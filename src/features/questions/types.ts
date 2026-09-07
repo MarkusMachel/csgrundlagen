@@ -1,0 +1,102 @@
+export type QuestionType = 'multiple-choice' | 'true-false';
+
+export interface BaseQuestion {
+  id: string;
+  type: QuestionType;
+  prompt: string;
+  tags: string[];
+  difficulty?: 'easy' | 'medium' | 'hard';
+  explanation: string;
+}
+
+export interface MultipleChoiceOption {
+  id: string; // 'A' | 'B' | 'C' | 'D' | 'E'
+  label: string;
+}
+
+export interface MultipleChoiceQuestion extends BaseQuestion {
+  type: 'multiple-choice';
+  options: MultipleChoiceOption[]; // 2–5 options, labeled A–E
+  correctOptionId: string;
+}
+
+export interface TrueFalseQuestion extends BaseQuestion {
+  type: 'true-false';
+  correctAnswer: boolean;
+}
+
+export type Question = MultipleChoiceQuestion | TrueFalseQuestion;
+
+export type AnswerValue = string | boolean;
+
+export interface QuestionComment {
+  id: string;
+  questionId: string;
+  userId: string;
+  userName: string;
+  body: string;
+  createdAt: string;
+}
+
+export interface AnswerStat {
+  optionId: string; // option id, or 'true' / 'false'
+  label: string;
+  count: number;
+  percentage: number;
+}
+
+export interface QuestionStats {
+  questionId: string;
+  totalResponses: number;
+  distribution: AnswerStat[];
+}
+
+export interface BugReport {
+  id: string;
+  questionId: string;
+  userId: string;
+  message: string;
+  createdAt: string;
+  status: 'open' | 'reviewed' | 'closed';
+}
+
+export interface Bookmark {
+  id: string;
+  userId: string;
+  questionId: string;
+  createdAt: string;
+}
+
+export interface QuestionNote {
+  id: string;
+  userId: string;
+  questionId: string;
+  body: string;
+  updatedAt: string;
+}
+
+export interface UserQuestionStat {
+  userId: string;
+  questionId: string;
+  timesAnswered: number;
+  timesCorrect: number;
+  lastAnsweredAt: string;
+  lastAnswerCorrect: boolean;
+}
+
+export interface SubmitAnswerResult {
+  questionId: string;
+  correct: boolean;
+  correctAnswer: AnswerValue; // correctOptionId or boolean
+}
+
+export interface QuestionsPage {
+  items: Question[];
+  page: number;
+  pageSize: number;
+  total: number;
+  totalPages: number;
+}
+
+export type QuestionMode = 'feed' | 'pick' | 'test' | 'review';
+export type TestSubMode = 'practice' | 'exam';

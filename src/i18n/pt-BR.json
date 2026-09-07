@@ -1,0 +1,184 @@
+{
+  "common": {
+    "appName": "Treinador de Fundamentos de Computação",
+    "retry": "Tentar novamente",
+    "errorTitle": "Algo deu errado",
+    "loading": "Carregando…",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "delete": "Excluir",
+    "close": "Fechar",
+    "submit": "Enviar",
+    "language": "Idioma"
+  },
+  "nav": {
+    "home": "Início",
+    "weakSpots": "Pontos Fracos",
+    "bookmarks": "Favoritos",
+    "buildTest": "Criar Teste",
+    "myTests": "Meus Testes",
+    "materials": "Material Curado",
+    "logout": "Sair",
+    "openMenu": "Abrir menu",
+    "collapseMenu": "Recolher menu",
+    "expandMenu": "Expandir menu",
+    "toggleTheme": "Alternar modo claro/escuro",
+    "userMenu": "Conta"
+  },
+  "auth": {
+    "loginTitle": "Entrar",
+    "email": "E-mail",
+    "password": "Senha",
+    "login": "Entrar",
+    "loginFailed": "E-mail ou senha inválidos",
+    "hint": "Login de demonstração: demo@example.com / password",
+    "emailInvalid": "Digite um endereço de e-mail válido",
+    "passwordRequired": "A senha é obrigatória"
+  },
+  "home": {
+    "questionOfTheDay": "Pergunta do Dia",
+    "feedTitle": "Todas as perguntas",
+    "filterByTag": "Filtrar por tag",
+    "allTags": "Todas as tags",
+    "searchPlaceholder": "Pesquisar perguntas…",
+    "noResults": "Nenhuma pergunta corresponde ao seu filtro",
+    "noResultsHint": "Tente outro termo de pesquisa ou tag."
+  },
+  "question": {
+    "submit": "Enviar resposta",
+    "correct": "Correto!",
+    "incorrect": "Não foi dessa vez — a resposta correta está destacada.",
+    "bookmark": "Favoritar esta pergunta",
+    "removeBookmark": "Remover dos favoritos",
+    "true": "Verdadeiro",
+    "false": "Falso",
+    "difficultyLabel": "Dificuldade",
+    "difficulty": {
+      "easy": "fácil",
+      "medium": "média",
+      "hard": "difícil"
+    },
+    "strike": "Riscar opção {{option}}",
+    "unstrike": "Restaurar opção {{option}}",
+    "tabs": {
+      "explanation": "Resposta Comentada",
+      "comments": "Comentários",
+      "notes": "Minhas Notas",
+      "stats": "Estatísticas",
+      "material": "Material",
+      "bug": "Reportar Erro"
+    },
+    "explanationHidden": "Envie sua resposta para revelar a explicação.",
+    "comments": {
+      "placeholder": "Adicionar um comentário…",
+      "post": "Publicar",
+      "empty": "Nenhum comentário ainda — seja o primeiro.",
+      "required": "O comentário não pode ficar vazio"
+    },
+    "notes": {
+      "label": "Nota privada",
+      "placeholder": "Suas notas privadas sobre esta pergunta (somente você pode vê-las)…",
+      "privacy": "Privado — visível somente para você.",
+      "saved": "Nota salva"
+    },
+    "stats": {
+      "empty": "Nenhuma resposta ainda",
+      "total": "{{count}} respostas",
+      "answers": "Respostas"
+    },
+    "material": {
+      "empty": "Nenhum material vinculado a esta pergunta ainda"
+    },
+    "bug": {
+      "placeholder": "Descreva o que está errado com esta pergunta…",
+      "submit": "Reportar erro",
+      "success": "Obrigado! Seu relatório foi registrado.",
+      "required": "Descreva o problema"
+    }
+  },
+  "builder": {
+    "title": "Criar Teste",
+    "pickerHint": "Selecione perguntas abaixo para adicioná-las ao seu teste.",
+    "addToTest": "Adicionar ao teste",
+    "selected": "Perguntas selecionadas",
+    "selectedCount": "{{count}} selecionadas",
+    "emptyTray": "Nenhuma pergunta selecionada ainda.",
+    "testName": "Nome do teste",
+    "nameRequired": "Dê um nome ao seu teste",
+    "needQuestions": "Selecione pelo menos uma pergunta",
+    "timed": "Com tempo",
+    "durationMinutes": "Duração (minutos)",
+    "durationInvalid": "Informe uma duração de pelo menos 1 minuto",
+    "shuffleQuestions": "Embaralhar perguntas",
+    "shuffleOptions": "Embaralhar opções de resposta",
+    "saveTest": "Salvar Teste",
+    "remove": "Remover da seleção"
+  },
+  "myTests": {
+    "title": "Meus Testes",
+    "empty": "Nenhum teste salvo ainda",
+    "emptyHint": "Crie seu primeiro teste a partir do banco de perguntas.",
+    "buildOne": "Criar Teste",
+    "questions": "{{count}} perguntas",
+    "timed": "Com tempo · {{minutes}} min",
+    "untimed": "Sem tempo",
+    "take": "Fazer Teste",
+    "attempts": "Histórico de tentativas",
+    "attemptsEmpty": "Nenhuma tentativa ainda",
+    "created": "Criado em {{date}}",
+    "score": "Pontuação",
+    "mode": "Modo",
+    "date": "Data",
+    "deleteTest": "Excluir teste"
+  },
+  "takeTest": {
+    "chooseMode": "Escolha um modo",
+    "practice": "Prática",
+    "exam": "Prova",
+    "practiceDesc": "Sem pressão: ajuda de eliminação e explicações continuam disponíveis.",
+    "examDesc": "Simula uma prova real: ajudas e explicações ocultas até você enviar.",
+    "start": "Começar",
+    "timeLeft": "Tempo restante",
+    "submitAll": "Enviar teste",
+    "results": "Resultados",
+    "yourScore": "Você acertou {{score}} de {{total}}",
+    "retryIncorrect": "Refazer Apenas as Erradas",
+    "backToTests": "Voltar para Meus Testes",
+    "questionOf": "Pergunta {{current}} de {{total}}"
+  },
+  "bookmarks": {
+    "title": "Favoritos",
+    "empty": "Nada favoritado ainda",
+    "emptyHint": "Favorite perguntas no feed para encontrá-las aqui.",
+    "goHome": "Ver perguntas"
+  },
+  "weakSpots": {
+    "title": "Pontos Fracos",
+    "explainer": "Perguntas que você errou recentemente ou com frequência.",
+    "empty": "Nenhum ponto fraco no momento",
+    "emptyHint": "Responda algumas perguntas e mostraremos onde você tem dificuldade."
+  },
+  "materials": {
+    "title": "Material Curado",
+    "filterType": "Tipo",
+    "allTypes": "Todos os tipos",
+    "type": {
+      "book": "Livro",
+      "video": "Vídeo",
+      "article": "Artigo",
+      "link": "Link"
+    },
+    "empty": "Nenhum material corresponde ao filtro atual",
+    "by": "por {{author}}"
+  },
+  "search": {
+    "placeholder": "Pesquisar perguntas, material, testes…",
+    "open": "Abrir pesquisa",
+    "groups": {
+      "questions": "Perguntas",
+      "materials": "Materiais",
+      "tests": "Testes"
+    },
+    "noResults": "Nenhum resultado para \"{{query}}\""
+  }
+}
