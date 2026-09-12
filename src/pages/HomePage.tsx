@@ -1,31 +1,33 @@
-import { Box, Skeleton, Stack, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import { QuestionCard, QuestionFeed, useDailyQuestion } from '@/features/questions';
+import { Spinner } from '@/shared/ui';
 
 export function HomePage() {
   const { t } = useTranslation();
   const daily = useDailyQuestion();
 
   return (
-    <Stack spacing={3}>
-      <Box data-testid="question-of-the-day">
-        <Typography variant="h5" component="h1" gutterBottom>
+    <div className="stack" style={{ gap: 28 }}>
+      <section data-testid="question-of-the-day">
+        <h1>
+          <span className="tok-com">{'// '}</span>
           {t('home.questionOfTheDay')}
-        </Typography>
+        </h1>
         {daily.isPending ? (
-          <Skeleton variant="rounded" height={220} />
+          <Spinner center />
         ) : daily.data ? (
           <QuestionCard question={daily.data} mode="feed" />
         ) : null}
-      </Box>
+      </section>
 
-      <Box>
-        <Typography variant="h5" component="h2" gutterBottom>
+      <section>
+        <h2>
+          <span className="tok-com">{'// '}</span>
           {t('home.feedTitle')}
-        </Typography>
+        </h2>
         <QuestionFeed mode="feed" />
-      </Box>
-    </Stack>
+      </section>
+    </div>
   );
 }

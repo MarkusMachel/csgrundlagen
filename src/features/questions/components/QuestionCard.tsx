@@ -1,21 +1,5 @@
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {
-  Alert,
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Checkbox,
-  Collapse,
-  FormControlLabel,
-  IconButton,
-  Link,
-  Stack,
-  Typography,
-} from '@mui/material';
-import { Fragment, useState } from 'react';
+import { Bookmark, ChevronDown } from 'lucide-react';
+import { useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useIsBookmarked, useToggleBookmark } from '../hooks/useBookmark';
@@ -41,6 +25,15 @@ export interface QuestionCardProps {
   optionOrder?: string[];
   /** Optional heading like "Question 2 of 5" in test mode. */
   heading?: string;
+}
+
+/** One numbered (or blank-gutter) line inside the editor pane. */
+function CodeLine({ numbered = true, children }: { numbered?: boolean; children: ReactNode }) {
+  return (
+    <div className={numbered ? 'code-line' : 'code-line code-line--spacer'}>
+      <div className="code-line__body">{children}</div>
+    </div>
+  );
 }
 
 export function QuestionCard({
@@ -99,79 +92,56 @@ export function QuestionCard({
   const explanationRevealed =
     mode === 'review' || submitted || (mode === 'test' && testMode === 'practice');
   const hideRevealingTabs = isExam;
-
   const answersDisabled = mode === 'review' || (mode === 'feed' && submitted);
 
+  const breadcrumb = [...question.tags.map((tag) => tag.toLowerCase()), question.id];
+  const promptLines = question.prompt.split('\n').filter((line) => line.trim().length > 0);
+
   return (
-    <Card component="article" variant="outlined" data-testid={`question-card-${question.id}`}>
-      {/* Header bar: index/id + tag breadcrumb, bookmark on the right */}
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 1.5,
-          px: 2,
-          py: 1,
-          borderBottom: 1,
-          borderColor: 'divider',
-          bgcolor: 'action.hover',
-          flexWrap: 'wrap',
-        }}
-      >
-        {heading && (
-          <Typography variant="body2" fontWeight={700} color="text.secondary">
-            {heading}
-          </Typography>
-        )}
-        <Typography
-          variant="body2"
-          sx={{ fontWeight: 700, color: 'primary.main', letterSpacing: 0.2 }}
-        >
-          Q{question.id.replace(/^q/, '')}
-        </Typography>
-        <Typography variant="body2" sx={{ minWidth: 0, flex: 1 }} noWrap>
-          {question.tags.map((tag, i) => (
-            <Fragment key={tag}>
-              {i === 1 && <Box component="span" sx={{ color: 'text.disabled', mx: 0.75 }}>›</Box>}
-              {i > 1 && <Box component="span" sx={{ color: 'text.disabled' }}>, </Box>}
-              <Link
-                component="span"
-                underline="hover"
-                sx={{ color: 'primary.main', fontWeight: i === 0 ? 600 : 400, cursor: 'default' }}
-              >
-                {tag}
-              </Link>
-            </Fragment>
+    <article className="editor-pane" data-testid={`question-card-${question.id}`}>
+      <div className="editor-pane__header">
+        {heading && <span style={{ color: 'var(--text)', fontWeight: 600 }}>{heading}</span>}
+        <span className="editor-pane__breadcrumb">
+          {breadcrumb.map((part, i) => (
+            <span key={`${part}-${i}`}>
+              {i > 0 && <span className="crumb-sep"> / </span>}
+              {part}
+            </span>
           ))}
-        </Typography>
+        </span>
         {bookmarkable && (
-          <IconButton
-            size="small"
+          <button
+            type="button"
+            className="btn btn--icon"
+            style={{ marginLeft: 'auto', color: isBookmarked ? 'var(--accent)' : undefined }}
             aria-label={isBookmarked ? t('question.removeBookmark') : t('question.bookmark')}
             aria-pressed={isBookmarked}
             onClick={() => toggleBookmark.mutate()}
-            sx={{ width: 40, height: 40, ml: 'auto' }}
           >
-            {isBookmarked ? (
-              <BookmarkIcon fontSize="small" color="primary" />
-            ) : (
-              <BookmarkBorderIcon fontSize="small" />
-            )}
-          </IconButton>
+            <Bookmark size={17} aria-hidden fill={isBookmarked ? 'currentColor' : 'none'} />
+          </button>
         )}
-      </Box>
+      </div>
 
-      <CardContent sx={{ pt: 1.5 }}>
+      <div className="code">
         {question.difficulty && (
-          <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 1 }}>
-            <strong>{t('question.difficultyLabel')}: </strong>
-            {t(`question.difficulty.${question.difficulty}`)}
-          </Typography>
+          <CodeLine>
+            <span className="tok-com">
+              {'// '}
+              {t('question.difficultyLabel').toLowerCase()}: {t(`question.difficulty.${question.difficulty}`)}
+            </span>
+          </CodeLine>
         )}
 
-        <Typography variant="body1" sx={{ mb: 2, lineHeight: 1.7, whiteSpace: 'pre-line' }}>
-          {question.prompt}
-        </Typography>
+        {promptLines.map((line, i) => (
+          <CodeLine key={i}>
+            <span style={{ fontWeight: 500 }}>{line}</span>
+          </CodeLine>
+        ))}
+
+        <CodeLine numbered={false}>
+          <span aria-hidden>&nbsp;</span>
+        </CodeLine>
 
         <AnswerOptions
           question={question}
@@ -185,72 +155,80 @@ export function QuestionCard({
           optionOrder={optionOrder}
         />
 
-        <Stack
-          direction="row"
-          spacing={1}
-          sx={{ mt: 2 }}
-          alignItems="center"
-          useFlexGap
-          flexWrap="wrap"
-        >
-          {showSubmit && (
-            <Button
-              variant="contained"
-              disabled={currentAnswer === undefined || submitted || submitAnswer.isPending}
-              onClick={() => {
-                if (currentAnswer !== undefined) submitAnswer.mutate(currentAnswer);
-              }}
-            >
-              {t('question.submit')}
-            </Button>
-          )}
-          {mode === 'feed' && submitted && submitAnswer.data && (
-            <Alert
-              severity={submitAnswer.data.correct ? 'success' : 'error'}
-              sx={{ py: 0, flex: 1, minWidth: 240 }}
-              data-testid="answer-feedback"
-            >
-              {submitAnswer.data.correct ? t('question.correct') : t('question.incorrect')}
-            </Alert>
-          )}
-          {mode === 'pick' && (
-            <FormControlLabel
-              control={
-                <Checkbox
+        <CodeLine numbered={false}>
+          <div className="pane-actions">
+            {showSubmit && (
+              <button
+                type="button"
+                className="btn"
+                disabled={currentAnswer === undefined || submitted || submitAnswer.isPending}
+                onClick={() => {
+                  if (currentAnswer !== undefined) submitAnswer.mutate(currentAnswer);
+                }}
+              >
+                <span className="prompt-char" aria-hidden>
+                  $
+                </span>
+                {t('question.submit')}
+              </button>
+            )}
+            {mode === 'pick' && (
+              <label className="checkbox-row">
+                <input
+                  type="checkbox"
                   checked={selected}
                   onChange={() => onToggleSelect?.(question.id)}
-                  inputProps={{ 'aria-label': t('builder.addToTest') }}
+                  aria-label={t('builder.addToTest')}
                 />
-              }
-              label={t('builder.addToTest')}
-            />
-          )}
-          <IconButton
-            aria-label={t('question.tabs.explanation')}
-            aria-expanded={tabsOpen}
-            onClick={() => setTabsOpen((o) => !o)}
-            sx={{
-              ml: 'auto',
-              width: 44,
-              height: 44,
-              transform: tabsOpen ? 'rotate(180deg)' : 'none',
-              transition: 'transform 150ms',
-            }}
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </Stack>
+                <span className="tok-com">{t('builder.addToTest')}</span>
+              </label>
+            )}
+            <button
+              type="button"
+              className="btn btn--icon"
+              style={{ marginLeft: 'auto' }}
+              aria-label={t('question.tabs.explanation')}
+              aria-expanded={tabsOpen}
+              onClick={() => setTabsOpen((o) => !o)}
+            >
+              <ChevronDown
+                size={17}
+                aria-hidden
+                style={{
+                  transform: tabsOpen ? 'rotate(180deg)' : 'none',
+                  transition: 'transform 150ms',
+                }}
+              />
+            </button>
+          </div>
+        </CodeLine>
 
-        <Collapse in={tabsOpen} mountOnEnter>
-          <Box sx={{ mt: 2 }}>
-            <QuestionTabs
-              question={question}
-              explanationRevealed={explanationRevealed}
-              hideRevealingTabs={hideRevealingTabs}
-            />
-          </Box>
-        </Collapse>
-      </CardContent>
-    </Card>
+        {mode === 'feed' && submitted && submitAnswer.data && (
+          <CodeLine numbered={false}>
+            <p
+              role="alert"
+              data-testid="answer-feedback"
+              className={
+                submitAnswer.data.correct
+                  ? 'feedback-line feedback-line--correct'
+                  : 'feedback-line feedback-line--wrong'
+              }
+              style={{ margin: 0 }}
+            >
+              {'> '}
+              {submitAnswer.data.correct ? t('question.correct') : t('question.incorrect')}
+            </p>
+          </CodeLine>
+        )}
+      </div>
+
+      {tabsOpen && (
+        <QuestionTabs
+          question={question}
+          explanationRevealed={explanationRevealed}
+          hideRevealingTabs={hideRevealingTabs}
+        />
+      )}
+    </article>
   );
 }

@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import { App } from './app/App';
+import './styles/global.css';
 
 // There is no real backend: MSW serves /api in every browser context
 // (dev, preview, and the app under Playwright E2E) — §2, §13.3.

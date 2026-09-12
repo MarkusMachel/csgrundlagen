@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
+import { AdminPage } from '@/pages/AdminPage';
 import { BookmarksPage } from '@/pages/BookmarksPage';
 import { BuildTestPage } from '@/pages/BuildTestPage';
 import { CuratedMaterialPage } from '@/pages/CuratedMaterialPage';
@@ -26,6 +27,8 @@ export const router = createBrowserRouter([
       { path: 'my-tests', element: <MyTestsPage /> },
       { path: 'tests/:id/take', element: <TakeTestPage /> },
       { path: 'materials', element: <CuratedMaterialPage /> },
+      // Admin-gated inside the component (redirects non-admins to /).
+      { path: 'admin', element: <AdminPage /> },
     ],
   },
 ]);

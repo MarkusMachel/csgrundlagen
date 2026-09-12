@@ -23,7 +23,9 @@
     "collapseMenu": "Recolher menu",
     "expandMenu": "Expandir menu",
     "toggleTheme": "Alternar modo claro/escuro",
-    "userMenu": "Conta"
+    "userMenu": "Conta",
+    "scrollDown": "Rolar para baixo",
+    "admin": "Admin"
   },
   "auth": {
     "loginTitle": "Entrar",
@@ -171,6 +173,10 @@
     "empty": "Nenhum material corresponde ao filtro atual",
     "by": "por {{author}}"
   },
+  "status": {
+    "feedPosition": "perguntas {{from}}–{{to}} de {{total}}",
+    "attemptPosition": "{{answered}} de {{total}} respondidas"
+  },
   "search": {
     "placeholder": "Pesquisar perguntas, material, testes…",
     "open": "Abrir pesquisa",
@@ -180,5 +186,76 @@
       "tests": "Testes"
     },
     "noResults": "Nenhum resultado para \"{{query}}\""
+  },
+  "authoring": {
+    "subtitle": "Adicione questões e material de estudo e vincule-os entre si. (Somente admin.)",
+    "tab": {
+      "question": "Nova questão",
+      "material": "Novo material",
+      "stats": "Estatísticas"
+    },
+    "questionType": "Tipo de questão",
+    "type": {
+      "multiple-choice": "Múltipla escolha",
+      "true-false": "Verdadeiro / Falso"
+    },
+    "prompt": "Enunciado",
+    "options": "Alternativas",
+    "optionsHint": "Preencha de 2 a 5 alternativas e marque a correta.",
+    "optionPlaceholder": "texto da alternativa",
+    "addOption": "Adicionar alternativa",
+    "removeOption": "Remover alternativa {{n}}",
+    "markCorrect": "Marcar como resposta correta",
+    "optionsMin": "Forneça pelo menos 2 alternativas",
+    "pickCorrect": "Selecione qual alternativa é a correta",
+    "correctAnswer": "Resposta correta",
+    "explanation": "Explicação (resposta comentada)",
+    "tags": "Tags",
+    "tagsPlaceholder": "Digite uma tag e pressione Enter",
+    "tagsRequired": "Adicione pelo menos uma tag",
+    "removeTag": "Remover tag {{tag}}",
+    "url": "URL",
+    "urlInvalid": "Informe uma URL válida",
+    "authorOptional": "Autor (opcional)",
+    "descriptionOptional": "Descrição (opcional)",
+    "linkMaterials": "Vincular a material",
+    "linkMaterialsHint": "Opcional — associe material existente a esta questão.",
+    "linkQuestions": "Vincular a questões",
+    "linkQuestionsHint": "Opcional — associe este material a questões existentes.",
+    "linkSearchPlaceholder": "Pesquise para filtrar…",
+    "noMatches": "Nenhum resultado",
+    "noMaterialsYet": "Ainda não há material para vincular",
+    "noQuestionsYet": "Ainda não há questões para vincular",
+    "unlink": "Desvincular {{name}}",
+    "required": "Este campo é obrigatório",
+    "createQuestion": "Criar questão",
+    "createMaterial": "Criar material",
+    "questionCreated": "Questão criada.",
+    "materialCreated": "Material criado.",
+    "saveError": "Não foi possível salvar — tente novamente.",
+    "title": "Gerenciar conteúdo",
+    "materialTitle": "Título",
+    "stats": {
+      "totalQuestions": "Questões",
+      "totalMaterials": "Materiais",
+      "totalUsers": "Usuários",
+      "totalAnswers": "Respostas enviadas",
+      "totalTests": "Testes salvos",
+      "totalAttempts": "Tentativas de teste",
+      "totalBookmarks": "Favoritos",
+      "totalBugReports": "Relatos de erro",
+      "questionsByType": "Questões por tipo",
+      "questionsByDifficulty": "Questões por dificuldade",
+      "materialsByType": "Materiais por tipo",
+      "answersByTag": "Principais tags por respostas",
+      "correctness": "Taxa de acerto",
+      "correct": "{{count}} corretas ({{pct}}%)",
+      "incorrect": "{{count}} incorretas ({{pct}}%)",
+      "correctnessAria": "{{correct}} corretas e {{incorrect}} incorretas, {{pct}}% de acerto",
+      "unspecified": "não especificado",
+      "noQuestionsYet": "Ainda não há questões",
+      "noMaterialsYet": "Ainda não há material",
+      "noAnswersYet": "Ainda não há respostas registradas"
+    }
   }
 }

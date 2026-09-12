@@ -1,5 +1,4 @@
-import { Box, Tab, Tabs } from '@mui/material';
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 
@@ -21,8 +20,10 @@ interface QuestionTabsProps {
 
 type TabKey = 'explanation' | 'comments' | 'notes' | 'stats' | 'material' | 'bug';
 
+/** Editor-style bottom panel (like OUTPUT / PROBLEMS / TERMINAL). */
 export function QuestionTabs({ question, explanationRevealed, hideRevealingTabs }: QuestionTabsProps) {
   const { t } = useTranslation();
+  const idBase = useId();
 
   const tabs: TabKey[] = hideRevealingTabs
     ? ['notes', 'material', 'bug']
@@ -35,20 +36,29 @@ export function QuestionTabs({ question, explanationRevealed, hideRevealingTabs 
     question.type === 'multiple-choice' ? question.correctOptionId : String(question.correctAnswer);
 
   return (
-    <Box>
-      <Tabs
-        value={activeTab}
-        onChange={(_e, v: TabKey) => setActive(v)}
-        variant="scrollable"
-        scrollButtons="auto"
-        allowScrollButtonsMobile
-        sx={{ borderBottom: 1, borderColor: 'divider', minHeight: 44 }}
-      >
+    <div className="panel">
+      <div className="panel-tabs" role="tablist">
         {tabs.map((key) => (
-          <Tab key={key} value={key} label={t(`question.tabs.${key}`)} sx={{ minHeight: 44 }} />
+          <button
+            key={key}
+            type="button"
+            role="tab"
+            id={`${idBase}-tab-${key}`}
+            aria-selected={activeTab === key}
+            aria-controls={`${idBase}-panel-${key}`}
+            className="panel-tab"
+            onClick={() => setActive(key)}
+          >
+            {t(`question.tabs.${key}`)}
+          </button>
         ))}
-      </Tabs>
-      <Box sx={{ pt: 2 }}>
+      </div>
+      <div
+        className="panel-body"
+        role="tabpanel"
+        id={`${idBase}-panel-${activeTab}`}
+        aria-labelledby={`${idBase}-tab-${activeTab}`}
+      >
         {/* Only the active tab renders, so its data is fetched lazily. */}
         {activeTab === 'explanation' && (
           <CommentedAnswerTab explanation={question.explanation} revealed={explanationRevealed} />
@@ -58,7 +68,7 @@ export function QuestionTabs({ question, explanationRevealed, hideRevealingTabs 
         {activeTab === 'stats' && <StatsTab questionId={question.id} correctKey={correctKey} />}
         {activeTab === 'material' && <MaterialTab questionId={question.id} />}
         {activeTab === 'bug' && <BugReportTab questionId={question.id} />}
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }

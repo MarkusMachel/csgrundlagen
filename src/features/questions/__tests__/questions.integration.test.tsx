@@ -110,7 +110,7 @@ describe('comments (integration)', () => {
     expect(await screen.findByText(/Please Do Not Throw Sausage/)).toBeInTheDocument();
 
     await user.type(screen.getByPlaceholderText('Add a comment…'), 'TCP retransmits!');
-    await user.click(screen.getByRole('button', { name: 'Post comment' }));
+    await user.click(screen.getByRole('button', { name: 'Post' }));
     expect(await screen.findByText('TCP retransmits!')).toBeInTheDocument();
   });
 });

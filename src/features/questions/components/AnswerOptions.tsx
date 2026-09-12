@@ -1,4 +1,4 @@
-import { Box, FormControl, FormControlLabel, Radio, RadioGroup, Typography } from '@mui/material';
+import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { AnswerValue, Question } from '../types';
@@ -23,48 +23,21 @@ interface AnswerOptionsProps {
 }
 
 interface RowSpec {
-  key: string; // option id or 'true'/'false'
-  label: string;
-  letter: string; // circled badge: 'A'…'E', or first letter of True/False
+  key: string; // option id ('A'…'E') or 'true'/'false'
+  label: string; // accessible name + displayed value
+  /** What the code notation shows before `=`, e.g. options[0] or answer. */
+  lhs: string;
+  /** Rendered right-hand side, e.g. "Transport layer" or true. */
+  rhs: string;
   answerValue: AnswerValue;
 }
 
-type BadgeState = 'idle' | 'selected' | 'correct' | 'wrong';
-
-/** The circled option letter — used as the Radio's icon, QConcursos-style. */
-function LetterBadge({ letter, state }: { letter: string; state: BadgeState }) {
-  const stateSx =
-    state === 'correct'
-      ? { bgcolor: 'success.main', borderColor: 'success.main', color: 'success.contrastText' }
-      : state === 'wrong'
-        ? { bgcolor: 'error.main', borderColor: 'error.main', color: 'error.contrastText' }
-        : state === 'selected'
-          ? { bgcolor: 'primary.main', borderColor: 'primary.main', color: 'primary.contrastText' }
-          : { bgcolor: 'transparent', borderColor: 'text.disabled', color: 'text.secondary' };
-  return (
-    <Box
-      component="span"
-      aria-hidden
-      sx={{
-        width: 28,
-        height: 28,
-        borderRadius: '50%',
-        border: 1,
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: 13,
-        fontWeight: 700,
-        flexShrink: 0,
-        transition: 'background-color 120ms, border-color 120ms',
-        ...stateSx,
-      }}
-    >
-      {letter}
-    </Box>
-  );
-}
-
+/**
+ * Answers rendered as array entries — `options[0] = "HTTP"` — per the
+ * editor-style design. Each row is a numbered code line; the native radio is
+ * visually hidden and the whole entry is its label (aria-label carries the
+ * plain option text so accessible names stay notation-free).
+ */
 export function AnswerOptions({
   question,
   value,
@@ -77,6 +50,7 @@ export function AnswerOptions({
   optionOrder,
 }: AnswerOptionsProps) {
   const { t } = useTranslation();
+  const groupName = useId();
 
   let rows: RowSpec[];
   if (question.type === 'multiple-choice') {
@@ -84,118 +58,91 @@ export function AnswerOptions({
     if (optionOrder) {
       options = [...options].sort((a, b) => optionOrder.indexOf(a.id) - optionOrder.indexOf(b.id));
     }
-    rows = options.map((o) => ({ key: o.id, label: o.label, letter: o.id, answerValue: o.id }));
+    rows = options.map((o, i) => ({
+      key: o.id,
+      label: o.label,
+      lhs: `options[${i}]`,
+      rhs: `"${o.label}"`,
+      answerValue: o.id,
+    }));
   } else {
-    const trueLabel = t('question.true');
-    const falseLabel = t('question.false');
     rows = [
-      { key: 'true', label: trueLabel, letter: trueLabel.charAt(0), answerValue: true },
-      { key: 'false', label: falseLabel, letter: falseLabel.charAt(0), answerValue: false },
+      { key: 'true', label: t('question.true'), lhs: 'answer', rhs: 'true', answerValue: true },
+      { key: 'false', label: t('question.false'), lhs: 'answer', rhs: 'false', answerValue: false },
     ];
   }
 
   const selectedKey = value === undefined ? '' : String(value);
 
   return (
-    <FormControl fullWidth disabled={disabled}>
-      <RadioGroup
-        aria-label={question.prompt}
-        value={selectedKey}
-        onChange={(e) => {
-          const key = e.target.value;
-          const row = rows.find((r) => r.key === key);
-          if (row) onChange(row.answerValue);
-        }}
-      >
-        {rows.map((row) => {
-          const struck = struckOptions.has(row.key);
-          const isCorrect = reveal !== undefined && String(reveal.correctAnswer) === row.key;
-          const isWrongPick =
-            reveal !== undefined &&
-            reveal.givenAnswer !== undefined &&
-            String(reveal.givenAnswer) === row.key &&
-            !isCorrect;
-          // The badge is the radio's icon; correctness reveal wins over selection.
-          const uncheckedState: BadgeState = isCorrect ? 'correct' : 'idle';
-          const checkedState: BadgeState = isCorrect
-            ? 'correct'
-            : isWrongPick
-              ? 'wrong'
-              : 'selected';
+    <div role="radiogroup" aria-label={question.prompt}>
+      {rows.map((row) => {
+        const struck = struckOptions.has(row.key);
+        const isSelected = selectedKey === row.key;
+        const isCorrect = reveal !== undefined && String(reveal.correctAnswer) === row.key;
+        const isWrongPick =
+          reveal !== undefined &&
+          reveal.givenAnswer !== undefined &&
+          String(reveal.givenAnswer) === row.key &&
+          !isCorrect;
 
-          return (
-            <Box
-              key={row.key}
-              sx={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: 0,
-                borderRadius: 1,
-                pr: 0.5,
-                minHeight: 44, // touch target (§12)
-                '&:hover': disabled ? {} : { bgcolor: 'action.hover' },
-                '& .option-label': struck
-                  ? {
-                      textDecoration: 'line-through',
-                      // struck state keeps legible contrast in both palettes (§12)
-                      color: 'text.disabled',
-                    }
-                  : {
-                      color: isCorrect
-                        ? 'success.main'
-                        : isWrongPick
-                          ? 'error.main'
-                          : 'text.primary',
-                    },
-                '& .scissors-toggle': {
-                  opacity: { xs: 1, md: 0 },
-                  transition: 'opacity 120ms',
-                },
-                '&:hover .scissors-toggle, & .scissors-toggle:focus-visible, & .scissors-toggle[aria-pressed="true"]':
-                  {
-                    opacity: 1,
-                  },
-                '@media (hover: none)': {
-                  '& .scissors-toggle': { opacity: 1 },
-                },
-              }}
-            >
-              {showScissors ? (
-                <ScissorsToggle
-                  optionLabel={row.letter}
-                  struck={struck}
-                  onToggle={() => onToggleStruck(row.key)}
-                />
-              ) : (
-                // Reserve the toggle's footprint so options don't shift left
-                // once scissors are hidden (e.g. after the answer is revealed).
-                <Box aria-hidden sx={{ width: 44, height: 44, flexShrink: 0 }} />
-              )}
-              <FormControlLabel
-                value={row.key}
-                sx={{ flex: 1, m: 0, alignItems: 'flex-start' }}
-                control={
-                  <Radio
-                    icon={<LetterBadge letter={row.letter} state={uncheckedState} />}
-                    checkedIcon={<LetterBadge letter={row.letter} state={checkedState} />}
-                    sx={{ py: 1, px: 1 }}
+        const entryClasses = [
+          'option-entry',
+          isCorrect
+            ? 'option-entry--correct'
+            : isWrongPick
+              ? 'option-entry--wrong'
+              : isSelected
+                ? 'option-entry--selected'
+                : '',
+          struck ? 'option-entry--struck' : '',
+          disabled ? 'option-entry--disabled' : '',
+        ]
+          .filter(Boolean)
+          .join(' ');
+
+        return (
+          <div key={row.key} className="code-line option-line">
+            <div className="code-line__body">
+              <div className="option-row">
+                {showScissors && (
+                  <ScissorsToggle
+                    optionLabel={row.key === 'true' || row.key === 'false' ? row.label : row.key}
+                    struck={struck}
+                    onToggle={() => onToggleStruck(row.key)}
                   />
-                }
-                label={
-                  <Typography
-                    component="span"
-                    className="option-label"
-                    variant="body2"
-                    sx={{ display: 'inline-block', pt: '12px', lineHeight: 1.6 }}
-                  >
-                    {row.label}
-                  </Typography>
-                }
-              />
-            </Box>
-          );
-        })}
-      </RadioGroup>
-    </FormControl>
+                )}
+                <label className={entryClasses}>
+                  <input
+                    type="radio"
+                    name={groupName}
+                    value={row.key}
+                    checked={isSelected}
+                    disabled={disabled}
+                    aria-label={row.label}
+                    onChange={() => onChange(row.answerValue)}
+                  />
+                  <span className="option-entry__text">
+                    <span className="tok-idx">{row.lhs}</span>
+                    <span className="muted"> = </span>
+                    <span className="tok-str">{row.rhs}</span>
+                  </span>
+                  {(isCorrect || isWrongPick) && (
+                    <span
+                      className={
+                        isCorrect ? 'option-entry__mark tok-green' : 'option-entry__mark tok-red'
+                      }
+                      aria-hidden
+                    >
+                      {isCorrect ? '✓' : '✕'}
+                    </span>
+                  )}
+                </label>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
   );
 }

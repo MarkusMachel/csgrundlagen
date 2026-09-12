@@ -1,7 +1,8 @@
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { Box, CircularProgress, Fade, TextField, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Lock } from 'lucide-react';
+import { useEffect, useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { Spinner } from '@/shared/ui';
 
 import { useQuestionNote, useSaveQuestionNote } from '../../hooks/useQuestionNote';
 
@@ -11,6 +12,7 @@ import { useQuestionNote, useSaveQuestionNote } from '../../hooks/useQuestionNot
  */
 export function MyNotesTab({ questionId }: { questionId: string }) {
   const { t } = useTranslation();
+  const noteId = useId();
   const { data: note, isPending } = useQuestionNote(questionId);
   const saveNote = useSaveQuestionNote(questionId);
   const [draft, setDraft] = useState('');
@@ -20,7 +22,7 @@ export function MyNotesTab({ questionId }: { questionId: string }) {
     if (note) setDraft(note.body);
   }, [note]);
 
-  if (isPending) return <CircularProgress size={24} aria-label={t('common.loading')} />;
+  if (isPending) return <Spinner />;
 
   const handleBlur = () => {
     if (draft !== (note?.body ?? '')) {
@@ -34,28 +36,27 @@ export function MyNotesTab({ questionId }: { questionId: string }) {
   };
 
   return (
-    <Box>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mb: 1 }}>
-        <LockOutlinedIcon fontSize="inherit" color="action" />
-        <Typography variant="caption" color="text.secondary">
-          {t('question.notes.privacy')}
-        </Typography>
-        <Fade in={savedFlash}>
-          <Typography variant="caption" color="success.main" sx={{ ml: 'auto' }} role="status">
+    <div className="field">
+      <div className="hstack" style={{ justifyContent: 'space-between' }}>
+        <span className="tok-com hstack" style={{ gap: 5 }}>
+          <Lock size={13} aria-hidden /> {t('question.notes.privacy')}
+        </span>
+        {savedFlash && (
+          <span className="tok-green" role="status" style={{ fontSize: 12 }}>
             {t('question.notes.saved')}
-          </Typography>
-        </Fade>
-      </Box>
-      <TextField
-        fullWidth
-        multiline
-        minRows={3}
-        label={t('question.notes.label')}
+          </span>
+        )}
+      </div>
+      <label htmlFor={noteId}>{t('question.notes.label')}</label>
+      <textarea
+        id={noteId}
+        className="textarea"
+        rows={3}
         placeholder={t('question.notes.placeholder')}
         value={draft}
         onChange={(e) => setDraft(e.target.value)}
         onBlur={handleBlur}
       />
-    </Box>
+    </div>
   );
 }

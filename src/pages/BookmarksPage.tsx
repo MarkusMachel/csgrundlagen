@@ -1,9 +1,9 @@
-import { CircularProgress, Stack, Typography } from '@mui/material';
+import { Bookmark } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { QuestionCard, useBookmarkedQuestions } from '@/features/questions';
-import { EmptyState, ErrorState } from '@/shared/ui';
+import { EmptyState, ErrorState, Spinner } from '@/shared/ui';
 
 export function BookmarksPage() {
   const { t } = useTranslation();
@@ -11,12 +11,13 @@ export function BookmarksPage() {
   const { data: questions, isPending, isError, refetch } = useBookmarkedQuestions();
 
   return (
-    <Stack spacing={2}>
-      <Typography variant="h5" component="h1">
+    <div className="stack">
+      <h1>
+        <span className="tok-com">{'// '}</span>
         {t('bookmarks.title')}
-      </Typography>
+      </h1>
       {isPending ? (
-        <CircularProgress aria-label={t('common.loading')} />
+        <Spinner center />
       ) : isError ? (
         <ErrorState onRetry={() => void refetch()} />
       ) : questions.length === 0 ? (
@@ -25,10 +26,11 @@ export function BookmarksPage() {
           description={t('bookmarks.emptyHint')}
           actionLabel={t('bookmarks.goHome')}
           onAction={() => navigate('/')}
+          glyph={<Bookmark size={28} />}
         />
       ) : (
         questions.map((q) => <QuestionCard key={q.id} question={q} mode="feed" />)
       )}
-    </Stack>
+    </div>
   );
 }

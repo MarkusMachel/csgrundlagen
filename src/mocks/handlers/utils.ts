@@ -3,7 +3,8 @@ import { HttpResponse } from 'msw';
 import type { Question } from '@/features/questions/types';
 import type { Locale, User } from '@/shared/types';
 
-import { localizeQuestion, seedQuestions } from '../seed/questions';
+import { db } from '../db';
+import { localizeQuestion } from '../seed/questions';
 import { seedUsers } from '../seed/users';
 
 /**
@@ -31,6 +32,10 @@ export function unauthorized() {
   return HttpResponse.json({ message: 'Not authenticated' }, { status: 401 });
 }
 
+export function forbidden() {
+  return HttpResponse.json({ message: 'Admin access required' }, { status: 403 });
+}
+
 export function localeOf(request: Request): Locale {
   const url = new URL(request.url);
   const locale = url.searchParams.get('locale');
@@ -38,10 +43,10 @@ export function localeOf(request: Request): Locale {
 }
 
 export function allQuestions(locale: Locale): Question[] {
-  return seedQuestions.map((s) => localizeQuestion(s, locale));
+  return db.questions.map((s) => localizeQuestion(s, locale));
 }
 
 export function findQuestion(id: string, locale: Locale): Question | undefined {
-  const seed = seedQuestions.find((s) => s.question.id === id);
+  const seed = db.questions.find((s) => s.question.id === id);
   return seed ? localizeQuestion(seed, locale) : undefined;
 }

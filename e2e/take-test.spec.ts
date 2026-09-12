@@ -46,10 +46,10 @@ test('take a test in Exam mode: aids hidden until submit, then score + review', 
   const results = page.getByTestId('results-screen');
   await expect(results.getByText('You scored 1 of 2')).toBeVisible();
 
-  // review reveals the explanation tabs now
+  // review reveals the explanation tabs (already expanded in review mode)
   const review1 = results.getByTestId('question-card-q1');
-  await review1.getByRole('button', { name: 'Commented Answer' }).click();
   await expect(review1.getByRole('tab', { name: 'Commented Answer' })).toBeVisible();
+  await expect(review1.getByRole('tab', { name: 'Stats' })).toBeVisible();
 
   // retry only the incorrect question
   await results.getByRole('button', { name: 'Retry Incorrect Only' }).click();

@@ -9,17 +9,10 @@ describe('useUIStore', () => {
     useUIStore.setState({
       themeMode: 'light',
       locale: 'en',
-      sidebarCollapsed: false,
-      mobileDrawerOpen: false,
+      streak: 0,
+      statusText: null,
+      statusDots: null,
     });
-  });
-
-  it('toggles the sidebar collapsed state', () => {
-    expect(useUIStore.getState().sidebarCollapsed).toBe(false);
-    useUIStore.getState().toggleSidebar();
-    expect(useUIStore.getState().sidebarCollapsed).toBe(true);
-    useUIStore.getState().toggleSidebar();
-    expect(useUIStore.getState().sidebarCollapsed).toBe(false);
   });
 
   it('toggles theme mode and persists it to localStorage', () => {
@@ -38,6 +31,25 @@ describe('useUIStore', () => {
       state?: { locale?: string };
     };
     expect(persisted.state?.locale).toBe('pt-BR');
+  });
+
+  it('increments the streak on correct answers and resets on a wrong one', () => {
+    const s = useUIStore.getState();
+    s.recordAnswerResult(true);
+    s.recordAnswerResult(true);
+    expect(useUIStore.getState().streak).toBe(2);
+    useUIStore.getState().recordAnswerResult(false);
+    expect(useUIStore.getState().streak).toBe(0);
+  });
+
+  it('does not persist session-only state (streak, status)', () => {
+    useUIStore.getState().recordAnswerResult(true);
+    useUIStore.getState().setStatus('question 1 of 5', [true, false]);
+    const persisted = JSON.parse(localStorage.getItem('cft.ui') ?? '{}') as {
+      state?: Record<string, unknown>;
+    };
+    expect(persisted.state).not.toHaveProperty('streak');
+    expect(persisted.state).not.toHaveProperty('statusText');
   });
 });
 

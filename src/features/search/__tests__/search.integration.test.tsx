@@ -8,7 +8,7 @@ import { loginAsDemo, renderWithProviders } from '@/test-utils';
 import { GlobalSearch } from '../components/GlobalSearch';
 
 describe('global search (integration)', () => {
-  it('shows grouped results and navigates to a question on click', async () => {
+  it('opens the palette, shows grouped results, and navigates to a question', async () => {
     loginAsDemo();
     const user = userEvent.setup();
     renderWithProviders(
@@ -18,6 +18,7 @@ describe('global search (integration)', () => {
       </Routes>,
     );
 
+    await user.click(screen.getByRole('button', { name: 'Open search' }));
     await user.type(screen.getByRole('searchbox'), 'OSI');
     const results = await screen.findByTestId('search-results');
     expect(within(results).getByText('Questions')).toBeInTheDocument();
@@ -33,6 +34,7 @@ describe('global search (integration)', () => {
     loginAsDemo();
     const user = userEvent.setup();
     renderWithProviders(<GlobalSearch />);
+    await user.click(screen.getByRole('button', { name: 'Open search' }));
     await user.type(screen.getByRole('searchbox'), 'zzzzqqq');
     expect(await screen.findByText(/No results for "zzzzqqq"/)).toBeInTheDocument();
   });

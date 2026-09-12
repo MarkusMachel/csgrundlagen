@@ -1,9 +1,7 @@
-import { Box, CircularProgress, Typography, useTheme } from '@mui/material';
-import { BarChart } from '@mui/x-charts/BarChart';
+import { ChartColumn } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-import { EmptyState, ErrorState } from '@/shared/ui';
-import { chartColors } from '@/theme/palette';
+import { EmptyState, ErrorState, Spinner } from '@/shared/ui';
 
 import { useQuestionStats } from '../../hooks/useQuestionExtras';
 
@@ -12,42 +10,49 @@ interface StatsTabProps {
   correctKey: string; // correctOptionId or 'true'/'false'
 }
 
+/**
+ * Answer-distribution as a horizontal bar list. Single measure, one hue
+ * (--chart-bar, validated for both surfaces); the correct option uses the
+ * status green plus a ✓ so identity is never color-alone. Every row carries
+ * its % as plain text, which doubles as the table view.
+ */
 export function StatsTab({ questionId, correctKey }: StatsTabProps) {
   const { t } = useTranslation();
-  const theme = useTheme();
   const { data: stats, isPending, isError, refetch } = useQuestionStats(questionId);
 
-  if (isPending) return <CircularProgress size={24} aria-label={t('common.loading')} />;
+  if (isPending) return <Spinner />;
   if (isError) return <ErrorState onRetry={() => void refetch()} />;
   if (stats.totalResponses === 0) {
-    return <EmptyState title={t('question.stats.empty')} />;
+    return <EmptyState title={t('question.stats.empty')} glyph={<ChartColumn size={28} />} />;
   }
 
-  const colors = chartColors[theme.palette.mode];
-
   return (
-    <Box>
-      <Typography variant="caption" color="text.secondary">
+    <div className="stack" style={{ gap: 8 }}>
+      <span className="tok-com">
+        {'// '}
         {t('question.stats.total', { count: stats.totalResponses })}
-      </Typography>
-      <Box sx={{ width: '100%', overflowX: 'auto' }}>
-        <BarChart
-          height={220}
-          xAxis={[{ scaleType: 'band', data: stats.distribution.map((d) => d.label) }]}
-          series={[
-            {
-              data: stats.distribution.map((d) => d.percentage),
-              label: t('question.stats.answers'),
-              valueFormatter: (v) => `${v ?? 0}%`,
-            },
-          ]}
-          colors={[colors.other]}
-          barLabel={(item) =>
-            stats.distribution[item.dataIndex]?.optionId === correctKey ? '✓' : ''
-          }
-          slotProps={{ legend: { hidden: true } }}
-        />
-      </Box>
-    </Box>
+      </span>
+      <div className="bar-chart">
+        {stats.distribution.map((d) => {
+          const correct = d.optionId === correctKey;
+          return (
+            <div
+              key={d.optionId}
+              className={correct ? 'bar-row bar-row--correct' : 'bar-row'}
+              title={`${d.count} · ${d.percentage}%`}
+            >
+              <span className="bar-row__label">{d.label}</span>
+              <span className="bar-row__track">
+                <span className="bar-row__fill" style={{ width: `${d.percentage}%` }} />
+              </span>
+              <span className="bar-row__value">
+                {correct && '✓ '}
+                {d.percentage}%
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }

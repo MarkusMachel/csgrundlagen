@@ -1,11 +1,10 @@
-import { CssBaseline, ThemeProvider } from '@mui/material';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import { I18nextProvider } from 'react-i18next';
 
 import { initI18n } from '@/i18n/config';
 import { useUIStore } from '@/stores/useUIStore';
-import { buildTheme } from '@/theme/theme';
+import { applyTheme } from '@/theme/theme';
 
 export function createAppQueryClient() {
   return new QueryClient({
@@ -26,16 +25,13 @@ export function AppProviders({ children }: { children: ReactNode }) {
     if (i18n.language !== locale) void i18n.changeLanguage(locale);
   }, [i18n, locale]);
 
-  const theme = useMemo(() => buildTheme(themeMode), [themeMode]);
+  useEffect(() => {
+    applyTheme(themeMode);
+  }, [themeMode]);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <I18nextProvider i18n={i18n}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          {children}
-        </ThemeProvider>
-      </I18nextProvider>
+      <I18nextProvider i18n={i18n}>{children}</I18nextProvider>
     </QueryClientProvider>
   );
 }

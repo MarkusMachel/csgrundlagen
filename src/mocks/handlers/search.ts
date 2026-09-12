@@ -4,7 +4,6 @@ import type { SearchResults } from '@/features/search';
 
 import { db } from '../db';
 import { allQuestions, currentUser, localeOf } from './utils';
-import { seedMaterials } from '../seed/materials';
 
 
 export const searchHandlers = [
@@ -28,7 +27,7 @@ export const searchHandlers = [
         subtitle: question.tags.join(', '),
       }));
 
-    const materials = seedMaterials
+    const materials = db.materials
       .filter(
         (m) =>
           m.title.toLowerCase().includes(q) ||

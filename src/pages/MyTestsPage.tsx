@@ -1,25 +1,4 @@
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import HistoryIcon from '@mui/icons-material/History';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Chip,
-  CircularProgress,
-  Collapse,
-  IconButton,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from '@mui/material';
+import { ChevronDown, ClipboardList, Play, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -30,44 +9,43 @@ import {
   useTests,
   type CustomTest,
 } from '@/features/custom-tests';
-import { EmptyState, ErrorState } from '@/shared/ui';
+import { EmptyState, ErrorState, Spinner } from '@/shared/ui';
 
 function AttemptHistory({ testId, open }: { testId: string; open: boolean }) {
   const { t, i18n } = useTranslation();
   const { data: attempts, isPending } = useTestAttempts(testId, open);
 
   if (!open) return null;
-  if (isPending) return <CircularProgress size={20} aria-label={t('common.loading')} />;
+  if (isPending) return <Spinner />;
   if (!attempts || attempts.length === 0) {
     return (
-      <Typography variant="body2" color="text.secondary">
+      <p className="tok-com" style={{ margin: 0 }}>
+        {'// '}
         {t('myTests.attemptsEmpty')}
-      </Typography>
+      </p>
     );
   }
   return (
-    <TableContainer sx={{ overflowX: 'auto' }}>
-      <Table size="small" data-testid="attempt-history">
-        <TableHead>
-          <TableRow>
-            <TableCell>{t('myTests.date')}</TableCell>
-            <TableCell>{t('myTests.mode')}</TableCell>
-            <TableCell align="right">{t('myTests.score')}</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
+    <div className="table-wrap">
+      <table className="data-table" data-testid="attempt-history">
+        <thead>
+          <tr>
+            <th>{t('myTests.date')}</th>
+            <th>{t('myTests.mode')}</th>
+            <th style={{ textAlign: 'right' }}>{t('myTests.score')}</th>
+          </tr>
+        </thead>
+        <tbody>
           {attempts.map((a) => (
-            <TableRow key={a.id}>
-              <TableCell>
-                {a.submittedAt ? new Date(a.submittedAt).toLocaleString(i18n.language) : '—'}
-              </TableCell>
-              <TableCell>{t(`takeTest.${a.mode}`)}</TableCell>
-              <TableCell align="right">{a.score}</TableCell>
-            </TableRow>
+            <tr key={a.id}>
+              <td>{a.submittedAt ? new Date(a.submittedAt).toLocaleString(i18n.language) : '—'}</td>
+              <td>{t(`takeTest.${a.mode}`)}</td>
+              <td style={{ textAlign: 'right' }}>{a.score}</td>
+            </tr>
           ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+        </tbody>
+      </table>
+    </div>
   );
 }
 
@@ -78,67 +56,62 @@ function TestCard({ test }: { test: CustomTest }) {
   const [historyOpen, setHistoryOpen] = useState(false);
 
   return (
-    <Card>
-      <CardContent>
-        <Stack direction="row" alignItems="flex-start" spacing={1}>
-          <Box sx={{ flex: 1 }}>
-            <Typography variant="h6" component="h2">
-              {test.name}
-            </Typography>
-            <Stack direction="row" spacing={0.5} useFlexGap flexWrap="wrap" sx={{ my: 1 }}>
-              <Chip size="small" label={t('myTests.questions', { count: test.questionIds.length })} />
-              <Chip
-                size="small"
-                variant="outlined"
-                label={
-                  test.timed
-                    ? t('myTests.timed', { minutes: test.durationMinutes })
-                    : t('myTests.untimed')
-                }
-              />
-            </Stack>
-            <Typography variant="caption" color="text.secondary">
-              {t('myTests.created', {
-                date: new Date(test.createdAt).toLocaleDateString(i18n.language),
-              })}
-            </Typography>
-          </Box>
-          <IconButton
-            aria-label={t('myTests.deleteTest')}
-            onClick={() => deleteTest.mutate(test.id)}
-            sx={{ width: 44, height: 44 }}
-          >
-            <DeleteOutlineIcon />
-          </IconButton>
-        </Stack>
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} sx={{ mt: 1 }}>
-          <Button
-            variant="contained"
-            startIcon={<PlayArrowIcon />}
-            onClick={() => navigate(`/tests/${test.id}/take`)}
-          >
-            {t('myTests.take')}
-          </Button>
-          <Button
-            variant="outlined"
-            startIcon={<HistoryIcon />}
-            endIcon={
-              <ExpandMoreIcon
-                sx={{ transform: historyOpen ? 'rotate(180deg)' : 'none', transition: '150ms' }}
-              />
-            }
-            onClick={() => setHistoryOpen((o) => !o)}
-          >
-            {t('myTests.attempts')}
-          </Button>
-        </Stack>
-        <Collapse in={historyOpen} mountOnEnter>
-          <Box sx={{ mt: 2 }}>
-            <AttemptHistory testId={test.id} open={historyOpen} />
-          </Box>
-        </Collapse>
-      </CardContent>
-    </Card>
+    <div className="card stack" style={{ gap: 10 }}>
+      <div className="hstack" style={{ alignItems: 'flex-start' }}>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <h2 style={{ margin: 0 }}>{test.name}</h2>
+          <div className="chip-row" style={{ margin: '6px 0' }}>
+            <span className="chip">{t('myTests.questions', { count: test.questionIds.length })}</span>
+            <span className="chip">
+              {test.timed
+                ? t('myTests.timed', { minutes: test.durationMinutes })
+                : t('myTests.untimed')}
+            </span>
+          </div>
+          <span className="tok-com" style={{ fontSize: 12 }}>
+            {'// '}
+            {t('myTests.created', {
+              date: new Date(test.createdAt).toLocaleDateString(i18n.language),
+            })}
+          </span>
+        </div>
+        <button
+          type="button"
+          className="btn btn--icon btn--danger"
+          aria-label={t('myTests.deleteTest')}
+          onClick={() => deleteTest.mutate(test.id)}
+        >
+          <Trash2 size={16} aria-hidden />
+        </button>
+      </div>
+      <div className="hstack" style={{ flexWrap: 'wrap', gap: 10 }}>
+        <button
+          type="button"
+          className="btn btn--primary"
+          onClick={() => navigate(`/tests/${test.id}/take`)}
+        >
+          <Play size={15} aria-hidden />
+          {t('myTests.take')}
+        </button>
+        <button
+          type="button"
+          className="btn"
+          aria-expanded={historyOpen}
+          onClick={() => setHistoryOpen((o) => !o)}
+        >
+          {t('myTests.attempts')}
+          <ChevronDown
+            size={15}
+            aria-hidden
+            style={{
+              transform: historyOpen ? 'rotate(180deg)' : 'none',
+              transition: '150ms',
+            }}
+          />
+        </button>
+      </div>
+      {historyOpen && <AttemptHistory testId={test.id} open={historyOpen} />}
+    </div>
   );
 }
 
@@ -148,12 +121,13 @@ export function MyTestsPage() {
   const { data: tests, isPending, isError, refetch } = useTests();
 
   return (
-    <Stack spacing={2}>
-      <Typography variant="h5" component="h1">
+    <div className="stack">
+      <h1>
+        <span className="tok-com">{'// '}</span>
         {t('myTests.title')}
-      </Typography>
+      </h1>
       {isPending ? (
-        <CircularProgress aria-label={t('common.loading')} />
+        <Spinner center />
       ) : isError ? (
         <ErrorState onRetry={() => void refetch()} />
       ) : tests.length === 0 ? (
@@ -162,10 +136,11 @@ export function MyTestsPage() {
           description={t('myTests.emptyHint')}
           actionLabel={t('myTests.buildOne')}
           onAction={() => navigate('/build')}
+          glyph={<ClipboardList size={28} />}
         />
       ) : (
         tests.map((test) => <TestCard key={test.id} test={test} />)
       )}
-    </Stack>
+    </div>
   );
 }

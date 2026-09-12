@@ -1,5 +1,4 @@
-import ReplayIcon from '@mui/icons-material/Replay';
-import { Box, Button, Paper, Stack, Typography } from '@mui/material';
+import { RotateCcw } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import { QuestionCard, type Question } from '@/features/questions';
@@ -23,33 +22,36 @@ export function ResultsScreen({
 }: ResultsScreenProps) {
   const { t } = useTranslation();
   const wrongIds = incorrectQuestionIds(result.breakdown);
+  const perfect = wrongIds.length === 0;
 
   return (
-    <Stack spacing={3} data-testid="results-screen">
-      <Paper sx={{ p: 3, textAlign: 'center' }}>
-        <Typography variant="h4" component="h2" gutterBottom>
-          {t('takeTest.results')}
-        </Typography>
-        <Typography variant="h5" color={wrongIds.length === 0 ? 'success.main' : 'text.primary'}>
+    <div className="stack" data-testid="results-screen">
+      <div className="card" style={{ textAlign: 'center', padding: 28 }}>
+        <p className="tok-com" style={{ marginBottom: 4 }}>
+          {'// '}
+          {t('takeTest.results').toLowerCase()}
+        </p>
+        <h2 className={perfect ? 'tok-green' : undefined} style={{ fontSize: '1.4rem' }}>
           {t('takeTest.yourScore', { score: result.score, total: result.total })}
-        </Typography>
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} justifyContent="center" sx={{ mt: 2 }}>
+        </h2>
+        <div className="hstack" style={{ justifyContent: 'center', flexWrap: 'wrap', gap: 10 }}>
           {wrongIds.length > 0 && (
-            <Button
-              variant="contained"
-              startIcon={<ReplayIcon />}
+            <button
+              type="button"
+              className="btn btn--primary"
               onClick={() => onRetryIncorrect(wrongIds)}
             >
+              <RotateCcw size={15} aria-hidden />
               {t('takeTest.retryIncorrect')}
-            </Button>
+            </button>
           )}
-          <Button variant="outlined" onClick={onBackToTests}>
+          <button type="button" className="btn" onClick={onBackToTests}>
             {t('takeTest.backToTests')}
-          </Button>
-        </Stack>
-      </Paper>
+          </button>
+        </div>
+      </div>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <div className="stack">
         {result.breakdown.map((item, index) => {
           const question = questions.find((q) => q.id === item.questionId);
           if (!question) return null;
@@ -66,7 +68,7 @@ export function ResultsScreen({
             />
           );
         })}
-      </Box>
-    </Stack>
+      </div>
+    </div>
   );
 }

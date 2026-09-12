@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Alert, Box, Button, TextField, Typography } from '@mui/material';
+import { useId } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
@@ -14,6 +14,7 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 
 export function LoginForm({ onSuccess }: { onSuccess?: () => void }) {
   const { t } = useTranslation();
+  const ids = { email: useId(), password: useId() };
   const login = useLogin();
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -30,33 +31,54 @@ export function LoginForm({ onSuccess }: { onSuccess?: () => void }) {
   });
 
   return (
-    <Box component="form" onSubmit={onSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <Typography variant="h5" component="h1">
-        {t('auth.loginTitle')}
-      </Typography>
-      {login.isError && <Alert severity="error">{t('auth.loginFailed')}</Alert>}
-      <TextField
-        label={t('auth.email')}
-        type="email"
-        autoComplete="email"
-        error={!!form.formState.errors.email}
-        helperText={form.formState.errors.email ? t('auth.emailInvalid') : undefined}
-        {...form.register('email')}
-      />
-      <TextField
-        label={t('auth.password')}
-        type="password"
-        autoComplete="current-password"
-        error={!!form.formState.errors.password}
-        helperText={form.formState.errors.password ? t('auth.passwordRequired') : undefined}
-        {...form.register('password')}
-      />
-      <Button type="submit" variant="contained" size="large" disabled={login.isPending}>
+    <form onSubmit={onSubmit} className="stack" style={{ gap: 14 }}>
+      <div>
+        <p className="tok-com" style={{ margin: 0 }}>
+          {'// '}
+          {t('common.appName').toLowerCase()}
+        </p>
+        <h1 style={{ margin: 0 }}>
+          <span className="tok-kw">$</span> {t('auth.loginTitle').toLowerCase()}
+        </h1>
+      </div>
+      {login.isError && (
+        <div className="alert alert--error" role="alert">
+          {t('auth.loginFailed')}
+        </div>
+      )}
+      <div className={form.formState.errors.email ? 'field field--error' : 'field'}>
+        <label htmlFor={ids.email}>{t('auth.email')}</label>
+        <input
+          id={ids.email}
+          type="email"
+          autoComplete="email"
+          className="input"
+          {...form.register('email')}
+        />
+        {form.formState.errors.email && (
+          <span className="field-error-text">{t('auth.emailInvalid')}</span>
+        )}
+      </div>
+      <div className={form.formState.errors.password ? 'field field--error' : 'field'}>
+        <label htmlFor={ids.password}>{t('auth.password')}</label>
+        <input
+          id={ids.password}
+          type="password"
+          autoComplete="current-password"
+          className="input"
+          {...form.register('password')}
+        />
+        {form.formState.errors.password && (
+          <span className="field-error-text">{t('auth.passwordRequired')}</span>
+        )}
+      </div>
+      <button type="submit" className="btn btn--primary" disabled={login.isPending}>
         {t('auth.login')}
-      </Button>
-      <Typography variant="caption" color="text.secondary">
+      </button>
+      <p className="tok-com" style={{ margin: 0, fontSize: 12 }}>
+        {'// '}
         {t('auth.hint')}
-      </Typography>
-    </Box>
+      </p>
+    </form>
   );
 }

@@ -1,4 +1,3 @@
-import { ThemeProvider } from '@mui/material';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, type RenderOptions } from '@testing-library/react';
 import type { ReactElement, ReactNode } from 'react';
@@ -8,13 +7,21 @@ import { MemoryRouter } from 'react-router-dom';
 import { initI18n } from '@/i18n/config';
 import { AUTH_TOKEN_KEY } from '@/shared/api/client';
 import { useAuthStore } from '@/stores/useAuthStore';
-import { buildTheme } from '@/theme/theme';
 
 /** Establishes an authenticated mock session for the demo user (u1). */
 export function loginAsDemo() {
   localStorage.setItem(AUTH_TOKEN_KEY, 'mock-token.u1');
   useAuthStore.setState({
-    user: { id: 'u1', name: 'Demo User', email: 'demo@example.com', locale: 'en' },
+    user: { id: 'u1', name: 'Demo User', email: 'demo@example.com', locale: 'en', role: 'admin' },
+    status: 'authenticated',
+  });
+}
+
+/** Establishes a session for a non-admin user (u2). */
+export function loginAsRegularUser() {
+  localStorage.setItem(AUTH_TOKEN_KEY, 'mock-token.u2');
+  useAuthStore.setState({
+    user: { id: 'u2', name: 'Ada Lovelace', email: 'ada@example.com', locale: 'en', role: 'user' },
     status: 'authenticated',
   });
 }
@@ -39,9 +46,7 @@ export function renderWithProviders(
     return (
       <QueryClientProvider client={queryClient}>
         <I18nextProvider i18n={i18n}>
-          <ThemeProvider theme={buildTheme('light')}>
-            <MemoryRouter initialEntries={[route]}>{children}</MemoryRouter>
-          </ThemeProvider>
+          <MemoryRouter initialEntries={[route]}>{children}</MemoryRouter>
         </I18nextProvider>
       </QueryClientProvider>
     );

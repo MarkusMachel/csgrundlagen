@@ -1,4 +1,5 @@
 import type { CustomTest, TestAttempt } from '@/features/custom-tests/types';
+import type { MaterialItem } from '@/features/materials/types';
 import type {
   Bookmark,
   BugReport,
@@ -8,7 +9,8 @@ import type {
 } from '@/features/questions/types';
 
 import { seedComments } from './seed/comments';
-import { seedQuestions } from './seed/questions';
+import { seedMaterials } from './seed/materials';
+import { seedQuestions, type SeedQuestion } from './seed/questions';
 
 /**
  * In-memory "database" behind the MSW handlers. Mutable module state, reset
@@ -17,6 +19,10 @@ import { seedQuestions } from './seed/questions';
  */
 
 interface Db {
+  /** All questions (seeded + admin-created), with optional translations. */
+  questions: SeedQuestion[];
+  /** All materials (seeded + admin-created); mutable so links can be added. */
+  materials: MaterialItem[];
   comments: QuestionComment[];
   bookmarks: Bookmark[];
   notes: QuestionNote[];
@@ -78,6 +84,14 @@ function seedUserQuestionStats(): UserQuestionStat[] {
 
 function freshDb(): Db {
   return {
+    questions: seedQuestions.map((s) => ({
+      question: { ...s.question },
+      translations: s.translations,
+    })),
+    materials: seedMaterials.map((m) => ({
+      ...m,
+      relatedQuestionIds: m.relatedQuestionIds ? [...m.relatedQuestionIds] : undefined,
+    })),
     comments: [...seedComments],
     bookmarks: [],
     notes: [],

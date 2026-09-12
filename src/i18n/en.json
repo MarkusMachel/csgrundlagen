@@ -23,7 +23,9 @@
     "collapseMenu": "Collapse menu",
     "expandMenu": "Expand menu",
     "toggleTheme": "Toggle light/dark mode",
-    "userMenu": "Account"
+    "userMenu": "Account",
+    "scrollDown": "Scroll down",
+    "admin": "Admin"
   },
   "auth": {
     "loginTitle": "Log in",
@@ -171,6 +173,10 @@
     "empty": "No material matches the current filter",
     "by": "by {{author}}"
   },
+  "status": {
+    "feedPosition": "questions {{from}}–{{to}} of {{total}}",
+    "attemptPosition": "answered {{answered}} of {{total}}"
+  },
   "search": {
     "placeholder": "Search questions, material, tests…",
     "open": "Open search",
@@ -180,5 +186,76 @@
       "tests": "Tests"
     },
     "noResults": "No results for \"{{query}}\""
+  },
+  "authoring": {
+    "subtitle": "Add questions and learning material, and link them together. (Admin only.)",
+    "tab": {
+      "question": "New question",
+      "material": "New material",
+      "stats": "Stats"
+    },
+    "questionType": "Question type",
+    "type": {
+      "multiple-choice": "Multiple choice",
+      "true-false": "True / False"
+    },
+    "prompt": "Prompt",
+    "options": "Options",
+    "optionsHint": "Fill 2–5 options and mark the correct one.",
+    "optionPlaceholder": "answer text",
+    "addOption": "Add option",
+    "removeOption": "Remove option {{n}}",
+    "markCorrect": "Mark as the correct answer",
+    "optionsMin": "Provide at least 2 options",
+    "pickCorrect": "Select which option is correct",
+    "correctAnswer": "Correct answer",
+    "explanation": "Explanation (commented answer)",
+    "tags": "Tags",
+    "tagsPlaceholder": "Type a tag and press Enter",
+    "tagsRequired": "Add at least one tag",
+    "removeTag": "Remove tag {{tag}}",
+    "url": "URL",
+    "urlInvalid": "Enter a valid URL",
+    "authorOptional": "Author (optional)",
+    "descriptionOptional": "Description (optional)",
+    "linkMaterials": "Link to material",
+    "linkMaterialsHint": "Optional — attach existing material to this question.",
+    "linkQuestions": "Link to questions",
+    "linkQuestionsHint": "Optional — attach this material to existing questions.",
+    "linkSearchPlaceholder": "Search to filter…",
+    "noMatches": "No matches",
+    "noMaterialsYet": "No material to link yet",
+    "noQuestionsYet": "No questions to link yet",
+    "unlink": "Unlink {{name}}",
+    "required": "This field is required",
+    "createQuestion": "Create question",
+    "createMaterial": "Create material",
+    "questionCreated": "Question created.",
+    "materialCreated": "Material created.",
+    "saveError": "Could not save — please try again.",
+    "title": "Content authoring",
+    "materialTitle": "Title",
+    "stats": {
+      "totalQuestions": "Questions",
+      "totalMaterials": "Material items",
+      "totalUsers": "Users",
+      "totalAnswers": "Answers submitted",
+      "totalTests": "Saved tests",
+      "totalAttempts": "Test attempts",
+      "totalBookmarks": "Bookmarks",
+      "totalBugReports": "Bug reports",
+      "questionsByType": "Questions by type",
+      "questionsByDifficulty": "Questions by difficulty",
+      "materialsByType": "Material by type",
+      "answersByTag": "Top tags by answers submitted",
+      "correctness": "Answer correctness",
+      "correct": "{{count}} correct ({{pct}}%)",
+      "incorrect": "{{count}} incorrect ({{pct}}%)",
+      "correctnessAria": "{{correct}} correct and {{incorrect}} incorrect, {{pct}}% correct",
+      "unspecified": "unspecified",
+      "noQuestionsYet": "No questions yet",
+      "noMaterialsYet": "No material yet",
+      "noAnswersYet": "No answers recorded yet"
+    }
   }
 }

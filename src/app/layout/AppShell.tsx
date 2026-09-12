@@ -1,20 +1,23 @@
-import { Box, CircularProgress, Toolbar } from '@mui/material';
+import { ArrowDown } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 import { useSessionBootstrap } from '@/features/auth';
+import { Spinner } from '@/shared/ui';
 
-import { SideNav } from './SideNav';
+import { StatusBar } from './StatusBar';
 import { TopBar } from './TopBar';
 
 export function AppShell() {
+  const { t } = useTranslation();
   const status = useSessionBootstrap();
   const location = useLocation();
 
   if (status === 'unknown') {
     return (
-      <Box sx={{ display: 'grid', placeItems: 'center', minHeight: '100vh' }}>
-        <CircularProgress />
-      </Box>
+      <div style={{ display: 'grid', placeItems: 'center', minHeight: '100vh' }}>
+        <Spinner />
+      </div>
     );
   }
 
@@ -23,13 +26,20 @@ export function AppShell() {
   }
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <>
       <TopBar />
-      <SideNav />
-      <Box component="main" sx={{ flexGrow: 1, p: { xs: 2, sm: 3 }, minWidth: 0 }}>
-        <Toolbar />
+      <main className="app-main">
         <Outlet />
-      </Box>
-    </Box>
+      </main>
+      <button
+        type="button"
+        className="scroll-fab"
+        aria-label={t('nav.scrollDown')}
+        onClick={() => window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' })}
+      >
+        <ArrowDown size={18} aria-hidden style={{ margin: 'auto' }} />
+      </button>
+      <StatusBar />
+    </>
   );
 }

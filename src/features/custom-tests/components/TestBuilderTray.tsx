@@ -1,20 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import {
-  Alert,
-  Box,
-  Button,
-  Divider,
-  FormControlLabel,
-  IconButton,
-  List,
-  ListItem,
-  ListItemText,
-  Paper,
-  Switch,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { X } from 'lucide-react';
+import { useId } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
@@ -47,6 +33,7 @@ interface TestBuilderTrayProps {
 
 export function TestBuilderTray({ selectedQuestions, onSaved }: TestBuilderTrayProps) {
   const { t } = useTranslation();
+  const ids = { name: useId(), duration: useId() };
   const { selectedQuestionIds, removeQuestion, clear } = useTestBuilderStore();
   const createTest = useCreateTest();
 
@@ -77,119 +64,126 @@ export function TestBuilderTray({ selectedQuestions, onSaved }: TestBuilderTrayP
     onSaved(test);
   });
 
-  const promptOf = (id: string) =>
-    selectedQuestions.find((q) => q.id === id)?.prompt ?? id;
+  const promptOf = (id: string) => selectedQuestions.find((q) => q.id === id)?.prompt ?? id;
 
   return (
-    <Paper
-      component="form"
+    <form
       onSubmit={onSubmit}
-      variant="outlined"
-      sx={{ p: 2, display: 'flex', flexDirection: 'column', gap: 1.5 }}
+      className="card stack"
+      style={{ gap: 12 }}
       data-testid="test-builder-tray"
     >
-      <Typography variant="h6" component="h2">
+      <h2 style={{ margin: 0 }}>
         {t('builder.selected')} ({selectedQuestionIds.length})
-      </Typography>
+      </h2>
 
       {selectedQuestionIds.length === 0 ? (
-        <Typography variant="body2" color="text.secondary">
+        <p className="tok-com" style={{ margin: 0 }}>
+          {'// '}
           {t('builder.emptyTray')}
-        </Typography>
+        </p>
       ) : (
-        <List dense sx={{ maxHeight: 240, overflowY: 'auto' }}>
+        <ul className="tray-list">
           {selectedQuestionIds.map((id) => (
-            <ListItem
-              key={id}
-              disableGutters
-              secondaryAction={
-                <IconButton
-                  edge="end"
-                  aria-label={t('builder.remove')}
-                  onClick={() => removeQuestion(id)}
-                  sx={{ width: 44, height: 44 }}
-                >
-                  <DeleteOutlineIcon fontSize="small" />
-                </IconButton>
-              }
-            >
-              <ListItemText
-                primary={promptOf(id)}
-                primaryTypographyProps={{ variant: 'body2', noWrap: true }}
-              />
-            </ListItem>
+            <li key={id}>
+              <span className="tray-prompt">{promptOf(id)}</span>
+              <button
+                type="button"
+                className="btn btn--icon btn--danger"
+                aria-label={t('builder.remove')}
+                onClick={() => removeQuestion(id)}
+              >
+                <X size={15} aria-hidden />
+              </button>
+            </li>
           ))}
-        </List>
+        </ul>
       )}
 
-      <Divider />
+      <hr className="divider" />
 
-      <TextField
-        label={t('builder.testName')}
-        size="small"
-        error={!!form.formState.errors.name}
-        helperText={form.formState.errors.name ? t('builder.nameRequired') : undefined}
-        {...form.register('name')}
-      />
+      <div className={form.formState.errors.name ? 'field field--error' : 'field'}>
+        <label htmlFor={ids.name}>{t('builder.testName')}</label>
+        <input id={ids.name} className="input" {...form.register('name')} />
+        {form.formState.errors.name && (
+          <span className="field-error-text">{t('builder.nameRequired')}</span>
+        )}
+      </div>
 
       <Controller
         control={form.control}
         name="timed"
         render={({ field }) => (
-          <FormControlLabel
-            control={<Switch checked={field.value} onChange={field.onChange} />}
-            label={t('builder.timed')}
-          />
+          <label className="checkbox-row">
+            <input
+              type="checkbox"
+              checked={field.value}
+              onChange={(e) => field.onChange(e.target.checked)}
+            />
+            {t('builder.timed')}
+          </label>
         )}
       />
       {timed && (
-        <TextField
-          label={t('builder.durationMinutes')}
-          type="number"
-          size="small"
-          inputProps={{ min: 1 }}
-          error={!!form.formState.errors.durationMinutes}
-          helperText={
-            form.formState.errors.durationMinutes ? t('builder.durationInvalid') : undefined
-          }
-          {...form.register('durationMinutes')}
-        />
+        <div className={form.formState.errors.durationMinutes ? 'field field--error' : 'field'}>
+          <label htmlFor={ids.duration}>{t('builder.durationMinutes')}</label>
+          <input
+            id={ids.duration}
+            type="number"
+            min={1}
+            className="input"
+            {...form.register('durationMinutes')}
+          />
+          {form.formState.errors.durationMinutes && (
+            <span className="field-error-text">{t('builder.durationInvalid')}</span>
+          )}
+        </div>
       )}
 
       <Controller
         control={form.control}
         name="shuffleQuestions"
         render={({ field }) => (
-          <FormControlLabel
-            control={<Switch checked={field.value} onChange={field.onChange} />}
-            label={t('builder.shuffleQuestions')}
-          />
+          <label className="checkbox-row">
+            <input
+              type="checkbox"
+              checked={field.value}
+              onChange={(e) => field.onChange(e.target.checked)}
+            />
+            {t('builder.shuffleQuestions')}
+          </label>
         )}
       />
       <Controller
         control={form.control}
         name="shuffleOptions"
         render={({ field }) => (
-          <FormControlLabel
-            control={<Switch checked={field.value} onChange={field.onChange} />}
-            label={t('builder.shuffleOptions')}
-          />
+          <label className="checkbox-row">
+            <input
+              type="checkbox"
+              checked={field.value}
+              onChange={(e) => field.onChange(e.target.checked)}
+            />
+            {t('builder.shuffleOptions')}
+          </label>
         )}
       />
 
       {selectedQuestionIds.length === 0 && form.formState.isSubmitted && (
-        <Alert severity="warning">{t('builder.needQuestions')}</Alert>
+        <div className="alert alert--error">{t('builder.needQuestions')}</div>
       )}
 
-      <Box>
-        <Button
-          type="submit"
-          variant="contained"
-          disabled={createTest.isPending || selectedQuestionIds.length === 0}
-        >
-          {t('builder.saveTest')}
-        </Button>
-      </Box>
-    </Paper>
+      <button
+        type="submit"
+        className="btn btn--primary"
+        disabled={createTest.isPending || selectedQuestionIds.length === 0}
+        style={{ alignSelf: 'flex-start' }}
+      >
+        <span className="prompt-char" aria-hidden>
+          $
+        </span>
+        {t('builder.saveTest')}
+      </button>
+    </form>
   );
 }

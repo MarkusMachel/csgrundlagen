@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Alert, Box, Button, TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
@@ -20,24 +19,27 @@ export function BugReportTab({ questionId }: { questionId: string }) {
   });
 
   return (
-    <Box component="form" onSubmit={onSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-      {reportBug.isSuccess && <Alert severity="success">{t('question.bug.success')}</Alert>}
-      <TextField
-        multiline
-        minRows={2}
-        placeholder={t('question.bug.placeholder')}
-        error={!!form.formState.errors.message}
-        helperText={form.formState.errors.message ? t('question.bug.required') : undefined}
-        {...form.register('message')}
-      />
-      <Button
+    <form onSubmit={onSubmit} className="stack" style={{ gap: 10 }}>
+      {reportBug.isSuccess && <div className="alert alert--success">{t('question.bug.success')}</div>}
+      <div className={form.formState.errors.message ? 'field field--error' : 'field'}>
+        <textarea
+          className="textarea"
+          rows={2}
+          placeholder={t('question.bug.placeholder')}
+          {...form.register('message')}
+        />
+        {form.formState.errors.message && (
+          <span className="field-error-text">{t('question.bug.required')}</span>
+        )}
+      </div>
+      <button
         type="submit"
-        variant="outlined"
+        className="btn"
         disabled={reportBug.isPending}
-        sx={{ alignSelf: 'flex-start' }}
+        style={{ alignSelf: 'flex-start' }}
       >
         {t('question.bug.submit')}
-      </Button>
-    </Box>
+      </button>
+    </form>
   );
 }

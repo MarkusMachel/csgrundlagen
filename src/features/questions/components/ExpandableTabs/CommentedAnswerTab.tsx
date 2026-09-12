@@ -1,4 +1,3 @@
-import { Alert, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 interface CommentedAnswerTabProps {
@@ -9,7 +8,7 @@ interface CommentedAnswerTabProps {
 export function CommentedAnswerTab({ explanation, revealed }: CommentedAnswerTabProps) {
   const { t } = useTranslation();
   if (!revealed) {
-    return <Alert severity="info">{t('question.explanationHidden')}</Alert>;
+    return <div className="alert alert--info">{t('question.explanationHidden')}</div>;
   }
-  return <Typography variant="body2">{explanation}</Typography>;
+  return <p style={{ margin: 0 }}>{explanation}</p>;
 }

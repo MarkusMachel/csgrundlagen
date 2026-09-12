@@ -1,18 +1,10 @@
-import SearchIcon from '@mui/icons-material/Search';
-import {
-  Box,
-  CircularProgress,
-  InputAdornment,
-  MenuItem,
-  Pagination,
-  Stack,
-  TextField,
-} from '@mui/material';
-import { useState } from 'react';
+import { ChevronLeft, ChevronRight, SearchX } from 'lucide-react';
+import { useEffect, useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useDebounce } from '@/shared/hooks/useDebounce';
-import { EmptyState, ErrorState } from '@/shared/ui';
+import { EmptyState, ErrorState, Spinner } from '@/shared/ui';
+import { useUIStore } from '@/stores/useUIStore';
 
 import { QuestionCard } from './QuestionCard';
 import { useQuestions, useTags } from '../hooks/useQuestions';
@@ -33,6 +25,7 @@ interface QuestionFeedProps {
  */
 export function QuestionFeed({ mode, selectedIds = [], onToggleSelect }: QuestionFeedProps) {
   const { t } = useTranslation();
+  const tagSelectId = useId();
   const [page, setPage] = useState(1);
   const [tag, setTag] = useState('');
   const [search, setSearch] = useState('');
@@ -46,57 +39,66 @@ export function QuestionFeed({ mode, selectedIds = [], onToggleSelect }: Questio
     search: debouncedSearch,
   });
 
+  // Status-bar context: "question <page-window> of <total>" (mockup design).
+  const setStatus = useUIStore((s) => s.setStatus);
+  useEffect(() => {
+    if (mode !== 'feed' || !data) return;
+    setStatus(
+      t('status.feedPosition', {
+        from: (data.page - 1) * data.pageSize + 1,
+        to: Math.min(data.page * data.pageSize, data.total),
+        total: data.total,
+      }),
+    );
+    return () => setStatus(null);
+  }, [mode, data, setStatus, t]);
+
   return (
-    <Stack spacing={2}>
-      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
-        <TextField
-          fullWidth
-          size="small"
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            setPage(1);
-          }}
-          placeholder={t('home.searchPlaceholder')}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon fontSize="small" />
-              </InputAdornment>
-            ),
-          }}
-        />
-        <TextField
-          select
-          size="small"
-          value={tag}
-          onChange={(e) => {
-            setTag(e.target.value);
-            setPage(1);
-          }}
-          label={t('home.filterByTag')}
-          sx={{ minWidth: { sm: 200 } }}
-        >
-          <MenuItem value="">{t('home.allTags')}</MenuItem>
-          {(tags ?? []).map((tg) => (
-            <MenuItem key={tg} value={tg}>
-              {tg}
-            </MenuItem>
-          ))}
-        </TextField>
-      </Stack>
+    <div className="stack">
+      <div className="toolbar">
+        <div className="field field--grow">
+          <input
+            type="search"
+            className="input"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setPage(1);
+            }}
+            placeholder={t('home.searchPlaceholder')}
+            aria-label={t('home.searchPlaceholder')}
+          />
+        </div>
+        <div className="field">
+          <label htmlFor={tagSelectId}>{t('home.filterByTag')}</label>
+          <select
+            id={tagSelectId}
+            className="select"
+            value={tag}
+            onChange={(e) => {
+              setTag(e.target.value);
+              setPage(1);
+            }}
+          >
+            <option value="">{t('home.allTags')}</option>
+            {(tags ?? []).map((tg) => (
+              <option key={tg} value={tg}>
+                {tg}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
 
       {isPending ? (
-        <Box sx={{ display: 'grid', placeItems: 'center', py: 6 }}>
-          <CircularProgress aria-label={t('common.loading')} />
-        </Box>
+        <Spinner center />
       ) : isError ? (
         <ErrorState onRetry={() => void refetch()} />
       ) : data.items.length === 0 ? (
-        <EmptyState title={t('home.noResults')} description={t('home.noResultsHint')} />
+        <EmptyState title={t('home.noResults')} description={t('home.noResultsHint')} glyph={<SearchX size={28} />} />
       ) : (
         <>
-          <Stack spacing={2} data-testid="question-feed">
+          <div className="stack" data-testid="question-feed">
             {data.items.map((question) => (
               <QuestionCard
                 key={question.id}
@@ -106,17 +108,42 @@ export function QuestionFeed({ mode, selectedIds = [], onToggleSelect }: Questio
                 onToggleSelect={onToggleSelect}
               />
             ))}
-          </Stack>
+          </div>
           {data.totalPages > 1 && (
-            <Pagination
-              count={data.totalPages}
-              page={page}
-              onChange={(_e, p) => setPage(p)}
-              sx={{ alignSelf: 'center' }}
-            />
+            <nav className="pagination" aria-label="pagination">
+              <button
+                type="button"
+                className="page-btn"
+                disabled={page <= 1}
+                onClick={() => setPage((p) => p - 1)}
+                aria-label="previous page"
+              >
+                <ChevronLeft size={15} aria-hidden style={{ verticalAlign: '-2px' }} />
+              </button>
+              {Array.from({ length: data.totalPages }, (_, i) => i + 1).map((p) => (
+                <button
+                  key={p}
+                  type="button"
+                  className={p === page ? 'page-btn page-btn--current' : 'page-btn'}
+                  aria-current={p === page ? 'page' : undefined}
+                  onClick={() => setPage(p)}
+                >
+                  {p}
+                </button>
+              ))}
+              <button
+                type="button"
+                className="page-btn"
+                disabled={page >= data.totalPages}
+                onClick={() => setPage((p) => p + 1)}
+                aria-label="next page"
+              >
+                <ChevronRight size={15} aria-hidden style={{ verticalAlign: '-2px' }} />
+              </button>
+            </nav>
           )}
         </>
       )}
-    </Stack>
+    </div>
   );
 }

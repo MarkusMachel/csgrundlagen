@@ -1,13 +1,4 @@
-import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
-import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
-import {
-  Button,
-  Card,
-  CardActionArea,
-  CardContent,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { BookOpen, GraduationCap, type LucideIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -21,57 +12,44 @@ export function TestModePicker({ onStart }: TestModePickerProps) {
   const { t } = useTranslation();
   const [mode, setMode] = useState<TestMode>('practice');
 
-  const options: { value: TestMode; icon: typeof SchoolOutlinedIcon; label: string; desc: string }[] =
-    [
-      {
-        value: 'practice',
-        icon: MenuBookOutlinedIcon,
-        label: t('takeTest.practice'),
-        desc: t('takeTest.practiceDesc'),
-      },
-      {
-        value: 'exam',
-        icon: SchoolOutlinedIcon,
-        label: t('takeTest.exam'),
-        desc: t('takeTest.examDesc'),
-      },
-    ];
+  const options: { value: TestMode; icon: LucideIcon; label: string; desc: string }[] = [
+    { value: 'practice', icon: BookOpen, label: t('takeTest.practice'), desc: t('takeTest.practiceDesc') },
+    { value: 'exam', icon: GraduationCap, label: t('takeTest.exam'), desc: t('takeTest.examDesc') },
+  ];
 
   return (
-    <Stack spacing={2} sx={{ maxWidth: 560, mx: 'auto' }}>
-      <Typography variant="h5" component="h2">
-        {t('takeTest.chooseMode')}
-      </Typography>
-      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+    <div className="stack" style={{ maxWidth: 620 }}>
+      <h2>{t('takeTest.chooseMode')}</h2>
+      <div className="mode-cards">
         {options.map(({ value, icon: Icon, label, desc }) => (
-          <Card
+          <button
             key={value}
-            variant="outlined"
-            sx={{
-              flex: 1,
-              borderColor: mode === value ? 'primary.main' : 'divider',
-              borderWidth: mode === value ? 2 : 1,
-            }}
+            type="button"
+            className="mode-card"
+            aria-pressed={mode === value}
+            onClick={() => setMode(value)}
           >
-            <CardActionArea
-              onClick={() => setMode(value)}
-              aria-pressed={mode === value}
-              sx={{ height: '100%' }}
-            >
-              <CardContent>
-                <Icon color={mode === value ? 'primary' : 'action'} />
-                <Typography variant="h6">{label}</Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {desc}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
+            <div className="mode-card__glyph" aria-hidden>
+              <Icon size={20} />
+            </div>
+            <h3>{label}</h3>
+            <p className="muted" style={{ margin: 0 }}>
+              {desc}
+            </p>
+          </button>
         ))}
-      </Stack>
-      <Button variant="contained" size="large" onClick={() => onStart(mode)}>
+      </div>
+      <button
+        type="button"
+        className="btn btn--primary"
+        style={{ alignSelf: 'flex-start' }}
+        onClick={() => onStart(mode)}
+      >
+        <span className="prompt-char" aria-hidden>
+          $
+        </span>
         {t('takeTest.start')}
-      </Button>
-    </Stack>
+      </button>
+    </div>
   );
 }

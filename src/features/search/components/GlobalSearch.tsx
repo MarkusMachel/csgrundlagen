@@ -1,24 +1,9 @@
-import SearchIcon from '@mui/icons-material/Search';
-import {
-  Box,
-  ClickAwayListener,
-  IconButton,
-  InputAdornment,
-  List,
-  ListItemButton,
-  ListItemText,
-  ListSubheader,
-  Paper,
-  Popper,
-  TextField,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
-import { useRef, useState } from 'react';
+import { Search } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import { useClickOutside } from '@/shared/hooks/useClickOutside';
 import { useDebounce } from '@/shared/hooks/useDebounce';
 
 import { useSearch } from '../hooks/useSearch';
@@ -26,27 +11,42 @@ import type { SearchResultItem } from '../types';
 
 type GroupKey = 'questions' | 'materials' | 'tests';
 
+/**
+ * Command-palette-style search: an icon in the title bar opens a dropdown
+ * panel with the input and grouped results. Ctrl/Cmd+K opens it too.
+ */
 export function GlobalSearch() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
-  const [mobileExpanded, setMobileExpanded] = useState(false);
-  const anchorRef = useRef<HTMLDivElement>(null);
+  const [query, setQuery] = useState('');
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  useClickOutside(wrapRef, () => setOpen(false), open);
 
   const debounced = useDebounce(query, 250);
   const { data: results } = useSearch(debounced);
 
-  const close = () => {
-    setOpen(false);
-    setMobileExpanded(false);
-  };
+  useEffect(() => {
+    if (open) inputRef.current?.focus();
+  }, [open]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setOpen(true);
+      } else if (e.key === 'Escape') {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, []);
 
   const goTo = (group: GroupKey, item: SearchResultItem) => {
-    close();
+    setOpen(false);
     setQuery('');
     if (group === 'questions') navigate(`/questions/${item.id}`);
     else if (group === 'materials') navigate('/materials');
@@ -55,85 +55,73 @@ export function GlobalSearch() {
 
   const groups: GroupKey[] = ['questions', 'materials', 'tests'];
   const hasResults = results && groups.some((g) => results[g].length > 0);
-
-  const field = (
-    <TextField
-      fullWidth
-      size="small"
-      value={query}
-      autoFocus={isMobile && mobileExpanded}
-      onChange={(e) => {
-        setQuery(e.target.value);
-        setOpen(true);
-      }}
-      onFocus={() => setOpen(true)}
-      placeholder={t('search.placeholder')}
-      inputProps={{ 'aria-label': t('search.placeholder'), role: 'searchbox' }}
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <SearchIcon fontSize="small" />
-          </InputAdornment>
-        ),
-      }}
-    />
-  );
-
-  // On small screens the search collapses to an icon that expands into a
-  // full-width field (§12) instead of an unusably narrow centered box.
-  if (isMobile && !mobileExpanded) {
-    return (
-      <IconButton
-        aria-label={t('search.open')}
-        onClick={() => setMobileExpanded(true)}
-        sx={{ ml: 'auto', width: 44, height: 44 }}
-      >
-        <SearchIcon />
-      </IconButton>
-    );
-  }
+  const showPanel = open;
+  const showResults = debounced.trim().length >= 2;
 
   return (
-    <ClickAwayListener onClickAway={close}>
-      <Box
-        ref={anchorRef}
-        sx={{
-          flex: 1,
-          maxWidth: { xs: '100%', sm: 480 },
-          mx: { xs: 0, sm: 'auto' },
-        }}
+    <div className="menu-wrap" ref={wrapRef}>
+      <button
+        type="button"
+        className="btn btn--icon"
+        aria-label={t('search.open')}
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
       >
-        {field}
-        <Popper
-          open={open && debounced.trim().length >= 2}
-          anchorEl={anchorRef.current}
-          placement="bottom-start"
-          sx={{ zIndex: (th) => th.zIndex.modal + 1, width: anchorRef.current?.clientWidth }}
+        <Search size={17} aria-hidden />
+      </button>
+      {showPanel && (
+        <div
+          className="menu"
+          style={{ width: 'min(480px, calc(100vw - 24px))', padding: 8 }}
         >
-          <Paper elevation={4} sx={{ mt: 0.5, maxHeight: 420, overflowY: 'auto' }}>
-            {hasResults ? (
-              <List dense disablePadding data-testid="search-results">
-                {groups.map((group) =>
-                  results[group].length === 0 ? null : (
-                    <Box key={group}>
-                      <ListSubheader disableSticky>{t(`search.groups.${group}`)}</ListSubheader>
-                      {results[group].map((item) => (
-                        <ListItemButton key={item.id} onClick={() => goTo(group, item)}>
-                          <ListItemText primary={item.title} secondary={item.subtitle} />
-                        </ListItemButton>
-                      ))}
-                    </Box>
-                  ),
-                )}
-              </List>
-            ) : (
-              <Typography variant="body2" color="text.secondary" sx={{ p: 2 }}>
-                {t('search.noResults', { query: debounced })}
-              </Typography>
-            )}
-          </Paper>
-        </Popper>
-      </Box>
-    </ClickAwayListener>
+          <div className="search-wrap" style={{ maxWidth: 'none' }}>
+            <span className="search-glyph" aria-hidden>
+              <Search size={15} />
+            </span>
+            <input
+              ref={inputRef}
+              type="search"
+              className="search-input"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder={t('search.placeholder')}
+              aria-label={t('search.placeholder')}
+            />
+          </div>
+          {showResults && (
+            <div style={{ maxHeight: 380, overflowY: 'auto', marginTop: 6 }}>
+              {hasResults ? (
+                <div data-testid="search-results">
+                  {groups.map((group) =>
+                    results[group].length === 0 ? null : (
+                      <div key={group}>
+                        <div className="search-group-label">{t(`search.groups.${group}`)}</div>
+                        {results[group].map((item) => (
+                          <button
+                            key={item.id}
+                            type="button"
+                            className="search-result"
+                            onClick={() => goTo(group, item)}
+                          >
+                            {item.title}
+                            {item.subtitle && (
+                              <span className="search-result__sub">{item.subtitle}</span>
+                            )}
+                          </button>
+                        ))}
+                      </div>
+                    ),
+                  )}
+                </div>
+              ) : (
+                <p className="muted" style={{ padding: '10px 12px', margin: 0 }}>
+                  {t('search.noResults', { query: debounced })}
+                </p>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
   );
 }

@@ -1,37 +1,23 @@
-import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
-import LinkOutlinedIcon from '@mui/icons-material/LinkOutlined';
-import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
-import OndemandVideoOutlinedIcon from '@mui/icons-material/OndemandVideoOutlined';
-import {
-  Box,
-  Card,
-  CardActionArea,
-  CardContent,
-  Chip,
-  CircularProgress,
-  MenuItem,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
-import { useState } from 'react';
+import { Book, BookOpen, FileText, Link2, Video, type LucideIcon } from 'lucide-react';
+import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useMaterials, type MaterialType } from '@/features/materials';
 import { useTags } from '@/features/questions';
-import { EmptyState, ErrorState } from '@/shared/ui';
+import { EmptyState, ErrorState, Spinner } from '@/shared/ui';
 
-const typeIcons: Record<MaterialType, typeof MenuBookOutlinedIcon> = {
-  book: MenuBookOutlinedIcon,
-  video: OndemandVideoOutlinedIcon,
-  article: ArticleOutlinedIcon,
-  link: LinkOutlinedIcon,
+const typeIcons: Record<MaterialType, LucideIcon> = {
+  book: Book,
+  video: Video,
+  article: FileText,
+  link: Link2,
 };
 
 const materialTypes: MaterialType[] = ['book', 'video', 'article', 'link'];
 
 export function CuratedMaterialPage() {
   const { t } = useTranslation();
+  const ids = { type: useId(), tag: useId() };
   const [type, setType] = useState<MaterialType | ''>('');
   const [tag, setTag] = useState('');
 
@@ -42,99 +28,91 @@ export function CuratedMaterialPage() {
   });
 
   return (
-    <Stack spacing={2}>
-      <Typography variant="h5" component="h1">
+    <div className="stack">
+      <h1>
+        <span className="tok-com">{'// '}</span>
         {t('materials.title')}
-      </Typography>
+      </h1>
 
-      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
-        <TextField
-          select
-          size="small"
-          label={t('materials.filterType')}
-          value={type}
-          onChange={(e) => setType(e.target.value as MaterialType | '')}
-          sx={{ minWidth: { sm: 180 } }}
-        >
-          <MenuItem value="">{t('materials.allTypes')}</MenuItem>
-          {materialTypes.map((mt) => (
-            <MenuItem key={mt} value={mt}>
-              {t(`materials.type.${mt}`)}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          select
-          size="small"
-          label={t('home.filterByTag')}
-          value={tag}
-          onChange={(e) => setTag(e.target.value)}
-          sx={{ minWidth: { sm: 200 } }}
-        >
-          <MenuItem value="">{t('home.allTags')}</MenuItem>
-          {(tags ?? []).map((tg) => (
-            <MenuItem key={tg} value={tg}>
-              {tg}
-            </MenuItem>
-          ))}
-        </TextField>
-      </Stack>
+      <div className="toolbar">
+        <div className="field">
+          <label htmlFor={ids.type}>{t('materials.filterType')}</label>
+          <select
+            id={ids.type}
+            className="select"
+            value={type}
+            onChange={(e) => setType(e.target.value as MaterialType | '')}
+          >
+            <option value="">{t('materials.allTypes')}</option>
+            {materialTypes.map((mt) => (
+              <option key={mt} value={mt}>
+                {t(`materials.type.${mt}`)}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="field">
+          <label htmlFor={ids.tag}>{t('home.filterByTag')}</label>
+          <select
+            id={ids.tag}
+            className="select"
+            value={tag}
+            onChange={(e) => setTag(e.target.value)}
+          >
+            <option value="">{t('home.allTags')}</option>
+            {(tags ?? []).map((tg) => (
+              <option key={tg} value={tg}>
+                {tg}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
 
       {isPending ? (
-        <CircularProgress aria-label={t('common.loading')} />
+        <Spinner center />
       ) : isError ? (
         <ErrorState onRetry={() => void refetch()} />
       ) : materials.length === 0 ? (
-        <EmptyState title={t('materials.empty')} />
+        <EmptyState title={t('materials.empty')} glyph={<BookOpen size={28} />} />
       ) : (
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' },
-            gap: 2,
-          }}
-        >
+        <div className="materials-grid">
           {materials.map((m) => {
             const Icon = typeIcons[m.type];
             return (
-              <Card key={m.id}>
-                <CardActionArea
-                  component="a"
-                  href={m.url}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  sx={{ height: '100%' }}
-                >
-                  <CardContent>
-                    <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1 }}>
-                      <Icon color="primary" />
-                      <Chip size="small" label={t(`materials.type.${m.type}`)} />
-                    </Stack>
-                    <Typography variant="h6" component="h2">
-                      {m.title}
-                    </Typography>
-                    {m.author && (
-                      <Typography variant="body2" color="text.secondary">
-                        {t('materials.by', { author: m.author })}
-                      </Typography>
-                    )}
-                    {m.description && (
-                      <Typography variant="body2" sx={{ mt: 1 }}>
-                        {m.description}
-                      </Typography>
-                    )}
-                    <Stack direction="row" spacing={0.5} useFlexGap flexWrap="wrap" sx={{ mt: 1 }}>
-                      {m.tags.map((tg) => (
-                        <Chip key={tg} size="small" variant="outlined" label={tg} />
-                      ))}
-                    </Stack>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
+            <a
+              key={m.id}
+              className="card"
+              href={m.url}
+              target="_blank"
+              rel="noreferrer noopener"
+              style={{ display: 'block', color: 'inherit', textDecoration: 'none' }}
+            >
+              <div className="hstack" style={{ marginBottom: 8 }}>
+                <span className="tok-kw" aria-hidden>
+                  <Icon size={16} />
+                </span>
+                <span className="chip">{t(`materials.type.${m.type}`)}</span>
+              </div>
+              <h2 style={{ fontSize: '1rem' }}>{m.title}</h2>
+              {m.author && (
+                <p className="muted" style={{ margin: 0 }}>
+                  {t('materials.by', { author: m.author })}
+                </p>
+              )}
+              {m.description && <p style={{ margin: '8px 0 0' }}>{m.description}</p>}
+              <div className="chip-row" style={{ marginTop: 10 }}>
+                {m.tags.map((tg) => (
+                  <span key={tg} className="chip">
+                    {tg}
+                  </span>
+                ))}
+              </div>
+            </a>
             );
           })}
-        </Box>
+        </div>
       )}
-    </Stack>
+    </div>
   );
 }

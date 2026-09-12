@@ -1,10 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Avatar, Box, Button, CircularProgress, List, ListItem, ListItemAvatar, ListItemText, TextField, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
-import { EmptyState, ErrorState } from '@/shared/ui';
+import { EmptyState, ErrorState, Spinner } from '@/shared/ui';
 
 import { useAddComment, useQuestionComments } from '../../hooks/useQuestionExtras';
 
@@ -25,49 +24,42 @@ export function CommentsTab({ questionId }: { questionId: string }) {
     form.reset();
   });
 
-  if (isPending) return <CircularProgress size={24} aria-label={t('common.loading')} />;
+  if (isPending) return <Spinner />;
   if (isError) return <ErrorState onRetry={() => void refetch()} />;
 
   return (
-    <Box>
+    <div className="stack" style={{ gap: 10 }}>
       {comments.length === 0 ? (
-        <EmptyState title={t('question.comments.empty')} />
+        <EmptyState title={t('question.comments.empty')} glyph="//" />
       ) : (
-        <List dense>
+        <div>
           {comments.map((c) => (
-            <ListItem key={c.id} alignItems="flex-start" disableGutters>
-              <ListItemAvatar>
-                <Avatar>{c.userName.charAt(0)}</Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary={
-                  <>
-                    <Typography component="span" fontWeight={600} variant="body2">
-                      {c.userName}
-                    </Typography>{' '}
-                    <Typography component="span" variant="caption" color="text.secondary">
-                      {new Date(c.createdAt).toLocaleDateString(i18n.language)}
-                    </Typography>
-                  </>
-                }
-                secondary={c.body}
-              />
-            </ListItem>
+            <div key={c.id} className="comment-item">
+              <span className="comment-avatar" aria-hidden>
+                {c.userName.charAt(0)}
+              </span>
+              <div style={{ minWidth: 0 }}>
+                <div className="comment-meta">
+                  <strong style={{ color: 'var(--text)' }}>{c.userName}</strong>{' '}
+                  {new Date(c.createdAt).toLocaleDateString(i18n.language)}
+                </div>
+                <div>{c.body}</div>
+              </div>
+            </div>
           ))}
-        </List>
+        </div>
       )}
-      <Box component="form" onSubmit={onSubmit} sx={{ display: 'flex', gap: 1, mt: 1 }}>
-        <TextField
-          fullWidth
-          size="small"
+      <form onSubmit={onSubmit} className="hstack" style={{ alignItems: 'flex-start' }}>
+        <input
+          className="input"
           placeholder={t('question.comments.placeholder')}
-          error={!!form.formState.errors.body}
+          aria-invalid={!!form.formState.errors.body}
           {...form.register('body')}
         />
-        <Button type="submit" variant="contained" disabled={addComment.isPending}>
+        <button type="submit" className="btn btn--primary" disabled={addComment.isPending}>
           {t('question.comments.post')}
-        </Button>
-      </Box>
-    </Box>
+        </button>
+      </form>
+    </div>
   );
 }

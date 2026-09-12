@@ -1,5 +1,4 @@
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import { Box, Button, Typography } from '@mui/material';
+import { TriangleAlert } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 interface ErrorStateProps {
@@ -11,30 +10,17 @@ interface ErrorStateProps {
 export function ErrorState({ title, description, onRetry }: ErrorStateProps) {
   const { t } = useTranslation();
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 1.5,
-        py: 6,
-        px: 2,
-        textAlign: 'center',
-      }}
-      role="alert"
-    >
-      <ErrorOutlineIcon color="error" sx={{ fontSize: 48 }} />
-      <Typography variant="h6">{title ?? t('common.errorTitle')}</Typography>
-      {description && (
-        <Typography variant="body2" color="text.secondary">
-          {description}
-        </Typography>
-      )}
+    <div className="state-block" role="alert">
+      <div className="state-block__glyph tok-red" aria-hidden>
+        <TriangleAlert size={28} />
+      </div>
+      <h3>{title ?? t('common.errorTitle')}</h3>
+      {description && <p>{description}</p>}
       {onRetry && (
-        <Button variant="outlined" onClick={onRetry} sx={{ mt: 1 }}>
+        <button type="button" className="btn" onClick={onRetry}>
           {t('common.retry')}
-        </Button>
+        </button>
       )}
-    </Box>
+    </div>
   );
 }

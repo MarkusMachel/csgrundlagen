@@ -1,12 +1,24 @@
 import { http, HttpResponse } from 'msw';
 
 import type { AnswerStat, AnswerValue, Question } from '@/features/questions/types';
+import type { MultipleChoiceOption } from '@/features/questions/types';
 import { isWeakStat } from '@/features/weak-spots';
 
-import { db, nextId, recordAnswer } from '../db';
-import { allQuestions, currentUser, findQuestion, localeOf, unauthorized } from './utils';
-import { allTags } from '../seed/questions';
 
+import { db, nextId, recordAnswer } from '../db';
+import { allQuestions, currentUser, findQuestion, forbidden, localeOf, unauthorized } from './utils';
+
+interface CreateQuestionBody {
+  type: Question['type'];
+  prompt: string;
+  tags: string[];
+  difficulty?: 'easy' | 'medium' | 'hard';
+  explanation: string;
+  options?: MultipleChoiceOption[];
+  correctOptionId?: string;
+  correctAnswer?: boolean;
+  relatedMaterialIds?: string[];
+}
 
 function correctAnswerOf(question: Question): AnswerValue {
   return question.type === 'multiple-choice' ? question.correctOptionId : question.correctAnswer;
@@ -208,5 +220,41 @@ export const questionHandlers = [
     return HttpResponse.json(questions);
   }),
 
-  http.get('/api/tags', () => HttpResponse.json(allTags)),
+  http.get('/api/tags', () =>
+    HttpResponse.json([...new Set(db.questions.flatMap((s) => s.question.tags))].sort()),
+  ),
+
+  // Admin-only content authoring (mirrors a future real backend's gate).
+  http.post('/api/questions', async ({ request }) => {
+    const user = currentUser(request);
+    if (!user) return unauthorized();
+    if (user.role !== 'admin') return forbidden();
+    const body = (await request.json()) as CreateQuestionBody;
+    const id = nextId('q');
+    const base = {
+      id,
+      prompt: body.prompt,
+      tags: body.tags,
+      difficulty: body.difficulty,
+      explanation: body.explanation,
+    };
+    const question: Question =
+      body.type === 'multiple-choice'
+        ? {
+            ...base,
+            type: 'multiple-choice',
+            options: body.options ?? [],
+            correctOptionId: body.correctOptionId ?? 'A',
+          }
+        : { ...base, type: 'true-false', correctAnswer: body.correctAnswer ?? true };
+    db.questions.push({ question });
+    // optional linking: attach this question to existing materials
+    for (const materialId of body.relatedMaterialIds ?? []) {
+      const material = db.materials.find((m) => m.id === materialId);
+      if (material) {
+        material.relatedQuestionIds = [...(material.relatedQuestionIds ?? []), id];
+      }
+    }
+    return HttpResponse.json(question, { status: 201 });
+  }),
 ];

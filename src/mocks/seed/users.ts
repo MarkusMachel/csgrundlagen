@@ -11,6 +11,7 @@ export const seedUsers: SeedUser[] = [
     email: 'demo@example.com',
     password: 'password',
     locale: 'en',
+    role: 'admin',
   },
   {
     id: 'u2',
@@ -18,6 +19,7 @@ export const seedUsers: SeedUser[] = [
     email: 'ada@example.com',
     password: 'password',
     locale: 'en',
+    role: 'user',
   },
   {
     id: 'u3',
@@ -25,5 +27,6 @@ export const seedUsers: SeedUser[] = [
     email: 'grace@example.com',
     password: 'password',
     locale: 'en',
+    role: 'user',
   },
 ];

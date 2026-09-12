@@ -30,19 +30,18 @@ const twoOption: Question = {
 };
 
 describe('QuestionCard', () => {
-  it('labels options A–E for a 5-option question and A–B for 2 options', () => {
+  it('renders options as array entries, indexed for 5 and for 2 options', () => {
     loginAsDemo();
     const { unmount } = renderWithProviders(<QuestionCard question={mcq} mode="feed" />);
     expect(screen.getAllByRole('radio')).toHaveLength(5);
-    ['A', 'B', 'C', 'D', 'E'].forEach((letter) => {
-      // each option renders its circled letter badge
-      expect(screen.getAllByText(letter).length).toBeGreaterThan(0);
+    [0, 1, 2, 3, 4].forEach((i) => {
+      expect(screen.getByText(`options[${i}]`)).toBeInTheDocument();
     });
     unmount();
 
     renderWithProviders(<QuestionCard question={twoOption} mode="feed" />);
     expect(screen.getAllByRole('radio')).toHaveLength(2);
-    expect(screen.queryByText('C')).not.toBeInTheDocument();
+    expect(screen.queryByText('options[2]')).not.toBeInTheDocument();
   });
 
   it('enforces single-select among options', async () => {

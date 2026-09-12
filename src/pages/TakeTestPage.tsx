@@ -1,5 +1,4 @@
-import { Box, Button, CircularProgress, Stack, Typography } from '@mui/material';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -14,8 +13,9 @@ import {
   type TestSubmitResult,
 } from '@/features/custom-tests';
 import { QuestionCard, useQuestions, type Question } from '@/features/questions';
-import { ErrorState } from '@/shared/ui';
+import { ErrorState, Spinner } from '@/shared/ui';
 import { seededShuffle } from '@/shared/utils/shuffle';
+import { useUIStore } from '@/stores/useUIStore';
 
 export function TakeTestPage() {
   const { t } = useTranslation();
@@ -42,6 +42,19 @@ export function TakeTestPage() {
       .map((id) => pool.items.find((q) => q.id === id))
       .filter((q): q is Question => q !== undefined);
   }, [test, pool, attempt.questionIds, attempt.shuffleSeed, started]);
+
+  // Status bar: answered count + progress dashes (mockup design).
+  const setStatus = useUIStore((s) => s.setStatus);
+  const answeredCount = orderedQuestions.filter((q) => attempt.answers[q.id] !== undefined).length;
+  useEffect(() => {
+    if (!started || result || orderedQuestions.length === 0) return;
+    setStatus(
+      t('status.attemptPosition', { answered: answeredCount, total: orderedQuestions.length }),
+      orderedQuestions.map((q) => attempt.answers[q.id] !== undefined),
+    );
+    return () => setStatus(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [started, result, answeredCount, orderedQuestions.length, setStatus, t]);
 
   const optionOrderFor = (question: Question, index: number): string[] | undefined => {
     if (!test?.shuffleOptions || question.type !== 'multiple-choice') return undefined;
@@ -72,7 +85,7 @@ export function TakeTestPage() {
     attempt.start(testId, mode, questionIds);
   };
 
-  if (isPending) return <CircularProgress aria-label={t('common.loading')} />;
+  if (isPending) return <Spinner center />;
   if (isError || !test) return <ErrorState onRetry={() => void refetch()} />;
 
   if (result) {
@@ -91,38 +104,27 @@ export function TakeTestPage() {
 
   if (!started) {
     return (
-      <Stack spacing={2}>
-        <Typography variant="h5" component="h1">
+      <div className="stack">
+        <h1>
+          <span className="tok-com">{'// '}</span>
           {test.name}
-        </Typography>
+        </h1>
         <TestModePicker onStart={(mode: TestMode) => attempt.start(testId, mode)} />
-      </Stack>
+      </div>
     );
   }
 
   return (
-    <Stack spacing={2}>
+    <div className="stack">
       {/* Sticky header keeps the countdown visible without scrolling (§12). */}
-      <Box
-        sx={{
-          position: 'sticky',
-          top: { xs: 56, sm: 64 },
-          zIndex: 2,
-          bgcolor: 'background.default',
-          py: 1,
-          display: 'flex',
-          alignItems: 'center',
-          gap: 2,
-          flexWrap: 'wrap',
-        }}
-      >
-        <Typography variant="h6" component="h1" sx={{ flex: 1, minWidth: 200 }}>
-          {test.name} — {t(`takeTest.${attempt.mode}`)}
-        </Typography>
+      <div className="attempt-header">
+        <h1 style={{ margin: 0, flex: 1, minWidth: 200 }}>
+          {test.name} <span className="tok-com">— {t(`takeTest.${attempt.mode}`)}</span>
+        </h1>
         {test.timed && test.durationMinutes && (
           <TestTimer durationMinutes={test.durationMinutes} onExpire={handleSubmit} />
         )}
-      </Box>
+      </div>
 
       {orderedQuestions.map((question, index) => (
         <QuestionCard
@@ -140,16 +142,19 @@ export function TakeTestPage() {
         />
       ))}
 
-      <Button
-        variant="contained"
-        size="large"
+      <button
+        type="button"
+        className="btn btn--primary"
         onClick={handleSubmit}
         disabled={submitTest.isPending}
-        sx={{ alignSelf: 'flex-start' }}
+        style={{ alignSelf: 'flex-start' }}
         data-testid="submit-test"
       >
+        <span className="prompt-char" aria-hidden>
+          $
+        </span>
         {t('takeTest.submitAll')}
-      </Button>
-    </Stack>
+      </button>
+    </div>
   );
 }
