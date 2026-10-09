@@ -4,9 +4,11 @@ import { createRoot } from 'react-dom/client';
 import { App } from './app/App';
 import './styles/global.css';
 
-// There is no real backend: MSW serves /api in every browser context
-// (dev, preview, and the app under Playwright E2E) — §2, §13.3.
+// MSW serves /api by default (dev, preview, and Playwright E2E). Set
+// VITE_USE_MOCKS=false (`npm run dev:real`) to talk to the Go API instead,
+// which the Vite dev server proxies at /api.
 async function enableMocking() {
+  if (import.meta.env.VITE_USE_MOCKS === 'false') return;
   const { worker } = await import('./mocks/browser');
   await worker.start({ onUnhandledRequest: 'bypass' });
 }

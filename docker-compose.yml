@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: csgrundlagen-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-csgrundlagen}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-csgrundlagen}
+      POSTGRES_DB: ${POSTGRES_DB:-csgrundlagen}
+    ports:
+      - '${POSTGRES_PORT:-5432}:5432'
+    volumes:
+      - csgrundlagen_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-csgrundlagen} -d ${POSTGRES_DB:-csgrundlagen}']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # The Go API. Usually you run it locally with `npm run api:dev` instead;
+  # start it here with `docker compose --profile api up -d`.
+  # It applies its own migrations on startup.
+  api:
+    profiles: ['api']
+    build: ./apps/api
+    container_name: csgrundlagen-api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-csgrundlagen}:${POSTGRES_PASSWORD:-csgrundlagen}@db:5432/${POSTGRES_DB:-csgrundlagen}
+      PORT: '8080'
+    ports:
+      - '${API_PORT:-8080}:8080'
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  csgrundlagen_pgdata:

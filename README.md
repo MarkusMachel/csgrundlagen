@@ -1,43 +1,122 @@
 # Computer Fundamentals Trainer
 
-Frontend-only, gamified quiz platform for computer-science fundamentals, built to
+A gamified quiz platform for computer-science fundamentals, built to
 [the spec](./computer-fundamentals-trainer-spec.md) with a **code-editor-style UI**:
 navigation is a strip of open "file" tabs (`home.cs`, `weak_spots.cs`, …), each
 question renders in an editor pane with a line-number gutter, answers read as array
 entries (`options[2] = "HTTPS"`), and a VS Code-style status bar carries page
-context, progress dashes, and the session streak. There is no real backend — every
-`fetch` is intercepted by **Mock Service Worker (MSW)**, so components are written
-exactly as they would be against a real API.
+context, progress dashes, and the session streak.
+
+## Monorepo layout
+
+```text
+apps/
+  web/   React + Vite frontend (npm workspace @csgrundlagen/web)
+  api/   Go JSON API + Postgres migrations
+docker-compose.yml   Postgres 16 (and, optionally, the API in a container)
+```
+
+The web app talks to `/api`. That `/api` is served either by **Mock Service Worker**
+in the browser (the default — no backend needed, used by all frontend tests) or by
+the **Go API**, which implements the same contract against Postgres.
 
 ## Stack
 
-TypeScript · React 18 · Vite · hand-rolled CSS design system (no UI library —
-tokens + components in `src/styles/global.css`) · Zustand · TanStack Query ·
-React Router v6 · react-i18next (en / pt-BR / de) · React Hook Form + Zod · MSW ·
-Vitest + React Testing Library · Playwright · Storybook.
+- **web** — TypeScript · React 18 · Vite · hand-rolled CSS design system ·
+  Zustand · TanStack Query · React Router v6 · react-i18next (en / pt-BR / de) ·
+  React Hook Form + Zod · MSW · Vitest + React Testing Library · Playwright ·
+  Storybook.
+- **api** — Go (standard-library `net/http` routing) · pgx v5 · bcrypt ·
+  embedded SQL migrations · Postgres 16.
 
 ## Getting started
 
+Frontend only, against the in-browser mocks:
+
 ```bash
 npm install
-npm run dev          # serves on localhost:5173
+npm run dev          # localhost:5173 — log in as demo@example.com / password
 ```
 
-Log in with the mock demo account: **demo@example.com / password**.
+Full stack, against Postgres:
+
+```bash
+cp .env.example .env # once; adjust credentials/ports if needed
+npm run db:up        # Postgres in Docker
+npm run api:dev      # Go API on :8080 — applies migrations on startup
+npm run api:adduser -- -email you@example.com -name "You" -role admin -password '…'
+npm run dev:real     # web on :5173 with mocks off; /api is proxied to :8080
+```
+
+The real database starts **empty** (no seed data). The mock demo accounts don't
+exist there; create users with `api:adduser`, which bcrypt-hashes the password
+(it can also read `ADDUSER_PASSWORD` to keep it out of shell history).
 
 ## Scripts
 
+Run from the repo root.
+
 | Script | What it does |
 |---|---|
-| `npm run dev` | Vite dev server (MSW serves `/api`) |
-| `npm run typecheck` | `tsc --noEmit` (strict) |
-| `npm run lint` | ESLint (incl. `import/order` and feature-boundary rule) |
-| `npm test` | Vitest unit + integration tests (MSW via `msw/node`) |
-| `npm run build` | typecheck + production build |
-| `npm run e2e` | Playwright journeys (starts the dev server itself; first run: `npx playwright install chromium`) |
-| `npm run storybook` | Storybook (QuestionCard in all four modes) |
+| `npm run dev` | Web dev server, MSW serves `/api` |
+| `npm run dev:real` | Web dev server, `/api` proxied to the Go API (`API_PROXY_TARGET`, default `localhost:8080`) |
+| `npm run typecheck` / `lint` | Web: `tsc --noEmit` (strict) / ESLint |
+| `npm test` | Web: Vitest unit + integration tests (MSW via `msw/node`) |
+| `npm run build` | Web: typecheck + production build |
+| `npm run e2e` | Web: Playwright journeys (first run: `npx playwright install chromium`) |
+| `npm run storybook` | Web: Storybook |
+| `npm run db:up` / `db:down` | Start / stop Postgres (data is kept) |
+| `npm run api:dev` | Run the Go API (`DATABASE_URL`, `PORT`) |
+| `npm run api:test` | Go tests — the integration suite needs Postgres running |
+| `npm run api:adduser` | Create a user with a hashed password |
 
-CI gate order (§13.4): **typecheck → lint → test → build → e2e** — cheapest first.
+Web CI gate order (§13.4): **typecheck → lint → test → build → e2e** — cheapest first.
+
+## API (`apps/api`)
+
+```text
+cmd/api          server entry point (graceful shutdown, migrations on start)
+cmd/adduser      CLI to create users
+internal/db      pgx pool + embedded migration runner (migrations/*.sql)
+internal/store   domain models and every SQL query
+internal/httpapi routes, auth middleware, handlers, integration tests
+```
+
+- **Contract**: identical paths and JSON shapes to the MSW handlers in
+  `apps/web/src/mocks/handlers` — the field names in `internal/store/models.go`
+  match `apps/web/src/features/*/types.ts`. Errors are `{"message": "…"}`.
+- **Auth**: `POST /api/auth/login` checks the bcrypt hash and returns a random
+  bearer token; only its SHA-256 is stored (`sessions` table, 30-day expiry).
+  `POST /api/auth/logout` revokes it. Admin-only routes return **403** for other
+  users, matching the mock.
+- **Migrations**: numbered files in `internal/db/migrations`, embedded in the
+  binary and applied in order on startup, each recorded in `schema_migrations`.
+  Never edit an applied file — add the next number.
+  - `0001_schema.sql` — tables mirroring the frontend domain model (users,
+    sessions, questions + options + tags + translations, materials and their
+    question links, bookmarks/notes/comments/bug reports, submitted answers,
+    custom tests + attempts).
+  - `0002_views.sql` — read-only views for the aggregates (per-question stats,
+    weak spots, admin stats), handy in DBeaver.
+- **Tests**: `go test ./...` creates a throwaway database next to
+  `DATABASE_URL`, migrates it, drives every endpoint over HTTP, then drops it.
+  It skips itself if Postgres isn't reachable.
+- **Docker**: `docker compose --profile api up -d` runs the API in a container
+  (distroless image) next to the database instead of `api:dev`.
+
+## Postgres
+
+**Connect from DBeaver** (or `psql`) with the values in `.env` — by default:
+host `localhost`, port `5432`, database `csgrundlagen`, user `csgrundlagen`,
+password `csgrundlagen`. `DATABASE_URL` in `.env` has the same as one string.
+
+```bash
+docker compose down        # stop (keeps data)
+docker compose down -v     # stop and WIPE the data volume
+docker compose logs -f db  # tail logs
+```
+
+The web app internals below live under `apps/web/`.
 
 ## Architecture
 
