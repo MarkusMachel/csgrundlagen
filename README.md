@@ -1,68 +1,196 @@
 # Computer Fundamentals Trainer
 
-Frontend-only, gamified quiz platform for computer-science fundamentals, built to
-[the spec](./computer-fundamentals-trainer-spec.md). There is no real backend — every
-`fetch` is intercepted by **Mock Service Worker (MSW)**, so components are written
-exactly as they would be against a real API.
+A gamified quiz platform for computer-science fundamentals, built to
+[the spec](./computer-fundamentals-trainer-spec.md) with a **code-editor-style UI**:
+navigation is a strip of open "file" tabs (`home.cs`, `weak_spots.cs`, …), each
+question renders in an editor pane with a line-number gutter, answers read as array
+entries (`options[2] = "HTTPS"`), and a VS Code-style status bar carries page
+context, progress dashes, and the session streak.
+
+## Monorepo layout
+
+```text
+apps/
+  web/   React + Vite frontend (npm workspace @csgrundlagen/web)
+  api/   Go JSON API + Postgres migrations
+docker-compose.yml   Postgres 16 (and, optionally, the API in a container)
+```
+
+The web app talks to `/api`. That `/api` is served either by **Mock Service Worker**
+in the browser (the default — no backend needed, used by all frontend tests) or by
+the **Go API**, which implements the same contract against Postgres.
 
 ## Stack
 
-TypeScript · React 18 · Vite · MUI v6 · MUI X Charts · Zustand · TanStack Query ·
-React Router v6 · react-i18next (en / pt-BR / de) · React Hook Form + Zod · MSW ·
-Vitest + React Testing Library · Playwright · Storybook.
+- **web** — TypeScript · React 18 · Vite · hand-rolled CSS design system ·
+  Zustand · TanStack Query · React Router v6 · react-i18next (en / pt-BR / de) ·
+  React Hook Form + Zod · MSW · Vitest + React Testing Library · Playwright ·
+  Storybook.
+- **api** — Go (standard-library `net/http` routing) · pgx v5 · bcrypt ·
+  embedded SQL migrations · Postgres 16.
 
 ## Getting started
 
+Frontend only, against the in-browser mocks:
+
 ```bash
 npm install
-npm run dev          # http://localhost:5173
+npm run dev          # localhost:5173 — log in as demo@example.com / password
 ```
 
-Log in with the mock demo account: **demo@example.com / password**.
+Full stack, against Postgres:
+
+```bash
+cp .env.example .env # once; adjust credentials/ports if needed
+npm run db:up        # Postgres in Docker
+npm run api:dev      # Go API on :8080 — applies migrations on startup
+npm run api:adduser -- -email you@example.com -name "You" -role admin -password '…'
+npm run dev:real     # web on :5173 with mocks off; /api is proxied to :8080
+```
+
+The real database starts **empty** (no seed data). The mock demo accounts don't
+exist there; create users with `api:adduser`, which bcrypt-hashes the password
+(it can also read `ADDUSER_PASSWORD` to keep it out of shell history).
 
 ## Scripts
 
+Run from the repo root.
+
 | Script | What it does |
 |---|---|
-| `npm run dev` | Vite dev server (MSW serves `/api`) |
-| `npm run typecheck` | `tsc --noEmit` (strict) |
-| `npm run lint` | ESLint (incl. `import/order` and feature-boundary rule) |
-| `npm test` | Vitest unit + integration tests (MSW via `msw/node`) |
-| `npm run build` | typecheck + production build |
-| `npm run e2e` | Playwright journeys (starts the dev server itself; first run: `npx playwright install chromium`) |
-| `npm run storybook` | Storybook (QuestionCard in all four modes) |
+| `npm run dev` | Web dev server, MSW serves `/api` |
+| `npm run dev:real` | Web dev server, `/api` proxied to the Go API (`API_PROXY_TARGET`, default `localhost:8080`) |
+| `npm run typecheck` / `lint` | Web: `tsc --noEmit` (strict) / ESLint |
+| `npm test` | Web: Vitest unit + integration tests (MSW via `msw/node`) |
+| `npm run build` | Web: typecheck + production build |
+| `npm run e2e` | Web: Playwright journeys (first run: `npx playwright install chromium`) |
+| `npm run storybook` | Web: Storybook |
+| `npm run db:up` / `db:down` | Start / stop Postgres (data is kept) |
+| `npm run api:dev` | Run the Go API (`DATABASE_URL`, `PORT`) |
+| `npm run api:test` | Go tests — the integration suite needs Postgres running |
+| `npm run api:adduser` | Create a user with a hashed password |
 
-CI gate order (§13.4): **typecheck → lint → test → build → e2e** — cheapest first.
+Web CI gate order (§13.4): **typecheck → lint → test → build → e2e** — cheapest first.
+
+## API (`apps/api`)
+
+```text
+cmd/api          server entry point (graceful shutdown, migrations on start)
+cmd/adduser      CLI to create users
+internal/db      pgx pool + embedded migration runner (migrations/*.sql)
+internal/store   domain models and every SQL query
+internal/httpapi routes, auth middleware, handlers, integration tests
+```
+
+- **Contract**: identical paths and JSON shapes to the MSW handlers in
+  `apps/web/src/mocks/handlers` — the field names in `internal/store/models.go`
+  match `apps/web/src/features/*/types.ts`. Errors are `{"message": "…"}`.
+- **Auth**: `POST /api/auth/login` checks the bcrypt hash and returns a random
+  bearer token; only its SHA-256 is stored (`sessions` table, 30-day expiry).
+  `POST /api/auth/logout` revokes it. Admin-only routes return **403** for other
+  users, matching the mock.
+- **Migrations**: numbered files in `internal/db/migrations`, embedded in the
+  binary and applied in order on startup, each recorded in `schema_migrations`.
+  Never edit an applied file — add the next number.
+  - `0001_schema.sql` — tables mirroring the frontend domain model (users,
+    sessions, questions + options + tags + translations, materials and their
+    question links, bookmarks/notes/comments/bug reports, submitted answers,
+    custom tests + attempts).
+  - `0002_views.sql` — read-only views for the aggregates (per-question stats,
+    weak spots, admin stats), handy in DBeaver.
+- **Tests**: `go test ./...` creates a throwaway database next to
+  `DATABASE_URL`, migrates it, drives every endpoint over HTTP, then drops it.
+  It skips itself if Postgres isn't reachable.
+- **Docker**: `docker compose --profile api up -d` runs the API in a container
+  (distroless image) next to the database instead of `api:dev`.
+
+## Postgres
+
+**Connect from DBeaver** (or `psql`) with the values in `.env` — by default:
+host `localhost`, port `5432`, database `csgrundlagen`, user `csgrundlagen`,
+password `csgrundlagen`. `DATABASE_URL` in `.env` has the same as one string.
+
+```bash
+docker compose down        # stop (keeps data)
+docker compose down -v     # stop and WIPE the data volume
+docker compose logs -f db  # tail logs
+```
+
+The web app internals below live under `apps/web/`.
 
 ## Architecture
 
 Feature-based layering with a strict one-way dependency (§4.1), enforced by a
 `no-restricted-imports` rule — other code may only import a feature's `index.ts` barrel:
 
-```
-app/ (providers, router, layout)  →  pages/ (thin composition)
-  →  features/ (questions, custom-tests, auth, search, materials, weak-spots)
+```text
+app/ (providers, router, layout: tab strip + status bar)  →  pages/ (thin composition)
+  →  features/ (questions, custom-tests, auth, authoring, search, materials, weak-spots)
   →  shared/ (ui, api client, hooks, utils, types)
 ```
 
 - **Server state** lives in TanStack Query hooks inside each feature's `hooks/`.
 - **Client/UI state** lives in Zustand: global stores in `src/stores/` (auth session,
-  theme/locale/sidebar), feature-scoped stores inside the owning feature
-  (test-builder selection, in-progress attempt incl. the per-attempt shuffle seed).
+  theme/locale, session streak, status-bar context), feature-scoped stores inside the
+  owning feature (test-builder selection, in-progress attempt incl. the per-attempt
+  shuffle seed).
+- **Theming** is pure CSS custom properties: light tokens on `:root`, dark overrides
+  under `[data-theme='dark']` (stamped on `<html>` from the UI store; defaults to the
+  OS preference, persisted to `localStorage`). The Stats bar colors are validated for
+  contrast/CVD on both surfaces.
 - **Mocks** (`src/mocks/`) mirror the feature split: handlers per domain, an in-memory
   `db.ts` (reset per test), seed data in `seed/`. The auth token stub encodes the user
   id so the mock session survives page reloads.
 - **Question content i18n**: seeds are authored in English with per-locale overrides
   (`translations[locale]`); handlers resolve a `locale` query param. EN is complete,
   pt-BR/de are stubbed for the first questions to demonstrate the pattern (§5).
+- **Search** is a command-palette (⌘/Ctrl+K or the ⌕ icon) with grouped results.
+
+## Content authoring (admin-gated)
+
+The `authoring` feature adds an `admin.cs` tab with forms to create **questions**
+and **material**, and to cross-link them in either direction (a new question can be
+linked to existing material; a new material can be linked to existing questions).
+
+The gate is deliberately layered so it slots straight onto a real backend:
+
+- `User.role` (`'admin' | 'user'`) — the seed **demo user is `admin`**, the others
+  are `user`.
+- **UI**: `useIsAdmin()` hides the nav tab; `AdminPage` redirects non-admins to `/`.
+- **API**: the mock `POST /api/questions` and `POST /api/materials` return **403**
+  for non-admins — the check a real backend takes over unchanged. All other content
+  endpoints stay open.
+- The mock `db` now holds questions and materials as mutable collections (still
+  seeded, still reset per test), so created content flows through the existing
+  feed / search / Curated Material / per-question Material tab with no special-casing.
+
+The admin page's **Stats** tab (default tab) is a `GET /api/admin/stats` snapshot,
+also 403'd for non-admins: headline tiles (question/material/user counts, answers
+submitted, saved tests, attempts, bookmarks, bug reports) plus charts — questions by
+type and by difficulty (ordinal: easy → medium → hard, not alphabetical), material by
+type, an answer-correctness split, and a top-tags-by-answer-volume ranking. Charts
+follow the project's dataviz method: fixed categorical hue slots for identity
+(`--series-1…4`, validated against both surfaces), one sequential hue for the
+open-ended tag ranking so it never cycles a 4-slot palette, and every bar keeps a
+direct text label since two of the four categorical slots carry a contrast WARN on
+the light surface.
 
 ## Decisions on the spec's open points (§15)
 
 - **Scissors strike-through**: session-only, not persisted.
-- **Tabs vs accordions**: MUI `Tabs` inside a collapsible section, used consistently.
-- **Pagination size**: 10 per page. Chart colors: per-mode palette in `src/theme/palette.ts`.
+- **Tabs vs accordions**: an editor-style bottom panel with tabs, used consistently.
+- **Pagination size**: 10 per page. Chart colors: validated tokens in `global.css`.
 - **"Weak" definition** (single constant in `src/features/weak-spots/weakness.ts`):
   accuracy < 60% with ≥ 2 attempts, **or** the most recent attempt was wrong.
 - **Practice mode**: the Commented Answer tab is available per-question as the user
   goes (lower-stakes feel); Exam hides Commented Answer / Comments / Stats and the
   scissors aid until after the bulk submit.
+
+### Deliberate deviations from the original spec (by design request)
+
+- The collapsible sidebar (§8) was replaced by the file-tab navigation strip; on
+  small screens it scrolls horizontally instead of collapsing into a drawer.
+- MUI was removed entirely in favor of the custom editor theme; the answer
+  distribution chart is a hand-rolled bar list instead of MUI X Charts.
+- Options display as `options[n] = "…"` array entries rather than A–E letter pills
+  (option ids remain A–E internally for scoring and the mock API).

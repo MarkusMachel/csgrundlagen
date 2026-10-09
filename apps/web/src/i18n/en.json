@@ -1,0 +1,261 @@
+{
+  "common": {
+    "appName": "CS Fundamentals Trainer",
+    "retry": "Retry",
+    "errorTitle": "Something went wrong",
+    "loading": "Loading…",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "close": "Close",
+    "submit": "Submit",
+    "language": "Language"
+  },
+  "nav": {
+    "home": "Home",
+    "weakSpots": "Weak Spots",
+    "bookmarks": "Bookmarks",
+    "buildTest": "Build a Test",
+    "myTests": "My Tests",
+    "materials": "Curated Material",
+    "logout": "Log out",
+    "openMenu": "Open menu",
+    "collapseMenu": "Collapse menu",
+    "expandMenu": "Expand menu",
+    "toggleTheme": "Toggle light/dark mode",
+    "userMenu": "Account",
+    "scrollDown": "Scroll down",
+    "admin": "Admin"
+  },
+  "auth": {
+    "loginTitle": "Log in",
+    "email": "Email",
+    "password": "Password",
+    "login": "Log in",
+    "loginFailed": "Invalid email or password",
+    "hint": "Demo login: demo@example.com / password",
+    "emailInvalid": "Enter a valid email address",
+    "passwordRequired": "Password is required"
+  },
+  "home": {
+    "questionOfTheDay": "Question of the Day",
+    "feedTitle": "All questions",
+    "filterByTag": "Filter by tag",
+    "allTags": "All tags",
+    "searchPlaceholder": "Search questions…",
+    "noResults": "No questions match your filter",
+    "noResultsHint": "Try a different search term or tag."
+  },
+  "question": {
+    "submit": "Submit answer",
+    "correct": "Correct!",
+    "incorrect": "Not quite — the correct answer is highlighted.",
+    "bookmark": "Bookmark this question",
+    "removeBookmark": "Remove bookmark",
+    "true": "True",
+    "false": "False",
+    "difficultyLabel": "Difficulty",
+    "difficulty": {
+      "easy": "easy",
+      "medium": "medium",
+      "hard": "hard"
+    },
+    "strike": "Strike out option {{option}}",
+    "unstrike": "Restore option {{option}}",
+    "tabs": {
+      "explanation": "Commented Answer",
+      "comments": "Comments",
+      "notes": "My Notes",
+      "stats": "Stats",
+      "material": "Material",
+      "bug": "Notify Bug"
+    },
+    "explanationHidden": "Submit your answer to reveal the explanation.",
+    "comments": {
+      "placeholder": "Add a comment…",
+      "post": "Post",
+      "empty": "No comments yet — be the first.",
+      "required": "Comment cannot be empty"
+    },
+    "notes": {
+      "label": "Private note",
+      "placeholder": "Your private notes on this question (only you can see them)…",
+      "privacy": "Private — visible only to you.",
+      "saved": "Note saved"
+    },
+    "stats": {
+      "empty": "No responses yet",
+      "total": "{{count}} responses",
+      "answers": "Answers"
+    },
+    "material": {
+      "empty": "No material linked to this question yet"
+    },
+    "bug": {
+      "placeholder": "Describe what's wrong with this question…",
+      "submit": "Report bug",
+      "success": "Thanks! Your report was filed.",
+      "required": "Please describe the problem"
+    }
+  },
+  "builder": {
+    "title": "Build a Test",
+    "pickerHint": "Select questions below to add them to your test.",
+    "addToTest": "Add to test",
+    "selected": "Selected questions",
+    "selectedCount": "{{count}} selected",
+    "emptyTray": "No questions selected yet.",
+    "testName": "Test name",
+    "nameRequired": "Give your test a name",
+    "needQuestions": "Select at least one question",
+    "timed": "Timed",
+    "durationMinutes": "Duration (minutes)",
+    "durationInvalid": "Enter a duration of at least 1 minute",
+    "shuffleQuestions": "Shuffle questions",
+    "shuffleOptions": "Shuffle answer options",
+    "saveTest": "Save Test",
+    "remove": "Remove from selection"
+  },
+  "myTests": {
+    "title": "My Tests",
+    "empty": "No saved tests yet",
+    "emptyHint": "Build your first test from the question pool.",
+    "buildOne": "Build a Test",
+    "questions": "{{count}} questions",
+    "timed": "Timed · {{minutes}} min",
+    "untimed": "Untimed",
+    "take": "Take Test",
+    "attempts": "Attempt history",
+    "attemptsEmpty": "No attempts yet",
+    "created": "Created {{date}}",
+    "score": "Score",
+    "mode": "Mode",
+    "date": "Date",
+    "deleteTest": "Delete test"
+  },
+  "takeTest": {
+    "chooseMode": "Choose a mode",
+    "practice": "Practice",
+    "exam": "Exam",
+    "practiceDesc": "Low stakes: elimination aid and explanations stay available.",
+    "examDesc": "Simulates a real test: aids and explanations hidden until you submit.",
+    "start": "Start",
+    "timeLeft": "Time left",
+    "submitAll": "Submit test",
+    "results": "Results",
+    "yourScore": "You scored {{score}} of {{total}}",
+    "retryIncorrect": "Retry Incorrect Only",
+    "backToTests": "Back to My Tests",
+    "questionOf": "Question {{current}} of {{total}}"
+  },
+  "bookmarks": {
+    "title": "Bookmarks",
+    "empty": "Nothing bookmarked yet",
+    "emptyHint": "Bookmark questions from the feed to find them here.",
+    "goHome": "Browse questions"
+  },
+  "weakSpots": {
+    "title": "Weak Spots",
+    "explainer": "Questions you've gotten wrong recently or often.",
+    "empty": "No weak spots right now",
+    "emptyHint": "Answer some questions and we'll surface the ones you struggle with."
+  },
+  "materials": {
+    "title": "Curated Material",
+    "filterType": "Type",
+    "allTypes": "All types",
+    "type": {
+      "book": "Book",
+      "video": "Video",
+      "article": "Article",
+      "link": "Link"
+    },
+    "empty": "No material matches the current filter",
+    "by": "by {{author}}"
+  },
+  "status": {
+    "feedPosition": "questions {{from}}–{{to}} of {{total}}",
+    "attemptPosition": "answered {{answered}} of {{total}}"
+  },
+  "search": {
+    "placeholder": "Search questions, material, tests…",
+    "open": "Open search",
+    "groups": {
+      "questions": "Questions",
+      "materials": "Materials",
+      "tests": "Tests"
+    },
+    "noResults": "No results for \"{{query}}\""
+  },
+  "authoring": {
+    "subtitle": "Add questions and learning material, and link them together. (Admin only.)",
+    "tab": {
+      "question": "New question",
+      "material": "New material",
+      "stats": "Stats"
+    },
+    "questionType": "Question type",
+    "type": {
+      "multiple-choice": "Multiple choice",
+      "true-false": "True / False"
+    },
+    "prompt": "Prompt",
+    "options": "Options",
+    "optionsHint": "Fill 2–5 options and mark the correct one.",
+    "optionPlaceholder": "answer text",
+    "addOption": "Add option",
+    "removeOption": "Remove option {{n}}",
+    "markCorrect": "Mark as the correct answer",
+    "optionsMin": "Provide at least 2 options",
+    "pickCorrect": "Select which option is correct",
+    "correctAnswer": "Correct answer",
+    "explanation": "Explanation (commented answer)",
+    "tags": "Tags",
+    "tagsPlaceholder": "Type a tag and press Enter",
+    "tagsRequired": "Add at least one tag",
+    "removeTag": "Remove tag {{tag}}",
+    "url": "URL",
+    "urlInvalid": "Enter a valid URL",
+    "authorOptional": "Author (optional)",
+    "descriptionOptional": "Description (optional)",
+    "linkMaterials": "Link to material",
+    "linkMaterialsHint": "Optional — attach existing material to this question.",
+    "linkQuestions": "Link to questions",
+    "linkQuestionsHint": "Optional — attach this material to existing questions.",
+    "linkSearchPlaceholder": "Search to filter…",
+    "noMatches": "No matches",
+    "noMaterialsYet": "No material to link yet",
+    "noQuestionsYet": "No questions to link yet",
+    "unlink": "Unlink {{name}}",
+    "required": "This field is required",
+    "createQuestion": "Create question",
+    "createMaterial": "Create material",
+    "questionCreated": "Question created.",
+    "materialCreated": "Material created.",
+    "saveError": "Could not save — please try again.",
+    "title": "Content authoring",
+    "materialTitle": "Title",
+    "stats": {
+      "totalQuestions": "Questions",
+      "totalMaterials": "Material items",
+      "totalUsers": "Users",
+      "totalAnswers": "Answers submitted",
+      "totalTests": "Saved tests",
+      "totalAttempts": "Test attempts",
+      "totalBookmarks": "Bookmarks",
+      "totalBugReports": "Bug reports",
+      "questionsByType": "Questions by type",
+      "questionsByDifficulty": "Questions by difficulty",
+      "materialsByType": "Material by type",
+      "answersByTag": "Top tags by answers submitted",
+      "correctness": "Answer correctness",
+      "correct": "{{count}} correct ({{pct}}%)",
+      "incorrect": "{{count}} incorrect ({{pct}}%)",
+      "correctnessAria": "{{correct}} correct and {{incorrect}} incorrect, {{pct}}% correct",
+      "unspecified": "unspecified",
+      "noQuestionsYet": "No questions yet",
+      "noMaterialsYet": "No material yet",
+      "noAnswersYet": "No answers recorded yet"
+    }
+  }
+}
