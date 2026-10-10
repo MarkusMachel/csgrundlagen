@@ -114,7 +114,12 @@ export const seedQuestions: SeedQuestion[] = [
     question: mc(
       'q3',
       'What does DNS primarily translate?',
-      ['MAC addresses to IP addresses', 'Domain names to IP addresses', 'IP addresses to ports', 'URLs to HTML'],
+      [
+        'MAC addresses to IP addresses',
+        'Domain names to IP addresses',
+        'IP addresses to ports',
+        'URLs to HTML',
+      ],
       1,
       ['Networking'],
       'DNS resolves human-readable domain names (like example.com) to IP addresses. MAC↔IP translation is ARP; ports are chosen by applications.',
@@ -435,7 +440,7 @@ export const seedQuestions: SeedQuestion[] = [
   {
     question: mc(
       'q29',
-      "What does Big-O notation describe?",
+      'What does Big-O notation describe?',
       [
         'Exact running time in seconds',
         'An upper bound on how an algorithm’s cost grows with input size',
@@ -516,18 +521,64 @@ export const seedQuestions: SeedQuestion[] = [
     question: mc(
       'q36',
       'Which pair correctly matches an OSI layer to a protocol?',
-      [
-        'Layer 7 — Ethernet',
-        'Layer 4 — TCP',
-        'Layer 3 — HTTP',
-        'Layer 2 — IP',
-        'Layer 1 — DNS',
-      ],
+      ['Layer 7 — Ethernet', 'Layer 4 — TCP', 'Layer 3 — HTTP', 'Layer 2 — IP', 'Layer 1 — DNS'],
       1,
       ['OSI Model', 'Networking'],
       'TCP is a transport (layer 4) protocol. Ethernet is layer 2, IP layer 3, HTTP and DNS layer 7.',
       'hard',
     ),
+  },
+  // One of each newer question type, so dev (mock) mode shows them all.
+  {
+    question: {
+      id: 'q-ms1',
+      type: 'multi-select',
+      prompt: 'Which of these JavaScript values are falsy?',
+      tags: ['JavaScript'],
+      difficulty: 'easy',
+      explanation:
+        'The falsy values are `false`, `0`, `-0`, `0n`, `""`, `null`, `undefined` and `NaN`. `[]` and `"0"` are truthy.',
+      options: [
+        { id: 'A', label: '`0`' },
+        { id: 'B', label: '`[]`' },
+        { id: 'C', label: '`""`' },
+        { id: 'D', label: '`"0"`' },
+        { id: 'E', label: '`NaN`' },
+      ],
+      correctOptionIds: ['A', 'C', 'E'],
+    },
+  },
+  {
+    question: {
+      id: 'q-ord1',
+      type: 'ordering',
+      prompt: 'Put the TCP connection setup in order.',
+      tags: ['Networking'],
+      difficulty: 'medium',
+      explanation:
+        'The three-way handshake: the client sends SYN, the server answers SYN-ACK, the client confirms with ACK, and only then does data flow.',
+      options: [
+        { id: 'A', label: 'Client sends SYN' },
+        { id: 'B', label: 'Server replies SYN-ACK' },
+        { id: 'C', label: 'Client sends ACK' },
+        { id: 'D', label: 'Data is exchanged' },
+      ],
+      correctOrder: ['A', 'B', 'C', 'D'],
+    },
+  },
+  {
+    question: {
+      id: 'q-out1',
+      type: 'output',
+      prompt: 'What does this print?',
+      tags: ['JavaScript'],
+      difficulty: 'medium',
+      explanation:
+        'Synchronous code runs first (A, B). Then the microtask queue drains (promise), and only then the next task, the timer (timeout).',
+      code: 'console.log("A");\nsetTimeout(() => console.log("timeout"), 0);\nPromise.resolve().then(() => console.log("promise"));\nconsole.log("B");',
+      codeLanguage: 'js',
+      expectedOutput: 'A\nB\npromise\ntimeout\n',
+    },
   },
 ];
 
@@ -535,7 +586,7 @@ export function localizeQuestion(seed: SeedQuestion, locale: Locale): Question {
   const t = seed.translations?.[locale];
   const base = seed.question;
   if (!t) return base;
-  if (base.type === 'multiple-choice') {
+  if (base.type === 'multiple-choice' || base.type === 'multi-select' || base.type === 'ordering') {
     return {
       ...base,
       prompt: t.prompt ?? base.prompt,
@@ -550,6 +601,4 @@ export function localizeQuestion(seed: SeedQuestion, locale: Locale): Question {
   };
 }
 
-export const allTags = [
-  ...new Set(seedQuestions.flatMap((s) => s.question.tags)),
-].sort();
+export const allTags = [...new Set(seedQuestions.flatMap((s) => s.question.tags))].sort();

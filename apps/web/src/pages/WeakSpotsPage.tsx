@@ -24,7 +24,11 @@ export function WeakSpotsPage() {
       ) : isError ? (
         <ErrorState onRetry={() => void refetch()} />
       ) : questions.length === 0 ? (
-        <EmptyState title={t('weakSpots.empty')} description={t('weakSpots.emptyHint')} glyph={<TrendingDown size={28} />} />
+        <EmptyState
+          title={t('weakSpots.empty')}
+          description={t('weakSpots.emptyHint')}
+          glyph={<TrendingDown size={28} />}
+        />
       ) : (
         questions.map((q) => <QuestionCard key={q.id} question={q} mode="feed" />)
       )}

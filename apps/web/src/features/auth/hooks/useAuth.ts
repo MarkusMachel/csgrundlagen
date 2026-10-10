@@ -19,6 +19,43 @@ export function useLogin() {
   });
 }
 
+export interface SignUpInput {
+  name: string;
+  email: string;
+  password: string;
+  locale?: string;
+}
+
+/** Creates an account and starts a session, like a login. */
+export function useSignUp() {
+  const setSession = useAuthStore((s) => s.setSession);
+  return useMutation({
+    mutationFn: (input: SignUpInput) => api.post<LoginResponse>('/auth/signup', input),
+    onSuccess: ({ token, user }) => setSession(user, token),
+  });
+}
+
+export function useChangePassword() {
+  return useMutation({
+    mutationFn: (input: { currentPassword: string; newPassword: string }) =>
+      api.post<void>('/auth/password', input),
+  });
+}
+
+/** Always succeeds for a well-formed email, whether or not it has an account. */
+export function useRequestPasswordReset() {
+  return useMutation({
+    mutationFn: (email: string) => api.post<{ message: string }>('/auth/password-reset', { email }),
+  });
+}
+
+export function useConfirmPasswordReset() {
+  return useMutation({
+    mutationFn: (input: { token: string; password: string }) =>
+      api.post<void>('/auth/password-reset/confirm', input),
+  });
+}
+
 export function useLogout() {
   const clearSession = useAuthStore((s) => s.clearSession);
   const queryClient = useQueryClient();

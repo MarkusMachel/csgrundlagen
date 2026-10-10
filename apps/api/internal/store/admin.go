@@ -2,6 +2,7 @@ package store
 
 import (
 	"context"
+	"time"
 
 	"github.com/jackc/pgx/v5"
 )
@@ -51,6 +52,56 @@ func (s *Store) AdminStats(ctx context.Context) (AdminStats, error) {
 		return st, err
 	}
 	return st, nil
+}
+
+// AdminBugReport is a bug report with the context an admin needs to triage it.
+type AdminBugReport struct {
+	ID             string    `json:"id"`
+	QuestionID     string    `json:"questionId"`
+	QuestionPrompt string    `json:"questionPrompt"`
+	UserID         string    `json:"userId"`
+	UserName       string    `json:"userName"`
+	Message        string    `json:"message"`
+	CreatedAt      time.Time `json:"createdAt"`
+	Status         string    `json:"status"`
+}
+
+var bugStatuses = map[string]bool{"open": true, "reviewed": true, "closed": true}
+
+// BugReports lists reports for the admin queue, newest first; status ""
+// means all of them.
+func (s *Store) BugReports(ctx context.Context, status string) ([]AdminBugReport, error) {
+	if status != "" && !bugStatuses[status] {
+		return nil, ErrInvalid{"status must be open, reviewed or closed"}
+	}
+	return collect[AdminBugReport](s.pool.Query(ctx, `
+		SELECT b.id, b.question_id, q.prompt, b.user_id, u.name, b.message, b.created_at, b.status::text
+		FROM bug_reports b
+		JOIN questions q ON q.id = b.question_id
+		JOIN users u ON u.id = b.user_id
+		WHERE $1 = '' OR b.status::text = $1
+		ORDER BY b.created_at DESC`, status))
+}
+
+func (s *Store) SetBugReportStatus(ctx context.Context, id, status string) (AdminBugReport, error) {
+	if !bugStatuses[status] {
+		return AdminBugReport{}, ErrInvalid{"status must be open, reviewed or closed"}
+	}
+	tag, err := s.pool.Exec(ctx, `UPDATE bug_reports SET status = $2::bug_report_status WHERE id = $1`, id, status)
+	if err != nil {
+		return AdminBugReport{}, err
+	}
+	if tag.RowsAffected() == 0 {
+		return AdminBugReport{}, ErrNotFound
+	}
+	rows, err := collect[AdminBugReport](s.pool.Query(ctx, `
+		SELECT b.id, b.question_id, q.prompt, b.user_id, u.name, b.message, b.created_at, b.status::text
+		FROM bug_reports b JOIN questions q ON q.id = b.question_id JOIN users u ON u.id = b.user_id
+		WHERE b.id = $1`, id))
+	if err != nil {
+		return AdminBugReport{}, err
+	}
+	return rows[0], nil
 }
 
 func collect[T any](rows pgx.Rows, err error) ([]T, error) {

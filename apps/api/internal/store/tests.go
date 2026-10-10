@@ -189,11 +189,15 @@ func (s *Store) SubmitTest(ctx context.Context, testID, userID string, in Submit
 			&attempt.Score, &attempt.StartedAt, &attempt.SubmittedAt); err != nil {
 			return err
 		}
+		now := time.Now()
 		for _, b := range breakdown {
 			if _, err := tx.Exec(ctx, `
 				INSERT INTO question_answers (user_id, question_id, answer_value, is_correct, test_attempt_id)
 				VALUES ($1, $2, $3, $4, $5)`,
 				userID, b.QuestionID, AnswerKey(b.GivenAnswer), b.Correct, attempt.ID); err != nil {
+				return err
+			}
+			if _, err := recordReview(ctx, tx, userID, b.QuestionID, b.Correct, now); err != nil {
 				return err
 			}
 		}

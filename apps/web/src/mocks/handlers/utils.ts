@@ -5,7 +5,6 @@ import type { Locale, User } from '@/shared/types';
 
 import { db } from '../db';
 import { localizeQuestion } from '../seed/questions';
-import { seedUsers } from '../seed/users';
 
 /**
  * The mock token stub encodes the user id (`mock-token.<userId>`), so the
@@ -22,7 +21,7 @@ export function currentUser(request: Request): User | null {
   const token = auth.slice('Bearer '.length);
   if (!token.startsWith('mock-token.')) return null;
   const userId = token.slice('mock-token.'.length);
-  const user = seedUsers.find((u) => u.id === userId);
+  const user = db.users.find((u) => u.id === userId);
   if (!user) return null;
   const { password: _password, ...publicUser } = user;
   return publicUser;

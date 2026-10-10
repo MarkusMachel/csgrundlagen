@@ -13,6 +13,8 @@ export {
 export { useBookmarkedQuestions, useIsBookmarked, useToggleBookmark } from './hooks/useBookmark';
 export { useSubmitAnswer } from './hooks/useSubmitAnswer';
 export { useQuestionNote, useSaveQuestionNote } from './hooks/useQuestionNote';
+export { useQuestionMaterials } from './hooks/useQuestionExtras';
+export { answerKey, canSubmit, correctAnswerOf, isAnswerCorrect, normalizeOutput } from './grading';
 export type {
   AnswerStat,
   AnswerValue,

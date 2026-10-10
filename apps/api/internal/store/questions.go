@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"hash/fnv"
+	"slices"
+	"sort"
 	"strings"
 	"time"
 
@@ -17,7 +19,8 @@ SELECT q.id, q.type::text, COALESCE(tr.prompt, q.prompt), q.difficulty::text,
        COALESCE(tr.explanation, q.explanation), q.correct_answer,
        COALESCE((SELECT array_agg(t.name ORDER BY t.name)
                  FROM question_tags qt JOIN tags t ON t.id = qt.tag_id
-                 WHERE qt.question_id = q.id), '{}')
+                 WHERE qt.question_id = q.id), '{}'),
+       q.code, q.code_language, q.expected_output
 FROM questions q
 LEFT JOIN question_translations tr ON tr.question_id = q.id AND tr.locale = $1::locale`
 
@@ -27,7 +30,7 @@ func scanQuestions(rows pgx.Rows) ([]Question, error) {
 	for rows.Next() {
 		var q Question
 		if err := rows.Scan(&q.ID, &q.Type, &q.Prompt, &q.Difficulty, &q.Explanation,
-			&q.CorrectAnswer, &q.Tags); err != nil {
+			&q.CorrectAnswer, &q.Tags, &q.Code, &q.CodeLanguage, &q.ExpectedOutput); err != nil {
 			return nil, err
 		}
 		out = append(out, q)
@@ -35,8 +38,9 @@ func scanQuestions(rows pgx.Rows) ([]Question, error) {
 	return out, rows.Err()
 }
 
-// attachOptions loads the (localized) options for every multiple-choice
-// question in qs and sets Options / CorrectOptionID.
+// attachOptions loads the (localized) options for every question in qs that
+// has them, and sets the type's answer key: CorrectOptionID (multiple
+// choice), CorrectOptionIDs (multi-select) or CorrectOrder (ordering).
 func (s *Store) attachOptions(ctx context.Context, locale string, qs []Question) error {
 	if len(qs) == 0 {
 		return nil
@@ -48,7 +52,7 @@ func (s *Store) attachOptions(ctx context.Context, locale string, qs []Question)
 		byID[qs[i].ID] = &qs[i]
 	}
 	rows, err := s.pool.Query(ctx, `
-		SELECT o.question_id, o.option_key, COALESCE(ot.label, o.label), o.is_correct
+		SELECT o.question_id, o.option_key, COALESCE(ot.label, o.label), o.is_correct, o.correct_position
 		FROM question_options o
 		LEFT JOIN question_option_translations ot
 		       ON ot.option_id = o.id AND ot.locale = $1::locale
@@ -58,20 +62,38 @@ func (s *Store) attachOptions(ctx context.Context, locale string, qs []Question)
 		return err
 	}
 	defer rows.Close()
+	positions := map[string]map[string]int{} // question -> option key -> correct position
 	for rows.Next() {
 		var qid, key, label string
 		var correct bool
-		if err := rows.Scan(&qid, &key, &label, &correct); err != nil {
+		var pos *int
+		if err := rows.Scan(&qid, &key, &label, &correct, &pos); err != nil {
 			return err
 		}
 		q := byID[qid]
 		q.Options = append(q.Options, Option{ID: key, Label: label})
-		if correct {
+		switch {
+		case q.Type == "multiple-choice" && correct:
 			k := key
 			q.CorrectOptionID = &k
+		case q.Type == "multi-select" && correct:
+			q.CorrectOptionIDs = append(q.CorrectOptionIDs, key)
+		case q.Type == "ordering" && pos != nil:
+			if positions[qid] == nil {
+				positions[qid] = map[string]int{}
+			}
+			positions[qid][key] = *pos
+			q.CorrectOrder = append(q.CorrectOrder, key)
 		}
 	}
-	return rows.Err()
+	if err := rows.Err(); err != nil {
+		return err
+	}
+	for qid, pos := range positions {
+		order := byID[qid].CorrectOrder
+		sort.Slice(order, func(i, j int) bool { return pos[order[i]] < pos[order[j]] })
+	}
+	return nil
 }
 
 func (s *Store) queryQuestions(ctx context.Context, locale, sql string, args ...any) ([]Question, error) {
@@ -90,8 +112,10 @@ func (s *Store) queryQuestions(ctx context.Context, locale, sql string, args ...
 }
 
 type QuestionFilter struct {
-	Page         int
-	PageSize     int
+	Page     int
+	PageSize int
+	// IDs restricts the list to these questions, returned in this order.
+	IDs          []string
 	Tags         []string // match any
 	Difficulties []string // match any of easy, medium, hard
 	Search       string
@@ -112,6 +136,11 @@ func (s *Store) ListQuestions(ctx context.Context, f QuestionFilter) (QuestionsP
 	next := func(v any) string {
 		args = append(args, v)
 		return fmt.Sprintf("$%d", len(args)+1)
+	}
+	idsParam := ""
+	if len(f.IDs) > 0 {
+		idsParam = next(f.IDs)
+		where = append(where, `q.id = ANY(`+idsParam+`::uuid[])`)
 	}
 	if len(f.Tags) > 0 {
 		where = append(where, `EXISTS (SELECT 1 FROM question_tags qt JOIN tags t ON t.id = qt.tag_id
@@ -156,6 +185,9 @@ func (s *Store) ListQuestions(ctx context.Context, f QuestionFilter) (QuestionsP
 	}
 
 	order := `q.created_at, q.id`
+	if idsParam != "" {
+		order = `array_position(` + idsParam + `::uuid[], q.id)`
+	}
 	switch f.Sort {
 	case "newest":
 		order = `q.created_at DESC, q.id DESC`
@@ -242,29 +274,6 @@ func (s *Store) BookmarkedQuestions(ctx context.Context, userID, locale string) 
 		ORDER BY b.created_at DESC`, userID)
 }
 
-// AnswerKey encodes a submitted answer the way question_answers stores it:
-// the option key for multiple choice, "true"/"false" for true/false.
-func AnswerKey(v any) string {
-	switch a := v.(type) {
-	case bool:
-		if a {
-			return "true"
-		}
-		return "false"
-	case string:
-		return a
-	default:
-		return "unanswered"
-	}
-}
-
-func isCorrect(q Question, given any) bool {
-	if given == nil {
-		return false
-	}
-	return given == q.Correct()
-}
-
 // SubmitAnswer records a standalone (feed) answer and reports correctness.
 func (s *Store) SubmitAnswer(ctx context.Context, userID, questionID string, answer any) (SubmitAnswerResult, error) {
 	q, err := s.GetQuestion(ctx, questionID, "en")
@@ -272,54 +281,81 @@ func (s *Store) SubmitAnswer(ctx context.Context, userID, questionID string, ans
 		return SubmitAnswerResult{}, err
 	}
 	correct := isCorrect(q, answer)
-	if _, err := s.pool.Exec(ctx, `
-		INSERT INTO question_answers (user_id, question_id, answer_value, is_correct)
-		VALUES ($1, $2, $3, $4)`, userID, questionID, AnswerKey(answer), correct); err != nil {
+	var next time.Time
+	err = s.withTx(ctx, func(tx pgx.Tx) error {
+		if _, err := tx.Exec(ctx, `
+			INSERT INTO question_answers (user_id, question_id, answer_value, is_correct)
+			VALUES ($1, $2, $3, $4)`, userID, questionID, AnswerKey(answer), correct); err != nil {
+			return err
+		}
+		next, err = recordReview(ctx, tx, userID, questionID, correct, time.Now())
+		return err
+	})
+	if err != nil {
 		return SubmitAnswerResult{}, err
 	}
-	return SubmitAnswerResult{QuestionID: q.ID, Correct: correct, CorrectAnswer: q.Correct()}, nil
+	return SubmitAnswerResult{QuestionID: q.ID, Correct: correct, CorrectAnswer: q.Correct(), NextReviewAt: &next}, nil
 }
 
+// QuestionStats summarizes everyone's answers to a question: how often each
+// option was picked (multiple choice, multi-select, true/false) or how many
+// answers were right (ordering, output).
 func (s *Store) QuestionStats(ctx context.Context, questionID string) (QuestionStats, error) {
 	q, err := s.GetQuestion(ctx, questionID, "en")
 	if err != nil {
 		return QuestionStats{}, err
 	}
 	counts := map[string]int{}
+	var total, right int
 	rows, err := s.pool.Query(ctx, `
-		SELECT answer_value, count(*) FROM question_answers
-		WHERE question_id = $1 GROUP BY answer_value`, questionID)
+		SELECT answer_value, is_correct, count(*) FROM question_answers
+		WHERE question_id = $1 GROUP BY answer_value, is_correct`, questionID)
 	if err != nil {
 		return QuestionStats{}, err
 	}
 	defer rows.Close()
 	for rows.Next() {
 		var k string
+		var ok bool
 		var n int
-		if err := rows.Scan(&k, &n); err != nil {
+		if err := rows.Scan(&k, &ok, &n); err != nil {
 			return QuestionStats{}, err
 		}
-		counts[k] = n
+		total += n
+		if ok {
+			right += n
+		}
+		if q.Type == "multi-select" {
+			for _, id := range strings.Split(k, ",") { // "A,C" counts for A and for C
+				counts[id] += n
+			}
+		} else {
+			counts[k] += n
+		}
 	}
 	if err := rows.Err(); err != nil {
 		return QuestionStats{}, err
 	}
 
 	var dist []AnswerStat
-	if q.Type == "multiple-choice" {
+	switch q.Type {
+	case "multiple-choice", "multi-select":
 		for _, o := range q.Options {
 			dist = append(dist, AnswerStat{OptionID: o.ID, Label: o.ID, Count: counts[o.ID]})
 		}
-	} else {
+	case "true-false":
 		dist = []AnswerStat{
 			{OptionID: "true", Label: "True", Count: counts["true"]},
 			{OptionID: "false", Label: "False", Count: counts["false"]},
 		}
+	default: // ordering, output: answers are too varied to list, so right vs wrong
+		dist = []AnswerStat{
+			{OptionID: "correct", Label: "Correct", Count: right},
+			{OptionID: "incorrect", Label: "Incorrect", Count: total - right},
+		}
 	}
-	total := 0
-	for _, d := range dist {
-		total += d.Count
-	}
+	// Percent of answers that picked each option. For multi-select one answer
+	// picks several options, so these add up to more than 100.
 	for i := range dist {
 		if total > 0 {
 			dist[i].Percentage = float64(int(float64(dist[i].Count)/float64(total)*1000+0.5)) / 10
@@ -340,6 +376,8 @@ func (s *Store) Tags(ctx context.Context) ([]string, error) {
 	return nonNil(tags), err
 }
 
+// NewQuestion is the create/update payload. Which answer fields apply depends
+// on Type; for ordering, Options are given in the correct order.
 type NewQuestion struct {
 	Type               string   `json:"type"`
 	Prompt             string   `json:"prompt"`
@@ -348,7 +386,11 @@ type NewQuestion struct {
 	Explanation        string   `json:"explanation"`
 	Options            []Option `json:"options"`
 	CorrectOptionID    *string  `json:"correctOptionId"`
+	CorrectOptionIDs   []string `json:"correctOptionIds"`
 	CorrectAnswer      *bool    `json:"correctAnswer"`
+	Code               *string  `json:"code"`
+	CodeLanguage       *string  `json:"codeLanguage"`
+	ExpectedOutput     *string  `json:"expectedOutput"`
 	RelatedMaterialIDs []string `json:"relatedMaterialIds"`
 }
 
@@ -371,12 +413,11 @@ func (n NewQuestion) validate() error {
 			return ErrInvalid{"relatedMaterialIds contains an invalid id"}
 		}
 	}
-	switch n.Type {
-	case "multiple-choice":
+	seen := map[string]bool{}
+	if HasOptions(n.Type) {
 		if len(n.Options) < 2 || len(n.Options) > 5 {
-			return ErrInvalid{"multiple-choice questions need 2 to 5 options"}
+			return ErrInvalid{"questions with options need 2 to 5 of them"}
 		}
-		seen := map[string]bool{}
 		for _, o := range n.Options {
 			if len(o.ID) != 1 || o.ID < "A" || o.ID > "E" || seen[o.ID] {
 				return ErrInvalid{"option ids must be unique letters A–E"}
@@ -386,17 +427,52 @@ func (n NewQuestion) validate() error {
 			}
 			seen[o.ID] = true
 		}
+	}
+	switch n.Type {
+	case "multiple-choice":
 		if n.CorrectOptionID == nil || !seen[*n.CorrectOptionID] {
 			return ErrInvalid{"correctOptionId must match one of the options"}
 		}
+	case "multi-select":
+		if len(n.CorrectOptionIDs) == 0 {
+			return ErrInvalid{"multi-select questions need at least one correct option"}
+		}
+		picked := map[string]bool{}
+		for _, id := range n.CorrectOptionIDs {
+			if !seen[id] || picked[id] {
+				return ErrInvalid{"correctOptionIds must be distinct options of the question"}
+			}
+			picked[id] = true
+		}
+	case "ordering":
+		// the options' order is the answer; nothing else to check
 	case "true-false":
 		if n.CorrectAnswer == nil {
 			return ErrInvalid{"true-false questions need correctAnswer"}
 		}
+	case "output":
+		if n.Code == nil || strings.TrimSpace(*n.Code) == "" {
+			return ErrInvalid{"output questions need the code to predict"}
+		}
+		if n.CodeLanguage == nil || strings.TrimSpace(*n.CodeLanguage) == "" || len(*n.CodeLanguage) > 20 {
+			return ErrInvalid{"output questions need a codeLanguage such as js or go"}
+		}
+		if n.ExpectedOutput == nil {
+			return ErrInvalid{"output questions need expectedOutput"}
+		}
 	default:
-		return ErrInvalid{"type must be multiple-choice or true-false"}
+		return ErrInvalid{"type must be multiple-choice, true-false, multi-select, ordering or output"}
 	}
 	return nil
+}
+
+// outputFields returns code, language and expected output for output
+// questions and nils otherwise, matching the table's check constraint.
+func (n NewQuestion) outputFields() (*string, *string, *string) {
+	if n.Type != "output" {
+		return nil, nil, nil
+	}
+	return n.Code, n.CodeLanguage, n.ExpectedOutput
 }
 
 // CreateQuestion inserts a question with its options and tags, and links it
@@ -407,47 +483,112 @@ func (s *Store) CreateQuestion(ctx context.Context, createdBy string, n NewQuest
 	}
 	var id string
 	err := s.withTx(ctx, func(tx pgx.Tx) error {
-		var correctAnswer *bool
-		if n.Type == "true-false" {
-			correctAnswer = n.CorrectAnswer
-		}
+		code, lang, expected := n.outputFields()
 		if err := tx.QueryRow(ctx, `
-			INSERT INTO questions (type, prompt, difficulty, explanation, correct_answer, created_by)
-			VALUES ($1::question_type, $2, $3::question_difficulty, $4, $5, $6)
+			INSERT INTO questions (type, prompt, difficulty, explanation, correct_answer, created_by,
+			                       code, code_language, expected_output)
+			VALUES ($1::question_type, $2, $3::question_difficulty, $4, $5, $6, $7, $8, $9)
 			RETURNING id`,
-			n.Type, n.Prompt, n.Difficulty, n.Explanation, correctAnswer, nullIfEmpty(createdBy),
+			n.Type, n.Prompt, n.Difficulty, n.Explanation, n.trueFalseAnswer(), nullIfEmpty(createdBy),
+			code, lang, expected,
 		).Scan(&id); err != nil {
 			return err
 		}
-		if n.Type == "multiple-choice" {
-			for _, o := range n.Options {
-				if _, err := tx.Exec(ctx, `
-					INSERT INTO question_options (question_id, option_key, label, is_correct)
-					VALUES ($1, $2, $3, $4)`, id, o.ID, o.Label, o.ID == *n.CorrectOptionID); err != nil {
-					return err
-				}
-			}
-		}
-		if err := ensureTags(ctx, tx, n.Tags); err != nil {
-			return err
-		}
-		if _, err := tx.Exec(ctx, `
-			INSERT INTO question_tags (question_id, tag_id)
-			SELECT $1, id FROM tags WHERE name = ANY($2::text[])`, id, n.Tags); err != nil {
-			return err
-		}
-		if len(n.RelatedMaterialIDs) > 0 {
-			if _, err := tx.Exec(ctx, `
-				INSERT INTO material_questions (material_id, question_id)
-				SELECT m.id, $1 FROM materials m WHERE m.id = ANY($2::uuid[])
-				ON CONFLICT DO NOTHING`, id, n.RelatedMaterialIDs); err != nil {
-				return err
-			}
-		}
-		return nil
+		return writeQuestionParts(ctx, tx, id, n)
 	})
 	if err != nil {
 		return Question{}, err
 	}
 	return s.GetQuestion(ctx, id, "en")
+}
+
+// UpdateQuestion replaces a question's content, options, tags and material
+// links. Answers, stats, notes and comments are kept. Option translations are
+// dropped with the old options, since the options themselves may have changed.
+func (s *Store) UpdateQuestion(ctx context.Context, id string, n NewQuestion) (Question, error) {
+	if err := n.validate(); err != nil {
+		return Question{}, err
+	}
+	err := s.withTx(ctx, func(tx pgx.Tx) error {
+		code, lang, expected := n.outputFields()
+		tag, err := tx.Exec(ctx, `
+			UPDATE questions
+			SET type = $2::question_type, prompt = $3, difficulty = $4::question_difficulty,
+			    explanation = $5, correct_answer = $6,
+			    code = $7, code_language = $8, expected_output = $9
+			WHERE id = $1`,
+			id, n.Type, n.Prompt, n.Difficulty, n.Explanation, n.trueFalseAnswer(), code, lang, expected)
+		if err != nil {
+			return err
+		}
+		if tag.RowsAffected() == 0 {
+			return ErrNotFound
+		}
+		for _, table := range []string{"question_options", "question_tags", "material_questions"} {
+			if _, err := tx.Exec(ctx, `DELETE FROM `+table+` WHERE question_id = $1`, id); err != nil {
+				return err
+			}
+		}
+		return writeQuestionParts(ctx, tx, id, n)
+	})
+	if err != nil {
+		return Question{}, err
+	}
+	return s.GetQuestion(ctx, id, "en")
+}
+
+// DeleteQuestion removes a question and everything attached to it (answers,
+// bookmarks, notes, comments, bug reports, test membership) by cascade.
+func (s *Store) DeleteQuestion(ctx context.Context, id string) error {
+	tag, err := s.pool.Exec(ctx, `DELETE FROM questions WHERE id = $1`, id)
+	if err != nil {
+		return err
+	}
+	if tag.RowsAffected() == 0 {
+		return ErrNotFound
+	}
+	return nil
+}
+
+func (n NewQuestion) trueFalseAnswer() *bool {
+	if n.Type == "true-false" {
+		return n.CorrectAnswer
+	}
+	return nil
+}
+
+// writeQuestionParts inserts a question's options, tags and material links.
+func writeQuestionParts(ctx context.Context, tx pgx.Tx, id string, n NewQuestion) error {
+	if HasOptions(n.Type) {
+		for i, o := range n.Options {
+			correct := (n.Type == "multiple-choice" && o.ID == *n.CorrectOptionID) ||
+				(n.Type == "multi-select" && slices.Contains(n.CorrectOptionIDs, o.ID))
+			var position *int
+			if n.Type == "ordering" {
+				position = &i
+			}
+			if _, err := tx.Exec(ctx, `
+				INSERT INTO question_options (question_id, option_key, label, is_correct, correct_position)
+				VALUES ($1, $2, $3, $4, $5)`, id, o.ID, o.Label, correct, position); err != nil {
+				return err
+			}
+		}
+	}
+	if err := ensureTags(ctx, tx, n.Tags); err != nil {
+		return err
+	}
+	if _, err := tx.Exec(ctx, `
+		INSERT INTO question_tags (question_id, tag_id)
+		SELECT $1, id FROM tags WHERE name = ANY($2::text[])`, id, n.Tags); err != nil {
+		return err
+	}
+	if len(n.RelatedMaterialIDs) > 0 {
+		if _, err := tx.Exec(ctx, `
+			INSERT INTO material_questions (material_id, question_id)
+			SELECT m.id, $1 FROM materials m WHERE m.id = ANY($2::uuid[])
+			ON CONFLICT DO NOTHING`, id, n.RelatedMaterialIDs); err != nil {
+			return err
+		}
+	}
+	return nil
 }

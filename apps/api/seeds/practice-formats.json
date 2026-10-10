@@ -1,0 +1,439 @@
+{
+  "name": "Practice formats: predict the output, pick all, ordering",
+  "materials": [
+    {
+      "key": "mdn-event-loop",
+      "type": "article",
+      "title": "The event loop",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop",
+      "author": "MDN Web Docs",
+      "description": "Stack, heap and queue."
+    },
+    {
+      "key": "mdn-microtask",
+      "type": "article",
+      "title": "Using microtasks in JavaScript with queueMicrotask()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide",
+      "author": "MDN Web Docs",
+      "description": "When and how microtasks run."
+    },
+    {
+      "key": "mdn-closures-loops",
+      "type": "article",
+      "title": "Creating closures in loops: a common mistake",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures#creating_closures_in_loops_a_common_mistake",
+      "author": "MDN Web Docs",
+      "description": "Why var in a loop shares one binding."
+    },
+    {
+      "key": "jsi-type-conversions",
+      "type": "article",
+      "title": "javascript.info: Type conversions",
+      "url": "https://javascript.info/type-conversions",
+      "author": "javascript.info",
+      "description": "String, numeric and boolean conversion rules."
+    },
+    {
+      "key": "jsi-types",
+      "type": "article",
+      "title": "javascript.info: Data types",
+      "url": "https://javascript.info/types",
+      "author": "javascript.info",
+      "description": "Primitives, typeof and its quirks."
+    },
+    {
+      "key": "jsi-object-copy",
+      "type": "article",
+      "title": "javascript.info: Object references and copying",
+      "url": "https://javascript.info/object-copy",
+      "author": "javascript.info",
+      "description": "Copying by reference, shallow and deep copies."
+    },
+    {
+      "key": "jsi-async-await",
+      "type": "article",
+      "title": "javascript.info: Async/await",
+      "url": "https://javascript.info/async-await",
+      "author": "javascript.info",
+      "description": "await, error handling and parallelism."
+    },
+    {
+      "key": "mdn-new",
+      "type": "article",
+      "title": "new operator",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new",
+      "author": "MDN Web Docs",
+      "description": "The four steps new performs."
+    },
+    {
+      "key": "eff-defer",
+      "type": "article",
+      "title": "Effective Go: Defer",
+      "url": "https://go.dev/doc/effective_go#defer",
+      "author": "The Go Authors",
+      "description": "How defer schedules cleanup."
+    },
+    {
+      "key": "slices-intro",
+      "type": "article",
+      "title": "Go Slices: usage and internals",
+      "url": "https://go.dev/blog/slices-intro",
+      "author": "The Go Authors",
+      "description": "Length, capacity, nil and empty slices."
+    },
+    {
+      "key": "faq-nil-error",
+      "type": "article",
+      "title": "Go FAQ: Why is my nil error value not equal to nil?",
+      "url": "https://go.dev/doc/faq#nil_error",
+      "author": "The Go Authors",
+      "description": "A related nil-comparison subtlety."
+    },
+    {
+      "key": "go113-errors",
+      "type": "article",
+      "title": "Working with Errors in Go 1.13",
+      "url": "https://go.dev/blog/go1.13-errors",
+      "author": "The Go Authors",
+      "description": "Wrapping with %w, errors.Is and errors.As."
+    },
+    {
+      "key": "go-strings",
+      "type": "article",
+      "title": "Strings, bytes, runes and characters in Go",
+      "url": "https://go.dev/blog/strings",
+      "author": "The Go Authors",
+      "description": "Why len counts bytes, not characters. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "pg-indexes",
+      "type": "article",
+      "title": "Indexes",
+      "url": "https://www.postgresql.org/docs/current/indexes.html",
+      "author": "PostgreSQL documentation",
+      "description": "Multicolumn, partial and expression indexes."
+    },
+    {
+      "key": "pg-select",
+      "type": "article",
+      "title": "SELECT",
+      "url": "https://www.postgresql.org/docs/current/sql-select.html",
+      "author": "PostgreSQL documentation",
+      "description": "How a SELECT is processed, clause by clause. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "mdn-http-overview",
+      "type": "article",
+      "title": "An overview of HTTP",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview",
+      "author": "MDN Web Docs",
+      "description": "Requests, responses and the connection underneath. Added as a standard reference; not from your notes."
+    }
+  ],
+  "questions": [
+    {
+      "type": "output",
+      "prompt": "Predict the output: synchronous code, promises, queueMicrotask and a zero-delay timer.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "code": "console.log(\"A\");\nsetTimeout(() => console.log(\"timeout\"), 0);\nPromise.resolve().then(() => console.log(\"promise\"));\nqueueMicrotask(() => console.log(\"microtask\"));\nconsole.log(\"B\");",
+      "codeLanguage": "js",
+      "expectedOutput": "A\nB\npromise\nmicrotask\ntimeout\n",
+      "explanation": "Synchronous code runs first (`A`, `B`). Then the whole microtask queue drains in the order things were queued: the promise reaction, then the `queueMicrotask` callback. Only after that does the event loop take the next task, the timer.",
+      "materials": [
+        "mdn-event-loop",
+        "mdn-microtask"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: `var` versus `let` in loops with timers.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "for (var i = 0; i < 3; i++) setTimeout(() => console.log(\"var\", i), 0);\nfor (let j = 0; j < 3; j++) setTimeout(() => console.log(\"let\", j), 0);",
+      "codeLanguage": "js",
+      "expectedOutput": "var 3\nvar 3\nvar 3\nlet 0\nlet 1\nlet 2\n",
+      "explanation": "`var` is function-scoped, so the three callbacks share one `i`, which is `3` once the loop ends. `let` creates a fresh binding per iteration, so each callback keeps its own `j`. The `var` timers were scheduled first, so they print first.",
+      "materials": [
+        "mdn-closures-loops"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: `typeof` quirks and `NaN`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "console.log(typeof null, typeof [], typeof function () {});\nconsole.log(Array.isArray([]), Number.isNaN(NaN), NaN === NaN);",
+      "codeLanguage": "js",
+      "expectedOutput": "object object function\ntrue true false\n",
+      "explanation": "`typeof null` is `\"object\"` (a historical bug), arrays are objects, and functions report `\"function\"`. `NaN` is the only value not equal to itself, which is why `Number.isNaN` exists.",
+      "materials": [
+        "jsi-types"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: coercion with `+`, `-`, `||` and `??`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "console.log(\"5\" + 1, \"5\" - 1);\nconsole.log([1, 2] + [3]);\nconsole.log(0 || \"default\", 0 ?? \"default\");",
+      "codeLanguage": "js",
+      "expectedOutput": "51 4\n1,23\ndefault 0\n",
+      "explanation": "`+` concatenates when either side is a string; `-` always converts to numbers. Arrays are turned into strings (`\"1,2\" + \"3\"`). `||` falls back for any falsy value, so `0` is replaced; `??` only for `null`/`undefined`, so `0` stays.",
+      "materials": [
+        "jsi-type-conversions"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: spreading an object with a nested object.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "const a = { n: 1, inner: { n: 1 } };\nconst b = { ...a };\nb.n = 2;\nb.inner.n = 2;\nconsole.log(a.n, a.inner.n);",
+      "codeLanguage": "js",
+      "expectedOutput": "1 2\n",
+      "explanation": "Spread copies one level. `b.n = 2` changes only the copy, but `b.inner` is the same object as `a.inner`, so changing it shows up through `a` too. Use `structuredClone` for a deep copy.",
+      "materials": [
+        "jsi-object-copy"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: what runs before and after an `await`?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "code": "async function f() {\n  console.log(\"f start\");\n  await null;\n  console.log(\"f after await\");\n}\nconsole.log(\"before\");\nf();\nconsole.log(\"after\");",
+      "codeLanguage": "js",
+      "expectedOutput": "before\nf start\nafter\nf after await\n",
+      "explanation": "An async function runs synchronously until its first `await`. The rest of it is scheduled as a microtask, so the caller continues first (`after`), and the function resumes once the current task finishes.",
+      "materials": [
+        "jsi-async-await",
+        "mdn-microtask"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: several `defer` calls in a loop.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tfor i := 0; i < 3; i++ {\n\t\tdefer fmt.Println(\"deferred\", i)\n\t}\n\tfmt.Println(\"done\")\n}",
+      "codeLanguage": "go",
+      "expectedOutput": "done\ndeferred 2\ndeferred 1\ndeferred 0\n",
+      "explanation": "Deferred calls run when the function returns, last-in-first-out. The arguments are evaluated when `defer` runs, so each call keeps its own `i`: they print 2, 1, 0 after `done`.",
+      "materials": [
+        "eff-defer"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: appending to a sub-slice.",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := []int{1, 2, 3}\n\tt := s[:2]\n\tt = append(t, 99)\n\tfmt.Println(s, t)\n}",
+      "codeLanguage": "go",
+      "expectedOutput": "[1 2 99] [1 2 99]\n",
+      "explanation": "`t := s[:2]` shares `s`'s backing array and has capacity 3, so `append` writes `99` into the shared array instead of allocating. Both slices now see it. Use a full slice expression (`s[:2:2]`) to force a copy on append.",
+      "materials": [
+        "slices-intro"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: nil maps and string length.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar m map[string]int\n\tfmt.Println(m[\"missing\"], len(m), m == nil)\n\tfmt.Println(len(\"héllo\"), len([]rune(\"héllo\")))\n}",
+      "codeLanguage": "go",
+      "expectedOutput": "0 0 true\n6 5\n",
+      "explanation": "Reading from a nil map returns the zero value and `len` is 0 (writing would panic). `len` of a string counts bytes: `é` is two bytes in UTF-8, so 6 bytes but 5 runes.",
+      "materials": [
+        "go-strings",
+        "slices-intro"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a nil pointer returned as an `error`, and `%w` wrapping.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport (\n\t\"errors\"\n\t\"fmt\"\n)\n\ntype MyErr struct{}\n\nfunc (*MyErr) Error() string { return \"my error\" }\n\nfunc find() error {\n\tvar p *MyErr = nil\n\treturn p\n}\n\nfunc main() {\n\terr := find()\n\tfmt.Println(err == nil)\n\twrapped := fmt.Errorf(\"lookup: %w\", errors.New(\"not found\"))\n\tfmt.Println(wrapped)\n}",
+      "codeLanguage": "go",
+      "expectedOutput": "false\nlookup: not found\n",
+      "explanation": "An interface is nil only if both its type and value are nil. Returning a nil `*MyErr` as `error` gives an interface with a type and a nil value, so `err == nil` is false: return a literal `nil` instead. `%w` keeps the wrapped error for `errors.Is`/`errors.As` and prints its message.",
+      "materials": [
+        "faq-nil-error",
+        "go113-errors"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these schedule their callback as a microtask?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`promise.then(cb)`",
+        "`setTimeout(cb, 0)`",
+        "`queueMicrotask(cb)`",
+        "The code after `await` in an async function",
+        "`setInterval(cb, 10)`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Promise reactions, `queueMicrotask` and `await` continuations are microtasks: they run as soon as the current task ends, before any timer. `setTimeout` and `setInterval` schedule tasks (macrotasks).",
+      "materials": [
+        "mdn-microtask",
+        "mdn-event-loop"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which Go values share their underlying data when you assign them to another variable?",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A slice",
+        "A map",
+        "An array",
+        "A channel",
+        "A struct holding only ints"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Slices, maps and channels are small headers that point at shared data, so a copy still refers to the same elements. Arrays and plain structs are values: assigning copies every field.",
+      "materials": [
+        "slices-intro"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which queries can a plain B-tree index on `orders(created_at)` speed up?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`WHERE created_at = '2026-10-01'`",
+        "`WHERE created_at > now() - interval '7 days'`",
+        "`ORDER BY created_at DESC LIMIT 20`",
+        "`WHERE to_char(created_at, 'YYYY') = '2026'`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "A B-tree handles equality, ranges and ordered scans on the indexed column. Wrapping the column in a function (`to_char(created_at, …)`) hides it from the index; that needs an expression index or a rewrite as a range.",
+      "materials": [
+        "pg-indexes"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the logical evaluation order of a SQL `SELECT` in order.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`FROM` / `JOIN`",
+        "`WHERE`",
+        "`GROUP BY`",
+        "`HAVING`",
+        "`SELECT` (computing the output columns)"
+      ],
+      "explanation": "Rows are gathered (`FROM`), filtered (`WHERE`), grouped (`GROUP BY`), groups are filtered (`HAVING`), and only then are output columns computed. That's why `WHERE` can't use a `SELECT` alias or an aggregate, but `HAVING` can use aggregates. (`ORDER BY` and `LIMIT` come last.)",
+      "materials": [
+        "pg-select"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the steps of `new Person(\"Ana\")` in order.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Create a new empty object",
+        "Link its prototype to `Person.prototype`",
+        "Run `Person` with `this` set to the new object",
+        "Return the object (unless the constructor returned another object)"
+      ],
+      "explanation": "`new` creates an object, links it to the constructor's prototype, calls the constructor with `this` bound to it, and returns it. That linking is why methods on `Person.prototype` are available on every instance.",
+      "materials": [
+        "mdn-new"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the steps of a browser's first HTTPS request to a new site in order.",
+      "tags": [
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "DNS lookup of the host name",
+        "TCP handshake",
+        "TLS handshake",
+        "Send the HTTP request",
+        "Receive the response"
+      ],
+      "explanation": "The browser resolves the name to an IP, opens a TCP connection (SYN, SYN-ACK, ACK), negotiates encryption with TLS, and only then sends the request. Keep-alive and HTTP/2 let later requests reuse the connection and skip the first three steps.",
+      "materials": [
+        "mdn-http-overview"
+      ],
+      "correct": 0
+    }
+  ]
+}

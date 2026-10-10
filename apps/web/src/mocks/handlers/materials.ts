@@ -50,6 +50,41 @@ export const materialHandlers = [
     return HttpResponse.json(material, { status: 201 });
   }),
 
+  http.put('/api/materials/:id', async ({ request, params }) => {
+    const user = currentUser(request);
+    if (!user) return unauthorized();
+    if (user.role !== 'admin') return forbidden();
+    const index = db.materials.findIndex((m) => m.id === params.id);
+    if (index < 0) return HttpResponse.json({ message: 'Not found' }, { status: 404 });
+    const body = (await request.json()) as CreateMaterialBody;
+    const material: MaterialItem = {
+      id: db.materials[index].id,
+      type: body.type,
+      title: body.title,
+      url: body.url,
+      author: body.author || undefined,
+      description: body.description || undefined,
+      tags: body.tags,
+      relatedQuestionIds:
+        body.relatedQuestionIds && body.relatedQuestionIds.length > 0
+          ? [...body.relatedQuestionIds]
+          : undefined,
+    };
+    db.materials[index] = material;
+    return HttpResponse.json(material);
+  }),
+
+  http.delete('/api/materials/:id', ({ request, params }) => {
+    const user = currentUser(request);
+    if (!user) return unauthorized();
+    if (user.role !== 'admin') return forbidden();
+    if (!db.materials.some((m) => m.id === params.id)) {
+      return HttpResponse.json({ message: 'Not found' }, { status: 404 });
+    }
+    db.materials = db.materials.filter((m) => m.id !== params.id);
+    return new HttpResponse(null, { status: 204 });
+  }),
+
   http.get('/api/questions/:id/materials', ({ params }) => {
     const items = db.materials.filter((m) => m.relatedQuestionIds?.includes(String(params.id)));
     return HttpResponse.json(items);

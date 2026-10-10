@@ -13,6 +13,8 @@ export type QuestionSort = 'oldest' | 'newest' | 'random';
 export interface QuestionsFilter {
   page?: number;
   pageSize?: number;
+  /** Fetch exactly these questions, in this order (e.g. a test's). */
+  ids?: string[];
   /** Match any of these tags. */
   tags?: string[];
   /** Match any of these difficulties. */
@@ -29,6 +31,7 @@ export function useQuestions(filter: QuestionsFilter = {}) {
   const {
     page = 1,
     pageSize = 10,
+    ids,
     tags = [],
     difficulties = [],
     status = '',
@@ -39,7 +42,7 @@ export function useQuestions(filter: QuestionsFilter = {}) {
   return useQuery({
     queryKey: [
       'questions',
-      { page, pageSize, tags, difficulties, status, search, sort, seed, locale },
+      { page, pageSize, ids, tags, difficulties, status, search, sort, seed, locale },
     ],
     queryFn: () => {
       const params = new URLSearchParams({
@@ -47,6 +50,7 @@ export function useQuestions(filter: QuestionsFilter = {}) {
         pageSize: String(pageSize),
         locale,
       });
+      if (ids) params.set('ids', ids.join(','));
       if (search) params.set('search', search);
       tags.forEach((t) => params.append('tags', t));
       difficulties.forEach((d) => params.append('difficulty', d));
@@ -56,6 +60,7 @@ export function useQuestions(filter: QuestionsFilter = {}) {
       return api.get<QuestionsPage>(`/questions?${params}`);
     },
     placeholderData: keepPreviousData,
+    enabled: ids === undefined || ids.length > 0,
   });
 }
 

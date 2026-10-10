@@ -1,4 +1,5 @@
-export type QuestionType = 'multiple-choice' | 'true-false';
+export type QuestionType =
+  'multiple-choice' | 'true-false' | 'multi-select' | 'ordering' | 'output';
 
 export interface BaseQuestion {
   id: string;
@@ -25,9 +26,42 @@ export interface TrueFalseQuestion extends BaseQuestion {
   correctAnswer: boolean;
 }
 
-export type Question = MultipleChoiceQuestion | TrueFalseQuestion;
+/** Pick all that apply: one or more options are correct. */
+export interface MultiSelectQuestion extends BaseQuestion {
+  type: 'multi-select';
+  options: MultipleChoiceOption[];
+  correctOptionIds: string[];
+}
 
-export type AnswerValue = string | boolean;
+/** Put the options in order; they are shown shuffled. */
+export interface OrderingQuestion extends BaseQuestion {
+  type: 'ordering';
+  options: MultipleChoiceOption[];
+  /** Option ids in the correct order. */
+  correctOrder: string[];
+}
+
+/** Predict what a snippet prints (and then run it, for js and go). */
+export interface OutputQuestion extends BaseQuestion {
+  type: 'output';
+  code: string;
+  /** Fence tag, e.g. js or go. */
+  codeLanguage: string;
+  expectedOutput: string;
+}
+
+export type Question =
+  | MultipleChoiceQuestion
+  | TrueFalseQuestion
+  | MultiSelectQuestion
+  | OrderingQuestion
+  | OutputQuestion;
+
+/**
+ * An answer: an option id (multiple choice), a boolean (true/false), option
+ * ids (multi-select: the picked set; ordering: the order) or text (output).
+ */
+export type AnswerValue = string | boolean | string[];
 
 export interface QuestionComment {
   id: string;
@@ -88,6 +122,8 @@ export interface SubmitAnswerResult {
   questionId: string;
   correct: boolean;
   correctAnswer: AnswerValue; // correctOptionId or boolean
+  /** When spaced repetition brings the question back (ISO time). */
+  nextReviewAt?: string;
 }
 
 export interface QuestionsPage {

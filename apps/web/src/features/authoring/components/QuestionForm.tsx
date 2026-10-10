@@ -6,65 +6,146 @@ import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
 import { useMaterials } from '@/features/materials';
-import { useTags } from '@/features/questions';
+import { useQuestionMaterials, useTags, type Question } from '@/features/questions';
 import { RichText } from '@/shared/ui';
 import { hasCode } from '@/shared/utils/richText';
 
-import { useCreateQuestion } from '../hooks/useAuthoring';
+import { OutputFields } from './OutputFields';
+import { useCreateQuestion, useUpdateQuestion } from '../hooks/useAuthoring';
 import type { CreateQuestionInput } from '../types';
 import { LinkPicker } from './LinkPicker';
 import { TagInput } from './TagInput';
 
 const OPTION_IDS = ['A', 'B', 'C', 'D', 'E'] as const;
+const QUESTION_TYPES = [
+  'multiple-choice',
+  'multi-select',
+  'true-false',
+  'ordering',
+  'output',
+] as const;
+const hasOptions = (type: string) =>
+  type === 'multiple-choice' || type === 'multi-select' || type === 'ordering';
 
 const schema = z
   .object({
-    type: z.enum(['multiple-choice', 'true-false']),
+    type: z.enum(QUESTION_TYPES),
     prompt: z.string().trim().min(1),
     tags: z.array(z.string()).min(1),
     difficulty: z.enum(['easy', 'medium', 'hard']).optional(),
     explanation: z.string().trim().min(1),
     options: z.array(z.object({ label: z.string() })),
     correctOptionId: z.string(),
+    correctOptionIds: z.array(z.string()),
     correctAnswer: z.boolean(),
+    code: z.string(),
+    codeLanguage: z.string(),
+    expectedOutput: z.string(),
     relatedMaterialIds: z.array(z.string()),
   })
   .superRefine((v, ctx) => {
-    if (v.type === 'multiple-choice') {
-      const filled = v.options.filter((o) => o.label.trim().length > 0);
-      if (filled.length < 2) {
-        ctx.addIssue({ code: 'custom', path: ['options'], message: 'min2' });
-      }
-      const correctIndex = OPTION_IDS.indexOf(v.correctOptionId as (typeof OPTION_IDS)[number]);
-      if (correctIndex < 0 || !v.options[correctIndex]?.label.trim()) {
-        ctx.addIssue({ code: 'custom', path: ['correctOptionId'], message: 'pickCorrect' });
-      }
+    const filledAt = (id: string) =>
+      !!v.options[OPTION_IDS.indexOf(id as (typeof OPTION_IDS)[number])]?.label.trim();
+    if (hasOptions(v.type) && v.options.filter((o) => o.label.trim()).length < 2) {
+      ctx.addIssue({ code: 'custom', path: ['options'], message: 'min2' });
+    }
+    if (v.type === 'multiple-choice' && !filledAt(v.correctOptionId)) {
+      ctx.addIssue({ code: 'custom', path: ['correctOptionId'], message: 'pickCorrect' });
+    }
+    if (v.type === 'multi-select' && !v.correctOptionIds.some(filledAt)) {
+      ctx.addIssue({ code: 'custom', path: ['correctOptionIds'], message: 'pickCorrect' });
+    }
+    if (v.type === 'output' && !v.code.trim()) {
+      ctx.addIssue({ code: 'custom', path: ['code'], message: 'required' });
     }
   });
 
-type FormValues = z.infer<typeof schema>;
+export type QuestionFormValues = z.infer<typeof schema>;
+type FormValues = QuestionFormValues;
 
-export function QuestionForm({ onCreated }: { onCreated?: (id: string) => void }) {
+interface QuestionFormProps {
+  /** Edit this question instead of creating a new one. */
+  question?: Question;
+  onSaved?: (id: string) => void;
+  /** Shows a Cancel button (edit mode). */
+  onCancel?: () => void;
+}
+
+const EMPTY: FormValues = {
+  type: 'multiple-choice',
+  prompt: '',
+  tags: [],
+  difficulty: 'medium',
+  explanation: '',
+  options: [{ label: '' }, { label: '' }, { label: '' }, { label: '' }],
+  correctOptionId: 'A',
+  correctOptionIds: [],
+  correctAnswer: true,
+  code: '',
+  codeLanguage: 'js',
+  expectedOutput: '',
+  relatedMaterialIds: [],
+};
+
+function valuesFrom(q: Question): FormValues {
+  return {
+    ...EMPTY,
+    type: q.type,
+    prompt: q.prompt,
+    tags: q.tags,
+    difficulty: q.difficulty ?? 'medium',
+    explanation: q.explanation,
+    ...answerValuesFrom(q),
+  };
+}
+
+function answerValuesFrom(q: Question): Partial<FormValues> {
+  const labels = (ids: string[], options: { id: string; label: string }[]) =>
+    ids.map((id) => ({ label: options.find((o) => o.id === id)?.label ?? '' }));
+  switch (q.type) {
+    case 'multiple-choice':
+      return {
+        options: q.options.map((o) => ({ label: o.label })),
+        correctOptionId: q.correctOptionId,
+      };
+    case 'multi-select':
+      return {
+        options: q.options.map((o) => ({ label: o.label })),
+        correctOptionIds: q.correctOptionIds,
+      };
+    case 'ordering': // the form lists items in the correct order
+      return { options: labels(q.correctOrder, q.options) };
+    case 'output':
+      return { code: q.code, codeLanguage: q.codeLanguage, expectedOutput: q.expectedOutput };
+    case 'true-false':
+      return { correctAnswer: q.correctAnswer };
+  }
+}
+
+export function QuestionForm({ question, onSaved, onCancel }: QuestionFormProps) {
   const { t } = useTranslation();
   const successId = useId();
   const createQuestion = useCreateQuestion();
+  const updateQuestion = useUpdateQuestion();
+  const save = question ? updateQuestion : createQuestion;
   const { data: tags } = useTags();
   const { data: materialsData } = useMaterials();
+  // In edit mode the current material links come from their own endpoint.
+  const { data: linkedMaterials } = useQuestionMaterials(question?.id ?? '', !!question);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: {
-      type: 'multiple-choice',
-      prompt: '',
-      tags: [],
-      difficulty: 'medium',
-      explanation: '',
-      options: [{ label: '' }, { label: '' }, { label: '' }, { label: '' }],
-      correctOptionId: 'A',
-      correctAnswer: true,
-      relatedMaterialIds: [],
-    },
+    defaultValues: question ? valuesFrom(question) : EMPTY,
   });
+
+  useEffect(() => {
+    if (linkedMaterials && !form.formState.dirtyFields.relatedMaterialIds) {
+      form.setValue(
+        'relatedMaterialIds',
+        linkedMaterials.map((m) => m.id),
+      );
+    }
+  }, [linkedMaterials, form]);
   const type = form.watch('type');
   const { fields, append, remove } = useFieldArray({ control: form.control, name: 'options' });
 
@@ -86,18 +167,36 @@ export function QuestionForm({ onCreated }: { onCreated?: (id: string) => void }
       explanation: values.explanation,
       relatedMaterialIds: values.relatedMaterialIds,
     };
-    if (values.type === 'multiple-choice') {
+    if (hasOptions(values.type)) {
       const opts = values.options
         .map((o, i) => ({ id: OPTION_IDS[i], label: o.label.trim() }))
         .filter((o) => o.label.length > 0);
       input.options = opts;
-      input.correctOptionId = values.correctOptionId;
+      if (values.type === 'multiple-choice') input.correctOptionId = values.correctOptionId;
+      if (values.type === 'multi-select') {
+        input.correctOptionIds = values.correctOptionIds.filter((id) =>
+          opts.some((o) => o.id === id),
+        );
+      }
+    } else if (values.type === 'output') {
+      input.code = values.code;
+      input.codeLanguage = values.codeLanguage;
+      input.expectedOutput = values.expectedOutput;
     } else {
       input.correctAnswer = values.correctAnswer;
     }
-    const created = await createQuestion.mutateAsync(input);
-    form.reset();
-    onCreated?.(created.id);
+    try {
+      if (question) {
+        const updated = await updateQuestion.mutateAsync({ id: question.id, input });
+        onSaved?.(updated.id);
+      } else {
+        const created = await createQuestion.mutateAsync(input);
+        form.reset();
+        onSaved?.(created.id);
+      }
+    } catch {
+      // rendered from save.isError
+    }
   });
 
   const err = form.formState.errors;
@@ -106,8 +205,8 @@ export function QuestionForm({ onCreated }: { onCreated?: (id: string) => void }
     <form onSubmit={onSubmit} className="stack" style={{ gap: 14 }}>
       <div className="field">
         <label>{t('authoring.questionType')}</label>
-        <div className="hstack" style={{ gap: 16 }}>
-          {(['multiple-choice', 'true-false'] as const).map((v) => (
+        <div className="hstack" style={{ gap: 16, flexWrap: 'wrap' }}>
+          {QUESTION_TYPES.map((v) => (
             <label key={v} className="checkbox-row">
               <input type="radio" value={v} checked={type === v} {...form.register('type')} />
               {t(`authoring.type.${v}`)}
@@ -124,27 +223,59 @@ export function QuestionForm({ onCreated }: { onCreated?: (id: string) => void }
         {err.prompt && <span className="field-error-text">{t('authoring.required')}</span>}
       </div>
 
-      {type === 'multiple-choice' ? (
-        <div className={err.options || err.correctOptionId ? 'field field--error' : 'field'}>
-          <label>{t('authoring.options')}</label>
+      {hasOptions(type) ? (
+        <div
+          className={
+            err.options || err.correctOptionId || err.correctOptionIds
+              ? 'field field--error'
+              : 'field'
+          }
+        >
+          <label>{type === 'ordering' ? t('authoring.items') : t('authoring.options')}</label>
           <span className="tok-com" style={{ fontSize: 12 }}>
             {'// '}
-            {t('authoring.optionsHint')}
+            {type === 'ordering'
+              ? t('authoring.orderingHint')
+              : type === 'multi-select'
+                ? t('authoring.multiSelectHint')
+                : t('authoring.optionsHint')}
           </span>
           {fields.map((f, i) => (
             <div key={f.id} className="hstack" style={{ gap: 8 }}>
-              <label className="checkbox-row" aria-label={t('authoring.markCorrect')}>
-                <input
-                  type="radio"
-                  value={OPTION_IDS[i]}
-                  checked={form.watch('correctOptionId') === OPTION_IDS[i]}
-                  {...form.register('correctOptionId')}
-                />
-                <span>
-                  <span className="tok-kw">var</span>{' '}
-                  <span className="tok-idx">{OPTION_IDS[i]}</span>
+              {type === 'ordering' ? (
+                <span className="tok-idx" style={{ minWidth: 64 }}>
+                  steps[{i}]
                 </span>
-              </label>
+              ) : (
+                <label className="checkbox-row" aria-label={t('authoring.markCorrect')}>
+                  {type === 'multi-select' ? (
+                    <input
+                      type="checkbox"
+                      checked={form.watch('correctOptionIds').includes(OPTION_IDS[i])}
+                      onChange={(e) => {
+                        const current = form.getValues('correctOptionIds');
+                        form.setValue(
+                          'correctOptionIds',
+                          e.target.checked
+                            ? [...current, OPTION_IDS[i]]
+                            : current.filter((id) => id !== OPTION_IDS[i]),
+                        );
+                      }}
+                    />
+                  ) : (
+                    <input
+                      type="radio"
+                      value={OPTION_IDS[i]}
+                      checked={form.watch('correctOptionId') === OPTION_IDS[i]}
+                      {...form.register('correctOptionId')}
+                    />
+                  )}
+                  <span>
+                    <span className="tok-kw">var</span>{' '}
+                    <span className="tok-idx">{OPTION_IDS[i]}</span>
+                  </span>
+                </label>
+              )}
               <div
                 style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 6 }}
               >
@@ -181,10 +312,12 @@ export function QuestionForm({ onCreated }: { onCreated?: (id: string) => void }
             </button>
           )}
           {err.options && <span className="field-error-text">{t('authoring.optionsMin')}</span>}
-          {err.correctOptionId && (
+          {(err.correctOptionId || err.correctOptionIds) && (
             <span className="field-error-text">{t('authoring.pickCorrect')}</span>
           )}
         </div>
+      ) : type === 'output' ? (
+        <OutputFields form={form} />
       ) : (
         <div className="field">
           <label>{t('authoring.correctAnswer')}</label>
@@ -255,28 +388,30 @@ export function QuestionForm({ onCreated }: { onCreated?: (id: string) => void }
         )}
       />
 
-      {createQuestion.isError && (
+      {save.isError && (
         <div className="alert alert--error" role="alert">
           {t('authoring.saveError')}
         </div>
       )}
-      {createQuestion.isSuccess && (
+      {save.isSuccess && (
         <div className="alert alert--success" id={successId} role="status">
-          {t('authoring.questionCreated')}
+          {question ? t('authoring.questionUpdated') : t('authoring.questionCreated')}
         </div>
       )}
 
-      <button
-        type="submit"
-        className="btn btn--primary"
-        disabled={createQuestion.isPending}
-        style={{ alignSelf: 'flex-start' }}
-      >
-        <span className="prompt-char" aria-hidden>
-          $
-        </span>
-        {t('authoring.createQuestion')}
-      </button>
+      <div className="hstack" style={{ gap: 10 }}>
+        <button type="submit" className="btn btn--primary" disabled={save.isPending}>
+          <span className="prompt-char" aria-hidden>
+            $
+          </span>
+          {question ? t('authoring.saveChanges') : t('authoring.createQuestion')}
+        </button>
+        {onCancel && (
+          <button type="button" className="btn btn--ghost" onClick={onCancel}>
+            {t('common.cancel')}
+          </button>
+        )}
+      </div>
     </form>
   );
 }

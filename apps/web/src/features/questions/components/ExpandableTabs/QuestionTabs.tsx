@@ -35,8 +35,16 @@ export function QuestionTabs({
   const [active, setActive] = useState<TabKey>(tabs[0]);
   const activeTab = tabs.includes(active) ? active : tabs[0];
 
-  const correctKey =
-    question.type === 'multiple-choice' ? question.correctOptionId : String(question.correctAnswer);
+  // Which stats rows to mark as right: option keys, 'true'/'false', or the
+  // 'correct' bucket for types graded right/wrong (ordering, output).
+  const correctKeys =
+    question.type === 'multiple-choice'
+      ? [question.correctOptionId]
+      : question.type === 'multi-select'
+        ? question.correctOptionIds
+        : question.type === 'true-false'
+          ? [String(question.correctAnswer)]
+          : ['correct'];
 
   return (
     <div className="panel">
@@ -68,7 +76,7 @@ export function QuestionTabs({
         )}
         {activeTab === 'comments' && <CommentsTab questionId={question.id} />}
         {activeTab === 'notes' && <MyNotesTab questionId={question.id} />}
-        {activeTab === 'stats' && <StatsTab questionId={question.id} correctKey={correctKey} />}
+        {activeTab === 'stats' && <StatsTab questionId={question.id} correctKeys={correctKeys} />}
         {activeTab === 'material' && <MaterialTab questionId={question.id} />}
         {activeTab === 'bug' && <BugReportTab questionId={question.id} />}
       </div>

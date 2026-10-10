@@ -9,10 +9,12 @@ export function BuildTestPage() {
   const navigate = useNavigate();
   const { selectedQuestionIds, toggleQuestion } = useTestBuilderStore();
 
-  // Resolve selected ids to question data for the tray's title list.
-  // Seed scale fits one large page; a real backend would get a by-ids endpoint.
-  const { data } = useQuestions({ page: 1, pageSize: 50 });
-  const selectedQuestions = (data?.items ?? []).filter((q) => selectedQuestionIds.includes(q.id));
+  // Resolve the selected ids to question data for the tray's title list.
+  const { data } = useQuestions({
+    ids: selectedQuestionIds,
+    pageSize: Math.max(1, selectedQuestionIds.length),
+  });
+  const selectedQuestions = selectedQuestionIds.length > 0 ? (data?.items ?? []) : [];
 
   return (
     <div className="build-layout">
@@ -22,10 +24,17 @@ export function BuildTestPage() {
           {t('builder.title')}
         </h1>
         <p className="muted">{t('builder.pickerHint')}</p>
-        <QuestionFeed mode="pick" selectedIds={selectedQuestionIds} onToggleSelect={toggleQuestion} />
+        <QuestionFeed
+          mode="pick"
+          selectedIds={selectedQuestionIds}
+          onToggleSelect={toggleQuestion}
+        />
       </div>
       <div className="build-layout__tray">
-        <TestBuilderTray selectedQuestions={selectedQuestions} onSaved={() => navigate('/my-tests')} />
+        <TestBuilderTray
+          selectedQuestions={selectedQuestions}
+          onSaved={() => navigate('/my-tests')}
+        />
       </div>
     </div>
   );

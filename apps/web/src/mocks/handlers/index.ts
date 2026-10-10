@@ -2,6 +2,7 @@ import { adminHandlers } from './admin';
 import { authHandlers } from './auth';
 import { materialHandlers } from './materials';
 import { questionHandlers } from './questions';
+import { reviewHandlers } from './review';
 import { searchHandlers } from './search';
 import { testHandlers } from './tests';
 
@@ -14,6 +15,7 @@ export const handlers = [
   // explicit route earlier avoids ambiguity.
   ...materialHandlers,
   ...questionHandlers,
+  ...reviewHandlers,
   ...searchHandlers,
   ...testHandlers,
 ];

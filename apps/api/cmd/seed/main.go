@@ -32,13 +32,25 @@ type bank struct {
 		Description string `json:"description"`
 	} `json:"materials"`
 	Questions []struct {
-		Prompt      string   `json:"prompt"`
-		Tags        []string `json:"tags"`
-		Difficulty  string   `json:"difficulty"`
-		Options     []string `json:"options"`
-		Correct     int      `json:"correct"` // index into Options
-		Explanation string   `json:"explanation"`
-		Materials   []string `json:"materials"` // material keys
+		// Type defaults to multiple-choice. Per type:
+		//   multiple-choice  options + correct (index)
+		//   multi-select     options + correctIndices
+		//   ordering         options, listed in the correct order
+		//   true-false       correctAnswer
+		//   output           code + codeLanguage + expectedOutput
+		Type           string   `json:"type"`
+		Prompt         string   `json:"prompt"`
+		Tags           []string `json:"tags"`
+		Difficulty     string   `json:"difficulty"`
+		Options        []string `json:"options"`
+		Correct        int      `json:"correct"`
+		CorrectIndices []int    `json:"correctIndices"`
+		CorrectAnswer  *bool    `json:"correctAnswer"`
+		Code           *string  `json:"code"`
+		CodeLanguage   *string  `json:"codeLanguage"`
+		ExpectedOutput *string  `json:"expectedOutput"`
+		Explanation    string   `json:"explanation"`
+		Materials      []string `json:"materials"` // material keys
 	} `json:"questions"`
 }
 
@@ -120,8 +132,23 @@ func run(file string) error {
 		} else if !errors.Is(err, store.ErrNotFound) {
 			return err
 		}
-		if q.Correct < 0 || q.Correct >= len(q.Options) || len(q.Options) > len(letters) {
+		typ := q.Type
+		if typ == "" {
+			typ = "multiple-choice"
+		}
+		if len(q.Options) > len(letters) {
+			return fmt.Errorf("question %d: at most %d options", i+1, len(letters))
+		}
+		in := func(j int) bool { return j >= 0 && j < len(q.Options) }
+		if typ == "multiple-choice" && !in(q.Correct) {
 			return fmt.Errorf("question %d: correct index %d out of range", i+1, q.Correct)
+		}
+		var correctIDs []string
+		for _, j := range q.CorrectIndices {
+			if !in(j) {
+				return fmt.Errorf("question %d: correct index %d out of range", i+1, j)
+			}
+			correctIDs = append(correctIDs, letters[j])
 		}
 		opts := make([]store.Option, len(q.Options))
 		for j, label := range q.Options {
@@ -135,12 +162,17 @@ func run(file string) error {
 			}
 			related = append(related, id)
 		}
-		correct, diff := letters[q.Correct], q.Difficulty
-		if _, err := st.CreateQuestion(ctx, "", store.NewQuestion{
-			Type: "multiple-choice", Prompt: q.Prompt, Tags: q.Tags, Difficulty: &diff,
-			Explanation: q.Explanation, Options: opts, CorrectOptionID: &correct,
+		diff := q.Difficulty
+		nq := store.NewQuestion{
+			Type: typ, Prompt: q.Prompt, Tags: q.Tags, Difficulty: &diff, Explanation: q.Explanation,
+			Options: opts, CorrectOptionIDs: correctIDs, CorrectAnswer: q.CorrectAnswer,
+			Code: q.Code, CodeLanguage: q.CodeLanguage, ExpectedOutput: q.ExpectedOutput,
 			RelatedMaterialIDs: related,
-		}); err != nil {
+		}
+		if typ == "multiple-choice" {
+			nq.CorrectOptionID = &letters[q.Correct]
+		}
+		if _, err := st.CreateQuestion(ctx, "", nq); err != nil {
 			return fmt.Errorf("question %d: %w", i+1, err)
 		}
 		newQuestions++

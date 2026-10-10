@@ -24,9 +24,13 @@ interface AnswerOptionsProps {
   showScissors: boolean;
   struckOptions: ReadonlySet<string>;
   onToggleStruck: (optionKey: string) => void;
-  /** Shuffled option-id order for this attempt (multiple-choice only). */
+  /** Shuffled option-id order for this attempt (multiple choice and multi-select). */
   optionOrder?: string[];
 }
+
+/** Option keys of an answer value: one for a single pick, several for a set. */
+const keysOf = (v: AnswerValue | undefined): string[] =>
+  v === undefined ? [] : Array.isArray(v) ? v : [String(v)];
 
 interface RowSpec {
   key: string; // option id ('A'…'E') or 'true'/'false'
@@ -40,9 +44,10 @@ interface RowSpec {
 
 /**
  * Answers rendered as variable declarations — `var A = "HTTP"` — per the
- * editor-style design. Each row is a numbered code line; the native radio is
- * visually hidden and the whole entry is its label (aria-label carries the
- * plain option text so accessible names stay notation-free).
+ * editor-style design. Each row is a numbered code line; the native radio
+ * (checkbox for multi-select) is visually hidden and the whole entry is its
+ * label (aria-label carries the plain option text so accessible names stay
+ * notation-free).
  */
 export function AnswerOptions({
   question,
@@ -58,8 +63,9 @@ export function AnswerOptions({
   const { t } = useTranslation();
   const groupName = useId();
 
+  const multi = question.type === 'multi-select';
   let rows: RowSpec[];
-  if (question.type === 'multiple-choice') {
+  if (question.type === 'multiple-choice' || question.type === 'multi-select') {
     let options = question.options;
     if (optionOrder) {
       options = [...options].sort((a, b) => optionOrder.indexOf(a.id) - optionOrder.indexOf(b.id));
@@ -71,26 +77,36 @@ export function AnswerOptions({
       rhs: o.label,
       answerValue: o.id,
     }));
-  } else {
+  } else if (question.type === 'true-false') {
     rows = [
       { key: 'true', label: t('question.true'), lhs: 'answer', rhs: 'true', answerValue: true },
       { key: 'false', label: t('question.false'), lhs: 'answer', rhs: 'false', answerValue: false },
     ];
+  } else {
+    return null; // ordering and output questions have their own inputs
   }
 
-  const selectedKey = value === undefined ? '' : String(value);
+  const selected = keysOf(value);
+  const correctKeys = reveal ? keysOf(reveal.correctAnswer) : [];
+  const givenKeys = reveal ? keysOf(reveal.givenAnswer) : [];
+  const toggle = (key: string) =>
+    onChange(selected.includes(key) ? selected.filter((k) => k !== key) : [...selected, key]);
 
   return (
-    <div role="radiogroup" aria-label={toPlainText(question.prompt)}>
+    <div role={multi ? 'group' : 'radiogroup'} aria-label={toPlainText(question.prompt)}>
+      {multi && (
+        <div className="code-line">
+          <p className="code-line__body option-hint tok-com">
+            {'// '}
+            {t('question.pickAll')}
+          </p>
+        </div>
+      )}
       {rows.map((row) => {
         const struck = struckOptions.has(row.key);
-        const isSelected = selectedKey === row.key;
-        const isCorrect = reveal !== undefined && String(reveal.correctAnswer) === row.key;
-        const isWrongPick =
-          reveal !== undefined &&
-          reveal.givenAnswer !== undefined &&
-          String(reveal.givenAnswer) === row.key &&
-          !isCorrect;
+        const isSelected = selected.includes(row.key);
+        const isCorrect = reveal !== undefined && correctKeys.includes(row.key);
+        const isWrongPick = reveal !== undefined && givenKeys.includes(row.key) && !isCorrect;
 
         const entryClasses = [
           'option-entry',
@@ -113,20 +129,20 @@ export function AnswerOptions({
               <div className="option-row">
                 {showScissors && (
                   <ScissorsToggle
-                    optionLabel={question.type === 'multiple-choice' ? row.lhs : row.label}
+                    optionLabel={question.type === 'true-false' ? row.label : row.lhs}
                     struck={struck}
                     onToggle={() => onToggleStruck(row.key)}
                   />
                 )}
                 <label className={entryClasses}>
                   <input
-                    type="radio"
+                    type={multi ? 'checkbox' : 'radio'}
                     name={groupName}
                     value={row.key}
                     checked={isSelected}
                     disabled={disabled}
                     aria-label={toPlainText(row.label)}
-                    onChange={() => onChange(row.answerValue)}
+                    onChange={() => (multi ? toggle(row.key) : onChange(row.answerValue))}
                   />
                   {isCodeOption(row) ? (
                     // a code-block answer: `var A =` with the highlighted snippet below
@@ -140,7 +156,7 @@ export function AnswerOptions({
                       <span className="tok-kw">var</span> <span className="tok-idx">{row.lhs}</span>
                       <span className="muted"> = </span>
                       <span className="tok-str">
-                        {question.type === 'multiple-choice' ? (
+                        {question.type !== 'true-false' ? (
                           <>
                             &quot;
                             <InlineText text={row.label} />

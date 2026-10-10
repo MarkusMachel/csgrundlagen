@@ -1,7 +1,9 @@
 package httpapi
 
 import (
+	"errors"
 	"net/http"
+	"net/url"
 	"strconv"
 	"strings"
 	"time"
@@ -49,6 +51,85 @@ func (s *Server) me(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, currentUser(r))
 }
 
+// signup creates a regular account and logs it in (same response as login).
+func (s *Server) signup(w http.ResponseWriter, r *http.Request) {
+	var body struct {
+		Name     string `json:"name"`
+		Email    string `json:"email"`
+		Password string `json:"password"`
+		Locale   string `json:"locale"`
+	}
+	if !decode(w, r, &body) {
+		return
+	}
+	token, user, err := s.store.SignUp(r.Context(), body.Name, body.Email, body.Password, body.Locale)
+	if err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	writeJSON(w, http.StatusCreated, map[string]any{"token": token, "user": user})
+}
+
+func (s *Server) changePassword(w http.ResponseWriter, r *http.Request) {
+	var body struct {
+		CurrentPassword string `json:"currentPassword"`
+		NewPassword     string `json:"newPassword"`
+	}
+	if !decode(w, r, &body) {
+		return
+	}
+	if err := s.store.ChangePassword(r.Context(), currentUser(r).ID, bearerToken(r),
+		body.CurrentPassword, body.NewPassword); err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	w.WriteHeader(http.StatusNoContent)
+}
+
+// requestPasswordReset always answers 202, whether or not the email has an
+// account, so the endpoint can't be used to find out who is registered.
+func (s *Server) requestPasswordReset(w http.ResponseWriter, r *http.Request) {
+	var body struct {
+		Email string `json:"email"`
+	}
+	if !decode(w, r, &body) {
+		return
+	}
+	token, user, err := s.store.CreatePasswordReset(r.Context(), body.Email)
+	switch {
+	case errors.Is(err, store.ErrNotFound):
+		// fall through to the same response
+	case err != nil:
+		s.fail(w, r, err)
+		return
+	default:
+		link := s.opts.BaseURL + "/reset-password?token=" + url.QueryEscape(token)
+		msg := "Hi " + user.Name + ",\n\nOpen this link within an hour to choose a new password:\n" + link +
+			"\n\nIf you didn't ask for this, ignore this email; your password stays the same."
+		if err := s.opts.Mailer.Send(r.Context(), user.Email, "Reset your password", msg); err != nil {
+			s.log.Error("send password reset", "err", err)
+		}
+	}
+	writeJSON(w, http.StatusAccepted, map[string]string{
+		"message": "If an account exists for that email, a reset link is on its way.",
+	})
+}
+
+func (s *Server) confirmPasswordReset(w http.ResponseWriter, r *http.Request) {
+	var body struct {
+		Token    string `json:"token"`
+		Password string `json:"password"`
+	}
+	if !decode(w, r, &body) {
+		return
+	}
+	if err := s.store.ResetPassword(r.Context(), body.Token, body.Password); err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	w.WriteHeader(http.StatusNoContent)
+}
+
 // --- questions ----------------------------------------------------------------
 
 // intParam reads an integer query param, clamped to [lo, hi].
@@ -68,6 +149,21 @@ func (s *Server) listQuestions(w http.ResponseWriter, r *http.Request) {
 			tags = append(tags, t)
 		}
 	}
+	// ?ids=a,b,c fetches specific questions (e.g. a test's), in that order.
+	var ids []string
+	for _, part := range strings.Split(q.Get("ids"), ",") {
+		if part = strings.TrimSpace(part); part != "" {
+			if !store.IsUUID(part) {
+				writeError(w, http.StatusBadRequest, "ids must be question ids")
+				return
+			}
+			ids = append(ids, part)
+		}
+	}
+	if len(ids) > 200 {
+		writeError(w, http.StatusBadRequest, "at most 200 ids")
+		return
+	}
 	var difficulties []string
 	for _, d := range q["difficulty"] {
 		if d == "easy" || d == "medium" || d == "hard" {
@@ -76,10 +172,11 @@ func (s *Server) listQuestions(w http.ResponseWriter, r *http.Request) {
 	}
 	f := store.QuestionFilter{
 		Page:         intParam(r, "page", 1, 1, 1<<20),
-		PageSize:     intParam(r, "pageSize", 10, 1, 50),
+		PageSize:     intParam(r, "pageSize", 10, 1, max(50, len(ids))),
 		Tags:         tags,
 		Difficulties: difficulties,
 		Search:       strings.TrimSpace(q.Get("search")),
+		IDs:          ids,
 		Locale:       locale(r),
 		Seed:         q.Get("seed"),
 	}
@@ -145,6 +242,35 @@ func (s *Server) createQuestion(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusCreated, q)
 }
 
+func (s *Server) updateQuestion(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(w, r)
+	if !ok {
+		return
+	}
+	var body store.NewQuestion
+	if !decode(w, r, &body) {
+		return
+	}
+	q, err := s.store.UpdateQuestion(r.Context(), id, body)
+	if err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, q)
+}
+
+func (s *Server) deleteQuestion(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(w, r)
+	if !ok {
+		return
+	}
+	if err := s.store.DeleteQuestion(r.Context(), id); err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	w.WriteHeader(http.StatusNoContent)
+}
+
 func (s *Server) submitAnswer(w http.ResponseWriter, r *http.Request) {
 	id, ok := pathID(w, r)
 	if !ok {
@@ -156,10 +282,8 @@ func (s *Server) submitAnswer(w http.ResponseWriter, r *http.Request) {
 	if !decode(w, r, &body) {
 		return
 	}
-	switch body.Answer.(type) {
-	case string, bool:
-	default:
-		writeError(w, http.StatusBadRequest, "answer must be an option id or a boolean")
+	if !store.ValidAnswerShape(body.Answer) {
+		writeError(w, http.StatusBadRequest, "answer must be an option id, a boolean, a list of option ids or text")
 		return
 	}
 	res, err := s.store.SubmitAnswer(r.Context(), currentUser(r).ID, id, body.Answer)
@@ -284,6 +408,33 @@ func (s *Server) bookmarks(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, qs)
 }
 
+// reviewQueue returns the user's due spaced-repetition reviews, plus up to
+// ?new=N unseen questions to start learning.
+func (s *Server) reviewQueue(w http.ResponseWriter, r *http.Request) {
+	q, err := s.store.ReviewQueue(r.Context(), currentUser(r).ID, locale(r),
+		intParam(r, "limit", 20, 1, 100), intParam(r, "new", 0, 0, 50))
+	if err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, q)
+}
+
+// progress takes ?tz= (an IANA zone like Europe/Berlin) so days follow the
+// user's calendar; anything unknown falls back to UTC.
+func (s *Server) progress(w http.ResponseWriter, r *http.Request) {
+	loc, err := time.LoadLocation(r.URL.Query().Get("tz"))
+	if err != nil {
+		loc = time.UTC
+	}
+	p, err := s.store.UserProgress(r.Context(), currentUser(r).ID, loc)
+	if err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, p)
+}
+
 func (s *Server) addBugReport(w http.ResponseWriter, r *http.Request) {
 	id, ok := pathID(w, r)
 	if !ok {
@@ -355,6 +506,63 @@ func (s *Server) createMaterial(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, http.StatusCreated, m)
+}
+
+func (s *Server) updateMaterial(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(w, r)
+	if !ok {
+		return
+	}
+	var body store.NewMaterial
+	if !decode(w, r, &body) {
+		return
+	}
+	m, err := s.store.UpdateMaterial(r.Context(), id, body)
+	if err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, m)
+}
+
+func (s *Server) deleteMaterial(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(w, r)
+	if !ok {
+		return
+	}
+	if err := s.store.DeleteMaterial(r.Context(), id); err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	w.WriteHeader(http.StatusNoContent)
+}
+
+func (s *Server) listBugReports(w http.ResponseWriter, r *http.Request) {
+	rs, err := s.store.BugReports(r.Context(), r.URL.Query().Get("status"))
+	if err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, rs)
+}
+
+func (s *Server) setBugReportStatus(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(w, r)
+	if !ok {
+		return
+	}
+	var body struct {
+		Status string `json:"status"`
+	}
+	if !decode(w, r, &body) {
+		return
+	}
+	rep, err := s.store.SetBugReportStatus(r.Context(), id, body.Status)
+	if err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, rep)
 }
 
 func (s *Server) adminStats(w http.ResponseWriter, r *http.Request) {

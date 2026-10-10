@@ -25,7 +25,10 @@
     "toggleTheme": "Toggle light/dark mode",
     "userMenu": "Account",
     "scrollDown": "Scroll down",
-    "admin": "Admin"
+    "admin": "Admin",
+    "account": "Account",
+    "review": "Review",
+    "progress": "Progress"
   },
   "auth": {
     "loginTitle": "Log in",
@@ -35,7 +38,34 @@
     "loginFailed": "Invalid email or password",
     "hint": "Demo login: demo@example.com / password",
     "emailInvalid": "Enter a valid email address",
-    "passwordRequired": "Password is required"
+    "passwordRequired": "Password is required",
+    "name": "Name",
+    "nameRequired": "Enter your name",
+    "signUp": "Create account",
+    "signUpTitle": "Create account",
+    "createAccount": "Create an account",
+    "haveAccount": "Already have an account?",
+    "forgotPassword": "Forgot password?",
+    "forgotTitle": "Reset password",
+    "forgotIntro": "Enter your account's email and we'll send you a link to choose a new password.",
+    "sendResetLink": "Send reset link",
+    "resetSent": "If an account exists for that email, a reset link is on its way. It works for one hour.",
+    "backToLogin": "Back to log in",
+    "resetTitle": "Choose a new password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm password",
+    "currentPassword": "Current password",
+    "setPassword": "Set password",
+    "resetDone": "Your password was changed. You can log in now.",
+    "resetLinkInvalid": "This reset link is incomplete. Open the link from the email again, or request a new one.",
+    "requestNewLink": "Request a new link",
+    "changePassword": "Change password",
+    "passwordChanged": "Password changed. Other devices were logged out.",
+    "passwordRules": "Use 8 to 72 characters",
+    "passwordsDiffer": "Passwords don't match",
+    "emailTaken": "An account with this email already exists. Try logging in instead.",
+    "tooManyAttempts": "Too many attempts. Wait a minute and try again.",
+    "genericError": "Something went wrong. Please try again."
   },
   "home": {
     "questionOfTheDay": "Question of the Day",
@@ -119,7 +149,15 @@
       "submit": "Report bug",
       "success": "Thanks! Your report was filed.",
       "required": "Please describe the problem"
-    }
+    },
+    "pickAll": "pick all that apply",
+    "orderHint": "move the steps into the right order",
+    "belongsAt": "✕ belongs at [{{n}}]",
+    "moveUp": "Move “{{item}}” up",
+    "moveDown": "Move “{{item}}” down",
+    "predictOutput": "what does this print?",
+    "outputPlaceholder": "type the exact output, one line per line printed",
+    "expectedOutput": "expected output"
   },
   "builder": {
     "title": "Build a Test",
@@ -222,12 +260,18 @@
     "tab": {
       "question": "New question",
       "material": "New material",
-      "stats": "Stats"
+      "stats": "Stats",
+      "questions": "Questions",
+      "materials": "Materials",
+      "bugs": "Bug reports"
     },
     "questionType": "Question type",
     "type": {
       "multiple-choice": "Multiple choice",
-      "true-false": "True / False"
+      "true-false": "True / False",
+      "multi-select": "Pick all that apply",
+      "ordering": "Ordering",
+      "output": "Predict the output"
     },
     "prompt": "Prompt",
     "options": "Options",
@@ -288,10 +332,109 @@
       "noAnswersYet": "No answers recorded yet"
     },
     "codeHint": "code: wrap a block in ```go … ``` (or sql, cs, ts…), and `inline code` in backticks",
-    "preview": "Preview"
+    "preview": "Preview",
+    "questionUpdated": "Question saved.",
+    "materialUpdated": "Material saved.",
+    "saveChanges": "Save changes",
+    "editQuestion": "Edit question",
+    "editMaterial": "Edit material",
+    "edit": "Edit",
+    "editLabel": "Edit {{label}}",
+    "delete": "Delete",
+    "deleteLabel": "Delete {{label}}",
+    "confirmDelete": "Delete for good?",
+    "prevPage": "Previous",
+    "nextPage": "Next",
+    "bugs": {
+      "filter": "Filter by status",
+      "empty": "No reports here.",
+      "reportedBy": "reported by {{name}} on {{date}}",
+      "editQuestion": "Edit question",
+      "markReviewed": "Mark reviewed",
+      "close": "Close",
+      "reopen": "Reopen",
+      "openCount_one": "{{count}} open report",
+      "openCount_other": "{{count}} open reports",
+      "status": {
+        "open": "Open",
+        "reviewed": "Reviewed",
+        "closed": "Closed",
+        "all": "All"
+      }
+    },
+    "items": "Items",
+    "orderingHint": "enter the items in the correct order; learners see them shuffled",
+    "multiSelectHint": "tick every correct option",
+    "code": "Code",
+    "codeLanguage": "Language",
+    "runnableHint": "js runs in the browser, go in the Go Playground; learners can run it after answering",
+    "notRunnableHint": "this language can't be run, so learners only predict",
+    "expectedOutput": "Expected output",
+    "runToFill": "Run to fill expected output"
   },
   "code": {
     "copy": "Copy code",
     "copied": "Copied"
+  },
+  "account": {
+    "title": "Account",
+    "role": {
+      "admin": "admin",
+      "user": "member"
+    }
+  },
+  "review": {
+    "title": "Review",
+    "subtitle": "Spaced repetition: questions come back just before you'd forget them. Correct answers wait longer each time; misses come back in minutes.",
+    "nextReview": "· next review {{when}}",
+    "allDone": "Nothing to review right now",
+    "allDoneHint": "Every question you've answered is scheduled for later. Come back when reviews are due, or start on new questions.",
+    "learnNew_one": "Learn {{count}} new question",
+    "learnNew_other": "Learn {{count}} new questions",
+    "sessionDone": "Session complete",
+    "sessionScore": "{{correct}} of {{total}} correct. Each answer has been rescheduled.",
+    "checkAgain": "Check for more reviews",
+    "seeProgress": "See your progress",
+    "position": "Question {{n}} of {{total}}",
+    "new": "new",
+    "progressLabel": "Session progress",
+    "next": "Next",
+    "finish": "Finish",
+    "dueBadge_one": "{{count}} review due",
+    "dueBadge_other": "{{count}} reviews due"
+  },
+  "progress": {
+    "title": "Progress",
+    "covered": "Covered",
+    "percentOfBank": "{{pct}}% of all questions",
+    "accuracy": "Accuracy",
+    "answersCount_one": "{{count}} answer",
+    "answersCount_other": "{{count}} answers",
+    "dueNow": "Reviews due",
+    "startReview": "Start reviewing",
+    "nothingDue": "All caught up",
+    "streak": "Streak",
+    "days_one": "{{count}} day",
+    "days_other": "{{count}} days",
+    "streakHint": "days in a row with an answer",
+    "activity": "Last 30 days",
+    "activityLabel": "Answers per day over the last 30 days, with the correct share highlighted",
+    "correct": "correct",
+    "wrong": "wrong",
+    "today": "today",
+    "upcoming": "Reviews coming up",
+    "byTopic": "By topic",
+    "topic": "Topic",
+    "notStarted": "not started"
+  },
+  "runner": {
+    "run": "Run",
+    "runAgain": "Run again",
+    "running": "Running…",
+    "output": "output",
+    "noOutput": "(no output)",
+    "predictFirst": "Run unlocks after you answer: predict first",
+    "goNote": "runs in the Go Playground",
+    "failed": "Couldn't run the code."
   }
 }

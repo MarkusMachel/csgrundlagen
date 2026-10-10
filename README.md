@@ -62,8 +62,19 @@ npm run dev:real     # web on :5173 with mocks off; /api is proxied to :8080
 ```
 
 The real database starts **empty** (no seed data). The mock demo accounts don't
-exist there; create users with `api:adduser`, which bcrypt-hashes the password
-(it can also read `ADDUSER_PASSWORD` to keep it out of shell history).
+exist there: people sign up at `/signup`, or you create users (including admins)
+with `api:adduser`, which bcrypt-hashes the password (it can also read
+`ADDUSER_PASSWORD` to keep it out of shell history).
+
+**Password reset emails**: there is no mail provider yet, so the API writes each
+reset link to its log instead (`npm run logs`, look for `Reset your password`).
+Links work once and expire after an hour. Set `APP_BASE_URL` to the site's public
+origin so the links point at the right host.
+
+**Running code**: "predict the output" questions can be run after answering.
+JavaScript runs in a sandboxed Web Worker in the browser; Go is sent by the API
+to the official Go Playground (`go.dev/_/compile`). Set `GO_PLAYGROUND_URL=off`
+to disable that, or point it at your own playground.
 
 ## Scripts
 
@@ -104,6 +115,20 @@ internal/httpapi routes, auth middleware, handlers, integration tests
   bearer token; only its SHA-256 is stored (`sessions` table, 30-day expiry).
   `POST /api/auth/logout` revokes it. Admin-only routes return **403** for other
   users, matching the mock.
+- **Accounts**: `POST /api/auth/signup` (logs straight in), `POST /api/auth/password`
+  (change; ends the user's other sessions), `POST /api/auth/password-reset` (always
+  202, so it can't reveal who has an account) and `…/password-reset/confirm`
+  (single-use, 1-hour token; ends all sessions). Login, sign-up, reset and code
+  runs are rate-limited to 20 requests per minute per IP and endpoint.
+- **Question types**: `multiple-choice`, `true-false`, `multi-select` (several
+  correct options), `ordering` (options carry a correct position) and `output`
+  (code + language + expected output). Grading lives in
+  `internal/store/grading.go`, mirrored by `apps/web/src/features/questions/grading.ts`.
+- **Spaced repetition**: every answer updates `review_schedule` with a simplified
+  SM-2 (`internal/store/review.go`); `GET /api/review/queue` serves what's due and
+  `GET /api/me/progress?tz=…` the progress page.
+- **Admin**: `PUT`/`DELETE` on `/api/questions/{id}` and `/api/materials/{id}`, and
+  the bug-report queue at `GET`/`PATCH /api/admin/bug-reports`.
 - **Migrations**: numbered files in `internal/db/migrations`, embedded in the
   binary and applied in order on startup, each recorded in `schema_migrations`.
   Never edit an applied file — add the next number.
@@ -113,6 +138,12 @@ internal/httpapi routes, auth middleware, handlers, integration tests
     custom tests + attempts).
   - `0002_views.sql` — read-only views for the aggregates (per-question stats,
     weak spots, admin stats), handy in DBeaver.
+  - `0003_code_fences.sql` — documents the ```` ``` ```` code format on the text
+    columns and converts old "Go:"/"SQL:" explanation trailers.
+  - `0004_merge_tags.sql` — folds ~120 ad-hoc tags into 17 shared ones.
+  - `0005_accounts.sql` — password reset tokens.
+  - `0006_review_schedule.sql` — spaced-repetition state, backfilled from answers.
+  - `0007_question_types.sql` — multi-select, ordering and output questions.
 - **Tests**: `go test ./...` creates a throwaway database next to
   `DATABASE_URL`, migrates it, drives every endpoint over HTTP, then drops it.
   It skips itself if Postgres isn't reachable.

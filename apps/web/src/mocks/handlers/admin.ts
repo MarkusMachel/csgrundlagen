@@ -1,11 +1,11 @@
 import { http, HttpResponse } from 'msw';
 
 import type { AdminStats } from '@/features/authoring/statsTypes';
+import type { AdminBugReport } from '@/features/authoring/types';
+import type { BugReport } from '@/features/questions/types';
 
 import { db } from '../db';
 import { currentUser, forbidden, unauthorized } from './utils';
-import { seedUsers } from '../seed/users';
-
 
 const DIFFICULTY_ORDER = ['easy', 'medium', 'hard', 'unspecified'];
 
@@ -48,7 +48,7 @@ export const adminHandlers = [
       totals: {
         questions: db.questions.length,
         materials: db.materials.length,
-        users: seedUsers.length,
+        users: db.users.length,
         tests: db.tests.length,
         testAttempts: db.attempts.length,
         answersSubmitted,
@@ -60,7 +60,9 @@ export const adminHandlers = [
       // Ordinal, not alphabetical: easy → medium → hard → unspecified.
       questionsByDifficulty: [...questionsByDifficulty]
         .map(([difficulty, count]) => ({ difficulty, count }))
-        .sort((a, b) => DIFFICULTY_ORDER.indexOf(a.difficulty) - DIFFICULTY_ORDER.indexOf(b.difficulty)),
+        .sort(
+          (a, b) => DIFFICULTY_ORDER.indexOf(a.difficulty) - DIFFICULTY_ORDER.indexOf(b.difficulty),
+        ),
       materialsByType: [...materialsByType].map(([type, count]) => ({ type, count })),
       answersByTag: [...tagAnswerCounts]
         .map(([tag, count]) => ({ tag, count }))
@@ -71,4 +73,42 @@ export const adminHandlers = [
 
     return HttpResponse.json(stats);
   }),
+
+  http.get('/api/admin/bug-reports', ({ request }) => {
+    const user = currentUser(request);
+    if (!user) return unauthorized();
+    if (user.role !== 'admin') return forbidden();
+    const status = new URL(request.url).searchParams.get('status');
+    const reports = db.bugReports
+      .filter((r) => !status || r.status === status)
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+      .map(withContext);
+    return HttpResponse.json(reports);
+  }),
+
+  http.patch('/api/admin/bug-reports/:id', async ({ request, params }) => {
+    const user = currentUser(request);
+    if (!user) return unauthorized();
+    if (user.role !== 'admin') return forbidden();
+    const { status } = (await request.json()) as { status: BugReport['status'] };
+    if (!['open', 'reviewed', 'closed'].includes(status)) {
+      return HttpResponse.json(
+        { message: 'status must be open, reviewed or closed' },
+        { status: 400 },
+      );
+    }
+    const report = db.bugReports.find((r) => r.id === params.id);
+    if (!report) return HttpResponse.json({ message: 'Not found' }, { status: 404 });
+    report.status = status;
+    return HttpResponse.json(withContext(report));
+  }),
 ];
+
+/** Adds the question prompt and reporter name, like the Go API's admin view. */
+function withContext(r: BugReport): AdminBugReport {
+  return {
+    ...r,
+    questionPrompt: db.questions.find((s) => s.question.id === r.questionId)?.question.prompt ?? '',
+    userName: db.users.find((u) => u.id === r.userId)?.name ?? '',
+  };
+}

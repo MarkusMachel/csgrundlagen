@@ -24,7 +24,11 @@ export function StatusBar() {
 
   const file =
     routeFiles[pathname] ??
-    (pathname.startsWith('/tests/') ? 'attempt.cs' : pathname.startsWith('/questions/') ? 'question.cs' : '—');
+    (pathname.startsWith('/tests/')
+      ? 'attempt.cs'
+      : pathname.startsWith('/questions/')
+        ? 'question.cs'
+        : '—');
 
   return (
     <footer className="statusbar" data-testid="status-bar">

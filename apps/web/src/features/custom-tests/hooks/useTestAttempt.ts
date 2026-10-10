@@ -42,5 +42,12 @@ export const useTestAttemptStore = create<TestAttemptState>()((set) => ({
   setAnswer: (questionId, answer) =>
     set((s) => ({ answers: { ...s.answers, [questionId]: answer } })),
   reset: () =>
-    set({ testId: null, mode: null, questionIds: null, answers: {}, shuffleSeed: 0, startedAt: null }),
+    set({
+      testId: null,
+      mode: null,
+      questionIds: null,
+      answers: {},
+      shuffleSeed: 0,
+      startedAt: null,
+    }),
 }));

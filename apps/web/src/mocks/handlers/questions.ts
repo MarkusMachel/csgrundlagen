@@ -1,10 +1,11 @@
 import { http, HttpResponse } from 'msw';
 
+import { correctAnswerOf, isAnswerCorrect } from '@/features/questions/grading';
 import type { AnswerStat, AnswerValue, Question } from '@/features/questions/types';
 import type { MultipleChoiceOption } from '@/features/questions/types';
 import { isWeakStat } from '@/features/weak-spots';
 
-import { db, nextId, recordAnswer } from '../db';
+import { ANSWERS_BUCKET, db, nextId, recordAnswer, statKeys } from '../db';
 import {
   allQuestions,
   currentUser,
@@ -22,12 +23,12 @@ interface CreateQuestionBody {
   explanation: string;
   options?: MultipleChoiceOption[];
   correctOptionId?: string;
+  correctOptionIds?: string[];
   correctAnswer?: boolean;
+  code?: string;
+  codeLanguage?: string;
+  expectedOutput?: string;
   relatedMaterialIds?: string[];
-}
-
-function correctAnswerOf(question: Question): AnswerValue {
-  return question.type === 'multiple-choice' ? question.correctOptionId : question.correctAnswer;
 }
 
 export const questionHandlers = [
@@ -56,7 +57,11 @@ export const questionHandlers = [
   http.get('/api/questions', ({ request }) => {
     const url = new URL(request.url);
     const page = Math.max(1, Number(url.searchParams.get('page') ?? '1'));
-    const pageSize = Math.min(50, Math.max(1, Number(url.searchParams.get('pageSize') ?? '10')));
+    const ids = (url.searchParams.get('ids') ?? '').split(',').filter(Boolean);
+    const pageSize = Math.min(
+      Math.max(50, ids.length),
+      Math.max(1, Number(url.searchParams.get('pageSize') ?? '10')),
+    );
     const tags = url.searchParams.getAll('tags').filter(Boolean);
     const search = (url.searchParams.get('search') ?? '').trim().toLowerCase();
     const difficulties = url.searchParams.getAll('difficulty');
@@ -64,6 +69,12 @@ export const questionHandlers = [
     const sort = url.searchParams.get('sort');
 
     let items = allQuestions(localeOf(request));
+    if (ids.length > 0) {
+      // a specific set, e.g. a test's questions, in the order asked for
+      items = ids
+        .map((id) => items.find((q) => q.id === id))
+        .filter((q): q is Question => q !== undefined);
+    }
     if (tags.length > 0) {
       items = items.filter((q) => tags.some((t) => q.tags.includes(t)));
     }
@@ -128,9 +139,14 @@ export const questionHandlers = [
 
     const { answer } = (await request.json()) as { answer: AnswerValue };
     const correctAnswer = correctAnswerOf(question);
-    const correct = answer === correctAnswer;
-    recordAnswer(user.id, question.id, String(answer), correct);
-    return HttpResponse.json({ questionId: question.id, correct, correctAnswer });
+    const correct = isAnswerCorrect(question, answer);
+    const nextReviewAt = recordAnswer(
+      user.id,
+      question.id,
+      statKeys(question, answer, correct),
+      correct,
+    );
+    return HttpResponse.json({ questionId: question.id, correct, correctAnswer, nextReviewAt });
   }),
 
   http.get('/api/questions/:id/comments', ({ params }) => {
@@ -190,13 +206,23 @@ export const questionHandlers = [
     if (!question) return HttpResponse.json({ message: 'Question not found' }, { status: 404 });
     const counts = db.answerCounts[question.id] ?? {};
     const optionEntries =
-      question.type === 'multiple-choice'
+      question.type === 'multiple-choice' || question.type === 'multi-select'
         ? question.options.map((o) => ({ optionId: o.id, label: `${o.id}` }))
-        : [
-            { optionId: 'true', label: 'True' },
-            { optionId: 'false', label: 'False' },
-          ];
-    const totalResponses = Object.values(counts).reduce((a, b) => a + b, 0);
+        : question.type === 'true-false'
+          ? [
+              { optionId: 'true', label: 'True' },
+              { optionId: 'false', label: 'False' },
+            ]
+          : [
+              { optionId: 'correct', label: 'Correct' },
+              { optionId: 'incorrect', label: 'Incorrect' },
+            ];
+    // One multi-select answer picks several options, so its total is kept in
+    // its own bucket instead of summing the picks.
+    const totalResponses =
+      question.type === 'multi-select'
+        ? (counts[ANSWERS_BUCKET] ?? 0)
+        : Object.values(counts).reduce((a, b) => a + b, 0);
     const distribution: AnswerStat[] = optionEntries.map(({ optionId, label }) => {
       const count = counts[optionId] ?? 0;
       return {
@@ -267,31 +293,94 @@ export const questionHandlers = [
     if (!user) return unauthorized();
     if (user.role !== 'admin') return forbidden();
     const body = (await request.json()) as CreateQuestionBody;
-    const id = nextId('q');
-    const base = {
-      id,
-      prompt: body.prompt,
-      tags: body.tags,
-      difficulty: body.difficulty,
-      explanation: body.explanation,
-    };
-    const question: Question =
-      body.type === 'multiple-choice'
-        ? {
-            ...base,
-            type: 'multiple-choice',
-            options: body.options ?? [],
-            correctOptionId: body.correctOptionId ?? 'A',
-          }
-        : { ...base, type: 'true-false', correctAnswer: body.correctAnswer ?? true };
+    const question = buildQuestion(nextId('q'), body);
     db.questions.push({ question });
-    // optional linking: attach this question to existing materials
-    for (const materialId of body.relatedMaterialIds ?? []) {
-      const material = db.materials.find((m) => m.id === materialId);
-      if (material) {
-        material.relatedQuestionIds = [...(material.relatedQuestionIds ?? []), id];
-      }
-    }
+    linkMaterials(question.id, body.relatedMaterialIds ?? []);
     return HttpResponse.json(question, { status: 201 });
   }),
+
+  http.put('/api/questions/:id', async ({ request, params }) => {
+    const user = currentUser(request);
+    if (!user) return unauthorized();
+    if (user.role !== 'admin') return forbidden();
+    const seed = db.questions.find((s) => s.question.id === params.id);
+    if (!seed) return HttpResponse.json({ message: 'Not found' }, { status: 404 });
+    const body = (await request.json()) as CreateQuestionBody;
+    seed.question = buildQuestion(seed.question.id, body);
+    seed.translations = undefined; // the content changed, so old translations no longer apply
+    linkMaterials(seed.question.id, body.relatedMaterialIds ?? []);
+    return HttpResponse.json(seed.question);
+  }),
+
+  // Cascades like the database: answers, bookmarks, notes, comments, reports
+  // and test membership go with the question.
+  http.delete('/api/questions/:id', ({ request, params }) => {
+    const user = currentUser(request);
+    if (!user) return unauthorized();
+    if (user.role !== 'admin') return forbidden();
+    const id = String(params.id);
+    if (!db.questions.some((s) => s.question.id === id)) {
+      return HttpResponse.json({ message: 'Not found' }, { status: 404 });
+    }
+    const keep = <T extends { questionId: string }>(xs: T[]) =>
+      xs.filter((x) => x.questionId !== id);
+    db.questions = db.questions.filter((s) => s.question.id !== id);
+    db.bookmarks = keep(db.bookmarks);
+    db.notes = keep(db.notes);
+    db.comments = keep(db.comments);
+    db.bugReports = keep(db.bugReports);
+    db.userQuestionStats = keep(db.userQuestionStats);
+    delete db.answerCounts[id];
+    for (const test of db.tests) test.questionIds = test.questionIds.filter((q) => q !== id);
+    linkMaterials(id, []);
+    return new HttpResponse(null, { status: 204 });
+  }),
 ];
+
+function buildQuestion(id: string, body: CreateQuestionBody): Question {
+  const base = {
+    id,
+    prompt: body.prompt,
+    tags: body.tags,
+    difficulty: body.difficulty,
+    explanation: body.explanation,
+  };
+  const options = body.options ?? [];
+  switch (body.type) {
+    case 'multiple-choice':
+      return {
+        ...base,
+        type: 'multiple-choice',
+        options,
+        correctOptionId: body.correctOptionId ?? 'A',
+      };
+    case 'multi-select':
+      return {
+        ...base,
+        type: 'multi-select',
+        options,
+        correctOptionIds: body.correctOptionIds ?? [],
+      };
+    case 'ordering': // options arrive in the correct order
+      return { ...base, type: 'ordering', options, correctOrder: options.map((o) => o.id) };
+    case 'output':
+      return {
+        ...base,
+        type: 'output',
+        code: body.code ?? '',
+        codeLanguage: body.codeLanguage ?? 'js',
+        expectedOutput: body.expectedOutput ?? '',
+      };
+    default:
+      return { ...base, type: 'true-false', correctAnswer: body.correctAnswer ?? true };
+  }
+}
+
+/** Makes exactly these materials link to the question (optional linking). */
+function linkMaterials(questionId: string, materialIds: string[]) {
+  for (const material of db.materials) {
+    const others = (material.relatedQuestionIds ?? []).filter((q) => q !== questionId);
+    const linked = materialIds.includes(material.id) ? [...others, questionId] : others;
+    material.relatedQuestionIds = linked.length > 0 ? linked : undefined;
+  }
+}

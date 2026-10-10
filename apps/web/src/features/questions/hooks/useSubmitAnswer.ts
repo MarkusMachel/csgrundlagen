@@ -15,6 +15,8 @@ export function useSubmitAnswer(questionId: string) {
       recordAnswerResult(result.correct); // feeds the status-bar streak
       void queryClient.invalidateQueries({ queryKey: ['questionStats', questionId] });
       void queryClient.invalidateQueries({ queryKey: ['questions', 'weak'] });
+      void queryClient.invalidateQueries({ queryKey: ['progress'] });
+      void queryClient.invalidateQueries({ queryKey: ['reviewSummary'] });
     },
   });
 }

@@ -10,6 +10,7 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+	_ "time/tzdata" // the distroless image has no zoneinfo; progress needs user time zones
 
 	"github.com/markusmachel/csgrundlagen/apps/api/internal/config"
 	"github.com/markusmachel/csgrundlagen/apps/api/internal/db"
@@ -42,7 +43,7 @@ func run(log *slog.Logger) error {
 
 	srv := &http.Server{
 		Addr:              cfg.Addr,
-		Handler:           httpapi.New(store.New(pool), log),
+		Handler:           httpapi.New(store.New(pool), log, httpapi.Options{BaseURL: cfg.BaseURL, GoPlaygroundURL: cfg.GoPlaygroundURL}),
 		ReadHeaderTimeout: 5 * time.Second,
 		ReadTimeout:       15 * time.Second,
 		WriteTimeout:      30 * time.Second,

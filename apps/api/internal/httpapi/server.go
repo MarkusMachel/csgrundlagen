@@ -17,25 +17,67 @@ import (
 )
 
 type Server struct {
-	store *store.Store
-	log   *slog.Logger
+	store       *store.Store
+	log         *slog.Logger
+	opts        Options
+	authLimiter *rateLimiter
+	httpClient  *http.Client
 }
 
-func New(st *store.Store, log *slog.Logger) http.Handler {
-	s := &Server{store: st, log: log}
+// Options configures the parts of the server that differ between
+// environments. Zero values get sensible defaults.
+type Options struct {
+	// BaseURL is the web app's public origin, used to build links in emails
+	// (default http://localhost:3000).
+	BaseURL string
+	// Mailer sends password reset links (default: LogMailer).
+	Mailer Mailer
+	// AuthRatePerMinute caps login, sign-up, reset and code-run requests per
+	// client IP and endpoint (default 20; negative disables the limit).
+	AuthRatePerMinute int
+	// GoPlaygroundURL is where Go snippets are run (default: the official Go
+	// Playground); "off" disables running Go.
+	GoPlaygroundURL string
+}
+
+func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
+	if opts.BaseURL == "" {
+		opts.BaseURL = "http://localhost:3000"
+	}
+	opts.BaseURL = strings.TrimRight(opts.BaseURL, "/")
+	if opts.Mailer == nil {
+		opts.Mailer = LogMailer{Log: log}
+	}
+	if opts.AuthRatePerMinute == 0 {
+		opts.AuthRatePerMinute = 20
+	}
+	if opts.GoPlaygroundURL == "" {
+		opts.GoPlaygroundURL = DefaultGoPlaygroundURL
+	}
+	s := &Server{
+		store: st, log: log, opts: opts,
+		authLimiter: newRateLimiter(opts.AuthRatePerMinute),
+		httpClient:  &http.Client{Timeout: runCallTimeout},
+	}
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("GET /healthz", s.health)
 
-	mux.HandleFunc("POST /api/auth/login", s.login)
+	mux.HandleFunc("POST /api/auth/login", s.limited(s.login))
+	mux.HandleFunc("POST /api/auth/signup", s.limited(s.signup))
 	mux.HandleFunc("POST /api/auth/logout", s.logout)
 	mux.HandleFunc("GET /api/auth/me", s.authed(s.me))
+	mux.HandleFunc("POST /api/auth/password", s.limited(s.authed(s.changePassword)))
+	mux.HandleFunc("POST /api/auth/password-reset", s.limited(s.requestPasswordReset))
+	mux.HandleFunc("POST /api/auth/password-reset/confirm", s.limited(s.confirmPasswordReset))
 
 	mux.HandleFunc("GET /api/questions", s.listQuestions)
 	mux.HandleFunc("POST /api/questions", s.admin(s.createQuestion))
 	mux.HandleFunc("GET /api/questions/daily", s.dailyQuestion)
 	mux.HandleFunc("GET /api/questions/weak", s.authed(s.weakQuestions))
 	mux.HandleFunc("GET /api/questions/{id}", s.getQuestion)
+	mux.HandleFunc("PUT /api/questions/{id}", s.admin(s.updateQuestion))
+	mux.HandleFunc("DELETE /api/questions/{id}", s.admin(s.deleteQuestion))
 	mux.HandleFunc("POST /api/questions/{id}/submit", s.authed(s.submitAnswer))
 	mux.HandleFunc("GET /api/questions/{id}/comments", s.listComments)
 	mux.HandleFunc("POST /api/questions/{id}/comments", s.authed(s.addComment))
@@ -47,6 +89,9 @@ func New(st *store.Store, log *slog.Logger) http.Handler {
 	mux.HandleFunc("POST /api/questions/{id}/bookmark", s.authed(s.toggleBookmark))
 
 	mux.HandleFunc("GET /api/bookmarks", s.authed(s.bookmarks))
+	mux.HandleFunc("GET /api/review/queue", s.authed(s.reviewQueue))
+	mux.HandleFunc("GET /api/me/progress", s.authed(s.progress))
+	mux.HandleFunc("POST /api/run", s.limited(s.authed(s.run)))
 	mux.HandleFunc("GET /api/tags", s.tags)
 	mux.HandleFunc("GET /api/search", s.search)
 
@@ -59,8 +104,12 @@ func New(st *store.Store, log *slog.Logger) http.Handler {
 
 	mux.HandleFunc("GET /api/materials", s.listMaterials)
 	mux.HandleFunc("POST /api/materials", s.admin(s.createMaterial))
+	mux.HandleFunc("PUT /api/materials/{id}", s.admin(s.updateMaterial))
+	mux.HandleFunc("DELETE /api/materials/{id}", s.admin(s.deleteMaterial))
 
 	mux.HandleFunc("GET /api/admin/stats", s.admin(s.adminStats))
+	mux.HandleFunc("GET /api/admin/bug-reports", s.admin(s.listBugReports))
+	mux.HandleFunc("PATCH /api/admin/bug-reports/{id}", s.admin(s.setBugReportStatus))
 
 	mux.HandleFunc("/api/", func(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusNotFound, "Not found")
@@ -183,11 +232,14 @@ func decode(w http.ResponseWriter, r *http.Request, v any) bool {
 // and reported as a 500 without leaking details.
 func (s *Server) fail(w http.ResponseWriter, r *http.Request, err error) {
 	var invalid store.ErrInvalid
+	var conflict store.ErrConflict
 	switch {
 	case errors.Is(err, store.ErrNotFound):
 		writeError(w, http.StatusNotFound, "Not found")
 	case errors.As(err, &invalid):
 		writeError(w, http.StatusBadRequest, invalid.Msg)
+	case errors.As(err, &conflict):
+		writeError(w, http.StatusConflict, conflict.Msg)
 	case errors.Is(err, store.ErrBadCredentials):
 		writeError(w, http.StatusUnauthorized, "Invalid email or password")
 	default:

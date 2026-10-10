@@ -4,12 +4,12 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
-import type { MaterialType } from '@/features/materials';
+import type { MaterialItem, MaterialType } from '@/features/materials';
 import { useQuestions, useTags } from '@/features/questions';
 
 import { LinkPicker } from './LinkPicker';
 import { TagInput } from './TagInput';
-import { useCreateMaterial } from '../hooks/useAuthoring';
+import { useCreateMaterial, useUpdateMaterial } from '../hooks/useAuthoring';
 
 const MATERIAL_TYPES: MaterialType[] = ['book', 'video', 'article', 'link'];
 
@@ -25,28 +25,38 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
-export function MaterialForm({ onCreated }: { onCreated?: (id: string) => void }) {
+interface MaterialFormProps {
+  /** Edit this material instead of creating a new one. */
+  material?: MaterialItem;
+  onSaved?: (id: string) => void;
+  /** Shows a Cancel button (edit mode). */
+  onCancel?: () => void;
+}
+
+export function MaterialForm({ material, onSaved, onCancel }: MaterialFormProps) {
   const { t } = useTranslation();
   const successId = useId();
   const createMaterial = useCreateMaterial();
+  const updateMaterial = useUpdateMaterial();
+  const save = material ? updateMaterial : createMaterial;
   const { data: tags } = useTags();
   const { data: questionsData } = useQuestions({ page: 1, pageSize: 50 });
 
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
-      type: 'article',
-      title: '',
-      url: '',
-      author: '',
-      description: '',
-      tags: [],
-      relatedQuestionIds: [],
+      type: material?.type ?? 'article',
+      title: material?.title ?? '',
+      url: material?.url ?? '',
+      author: material?.author ?? '',
+      description: material?.description ?? '',
+      tags: material?.tags ?? [],
+      relatedQuestionIds: material?.relatedQuestionIds ?? [],
     },
   });
 
   const onSubmit = form.handleSubmit(async (values) => {
-    const created = await createMaterial.mutateAsync({
+    const input = {
       type: values.type,
       title: values.title,
       url: values.url,
@@ -54,9 +64,19 @@ export function MaterialForm({ onCreated }: { onCreated?: (id: string) => void }
       description: values.description || undefined,
       tags: values.tags,
       relatedQuestionIds: values.relatedQuestionIds,
-    });
-    form.reset();
-    onCreated?.(created.id);
+    };
+    try {
+      if (material) {
+        const updated = await updateMaterial.mutateAsync({ id: material.id, input });
+        onSaved?.(updated.id);
+      } else {
+        const created = await createMaterial.mutateAsync(input);
+        form.reset();
+        onSaved?.(created.id);
+      }
+    } catch {
+      // rendered from save.isError
+    }
   });
 
   const err = form.formState.errors;
@@ -128,28 +148,30 @@ export function MaterialForm({ onCreated }: { onCreated?: (id: string) => void }
         )}
       />
 
-      {createMaterial.isError && (
+      {save.isError && (
         <div className="alert alert--error" role="alert">
           {t('authoring.saveError')}
         </div>
       )}
-      {createMaterial.isSuccess && (
+      {save.isSuccess && (
         <div className="alert alert--success" id={successId} role="status">
-          {t('authoring.materialCreated')}
+          {material ? t('authoring.materialUpdated') : t('authoring.materialCreated')}
         </div>
       )}
 
-      <button
-        type="submit"
-        className="btn btn--primary"
-        disabled={createMaterial.isPending}
-        style={{ alignSelf: 'flex-start' }}
-      >
-        <span className="prompt-char" aria-hidden>
-          $
-        </span>
-        {t('authoring.createMaterial')}
-      </button>
+      <div className="hstack" style={{ gap: 10 }}>
+        <button type="submit" className="btn btn--primary" disabled={save.isPending}>
+          <span className="prompt-char" aria-hidden>
+            $
+          </span>
+          {material ? t('authoring.saveChanges') : t('authoring.createMaterial')}
+        </button>
+        {onCancel && (
+          <button type="button" className="btn btn--ghost" onClick={onCancel}>
+            {t('common.cancel')}
+          </button>
+        )}
+      </div>
     </form>
   );
 }
