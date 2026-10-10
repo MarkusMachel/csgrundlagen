@@ -16,6 +16,7 @@ import { seedComments } from './seed/comments';
 import {
   seedLoginEvents,
   seedSessions,
+  type MockConsent,
   type MockLoginEvent,
   type MockSession,
 } from './seed/devices';
@@ -43,6 +44,8 @@ interface Db {
   loginEvents: MockLoginEvent[];
   /** Ids of signed-out sessions, so they aren't revived (see currentSession). */
   revokedSessions: string[];
+  /** Consent log, oldest first (mirrors consent_records). */
+  consents: MockConsent[];
   /** All questions (seeded + admin-created), with optional translations. */
   questions: SeedQuestion[];
   /** All materials (seeded + admin-created); mutable so links can be added. */
@@ -150,6 +153,7 @@ function freshDb(): Db {
     sessions: seedSessions(),
     loginEvents: seedLoginEvents(),
     revokedSessions: [],
+    consents: [],
     questions: seedQuestions.map((s) => ({
       question: { ...s.question },
       translations: s.translations,

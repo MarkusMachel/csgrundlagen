@@ -25,6 +25,7 @@ describe('sign-up (integration)', () => {
     await user.type(screen.getByLabelText('Email'), 'linus@example.com');
     await user.type(screen.getByLabelText('Password'), 'long enough');
     await user.type(screen.getByLabelText('Confirm password'), 'long enough');
+    await user.click(screen.getByRole('checkbox', { name: /privacy policy/i }));
     await user.click(screen.getByRole('button', { name: 'Create account' }));
 
     expect(await screen.findByText('home')).toBeInTheDocument();
@@ -45,11 +46,13 @@ describe('sign-up (integration)', () => {
     await user.click(screen.getByRole('button', { name: 'Create account' }));
     expect(await screen.findByText('Use 8 to 72 characters')).toBeInTheDocument();
     expect(screen.getByText("Passwords don't match")).toBeInTheDocument();
+    expect(screen.getByText(/accept the privacy policy/)).toBeInTheDocument();
 
     await user.clear(screen.getByLabelText('Password'));
     await user.type(screen.getByLabelText('Password'), 'long enough');
     await user.clear(screen.getByLabelText('Confirm password'));
     await user.type(screen.getByLabelText('Confirm password'), 'long enough');
+    await user.click(screen.getByRole('checkbox', { name: /privacy policy/i }));
     await user.click(screen.getByRole('button', { name: 'Create account' }));
     expect(await screen.findByRole('alert')).toHaveTextContent(/already exists/);
   });

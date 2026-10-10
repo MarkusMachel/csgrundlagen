@@ -131,7 +131,9 @@ function UserDetail({ id, onBack }: { id: string; onBack: () => void }) {
       </div>
     );
 
-  const { user, sessions, events } = detail.data;
+  const { user, sessions, events, consent, privacyAcceptedAt } = detail.data;
+  const day = (iso: string) => new Date(iso).toLocaleDateString(i18n.language);
+  const onOff = (v: boolean) => t(v ? 'privacy.admin.on' : 'privacy.admin.off');
   return (
     <div className="stack" style={{ gap: 18 }}>
       <div>{back}</div>
@@ -159,6 +161,35 @@ function UserDetail({ id, onBack }: { id: string; onBack: () => void }) {
           </button>
         )}
       </div>
+
+      <section className="stack" style={{ gap: 8 }}>
+        <h3 style={{ margin: 0 }}>{t('privacy.admin.consent')}</h3>
+        <dl className="device-facts" style={{ margin: 0 }}>
+          <div>
+            <dt>{t('privacy.admin.policy')}</dt>
+            <dd>
+              {privacyAcceptedAt && user.privacyVersion
+                ? t('privacy.admin.acceptedOn', {
+                    date: day(privacyAcceptedAt),
+                    version: user.privacyVersion,
+                  })
+                : t('privacy.admin.notAccepted')}
+            </dd>
+          </div>
+          <div>
+            <dt>{t('privacy.admin.choice')}</dt>
+            <dd>
+              {consent
+                ? t('privacy.admin.choiceValue', {
+                    preferences: onOff(consent.preferences),
+                    deviceDetails: onOff(consent.deviceDetails),
+                    date: day(consent.createdAt),
+                  })
+                : t('privacy.admin.noChoice')}
+            </dd>
+          </div>
+        </dl>
+      </section>
 
       <section className="stack" style={{ gap: 8 }}>
         <h3 style={{ margin: 0 }}>

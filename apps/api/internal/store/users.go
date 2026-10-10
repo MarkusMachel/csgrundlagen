@@ -25,11 +25,11 @@ var ErrBadCredentials = errors.New("invalid email or password")
 // the same bcrypt work as a wrong password and can't be told apart by timing.
 var dummyHash, _ = bcrypt.GenerateFromPassword([]byte("not-a-real-password"), bcrypt.DefaultCost)
 
-const userSelect = `SELECT u.id, u.name, u.email, u.avatar_url, u.locale::text, u.role::text FROM users u`
+const userSelect = `SELECT u.id, u.name, u.email, u.avatar_url, u.locale::text, u.role::text, u.privacy_version FROM users u`
 
 func scanUser(row interface{ Scan(...any) error }) (User, error) {
 	var u User
-	err := row.Scan(&u.ID, &u.Name, &u.Email, &u.AvatarURL, &u.Locale, &u.Role)
+	err := row.Scan(&u.ID, &u.Name, &u.Email, &u.AvatarURL, &u.Locale, &u.Role, &u.PrivacyVersion)
 	return u, notFound(err)
 }
 
@@ -43,9 +43,9 @@ func (s *Store) Login(ctx context.Context, email, password string, client Client
 	var hash string
 	var u User
 	err := s.pool.QueryRow(ctx, `
-		SELECT u.id, u.name, u.email, u.avatar_url, u.locale::text, u.role::text, u.password_hash
+		SELECT u.id, u.name, u.email, u.avatar_url, u.locale::text, u.role::text, u.privacy_version, u.password_hash
 		FROM users u WHERE lower(u.email) = lower($1)`, strings.TrimSpace(email),
-	).Scan(&u.ID, &u.Name, &u.Email, &u.AvatarURL, &u.Locale, &u.Role, &hash)
+	).Scan(&u.ID, &u.Name, &u.Email, &u.AvatarURL, &u.Locale, &u.Role, &u.PrivacyVersion, &hash)
 	if err != nil {
 		if errors.Is(notFound(err), ErrNotFound) {
 			_ = bcrypt.CompareHashAndPassword(dummyHash, []byte(password))
@@ -154,7 +154,7 @@ func (s *Store) CreateUser(ctx context.Context, name, email, password, role, loc
 		INSERT INTO users (name, email, password_hash, role, locale)
 		VALUES ($1, $2, $3, $4::user_role, $5::locale)
 		ON CONFLICT (email) DO NOTHING
-		RETURNING id, name, email, avatar_url, locale::text, role::text`,
+		RETURNING id, name, email, avatar_url, locale::text, role::text, privacy_version`,
 		name, email, hash, role, NormalizeLocale(locale)))
 	if errors.Is(err, ErrNotFound) {
 		return User{}, ErrConflict{"an account with this email already exists"}
@@ -162,12 +162,18 @@ func (s *Store) CreateUser(ctx context.Context, name, email, password, role, loc
 	return u, err
 }
 
-// SignUp creates a regular (non-admin) account and logs it in.
+// SignUp creates a regular (non-admin) account and logs it in. Signing up
+// means accepting the current privacy policy; callers check the user agreed.
 func (s *Store) SignUp(ctx context.Context, name, email, password, locale string, client Client) (string, User, error) {
 	u, err := s.CreateUser(ctx, name, email, password, "user", locale)
 	if err != nil {
 		return "", User{}, err
 	}
+	if err := s.AcceptPrivacyPolicy(ctx, u.ID, PrivacyPolicyVersion); err != nil {
+		return "", User{}, err
+	}
+	v := PrivacyPolicyVersion
+	u.PrivacyVersion = &v
 	token, err := s.openSession(ctx, u.ID, client)
 	if err == nil {
 		s.recordEvent(ctx, s.pool, u.ID, "signup", client)

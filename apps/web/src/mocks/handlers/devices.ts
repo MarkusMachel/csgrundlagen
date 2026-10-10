@@ -6,6 +6,9 @@ import { db } from '../db';
 import { currentSession, currentUser, forbidden, revokeSessions, unauthorized } from './utils';
 import { parseUserAgent, type MockSession } from '../seed/devices';
 
+export const latestConsent = (userId: string) =>
+  db.consents.filter((c) => c.userId === userId).at(-1);
+
 const notFound = () => HttpResponse.json({ message: 'Not found' }, { status: 404 });
 
 const live = (userId: string) =>
@@ -35,6 +38,7 @@ function adminUser(userId: string): AdminUser | undefined {
     activeSessions: sessions.length,
     devices: (['desktop', 'mobile', 'tablet', 'bot'] as const).filter((d) => devices.has(d)),
     answers: db.answerLog.filter((a) => a.userId === u.id).length,
+    privacyVersion: u.privacyVersion,
     failedLogins24h: db.loginEvents.filter(
       (e) =>
         e.userId === u.id && e.kind === 'login_failed' && new Date(e.createdAt).getTime() > dayAgo,
@@ -61,6 +65,10 @@ export const deviceHandlers = [
   http.post('/api/me/device', async ({ request }) => {
     const session = currentSession(request);
     if (!session) return unauthorized();
+    // like the API: only with device-details consent
+    if (!latestConsent(session.userId)?.deviceDetails) {
+      return HttpResponse.json({ message: 'device details need consent' }, { status: 409 });
+    }
     session.clientInfo = (await request.json()) as ClientInfo;
     return new HttpResponse(null, { status: 204 });
   }),
@@ -85,7 +93,15 @@ export const deviceHandlers = [
       .reverse()
       .slice(0, 50)
       .map(({ userId: _userId, ...e }) => ({ ...e, ...parseUserAgent(e.userAgent) }));
-    return HttpResponse.json({ user, sessions: live(user.id).map((s) => toSession(s)), events });
+    const consent = latestConsent(user.id);
+    return HttpResponse.json({
+      user,
+      sessions: live(user.id).map((s) => toSession(s)),
+      events,
+      consent: consent ? { ...consent, userId: undefined } : null,
+      // the mocks don't track when; signing up is when it happened
+      privacyAcceptedAt: user.privacyVersion ? user.createdAt : undefined,
+    });
   }),
 
   http.delete('/api/admin/users/:id/sessions', ({ request, params }) => {

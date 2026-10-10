@@ -30,6 +30,8 @@ type User struct {
 	AvatarURL *string `json:"avatarUrl,omitempty"`
 	Locale    string  `json:"locale"`
 	Role      string  `json:"role"`
+	// PrivacyVersion is the privacy policy version the user accepted, if any.
+	PrivacyVersion *string `json:"privacyVersion,omitempty"`
 }
 
 func (u User) IsAdmin() bool { return u.Role == "admin" }

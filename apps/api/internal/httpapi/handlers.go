@@ -58,8 +58,14 @@ func (s *Server) signup(w http.ResponseWriter, r *http.Request) {
 		Email    string `json:"email"`
 		Password string `json:"password"`
 		Locale   string `json:"locale"`
+		// AcceptPrivacy must be true: the user agreed to the privacy policy.
+		AcceptPrivacy bool `json:"acceptPrivacy"`
 	}
 	if !decode(w, r, &body) {
+		return
+	}
+	if !body.AcceptPrivacy {
+		writeError(w, http.StatusBadRequest, "please accept the privacy policy to create an account")
 		return
 	}
 	token, user, err := s.store.SignUp(r.Context(), body.Name, body.Email, body.Password, body.Locale, clientOf(r))

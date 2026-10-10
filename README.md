@@ -136,6 +136,20 @@ internal/httpapi routes, auth middleware, handlers, integration tests
   Users list and sign out their own devices (`/api/me/sessions`); admins see
   everyone's under `/api/admin/users`. The API purges expired sessions and
   history older than 90 days hourly.
+- **Privacy (GDPR)**: a first-visit banner offers "Accept all" and "Essential only"
+  side by side, and a settings dialog (linked from every page's status bar) has
+  per-category switches. Essential storage (sign-in token, the choice itself) and
+  security records are always on. "Preferences" decides whether theme and
+  language are remembered. "Device details" decides whether the browser's
+  self-report is stored, and the API refuses `POST /api/me/device` without it.
+  Signed-in users' choices are logged in `consent_records`
+  (`POST /api/me/consent`). Sign-up requires accepting the policy at `/privacy`,
+  and users who haven't read the current version are asked once. The Account
+  page offers a JSON export of everything stored (`GET /api/me/export`) and
+  account deletion (`DELETE /api/me`, password required; the last admin can't
+  delete themselves). Set `PRIVACY_CONTACT` in `.env` so the policy names who runs
+  the instance. Bump `PrivacyPolicyVersion` (Go) and `PRIVACY_POLICY_VERSION`
+  (web) together when the policy text changes.
 - **Migrations**: numbered files in `internal/db/migrations`, embedded in the
   binary and applied in order on startup, each recorded in `schema_migrations`.
   Never edit an applied file — add the next number.

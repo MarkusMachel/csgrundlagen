@@ -1,6 +1,7 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
+import { consentAwareStorage } from '@/features/privacy/consentStorage';
 import type { Locale } from '@/shared/types';
 import type { ThemeMode } from '@/theme/theme';
 
@@ -44,6 +45,8 @@ export const useUIStore = create<UIState>()(
     }),
     {
       name: 'cft.ui',
+      // Only remembered with "preferences" consent (see features/privacy).
+      storage: createJSONStorage(() => consentAwareStorage),
       partialize: (s) => ({ themeMode: s.themeMode, locale: s.locale }),
     },
   ),

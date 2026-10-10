@@ -54,10 +54,19 @@ export interface AdminUser {
   devices: DeviceType[];
   answers: number;
   failedLogins24h: number;
+  privacyVersion?: string;
 }
 
 export interface AdminUserDetail {
   user: AdminUser;
   sessions: DeviceSession[];
   events: LoginEvent[];
+  /** The latest consent choice; null if the user never made one. */
+  consent: {
+    policyVersion: string;
+    preferences: boolean;
+    deviceDetails: boolean;
+    createdAt: string;
+  } | null;
+  privacyAcceptedAt?: string;
 }

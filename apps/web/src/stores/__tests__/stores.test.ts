@@ -1,11 +1,14 @@
 import { describe, expect, it, beforeEach } from 'vitest';
 
 import { useTestBuilderStore } from '@/features/custom-tests';
+import { ALL, ESSENTIAL_ONLY, useConsentStore } from '@/features/privacy/consent';
 
 import { useUIStore } from '../useUIStore';
 
 describe('useUIStore', () => {
   beforeEach(() => {
+    // theme and language are only remembered with "preferences" consent
+    useConsentStore.getState().decide(ALL);
     useUIStore.setState({
       themeMode: 'light',
       locale: 'en',
@@ -31,6 +34,16 @@ describe('useUIStore', () => {
       state?: { locale?: string };
     };
     expect(persisted.state?.locale).toBe('pt-BR');
+  });
+
+  it('remembers nothing without preferences consent, and forgets on withdrawal', () => {
+    useUIStore.getState().toggleThemeMode();
+    expect(localStorage.getItem('cft.ui')).not.toBeNull();
+    useConsentStore.getState().decide(ESSENTIAL_ONLY);
+    expect(localStorage.getItem('cft.ui')).toBeNull();
+    useUIStore.getState().setLocale('de');
+    expect(useUIStore.getState().locale).toBe('de'); // still works for this page load
+    expect(localStorage.getItem('cft.ui')).toBeNull();
   });
 
   it('increments the streak on correct answers and resets on a wrong one', () => {

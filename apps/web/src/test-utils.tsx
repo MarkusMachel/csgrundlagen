@@ -4,6 +4,7 @@ import type { ReactElement, ReactNode } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import { MemoryRouter } from 'react-router-dom';
 
+import { PRIVACY_POLICY_VERSION } from '@/features/privacy/consent';
 import { initI18n } from '@/i18n/config';
 import { AUTH_TOKEN_KEY } from '@/shared/api/client';
 import { useAuthStore } from '@/stores/useAuthStore';
@@ -12,7 +13,14 @@ import { useAuthStore } from '@/stores/useAuthStore';
 export function loginAsDemo() {
   localStorage.setItem(AUTH_TOKEN_KEY, 'mock-token.u1');
   useAuthStore.setState({
-    user: { id: 'u1', name: 'Demo User', email: 'demo@example.com', locale: 'en', role: 'admin' },
+    user: {
+      id: 'u1',
+      name: 'Demo User',
+      email: 'demo@example.com',
+      locale: 'en',
+      role: 'admin',
+      privacyVersion: PRIVACY_POLICY_VERSION,
+    },
     status: 'authenticated',
   });
 }
@@ -21,7 +29,14 @@ export function loginAsDemo() {
 export function loginAsRegularUser() {
   localStorage.setItem(AUTH_TOKEN_KEY, 'mock-token.u2');
   useAuthStore.setState({
-    user: { id: 'u2', name: 'Ada Lovelace', email: 'ada@example.com', locale: 'en', role: 'user' },
+    user: {
+      id: 'u2',
+      name: 'Ada Lovelace',
+      email: 'ada@example.com',
+      locale: 'en',
+      role: 'user',
+      privacyVersion: PRIVACY_POLICY_VERSION,
+    },
     status: 'authenticated',
   });
 }

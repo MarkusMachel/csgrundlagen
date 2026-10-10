@@ -50,6 +50,14 @@ export interface MockSession {
   clientInfo?: ClientInfo;
 }
 
+export interface MockConsent {
+  userId: string;
+  policyVersion: string;
+  preferences: boolean;
+  deviceDetails: boolean;
+  createdAt: string;
+}
+
 export interface MockLoginEvent {
   id: number;
   userId: string;

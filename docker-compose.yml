@@ -40,6 +40,8 @@ services:
     build:
       context: .
       dockerfile: apps/web/Dockerfile
+      args:
+        VITE_PRIVACY_CONTACT: ${PRIVACY_CONTACT:-}
     container_name: csgrundlagen-web
     restart: unless-stopped
     ports:

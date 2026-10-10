@@ -511,5 +511,78 @@
       "historyHint": "Últimos 50 eventos. O histórico é mantido por 90 dias.",
       "noHistory": "Nenhum login registrado ainda."
     }
+  },
+  "privacy": {
+    "policyLink": "Política de privacidade",
+    "footerLink": "privacidade",
+    "acceptAll": "Aceitar tudo",
+    "essentialOnly": "Só o essencial",
+    "customize": "Escolher…",
+    "alwaysOn": "sempre ativo",
+    "banner": {
+      "label": "Escolhas de privacidade",
+      "text": "Guardamos seu login neste navegador e mantemos um registro de segurança dos dispositivos em que você entra. Com sua permissão, também lembramos seu tema e idioma e anotamos o que seu navegador informa (fuso horário, tela) para você reconhecer seus dispositivos. Sem anúncios, sem análise, sem rastreadores."
+    },
+    "settings": {
+      "open": "Configurações de privacidade",
+      "title": "Configurações de privacidade",
+      "save": "Salvar minhas escolhas",
+      "intro": "Escolha o que este app pode armazenar. Você pode mudar isso a qualquer momento no rodapé de cada página."
+    },
+    "category": {
+      "essential": {
+        "name": "Essencial",
+        "desc": "Mantém você conectado, lembra esta escolha e registra o IP, o navegador e o horário de cada login para proteger sua conta. O app não funciona sem isso."
+      },
+      "preferences": {
+        "name": "Preferências",
+        "desc": "Lembra seu tema (claro ou escuro) e idioma neste navegador. Sem isso, eles voltam ao padrão ao recarregar."
+      },
+      "deviceDetails": {
+        "name": "Detalhes do dispositivo",
+        "desc": "Guarda o fuso horário, idiomas, tamanho de tela e plataforma informados pelo navegador em cada dispositivo conectado, para você diferenciá-los. Retirar o consentimento os apaga."
+      }
+    },
+    "page": {
+      "title": "Política de privacidade",
+      "version": "Versão {{version}}",
+      "operator": "o operador deste site",
+      "backLogin": "Voltar ao login",
+      "backAccount": "Voltar à sua conta"
+    },
+    "update": {
+      "titleNew": "Nossa política de privacidade",
+      "titleChanged": "Nossa política de privacidade mudou",
+      "text": "Reserve um momento para ler como tratamos seus dados: o que armazenamos, por quê, por quanto tempo e seus direitos de baixá-los ou excluí-los.",
+      "read": "Ler aqui",
+      "ok": "Já li"
+    },
+    "signup": {
+      "accept": "Li e aceito a",
+      "required": "Aceite a política de privacidade para criar uma conta."
+    },
+    "yourData": {
+      "title": "Seus dados e privacidade",
+      "intro": "Baixe tudo o que armazenamos sobre você, mude o que pode ser armazenado ou exclua sua conta.",
+      "download": "Baixar meus dados",
+      "delete": "Excluir minha conta"
+    },
+    "deleteDialog": {
+      "title": "Excluir sua conta?",
+      "text": "Isso exclui permanentemente sua conta e tudo nela: respostas, agenda de revisão, favoritos, notas, comentários, testes e dispositivos. Não dá para desfazer. Baixe seus dados antes se quiser uma cópia.",
+      "typeWord": "Digite {{word}} para confirmar",
+      "confirm": "Excluir de vez"
+    },
+    "admin": {
+      "consent": "Privacidade",
+      "policy": "Política de privacidade",
+      "acceptedOn": "aceita em {{date}} (versão {{version}})",
+      "notAccepted": "ainda não aceita",
+      "choice": "Consentimento",
+      "noChoice": "nenhuma escolha registrada",
+      "choiceValue": "preferências {{preferences}}, detalhes do dispositivo {{deviceDetails}} · {{date}}",
+      "on": "sim",
+      "off": "não"
+    }
   }
 }

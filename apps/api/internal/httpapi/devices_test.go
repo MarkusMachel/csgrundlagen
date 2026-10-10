@@ -42,7 +42,11 @@ func TestDevices(t *testing.T) {
 	phoneTok, _ := login(phone, "ada@example.com", "correct horse battery")
 	adminTok, _ := login(laptop, "root@example.com", "correct horse battery")
 
-	// --- the browser's self-report lands on the right session ---
+	// --- the browser's self-report lands on the right session, with consent ---
+	expect(t, "device info needs consent", laptop.do("POST", "/api/me/device", laptopTok, map[string]any{
+		"timezone": "Europe/Berlin"}, nil), 409)
+	expect(t, "consent", laptop.do("POST", "/api/me/consent", laptopTok, map[string]any{
+		"preferences": true, "deviceDetails": true}, nil), 204)
 	expect(t, "device info", laptop.do("POST", "/api/me/device", laptopTok, map[string]any{
 		"timezone": "Europe/Berlin", "language": "de-DE", "screen": "2560x1440", "pixelRatio": 2,
 		"languages": []string{"de-DE", "en", "a", "b", "c", "d", "e", "f", "g", "h"},

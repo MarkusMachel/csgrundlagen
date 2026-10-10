@@ -511,5 +511,78 @@
       "historyHint": "Last 50 events. History is kept for 90 days.",
       "noHistory": "No sign-ins recorded yet."
     }
+  },
+  "privacy": {
+    "policyLink": "Privacy policy",
+    "footerLink": "privacy",
+    "acceptAll": "Accept all",
+    "essentialOnly": "Essential only",
+    "customize": "Choose…",
+    "alwaysOn": "always on",
+    "banner": {
+      "label": "Privacy choices",
+      "text": "We store your sign-in in this browser and keep a security record of the devices you sign in from. With your OK we also remember your theme and language and note details your browser reports (time zone, screen) so you can recognise your devices. No ads, no analytics, no trackers."
+    },
+    "settings": {
+      "open": "Privacy settings",
+      "title": "Privacy settings",
+      "save": "Save my choices",
+      "intro": "Choose what this app may store. You can change this any time from the bottom of every page."
+    },
+    "category": {
+      "essential": {
+        "name": "Essential",
+        "desc": "Keeps you signed in, remembers this choice, and records the IP address, browser and time of each sign-in to protect your account. The app can’t work without these."
+      },
+      "preferences": {
+        "name": "Preferences",
+        "desc": "Remembers your theme (light or dark) and language in this browser. Without it they reset when you reload."
+      },
+      "deviceDetails": {
+        "name": "Device details",
+        "desc": "Stores the time zone, languages, screen size and platform your browser reports with each signed-in device, so you can tell your devices apart. Withdrawing deletes them."
+      }
+    },
+    "page": {
+      "title": "Privacy policy",
+      "version": "Version {{version}}",
+      "operator": "the operator of this site",
+      "backLogin": "Back to sign in",
+      "backAccount": "Back to your account"
+    },
+    "update": {
+      "titleNew": "Our privacy policy",
+      "titleChanged": "Our privacy policy has changed",
+      "text": "Please take a moment to read how we handle your data: what we store, why, how long, and your rights to download or delete it.",
+      "read": "Read it here",
+      "ok": "I’ve read it"
+    },
+    "signup": {
+      "accept": "I have read and accept the",
+      "required": "Please accept the privacy policy to create an account."
+    },
+    "yourData": {
+      "title": "Your data & privacy",
+      "intro": "Download everything we store about you, change what may be stored, or delete your account.",
+      "download": "Download my data",
+      "delete": "Delete my account"
+    },
+    "deleteDialog": {
+      "title": "Delete your account?",
+      "text": "This permanently deletes your account and everything in it: answers, review schedule, bookmarks, notes, comments, tests and devices. It can’t be undone. Download your data first if you want a copy.",
+      "typeWord": "Type {{word}} to confirm",
+      "confirm": "Delete for good"
+    },
+    "admin": {
+      "consent": "Privacy",
+      "policy": "Privacy policy",
+      "acceptedOn": "accepted {{date}} (version {{version}})",
+      "notAccepted": "not accepted yet",
+      "choice": "Consent",
+      "noChoice": "no choice recorded",
+      "choiceValue": "preferences {{preferences}}, device details {{deviceDetails}} · {{date}}",
+      "on": "on",
+      "off": "off"
+    }
   }
 }

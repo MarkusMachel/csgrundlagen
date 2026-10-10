@@ -9,7 +9,6 @@ export {
   useAdminUserDetail,
   useAdminUsers,
   useMySessions,
-  useReportDevice,
   useRevokeMySession,
 } from './hooks/useDevices';
 export type * from './types';

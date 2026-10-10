@@ -511,5 +511,78 @@
       "historyHint": "Die letzten 50 Ereignisse. Der Verlauf wird 90 Tage aufbewahrt.",
       "noHistory": "Noch keine Anmeldungen erfasst."
     }
+  },
+  "privacy": {
+    "policyLink": "Datenschutzerklärung",
+    "footerLink": "Datenschutz",
+    "acceptAll": "Alle akzeptieren",
+    "essentialOnly": "Nur notwendige",
+    "customize": "Auswählen…",
+    "alwaysOn": "immer aktiv",
+    "banner": {
+      "label": "Datenschutz-Auswahl",
+      "text": "Wir speichern deine Anmeldung in diesem Browser und protokollieren zur Sicherheit die Geräte, mit denen du dich anmeldest. Mit deinem OK merken wir uns außerdem Farbschema und Sprache und notieren, was dein Browser meldet (Zeitzone, Bildschirm), damit du deine Geräte erkennst. Keine Werbung, keine Analyse, kein Tracking."
+    },
+    "settings": {
+      "open": "Datenschutz-Einstellungen",
+      "title": "Datenschutz-Einstellungen",
+      "save": "Auswahl speichern",
+      "intro": "Lege fest, was diese App speichern darf. Du kannst das jederzeit unten auf jeder Seite ändern."
+    },
+    "category": {
+      "essential": {
+        "name": "Notwendig",
+        "desc": "Hält dich angemeldet, merkt sich diese Auswahl und protokolliert IP-Adresse, Browser und Zeitpunkt jeder Anmeldung zum Schutz deines Kontos. Ohne sie funktioniert die App nicht."
+      },
+      "preferences": {
+        "name": "Einstellungen",
+        "desc": "Merkt sich dein Farbschema (hell oder dunkel) und deine Sprache in diesem Browser. Ohne sie werden sie beim Neuladen zurückgesetzt."
+      },
+      "deviceDetails": {
+        "name": "Gerätedetails",
+        "desc": "Speichert Zeitzone, Sprachen, Bildschirmgröße und Plattform, die dein Browser meldet, zu jedem angemeldeten Gerät, damit du deine Geräte unterscheiden kannst. Ein Widerruf löscht sie."
+      }
+    },
+    "page": {
+      "title": "Datenschutzerklärung",
+      "version": "Version {{version}}",
+      "operator": "der Betreiber dieser Website",
+      "backLogin": "Zurück zur Anmeldung",
+      "backAccount": "Zurück zu deinem Konto"
+    },
+    "update": {
+      "titleNew": "Unsere Datenschutzerklärung",
+      "titleChanged": "Unsere Datenschutzerklärung hat sich geändert",
+      "text": "Bitte nimm dir einen Moment, um zu lesen, wie wir mit deinen Daten umgehen: was wir speichern, warum, wie lange, und wie du sie herunterladen oder löschen kannst.",
+      "read": "Hier lesen",
+      "ok": "Gelesen"
+    },
+    "signup": {
+      "accept": "Ich habe Folgendes gelesen und akzeptiere es:",
+      "required": "Bitte akzeptiere die Datenschutzerklärung, um ein Konto zu erstellen."
+    },
+    "yourData": {
+      "title": "Deine Daten & Datenschutz",
+      "intro": "Lade alle über dich gespeicherten Daten herunter, ändere, was gespeichert werden darf, oder lösche dein Konto.",
+      "download": "Meine Daten herunterladen",
+      "delete": "Mein Konto löschen"
+    },
+    "deleteDialog": {
+      "title": "Konto löschen?",
+      "text": "Damit werden dein Konto und alles darin endgültig gelöscht: Antworten, Wiederholungsplan, Lesezeichen, Notizen, Kommentare, Tests und Geräte. Das lässt sich nicht rückgängig machen. Lade vorher deine Daten herunter, wenn du eine Kopie möchtest.",
+      "typeWord": "Gib {{word}} zur Bestätigung ein",
+      "confirm": "Endgültig löschen"
+    },
+    "admin": {
+      "consent": "Datenschutz",
+      "policy": "Datenschutzerklärung",
+      "acceptedOn": "akzeptiert am {{date}} (Version {{version}})",
+      "notAccepted": "noch nicht akzeptiert",
+      "choice": "Einwilligung",
+      "noChoice": "keine Auswahl erfasst",
+      "choiceValue": "Einstellungen {{preferences}}, Gerätedetails {{deviceDetails}} · {{date}}",
+      "on": "an",
+      "off": "aus"
+    }
   }
 }

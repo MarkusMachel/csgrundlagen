@@ -1,5 +1,7 @@
 import { http, HttpResponse } from 'msw';
 
+import { PRIVACY_POLICY_VERSION } from '@/features/privacy/consent';
+
 import { db, nextId } from '../db';
 import {
   currentSession,
@@ -29,9 +31,17 @@ export const authHandlers = [
   }),
 
   http.post('/api/auth/signup', async ({ request }) => {
-    const body = (await request.json()) as { name: string; email: string; password: string };
+    const body = (await request.json()) as {
+      name: string;
+      email: string;
+      password: string;
+      acceptPrivacy?: boolean;
+    };
     const name = body.name?.trim() ?? '';
     const email = body.email?.trim().toLowerCase() ?? '';
+    if (!body.acceptPrivacy) {
+      return invalid('please accept the privacy policy to create an account');
+    }
     if (!name) return invalid('name is required (at most 100 characters)');
     if (!/^[^@\s]+@[^@\s]+$/.test(email)) return invalid('a valid email is required');
     const problem = passwordProblem(body.password ?? '');
@@ -50,6 +60,7 @@ export const authHandlers = [
       locale: 'en',
       role: 'user',
       createdAt: new Date().toISOString(),
+      privacyVersion: PRIVACY_POLICY_VERSION,
     };
     db.users.push(user);
     recordLoginEvent(request, user.id, 'signup');

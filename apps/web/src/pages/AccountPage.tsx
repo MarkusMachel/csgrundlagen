@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import { ChangePasswordForm } from '@/features/auth';
 import { MyDevices } from '@/features/devices';
+import { YourData } from '@/features/privacy';
 import { useAuthStore } from '@/stores/useAuthStore';
 
 export function AccountPage() {
@@ -35,6 +36,10 @@ export function AccountPage() {
           </p>
         </div>
         <MyDevices />
+      </section>
+      <section className="stack" style={{ gap: 12 }}>
+        <h2 style={{ margin: 0 }}>{t('privacy.yourData.title')}</h2>
+        <YourData />
       </section>
     </div>
   );

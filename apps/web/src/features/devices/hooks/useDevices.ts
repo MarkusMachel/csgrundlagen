@@ -1,10 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useEffect } from 'react';
 
 import { api } from '@/shared/api/client';
-import { useAuthStore } from '@/stores/useAuthStore';
 
-import { collectClientInfo } from '../clientInfo';
 import type { AdminUser, AdminUserDetail, DeviceSession } from '../types';
 
 export function useMySessions() {
@@ -20,21 +17,6 @@ export function useRevokeMySession() {
     mutationFn: (id: string) => api.delete<void>(`/me/sessions/${id}`),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['me', 'sessions'] }),
   });
-}
-
-/**
- * Sends the browser's self-report (time zone, screen, languages) for the
- * current session, once per sign-in or page load.
- */
-export function useReportDevice() {
-  const status = useAuthStore((s) => s.status);
-  const userId = useAuthStore((s) => s.user?.id);
-  useEffect(() => {
-    if (status !== 'authenticated') return;
-    api.post<void>('/me/device', collectClientInfo()).catch(() => {
-      // best effort; the device list just shows less detail
-    });
-  }, [status, userId]);
 }
 
 export function useAdminUsers() {

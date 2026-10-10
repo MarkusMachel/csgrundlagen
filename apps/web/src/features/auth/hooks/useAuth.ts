@@ -24,6 +24,8 @@ export interface SignUpInput {
   email: string;
   password: string;
   locale?: string;
+  /** The user agreed to the privacy policy; the API refuses sign-ups without it. */
+  acceptPrivacy: boolean;
 }
 
 /** Creates an account and starts a session, like a login. */

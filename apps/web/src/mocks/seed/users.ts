@@ -1,3 +1,4 @@
+import { PRIVACY_POLICY_VERSION } from '@/features/privacy/consent';
 import type { User } from '@/shared/types';
 
 export interface SeedUser extends User {
@@ -14,6 +15,7 @@ export const seedUsers: SeedUser[] = [
     password: 'password',
     locale: 'en',
     role: 'admin',
+    privacyVersion: PRIVACY_POLICY_VERSION,
   },
   {
     id: 'u2',
@@ -22,6 +24,7 @@ export const seedUsers: SeedUser[] = [
     password: 'password',
     locale: 'en',
     role: 'user',
+    privacyVersion: PRIVACY_POLICY_VERSION,
   },
   {
     id: 'u3',
@@ -30,5 +33,6 @@ export const seedUsers: SeedUser[] = [
     password: 'password',
     locale: 'en',
     role: 'user',
+    privacyVersion: PRIVACY_POLICY_VERSION,
   },
 ];

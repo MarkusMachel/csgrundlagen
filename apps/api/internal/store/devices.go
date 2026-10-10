@@ -154,10 +154,18 @@ func (ci ClientInfo) sanitized() ClientInfo {
 	return ci
 }
 
-// SaveClientInfo stores the browser's self-report on the session behind token.
+// SaveClientInfo stores the browser's self-report on the session behind token,
+// but only if the user's latest consent allows device details.
 func (s *Store) SaveClientInfo(ctx context.Context, token string, info ClientInfo) error {
-	_, err := s.pool.Exec(ctx, `UPDATE sessions SET client_info = $2 WHERE token_hash = $1`,
+	tag, err := s.pool.Exec(ctx, `
+		UPDATE sessions se SET client_info = $2
+		WHERE se.token_hash = $1 AND (
+			SELECT device_details FROM consent_records c
+			WHERE c.user_id = se.user_id ORDER BY c.created_at DESC, c.id DESC LIMIT 1)`,
 		hashToken(token), info.sanitized())
+	if err == nil && tag.RowsAffected() == 0 {
+		return ErrConflict{"device details need consent"}
+	}
 	return err
 }
 
@@ -216,7 +224,7 @@ func (s *Store) AdminUsers(ctx context.Context) ([]AdminUser, error) {
 // adminUsers lists every account, or only the one with this id.
 func (s *Store) adminUsers(ctx context.Context, onlyID string) ([]AdminUser, error) {
 	rows, err := s.pool.Query(ctx, `
-		SELECT u.id, u.name, u.email, u.avatar_url, u.locale::text, u.role::text, u.created_at,
+		SELECT u.id, u.name, u.email, u.avatar_url, u.locale::text, u.role::text, u.privacy_version, u.created_at,
 		       (SELECT max(last_seen_at) FROM sessions se WHERE se.user_id = u.id),
 		       (SELECT count(*) FROM sessions se WHERE se.user_id = u.id AND se.expires_at > now()),
 		       COALESCE((SELECT array_agg(se.user_agent) FROM sessions se
@@ -226,7 +234,7 @@ func (s *Store) adminUsers(ctx context.Context, onlyID string) ([]AdminUser, err
 		          AND le.kind = 'login_failed' AND le.created_at > now() - interval '24 hours')
 		FROM users u
 		WHERE $1 = '' OR u.id::text = $1
-		ORDER BY 8 DESC NULLS LAST, u.created_at DESC`, onlyID)
+		ORDER BY 9 DESC NULLS LAST, u.created_at DESC`, onlyID)
 	if err != nil {
 		return nil, err
 	}
@@ -235,7 +243,7 @@ func (s *Store) adminUsers(ctx context.Context, onlyID string) ([]AdminUser, err
 	for rows.Next() {
 		var a AdminUser
 		var agents []*string
-		if err := rows.Scan(&a.ID, &a.Name, &a.Email, &a.AvatarURL, &a.Locale, &a.Role, &a.CreatedAt,
+		if err := rows.Scan(&a.ID, &a.Name, &a.Email, &a.AvatarURL, &a.Locale, &a.Role, &a.PrivacyVersion, &a.CreatedAt,
 			&a.LastSeenAt, &a.ActiveSessions, &agents, &a.Answers, &a.FailedLogins24h); err != nil {
 			return nil, err
 		}
@@ -270,6 +278,9 @@ type AdminUserDetail struct {
 	User     AdminUser    `json:"user"`
 	Sessions []Session    `json:"sessions"`
 	Events   []LoginEvent `json:"events"`
+	// Consent is the latest consent choice; nil if the user never made one.
+	Consent           *Consent   `json:"consent"`
+	PrivacyAcceptedAt *time.Time `json:"privacyAcceptedAt,omitempty"`
 }
 
 func (s *Store) AdminUserDetail(ctx context.Context, userID string) (AdminUserDetail, error) {
@@ -285,7 +296,13 @@ func (s *Store) AdminUserDetail(ctx context.Context, userID string) (AdminUserDe
 	if d.Sessions, err = s.sessions(ctx, userID, ""); err != nil {
 		return d, err
 	}
-	d.Events, err = s.loginEvents(ctx, userID, 50)
+	if d.Events, err = s.loginEvents(ctx, userID, 50); err != nil {
+		return d, err
+	}
+	if d.Consent, err = s.LatestConsent(ctx, userID); err != nil {
+		return d, err
+	}
+	err = s.pool.QueryRow(ctx, `SELECT privacy_accepted_at FROM users WHERE id = $1`, userID).Scan(&d.PrivacyAcceptedAt)
 	return d, err
 }
 
