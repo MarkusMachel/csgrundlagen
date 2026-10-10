@@ -27,6 +27,7 @@ BANKS = {
     "practice_formats": "practice-formats.json",
     "dotnet_by_level": "dotnet-by-level.json",
     "javascript_by_level": "javascript-by-level.json",
+    "sql_100": "sql-100.json",
 }
 
 
