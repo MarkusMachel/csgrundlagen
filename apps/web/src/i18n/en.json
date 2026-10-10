@@ -757,5 +757,11 @@
         "hint": "A wrong option almost nobody picks (under 3%); replace it with a believable mistake."
       }
     }
+  },
+  "offline": {
+    "offline": "offline",
+    "pending_one": "{{count}} answer waiting to sync",
+    "pending_other": "{{count}} answers waiting to sync",
+    "savedForLater": "Saved on this device; it syncs when you’re back online."
   }
 }

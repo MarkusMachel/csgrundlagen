@@ -5,6 +5,7 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 import { useSessionBootstrap } from '@/features/auth';
 import { PolicyUpdateModal, usePrivacySync } from '@/features/privacy';
+import { useOfflineSync } from '@/shared/offline/useOffline';
 import { Spinner } from '@/shared/ui';
 import { scrollBehavior } from '@/shared/utils/motion';
 
@@ -38,6 +39,7 @@ export function AppShell() {
   const { t } = useTranslation();
   const status = useSessionBootstrap();
   usePrivacySync();
+  useOfflineSync();
   const location = useLocation();
   // Hidden at the bottom so it never covers the last controls, like the pagination.
   const nearBottom = useNearBottom();

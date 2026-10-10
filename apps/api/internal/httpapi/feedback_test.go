@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/markusmachel/csgrundlagen/apps/api/internal/httpapi"
 	"github.com/markusmachel/csgrundlagen/apps/api/internal/store"
@@ -101,4 +102,42 @@ func httpGet(url string) (string, error) {
 	defer res.Body.Close()
 	b, err := io.ReadAll(res.Body)
 	return string(b), err
+}
+
+func TestOfflineAnswers(t *testing.T) {
+	ctx := context.Background()
+	pool := newTestDB(t)
+	st := store.New(pool)
+	srv := httptest.NewServer(httpapi.New(st, slog.New(slog.NewTextHandler(io.Discard, nil)),
+		httpapi.Options{AuthRatePerMinute: -1}))
+	defer srv.Close()
+	c := client{t: t, srv: srv}
+	if _, err := st.CreateUser(ctx, "Root", "root@example.com", "correct horse battery", "admin", "en"); err != nil {
+		t.Fatal(err)
+	}
+	var login struct{ Token string }
+	c.do("POST", "/api/auth/login", "", map[string]string{"email": "root@example.com", "password": "correct horse battery"}, &login)
+	var q store.Question
+	c.do("POST", "/api/questions", login.Token, map[string]any{
+		"type": "true-false", "prompt": "p", "explanation": "e", "tags": []string{"Networking"}, "correctAnswer": true,
+	}, &q)
+
+	twoHoursAgo := time.Now().Add(-2 * time.Hour).UTC().Truncate(time.Second)
+	expect(t, "offline answer", c.do("POST", "/api/questions/"+q.ID+"/submit", login.Token, map[string]any{
+		"answer": true, "answeredAt": twoHoursAgo}, nil), 200)
+	var at time.Time
+	pool.QueryRow(ctx, `SELECT answered_at FROM question_answers WHERE question_id = $1`, q.ID).Scan(&at)
+	expect(t, "dated when given", at.Equal(twoHoursAgo), true)
+
+	// a newer answer, then an even older offline one arrives late: schedule unchanged
+	c.do("POST", "/api/questions/"+q.ID+"/submit", login.Token, map[string]any{"answer": false}, nil)
+	var due1, due2 time.Time
+	pool.QueryRow(ctx, `SELECT due_at FROM review_schedule WHERE question_id = $1`, q.ID).Scan(&due1)
+	threeHoursAgo := time.Now().Add(-3 * time.Hour)
+	c.do("POST", "/api/questions/"+q.ID+"/submit", login.Token, map[string]any{"answer": true, "answeredAt": threeHoursAgo}, nil)
+	pool.QueryRow(ctx, `SELECT due_at FROM review_schedule WHERE question_id = $1`, q.ID).Scan(&due2)
+	expect(t, "late answer doesn't reschedule", due2.Equal(due1), true)
+	var n int
+	pool.QueryRow(ctx, `SELECT count(*) FROM question_answers WHERE question_id = $1`, q.ID).Scan(&n)
+	expect(t, "but it is recorded", n, 3)
 }

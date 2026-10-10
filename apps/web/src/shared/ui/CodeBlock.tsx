@@ -23,7 +23,10 @@ const LANGUAGES: Record<string, { label: string; aliases: string[] }> = {
   python: { label: 'Python', aliases: ['py', 'gyp', 'ipython'] },
   sql: { label: 'SQL', aliases: [] },
   typescript: { label: 'TypeScript', aliases: ['ts', 'tsx', 'mts', 'cts'] },
-  xml: { label: 'HTML/XML', aliases: ['html', 'xhtml', 'rss', 'atom', 'xjb', 'xsd', 'xsl', 'plist', 'svg'] },
+  xml: {
+    label: 'HTML/XML',
+    aliases: ['html', 'xhtml', 'rss', 'atom', 'xjb', 'xsd', 'xsl', 'plist', 'svg'],
+  },
   yaml: { label: 'YAML', aliases: ['yml'] },
 };
 
@@ -31,7 +34,9 @@ const LANGUAGES: Record<string, { label: string; aliases: string[] }> = {
 function resolveLanguage(lang: string): string | undefined {
   const tag = lang.trim().toLowerCase();
   if (!tag) return undefined;
-  return Object.keys(LANGUAGES).find((name) => name === tag || LANGUAGES[name].aliases.includes(tag));
+  return Object.keys(LANGUAGES).find(
+    (name) => name === tag || LANGUAGES[name].aliases.includes(tag),
+  );
 }
 
 interface CodeBlockProps {

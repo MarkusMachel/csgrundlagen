@@ -80,7 +80,7 @@ export function QuestionCard({
 
   // feed-mode local answer + submission result
   const [localAnswer, setLocalAnswer] = useState<AnswerValue | undefined>(undefined);
-  const submitAnswer = useSubmitAnswer(question.id);
+  const submitAnswer = useSubmitAnswer(question.id, question);
   const submitted = submitAnswer.isSuccess;
 
   // scissors strike-outs: session-only by design (§15)
@@ -304,6 +304,9 @@ export function QuestionCard({
             >
               {'> '}
               {submitAnswer.data.correct ? t('question.correct') : t('question.incorrect')}
+              {submitAnswer.data.offline && (
+                <span className="feedback-line__next"> {t('offline.savedForLater')}</span>
+              )}
               {submitAnswer.data.nextReviewAt && (
                 <span className="feedback-line__next">
                   {' '}

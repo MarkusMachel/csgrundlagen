@@ -1,7 +1,9 @@
 import { create } from 'zustand';
 
 import { AUTH_TOKEN_KEY } from '@/shared/api/client';
+import { clearApiCache } from '@/shared/offline/registerServiceWorker';
 import type { User } from '@/shared/types';
+
 
 import { useUIStore } from './useUIStore';
 
@@ -33,6 +35,8 @@ export const useAuthStore = create<AuthState>()((set) => ({
     } catch {
       // ignore
     }
+    // cached API responses belong to this user; don't leave them for the next one
+    void clearApiCache();
     set({ user: null, status: 'anonymous' });
   },
 }));

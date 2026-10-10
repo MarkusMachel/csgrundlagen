@@ -757,5 +757,11 @@
         "hint": "Eine falsche Option wählt fast niemand (unter 3 %); ersetze sie durch einen glaubwürdigen Fehler."
       }
     }
+  },
+  "offline": {
+    "offline": "offline",
+    "pending_one": "{{count}} Antwort wartet auf Synchronisierung",
+    "pending_other": "{{count}} Antworten warten auf Synchronisierung",
+    "savedForLater": "Auf diesem Gerät gespeichert; wird synchronisiert, sobald du wieder online bist."
   }
 }

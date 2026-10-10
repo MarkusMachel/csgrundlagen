@@ -142,6 +142,8 @@ export interface SubmitAnswerResult {
   nextReviewAt?: string;
   /** Why the picked wrong options are wrong, where the author explained it. */
   feedback?: OptionFeedback[];
+  /** Graded on the device while offline; sent to the server later. */
+  offline?: boolean;
 }
 
 export interface QuestionsPage {

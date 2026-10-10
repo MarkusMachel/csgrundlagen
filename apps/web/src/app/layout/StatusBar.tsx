@@ -1,8 +1,9 @@
-import { Flame } from 'lucide-react';
+import { Flame, RefreshCw, WifiOff } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
 
 import { PrivacySettingsButton } from '@/features/privacy';
+import { useOnline, usePendingAnswers } from '@/shared/offline/useOffline';
 import { useUIStore } from '@/stores/useUIStore';
 
 const routeFiles: Record<string, string> = {
@@ -18,6 +19,8 @@ const routeFiles: Record<string, string> = {
 /** VS Code-style status bar: page context left, progress/streak/locale right. */
 export function StatusBar() {
   const { t, i18n } = useTranslation();
+  const online = useOnline();
+  const pending = usePendingAnswers();
   const { pathname } = useLocation();
   const statusText = useUIStore((s) => s.statusText);
   const statusDots = useUIStore((s) => s.statusDots);
@@ -48,6 +51,17 @@ export function StatusBar() {
         {streak > 0 && (
           <span className="statusbar__streak hstack" style={{ gap: 3 }} data-testid="streak">
             <Flame size={13} aria-hidden /> {streak}
+          </span>
+        )}
+        {(!online || pending > 0) && (
+          <span
+            className={online ? 'statusbar__sync' : 'statusbar__sync statusbar__sync--offline'}
+            role="status"
+          >
+            {online ? <RefreshCw size={12} aria-hidden /> : <WifiOff size={12} aria-hidden />}
+            {!online && t('offline.offline')}
+            {!online && pending > 0 && ' · '}
+            {pending > 0 && t('offline.pending', { count: pending })}
           </span>
         )}
         <Link to="/privacy" className="statusbar__link">

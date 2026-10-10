@@ -284,6 +284,8 @@ func (s *Server) submitAnswer(w http.ResponseWriter, r *http.Request) {
 	}
 	var body struct {
 		Answer any `json:"answer"`
+		// AnsweredAt is set for answers given offline and synced later.
+		AnsweredAt *time.Time `json:"answeredAt"`
 	}
 	if !decode(w, r, &body) {
 		return
@@ -292,7 +294,7 @@ func (s *Server) submitAnswer(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusBadRequest, "answer must be an option id, a boolean, a list of option ids or text")
 		return
 	}
-	res, err := s.store.SubmitAnswer(r.Context(), currentUser(r).ID, id, body.Answer)
+	res, err := s.store.SubmitAnswer(r.Context(), currentUser(r).ID, id, body.Answer, body.AnsweredAt)
 	if err != nil {
 		s.fail(w, r, err)
 		return

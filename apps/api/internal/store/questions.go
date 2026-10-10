@@ -275,20 +275,34 @@ func (s *Store) BookmarkedQuestions(ctx context.Context, userID, locale string) 
 }
 
 // SubmitAnswer records a standalone (feed) answer and reports correctness.
-func (s *Store) SubmitAnswer(ctx context.Context, userID, questionID string, answer any) (SubmitAnswerResult, error) {
+// MaxOfflineAge is how far back an answer synced after being given offline
+// may be dated; anything older is recorded as given now.
+const MaxOfflineAge = 30 * 24 * time.Hour
+
+// answerTime is when an answer counts as given: the client's time for an
+// offline answer if plausible, otherwise now.
+func answerTime(at *time.Time, now time.Time) time.Time {
+	if at == nil || at.After(now) || now.Sub(*at) > MaxOfflineAge {
+		return now
+	}
+	return *at
+}
+
+func (s *Store) SubmitAnswer(ctx context.Context, userID, questionID string, answer any, answeredAt *time.Time) (SubmitAnswerResult, error) {
 	q, err := s.GetQuestion(ctx, questionID, "en")
 	if err != nil {
 		return SubmitAnswerResult{}, err
 	}
 	correct := isCorrect(q, answer)
+	at := answerTime(answeredAt, time.Now())
 	var next time.Time
 	err = s.withTx(ctx, func(tx pgx.Tx) error {
 		if _, err := tx.Exec(ctx, `
-			INSERT INTO question_answers (user_id, question_id, answer_value, is_correct)
-			VALUES ($1, $2, $3, $4)`, userID, questionID, AnswerKey(answer), correct); err != nil {
+			INSERT INTO question_answers (user_id, question_id, answer_value, is_correct, answered_at)
+			VALUES ($1, $2, $3, $4, $5)`, userID, questionID, AnswerKey(answer), correct, at); err != nil {
 			return err
 		}
-		next, err = recordReview(ctx, tx, userID, questionID, correct, time.Now())
+		next, err = recordReview(ctx, tx, userID, questionID, correct, at)
 		return err
 	})
 	if err != nil {
