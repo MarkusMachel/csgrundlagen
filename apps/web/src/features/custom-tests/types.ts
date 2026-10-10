@@ -1,4 +1,4 @@
-import type { AnswerValue } from '@/features/questions/types';
+import type { AnswerValue, OptionFeedback } from '@/features/questions/types';
 
 export type TestMode = 'practice' | 'exam';
 
@@ -42,6 +42,7 @@ export interface TestSubmitResultItem {
   correct: boolean;
   givenAnswer?: AnswerValue;
   correctAnswer: AnswerValue;
+  feedback?: OptionFeedback[];
 }
 
 export interface TestSubmitResult {

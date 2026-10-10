@@ -146,7 +146,13 @@ export const questionHandlers = [
       statKeys(question, answer, correct),
       correct,
     );
-    return HttpResponse.json({ questionId: question.id, correct, correctAnswer, nextReviewAt });
+    return HttpResponse.json({
+      questionId: question.id,
+      correct,
+      correctAnswer,
+      nextReviewAt,
+      feedback: feedbackFor(question, answer),
+    });
   }),
 
   http.get('/api/questions/:id/comments', ({ request, params }) => {
@@ -359,7 +365,20 @@ export function buildQuestion(id: string, body: CreateQuestionBody): Question {
     difficulty: body.difficulty,
     explanation: body.explanation,
   };
-  const options = body.options ?? [];
+  // feedback goes to its own table, like the API: public questions don't carry it
+  const raw = body.options ?? [];
+  const correctIds =
+    body.type === 'multi-select' ? (body.correctOptionIds ?? []) : [body.correctOptionId ?? 'A'];
+  db.optionFeedback[id] = Object.fromEntries(
+    raw
+      .filter((o) => body.type !== 'ordering' && !correctIds.includes(o.id))
+      .filter((o) => o.feedback?.trim() || o.materialId)
+      .map((o) => [
+        o.id,
+        { feedback: o.feedback?.trim() || undefined, materialId: o.materialId || undefined },
+      ]),
+  );
+  const options = raw.map(({ id: optionId, label }) => ({ id: optionId, label }));
   switch (body.type) {
     case 'multiple-choice':
       return {
@@ -425,4 +444,26 @@ export function asInput(q: Question) {
     return { ...rest, options: correctOrder.map((id) => q.options.find((o) => o.id === id)!) };
   }
   return rest;
+}
+
+/** Mirrors store.feedbackFor: notes on the wrong options someone picked. */
+export function feedbackFor(question: Question, answer: AnswerValue | undefined) {
+  if (question.type !== 'multiple-choice' && question.type !== 'multi-select') return undefined;
+  const picked = Array.isArray(answer) ? answer : typeof answer === 'string' ? [answer] : [];
+  const correct =
+    question.type === 'multi-select' ? question.correctOptionIds : [question.correctOptionId];
+  const notes = db.optionFeedback[question.id] ?? {};
+  const out = picked
+    .filter((id) => !correct.includes(id) && notes[id])
+    .map((id) => {
+      const m = notes[id].materialId
+        ? db.materials.find((x) => x.id === notes[id].materialId)
+        : undefined;
+      return {
+        optionId: id,
+        text: notes[id].feedback,
+        material: m && { id: m.id, type: m.type, title: m.title, url: m.url, author: m.author },
+      };
+    });
+  return out.length ? out : undefined;
 }

@@ -2,7 +2,6 @@ import { Bookmark, ChevronDown } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
-
 import { CodeBlock, InlineText } from '@/shared/ui';
 import { formatRelative } from '@/shared/utils/relativeTime';
 import { parseRichText, type RichSegment } from '@/shared/utils/richText';
@@ -12,6 +11,7 @@ import { canSubmit, correctAnswerOf } from '../grading';
 import { shuffledOptionOrder } from '../optionShuffle';
 import type {
   AnswerValue,
+  OptionFeedback,
   Question,
   QuestionMode,
   SubmitAnswerResult,
@@ -22,6 +22,7 @@ import { QuestionTabs } from './ExpandableTabs/QuestionTabs';
 import { initialOrder, OrderingInput } from './OrderingInput';
 import { OutputInput } from './OutputInput';
 import { RunnableCode } from './RunnableCode';
+import { WrongAnswerFeedback } from './WrongAnswerFeedback';
 import { useIsBookmarked, useToggleBookmark } from '../hooks/useBookmark';
 import { useSubmitAnswer } from '../hooks/useSubmitAnswer';
 
@@ -42,6 +43,8 @@ export interface QuestionCardProps {
   optionOrder?: string[];
   /** Optional heading like "Question 2 of 5" in test mode. */
   heading?: string;
+  /** Review mode: feedback on the wrong options that were picked. */
+  reviewFeedback?: OptionFeedback[];
   /** feed mode: called once the answer is graded (e.g. to advance a review session). */
   onAnswered?: (result: SubmitAnswerResult) => void;
 }
@@ -64,6 +67,7 @@ export function QuestionCard({
   value,
   onChange,
   reviewGivenAnswer,
+  reviewFeedback,
   optionOrder,
   heading,
   onAnswered,
@@ -93,7 +97,8 @@ export function QuestionCard({
   // Drawn once per mounted card, so it doesn't move while you answer.
   const [viewSeed] = useState(randomSeed);
   const shownOrder =
-    optionOrder ?? (mode === 'feed' || mode === 'pick' ? shuffledOptionOrder(question, viewSeed) : undefined);
+    optionOrder ??
+    (mode === 'feed' || mode === 'pick' ? shuffledOptionOrder(question, viewSeed) : undefined);
 
   const bookmarkable = mode === 'feed' || mode === 'pick';
   const isBookmarked = useIsBookmarked(question.id);
@@ -305,6 +310,12 @@ export function QuestionCard({
                 </span>
               )}
             </p>
+            <WrongAnswerFeedback question={question} feedback={submitAnswer.data.feedback} />
+          </CodeLine>
+        )}
+        {mode === 'review' && reviewFeedback && reviewFeedback.length > 0 && (
+          <CodeLine numbered={false}>
+            <WrongAnswerFeedback question={question} feedback={reviewFeedback} />
           </CodeLine>
         )}
       </div>

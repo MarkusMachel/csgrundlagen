@@ -7,7 +7,8 @@ import type { Question } from './types';
  * "both A and C") stop making sense when shuffled, so such questions keep
  * their authored order.
  */
-const POSITIONAL = /\b(all|none|both|neither) of the (above|options)\b|\b(options?|answers?) [A-E]\b|\b[A-E] (and|or|&) [A-E]\b/i;
+const POSITIONAL =
+  /\b(all|none|both|neither) of the (above|options)\b|\b(options?|answers?) [A-E]\b|\b[A-E] (and|or|&) [A-E]\b/i;
 
 /** Whether a question's options may be shown in a random order. */
 export function canShuffleOptions(question: Question): boolean {

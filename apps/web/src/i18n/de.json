@@ -176,7 +176,9 @@
     "moveDown": "„{{item}}“ nach unten",
     "predictOutput": "was wird ausgegeben?",
     "outputPlaceholder": "gib die genaue Ausgabe ein, eine Zeile pro ausgegebener Zeile",
-    "expectedOutput": "erwartete Ausgabe"
+    "expectedOutput": "erwartete Ausgabe",
+    "whyWrong": "Warum nicht",
+    "readAbout": "Lies: {{title}}"
   },
   "builder": {
     "title": "Test erstellen",
@@ -435,6 +437,15 @@
         "difficulty": "Schwierigkeit",
         "materials": "Materialien"
       }
+    },
+    "feedback": {
+      "summary": "Wenn jemand dies wählt… (optional)",
+      "added": "Feedback",
+      "label": "Warum Option {{option}} falsch ist",
+      "placeholder": "Erkläre den Denkfehler hinter dieser Option. Nur für Leute sichtbar, die sie wählen.",
+      "materialLabel": "Lesestoff zu Option {{option}}",
+      "searchMaterials": "Materialien suchen…",
+      "noMaterial": "Kein Lesestoff verknüpft"
     }
   },
   "code": {

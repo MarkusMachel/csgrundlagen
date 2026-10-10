@@ -1,17 +1,18 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Plus, X } from 'lucide-react';
 import { useEffect, useId } from 'react';
-import { Controller, useFieldArray, useForm } from 'react-hook-form';
+import { Controller, useFieldArray, useForm, type UseFormReturn } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
-import { useMaterials } from '@/features/materials';
+import { useMaterials, type MaterialItem } from '@/features/materials';
 import { useQuestionMaterials, useTags, type Question } from '@/features/questions';
-import { RichText } from '@/shared/ui';
+import { RichText, Select } from '@/shared/ui';
 import { hasCode } from '@/shared/utils/richText';
 
 import { OutputFields } from './OutputFields';
 import { useCreateQuestion, useUpdateQuestion } from '../hooks/useAuthoring';
+import { useQuestionAuthoring } from '../hooks/useQuestionAdmin';
 import type { CreateQuestionInput } from '../types';
 import { LinkPicker } from './LinkPicker';
 import { TagInput } from './TagInput';
@@ -34,7 +35,14 @@ const schema = z
     tags: z.array(z.string()).min(1),
     difficulty: z.enum(['easy', 'medium', 'hard']).optional(),
     explanation: z.string().trim().min(1),
-    options: z.array(z.object({ label: z.string() })),
+    options: z.array(
+      z.object({
+        label: z.string(),
+        // why this option is wrong, and what to read; shown to whoever picks it
+        feedback: z.string().max(2000).optional(),
+        materialId: z.string().optional(),
+      }),
+    ),
     correctOptionId: z.string(),
     correctOptionIds: z.array(z.string()),
     correctAnswer: z.boolean(),
@@ -132,6 +140,8 @@ export function QuestionForm({ question, onSaved, onCancel }: QuestionFormProps)
   const { data: materialsData } = useMaterials();
   // In edit mode the current material links come from their own endpoint.
   const { data: linkedMaterials } = useQuestionMaterials(question?.id ?? '', !!question);
+  // ...and so does the wrong-option feedback, which public questions leave out.
+  const { data: authoring } = useQuestionAuthoring(question?.id ?? '', !!question);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -146,8 +156,19 @@ export function QuestionForm({ question, onSaved, onCancel }: QuestionFormProps)
       );
     }
   }, [linkedMaterials, form]);
+  useEffect(() => {
+    if (!authoring?.options || form.formState.dirtyFields.options) return;
+    authoring.options.forEach((o) => {
+      const i = OPTION_IDS.indexOf(o.id as (typeof OPTION_IDS)[number]);
+      if (i < 0) return;
+      if (o.feedback) form.setValue(`options.${i}.feedback`, o.feedback);
+      if (o.materialId) form.setValue(`options.${i}.materialId`, o.materialId);
+    });
+  }, [authoring, form]);
   const type = form.watch('type');
   const { fields, append, remove } = useFieldArray({ control: form.control, name: 'options' });
+  const correctIds =
+    type === 'multi-select' ? form.watch('correctOptionIds') : [form.watch('correctOptionId')];
 
   // keep correctOptionId valid if the chosen option is removed
   useEffect(() => {
@@ -169,7 +190,12 @@ export function QuestionForm({ question, onSaved, onCancel }: QuestionFormProps)
     };
     if (hasOptions(values.type)) {
       const opts = values.options
-        .map((o, i) => ({ id: OPTION_IDS[i], label: o.label.trim() }))
+        .map((o, i) => ({
+          id: OPTION_IDS[i],
+          label: o.label.trim(),
+          feedback: o.feedback?.trim() || undefined,
+          materialId: o.materialId || undefined,
+        }))
         .filter((o) => o.label.length > 0);
       input.options = opts;
       if (values.type === 'multiple-choice') input.correctOptionId = values.correctOptionId;
@@ -289,6 +315,9 @@ export function QuestionForm({ question, onSaved, onCancel }: QuestionFormProps)
                     {...form.register(`options.${i}.label` as const)}
                   />
                   <RichPreview text={form.watch(`options.${i}.label`)} />
+                  {type !== 'ordering' && !correctIds.includes(OPTION_IDS[i]) && (
+                    <OptionFeedbackFields index={i} form={form} materials={materialsData ?? []} />
+                  )}
                 </div>
                 {fields.length > 2 && (
                   <button
@@ -441,5 +470,52 @@ function RichPreview({ text }: { text: string | undefined }) {
       <span className="rich-preview__label">{t('authoring.preview')}</span>
       <RichText text={text} />
     </div>
+  );
+}
+
+/** "If someone picks this…": a short explanation and a reading, for wrong options. */
+function OptionFeedbackFields({
+  index,
+  form,
+  materials,
+}: {
+  index: number;
+  form: UseFormReturn<FormValues>;
+  materials: MaterialItem[];
+}) {
+  const { t } = useTranslation();
+  const labelId = useId();
+  const feedback = form.watch(`options.${index}.feedback`) ?? '';
+  const materialId = form.watch(`options.${index}.materialId`) ?? '';
+  const filled = feedback.trim().length > 0 || materialId !== '';
+  return (
+    <details className="option-feedback" open={filled || undefined}>
+      <summary>
+        {t('authoring.feedback.summary')}
+        {filled && <span className="chip chip--accent">{t('authoring.feedback.added')}</span>}
+      </summary>
+      <textarea
+        className="textarea textarea--autogrow"
+        rows={2}
+        maxLength={2000}
+        aria-label={t('authoring.feedback.label', { option: OPTION_IDS[index] })}
+        placeholder={t('authoring.feedback.placeholder')}
+        {...form.register(`options.${index}.feedback` as const)}
+      />
+      <span id={labelId} className="sr-only">
+        {t('authoring.feedback.materialLabel', { option: OPTION_IDS[index] })}
+      </span>
+      <Select
+        searchable
+        labelledBy={labelId}
+        value={materialId}
+        onChange={(v) => form.setValue(`options.${index}.materialId`, v, { shouldDirty: true })}
+        searchPlaceholder={t('authoring.feedback.searchMaterials')}
+        options={[
+          { value: '', label: t('authoring.feedback.noMaterial') },
+          ...materials.map((m) => ({ value: m.id, label: m.title })),
+        ]}
+      />
+    </details>
   );
 }

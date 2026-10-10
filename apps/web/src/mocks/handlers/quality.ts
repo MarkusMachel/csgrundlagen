@@ -1,7 +1,13 @@
 import { http, HttpResponse } from 'msw';
 
 import { db } from '../db';
-import { buildQuestion, linkMaterials, recordRevision, type CreateQuestionBody } from './questions';
+import {
+  asInput,
+  buildQuestion,
+  linkMaterials,
+  recordRevision,
+  type CreateQuestionBody,
+} from './questions';
 import { currentUser, forbidden, unauthorized } from './utils';
 
 /** Mirrors store.QualityReport and the revision endpoints. */
@@ -41,6 +47,19 @@ export const qualityHandlers = [
     linkMaterials(seed.question.id, body.relatedMaterialIds ?? []);
     recordRevision(seed.question.id, 'restored', rev.snapshot, me!.name, rev.id);
     return HttpResponse.json(seed.question);
+  }),
+
+  http.get('/api/questions/:id/authoring', ({ request, params }) => {
+    const { error } = adminOnly(request);
+    if (error) return error;
+    const seed = db.questions.find((s) => s.question.id === params.id);
+    if (!seed) return HttpResponse.json({ message: 'Not found' }, { status: 404 });
+    const input = asInput(seed.question) as {
+      options?: { id: string; feedback?: string; materialId?: string }[];
+    };
+    const notes = db.optionFeedback[seed.question.id] ?? {};
+    input.options = input.options?.map((o) => ({ ...o, ...notes[o.id] }));
+    return HttpResponse.json(input);
   }),
 
   http.get('/api/admin/quality', ({ request }) => {

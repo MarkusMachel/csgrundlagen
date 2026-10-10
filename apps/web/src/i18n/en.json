@@ -176,7 +176,9 @@
     "moveDown": "Move “{{item}}” down",
     "predictOutput": "what does this print?",
     "outputPlaceholder": "type the exact output, one line per line printed",
-    "expectedOutput": "expected output"
+    "expectedOutput": "expected output",
+    "whyWrong": "Why not",
+    "readAbout": "Read: {{title}}"
   },
   "builder": {
     "title": "Build a Test",
@@ -435,6 +437,15 @@
         "difficulty": "difficulty",
         "materials": "materials"
       }
+    },
+    "feedback": {
+      "summary": "If someone picks this… (optional)",
+      "added": "feedback",
+      "label": "Why option {{option}} is wrong",
+      "placeholder": "Explain the misconception behind this option. Shown only to people who pick it.",
+      "materialLabel": "Reading for option {{option}}",
+      "searchMaterials": "Search materials…",
+      "noMaterial": "No reading linked"
     }
   },
   "code": {

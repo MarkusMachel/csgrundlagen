@@ -294,7 +294,12 @@ func (s *Store) SubmitAnswer(ctx context.Context, userID, questionID string, ans
 	if err != nil {
 		return SubmitAnswerResult{}, err
 	}
-	return SubmitAnswerResult{QuestionID: q.ID, Correct: correct, CorrectAnswer: q.Correct(), NextReviewAt: &next}, nil
+	feedback, err := s.feedbackFor(ctx, q, answer)
+	if err != nil {
+		return SubmitAnswerResult{}, err
+	}
+	return SubmitAnswerResult{QuestionID: q.ID, Correct: correct, CorrectAnswer: q.Correct(), NextReviewAt: &next,
+		Feedback: feedback}, nil
 }
 
 // QuestionStats summarizes everyone's answers to a question: how often each
@@ -400,6 +405,11 @@ func (n NewQuestion) validate() error {
 	}
 	if len(n.Tags) == 0 {
 		return ErrInvalid{"at least one tag is required"}
+	}
+	for _, o := range n.Options {
+		if o.Feedback != nil && len(*o.Feedback) > maxFeedbackLen {
+			return ErrInvalid{"option feedback is limited to 2000 characters"}
+		}
 	}
 	if n.Difficulty != nil {
 		switch *n.Difficulty {
@@ -592,9 +602,19 @@ func writeQuestionParts(ctx context.Context, tx pgx.Tx, id string, n NewQuestion
 			if n.Type == "ordering" {
 				position = &i
 			}
+			// feedback is for wrong options only
+			feedback, material := cleanFeedback(o.Feedback), o.MaterialID
+			if correct || n.Type == "ordering" {
+				feedback, material = nil, nil
+			}
+			if material != nil && *material == "" {
+				material = nil
+			}
 			if _, err := tx.Exec(ctx, `
-				INSERT INTO question_options (question_id, option_key, label, is_correct, correct_position)
-				VALUES ($1, $2, $3, $4, $5)`, id, o.ID, o.Label, correct, position); err != nil {
+				INSERT INTO question_options (question_id, option_key, label, is_correct, correct_position,
+				                              feedback, material_id)
+				VALUES ($1, $2, $3, $4, $5, $6, (SELECT id FROM materials WHERE id::text = $7))`,
+				id, o.ID, o.Label, correct, position, feedback, material); err != nil {
 				return err
 			}
 		}

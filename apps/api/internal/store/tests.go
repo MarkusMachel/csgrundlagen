@@ -175,8 +175,12 @@ func (s *Store) SubmitTest(ctx context.Context, testID, userID string, in Submit
 		if ok {
 			score++
 		}
+		feedback, err := s.feedbackFor(ctx, q, given)
+		if err != nil {
+			return TestSubmitResult{}, err
+		}
 		breakdown = append(breakdown, TestSubmitResultItem{
-			QuestionID: q.ID, Correct: ok, GivenAnswer: given, CorrectAnswer: q.Correct(),
+			QuestionID: q.ID, Correct: ok, GivenAnswer: given, CorrectAnswer: q.Correct(), Feedback: feedback,
 		})
 	}
 

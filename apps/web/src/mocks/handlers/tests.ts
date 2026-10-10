@@ -9,6 +9,7 @@ import {
 import type { AnswerValue, Question } from '@/features/questions/types';
 
 import { db, nextId, recordAnswer, statKeys } from '../db';
+import { feedbackFor } from './questions';
 import { currentUser, findQuestion, unauthorized } from './utils';
 
 export const testHandlers = [
@@ -157,6 +158,10 @@ export const testHandlers = [
       submittedAt: new Date().toISOString(),
     };
     db.attempts.push(attempt);
-    return HttpResponse.json({ attempt, total, score, breakdown });
+    const withFeedback = breakdown.map((item) => {
+      const question = questions.find((q) => q.id === item.questionId);
+      return { ...item, feedback: question && feedbackFor(question, item.givenAnswer) };
+    });
+    return HttpResponse.json({ attempt, total, score, breakdown: withFeedback });
   }),
 ];

@@ -22,7 +22,13 @@ describe('option shuffling', () => {
   });
 
   it('keeps the authored order when options refer to each other', () => {
-    for (const label of ['All of the above', 'None of the above', 'Both A and C', 'Options B or D', 'A & B']) {
+    for (const label of [
+      'All of the above',
+      'None of the above',
+      'Both A and C',
+      'Options B or D',
+      'A & B',
+    ]) {
       expect(canShuffleOptions(mc(['x', 'y', label]))).toBe(false);
     }
   });
@@ -32,7 +38,14 @@ describe('option shuffling', () => {
   });
 
   it('only applies to option-based questions', () => {
-    const tf = { id: 't', type: 'true-false', prompt: 'p', explanation: 'e', tags: [], correctAnswer: true } as Question;
+    const tf = {
+      id: 't',
+      type: 'true-false',
+      prompt: 'p',
+      explanation: 'e',
+      tags: [],
+      correctAnswer: true,
+    } as Question;
     expect(shuffledOptionOrder(tf, 1)).toBeUndefined();
   });
 });

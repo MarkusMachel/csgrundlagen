@@ -61,6 +61,7 @@ export function ResultsScreen({
               question={question}
               mode="review"
               reviewGivenAnswer={item.givenAnswer}
+              reviewFeedback={item.feedback}
               heading={t('takeTest.questionOf', {
                 current: index + 1,
                 total: result.breakdown.length,

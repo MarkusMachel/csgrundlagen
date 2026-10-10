@@ -61,7 +61,8 @@ func (s *Store) currentInput(ctx context.Context, id string) (NewQuestion, error
 	if err != nil {
 		return NewQuestion{}, err
 	}
-	return q.asInput(ids), nil
+	n := q.asInput(ids)
+	return n, s.withOptionFeedback(ctx, id, &n)
 }
 
 func recordRevision(ctx context.Context, tx pgx.Tx, questionID, editorID, kind string, snap revisionSnapshot) error {

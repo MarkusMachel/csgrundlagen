@@ -39,6 +39,10 @@ func (u User) IsAdmin() bool { return u.Role == "admin" }
 type Option struct {
 	ID    string `json:"id"` // 'A'..'E'
 	Label string `json:"label"`
+	// Feedback and MaterialID explain a wrong option. They are written by
+	// admins and only loaded for authoring; public questions never carry them.
+	Feedback   *string `json:"feedback,omitempty"`
+	MaterialID *string `json:"materialId,omitempty"`
 }
 
 // Question is the union of the question types (apps/web/src/features/questions/types.ts):
@@ -112,6 +116,8 @@ type SubmitAnswerResult struct {
 	CorrectAnswer any    `json:"correctAnswer"`
 	// NextReviewAt is when spaced repetition will bring the question back.
 	NextReviewAt *time.Time `json:"nextReviewAt,omitempty"`
+	// Feedback explains the wrong options picked, when the author wrote some.
+	Feedback []OptionFeedback `json:"feedback,omitempty"`
 }
 
 type Comment struct {
@@ -194,10 +200,11 @@ type TestAttempt struct {
 }
 
 type TestSubmitResultItem struct {
-	QuestionID    string `json:"questionId"`
-	Correct       bool   `json:"correct"`
-	GivenAnswer   any    `json:"givenAnswer,omitempty"`
-	CorrectAnswer any    `json:"correctAnswer"`
+	QuestionID    string           `json:"questionId"`
+	Correct       bool             `json:"correct"`
+	GivenAnswer   any              `json:"givenAnswer,omitempty"`
+	CorrectAnswer any              `json:"correctAnswer"`
+	Feedback      []OptionFeedback `json:"feedback,omitempty"`
 }
 
 type TestSubmitResult struct {

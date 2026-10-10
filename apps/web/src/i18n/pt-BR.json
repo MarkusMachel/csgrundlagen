@@ -176,7 +176,9 @@
     "moveDown": "Mover “{{item}}” para baixo",
     "predictOutput": "o que isso imprime?",
     "outputPlaceholder": "digite a saída exata, uma linha por linha impressa",
-    "expectedOutput": "saída esperada"
+    "expectedOutput": "saída esperada",
+    "whyWrong": "Por que não",
+    "readAbout": "Leia: {{title}}"
   },
   "builder": {
     "title": "Criar Teste",
@@ -435,6 +437,15 @@
         "difficulty": "dificuldade",
         "materials": "materiais"
       }
+    },
+    "feedback": {
+      "summary": "Se alguém escolher esta… (opcional)",
+      "added": "feedback",
+      "label": "Por que a opção {{option}} está errada",
+      "placeholder": "Explique o equívoco por trás desta opção. Visível só para quem escolhê-la.",
+      "materialLabel": "Leitura para a opção {{option}}",
+      "searchMaterials": "Buscar materiais…",
+      "noMaterial": "Nenhuma leitura vinculada"
     }
   },
   "code": {

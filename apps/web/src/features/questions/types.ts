@@ -13,6 +13,17 @@ export interface BaseQuestion {
 export interface MultipleChoiceOption {
   id: string; // 'A' | 'B' | 'C' | 'D' | 'E'
   label: string;
+  /** Authoring only: why this option is wrong, shown to whoever picks it. */
+  feedback?: string;
+  /** Authoring only: material that clears up the misconception. */
+  materialId?: string;
+}
+
+/** Feedback for a wrong option someone picked (from the answer result). */
+export interface OptionFeedback {
+  optionId: string;
+  text?: string;
+  material?: { id: string; type: string; title: string; url: string; author?: string };
 }
 
 export interface MultipleChoiceQuestion extends BaseQuestion {
@@ -129,6 +140,8 @@ export interface SubmitAnswerResult {
   correctAnswer: AnswerValue; // correctOptionId or boolean
   /** When spaced repetition brings the question back (ISO time). */
   nextReviewAt?: string;
+  /** Why the picked wrong options are wrong, where the author explained it. */
+  feedback?: OptionFeedback[];
 }
 
 export interface QuestionsPage {

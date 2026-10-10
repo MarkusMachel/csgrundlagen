@@ -14,6 +14,15 @@ export interface Revision {
   restoredFrom?: number;
 }
 
+/** A question in the form's shape, with the wrong-option feedback (admins only). */
+export function useQuestionAuthoring(questionId: string, enabled = true) {
+  return useQuery({
+    queryKey: ['admin', 'authoring', questionId],
+    queryFn: () => api.get<CreateQuestionInput>(`/questions/${questionId}/authoring`),
+    enabled,
+  });
+}
+
 export function useRevisions(questionId: string) {
   return useQuery({
     queryKey: ['admin', 'revisions', questionId],

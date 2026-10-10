@@ -700,3 +700,18 @@ func (s *Server) qualityReport(w http.ResponseWriter, r *http.Request) {
 	}
 	writeJSON(w, http.StatusOK, rep)
 }
+
+// questionAuthoring returns a question in the admin form's shape, with the
+// wrong-option feedback the public question leaves out.
+func (s *Server) questionAuthoring(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(w, r)
+	if !ok {
+		return
+	}
+	n, err := s.store.QuestionInput(r.Context(), id)
+	if err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, n)
+}

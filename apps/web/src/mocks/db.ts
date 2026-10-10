@@ -67,6 +67,8 @@ interface Db {
   notes: QuestionNote[];
   bugReports: BugReport[];
   tests: CustomTest[];
+  /** Wrong-option feedback, kept out of the public question: questionId -> optionId -> note. */
+  optionFeedback: Record<string, Record<string, { feedback?: string; materialId?: string }>>;
   /** Question version history (mirrors question_revisions), oldest first. */
   revisions: {
     id: number;
@@ -178,6 +180,7 @@ function freshDb(): Db {
     sessions: seedSessions(),
     loginEvents: seedLoginEvents(),
     revokedSessions: [],
+    optionFeedback: {},
     revisions: [],
     drafts: {},
     commentReports: [],
