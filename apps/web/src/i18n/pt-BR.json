@@ -294,7 +294,8 @@
       "materials": "Materiais",
       "bugs": "Relatos de erro",
       "users": "Usuários",
-      "comments": "Comentários"
+      "comments": "Comentários",
+      "quality": "Qualidade"
     },
     "questionType": "Tipo de questão",
     "type": {
@@ -401,7 +402,40 @@
     "runnableHint": "js roda no navegador, go no Go Playground; dá para executar depois de responder",
     "notRunnableHint": "essa linguagem não pode ser executada, então só se prevê",
     "expectedOutput": "Saída esperada",
-    "runToFill": "Executar para preencher a saída"
+    "runToFill": "Executar para preencher a saída",
+    "history": {
+      "back": "Voltar à lista",
+      "view": "Visualização",
+      "edit": "Editar",
+      "title": "Histórico",
+      "empty": "Nenhuma versão registrada ainda.",
+      "current": "atual",
+      "unknownEditor": "alguém (conta excluída)",
+      "changed": "alterou {{fields}}",
+      "showVersion": "Ver esta versão",
+      "hideVersion": "Ocultar",
+      "restore": "Restaurar",
+      "confirmRestore": "Restaurar esta versão?",
+      "correctOption": "correta",
+      "answerIs": "Resposta:",
+      "kind": {
+        "created": "Criada",
+        "edited": "Editada",
+        "restored": "v{{version}} restaurada",
+        "original": "Antes do histórico"
+      },
+      "field": {
+        "type": "tipo",
+        "prompt": "enunciado",
+        "options": "opções",
+        "answer": "resposta",
+        "explanation": "explicação",
+        "code": "código",
+        "tags": "tags",
+        "difficulty": "dificuldade",
+        "materials": "materiais"
+      }
+    }
   },
   "code": {
     "copy": "Copiar código",
@@ -675,6 +709,42 @@
     "step3": {
       "title": "Acompanhe seu progresso ou monte um teste",
       "text": "Cobertura, acerto por tema e sequências estão em"
+    }
+  },
+  "quality": {
+    "intro": "Avaliado a partir de respostas reais. Uma pergunta precisa de {{min}} respostas antes de ser sinalizada.",
+    "analysed": "Perguntas analisadas",
+    "flagged": "Sinalizadas",
+    "tooFew": "Menos de {{min}} respostas",
+    "filter": "Mostrar",
+    "allFlagged": "Todas sinalizadas",
+    "empty": "Nada a corrigir aqui.",
+    "answers_one": "{{count}} resposta",
+    "answers_other": "{{count}} respostas",
+    "correctRate": "{{rate}} de acerto",
+    "picks": "Quantas vezes cada opção foi escolhida",
+    "correctOption": "(opção correta)",
+    "flag": {
+      "wrong_key": {
+        "name": "Gabarito errado?",
+        "hint": "Uma opção errada é escolhida mais que a correta; confira o gabarito."
+      },
+      "open_bug_reports": {
+        "name": "Relatos de erro abertos",
+        "hint": "Usuários relataram um problema que ainda está aberto."
+      },
+      "too_hard": {
+        "name": "Difícil demais",
+        "hint": "30% ou menos acertam: enunciado confuso, ou a resposta pode estar errada."
+      },
+      "too_easy": {
+        "name": "Fácil demais",
+        "hint": "95% ou mais acertam: ensina pouco; torne as alternativas erradas mais convincentes."
+      },
+      "dead_distractor": {
+        "name": "Opção ignorada",
+        "hint": "Uma opção errada quase ninguém escolhe (menos de 3%); troque por um erro plausível."
+      }
     }
   }
 }

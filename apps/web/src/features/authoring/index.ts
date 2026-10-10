@@ -4,6 +4,7 @@
 export { AdminStatsTab } from './components/AdminStatsTab';
 export { BugReportQueue } from './components/BugReportQueue';
 export { CommentModeration } from './components/CommentModeration';
+export { QualityReportTab } from './components/QualityReportTab';
 export { useModerationQueue } from './hooks/useModeration';
 export { MaterialManager } from './components/MaterialManager';
 export { QuestionManager } from './components/QuestionManager';

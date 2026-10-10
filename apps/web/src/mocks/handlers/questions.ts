@@ -15,7 +15,7 @@ import {
   unauthorized,
 } from './utils';
 
-interface CreateQuestionBody {
+export interface CreateQuestionBody {
   type: Question['type'];
   prompt: string;
   tags: string[];
@@ -304,6 +304,7 @@ export const questionHandlers = [
     const body = (await request.json()) as CreateQuestionBody;
     const question = buildQuestion(nextId('q'), body);
     db.questions.push({ question });
+    recordRevision(question.id, 'created', body, user.name);
     linkMaterials(question.id, body.relatedMaterialIds ?? []);
     return HttpResponse.json(question, { status: 201 });
   }),
@@ -315,6 +316,10 @@ export const questionHandlers = [
     const seed = db.questions.find((s) => s.question.id === params.id);
     if (!seed) return HttpResponse.json({ message: 'Not found' }, { status: 404 });
     const body = (await request.json()) as CreateQuestionBody;
+    if (!db.revisions.some((r) => r.questionId === seed.question.id)) {
+      recordRevision(seed.question.id, 'original', asInput(seed.question));
+    }
+    recordRevision(seed.question.id, 'edited', body, user.name);
     seed.question = buildQuestion(seed.question.id, body);
     seed.translations = undefined; // the content changed, so old translations no longer apply
     linkMaterials(seed.question.id, body.relatedMaterialIds ?? []);
@@ -346,7 +351,7 @@ export const questionHandlers = [
   }),
 ];
 
-function buildQuestion(id: string, body: CreateQuestionBody): Question {
+export function buildQuestion(id: string, body: CreateQuestionBody): Question {
   const base = {
     id,
     prompt: body.prompt,
@@ -386,10 +391,38 @@ function buildQuestion(id: string, body: CreateQuestionBody): Question {
 }
 
 /** Makes exactly these materials link to the question (optional linking). */
-function linkMaterials(questionId: string, materialIds: string[]) {
+export function linkMaterials(questionId: string, materialIds: string[]) {
   for (const material of db.materials) {
     const others = (material.relatedQuestionIds ?? []).filter((q) => q !== questionId);
     const linked = materialIds.includes(material.id) ? [...others, questionId] : others;
     material.relatedQuestionIds = linked.length > 0 ? linked : undefined;
   }
+}
+
+/** Mirrors store.recordRevision. */
+export function recordRevision(
+  questionId: string,
+  kind: 'created' | 'edited' | 'restored' | 'original',
+  snapshot: unknown,
+  editorName?: string,
+  restoredFrom?: number,
+) {
+  db.revisions.push({
+    id: db.revisions.length + 1,
+    questionId,
+    kind,
+    editorName,
+    snapshot,
+    createdAt: new Date().toISOString(),
+    restoredFrom,
+  });
+}
+
+/** A stored question back in the admin form's shape (mirrors Question.asInput). */
+export function asInput(q: Question) {
+  const { id: _id, correctOrder, ...rest } = q as Question & { correctOrder?: string[] };
+  if (q.type === 'ordering' && correctOrder) {
+    return { ...rest, options: correctOrder.map((id) => q.options.find((o) => o.id === id)!) };
+  }
+  return rest;
 }

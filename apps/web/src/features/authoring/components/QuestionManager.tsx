@@ -8,7 +8,7 @@ import { EmptyState, ErrorState, Spinner } from '@/shared/ui';
 import { toPlainText } from '@/shared/utils/richText';
 
 import { ConfirmDeleteButton } from './ConfirmDeleteButton';
-import { QuestionForm } from './QuestionForm';
+import { EditQuestionView } from './EditQuestionView';
 import { useDeleteQuestion } from '../hooks/useAuthoring';
 
 const PAGE_SIZE = 20;
@@ -28,17 +28,7 @@ export function QuestionManager() {
   });
 
   if (editing) {
-    return (
-      <div className="stack" style={{ gap: 12 }}>
-        <h2 style={{ margin: 0 }}>{t('authoring.editQuestion')}</h2>
-        <QuestionForm
-          key={editing.id}
-          question={editing}
-          onSaved={() => setEditing(null)}
-          onCancel={() => setEditing(null)}
-        />
-      </div>
-    );
+    return <EditQuestionView key={editing.id} question={editing} onDone={() => setEditing(null)} />;
   }
 
   return (

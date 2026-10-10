@@ -67,6 +67,16 @@ interface Db {
   notes: QuestionNote[];
   bugReports: BugReport[];
   tests: CustomTest[];
+  /** Question version history (mirrors question_revisions), oldest first. */
+  revisions: {
+    id: number;
+    questionId: string;
+    kind: 'created' | 'edited' | 'restored' | 'original';
+    editorName?: string;
+    snapshot: unknown;
+    createdAt: string;
+    restoredFrom?: number;
+  }[];
   /** Unfinished attempts, keyed `${testId}:${userId}`. */
   drafts: Record<string, TestDraft & { updatedAt: string }>;
   attempts: TestAttempt[];
@@ -168,6 +178,7 @@ function freshDb(): Db {
     sessions: seedSessions(),
     loginEvents: seedLoginEvents(),
     revokedSessions: [],
+    revisions: [],
     drafts: {},
     commentReports: [],
     consents: [],

@@ -257,7 +257,7 @@ func (s *Server) updateQuestion(w http.ResponseWriter, r *http.Request) {
 	if !decode(w, r, &body) {
 		return
 	}
-	q, err := s.store.UpdateQuestion(r.Context(), id, body)
+	q, err := s.store.UpdateQuestion(r.Context(), currentUser(r).ID, id, body)
 	if err != nil {
 		s.fail(w, r, err)
 		return
@@ -657,4 +657,46 @@ func (s *Server) submitTest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, http.StatusOK, res)
+}
+
+// --- admin: question history and quality -----------------------------------
+
+func (s *Server) questionRevisions(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(w, r)
+	if !ok {
+		return
+	}
+	revs, err := s.store.Revisions(r.Context(), id)
+	if err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, revs)
+}
+
+func (s *Server) restoreRevision(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(w, r)
+	if !ok {
+		return
+	}
+	rid, err := strconv.ParseInt(r.PathValue("rid"), 10, 64)
+	if err != nil {
+		writeError(w, http.StatusNotFound, "Not found")
+		return
+	}
+	q, err := s.store.RestoreRevision(r.Context(), currentUser(r).ID, id, rid)
+	if err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, q)
+}
+
+func (s *Server) qualityReport(w http.ResponseWriter, r *http.Request) {
+	rep, err := s.store.QualityReport(r.Context())
+	if err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, rep)
 }

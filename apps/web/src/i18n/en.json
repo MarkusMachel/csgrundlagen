@@ -294,7 +294,8 @@
       "materials": "Materials",
       "bugs": "Bug reports",
       "users": "Users",
-      "comments": "Comments"
+      "comments": "Comments",
+      "quality": "Quality"
     },
     "questionType": "Question type",
     "type": {
@@ -401,7 +402,40 @@
     "runnableHint": "js runs in the browser, go in the Go Playground; learners can run it after answering",
     "notRunnableHint": "this language can't be run, so learners only predict",
     "expectedOutput": "Expected output",
-    "runToFill": "Run to fill expected output"
+    "runToFill": "Run to fill expected output",
+    "history": {
+      "back": "Back to the list",
+      "view": "View",
+      "edit": "Edit",
+      "title": "History",
+      "empty": "No versions recorded yet.",
+      "current": "current",
+      "unknownEditor": "someone (deleted account)",
+      "changed": "changed {{fields}}",
+      "showVersion": "Show this version",
+      "hideVersion": "Hide",
+      "restore": "Restore",
+      "confirmRestore": "Restore this version?",
+      "correctOption": "correct",
+      "answerIs": "Answer:",
+      "kind": {
+        "created": "Created",
+        "edited": "Edited",
+        "restored": "Restored v{{version}}",
+        "original": "Before history began"
+      },
+      "field": {
+        "type": "type",
+        "prompt": "prompt",
+        "options": "options",
+        "answer": "answer",
+        "explanation": "explanation",
+        "code": "code",
+        "tags": "tags",
+        "difficulty": "difficulty",
+        "materials": "materials"
+      }
+    }
   },
   "code": {
     "copy": "Copy code",
@@ -675,6 +709,42 @@
     "step3": {
       "title": "Watch your progress, or build a test",
       "text": "Coverage, accuracy per topic and streaks are in"
+    }
+  },
+  "quality": {
+    "intro": "Judged from real answers. A question needs {{min}} answers before it is flagged.",
+    "analysed": "Questions analysed",
+    "flagged": "Flagged",
+    "tooFew": "Under {{min}} answers",
+    "filter": "Show",
+    "allFlagged": "All flagged",
+    "empty": "Nothing to fix here.",
+    "answers_one": "{{count}} answer",
+    "answers_other": "{{count}} answers",
+    "correctRate": "{{rate}} right",
+    "picks": "How often each option was picked",
+    "correctOption": "(correct option)",
+    "flag": {
+      "wrong_key": {
+        "name": "Wrong key?",
+        "hint": "A wrong option is picked more often than the correct one; check the answer key."
+      },
+      "open_bug_reports": {
+        "name": "Open bug reports",
+        "hint": "Users reported a problem that is still open."
+      },
+      "too_hard": {
+        "name": "Too hard",
+        "hint": "30% or fewer get it right: unclear wording, or the answer may be wrong."
+      },
+      "too_easy": {
+        "name": "Too easy",
+        "hint": "95% or more get it right: it teaches little; make the distractors more tempting."
+      },
+      "dead_distractor": {
+        "name": "Unused option",
+        "hint": "A wrong option almost nobody picks (under 3%); replace it with a believable mistake."
+      }
     }
   }
 }

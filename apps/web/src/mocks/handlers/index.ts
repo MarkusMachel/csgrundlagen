@@ -5,6 +5,7 @@ import { materialHandlers } from './materials';
 import { moderationHandlers } from './moderation';
 import { privacyHandlers } from './privacy';
 import { profileHandlers } from './profile';
+import { qualityHandlers } from './quality';
 import { questionHandlers } from './questions';
 import { reviewHandlers } from './review';
 import { searchHandlers } from './search';
@@ -15,6 +16,7 @@ export const handlers = [
   ...adminHandlers,
   ...deviceHandlers,
   ...privacyHandlers,
+  ...qualityHandlers,
   ...moderationHandlers,
   ...profileHandlers,
   // materialHandlers before questionHandlers so /questions/:id/materials

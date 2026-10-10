@@ -294,7 +294,8 @@
       "materials": "Materialien",
       "bugs": "Fehlermeldungen",
       "users": "Benutzer",
-      "comments": "Kommentare"
+      "comments": "Kommentare",
+      "quality": "Qualität"
     },
     "questionType": "Fragetyp",
     "type": {
@@ -401,7 +402,40 @@
     "runnableHint": "js läuft im Browser, go im Go Playground; Lernende können nach dem Antworten ausführen",
     "notRunnableHint": "diese Sprache kann nicht ausgeführt werden, Lernende sagen nur vorher",
     "expectedOutput": "Erwartete Ausgabe",
-    "runToFill": "Ausführen und Ausgabe übernehmen"
+    "runToFill": "Ausführen und Ausgabe übernehmen",
+    "history": {
+      "back": "Zurück zur Liste",
+      "view": "Ansicht",
+      "edit": "Bearbeiten",
+      "title": "Verlauf",
+      "empty": "Noch keine Versionen erfasst.",
+      "current": "aktuell",
+      "unknownEditor": "jemand (gelöschtes Konto)",
+      "changed": "geändert: {{fields}}",
+      "showVersion": "Diese Version anzeigen",
+      "hideVersion": "Ausblenden",
+      "restore": "Wiederherstellen",
+      "confirmRestore": "Diese Version wiederherstellen?",
+      "correctOption": "richtig",
+      "answerIs": "Antwort:",
+      "kind": {
+        "created": "Erstellt",
+        "edited": "Bearbeitet",
+        "restored": "v{{version}} wiederhergestellt",
+        "original": "Vor Beginn des Verlaufs"
+      },
+      "field": {
+        "type": "Typ",
+        "prompt": "Frage",
+        "options": "Optionen",
+        "answer": "Antwort",
+        "explanation": "Erklärung",
+        "code": "Code",
+        "tags": "Tags",
+        "difficulty": "Schwierigkeit",
+        "materials": "Materialien"
+      }
+    }
   },
   "code": {
     "copy": "Code kopieren",
@@ -675,6 +709,42 @@
     "step3": {
       "title": "Verfolge deinen Fortschritt oder baue einen Test",
       "text": "Abdeckung, Trefferquote pro Thema und Serien findest du in"
+    }
+  },
+  "quality": {
+    "intro": "Anhand echter Antworten bewertet. Eine Frage braucht {{min}} Antworten, bevor sie markiert wird.",
+    "analysed": "Analysierte Fragen",
+    "flagged": "Markiert",
+    "tooFew": "Unter {{min}} Antworten",
+    "filter": "Anzeigen",
+    "allFlagged": "Alle markierten",
+    "empty": "Hier gibt es nichts zu tun.",
+    "answers_one": "{{count}} Antwort",
+    "answers_other": "{{count}} Antworten",
+    "correctRate": "{{rate}} richtig",
+    "picks": "Wie oft jede Option gewählt wurde",
+    "correctOption": "(richtige Option)",
+    "flag": {
+      "wrong_key": {
+        "name": "Falscher Schlüssel?",
+        "hint": "Eine falsche Option wird öfter gewählt als die richtige; prüfe die Lösung."
+      },
+      "open_bug_reports": {
+        "name": "Offene Fehlermeldungen",
+        "hint": "Nutzer haben ein Problem gemeldet, das noch offen ist."
+      },
+      "too_hard": {
+        "name": "Zu schwer",
+        "hint": "30 % oder weniger liegen richtig: unklare Formulierung oder falsche Lösung."
+      },
+      "too_easy": {
+        "name": "Zu leicht",
+        "hint": "95 % oder mehr liegen richtig: wenig Lerneffekt; mach die falschen Optionen verlockender."
+      },
+      "dead_distractor": {
+        "name": "Ungenutzte Option",
+        "hint": "Eine falsche Option wählt fast niemand (unter 3 %); ersetze sie durch einen glaubwürdigen Fehler."
+      }
     }
   }
 }

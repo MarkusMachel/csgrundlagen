@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"strconv"
 	"strings"
 	"testing"
 
@@ -382,3 +383,5 @@ func TestAPI(t *testing.T) {
 	expect(t, "logout", c.do("POST", "/api/auth/logout", adaTok, nil, nil), 204)
 	expect(t, "token revoked", c.do("GET", "/api/auth/me", adaTok, nil, nil), 401)
 }
+
+func itoa(n int64) string { return strconv.FormatInt(n, 10) }

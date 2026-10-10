@@ -6,6 +6,7 @@ import {
   AdminStatsTab,
   BugReportQueue,
   CommentModeration,
+  QualityReportTab,
   MaterialForm,
   MaterialManager,
   QuestionForm,
@@ -17,7 +18,15 @@ import {
 import { AdminUsersTab } from '@/features/devices';
 
 type Tab =
-  'stats' | 'question' | 'material' | 'questions' | 'materials' | 'bugs' | 'comments' | 'users';
+  | 'stats'
+  | 'quality'
+  | 'question'
+  | 'material'
+  | 'questions'
+  | 'materials'
+  | 'bugs'
+  | 'comments'
+  | 'users';
 
 export function AdminPage() {
   const { t } = useTranslation();
@@ -33,6 +42,7 @@ export function AdminPage() {
 
   const tabs: Tab[] = [
     'stats',
+    'quality',
     'question',
     'material',
     'questions',
@@ -94,6 +104,7 @@ export function AdminPage() {
           aria-labelledby={`${idBase}-tab-${tab}`}
         >
           {tab === 'stats' && <AdminStatsTab />}
+          {tab === 'quality' && <QualityReportTab />}
           {tab === 'question' && <QuestionForm />}
           {tab === 'material' && <MaterialForm />}
           {tab === 'questions' && <QuestionManager />}

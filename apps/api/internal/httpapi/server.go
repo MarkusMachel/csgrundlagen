@@ -78,6 +78,8 @@ func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
 	mux.HandleFunc("GET /api/questions/{id}", s.getQuestion)
 	mux.HandleFunc("PUT /api/questions/{id}", s.admin(s.updateQuestion))
 	mux.HandleFunc("DELETE /api/questions/{id}", s.admin(s.deleteQuestion))
+	mux.HandleFunc("GET /api/questions/{id}/revisions", s.admin(s.questionRevisions))
+	mux.HandleFunc("POST /api/questions/{id}/revisions/{rid}/restore", s.admin(s.restoreRevision))
 	mux.HandleFunc("POST /api/questions/{id}/submit", s.authed(s.submitAnswer))
 	mux.HandleFunc("GET /api/questions/{id}/comments", s.listComments)
 	mux.HandleFunc("POST /api/questions/{id}/comments", s.authed(s.addComment))
@@ -121,6 +123,7 @@ func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
 	mux.HandleFunc("DELETE /api/materials/{id}", s.admin(s.deleteMaterial))
 
 	mux.HandleFunc("GET /api/admin/stats", s.admin(s.adminStats))
+	mux.HandleFunc("GET /api/admin/quality", s.admin(s.qualityReport))
 	mux.HandleFunc("GET /api/admin/bug-reports", s.admin(s.listBugReports))
 	mux.HandleFunc("PATCH /api/admin/bug-reports/{id}", s.admin(s.setBugReportStatus))
 	mux.HandleFunc("GET /api/admin/comments", s.admin(s.moderationQueue))

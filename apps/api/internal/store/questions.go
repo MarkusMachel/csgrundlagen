@@ -494,7 +494,10 @@ func (s *Store) CreateQuestion(ctx context.Context, createdBy string, n NewQuest
 		).Scan(&id); err != nil {
 			return err
 		}
-		return writeQuestionParts(ctx, tx, id, n)
+		if err := writeQuestionParts(ctx, tx, id, n); err != nil {
+			return err
+		}
+		return recordRevision(ctx, tx, id, createdBy, "created", revisionSnapshot{NewQuestion: n})
 	})
 	if err != nil {
 		return Question{}, err
@@ -505,11 +508,30 @@ func (s *Store) CreateQuestion(ctx context.Context, createdBy string, n NewQuest
 // UpdateQuestion replaces a question's content, options, tags and material
 // links. Answers, stats, notes and comments are kept. Option translations are
 // dropped with the old options, since the options themselves may have changed.
-func (s *Store) UpdateQuestion(ctx context.Context, id string, n NewQuestion) (Question, error) {
+func (s *Store) UpdateQuestion(ctx context.Context, editorID, id string, n NewQuestion) (Question, error) {
+	return s.saveQuestion(ctx, editorID, id, n, "edited", nil)
+}
+
+// saveQuestion applies new content and records it as a revision.
+func (s *Store) saveQuestion(ctx context.Context, editorID, id string, n NewQuestion, kind string, restoredFrom *int64) (Question, error) {
 	if err := n.validate(); err != nil {
 		return Question{}, err
 	}
-	err := s.withTx(ctx, func(tx pgx.Tx) error {
+	// The state before the first recorded edit, so it can still be restored.
+	before, err := s.currentInput(ctx, id)
+	if err != nil {
+		return Question{}, err
+	}
+	err = s.withTx(ctx, func(tx pgx.Tx) error {
+		had, err := hasRevisions(ctx, tx, id)
+		if err != nil {
+			return err
+		}
+		if !had {
+			if err := recordRevision(ctx, tx, id, "", "original", revisionSnapshot{NewQuestion: before}); err != nil {
+				return err
+			}
+		}
 		code, lang, expected := n.outputFields()
 		tag, err := tx.Exec(ctx, `
 			UPDATE questions
@@ -529,7 +551,10 @@ func (s *Store) UpdateQuestion(ctx context.Context, id string, n NewQuestion) (Q
 				return err
 			}
 		}
-		return writeQuestionParts(ctx, tx, id, n)
+		if err := writeQuestionParts(ctx, tx, id, n); err != nil {
+			return err
+		}
+		return recordRevision(ctx, tx, id, editorID, kind, revisionSnapshot{NewQuestion: n, RestoredFrom: restoredFrom})
 	})
 	if err != nil {
 		return Question{}, err
