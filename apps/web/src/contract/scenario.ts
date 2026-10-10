@@ -361,6 +361,35 @@ export async function runScenario(backend: Backend): Promise<Recorded[]> {
   const sessions = await call<Row[]>('my sessions', 'user', 'GET', '/me/sessions');
   await call('update profile', 'user', 'PATCH', '/me', { name: 'Contract Person', locale: 'de' });
   await call('update profile invalid', 'user', 'PATCH', '/me', { name: '' });
+  // --- saved filters ---
+  await call('no saved filters', 'user', 'GET', '/me/filters');
+  const savedFilter = await call('save filter', 'user', 'POST', '/me/filters', {
+    name: ' Hard contract ',
+    filters: {
+      search: ' udp ',
+      tags: ['Contract'],
+      difficulties: ['hard'],
+      status: 'wrong',
+      sort: 'random',
+      seed: 'abc',
+    },
+  });
+  await call('save empty filter', 'user', 'POST', '/me/filters', { name: 'Everything', filters: {} });
+  await call('save duplicate filter name', 'user', 'POST', '/me/filters', {
+    name: 'hard CONTRACT',
+    filters: {},
+  });
+  await call('save filter bad status', 'user', 'POST', '/me/filters', {
+    name: 'Bad',
+    filters: { status: 'nope' },
+  });
+  await call('rename filter', 'user', 'PATCH', `/me/filters/${savedFilter.id}`, { name: 'Hard ones' });
+  await call('change filter of other user', 'admin', 'PATCH', `/me/filters/${savedFilter.id}`, {
+    name: 'mine',
+  });
+  await call('saved filters', 'user', 'GET', '/me/filters');
+  await call('saved filters anonymous', 'anon', 'GET', '/me/filters');
+
   await call('export my data', 'user', 'GET', '/me/export', undefined, [
     '$.testAttempts[].answers',
   ]);

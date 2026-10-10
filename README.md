@@ -276,6 +276,13 @@ app/ (providers, router, layout: tab strip + status bar)  →  pages/ (thin comp
   (`translations[locale]`); handlers resolve a `locale` query param. EN is complete,
   pt-BR/de are stubbed for the first questions to demonstrate the pattern (§5).
 - **Search** is a command-palette (⌘/Ctrl+K or the ⌕ icon) with grouped results.
+- **Filters**: Home and the test builder keep their filters in the URL
+  (`?q=…&tag=…&difficulty=…&status=…&sort=…&seed=…`, `features/questions/filterUrl.ts`),
+  so back/forward, bookmarks and shared links work, and remember the last ones
+  shown in the browser for the next visit (`useFilterState`). Signed-in users
+  can save named filters (`/api/me/filters`, up to 20, in the data export);
+  they show in the filter panel, and on Home each one links to the builder with
+  its filters.
 - **Signed-out browsing**: Home, questions and material are open to everyone.
   Anything that needs an account asks to log in in a modal and then carries on:
   the API client (`shared/api/client.ts`) holds back changes made while signed

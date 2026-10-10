@@ -2,6 +2,7 @@ import { adminHandlers } from './admin';
 import { ankiHandlers } from './anki';
 import { authHandlers } from './auth';
 import { deviceHandlers } from './devices';
+import { filterHandlers } from './filters';
 import { materialHandlers } from './materials';
 import { moderationHandlers } from './moderation';
 import { privacyHandlers } from './privacy';
@@ -21,6 +22,7 @@ export const handlers = [
   ...qualityHandlers,
   ...moderationHandlers,
   ...profileHandlers,
+  ...filterHandlers,
   // materialHandlers before questionHandlers so /questions/:id/materials
   // wins over the generic /questions/:id matcher ordering concerns —
   // MSW matches most-specific path first regardless, but keeping the

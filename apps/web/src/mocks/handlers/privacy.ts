@@ -160,6 +160,12 @@ export const privacyHandlers = [
         started_at: a.startedAt,
         submitted_at: a.submittedAt ?? null,
       })),
+      savedFilters: mine(db.savedFilters).map((f) => ({
+        id: f.id,
+        name: f.name,
+        filters: f.filters,
+        created_at: f.createdAt,
+      })),
     });
   }),
 

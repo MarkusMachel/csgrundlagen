@@ -218,3 +218,72 @@
   padding: 4px 8px;
   color: var(--muted);
 }
+
+/* ---------- saved filters ---------- */
+
+.saved-filters {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+}
+
+.saved-filters__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: 100%;
+}
+
+.saved-filters__item {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+}
+
+.saved-filters__apply {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 4px 4px 4px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.saved-filters__apply span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.saved-filters__apply svg {
+  flex: none;
+  color: var(--accent);
+}
+
+.saved-filters__item:has(.saved-filters__apply[aria-pressed='true']) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.saved-filters__form {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+}
+
+.saved-filters__empty {
+  margin: 0;
+  font-size: 13px;
+}

@@ -1,5 +1,5 @@
 import { Check, ChevronDown, Search, Shuffle } from 'lucide-react';
-import { useId, useState } from 'react';
+import { useId, useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -20,6 +20,8 @@ interface QuestionFilterSidebarProps {
   allTags: string[];
   /** Matching question count, once known. */
   total?: number;
+  /** Shown above the filters, e.g. the saved filters. */
+  extra?: ReactNode;
 }
 
 /** True on the layout where the panel is a sticky sidebar (matches the CSS breakpoint). */
@@ -35,6 +37,7 @@ export function QuestionFilterSidebar({
   onChange,
   allTags,
   total,
+  extra,
 }: QuestionFilterSidebarProps) {
   const { t } = useTranslation();
   const ids = { status: useId(), sort: useId(), difficulty: useId(), tags: useId() };
@@ -85,6 +88,8 @@ export function QuestionFilterSidebar({
             </button>
           )}
         </div>
+
+        {extra}
 
         <section className="filter-panel__section" aria-labelledby={ids.status}>
           <h3 id={ids.status} className="filter-panel__heading">

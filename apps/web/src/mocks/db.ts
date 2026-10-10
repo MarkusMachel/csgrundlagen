@@ -8,6 +8,7 @@ import type {
   QuestionComment,
   Question,
   QuestionNote,
+  SavedFilter,
   UserQuestionStat,
 } from '@/features/questions/types';
 import { nextReview } from '@/features/review/srs';
@@ -82,6 +83,8 @@ interface Db {
   }[];
   /** Unfinished attempts, keyed `${testId}:${userId}`. */
   drafts: Record<string, TestDraft & { updatedAt: string }>;
+  /** Named filters (mirrors saved_filters). */
+  savedFilters: (SavedFilter & { userId: string })[];
   attempts: TestAttempt[];
   userQuestionStats: UserQuestionStat[];
   /** Spaced-repetition state, keyed `${userId}:${questionId}`. */
@@ -184,6 +187,7 @@ function freshDb(): Db {
     optionFeedback: {},
     revisions: [],
     drafts: {},
+    savedFilters: [],
     commentReports: [],
     consents: [],
     questions: [...seedQuestions, ...designSeedQuestions].map((s) => ({

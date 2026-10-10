@@ -882,5 +882,16 @@
       "object-storage": "Armazenamento de objetos",
       "search": "Índice de busca"
     }
+  },
+  "filters": {
+    "saved": "Filtros salvos",
+    "save": "Salvar estes filtros",
+    "nameLabel": "Nome para estes filtros",
+    "namePlaceholder": "ex.: Redes difíceis",
+    "saveButton": "Salvar",
+    "saveFailed": "Não foi possível salvar os filtros. Tente de novo.",
+    "delete": "Excluir o filtro salvo {{name}}",
+    "buildTest": "Montar um teste com {{name}}",
+    "none": "Escolha alguns filtros e salve-os aqui para voltar com um clique."
   }
 }

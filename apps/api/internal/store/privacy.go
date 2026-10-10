@@ -125,7 +125,9 @@ func (s *Store) ExportUserData(ctx context.Context, userID string) (json.RawMess
 		      FROM custom_tests ct WHERE ct.owner_id = $1) t),
 		  'testAttempts', (SELECT COALESCE(json_agg(t ORDER BY t.started_at), '[]') FROM (
 		      SELECT id, test_id, mode, answers, score, started_at, submitted_at
-		      FROM test_attempts WHERE user_id = $1) t)
+		      FROM test_attempts WHERE user_id = $1) t),
+		  'savedFilters', (SELECT COALESCE(json_agg(t ORDER BY t.created_at), '[]') FROM (
+		      SELECT id, name, filters, created_at FROM saved_filters WHERE user_id = $1) t)
 		)`, userID, PrivacyPolicyVersion).Scan(&out)
 	return out, notFound(err)
 }

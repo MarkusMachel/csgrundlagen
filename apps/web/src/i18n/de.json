@@ -882,5 +882,16 @@
       "object-storage": "Objektspeicher",
       "search": "Suchindex"
     }
+  },
+  "filters": {
+    "saved": "Gespeicherte Filter",
+    "save": "Diese Filter speichern",
+    "nameLabel": "Name für diese Filter",
+    "namePlaceholder": "z. B. Schwere Netzwerkfragen",
+    "saveButton": "Speichern",
+    "saveFailed": "Die Filter konnten nicht gespeichert werden. Versuch es noch einmal.",
+    "delete": "Gespeicherten Filter {{name}} löschen",
+    "buildTest": "Test aus {{name}} erstellen",
+    "none": "Wähle Filter und speichere sie hier, um sie mit einem Klick wiederzufinden."
   }
 }

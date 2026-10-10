@@ -882,5 +882,16 @@
       "object-storage": "Object storage",
       "search": "Search index"
     }
+  },
+  "filters": {
+    "saved": "Saved filters",
+    "save": "Save these filters",
+    "nameLabel": "Name for these filters",
+    "namePlaceholder": "e.g. Hard networking",
+    "saveButton": "Save",
+    "saveFailed": "Couldn't save the filters. Try again.",
+    "delete": "Delete saved filter {{name}}",
+    "buildTest": "Build a test from {{name}}",
+    "none": "Pick some filters, then save them here to come back in one click."
   }
 }

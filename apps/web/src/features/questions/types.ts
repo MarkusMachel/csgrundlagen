@@ -245,3 +245,18 @@ export interface QuestionsPage {
 
 export type QuestionMode = 'feed' | 'pick' | 'test' | 'review';
 export type TestSubMode = 'practice' | 'exam';
+
+/** A named filter the user saved (GET /api/me/filters). */
+export interface SavedFilter {
+  id: string;
+  name: string;
+  filters: {
+    search: string;
+    tags: string[];
+    difficulties: ('easy' | 'medium' | 'hard')[];
+    status: '' | 'unanswered' | 'answered' | 'wrong' | 'bookmarked';
+    sort: 'oldest' | 'newest' | 'random';
+    seed: string;
+  };
+  createdAt: string;
+}
