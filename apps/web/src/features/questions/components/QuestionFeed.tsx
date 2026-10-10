@@ -25,6 +25,9 @@ interface QuestionFeedProps {
   layout?: 'bar' | 'sidebar';
   /** Content above the results in the main column (sidebar layout), e.g. the Question of the Day. */
   lead?: ReactNode;
+  /** Controlled filters, for parents that set them (e.g. a topic picked elsewhere). */
+  filters?: FilterState;
+  onFiltersChange?: (filters: FilterState) => void;
 }
 
 /**
@@ -38,10 +41,16 @@ export function QuestionFeed({
   onToggleSelect,
   layout = 'bar',
   lead,
+  filters: controlledFilters,
+  onFiltersChange,
 }: QuestionFeedProps) {
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
-  const [filters, setFilters] = useState<FilterState>(emptyFilters);
+  const [ownFilters, setOwnFilters] = useState<FilterState>(emptyFilters);
+  const filters = controlledFilters ?? ownFilters;
+  const setFilters = onFiltersChange ?? setOwnFilters;
+  // Back to page 1 when the parent changes the filters.
+  useEffect(() => setPage(1), [controlledFilters]);
   const debouncedSearch = useDebounce(filters.search, 300);
 
   const { data: tags } = useTags();

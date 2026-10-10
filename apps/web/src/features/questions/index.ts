@@ -2,6 +2,7 @@
 // from here only, never from internal files.
 export { QuestionCard, type QuestionCardProps } from './components/QuestionCard';
 export { QuestionFeed } from './components/QuestionFeed';
+export { emptyFilters, type FilterState } from './components/QuestionFilters';
 export {
   useDailyQuestion,
   useQuestion,

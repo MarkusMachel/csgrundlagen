@@ -19,6 +19,9 @@ interface UIState {
   setLocale: (locale: Locale) => void;
   recordAnswerResult: (correct: boolean) => void;
   setStatus: (text: string | null, dots?: boolean[] | null) => void;
+  /** The getting-started panel was closed (this page load only). */
+  welcomeHidden: boolean;
+  hideWelcome: () => void;
 }
 
 function systemThemeMode(): ThemeMode {
@@ -36,6 +39,8 @@ export const useUIStore = create<UIState>()(
       streak: 0,
       statusText: null,
       statusDots: null,
+      welcomeHidden: false,
+      hideWelcome: () => set({ welcomeHidden: true }),
       setThemeMode: (themeMode) => set({ themeMode }),
       toggleThemeMode: () =>
         set((s) => ({ themeMode: s.themeMode === 'light' ? 'dark' : 'light' })),

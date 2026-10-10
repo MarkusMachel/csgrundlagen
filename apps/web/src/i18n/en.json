@@ -659,5 +659,22 @@
     "commentBy": "comment by {{name}}",
     "openCount_one": "{{count}} reported comment",
     "openCount_other": "{{count}} reported comments"
+  },
+  "onboarding": {
+    "title": "Welcome! Here’s how to get going",
+    "hide": "Hide for now",
+    "intro": "{{count}} questions are waiting. Three steps to make the most of them:",
+    "step1": {
+      "title": "Pick a topic to start with",
+      "text": "Answer a few questions; each one shows the explanation and links to reading material."
+    },
+    "step2": {
+      "title": "Come back for your reviews",
+      "text": "Every answer schedules a review: wrong ones in minutes, right ones in days. Due cards collect in"
+    },
+    "step3": {
+      "title": "Watch your progress, or build a test",
+      "text": "Coverage, accuracy per topic and streaks are in"
+    }
   }
 }

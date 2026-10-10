@@ -659,5 +659,22 @@
     "commentBy": "Kommentar von {{name}}",
     "openCount_one": "{{count}} gemeldeter Kommentar",
     "openCount_other": "{{count}} gemeldete Kommentare"
+  },
+  "onboarding": {
+    "title": "Willkommen! So legst du los",
+    "hide": "Vorerst ausblenden",
+    "intro": "{{count}} Fragen warten auf dich. Drei Schritte, um das Beste daraus zu machen:",
+    "step1": {
+      "title": "Wähle ein Thema zum Start",
+      "text": "Beantworte ein paar Fragen; jede zeigt die Erklärung und verlinkt Lesestoff."
+    },
+    "step2": {
+      "title": "Komm für deine Wiederholungen zurück",
+      "text": "Jede Antwort plant eine Wiederholung: falsche in Minuten, richtige in Tagen. Fällige Karten sammeln sich in"
+    },
+    "step3": {
+      "title": "Verfolge deinen Fortschritt oder baue einen Test",
+      "text": "Abdeckung, Trefferquote pro Thema und Serien findest du in"
+    }
   }
 }

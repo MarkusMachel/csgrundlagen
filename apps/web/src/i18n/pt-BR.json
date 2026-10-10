@@ -659,5 +659,22 @@
     "commentBy": "comentário de {{name}}",
     "openCount_one": "{{count}} comentário denunciado",
     "openCount_other": "{{count}} comentários denunciados"
+  },
+  "onboarding": {
+    "title": "Boas-vindas! Veja como começar",
+    "hide": "Ocultar por enquanto",
+    "intro": "{{count}} perguntas esperam por você. Três passos para aproveitá-las:",
+    "step1": {
+      "title": "Escolha um tema para começar",
+      "text": "Responda algumas perguntas; cada uma mostra a explicação e links para leitura."
+    },
+    "step2": {
+      "title": "Volte para as revisões",
+      "text": "Cada resposta agenda uma revisão: as erradas em minutos, as certas em dias. Os cartões pendentes ficam em"
+    },
+    "step3": {
+      "title": "Acompanhe seu progresso ou monte um teste",
+      "text": "Cobertura, acerto por tema e sequências estão em"
+    }
   }
 }
