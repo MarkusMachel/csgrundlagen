@@ -9,7 +9,9 @@
     "delete": "Delete",
     "close": "Close",
     "submit": "Submit",
-    "language": "Language"
+    "language": "Language",
+    "yes": "Yes",
+    "no": "No"
   },
   "nav": {
     "home": "Home",
@@ -65,7 +67,23 @@
     "passwordsDiffer": "Passwords don't match",
     "emailTaken": "An account with this email already exists. Try logging in instead.",
     "tooManyAttempts": "Too many attempts. Wait a minute and try again.",
-    "genericError": "Something went wrong. Please try again."
+    "genericError": "Something went wrong. Please try again.",
+    "prompt": {
+      "loginTitle": "Log in to continue",
+      "signUpTitle": "Create your account",
+      "why": "Browsing is free. Log in to answer, save bookmarks and notes, build tests and track your progress.",
+      "inline": "log in to use this",
+      "gateTitle": "This page is yours once you log in",
+      "gateBody": "Your progress, reviews, bookmarks and tests are kept with your account.",
+      "gateHint": "log in or create a free account"
+    },
+    "brand": {
+      "tagline": "Practise computer science fundamentals until the answers stick.",
+      "f1": "questions across networking, OS, data structures and more",
+      "f2": "spaced repetition brings back what you are about to forget",
+      "f3": "timed tests, weak spots and progress you can see",
+      "browse": "Look around first"
+    }
   },
   "home": {
     "questionOfTheDay": "Question of the Day",
@@ -128,7 +146,24 @@
       "placeholder": "Add a comment…",
       "post": "Post",
       "empty": "No comments yet — be the first.",
-      "required": "Comment cannot be empty"
+      "required": "Comment cannot be empty",
+      "hidden": "hidden",
+      "report": "Report",
+      "reportLabel": "Report comment by {{name}}",
+      "reported": "Reported",
+      "delete": "Delete",
+      "deleteLabel": "Delete comment by {{name}}",
+      "confirmDelete": "Delete?",
+      "reportTitle": "Report comment",
+      "why": "What’s wrong with it?",
+      "note": "Anything else? (optional)",
+      "sendReport": "Send report",
+      "reason": {
+        "spam": "Spam or advertising",
+        "offensive": "Offensive or abusive",
+        "misleading": "Wrong or misleading",
+        "other": "Something else"
+      }
     },
     "notes": {
       "label": "Private note",
@@ -157,7 +192,9 @@
     "moveDown": "Move “{{item}}” down",
     "predictOutput": "what does this print?",
     "outputPlaceholder": "type the exact output, one line per line printed",
-    "expectedOutput": "expected output"
+    "expectedOutput": "expected output",
+    "whyWrong": "Why not",
+    "readAbout": "Read: {{title}}"
   },
   "builder": {
     "title": "Build a Test",
@@ -192,7 +229,8 @@
     "score": "Score",
     "mode": "Mode",
     "date": "Date",
-    "deleteTest": "Delete test"
+    "deleteTest": "Delete test",
+    "resume": "Resume ({{answered}}/{{total}} answered)"
   },
   "takeTest": {
     "chooseMode": "Choose a mode",
@@ -207,7 +245,16 @@
     "yourScore": "You scored {{score}} of {{total}}",
     "retryIncorrect": "Retry Incorrect Only",
     "backToTests": "Back to My Tests",
-    "questionOf": "Question {{current}} of {{total}}"
+    "questionOf": "Question {{current}} of {{total}}",
+    "resume": {
+      "title": "You have an unfinished attempt",
+      "summary": "{{mode}}, {{answered}} of {{total}} answered, last saved {{when}}.",
+      "timeLeft": "About {{minutes}} min left on the clock.",
+      "timeUp": "The time ran out while you were away.",
+      "continue": "Resume",
+      "submitNow": "Open and submit",
+      "startOver": "Discard and start over"
+    }
   },
   "bookmarks": {
     "title": "Bookmarks",
@@ -263,7 +310,11 @@
       "stats": "Stats",
       "questions": "Questions",
       "materials": "Materials",
-      "bugs": "Bug reports"
+      "bugs": "Bug reports",
+      "users": "Users",
+      "comments": "Comments",
+      "quality": "Quality",
+      "import": "Import"
     },
     "questionType": "Question type",
     "type": {
@@ -271,7 +322,8 @@
       "true-false": "True / False",
       "multi-select": "Pick all that apply",
       "ordering": "Ordering",
-      "output": "Predict the output"
+      "output": "Predict the output",
+      "flashcard": "flashcard"
     },
     "prompt": "Prompt",
     "options": "Options",
@@ -370,7 +422,52 @@
     "runnableHint": "js runs in the browser, go in the Go Playground; learners can run it after answering",
     "notRunnableHint": "this language can't be run, so learners only predict",
     "expectedOutput": "Expected output",
-    "runToFill": "Run to fill expected output"
+    "runToFill": "Run to fill expected output",
+    "history": {
+      "back": "Back to the list",
+      "view": "View",
+      "edit": "Edit",
+      "title": "History",
+      "empty": "No versions recorded yet.",
+      "current": "current",
+      "unknownEditor": "someone (deleted account)",
+      "changed": "changed {{fields}}",
+      "showVersion": "Show this version",
+      "hideVersion": "Hide",
+      "restore": "Restore",
+      "confirmRestore": "Restore this version?",
+      "correctOption": "correct",
+      "answerIs": "Answer:",
+      "kind": {
+        "created": "Created",
+        "edited": "Edited",
+        "restored": "Restored v{{version}}",
+        "original": "Before history began"
+      },
+      "field": {
+        "type": "type",
+        "prompt": "prompt",
+        "options": "options",
+        "answer": "answer",
+        "explanation": "explanation",
+        "code": "code",
+        "tags": "tags",
+        "difficulty": "difficulty",
+        "materials": "materials"
+      }
+    },
+    "feedback": {
+      "summary": "If someone picks this… (optional)",
+      "added": "feedback",
+      "label": "Why option {{option}} is wrong",
+      "placeholder": "Explain the misconception behind this option. Shown only to people who pick it.",
+      "materialLabel": "Reading for option {{option}}",
+      "searchMaterials": "Search materials…",
+      "noMaterial": "No reading linked"
+    },
+    "front": "Front",
+    "back": "Back",
+    "flashcardHint": "The front is the question, the back the answer; learners grade themselves."
   },
   "code": {
     "copy": "Copy code",
@@ -381,6 +478,24 @@
     "role": {
       "admin": "admin",
       "user": "member"
+    },
+    "profile": {
+      "title": "Profile",
+      "save": "Save profile",
+      "saved": "Profile saved."
+    },
+    "email": {
+      "title": "Email address",
+      "current": "Your account uses {{email}}.",
+      "new": "New email address",
+      "send": "Send confirmation link",
+      "sent": "We sent a link to {{email}}. Your email changes once you open it (within 24 hours).",
+      "again": "Use a different address",
+      "confirmTitle": "Confirm your email",
+      "confirmed": "Done: your account now uses {{email}}.",
+      "invalidLink": "This confirmation link is invalid or has expired.",
+      "toAccount": "Go to your account",
+      "password": "Your password, to confirm"
     }
   },
   "review": {
@@ -436,5 +551,264 @@
     "predictFirst": "Run unlocks after you answer: predict first",
     "goNote": "runs in the Go Playground",
     "failed": "Couldn't run the code."
+  },
+  "devices": {
+    "title": "Signed-in devices",
+    "intro": "Everywhere your account is signed in right now. Sign out any device you don’t recognise.",
+    "browserOn": "{{browser}} on {{os}}",
+    "thisDevice": "This device",
+    "lastActive": "Active {{when}}",
+    "signedIn": "signed in {{date}}",
+    "details": "Details",
+    "signOut": "Sign out",
+    "signOutHere": "Sign out here",
+    "signOutOthers_one": "Sign out {{count}} other device",
+    "signOutOthers_other": "Sign out {{count}} other devices",
+    "type": {
+      "desktop": "Desktop",
+      "mobile": "Phone",
+      "tablet": "Tablet",
+      "bot": "Bot or script"
+    },
+    "fact": {
+      "device": "Device type",
+      "firstIp": "IP at sign-in",
+      "lastIp": "Latest IP",
+      "timezone": "Time zone",
+      "languages": "Languages",
+      "platform": "Platform",
+      "screen": "Screen",
+      "viewport": "Window",
+      "touch": "Touch screen",
+      "colorScheme": "Colour scheme",
+      "expires": "Session expires",
+      "userAgent": "User agent"
+    },
+    "event": {
+      "login": "Signed in",
+      "signup": "Created account",
+      "login_failed": "Wrong password",
+      "password_reset": "Reset password"
+    },
+    "admin": {
+      "search": "Search users by name or email…",
+      "empty": "No users match.",
+      "never": "never",
+      "col": {
+        "user": "User",
+        "role": "Role",
+        "lastSeen": "Last seen",
+        "devices": "Devices",
+        "answers": "Answers",
+        "joined": "Joined",
+        "actions": "Actions",
+        "when": "When",
+        "event": "Event",
+        "device": "Device"
+      },
+      "sessions_one": "{{count}} session",
+      "sessions_other": "{{count}} sessions",
+      "failed_one": "{{count}} failed",
+      "failed_other": "{{count}} failed",
+      "failedHint": "Wrong-password attempts in the last 24 hours",
+      "view": "View",
+      "viewLabel": "View {{name}}",
+      "back": "All users",
+      "joinedOn": "joined {{date}}",
+      "signOutEverywhere": "Sign out everywhere",
+      "activeDevices_one": "{{count}} active device",
+      "activeDevices_other": "{{count}} active devices",
+      "noSessions": "Not signed in anywhere.",
+      "history": "Sign-in history",
+      "historyHint": "Last 50 events. History is kept for 90 days.",
+      "noHistory": "No sign-ins recorded yet.",
+      "blocked": "blocked",
+      "manage": "Manage account",
+      "makeAdmin": "Make admin",
+      "makeMember": "Make member",
+      "block": "Block",
+      "unblock": "Unblock",
+      "blockedSince": "Blocked since {{date}}: signed out and can’t sign in.",
+      "manageHint": "Blocking signs the user out everywhere. The last admin can’t be demoted, blocked or deleted."
+    }
+  },
+  "privacy": {
+    "policyLink": "Privacy policy",
+    "footerLink": "privacy",
+    "acceptAll": "Accept all",
+    "essentialOnly": "Essential only",
+    "customize": "Choose…",
+    "alwaysOn": "always on",
+    "banner": {
+      "label": "Privacy choices",
+      "text": "We store your sign-in in this browser and keep a security record of the devices you sign in from. With your OK we also remember your theme and language and note details your browser reports (time zone, screen) so you can recognise your devices. No ads, no analytics, no trackers."
+    },
+    "settings": {
+      "open": "Privacy settings",
+      "title": "Privacy settings",
+      "save": "Save my choices",
+      "intro": "Choose what this app may store. You can change this any time from the bottom of every page."
+    },
+    "category": {
+      "essential": {
+        "name": "Essential",
+        "desc": "Keeps you signed in, remembers this choice, and records the IP address, browser and time of each sign-in to protect your account. The app can’t work without these."
+      },
+      "preferences": {
+        "name": "Preferences",
+        "desc": "Remembers your theme (light or dark) and language in this browser. Without it they reset when you reload."
+      },
+      "deviceDetails": {
+        "name": "Device details",
+        "desc": "Stores the time zone, languages, screen size and platform your browser reports with each signed-in device, so you can tell your devices apart. Withdrawing deletes them."
+      }
+    },
+    "page": {
+      "title": "Privacy policy",
+      "version": "Version {{version}}",
+      "operator": "the operator of this site",
+      "backLogin": "Back to sign in",
+      "backAccount": "Back to your account"
+    },
+    "update": {
+      "titleNew": "Our privacy policy",
+      "titleChanged": "Our privacy policy has changed",
+      "text": "Please take a moment to read how we handle your data: what we store, why, how long, and your rights to download or delete it.",
+      "read": "Read it here",
+      "ok": "I’ve read it"
+    },
+    "signup": {
+      "accept": "I have read and accept the",
+      "required": "Please accept the privacy policy to create an account."
+    },
+    "yourData": {
+      "title": "Your data & privacy",
+      "intro": "Download everything we store about you, change what may be stored, or delete your account.",
+      "download": "Download my data",
+      "delete": "Delete my account"
+    },
+    "deleteDialog": {
+      "title": "Delete your account?",
+      "text": "This permanently deletes your account and everything in it: answers, review schedule, bookmarks, notes, comments, tests and devices. It can’t be undone. Download your data first if you want a copy.",
+      "typeWord": "Type {{word}} to confirm",
+      "confirm": "Delete for good"
+    },
+    "admin": {
+      "consent": "Privacy",
+      "policy": "Privacy policy",
+      "acceptedOn": "accepted {{date}} (version {{version}})",
+      "notAccepted": "not accepted yet",
+      "choice": "Consent",
+      "noChoice": "no choice recorded",
+      "choiceValue": "preferences {{preferences}}, device details {{deviceDetails}} · {{date}}",
+      "on": "on",
+      "off": "off"
+    }
+  },
+  "moderation": {
+    "filter": "Show",
+    "filters": {
+      "reported": "Reported",
+      "hidden": "Hidden",
+      "all": "All comments"
+    },
+    "empty": {
+      "reported": "No open reports. All clear.",
+      "hidden": "No hidden comments.",
+      "all": "No comments yet."
+    },
+    "by": "by {{name}} · {{date}}",
+    "reportedBy": "reported by {{name}} · {{date}}",
+    "hide": "Hide",
+    "unhide": "Unhide",
+    "dismiss": "Dismiss reports",
+    "commentBy": "comment by {{name}}",
+    "openCount_one": "{{count}} reported comment",
+    "openCount_other": "{{count}} reported comments"
+  },
+  "onboarding": {
+    "title": "Welcome! Here’s how to get going",
+    "hide": "Hide for now",
+    "intro": "{{count}} questions are waiting. Three steps to make the most of them:",
+    "step1": {
+      "title": "Pick a topic to start with",
+      "text": "Answer a few questions; each one shows the explanation and links to reading material."
+    },
+    "step2": {
+      "title": "Come back for your reviews",
+      "text": "Every answer schedules a review: wrong ones in minutes, right ones in days. Due cards collect in"
+    },
+    "step3": {
+      "title": "Watch your progress, or build a test",
+      "text": "Coverage, accuracy per topic and streaks are in"
+    }
+  },
+  "quality": {
+    "intro": "Judged from real answers. A question needs {{min}} answers before it is flagged.",
+    "analysed": "Questions analysed",
+    "flagged": "Flagged",
+    "tooFew": "Under {{min}} answers",
+    "filter": "Show",
+    "allFlagged": "All flagged",
+    "empty": "Nothing to fix here.",
+    "answers_one": "{{count}} answer",
+    "answers_other": "{{count}} answers",
+    "correctRate": "{{rate}} right",
+    "picks": "How often each option was picked",
+    "correctOption": "(correct option)",
+    "flag": {
+      "wrong_key": {
+        "name": "Wrong key?",
+        "hint": "A wrong option is picked more often than the correct one; check the answer key."
+      },
+      "open_bug_reports": {
+        "name": "Open bug reports",
+        "hint": "Users reported a problem that is still open."
+      },
+      "too_hard": {
+        "name": "Too hard",
+        "hint": "30% or fewer get it right: unclear wording, or the answer may be wrong."
+      },
+      "too_easy": {
+        "name": "Too easy",
+        "hint": "95% or more get it right: it teaches little; make the distractors more tempting."
+      },
+      "dead_distractor": {
+        "name": "Unused option",
+        "hint": "A wrong option almost nobody picks (under 3%); replace it with a believable mistake."
+      }
+    }
+  },
+  "offline": {
+    "offline": "offline",
+    "pending_one": "{{count}} answer waiting to sync",
+    "pending_other": "{{count}} answers waiting to sync",
+    "savedForLater": "Saved on this device; it syncs when you’re back online."
+  },
+  "anki": {
+    "export": "Export to Anki",
+    "exportFailed": "Export failed, retry",
+    "exportHint": "Download these questions as a file Anki can import (File → Import). Exporting again updates the same cards.",
+    "importIntro": "Import an Anki deck as flashcards: in Anki, use File → Export → “Notes in Plain Text” (with HTML and tags), then choose the file here. Cards whose front already exists are skipped, so importing again is safe.",
+    "file": "Anki text export (.txt)",
+    "parsed_one": "{{count}} card found in {{file}}.",
+    "parsed_other": "{{count}} cards found in {{file}}.",
+    "skippedLines_one": "{{count}} line was skipped (fewer than two fields).",
+    "skippedLines_other": "{{count}} lines were skipped (fewer than two fields).",
+    "topics": "Topics",
+    "andMore": "…and {{count}} more",
+    "useCardTags": "Use the cards’ Anki tags as topics (cs::Networking → Networking)",
+    "defaultTags_one": "Topics for the {{count}} card without tags",
+    "defaultTags_other": "Topics for the {{count}} cards without tags",
+    "import_one": "Import {{count}} card",
+    "import_other": "Import {{count}} cards",
+    "done": "Imported {{created}} flashcards; {{skipped}} already existed."
+  },
+  "flashcard": {
+    "show": "Show answer",
+    "answer": "Answer",
+    "how": "Did you know it?",
+    "knew": "I knew it",
+    "didnt": "I didn’t"
   }
 }

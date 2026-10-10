@@ -87,6 +87,10 @@ func isCorrect(q Question, given any) bool {
 	case "output":
 		s, ok := given.(string)
 		return ok && q.ExpectedOutput != nil && NormalizeOutput(s) == NormalizeOutput(*q.ExpectedOutput)
+	case "flashcard":
+		// self-graded: true means "I knew it"
+		b, ok := given.(bool)
+		return ok && b
 	}
 	return false
 }

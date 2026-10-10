@@ -1,5 +1,5 @@
 export type QuestionType =
-  'multiple-choice' | 'true-false' | 'multi-select' | 'ordering' | 'output';
+  'multiple-choice' | 'true-false' | 'multi-select' | 'ordering' | 'output' | 'flashcard';
 
 export interface BaseQuestion {
   id: string;
@@ -13,6 +13,17 @@ export interface BaseQuestion {
 export interface MultipleChoiceOption {
   id: string; // 'A' | 'B' | 'C' | 'D' | 'E'
   label: string;
+  /** Authoring only: why this option is wrong, shown to whoever picks it. */
+  feedback?: string;
+  /** Authoring only: material that clears up the misconception. */
+  materialId?: string;
+}
+
+/** Feedback for a wrong option someone picked (from the answer result). */
+export interface OptionFeedback {
+  optionId: string;
+  text?: string;
+  material?: { id: string; type: string; title: string; url: string; author?: string };
 }
 
 export interface MultipleChoiceQuestion extends BaseQuestion {
@@ -50,12 +61,21 @@ export interface OutputQuestion extends BaseQuestion {
   expectedOutput: string;
 }
 
+/**
+ * A flashcard (e.g. imported from Anki): the prompt is the front, the
+ * explanation the back, and the learner grades themselves (true = knew it).
+ */
+export interface FlashcardQuestion extends BaseQuestion {
+  type: 'flashcard';
+}
+
 export type Question =
   | MultipleChoiceQuestion
   | TrueFalseQuestion
   | MultiSelectQuestion
   | OrderingQuestion
-  | OutputQuestion;
+  | OutputQuestion
+  | FlashcardQuestion;
 
 /**
  * An answer: an option id (multiple choice), a boolean (true/false), option
@@ -70,7 +90,12 @@ export interface QuestionComment {
   userName: string;
   body: string;
   createdAt: string;
+  /** Only admins ever receive hidden comments. */
+  hidden?: boolean;
+  reportedByMe?: boolean;
 }
+
+export type CommentReportReason = 'spam' | 'offensive' | 'misleading' | 'other';
 
 export interface AnswerStat {
   optionId: string; // option id, or 'true' / 'false'
@@ -124,6 +149,10 @@ export interface SubmitAnswerResult {
   correctAnswer: AnswerValue; // correctOptionId or boolean
   /** When spaced repetition brings the question back (ISO time). */
   nextReviewAt?: string;
+  /** Why the picked wrong options are wrong, where the author explained it. */
+  feedback?: OptionFeedback[];
+  /** Graded on the device while offline; sent to the server later. */
+  offline?: boolean;
 }
 
 export interface QuestionsPage {

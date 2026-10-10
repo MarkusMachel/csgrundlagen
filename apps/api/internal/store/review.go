@@ -70,16 +70,21 @@ type querier interface {
 // and returns when it is due next.
 func recordReview(ctx context.Context, q querier, userID, questionID string, correct bool, now time.Time) (time.Time, error) {
 	var prev ReviewState
+	var lastReviewed time.Time
 	err := q.QueryRow(ctx, `
-		SELECT repetitions, interval_days, ease, due_at FROM review_schedule
+		SELECT repetitions, interval_days, ease, due_at, last_reviewed_at FROM review_schedule
 		WHERE user_id = $1 AND question_id = $2`, userID, questionID,
-	).Scan(&prev.Repetitions, &prev.IntervalDays, &prev.Ease, &prev.DueAt)
+	).Scan(&prev.Repetitions, &prev.IntervalDays, &prev.Ease, &prev.DueAt, &lastReviewed)
 	var next ReviewState
 	switch {
 	case errors.Is(err, pgx.ErrNoRows):
 		next = NextReview(nil, correct, now)
 	case err != nil:
 		return time.Time{}, err
+	case lastReviewed.After(now):
+		// An offline answer synced after a newer one: the schedule already
+		// reflects the newer answer, so leave it.
+		return prev.DueAt, nil
 	default:
 		next = NextReview(&prev, correct, now)
 	}

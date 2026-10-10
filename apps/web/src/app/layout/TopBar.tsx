@@ -4,6 +4,7 @@ import {
   ChartColumn,
   ClipboardList,
   Home,
+  LogIn,
   ListChecks,
   Moon,
   Repeat,
@@ -16,12 +17,13 @@ import { useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-import { useLogout } from '@/features/auth';
+import { useLogout, useUpdateProfile } from '@/features/auth';
 import { useIsAdmin } from '@/features/authoring';
 import { useDueCount } from '@/features/review';
 import { GlobalSearch } from '@/features/search';
 import { SUPPORTED_LOCALES } from '@/i18n/config';
 import { useClickOutside } from '@/shared/hooks/useClickOutside';
+import { requestSignIn } from '@/stores/useAuthPrompt';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useUIStore } from '@/stores/useUIStore';
 
@@ -61,6 +63,7 @@ export function TopBar() {
   const user = useAuthStore((s) => s.user);
   const isAdmin = useIsAdmin();
   const logout = useLogout();
+  const updateProfile = useUpdateProfile();
   const { data: dueCount } = useDueCount();
 
   const visibleTabs = useMemo(() => fileTabs.filter((tab) => !tab.adminOnly || isAdmin), [isAdmin]);
@@ -136,6 +139,8 @@ export function TopBar() {
                     className={code === locale ? 'menu-item menu-item--selected' : 'menu-item'}
                     onClick={() => {
                       setLocale(code);
+                      // signed in: remember it on the account too
+                      if (user) updateProfile.mutate({ locale: code });
                       setLocaleMenuOpen(false);
                     }}
                   >
@@ -186,7 +191,7 @@ export function TopBar() {
                     className="menu-item"
                     onClick={() => {
                       setUserMenuOpen(false);
-                      logout.mutate(undefined, { onSettled: () => navigate('/login') });
+                      logout.mutate(undefined, { onSettled: () => navigate('/') });
                     }}
                   >
                     {t('nav.logout')}
@@ -195,6 +200,15 @@ export function TopBar() {
               </ul>
             )}
           </div>
+        )}
+        {!user && (
+          <button
+            type="button"
+            className="btn btn--primary btn--small titlebar__signin"
+            onClick={() => requestSignIn().catch(() => {})}
+          >
+            <LogIn size={14} aria-hidden /> {t('auth.login')}
+          </button>
         )}
       </div>
     </header>

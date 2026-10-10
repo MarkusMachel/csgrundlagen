@@ -2,7 +2,8 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import { App } from './app/App';
-import './styles/global.css';
+import { registerServiceWorker } from './shared/offline/registerServiceWorker';
+import './styles/index.css';
 
 // MSW serves /api by default (dev, preview, and Playwright E2E). Set
 // VITE_USE_MOCKS=false (`npm run dev:real`) to talk to the Go API instead,
@@ -12,6 +13,8 @@ async function enableMocking() {
   const { worker } = await import('./mocks/browser');
   await worker.start({ onUnhandledRequest: 'bypass' });
 }
+
+registerServiceWorker();
 
 void enableMocking().then(() => {
   createRoot(document.getElementById('root')!).render(

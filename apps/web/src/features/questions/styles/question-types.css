@@ -1,0 +1,53 @@
+/* ---------- newer question types ---------- */
+
+.option-hint {
+  margin: 0 0 6px;
+  font-size: 12px;
+}
+
+.ordering__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ordering__entry {
+  cursor: default;
+}
+
+.ordering__moves {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.ordering__row--right .option-entry {
+  --ring: var(--green);
+  --fill: var(--green-soft);
+}
+
+.ordering__row--wrong .option-entry {
+  --ring: var(--red);
+  --fill: var(--red-soft);
+}
+
+.output-answer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 16px;
+}
+
+.output-answer__input {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  background: var(--code-bg);
+  resize: vertical;
+}
+
+.output-answer__input--right {
+  border-color: var(--green);
+}
+
+.output-answer__input--wrong {
+  border-color: var(--red);
+}

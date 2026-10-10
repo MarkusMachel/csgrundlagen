@@ -275,26 +275,45 @@ func (s *Store) BookmarkedQuestions(ctx context.Context, userID, locale string) 
 }
 
 // SubmitAnswer records a standalone (feed) answer and reports correctness.
-func (s *Store) SubmitAnswer(ctx context.Context, userID, questionID string, answer any) (SubmitAnswerResult, error) {
+// MaxOfflineAge is how far back an answer synced after being given offline
+// may be dated; anything older is recorded as given now.
+const MaxOfflineAge = 30 * 24 * time.Hour
+
+// answerTime is when an answer counts as given: the client's time for an
+// offline answer if plausible, otherwise now.
+func answerTime(at *time.Time, now time.Time) time.Time {
+	if at == nil || at.After(now) || now.Sub(*at) > MaxOfflineAge {
+		return now
+	}
+	return *at
+}
+
+func (s *Store) SubmitAnswer(ctx context.Context, userID, questionID string, answer any, answeredAt *time.Time) (SubmitAnswerResult, error) {
 	q, err := s.GetQuestion(ctx, questionID, "en")
 	if err != nil {
 		return SubmitAnswerResult{}, err
 	}
 	correct := isCorrect(q, answer)
+	at := answerTime(answeredAt, time.Now())
 	var next time.Time
 	err = s.withTx(ctx, func(tx pgx.Tx) error {
 		if _, err := tx.Exec(ctx, `
-			INSERT INTO question_answers (user_id, question_id, answer_value, is_correct)
-			VALUES ($1, $2, $3, $4)`, userID, questionID, AnswerKey(answer), correct); err != nil {
+			INSERT INTO question_answers (user_id, question_id, answer_value, is_correct, answered_at)
+			VALUES ($1, $2, $3, $4, $5)`, userID, questionID, AnswerKey(answer), correct, at); err != nil {
 			return err
 		}
-		next, err = recordReview(ctx, tx, userID, questionID, correct, time.Now())
+		next, err = recordReview(ctx, tx, userID, questionID, correct, at)
 		return err
 	})
 	if err != nil {
 		return SubmitAnswerResult{}, err
 	}
-	return SubmitAnswerResult{QuestionID: q.ID, Correct: correct, CorrectAnswer: q.Correct(), NextReviewAt: &next}, nil
+	feedback, err := s.feedbackFor(ctx, q, answer)
+	if err != nil {
+		return SubmitAnswerResult{}, err
+	}
+	return SubmitAnswerResult{QuestionID: q.ID, Correct: correct, CorrectAnswer: q.Correct(), NextReviewAt: &next,
+		Feedback: feedback}, nil
 }
 
 // QuestionStats summarizes everyone's answers to a question: how often each
@@ -348,6 +367,11 @@ func (s *Store) QuestionStats(ctx context.Context, questionID string) (QuestionS
 			{OptionID: "true", Label: "True", Count: counts["true"]},
 			{OptionID: "false", Label: "False", Count: counts["false"]},
 		}
+	case "flashcard":
+		dist = []AnswerStat{
+			{OptionID: "true", Label: "Knew it", Count: counts["true"]},
+			{OptionID: "false", Label: "Didn't", Count: counts["false"]},
+		}
 	default: // ordering, output: answers are too varied to list, so right vs wrong
 		dist = []AnswerStat{
 			{OptionID: "correct", Label: "Correct", Count: right},
@@ -400,6 +424,11 @@ func (n NewQuestion) validate() error {
 	}
 	if len(n.Tags) == 0 {
 		return ErrInvalid{"at least one tag is required"}
+	}
+	for _, o := range n.Options {
+		if o.Feedback != nil && len(*o.Feedback) > maxFeedbackLen {
+			return ErrInvalid{"option feedback is limited to 2000 characters"}
+		}
 	}
 	if n.Difficulty != nil {
 		switch *n.Difficulty {
@@ -460,8 +489,10 @@ func (n NewQuestion) validate() error {
 		if n.ExpectedOutput == nil {
 			return ErrInvalid{"output questions need expectedOutput"}
 		}
+	case "flashcard":
+		// front and back are prompt and explanation, checked above
 	default:
-		return ErrInvalid{"type must be multiple-choice, true-false, multi-select, ordering or output"}
+		return ErrInvalid{"type must be multiple-choice, true-false, multi-select, ordering, output or flashcard"}
 	}
 	return nil
 }
@@ -494,7 +525,10 @@ func (s *Store) CreateQuestion(ctx context.Context, createdBy string, n NewQuest
 		).Scan(&id); err != nil {
 			return err
 		}
-		return writeQuestionParts(ctx, tx, id, n)
+		if err := writeQuestionParts(ctx, tx, id, n); err != nil {
+			return err
+		}
+		return recordRevision(ctx, tx, id, createdBy, "created", revisionSnapshot{NewQuestion: n})
 	})
 	if err != nil {
 		return Question{}, err
@@ -505,11 +539,30 @@ func (s *Store) CreateQuestion(ctx context.Context, createdBy string, n NewQuest
 // UpdateQuestion replaces a question's content, options, tags and material
 // links. Answers, stats, notes and comments are kept. Option translations are
 // dropped with the old options, since the options themselves may have changed.
-func (s *Store) UpdateQuestion(ctx context.Context, id string, n NewQuestion) (Question, error) {
+func (s *Store) UpdateQuestion(ctx context.Context, editorID, id string, n NewQuestion) (Question, error) {
+	return s.saveQuestion(ctx, editorID, id, n, "edited", nil)
+}
+
+// saveQuestion applies new content and records it as a revision.
+func (s *Store) saveQuestion(ctx context.Context, editorID, id string, n NewQuestion, kind string, restoredFrom *int64) (Question, error) {
 	if err := n.validate(); err != nil {
 		return Question{}, err
 	}
-	err := s.withTx(ctx, func(tx pgx.Tx) error {
+	// The state before the first recorded edit, so it can still be restored.
+	before, err := s.currentInput(ctx, id)
+	if err != nil {
+		return Question{}, err
+	}
+	err = s.withTx(ctx, func(tx pgx.Tx) error {
+		had, err := hasRevisions(ctx, tx, id)
+		if err != nil {
+			return err
+		}
+		if !had {
+			if err := recordRevision(ctx, tx, id, "", "original", revisionSnapshot{NewQuestion: before}); err != nil {
+				return err
+			}
+		}
 		code, lang, expected := n.outputFields()
 		tag, err := tx.Exec(ctx, `
 			UPDATE questions
@@ -529,7 +582,10 @@ func (s *Store) UpdateQuestion(ctx context.Context, id string, n NewQuestion) (Q
 				return err
 			}
 		}
-		return writeQuestionParts(ctx, tx, id, n)
+		if err := writeQuestionParts(ctx, tx, id, n); err != nil {
+			return err
+		}
+		return recordRevision(ctx, tx, id, editorID, kind, revisionSnapshot{NewQuestion: n, RestoredFrom: restoredFrom})
 	})
 	if err != nil {
 		return Question{}, err
@@ -567,9 +623,19 @@ func writeQuestionParts(ctx context.Context, tx pgx.Tx, id string, n NewQuestion
 			if n.Type == "ordering" {
 				position = &i
 			}
+			// feedback is for wrong options only
+			feedback, material := cleanFeedback(o.Feedback), o.MaterialID
+			if correct || n.Type == "ordering" {
+				feedback, material = nil, nil
+			}
+			if material != nil && *material == "" {
+				material = nil
+			}
 			if _, err := tx.Exec(ctx, `
-				INSERT INTO question_options (question_id, option_key, label, is_correct, correct_position)
-				VALUES ($1, $2, $3, $4, $5)`, id, o.ID, o.Label, correct, position); err != nil {
+				INSERT INTO question_options (question_id, option_key, label, is_correct, correct_position,
+				                              feedback, material_id)
+				VALUES ($1, $2, $3, $4, $5, $6, (SELECT id FROM materials WHERE id::text = $7))`,
+				id, o.ID, o.Label, correct, position, feedback, material); err != nil {
 				return err
 			}
 		}

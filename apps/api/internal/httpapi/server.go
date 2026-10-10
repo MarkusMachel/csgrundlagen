@@ -66,6 +66,7 @@ func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
 	mux.HandleFunc("POST /api/auth/login", s.limited(s.login))
 	mux.HandleFunc("POST /api/auth/signup", s.limited(s.signup))
 	mux.HandleFunc("POST /api/auth/logout", s.logout)
+	mux.HandleFunc("POST /api/auth/cookie", s.authed(s.tokenToCookie))
 	mux.HandleFunc("GET /api/auth/me", s.authed(s.me))
 	mux.HandleFunc("POST /api/auth/password", s.limited(s.authed(s.changePassword)))
 	mux.HandleFunc("POST /api/auth/password-reset", s.limited(s.requestPasswordReset))
@@ -78,6 +79,9 @@ func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
 	mux.HandleFunc("GET /api/questions/{id}", s.getQuestion)
 	mux.HandleFunc("PUT /api/questions/{id}", s.admin(s.updateQuestion))
 	mux.HandleFunc("DELETE /api/questions/{id}", s.admin(s.deleteQuestion))
+	mux.HandleFunc("GET /api/questions/{id}/revisions", s.admin(s.questionRevisions))
+	mux.HandleFunc("GET /api/questions/{id}/authoring", s.admin(s.questionAuthoring))
+	mux.HandleFunc("POST /api/questions/{id}/revisions/{rid}/restore", s.admin(s.restoreRevision))
 	mux.HandleFunc("POST /api/questions/{id}/submit", s.authed(s.submitAnswer))
 	mux.HandleFunc("GET /api/questions/{id}/comments", s.listComments)
 	mux.HandleFunc("POST /api/questions/{id}/comments", s.authed(s.addComment))
@@ -91,6 +95,16 @@ func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
 	mux.HandleFunc("GET /api/bookmarks", s.authed(s.bookmarks))
 	mux.HandleFunc("GET /api/review/queue", s.authed(s.reviewQueue))
 	mux.HandleFunc("GET /api/me/progress", s.authed(s.progress))
+	mux.HandleFunc("GET /api/me/sessions", s.authed(s.mySessions))
+	mux.HandleFunc("DELETE /api/me/sessions/{id}", s.authed(s.revokeMySession))
+	mux.HandleFunc("POST /api/me/device", s.authed(s.saveDevice))
+	mux.HandleFunc("POST /api/me/consent", s.authed(s.recordConsent))
+	mux.HandleFunc("POST /api/me/privacy", s.authed(s.acceptPrivacy))
+	mux.HandleFunc("GET /api/me/export", s.authed(s.exportMyData))
+	mux.HandleFunc("DELETE /api/me", s.limited(s.authed(s.deleteMyAccount)))
+	mux.HandleFunc("PATCH /api/me", s.authed(s.updateProfile))
+	mux.HandleFunc("POST /api/me/email", s.limited(s.authed(s.requestEmailChange)))
+	mux.HandleFunc("POST /api/me/email/confirm", s.limited(s.confirmEmailChange))
 	mux.HandleFunc("POST /api/run", s.limited(s.authed(s.run)))
 	mux.HandleFunc("GET /api/tags", s.tags)
 	mux.HandleFunc("GET /api/search", s.search)
@@ -101,6 +115,9 @@ func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
 	mux.HandleFunc("DELETE /api/tests/{id}", s.authed(s.deleteTest))
 	mux.HandleFunc("GET /api/tests/{id}/attempts", s.authed(s.listAttempts))
 	mux.HandleFunc("POST /api/tests/{id}/submit", s.authed(s.submitTest))
+	mux.HandleFunc("GET /api/tests/{id}/draft", s.authed(s.getDraft))
+	mux.HandleFunc("PUT /api/tests/{id}/draft", s.authed(s.saveDraft))
+	mux.HandleFunc("DELETE /api/tests/{id}/draft", s.authed(s.deleteDraft))
 
 	mux.HandleFunc("GET /api/materials", s.listMaterials)
 	mux.HandleFunc("POST /api/materials", s.admin(s.createMaterial))
@@ -108,14 +125,27 @@ func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
 	mux.HandleFunc("DELETE /api/materials/{id}", s.admin(s.deleteMaterial))
 
 	mux.HandleFunc("GET /api/admin/stats", s.admin(s.adminStats))
+	mux.HandleFunc("GET /api/admin/quality", s.admin(s.qualityReport))
+	mux.HandleFunc("POST /api/admin/import/flashcards", s.admin(s.importFlashcards))
+	mux.HandleFunc("GET /api/export/anki", s.authed(s.exportAnki))
 	mux.HandleFunc("GET /api/admin/bug-reports", s.admin(s.listBugReports))
 	mux.HandleFunc("PATCH /api/admin/bug-reports/{id}", s.admin(s.setBugReportStatus))
+	mux.HandleFunc("GET /api/admin/comments", s.admin(s.moderationQueue))
+	mux.HandleFunc("PATCH /api/admin/comments/{id}", s.admin(s.moderateComment))
+	mux.HandleFunc("POST /api/comments/{id}/report", s.limited(s.authed(s.reportComment)))
+	mux.HandleFunc("DELETE /api/comments/{id}", s.authed(s.deleteComment))
+	mux.HandleFunc("GET /api/admin/users", s.admin(s.adminUsers))
+	mux.HandleFunc("GET /api/admin/users/{id}", s.admin(s.adminUserDetail))
+	mux.HandleFunc("PATCH /api/admin/users/{id}", s.admin(s.adminChangeUser))
+	mux.HandleFunc("DELETE /api/admin/users/{id}", s.admin(s.adminDeleteUser))
+	mux.HandleFunc("DELETE /api/admin/users/{id}/sessions", s.admin(s.adminRevokeAllSessions))
+	mux.HandleFunc("DELETE /api/admin/users/{id}/sessions/{sid}", s.admin(s.adminRevokeSession))
 
 	mux.HandleFunc("/api/", func(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusNotFound, "Not found")
 	})
 
-	return s.recoverer(s.logRequests(mux))
+	return s.recoverer(s.logRequests(sameOrigin(mux)))
 }
 
 // --- middleware -------------------------------------------------------------
@@ -124,21 +154,13 @@ type ctxKey int
 
 const userKey ctxKey = iota
 
-func bearerToken(r *http.Request) string {
-	h := r.Header.Get("Authorization")
-	if t, ok := strings.CutPrefix(h, "Bearer "); ok {
-		return strings.TrimSpace(t)
-	}
-	return ""
-}
-
 // optionalUser resolves the bearer token if one is present; nil otherwise.
 func (s *Server) optionalUser(r *http.Request) *store.User {
-	token := bearerToken(r)
+	token := sessionToken(r)
 	if token == "" {
 		return nil
 	}
-	u, err := s.store.UserForToken(r.Context(), token)
+	u, err := s.store.UserForToken(r.Context(), token, clientIP(r))
 	if err != nil {
 		return nil
 	}
@@ -220,7 +242,17 @@ func writeError(w http.ResponseWriter, status int, msg string) {
 }
 
 func decode(w http.ResponseWriter, r *http.Request, v any) bool {
-	dec := json.NewDecoder(io.LimitReader(r.Body, maxBody))
+	return decodeN(w, r, v, maxBody)
+}
+
+// decodeLarge is decode for the few endpoints that take big bodies (imports);
+// the caller bounds the body itself.
+func decodeLarge(w http.ResponseWriter, r *http.Request, v any) bool {
+	return decodeN(w, r, v, 8<<20)
+}
+
+func decodeN(w http.ResponseWriter, r *http.Request, v any, limit int64) bool {
+	dec := json.NewDecoder(io.LimitReader(r.Body, limit))
 	if err := dec.Decode(v); err != nil {
 		writeError(w, http.StatusBadRequest, "Invalid JSON body")
 		return false
@@ -240,6 +272,8 @@ func (s *Server) fail(w http.ResponseWriter, r *http.Request, err error) {
 		writeError(w, http.StatusBadRequest, invalid.Msg)
 	case errors.As(err, &conflict):
 		writeError(w, http.StatusConflict, conflict.Msg)
+	case errors.Is(err, store.ErrBlocked):
+		writeError(w, http.StatusForbidden, "This account is blocked. Contact the site operator.")
 	case errors.Is(err, store.ErrBadCredentials):
 		writeError(w, http.StatusUnauthorized, "Invalid email or password")
 	default:

@@ -1,0 +1,55 @@
+/* ============================================================
+   CS Fundamentals Trainer — code-editor theme
+   Every stylesheet, in cascade order. Shared pieces live in
+   src/styles/, feature styles next to their feature (styles/).
+   Add a new file here, after the files whose rules it builds on:
+   later rules win over earlier ones of the same specificity.
+   ============================================================ */
+
+@import './tokens.css';
+@import './base/base.css';
+@import './base/text.css';
+@import './ui/buttons.css';
+@import './ui/forms.css';
+@import '../app/layout/styles/title-bar.css';
+@import '../app/layout/styles/tab-strip.css';
+@import '../app/layout/styles/status-bar.css';
+@import '../app/layout/styles/app-frame.css';
+@import '../features/questions/styles/editor-pane.css';
+@import '../features/questions/styles/bottom-panel.css';
+@import './ui/alerts.css';
+@import './ui/spinner.css';
+@import './ui/empty-states.css';
+@import './ui/menus.css';
+@import '../features/search/styles/search.css';
+@import './ui/cards-tables.css';
+@import './ui/pagination.css';
+@import '../features/questions/styles/stats-bars.css';
+@import '../features/authoring/styles/admin-stats.css';
+@import '../features/questions/styles/comments.css';
+@import '../features/materials/styles/material-list.css';
+@import '../features/custom-tests/styles/mode-picker.css';
+@import '../features/custom-tests/styles/attempt-header.css';
+@import '../features/auth/styles/login.css';
+@import './ui/toolbars.css';
+@import '../features/questions/styles/filters.css';
+@import '../features/questions/styles/filter-sidebar.css';
+@import './ui/rich-text.css';
+@import '../features/authoring/styles/forms.css';
+@import '../features/authoring/styles/admin-lists.css';
+@import '../features/review/styles/review.css';
+@import '../features/progress/styles/progress.css';
+@import '../features/questions/styles/question-types.css';
+@import '../features/questions/styles/runnable-code.css';
+@import './ui/select.css';
+@import '../features/materials/styles/wiki.css';
+@import '../features/custom-tests/styles/build-layout.css';
+@import './base/misc.css';
+@import '../features/devices/styles/devices.css';
+@import '../features/privacy/styles/privacy.css';
+@import '../features/authoring/styles/moderation.css';
+@import '../features/onboarding/styles/welcome.css';
+@import '../features/authoring/styles/history-quality.css';
+@import '../features/questions/styles/wrong-feedback.css';
+@import '../app/layout/styles/offline.css';
+@import '../features/anki/styles/flashcards.css';

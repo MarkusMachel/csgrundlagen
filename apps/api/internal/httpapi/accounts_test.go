@@ -53,24 +53,24 @@ func TestAccounts(t *testing.T) {
 
 	// --- sign-up ---
 	var sess session
-	expect(t, "signup", c.do("POST", "/api/auth/signup", "", map[string]string{
-		"name": "Linus", "email": " Linus@Example.com ", "password": "first password",
+	expect(t, "signup", c.do("POST", "/api/auth/signup", "", map[string]any{
+		"name": "Linus", "email": " Linus@Example.com ", "password": "first password", "acceptPrivacy": true,
 	}, &sess), 201)
 	expect(t, "signup user", vals(sess.User.Email, sess.User.Role), "linus@example.com user")
 	var me store.User
 	expect(t, "signed-up session works", c.do("GET", "/api/auth/me", sess.Token, nil, &me), 200)
 
-	expect(t, "duplicate email", c.do("POST", "/api/auth/signup", "", map[string]string{
-		"name": "Other", "email": "LINUS@example.com", "password": "another password",
+	expect(t, "duplicate email", c.do("POST", "/api/auth/signup", "", map[string]any{
+		"name": "Other", "email": "LINUS@example.com", "password": "another password", "acceptPrivacy": true,
 	}, &errBody), 409)
-	expect(t, "short password", c.do("POST", "/api/auth/signup", "", map[string]string{
-		"name": "Short", "email": "short@example.com", "password": "1234567",
+	expect(t, "short password", c.do("POST", "/api/auth/signup", "", map[string]any{
+		"name": "Short", "email": "short@example.com", "password": "1234567", "acceptPrivacy": true,
 	}, &errBody), 400)
-	expect(t, "bad email", c.do("POST", "/api/auth/signup", "", map[string]string{
-		"name": "Bad", "email": "not-an-email", "password": "long enough pw",
+	expect(t, "bad email", c.do("POST", "/api/auth/signup", "", map[string]any{
+		"name": "Bad", "email": "not-an-email", "password": "long enough pw", "acceptPrivacy": true,
 	}, nil), 400)
 	expect(t, "cannot sign up as admin", c.do("POST", "/api/auth/signup", "", map[string]any{
-		"name": "Sneaky", "email": "sneaky@example.com", "password": "long enough pw", "role": "admin",
+		"name": "Sneaky", "email": "sneaky@example.com", "password": "long enough pw", "role": "admin", "acceptPrivacy": true,
 	}, &sess), 201)
 	expect(t, "role ignored", sess.User.Role, "user")
 
@@ -131,7 +131,7 @@ func TestAuthRateLimit(t *testing.T) {
 	}
 	expect(t, "over limit", c.do("POST", "/api/auth/login", "", bad, nil), 429)
 	// Limits are per endpoint: sign-up still works.
-	expect(t, "other endpoint unaffected", c.do("POST", "/api/auth/signup", "", map[string]string{
-		"name": "Rate", "email": "rate@example.com", "password": "long enough pw",
+	expect(t, "other endpoint unaffected", c.do("POST", "/api/auth/signup", "", map[string]any{
+		"name": "Rate", "email": "rate@example.com", "password": "long enough pw", "acceptPrivacy": true,
 	}, nil), 201)
 }

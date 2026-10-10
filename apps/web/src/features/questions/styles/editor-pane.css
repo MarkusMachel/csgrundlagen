@@ -1,0 +1,241 @@
+/* ---------- editor pane (question card) ---------- */
+
+.editor-pane {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.editor-pane__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12.5px;
+  flex-wrap: wrap;
+}
+
+.editor-pane__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.editor-pane__breadcrumb .crumb-sep {
+  color: var(--border-strong);
+}
+
+/* code area with line-number gutter */
+.code {
+  counter-reset: line;
+  padding: 14px 16px 14px 0;
+  position: relative;
+}
+
+/* the darker gutter strip behind the numbers */
+.code::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 46px;
+  background: var(--gutter);
+  border-right: 1px solid var(--border);
+}
+
+.code-line {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  padding-right: 14px;
+}
+
+.code-line::before {
+  counter-increment: line;
+  content: counter(line);
+  flex-shrink: 0;
+  width: 46px;
+  padding-right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  opacity: 0.65;
+  user-select: none;
+  font-size: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.code-line__body {
+  flex: 1;
+  min-width: 0;
+  padding-left: 16px;
+}
+
+.code-line--spacer::before {
+  content: '';
+  counter-increment: none;
+}
+
+/* option rows */
+.option-line {
+  padding: 3px 0;
+}
+
+.option-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
+}
+
+.option-entry {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 14px;
+  min-height: 44px;
+  cursor: pointer;
+  transition:
+    border-color 120ms,
+    background 120ms;
+}
+
+.option-entry:hover {
+  border-color: var(--border-strong);
+}
+
+.option-entry input[type='radio'] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: auto;
+  width: 1px;
+  height: 1px;
+}
+
+.option-entry--selected {
+  border-color: var(--accent);
+  background: var(--line-hl);
+}
+
+.option-entry--correct {
+  border-color: var(--green);
+  background: var(--green-soft);
+}
+
+.option-entry--wrong {
+  border-color: var(--red);
+  background: var(--red-soft);
+}
+
+.option-entry--disabled {
+  cursor: default;
+}
+
+.option-entry:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.option-entry__text {
+  min-width: 0;
+}
+
+/* struck out with the scissors: grey out the whole option, including the
+   separately coloured index and answer tokens */
+.option-entry--struck .option-entry__text {
+  text-decoration: line-through;
+}
+
+.option-entry--struck .option-entry__text,
+.option-entry--struck .option-entry__text * {
+  color: var(--muted);
+}
+
+.option-entry--struck {
+  opacity: 0.6;
+}
+
+.option-entry--correct .option-entry__text .tok-str {
+  color: var(--green);
+}
+.option-entry--wrong .option-entry__text .tok-str {
+  color: var(--red);
+}
+
+.option-entry__mark {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+/* scissors */
+.scissors-toggle {
+  flex-shrink: 0;
+  width: 34px;
+  min-width: 34px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 120ms;
+}
+
+.option-line:hover .scissors-toggle,
+.scissors-toggle:focus-visible,
+.scissors-toggle[aria-pressed='true'] {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .scissors-toggle {
+    opacity: 1;
+  }
+}
+
+.scissors-toggle:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.scissors-toggle[aria-pressed='true'] {
+  color: var(--accent);
+}
+
+/* feedback line */
+.feedback-line {
+  font-weight: 600;
+}
+.feedback-line--correct {
+  color: var(--green);
+}
+.feedback-line--wrong {
+  color: var(--red);
+}
+
+/* editor pane footer / actions */
+.pane-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 6px 0 2px;
+}

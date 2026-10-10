@@ -1,0 +1,41 @@
+/* ---------- bottom panel (per-question tabs) ---------- */
+
+.panel {
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.panel-tabs {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  padding: 0 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.panel-tab {
+  padding: 8px 12px;
+  min-height: 40px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.panel-tab:hover {
+  color: var(--text);
+}
+
+.panel-tab[aria-selected='true'] {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+.panel-body {
+  padding: 14px 16px;
+}

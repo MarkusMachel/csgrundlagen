@@ -95,8 +95,14 @@ Run from the repo root.
 | `npm run api:dev` | Run the Go API (`DATABASE_URL`, `PORT`) |
 | `npm run api:test` | Go tests — the integration suite needs Postgres running |
 | `npm run api:adduser` | Create a user with a hashed password |
+| `npm run contract` | Contract check: the MSW mocks must answer like the Go API (needs Postgres and Go) |
 
 Web CI gate order (§13.4): **typecheck → lint → test → build → e2e** — cheapest first.
+
+CI (`.github/workflows/ci.yml`) runs on pushes to `main`/`development` and on pull
+requests, as three parallel jobs: **Web** (that gate), **API** (gofmt, `go vet`,
+`go test` against a Postgres service with `REQUIRE_DB=1`, so the integration
+tests can't silently skip) and **Mocks vs API contract** (`npm run contract`).
 
 ## API (`apps/api`)
 
@@ -111,10 +117,22 @@ internal/httpapi routes, auth middleware, handlers, integration tests
 - **Contract**: identical paths and JSON shapes to the MSW handlers in
   `apps/web/src/mocks/handlers` — the field names in `internal/store/models.go`
   match `apps/web/src/features/*/types.ts`. Errors are `{"message": "…"}`.
-- **Auth**: `POST /api/auth/login` checks the bcrypt hash and returns a random
-  bearer token; only its SHA-256 is stored (`sessions` table, 30-day expiry).
-  `POST /api/auth/logout` revokes it. Admin-only routes return **403** for other
-  users, matching the mock.
+  `npm run contract` checks this: `scripts/contract.sh` starts the API on a
+  throwaway database with one admin, then `apps/web/src/contract` runs one
+  scenario (sign-up to account deletion, about 90 requests, error cases included)
+  against the mocks and the API and fails on any step whose status code or
+  JSON shape differs (types, not values; see `contract/shape.ts`). When you
+  change an endpoint, change its mock too and add the step to `scenario.ts`.
+- **Auth**: `POST /api/auth/login` checks the bcrypt hash and sets a random
+  session token as the `cft_session` cookie (HttpOnly, SameSite=Lax, Path=/api,
+  Secure over HTTPS), so page scripts never see it; only its SHA-256 is stored
+  (`sessions` table, 30-day expiry). Unsafe requests authenticated by the cookie
+  must come from the same origin (`Sec-Fetch-Site`/`Origin` checks) as CSRF
+  protection. Scripts can send `X-Auth-Mode: token` to get the token in the body
+  and use `Authorization: Bearer …` instead; `POST /api/auth/cookie` turns such a
+  token into the cookie (used once to migrate sessions from the old localStorage
+  token). `POST /api/auth/logout` revokes the session and clears the cookie.
+  Admin-only routes return **403** for other users, matching the mock.
 - **Accounts**: `POST /api/auth/signup` (logs straight in), `POST /api/auth/password`
   (change; ends the user's other sessions), `POST /api/auth/password-reset` (always
   202, so it can't reveal who has an account) and `…/password-reset/confirm`
@@ -129,6 +147,45 @@ internal/httpapi routes, auth middleware, handlers, integration tests
   `GET /api/me/progress?tz=…` the progress page.
 - **Admin**: `PUT`/`DELETE` on `/api/questions/{id}` and `/api/materials/{id}`, and
   the bug-report queue at `GET`/`PATCH /api/admin/bug-reports`.
+- **Devices**: each session stores the IP and User-Agent it was opened from, its
+  latest IP and use, and what the browser reports about itself
+  (`POST /api/me/device`: time zone, screen, languages). `login_events` keeps the
+  sign-in history (logins, sign-ups, wrong passwords for known accounts, resets).
+  Users list and sign out their own devices (`/api/me/sessions`); admins see
+  everyone's under `/api/admin/users`. The API purges expired sessions and
+  history older than 90 days hourly.
+- **Privacy (GDPR)**: a first-visit banner offers "Accept all" and "Essential only"
+  side by side, and a settings dialog (linked from every page's status bar) has
+  per-category switches. Essential storage (sign-in token, the choice itself) and
+  security records are always on. "Preferences" decides whether theme and
+  language are remembered. "Device details" decides whether the browser's
+  self-report is stored, and the API refuses `POST /api/me/device` without it.
+  Signed-in users' choices are logged in `consent_records`
+  (`POST /api/me/consent`). Sign-up requires accepting the policy at `/privacy`,
+  and users who haven't read the current version are asked once. The Account
+  page offers a JSON export of everything stored (`GET /api/me/export`) and
+  account deletion (`DELETE /api/me`, password required; the last admin can't
+  delete themselves). Set `PRIVACY_CONTACT` in `.env` so the policy names who runs
+  the instance. Bump `PrivacyPolicyVersion` (Go) and `PRIVACY_POLICY_VERSION`
+  (web) together when the policy text changes.
+- **Profile & accounts admin**: `PATCH /api/me` (name, language), email change via a
+  confirmation link (`POST /api/me/email`, `/api/me/email/confirm`); admins change
+  roles, block and delete accounts (`PATCH`/`DELETE /api/admin/users/{id}`) but
+  never the last admin.
+- **Moderation**: readers report comments (`POST /api/comments/{id}/report`),
+  authors and admins delete them, admins hide or dismiss from
+  `/api/admin/comments`.
+- **Content quality**: every question save is a revision
+  (`/api/questions/{id}/revisions`, restore included); `GET /api/admin/quality`
+  flags too easy/hard questions, likely wrong keys and unused options; wrong
+  options can carry feedback and a reading (returned only with the answer).
+- **Tests and offline**: unfinished attempts are drafts (`/api/tests/{id}/draft`);
+  `POST …/submit` accepts `answeredAt` for answers given offline. The web app is an
+  installable PWA (`public/sw.js`, production builds only) that queues offline
+  answers in IndexedDB.
+- **Anki**: `GET /api/export/anki` (bookmarks, a test, or feed filters) writes
+  Anki's plain-text import format with stable GUIDs; admins import Anki text
+  exports as self-graded `flashcard` questions (`POST /api/admin/import/flashcards`).
 - **Migrations**: numbered files in `internal/db/migrations`, embedded in the
   binary and applied in order on startup, each recorded in `schema_migrations`.
   Never edit an applied file — add the next number.
@@ -182,6 +239,9 @@ app/ (providers, router, layout: tab strip + status bar)  →  pages/ (thin comp
   theme/locale, session streak, status-bar context), feature-scoped stores inside the
   owning feature (test-builder selection, in-progress attempt incl. the per-attempt
   shuffle seed).
+- **Styles** are plain CSS, one file per area: shared tokens, base and UI pieces in
+  `src/styles/`, feature styles in each feature's `styles/` folder, all imported in
+  cascade order from `src/styles/index.css` (add new files there).
 - **Theming** is pure CSS custom properties: light tokens on `:root`, dark overrides
   under `[data-theme='dark']` (stamped on `<html>` from the UI store; defaults to the
   OS preference, persisted to `localStorage`). The Stats bar colors are validated for
@@ -193,6 +253,16 @@ app/ (providers, router, layout: tab strip + status bar)  →  pages/ (thin comp
   (`translations[locale]`); handlers resolve a `locale` query param. EN is complete,
   pt-BR/de are stubbed for the first questions to demonstrate the pattern (§5).
 - **Search** is a command-palette (⌘/Ctrl+K or the ⌕ icon) with grouped results.
+- **Signed-out browsing**: Home, questions and material are open to everyone.
+  Anything that needs an account asks to log in in a modal and then carries on:
+  the API client (`shared/api/client.ts`) holds back changes made while signed
+  out until `requestSignIn()` (`stores/useAuthPrompt.ts`) resolves, so an answer,
+  bookmark or comment goes through right after logging in; closing the modal
+  rejects with `SignInCancelled`. Pages about the user's own data (review,
+  progress, tests, account, admin) are wrapped in `RequireSignIn`, and personal
+  queries are `enabled` only when signed in (`useSignedIn()`).
+- **Brand**: the `{✓}` mark (`src/assets/brand/`, `BrandMark` in `shared/ui`)
+  and the signed-out screens' brand panel (`features/auth/components/AuthLayout`).
 
 ## Content authoring (admin-gated)
 
@@ -227,7 +297,7 @@ the light surface.
 
 - **Scissors strike-through**: session-only, not persisted.
 - **Tabs vs accordions**: an editor-style bottom panel with tabs, used consistently.
-- **Pagination size**: 10 per page. Chart colors: validated tokens in `global.css`.
+- **Pagination size**: 10 per page. Chart colors: validated tokens in `src/styles/tokens.css`.
 - **"Weak" definition** (single constant in `src/features/weak-spots/weakness.ts`):
   accuracy < 60% with ≥ 2 attempts, **or** the most recent attempt was wrong.
 - **Practice mode**: the Commented Answer tab is available per-question as the user

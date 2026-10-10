@@ -1,24 +1,32 @@
 import { Bookmark, ChevronDown } from 'lucide-react';
-import { useState, type ReactNode } from 'react';
+import { lazy, Suspense, useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { CodeBlock, InlineText } from '@/shared/ui';
+import { CodeBlock, InlineText, Spinner } from '@/shared/ui';
 import { formatRelative } from '@/shared/utils/relativeTime';
 import { parseRichText, type RichSegment } from '@/shared/utils/richText';
+import { randomSeed } from '@/shared/utils/shuffle';
 
 import { canSubmit, correctAnswerOf } from '../grading';
+import { shuffledOptionOrder } from '../optionShuffle';
 import type {
   AnswerValue,
+  OptionFeedback,
   Question,
   QuestionMode,
   SubmitAnswerResult,
   TestSubMode,
 } from '../types';
 import { AnswerOptions, type AnswerReveal } from './AnswerOptions';
-import { QuestionTabs } from './ExpandableTabs/QuestionTabs';
+// The tabs (explanation, comments, notes, …) load when first opened.
+const QuestionTabs = lazy(() =>
+  import('./ExpandableTabs/QuestionTabs').then((m) => ({ default: m.QuestionTabs })),
+);
+import { FlashcardInput } from './FlashcardInput';
 import { initialOrder, OrderingInput } from './OrderingInput';
 import { OutputInput } from './OutputInput';
 import { RunnableCode } from './RunnableCode';
+import { WrongAnswerFeedback } from './WrongAnswerFeedback';
 import { useIsBookmarked, useToggleBookmark } from '../hooks/useBookmark';
 import { useSubmitAnswer } from '../hooks/useSubmitAnswer';
 
@@ -39,6 +47,8 @@ export interface QuestionCardProps {
   optionOrder?: string[];
   /** Optional heading like "Question 2 of 5" in test mode. */
   heading?: string;
+  /** Review mode: feedback on the wrong options that were picked. */
+  reviewFeedback?: OptionFeedback[];
   /** feed mode: called once the answer is graded (e.g. to advance a review session). */
   onAnswered?: (result: SubmitAnswerResult) => void;
 }
@@ -61,6 +71,7 @@ export function QuestionCard({
   value,
   onChange,
   reviewGivenAnswer,
+  reviewFeedback,
   optionOrder,
   heading,
   onAnswered,
@@ -70,7 +81,7 @@ export function QuestionCard({
 
   // feed-mode local answer + submission result
   const [localAnswer, setLocalAnswer] = useState<AnswerValue | undefined>(undefined);
-  const submitAnswer = useSubmitAnswer(question.id);
+  const submitAnswer = useSubmitAnswer(question.id, question);
   const submitted = submitAnswer.isSuccess;
 
   // scissors strike-outs: session-only by design (§15)
@@ -84,6 +95,14 @@ export function QuestionCard({
     });
 
   const [tabsOpen, setTabsOpen] = useState(mode === 'review');
+
+  // Outside tests (which have their own setting), options come in a new order
+  // every time a question is shown, so answers are learned, not positions.
+  // Drawn once per mounted card, so it doesn't move while you answer.
+  const [viewSeed] = useState(randomSeed);
+  const shownOrder =
+    optionOrder ??
+    (mode === 'feed' || mode === 'pick' ? shuffledOptionOrder(question, viewSeed) : undefined);
 
   const bookmarkable = mode === 'feed' || mode === 'pick';
   const isBookmarked = useIsBookmarked(question.id);
@@ -106,7 +125,8 @@ export function QuestionCard({
   const hasOptions = question.type !== 'ordering' && question.type !== 'output';
   const showScissors =
     hasOptions && (mode === 'feed' || mode === 'pick' || mode === 'test') && !isExam && !reveal;
-  const showSubmit = mode === 'feed';
+  // flashcards submit straight from their "knew it / didn't" buttons
+  const showSubmit = mode === 'feed' && question.type !== 'flashcard';
   // Practice keeps explanations reachable as the user goes (§15 open decision).
   const explanationRevealed =
     mode === 'review' || submitted || (mode === 'test' && testMode === 'practice');
@@ -189,7 +209,22 @@ export function QuestionCard({
           <span aria-hidden>&nbsp;</span>
         </CodeLine>
 
-        {question.type === 'ordering' ? (
+        {question.type === 'flashcard' ? (
+          <CodeLine numbered={false}>
+            <FlashcardInput
+              question={question}
+              value={(reveal?.givenAnswer ?? currentAnswer) as boolean | undefined}
+              disabled={answersDisabled}
+              revealed={mode === 'review'}
+              onGrade={(knewIt) => {
+                setAnswer(knewIt);
+                if (mode === 'feed' && !submitted && !submitAnswer.isPending) {
+                  submitAnswer.mutate(knewIt, { onSuccess: (r) => onAnswered?.(r) });
+                }
+              }}
+            />
+          </CodeLine>
+        ) : question.type === 'ordering' ? (
           <OrderingInput
             question={question}
             value={(reveal?.givenAnswer ?? currentAnswer) as string[]}
@@ -216,7 +251,7 @@ export function QuestionCard({
             showScissors={showScissors}
             struckOptions={struckOptions}
             onToggleStruck={toggleStruck}
-            optionOrder={optionOrder}
+            optionOrder={shownOrder}
           />
         )}
 
@@ -286,6 +321,9 @@ export function QuestionCard({
             >
               {'> '}
               {submitAnswer.data.correct ? t('question.correct') : t('question.incorrect')}
+              {submitAnswer.data.offline && (
+                <span className="feedback-line__next"> {t('offline.savedForLater')}</span>
+              )}
               {submitAnswer.data.nextReviewAt && (
                 <span className="feedback-line__next">
                   {' '}
@@ -295,16 +333,24 @@ export function QuestionCard({
                 </span>
               )}
             </p>
+            <WrongAnswerFeedback question={question} feedback={submitAnswer.data.feedback} />
+          </CodeLine>
+        )}
+        {mode === 'review' && reviewFeedback && reviewFeedback.length > 0 && (
+          <CodeLine numbered={false}>
+            <WrongAnswerFeedback question={question} feedback={reviewFeedback} />
           </CodeLine>
         )}
       </div>
 
       {tabsOpen && (
-        <QuestionTabs
-          question={question}
-          explanationRevealed={explanationRevealed}
-          hideRevealingTabs={hideRevealingTabs}
-        />
+        <Suspense fallback={<Spinner />}>
+          <QuestionTabs
+            question={question}
+            explanationRevealed={explanationRevealed}
+            hideRevealingTabs={hideRevealingTabs}
+          />
+        </Suspense>
       )}
     </article>
   );

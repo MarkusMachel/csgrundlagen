@@ -1,0 +1,29 @@
+/* ---------- app frame ---------- */
+
+.app-main {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 20px 16px 100px; /* room for the status bar and the scroll button */
+}
+
+.scroll-fab {
+  position: fixed;
+  bottom: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 35;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  font-size: 16px;
+}
+
+.scroll-fab:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}

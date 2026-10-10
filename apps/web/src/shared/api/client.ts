@@ -1,3 +1,6 @@
+import { requestSignIn } from '@/stores/useAuthPrompt';
+import { useAuthStore } from '@/stores/useAuthStore';
+
 export class ApiError extends Error {
   constructor(
     public status: number,
@@ -8,26 +11,41 @@ export class ApiError extends Error {
   }
 }
 
-export const AUTH_TOKEN_KEY = 'cft.authToken';
+/**
+ * Where sessions used to keep their token, before the HttpOnly cookie. Only
+ * read once, to move an existing session into the cookie (useSessionBootstrap).
+ */
+export const LEGACY_TOKEN_KEY = 'cft.authToken';
 
-function authHeaders(): Record<string, string> {
-  try {
-    const token = localStorage.getItem(AUTH_TOKEN_KEY);
-    return token ? { Authorization: `Bearer ${token}` } : {};
-  } catch {
-    return {};
-  }
-}
+/** Changes that don't need an account (signing in, password reset, ...). */
+const ANONYMOUS_OK = /^\/(auth|me\/email\/confirm)\b/;
 
-async function request<T>(path: string, init?: RequestInit): Promise<T> {
+async function request<T>(path: string, init?: RequestInit, retried = false): Promise<T> {
+  const unsafe = (init?.method ?? 'GET') !== 'GET' && !ANONYMOUS_OK.test(path);
+  // Browsing works signed out; doing something asks to sign in first and
+  // then carries on (the modal is app/layout/AuthPrompt).
+  if (unsafe && useAuthStore.getState().status === 'anonymous') await requestSignIn();
+
+  // The session is an HttpOnly cookie the browser sends by itself; page
+  // scripts never see the token.
   const res = await fetch(`/api${path}`, {
     ...init,
+    credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',
-      ...authHeaders(),
       ...init?.headers,
     },
   });
+  // The session ran out (or was signed out elsewhere) while the page was open.
+  if (
+    res.status === 401 &&
+    unsafe &&
+    !retried &&
+    useAuthStore.getState().status === 'authenticated'
+  ) {
+    useAuthStore.getState().setAnonymous();
+    return request<T>(path, init, true);
+  }
   if (!res.ok) {
     let message = res.statusText;
     try {
@@ -53,5 +71,9 @@ export const api = {
     request<T>(path, { method: 'PATCH', body: JSON.stringify(body) }),
   put: <T>(path: string, body?: unknown) =>
     request<T>(path, { method: 'PUT', body: JSON.stringify(body) }),
-  delete: <T>(path: string) => request<T>(path, { method: 'DELETE' }),
+  delete: <T>(path: string, body?: unknown) =>
+    request<T>(path, {
+      method: 'DELETE',
+      body: body === undefined ? undefined : JSON.stringify(body),
+    }),
 };

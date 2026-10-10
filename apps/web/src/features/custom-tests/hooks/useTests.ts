@@ -7,6 +7,7 @@ import type {
   CreateTestInput,
   CustomTest,
   TestAttempt,
+  TestDraft,
   TestMode,
   TestSubmitResult,
 } from '../types';
@@ -63,9 +64,37 @@ export function useSubmitTest(testId: string) {
     mutationFn: (input: SubmitTestInput) =>
       api.post<TestSubmitResult>(`/tests/${testId}/submit`, input),
     onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: ['tests', testId, 'attempts'] });
+      void queryClient.invalidateQueries({ queryKey: ['tests'] }); // attempts + draft summary
       void queryClient.invalidateQueries({ queryKey: ['questions', 'weak'] });
       void queryClient.invalidateQueries({ queryKey: ['questionStats'] });
+    },
+  });
+}
+
+/** The unfinished attempt for a test, or null. */
+export function useTestDraft(testId: string) {
+  return useQuery({
+    queryKey: ['tests', testId, 'draft'],
+    queryFn: () => api.get<TestDraft | null>(`/tests/${testId}/draft`),
+    staleTime: 0,
+  });
+}
+
+export function useSaveDraft(testId: string) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (draft: TestDraft) => api.put<void>(`/tests/${testId}/draft`, draft),
+    onSuccess: () => void queryClient.invalidateQueries({ queryKey: ['tests'], exact: true }),
+  });
+}
+
+export function useDiscardDraft(testId: string) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: () => api.delete<void>(`/tests/${testId}/draft`),
+    onSuccess: () => {
+      queryClient.setQueryData(['tests', testId, 'draft'], null);
+      void queryClient.invalidateQueries({ queryKey: ['tests'], exact: true });
     },
   });
 }

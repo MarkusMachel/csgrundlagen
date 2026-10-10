@@ -41,9 +41,12 @@ func run(log *slog.Logger) error {
 		return err
 	}
 
+	st := store.New(pool)
+	go purgeLoop(ctx, st, log)
+
 	srv := &http.Server{
 		Addr:              cfg.Addr,
-		Handler:           httpapi.New(store.New(pool), log, httpapi.Options{BaseURL: cfg.BaseURL, GoPlaygroundURL: cfg.GoPlaygroundURL}),
+		Handler:           httpapi.New(st, log, httpapi.Options{BaseURL: cfg.BaseURL, GoPlaygroundURL: cfg.GoPlaygroundURL}),
 		ReadHeaderTimeout: 5 * time.Second,
 		ReadTimeout:       15 * time.Second,
 		WriteTimeout:      30 * time.Second,
@@ -67,5 +70,22 @@ func run(log *slog.Logger) error {
 		shutdownCtx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 		defer cancel()
 		return srv.Shutdown(shutdownCtx)
+	}
+}
+
+// purgeLoop deletes expired sessions and reset tokens and old sign-in history,
+// on startup and then hourly.
+func purgeLoop(ctx context.Context, st *store.Store, log *slog.Logger) {
+	ticker := time.NewTicker(time.Hour)
+	defer ticker.Stop()
+	for {
+		if err := st.PurgeExpired(ctx); err != nil && ctx.Err() == nil {
+			log.Error("purge expired data", "err", err)
+		}
+		select {
+		case <-ctx.Done():
+			return
+		case <-ticker.C:
+		}
 	}
 }

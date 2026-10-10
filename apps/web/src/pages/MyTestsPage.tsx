@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import { AnkiExportButton } from '@/features/anki';
 import { useDeleteTest, useTestAttempts, useTests, type CustomTest } from '@/features/custom-tests';
 import { EmptyState, ErrorState, Spinner } from '@/shared/ui';
 
@@ -88,7 +89,9 @@ function TestCard({ test }: { test: CustomTest }) {
           onClick={() => navigate(`/tests/${test.id}/take`)}
         >
           <Play size={15} aria-hidden />
-          {t('myTests.take')}
+          {test.draft
+            ? t('myTests.resume', { answered: test.draft.answered, total: test.draft.total })
+            : t('myTests.take')}
         </button>
         <button
           type="button"
@@ -106,6 +109,7 @@ function TestCard({ test }: { test: CustomTest }) {
             }}
           />
         </button>
+        <AnkiExportButton source={{ source: 'test', id: test.id }} className="btn" />
       </div>
       {historyOpen && <AttemptHistory testId={test.id} open={historyOpen} />}
     </div>

@@ -2,18 +2,33 @@ import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
 
+import { AnkiImportTab } from '@/features/anki';
 import {
   AdminStatsTab,
   BugReportQueue,
+  CommentModeration,
+  QualityReportTab,
   MaterialForm,
   MaterialManager,
   QuestionForm,
   QuestionManager,
   useBugReports,
   useIsAdmin,
+  useModerationQueue,
 } from '@/features/authoring';
+import { AdminUsersTab } from '@/features/devices';
 
-type Tab = 'stats' | 'question' | 'material' | 'questions' | 'materials' | 'bugs';
+type Tab =
+  | 'stats'
+  | 'quality'
+  | 'question'
+  | 'material'
+  | 'questions'
+  | 'materials'
+  | 'bugs'
+  | 'comments'
+  | 'users'
+  | 'import';
 
 export function AdminPage() {
   const { t } = useTranslation();
@@ -21,11 +36,24 @@ export function AdminPage() {
   const idBase = useId();
   const [tab, setTab] = useState<Tab>('stats');
   const openBugs = useBugReports('open');
+  const reported = useModerationQueue('reported');
+  const openReports = reported.data?.openReports ?? 0;
 
   // Client-side gate; the mock API also rejects non-admins (403).
   if (!isAdmin) return <Navigate to="/" replace />;
 
-  const tabs: Tab[] = ['stats', 'question', 'material', 'questions', 'materials', 'bugs'];
+  const tabs: Tab[] = [
+    'stats',
+    'quality',
+    'question',
+    'material',
+    'questions',
+    'materials',
+    'bugs',
+    'comments',
+    'users',
+    'import',
+  ];
 
   return (
     <div className="stack admin-page">
@@ -61,6 +89,14 @@ export function AdminPage() {
                   {openBugs.data!.length}
                 </span>
               )}
+              {key === 'comments' && openReports > 0 && (
+                <span
+                  className="tab-badge"
+                  aria-label={t('moderation.openCount', { count: openReports })}
+                >
+                  {openReports}
+                </span>
+              )}
             </button>
           ))}
         </div>
@@ -71,11 +107,15 @@ export function AdminPage() {
           aria-labelledby={`${idBase}-tab-${tab}`}
         >
           {tab === 'stats' && <AdminStatsTab />}
+          {tab === 'quality' && <QualityReportTab />}
           {tab === 'question' && <QuestionForm />}
           {tab === 'material' && <MaterialForm />}
           {tab === 'questions' && <QuestionManager />}
           {tab === 'materials' && <MaterialManager />}
           {tab === 'bugs' && <BugReportQueue />}
+          {tab === 'comments' && <CommentModeration />}
+          {tab === 'users' && <AdminUsersTab />}
+          {tab === 'import' && <AnkiImportTab />}
         </div>
       </div>
     </div>

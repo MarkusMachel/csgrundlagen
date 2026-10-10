@@ -25,11 +25,11 @@ var ErrBadCredentials = errors.New("invalid email or password")
 // the same bcrypt work as a wrong password and can't be told apart by timing.
 var dummyHash, _ = bcrypt.GenerateFromPassword([]byte("not-a-real-password"), bcrypt.DefaultCost)
 
-const userSelect = `SELECT u.id, u.name, u.email, u.avatar_url, u.locale::text, u.role::text FROM users u`
+const userSelect = `SELECT u.id, u.name, u.email, u.avatar_url, u.locale::text, u.role::text, u.privacy_version FROM users u`
 
 func scanUser(row interface{ Scan(...any) error }) (User, error) {
 	var u User
-	err := row.Scan(&u.ID, &u.Name, &u.Email, &u.AvatarURL, &u.Locale, &u.Role)
+	err := row.Scan(&u.ID, &u.Name, &u.Email, &u.AvatarURL, &u.Locale, &u.Role, &u.PrivacyVersion)
 	return u, notFound(err)
 }
 
@@ -39,13 +39,15 @@ func hashToken(token string) string {
 }
 
 // Login checks the password and opens a session, returning the bearer token.
-func (s *Store) Login(ctx context.Context, email, password string) (string, User, error) {
+func (s *Store) Login(ctx context.Context, email, password string, client Client) (string, User, error) {
 	var hash string
+	var blocked bool
 	var u User
 	err := s.pool.QueryRow(ctx, `
-		SELECT u.id, u.name, u.email, u.avatar_url, u.locale::text, u.role::text, u.password_hash
+		SELECT u.id, u.name, u.email, u.avatar_url, u.locale::text, u.role::text, u.privacy_version, u.password_hash,
+		       u.blocked_at IS NOT NULL
 		FROM users u WHERE lower(u.email) = lower($1)`, strings.TrimSpace(email),
-	).Scan(&u.ID, &u.Name, &u.Email, &u.AvatarURL, &u.Locale, &u.Role, &hash)
+	).Scan(&u.ID, &u.Name, &u.Email, &u.AvatarURL, &u.Locale, &u.Role, &u.PrivacyVersion, &hash, &blocked)
 	if err != nil {
 		if errors.Is(notFound(err), ErrNotFound) {
 			_ = bcrypt.CompareHashAndPassword(dummyHash, []byte(password))
@@ -54,12 +56,18 @@ func (s *Store) Login(ctx context.Context, email, password string) (string, User
 		return "", User{}, err
 	}
 	if bcrypt.CompareHashAndPassword([]byte(hash), []byte(password)) != nil {
+		s.recordEvent(ctx, s.pool, u.ID, "login_failed", client)
 		return "", User{}, ErrBadCredentials
 	}
-	token, err := s.openSession(ctx, u.ID)
+	// Only revealed after the right password, so it says nothing to a guesser.
+	if blocked {
+		return "", User{}, ErrBlocked
+	}
+	token, err := s.openSession(ctx, u.ID, client)
 	if err != nil {
 		return "", User{}, err
 	}
+	s.recordEvent(ctx, s.pool, u.ID, "login", client)
 	return token, u, nil
 }
 
@@ -72,24 +80,33 @@ func newToken() (string, error) {
 	return base64.RawURLEncoding.EncodeToString(raw), nil
 }
 
-// openSession starts a session for the user and returns its bearer token.
-func (s *Store) openSession(ctx context.Context, userID string) (string, error) {
+// openSession starts a session for the user, remembering the device it was
+// opened from, and returns its bearer token.
+func (s *Store) openSession(ctx context.Context, userID string, client Client) (string, error) {
 	token, err := newToken()
 	if err != nil {
 		return "", err
 	}
 	_, err = s.pool.Exec(ctx, `
-		INSERT INTO sessions (token_hash, user_id, expires_at) VALUES ($1, $2, $3)`,
-		hashToken(token), userID, time.Now().Add(SessionTTL))
+		INSERT INTO sessions (token_hash, user_id, expires_at, ip, last_ip, user_agent)
+		VALUES ($1, $2, $3, $4, $4, $5)`,
+		hashToken(token), userID, time.Now().Add(SessionTTL), client.ip(), client.userAgent())
 	return token, err
 }
 
 // UserForToken resolves a bearer token to its user, or ErrNotFound if the
-// token is unknown or expired.
-func (s *Store) UserForToken(ctx context.Context, token string) (User, error) {
-	return scanUser(s.pool.QueryRow(ctx, userSelect+`
+// token is unknown or expired. It also marks the session as used from ip,
+// at most once a minute so busy clients don't write on every request.
+func (s *Store) UserForToken(ctx context.Context, token, ip string) (User, error) {
+	return scanUser(s.pool.QueryRow(ctx, `
+		WITH touched AS (
+			UPDATE sessions SET last_seen_at = now(), last_ip = COALESCE($2, last_ip)
+			WHERE token_hash = $1 AND expires_at > now()
+			  AND (last_seen_at < now() - interval '1 minute' OR last_ip IS DISTINCT FROM COALESCE($2, last_ip))
+		)
+		`+userSelect+`
 		JOIN sessions se ON se.user_id = u.id
-		WHERE se.token_hash = $1 AND se.expires_at > now()`, hashToken(token)))
+		WHERE se.token_hash = $1 AND se.expires_at > now() AND u.blocked_at IS NULL`, hashToken(token), Client{IP: ip}.ip()))
 }
 
 func (s *Store) Logout(ctx context.Context, token string) error {
@@ -143,7 +160,7 @@ func (s *Store) CreateUser(ctx context.Context, name, email, password, role, loc
 		INSERT INTO users (name, email, password_hash, role, locale)
 		VALUES ($1, $2, $3, $4::user_role, $5::locale)
 		ON CONFLICT (email) DO NOTHING
-		RETURNING id, name, email, avatar_url, locale::text, role::text`,
+		RETURNING id, name, email, avatar_url, locale::text, role::text, privacy_version`,
 		name, email, hash, role, NormalizeLocale(locale)))
 	if errors.Is(err, ErrNotFound) {
 		return User{}, ErrConflict{"an account with this email already exists"}
@@ -151,13 +168,22 @@ func (s *Store) CreateUser(ctx context.Context, name, email, password, role, loc
 	return u, err
 }
 
-// SignUp creates a regular (non-admin) account and logs it in.
-func (s *Store) SignUp(ctx context.Context, name, email, password, locale string) (string, User, error) {
+// SignUp creates a regular (non-admin) account and logs it in. Signing up
+// means accepting the current privacy policy; callers check the user agreed.
+func (s *Store) SignUp(ctx context.Context, name, email, password, locale string, client Client) (string, User, error) {
 	u, err := s.CreateUser(ctx, name, email, password, "user", locale)
 	if err != nil {
 		return "", User{}, err
 	}
-	token, err := s.openSession(ctx, u.ID)
+	if err := s.AcceptPrivacyPolicy(ctx, u.ID, PrivacyPolicyVersion); err != nil {
+		return "", User{}, err
+	}
+	v := PrivacyPolicyVersion
+	u.PrivacyVersion = &v
+	token, err := s.openSession(ctx, u.ID, client)
+	if err == nil {
+		s.recordEvent(ctx, s.pool, u.ID, "signup", client)
+	}
 	return token, u, err
 }
 
@@ -184,7 +210,7 @@ func (s *Store) CreatePasswordReset(ctx context.Context, email string) (string, 
 
 // ResetPassword sets a new password using a reset token, marks the token used,
 // and signs the user out everywhere.
-func (s *Store) ResetPassword(ctx context.Context, token, password string) error {
+func (s *Store) ResetPassword(ctx context.Context, token, password string, client Client) error {
 	if err := validatePassword(password); err != nil {
 		return err
 	}
@@ -207,8 +233,11 @@ func (s *Store) ResetPassword(ctx context.Context, token, password string) error
 		if _, err := tx.Exec(ctx, `UPDATE users SET password_hash = $1 WHERE id = $2`, hash, userID); err != nil {
 			return err
 		}
-		_, err = tx.Exec(ctx, `DELETE FROM sessions WHERE user_id = $1`, userID)
-		return err
+		if _, err = tx.Exec(ctx, `DELETE FROM sessions WHERE user_id = $1`, userID); err != nil {
+			return err
+		}
+		s.recordEvent(ctx, tx, userID, "password_reset", client)
+		return nil
 	})
 }
 

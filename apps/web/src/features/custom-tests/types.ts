@@ -1,4 +1,4 @@
-import type { AnswerValue } from '@/features/questions/types';
+import type { AnswerValue, OptionFeedback } from '@/features/questions/types';
 
 export type TestMode = 'practice' | 'exam';
 
@@ -12,6 +12,18 @@ export interface CustomTest {
   shuffleQuestions: boolean;
   shuffleOptions: boolean;
   createdAt: string;
+  /** An unfinished attempt that can be resumed. */
+  draft?: { answered: number; total: number; startedAt: string; updatedAt: string };
+}
+
+/** An unfinished attempt as saved on the server. */
+export interface TestDraft {
+  mode: TestMode;
+  questionIds?: string[];
+  answers: Record<string, AnswerValue>;
+  shuffleSeed: number;
+  startedAt: string;
+  updatedAt?: string;
 }
 
 export interface TestAttempt {
@@ -30,6 +42,7 @@ export interface TestSubmitResultItem {
   correct: boolean;
   givenAnswer?: AnswerValue;
   correctAnswer: AnswerValue;
+  feedback?: OptionFeedback[];
 }
 
 export interface TestSubmitResult {

@@ -1,16 +1,24 @@
 import { Timer } from 'lucide-react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { formatSeconds, useCountdown } from '../hooks/useCountdown';
 
 interface TestTimerProps {
   durationMinutes: number;
+  /** When the attempt began; a resumed attempt continues where the clock is now. */
+  startedAt?: string | null;
   onExpire: () => void;
 }
 
-export function TestTimer({ durationMinutes, onExpire }: TestTimerProps) {
+export function TestTimer({ durationMinutes, startedAt, onExpire }: TestTimerProps) {
   const { t } = useTranslation();
-  const secondsLeft = useCountdown(durationMinutes * 60, onExpire);
+  // Computed once per attempt: the clock kept running while the test was closed.
+  const total = useMemo(() => {
+    const elapsed = startedAt ? Math.floor((Date.now() - new Date(startedAt).getTime()) / 1000) : 0;
+    return Math.max(1, durationMinutes * 60 - Math.max(0, elapsed));
+  }, [durationMinutes, startedAt]);
+  const secondsLeft = useCountdown(total, onExpire);
   const critical = secondsLeft <= 30;
 
   return (

@@ -10,4 +10,6 @@ export interface User {
   locale: Locale;
   /** Gates content authoring (§ admin): only 'admin' may create questions/material. */
   role: UserRole;
+  /** The privacy policy version the user accepted, if any. */
+  privacyVersion?: string;
 }

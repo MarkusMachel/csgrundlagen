@@ -12,7 +12,13 @@ const testSelect = `
 SELECT t.id, t.owner_id, t.name,
        COALESCE((SELECT array_agg(ctq.question_id::text ORDER BY ctq.position)
                  FROM custom_test_questions ctq WHERE ctq.test_id = t.id), '{}'),
-       t.timed, t.duration_minutes, t.shuffle_questions, t.shuffle_options, t.created_at
+       t.timed, t.duration_minutes, t.shuffle_questions, t.shuffle_options, t.created_at,
+       (SELECT json_build_object(
+                 'answered', (SELECT count(*) FROM jsonb_object_keys(d.answers)),
+                 'total', COALESCE(jsonb_array_length(d.question_ids),
+                                   (SELECT count(*) FROM custom_test_questions q WHERE q.test_id = t.id)),
+                 'startedAt', d.started_at, 'updatedAt', d.updated_at)
+          FROM test_attempt_drafts d WHERE d.test_id = t.id AND d.user_id = t.owner_id)
 FROM custom_tests t`
 
 func (s *Store) queryTests(ctx context.Context, sql string, args ...any) ([]CustomTest, error) {
@@ -169,8 +175,12 @@ func (s *Store) SubmitTest(ctx context.Context, testID, userID string, in Submit
 		if ok {
 			score++
 		}
+		feedback, err := s.feedbackFor(ctx, q, given)
+		if err != nil {
+			return TestSubmitResult{}, err
+		}
 		breakdown = append(breakdown, TestSubmitResultItem{
-			QuestionID: q.ID, Correct: ok, GivenAnswer: given, CorrectAnswer: q.Correct(),
+			QuestionID: q.ID, Correct: ok, GivenAnswer: given, CorrectAnswer: q.Correct(), Feedback: feedback,
 		})
 	}
 
@@ -187,6 +197,10 @@ func (s *Store) SubmitTest(ctx context.Context, testID, userID string, in Submit
 			testID, userID, in.Mode, answers, score, startedAt,
 		).Scan(&attempt.ID, &attempt.TestID, &attempt.UserID, &attempt.Mode, &attempt.Answers,
 			&attempt.Score, &attempt.StartedAt, &attempt.SubmittedAt); err != nil {
+			return err
+		}
+		if _, err := tx.Exec(ctx, `DELETE FROM test_attempt_drafts WHERE test_id = $1 AND user_id = $2`,
+			testID, userID); err != nil {
 			return err
 		}
 		now := time.Now()

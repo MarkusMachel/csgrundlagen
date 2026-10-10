@@ -1,0 +1,46 @@
+/* ---------- flashcards and Anki ---------- */
+
+.flashcard__show {
+  align-self: flex-start;
+}
+
+.flashcard__back {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.flashcard__answer {
+  padding: 10px 14px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  background: var(--accent-soft);
+}
+
+.flashcard__grade {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.flashcard__knew[aria-pressed='true'] {
+  border-color: var(--green);
+  color: var(--green);
+  font-weight: 600;
+}
+
+.flashcard__didnt[aria-pressed='true'] {
+  border-color: var(--red);
+  color: var(--red);
+  font-weight: 600;
+}
+
+.anki-cell {
+  max-width: 360px;
+  overflow-wrap: anywhere;
+}
+
+/* the choice made stays fully visible once the card is graded */
+.flashcard__grade .btn[aria-pressed='true']:disabled {
+  opacity: 1;
+}

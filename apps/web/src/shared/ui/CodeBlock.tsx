@@ -1,41 +1,42 @@
-import hljs from 'highlight.js/lib/core';
-import bash from 'highlight.js/lib/languages/bash';
-import csharp from 'highlight.js/lib/languages/csharp';
-import go from 'highlight.js/lib/languages/go';
-import javascript from 'highlight.js/lib/languages/javascript';
-import json from 'highlight.js/lib/languages/json';
-import python from 'highlight.js/lib/languages/python';
-import sql from 'highlight.js/lib/languages/sql';
-import typescript from 'highlight.js/lib/languages/typescript';
-import xml from 'highlight.js/lib/languages/xml';
-import yaml from 'highlight.js/lib/languages/yaml';
 import { Check, Copy } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-// Only the languages the question banks use, to keep the bundle small.
-// Each definition brings its own aliases (cs/c#, ts, js, sh/shell, yml, html…).
-const LANGUAGES = { bash, csharp, go, javascript, json, python, sql, typescript, xml, yaml };
-Object.entries(LANGUAGES).forEach(([name, def]) => hljs.registerLanguage(name, def));
+type Highlighter = typeof import('./highlight');
 
-const DISPLAY_NAMES: Record<string, string> = {
-  bash: 'Bash',
-  csharp: 'C#',
-  go: 'Go',
-  javascript: 'JavaScript',
-  json: 'JSON',
-  python: 'Python',
-  sql: 'SQL',
-  typescript: 'TypeScript',
-  xml: 'HTML/XML',
-  yaml: 'YAML',
+// highlight.js is fetched the first time a code block appears; until then
+// (a moment, once) code shows as plain text.
+let highlighter: Highlighter | null = null;
+let loading: Promise<Highlighter> | null = null;
+function loadHighlighter() {
+  loading ??= import('./highlight').then((m) => (highlighter = m));
+  return loading;
+}
+
+/** Fence tags we recognise, by canonical language (aliases as highlight.js knows them). */
+const LANGUAGES: Record<string, { label: string; aliases: string[] }> = {
+  bash: { label: 'Bash', aliases: ['sh', 'shell', 'zsh'] },
+  csharp: { label: 'C#', aliases: ['cs', 'c#'] },
+  go: { label: 'Go', aliases: ['golang'] },
+  javascript: { label: 'JavaScript', aliases: ['js', 'jsx', 'mjs', 'cjs'] },
+  json: { label: 'JSON', aliases: ['jsonc'] },
+  python: { label: 'Python', aliases: ['py', 'gyp', 'ipython'] },
+  sql: { label: 'SQL', aliases: [] },
+  typescript: { label: 'TypeScript', aliases: ['ts', 'tsx', 'mts', 'cts'] },
+  xml: {
+    label: 'HTML/XML',
+    aliases: ['html', 'xhtml', 'rss', 'atom', 'xjb', 'xsd', 'xsl', 'plist', 'svg'],
+  },
+  yaml: { label: 'YAML', aliases: ['yml'] },
 };
 
 /** Canonical language name for a fence tag like "cs" or "ts", or undefined if unknown. */
 function resolveLanguage(lang: string): string | undefined {
-  const def = lang ? hljs.getLanguage(lang) : undefined;
-  if (!def) return undefined;
-  return Object.keys(LANGUAGES).find((name) => hljs.getLanguage(name) === def);
+  const tag = lang.trim().toLowerCase();
+  if (!tag) return undefined;
+  return Object.keys(LANGUAGES).find(
+    (name) => name === tag || LANGUAGES[name].aliases.includes(tag),
+  );
 }
 
 interface CodeBlockProps {
@@ -48,12 +49,19 @@ export function CodeBlock({ code, lang = '' }: CodeBlockProps) {
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
   const language = resolveLanguage(lang);
+  const [hl, setHl] = useState(highlighter);
 
-  // highlight.js escapes the source before adding its <span> markup, so the
-  // result is safe to inject; unknown languages are escaped the same way.
-  const html = language
-    ? hljs.highlight(code, { language, ignoreIllegals: true }).value
-    : escapeHtml(code);
+  useEffect(() => {
+    if (!language || hl) return;
+    let live = true;
+    void loadHighlighter().then((m) => live && setHl(m));
+    return () => {
+      live = false;
+    };
+  }, [language, hl]);
+
+  // Unknown languages, and code before the highlighter loads, are escaped.
+  const html = language && hl ? hl.highlight(code, language) : escapeHtml(code);
 
   const copy = async () => {
     try {
@@ -69,7 +77,7 @@ export function CodeBlock({ code, lang = '' }: CodeBlockProps) {
     <figure className="code-block">
       <figcaption className="code-block__bar">
         <span className="code-block__lang">
-          {language ? DISPLAY_NAMES[language] : lang || 'text'}
+          {language ? LANGUAGES[language].label : lang || 'text'}
         </span>
         <button
           type="button"

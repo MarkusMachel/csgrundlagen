@@ -1,0 +1,13 @@
+/* ---------- offline ---------- */
+
+.statusbar__sync {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--accent);
+}
+
+.statusbar__sync--offline {
+  color: var(--orange);
+  font-weight: 600;
+}

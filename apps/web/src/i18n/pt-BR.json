@@ -9,7 +9,9 @@
     "delete": "Excluir",
     "close": "Fechar",
     "submit": "Enviar",
-    "language": "Idioma"
+    "language": "Idioma",
+    "yes": "Sim",
+    "no": "Não"
   },
   "nav": {
     "home": "Início",
@@ -65,7 +67,23 @@
     "passwordsDiffer": "As senhas não coincidem",
     "emailTaken": "Já existe uma conta com este e-mail. Tente entrar.",
     "tooManyAttempts": "Muitas tentativas. Aguarde um minuto e tente novamente.",
-    "genericError": "Algo deu errado. Tente novamente."
+    "genericError": "Algo deu errado. Tente novamente.",
+    "prompt": {
+      "loginTitle": "Entre para continuar",
+      "signUpTitle": "Crie sua conta",
+      "why": "Navegar é livre. Entre para responder, salvar favoritos e notas, montar testes e acompanhar seu progresso.",
+      "inline": "entre para usar isto",
+      "gateTitle": "Esta página é sua assim que você entrar",
+      "gateBody": "Seu progresso, revisões, favoritos e testes ficam guardados na sua conta.",
+      "gateHint": "entre ou crie uma conta grátis"
+    },
+    "brand": {
+      "tagline": "Pratique os fundamentos da computação até as respostas ficarem.",
+      "f1": "perguntas sobre redes, sistemas operacionais, estruturas de dados e mais",
+      "f2": "repetição espaçada traz de volta o que você está para esquecer",
+      "f3": "testes cronometrados, pontos fracos e progresso visível",
+      "browse": "Dar uma olhada primeiro"
+    }
   },
   "home": {
     "questionOfTheDay": "Pergunta do Dia",
@@ -128,7 +146,24 @@
       "placeholder": "Adicionar um comentário…",
       "post": "Publicar",
       "empty": "Nenhum comentário ainda — seja o primeiro.",
-      "required": "O comentário não pode ficar vazio"
+      "required": "O comentário não pode ficar vazio",
+      "hidden": "oculto",
+      "report": "Denunciar",
+      "reportLabel": "Denunciar comentário de {{name}}",
+      "reported": "Denunciado",
+      "delete": "Excluir",
+      "deleteLabel": "Excluir comentário de {{name}}",
+      "confirmDelete": "Excluir?",
+      "reportTitle": "Denunciar comentário",
+      "why": "Qual é o problema?",
+      "note": "Mais alguma coisa? (opcional)",
+      "sendReport": "Enviar denúncia",
+      "reason": {
+        "spam": "Spam ou propaganda",
+        "offensive": "Ofensivo ou abusivo",
+        "misleading": "Errado ou enganoso",
+        "other": "Outra coisa"
+      }
     },
     "notes": {
       "label": "Nota privada",
@@ -157,7 +192,9 @@
     "moveDown": "Mover “{{item}}” para baixo",
     "predictOutput": "o que isso imprime?",
     "outputPlaceholder": "digite a saída exata, uma linha por linha impressa",
-    "expectedOutput": "saída esperada"
+    "expectedOutput": "saída esperada",
+    "whyWrong": "Por que não",
+    "readAbout": "Leia: {{title}}"
   },
   "builder": {
     "title": "Criar Teste",
@@ -192,7 +229,8 @@
     "score": "Pontuação",
     "mode": "Modo",
     "date": "Data",
-    "deleteTest": "Excluir teste"
+    "deleteTest": "Excluir teste",
+    "resume": "Continuar ({{answered}}/{{total}} respondidas)"
   },
   "takeTest": {
     "chooseMode": "Escolha um modo",
@@ -207,7 +245,16 @@
     "yourScore": "Você acertou {{score}} de {{total}}",
     "retryIncorrect": "Refazer Apenas as Erradas",
     "backToTests": "Voltar para Meus Testes",
-    "questionOf": "Pergunta {{current}} de {{total}}"
+    "questionOf": "Pergunta {{current}} de {{total}}",
+    "resume": {
+      "title": "Você tem uma tentativa inacabada",
+      "summary": "{{mode}}, {{answered}} de {{total}} respondidas, salva {{when}}.",
+      "timeLeft": "Restam cerca de {{minutes}} min no relógio.",
+      "timeUp": "O tempo acabou enquanto você estava fora.",
+      "continue": "Continuar",
+      "submitNow": "Abrir e enviar",
+      "startOver": "Descartar e recomeçar"
+    }
   },
   "bookmarks": {
     "title": "Favoritos",
@@ -263,7 +310,11 @@
       "stats": "Estatísticas",
       "questions": "Perguntas",
       "materials": "Materiais",
-      "bugs": "Relatos de erro"
+      "bugs": "Relatos de erro",
+      "users": "Usuários",
+      "comments": "Comentários",
+      "quality": "Qualidade",
+      "import": "Importar"
     },
     "questionType": "Tipo de questão",
     "type": {
@@ -271,7 +322,8 @@
       "true-false": "Verdadeiro / Falso",
       "multi-select": "Múltipla seleção",
       "ordering": "Ordenação",
-      "output": "Prever a saída"
+      "output": "Prever a saída",
+      "flashcard": "flashcard"
     },
     "prompt": "Enunciado",
     "options": "Alternativas",
@@ -370,7 +422,52 @@
     "runnableHint": "js roda no navegador, go no Go Playground; dá para executar depois de responder",
     "notRunnableHint": "essa linguagem não pode ser executada, então só se prevê",
     "expectedOutput": "Saída esperada",
-    "runToFill": "Executar para preencher a saída"
+    "runToFill": "Executar para preencher a saída",
+    "history": {
+      "back": "Voltar à lista",
+      "view": "Visualização",
+      "edit": "Editar",
+      "title": "Histórico",
+      "empty": "Nenhuma versão registrada ainda.",
+      "current": "atual",
+      "unknownEditor": "alguém (conta excluída)",
+      "changed": "alterou {{fields}}",
+      "showVersion": "Ver esta versão",
+      "hideVersion": "Ocultar",
+      "restore": "Restaurar",
+      "confirmRestore": "Restaurar esta versão?",
+      "correctOption": "correta",
+      "answerIs": "Resposta:",
+      "kind": {
+        "created": "Criada",
+        "edited": "Editada",
+        "restored": "v{{version}} restaurada",
+        "original": "Antes do histórico"
+      },
+      "field": {
+        "type": "tipo",
+        "prompt": "enunciado",
+        "options": "opções",
+        "answer": "resposta",
+        "explanation": "explicação",
+        "code": "código",
+        "tags": "tags",
+        "difficulty": "dificuldade",
+        "materials": "materiais"
+      }
+    },
+    "feedback": {
+      "summary": "Se alguém escolher esta… (opcional)",
+      "added": "feedback",
+      "label": "Por que a opção {{option}} está errada",
+      "placeholder": "Explique o equívoco por trás desta opção. Visível só para quem escolhê-la.",
+      "materialLabel": "Leitura para a opção {{option}}",
+      "searchMaterials": "Buscar materiais…",
+      "noMaterial": "Nenhuma leitura vinculada"
+    },
+    "front": "Frente",
+    "back": "Verso",
+    "flashcardHint": "A frente é a pergunta, o verso a resposta; quem estuda avalia a si mesmo."
   },
   "code": {
     "copy": "Copiar código",
@@ -381,6 +478,24 @@
     "role": {
       "admin": "admin",
       "user": "membro"
+    },
+    "profile": {
+      "title": "Perfil",
+      "save": "Salvar perfil",
+      "saved": "Perfil salvo."
+    },
+    "email": {
+      "title": "Endereço de e-mail",
+      "current": "Sua conta usa {{email}}.",
+      "new": "Novo e-mail",
+      "send": "Enviar link de confirmação",
+      "sent": "Enviamos um link para {{email}}. Seu e-mail muda quando você abri-lo (em até 24 horas).",
+      "again": "Usar outro endereço",
+      "confirmTitle": "Confirme seu e-mail",
+      "confirmed": "Pronto: sua conta agora usa {{email}}.",
+      "invalidLink": "Este link de confirmação é inválido ou expirou.",
+      "toAccount": "Ir para sua conta",
+      "password": "Sua senha, para confirmar"
     }
   },
   "review": {
@@ -436,5 +551,264 @@
     "predictFirst": "Executar libera depois que você responder: preveja primeiro",
     "goNote": "roda no Go Playground",
     "failed": "Não foi possível executar o código."
+  },
+  "devices": {
+    "title": "Dispositivos conectados",
+    "intro": "Todos os lugares onde sua conta está conectada agora. Desconecte qualquer dispositivo que você não reconheça.",
+    "browserOn": "{{browser}} no {{os}}",
+    "thisDevice": "Este dispositivo",
+    "lastActive": "Ativo {{when}}",
+    "signedIn": "conectado em {{date}}",
+    "details": "Detalhes",
+    "signOut": "Desconectar",
+    "signOutHere": "Sair aqui",
+    "signOutOthers_one": "Desconectar {{count}} outro dispositivo",
+    "signOutOthers_other": "Desconectar {{count}} outros dispositivos",
+    "type": {
+      "desktop": "Computador",
+      "mobile": "Celular",
+      "tablet": "Tablet",
+      "bot": "Bot ou script"
+    },
+    "fact": {
+      "device": "Tipo de dispositivo",
+      "firstIp": "IP no login",
+      "lastIp": "IP mais recente",
+      "timezone": "Fuso horário",
+      "languages": "Idiomas",
+      "platform": "Plataforma",
+      "screen": "Tela",
+      "viewport": "Janela",
+      "touch": "Tela sensível ao toque",
+      "colorScheme": "Esquema de cores",
+      "expires": "Sessão expira",
+      "userAgent": "User agent"
+    },
+    "event": {
+      "login": "Entrou",
+      "signup": "Criou a conta",
+      "login_failed": "Senha incorreta",
+      "password_reset": "Redefiniu a senha"
+    },
+    "admin": {
+      "search": "Buscar usuários por nome ou e-mail…",
+      "empty": "Nenhum usuário encontrado.",
+      "never": "nunca",
+      "col": {
+        "user": "Usuário",
+        "role": "Papel",
+        "lastSeen": "Visto por último",
+        "devices": "Dispositivos",
+        "answers": "Respostas",
+        "joined": "Entrou em",
+        "actions": "Ações",
+        "when": "Quando",
+        "event": "Evento",
+        "device": "Dispositivo"
+      },
+      "sessions_one": "{{count}} sessão",
+      "sessions_other": "{{count}} sessões",
+      "failed_one": "{{count}} falha",
+      "failed_other": "{{count}} falhas",
+      "failedHint": "Tentativas com senha incorreta nas últimas 24 horas",
+      "view": "Ver",
+      "viewLabel": "Ver {{name}}",
+      "back": "Todos os usuários",
+      "joinedOn": "entrou em {{date}}",
+      "signOutEverywhere": "Desconectar de tudo",
+      "activeDevices_one": "{{count}} dispositivo ativo",
+      "activeDevices_other": "{{count}} dispositivos ativos",
+      "noSessions": "Não está conectado em nenhum lugar.",
+      "history": "Histórico de login",
+      "historyHint": "Últimos 50 eventos. O histórico é mantido por 90 dias.",
+      "noHistory": "Nenhum login registrado ainda.",
+      "blocked": "bloqueado",
+      "manage": "Gerenciar conta",
+      "makeAdmin": "Tornar admin",
+      "makeMember": "Tornar membro",
+      "block": "Bloquear",
+      "unblock": "Desbloquear",
+      "blockedSince": "Bloqueado desde {{date}}: desconectado e não consegue entrar.",
+      "manageHint": "Bloquear desconecta o usuário de todos os dispositivos. O último admin não pode ser rebaixado, bloqueado nem excluído."
+    }
+  },
+  "privacy": {
+    "policyLink": "Política de privacidade",
+    "footerLink": "privacidade",
+    "acceptAll": "Aceitar tudo",
+    "essentialOnly": "Só o essencial",
+    "customize": "Escolher…",
+    "alwaysOn": "sempre ativo",
+    "banner": {
+      "label": "Escolhas de privacidade",
+      "text": "Guardamos seu login neste navegador e mantemos um registro de segurança dos dispositivos em que você entra. Com sua permissão, também lembramos seu tema e idioma e anotamos o que seu navegador informa (fuso horário, tela) para você reconhecer seus dispositivos. Sem anúncios, sem análise, sem rastreadores."
+    },
+    "settings": {
+      "open": "Configurações de privacidade",
+      "title": "Configurações de privacidade",
+      "save": "Salvar minhas escolhas",
+      "intro": "Escolha o que este app pode armazenar. Você pode mudar isso a qualquer momento no rodapé de cada página."
+    },
+    "category": {
+      "essential": {
+        "name": "Essencial",
+        "desc": "Mantém você conectado, lembra esta escolha e registra o IP, o navegador e o horário de cada login para proteger sua conta. O app não funciona sem isso."
+      },
+      "preferences": {
+        "name": "Preferências",
+        "desc": "Lembra seu tema (claro ou escuro) e idioma neste navegador. Sem isso, eles voltam ao padrão ao recarregar."
+      },
+      "deviceDetails": {
+        "name": "Detalhes do dispositivo",
+        "desc": "Guarda o fuso horário, idiomas, tamanho de tela e plataforma informados pelo navegador em cada dispositivo conectado, para você diferenciá-los. Retirar o consentimento os apaga."
+      }
+    },
+    "page": {
+      "title": "Política de privacidade",
+      "version": "Versão {{version}}",
+      "operator": "o operador deste site",
+      "backLogin": "Voltar ao login",
+      "backAccount": "Voltar à sua conta"
+    },
+    "update": {
+      "titleNew": "Nossa política de privacidade",
+      "titleChanged": "Nossa política de privacidade mudou",
+      "text": "Reserve um momento para ler como tratamos seus dados: o que armazenamos, por quê, por quanto tempo e seus direitos de baixá-los ou excluí-los.",
+      "read": "Ler aqui",
+      "ok": "Já li"
+    },
+    "signup": {
+      "accept": "Li e aceito a",
+      "required": "Aceite a política de privacidade para criar uma conta."
+    },
+    "yourData": {
+      "title": "Seus dados e privacidade",
+      "intro": "Baixe tudo o que armazenamos sobre você, mude o que pode ser armazenado ou exclua sua conta.",
+      "download": "Baixar meus dados",
+      "delete": "Excluir minha conta"
+    },
+    "deleteDialog": {
+      "title": "Excluir sua conta?",
+      "text": "Isso exclui permanentemente sua conta e tudo nela: respostas, agenda de revisão, favoritos, notas, comentários, testes e dispositivos. Não dá para desfazer. Baixe seus dados antes se quiser uma cópia.",
+      "typeWord": "Digite {{word}} para confirmar",
+      "confirm": "Excluir de vez"
+    },
+    "admin": {
+      "consent": "Privacidade",
+      "policy": "Política de privacidade",
+      "acceptedOn": "aceita em {{date}} (versão {{version}})",
+      "notAccepted": "ainda não aceita",
+      "choice": "Consentimento",
+      "noChoice": "nenhuma escolha registrada",
+      "choiceValue": "preferências {{preferences}}, detalhes do dispositivo {{deviceDetails}} · {{date}}",
+      "on": "sim",
+      "off": "não"
+    }
+  },
+  "moderation": {
+    "filter": "Mostrar",
+    "filters": {
+      "reported": "Denunciados",
+      "hidden": "Ocultos",
+      "all": "Todos os comentários"
+    },
+    "empty": {
+      "reported": "Nenhuma denúncia aberta. Tudo certo.",
+      "hidden": "Nenhum comentário oculto.",
+      "all": "Nenhum comentário ainda."
+    },
+    "by": "de {{name}} · {{date}}",
+    "reportedBy": "denunciado por {{name}} · {{date}}",
+    "hide": "Ocultar",
+    "unhide": "Mostrar",
+    "dismiss": "Descartar denúncias",
+    "commentBy": "comentário de {{name}}",
+    "openCount_one": "{{count}} comentário denunciado",
+    "openCount_other": "{{count}} comentários denunciados"
+  },
+  "onboarding": {
+    "title": "Boas-vindas! Veja como começar",
+    "hide": "Ocultar por enquanto",
+    "intro": "{{count}} perguntas esperam por você. Três passos para aproveitá-las:",
+    "step1": {
+      "title": "Escolha um tema para começar",
+      "text": "Responda algumas perguntas; cada uma mostra a explicação e links para leitura."
+    },
+    "step2": {
+      "title": "Volte para as revisões",
+      "text": "Cada resposta agenda uma revisão: as erradas em minutos, as certas em dias. Os cartões pendentes ficam em"
+    },
+    "step3": {
+      "title": "Acompanhe seu progresso ou monte um teste",
+      "text": "Cobertura, acerto por tema e sequências estão em"
+    }
+  },
+  "quality": {
+    "intro": "Avaliado a partir de respostas reais. Uma pergunta precisa de {{min}} respostas antes de ser sinalizada.",
+    "analysed": "Perguntas analisadas",
+    "flagged": "Sinalizadas",
+    "tooFew": "Menos de {{min}} respostas",
+    "filter": "Mostrar",
+    "allFlagged": "Todas sinalizadas",
+    "empty": "Nada a corrigir aqui.",
+    "answers_one": "{{count}} resposta",
+    "answers_other": "{{count}} respostas",
+    "correctRate": "{{rate}} de acerto",
+    "picks": "Quantas vezes cada opção foi escolhida",
+    "correctOption": "(opção correta)",
+    "flag": {
+      "wrong_key": {
+        "name": "Gabarito errado?",
+        "hint": "Uma opção errada é escolhida mais que a correta; confira o gabarito."
+      },
+      "open_bug_reports": {
+        "name": "Relatos de erro abertos",
+        "hint": "Usuários relataram um problema que ainda está aberto."
+      },
+      "too_hard": {
+        "name": "Difícil demais",
+        "hint": "30% ou menos acertam: enunciado confuso, ou a resposta pode estar errada."
+      },
+      "too_easy": {
+        "name": "Fácil demais",
+        "hint": "95% ou mais acertam: ensina pouco; torne as alternativas erradas mais convincentes."
+      },
+      "dead_distractor": {
+        "name": "Opção ignorada",
+        "hint": "Uma opção errada quase ninguém escolhe (menos de 3%); troque por um erro plausível."
+      }
+    }
+  },
+  "offline": {
+    "offline": "offline",
+    "pending_one": "{{count}} resposta aguardando sincronização",
+    "pending_other": "{{count}} respostas aguardando sincronização",
+    "savedForLater": "Salva neste dispositivo; sincroniza quando você voltar a ficar online."
+  },
+  "anki": {
+    "export": "Exportar para o Anki",
+    "exportFailed": "Falha na exportação, tente de novo",
+    "exportHint": "Baixe estas perguntas num arquivo que o Anki importa (Arquivo → Importar). Exportar de novo atualiza os mesmos cartões.",
+    "importIntro": "Importe um baralho do Anki como flashcards: no Anki, use Arquivo → Exportar → “Notas em texto simples” (com HTML e tags) e escolha o arquivo aqui. Cartões cuja frente já existe são ignorados, então importar de novo é seguro.",
+    "file": "Exportação de texto do Anki (.txt)",
+    "parsed_one": "{{count}} cartão encontrado em {{file}}.",
+    "parsed_other": "{{count}} cartões encontrados em {{file}}.",
+    "skippedLines_one": "{{count}} linha ignorada (menos de dois campos).",
+    "skippedLines_other": "{{count}} linhas ignoradas (menos de dois campos).",
+    "topics": "Temas",
+    "andMore": "…e mais {{count}}",
+    "useCardTags": "Usar as tags do Anki como temas (cs::Networking → Networking)",
+    "defaultTags_one": "Temas para o {{count}} cartão sem tags",
+    "defaultTags_other": "Temas para os {{count}} cartões sem tags",
+    "import_one": "Importar {{count}} cartão",
+    "import_other": "Importar {{count}} cartões",
+    "done": "{{created}} flashcards importados; {{skipped}} já existiam."
+  },
+  "flashcard": {
+    "show": "Mostrar resposta",
+    "answer": "Resposta",
+    "how": "Você sabia?",
+    "knew": "Eu sabia",
+    "didnt": "Não sabia"
   }
 }

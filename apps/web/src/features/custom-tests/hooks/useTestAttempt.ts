@@ -3,7 +3,7 @@ import { create } from 'zustand';
 import type { AnswerValue } from '@/features/questions';
 import { randomSeed } from '@/shared/utils/shuffle';
 
-import type { TestMode } from '../types';
+import type { TestDraft, TestMode } from '../types';
 
 /**
  * In-progress attempt state (§11) — answers, mode, and the per-attempt shuffle
@@ -19,6 +19,8 @@ interface TestAttemptState {
   shuffleSeed: number;
   startedAt: string | null;
   start: (testId: string, mode: TestMode, questionIds?: string[]) => void;
+  /** Continues a saved draft: same answers, shuffle order and clock. */
+  resume: (testId: string, draft: TestDraft) => void;
   setAnswer: (questionId: string, answer: AnswerValue) => void;
   reset: () => void;
 }
@@ -38,6 +40,15 @@ export const useTestAttemptStore = create<TestAttemptState>()((set) => ({
       answers: {},
       shuffleSeed: randomSeed(),
       startedAt: new Date().toISOString(),
+    }),
+  resume: (testId, draft) =>
+    set({
+      testId,
+      mode: draft.mode,
+      questionIds: draft.questionIds?.length ? draft.questionIds : null,
+      answers: draft.answers ?? {},
+      shuffleSeed: draft.shuffleSeed,
+      startedAt: draft.startedAt,
     }),
   setAnswer: (questionId, answer) =>
     set((s) => ({ answers: { ...s.answers, [questionId]: answer } })),

@@ -1,9 +1,10 @@
-import type { CustomTest, TestAttempt } from '@/features/custom-tests/types';
+import type { CustomTest, TestAttempt, TestDraft } from '@/features/custom-tests/types';
 import type { MaterialItem } from '@/features/materials/types';
 import type {
   AnswerValue,
   Bookmark,
   BugReport,
+  CommentReportReason,
   QuestionComment,
   Question,
   QuestionNote,
@@ -13,6 +14,13 @@ import { nextReview } from '@/features/review/srs';
 import type { ReviewState } from '@/features/review/types';
 
 import { seedComments } from './seed/comments';
+import {
+  seedLoginEvents,
+  seedSessions,
+  type MockConsent,
+  type MockLoginEvent,
+  type MockSession,
+} from './seed/devices';
 import { seedMaterials } from './seed/materials';
 import { seedQuestions, type SeedQuestion } from './seed/questions';
 import { seedUsers, type SeedUser } from './seed/users';
@@ -31,15 +39,48 @@ interface Db {
   users: SeedUser[];
   /** Password reset token -> user id (single use). */
   resetTokens: Record<string, string>;
+  /** Email-change token -> pending change (single use). */
+  emailTokens: Record<string, { userId: string; email: string }>;
+  /** Signed-in devices; a token stub `mock-token.<userId>[.<sessionId>]` names one. */
+  sessions: MockSession[];
+  /** Sign-in history, oldest first. */
+  loginEvents: MockLoginEvent[];
+  /** Ids of signed-out sessions, so they aren't revived (see currentSession). */
+  revokedSessions: string[];
+  /** Consent log, oldest first (mirrors consent_records). */
+  consents: MockConsent[];
   /** All questions (seeded + admin-created), with optional translations. */
   questions: SeedQuestion[];
   /** All materials (seeded + admin-created); mutable so links can be added. */
   materials: MaterialItem[];
-  comments: QuestionComment[];
+  comments: (QuestionComment & { hiddenAt?: string })[];
+  /** Mirrors comment_reports. */
+  commentReports: {
+    commentId: string;
+    userId: string;
+    reason: CommentReportReason;
+    note?: string;
+    createdAt: string;
+    resolved?: boolean;
+  }[];
   bookmarks: Bookmark[];
   notes: QuestionNote[];
   bugReports: BugReport[];
   tests: CustomTest[];
+  /** Wrong-option feedback, kept out of the public question: questionId -> optionId -> note. */
+  optionFeedback: Record<string, Record<string, { feedback?: string; materialId?: string }>>;
+  /** Question version history (mirrors question_revisions), oldest first. */
+  revisions: {
+    id: number;
+    questionId: string;
+    kind: 'created' | 'edited' | 'restored' | 'original';
+    editorName?: string;
+    snapshot: unknown;
+    createdAt: string;
+    restoredFrom?: number;
+  }[];
+  /** Unfinished attempts, keyed `${testId}:${userId}`. */
+  drafts: Record<string, TestDraft & { updatedAt: string }>;
   attempts: TestAttempt[];
   userQuestionStats: UserQuestionStat[];
   /** Spaced-repetition state, keyed `${userId}:${questionId}`. */
@@ -135,6 +176,15 @@ function freshDb(): Db {
   return {
     users: seedUsers.map((u) => ({ ...u })),
     resetTokens: {},
+    emailTokens: {},
+    sessions: seedSessions(),
+    loginEvents: seedLoginEvents(),
+    revokedSessions: [],
+    optionFeedback: {},
+    revisions: [],
+    drafts: {},
+    commentReports: [],
+    consents: [],
     questions: seedQuestions.map((s) => ({
       question: { ...s.question },
       translations: s.translations,

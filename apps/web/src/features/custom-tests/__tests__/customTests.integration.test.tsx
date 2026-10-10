@@ -152,3 +152,54 @@ describe('attempt history (integration)', () => {
     expect(within(table).getByText('1')).toBeInTheDocument();
   });
 });
+
+describe('resuming an unfinished test (integration)', () => {
+  it('saves answers as you go; leaving and coming back resumes them, and submitting clears the draft', async () => {
+    loginAsDemo();
+    const user = userEvent.setup();
+    seedTest(['q1', 'q2']);
+    const first = renderTakeTest('seeded-test');
+
+    await user.click(await screen.findByRole('button', { name: /Exam/ }));
+    await user.click(screen.getByRole('button', { name: 'Start' }));
+    const cardQ1 = await screen.findByTestId('question-card-q1');
+    await user.click(within(cardQ1).getByRole('radio', { name: /Transport layer/ }));
+    await waitFor(() => expect(db.drafts['seeded-test:u1']?.answers).toEqual({ q1: 'B' }));
+
+    // close the tab: the in-memory attempt is gone
+    first.unmount();
+    useTestAttemptStore.getState().reset();
+
+    renderWithProviders(<MyTestsPage />);
+    expect(
+      await screen.findByRole('button', { name: 'Resume (1/2 answered)' }),
+    ).toBeInTheDocument();
+
+    renderTakeTest('seeded-test');
+    expect(await screen.findByText('You have an unfinished attempt')).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Resume' }));
+    const resumed = await screen.findByTestId('question-card-q1');
+    expect(within(resumed).getByRole('radio', { name: /Transport layer/ })).toBeChecked();
+
+    await user.click(screen.getByTestId('submit-test'));
+    await screen.findByTestId('results-screen');
+    expect(db.drafts['seeded-test:u1']).toBeUndefined();
+  });
+
+  it('"start over" discards the draft', async () => {
+    loginAsDemo();
+    const user = userEvent.setup();
+    seedTest(['q1']);
+    db.drafts['seeded-test:u1'] = {
+      mode: 'practice',
+      answers: { q1: 'A' },
+      shuffleSeed: 7,
+      startedAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+    renderTakeTest('seeded-test');
+    await user.click(await screen.findByRole('button', { name: 'Discard and start over' }));
+    expect(await screen.findByRole('button', { name: 'Start' })).toBeInTheDocument();
+    expect(db.drafts['seeded-test:u1']).toBeUndefined();
+  });
+});

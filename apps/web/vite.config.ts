@@ -16,6 +16,18 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        // Libraries change rarely; separate chunks stay cached across deploys.
+        manualChunks: {
+          react: ['react', 'react-dom', 'react-router-dom'],
+          vendor: ['@tanstack/react-query', 'i18next', 'react-i18next', 'zustand'],
+          forms: ['react-hook-form', 'zod', '@hookform/resolvers'],
+        },
+      },
+    },
+  },
   server: { proxy: apiProxy },
   preview: { proxy: apiProxy },
   test: {

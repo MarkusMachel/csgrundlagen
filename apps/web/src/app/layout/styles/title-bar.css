@@ -1,0 +1,44 @@
+/* ---------- title bar ---------- */
+
+.titlebar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  height: 46px;
+  background: var(--tabstrip);
+  border-bottom: 1px solid var(--border);
+}
+
+.file-tab {
+  align-items: center;
+  display: inline-flex;
+}
+
+.titlebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.titlebar__brand:hover {
+  text-decoration: none;
+}
+
+.titlebar__brand .logo-glyph {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.titlebar__actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: auto;
+}

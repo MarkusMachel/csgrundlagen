@@ -1,0 +1,76 @@
+/* Design tokens: colours, fonts and shadows for light and dark (applied by
+   src/theme/theme.ts). Everything else reads these custom properties. */
+
+:root {
+  --font-mono:
+    ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, 'Liberation Mono', monospace;
+
+  /* light — plain white, like an editor light theme */
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --gutter: #f6f7f9;
+  --tabstrip: #f3f3f5;
+  --border: #e3e5e9;
+  --border-strong: #c4c8d0;
+  --text: #1f2430;
+  /* both at least 4.5:1 on the white and tab-strip backgrounds (WCAG AA) */
+  --muted: #646b7a;
+  --comment: #666e7e;
+  --accent: #2f5fd0;
+  --accent-soft: rgba(47, 95, 208, 0.1);
+  --accent-contrast: #ffffff;
+  --green: #1a7f37;
+  --green-soft: rgba(26, 127, 55, 0.1);
+  --red: #cf222e;
+  --red-soft: rgba(207, 34, 46, 0.08);
+  --orange: #b35c00;
+  --line-hl: rgba(47, 95, 208, 0.07);
+  --chart-bar: #2f5fd0; /* validated vs #ffffff (dataviz six checks) */
+  /* syntax highlighting (keywords use --accent, comments --comment) */
+  --code-bg: #f6f8fa;
+  --code-str: #0a3069;
+  --code-num: #0550ae;
+  --code-fn: #8250df;
+  --code-type: #953800;
+  /* categorical chart series (validated vs #ffffff, all 4 PASS; series 3/4
+     carry a WARN on contrast alone, so every bar keeps a direct text label) */
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --shadow: 0 4px 16px rgba(15, 20, 40, 0.14);
+}
+
+[data-theme='dark'] {
+  /* console black */
+  --bg: #0e0e10;
+  --surface: #131316;
+  --gutter: #17171a;
+  --tabstrip: #060607;
+  --border: #2a2a30;
+  --border-strong: #45454d;
+  --text: #e8e8ec;
+  --muted: #8b8e98;
+  --comment: #7d8590;
+  --accent: #6ea8fe;
+  --accent-soft: rgba(110, 168, 254, 0.14);
+  --accent-contrast: #10131c;
+  --green: #57ab5a;
+  --green-soft: rgba(87, 171, 90, 0.14);
+  --red: #f2777d;
+  --red-soft: rgba(242, 119, 125, 0.12);
+  --orange: #f5a623;
+  --line-hl: rgba(110, 168, 254, 0.09);
+  --chart-bar: #4c8ceb; /* validated vs #1a1b21 (dataviz six checks) */
+  --code-bg: #0a0a0c;
+  --code-str: #a5d6ff;
+  --code-num: #79c0ff;
+  --code-fn: #d2a8ff;
+  --code-type: #ffa657;
+  /* categorical chart series (validated vs #131316, all 4 PASS) */
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}

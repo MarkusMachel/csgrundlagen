@@ -9,7 +9,9 @@
     "delete": "Löschen",
     "close": "Schließen",
     "submit": "Absenden",
-    "language": "Sprache"
+    "language": "Sprache",
+    "yes": "Ja",
+    "no": "Nein"
   },
   "nav": {
     "home": "Start",
@@ -65,7 +67,23 @@
     "passwordsDiffer": "Die Passwörter stimmen nicht überein",
     "emailTaken": "Zu dieser E-Mail gibt es schon ein Konto. Melde dich stattdessen an.",
     "tooManyAttempts": "Zu viele Versuche. Warte eine Minute und versuche es erneut.",
-    "genericError": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
+    "genericError": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+    "prompt": {
+      "loginTitle": "Melde dich an, um weiterzumachen",
+      "signUpTitle": "Konto erstellen",
+      "why": "Stöbern ist frei. Melde dich an, um zu antworten, Lesezeichen und Notizen zu speichern, Tests zu erstellen und deinen Fortschritt zu sehen.",
+      "inline": "zum Nutzen anmelden",
+      "gateTitle": "Diese Seite gehört dir, sobald du angemeldet bist",
+      "gateBody": "Fortschritt, Wiederholungen, Lesezeichen und Tests werden mit deinem Konto gespeichert.",
+      "gateHint": "anmelden oder kostenloses Konto erstellen"
+    },
+    "brand": {
+      "tagline": "Übe Informatik-Grundlagen, bis die Antworten sitzen.",
+      "f1": "Fragen zu Netzwerken, Betriebssystemen, Datenstrukturen und mehr",
+      "f2": "Wiederholung mit Abstand holt zurück, was du gleich vergessen würdest",
+      "f3": "Tests mit Zeitlimit, Schwachstellen und sichtbarer Fortschritt",
+      "browse": "Erst mal umsehen"
+    }
   },
   "home": {
     "questionOfTheDay": "Frage des Tages",
@@ -128,7 +146,24 @@
       "placeholder": "Kommentar hinzufügen…",
       "post": "Posten",
       "empty": "Noch keine Kommentare — sei die/der Erste.",
-      "required": "Kommentar darf nicht leer sein"
+      "required": "Kommentar darf nicht leer sein",
+      "hidden": "ausgeblendet",
+      "report": "Melden",
+      "reportLabel": "Kommentar von {{name}} melden",
+      "reported": "Gemeldet",
+      "delete": "Löschen",
+      "deleteLabel": "Kommentar von {{name}} löschen",
+      "confirmDelete": "Löschen?",
+      "reportTitle": "Kommentar melden",
+      "why": "Was stimmt damit nicht?",
+      "note": "Noch etwas? (optional)",
+      "sendReport": "Meldung senden",
+      "reason": {
+        "spam": "Spam oder Werbung",
+        "offensive": "Beleidigend oder missbräuchlich",
+        "misleading": "Falsch oder irreführend",
+        "other": "Etwas anderes"
+      }
     },
     "notes": {
       "label": "Private Notiz",
@@ -157,7 +192,9 @@
     "moveDown": "„{{item}}“ nach unten",
     "predictOutput": "was wird ausgegeben?",
     "outputPlaceholder": "gib die genaue Ausgabe ein, eine Zeile pro ausgegebener Zeile",
-    "expectedOutput": "erwartete Ausgabe"
+    "expectedOutput": "erwartete Ausgabe",
+    "whyWrong": "Warum nicht",
+    "readAbout": "Lies: {{title}}"
   },
   "builder": {
     "title": "Test erstellen",
@@ -192,7 +229,8 @@
     "score": "Ergebnis",
     "mode": "Modus",
     "date": "Datum",
-    "deleteTest": "Test löschen"
+    "deleteTest": "Test löschen",
+    "resume": "Fortsetzen ({{answered}}/{{total}} beantwortet)"
   },
   "takeTest": {
     "chooseMode": "Modus wählen",
@@ -207,7 +245,16 @@
     "yourScore": "Du hast {{score}} von {{total}} erreicht",
     "retryIncorrect": "Nur falsche wiederholen",
     "backToTests": "Zurück zu Meine Tests",
-    "questionOf": "Frage {{current}} von {{total}}"
+    "questionOf": "Frage {{current}} von {{total}}",
+    "resume": {
+      "title": "Du hast einen unfertigen Versuch",
+      "summary": "{{mode}}, {{answered}} von {{total}} beantwortet, zuletzt gespeichert {{when}}.",
+      "timeLeft": "Noch etwa {{minutes}} Min. auf der Uhr.",
+      "timeUp": "Die Zeit ist abgelaufen, während du weg warst.",
+      "continue": "Fortsetzen",
+      "submitNow": "Öffnen und abgeben",
+      "startOver": "Verwerfen und neu starten"
+    }
   },
   "bookmarks": {
     "title": "Lesezeichen",
@@ -263,7 +310,11 @@
       "stats": "Statistik",
       "questions": "Fragen",
       "materials": "Materialien",
-      "bugs": "Fehlermeldungen"
+      "bugs": "Fehlermeldungen",
+      "users": "Benutzer",
+      "comments": "Kommentare",
+      "quality": "Qualität",
+      "import": "Import"
     },
     "questionType": "Fragetyp",
     "type": {
@@ -271,7 +322,8 @@
       "true-false": "Wahr / Falsch",
       "multi-select": "Mehrfachauswahl",
       "ordering": "Reihenfolge",
-      "output": "Ausgabe vorhersagen"
+      "output": "Ausgabe vorhersagen",
+      "flashcard": "Karteikarte"
     },
     "prompt": "Fragetext",
     "options": "Antwortoptionen",
@@ -370,7 +422,52 @@
     "runnableHint": "js läuft im Browser, go im Go Playground; Lernende können nach dem Antworten ausführen",
     "notRunnableHint": "diese Sprache kann nicht ausgeführt werden, Lernende sagen nur vorher",
     "expectedOutput": "Erwartete Ausgabe",
-    "runToFill": "Ausführen und Ausgabe übernehmen"
+    "runToFill": "Ausführen und Ausgabe übernehmen",
+    "history": {
+      "back": "Zurück zur Liste",
+      "view": "Ansicht",
+      "edit": "Bearbeiten",
+      "title": "Verlauf",
+      "empty": "Noch keine Versionen erfasst.",
+      "current": "aktuell",
+      "unknownEditor": "jemand (gelöschtes Konto)",
+      "changed": "geändert: {{fields}}",
+      "showVersion": "Diese Version anzeigen",
+      "hideVersion": "Ausblenden",
+      "restore": "Wiederherstellen",
+      "confirmRestore": "Diese Version wiederherstellen?",
+      "correctOption": "richtig",
+      "answerIs": "Antwort:",
+      "kind": {
+        "created": "Erstellt",
+        "edited": "Bearbeitet",
+        "restored": "v{{version}} wiederhergestellt",
+        "original": "Vor Beginn des Verlaufs"
+      },
+      "field": {
+        "type": "Typ",
+        "prompt": "Frage",
+        "options": "Optionen",
+        "answer": "Antwort",
+        "explanation": "Erklärung",
+        "code": "Code",
+        "tags": "Tags",
+        "difficulty": "Schwierigkeit",
+        "materials": "Materialien"
+      }
+    },
+    "feedback": {
+      "summary": "Wenn jemand dies wählt… (optional)",
+      "added": "Feedback",
+      "label": "Warum Option {{option}} falsch ist",
+      "placeholder": "Erkläre den Denkfehler hinter dieser Option. Nur für Leute sichtbar, die sie wählen.",
+      "materialLabel": "Lesestoff zu Option {{option}}",
+      "searchMaterials": "Materialien suchen…",
+      "noMaterial": "Kein Lesestoff verknüpft"
+    },
+    "front": "Vorderseite",
+    "back": "Rückseite",
+    "flashcardHint": "Die Vorderseite ist die Frage, die Rückseite die Antwort; Lernende bewerten sich selbst."
   },
   "code": {
     "copy": "Code kopieren",
@@ -381,6 +478,24 @@
     "role": {
       "admin": "Admin",
       "user": "Mitglied"
+    },
+    "profile": {
+      "title": "Profil",
+      "save": "Profil speichern",
+      "saved": "Profil gespeichert."
+    },
+    "email": {
+      "title": "E-Mail-Adresse",
+      "current": "Dein Konto nutzt {{email}}.",
+      "new": "Neue E-Mail-Adresse",
+      "send": "Bestätigungslink senden",
+      "sent": "Wir haben einen Link an {{email}} geschickt. Deine E-Mail ändert sich, sobald du ihn öffnest (innerhalb von 24 Stunden).",
+      "again": "Andere Adresse verwenden",
+      "confirmTitle": "E-Mail bestätigen",
+      "confirmed": "Erledigt: Dein Konto nutzt jetzt {{email}}.",
+      "invalidLink": "Dieser Bestätigungslink ist ungültig oder abgelaufen.",
+      "toAccount": "Zu deinem Konto",
+      "password": "Dein Passwort zur Bestätigung"
     }
   },
   "review": {
@@ -436,5 +551,264 @@
     "predictFirst": "Ausführen geht nach dem Antworten: erst vorhersagen",
     "goNote": "läuft im Go Playground",
     "failed": "Der Code konnte nicht ausgeführt werden."
+  },
+  "devices": {
+    "title": "Angemeldete Geräte",
+    "intro": "Überall dort, wo dein Konto gerade angemeldet ist. Melde Geräte ab, die du nicht kennst.",
+    "browserOn": "{{browser}} auf {{os}}",
+    "thisDevice": "Dieses Gerät",
+    "lastActive": "Aktiv {{when}}",
+    "signedIn": "angemeldet am {{date}}",
+    "details": "Details",
+    "signOut": "Abmelden",
+    "signOutHere": "Hier abmelden",
+    "signOutOthers_one": "{{count}} anderes Gerät abmelden",
+    "signOutOthers_other": "{{count}} andere Geräte abmelden",
+    "type": {
+      "desktop": "Desktop",
+      "mobile": "Smartphone",
+      "tablet": "Tablet",
+      "bot": "Bot oder Skript"
+    },
+    "fact": {
+      "device": "Gerätetyp",
+      "firstIp": "IP bei Anmeldung",
+      "lastIp": "Letzte IP",
+      "timezone": "Zeitzone",
+      "languages": "Sprachen",
+      "platform": "Plattform",
+      "screen": "Bildschirm",
+      "viewport": "Fenster",
+      "touch": "Touchscreen",
+      "colorScheme": "Farbschema",
+      "expires": "Sitzung läuft ab",
+      "userAgent": "User-Agent"
+    },
+    "event": {
+      "login": "Angemeldet",
+      "signup": "Konto erstellt",
+      "login_failed": "Falsches Passwort",
+      "password_reset": "Passwort zurückgesetzt"
+    },
+    "admin": {
+      "search": "Benutzer nach Name oder E-Mail suchen…",
+      "empty": "Keine passenden Benutzer.",
+      "never": "nie",
+      "col": {
+        "user": "Benutzer",
+        "role": "Rolle",
+        "lastSeen": "Zuletzt aktiv",
+        "devices": "Geräte",
+        "answers": "Antworten",
+        "joined": "Beigetreten",
+        "actions": "Aktionen",
+        "when": "Wann",
+        "event": "Ereignis",
+        "device": "Gerät"
+      },
+      "sessions_one": "{{count}} Sitzung",
+      "sessions_other": "{{count}} Sitzungen",
+      "failed_one": "{{count}} fehlgeschlagen",
+      "failed_other": "{{count}} fehlgeschlagen",
+      "failedHint": "Versuche mit falschem Passwort in den letzten 24 Stunden",
+      "view": "Ansehen",
+      "viewLabel": "{{name}} ansehen",
+      "back": "Alle Benutzer",
+      "joinedOn": "beigetreten am {{date}}",
+      "signOutEverywhere": "Überall abmelden",
+      "activeDevices_one": "{{count}} aktives Gerät",
+      "activeDevices_other": "{{count}} aktive Geräte",
+      "noSessions": "Nirgends angemeldet.",
+      "history": "Anmeldeverlauf",
+      "historyHint": "Die letzten 50 Ereignisse. Der Verlauf wird 90 Tage aufbewahrt.",
+      "noHistory": "Noch keine Anmeldungen erfasst.",
+      "blocked": "gesperrt",
+      "manage": "Konto verwalten",
+      "makeAdmin": "Zum Admin machen",
+      "makeMember": "Zum Mitglied machen",
+      "block": "Sperren",
+      "unblock": "Entsperren",
+      "blockedSince": "Gesperrt seit {{date}}: abgemeldet und kann sich nicht anmelden.",
+      "manageHint": "Sperren meldet den Nutzer überall ab. Der letzte Admin kann nicht herabgestuft, gesperrt oder gelöscht werden."
+    }
+  },
+  "privacy": {
+    "policyLink": "Datenschutzerklärung",
+    "footerLink": "Datenschutz",
+    "acceptAll": "Alle akzeptieren",
+    "essentialOnly": "Nur notwendige",
+    "customize": "Auswählen…",
+    "alwaysOn": "immer aktiv",
+    "banner": {
+      "label": "Datenschutz-Auswahl",
+      "text": "Wir speichern deine Anmeldung in diesem Browser und protokollieren zur Sicherheit die Geräte, mit denen du dich anmeldest. Mit deinem OK merken wir uns außerdem Farbschema und Sprache und notieren, was dein Browser meldet (Zeitzone, Bildschirm), damit du deine Geräte erkennst. Keine Werbung, keine Analyse, kein Tracking."
+    },
+    "settings": {
+      "open": "Datenschutz-Einstellungen",
+      "title": "Datenschutz-Einstellungen",
+      "save": "Auswahl speichern",
+      "intro": "Lege fest, was diese App speichern darf. Du kannst das jederzeit unten auf jeder Seite ändern."
+    },
+    "category": {
+      "essential": {
+        "name": "Notwendig",
+        "desc": "Hält dich angemeldet, merkt sich diese Auswahl und protokolliert IP-Adresse, Browser und Zeitpunkt jeder Anmeldung zum Schutz deines Kontos. Ohne sie funktioniert die App nicht."
+      },
+      "preferences": {
+        "name": "Einstellungen",
+        "desc": "Merkt sich dein Farbschema (hell oder dunkel) und deine Sprache in diesem Browser. Ohne sie werden sie beim Neuladen zurückgesetzt."
+      },
+      "deviceDetails": {
+        "name": "Gerätedetails",
+        "desc": "Speichert Zeitzone, Sprachen, Bildschirmgröße und Plattform, die dein Browser meldet, zu jedem angemeldeten Gerät, damit du deine Geräte unterscheiden kannst. Ein Widerruf löscht sie."
+      }
+    },
+    "page": {
+      "title": "Datenschutzerklärung",
+      "version": "Version {{version}}",
+      "operator": "der Betreiber dieser Website",
+      "backLogin": "Zurück zur Anmeldung",
+      "backAccount": "Zurück zu deinem Konto"
+    },
+    "update": {
+      "titleNew": "Unsere Datenschutzerklärung",
+      "titleChanged": "Unsere Datenschutzerklärung hat sich geändert",
+      "text": "Bitte nimm dir einen Moment, um zu lesen, wie wir mit deinen Daten umgehen: was wir speichern, warum, wie lange, und wie du sie herunterladen oder löschen kannst.",
+      "read": "Hier lesen",
+      "ok": "Gelesen"
+    },
+    "signup": {
+      "accept": "Ich habe Folgendes gelesen und akzeptiere es:",
+      "required": "Bitte akzeptiere die Datenschutzerklärung, um ein Konto zu erstellen."
+    },
+    "yourData": {
+      "title": "Deine Daten & Datenschutz",
+      "intro": "Lade alle über dich gespeicherten Daten herunter, ändere, was gespeichert werden darf, oder lösche dein Konto.",
+      "download": "Meine Daten herunterladen",
+      "delete": "Mein Konto löschen"
+    },
+    "deleteDialog": {
+      "title": "Konto löschen?",
+      "text": "Damit werden dein Konto und alles darin endgültig gelöscht: Antworten, Wiederholungsplan, Lesezeichen, Notizen, Kommentare, Tests und Geräte. Das lässt sich nicht rückgängig machen. Lade vorher deine Daten herunter, wenn du eine Kopie möchtest.",
+      "typeWord": "Gib {{word}} zur Bestätigung ein",
+      "confirm": "Endgültig löschen"
+    },
+    "admin": {
+      "consent": "Datenschutz",
+      "policy": "Datenschutzerklärung",
+      "acceptedOn": "akzeptiert am {{date}} (Version {{version}})",
+      "notAccepted": "noch nicht akzeptiert",
+      "choice": "Einwilligung",
+      "noChoice": "keine Auswahl erfasst",
+      "choiceValue": "Einstellungen {{preferences}}, Gerätedetails {{deviceDetails}} · {{date}}",
+      "on": "an",
+      "off": "aus"
+    }
+  },
+  "moderation": {
+    "filter": "Anzeigen",
+    "filters": {
+      "reported": "Gemeldet",
+      "hidden": "Ausgeblendet",
+      "all": "Alle Kommentare"
+    },
+    "empty": {
+      "reported": "Keine offenen Meldungen. Alles in Ordnung.",
+      "hidden": "Keine ausgeblendeten Kommentare.",
+      "all": "Noch keine Kommentare."
+    },
+    "by": "von {{name}} · {{date}}",
+    "reportedBy": "gemeldet von {{name}} · {{date}}",
+    "hide": "Ausblenden",
+    "unhide": "Einblenden",
+    "dismiss": "Meldungen verwerfen",
+    "commentBy": "Kommentar von {{name}}",
+    "openCount_one": "{{count}} gemeldeter Kommentar",
+    "openCount_other": "{{count}} gemeldete Kommentare"
+  },
+  "onboarding": {
+    "title": "Willkommen! So legst du los",
+    "hide": "Vorerst ausblenden",
+    "intro": "{{count}} Fragen warten auf dich. Drei Schritte, um das Beste daraus zu machen:",
+    "step1": {
+      "title": "Wähle ein Thema zum Start",
+      "text": "Beantworte ein paar Fragen; jede zeigt die Erklärung und verlinkt Lesestoff."
+    },
+    "step2": {
+      "title": "Komm für deine Wiederholungen zurück",
+      "text": "Jede Antwort plant eine Wiederholung: falsche in Minuten, richtige in Tagen. Fällige Karten sammeln sich in"
+    },
+    "step3": {
+      "title": "Verfolge deinen Fortschritt oder baue einen Test",
+      "text": "Abdeckung, Trefferquote pro Thema und Serien findest du in"
+    }
+  },
+  "quality": {
+    "intro": "Anhand echter Antworten bewertet. Eine Frage braucht {{min}} Antworten, bevor sie markiert wird.",
+    "analysed": "Analysierte Fragen",
+    "flagged": "Markiert",
+    "tooFew": "Unter {{min}} Antworten",
+    "filter": "Anzeigen",
+    "allFlagged": "Alle markierten",
+    "empty": "Hier gibt es nichts zu tun.",
+    "answers_one": "{{count}} Antwort",
+    "answers_other": "{{count}} Antworten",
+    "correctRate": "{{rate}} richtig",
+    "picks": "Wie oft jede Option gewählt wurde",
+    "correctOption": "(richtige Option)",
+    "flag": {
+      "wrong_key": {
+        "name": "Falscher Schlüssel?",
+        "hint": "Eine falsche Option wird öfter gewählt als die richtige; prüfe die Lösung."
+      },
+      "open_bug_reports": {
+        "name": "Offene Fehlermeldungen",
+        "hint": "Nutzer haben ein Problem gemeldet, das noch offen ist."
+      },
+      "too_hard": {
+        "name": "Zu schwer",
+        "hint": "30 % oder weniger liegen richtig: unklare Formulierung oder falsche Lösung."
+      },
+      "too_easy": {
+        "name": "Zu leicht",
+        "hint": "95 % oder mehr liegen richtig: wenig Lerneffekt; mach die falschen Optionen verlockender."
+      },
+      "dead_distractor": {
+        "name": "Ungenutzte Option",
+        "hint": "Eine falsche Option wählt fast niemand (unter 3 %); ersetze sie durch einen glaubwürdigen Fehler."
+      }
+    }
+  },
+  "offline": {
+    "offline": "offline",
+    "pending_one": "{{count}} Antwort wartet auf Synchronisierung",
+    "pending_other": "{{count}} Antworten warten auf Synchronisierung",
+    "savedForLater": "Auf diesem Gerät gespeichert; wird synchronisiert, sobald du wieder online bist."
+  },
+  "anki": {
+    "export": "Nach Anki exportieren",
+    "exportFailed": "Export fehlgeschlagen, erneut versuchen",
+    "exportHint": "Lade diese Fragen als Datei herunter, die Anki importieren kann (Datei → Importieren). Ein erneuter Export aktualisiert dieselben Karten.",
+    "importIntro": "Importiere ein Anki-Deck als Karteikarten: In Anki Datei → Exportieren → „Notizen als Klartext“ (mit HTML und Tags) wählen, dann die Datei hier auswählen. Karten mit bereits vorhandener Vorderseite werden übersprungen, ein erneuter Import ist also sicher.",
+    "file": "Anki-Textexport (.txt)",
+    "parsed_one": "{{count}} Karte in {{file}} gefunden.",
+    "parsed_other": "{{count}} Karten in {{file}} gefunden.",
+    "skippedLines_one": "{{count}} Zeile übersprungen (weniger als zwei Felder).",
+    "skippedLines_other": "{{count}} Zeilen übersprungen (weniger als zwei Felder).",
+    "topics": "Themen",
+    "andMore": "…und {{count}} weitere",
+    "useCardTags": "Anki-Tags der Karten als Themen verwenden (cs::Networking → Networking)",
+    "defaultTags_one": "Themen für die {{count}} Karte ohne Tags",
+    "defaultTags_other": "Themen für die {{count}} Karten ohne Tags",
+    "import_one": "{{count}} Karte importieren",
+    "import_other": "{{count}} Karten importieren",
+    "done": "{{created}} Karteikarten importiert; {{skipped}} gab es schon."
+  },
+  "flashcard": {
+    "show": "Antwort zeigen",
+    "answer": "Antwort",
+    "how": "Wusstest du es?",
+    "knew": "Gewusst",
+    "didnt": "Nicht gewusst"
   }
 }

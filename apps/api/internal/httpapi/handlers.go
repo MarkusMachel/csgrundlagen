@@ -29,21 +29,30 @@ func (s *Server) login(w http.ResponseWriter, r *http.Request) {
 	if !decode(w, r, &body) {
 		return
 	}
-	token, user, err := s.store.Login(r.Context(), body.Email, body.Password)
+	token, user, err := s.store.Login(r.Context(), body.Email, body.Password, clientOf(r))
 	if err != nil {
 		s.fail(w, r, err)
 		return
 	}
-	writeJSON(w, http.StatusOK, map[string]any{"token": token, "user": user})
+	s.writeSession(w, r, http.StatusOK, token, user)
 }
 
 func (s *Server) logout(w http.ResponseWriter, r *http.Request) {
-	if token := bearerToken(r); token != "" {
+	if token := sessionToken(r); token != "" {
 		if err := s.store.Logout(r.Context(), token); err != nil {
 			s.fail(w, r, err)
 			return
 		}
 	}
+	clearSessionCookie(w, r)
+	w.WriteHeader(http.StatusNoContent)
+}
+
+// tokenToCookie moves a bearer-token session into the cookie. The web app
+// calls it once for sessions started before it switched to cookies (their
+// token was kept in localStorage), so nobody is signed out by the change.
+func (s *Server) tokenToCookie(w http.ResponseWriter, r *http.Request) {
+	setSessionCookie(w, r, sessionToken(r))
 	w.WriteHeader(http.StatusNoContent)
 }
 
@@ -58,16 +67,22 @@ func (s *Server) signup(w http.ResponseWriter, r *http.Request) {
 		Email    string `json:"email"`
 		Password string `json:"password"`
 		Locale   string `json:"locale"`
+		// AcceptPrivacy must be true: the user agreed to the privacy policy.
+		AcceptPrivacy bool `json:"acceptPrivacy"`
 	}
 	if !decode(w, r, &body) {
 		return
 	}
-	token, user, err := s.store.SignUp(r.Context(), body.Name, body.Email, body.Password, body.Locale)
+	if !body.AcceptPrivacy {
+		writeError(w, http.StatusBadRequest, "please accept the privacy policy to create an account")
+		return
+	}
+	token, user, err := s.store.SignUp(r.Context(), body.Name, body.Email, body.Password, body.Locale, clientOf(r))
 	if err != nil {
 		s.fail(w, r, err)
 		return
 	}
-	writeJSON(w, http.StatusCreated, map[string]any{"token": token, "user": user})
+	s.writeSession(w, r, http.StatusCreated, token, user)
 }
 
 func (s *Server) changePassword(w http.ResponseWriter, r *http.Request) {
@@ -78,7 +93,7 @@ func (s *Server) changePassword(w http.ResponseWriter, r *http.Request) {
 	if !decode(w, r, &body) {
 		return
 	}
-	if err := s.store.ChangePassword(r.Context(), currentUser(r).ID, bearerToken(r),
+	if err := s.store.ChangePassword(r.Context(), currentUser(r).ID, sessionToken(r),
 		body.CurrentPassword, body.NewPassword); err != nil {
 		s.fail(w, r, err)
 		return
@@ -123,7 +138,7 @@ func (s *Server) confirmPasswordReset(w http.ResponseWriter, r *http.Request) {
 	if !decode(w, r, &body) {
 		return
 	}
-	if err := s.store.ResetPassword(r.Context(), body.Token, body.Password); err != nil {
+	if err := s.store.ResetPassword(r.Context(), body.Token, body.Password, clientOf(r)); err != nil {
 		s.fail(w, r, err)
 		return
 	}
@@ -251,7 +266,7 @@ func (s *Server) updateQuestion(w http.ResponseWriter, r *http.Request) {
 	if !decode(w, r, &body) {
 		return
 	}
-	q, err := s.store.UpdateQuestion(r.Context(), id, body)
+	q, err := s.store.UpdateQuestion(r.Context(), currentUser(r).ID, id, body)
 	if err != nil {
 		s.fail(w, r, err)
 		return
@@ -278,6 +293,8 @@ func (s *Server) submitAnswer(w http.ResponseWriter, r *http.Request) {
 	}
 	var body struct {
 		Answer any `json:"answer"`
+		// AnsweredAt is set for answers given offline and synced later.
+		AnsweredAt *time.Time `json:"answeredAt"`
 	}
 	if !decode(w, r, &body) {
 		return
@@ -286,7 +303,7 @@ func (s *Server) submitAnswer(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusBadRequest, "answer must be an option id, a boolean, a list of option ids or text")
 		return
 	}
-	res, err := s.store.SubmitAnswer(r.Context(), currentUser(r).ID, id, body.Answer)
+	res, err := s.store.SubmitAnswer(r.Context(), currentUser(r).ID, id, body.Answer, body.AnsweredAt)
 	if err != nil {
 		s.fail(w, r, err)
 		return
@@ -327,7 +344,7 @@ func (s *Server) listComments(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	cs, err := s.store.Comments(r.Context(), id)
+	cs, err := s.store.Comments(r.Context(), id, s.optionalUser(r))
 	if err != nil {
 		s.fail(w, r, err)
 		return
@@ -651,4 +668,61 @@ func (s *Server) submitTest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, http.StatusOK, res)
+}
+
+// --- admin: question history and quality -----------------------------------
+
+func (s *Server) questionRevisions(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(w, r)
+	if !ok {
+		return
+	}
+	revs, err := s.store.Revisions(r.Context(), id)
+	if err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, revs)
+}
+
+func (s *Server) restoreRevision(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(w, r)
+	if !ok {
+		return
+	}
+	rid, err := strconv.ParseInt(r.PathValue("rid"), 10, 64)
+	if err != nil {
+		writeError(w, http.StatusNotFound, "Not found")
+		return
+	}
+	q, err := s.store.RestoreRevision(r.Context(), currentUser(r).ID, id, rid)
+	if err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, q)
+}
+
+func (s *Server) qualityReport(w http.ResponseWriter, r *http.Request) {
+	rep, err := s.store.QualityReport(r.Context())
+	if err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, rep)
+}
+
+// questionAuthoring returns a question in the admin form's shape, with the
+// wrong-option feedback the public question leaves out.
+func (s *Server) questionAuthoring(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(w, r)
+	if !ok {
+		return
+	}
+	n, err := s.store.QuestionInput(r.Context(), id)
+	if err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	writeJSON(w, http.StatusOK, n)
 }

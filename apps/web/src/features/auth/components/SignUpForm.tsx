@@ -17,24 +17,32 @@ const schema = z
     email: z.string().email(),
     password: z.string().min(8).max(72),
     confirm: z.string(),
+    acceptPrivacy: z.boolean().refine((v) => v),
   })
   .refine((v) => v.password === v.confirm, { path: ['confirm'] });
 type Values = z.infer<typeof schema>;
 
-export function SignUpForm({ onSuccess }: { onSuccess?: () => void }) {
+export function SignUpForm({
+  onSuccess,
+  onSwitchToLogin,
+}: {
+  onSuccess?: () => void;
+  /** In the sign-in modal, "sign in" switches the modal instead of navigating. */
+  onSwitchToLogin?: () => void;
+}) {
   const { t } = useTranslation();
-  const ids = { name: useId(), email: useId() };
+  const ids = { name: useId(), email: useId(), privacy: useId() };
   const locale = useUIStore((s) => s.locale);
   const signUp = useSignUp();
   const form = useForm<Values>({
     resolver: zodResolver(schema),
-    defaultValues: { name: '', email: '', password: '', confirm: '' },
+    defaultValues: { name: '', email: '', password: '', confirm: '', acceptPrivacy: false },
   });
   const err = form.formState.errors;
 
   const onSubmit = form.handleSubmit(async ({ name, email, password }) => {
     try {
-      await signUp.mutateAsync({ name, email, password, locale });
+      await signUp.mutateAsync({ name, email, password, locale, acceptPrivacy: true });
       onSuccess?.();
     } catch {
       // rendered from signUp.error
@@ -76,11 +84,32 @@ export function SignUpForm({ onSuccess }: { onSuccess?: () => void }) {
         error={err.confirm && t('auth.passwordsDiffer')}
         {...form.register('confirm')}
       />
+      <div className={err.acceptPrivacy ? 'field field--error' : 'field'}>
+        <label htmlFor={ids.privacy} className="checkbox-row" style={{ alignItems: 'flex-start' }}>
+          <input id={ids.privacy} type="checkbox" {...form.register('acceptPrivacy')} />
+          <span style={{ fontSize: 13 }}>
+            {t('privacy.signup.accept')}{' '}
+            <Link to="/privacy" target="_blank" rel="noopener">
+              {t('privacy.policyLink')}
+            </Link>
+          </span>
+        </label>
+        {err.acceptPrivacy && (
+          <span className="field-error-text">{t('privacy.signup.required')}</span>
+        )}
+      </div>
       <button type="submit" className="btn btn--primary" disabled={signUp.isPending}>
         {t('auth.signUp')}
       </button>
       <p className="muted" style={{ margin: 0, fontSize: 13 }}>
-        {t('auth.haveAccount')} <Link to="/login">{t('auth.login')}</Link>
+        {t('auth.haveAccount')}{' '}
+        {onSwitchToLogin ? (
+          <button type="button" className="link-button" onClick={onSwitchToLogin}>
+            {t('auth.login')}
+          </button>
+        ) : (
+          <Link to="/login">{t('auth.login')}</Link>
+        )}
       </p>
     </form>
   );

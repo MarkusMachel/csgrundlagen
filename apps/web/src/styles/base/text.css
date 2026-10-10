@@ -1,0 +1,47 @@
+/* ---------- text utilities ---------- */
+
+.muted {
+  color: var(--muted);
+}
+.tok-com {
+  color: var(--comment);
+}
+.tok-kw {
+  color: var(--accent);
+}
+.tok-idx {
+  color: var(--muted);
+}
+.tok-str {
+  color: var(--text);
+  font-weight: 600;
+}
+.tok-green {
+  color: var(--green);
+}
+.tok-red {
+  color: var(--red);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.hstack {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

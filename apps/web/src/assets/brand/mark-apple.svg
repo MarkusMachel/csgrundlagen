@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Apple touch icon: full-bleed (iOS rounds the corners itself). -->
+  <rect width="512" height="512" fill="#0e0e10"/>
+  <g transform="translate(256 256) scale(.86) translate(-256 -256)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="#6ea8fe" stroke-width="36"
+          d="M178 124c-40 0-52 18-52 52v36c0 28-12 44-40 44 28 0 40 16 40 44v36c0 34 12 52 52 52"/>
+    <path stroke="#6ea8fe" stroke-width="36"
+          d="M334 124c40 0 52 18 52 52v36c0 28 12 44 40 44-28 0-40 16-40 44v36c0 34-12 52-52 52"/>
+    <path stroke="#57ab5a" stroke-width="40" d="M200 262l40 40 76-88"/>
+  </g>
+</svg>

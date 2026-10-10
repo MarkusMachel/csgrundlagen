@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { LoginForm } from '@/features/auth';
+import { AuthLayout, LoginForm } from '@/features/auth';
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -8,10 +8,8 @@ export function LoginPage() {
   const from = (location.state as { from?: string } | null)?.from ?? '/';
 
   return (
-    <div className="login-screen">
-      <div className="login-card">
-        <LoginForm onSuccess={() => navigate(from, { replace: true })} />
-      </div>
-    </div>
+    <AuthLayout>
+      <LoginForm onSuccess={() => navigate(from, { replace: true })} />
+    </AuthLayout>
   );
 }

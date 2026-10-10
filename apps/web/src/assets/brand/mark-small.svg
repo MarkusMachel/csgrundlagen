@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Favicon variant of mark.svg: heavier strokes for 16–48px. -->
+  <rect width="512" height="512" rx="96" fill="#0e0e10"/>
+  <rect x="8" y="8" width="496" height="496" rx="88" fill="none" stroke="#ffffff" stroke-opacity=".14" stroke-width="16"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="#6ea8fe" stroke-width="56"
+          d="M178 104c-44 0-60 20-60 58v40c0 32-14 54-46 54 32 0 46 22 46 54v40c0 38 16 58 60 58"/>
+    <path stroke="#6ea8fe" stroke-width="56"
+          d="M334 104c44 0 60 20 60 58v40c0 32 14 54 46 54-32 0-46 22-46 54v40c0 38-16 58-60 58"/>
+    <path stroke="#57ab5a" stroke-width="60" d="M192 262l48 48 84-100"/>
+  </g>
+</svg>

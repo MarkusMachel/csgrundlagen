@@ -9,6 +9,7 @@ import {
   SORTS,
   STATUSES,
   emptyFilters,
+  withStatus,
   type FilterState,
 } from './QuestionFilters';
 import type { Difficulty } from '../hooks/useQuestions';
@@ -97,7 +98,7 @@ export function QuestionFilterSidebar({
                 role="radio"
                 aria-checked={value.status === s}
                 className="filter-panel__item"
-                onClick={() => set({ status: s })}
+                onClick={() => withStatus(s, set)}
               >
                 {t(`home.status.${s || 'all'}`)}
               </button>

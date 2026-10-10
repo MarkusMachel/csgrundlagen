@@ -8,6 +8,9 @@ export { useTestBuilderStore } from './hooks/useTestBuilder';
 export { formatSeconds, useCountdown } from './hooks/useCountdown';
 export {
   useCreateTest,
+  useDiscardDraft,
+  useSaveDraft,
+  useTestDraft,
   useDeleteTest,
   useSubmitTest,
   useTest,
@@ -25,6 +28,7 @@ export type {
   CreateTestInput,
   CustomTest,
   TestAttempt,
+  TestDraft,
   TestMode,
   TestSubmitResult,
   TestSubmitResultItem,

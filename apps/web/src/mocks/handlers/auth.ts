@@ -1,10 +1,22 @@
 import { http, HttpResponse } from 'msw';
 
+import { PRIVACY_POLICY_VERSION } from '@/features/privacy/consent';
+
 import { db, nextId } from '../db';
-import { currentUser, tokenFor, unauthorized } from './utils';
+import {
+  clearedSessionCookie,
+  currentSession,
+  currentUser,
+  openSession,
+  recordLoginEvent,
+  revokeSessions,
+  sessionCookie,
+  unauthorized,
+} from './utils';
 import type { SeedUser } from '../seed/users';
 
-const publicUser = ({ password: _pw, ...user }: SeedUser) => user;
+// like the API's User: no password, no sign-up date
+const publicUser = ({ password: _pw, createdAt: _at, ...user }: SeedUser) => user;
 const invalid = (message: string) => HttpResponse.json({ message }, { status: 400 });
 const passwordProblem = (pw: string) =>
   pw.length < 8 ? 'password must be at least 8 characters' : null;
@@ -12,19 +24,36 @@ const passwordProblem = (pw: string) =>
 export const authHandlers = [
   http.post('/api/auth/login', async ({ request }) => {
     const { email, password } = (await request.json()) as { email: string; password: string };
-    const user = db.users.find(
-      (u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password,
-    );
-    if (!user) {
+    const user = db.users.find((u) => u.email.toLowerCase() === email.toLowerCase());
+    if (!user || user.password !== password) {
+      if (user) recordLoginEvent(request, user.id, 'login_failed');
       return HttpResponse.json({ message: 'Invalid email or password' }, { status: 401 });
     }
-    return HttpResponse.json({ token: tokenFor(user.id), user: publicUser(user) });
+    if (user.blockedAt) {
+      return HttpResponse.json(
+        { message: 'This account is blocked. Contact the site operator.' },
+        { status: 403 },
+      );
+    }
+    recordLoginEvent(request, user.id, 'login');
+    return HttpResponse.json(
+      { user: publicUser(user) },
+      { headers: sessionCookie(openSession(request, user.id)) },
+    );
   }),
 
   http.post('/api/auth/signup', async ({ request }) => {
-    const body = (await request.json()) as { name: string; email: string; password: string };
+    const body = (await request.json()) as {
+      name: string;
+      email: string;
+      password: string;
+      acceptPrivacy?: boolean;
+    };
     const name = body.name?.trim() ?? '';
     const email = body.email?.trim().toLowerCase() ?? '';
+    if (!body.acceptPrivacy) {
+      return invalid('please accept the privacy policy to create an account');
+    }
     if (!name) return invalid('name is required (at most 100 characters)');
     if (!/^[^@\s]+@[^@\s]+$/.test(email)) return invalid('a valid email is required');
     const problem = passwordProblem(body.password ?? '');
@@ -42,13 +71,29 @@ export const authHandlers = [
       password: body.password,
       locale: 'en',
       role: 'user',
+      createdAt: new Date().toISOString(),
+      privacyVersion: PRIVACY_POLICY_VERSION,
     };
     db.users.push(user);
-    return HttpResponse.json({ token: tokenFor(user.id), user: publicUser(user) }, { status: 201 });
+    recordLoginEvent(request, user.id, 'signup');
+    return HttpResponse.json(
+      { user: publicUser(user) },
+      { status: 201, headers: sessionCookie(openSession(request, user.id)) },
+    );
   }),
 
-  // The token is a stateless stub, so logout is client-side (token removal).
-  http.post('/api/auth/logout', () => new HttpResponse(null, { status: 204 })),
+  http.post('/api/auth/logout', ({ request }) => {
+    const session = currentSession(request);
+    if (session) revokeSessions((s) => s.id === session.id);
+    return new HttpResponse(null, { status: 204, headers: clearedSessionCookie() });
+  }),
+
+  // Moves a pre-cookie session (Bearer token from localStorage) into the cookie.
+  http.post('/api/auth/cookie', ({ request }) => {
+    if (!currentSession(request)) return unauthorized();
+    const token = request.headers.get('Authorization')!.slice('Bearer '.length);
+    return new HttpResponse(null, { status: 204, headers: sessionCookie(token) });
+  }),
 
   http.get('/api/auth/me', ({ request }) => {
     const user = currentUser(request);
@@ -65,6 +110,9 @@ export const authHandlers = [
     const problem = passwordProblem(body.newPassword ?? '');
     if (problem) return invalid(problem);
     user.password = body.newPassword;
+    // like the API: the other devices are signed out
+    const current = currentSession(request)!;
+    revokeSessions((s) => s.userId === user.id && s.id !== current.id);
     return new HttpResponse(null, { status: 204 });
   }),
 
@@ -92,6 +140,8 @@ export const authHandlers = [
     if (problem) return invalid(problem);
     delete db.resetTokens[token];
     db.users.find((u) => u.id === userId)!.password = password;
+    revokeSessions((s) => s.userId === userId);
+    recordLoginEvent(request, userId, 'password_reset');
     return new HttpResponse(null, { status: 204 });
   }),
 ];

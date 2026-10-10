@@ -30,6 +30,8 @@ type User struct {
 	AvatarURL *string `json:"avatarUrl,omitempty"`
 	Locale    string  `json:"locale"`
 	Role      string  `json:"role"`
+	// PrivacyVersion is the privacy policy version the user accepted, if any.
+	PrivacyVersion *string `json:"privacyVersion,omitempty"`
 }
 
 func (u User) IsAdmin() bool { return u.Role == "admin" }
@@ -37,6 +39,10 @@ func (u User) IsAdmin() bool { return u.Role == "admin" }
 type Option struct {
 	ID    string `json:"id"` // 'A'..'E'
 	Label string `json:"label"`
+	// Feedback and MaterialID explain a wrong option. They are written by
+	// admins and only loaded for authoring; public questions never carry them.
+	Feedback   *string `json:"feedback,omitempty"`
+	MaterialID *string `json:"materialId,omitempty"`
 }
 
 // Question is the union of the question types (apps/web/src/features/questions/types.ts):
@@ -46,6 +52,7 @@ type Option struct {
 //	multi-select     Options + CorrectOptionIDs (pick all that apply)
 //	ordering         Options + CorrectOrder (option ids in the right order)
 //	output           Code + CodeLanguage + ExpectedOutput (predict what it prints)
+//	flashcard        Prompt is the front, Explanation the back; self-graded (true = knew it)
 type Question struct {
 	ID               string   `json:"id"`
 	Type             string   `json:"type"`
@@ -92,6 +99,8 @@ func (q Question) Correct() any {
 		if q.ExpectedOutput != nil {
 			return *q.ExpectedOutput
 		}
+	case "flashcard":
+		return true
 	}
 	return nil
 }
@@ -110,6 +119,8 @@ type SubmitAnswerResult struct {
 	CorrectAnswer any    `json:"correctAnswer"`
 	// NextReviewAt is when spaced repetition will bring the question back.
 	NextReviewAt *time.Time `json:"nextReviewAt,omitempty"`
+	// Feedback explains the wrong options picked, when the author wrote some.
+	Feedback []OptionFeedback `json:"feedback,omitempty"`
 }
 
 type Comment struct {
@@ -119,6 +130,10 @@ type Comment struct {
 	UserName   string    `json:"userName"`
 	Body       string    `json:"body"`
 	CreatedAt  time.Time `json:"createdAt"`
+	// Hidden is only ever true in an admin's view; others don't get hidden comments.
+	Hidden bool `json:"hidden"`
+	// ReportedByMe tells the viewer they already reported it.
+	ReportedByMe bool `json:"reportedByMe"`
 }
 
 type Note struct {
@@ -172,6 +187,8 @@ type CustomTest struct {
 	ShuffleQuestions bool      `json:"shuffleQuestions"`
 	ShuffleOptions   bool      `json:"shuffleOptions"`
 	CreatedAt        time.Time `json:"createdAt"`
+	// Draft summarises an unfinished attempt, if there is one.
+	Draft *DraftSummary `json:"draft,omitempty"`
 }
 
 type TestAttempt struct {
@@ -186,10 +203,11 @@ type TestAttempt struct {
 }
 
 type TestSubmitResultItem struct {
-	QuestionID    string `json:"questionId"`
-	Correct       bool   `json:"correct"`
-	GivenAnswer   any    `json:"givenAnswer,omitempty"`
-	CorrectAnswer any    `json:"correctAnswer"`
+	QuestionID    string           `json:"questionId"`
+	Correct       bool             `json:"correct"`
+	GivenAnswer   any              `json:"givenAnswer,omitempty"`
+	CorrectAnswer any              `json:"correctAnswer"`
+	Feedback      []OptionFeedback `json:"feedback,omitempty"`
 }
 
 type TestSubmitResult struct {

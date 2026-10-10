@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { api } from '@/shared/api/client';
+import { useSignedIn } from '@/stores/useAuthStore';
 import { useUIStore } from '@/stores/useUIStore';
 
 import type { ReviewQueue } from '../types';
@@ -26,5 +27,6 @@ export function useDueCount() {
     queryKey: ['reviewSummary'],
     queryFn: () => api.get<ReviewQueue>('/review/queue?limit=1'),
     select: (q) => q.due,
+    enabled: useSignedIn(),
   });
 }
