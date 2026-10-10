@@ -3175,3 +3175,8 @@ svg.lucide {
   color: var(--text);
   text-decoration: underline;
 }
+
+.chip--danger {
+  border-color: var(--red);
+  color: var(--red);
+}

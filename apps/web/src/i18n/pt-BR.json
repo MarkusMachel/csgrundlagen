@@ -527,7 +527,15 @@
       "noSessions": "Não está conectado em nenhum lugar.",
       "history": "Histórico de login",
       "historyHint": "Últimos 50 eventos. O histórico é mantido por 90 dias.",
-      "noHistory": "Nenhum login registrado ainda."
+      "noHistory": "Nenhum login registrado ainda.",
+      "blocked": "bloqueado",
+      "manage": "Gerenciar conta",
+      "makeAdmin": "Tornar admin",
+      "makeMember": "Tornar membro",
+      "block": "Bloquear",
+      "unblock": "Desbloquear",
+      "blockedSince": "Bloqueado desde {{date}}: desconectado e não consegue entrar.",
+      "manageHint": "Bloquear desconecta o usuário de todos os dispositivos. O último admin não pode ser rebaixado, bloqueado nem excluído."
     }
   },
   "privacy": {

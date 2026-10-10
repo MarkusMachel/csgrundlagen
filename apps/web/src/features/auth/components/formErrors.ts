@@ -7,7 +7,7 @@ export function authErrorMessage(err: unknown, t: TFunction): string {
   if (err instanceof ApiError) {
     if (err.status === 409) return t('auth.emailTaken');
     if (err.status === 429) return t('auth.tooManyAttempts');
-    if (err.status === 400 && err.message) return err.message;
+    if ((err.status === 400 || err.status === 403) && err.message) return err.message;
   }
   return t('auth.genericError');
 }

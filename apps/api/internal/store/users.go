@@ -41,11 +41,13 @@ func hashToken(token string) string {
 // Login checks the password and opens a session, returning the bearer token.
 func (s *Store) Login(ctx context.Context, email, password string, client Client) (string, User, error) {
 	var hash string
+	var blocked bool
 	var u User
 	err := s.pool.QueryRow(ctx, `
-		SELECT u.id, u.name, u.email, u.avatar_url, u.locale::text, u.role::text, u.privacy_version, u.password_hash
+		SELECT u.id, u.name, u.email, u.avatar_url, u.locale::text, u.role::text, u.privacy_version, u.password_hash,
+		       u.blocked_at IS NOT NULL
 		FROM users u WHERE lower(u.email) = lower($1)`, strings.TrimSpace(email),
-	).Scan(&u.ID, &u.Name, &u.Email, &u.AvatarURL, &u.Locale, &u.Role, &u.PrivacyVersion, &hash)
+	).Scan(&u.ID, &u.Name, &u.Email, &u.AvatarURL, &u.Locale, &u.Role, &u.PrivacyVersion, &hash, &blocked)
 	if err != nil {
 		if errors.Is(notFound(err), ErrNotFound) {
 			_ = bcrypt.CompareHashAndPassword(dummyHash, []byte(password))
@@ -56,6 +58,10 @@ func (s *Store) Login(ctx context.Context, email, password string, client Client
 	if bcrypt.CompareHashAndPassword([]byte(hash), []byte(password)) != nil {
 		s.recordEvent(ctx, s.pool, u.ID, "login_failed", client)
 		return "", User{}, ErrBadCredentials
+	}
+	// Only revealed after the right password, so it says nothing to a guesser.
+	if blocked {
+		return "", User{}, ErrBlocked
 	}
 	token, err := s.openSession(ctx, u.ID, client)
 	if err != nil {
@@ -100,7 +106,7 @@ func (s *Store) UserForToken(ctx context.Context, token, ip string) (User, error
 		)
 		`+userSelect+`
 		JOIN sessions se ON se.user_id = u.id
-		WHERE se.token_hash = $1 AND se.expires_at > now()`, hashToken(token), Client{IP: ip}.ip()))
+		WHERE se.token_hash = $1 AND se.expires_at > now() AND u.blocked_at IS NULL`, hashToken(token), Client{IP: ip}.ip()))
 }
 
 func (s *Store) Logout(ctx context.Context, token string) error {

@@ -527,7 +527,15 @@
       "noSessions": "Not signed in anywhere.",
       "history": "Sign-in history",
       "historyHint": "Last 50 events. History is kept for 90 days.",
-      "noHistory": "No sign-ins recorded yet."
+      "noHistory": "No sign-ins recorded yet.",
+      "blocked": "blocked",
+      "manage": "Manage account",
+      "makeAdmin": "Make admin",
+      "makeMember": "Make member",
+      "block": "Block",
+      "unblock": "Unblock",
+      "blockedSince": "Blocked since {{date}}: signed out and can’t sign in.",
+      "manageHint": "Blocking signs the user out everywhere. The last admin can’t be demoted, blocked or deleted."
     }
   },
   "privacy": {

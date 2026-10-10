@@ -527,7 +527,15 @@
       "noSessions": "Nirgends angemeldet.",
       "history": "Anmeldeverlauf",
       "historyHint": "Die letzten 50 Ereignisse. Der Verlauf wird 90 Tage aufbewahrt.",
-      "noHistory": "Noch keine Anmeldungen erfasst."
+      "noHistory": "Noch keine Anmeldungen erfasst.",
+      "blocked": "gesperrt",
+      "manage": "Konto verwalten",
+      "makeAdmin": "Zum Admin machen",
+      "makeMember": "Zum Mitglied machen",
+      "block": "Sperren",
+      "unblock": "Entsperren",
+      "blockedSince": "Gesperrt seit {{date}}: abgemeldet und kann sich nicht anmelden.",
+      "manageHint": "Sperren meldet den Nutzer überall ab. Der letzte Admin kann nicht herabgestuft, gesperrt oder gelöscht werden."
     }
   },
   "privacy": {

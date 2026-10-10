@@ -104,3 +104,32 @@ func (s *Server) adminRevokeAllSessions(w http.ResponseWriter, r *http.Request) 
 	}
 	writeJSON(w, http.StatusOK, map[string]int64{"revoked": n})
 }
+
+// adminChangeUser changes another account's role or blocks/unblocks it.
+func (s *Server) adminChangeUser(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(w, r)
+	if !ok {
+		return
+	}
+	var body store.UserChange
+	if !decode(w, r, &body) {
+		return
+	}
+	if err := s.store.ChangeUser(r.Context(), currentUser(r).ID, id, body); err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	w.WriteHeader(http.StatusNoContent)
+}
+
+func (s *Server) adminDeleteUser(w http.ResponseWriter, r *http.Request) {
+	id, ok := pathID(w, r)
+	if !ok {
+		return
+	}
+	if err := s.store.AdminDeleteUser(r.Context(), currentUser(r).ID, id); err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	w.WriteHeader(http.StatusNoContent)
+}

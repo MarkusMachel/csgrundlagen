@@ -33,6 +33,24 @@ export function useAdminUserDetail(id: string) {
   });
 }
 
+/** Changes another account's role, or blocks/unblocks it. */
+export function useAdminChangeUser(userId: string) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (change: { role?: 'admin' | 'user'; blocked?: boolean }) =>
+      api.patch<void>(`/admin/users/${userId}`, change),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin', 'users'] }),
+  });
+}
+
+export function useAdminDeleteUser() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (userId: string) => api.delete<void>(`/admin/users/${userId}`),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin', 'users'] }),
+  });
+}
+
 export function useAdminRevokeSession(userId: string) {
   const queryClient = useQueryClient();
   return useMutation({

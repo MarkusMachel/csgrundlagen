@@ -122,6 +122,8 @@ func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
 	mux.HandleFunc("PATCH /api/admin/bug-reports/{id}", s.admin(s.setBugReportStatus))
 	mux.HandleFunc("GET /api/admin/users", s.admin(s.adminUsers))
 	mux.HandleFunc("GET /api/admin/users/{id}", s.admin(s.adminUserDetail))
+	mux.HandleFunc("PATCH /api/admin/users/{id}", s.admin(s.adminChangeUser))
+	mux.HandleFunc("DELETE /api/admin/users/{id}", s.admin(s.adminDeleteUser))
 	mux.HandleFunc("DELETE /api/admin/users/{id}/sessions", s.admin(s.adminRevokeAllSessions))
 	mux.HandleFunc("DELETE /api/admin/users/{id}/sessions/{sid}", s.admin(s.adminRevokeSession))
 
@@ -254,6 +256,8 @@ func (s *Server) fail(w http.ResponseWriter, r *http.Request, err error) {
 		writeError(w, http.StatusBadRequest, invalid.Msg)
 	case errors.As(err, &conflict):
 		writeError(w, http.StatusConflict, conflict.Msg)
+	case errors.Is(err, store.ErrBlocked):
+		writeError(w, http.StatusForbidden, "This account is blocked. Contact the site operator.")
 	case errors.Is(err, store.ErrBadCredentials):
 		writeError(w, http.StatusUnauthorized, "Invalid email or password")
 	default:

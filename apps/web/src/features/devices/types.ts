@@ -55,6 +55,7 @@ export interface AdminUser {
   answers: number;
   failedLogins24h: number;
   privacyVersion?: string;
+  blockedAt?: string;
 }
 
 export interface AdminUserDetail {

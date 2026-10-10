@@ -210,9 +210,10 @@ type AdminUser struct {
 	LastSeenAt     *time.Time `json:"lastSeenAt,omitempty"`
 	ActiveSessions int        `json:"activeSessions"`
 	// Device types of the active sessions, e.g. ["desktop", "mobile"].
-	Devices         []string `json:"devices"`
-	Answers         int      `json:"answers"`
-	FailedLogins24h int      `json:"failedLogins24h"`
+	Devices         []string   `json:"devices"`
+	Answers         int        `json:"answers"`
+	FailedLogins24h int        `json:"failedLogins24h"`
+	BlockedAt       *time.Time `json:"blockedAt,omitempty"`
 }
 
 // AdminUsers lists every account with its activity summary, most recently
@@ -231,7 +232,8 @@ func (s *Store) adminUsers(ctx context.Context, onlyID string) ([]AdminUser, err
 		                 WHERE se.user_id = u.id AND se.expires_at > now()), '{}'),
 		       (SELECT count(*) FROM question_answers qa WHERE qa.user_id = u.id),
 		       (SELECT count(*) FROM login_events le WHERE le.user_id = u.id
-		          AND le.kind = 'login_failed' AND le.created_at > now() - interval '24 hours')
+		          AND le.kind = 'login_failed' AND le.created_at > now() - interval '24 hours'),
+		       u.blocked_at
 		FROM users u
 		WHERE $1 = '' OR u.id::text = $1
 		ORDER BY 9 DESC NULLS LAST, u.created_at DESC`, onlyID)
@@ -244,7 +246,7 @@ func (s *Store) adminUsers(ctx context.Context, onlyID string) ([]AdminUser, err
 		var a AdminUser
 		var agents []*string
 		if err := rows.Scan(&a.ID, &a.Name, &a.Email, &a.AvatarURL, &a.Locale, &a.Role, &a.PrivacyVersion, &a.CreatedAt,
-			&a.LastSeenAt, &a.ActiveSessions, &agents, &a.Answers, &a.FailedLogins24h); err != nil {
+			&a.LastSeenAt, &a.ActiveSessions, &agents, &a.Answers, &a.FailedLogins24h, &a.BlockedAt); err != nil {
 			return nil, err
 		}
 		a.Devices = deviceTypes(agents)

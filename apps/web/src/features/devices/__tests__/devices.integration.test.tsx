@@ -54,3 +54,34 @@ describe('admin users tab (integration)', () => {
     expect(db.sessions.some((s) => s.userId === 'u2')).toBe(false);
   });
 });
+
+describe('admin account management (integration)', () => {
+  it('promotes, blocks, unblocks and deletes an account, never yourself', async () => {
+    loginAsDemo();
+    const user = userEvent.setup();
+    renderWithProviders(<AdminPage />);
+    await user.click(screen.getByRole('tab', { name: 'Users' }));
+
+    // own account: no management controls
+    await user.click(await screen.findByRole('button', { name: 'View Demo User' }));
+    expect(await screen.findByText('Demo User')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Block' })).not.toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'All users' }));
+
+    await user.click(await screen.findByRole('button', { name: 'View Ada Lovelace' }));
+    await user.click(await screen.findByRole('button', { name: 'Make admin' }));
+    await waitFor(() => expect(db.users.find((u) => u.id === 'u2')!.role).toBe('admin'));
+    expect(await screen.findByRole('button', { name: 'Make member' })).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Block' }));
+    expect(await screen.findByText(/Blocked since/)).toBeInTheDocument();
+    expect(db.sessions.some((s) => s.userId === 'u2')).toBe(false);
+    await user.click(screen.getByRole('button', { name: 'Unblock' }));
+    await waitFor(() => expect(screen.queryByText(/Blocked since/)).not.toBeInTheDocument());
+
+    await user.click(screen.getByRole('button', { name: 'Delete Ada Lovelace' }));
+    await user.click(screen.getByRole('button', { name: /Delete for good/ }));
+    await waitFor(() => expect(db.users.some((u) => u.id === 'u2')).toBe(false));
+    expect(await screen.findByText('demo@example.com')).toBeInTheDocument(); // back on the list
+  });
+});

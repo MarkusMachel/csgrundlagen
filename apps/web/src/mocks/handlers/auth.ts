@@ -26,6 +26,12 @@ export const authHandlers = [
       if (user) recordLoginEvent(request, user.id, 'login_failed');
       return HttpResponse.json({ message: 'Invalid email or password' }, { status: 401 });
     }
+    if (user.blockedAt) {
+      return HttpResponse.json(
+        { message: 'This account is blocked. Contact the site operator.' },
+        { status: 403 },
+      );
+    }
     recordLoginEvent(request, user.id, 'login');
     return HttpResponse.json({ token: openSession(request, user.id), user: publicUser(user) });
   }),

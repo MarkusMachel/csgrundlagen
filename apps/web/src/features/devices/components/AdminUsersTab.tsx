@@ -2,12 +2,21 @@ import { AlertTriangle, ArrowLeft, Eye } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { ConfirmDeleteButton } from '@/features/authoring/components/ConfirmDeleteButton';
+import { ApiError } from '@/shared/api/client';
 import { EmptyState, ErrorState, Spinner } from '@/shared/ui';
 import { formatRelative } from '@/shared/utils/relativeTime';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 import { DeviceIcon } from './DeviceIcon';
 import { DeviceList } from './DeviceList';
-import { useAdminRevokeSession, useAdminUserDetail, useAdminUsers } from '../hooks/useDevices';
+import {
+  useAdminChangeUser,
+  useAdminDeleteUser,
+  useAdminRevokeSession,
+  useAdminUserDetail,
+  useAdminUsers,
+} from '../hooks/useDevices';
 
 /** Admin: every account with its devices, activity and sign-in history. */
 export function AdminUsersTab() {
@@ -64,6 +73,11 @@ export function AdminUsersTab() {
                     <span className={u.role === 'admin' ? 'chip chip--accent' : 'chip'}>
                       {t(`account.role.${u.role}`)}
                     </span>
+                    {u.blockedAt && (
+                      <span className="chip chip--danger" style={{ marginLeft: 6 }}>
+                        {t('devices.admin.blocked')}
+                      </span>
+                    )}
                   </td>
                   <td>
                     {u.lastSeenAt
@@ -115,6 +129,9 @@ function UserDetail({ id, onBack }: { id: string; onBack: () => void }) {
   const { t, i18n } = useTranslation();
   const detail = useAdminUserDetail(id);
   const revoke = useAdminRevokeSession(id);
+  const change = useAdminChangeUser(id);
+  const remove = useAdminDeleteUser();
+  const myId = useAuthStore((s) => s.user?.id);
 
   const back = (
     <button type="button" className="btn btn--small btn--ghost" onClick={onBack}>
@@ -161,6 +178,49 @@ function UserDetail({ id, onBack }: { id: string; onBack: () => void }) {
           </button>
         )}
       </div>
+
+      {user.id !== myId && (
+        <section className="stack" style={{ gap: 8 }}>
+          <h3 style={{ margin: 0 }}>{t('devices.admin.manage')}</h3>
+          {user.blockedAt && (
+            <div className="alert alert--error" role="status">
+              {t('devices.admin.blockedSince', { date: day(user.blockedAt) })}
+            </div>
+          )}
+          {(change.isError || remove.isError) && (
+            <div className="alert alert--error" role="alert">
+              {[change.error, remove.error].find((e) => e instanceof ApiError)?.message ??
+                t('common.errorTitle')}
+            </div>
+          )}
+          <div className="hstack" style={{ gap: 8, flexWrap: 'wrap' }}>
+            <button
+              type="button"
+              className="btn btn--small"
+              disabled={change.isPending}
+              onClick={() => change.mutate({ role: user.role === 'admin' ? 'user' : 'admin' })}
+            >
+              {user.role === 'admin' ? t('devices.admin.makeMember') : t('devices.admin.makeAdmin')}
+            </button>
+            <button
+              type="button"
+              className={user.blockedAt ? 'btn btn--small' : 'btn btn--small btn--danger'}
+              disabled={change.isPending}
+              onClick={() => change.mutate({ blocked: !user.blockedAt })}
+            >
+              {user.blockedAt ? t('devices.admin.unblock') : t('devices.admin.block')}
+            </button>
+            <ConfirmDeleteButton
+              label={user.name}
+              pending={remove.isPending}
+              onConfirm={() => remove.mutate(user.id, { onSuccess: onBack })}
+            />
+          </div>
+          <p className="muted" style={{ margin: 0, fontSize: 12.5 }}>
+            {t('devices.admin.manageHint')}
+          </p>
+        </section>
+      )}
 
       <section className="stack" style={{ gap: 8 }}>
         <h3 style={{ margin: 0 }}>{t('privacy.admin.consent')}</h3>

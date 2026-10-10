@@ -5,6 +5,7 @@ export interface SeedUser extends User {
   password: string;
   /** Set for accounts created through sign-up. */
   createdAt?: string;
+  blockedAt?: string;
 }
 
 export const seedUsers: SeedUser[] = [

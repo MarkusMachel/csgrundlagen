@@ -9,6 +9,12 @@ import { parseUserAgent, type MockSession } from '../seed/devices';
 export const latestConsent = (userId: string) =>
   db.consents.filter((c) => c.userId === userId).at(-1);
 
+const lastAdmin = () =>
+  HttpResponse.json(
+    { message: 'this is the only admin; make someone else an admin first' },
+    { status: 409 },
+  );
+
 const notFound = () => HttpResponse.json({ message: 'Not found' }, { status: 404 });
 
 const live = (userId: string) =>
@@ -39,6 +45,7 @@ function adminUser(userId: string): AdminUser | undefined {
     devices: (['desktop', 'mobile', 'tablet', 'bot'] as const).filter((d) => devices.has(d)),
     answers: db.answerLog.filter((a) => a.userId === u.id).length,
     privacyVersion: u.privacyVersion,
+    blockedAt: u.blockedAt,
     failedLogins24h: db.loginEvents.filter(
       (e) =>
         e.userId === u.id && e.kind === 'login_failed' && new Date(e.createdAt).getTime() > dayAgo,
@@ -102,6 +109,51 @@ export const deviceHandlers = [
       // the mocks don't track when; signing up is when it happened
       privacyAcceptedAt: user.privacyVersion ? user.createdAt : undefined,
     });
+  }),
+
+  http.patch('/api/admin/users/:id', async ({ request, params }) => {
+    const me = currentUser(request);
+    if (!me) return unauthorized();
+    if (me.role !== 'admin') return forbidden();
+    if (params.id === me.id) {
+      return HttpResponse.json(
+        { message: "you can't change your own role or block yourself" },
+        { status: 400 },
+      );
+    }
+    const target = db.users.find((u) => u.id === params.id);
+    if (!target) return notFound();
+    const change = (await request.json()) as { role?: 'admin' | 'user'; blocked?: boolean };
+    const losesAdmin =
+      target.role === 'admin' && (change.role === 'user' || change.blocked === true);
+    if (losesAdmin && db.users.filter((u) => u.role === 'admin').length <= 1) return lastAdmin();
+    if (change.role) target.role = change.role;
+    if (change.blocked === true) {
+      target.blockedAt ??= new Date().toISOString();
+      revokeSessions((s) => s.userId === target.id);
+    } else if (change.blocked === false) {
+      target.blockedAt = undefined;
+    }
+    return new HttpResponse(null, { status: 204 });
+  }),
+
+  http.delete('/api/admin/users/:id', ({ request, params }) => {
+    const me = currentUser(request);
+    if (!me) return unauthorized();
+    if (me.role !== 'admin') return forbidden();
+    if (params.id === me.id) {
+      return HttpResponse.json(
+        { message: 'delete your own account from the Account page' },
+        { status: 400 },
+      );
+    }
+    const target = db.users.find((u) => u.id === params.id);
+    if (!target) return notFound();
+    if (target.role === 'admin' && db.users.filter((u) => u.role === 'admin').length <= 1)
+      return lastAdmin();
+    db.users = db.users.filter((u) => u !== target);
+    revokeSessions((s) => s.userId === target.id);
+    return new HttpResponse(null, { status: 204 });
   }),
 
   http.delete('/api/admin/users/:id/sessions', ({ request, params }) => {
