@@ -1,0 +1,2040 @@
+{
+  "name": "JavaScript interview questions",
+  "materials": [
+    {
+      "key": "ydkjs",
+      "type": "book",
+      "title": "You Don't Know JS Yet (book series)",
+      "url": "https://github.com/getify/You-Dont-Know-JS",
+      "author": "Kyle Simpson",
+      "description": "Free series: Get Started, Scope & Closures, Objects & Classes, Types & Grammar."
+    },
+    {
+      "key": "eloquent",
+      "type": "book",
+      "title": "Eloquent JavaScript",
+      "url": "https://eloquentjavascript.net/",
+      "author": "Marijn Haverbeke",
+      "description": "Free online book; see the data structures and higher-order functions chapters."
+    },
+    {
+      "key": "exploring-js",
+      "type": "book",
+      "title": "Exploring JS",
+      "url": "https://exploringjs.com/",
+      "author": "Axel Rauschmayer",
+      "description": "Free, in-depth books on modern JavaScript features."
+    },
+    {
+      "key": "effective-ts",
+      "type": "book",
+      "title": "Effective TypeScript",
+      "url": "https://effectivetypescript.com/",
+      "author": "Dan Vanderkam",
+      "description": "Specific ways to improve your TypeScript. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "fm-deep-js",
+      "type": "video",
+      "title": "Deep JavaScript Foundations, v3",
+      "url": "https://frontendmasters.com/courses/deep-javascript-v3/",
+      "author": "Kyle Simpson",
+      "description": "Paid course; the coercion section covers == in depth."
+    },
+    {
+      "key": "namaste-js",
+      "type": "video",
+      "title": "Namaste JavaScript",
+      "url": "https://www.youtube.com/@akshaymarch7",
+      "author": "Akshay Saini",
+      "description": "YouTube series; the closures episodes cover the loop puzzle. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "mdn-types",
+      "type": "article",
+      "title": "JavaScript data types and data structures",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures",
+      "author": "MDN Web Docs",
+      "description": "The seven primitives and objects."
+    },
+    {
+      "key": "jsi-types",
+      "type": "article",
+      "title": "javascript.info: Data types",
+      "url": "https://javascript.info/types",
+      "author": "javascript.info",
+      "description": "Primitives, typeof and its quirks."
+    },
+    {
+      "key": "mdn-equality",
+      "type": "article",
+      "title": "Equality comparisons and sameness",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness",
+      "author": "MDN Web Docs",
+      "description": "==, ===, Object.is and SameValueZero."
+    },
+    {
+      "key": "jsi-comparison",
+      "type": "article",
+      "title": "javascript.info: Comparisons",
+      "url": "https://javascript.info/comparison",
+      "author": "javascript.info",
+      "description": "How comparisons convert their operands."
+    },
+    {
+      "key": "mdn-let",
+      "type": "article",
+      "title": "let",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let",
+      "author": "MDN Web Docs",
+      "description": "Block scope and the temporal dead zone."
+    },
+    {
+      "key": "mdn-const",
+      "type": "article",
+      "title": "const",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const",
+      "author": "MDN Web Docs",
+      "description": "Constant bindings, not immutable values."
+    },
+    {
+      "key": "jsi-variables",
+      "type": "article",
+      "title": "javascript.info: Variables",
+      "url": "https://javascript.info/variables",
+      "author": "javascript.info",
+      "description": "Declaring variables with let and const."
+    },
+    {
+      "key": "mdn-hoisting",
+      "type": "article",
+      "title": "Hoisting",
+      "url": "https://developer.mozilla.org/en-US/docs/Glossary/Hoisting",
+      "author": "MDN Web Docs",
+      "description": "What gets hoisted, and how."
+    },
+    {
+      "key": "jsi-closure",
+      "type": "article",
+      "title": "javascript.info: Variable scope, closure",
+      "url": "https://javascript.info/closure",
+      "author": "javascript.info",
+      "description": "Lexical environments, closures and hoisting."
+    },
+    {
+      "key": "mdn-truthy",
+      "type": "article",
+      "title": "Truthy",
+      "url": "https://developer.mozilla.org/en-US/docs/Glossary/Truthy",
+      "author": "MDN Web Docs",
+      "description": "Values that count as true in a boolean context."
+    },
+    {
+      "key": "mdn-falsy",
+      "type": "article",
+      "title": "Falsy",
+      "url": "https://developer.mozilla.org/en-US/docs/Glossary/Falsy",
+      "author": "MDN Web Docs",
+      "description": "The short list of values that count as false."
+    },
+    {
+      "key": "jsi-logical",
+      "type": "article",
+      "title": "javascript.info: Logical operators",
+      "url": "https://javascript.info/logical-operators",
+      "author": "javascript.info",
+      "description": "||, && and ! and what they return."
+    },
+    {
+      "key": "mdn-null",
+      "type": "article",
+      "title": "null",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/null",
+      "author": "MDN Web Docs",
+      "description": "The intentional absence of a value."
+    },
+    {
+      "key": "mdn-undefined",
+      "type": "article",
+      "title": "undefined",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+      "author": "MDN Web Docs",
+      "description": "The value of anything not yet assigned."
+    },
+    {
+      "key": "jsi-nullish",
+      "type": "article",
+      "title": "javascript.info: Nullish coalescing operator ??",
+      "url": "https://javascript.info/nullish-coalescing-operator",
+      "author": "javascript.info",
+      "description": "Defaults only for null and undefined."
+    },
+    {
+      "key": "jsi-object-copy",
+      "type": "article",
+      "title": "javascript.info: Object references and copying",
+      "url": "https://javascript.info/object-copy",
+      "author": "javascript.info",
+      "description": "Copying by reference, shallow and deep copies."
+    },
+    {
+      "key": "mdn-primitive",
+      "type": "article",
+      "title": "Primitive",
+      "url": "https://developer.mozilla.org/en-US/docs/Glossary/Primitive",
+      "author": "MDN Web Docs",
+      "description": "Immutable values without methods of their own."
+    },
+    {
+      "key": "mdn-structuredclone",
+      "type": "article",
+      "title": "structuredClone()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/structuredClone",
+      "author": "MDN Web Docs",
+      "description": "Built-in deep copy using the structured clone algorithm."
+    },
+    {
+      "key": "webdev-structured-clone",
+      "type": "article",
+      "title": "Deep-copying in JavaScript using structuredClone",
+      "url": "https://web.dev/articles/structured-clone",
+      "author": "web.dev",
+      "description": "What structuredClone handles and what it doesn't. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "mdn-number",
+      "type": "article",
+      "title": "Number",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+      "author": "MDN Web Docs",
+      "description": "IEEE 754 doubles, EPSILON and MAX_SAFE_INTEGER."
+    },
+    {
+      "key": "mdn-bigint",
+      "type": "article",
+      "title": "BigInt",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt",
+      "author": "MDN Web Docs",
+      "description": "Arbitrary-precision integers."
+    },
+    {
+      "key": "point-three",
+      "type": "link",
+      "title": "0.30000000000000004.com",
+      "url": "https://0.30000000000000004.com/",
+      "author": "Erik Wiffin",
+      "description": "Floating-point math across many languages."
+    },
+    {
+      "key": "jsi-number",
+      "type": "article",
+      "title": "javascript.info: Numbers",
+      "url": "https://javascript.info/number",
+      "author": "javascript.info",
+      "description": "Imprecise calculations and how to work around them."
+    },
+    {
+      "key": "jsi-type-conversions",
+      "type": "article",
+      "title": "javascript.info: Type conversions",
+      "url": "https://javascript.info/type-conversions",
+      "author": "javascript.info",
+      "description": "String, numeric and boolean conversion rules."
+    },
+    {
+      "key": "mdn-coercion",
+      "type": "article",
+      "title": "Type coercion",
+      "url": "https://developer.mozilla.org/en-US/docs/Glossary/Type_coercion",
+      "author": "MDN Web Docs",
+      "description": "Automatic conversion between types."
+    },
+    {
+      "key": "mdn-closures",
+      "type": "article",
+      "title": "Closures",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures",
+      "author": "MDN Web Docs",
+      "description": "Lexical scoping, closures and their uses."
+    },
+    {
+      "key": "mdn-closures-loops",
+      "type": "article",
+      "title": "Creating closures in loops: a common mistake",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures#creating_closures_in_loops_a_common_mistake",
+      "author": "MDN Web Docs",
+      "description": "Why var in a loop shares one binding."
+    },
+    {
+      "key": "mdn-this",
+      "type": "article",
+      "title": "this",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this",
+      "author": "MDN Web Docs",
+      "description": "How this is determined for each kind of call."
+    },
+    {
+      "key": "jsi-object-methods",
+      "type": "article",
+      "title": "javascript.info: Object methods, \"this\"",
+      "url": "https://javascript.info/object-methods",
+      "author": "javascript.info",
+      "description": "Methods, this and losing it."
+    },
+    {
+      "key": "mdn-bind",
+      "type": "article",
+      "title": "Function.prototype.bind()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind",
+      "author": "MDN Web Docs",
+      "description": "Fixing this and leading arguments."
+    },
+    {
+      "key": "jsi-bind",
+      "type": "article",
+      "title": "javascript.info: Function binding",
+      "url": "https://javascript.info/bind",
+      "author": "javascript.info",
+      "description": "Losing this, and bind as the fix."
+    },
+    {
+      "key": "mdn-arrow",
+      "type": "article",
+      "title": "Arrow function expressions",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions",
+      "author": "MDN Web Docs",
+      "description": "What arrows don't have: this, arguments, prototype."
+    },
+    {
+      "key": "jsi-arrow",
+      "type": "article",
+      "title": "javascript.info: Arrow functions revisited",
+      "url": "https://javascript.info/arrow-functions",
+      "author": "javascript.info",
+      "description": "Arrows and the outer this."
+    },
+    {
+      "key": "mdn-proto-chain",
+      "type": "article",
+      "title": "Inheritance and the prototype chain",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain",
+      "author": "MDN Web Docs",
+      "description": "How property lookup walks [[Prototype]]."
+    },
+    {
+      "key": "jsi-proto",
+      "type": "article",
+      "title": "javascript.info: Prototypal inheritance",
+      "url": "https://javascript.info/prototype-inheritance",
+      "author": "javascript.info",
+      "description": "[[Prototype]], __proto__ and Object.create."
+    },
+    {
+      "key": "mdn-classes",
+      "type": "article",
+      "title": "Classes",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes",
+      "author": "MDN Web Docs",
+      "description": "Class syntax, private fields and static members."
+    },
+    {
+      "key": "jsi-class",
+      "type": "article",
+      "title": "javascript.info: Class basic syntax",
+      "url": "https://javascript.info/class",
+      "author": "javascript.info",
+      "description": "What a class really is under the hood."
+    },
+    {
+      "key": "mdn-new",
+      "type": "article",
+      "title": "new operator",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new",
+      "author": "MDN Web Docs",
+      "description": "The four steps new performs."
+    },
+    {
+      "key": "jsi-constructor-new",
+      "type": "article",
+      "title": "javascript.info: Constructor, operator \"new\"",
+      "url": "https://javascript.info/constructor-new",
+      "author": "javascript.info",
+      "description": "Constructor functions and new."
+    },
+    {
+      "key": "jsi-currying",
+      "type": "article",
+      "title": "javascript.info: Currying",
+      "url": "https://javascript.info/currying-partials",
+      "author": "javascript.info",
+      "description": "Currying and partial application."
+    },
+    {
+      "key": "mdn-first-class",
+      "type": "article",
+      "title": "First-class function",
+      "url": "https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function",
+      "author": "MDN Web Docs",
+      "description": "Functions as values."
+    },
+    {
+      "key": "jsi-decorators",
+      "type": "article",
+      "title": "javascript.info: Decorators and forwarding, call/apply",
+      "url": "https://javascript.info/call-apply-decorators",
+      "author": "javascript.info",
+      "description": "Caching decorators; tasks include debounce and throttle."
+    },
+    {
+      "key": "mdn-map",
+      "type": "article",
+      "title": "Map",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+      "author": "MDN Web Docs",
+      "description": "Keyed collection with any key type."
+    },
+    {
+      "key": "roberts-event-loop",
+      "type": "video",
+      "title": "What the heck is the event loop anyway?",
+      "url": "https://www.youtube.com/watch?v=8aGhZQkoFbQ",
+      "author": "Philip Roberts",
+      "description": "The classic visual explanation (JSConf EU 2014)."
+    },
+    {
+      "key": "archibald-in-the-loop",
+      "type": "video",
+      "title": "In The Loop (JSConf.Asia 2018)",
+      "url": "https://www.youtube.com/watch?v=cCOL7MC4Pl0",
+      "author": "Jake Archibald",
+      "description": "Tasks, microtasks and rendering in the browser. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "hallie-event-loop",
+      "type": "article",
+      "title": "JavaScript Visualized: Event Loop",
+      "url": "https://dev.to/lydiahallie/javascript-visualized-event-loop-3dif",
+      "author": "Lydia Hallie",
+      "description": "Animated walkthrough of the call stack and queues."
+    },
+    {
+      "key": "mdn-event-loop",
+      "type": "article",
+      "title": "The event loop",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop",
+      "author": "MDN Web Docs",
+      "description": "Stack, heap and queue."
+    },
+    {
+      "key": "archibald-tasks",
+      "type": "article",
+      "title": "Tasks, microtasks, queues and schedules",
+      "url": "https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/",
+      "author": "Jake Archibald",
+      "description": "Step-by-step ordering of tasks and microtasks. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "mdn-microtask",
+      "type": "article",
+      "title": "Using microtasks in JavaScript with queueMicrotask()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide",
+      "author": "MDN Web Docs",
+      "description": "When and how microtasks run."
+    },
+    {
+      "key": "jsi-microtask",
+      "type": "article",
+      "title": "javascript.info: Microtasks",
+      "url": "https://javascript.info/microtask-queue",
+      "author": "javascript.info",
+      "description": "Why promise handlers run before timers."
+    },
+    {
+      "key": "jsi-callbacks",
+      "type": "article",
+      "title": "javascript.info: Introduction: callbacks",
+      "url": "https://javascript.info/callbacks",
+      "author": "javascript.info",
+      "description": "Callbacks and the pyramid of doom."
+    },
+    {
+      "key": "node-promisify",
+      "type": "article",
+      "title": "util.promisify(original)",
+      "url": "https://nodejs.org/api/util.html#utilpromisifyoriginal",
+      "author": "Node.js",
+      "description": "Turning error-first callbacks into promises."
+    },
+    {
+      "key": "callbackhell",
+      "type": "link",
+      "title": "Callback Hell",
+      "url": "http://callbackhell.com/",
+      "author": "Max Ogden",
+      "description": "A guide to writing asynchronous JavaScript programs. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "mdn-using-promises",
+      "type": "article",
+      "title": "Using promises",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises",
+      "author": "MDN Web Docs",
+      "description": "Chaining, error handling and composition."
+    },
+    {
+      "key": "jsi-promise-basics",
+      "type": "article",
+      "title": "javascript.info: Promise",
+      "url": "https://javascript.info/promise-basics",
+      "author": "javascript.info",
+      "description": "States, resolve and reject."
+    },
+    {
+      "key": "jsi-promise-chaining",
+      "type": "article",
+      "title": "javascript.info: Promises chaining",
+      "url": "https://javascript.info/promise-chaining",
+      "author": "javascript.info",
+      "description": "How then returns a new promise."
+    },
+    {
+      "key": "hallie-promises",
+      "type": "article",
+      "title": "JavaScript Visualized: Promises & Async/Await",
+      "url": "https://dev.to/lydiahallie/javascript-visualized-promises-async-await-5gke",
+      "author": "Lydia Hallie",
+      "description": "Animated walkthrough of promises and await."
+    },
+    {
+      "key": "mdn-promise-concurrency",
+      "type": "article",
+      "title": "Promise concurrency methods",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#promise_concurrency",
+      "author": "MDN Web Docs",
+      "description": "all, allSettled, any and race compared."
+    },
+    {
+      "key": "jsi-promise-api",
+      "type": "article",
+      "title": "javascript.info: Promise API",
+      "url": "https://javascript.info/promise-api",
+      "author": "javascript.info",
+      "description": "Promise.all, allSettled, race and any."
+    },
+    {
+      "key": "mdn-async-function",
+      "type": "article",
+      "title": "async function",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function",
+      "author": "MDN Web Docs",
+      "description": "Async functions always return a promise."
+    },
+    {
+      "key": "jsi-async-await",
+      "type": "article",
+      "title": "javascript.info: Async/await",
+      "url": "https://javascript.info/async-await",
+      "author": "javascript.info",
+      "description": "await, error handling and parallelism."
+    },
+    {
+      "key": "mdn-error-cause",
+      "type": "article",
+      "title": "Error: cause",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause",
+      "author": "MDN Web Docs",
+      "description": "Wrapping errors without losing the original."
+    },
+    {
+      "key": "webdev-async-iterators",
+      "type": "article",
+      "title": "Async iterators and generators",
+      "url": "https://web.dev/articles/async-iterators",
+      "author": "Jake Archibald",
+      "description": "Streaming async data with for await. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "mdn-for-await",
+      "type": "article",
+      "title": "for await...of",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of",
+      "author": "MDN Web Docs",
+      "description": "Iterating async iterables."
+    },
+    {
+      "key": "node-unhandled",
+      "type": "article",
+      "title": "process: 'unhandledRejection' event",
+      "url": "https://nodejs.org/api/process.html#event-unhandledrejection",
+      "author": "Node.js",
+      "description": "How Node reports and handles unhandled rejections."
+    },
+    {
+      "key": "mdn-unhandledrejection",
+      "type": "article",
+      "title": "Window: unhandledrejection event",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/unhandledrejection_event",
+      "author": "MDN Web Docs",
+      "description": "The browser's unhandled rejection event."
+    },
+    {
+      "key": "jsi-promise-error",
+      "type": "article",
+      "title": "javascript.info: Error handling with promises",
+      "url": "https://javascript.info/promise-error-handling",
+      "author": "javascript.info",
+      "description": "Implicit try/catch and unhandled rejections."
+    },
+    {
+      "key": "mdn-settimeout",
+      "type": "article",
+      "title": "setTimeout(): reasons for delays longer than specified",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout#reasons_for_delays_longer_than_specified",
+      "author": "MDN Web Docs",
+      "description": "Clamping, throttling and a busy main thread."
+    },
+    {
+      "key": "jsi-settimeout",
+      "type": "article",
+      "title": "javascript.info: Scheduling: setTimeout and setInterval",
+      "url": "https://javascript.info/settimeout-setinterval",
+      "author": "javascript.info",
+      "description": "Zero-delay timers and nested setTimeout."
+    },
+    {
+      "key": "mdn-abortcontroller",
+      "type": "article",
+      "title": "AbortController",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/AbortController",
+      "author": "MDN Web Docs",
+      "description": "Cancelling fetch and other async work."
+    },
+    {
+      "key": "jsi-fetch-abort",
+      "type": "article",
+      "title": "javascript.info: Fetch: Abort",
+      "url": "https://javascript.info/fetch-abort",
+      "author": "javascript.info",
+      "description": "Aborting requests with AbortController."
+    },
+    {
+      "key": "mdn-destructuring",
+      "type": "article",
+      "title": "Destructuring assignment",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment",
+      "author": "MDN Web Docs",
+      "description": "Unpacking arrays and objects, defaults and renaming."
+    },
+    {
+      "key": "jsi-destructuring",
+      "type": "article",
+      "title": "javascript.info: Destructuring assignment",
+      "url": "https://javascript.info/destructuring-assignment",
+      "author": "javascript.info",
+      "description": "Patterns, defaults and the rest pattern."
+    },
+    {
+      "key": "jsi-rest-spread",
+      "type": "article",
+      "title": "javascript.info: Rest parameters and spread syntax",
+      "url": "https://javascript.info/rest-parameters-spread",
+      "author": "javascript.info",
+      "description": "Collecting and expanding values."
+    },
+    {
+      "key": "mdn-modules",
+      "type": "article",
+      "title": "JavaScript modules",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules",
+      "author": "MDN Web Docs",
+      "description": "import, export and dynamic import()."
+    },
+    {
+      "key": "node-esm",
+      "type": "article",
+      "title": "Modules: ECMAScript modules",
+      "url": "https://nodejs.org/api/esm.html",
+      "author": "Node.js",
+      "description": "ESM in Node: .mjs, type: module and interop."
+    },
+    {
+      "key": "jsi-modules",
+      "type": "article",
+      "title": "javascript.info: Modules, introduction",
+      "url": "https://javascript.info/modules-intro",
+      "author": "javascript.info",
+      "description": "What makes a module different from a script."
+    },
+    {
+      "key": "mdn-keyed",
+      "type": "article",
+      "title": "Keyed collections",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Keyed_collections",
+      "author": "MDN Web Docs",
+      "description": "Map, Set, WeakMap and WeakSet."
+    },
+    {
+      "key": "jsi-map-set",
+      "type": "article",
+      "title": "javascript.info: Map and Set",
+      "url": "https://javascript.info/map-set",
+      "author": "javascript.info",
+      "description": "When to use them over objects and arrays."
+    },
+    {
+      "key": "jsi-weakmap",
+      "type": "article",
+      "title": "javascript.info: WeakMap and WeakSet",
+      "url": "https://javascript.info/weakmap-weakset",
+      "author": "javascript.info",
+      "description": "Weakly held keys for caches and metadata."
+    },
+    {
+      "key": "mdn-iterators",
+      "type": "article",
+      "title": "Iterators and generators",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_generators",
+      "author": "MDN Web Docs",
+      "description": "The iteration protocols and function*."
+    },
+    {
+      "key": "jsi-generators",
+      "type": "article",
+      "title": "javascript.info: Generators",
+      "url": "https://javascript.info/generators",
+      "author": "javascript.info",
+      "description": "yield, iteration and composition."
+    },
+    {
+      "key": "jsi-async-iter",
+      "type": "article",
+      "title": "javascript.info: Async iteration and generators",
+      "url": "https://javascript.info/async-iterators-generators",
+      "author": "javascript.info",
+      "description": "for await and async generators."
+    },
+    {
+      "key": "mdn-optional-chaining",
+      "type": "article",
+      "title": "Optional chaining (?.)",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining",
+      "author": "MDN Web Docs",
+      "description": "Safe property access, calls and indexing."
+    },
+    {
+      "key": "mdn-nullish",
+      "type": "article",
+      "title": "Nullish coalescing operator (??)",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing",
+      "author": "MDN Web Docs",
+      "description": "Fallbacks for null and undefined only."
+    },
+    {
+      "key": "jsi-optional-chaining",
+      "type": "article",
+      "title": "javascript.info: Optional chaining '?.'",
+      "url": "https://javascript.info/optional-chaining",
+      "author": "javascript.info",
+      "description": "Short-circuiting property access."
+    },
+    {
+      "key": "mdn-template",
+      "type": "article",
+      "title": "Template literals (Template strings)",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals",
+      "author": "MDN Web Docs",
+      "description": "Interpolation, multiline strings and tagged templates."
+    },
+    {
+      "key": "jsi-string",
+      "type": "article",
+      "title": "javascript.info: Strings",
+      "url": "https://javascript.info/string",
+      "author": "javascript.info",
+      "description": "Quotes, backticks and string methods."
+    },
+    {
+      "key": "mdn-array",
+      "type": "article",
+      "title": "Array",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+      "author": "MDN Web Docs",
+      "description": "Every array method, including map, filter and reduce."
+    },
+    {
+      "key": "jsi-array-methods",
+      "type": "article",
+      "title": "javascript.info: Array methods",
+      "url": "https://javascript.info/array-methods",
+      "author": "javascript.info",
+      "description": "Transforming, searching and reducing arrays."
+    },
+    {
+      "key": "mdn-proxy",
+      "type": "article",
+      "title": "Proxy",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+      "author": "MDN Web Docs",
+      "description": "Intercepting operations on objects."
+    },
+    {
+      "key": "jsi-proxy",
+      "type": "article",
+      "title": "javascript.info: Proxy and Reflect",
+      "url": "https://javascript.info/proxy",
+      "author": "javascript.info",
+      "description": "Traps, Reflect and invariants."
+    },
+    {
+      "key": "mdn-freeze",
+      "type": "article",
+      "title": "Object.freeze()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze",
+      "author": "MDN Web Docs",
+      "description": "Shallow immutability for objects."
+    },
+    {
+      "key": "jsi-descriptors",
+      "type": "article",
+      "title": "javascript.info: Property flags and descriptors",
+      "url": "https://javascript.info/property-descriptors",
+      "author": "javascript.info",
+      "description": "writable, enumerable and configurable."
+    },
+    {
+      "key": "mdn-for-in",
+      "type": "article",
+      "title": "for...in",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in",
+      "author": "MDN Web Docs",
+      "description": "Enumerable string keys, inherited ones included."
+    },
+    {
+      "key": "mdn-for-of",
+      "type": "article",
+      "title": "for...of",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of",
+      "author": "MDN Web Docs",
+      "description": "Iterating values of any iterable."
+    },
+    {
+      "key": "jsi-keys",
+      "type": "article",
+      "title": "javascript.info: Object.keys, values, entries",
+      "url": "https://javascript.info/keys-values-entries",
+      "author": "javascript.info",
+      "description": "Own properties as arrays."
+    },
+    {
+      "key": "node-event-loop",
+      "type": "article",
+      "title": "The Node.js event loop, timers and process.nextTick()",
+      "url": "https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick",
+      "author": "Node.js",
+      "description": "Event loop phases in Node."
+    },
+    {
+      "key": "node-workers",
+      "type": "article",
+      "title": "Worker threads",
+      "url": "https://nodejs.org/api/worker_threads.html",
+      "author": "Node.js",
+      "description": "Running CPU-bound JavaScript in parallel."
+    },
+    {
+      "key": "belder-event-loop",
+      "type": "video",
+      "title": "Everything You Need to Know About Node.js Event Loop",
+      "url": "https://www.youtube.com/watch?v=PNa9OMajw9w",
+      "author": "Bert Belder",
+      "description": "How libuv and the Node event loop really work. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "mdn-memory",
+      "type": "article",
+      "title": "Memory management",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_management",
+      "author": "MDN Web Docs",
+      "description": "Garbage collection and reachability."
+    },
+    {
+      "key": "chrome-memory",
+      "type": "article",
+      "title": "Fix memory problems",
+      "url": "https://developer.chrome.com/docs/devtools/memory-problems",
+      "author": "Chrome for Developers",
+      "description": "Heap snapshots and allocation timelines in DevTools. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "node-memory",
+      "type": "article",
+      "title": "Node.js diagnostics: memory",
+      "url": "https://nodejs.org/en/learn/diagnostics/memory",
+      "author": "Node.js",
+      "description": "Finding leaks with heap snapshots in Node."
+    },
+    {
+      "key": "css-tricks-debounce",
+      "type": "article",
+      "title": "Debouncing and Throttling Explained Through Examples",
+      "url": "https://css-tricks.com/debouncing-throttling-explained-examples/",
+      "author": "CSS-Tricks",
+      "description": "Interactive examples of both techniques. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "jsi-bubbling",
+      "type": "article",
+      "title": "javascript.info: Bubbling and capturing",
+      "url": "https://javascript.info/bubbling-and-capturing",
+      "author": "javascript.info",
+      "description": "The three phases of event propagation."
+    },
+    {
+      "key": "jsi-delegation",
+      "type": "article",
+      "title": "javascript.info: Event delegation",
+      "url": "https://javascript.info/event-delegation",
+      "author": "javascript.info",
+      "description": "One listener for many children."
+    },
+    {
+      "key": "mdn-bubbling",
+      "type": "article",
+      "title": "Event bubbling",
+      "url": "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Event_bubbling",
+      "author": "MDN Web Docs",
+      "description": "Bubbling, capture and delegation explained."
+    },
+    {
+      "key": "mdn-cors",
+      "type": "article",
+      "title": "Cross-Origin Resource Sharing (CORS)",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS",
+      "author": "MDN Web Docs",
+      "description": "Simple requests, preflights and credentials."
+    },
+    {
+      "key": "jsi-fetch-cors",
+      "type": "article",
+      "title": "javascript.info: Fetch: Cross-Origin Requests",
+      "url": "https://javascript.info/fetch-crossorigin",
+      "author": "javascript.info",
+      "description": "CORS from the client's side."
+    },
+    {
+      "key": "owasp-xss",
+      "type": "article",
+      "title": "Cross Site Scripting Prevention Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html",
+      "author": "OWASP",
+      "description": "Output encoding, sanitising and safe sinks."
+    },
+    {
+      "key": "owasp-csrf",
+      "type": "article",
+      "title": "Cross-Site Request Forgery Prevention Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html",
+      "author": "OWASP",
+      "description": "Tokens, SameSite cookies and origin checks."
+    },
+    {
+      "key": "mdn-csp",
+      "type": "article",
+      "title": "Content Security Policy (CSP)",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP",
+      "author": "MDN Web Docs",
+      "description": "Restricting which scripts a page may run."
+    },
+    {
+      "key": "mdn-webstorage",
+      "type": "article",
+      "title": "Web Storage API",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API",
+      "author": "MDN Web Docs",
+      "description": "localStorage and sessionStorage."
+    },
+    {
+      "key": "mdn-indexeddb",
+      "type": "article",
+      "title": "IndexedDB API",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API",
+      "author": "MDN Web Docs",
+      "description": "Asynchronous structured storage in the browser."
+    },
+    {
+      "key": "jsi-localstorage",
+      "type": "article",
+      "title": "javascript.info: LocalStorage, sessionStorage",
+      "url": "https://javascript.info/localstorage",
+      "author": "javascript.info",
+      "description": "Persistence, scope and limits."
+    },
+    {
+      "key": "jsi-cookie",
+      "type": "article",
+      "title": "javascript.info: Cookies, document.cookie",
+      "url": "https://javascript.info/cookie",
+      "author": "javascript.info",
+      "description": "Cookie attributes, including HttpOnly and SameSite."
+    },
+    {
+      "key": "mdn-workers",
+      "type": "article",
+      "title": "Using Web Workers",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers",
+      "author": "MDN Web Docs",
+      "description": "Moving work off the main thread."
+    },
+    {
+      "key": "webdev-long-tasks",
+      "type": "article",
+      "title": "Optimize long tasks",
+      "url": "https://web.dev/articles/optimize-long-tasks",
+      "author": "web.dev",
+      "description": "Breaking up work so the page stays responsive."
+    },
+    {
+      "key": "webdev-layout-thrashing",
+      "type": "article",
+      "title": "Avoid large, complex layouts and layout thrashing",
+      "url": "https://web.dev/articles/avoid-large-complex-layouts-and-layout-thrashing",
+      "author": "web.dev",
+      "description": "Batching DOM reads and writes."
+    },
+    {
+      "key": "mdn-strict",
+      "type": "article",
+      "title": "Strict mode",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode",
+      "author": "MDN Web Docs",
+      "description": "What 'use strict' changes."
+    },
+    {
+      "key": "ts-handbook",
+      "type": "article",
+      "title": "The TypeScript Handbook",
+      "url": "https://www.typescriptlang.org/docs/handbook/intro.html",
+      "author": "TypeScript",
+      "description": "The official guide to TypeScript."
+    },
+    {
+      "key": "mdn-promise-all",
+      "type": "article",
+      "title": "Promise.all()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all",
+      "author": "MDN Web Docs",
+      "description": "Ordering, rejection and empty input."
+    },
+    {
+      "key": "greatfrontend",
+      "type": "link",
+      "title": "GreatFrontEnd",
+      "url": "https://www.greatfrontend.com/",
+      "author": "GreatFrontEnd",
+      "description": "Front-end interview practice, including implementing Promise.all. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "exercism-js",
+      "type": "link",
+      "title": "Exercism: JavaScript track",
+      "url": "https://exercism.org/tracks/javascript",
+      "author": "Exercism",
+      "description": "Free practice exercises with mentoring. Link not verified by the study guide; if it doesn't open, search for its title."
+    }
+  ],
+  "questions": [
+    {
+      "prompt": "What are JavaScript's data types, and what are the two classic quirks of `typeof`?",
+      "tags": [
+        "JS Core & Types"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Seven primitives plus objects; `typeof NaN` is `\"undefined\"` and `typeof function(){}` is `\"object\"`.",
+        "Seven primitives plus objects; `typeof null` is `\"object\"` (an old bug) and functions report `\"function\"`.",
+        "Everything is an object, so `typeof` returns `\"object\"` for every value except `undefined`.",
+        "Five primitives plus arrays; `typeof []` is `\"array\"` and `typeof null` is `\"null\"`."
+      ],
+      "correct": 1,
+      "explanation": "Seven primitives: `string`, `number`, `bigint`, `boolean`, `undefined`, `symbol`, `null`. Everything else is an object (arrays, functions, dates, maps). `typeof` returns the type name as a string, with two quirks: `typeof null` is `\"object\"` (a historical bug) and `typeof function(){}` is `\"function\"`. Use `Array.isArray` for arrays.\n\n```js\ntypeof 42;          // \"number\"\ntypeof null;        // \"object\"  (bug that stayed)\ntypeof [];          // \"object\"\nArray.isArray([]);  // true\n```",
+      "materials": [
+        "mdn-types",
+        "jsi-types",
+        "ydkjs"
+      ]
+    },
+    {
+      "prompt": "What is the difference between `==` and `===`, and when is `==` acceptable?",
+      "tags": [
+        "JS Core & Types"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`==` is faster because it skips the type check, so it's preferred in hot loops and comparisons of numbers.",
+        "`===` compares without type conversion; `==` coerces first. The one common accepted use is `x == null`.",
+        "`===` compares by reference while `==` compares by value, so use `==` for primitives and `===` for objects.",
+        "They are identical in strict mode, so the choice only matters in old sloppy-mode scripts."
+      ],
+      "correct": 1,
+      "explanation": "`===` compares without conversion (type and value). `==` applies the coercion rules first, which gives surprising results (`0 == \"\"`, `null == undefined`). Default to `===`. The one common accepted use of `==` is `x == null` to check for both `null` and `undefined` at once.\n\n```js\n0 == \"\";            // true\nnull == undefined;  // true\nnull === undefined; // false\nNaN === NaN;        // false\n```",
+      "materials": [
+        "mdn-equality",
+        "jsi-comparison",
+        "fm-deep-js"
+      ]
+    },
+    {
+      "prompt": "How do `var`, `let` and `const` differ?",
+      "tags": [
+        "JS Core & Types"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "All three are block-scoped; `var` just allows redeclaration, and `const` deep-freezes the value it is assigned.",
+        "`let` and `const` are hoisted as `undefined` like `var`, so reading them before the declaration returns `undefined`.",
+        "`var` and `let` behave the same way in every scope; only `const` is block-scoped, and it also makes the object it points to fully immutable.",
+        "`var` is function-scoped and hoisted as `undefined`; `let`/`const` are block-scoped with a TDZ, and `const` only forbids reassignment."
+      ],
+      "correct": 3,
+      "explanation": "`var` is function-scoped, hoisted and initialised to `undefined`, and can be redeclared. `let` and `const` are block-scoped and live in the temporal dead zone (TDZ) until their declaration runs; touching them earlier throws a `ReferenceError`. `const` forbids reassigning the binding, not mutating the object it points to.\n\n```js\nconsole.log(a); // undefined\nvar a = 1;\n// console.log(b); // ReferenceError (TDZ)\nlet b = 2;\nconst o = { n: 1 };\no.n = 2;        // fine\n// o = {};      // TypeError\n```",
+      "materials": [
+        "mdn-let",
+        "mdn-const",
+        "jsi-variables"
+      ]
+    },
+    {
+      "prompt": "What is hoisting, and why can you call a function declaration before it appears but not a `var` function expression?",
+      "tags": [
+        "JS Core & Types"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Declarations are registered before code runs: function declarations with their body, `var` only as `undefined`.",
+        "Function expressions are hoisted with their body too; calling one early fails only in strict mode.",
+        "Hoisting only applies to `let` and `const`, which is why they can be read before their declaration.",
+        "The engine physically moves every line of code to the top of its file before running it."
+      ],
+      "correct": 0,
+      "explanation": "Declarations are registered when the scope is created, before code runs. Function declarations are hoisted with their body, so you can call them early. `var` is hoisted as `undefined`, so calling a `var` function expression early is calling `undefined`. `let`, `const` and `class` are hoisted but not initialised (TDZ).\n\n```js\nhello();                 // works\nfunction hello() { console.log(\"hi\"); }\n\n// bye();                // TypeError: bye is not a function\nvar bye = function () {};\n```",
+      "materials": [
+        "mdn-hoisting",
+        "jsi-closure"
+      ]
+    },
+    {
+      "prompt": "Which values are falsy, and why does `count || 10` go wrong when `count` is `0`?",
+      "tags": [
+        "JS Core & Types"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`false`, `null` and `undefined` only; `0 || 10` returns `0`, so `||` is safe for counts.",
+        "Every empty value, including `[]` and `{}`; `||` checks for emptiness, so `0` and `[]` both fall through.",
+        "`false`, `0` and `\"false\"`; the string `\"0\"` is falsy too, which is why `||` misbehaves with form input.",
+        "`false`, `0`, `-0`, `0n`, `\"\"`, `null`, `undefined`, `NaN`; `||` treats `0` as missing, so use `??`."
+      ],
+      "correct": 3,
+      "explanation": "Falsy values are `false`, `0`, `-0`, `0n`, `\"\"`, `null`, `undefined` and `NaN`. Everything else is truthy, including `\"0\"`, `\"false\"`, `[]` and `{}`. This matters in conditions and with `||`, which treats `0` and `\"\"` as missing; prefer `??` when those are valid values.\n\n```js\nconst count = 0;\ncount || 10;   // 10  (surprise)\ncount ?? 10;   // 0\nBoolean([]);   // true\n```",
+      "materials": [
+        "mdn-truthy",
+        "mdn-falsy",
+        "jsi-logical"
+      ]
+    },
+    {
+      "prompt": "What is the difference between `null` and `undefined`?",
+      "tags": [
+        "JS Core & Types"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`undefined` means nothing was assigned; `null` is an intentional empty value. `JSON.stringify` drops `undefined` properties.",
+        "`null` means a variable was never declared, while `undefined` means it was declared but deleted.",
+        "`undefined` is the intentional empty value developers set, while the engine itself uses `null` for missing properties and arguments, so `JSON.stringify` keeps both.",
+        "They are the same value with two names, so `null === undefined` is `true`."
+      ],
+      "correct": 0,
+      "explanation": "`undefined` means \"no value assigned\": an uninitialised variable, a missing property or argument, a function with no `return`. `null` is an intentional \"no value\" set by the programmer. They are loosely equal (`==`) but not strictly equal, and `typeof` differs. APIs and JSON usually use `null` for empty; `JSON.stringify` drops properties whose value is `undefined`.\n\n```js\nlet a;               // undefined\nconst b = null;      // explicit empty\nJSON.stringify({ a: undefined, b: null }); // '{\"b\":null}'\n```",
+      "materials": [
+        "mdn-null",
+        "mdn-undefined",
+        "jsi-nullish"
+      ]
+    },
+    {
+      "prompt": "How are primitives and objects copied and compared?",
+      "tags": [
+        "JS Core & Types"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Primitives are passed by reference to functions, so a function can change a caller's number variable.",
+        "Both are copied by value; objects are cloned on assignment, so changing a copy never affects the original.",
+        "Primitives are copied and compared by value; objects by reference, so `===` checks identity, not content.",
+        "Objects are compared by content with `===`, so two object literals with the same keys are equal."
+      ],
+      "correct": 2,
+      "explanation": "Primitives are immutable and copied by value; comparing compares values. Objects (arrays and functions included) are copied by reference: the variable holds a pointer, so two variables can share and mutate the same object, and `===` compares identity, not content.\n\n```js\nconst a = { x: 1 };\nconst b = a;\nb.x = 2;\na.x;                       // 2\n({ x: 1 }) === ({ x: 1 }); // false\n```",
+      "materials": [
+        "jsi-object-copy",
+        "mdn-primitive",
+        "eloquent"
+      ]
+    },
+    {
+      "prompt": "How do you deep-copy an object, and what is wrong with `JSON.parse(JSON.stringify(x))`?",
+      "tags": [
+        "JS Core & Types"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Use `structuredClone`, which also copies functions and class prototypes; the JSON round-trip handles everything else.",
+        "Use `structuredClone`; the JSON round-trip drops `undefined`, turns dates into strings, loses `Map`/`Set` and throws on cycles.",
+        "Use `Object.assign({}, x)`, which deep-copies; the JSON round-trip only fails for numbers above 2^53.",
+        "Use the spread operator, which copies nested objects too; the JSON round-trip is fine apart from being slow."
+      ],
+      "correct": 1,
+      "explanation": "Spread (`{...o}`) and `Object.assign` copy one level; nested objects are still shared. For a deep copy use `structuredClone`: built in, and it handles dates, maps, sets and cycles (but not functions or class prototypes). `JSON.parse(JSON.stringify(x))` loses `undefined`, turns dates into strings, drops `Map` and `Set`, and throws on cycles.\n\n```js\nconst o = { a: 1, inner: { b: 2 }, when: new Date() };\nconst shallow = { ...o };\nconst deep = structuredClone(o);\nshallow.inner === o.inner; // true\ndeep.inner === o.inner;    // false\n```",
+      "materials": [
+        "mdn-structuredclone",
+        "jsi-object-copy",
+        "webdev-structured-clone"
+      ]
+    },
+    {
+      "prompt": "Why is `0.1 + 0.2 !== 0.3`, and when do you need `BigInt`?",
+      "tags": [
+        "JS Core & Types"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Numbers are IEEE 754 doubles that can't store some decimals exactly; `BigInt` is for integers beyond 2^53 - 1.",
+        "Addition rounds to 16 significant digits; `BigInt` is for decimals that need more precision, like currency.",
+        "JavaScript stores numbers as 32-bit floats; `BigInt` doubles that to 64 bits so decimals become exact.",
+        "It's a known engine bug fixed in ES2015; `BigInt` is the fix and should be used for all decimal math."
+      ],
+      "correct": 0,
+      "explanation": "Numbers are IEEE 754 64-bit floats, and some decimals can't be represented exactly in binary. Compare with a tolerance (`Math.abs(a - b) < Number.EPSILON`) or work in integers (cents) for money. Integers are exact only up to `Number.MAX_SAFE_INTEGER` (2^53 - 1); beyond that use `BigInt` (suffix `n`), which can't be mixed with `Number` without converting.\n\n```js\n0.1 + 0.2;                                   // 0.30000000000000004\nMath.abs(0.1 + 0.2 - 0.3) < Number.EPSILON;  // true\n9007199254740993n + 1n;                      // 9007199254740994n\n```",
+      "materials": [
+        "mdn-number",
+        "mdn-bigint",
+        "point-three",
+        "jsi-number"
+      ]
+    },
+    {
+      "prompt": "What do `\"5\" + 1` and `\"5\" - 1` evaluate to, and why?",
+      "tags": [
+        "JS Core & Types"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`6` and `4`: both operators convert numeric strings to numbers before doing arithmetic.",
+        "`\"51\"` and `4`: `+` concatenates when either side is a string, while `-` always converts to numbers.",
+        "`\"51\"` and `\"5-1\"`: once a string is involved, every operator works on strings.",
+        "`6` and `\"4\"`: arithmetic happens first and the result takes the type of the left operand."
+      ],
+      "correct": 1,
+      "explanation": "Operators convert their operands: `+` concatenates if either side is a string, the other arithmetic operators convert to numbers, conditions convert to booleans, and `==` uses the abstract equality algorithm. Be explicit instead: `Number(x)`, `String(x)`, `Boolean(x)`. `parseInt` parses a prefix and needs a radix.\n\n```js\n\"5\" + 1;              // \"51\"\n\"5\" - 1;              // 4\n[] + {};              // \"[object Object]\"\n+\"\";                  // 0\nparseInt(\"08px\", 10); // 8\n```",
+      "materials": [
+        "jsi-type-conversions",
+        "mdn-coercion",
+        "ydkjs"
+      ]
+    },
+    {
+      "prompt": "What is a closure, what is it good for, and what does it cost?",
+      "tags": [
+        "JS Functions, Scope & Prototypes"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A function that runs immediately and closes over nothing; it isolates code from the global scope.",
+        "A function that copies the outer variables' values at the moment it's created; it saves memory, because nothing from the outer scope is kept alive afterwards.",
+        "A function stored inside an object; it's mainly a way to group methods and has no effect on memory.",
+        "A function that keeps access to its creating scope's variables; good for private state and factories, but captured values stay in memory."
+      ],
+      "correct": 3,
+      "explanation": "A closure is a function that keeps access to the variables of the scope where it was created, even after that scope has returned. Uses: private state, factories, callbacks that remember context, memoisation, partial application. The cost: captured variables aren't garbage-collected while the closure lives.\n\n```js\nfunction counter() {\n  let n = 0;\n  return () => ++n;\n}\nconst next = counter();\nnext(); next(); // 1, 2\n```",
+      "materials": [
+        "mdn-closures",
+        "jsi-closure",
+        "ydkjs"
+      ]
+    },
+    {
+      "prompt": "What does this print, and how do you fix it?\n\n```js\nfor (var i = 0; i < 3; i++) setTimeout(() => console.log(i), 0);\n```",
+      "tags": [
+        "JS Functions, Scope & Prototypes"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`2 2 2`, because the last loop iteration sets `i` to 2 before any timer fires.",
+        "`3 3 3`, because every callback shares one function-scoped `i`; use `let` to get a new binding per iteration.",
+        "`0 1 2`, because each arrow callback captures the current value of `i` at the moment `setTimeout` is called, not the variable.",
+        "`undefined` three times, because `i` no longer exists once the loop has finished running."
+      ],
+      "correct": 1,
+      "explanation": "`var` is function-scoped, so all callbacks share one `i`, which is `3` by the time the timers run. Fix it with `let` (a new binding per iteration) or an IIFE.\n\n```js\nfor (var i = 0; i < 3; i++) setTimeout(() => console.log(i), 0); // 3 3 3\nfor (let j = 0; j < 3; j++) setTimeout(() => console.log(j), 0); // 0 1 2\n```",
+      "materials": [
+        "mdn-closures-loops",
+        "jsi-closure",
+        "namaste-js"
+      ]
+    },
+    {
+      "prompt": "How is the value of `this` determined?",
+      "tags": [
+        "JS Functions, Scope & Prototypes"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "By where the function is defined: `this` always refers to the object literal or class body the code appears in, no matter how it is called later.",
+        "By how the function is called: `new`, then `call`/`apply`/`bind`, then `obj.fn()`, then a plain call; arrows use the outer `this`.",
+        "By the last object the function was assigned to, so storing a method in a variable keeps its `this`.",
+        "It always refers to the global object unless the function is declared with the `method` keyword."
+      ],
+      "correct": 1,
+      "explanation": "By how the function is called, not where it is defined (except arrows). Precedence: `new` (the new object), explicit `call`/`apply`/`bind`, a method call (`obj.fn()` gives `obj`), a plain call (`undefined` in strict mode, the global object otherwise). Arrow functions take `this` from the enclosing scope. Extracting a method loses its `this`.\n\n```js\nconst user = { name: \"Ana\", hi() { return this?.name; } };\nuser.hi();          // \"Ana\"\nconst f = user.hi;\nf();                // undefined (this lost)\n```",
+      "materials": [
+        "mdn-this",
+        "jsi-object-methods",
+        "ydkjs"
+      ]
+    },
+    {
+      "prompt": "What do `call`, `apply` and `bind` do?",
+      "tags": [
+        "JS Functions, Scope & Prototypes"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "They only work on arrow functions, and they set the function's `arguments` object, not `this`.",
+        "All set `this`: `call` invokes now with listed arguments, `apply` with an array, `bind` returns a new bound function.",
+        "`call` and `apply` create copies of a function with a new scope, and `bind` attaches a function to an object permanently by adding it as a method.",
+        "`bind` invokes immediately with an array of arguments, and `call`/`apply` return new functions."
+      ],
+      "correct": 1,
+      "explanation": "All three set `this` explicitly. `call(thisArg, a, b)` invokes now with listed arguments; `apply(thisArg, [a, b])` invokes now with an array; `bind(thisArg, ...preset)` returns a new function with `this` (and optionally leading arguments) fixed.\n\n```js\nfunction greet(g, p) { return `${g}, ${this.name}${p}`; }\nconst u = { name: \"Ana\" };\ngreet.call(u, \"Hi\", \"!\");\ngreet.apply(u, [\"Hi\", \"!\"]);\nconst hi = greet.bind(u, \"Hi\");\nhi(\"?\");\n```",
+      "materials": [
+        "mdn-bind",
+        "jsi-bind"
+      ]
+    },
+    {
+      "prompt": "How do arrow functions differ from regular functions?",
+      "tags": [
+        "JS Functions, Scope & Prototypes"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "They are hoisted with their body like function declarations, so they can be called before they appear.",
+        "They always bind `this` to the object they are stored on, which makes them ideal for object methods.",
+        "They are just shorter syntax with identical behaviour, so they can replace every regular function.",
+        "No own `this`, `arguments` or `prototype`, and no `new`: good for callbacks, wrong for methods and constructors."
+      ],
+      "correct": 3,
+      "explanation": "Arrows have no own `this`, `arguments`, `super` or `new.target`; they can't be used with `new` and have no `prototype`. Great for callbacks that need the outer `this`; wrong for object methods that rely on their own `this`, and for constructors.\n\n```js\nconst o = {\n  n: 1,\n  later() { setTimeout(() => console.log(this.n), 0); }, // 1\n  bad: () => this,                                       // not o\n};\n```",
+      "materials": [
+        "mdn-arrow",
+        "jsi-arrow"
+      ]
+    },
+    {
+      "prompt": "How does the prototype chain work?",
+      "tags": [
+        "JS Functions, Scope & Prototypes"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Each object copies all of its prototype's properties when it's created, so later changes to the prototype are never seen by existing objects.",
+        "Each object links to a prototype; reads walk the chain until found or `null`, while writes set the property on the object itself.",
+        "Property reads and writes both go to the prototype, so writing a property changes it for every instance.",
+        "Only classes have prototypes; objects created with literals or `Object.create` have no prototype link."
+      ],
+      "correct": 1,
+      "explanation": "Every object has an internal `[[Prototype]]` link. Property lookup walks the chain until it finds the property or reaches `null`. Writing sets the property on the object itself (shadowing). `Object.getPrototypeOf(x)` reads the link; `Object.create(p)` makes an object with prototype `p`. Methods shared via the prototype are stored once, not per instance.\n\n```js\nconst animal = { eats: true };\nconst dog = Object.create(animal);\ndog.barks = true;\ndog.eats;                              // true (from prototype)\nObject.getPrototypeOf(dog) === animal; // true\n```",
+      "materials": [
+        "mdn-proto-chain",
+        "jsi-proto",
+        "ydkjs"
+      ]
+    },
+    {
+      "prompt": "Are ES6 classes real classes, or something else underneath?",
+      "tags": [
+        "JS Functions, Scope & Prototypes"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Real classes like in Java or C#: every instance gets its own copy of each method, and there is no prototype involved anywhere in the lookup.",
+        "Exactly the same as constructor functions, with no behavioural differences besides the keyword.",
+        "Syntax over prototypes: methods live on `Class.prototype`, but classes are always strict, need `new` and support `#private`.",
+        "A compile-time feature only: they're removed during parsing, so `typeof SomeClass` is `\"undefined\"`."
+      ],
+      "correct": 2,
+      "explanation": "They are syntax over prototypes. A class body defines the constructor function; methods go on `Class.prototype`; `extends` links prototypes and `super` calls the parent. Differences from old constructor functions: a TDZ before the declaration, always strict, must be called with `new`, and support for `#private` fields and `static` members.\n\n```js\nclass Animal {\n  #sound;\n  constructor(s) { this.#sound = s; }\n  speak() { return this.#sound; }\n}\nclass Dog extends Animal { constructor() { super(\"woof\"); } }\nnew Dog().speak(); // \"woof\"\ntypeof Animal;     // \"function\"\n```",
+      "materials": [
+        "mdn-classes",
+        "jsi-class"
+      ]
+    },
+    {
+      "prompt": "What does the `new` keyword do?",
+      "tags": [
+        "JS Functions, Scope & Prototypes"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Allocates a copy of the constructor function itself and returns that copy as the new instance.",
+        "Creates an object with no prototype at all, then copies every property and method of the constructor function onto it.",
+        "Creates an object linked to `Constructor.prototype`, runs the constructor with `this` set to it, and returns it.",
+        "Calls the constructor normally; `new` is only a naming convention that signals intent to readers."
+      ],
+      "correct": 2,
+      "explanation": "It creates an empty object linked to `Constructor.prototype`, calls the constructor with `this` set to that object, and returns the object (unless the constructor returns another object). Forgetting `new` on a plain function sets properties on the global object (sloppy mode) or throws (strict mode, classes).\n\n```js\nfunction Person(name) { this.name = name; }\nconst p = new Person(\"Ana\");\np instanceof Person;   // true\n```",
+      "materials": [
+        "mdn-new",
+        "jsi-constructor-new"
+      ]
+    },
+    {
+      "prompt": "What is a higher-order function, and what is currying?",
+      "tags": [
+        "JS Functions, Scope & Prototypes"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A function with more than three parameters; currying merges its parameters into a single options object.",
+        "A function that runs at a higher priority in the event loop; currying is chaining several of them together.",
+        "A function defined inside a class; currying is binding it to the class with `bind`.",
+        "A function that takes or returns functions; currying turns `f(a, b, c)` into `f(a)(b)(c)` for partial application."
+      ],
+      "correct": 3,
+      "explanation": "A higher-order function takes or returns functions (`map`, `filter`, `setTimeout`, decorators). Currying turns `f(a, b, c)` into `f(a)(b)(c)`, enabling partial application and reuse.\n\n```js\nconst curry = (fn) =>\n  function curried(...args) {\n    return args.length >= fn.length\n      ? fn(...args)\n      : (...more) => curried(...args, ...more);\n  };\nconst add = curry((a, b, c) => a + b + c);\nadd(1)(2)(3); // 6\nadd(1, 2)(3); // 6\n```",
+      "materials": [
+        "jsi-currying",
+        "mdn-first-class",
+        "eloquent"
+      ]
+    },
+    {
+      "prompt": "What is memoisation, and what are its limits?",
+      "tags": [
+        "JS Functions, Scope & Prototypes"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A garbage-collector optimisation that the engine applies automatically to recursive functions.",
+        "Storing a function's source code so it doesn't have to be parsed again on every call.",
+        "Caching any function's results, including impure ones like API calls, so they never need to run twice.",
+        "Caching a pure function's results by its arguments; it needs a stable key and an upper bound on the cache."
+      ],
+      "correct": 3,
+      "explanation": "Memoisation caches a pure function's results by its arguments, trading memory for speed. It needs a stable cache key (serialise the arguments) and only suits pure functions. Watch for unbounded cache growth; consider an LRU, or a `WeakMap` for object keys.\n\n```js\nconst memo = (fn) => {\n  const cache = new Map();\n  return (...args) => {\n    const k = JSON.stringify(args);\n    if (!cache.has(k)) cache.set(k, fn(...args));\n    return cache.get(k);\n  };\n};\nconst fib = memo((n) => (n < 2 ? n : fib(n - 1) + fib(n - 2)));\nfib(50); // 12586269025\n```",
+      "materials": [
+        "jsi-decorators",
+        "mdn-map"
+      ]
+    },
+    {
+      "prompt": "In what order does this log, and why?\n\n```js\nconsole.log(\"A\");\nsetTimeout(() => console.log(\"timeout\"), 0);\nPromise.resolve().then(() => console.log(\"promise\"));\nconsole.log(\"B\");\n```",
+      "tags": [
+        "JS Async & Event Loop"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A, promise, B, timeout: resolved promises run synchronously inside the current statement.",
+        "A, timeout, promise, B: callbacks run as soon as they are scheduled, in order of registration.",
+        "A, B, timeout, promise: a zero-delay timer is due immediately, so it beats the promise.",
+        "A, B, promise, timeout: synchronous code first, then all microtasks, then the next task (the timer)."
+      ],
+      "correct": 3,
+      "explanation": "JavaScript runs on one thread with one call stack. Async work (timers, I/O, network) is handled by the host (browser or Node), which queues callbacks. When the stack is empty the loop takes the next task. After each task it drains the whole microtask queue (promise reactions, `queueMicrotask`) before the next task or render. A long synchronous task blocks everything, including rendering.\n\n```js\nconsole.log(\"A\");\nsetTimeout(() => console.log(\"timeout\"), 0);\nPromise.resolve().then(() => console.log(\"promise\"));\nconsole.log(\"B\");\n// A, B, promise, timeout\n```",
+      "materials": [
+        "roberts-event-loop",
+        "archibald-in-the-loop",
+        "hallie-event-loop",
+        "mdn-event-loop"
+      ]
+    },
+    {
+      "prompt": "What is the difference between microtasks and macrotasks (tasks)?",
+      "tags": [
+        "JS Async & Event Loop"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Promise reactions and `queueMicrotask` are microtasks, drained fully after each task; timers, I/O and UI events are tasks.",
+        "Microtasks are small timers under 4 ms; macrotasks are timers above that and are throttled by the browser.",
+        "Microtasks run on a separate worker thread, so they can't block rendering the way tasks do.",
+        "Tasks always run before microtasks, which is why a `setTimeout(fn, 0)` callback beats the `.then` of an already-resolved promise every time."
+      ],
+      "correct": 0,
+      "explanation": "Macrotasks (tasks): `setTimeout`, `setInterval`, I/O, UI events, `MessageChannel`. Microtasks: promise `.then/.catch/.finally`, `await` continuations, `queueMicrotask`, `MutationObserver`. The microtask queue is fully drained after the current task, so a promise chain always runs before the next timer, and an endless microtask loop starves rendering.\n\n```js\nsetTimeout(() => console.log(\"macro\"), 0);\nqueueMicrotask(() => console.log(\"micro 1\"));\nPromise.resolve().then(() => console.log(\"micro 2\"));\n// micro 1, micro 2, macro\n```",
+      "materials": [
+        "archibald-tasks",
+        "mdn-microtask",
+        "jsi-microtask"
+      ]
+    },
+    {
+      "prompt": "What is callback hell, and how do you avoid it?",
+      "tags": [
+        "JS Async & Event Loop"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Deeply nested callbacks that are hard to read and handle errors in; flatten with promises and `async/await`.",
+        "Calling a callback more than once; avoid it by wrapping every callback in `setTimeout`.",
+        "Using callbacks in the browser instead of Node; avoid it by moving async code to the server.",
+        "An infinite loop of callbacks that crashes the engine; avoid it by limiting callbacks to three per file."
+      ],
+      "correct": 0,
+      "explanation": "Deeply nested callbacks that are hard to read, handle errors in, and compose. Avoid them with promises (flat chains and a central `.catch`), `async/await`, named functions and small composable helpers. Node's `util.promisify` converts error-first callbacks into promise-returning functions.\n\n```js\nimport { readFile } from \"node:fs/promises\";\nconst data = await readFile(\"a.json\", \"utf8\"); // instead of nested callbacks\n```",
+      "materials": [
+        "jsi-callbacks",
+        "node-promisify",
+        "callbackhell"
+      ]
+    },
+    {
+      "prompt": "What are a promise's states, and how does chaining with `.then` work?",
+      "tags": [
+        "JS Async & Event Loop"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Pending, running and done; `.then` mutates the original promise in place, so every handler in the chain sees the very first resolved value, unchanged.",
+        "Fulfilled or rejected only; `.then` callbacks run synchronously, and a thrown error stops the program.",
+        "Pending and settled, which can switch back to pending if the promise is resolved again.",
+        "Pending, then fulfilled or rejected; each `.then` returns a new promise resolved with the callback's return value, and throws become rejections."
+      ],
+      "correct": 3,
+      "explanation": "`pending`, then `fulfilled` or `rejected` (settled, final). `.then(onOk, onErr)` returns a new promise; its value is the callback's return value (or the unwrapped promise it returns); a thrown error becomes a rejection. `.catch` handles rejections anywhere above it in the chain; `.finally` runs either way and doesn't change the value.\n\n```js\nPromise.resolve(1)\n  .then((x) => x + 1)\n  .then((x) => { throw new Error(\"boom \" + x); })\n  .catch((e) => e.message)  // \"boom 2\"\n  .finally(() => console.log(\"done\"));\n```",
+      "materials": [
+        "mdn-using-promises",
+        "jsi-promise-basics",
+        "jsi-promise-chaining",
+        "hallie-promises"
+      ]
+    },
+    {
+      "prompt": "When do you use `Promise.all`, `allSettled`, `race` and `any`?",
+      "tags": [
+        "JS Async & Event Loop"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`all` ignores rejections, `allSettled` fails fast, `race` waits for all, and `any` returns the slowest result.",
+        "They're aliases kept for compatibility; all four wait for every promise and differ only in the return shape.",
+        "`all` fails fast, `allSettled` reports every outcome, `race` takes the first settled (timeouts), `any` the first success.",
+        "`all` runs promises sequentially, `allSettled` in parallel, `race` retries failures, and `any` picks one at random."
+      ],
+      "correct": 2,
+      "explanation": "`all`: waits for all, rejects on the first rejection (fail fast). `allSettled`: waits for all and reports each outcome; never rejects. `race`: settles with the first settled promise (good for timeouts). `any`: resolves with the first fulfilled one; rejects with an `AggregateError` only if all fail (good for redundant sources).\n\n```js\nconst results = await Promise.allSettled([a(), b(), c()]);\nconst ok = results.filter((r) => r.status === \"fulfilled\").map((r) => r.value);\n\nconst withTimeout = (p, ms) =>\n  Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error(\"timeout\")), ms))]);\n```",
+      "materials": [
+        "mdn-promise-concurrency",
+        "jsi-promise-api"
+      ]
+    },
+    {
+      "prompt": "How do you handle errors with `async/await`, and what does `fetch` not reject on?",
+      "tags": [
+        "JS Async & Event Loop"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Wrap the whole program in one top-level `try/catch`; `fetch` already rejects on any non-200 status, so no extra check of the response is needed.",
+        "`async` functions can't throw, so check the return value for `null`; `fetch` rejects only on 500 errors.",
+        "`try/catch` around awaits where you can act, rethrowing with a `cause`; `fetch` doesn't reject on HTTP errors, so check `res.ok`.",
+        "Attach `.catch` to every awaited line; `fetch` rejects on 404s but not on network failures."
+      ],
+      "correct": 2,
+      "explanation": "Use `try/catch` around awaited calls; an `async` function always returns a promise, and a thrown error rejects it. Catch where you can act (retry, fallback, translate) and let the rest bubble; don't swallow errors. `fetch` only rejects on network failure, not on a 404 or 500, so check `res.ok`. A rejected promise that is never awaited or caught becomes an unhandled rejection.\n\n```js\nasync function load(id) {\n  try {\n    const res = await fetch(`/api/items/${id}`);\n    if (!res.ok) throw new Error(`HTTP ${res.status}`); // fetch does not reject on 404\n    return await res.json();\n  } catch (err) {\n    throw new Error(`load(${id}) failed`, { cause: err });\n  }\n}\n```",
+      "materials": [
+        "mdn-async-function",
+        "jsi-async-await",
+        "mdn-error-cause"
+      ]
+    },
+    {
+      "prompt": "What is the performance trap with sequential `await`, and why is `forEach` with an async callback wrong?",
+      "tags": [
+        "JS Async & Event Loop"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`await` blocks the whole thread, so use callbacks instead; `forEach` does await each async callback in turn but is slower than a plain `for` loop.",
+        "Sequential awaits run in parallel automatically, so there's no trap; `forEach` is fine because it returns a promise.",
+        "Awaiting more than ten promises overflows the microtask queue; `forEach` is wrong only in older browsers.",
+        "Independent awaits run one after another; start them together with `Promise.all`. `forEach` doesn't wait for async callbacks at all."
+      ],
+      "correct": 3,
+      "explanation": "Awaiting in sequence makes independent calls run one after another. Start them together and await them together. In loops, `await` inside `for...of` is sequential on purpose, while `forEach` with an async callback doesn't wait at all. Bound concurrency for big lists (batches or a pool) to avoid overloading a server.\n\n```js\n// slow: total = a + b\nconst x = await getA();\nconst y = await getB();\n\n// fast: total = max(a, b)\nconst [x2, y2] = await Promise.all([getA(), getB()]);\n\n// wrong: forEach does not await\nitems.forEach(async (i) => { await save(i); });\n// right\nawait Promise.all(items.map(save));\n```",
+      "materials": [
+        "jsi-async-await",
+        "webdev-async-iterators",
+        "mdn-for-await"
+      ]
+    },
+    {
+      "prompt": "What is an unhandled promise rejection, and what does modern Node do with one?",
+      "tags": [
+        "JS Async & Event Loop"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A rejection with no handler once microtasks drain; since Node 15 it terminates the process by default.",
+        "A promise that never settles; Node keeps it in memory forever but otherwise ignores it.",
+        "Any promise created without `new`; Node rejects it at parse time and refuses to start the script.",
+        "A rejection inside `try/catch`; Node logs a warning and continues as if the promise had resolved."
+      ],
+      "correct": 0,
+      "explanation": "A rejection with no handler attached by the time the microtask queue drains. Browsers emit `unhandledrejection`; modern Node terminates the process by default (since v15). Always return, await or catch promises; add a global handler only to log and shut down cleanly, not to carry on as if nothing happened.\n\n```js\nprocess.on(\"unhandledRejection\", (reason) => {\n  console.error(\"unhandled\", reason);\n  process.exit(1);\n});\n```",
+      "materials": [
+        "node-unhandled",
+        "mdn-unhandledrejection",
+        "jsi-promise-error"
+      ]
+    },
+    {
+      "prompt": "Does `setTimeout(fn, 0)` run immediately?",
+      "tags": [
+        "JS Async & Event Loop"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Yes: a zero delay calls the function synchronously before the next statement runs.",
+        "No: it always waits exactly 4 ms, which is the fixed minimum resolution of every JavaScript timer in browsers and Node.",
+        "No: it queues a task after at least the delay, and it runs only once the stack is empty and microtasks are drained.",
+        "Yes, unless a promise is pending, in which case it waits for that specific promise."
+      ],
+      "correct": 2,
+      "explanation": "No. It schedules a task after at least the delay (browsers clamp nested timers to about 4 ms and throttle background tabs). It runs only when the stack is empty and microtasks are drained, so a busy main thread delays it arbitrarily. Use `requestAnimationFrame` for visual updates and `queueMicrotask` for \"right after this\".\n\n```js\nconst t = Date.now();\nsetTimeout(() => console.log(\"fired after\", Date.now() - t, \"ms\"), 0);\nwhile (Date.now() - t < 100) {} // blocks: timer fires after about 100 ms\n```",
+      "materials": [
+        "mdn-settimeout",
+        "jsi-settimeout",
+        "roberts-event-loop"
+      ]
+    },
+    {
+      "prompt": "How do you cancel an async operation like a `fetch`?",
+      "tags": [
+        "JS Async & Event Loop"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Call `promise.cancel()`, which every native promise supports since ES2017.",
+        "Set the promise variable to `null`, which stops the request and frees its memory.",
+        "Pass an `AbortController`'s `signal` and call `abort()`; `AbortSignal.timeout(ms)` gives a timeout.",
+        "Throw inside a `.then` handler, which propagates back up the chain and cancels the underlying network request."
+      ],
+      "correct": 2,
+      "explanation": "Promises can't be cancelled themselves; use `AbortController`. Pass its `signal` to `fetch` (and many Node APIs), call `abort()` to cancel, and handle the `AbortError`. Also use it for timeouts (`AbortSignal.timeout(ms)`) and to ignore stale responses in UI code.\n\n```js\nconst ctrl = new AbortController();\nconst p = fetch(\"/api/slow\", { signal: ctrl.signal });\nsetTimeout(() => ctrl.abort(), 500);\ntry { await p; } catch (e) { if (e.name !== \"AbortError\") throw e; }\n\nawait fetch(\"/api/x\", { signal: AbortSignal.timeout(3000) });\n```",
+      "materials": [
+        "mdn-abortcontroller",
+        "jsi-fetch-abort"
+      ]
+    },
+    {
+      "prompt": "What are destructuring, spread and rest, and what are their traps?",
+      "tags": [
+        "Modern JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Unpacking, expanding and collecting values; spread copies are shallow, and defaults apply only to `undefined`, not `null`.",
+        "Ways to declare typed variables; the trap is that defaults also replace `0` and `\"\"`.",
+        "Syntax for importing modules; the trap is that they only work with default exports.",
+        "Ways to deep-clone objects and arrays safely; the main trap is that they're slow, so you should avoid them inside loops."
+      ],
+      "correct": 0,
+      "explanation": "Destructuring unpacks arrays and objects into variables, with defaults and renaming. Spread (`...x`) expands an iterable or object in place; rest (`...x`) collects the remaining items. Traps: spread copies are shallow, and defaults apply only for `undefined`, not `null`.\n\n```js\nconst { id, name: title = \"n/a\", ...others } = { id: 1, extra: true };\nconst [first, , third = 0, ...tail] = [1, 2, undefined, 4, 5];\nconst merged = { ...{ a: 1 }, ...{ a: 2, b: 3 } }; // { a: 2, b: 3 }\nconst sum = (...nums) => nums.reduce((a, b) => a + b, 0);\n```",
+      "materials": [
+        "mdn-destructuring",
+        "jsi-destructuring",
+        "jsi-rest-spread",
+        "exploring-js"
+      ]
+    },
+    {
+      "prompt": "How do ES modules differ from CommonJS?",
+      "tags": [
+        "Modern JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "They're identical; `import` is just a newer spelling of `require` that bundlers translate one-to-one.",
+        "CommonJS supports tree shaking and top-level `await`, while ES modules are loaded synchronously like `require`, which is why bundlers prefer CommonJS.",
+        "ESM is static and async, always strict, with live bindings, tree shaking and top-level `await`; CommonJS `require` is synchronous and dynamic.",
+        "ESM only works in browsers and CommonJS only in Node, so a package can never use both."
+      ],
+      "correct": 2,
+      "explanation": "CommonJS (`require`, `module.exports`) is synchronous, dynamic and Node's legacy format. ES modules (`import`/`export`) are static (enabling tree shaking), asynchronous, always strict, export live bindings and support top-level `await`. In Node, enable ESM with `.mjs` or `\"type\": \"module\"`. Use dynamic `import()` for lazy loading and to import ESM from CommonJS.\n\n```js\n// math.mjs\nexport const add = (a, b) => a + b;\nexport default function mul(a, b) { return a * b; }\n// app.mjs\nimport mul, { add } from \"./math.mjs\";\nconst lazy = await import(\"./big.mjs\");\n```",
+      "materials": [
+        "mdn-modules",
+        "node-esm",
+        "jsi-modules"
+      ]
+    },
+    {
+      "prompt": "When do you use `Map`, `Set`, `WeakMap` and `WeakSet` instead of objects and arrays?",
+      "tags": [
+        "Modern JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Map` for any-type keys and frequent changes, `Set` for unique values, and the weak versions for per-object data that mustn't leak.",
+        "`WeakMap` is a `Map` limited to string keys, used when the number of keys is small and fixed.",
+        "`Set` keeps duplicates in insertion order, and `WeakSet` is a `Set` that can be iterated faster.",
+        "`Map` and `Set` are slower aliases of objects and arrays kept only for older code, and the weak versions are deprecated in favour of `WeakRef`."
+      ],
+      "correct": 0,
+      "explanation": "`Map` allows any key type, keeps insertion order, has `size`, and beats an object for frequent adds and removals. `Set` stores unique values (fast `has`, easy dedupe). `WeakMap`/`WeakSet` hold keys weakly (objects only, not iterable), so entries disappear when the key is collected: ideal for caches or metadata per object without leaks.\n\n```js\nconst unique = [...new Set([1, 1, 2])];   // [1, 2]\nconst m = new Map([[{ id: 1 }, \"x\"]]);\nconst meta = new WeakMap();\nmeta.set(domNode, { clicks: 0 });         // freed with domNode\n```",
+      "materials": [
+        "mdn-keyed",
+        "jsi-map-set",
+        "jsi-weakmap"
+      ]
+    },
+    {
+      "prompt": "What are iterators and generators?",
+      "tags": [
+        "Modern JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Generators run eagerly and return all values at once, while iterators are only for asynchronous code.",
+        "An iterable has `[Symbol.iterator]()` yielding `{ value, done }`; a generator (`function*`) is a pausable function that `yield`s values lazily.",
+        "Iterators are arrays with an internal index property, and generators are functions that build and return a brand-new array of all values on every call.",
+        "Both are Node-only APIs for reading files line by line, unavailable in the browser."
+      ],
+      "correct": 1,
+      "explanation": "An iterable has `[Symbol.iterator]()` returning an iterator whose `next()` yields `{ value, done }`; `for...of`, spread and destructuring use it. A generator (`function*`) is a pausable function that `yield`s values lazily, handy for infinite sequences, custom iteration and cooperative flows. Async generators with `for await` stream async data.\n\n```js\nfunction* ids() { let i = 1; while (true) yield i++; }\nconst it = ids();\nit.next().value; // 1\nit.next().value; // 2\n\nasync function* pages() { for (let p = 1; p <= 3; p++) yield await fetchPage(p); }\nfor await (const page of pages()) { /* ... */ }\n```",
+      "materials": [
+        "mdn-iterators",
+        "jsi-generators",
+        "jsi-async-iter"
+      ]
+    },
+    {
+      "prompt": "What do optional chaining (`?.`) and nullish coalescing (`??`) do, and how is `??` different from `||`?",
+      "tags": [
+        "Modern JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`?.` catches any exception thrown by a getter along the chain, and `??` falls back for every falsy value exactly like `||` does, just with lower precedence.",
+        "`?.` converts `null` to an empty object; `??` and `||` are identical except for operator precedence.",
+        "`?.` makes a property optional in the type system; `??` throws if the left side is `null`.",
+        "`?.` returns `undefined` instead of throwing on `null`/`undefined`; `??` falls back only for those two, while `||` falls back for any falsy value."
+      ],
+      "correct": 3,
+      "explanation": "`a?.b` returns `undefined` instead of throwing when `a` is `null` or `undefined` (also `a?.[k]` and `a?.()`). `a ?? b` falls back only for `null`/`undefined`, unlike `||`, which falls back for any falsy value. Combine them for safe reads with correct defaults.\n\n```js\nconst port = config?.server?.port ?? 3000;\nuser.onLogin?.();\n0 ?? 5;   // 0\n0 || 5;   // 5\n```",
+      "materials": [
+        "mdn-optional-chaining",
+        "mdn-nullish",
+        "jsi-optional-chaining"
+      ]
+    },
+    {
+      "prompt": "What are template literals and tagged templates?",
+      "tags": [
+        "Modern JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Backtick strings with `${}` interpolation and multiple lines; a tag function receives the string parts and values separately.",
+        "A JSON shorthand; tagged templates are validated against a schema at parse time.",
+        "Strings that are compiled once and cached by the engine for speed; a tag function marks which of those cached strings should be translated.",
+        "HTML snippets the browser parses automatically; tags choose which HTML element to render."
+      ],
+      "correct": 0,
+      "explanation": "Backtick strings with `${expression}` interpolation and multiline support. A tag function receives the string parts and the values separately, enabling safe SQL/HTML building, i18n or styling (the idea behind styled-components and `sql` helper libraries).\n\n```js\nconst tag = (strings, ...vals) =>\n  strings.reduce((out, s, i) => out + s + (vals[i] !== undefined ? `[${vals[i]}]` : \"\"), \"\");\ntag`id=${7} name=${\"ana\"}`; // \"id=[7] name=[ana]\"\n```",
+      "materials": [
+        "mdn-template",
+        "jsi-string"
+      ]
+    },
+    {
+      "prompt": "When shouldn't you use `forEach` or `reduce`?",
+      "tags": [
+        "Modern JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`forEach` can't be awaited or stopped early, so use `for...of`; `reduce` that builds complex objects reads better as `Object.groupBy`.",
+        "Use `forEach` for async work, since it awaits each callback before moving on; avoid `reduce`, because it mutates the original array as it folds.",
+        "Never: `forEach` and `reduce` are always the fastest and clearest way to loop over arrays.",
+        "Avoid both on arrays over 100 items, since they copy the array on every iteration."
+      ],
+      "correct": 0,
+      "explanation": "`map` transforms each item into a new array, `filter` keeps matching items, `reduce` folds to a single value. `forEach` returns nothing and can't be awaited or broken out of; prefer `for...of` for side effects, early exit and `await`. `reduce` becomes unreadable when it builds complex objects; `Object.groupBy` or `Object.fromEntries` often say it better.\n\n```js\nconst orders = [{ t: \"a\", n: 2 }, { t: \"b\", n: 3 }, { t: \"a\", n: 1 }];\nconst total = orders.reduce((s, o) => s + o.n, 0);           // 6\nconst byType = Object.groupBy(orders, (o) => o.t);            // { a: [...], b: [...] }\nconst names = orders.filter((o) => o.n > 1).map((o) => o.t);  // [\"a\", \"b\"]\n```",
+      "materials": [
+        "mdn-array",
+        "jsi-array-methods",
+        "eloquent"
+      ]
+    },
+    {
+      "prompt": "What are `Proxy` and `Reflect` used for?",
+      "tags": [
+        "Modern JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`Proxy` makes a deep copy of an object; `Reflect` compares two proxies for structural equality.",
+        "A `Proxy` intercepts operations through traps (validation, reactivity); `Reflect` provides each default behaviour so traps can delegate.",
+        "`Proxy` is a faster replacement for plain objects; `Reflect` converts a proxy back to an object.",
+        "`Proxy` forwards network requests through an intermediate server, and `Reflect` records the responses that come back so you can debug them later."
+      ],
+      "correct": 1,
+      "explanation": "A `Proxy` wraps an object and intercepts operations (get, set, has, deleteProperty, apply) through handler traps. `Reflect` offers the default behaviour for each operation, so traps can delegate. Uses: validation, observable state (Vue 3 reactivity), logging, default values. Costs: slower than plain access, and subtle invariants.\n\n```js\nconst guarded = new Proxy({}, {\n  set(target, key, value, receiver) {\n    if (key === \"age\" && !Number.isInteger(value)) throw new TypeError(\"age must be int\");\n    return Reflect.set(target, key, value, receiver);\n  },\n});\nguarded.age = 30;\n```",
+      "materials": [
+        "mdn-proxy",
+        "jsi-proxy"
+      ]
+    },
+    {
+      "prompt": "How do you make an object immutable, and how is `Object.freeze` different from `const`?",
+      "tags": [
+        "Modern JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Both are identical; `Object.freeze` is the older spelling of `const` for objects.",
+        "`const` protects only the binding; `Object.freeze` makes own properties read-only, but only one level deep.",
+        "`Object.freeze` deep-freezes every nested object recursively, while `const` only freezes the top-level properties.",
+        "`const` makes the object deeply immutable, so `Object.freeze` is only needed for arrays."
+      ],
+      "correct": 1,
+      "explanation": "`const` protects the binding only. `Object.freeze` makes own properties read-only (shallow; it fails silently in sloppy mode and throws a `TypeError` in strict mode). Nested objects need recursive freezing or immutable update patterns (spread, `structuredClone`, Immer). `Object.defineProperty` gives per-property control (`writable`, `enumerable`, `configurable`).\n\n```js\n\"use strict\";\nconst cfg = Object.freeze({ a: 1, nested: { b: 2 } });\n// cfg.a = 2;        // TypeError\ncfg.nested.b = 3;    // allowed (shallow freeze)\n```",
+      "materials": [
+        "mdn-freeze",
+        "jsi-descriptors"
+      ]
+    },
+    {
+      "prompt": "What is the difference between `for...in` and `for...of`?",
+      "tags": [
+        "Modern JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Both iterate values; `for...in` is just the older, slower syntax for the same loop.",
+        "`for...in` loops over array values and `for...of` over object keys, so on arrays the two loops are fully interchangeable in practice.",
+        "`for...in` loops over enumerable string keys, inherited ones included; `for...of` loops over the values of any iterable.",
+        "`for...of` only works on arrays, while `for...in` also works on strings, Maps and Sets."
+      ],
+      "correct": 2,
+      "explanation": "`for...in` iterates enumerable string keys, including inherited ones (avoid it on arrays). `for...of` iterates the values of any iterable (arrays, strings, Maps, Sets, generators). For an object's own properties use `Object.keys`/`values`/`entries`, often with `for...of` and destructuring.\n\n```js\nfor (const [k, v] of Object.entries({ a: 1, b: 2 })) console.log(k, v);\nfor (const ch of \"hi\") console.log(ch);\nfor (const i in [\"x\", \"y\"]) console.log(typeof i); // \"string\"\n```",
+      "materials": [
+        "mdn-for-in",
+        "mdn-for-of",
+        "jsi-keys"
+      ]
+    },
+    {
+      "prompt": "How does Node.js handle concurrency if JavaScript is single-threaded?",
+      "tags": [
+        "JS Runtime, Browser & Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "JavaScript in Node is multi-threaded by default; only browsers restrict it to a single thread.",
+        "Node runs each incoming request's JavaScript on its own OS thread, so CPU-heavy code in one handler never blocks the other requests being served.",
+        "Node isn't concurrent: it handles one request at a time, which is why it uses many processes by default.",
+        "JS runs on one thread, but I/O goes to the OS and libuv's thread pool and returns as callbacks; CPU-bound work needs worker threads."
+      ],
+      "correct": 3,
+      "explanation": "The JS code runs on one thread, but I/O is delegated to the OS (epoll/kqueue/IOCP) and to a libuv thread pool (file system, DNS, crypto, zlib), and results come back as callbacks into the event loop. CPU-bound work blocks the loop, so offload it to `worker_threads`, child processes or a separate service; scale across cores with the `cluster` module or multiple processes.\n\n```js\nimport { Worker, isMainThread, parentPort, workerData } from \"node:worker_threads\";\nif (isMainThread) {\n  new Worker(new URL(import.meta.url), { workerData: 40 })\n    .on(\"message\", (r) => console.log(\"fib\", r));\n} else {\n  const fib = (n) => (n < 2 ? n : fib(n - 1) + fib(n - 2));\n  parentPort.postMessage(fib(workerData));\n}\n```",
+      "materials": [
+        "node-event-loop",
+        "node-workers",
+        "belder-event-loop"
+      ]
+    },
+    {
+      "prompt": "What typically causes memory leaks in JavaScript, and how do you find them?",
+      "tags": [
+        "JS Runtime, Browser & Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Only `var` variables leak; switching everything to `let` and `const` removes every leak.",
+        "Leaks are impossible thanks to garbage collection; a slow or bloated page comes from CPU usage, which the Performance tab shows you directly instead.",
+        "Forgotten references: listeners, timers, closures, unbounded caches, detached DOM nodes. Compare heap snapshots before and after an action.",
+        "Large arrays leak automatically after 100 MB; you find them by counting `new` calls in the source."
+      ],
+      "correct": 2,
+      "explanation": "The GC frees what is unreachable, so leaks are references you forgot: accidental globals, listeners never removed, timers never cleared, closures holding big objects, unbounded caches and Maps, detached DOM nodes. Find them with heap snapshots and allocation timelines (Chrome DevTools Memory tab, `node --inspect`), comparing snapshots before and after an action. Fix by removing listeners, using `WeakMap`/`WeakRef`, bounding caches and clearing timers.\n\n```js\nconst cache = new Map();              // leak: grows forever\nfunction get(k) { if (!cache.has(k)) cache.set(k, big(k)); return cache.get(k); }\n// fix: LRU / size limit, or WeakMap when keys are objects\n```",
+      "materials": [
+        "mdn-memory",
+        "chrome-memory",
+        "node-memory"
+      ]
+    },
+    {
+      "prompt": "What is the difference between debounce and throttle in JavaScript, and when do you use each?",
+      "tags": [
+        "JS Runtime, Browser & Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Debounce runs once after calls stop for `ms` (search-as-you-type); throttle runs at most once per `ms` while calls continue (scroll).",
+        "Both delay a function by a fixed time; debounce uses `setTimeout` and throttle uses `setInterval`.",
+        "Debounce cancels the function entirely after the first call; throttle makes it run twice as often.",
+        "Debounce runs at most once per interval while events keep coming, and throttle waits for a quiet period with no calls, then runs exactly once."
+      ],
+      "correct": 0,
+      "explanation": "Debounce waits until calls stop for `ms`, then runs once (search-as-you-type, end of resize). Throttle runs at most once per `ms` while calls continue (scroll, mouse move). Both use closures and timers.\n\n```js\nconst debounce = (fn, ms) => {\n  let t;\n  return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };\n};\nconst throttle = (fn, ms) => {\n  let last = 0;\n  return (...a) => {\n    const now = Date.now();\n    if (now - last >= ms) { last = now; fn(...a); }\n  };\n};\n```",
+      "materials": [
+        "jsi-decorators",
+        "css-tricks-debounce"
+      ]
+    },
+    {
+      "prompt": "What are event bubbling, capturing and delegation?",
+      "tags": [
+        "JS Runtime, Browser & Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Events fire only on the target; bubbling is an opt-in flag, and delegation means using `stopPropagation`.",
+        "Capturing stores events for later replay; delegation hands the event to a Web Worker for processing.",
+        "Events travel down (capture), hit the target, then bubble up; delegation uses one parent listener and `event.target` for many children.",
+        "Bubbling delivers an event to every element on the page at the same time, and delegation copies a single listener onto each child element."
+      ],
+      "correct": 2,
+      "explanation": "An event travels down from the root to the target (capture), fires on the target, then bubbles back up. Handlers run on bubble by default. Delegation attaches one listener on a parent and uses `event.target` (or `closest`) to handle many children, including ones added later. `stopPropagation` halts the travel; `preventDefault` cancels the browser default; they're different things.\n\n```js\nlist.addEventListener(\"click\", (e) => {\n  const li = e.target.closest(\"li\");\n  if (li && list.contains(li)) console.log(\"clicked\", li.dataset.id);\n});\n```",
+      "materials": [
+        "jsi-bubbling",
+        "jsi-delegation",
+        "mdn-bubbling"
+      ]
+    },
+    {
+      "prompt": "What is CORS, and when does the browser send a preflight request?",
+      "tags": [
+        "JS Runtime, Browser & Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A server-side firewall that blocks requests coming from other origins, which is why every single cross-origin request gets a preflight first.",
+        "An authentication scheme: the preflight sends the user's credentials so the server can log them in.",
+        "Server headers that opt in to cross-origin reads; non-simple requests (custom headers, JSON, `PUT`/`DELETE`) get an `OPTIONS` preflight.",
+        "A browser cache policy; the preflight checks whether a cached response is still fresh."
+      ],
+      "correct": 2,
+      "explanation": "The same-origin policy blocks a page from reading responses from another origin. CORS lets the server opt in with headers (`Access-Control-Allow-Origin`, `-Methods`, `-Headers`, `-Credentials`). \"Non-simple\" requests (custom headers, a JSON content type, `PUT`/`DELETE`) trigger a preflight `OPTIONS` request first. CORS is enforced by the browser only, protects users, and isn't an authentication mechanism. Never reflect `*` together with credentials.\n\n```js\n// Express-style\napp.use((req, res, next) => {\n  res.set(\"Access-Control-Allow-Origin\", \"https://app.example.com\");\n  res.set(\"Access-Control-Allow-Headers\", \"Content-Type, Authorization\");\n  if (req.method === \"OPTIONS\") return res.sendStatus(204);\n  next();\n});\n```",
+      "materials": [
+        "mdn-cors",
+        "jsi-fetch-cors"
+      ]
+    },
+    {
+      "prompt": "What are XSS and CSRF, and how do you defend a JavaScript app against each?",
+      "tags": [
+        "JS Runtime, Browser & Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Both are prevented by CORS, so a strict `Access-Control-Allow-Origin` header is enough for either.",
+        "XSS abuses cookies (fix with `SameSite`); CSRF injects scripts into the page (fix with `textContent`).",
+        "XSS runs attacker script in your page (escape output, avoid `innerHTML`, CSP); CSRF abuses cookies (SameSite, tokens, origin checks).",
+        "XSS is stealing cookies over plain HTTP (fix it with HTTPS), and CSRF is SQL injection through forms (fix it with prepared statements)."
+      ],
+      "correct": 2,
+      "explanation": "XSS: attacker script runs in your page. Defend by escaping output, avoiding `innerHTML` with untrusted data (use `textContent`), sanitising HTML (DOMPurify) and a strict Content-Security-Policy. CSRF: a malicious site makes the browser send an authenticated request using cookies. Defend with `SameSite` cookies, CSRF tokens and checking `Origin`. Store session cookies as `HttpOnly; Secure`.\n\n```js\nel.textContent = userInput;         // safe\n// el.innerHTML = userInput;        // XSS risk\n// Set-Cookie: sid=...; HttpOnly; Secure; SameSite=Lax\n```",
+      "materials": [
+        "owasp-xss",
+        "owasp-csrf",
+        "mdn-csp"
+      ]
+    },
+    {
+      "prompt": "When do you use `localStorage`, `sessionStorage`, cookies and IndexedDB?",
+      "tags": [
+        "JS Runtime, Browser & Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "They're interchangeable: all four are synchronous, unlimited in size and sent to the server automatically.",
+        "Web Storage for small strings (per origin or per tab), `HttpOnly` cookies for session ids, IndexedDB for large or offline data.",
+        "Cookies for offline apps, `sessionStorage` for data shared across tabs, and IndexedDB only inside workers.",
+        "`localStorage` for auth tokens, since page scripts can't read it; cookies for large files; and IndexedDB for small UI preferences."
+      ],
+      "correct": 1,
+      "explanation": "`localStorage`: synchronous string key/values, persistent, per origin, about 5 MB, readable by any script (don't keep tokens there if XSS is a concern). `sessionStorage`: the same, but per tab session. Cookies: sent with every request, size-limited, can be `HttpOnly` (invisible to JS), so best for session ids. IndexedDB: asynchronous, structured, for large data and offline apps.\n\n```js\nlocalStorage.setItem(\"theme\", \"dark\");\nJSON.parse(localStorage.getItem(\"prefs\") ?? \"{}\");\n```",
+      "materials": [
+        "mdn-webstorage",
+        "mdn-indexeddb",
+        "jsi-localstorage",
+        "jsi-cookie"
+      ]
+    },
+    {
+      "prompt": "How do you keep the browser UI responsive during heavy work?",
+      "tags": [
+        "JS Runtime, Browser & Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Move computation to Web Workers, split long tasks, animate in `requestAnimationFrame`, and batch DOM reads before writes.",
+        "Use `setInterval` with a 0 ms delay, which gives the loop its own thread separate from rendering.",
+        "Wrap the heavy loops in `async` functions, which the engine then runs on a background thread automatically, away from rendering.",
+        "Call `document.write` instead of DOM APIs, which skips layout and paint entirely."
+      ],
+      "correct": 0,
+      "explanation": "The main thread runs JS, style, layout and paint, so long tasks (over 50 ms) cause jank. Move heavy computation to Web Workers, split work into chunks (`requestIdleCallback`, `scheduler.yield`), do visual updates in `requestAnimationFrame`, batch DOM reads before writes to avoid layout thrashing, and prefer CSS transforms for animation.\n\n```js\nconst w = new Worker(\"worker.js\");\nw.postMessage(bigArray);\nw.onmessage = (e) => render(e.data);\n\nfunction tick() { el.style.transform = `translateX(${x++}px)`; requestAnimationFrame(tick); }\nrequestAnimationFrame(tick);\n```",
+      "materials": [
+        "mdn-workers",
+        "webdev-long-tasks",
+        "webdev-layout-thrashing"
+      ]
+    },
+    {
+      "prompt": "What does `\"use strict\"` change, and what does TypeScript add on top?",
+      "tags": [
+        "JS Runtime, Browser & Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Strict mode turns silent errors into exceptions and makes plain-call `this` `undefined`; TypeScript adds build-time types but erases to JS.",
+        "Strict mode is required for `async` code; TypeScript replaces the JS engine with a typed one.",
+        "Strict mode makes all objects immutable; TypeScript validates API responses at runtime automatically.",
+        "Strict mode enables static type checks at runtime, and TypeScript then strips them out again in the build so the code executes noticeably faster."
+      ],
+      "correct": 0,
+      "explanation": "Strict mode turns silent errors into exceptions (undeclared variables, duplicate parameters, assignments to read-only properties), sets `this` to `undefined` in plain calls, and is automatic in modules and classes. TypeScript adds static types, catching shape and null errors at build time and improving refactoring and editor support; it erases to plain JavaScript, so runtime rules still apply and external data still needs validation (for example with Zod).\n\n```js\n\"use strict\";\n// undeclaredVar = 1;   // ReferenceError\n```",
+      "materials": [
+        "mdn-strict",
+        "ts-handbook",
+        "effective-ts"
+      ]
+    },
+    {
+      "prompt": "Implementing `Promise.all` by hand is a common exercise. What must a correct version handle?",
+      "tags": [
+        "JS Runtime, Browser & Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Only arrays of promises; non-promise values and empty input should throw a `TypeError`.",
+        "Results in input order, non-promise values, empty input resolving to `[]`, rejecting on the first failure, and counting completions.",
+        "Results in completion order, ignoring any rejections, and resolving only once the input array's length stops changing between checks.",
+        "Awaiting each promise in a `for` loop, which keeps order and is just as fast as running them together."
+      ],
+      "correct": 1,
+      "explanation": "It tests promises, ordering and edge cases: preserve input order (not completion order), accept non-promise values (wrap them with `Promise.resolve`), resolve `[]` for empty input, reject on the first rejection, and count completions rather than relying on array length.\n\n```js\nfunction promiseAll(items) {\n  return new Promise((resolve, reject) => {\n    const list = [...items];\n    const out = new Array(list.length);\n    let left = list.length;\n    if (left === 0) return resolve(out);\n    list.forEach((item, i) => {\n      Promise.resolve(item).then((v) => {\n        out[i] = v;\n        if (--left === 0) resolve(out);\n      }, reject);\n    });\n  });\n}\nawait promiseAll([1, Promise.resolve(2), new Promise((r) => setTimeout(() => r(3), 10))]); // [1,2,3]\n```",
+      "materials": [
+        "mdn-promise-all",
+        "jsi-promise-api",
+        "greatfrontend",
+        "exercism-js"
+      ]
+    }
+  ]
+}
