@@ -29,7 +29,7 @@ func (s *Server) login(w http.ResponseWriter, r *http.Request) {
 	if !decode(w, r, &body) {
 		return
 	}
-	token, user, err := s.store.Login(r.Context(), body.Email, body.Password)
+	token, user, err := s.store.Login(r.Context(), body.Email, body.Password, clientOf(r))
 	if err != nil {
 		s.fail(w, r, err)
 		return
@@ -62,7 +62,7 @@ func (s *Server) signup(w http.ResponseWriter, r *http.Request) {
 	if !decode(w, r, &body) {
 		return
 	}
-	token, user, err := s.store.SignUp(r.Context(), body.Name, body.Email, body.Password, body.Locale)
+	token, user, err := s.store.SignUp(r.Context(), body.Name, body.Email, body.Password, body.Locale, clientOf(r))
 	if err != nil {
 		s.fail(w, r, err)
 		return
@@ -123,7 +123,7 @@ func (s *Server) confirmPasswordReset(w http.ResponseWriter, r *http.Request) {
 	if !decode(w, r, &body) {
 		return
 	}
-	if err := s.store.ResetPassword(r.Context(), body.Token, body.Password); err != nil {
+	if err := s.store.ResetPassword(r.Context(), body.Token, body.Password, clientOf(r)); err != nil {
 		s.fail(w, r, err)
 		return
 	}

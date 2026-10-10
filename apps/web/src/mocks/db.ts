@@ -13,6 +13,12 @@ import { nextReview } from '@/features/review/srs';
 import type { ReviewState } from '@/features/review/types';
 
 import { seedComments } from './seed/comments';
+import {
+  seedLoginEvents,
+  seedSessions,
+  type MockLoginEvent,
+  type MockSession,
+} from './seed/devices';
 import { seedMaterials } from './seed/materials';
 import { seedQuestions, type SeedQuestion } from './seed/questions';
 import { seedUsers, type SeedUser } from './seed/users';
@@ -31,6 +37,12 @@ interface Db {
   users: SeedUser[];
   /** Password reset token -> user id (single use). */
   resetTokens: Record<string, string>;
+  /** Signed-in devices; a token stub `mock-token.<userId>[.<sessionId>]` names one. */
+  sessions: MockSession[];
+  /** Sign-in history, oldest first. */
+  loginEvents: MockLoginEvent[];
+  /** Ids of signed-out sessions, so they aren't revived (see currentSession). */
+  revokedSessions: string[];
   /** All questions (seeded + admin-created), with optional translations. */
   questions: SeedQuestion[];
   /** All materials (seeded + admin-created); mutable so links can be added. */
@@ -135,6 +147,9 @@ function freshDb(): Db {
   return {
     users: seedUsers.map((u) => ({ ...u })),
     resetTokens: {},
+    sessions: seedSessions(),
+    loginEvents: seedLoginEvents(),
+    revokedSessions: [],
     questions: seedQuestions.map((s) => ({
       question: { ...s.question },
       translations: s.translations,

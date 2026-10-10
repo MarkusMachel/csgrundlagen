@@ -9,7 +9,9 @@
     "delete": "Excluir",
     "close": "Fechar",
     "submit": "Enviar",
-    "language": "Idioma"
+    "language": "Idioma",
+    "yes": "Sim",
+    "no": "Não"
   },
   "nav": {
     "home": "Início",
@@ -263,7 +265,8 @@
       "stats": "Estatísticas",
       "questions": "Perguntas",
       "materials": "Materiais",
-      "bugs": "Relatos de erro"
+      "bugs": "Relatos de erro",
+      "users": "Usuários"
     },
     "questionType": "Tipo de questão",
     "type": {
@@ -436,5 +439,77 @@
     "predictFirst": "Executar libera depois que você responder: preveja primeiro",
     "goNote": "roda no Go Playground",
     "failed": "Não foi possível executar o código."
+  },
+  "devices": {
+    "title": "Dispositivos conectados",
+    "intro": "Todos os lugares onde sua conta está conectada agora. Desconecte qualquer dispositivo que você não reconheça.",
+    "browserOn": "{{browser}} no {{os}}",
+    "thisDevice": "Este dispositivo",
+    "lastActive": "Ativo {{when}}",
+    "signedIn": "conectado em {{date}}",
+    "details": "Detalhes",
+    "signOut": "Desconectar",
+    "signOutHere": "Sair aqui",
+    "signOutOthers_one": "Desconectar {{count}} outro dispositivo",
+    "signOutOthers_other": "Desconectar {{count}} outros dispositivos",
+    "type": {
+      "desktop": "Computador",
+      "mobile": "Celular",
+      "tablet": "Tablet",
+      "bot": "Bot ou script"
+    },
+    "fact": {
+      "device": "Tipo de dispositivo",
+      "firstIp": "IP no login",
+      "lastIp": "IP mais recente",
+      "timezone": "Fuso horário",
+      "languages": "Idiomas",
+      "platform": "Plataforma",
+      "screen": "Tela",
+      "viewport": "Janela",
+      "touch": "Tela sensível ao toque",
+      "colorScheme": "Esquema de cores",
+      "expires": "Sessão expira",
+      "userAgent": "User agent"
+    },
+    "event": {
+      "login": "Entrou",
+      "signup": "Criou a conta",
+      "login_failed": "Senha incorreta",
+      "password_reset": "Redefiniu a senha"
+    },
+    "admin": {
+      "search": "Buscar usuários por nome ou e-mail…",
+      "empty": "Nenhum usuário encontrado.",
+      "never": "nunca",
+      "col": {
+        "user": "Usuário",
+        "role": "Papel",
+        "lastSeen": "Visto por último",
+        "devices": "Dispositivos",
+        "answers": "Respostas",
+        "joined": "Entrou em",
+        "actions": "Ações",
+        "when": "Quando",
+        "event": "Evento",
+        "device": "Dispositivo"
+      },
+      "sessions_one": "{{count}} sessão",
+      "sessions_other": "{{count}} sessões",
+      "failed_one": "{{count}} falha",
+      "failed_other": "{{count}} falhas",
+      "failedHint": "Tentativas com senha incorreta nas últimas 24 horas",
+      "view": "Ver",
+      "viewLabel": "Ver {{name}}",
+      "back": "Todos os usuários",
+      "joinedOn": "entrou em {{date}}",
+      "signOutEverywhere": "Desconectar de tudo",
+      "activeDevices_one": "{{count}} dispositivo ativo",
+      "activeDevices_other": "{{count}} dispositivos ativos",
+      "noSessions": "Não está conectado em nenhum lugar.",
+      "history": "Histórico de login",
+      "historyHint": "Últimos 50 eventos. O histórico é mantido por 90 dias.",
+      "noHistory": "Nenhum login registrado ainda."
+    }
   }
 }

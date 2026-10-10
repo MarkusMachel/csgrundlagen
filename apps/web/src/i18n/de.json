@@ -9,7 +9,9 @@
     "delete": "Löschen",
     "close": "Schließen",
     "submit": "Absenden",
-    "language": "Sprache"
+    "language": "Sprache",
+    "yes": "Ja",
+    "no": "Nein"
   },
   "nav": {
     "home": "Start",
@@ -263,7 +265,8 @@
       "stats": "Statistik",
       "questions": "Fragen",
       "materials": "Materialien",
-      "bugs": "Fehlermeldungen"
+      "bugs": "Fehlermeldungen",
+      "users": "Benutzer"
     },
     "questionType": "Fragetyp",
     "type": {
@@ -436,5 +439,77 @@
     "predictFirst": "Ausführen geht nach dem Antworten: erst vorhersagen",
     "goNote": "läuft im Go Playground",
     "failed": "Der Code konnte nicht ausgeführt werden."
+  },
+  "devices": {
+    "title": "Angemeldete Geräte",
+    "intro": "Überall dort, wo dein Konto gerade angemeldet ist. Melde Geräte ab, die du nicht kennst.",
+    "browserOn": "{{browser}} auf {{os}}",
+    "thisDevice": "Dieses Gerät",
+    "lastActive": "Aktiv {{when}}",
+    "signedIn": "angemeldet am {{date}}",
+    "details": "Details",
+    "signOut": "Abmelden",
+    "signOutHere": "Hier abmelden",
+    "signOutOthers_one": "{{count}} anderes Gerät abmelden",
+    "signOutOthers_other": "{{count}} andere Geräte abmelden",
+    "type": {
+      "desktop": "Desktop",
+      "mobile": "Smartphone",
+      "tablet": "Tablet",
+      "bot": "Bot oder Skript"
+    },
+    "fact": {
+      "device": "Gerätetyp",
+      "firstIp": "IP bei Anmeldung",
+      "lastIp": "Letzte IP",
+      "timezone": "Zeitzone",
+      "languages": "Sprachen",
+      "platform": "Plattform",
+      "screen": "Bildschirm",
+      "viewport": "Fenster",
+      "touch": "Touchscreen",
+      "colorScheme": "Farbschema",
+      "expires": "Sitzung läuft ab",
+      "userAgent": "User-Agent"
+    },
+    "event": {
+      "login": "Angemeldet",
+      "signup": "Konto erstellt",
+      "login_failed": "Falsches Passwort",
+      "password_reset": "Passwort zurückgesetzt"
+    },
+    "admin": {
+      "search": "Benutzer nach Name oder E-Mail suchen…",
+      "empty": "Keine passenden Benutzer.",
+      "never": "nie",
+      "col": {
+        "user": "Benutzer",
+        "role": "Rolle",
+        "lastSeen": "Zuletzt aktiv",
+        "devices": "Geräte",
+        "answers": "Antworten",
+        "joined": "Beigetreten",
+        "actions": "Aktionen",
+        "when": "Wann",
+        "event": "Ereignis",
+        "device": "Gerät"
+      },
+      "sessions_one": "{{count}} Sitzung",
+      "sessions_other": "{{count}} Sitzungen",
+      "failed_one": "{{count}} fehlgeschlagen",
+      "failed_other": "{{count}} fehlgeschlagen",
+      "failedHint": "Versuche mit falschem Passwort in den letzten 24 Stunden",
+      "view": "Ansehen",
+      "viewLabel": "{{name}} ansehen",
+      "back": "Alle Benutzer",
+      "joinedOn": "beigetreten am {{date}}",
+      "signOutEverywhere": "Überall abmelden",
+      "activeDevices_one": "{{count}} aktives Gerät",
+      "activeDevices_other": "{{count}} aktive Geräte",
+      "noSessions": "Nirgends angemeldet.",
+      "history": "Anmeldeverlauf",
+      "historyHint": "Die letzten 50 Ereignisse. Der Verlauf wird 90 Tage aufbewahrt.",
+      "noHistory": "Noch keine Anmeldungen erfasst."
+    }
   }
 }

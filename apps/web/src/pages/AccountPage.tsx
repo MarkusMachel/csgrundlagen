@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import { ChangePasswordForm } from '@/features/auth';
+import { MyDevices } from '@/features/devices';
 import { useAuthStore } from '@/stores/useAuthStore';
 
 export function AccountPage() {
@@ -25,6 +26,15 @@ export function AccountPage() {
       <section className="stack" style={{ gap: 12 }}>
         <h2 style={{ margin: 0 }}>{t('auth.changePassword')}</h2>
         <ChangePasswordForm />
+      </section>
+      <section className="stack" style={{ gap: 12 }}>
+        <div>
+          <h2 style={{ margin: 0 }}>{t('devices.title')}</h2>
+          <p className="muted" style={{ margin: '4px 0 0', fontSize: 13 }}>
+            {t('devices.intro')}
+          </p>
+        </div>
+        <MyDevices />
       </section>
     </div>
   );

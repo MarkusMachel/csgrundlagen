@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 import { useSessionBootstrap } from '@/features/auth';
+import { useReportDevice } from '@/features/devices';
 import { Spinner } from '@/shared/ui';
 
 import { StatusBar } from './StatusBar';
@@ -35,6 +36,7 @@ function useNearBottom(threshold = 120) {
 export function AppShell() {
   const { t } = useTranslation();
   const status = useSessionBootstrap();
+  useReportDevice();
   const location = useLocation();
   // Hidden at the bottom so it never covers the last controls, like the pagination.
   const nearBottom = useNearBottom();

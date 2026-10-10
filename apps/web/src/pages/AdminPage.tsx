@@ -12,8 +12,9 @@ import {
   useBugReports,
   useIsAdmin,
 } from '@/features/authoring';
+import { AdminUsersTab } from '@/features/devices';
 
-type Tab = 'stats' | 'question' | 'material' | 'questions' | 'materials' | 'bugs';
+type Tab = 'stats' | 'question' | 'material' | 'questions' | 'materials' | 'bugs' | 'users';
 
 export function AdminPage() {
   const { t } = useTranslation();
@@ -25,7 +26,7 @@ export function AdminPage() {
   // Client-side gate; the mock API also rejects non-admins (403).
   if (!isAdmin) return <Navigate to="/" replace />;
 
-  const tabs: Tab[] = ['stats', 'question', 'material', 'questions', 'materials', 'bugs'];
+  const tabs: Tab[] = ['stats', 'question', 'material', 'questions', 'materials', 'bugs', 'users'];
 
   return (
     <div className="stack admin-page">
@@ -76,6 +77,7 @@ export function AdminPage() {
           {tab === 'questions' && <QuestionManager />}
           {tab === 'materials' && <MaterialManager />}
           {tab === 'bugs' && <BugReportQueue />}
+          {tab === 'users' && <AdminUsersTab />}
         </div>
       </div>
     </div>

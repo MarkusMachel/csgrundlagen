@@ -91,6 +91,9 @@ func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
 	mux.HandleFunc("GET /api/bookmarks", s.authed(s.bookmarks))
 	mux.HandleFunc("GET /api/review/queue", s.authed(s.reviewQueue))
 	mux.HandleFunc("GET /api/me/progress", s.authed(s.progress))
+	mux.HandleFunc("GET /api/me/sessions", s.authed(s.mySessions))
+	mux.HandleFunc("DELETE /api/me/sessions/{id}", s.authed(s.revokeMySession))
+	mux.HandleFunc("POST /api/me/device", s.authed(s.saveDevice))
 	mux.HandleFunc("POST /api/run", s.limited(s.authed(s.run)))
 	mux.HandleFunc("GET /api/tags", s.tags)
 	mux.HandleFunc("GET /api/search", s.search)
@@ -110,6 +113,10 @@ func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
 	mux.HandleFunc("GET /api/admin/stats", s.admin(s.adminStats))
 	mux.HandleFunc("GET /api/admin/bug-reports", s.admin(s.listBugReports))
 	mux.HandleFunc("PATCH /api/admin/bug-reports/{id}", s.admin(s.setBugReportStatus))
+	mux.HandleFunc("GET /api/admin/users", s.admin(s.adminUsers))
+	mux.HandleFunc("GET /api/admin/users/{id}", s.admin(s.adminUserDetail))
+	mux.HandleFunc("DELETE /api/admin/users/{id}/sessions", s.admin(s.adminRevokeAllSessions))
+	mux.HandleFunc("DELETE /api/admin/users/{id}/sessions/{sid}", s.admin(s.adminRevokeSession))
 
 	mux.HandleFunc("/api/", func(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusNotFound, "Not found")
@@ -138,7 +145,7 @@ func (s *Server) optionalUser(r *http.Request) *store.User {
 	if token == "" {
 		return nil
 	}
-	u, err := s.store.UserForToken(r.Context(), token)
+	u, err := s.store.UserForToken(r.Context(), token, clientIP(r))
 	if err != nil {
 		return nil
 	}

@@ -65,6 +65,7 @@ func newTestDB(t *testing.T) *pgxpool.Pool {
 type client struct {
 	t   *testing.T
 	srv *httptest.Server
+	ua  string // User-Agent header, if set
 }
 
 // do sends a JSON request and decodes the JSON response into out (if non-nil).
@@ -79,6 +80,9 @@ func (c client) do(method, path, token string, body, out any) int {
 	req.Header.Set("Content-Type", "application/json")
 	if token != "" {
 		req.Header.Set("Authorization", "Bearer "+token)
+	}
+	if c.ua != "" {
+		req.Header.Set("User-Agent", c.ua)
 	}
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {

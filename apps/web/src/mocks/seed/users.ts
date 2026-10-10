@@ -2,6 +2,8 @@ import type { User } from '@/shared/types';
 
 export interface SeedUser extends User {
   password: string;
+  /** Set for accounts created through sign-up. */
+  createdAt?: string;
 }
 
 export const seedUsers: SeedUser[] = [

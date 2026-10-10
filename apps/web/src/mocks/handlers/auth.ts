@@ -1,7 +1,14 @@
 import { http, HttpResponse } from 'msw';
 
 import { db, nextId } from '../db';
-import { currentUser, tokenFor, unauthorized } from './utils';
+import {
+  currentSession,
+  currentUser,
+  openSession,
+  recordLoginEvent,
+  revokeSessions,
+  unauthorized,
+} from './utils';
 import type { SeedUser } from '../seed/users';
 
 const publicUser = ({ password: _pw, ...user }: SeedUser) => user;
@@ -12,13 +19,13 @@ const passwordProblem = (pw: string) =>
 export const authHandlers = [
   http.post('/api/auth/login', async ({ request }) => {
     const { email, password } = (await request.json()) as { email: string; password: string };
-    const user = db.users.find(
-      (u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password,
-    );
-    if (!user) {
+    const user = db.users.find((u) => u.email.toLowerCase() === email.toLowerCase());
+    if (!user || user.password !== password) {
+      if (user) recordLoginEvent(request, user.id, 'login_failed');
       return HttpResponse.json({ message: 'Invalid email or password' }, { status: 401 });
     }
-    return HttpResponse.json({ token: tokenFor(user.id), user: publicUser(user) });
+    recordLoginEvent(request, user.id, 'login');
+    return HttpResponse.json({ token: openSession(request, user.id), user: publicUser(user) });
   }),
 
   http.post('/api/auth/signup', async ({ request }) => {
@@ -42,13 +49,21 @@ export const authHandlers = [
       password: body.password,
       locale: 'en',
       role: 'user',
+      createdAt: new Date().toISOString(),
     };
     db.users.push(user);
-    return HttpResponse.json({ token: tokenFor(user.id), user: publicUser(user) }, { status: 201 });
+    recordLoginEvent(request, user.id, 'signup');
+    return HttpResponse.json(
+      { token: openSession(request, user.id), user: publicUser(user) },
+      { status: 201 },
+    );
   }),
 
-  // The token is a stateless stub, so logout is client-side (token removal).
-  http.post('/api/auth/logout', () => new HttpResponse(null, { status: 204 })),
+  http.post('/api/auth/logout', ({ request }) => {
+    const session = currentSession(request);
+    if (session) revokeSessions((s) => s.id === session.id);
+    return new HttpResponse(null, { status: 204 });
+  }),
 
   http.get('/api/auth/me', ({ request }) => {
     const user = currentUser(request);
@@ -65,6 +80,9 @@ export const authHandlers = [
     const problem = passwordProblem(body.newPassword ?? '');
     if (problem) return invalid(problem);
     user.password = body.newPassword;
+    // like the API: the other devices are signed out
+    const current = currentSession(request)!;
+    revokeSessions((s) => s.userId === user.id && s.id !== current.id);
     return new HttpResponse(null, { status: 204 });
   }),
 
@@ -92,6 +110,8 @@ export const authHandlers = [
     if (problem) return invalid(problem);
     delete db.resetTokens[token];
     db.users.find((u) => u.id === userId)!.password = password;
+    revokeSessions((s) => s.userId === userId);
+    recordLoginEvent(request, userId, 'password_reset');
     return new HttpResponse(null, { status: 204 });
   }),
 ];

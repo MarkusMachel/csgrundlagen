@@ -129,6 +129,13 @@ internal/httpapi routes, auth middleware, handlers, integration tests
   `GET /api/me/progress?tz=…` the progress page.
 - **Admin**: `PUT`/`DELETE` on `/api/questions/{id}` and `/api/materials/{id}`, and
   the bug-report queue at `GET`/`PATCH /api/admin/bug-reports`.
+- **Devices**: each session stores the IP and User-Agent it was opened from, its
+  latest IP and use, and what the browser reports about itself
+  (`POST /api/me/device`: time zone, screen, languages). `login_events` keeps the
+  sign-in history (logins, sign-ups, wrong passwords for known accounts, resets).
+  Users list and sign out their own devices (`/api/me/sessions`); admins see
+  everyone's under `/api/admin/users`. The API purges expired sessions and
+  history older than 90 days hourly.
 - **Migrations**: numbered files in `internal/db/migrations`, embedded in the
   binary and applied in order on startup, each recorded in `schema_migrations`.
   Never edit an applied file — add the next number.

@@ -9,7 +9,9 @@
     "delete": "Delete",
     "close": "Close",
     "submit": "Submit",
-    "language": "Language"
+    "language": "Language",
+    "yes": "Yes",
+    "no": "No"
   },
   "nav": {
     "home": "Home",
@@ -263,7 +265,8 @@
       "stats": "Stats",
       "questions": "Questions",
       "materials": "Materials",
-      "bugs": "Bug reports"
+      "bugs": "Bug reports",
+      "users": "Users"
     },
     "questionType": "Question type",
     "type": {
@@ -436,5 +439,77 @@
     "predictFirst": "Run unlocks after you answer: predict first",
     "goNote": "runs in the Go Playground",
     "failed": "Couldn't run the code."
+  },
+  "devices": {
+    "title": "Signed-in devices",
+    "intro": "Everywhere your account is signed in right now. Sign out any device you don’t recognise.",
+    "browserOn": "{{browser}} on {{os}}",
+    "thisDevice": "This device",
+    "lastActive": "Active {{when}}",
+    "signedIn": "signed in {{date}}",
+    "details": "Details",
+    "signOut": "Sign out",
+    "signOutHere": "Sign out here",
+    "signOutOthers_one": "Sign out {{count}} other device",
+    "signOutOthers_other": "Sign out {{count}} other devices",
+    "type": {
+      "desktop": "Desktop",
+      "mobile": "Phone",
+      "tablet": "Tablet",
+      "bot": "Bot or script"
+    },
+    "fact": {
+      "device": "Device type",
+      "firstIp": "IP at sign-in",
+      "lastIp": "Latest IP",
+      "timezone": "Time zone",
+      "languages": "Languages",
+      "platform": "Platform",
+      "screen": "Screen",
+      "viewport": "Window",
+      "touch": "Touch screen",
+      "colorScheme": "Colour scheme",
+      "expires": "Session expires",
+      "userAgent": "User agent"
+    },
+    "event": {
+      "login": "Signed in",
+      "signup": "Created account",
+      "login_failed": "Wrong password",
+      "password_reset": "Reset password"
+    },
+    "admin": {
+      "search": "Search users by name or email…",
+      "empty": "No users match.",
+      "never": "never",
+      "col": {
+        "user": "User",
+        "role": "Role",
+        "lastSeen": "Last seen",
+        "devices": "Devices",
+        "answers": "Answers",
+        "joined": "Joined",
+        "actions": "Actions",
+        "when": "When",
+        "event": "Event",
+        "device": "Device"
+      },
+      "sessions_one": "{{count}} session",
+      "sessions_other": "{{count}} sessions",
+      "failed_one": "{{count}} failed",
+      "failed_other": "{{count}} failed",
+      "failedHint": "Wrong-password attempts in the last 24 hours",
+      "view": "View",
+      "viewLabel": "View {{name}}",
+      "back": "All users",
+      "joinedOn": "joined {{date}}",
+      "signOutEverywhere": "Sign out everywhere",
+      "activeDevices_one": "{{count}} active device",
+      "activeDevices_other": "{{count}} active devices",
+      "noSessions": "Not signed in anywhere.",
+      "history": "Sign-in history",
+      "historyHint": "Last 50 events. History is kept for 90 days.",
+      "noHistory": "No sign-ins recorded yet."
+    }
   }
 }
