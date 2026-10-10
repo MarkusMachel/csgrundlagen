@@ -5,6 +5,7 @@ import { AccountPage } from '@/pages/AccountPage';
 import { AdminPage } from '@/pages/AdminPage';
 import { BookmarksPage } from '@/pages/BookmarksPage';
 import { BuildTestPage } from '@/pages/BuildTestPage';
+import { ConfirmEmailPage } from '@/pages/ConfirmEmailPage';
 import { CuratedMaterialPage } from '@/pages/CuratedMaterialPage';
 import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage';
 import { HomePage } from '@/pages/HomePage';
@@ -37,6 +38,7 @@ export const router = createBrowserRouter([
     children: [
       { path: '/login', element: <LoginPage /> },
       { path: '/privacy', element: <PrivacyPage /> },
+      { path: '/confirm-email', element: <ConfirmEmailPage /> },
       { path: '/signup', element: <SignUpPage /> },
       { path: '/forgot-password', element: <ForgotPasswordPage /> },
       { path: '/reset-password', element: <ResetPasswordPage /> },

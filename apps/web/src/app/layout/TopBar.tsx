@@ -16,7 +16,7 @@ import { useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-import { useLogout } from '@/features/auth';
+import { useLogout, useUpdateProfile } from '@/features/auth';
 import { useIsAdmin } from '@/features/authoring';
 import { useDueCount } from '@/features/review';
 import { GlobalSearch } from '@/features/search';
@@ -61,6 +61,7 @@ export function TopBar() {
   const user = useAuthStore((s) => s.user);
   const isAdmin = useIsAdmin();
   const logout = useLogout();
+  const updateProfile = useUpdateProfile();
   const { data: dueCount } = useDueCount();
 
   const visibleTabs = useMemo(() => fileTabs.filter((tab) => !tab.adminOnly || isAdmin), [isAdmin]);
@@ -136,6 +137,8 @@ export function TopBar() {
                     className={code === locale ? 'menu-item menu-item--selected' : 'menu-item'}
                     onClick={() => {
                       setLocale(code);
+                      // signed in: remember it on the account too
+                      if (user) updateProfile.mutate({ locale: code });
                       setLocaleMenuOpen(false);
                     }}
                   >

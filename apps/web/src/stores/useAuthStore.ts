@@ -3,6 +3,8 @@ import { create } from 'zustand';
 import { AUTH_TOKEN_KEY } from '@/shared/api/client';
 import type { User } from '@/shared/types';
 
+import { useUIStore } from './useUIStore';
+
 interface AuthState {
   user: User | null;
   status: 'unknown' | 'authenticated' | 'anonymous';
@@ -20,6 +22,8 @@ export const useAuthStore = create<AuthState>()((set) => ({
     } catch {
       // storage unavailable — session stays in-memory only
     }
+    // The account's language wins over the browser's on every sign-in.
+    if (user.locale) useUIStore.getState().setLocale(user.locale);
     set({ user, status: 'authenticated' });
   },
   setAnonymous: () => set({ user: null, status: 'anonymous' }),

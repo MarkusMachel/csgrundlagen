@@ -384,6 +384,24 @@
     "role": {
       "admin": "Admin",
       "user": "Mitglied"
+    },
+    "profile": {
+      "title": "Profil",
+      "save": "Profil speichern",
+      "saved": "Profil gespeichert."
+    },
+    "email": {
+      "title": "E-Mail-Adresse",
+      "current": "Dein Konto nutzt {{email}}.",
+      "new": "Neue E-Mail-Adresse",
+      "send": "Bestätigungslink senden",
+      "sent": "Wir haben einen Link an {{email}} geschickt. Deine E-Mail ändert sich, sobald du ihn öffnest (innerhalb von 24 Stunden).",
+      "again": "Andere Adresse verwenden",
+      "confirmTitle": "E-Mail bestätigen",
+      "confirmed": "Erledigt: Dein Konto nutzt jetzt {{email}}.",
+      "invalidLink": "Dieser Bestätigungslink ist ungültig oder abgelaufen.",
+      "toAccount": "Zu deinem Konto",
+      "password": "Dein Passwort zur Bestätigung"
     }
   },
   "review": {

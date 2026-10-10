@@ -2,8 +2,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
 import { api, AUTH_TOKEN_KEY } from '@/shared/api/client';
-import type { User } from '@/shared/types';
+import type { Locale, User } from '@/shared/types';
 import { useAuthStore } from '@/stores/useAuthStore';
+import { useUIStore } from '@/stores/useUIStore';
 
 interface LoginResponse {
   token: string;
@@ -98,4 +99,39 @@ export function useSessionBootstrap() {
   }, [status, setSession, setAnonymous]);
 
   return status;
+}
+
+export interface ProfileInput {
+  name?: string;
+  locale?: Locale;
+}
+
+/** Saves name and/or language to the account and applies them right away. */
+export function useUpdateProfile() {
+  return useMutation({
+    mutationFn: (input: ProfileInput) => api.patch<User>('/me', input),
+    onSuccess: (user) => {
+      useAuthStore.setState({ user });
+      useUIStore.getState().setLocale(user.locale);
+    },
+  });
+}
+
+/** Sends a confirmation link to the new address; nothing changes until it's opened. */
+export function useRequestEmailChange() {
+  return useMutation({
+    mutationFn: (input: { email: string; password: string }) =>
+      api.post<{ email: string }>('/me/email', input),
+  });
+}
+
+export function useConfirmEmailChange() {
+  return useMutation({
+    mutationFn: (token: string) => api.post<User>('/me/email/confirm', { token }),
+    onSuccess: (user) => {
+      // the link may be opened in a browser where someone else is signed in
+      const current = useAuthStore.getState().user;
+      if (current?.id === user.id) useAuthStore.setState({ user });
+    },
+  });
 }

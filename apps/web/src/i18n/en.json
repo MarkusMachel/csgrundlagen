@@ -384,6 +384,24 @@
     "role": {
       "admin": "admin",
       "user": "member"
+    },
+    "profile": {
+      "title": "Profile",
+      "save": "Save profile",
+      "saved": "Profile saved."
+    },
+    "email": {
+      "title": "Email address",
+      "current": "Your account uses {{email}}.",
+      "new": "New email address",
+      "send": "Send confirmation link",
+      "sent": "We sent a link to {{email}}. Your email changes once you open it (within 24 hours).",
+      "again": "Use a different address",
+      "confirmTitle": "Confirm your email",
+      "confirmed": "Done: your account now uses {{email}}.",
+      "invalidLink": "This confirmation link is invalid or has expired.",
+      "toAccount": "Go to your account",
+      "password": "Your password, to confirm"
     }
   },
   "review": {

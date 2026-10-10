@@ -38,6 +38,8 @@ interface Db {
   users: SeedUser[];
   /** Password reset token -> user id (single use). */
   resetTokens: Record<string, string>;
+  /** Email-change token -> pending change (single use). */
+  emailTokens: Record<string, { userId: string; email: string }>;
   /** Signed-in devices; a token stub `mock-token.<userId>[.<sessionId>]` names one. */
   sessions: MockSession[];
   /** Sign-in history, oldest first. */
@@ -150,6 +152,7 @@ function freshDb(): Db {
   return {
     users: seedUsers.map((u) => ({ ...u })),
     resetTokens: {},
+    emailTokens: {},
     sessions: seedSessions(),
     loginEvents: seedLoginEvents(),
     revokedSessions: [],

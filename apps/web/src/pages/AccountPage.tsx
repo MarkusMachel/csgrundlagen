@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import { ChangePasswordForm } from '@/features/auth';
+import { ChangeEmailForm, ChangePasswordForm, ProfileForm } from '@/features/auth';
 import { MyDevices } from '@/features/devices';
 import { YourData } from '@/features/privacy';
 import { useAuthStore } from '@/stores/useAuthStore';
@@ -24,6 +24,14 @@ export function AccountPage() {
           </span>
         </section>
       )}
+      <section className="stack" style={{ gap: 12 }}>
+        <h2 style={{ margin: 0 }}>{t('account.profile.title')}</h2>
+        <ProfileForm />
+      </section>
+      <section className="stack" style={{ gap: 12 }}>
+        <h2 style={{ margin: 0 }}>{t('account.email.title')}</h2>
+        <ChangeEmailForm />
+      </section>
       <section className="stack" style={{ gap: 12 }}>
         <h2 style={{ margin: 0 }}>{t('auth.changePassword')}</h2>
         <ChangePasswordForm />

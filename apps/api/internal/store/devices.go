@@ -319,6 +319,10 @@ func (s *Store) PurgeExpired(ctx context.Context) error {
 		`DELETE FROM password_reset_tokens WHERE expires_at < now() OR used_at IS NOT NULL`); err != nil {
 		return err
 	}
+	if _, err := s.pool.Exec(ctx,
+		`DELETE FROM email_change_tokens WHERE expires_at < now() OR used_at IS NOT NULL`); err != nil {
+		return err
+	}
 	_, err := s.pool.Exec(ctx, `DELETE FROM login_events WHERE created_at < $1`,
 		time.Now().Add(-LoginEventRetention))
 	return err

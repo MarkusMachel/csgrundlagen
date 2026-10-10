@@ -384,6 +384,24 @@
     "role": {
       "admin": "admin",
       "user": "membro"
+    },
+    "profile": {
+      "title": "Perfil",
+      "save": "Salvar perfil",
+      "saved": "Perfil salvo."
+    },
+    "email": {
+      "title": "Endereço de e-mail",
+      "current": "Sua conta usa {{email}}.",
+      "new": "Novo e-mail",
+      "send": "Enviar link de confirmação",
+      "sent": "Enviamos um link para {{email}}. Seu e-mail muda quando você abri-lo (em até 24 horas).",
+      "again": "Usar outro endereço",
+      "confirmTitle": "Confirme seu e-mail",
+      "confirmed": "Pronto: sua conta agora usa {{email}}.",
+      "invalidLink": "Este link de confirmação é inválido ou expirou.",
+      "toAccount": "Ir para sua conta",
+      "password": "Sua senha, para confirmar"
     }
   },
   "review": {

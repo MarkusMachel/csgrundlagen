@@ -3,6 +3,7 @@ import { authHandlers } from './auth';
 import { deviceHandlers } from './devices';
 import { materialHandlers } from './materials';
 import { privacyHandlers } from './privacy';
+import { profileHandlers } from './profile';
 import { questionHandlers } from './questions';
 import { reviewHandlers } from './review';
 import { searchHandlers } from './search';
@@ -13,6 +14,7 @@ export const handlers = [
   ...adminHandlers,
   ...deviceHandlers,
   ...privacyHandlers,
+  ...profileHandlers,
   // materialHandlers before questionHandlers so /questions/:id/materials
   // wins over the generic /questions/:id matcher ordering concerns —
   // MSW matches most-specific path first regardless, but keeping the
