@@ -95,6 +95,7 @@ Run from the repo root.
 | `npm run api:dev` | Run the Go API (`DATABASE_URL`, `PORT`) |
 | `npm run api:test` | Go tests — the integration suite needs Postgres running |
 | `npm run api:adduser` | Create a user with a hashed password |
+| `npm run contract` | Contract check: the MSW mocks must answer like the Go API (needs Postgres and Go) |
 
 Web CI gate order (§13.4): **typecheck → lint → test → build → e2e** — cheapest first.
 
@@ -111,6 +112,12 @@ internal/httpapi routes, auth middleware, handlers, integration tests
 - **Contract**: identical paths and JSON shapes to the MSW handlers in
   `apps/web/src/mocks/handlers` — the field names in `internal/store/models.go`
   match `apps/web/src/features/*/types.ts`. Errors are `{"message": "…"}`.
+  `npm run contract` checks this: `scripts/contract.sh` starts the API on a
+  throwaway database with one admin, then `apps/web/src/contract` runs one
+  scenario (sign-up to account deletion, about 90 requests, error cases included)
+  against the mocks and the API and fails on any step whose status code or
+  JSON shape differs (types, not values; see `contract/shape.ts`). When you
+  change an endpoint, change its mock too and add the step to `scenario.ts`.
 - **Auth**: `POST /api/auth/login` checks the bcrypt hash and sets a random
   session token as the `cft_session` cookie (HttpOnly, SameSite=Lax, Path=/api,
   Secure over HTTPS), so page scripts never see it; only its SHA-256 is stored

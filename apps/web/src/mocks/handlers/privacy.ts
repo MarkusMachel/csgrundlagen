@@ -53,17 +53,113 @@ export const privacyHandlers = [
     if (!me) return unauthorized();
     const mine = <T extends { userId: string }>(rows: T[]) =>
       rows.filter((r) => r.userId === me.id);
+    const profile = db.users.find((u) => u.id === me.id)!;
+    // Same layout as the API's export (store.ExportUserData): table rows
+    // with their column names.
     return HttpResponse.json({
       exportedAt: new Date().toISOString(),
       privacyPolicyVersion: PRIVACY_POLICY_VERSION,
-      profile: me,
-      sessions: mine(db.sessions),
-      signInHistory: mine(db.loginEvents),
-      consents: mine(db.consents),
-      answers: mine(db.answerLog),
-      bookmarks: mine(db.bookmarks),
-      notes: mine(db.notes),
-      bugReports: mine(db.bugReports),
+      profile: {
+        id: me.id,
+        name: me.name,
+        email: me.email,
+        avatarUrl: me.avatarUrl ?? null,
+        locale: me.locale,
+        role: me.role,
+        createdAt: profile.createdAt ?? null,
+        privacyVersion: me.privacyVersion ?? null,
+        privacyAcceptedAt: me.privacyVersion ? (profile.createdAt ?? null) : null,
+      },
+      sessions: mine(db.sessions).map((s) => ({
+        id: s.id,
+        created_at: s.createdAt,
+        last_seen_at: s.lastSeenAt,
+        expires_at: s.expiresAt,
+        ip: s.ip ?? null,
+        last_ip: s.lastIp ?? null,
+        user_agent: s.userAgent ?? null,
+        client_info: s.clientInfo ?? null,
+      })),
+      signInHistory: mine(db.loginEvents).map((e) => ({
+        kind: e.kind,
+        ip: e.ip ?? null,
+        user_agent: e.userAgent ?? null,
+        created_at: e.createdAt,
+      })),
+      consents: mine(db.consents).map((c) => ({
+        policy_version: c.policyVersion,
+        preferences: c.preferences,
+        device_details: c.deviceDetails,
+        ip: null,
+        user_agent: null,
+        created_at: c.createdAt,
+      })),
+      answers: mine(db.answerLog).map((a) => ({
+        question_id: a.questionId,
+        answer_value: null,
+        is_correct: a.correct,
+        test_attempt_id: null,
+        answered_at: a.at,
+      })),
+      reviewSchedule: Object.entries(db.reviews)
+        .filter(([key]) => key.startsWith(`${me.id}:`))
+        .map(([key, r]) => ({
+          question_id: key.slice(me.id.length + 1),
+          repetitions: r.repetitions,
+          interval_days: r.intervalDays,
+          ease: r.ease,
+          due_at: r.dueAt,
+          last_reviewed_at: null,
+        })),
+      bookmarks: mine(db.bookmarks).map((b) => ({
+        question_id: b.questionId,
+        created_at: b.createdAt,
+      })),
+      notes: mine(db.notes).map((n) => ({
+        question_id: n.questionId,
+        body: n.body,
+        updated_at: n.updatedAt,
+      })),
+      comments: mine(db.comments).map((c) => ({
+        id: c.id,
+        question_id: c.questionId,
+        body: c.body,
+        created_at: c.createdAt,
+      })),
+      commentReports: mine(db.commentReports).map((r) => ({
+        comment_id: r.commentId,
+        reason: r.reason,
+        note: r.note ?? null,
+        created_at: r.createdAt,
+      })),
+      bugReports: mine(db.bugReports).map((r) => ({
+        id: r.id,
+        question_id: r.questionId,
+        message: r.message,
+        status: r.status,
+        created_at: r.createdAt,
+      })),
+      tests: db.tests
+        .filter((t) => t.ownerId === me.id)
+        .map((t) => ({
+          id: t.id,
+          name: t.name,
+          timed: t.timed,
+          duration_minutes: t.durationMinutes ?? null,
+          shuffle_questions: t.shuffleQuestions,
+          shuffle_options: t.shuffleOptions,
+          created_at: t.createdAt,
+          question_ids: t.questionIds,
+        })),
+      testAttempts: mine(db.attempts).map((a) => ({
+        id: a.id,
+        test_id: a.testId,
+        mode: a.mode,
+        answers: a.answers,
+        score: a.score,
+        started_at: a.startedAt,
+        submitted_at: a.submittedAt ?? null,
+      })),
     });
   }),
 

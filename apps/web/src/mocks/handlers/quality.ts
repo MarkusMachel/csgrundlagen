@@ -59,7 +59,10 @@ export const qualityHandlers = [
     };
     const notes = db.optionFeedback[seed.question.id] ?? {};
     input.options = input.options?.map((o) => ({ ...o, ...notes[o.id] }));
-    return HttpResponse.json(input);
+    const relatedMaterialIds = db.materials
+      .filter((m) => m.relatedQuestionIds?.includes(seed.question.id))
+      .map((m) => m.id);
+    return HttpResponse.json({ ...input, relatedMaterialIds });
   }),
 
   http.get('/api/admin/quality', ({ request }) => {

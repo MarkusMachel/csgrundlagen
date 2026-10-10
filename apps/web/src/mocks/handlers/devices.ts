@@ -76,7 +76,14 @@ export const deviceHandlers = [
     if (!latestConsent(session.userId)?.deviceDetails) {
       return HttpResponse.json({ message: 'device details need consent' }, { status: 409 });
     }
-    session.clientInfo = (await request.json()) as ClientInfo;
+    const info = (await request.json()) as ClientInfo;
+    // the API leaves out empty values (Go omitempty), including touch: false
+    session.clientInfo = Object.fromEntries(
+      Object.entries(info).filter(
+        ([, v]) =>
+          v !== false && v !== '' && v !== 0 && v != null && !(Array.isArray(v) && !v.length),
+      ),
+    ) as ClientInfo;
     return new HttpResponse(null, { status: 204 });
   }),
 

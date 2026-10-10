@@ -57,9 +57,10 @@ export const moderationHandlers = [
       .filter((c) =>
         filter === 'hidden' ? !!c.hiddenAt : filter === 'all' ? true : open(c.id).length > 0,
       )
-      .map((c) => ({
+      .map(({ hiddenAt, ...c }) => ({
         ...c,
-        hidden: !!c.hiddenAt,
+        hidden: !!hiddenAt,
+        reportedByMe: db.commentReports.some((r) => r.commentId === c.id && r.userId === me?.id),
         questionPrompt:
           db.questions.find((q) => q.question.id === c.questionId)?.question.prompt ?? '',
         openReports: open(c.id).map((r) => ({

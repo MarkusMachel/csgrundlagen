@@ -15,7 +15,8 @@ import {
 } from './utils';
 import type { SeedUser } from '../seed/users';
 
-const publicUser = ({ password: _pw, ...user }: SeedUser) => user;
+// like the API's User: no password, no sign-up date
+const publicUser = ({ password: _pw, createdAt: _at, ...user }: SeedUser) => user;
 const invalid = (message: string) => HttpResponse.json({ message }, { status: 400 });
 const passwordProblem = (pw: string) =>
   pw.length < 8 ? 'password must be at least 8 characters' : null;

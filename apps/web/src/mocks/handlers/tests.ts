@@ -12,6 +12,9 @@ import { db, nextId, recordAnswer, statKeys } from '../db';
 import { feedbackFor } from './questions';
 import { currentUser, findQuestion, unauthorized } from './utils';
 
+const invalid = (message: string) => HttpResponse.json({ message }, { status: 400 });
+const isMode = (mode: unknown): mode is TestMode => mode === 'practice' || mode === 'exam';
+
 export const testHandlers = [
   http.get('/api/tests', ({ request }) => {
     const user = currentUser(request);
@@ -40,6 +43,18 @@ export const testHandlers = [
     const user = currentUser(request);
     if (!user) return unauthorized();
     const input = (await request.json()) as CreateTestInput;
+    // the API's checks (store.CreateTest)
+    if (!input.name?.trim()) return invalid('name is required');
+    if (!input.questionIds?.length) return invalid('select at least one question');
+    if (
+      new Set(input.questionIds).size !== input.questionIds.length ||
+      !input.questionIds.every((id) => db.questions.some((s) => s.question.id === id))
+    ) {
+      return invalid('questionIds must be unique, valid ids');
+    }
+    if (input.timed && !(input.durationMinutes && input.durationMinutes >= 1)) {
+      return invalid('timed tests need durationMinutes >= 1');
+    }
     const test = {
       id: nextId('t'),
       ownerId: user.id,
@@ -47,8 +62,8 @@ export const testHandlers = [
       questionIds: input.questionIds,
       timed: input.timed,
       durationMinutes: input.timed ? input.durationMinutes : undefined,
-      shuffleQuestions: input.shuffleQuestions,
-      shuffleOptions: input.shuffleOptions,
+      shuffleQuestions: input.shuffleQuestions ?? false,
+      shuffleOptions: input.shuffleOptions ?? false,
       createdAt: new Date().toISOString(),
     };
     db.tests.push(test);
@@ -94,6 +109,7 @@ export const testHandlers = [
       return HttpResponse.json({ message: 'Test not found' }, { status: 404 });
     }
     const next = (await request.json()) as TestDraft;
+    if (!isMode(next.mode)) return invalid('mode must be practice or exam');
     const key = `${params.id}:${user.id}`;
     const prev = db.drafts[key];
     // like the API: the clock keeps running unless it's a new attempt
@@ -130,6 +146,7 @@ export const testHandlers = [
       questionIds?: string[]; // subset for "Retry Incorrect Only" attempts
       startedAt?: string;
     };
+    if (!isMode(body.mode)) return invalid('mode must be practice or exam');
     const questionIds =
       body.questionIds && body.questionIds.length > 0 ? body.questionIds : test.questionIds;
     const questions = questionIds

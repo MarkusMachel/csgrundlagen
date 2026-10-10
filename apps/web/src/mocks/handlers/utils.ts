@@ -88,7 +88,7 @@ export function currentUser(request: Request): User | null {
   const session = currentSession(request);
   const user = session && db.users.find((u) => u.id === session.userId);
   if (!user) return null;
-  const { password: _password, ...publicUser } = user;
+  const { password: _password, createdAt: _createdAt, ...publicUser } = user;
   return publicUser;
 }
 

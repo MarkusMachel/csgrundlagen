@@ -31,6 +31,65 @@ export interface CreateQuestionBody {
   relatedMaterialIds?: string[];
 }
 
+const invalid = (message: string) => HttpResponse.json({ message }, { status: 400 });
+
+/** Mirrors store.NewQuestion.validate: the message of the first problem, or null. */
+export function questionProblem(n: Partial<CreateQuestionBody>): string | null {
+  if (!n.prompt?.trim() || !n.explanation?.trim()) return 'prompt and explanation are required';
+  if (!n.tags?.length) return 'at least one tag is required';
+  if (n.difficulty && !['easy', 'medium', 'hard'].includes(n.difficulty)) {
+    return 'difficulty must be easy, medium or hard';
+  }
+  const seen = new Set<string>();
+  if (n.type === 'multiple-choice' || n.type === 'multi-select' || n.type === 'ordering') {
+    const options = n.options ?? [];
+    if (options.length < 2 || options.length > 5)
+      return 'questions with options need 2 to 5 of them';
+    for (const o of options) {
+      if (!/^[A-E]$/.test(o.id) || seen.has(o.id)) return 'option ids must be unique letters A–E';
+      if (!o.label?.trim()) return 'option labels cannot be empty';
+      seen.add(o.id);
+    }
+  }
+  switch (n.type) {
+    case 'multiple-choice':
+      return n.correctOptionId && seen.has(n.correctOptionId)
+        ? null
+        : 'correctOptionId must match one of the options';
+    case 'multi-select': {
+      const ids = n.correctOptionIds ?? [];
+      if (!ids.length) return 'multi-select questions need at least one correct option';
+      return ids.every((id) => seen.has(id)) && new Set(ids).size === ids.length
+        ? null
+        : 'correctOptionIds must be distinct options of the question';
+    }
+    case 'true-false':
+      return typeof n.correctAnswer === 'boolean'
+        ? null
+        : 'true-false questions need correctAnswer';
+    case 'output':
+      if (!n.code?.trim()) return 'output questions need the code to predict';
+      if (!n.codeLanguage?.trim() || n.codeLanguage.length > 20) {
+        return 'output questions need a codeLanguage such as js or go';
+      }
+      return n.expectedOutput === undefined ? 'output questions need expectedOutput' : null;
+    case 'ordering':
+    case 'flashcard':
+      return null;
+    default:
+      return 'type must be multiple-choice, true-false, multi-select, ordering, output or flashcard';
+  }
+}
+
+/** Like the API: an option id, a boolean, a list of option ids or text. */
+export function isAnswerValue(answer: unknown): answer is AnswerValue {
+  return (
+    typeof answer === 'string' ||
+    typeof answer === 'boolean' ||
+    (Array.isArray(answer) && answer.every((a) => typeof a === 'string'))
+  );
+}
+
 export const questionHandlers = [
   http.get('/api/questions/daily', ({ request }) => {
     // Deterministic by calendar date so it survives refreshes (§7).
@@ -137,7 +196,10 @@ export const questionHandlers = [
     const question = findQuestion(String(params.id), 'en');
     if (!question) return HttpResponse.json({ message: 'Question not found' }, { status: 404 });
 
-    const { answer } = (await request.json()) as { answer: AnswerValue };
+    const { answer } = (await request.json()) as { answer: unknown };
+    if (!isAnswerValue(answer)) {
+      return invalid('answer must be an option id, a boolean, a list of option ids or text');
+    }
     const correctAnswer = correctAnswerOf(question);
     const correct = isAnswerCorrect(question, answer);
     const nextReviewAt = recordAnswer(
@@ -175,6 +237,7 @@ export const questionHandlers = [
     const user = currentUser(request);
     if (!user) return unauthorized();
     const { body } = (await request.json()) as { body: string };
+    if (!body?.trim()) return invalid('comment body is required');
     const comment = {
       id: nextId('c'),
       questionId: String(params.id),
@@ -184,7 +247,7 @@ export const questionHandlers = [
       createdAt: new Date().toISOString(),
     };
     db.comments.push(comment);
-    return HttpResponse.json(comment, { status: 201 });
+    return HttpResponse.json({ ...comment, hidden: false, reportedByMe: false }, { status: 201 });
   }),
 
   http.get('/api/questions/:id/notes', ({ request, params }) => {
@@ -213,7 +276,7 @@ export const questionHandlers = [
       updatedAt: now,
     };
     db.notes.push(note);
-    return HttpResponse.json(note, { status: 201 });
+    return HttpResponse.json(note); // 200 like the API's upsert, new or not
   }),
 
   http.get('/api/questions/:id/stats', ({ request, params }) => {
@@ -308,6 +371,8 @@ export const questionHandlers = [
     if (!user) return unauthorized();
     if (user.role !== 'admin') return forbidden();
     const body = (await request.json()) as CreateQuestionBody;
+    const problem = questionProblem(body);
+    if (problem) return invalid(problem);
     const question = buildQuestion(nextId('q'), body);
     db.questions.push({ question });
     recordRevision(question.id, 'created', body, user.name);
@@ -322,6 +387,8 @@ export const questionHandlers = [
     const seed = db.questions.find((s) => s.question.id === params.id);
     if (!seed) return HttpResponse.json({ message: 'Not found' }, { status: 404 });
     const body = (await request.json()) as CreateQuestionBody;
+    const problem = questionProblem(body);
+    if (problem) return invalid(problem);
     if (!db.revisions.some((r) => r.questionId === seed.question.id)) {
       recordRevision(seed.question.id, 'original', asInput(seed.question));
     }
