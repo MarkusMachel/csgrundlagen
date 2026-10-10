@@ -111,6 +111,9 @@ func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
 	mux.HandleFunc("DELETE /api/tests/{id}", s.authed(s.deleteTest))
 	mux.HandleFunc("GET /api/tests/{id}/attempts", s.authed(s.listAttempts))
 	mux.HandleFunc("POST /api/tests/{id}/submit", s.authed(s.submitTest))
+	mux.HandleFunc("GET /api/tests/{id}/draft", s.authed(s.getDraft))
+	mux.HandleFunc("PUT /api/tests/{id}/draft", s.authed(s.saveDraft))
+	mux.HandleFunc("DELETE /api/tests/{id}/draft", s.authed(s.deleteDraft))
 
 	mux.HandleFunc("GET /api/materials", s.listMaterials)
 	mux.HandleFunc("POST /api/materials", s.admin(s.createMaterial))

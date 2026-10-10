@@ -211,7 +211,8 @@
     "score": "Pontuação",
     "mode": "Modo",
     "date": "Data",
-    "deleteTest": "Excluir teste"
+    "deleteTest": "Excluir teste",
+    "resume": "Continuar ({{answered}}/{{total}} respondidas)"
   },
   "takeTest": {
     "chooseMode": "Escolha um modo",
@@ -226,7 +227,16 @@
     "yourScore": "Você acertou {{score}} de {{total}}",
     "retryIncorrect": "Refazer Apenas as Erradas",
     "backToTests": "Voltar para Meus Testes",
-    "questionOf": "Pergunta {{current}} de {{total}}"
+    "questionOf": "Pergunta {{current}} de {{total}}",
+    "resume": {
+      "title": "Você tem uma tentativa inacabada",
+      "summary": "{{mode}}, {{answered}} de {{total}} respondidas, salva {{when}}.",
+      "timeLeft": "Restam cerca de {{minutes}} min no relógio.",
+      "timeUp": "O tempo acabou enquanto você estava fora.",
+      "continue": "Continuar",
+      "submitNow": "Abrir e enviar",
+      "startOver": "Descartar e recomeçar"
+    }
   },
   "bookmarks": {
     "title": "Favoritos",

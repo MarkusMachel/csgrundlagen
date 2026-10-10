@@ -88,7 +88,9 @@ function TestCard({ test }: { test: CustomTest }) {
           onClick={() => navigate(`/tests/${test.id}/take`)}
         >
           <Play size={15} aria-hidden />
-          {t('myTests.take')}
+          {test.draft
+            ? t('myTests.resume', { answered: test.draft.answered, total: test.draft.total })
+            : t('myTests.take')}
         </button>
         <button
           type="button"

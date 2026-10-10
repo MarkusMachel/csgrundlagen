@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -6,19 +6,23 @@ import {
   ResultsScreen,
   TestModePicker,
   TestTimer,
+  useDiscardDraft,
+  useSaveDraft,
   useSubmitTest,
   useTest,
   useTestAttemptStore,
+  useTestDraft,
   type TestMode,
   type TestSubmitResult,
 } from '@/features/custom-tests';
 import { QuestionCard, useQuestions, type Question } from '@/features/questions';
 import { ErrorState, Spinner } from '@/shared/ui';
+import { formatRelative } from '@/shared/utils/relativeTime';
 import { seededShuffle } from '@/shared/utils/shuffle';
 import { useUIStore } from '@/stores/useUIStore';
 
 export function TakeTestPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const { id: testId = '' } = useParams();
 
@@ -32,8 +36,41 @@ export function TakeTestPage() {
   const attempt = useTestAttemptStore();
   const submitTest = useSubmitTest(testId);
   const [result, setResult] = useState<TestSubmitResult | null>(null);
+  const draft = useTestDraft(testId);
+  const saveDraft = useSaveDraft(testId);
+  const discardDraft = useDiscardDraft(testId);
 
   const started = attempt.testId === testId && attempt.mode !== null;
+
+  // Autosave the attempt shortly after each change, so it can be resumed.
+  const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastSave = useRef<Promise<unknown>>(Promise.resolve());
+  const submitting = useRef(false);
+  useEffect(() => {
+    if (!started || result || submitting.current || !attempt.mode || !attempt.startedAt) return;
+    const snapshot = {
+      mode: attempt.mode,
+      questionIds: attempt.questionIds ?? undefined,
+      answers: attempt.answers,
+      shuffleSeed: attempt.shuffleSeed,
+      startedAt: attempt.startedAt,
+    };
+    saveTimer.current = setTimeout(() => {
+      lastSave.current = saveDraft.mutateAsync(snapshot).catch(() => undefined);
+    }, 500);
+    return () => {
+      if (saveTimer.current) clearTimeout(saveTimer.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    started,
+    result,
+    attempt.mode,
+    attempt.answers,
+    attempt.questionIds,
+    attempt.shuffleSeed,
+    attempt.startedAt,
+  ]);
 
   // Question order is derived once per attempt from the stored seed (§9.5).
   const orderedQuestions: Question[] = useMemo(() => {
@@ -68,8 +105,13 @@ export function TakeTestPage() {
     );
   };
 
-  const handleSubmit = () => {
-    if (!attempt.mode || submitTest.isPending || result) return;
+  const handleSubmit = async () => {
+    if (!attempt.mode || submitTest.isPending || result || submitting.current) return;
+    // Stop autosaving and let a save in flight land first, so it can't
+    // re-create the draft that submitting removes.
+    submitting.current = true;
+    if (saveTimer.current) clearTimeout(saveTimer.current);
+    await lastSave.current;
     submitTest.mutate(
       {
         mode: attempt.mode,
@@ -77,7 +119,12 @@ export function TakeTestPage() {
         questionIds: attempt.questionIds ?? undefined,
         startedAt: attempt.startedAt ?? undefined,
       },
-      { onSuccess: setResult },
+      {
+        onSuccess: setResult,
+        onSettled: () => {
+          submitting.current = false;
+        },
+      },
     );
   };
 
@@ -107,13 +154,60 @@ export function TakeTestPage() {
   }
 
   if (!started) {
+    if (draft.isPending) return <Spinner center />;
+    const saved = draft.data;
+    const total = saved?.questionIds?.length || test.questionIds.length;
+    const minutesLeft =
+      saved && test.timed && test.durationMinutes
+        ? test.durationMinutes - (Date.now() - new Date(saved.startedAt).getTime()) / 60000
+        : null;
     return (
       <div className="stack">
         <h1>
           <span className="tok-com">{'// '}</span>
           {test.name}
         </h1>
-        <TestModePicker onStart={(mode: TestMode) => attempt.start(testId, mode)} />
+        {saved ? (
+          <div className="card stack resume-card" style={{ gap: 10 }}>
+            <h2 style={{ margin: 0 }}>{t('takeTest.resume.title')}</h2>
+            <p className="muted" style={{ margin: 0 }}>
+              {t('takeTest.resume.summary', {
+                mode: t(`takeTest.${saved.mode}`),
+                answered: Object.keys(saved.answers).length,
+                total,
+                when: formatRelative(saved.updatedAt ?? saved.startedAt, i18n.language),
+              })}
+              {minutesLeft !== null &&
+                ' ' +
+                  (minutesLeft > 0
+                    ? t('takeTest.resume.timeLeft', {
+                        minutes: Math.max(1, Math.floor(minutesLeft)),
+                      })
+                    : t('takeTest.resume.timeUp'))}
+            </p>
+            <div className="hstack" style={{ gap: 8, flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                className="btn btn--primary"
+                onClick={() => attempt.resume(testId, saved)}
+              >
+                {minutesLeft !== null && minutesLeft <= 0
+                  ? t('takeTest.resume.submitNow')
+                  : t('takeTest.resume.continue')}
+              </button>
+              <button
+                type="button"
+                className="btn btn--ghost"
+                disabled={discardDraft.isPending}
+                onClick={() => discardDraft.mutate()}
+              >
+                {t('takeTest.resume.startOver')}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <TestModePicker onStart={(mode: TestMode) => attempt.start(testId, mode)} />
+        )}
       </div>
     );
   }
@@ -126,7 +220,11 @@ export function TakeTestPage() {
           {test.name} <span className="tok-com">— {t(`takeTest.${attempt.mode}`)}</span>
         </h1>
         {test.timed && test.durationMinutes && (
-          <TestTimer durationMinutes={test.durationMinutes} onExpire={handleSubmit} />
+          <TestTimer
+            durationMinutes={test.durationMinutes}
+            startedAt={attempt.startedAt}
+            onExpire={() => void handleSubmit()}
+          />
         )}
       </div>
 
@@ -149,7 +247,7 @@ export function TakeTestPage() {
       <button
         type="button"
         className="btn btn--primary"
-        onClick={handleSubmit}
+        onClick={() => void handleSubmit()}
         disabled={submitTest.isPending}
         style={{ alignSelf: 'flex-start' }}
         data-testid="submit-test"

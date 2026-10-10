@@ -211,7 +211,8 @@
     "score": "Score",
     "mode": "Mode",
     "date": "Date",
-    "deleteTest": "Delete test"
+    "deleteTest": "Delete test",
+    "resume": "Resume ({{answered}}/{{total}} answered)"
   },
   "takeTest": {
     "chooseMode": "Choose a mode",
@@ -226,7 +227,16 @@
     "yourScore": "You scored {{score}} of {{total}}",
     "retryIncorrect": "Retry Incorrect Only",
     "backToTests": "Back to My Tests",
-    "questionOf": "Question {{current}} of {{total}}"
+    "questionOf": "Question {{current}} of {{total}}",
+    "resume": {
+      "title": "You have an unfinished attempt",
+      "summary": "{{mode}}, {{answered}} of {{total}} answered, last saved {{when}}.",
+      "timeLeft": "About {{minutes}} min left on the clock.",
+      "timeUp": "The time ran out while you were away.",
+      "continue": "Resume",
+      "submitNow": "Open and submit",
+      "startOver": "Discard and start over"
+    }
   },
   "bookmarks": {
     "title": "Bookmarks",

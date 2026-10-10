@@ -1,4 +1,4 @@
-import type { CustomTest, TestAttempt } from '@/features/custom-tests/types';
+import type { CustomTest, TestAttempt, TestDraft } from '@/features/custom-tests/types';
 import type { MaterialItem } from '@/features/materials/types';
 import type {
   AnswerValue,
@@ -67,6 +67,8 @@ interface Db {
   notes: QuestionNote[];
   bugReports: BugReport[];
   tests: CustomTest[];
+  /** Unfinished attempts, keyed `${testId}:${userId}`. */
+  drafts: Record<string, TestDraft & { updatedAt: string }>;
   attempts: TestAttempt[];
   userQuestionStats: UserQuestionStat[];
   /** Spaced-repetition state, keyed `${userId}:${questionId}`. */
@@ -166,6 +168,7 @@ function freshDb(): Db {
     sessions: seedSessions(),
     loginEvents: seedLoginEvents(),
     revokedSessions: [],
+    drafts: {},
     commentReports: [],
     consents: [],
     questions: seedQuestions.map((s) => ({

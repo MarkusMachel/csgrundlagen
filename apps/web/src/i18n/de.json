@@ -211,7 +211,8 @@
     "score": "Ergebnis",
     "mode": "Modus",
     "date": "Datum",
-    "deleteTest": "Test löschen"
+    "deleteTest": "Test löschen",
+    "resume": "Fortsetzen ({{answered}}/{{total}} beantwortet)"
   },
   "takeTest": {
     "chooseMode": "Modus wählen",
@@ -226,7 +227,16 @@
     "yourScore": "Du hast {{score}} von {{total}} erreicht",
     "retryIncorrect": "Nur falsche wiederholen",
     "backToTests": "Zurück zu Meine Tests",
-    "questionOf": "Frage {{current}} von {{total}}"
+    "questionOf": "Frage {{current}} von {{total}}",
+    "resume": {
+      "title": "Du hast einen unfertigen Versuch",
+      "summary": "{{mode}}, {{answered}} von {{total}} beantwortet, zuletzt gespeichert {{when}}.",
+      "timeLeft": "Noch etwa {{minutes}} Min. auf der Uhr.",
+      "timeUp": "Die Zeit ist abgelaufen, während du weg warst.",
+      "continue": "Fortsetzen",
+      "submitNow": "Öffnen und abgeben",
+      "startOver": "Verwerfen und neu starten"
+    }
   },
   "bookmarks": {
     "title": "Lesezeichen",

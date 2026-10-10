@@ -1,6 +1,11 @@
 import { http, HttpResponse } from 'msw';
 
-import { scoreAnswers, type CreateTestInput, type TestMode } from '@/features/custom-tests';
+import {
+  scoreAnswers,
+  type CreateTestInput,
+  type TestDraft,
+  type TestMode,
+} from '@/features/custom-tests';
 import type { AnswerValue, Question } from '@/features/questions/types';
 
 import { db, nextId, recordAnswer, statKeys } from '../db';
@@ -12,7 +17,21 @@ export const testHandlers = [
     if (!user) return unauthorized();
     const tests = db.tests
       .filter((t) => t.ownerId === user.id)
-      .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+      .map((t) => {
+        const d = db.drafts[`${t.id}:${user.id}`];
+        return d
+          ? {
+              ...t,
+              draft: {
+                answered: Object.keys(d.answers).length,
+                total: d.questionIds?.length || t.questionIds.length,
+                startedAt: d.startedAt,
+                updatedAt: d.updatedAt,
+              },
+            }
+          : t;
+      });
     return HttpResponse.json(tests);
   }),
 
@@ -61,11 +80,48 @@ export const testHandlers = [
     return HttpResponse.json(attempts);
   }),
 
+  http.get('/api/tests/:id/draft', ({ request, params }) => {
+    const user = currentUser(request);
+    if (!user) return unauthorized();
+    return HttpResponse.json(db.drafts[`${params.id}:${user.id}`] ?? null);
+  }),
+
+  http.put('/api/tests/:id/draft', async ({ request, params }) => {
+    const user = currentUser(request);
+    if (!user) return unauthorized();
+    if (!db.tests.some((t) => t.id === params.id && t.ownerId === user.id)) {
+      return HttpResponse.json({ message: 'Test not found' }, { status: 404 });
+    }
+    const next = (await request.json()) as TestDraft;
+    const key = `${params.id}:${user.id}`;
+    const prev = db.drafts[key];
+    // like the API: the clock keeps running unless it's a new attempt
+    const sameAttempt =
+      prev &&
+      prev.mode === next.mode &&
+      prev.shuffleSeed === next.shuffleSeed &&
+      (prev.questionIds ?? []).join() === (next.questionIds ?? []).join();
+    db.drafts[key] = {
+      ...next,
+      startedAt: sameAttempt ? prev.startedAt : next.startedAt,
+      updatedAt: new Date().toISOString(),
+    };
+    return new HttpResponse(null, { status: 204 });
+  }),
+
+  http.delete('/api/tests/:id/draft', ({ request, params }) => {
+    const user = currentUser(request);
+    if (!user) return unauthorized();
+    delete db.drafts[`${params.id}:${user.id}`];
+    return new HttpResponse(null, { status: 204 });
+  }),
+
   http.post('/api/tests/:id/submit', async ({ request, params }) => {
     const user = currentUser(request);
     if (!user) return unauthorized();
     const test = db.tests.find((t) => t.id === params.id && t.ownerId === user.id);
     if (!test) return HttpResponse.json({ message: 'Test not found' }, { status: 404 });
+    delete db.drafts[`${test.id}:${user.id}`];
 
     const body = (await request.json()) as {
       mode: TestMode;

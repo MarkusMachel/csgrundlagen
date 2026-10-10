@@ -12,6 +12,18 @@ export interface CustomTest {
   shuffleQuestions: boolean;
   shuffleOptions: boolean;
   createdAt: string;
+  /** An unfinished attempt that can be resumed. */
+  draft?: { answered: number; total: number; startedAt: string; updatedAt: string };
+}
+
+/** An unfinished attempt as saved on the server. */
+export interface TestDraft {
+  mode: TestMode;
+  questionIds?: string[];
+  answers: Record<string, AnswerValue>;
+  shuffleSeed: number;
+  startedAt: string;
+  updatedAt?: string;
 }
 
 export interface TestAttempt {

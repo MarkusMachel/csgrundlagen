@@ -178,6 +178,8 @@ type CustomTest struct {
 	ShuffleQuestions bool      `json:"shuffleQuestions"`
 	ShuffleOptions   bool      `json:"shuffleOptions"`
 	CreatedAt        time.Time `json:"createdAt"`
+	// Draft summarises an unfinished attempt, if there is one.
+	Draft *DraftSummary `json:"draft,omitempty"`
 }
 
 type TestAttempt struct {
