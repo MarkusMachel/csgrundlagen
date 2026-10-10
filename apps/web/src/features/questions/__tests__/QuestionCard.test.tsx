@@ -113,10 +113,11 @@ describe('QuestionCard', () => {
     expect(screen.queryByRole('button', { name: /Strike out/ })).not.toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Commented Answer', expanded: false }));
+    // the tabs load on first open: wait for them before checking what's missing
+    expect(await screen.findByRole('tab', { name: 'My Notes' })).toBeInTheDocument();
     expect(screen.queryByRole('tab', { name: 'Commented Answer' })).not.toBeInTheDocument();
     expect(screen.queryByRole('tab', { name: 'Stats' })).not.toBeInTheDocument();
     expect(screen.queryByRole('tab', { name: 'Comments' })).not.toBeInTheDocument();
-    expect(screen.getByRole('tab', { name: 'My Notes' })).toBeInTheDocument();
   });
 
   it('shows scissors and all tabs in practice test mode', async () => {
@@ -127,7 +128,7 @@ describe('QuestionCard', () => {
     );
     expect(screen.getByRole('button', { name: 'Strike out option A' })).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Commented Answer', expanded: false }));
-    expect(screen.getByRole('tab', { name: 'Commented Answer' })).toBeInTheDocument();
+    expect(await screen.findByRole('tab', { name: 'Commented Answer' })).toBeInTheDocument();
     expect(screen.getByRole('tab', { name: 'Stats' })).toBeInTheDocument();
   });
 

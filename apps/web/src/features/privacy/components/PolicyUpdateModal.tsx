@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
-import { Modal } from '@/shared/ui';
+import { Modal, Spinner } from '@/shared/ui';
 import { useAuthStore } from '@/stores/useAuthStore';
 
 import { PRIVACY_POLICY_VERSION } from '../consent';
-import { PrivacyPolicy } from './PrivacyPolicy';
+// The policy text (three languages) loads only when someone opens it.
+const PrivacyPolicy = lazy(() =>
+  import('./PrivacyPolicy').then((m) => ({ default: m.PrivacyPolicy })),
+);
 import { useAcceptPolicy } from '../hooks/usePrivacy';
 
 /**
@@ -52,7 +55,9 @@ export function PolicyUpdateModal() {
       )}
       {reading && (
         <div className="modal__scroll">
-          <PrivacyPolicy />
+          <Suspense fallback={<Spinner />}>
+            <PrivacyPolicy />
+          </Suspense>
         </div>
       )}
     </Modal>

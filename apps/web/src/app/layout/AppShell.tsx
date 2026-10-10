@@ -1,5 +1,5 @@
 import { ArrowDown } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
@@ -57,7 +57,9 @@ export function AppShell() {
     <>
       <TopBar />
       <main className="app-main">
-        <Outlet />
+        <Suspense fallback={<Spinner center />}>
+          <Outlet />
+        </Suspense>
       </main>
       {!nearBottom && (
         <button

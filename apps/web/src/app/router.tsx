@@ -1,32 +1,48 @@
+import { lazy, Suspense, type ComponentType } from 'react';
 import { createBrowserRouter, Outlet } from 'react-router-dom';
 
 import { ConsentLayer } from '@/features/privacy';
-import { AccountPage } from '@/pages/AccountPage';
-import { AdminPage } from '@/pages/AdminPage';
-import { BookmarksPage } from '@/pages/BookmarksPage';
-import { BuildTestPage } from '@/pages/BuildTestPage';
-import { ConfirmEmailPage } from '@/pages/ConfirmEmailPage';
-import { CuratedMaterialPage } from '@/pages/CuratedMaterialPage';
-import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage';
 import { HomePage } from '@/pages/HomePage';
-import { LoginPage } from '@/pages/LoginPage';
-import { MyTestsPage } from '@/pages/MyTestsPage';
-import { PrivacyPage } from '@/pages/PrivacyPage';
-import { ProgressPage } from '@/pages/ProgressPage';
-import { QuestionPage } from '@/pages/QuestionPage';
-import { ResetPasswordPage } from '@/pages/ResetPasswordPage';
-import { ReviewPage } from '@/pages/ReviewPage';
-import { SignUpPage } from '@/pages/SignUpPage';
-import { TakeTestPage } from '@/pages/TakeTestPage';
-import { WeakSpotsPage } from '@/pages/WeakSpotsPage';
+import { Spinner } from '@/shared/ui';
 
 import { AppShell } from './layout/AppShell';
+
+/**
+ * Pages load on first visit, so the first screen doesn't download every page
+ * (Home, where signed-in users land, stays in the main bundle).
+ */
+function page<K extends string>(load: () => Promise<Record<K, ComponentType>>, name: K) {
+  return lazy(() => load().then((m) => ({ default: m[name] })));
+}
+
+const AccountPage = page(() => import('@/pages/AccountPage'), 'AccountPage');
+const AdminPage = page(() => import('@/pages/AdminPage'), 'AdminPage');
+const BookmarksPage = page(() => import('@/pages/BookmarksPage'), 'BookmarksPage');
+const BuildTestPage = page(() => import('@/pages/BuildTestPage'), 'BuildTestPage');
+const ConfirmEmailPage = page(() => import('@/pages/ConfirmEmailPage'), 'ConfirmEmailPage');
+const CuratedMaterialPage = page(
+  () => import('@/pages/CuratedMaterialPage'),
+  'CuratedMaterialPage',
+);
+const ForgotPasswordPage = page(() => import('@/pages/ForgotPasswordPage'), 'ForgotPasswordPage');
+const LoginPage = page(() => import('@/pages/LoginPage'), 'LoginPage');
+const MyTestsPage = page(() => import('@/pages/MyTestsPage'), 'MyTestsPage');
+const PrivacyPage = page(() => import('@/pages/PrivacyPage'), 'PrivacyPage');
+const ProgressPage = page(() => import('@/pages/ProgressPage'), 'ProgressPage');
+const QuestionPage = page(() => import('@/pages/QuestionPage'), 'QuestionPage');
+const ResetPasswordPage = page(() => import('@/pages/ResetPasswordPage'), 'ResetPasswordPage');
+const ReviewPage = page(() => import('@/pages/ReviewPage'), 'ReviewPage');
+const SignUpPage = page(() => import('@/pages/SignUpPage'), 'SignUpPage');
+const TakeTestPage = page(() => import('@/pages/TakeTestPage'), 'TakeTestPage');
+const WeakSpotsPage = page(() => import('@/pages/WeakSpotsPage'), 'WeakSpotsPage');
 
 /** Wraps every page, signed in or not, so the consent banner is everywhere. */
 function RootLayout() {
   return (
     <>
-      <Outlet />
+      <Suspense fallback={<Spinner center />}>
+        <Outlet />
+      </Suspense>
       <ConsentLayer />
     </>
   );

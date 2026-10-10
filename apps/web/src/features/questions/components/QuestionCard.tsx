@@ -1,8 +1,8 @@
 import { Bookmark, ChevronDown } from 'lucide-react';
-import { useState, type ReactNode } from 'react';
+import { lazy, Suspense, useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { CodeBlock, InlineText } from '@/shared/ui';
+import { CodeBlock, InlineText, Spinner } from '@/shared/ui';
 import { formatRelative } from '@/shared/utils/relativeTime';
 import { parseRichText, type RichSegment } from '@/shared/utils/richText';
 import { randomSeed } from '@/shared/utils/shuffle';
@@ -18,7 +18,10 @@ import type {
   TestSubMode,
 } from '../types';
 import { AnswerOptions, type AnswerReveal } from './AnswerOptions';
-import { QuestionTabs } from './ExpandableTabs/QuestionTabs';
+// The tabs (explanation, comments, notes, …) load when first opened.
+const QuestionTabs = lazy(() =>
+  import('./ExpandableTabs/QuestionTabs').then((m) => ({ default: m.QuestionTabs })),
+);
 import { initialOrder, OrderingInput } from './OrderingInput';
 import { OutputInput } from './OutputInput';
 import { RunnableCode } from './RunnableCode';
@@ -321,11 +324,13 @@ export function QuestionCard({
       </div>
 
       {tabsOpen && (
-        <QuestionTabs
-          question={question}
-          explanationRevealed={explanationRevealed}
-          hideRevealingTabs={hideRevealingTabs}
-        />
+        <Suspense fallback={<Spinner />}>
+          <QuestionTabs
+            question={question}
+            explanationRevealed={explanationRevealed}
+            hideRevealingTabs={hideRevealingTabs}
+          />
+        </Suspense>
       )}
     </article>
   );
