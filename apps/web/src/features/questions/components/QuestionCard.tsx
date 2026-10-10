@@ -2,6 +2,9 @@ import { Bookmark, ChevronDown } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { CodeBlock, InlineText } from '@/shared/ui';
+import { parseRichText, type RichSegment } from '@/shared/utils/richText';
+
 import { useIsBookmarked, useToggleBookmark } from '../hooks/useBookmark';
 import { useSubmitAnswer } from '../hooks/useSubmitAnswer';
 import type { AnswerValue, Question, QuestionMode, TestSubMode } from '../types';
@@ -86,7 +89,8 @@ export function QuestionCard({
     reveal = { correctAnswer: submitAnswer.data.correctAnswer, givenAnswer: currentAnswer };
   }
 
-  const showScissors = (mode === 'feed' || mode === 'pick' || mode === 'test') && !isExam && !reveal;
+  const showScissors =
+    (mode === 'feed' || mode === 'pick' || mode === 'test') && !isExam && !reveal;
   const showSubmit = mode === 'feed';
   // Practice keeps explanations reachable as the user goes (§15 open decision).
   const explanationRevealed =
@@ -94,8 +98,18 @@ export function QuestionCard({
   const hideRevealingTabs = isExam;
   const answersDisabled = mode === 'review' || (mode === 'feed' && submitted);
 
-  const breadcrumb = [...question.tags.map((tag) => tag.toLowerCase()), question.id];
-  const promptLines = question.prompt.split('\n').filter((line) => line.trim().length > 0);
+  // Short id like a git hash: the UUID up to its first hyphen (full id in the tooltip).
+  const shortId = question.id.split('-')[0];
+  const breadcrumb = [...question.tags.map((tag) => tag.toLowerCase()), shortId];
+  // One numbered line per line of prose; a fenced code block takes a single line.
+  const promptRows = parseRichText(question.prompt).flatMap<RichSegment>((segment) =>
+    segment.kind === 'code'
+      ? [segment]
+      : segment.text
+          .split('\n')
+          .filter((line) => line.trim().length > 0)
+          .map((line) => ({ kind: 'text' as const, text: line })),
+  );
 
   return (
     <article className="editor-pane" data-testid={`question-card-${question.id}`}>
@@ -103,7 +117,10 @@ export function QuestionCard({
         {heading && <span style={{ color: 'var(--text)', fontWeight: 600 }}>{heading}</span>}
         <span className="editor-pane__breadcrumb">
           {breadcrumb.map((part, i) => (
-            <span key={`${part}-${i}`}>
+            <span
+              key={`${part}-${i}`}
+              title={i === breadcrumb.length - 1 ? question.id : undefined}
+            >
               {i > 0 && <span className="crumb-sep"> / </span>}
               {part}
             </span>
@@ -128,14 +145,21 @@ export function QuestionCard({
           <CodeLine>
             <span className="tok-com">
               {'// '}
-              {t('question.difficultyLabel').toLowerCase()}: {t(`question.difficulty.${question.difficulty}`)}
+              {t('question.difficultyLabel').toLowerCase()}:{' '}
+              {t(`question.difficulty.${question.difficulty}`)}
             </span>
           </CodeLine>
         )}
 
-        {promptLines.map((line, i) => (
+        {promptRows.map((row, i) => (
           <CodeLine key={i}>
-            <span style={{ fontWeight: 500 }}>{line}</span>
+            {row.kind === 'code' ? (
+              <CodeBlock code={row.code} lang={row.lang} />
+            ) : (
+              <span style={{ fontWeight: 500 }}>
+                <InlineText text={row.text} />
+              </span>
+            )}
           </CodeLine>
         ))}
 

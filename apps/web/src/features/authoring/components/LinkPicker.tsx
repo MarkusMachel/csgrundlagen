@@ -34,8 +34,7 @@ export function LinkPicker({ label, hint, options, value, onChange, emptyText }:
     if (!debounced) return options;
     return options.filter(
       (o) =>
-        o.label.toLowerCase().includes(debounced) ||
-        o.sublabel?.toLowerCase().includes(debounced),
+        o.label.toLowerCase().includes(debounced) || o.sublabel?.toLowerCase().includes(debounced),
     );
   }, [options, debounced]);
 

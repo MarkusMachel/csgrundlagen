@@ -1,0 +1,1702 @@
+{
+  "name": "50 design, architecture and pattern questions",
+  "materials": [
+    {
+      "key": "arch-principles",
+      "type": "article",
+      "title": "Architectural principles",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles",
+      "author": "Microsoft Learn",
+      "description": "SOLID, separation of concerns and other principles for maintainable apps."
+    },
+    {
+      "key": "lsp",
+      "type": "article",
+      "title": "Liskov substitution principle",
+      "url": "https://en.wikipedia.org/wiki/Liskov_substitution_principle",
+      "author": "Wikipedia",
+      "description": "Subtypes must honour the contract of their base type."
+    },
+    {
+      "key": "composition",
+      "type": "article",
+      "title": "Composition over inheritance",
+      "url": "https://en.wikipedia.org/wiki/Composition_over_inheritance",
+      "author": "Wikipedia",
+      "description": "Why composing behaviour usually beats deep class hierarchies."
+    },
+    {
+      "key": "yagni",
+      "type": "article",
+      "title": "Yagni",
+      "url": "https://martinfowler.com/bliki/Yagni.html",
+      "author": "Martin Fowler",
+      "description": "Don't build capabilities for presumptive future needs."
+    },
+    {
+      "key": "rule-of-three",
+      "type": "article",
+      "title": "Rule of three (computer programming)",
+      "url": "https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming)",
+      "author": "Wikipedia",
+      "description": "Wait for the third duplication before abstracting."
+    },
+    {
+      "key": "fowler-bliki",
+      "type": "link",
+      "title": "Martin Fowler's bliki",
+      "url": "https://martinfowler.com/bliki/",
+      "author": "Martin Fowler",
+      "description": "Short, careful definitions of design and architecture terms."
+    },
+    {
+      "key": "di-dotnet",
+      "type": "article",
+      "title": "Dependency injection in .NET",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection",
+      "author": "Microsoft Learn",
+      "description": "Constructor injection, lifetimes and the built-in container."
+    },
+    {
+      "key": "rg-catalogue",
+      "type": "link",
+      "title": "Refactoring.Guru design patterns catalogue",
+      "url": "https://refactoring.guru/design-patterns",
+      "author": "Refactoring.Guru",
+      "description": "A free, illustrated catalogue of the classic patterns."
+    },
+    {
+      "key": "rg-strategy",
+      "type": "article",
+      "title": "Strategy pattern",
+      "url": "https://refactoring.guru/design-patterns/strategy",
+      "author": "Refactoring.Guru",
+      "description": "Swappable algorithms behind a common interface."
+    },
+    {
+      "key": "rg-factory-method",
+      "type": "article",
+      "title": "Factory Method pattern",
+      "url": "https://refactoring.guru/design-patterns/factory-method",
+      "author": "Refactoring.Guru",
+      "description": "Let subclasses decide which object to create."
+    },
+    {
+      "key": "rg-abstract-factory",
+      "type": "article",
+      "title": "Abstract Factory pattern",
+      "url": "https://refactoring.guru/design-patterns/abstract-factory",
+      "author": "Refactoring.Guru",
+      "description": "Create families of related objects without naming concrete classes."
+    },
+    {
+      "key": "rg-decorator",
+      "type": "article",
+      "title": "Decorator pattern",
+      "url": "https://refactoring.guru/design-patterns/decorator",
+      "author": "Refactoring.Guru",
+      "description": "Add behaviour by wrapping an object behind the same interface."
+    },
+    {
+      "key": "rg-adapter",
+      "type": "article",
+      "title": "Adapter pattern",
+      "url": "https://refactoring.guru/design-patterns/adapter",
+      "author": "Refactoring.Guru",
+      "description": "Convert one interface into another that clients expect."
+    },
+    {
+      "key": "rg-facade",
+      "type": "article",
+      "title": "Facade pattern",
+      "url": "https://refactoring.guru/design-patterns/facade",
+      "author": "Refactoring.Guru",
+      "description": "A simple interface over a complex subsystem."
+    },
+    {
+      "key": "rg-observer",
+      "type": "article",
+      "title": "Observer pattern",
+      "url": "https://refactoring.guru/design-patterns/observer",
+      "author": "Refactoring.Guru",
+      "description": "Subscribers notified of changes in a publisher."
+    },
+    {
+      "key": "rg-singleton",
+      "type": "article",
+      "title": "Singleton pattern",
+      "url": "https://refactoring.guru/design-patterns/singleton",
+      "author": "Refactoring.Guru",
+      "description": "One instance with global access, and why that is risky."
+    },
+    {
+      "key": "persistence-layer",
+      "type": "article",
+      "title": "Design the infrastructure persistence layer",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design",
+      "author": "Microsoft Learn",
+      "description": "Repositories and unit of work with EF Core."
+    },
+    {
+      "key": "bounded-context",
+      "type": "article",
+      "title": "Bounded context",
+      "url": "https://martinfowler.com/bliki/BoundedContext.html",
+      "author": "Martin Fowler",
+      "description": "Dividing a large model into contexts with explicit boundaries."
+    },
+    {
+      "key": "domain-analysis",
+      "type": "article",
+      "title": "Using domain analysis to model microservices",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/microservices/model/domain-analysis",
+      "author": "Microsoft Learn",
+      "description": "Finding bounded contexts from the business domain."
+    },
+    {
+      "key": "tactical-ddd",
+      "type": "article",
+      "title": "Using tactical DDD to design microservices",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/microservices/model/tactical-ddd",
+      "author": "Microsoft Learn",
+      "description": "Entities, value objects, aggregates and domain services."
+    },
+    {
+      "key": "ddd-aggregate",
+      "type": "article",
+      "title": "DDD Aggregate",
+      "url": "https://martinfowler.com/bliki/DDD_Aggregate.html",
+      "author": "Martin Fowler",
+      "description": "Clusters of objects treated as one consistency unit."
+    },
+    {
+      "key": "domain-model-layer",
+      "type": "article",
+      "title": "Design a microservice domain model",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/microservice-domain-model",
+      "author": "Microsoft Learn",
+      "description": "Building the domain model layer with aggregates in .NET."
+    },
+    {
+      "key": "domain-events",
+      "type": "article",
+      "title": "Domain events: design and implementation",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/domain-events-design-implementation",
+      "author": "Microsoft Learn",
+      "description": "Domain events versus integration events."
+    },
+    {
+      "key": "anemic",
+      "type": "article",
+      "title": "Anemic domain model",
+      "url": "https://martinfowler.com/bliki/AnemicDomainModel.html",
+      "author": "Martin Fowler",
+      "description": "Why data-only entities with logic elsewhere is an anti-pattern."
+    },
+    {
+      "key": "hexagonal",
+      "type": "article",
+      "title": "Hexagonal architecture",
+      "url": "https://alistair.cockburn.us/hexagonal-architecture/",
+      "author": "Alistair Cockburn",
+      "description": "Ports and adapters, from the pattern's author."
+    },
+    {
+      "key": "clean-arch",
+      "type": "article",
+      "title": "The Clean Architecture",
+      "url": "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html",
+      "author": "Robert C. Martin",
+      "description": "The dependency rule and concentric layers."
+    },
+    {
+      "key": "vertical-slice",
+      "type": "article",
+      "title": "Vertical slice architecture",
+      "url": "https://www.jimmybogard.com/vertical-slice-architecture/",
+      "author": "Jimmy Bogard",
+      "description": "Organizing code by feature instead of by layer."
+    },
+    {
+      "key": "acl",
+      "type": "article",
+      "title": "Anti-corruption Layer pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer",
+      "author": "Microsoft Learn",
+      "description": "Translating between your model and a foreign or legacy one."
+    },
+    {
+      "key": "cqrs",
+      "type": "article",
+      "title": "Apply simplified CQRS and DDD patterns in a microservice",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/apply-simplified-microservice-cqrs-ddd-patterns",
+      "author": "Microsoft Learn",
+      "description": "Separating read and write models without full event sourcing."
+    },
+    {
+      "key": "cap",
+      "type": "article",
+      "title": "CAP theorem",
+      "url": "https://en.wikipedia.org/wiki/CAP_theorem",
+      "author": "Wikipedia",
+      "description": "Consistency versus availability under network partitions."
+    },
+    {
+      "key": "pacelc",
+      "type": "article",
+      "title": "PACELC theorem",
+      "url": "https://en.wikipedia.org/wiki/PACELC_theorem",
+      "author": "Wikipedia",
+      "description": "The latency-consistency trade-off when there is no partition."
+    },
+    {
+      "key": "fallacies",
+      "type": "article",
+      "title": "Fallacies of distributed computing",
+      "url": "https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing",
+      "author": "Wikipedia",
+      "description": "Eight false assumptions about networks."
+    },
+    {
+      "key": "jepsen",
+      "type": "article",
+      "title": "Jepsen: consistency models",
+      "url": "https://jepsen.io/consistency",
+      "author": "Jepsen",
+      "description": "A map of consistency models and what each guarantees."
+    },
+    {
+      "key": "2pc",
+      "type": "article",
+      "title": "Two-phase commit protocol",
+      "url": "https://en.wikipedia.org/wiki/Two-phase_commit_protocol",
+      "author": "Wikipedia",
+      "description": "How 2PC works and why it blocks."
+    },
+    {
+      "key": "saga-azure",
+      "type": "article",
+      "title": "Saga distributed transactions pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/saga",
+      "author": "Microsoft Learn",
+      "description": "Local transactions with compensations, orchestrated or choreographed."
+    },
+    {
+      "key": "msio-patterns",
+      "type": "link",
+      "title": "microservices.io pattern language",
+      "url": "https://microservices.io/patterns/index.html",
+      "author": "microservices.io",
+      "description": "Data consistency, decomposition and messaging patterns."
+    },
+    {
+      "key": "choreography",
+      "type": "article",
+      "title": "Choreography pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/choreography",
+      "author": "Microsoft Learn",
+      "description": "Services coordinating through events without a central coordinator."
+    },
+    {
+      "key": "msio-saga",
+      "type": "article",
+      "title": "Pattern: Saga",
+      "url": "https://microservices.io/patterns/data/saga.html",
+      "author": "microservices.io",
+      "description": "Maintaining consistency across services with compensations."
+    },
+    {
+      "key": "event-sourcing-azure",
+      "type": "article",
+      "title": "Event Sourcing pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing",
+      "author": "Microsoft Learn",
+      "description": "Storing state as an append-only log of events."
+    },
+    {
+      "key": "event-sourcing-fowler",
+      "type": "article",
+      "title": "Event Sourcing",
+      "url": "https://martinfowler.com/eaaDev/EventSourcing.html",
+      "author": "Martin Fowler",
+      "description": "Capturing all changes to application state as events."
+    },
+    {
+      "key": "idempotent-consumer",
+      "type": "article",
+      "title": "Pattern: Idempotent consumer",
+      "url": "https://microservices.io/patterns/communication-style/idempotent-consumer.html",
+      "author": "microservices.io",
+      "description": "Handling duplicate messages safely."
+    },
+    {
+      "key": "leader-election",
+      "type": "article",
+      "title": "Leader Election pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/leader-election",
+      "author": "Microsoft Learn",
+      "description": "Electing one instance to coordinate work."
+    },
+    {
+      "key": "kleppmann-locking",
+      "type": "article",
+      "title": "How to do distributed locking",
+      "url": "https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html",
+      "author": "Martin Kleppmann",
+      "description": "Why leases need fencing tokens to be safe."
+    },
+    {
+      "key": "lamport",
+      "type": "article",
+      "title": "Time, Clocks, and the Ordering of Events in a Distributed System",
+      "url": "https://lamport.azurewebsites.net/pubs/time-clocks.pdf",
+      "author": "Leslie Lamport",
+      "description": "The classic paper on logical clocks and causality. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "raft",
+      "type": "link",
+      "title": "The Raft consensus algorithm",
+      "url": "https://raft.github.io/",
+      "author": "Raft",
+      "description": "An understandable consensus algorithm, with a visualization."
+    },
+    {
+      "key": "outbox",
+      "type": "article",
+      "title": "Pattern: Transactional outbox",
+      "url": "https://microservices.io/patterns/data/transactional-outbox.html",
+      "author": "microservices.io",
+      "description": "Publishing events reliably without dual writes."
+    },
+    {
+      "key": "log-tailing",
+      "type": "article",
+      "title": "Pattern: Transaction log tailing",
+      "url": "https://microservices.io/patterns/data/transaction-log-tailing.html",
+      "author": "microservices.io",
+      "description": "Relaying outbox messages with change data capture."
+    },
+    {
+      "key": "debezium",
+      "type": "link",
+      "title": "Debezium documentation",
+      "url": "https://debezium.io/documentation/",
+      "author": "Debezium",
+      "description": "Change data capture from database logs into Kafka. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "azure-patterns",
+      "type": "link",
+      "title": "Azure Architecture Center: cloud design patterns",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/",
+      "author": "Microsoft Learn",
+      "description": "One page per pattern, with when to use it and when not to."
+    },
+    {
+      "key": "circuit-breaker",
+      "type": "article",
+      "title": "Circuit Breaker pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker",
+      "author": "Microsoft Learn",
+      "description": "Failing fast when a dependency is unhealthy."
+    },
+    {
+      "key": "retry-pattern",
+      "type": "article",
+      "title": "Retry pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/retry",
+      "author": "Microsoft Learn",
+      "description": "Retrying transient failures safely."
+    },
+    {
+      "key": "aws-backoff",
+      "type": "article",
+      "title": "Timeouts, retries and backoff with jitter",
+      "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+      "author": "Amazon Builders' Library",
+      "description": "How Amazon sets timeouts and avoids retry amplification."
+    },
+    {
+      "key": "bulkhead",
+      "type": "article",
+      "title": "Bulkhead pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/bulkhead",
+      "author": "Microsoft Learn",
+      "description": "Isolating resources so one failure can't sink everything."
+    },
+    {
+      "key": "rate-limiting-pattern",
+      "type": "article",
+      "title": "Rate Limiting pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/rate-limiting-pattern",
+      "author": "Microsoft Learn",
+      "description": "Controlling consumption to avoid throttling and overload."
+    },
+    {
+      "key": "aws-load-shedding",
+      "type": "article",
+      "title": "Using load shedding to avoid overload",
+      "url": "https://aws.amazon.com/builders-library/using-load-shedding-to-avoid-overload/",
+      "author": "Amazon Builders' Library",
+      "description": "Dropping excess work to protect the core service."
+    },
+    {
+      "key": "aws-builders",
+      "type": "link",
+      "title": "Amazon Builders' Library",
+      "url": "https://aws.amazon.com/builders-library/",
+      "author": "Amazon Builders' Library",
+      "description": "Production lessons on retries, load shedding and more."
+    },
+    {
+      "key": "cache-aside",
+      "type": "article",
+      "title": "Cache-Aside pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+      "author": "Microsoft Learn",
+      "description": "Loading data into a cache on demand."
+    },
+    {
+      "key": "caching-guidance",
+      "type": "article",
+      "title": "Caching guidance",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/caching",
+      "author": "Microsoft Learn",
+      "description": "Strategies, invalidation and consistency for caches."
+    },
+    {
+      "key": "twelve-factor",
+      "type": "link",
+      "title": "The Twelve-Factor App",
+      "url": "https://12factor.net/",
+      "author": "Adam Wiggins",
+      "description": "Principles for stateless, portable, scalable services."
+    },
+    {
+      "key": "sharding",
+      "type": "article",
+      "title": "Sharding pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/sharding",
+      "author": "Microsoft Learn",
+      "description": "Splitting data across horizontal partitions."
+    },
+    {
+      "key": "data-partitioning",
+      "type": "article",
+      "title": "Data partitioning guidance",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/data-partitioning",
+      "author": "Microsoft Learn",
+      "description": "Choosing partition keys and avoiding hot partitions."
+    },
+    {
+      "key": "competing-consumers",
+      "type": "article",
+      "title": "Competing Consumers pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/competing-consumers",
+      "author": "Microsoft Learn",
+      "description": "Many consumers processing one queue concurrently."
+    },
+    {
+      "key": "queue-leveling",
+      "type": "article",
+      "title": "Queue-Based Load Leveling pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+      "author": "Microsoft Learn",
+      "description": "A queue as a buffer between bursty producers and steady consumers."
+    },
+    {
+      "key": "gateway",
+      "type": "article",
+      "title": "Use API gateways in microservices",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/microservices/design/gateway",
+      "author": "Microsoft Learn",
+      "description": "Routing, aggregation and offloading at a single entry point."
+    },
+    {
+      "key": "bff",
+      "type": "article",
+      "title": "Backends for Frontends pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/backends-for-frontends",
+      "author": "Microsoft Learn",
+      "description": "A dedicated backend per client type."
+    },
+    {
+      "key": "sidecar",
+      "type": "article",
+      "title": "Sidecar pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/sidecar",
+      "author": "Microsoft Learn",
+      "description": "Deploying cross-cutting concerns next to each service."
+    },
+    {
+      "key": "pubsub",
+      "type": "article",
+      "title": "Publisher-Subscriber pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/publisher-subscriber",
+      "author": "Microsoft Learn",
+      "description": "Announcing events to many interested consumers."
+    },
+    {
+      "key": "claim-check",
+      "type": "article",
+      "title": "Claim-Check pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/claim-check",
+      "author": "Microsoft Learn",
+      "description": "Sending a reference to a large payload instead of the payload."
+    },
+    {
+      "key": "blue-green",
+      "type": "article",
+      "title": "Blue-green deployment",
+      "url": "https://martinfowler.com/bliki/BlueGreenDeployment.html",
+      "author": "Martin Fowler",
+      "description": "Switching traffic between two production environments."
+    },
+    {
+      "key": "canary",
+      "type": "article",
+      "title": "Canary release",
+      "url": "https://martinfowler.com/bliki/CanaryRelease.html",
+      "author": "Martin Fowler",
+      "description": "Rolling out to a small share of users first."
+    },
+    {
+      "key": "feature-toggles",
+      "type": "article",
+      "title": "Feature toggles (aka feature flags)",
+      "url": "https://martinfowler.com/articles/feature-toggles.html",
+      "author": "Pete Hodgson",
+      "description": "Kinds of toggles, and how to manage them."
+    },
+    {
+      "key": "sd-primer",
+      "type": "link",
+      "title": "System Design Primer",
+      "url": "https://github.com/donnemartin/system-design-primer",
+      "author": "Donne Martin",
+      "description": "Practice questions with worked answers."
+    },
+    {
+      "key": "stripe-rate",
+      "type": "article",
+      "title": "Scaling your API with rate limiters",
+      "url": "https://stripe.com/blog/rate-limiters",
+      "author": "Stripe",
+      "description": "How Stripe uses several kinds of limiters in production. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "multitenant",
+      "type": "article",
+      "title": "Architect multitenant solutions on Azure",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/overview",
+      "author": "Microsoft Learn",
+      "description": "Isolation, noisy neighbours and multitenancy trade-offs."
+    },
+    {
+      "key": "tenancy-models",
+      "type": "article",
+      "title": "Tenancy models for a multitenant solution",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/considerations/tenancy-models",
+      "author": "Microsoft Learn",
+      "description": "Shared, per-schema and per-database models compared."
+    },
+    {
+      "key": "priority-queue",
+      "type": "article",
+      "title": "Priority Queue pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/priority-queue",
+      "author": "Microsoft Learn",
+      "description": "Processing high-priority work before the rest."
+    },
+    {
+      "key": "audit-log",
+      "type": "article",
+      "title": "Audit log",
+      "url": "https://martinfowler.com/eaaDev/AuditLog.html",
+      "author": "Martin Fowler",
+      "description": "Recording a simple log of changes."
+    },
+    {
+      "key": "otel-docs",
+      "type": "link",
+      "title": "OpenTelemetry documentation",
+      "url": "https://opentelemetry.io/docs/",
+      "author": "OpenTelemetry",
+      "description": "Vendor-neutral logs, metrics and traces."
+    },
+    {
+      "key": "sre-monitoring",
+      "type": "article",
+      "title": "Monitoring distributed systems",
+      "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+      "author": "Google SRE",
+      "description": "The four golden signals and alerting philosophy."
+    },
+    {
+      "key": "adr",
+      "type": "link",
+      "title": "Architecture decision records",
+      "url": "https://adr.github.io/",
+      "author": "ADR GitHub organization",
+      "description": "Templates and tooling for recording decisions."
+    },
+    {
+      "key": "nygard-adr",
+      "type": "article",
+      "title": "Documenting architecture decisions",
+      "url": "https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions",
+      "author": "Michael Nygard",
+      "description": "The post that introduced the ADR format."
+    },
+    {
+      "key": "monolith-first",
+      "type": "article",
+      "title": "Monolith First",
+      "url": "https://martinfowler.com/bliki/MonolithFirst.html",
+      "author": "Martin Fowler",
+      "description": "Why most successful microservice systems started as monoliths."
+    },
+    {
+      "key": "waf",
+      "type": "article",
+      "title": "Azure Well-Architected Framework",
+      "url": "https://learn.microsoft.com/en-us/azure/well-architected/",
+      "author": "Microsoft Learn",
+      "description": "Pillars for reliable, secure, efficient workloads."
+    },
+    {
+      "key": "tech-debt",
+      "type": "article",
+      "title": "Technical debt",
+      "url": "https://martinfowler.com/bliki/TechnicalDebt.html",
+      "author": "Martin Fowler",
+      "description": "The debt metaphor and how to reason about it."
+    },
+    {
+      "key": "debt-quadrant",
+      "type": "article",
+      "title": "Technical debt quadrant",
+      "url": "https://martinfowler.com/bliki/TechnicalDebtQuadrant.html",
+      "author": "Martin Fowler",
+      "description": "Deliberate or inadvertent, prudent or reckless."
+    },
+    {
+      "key": "c4",
+      "type": "link",
+      "title": "The C4 model",
+      "url": "https://c4model.com/",
+      "author": "Simon Brown",
+      "description": "Context, container, component and code diagrams."
+    },
+    {
+      "key": "design-docs",
+      "type": "article",
+      "title": "Design docs at Google",
+      "url": "https://www.industrialempathy.com/posts/design-docs-at-google/",
+      "author": "Malte Ubl",
+      "description": "What a good design doc contains and when to write one."
+    },
+    {
+      "key": "staffeng",
+      "type": "link",
+      "title": "StaffEng guides",
+      "url": "https://staffeng.com/guides/",
+      "author": "Will Larson",
+      "description": "Guides on operating as a Staff-plus engineer."
+    }
+  ],
+  "questions": [
+    {
+      "prompt": "Which description of the SOLID principles is accurate?",
+      "tags": [
+        "Design Principles & Patterns",
+        "SOLID"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Liskov substitution says subclasses may change the base contract freely, as long as the method signatures stay the same.",
+        "Single responsibility, open-closed, Liskov substitution, interface segregation and dependency inversion, applied with judgement rather than dogma.",
+        "They are five performance rules: single thread, open connections, lazy loading, inline methods and direct database access.",
+        "SOLID requires an interface for every class, because dependency inversion forbids depending on any concrete type, even private helpers inside one module."
+      ],
+      "correct": 1,
+      "explanation": "Single responsibility (one reason to change), open-closed (extend without editing), Liskov substitution (subtypes honour the base contract), interface segregation (small client-specific interfaces), dependency inversion (depend on abstractions you own). Then the caveat: applied dogmatically they produce needless interfaces.",
+      "materials": [
+        "arch-principles",
+        "lsp"
+      ]
+    },
+    {
+      "prompt": "Should you prefer composition or inheritance?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A subclass overriding a method to throw NotSupportedException is the recommended way to opt out of base behaviour.",
+        "Prefer composition for flexibility and testability; use inheritance for true is-a relationships with a stable base type.",
+        "Prefer inheritance everywhere, because deep class hierarchies maximize code reuse and make every behaviour easy and safe to override later.",
+        "Composition is only possible in functional languages; in C# inheritance is the sole mechanism for reuse."
+      ],
+      "correct": 1,
+      "explanation": "Prefer composition: it is flexible, testable and avoids the fragile base class problem. Inheritance fits true is-a relationships with stable base types and shared behaviour. A smell: a subclass that overrides to throw NotSupported, which breaks Liskov.",
+      "materials": [
+        "composition"
+      ]
+    },
+    {
+      "prompt": "How do DRY, KISS and YAGNI interact, and when do they conflict?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "YAGNI means building every extension point up front, so that future requirements never require changing code.",
+        "KISS forbids abstractions entirely, so all three principles agree that duplication is always preferable.",
+        "DRY means merging any two code blocks that look alike, even if they change for different reasons.",
+        "DRY removes duplicated knowledge, not text, and YAGNI avoids speculative features, so wait for the rule of three before abstracting."
+      ],
+      "correct": 3,
+      "explanation": "DRY removes duplicated knowledge, not duplicated text; merging two things that merely look alike couples them. YAGNI says do not build for speculative needs. Wait for the third occurrence (rule of three) before abstracting, and weigh the cost of a wrong abstraction against some duplication.",
+      "materials": [
+        "yagni",
+        "rule-of-three",
+        "fowler-bliki"
+      ]
+    },
+    {
+      "prompt": "How does dependency injection differ from inversion of control and a service locator?",
+      "tags": [
+        "Design Principles & Patterns",
+        "Dependency injection"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "IoC means the framework calls your code; DI passes collaborators in explicitly, while a service locator hides them behind a global lookup.",
+        "A service locator makes dependencies visible in the constructor, while DI resolves them through a static registry.",
+        "Inversion of control means your code calls the framework directly, instead of the framework calling you.",
+        "They are three names for the same technique, so a service locator is exactly as explicit and testable as constructor injection in practice."
+      ],
+      "correct": 0,
+      "explanation": "Inversion of control means the framework calls your code. Dependency injection passes collaborators in, usually through the constructor, which makes dependencies explicit and testable. A service locator hides them behind a global lookup, so dependencies are invisible and fail at runtime.",
+      "materials": [
+        "di-dotnet"
+      ]
+    },
+    {
+      "prompt": "When is the Strategy pattern the right tool?",
+      "tags": [
+        "Design Principles & Patterns",
+        "Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "When a complex object must be assembled step by step while remaining valid at every intermediate stage of its construction.",
+        "When an object must notify many listeners of its state changes without knowing who they are.",
+        "When you need exactly one instance of a class shared globally across the application.",
+        "When behaviour varies by context and should be swappable without conditionals, such as pricing rules or export formats."
+      ],
+      "correct": 3,
+      "explanation": "When behaviour varies by context and you want to swap it without conditionals: pricing rules, retry policies, export formats. Inject the strategy, pick it by key or rule. In C# a delegate is often enough; a full interface pays off when the strategy has state or several methods.",
+      "materials": [
+        "rg-strategy",
+        "rg-catalogue"
+      ]
+    },
+    {
+      "prompt": "How do Factory Method, Abstract Factory and Builder differ?",
+      "tags": [
+        "Design Principles & Patterns",
+        "Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Factory Method defers which subtype is created, Abstract Factory creates families of related objects, and Builder assembles one complex object step by step.",
+        "They are interchangeable names for any static method that returns a new instance.",
+        "Builder creates families of related objects, while Abstract Factory assembles a single object in many steps.",
+        "Factories are always required alongside a DI container, because the container cannot construct objects with constructor parameters on its own."
+      ],
+      "correct": 0,
+      "explanation": "Factory Method defers which subtype is created. Abstract Factory creates families of related objects. Builder assembles a complex object step by step and keeps it valid. In DI-based code, factories are mostly needed when the type depends on runtime data.",
+      "materials": [
+        "rg-factory-method",
+        "rg-abstract-factory"
+      ]
+    },
+    {
+      "prompt": "How do Decorator, Adapter, Facade and Proxy differ?",
+      "tags": [
+        "Design Principles & Patterns",
+        "Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Facade and Proxy are identical, and both exist only to lazy-load objects from a database.",
+        "They differ only in the shape of their class diagrams, so the intent behind a wrapper never matters when you choose between the four of them.",
+        "All wrap an object: Decorator adds behaviour behind the same interface, Adapter converts interfaces, Facade simplifies a subsystem, Proxy controls access.",
+        "Decorator converts one interface into another, while Adapter adds logging or caching behind the same interface."
+      ],
+      "correct": 2,
+      "explanation": "All wrap another object. Decorator adds behaviour behind the same interface (logging, caching, retry). Adapter converts one interface into another. Facade offers a simpler interface over a subsystem. Proxy controls access (lazy loading, auth). Name the intent, not the structure.",
+      "materials": [
+        "rg-decorator",
+        "rg-adapter",
+        "rg-facade"
+      ]
+    },
+    {
+      "prompt": "When is Observer or an in-process event bus a good idea, and when is it harmful?",
+      "tags": [
+        "Design Principles & Patterns",
+        "Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Harmful only for performance; every in-process bus guarantees ordering and error handling.",
+        "Good for decoupled side effects of a change; harmful when core flow becomes invisible and ordering or error handling are unclear.",
+        "Always better than direct calls, because events make every flow easier to follow and debug.",
+        "Use events for the core business flow and direct method calls only for logging, since events make every step of the main flow easier to trace."
+      ],
+      "correct": 1,
+      "explanation": "Good for decoupled reactions to a change. Harmful when flow becomes invisible, ordering and error handling are unclear, or handlers leak (see the event-leak question in the .NET set). Prefer explicit calls for core flow and events for genuine side effects.",
+      "materials": [
+        "rg-observer"
+      ]
+    },
+    {
+      "prompt": "Why is the Singleton pattern often considered a smell?",
+      "tags": [
+        "Design Principles & Patterns",
+        "Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It brings global mutable state and hidden dependencies that are hard to test; prefer a singleton lifetime in the DI container.",
+        "Because a singleton allocates a new instance on every access, which wastes memory.",
+        "Because singletons can never be made thread-safe in .NET.",
+        "Because the DI container cannot register singletons, so a static instance is the only option."
+      ],
+      "correct": 0,
+      "explanation": "Global mutable state, hidden dependencies, hard to test, and thread-safety risks. In .NET prefer a singleton lifetime in the DI container over a hand-written static instance, and keep that instance stateless or thread-safe.",
+      "materials": [
+        "rg-singleton"
+      ]
+    },
+    {
+      "prompt": "Are Repository and Unit of Work still useful with EF Core?",
+      "tags": [
+        "Design Principles & Patterns",
+        "EF Core"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Yes, always wrap DbContext in a generic repository that exposes IQueryable to callers, so any layer can compose whatever query it needs.",
+        "A thin generic wrapper adds little, since DbContext is already a unit of work, but an aggregate-focused repository can still earn its place.",
+        "No, because EF Core can't track changes across several entities without an explicit unit-of-work class.",
+        "Repositories are required by EF Core, which refuses to save entities not accessed through one."
+      ],
+      "correct": 1,
+      "explanation": "DbContext already is a unit of work and DbSet a repository, so a thin generic wrapper adds little. A repository still earns its place as an aggregate-focused abstraction in a domain model, or to hide complex queries. Do not leak IQueryable through it.",
+      "materials": [
+        "persistence-layer"
+      ]
+    },
+    {
+      "prompt": "What is a bounded context, and how do you find one?",
+      "tags": [
+        "DDD & Application Architecture",
+        "DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A deployment unit such as a container, so the number of contexts always equals the number of services.",
+        "A shared enterprise-wide model in which every business term must mean exactly the same thing to every team in the whole organization.",
+        "A single database table plus the service that owns it, so every table becomes its own bounded context.",
+        "A boundary within which a model and its terms have one consistent meaning; find it by listening for where words change meaning."
+      ],
+      "correct": 3,
+      "explanation": "A boundary inside which a model and its words have one consistent meaning (\"campaign\" means something different to billing and to delivery). Find them by listening to language, to who owns what, and to where the same word changes meaning. They guide service and module boundaries.",
+      "materials": [
+        "bounded-context",
+        "domain-analysis"
+      ]
+    },
+    {
+      "prompt": "What are entities, value objects and aggregates?",
+      "tags": [
+        "DDD & Application Architecture",
+        "DDD"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Value objects need a database id, so they can be updated in place when a field changes.",
+        "An entity has lasting identity, a value object is immutable and defined by its values, and an aggregate is a consistency unit with one root.",
+        "An entity is immutable and defined only by its values, while a value object has an identity that persists over time and across changes.",
+        "An aggregate is any set of entities loaded together for reporting, with no rules about access."
+      ],
+      "correct": 1,
+      "explanation": "An entity has identity that persists over time. A value object is defined by its values, is immutable and is replaceable (money, address, date range). An aggregate is a cluster of objects treated as one consistency unit, with a single root as its only entry point.",
+      "materials": [
+        "tactical-ddd",
+        "ddd-aggregate"
+      ]
+    },
+    {
+      "prompt": "How should you design aggregate boundaries?",
+      "tags": [
+        "DDD & Application Architecture",
+        "DDD"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Update several aggregates in a single transaction whenever one use case touches them, so you never have to deal with eventual consistency.",
+        "Keep them small and built around true invariants, reference other aggregates by id, and change one aggregate per transaction.",
+        "Reference other aggregates by object reference, so they always load together in one query.",
+        "Make aggregates as large as possible, so one transaction keeps the whole domain consistent."
+      ],
+      "correct": 1,
+      "explanation": "Keep them small and based on true invariants that must be consistent in one transaction. Reference other aggregates by id, not object. One aggregate per transaction; use eventual consistency (events) between aggregates. Large aggregates cause contention and slow loads.",
+      "materials": [
+        "ddd-aggregate",
+        "domain-model-layer"
+      ]
+    },
+    {
+      "prompt": "What is the difference between a domain event and an integration event?",
+      "tags": [
+        "DDD & Application Architecture",
+        "DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Domain events need a stable versioned schema, while integration events can change freely.",
+        "A domain event happens inside a bounded context and is handled in-process; an integration event is a published contract for other services.",
+        "They are the same, so domain events should be published directly as your public contract.",
+        "Integration events are handled in the same database transaction, while domain events always travel through a broker."
+      ],
+      "correct": 1,
+      "explanation": "A domain event is something that happened inside a bounded context, handled in-process and often in the same transaction. An integration event is a published contract that other services consume; it needs a stable schema and reliable delivery (the outbox). Do not expose domain events as your public contract.",
+      "materials": [
+        "domain-events"
+      ]
+    },
+    {
+      "prompt": "What is the difference between an anemic and a rich domain model?",
+      "tags": [
+        "DDD & Application Architecture",
+        "DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A rich model keeps all logic in application services and entities as property bags.",
+        "Anemic models are always wrong, even for simple CRUD without business rules.",
+        "A rich model stores more columns per entity, while an anemic model normalizes the same data across many more database tables to save space.",
+        "An anemic model keeps logic in services so invariants can be bypassed; a rich model protects invariants behind behaviour on the entities."
+      ],
+      "correct": 3,
+      "explanation": "An anemic model holds data in entities and logic in services, so invariants can be bypassed. A rich model puts behaviour with the data and protects invariants behind methods. Rich is better for complex rules; plain data and services are fine for simple CRUD. Say which you chose and why.",
+      "materials": [
+        "anemic"
+      ]
+    },
+    {
+      "prompt": "What do clean, hexagonal and onion architecture have in common?",
+      "tags": [
+        "DDD & Application Architecture",
+        "Architecture"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "They place the database at the centre, so the domain model depends directly on the persistence framework and its generated entity types.",
+        "They invert dependencies so the domain owns ports and outer adapters plug in, at the cost of indirection and mapping code.",
+        "They have no trade-offs, since the extra layers add neither boilerplate nor mapping code.",
+        "They require microservices, since a single deployable can't have a core and adapters."
+      ],
+      "correct": 1,
+      "explanation": "All invert dependencies so the domain does not depend on frameworks, databases or UI: the core defines ports (interfaces), outer layers provide adapters. Benefits: testability and replaceable infrastructure. Cost: indirection, mapping code and boilerplate.",
+      "materials": [
+        "hexagonal",
+        "clean-arch"
+      ]
+    },
+    {
+      "prompt": "When would you choose vertical slice over layered architecture?",
+      "tags": [
+        "DDD & Application Architecture",
+        "Architecture"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Vertical slices group code by technical role, while layers group everything one feature needs, from the endpoint down to its data access.",
+        "Never, because vertical slices forbid sharing any code between features.",
+        "Slices group everything for one feature and cut cross-layer churn; layers group by technical role and suit strict, uniform structure.",
+        "Layers and slices can't be combined, so each project must pick exactly one."
+      ],
+      "correct": 2,
+      "explanation": "Layers group code by technical role; slices group everything for one feature (endpoint, handler, data access). Slices cut cross-layer churn and let each feature choose its own complexity. Layers give uniform structure and can suit a large team with strict rules. Many teams combine them.",
+      "materials": [
+        "vertical-slice"
+      ]
+    },
+    {
+      "prompt": "What is an anti-corruption layer, and when do you need one?",
+      "tags": [
+        "DDD & Application Architecture",
+        "Integration"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A shared client library that every service imports, so all services work directly with the partner's own data model and naming everywhere.",
+        "A database trigger that rejects rows violating the domain's invariants.",
+        "A translation layer that keeps a foreign or legacy model out of yours, used when integrating partners or legacy systems.",
+        "A firewall rule that blocks malicious requests before they reach the domain model."
+      ],
+      "correct": 2,
+      "explanation": "A translation layer that stops a foreign or legacy model from leaking into yours. Use it when integrating with partner APIs (Klaviyo, Zapier) or legacy systems whose concepts differ from your domain. It centralizes mapping and gives one place to absorb their changes.",
+      "materials": [
+        "acl"
+      ]
+    },
+    {
+      "prompt": "Is a mediator or in-process command bus worth it?",
+      "tags": [
+        "DDD & Application Architecture",
+        "Architecture"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It is mandatory for CQRS, which cannot be built without a mediator library.",
+        "Always, because it removes all coupling between components and makes navigation easier.",
+        "Never, because it can't be combined with dependency injection or validation.",
+        "It standardizes handlers and pipeline behaviours at the cost of indirection, so it's worth it only if you need those pipelines."
+      ],
+      "correct": 3,
+      "explanation": "It standardizes handlers, and pipelines for validation, logging and transactions. Costs: indirection, harder navigation, hidden coupling, and a library dependency. Plain application services or minimal-API handlers are often enough. Judge by whether you need the pipeline behaviours.",
+      "materials": [
+        "cqrs"
+      ]
+    },
+    {
+      "prompt": "Where does a business rule belong: entity, domain service or application service?",
+      "tags": [
+        "DDD & Application Architecture",
+        "DDD"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "In the repository, since it loads the data and can check rules while saving.",
+        "Always in the application service, so that entities stay simple data holders that the ORM can map without needing any custom configuration.",
+        "In the controller, because that is where request data is validated first.",
+        "In the entity for its own invariants and a domain service when it spans aggregates; the application service only orchestrates."
+      ],
+      "correct": 3,
+      "explanation": "If it concerns one aggregate's own invariants, in the entity. If it spans aggregates and has no natural owner, a domain service. The application service only orchestrates: load, call, save, publish. Keep I/O and transactions out of the domain layer.",
+      "materials": [
+        "tactical-ddd"
+      ]
+    },
+    {
+      "prompt": "What do the CAP theorem and PACELC mean in practice?",
+      "tags": [
+        "Distributed Systems",
+        "Consistency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "CAP applies only to SQL databases, and PACELC says partitions never happen.",
+        "You can pick any two of consistency, availability and partition tolerance, so giving up partition tolerance is a valid choice on a real network.",
+        "A product is permanently either CP or AP, so the choice is made once rather than per operation.",
+        "During a partition you choose consistency or availability; PACELC adds a latency-versus-consistency trade-off even without one."
+      ],
+      "correct": 3,
+      "explanation": "When a network partition happens you must choose between consistency and availability; you cannot give up partition tolerance on a real network. PACELC adds that even without a partition you trade latency for consistency. Real systems choose per operation, not per product.",
+      "materials": [
+        "cap",
+        "pacelc",
+        "fallacies"
+      ]
+    },
+    {
+      "prompt": "What does eventual consistency mean for users?",
+      "tags": [
+        "Distributed Systems",
+        "Consistency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Replicas converge if writes stop, with no time bound, so design the UX around pending states and read-your-writes.",
+        "Every read returns the latest write, but only after a fixed delay of a few seconds that the database guarantees for every replica in the cluster.",
+        "Data is consistent within one request but may stay different between replicas forever.",
+        "It guarantees causal ordering for all users, so reversals are impossible."
+      ],
+      "correct": 0,
+      "explanation": "Strong (linearizable), sequential, causal, read-your-writes, eventual. Eventual means replicas converge if writes stop, with no promise about when. Design the user experience around it: show pending states, read from the primary after a write, avoid surprising reversals.",
+      "materials": [
+        "jepsen"
+      ]
+    },
+    {
+      "prompt": "Why avoid two-phase commit across services, and what do you use instead?",
+      "tags": [
+        "Distributed Systems",
+        "Transactions"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "2PC blocks when the coordinator fails and ties availability to every participant; use local transactions, sagas and the outbox.",
+        "Use one shared database for all services, so distributed transactions are never needed.",
+        "Replace it with retries alone, since retried writes are always consistent across services.",
+        "2PC is the recommended default for microservices, because every modern message queue and database supports it natively and without any blocking."
+      ],
+      "correct": 0,
+      "explanation": "2PC blocks while the coordinator is down, ties availability to every participant and is unsupported by most modern stores and queues. Use local transactions plus sagas and compensations, with the outbox for reliable messaging.",
+      "materials": [
+        "2pc",
+        "saga-azure",
+        "msio-patterns"
+      ]
+    },
+    {
+      "prompt": "Should a saga use orchestration or choreography?",
+      "tags": [
+        "Distributed Systems",
+        "Sagas"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Choreography is always better, because a central coordinator makes the overall flow harder to see, test and change than services reacting to events.",
+        "Orchestration requires every service to share one database, while choreography does not.",
+        "They behave identically at runtime and differ only in how the diagrams are drawn.",
+        "Orchestration keeps the flow visible and testable in one coordinator; choreography decouples services but hides the overall flow."
+      ],
+      "correct": 3,
+      "explanation": "Orchestration: a central coordinator (such as a Temporal workflow) holds the flow, which is visible, testable and easy to change, but is a coordination point. Choreography: services react to each other's events, which is decoupled but makes the overall flow hard to see and debug. Prefer orchestration for long or critical business flows.",
+      "materials": [
+        "choreography",
+        "msio-saga"
+      ]
+    },
+    {
+      "prompt": "What is event sourcing, and what does it cost?",
+      "tags": [
+        "Distributed Systems",
+        "Event sourcing"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A free upgrade over CRUD with no extra complexity, so it should be the default for every service.",
+        "Events are mutable records, updated in place whenever the business state changes.",
+        "State is stored as an append-only event log and rebuilt by replay; costs include event schema evolution, replay time and eventual reads.",
+        "It means publishing every database change to Kafka, while the current-state tables remain the source of truth that all reads and writes rely on."
+      ],
+      "correct": 2,
+      "explanation": "State is stored as an append-only sequence of events and rebuilt by replay. You get a full audit trail, time travel and new projections. Costs: schema evolution of old events, replay time (snapshots), eventual read models, and a steep learning curve. Not a default; use it where history is the business.",
+      "materials": [
+        "event-sourcing-azure",
+        "event-sourcing-fowler"
+      ]
+    },
+    {
+      "prompt": "Is exactly-once delivery possible end to end?",
+      "tags": [
+        "Distributed Systems",
+        "Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Yes, every modern broker guarantees exactly-once delivery to any external system.",
+        "Yes, as long as the consumer commits its offset before it processes the message.",
+        "Not end to end; combine at-least-once delivery with idempotent processing to get the effect of exactly-once.",
+        "No, so consumers have to accept occasional duplicate side effects as unavoidable."
+      ],
+      "correct": 2,
+      "explanation": "Not end to end. You get at-least-once delivery plus idempotent processing, which has the effect of exactly-once. Implement it with an idempotency key or message id stored in the same transaction as the side effect (the inbox).",
+      "materials": [
+        "idempotent-consumer"
+      ]
+    },
+    {
+      "prompt": "How do distributed locks and leader election work, and why are they risky?",
+      "tags": [
+        "Distributed Systems",
+        "Coordination"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Locks held in Redis are perfectly safe, because the clocks of machines in one cluster never drift and processes never pause while holding a lease.",
+        "Leader election needs no shared store, since each node decides on its own that it leads.",
+        "Distributed locks are always preferable to idempotent work, because they cost nothing.",
+        "A lease in a shared store elects one holder, but pauses and clock skew can produce two holders, so protect the resource with fencing tokens."
+      ],
+      "correct": 3,
+      "explanation": "A lease in a shared store (database, Redis, etcd, a blob) elects one holder. Risks: pauses and clock skew let two nodes believe they hold it, so protect the resource with a fencing token. Prefer designs that need no lock, such as idempotent work or SKIP LOCKED claims.",
+      "materials": [
+        "leader-election",
+        "kleppmann-locking"
+      ]
+    },
+    {
+      "prompt": "How do you order events across machines when clocks disagree?",
+      "tags": [
+        "Distributed Systems",
+        "Ordering"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Don't trust wall clocks: use per-key log ordering, sequence numbers or logical clocks, and order per entity when that's enough.",
+        "Synchronize every server with NTP and sort all events by their wall-clock timestamp, which yields an exact and reliable global order across machines.",
+        "Ordering is irrelevant in distributed systems, so consumers can process events in any order.",
+        "Global ordering is always required, so route every event through one single-partition topic."
+      ],
+      "correct": 0,
+      "explanation": "Wall clocks drift, so do not rely on them for ordering. Use per-key ordering in a log partition, sequence numbers, or logical and vector clocks to capture causality. Say what ordering the business really needs: usually per entity, not global.",
+      "materials": [
+        "lamport"
+      ]
+    },
+    {
+      "prompt": "What should a back-end engineer know about consensus algorithms such as Raft?",
+      "tags": [
+        "Distributed Systems",
+        "Consensus"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Consensus works best with an even number of nodes, so that a tie between two equal halves can be broken by a random election among the leaders.",
+        "Every service that needs replication should implement its own Raft from scratch.",
+        "A majority quorum agrees on a replicated log through an elected leader; it tolerates minority failures and underlies etcd and Consul.",
+        "Raft needs every node to agree before committing, so one failed node halts the cluster."
+      ],
+      "correct": 2,
+      "explanation": "A cluster agrees on a log using a majority quorum; a leader replicates entries and a new leader is elected on failure. It tolerates minority failure, and needs an odd number of nodes. It underlies etcd, Consul and many databases. You need to use it wisely, not implement it.",
+      "materials": [
+        "raft"
+      ]
+    },
+    {
+      "prompt": "How do you keep a database and a message broker consistent?",
+      "tags": [
+        "Distributed Systems",
+        "Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Write to the database and then publish to the broker in the same method; the two calls run back to back, so they are atomic in practice.",
+        "Publish to the broker first and let consumers write the database, so nothing can diverge.",
+        "Write the event to an outbox table in the same transaction, then relay it by polling or CDC to idempotent consumers.",
+        "Use a distributed two-phase commit between the database and Kafka on every write."
+      ],
+      "correct": 2,
+      "explanation": "Writing to both can leave one updated and the other not. Write the event into an outbox table in the same transaction, then publish it by polling or by change data capture on the log (Debezium). Consumers must be idempotent because relays deliver at least once.",
+      "materials": [
+        "outbox",
+        "log-tailing",
+        "debezium"
+      ]
+    },
+    {
+      "prompt": "How do timeouts, retries and circuit breakers fit together?",
+      "tags": [
+        "Resilience & Scalability",
+        "Resilience"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Every remote call gets a timeout, retries cover only transient idempotent failures with jittered backoff, and a breaker fails fast.",
+        "Timeouts are unnecessary when retries exist, because retries eventually succeed.",
+        "A circuit breaker retries calls more aggressively while a dependency is failing.",
+        "Retry every failure immediately and indefinitely, because a circuit breaker only adds latency and hides the real error from callers and operators."
+      ],
+      "correct": 0,
+      "explanation": "Every remote call gets a timeout. Retry only transient, idempotent failures, with exponential backoff and jitter and a retry budget. A circuit breaker stops calling a failing dependency so it can recover and callers fail fast. Layered wrongly, retries multiply load (a retry storm).",
+      "materials": [
+        "circuit-breaker",
+        "retry-pattern",
+        "aws-backoff",
+        "azure-patterns"
+      ]
+    },
+    {
+      "prompt": "What is the bulkhead pattern, and how does it limit blast radius?",
+      "tags": [
+        "Resilience & Scalability",
+        "Resilience"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Put all tenants into one shared pool of threads and connections, so spare capacity is always available to whichever tenant happens to need it most.",
+        "Replicate every service three times, so any single failure is invisible to users.",
+        "Partition resources such as pools, queues or deployments, so one failing part or noisy tenant can't exhaust the rest.",
+        "A bulkhead is a firewall in front of the database that blocks slow queries."
+      ],
+      "correct": 2,
+      "explanation": "Partition resources (thread pools, connection pools, queues, whole deployments for tenant groups) so one failing part cannot exhaust the rest. A noisy tenant or a slow partner then hurts only its own compartment. Cells take it further by isolating whole slices of the system.",
+      "materials": [
+        "bulkhead"
+      ]
+    },
+    {
+      "prompt": "How do backpressure, load shedding and rate limiting differ?",
+      "tags": [
+        "Resilience & Scalability",
+        "Scalability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Backpressure slows producers, load shedding drops low-priority work under overload, and rate limiting caps each caller's rate.",
+        "Load shedding drops the most important work first, so the system recovers faster.",
+        "Backpressure means adding more servers automatically whenever a queue grows.",
+        "They are three names for one mechanism that rejects excess requests with HTTP 429."
+      ],
+      "correct": 0,
+      "explanation": "Backpressure tells producers to slow down (bounded queues, flow control). Load shedding drops low-priority work to protect the core when overloaded. Rate limiting caps request rates per caller (token bucket, sliding window). Together they keep the system degrading gracefully instead of collapsing.",
+      "materials": [
+        "rate-limiting-pattern",
+        "aws-load-shedding",
+        "aws-builders"
+      ]
+    },
+    {
+      "prompt": "How do cache-aside, write-through and write-behind compare?",
+      "tags": [
+        "Resilience & Scalability",
+        "Caching"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Cache-aside writes to the cache and the database together on every update.",
+        "Cache-aside loads on a miss and is the usual default; write-through keeps the cache fresh at a write cost; write-behind risks losing writes.",
+        "Write-behind is the safest of the three, because writes buffered in the cache can never be lost even if the cache node crashes before flushing them.",
+        "With any of these strategies, invalidation and stampedes stop being concerns."
+      ],
+      "correct": 1,
+      "explanation": "Cache-aside: the app loads on a miss and writes to the cache; simple and the common default. Write-through writes both together, keeping the cache fresh at higher write latency. Write-behind buffers writes and risks loss. Discuss invalidation, TTL, stampedes and what happens if the cache is down.",
+      "materials": [
+        "cache-aside",
+        "caching-guidance"
+      ]
+    },
+    {
+      "prompt": "What makes a service horizontally scalable?",
+      "tags": [
+        "Resilience & Scalability",
+        "Scalability"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Running one very large server, since vertical scaling is what horizontal scaling means.",
+        "Keeping user sessions and uploaded files on each instance's local disk, which avoids network hops and makes every added instance faster than the last.",
+        "Adding instances is always enough, since the database is never the bottleneck.",
+        "Stateless instances behind a load balancer, state in a shared store, config from the environment, and graceful shutdown."
+      ],
+      "correct": 3,
+      "explanation": "Stateless instances behind a load balancer, with state in a shared store, no local session data or files, config from the environment, fast startup and graceful shutdown. Identify the real bottleneck first, which is often the database, and scale that deliberately.",
+      "materials": [
+        "twelve-factor"
+      ]
+    },
+    {
+      "prompt": "How do you shard data, and what is a hot partition?",
+      "tags": [
+        "Resilience & Scalability",
+        "Data"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Pick a key that spreads load and keeps related data together; a hot partition is one key receiving a disproportionate share.",
+        "Cross-shard transactions are cheap, so the choice of shard key rarely matters.",
+        "Shard by a random value per row, so related data is spread across as many shards as possible and cross-shard queries become the fast path.",
+        "A hot partition is a shard that failed over to a replica, and resharding is free."
+      ],
+      "correct": 0,
+      "explanation": "Choose a key that spreads load evenly and keeps related data together (tenant id, hash of id, time range). A hot partition occurs when one key gets a disproportionate share, as with a huge tenant or a celebrity. Resharding is costly, so plan for it and avoid cross-shard queries and transactions.",
+      "materials": [
+        "sharding",
+        "data-partitioning"
+      ]
+    },
+    {
+      "prompt": "When do you use competing consumers and queue-based load leveling?",
+      "tags": [
+        "Resilience & Scalability",
+        "Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A queue absorbs bursts and several consumers share it for throughput; handlers must be idempotent, with a dead-letter queue.",
+        "When every message must be processed once by every consumer in the group.",
+        "When strict global ordering is required, because competing consumers always process messages in the exact order in which they were produced.",
+        "Only for synchronous request-response calls that need an immediate answer."
+      ],
+      "correct": 0,
+      "explanation": "A queue absorbs bursts so workers process at a steady rate, and several consumers share the queue to scale throughput. Requirements: idempotent handlers, visibility timeouts, a dead-letter queue, and awareness that ordering is lost unless you partition by key.",
+      "materials": [
+        "competing-consumers",
+        "queue-leveling"
+      ]
+    },
+    {
+      "prompt": "What distinguishes an API gateway, a backend for frontend and a service mesh?",
+      "tags": [
+        "Resilience & Scalability",
+        "Integration"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A service mesh is the public entry point for browsers, while a gateway handles mTLS.",
+        "A gateway is the single entry point, a BFF is a gateway tailored to one client, and a mesh handles service-to-service concerns via sidecars.",
+        "A BFF is a database view optimized for front-end queries.",
+        "They are the same component, and business logic belongs in the gateway so that the services behind it can stay thin and almost free of rules."
+      ],
+      "correct": 1,
+      "explanation": "A gateway is the single entry point for routing, auth, throttling and aggregation. A BFF is a gateway tailored to one client type. A service mesh handles service-to-service concerns (mTLS, retries, telemetry) through sidecars. Risks: a gateway can become a bottleneck or a place where logic piles up.",
+      "materials": [
+        "gateway",
+        "bff",
+        "sidecar"
+      ]
+    },
+    {
+      "prompt": "What is the difference between a command and an event, and what is a claim check?",
+      "tags": [
+        "Resilience & Scalability",
+        "Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Commands and events are interchangeable, and both always have one subscriber.",
+        "A command asks one receiver to act and can be rejected; an event states a past fact; a claim check sends a reference to a large payload.",
+        "A claim check embeds the whole payload in every message, so no storage is needed.",
+        "An event asks one receiver to do something and can be rejected, while a command broadcasts a fact that already happened to any number of subscribers."
+      ],
+      "correct": 1,
+      "explanation": "A command asks one receiver to do something and can be rejected; an event states a fact that already happened and has any number of subscribers. The claim check keeps large payloads in blob storage and sends only a reference, which keeps messages small and within broker limits.",
+      "materials": [
+        "pubsub",
+        "claim-check"
+      ]
+    },
+    {
+      "prompt": "How do blue-green, canary and feature-flag releases compare?",
+      "tags": [
+        "Resilience & Scalability",
+        "Delivery"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Blue-green means two versions with separate databases that never share data.",
+        "Feature flags remove the need for backward-compatible data changes, and once added they never need to be cleaned up or removed from the code.",
+        "Blue-green switches between two environments, canary shifts a small share of traffic, and feature flags separate deploy from release.",
+        "Canary deploys to every server at once and rolls back only if all users report errors."
+      ],
+      "correct": 2,
+      "explanation": "Blue-green switches traffic between two full environments for instant rollback. Canary sends a small share of traffic to the new version and watches metrics. Feature flags separate deploy from release and allow per-tenant rollout. All require backward-compatible data changes, and flags need cleanup.",
+      "materials": [
+        "blue-green",
+        "canary",
+        "feature-toggles"
+      ]
+    },
+    {
+      "prompt": "How should you approach a system design interview question?",
+      "tags": [
+        "System Design & Judgement",
+        "System design"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Focus on naming technologies; trade-offs and failure modes are out of scope.",
+        "Start drawing the most scalable architecture at once, since requirements can be assumed.",
+        "Add caching, queues and sharding up front, regardless of the expected load.",
+        "Clarify requirements and scale, define the API and data model, sketch a simple design, then find the bottleneck from the numbers."
+      ],
+      "correct": 3,
+      "explanation": "Clarify requirements and scale (users, reads versus writes, latency, data size). Define the API and data model. Sketch the simplest design, estimate load, find the bottleneck, then add caching, queues, partitioning or replication where the numbers demand it. Name the trade-offs and failure modes aloud. Example to practise: a URL shortener (id generation, redirects, caching, analytics).",
+      "materials": [
+        "sd-primer"
+      ]
+    },
+    {
+      "prompt": "How would you design a distributed rate limiter?",
+      "tags": [
+        "System Design & Judgement",
+        "System design"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Return HTTP 500 when the limit is reached, so clients retry immediately.",
+        "Use only per-instance in-memory counters, which stay exact across a cluster of any size because the load balancer spreads requests perfectly evenly.",
+        "Choose an algorithm and a key, keep shared counters in Redis with atomic operations, and decide whether to fail open or closed.",
+        "Keep counters in the primary SQL database with a row lock per request."
+      ],
+      "correct": 2,
+      "explanation": "Choose an algorithm (token bucket or sliding window), a key (API key, tenant, IP) and where it runs (gateway, middleware). Shared counters in Redis with atomic operations give accuracy across instances; local limits are cheaper but approximate. Decide fail-open or fail-closed, the response (429 with Retry-After) and how to keep the limiter itself from becoming a bottleneck.",
+      "materials": [
+        "rate-limiting-pattern",
+        "stripe-rate"
+      ]
+    },
+    {
+      "prompt": "How do you design a multi-tenant SaaS data layer?",
+      "tags": [
+        "System Design & Judgement",
+        "Multi-tenancy"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Choose shared schema, schema per tenant or database per tenant by weighing isolation against cost, and mix models by tier.",
+        "A shared schema needs no tenant id, because the application never mixes tenants.",
+        "Store each tenant's data in a separate JSON file on the web server.",
+        "Always use one database per tenant, since isolation never needs to be weighed against cost, operations effort or the number of tenants you serve."
+      ],
+      "correct": 0,
+      "explanation": "Three models: shared schema with a tenant id (cheapest, needs strong isolation such as row-level security), schema per tenant, database per tenant (strongest isolation, highest cost). Weigh isolation, noisy neighbours, per-tenant customization, backup and restore, compliance and operational cost. Mix models by customer tier.",
+      "materials": [
+        "multitenant",
+        "tenancy-models"
+      ]
+    },
+    {
+      "prompt": "How would you design a system that sends scheduled campaigns to millions of recipients?",
+      "tags": [
+        "System Design & Judgement",
+        "System design"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Track progress only in memory, since a failed send can restart from the beginning.",
+        "Send everything at the scheduled time at once, ignoring provider limits and bounces.",
+        "Persist and chunk the audience, fan out through queues with per-provider rate limits, and keep idempotent per-recipient state.",
+        "Loop over every recipient inside one web request and call the email provider synchronously for each one, which keeps the design as simple as possible."
+      ],
+      "correct": 2,
+      "explanation": "Persist the campaign, plan and chunk the audience, fan out through queues, rate limit per provider, keep per-recipient state with idempotent sends, handle bounces and webhooks, and report progress. Use a workflow engine for the long-running orchestration, and discuss priority, cost and provider outages.",
+      "materials": [
+        "priority-queue",
+        "queue-leveling"
+      ]
+    },
+    {
+      "prompt": "How do you build an audit log or change history?",
+      "tags": [
+        "System Design & Judgement",
+        "Data"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Write audit entries asynchronously after the transaction commits, accepting that a few changes will be missing whenever a process crashes in between.",
+        "Update the audit row in place whenever a record changes, keeping the latest action.",
+        "Write append-only who-did-what-when records in the same transaction as the change, planning for retention, PII and querying.",
+        "Rely on application logs alone, since they are tamper-proof and kept forever."
+      ],
+      "correct": 2,
+      "explanation": "Append-only records of who did what, when and to what, written in the same transaction as the change (or from the outbox). Choices: triggers or CDC for completeness, application-level events for meaning. Cover tamper resistance, retention, PII handling, partitioning by time and how it is queried.",
+      "materials": [
+        "audit-log",
+        "event-sourcing-azure"
+      ]
+    },
+    {
+      "prompt": "How do you design observability for a distributed system?",
+      "tags": [
+        "System Design & Judgement",
+        "Observability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Alert on every individual error, so no problem ever goes unnoticed.",
+        "Use logs only, because metrics and traces duplicate what the logs already contain.",
+        "Structured logs with correlation ids, RED metrics plus saturation, and propagated traces, with SLO-based alerts that have runbooks.",
+        "Log everything at debug level and keep it forever, since storage cost doesn't matter and more data always makes incidents faster to diagnose and resolve."
+      ],
+      "correct": 2,
+      "explanation": "Structured logs with correlation ids, RED metrics per service (rate, errors, duration) plus saturation, distributed traces propagated across HTTP, queues and workflows. Control cost with sampling and retention. Tie alerts to SLOs, and give each alert a runbook.",
+      "materials": [
+        "otel-docs",
+        "sre-monitoring"
+      ]
+    },
+    {
+      "prompt": "How do you make and record an architectural decision?",
+      "tags": [
+        "System Design & Judgement",
+        "Decisions"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Choose the newest technology and avoid writing anything down, so the decision can change quietly.",
+        "Compare real alternatives against the quality attributes that matter, decide, and write a short ADR with context and consequences.",
+        "Let the most senior engineer decide alone, without recording alternatives.",
+        "Write the decision record once and never revisit it, even after the context changes."
+      ],
+      "correct": 1,
+      "explanation": "List the quality attributes that matter (latency, cost, security, changeability), generate real alternatives, compare them against those attributes, decide, and write a short architecture decision record with context, decision and consequences. Revisit it when the context changes.",
+      "materials": [
+        "adr",
+        "nygard-adr"
+      ]
+    },
+    {
+      "prompt": "What is evolutionary architecture, and when should you split a monolith?",
+      "tags": [
+        "System Design & Judgement",
+        "Architecture"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Keep change cheap with clear modules and fitness functions, and extract a service only when a real force such as scaling requires it.",
+        "Never split a monolith, since services cannot evolve independently.",
+        "Split the monolith into microservices on day one, before any module boundaries are known, because services are easier to merge later than to split.",
+        "Evolutionary architecture means rewriting the system from scratch each year."
+      ],
+      "correct": 0,
+      "explanation": "Design so change is cheap: clear module boundaries, automated tests and fitness functions that guard architectural rules in the build. Start as a modular monolith and extract a service only when a real force requires it (scaling, team autonomy, release cadence, isolation).",
+      "materials": [
+        "monolith-first",
+        "waf"
+      ]
+    },
+    {
+      "prompt": "How do you decide build versus buy, and manage technical debt?",
+      "tags": [
+        "System Design & Judgement",
+        "Decisions"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Build what differentiates the business, buy commodity needs counting total cost, and track debt and pay it down with a business reason.",
+        "Ignore technical debt until the system fails, then rewrite it from scratch.",
+        "Always buy the cheapest tool, since licence price is the only cost that matters.",
+        "Always build everything in-house, since buying or adopting open source only creates lock-in and integration work without delivering any real benefit."
+      ],
+      "correct": 0,
+      "explanation": "Build what differentiates the business; buy or adopt open source for commodity needs, counting integration, licence, lock-in and operating cost, not just price. Treat debt as deliberate or accidental, prudent or reckless; track it, size it, and pay it down alongside feature work with a business reason.",
+      "materials": [
+        "tech-debt",
+        "debt-quadrant"
+      ]
+    },
+    {
+      "prompt": "How do you communicate a design and lead without owning every line?",
+      "tags": [
+        "System Design & Judgement",
+        "Leadership"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Skip documentation, since docs and diagrams slow teams down at Staff level.",
+        "Write a design doc with goals, non-goals and risks, draw C4 views, review early, and raise others' ability to decide.",
+        "Present only the option you already chose, hiding the alternatives and risks from reviewers so that the discussion stays short and the team moves faster.",
+        "Write all the code yourself, so the design is never misunderstood."
+      ],
+      "correct": 1,
+      "explanation": "Write a design doc with goals, non-goals, options and risks; draw the C4 context and container views; get early review from the people who will run and use it; make the decision visible and the trade-offs honest. At Staff level, show how you raised others' ability and aligned teams, not only how you designed.",
+      "materials": [
+        "c4",
+        "design-docs",
+        "staffeng"
+      ]
+    }
+  ]
+}

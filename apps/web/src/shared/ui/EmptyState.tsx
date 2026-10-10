@@ -8,7 +8,13 @@ interface EmptyStateProps {
   onAction?: () => void;
 }
 
-export function EmptyState({ title, description, glyph = '∅', actionLabel, onAction }: EmptyStateProps) {
+export function EmptyState({
+  title,
+  description,
+  glyph = '∅',
+  actionLabel,
+  onAction,
+}: EmptyStateProps) {
   return (
     <div className="state-block" role="status">
       <div className="state-block__glyph" aria-hidden>

@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
+import { RichText } from '@/shared/ui';
+
 interface CommentedAnswerTabProps {
   explanation: string;
   revealed: boolean;
@@ -10,5 +12,6 @@ export function CommentedAnswerTab({ explanation, revealed }: CommentedAnswerTab
   if (!revealed) {
     return <div className="alert alert--info">{t('question.explanationHidden')}</div>;
   }
-  return <p style={{ margin: 0 }}>{explanation}</p>;
+  // Prose keeps its line breaks; ```lang fences render as highlighted code.
+  return <RichText text={explanation} />;
 }

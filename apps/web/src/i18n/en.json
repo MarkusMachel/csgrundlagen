@@ -44,7 +44,30 @@
     "allTags": "All tags",
     "searchPlaceholder": "Search questions…",
     "noResults": "No questions match your filter",
-    "noResultsHint": "Try a different search term or tag."
+    "noResultsHint": "Try a different search term, or clear some filters.",
+    "filterStatus": "Status",
+    "status": {
+      "all": "All questions",
+      "unanswered": "Not answered yet",
+      "answered": "Answered",
+      "wrong": "Got wrong",
+      "bookmarked": "Bookmarked"
+    },
+    "sort": "Sort",
+    "sortBy": {
+      "oldest": "Oldest first",
+      "newest": "Newest first",
+      "random": "Random"
+    },
+    "reshuffle": "Shuffle again",
+    "tags": "Tags",
+    "addTag": "+ Add tag",
+    "removeTag": "Remove tag {{tag}}",
+    "clearFilters": "Clear filters",
+    "resultCount_one": "{{count}} question",
+    "resultCount_other": "{{count}} questions",
+    "searchTags": "Search tags…",
+    "filters": "Filters"
   },
   "question": {
     "submit": "Submit answer",
@@ -171,7 +194,14 @@
       "link": "Link"
     },
     "empty": "No material matches the current filter",
-    "by": "by {{author}}"
+    "by": "by {{author}}",
+    "other": "Other",
+    "summary": "{{count}} resources in {{categories}} categories",
+    "summaryFiltered": "{{count}} of {{total}} resources",
+    "searchPlaceholder": "Search material…",
+    "contents": "Contents",
+    "seeAlso": "See also:",
+    "linkToSection": "Link to {{name}}"
   },
   "status": {
     "feedPosition": "questions {{from}}–{{to}} of {{total}}",
@@ -256,6 +286,12 @@
       "noQuestionsYet": "No questions yet",
       "noMaterialsYet": "No material yet",
       "noAnswersYet": "No answers recorded yet"
-    }
+    },
+    "codeHint": "code: wrap a block in ```go … ``` (or sql, cs, ts…), and `inline code` in backticks",
+    "preview": "Preview"
+  },
+  "code": {
+    "copy": "Copy code",
+    "copied": "Copied"
   }
 }

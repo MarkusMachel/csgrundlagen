@@ -63,9 +63,11 @@ export function TagInput({ value, onChange, suggestions = [], error }: TagInputP
         onBlur={() => draft && commit(draft)}
       />
       <datalist id={listId}>
-        {suggestions.filter((s) => !value.includes(s)).map((s) => (
-          <option key={s} value={s} />
-        ))}
+        {suggestions
+          .filter((s) => !value.includes(s))
+          .map((s) => (
+            <option key={s} value={s} />
+          ))}
       </datalist>
       {error && <span className="field-error-text">{error}</span>}
     </div>

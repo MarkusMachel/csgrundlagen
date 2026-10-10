@@ -28,6 +28,12 @@
   --orange: #b35c00;
   --line-hl: rgba(47, 95, 208, 0.07);
   --chart-bar: #2f5fd0; /* validated vs #ffffff (dataviz six checks) */
+  /* syntax highlighting (keywords use --accent, comments --comment) */
+  --code-bg: #f6f8fa;
+  --code-str: #0a3069;
+  --code-num: #0550ae;
+  --code-fn: #8250df;
+  --code-type: #953800;
   /* categorical chart series (validated vs #ffffff, all 4 PASS; series 3/4
      carry a WARN on contrast alone, so every bar keeps a direct text label) */
   --series-1: #2a78d6;
@@ -58,6 +64,11 @@
   --orange: #f5a623;
   --line-hl: rgba(110, 168, 254, 0.09);
   --chart-bar: #4c8ceb; /* validated vs #1a1b21 (dataviz six checks) */
+  --code-bg: #0a0a0c;
+  --code-str: #a5d6ff;
+  --code-num: #79c0ff;
+  --code-fn: #d2a8ff;
+  --code-type: #ffa657;
   /* categorical chart series (validated vs #131316, all 4 PASS) */
   --series-1: #3987e5;
   --series-2: #d95926;
@@ -474,7 +485,7 @@ button {
 .app-main {
   max-width: 980px;
   margin: 0 auto;
-  padding: 20px 16px 72px; /* room for the status bar */
+  padding: 20px 16px 100px; /* room for the status bar and the scroll button */
 }
 
 .scroll-fab {
@@ -656,9 +667,19 @@ button {
   min-width: 0;
 }
 
+/* struck out with the scissors: grey out the whole option, including the
+   separately coloured index and answer tokens */
 .option-entry--struck .option-entry__text {
   text-decoration: line-through;
+}
+
+.option-entry--struck .option-entry__text,
+.option-entry--struck .option-entry__text * {
   color: var(--muted);
+}
+
+.option-entry--struck {
+  opacity: 0.6;
 }
 
 .option-entry--correct .option-entry__text .tok-str {
@@ -1013,13 +1034,22 @@ table.data-table {
   display: flex;
   gap: 6px;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+}
+
+.page-gap {
+  min-width: 20px;
+  text-align: center;
+  color: var(--muted);
+  user-select: none;
 }
 
 .page-btn {
   min-width: 36px;
   min-height: 36px;
   padding: 4px 10px;
+  font-variant-numeric: tabular-nums;
   border: 1px solid var(--border);
   background: var(--surface);
   border-radius: 8px;
@@ -1358,26 +1388,876 @@ table.data-table {
 .toolbar .field--grow {
   flex: 1;
   min-width: 200px;
+  justify-content: flex-end; /* line the search box up with the labelled selects */
+}
+
+/* ---------- question filters ---------- */
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filters__sort {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.filters__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+}
+
+.filters__group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.filters__label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-right: 2px;
+}
+
+.filters__summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 30px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.toggle-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 28px;
+  padding: 2px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 12.5px;
+  cursor: pointer;
+  transition:
+    border-color 120ms,
+    background 120ms,
+    color 120ms;
+}
+
+.toggle-chip:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.toggle-chip[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.select--compact {
+  width: auto;
+  min-height: 28px;
+  padding: 2px 10px 2px 12px;
+  font-size: 12.5px;
+  border-radius: 999px;
+}
+
+/* ---------- home: filters in a left sidebar ---------- */
+
+/* Like the material wiki, the home feed uses the full window width. */
+.app-main:has(.feed-layout) {
+  max-width: none;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.feed-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+}
+
+.feed-layout__main {
+  min-width: 0;
+}
+
+@media (min-width: 860px) {
+  .feed-layout {
+    grid-template-columns: 270px minmax(0, 1fr);
+    column-gap: 36px;
+  }
+
+  .feed-layout__sidebar {
+    position: sticky;
+    top: 66px; /* below the sticky title bar */
+    align-self: start;
+  }
+
+  /* the rounded panel itself scrolls, so the scrollbar stays inside it */
+  .filter-panel {
+    max-height: calc(100vh - 66px - 56px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
+.filter-panel {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 0 10px 12px;
+}
+
+.filter-panel__title {
+  list-style: none; /* the chevron replaces the default marker */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  padding: 10px 4px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.filter-panel__title::-webkit-details-marker {
+  display: none;
+}
+
+.filter-panel__chevron {
+  margin-left: auto;
+  transform: rotate(-90deg);
+  transition: transform 150ms;
+}
+
+.filter-panel[open] .filter-panel__chevron {
+  transform: none;
+}
+
+.filter-panel__badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.filter-panel__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.filter-panel__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 28px;
+  margin-top: -6px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.filter-panel__section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.filter-panel__heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 22px;
+  margin: 0;
+  padding: 0 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.filter-panel__heading-action {
+  margin-left: auto;
+  width: 26px;
+  min-width: 26px;
+  min-height: 26px;
+}
+
+.filter-panel__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-panel__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  font-size: 12.5px;
+  line-height: 1.45;
+  text-align: left;
+  cursor: pointer;
+}
+
+.filter-panel__item:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.filter-panel__item[aria-checked='true'],
+.filter-panel__item[aria-pressed='true'] {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* tag rows: a small checkbox, since several can be ticked */
+.filter-panel__box {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  background: var(--surface);
+}
+
+.filter-panel__item[aria-pressed='true'] .filter-panel__box {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.filter-panel__tag-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 4px;
+  padding: 5px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--muted);
+}
+
+.filter-panel__tag-search:focus-within {
+  border-color: var(--accent);
+}
+
+.filter-panel__tag-search input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  outline: none;
+  font-size: 12.5px;
+}
+
+.filter-panel__empty {
+  margin: 0;
+  padding: 4px 8px;
+  color: var(--muted);
+}
+
+/* ---------- rich text: code blocks and inline code (shared/ui/RichText) ---------- */
+
+.rich-text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.rich-text__p {
+  margin: 0;
+  white-space: pre-wrap; /* keep the line breaks of the source text */
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  color: var(--code-str);
+  font-weight: 500;
+}
+
+.code-block {
+  margin: 4px 0;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--code-bg);
+  overflow: hidden;
+}
+
+.code-block__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 6px 3px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.code-block__lang {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.code-block__copy {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 24px;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.code-block__copy:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.code-block__pre {
+  margin: 0;
+  padding: 10px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.55;
+  tab-size: 4;
+  font-weight: 400;
+}
+
+.code-block .hljs {
+  color: var(--text);
+  background: none;
+}
+
+.hljs-keyword,
+.hljs-literal,
+.hljs-selector-tag,
+.hljs-meta .hljs-keyword {
+  color: var(--accent);
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-template-string,
+.hljs-attr,
+.hljs-symbol {
+  color: var(--code-str);
+}
+
+.hljs-number,
+.hljs-variable.language_,
+.hljs-variable.constant_ {
+  color: var(--code-num);
+}
+
+.hljs-title.function_,
+.hljs-title.function_.invoke__,
+.hljs-built_in {
+  color: var(--code-fn);
+}
+
+.hljs-type,
+.hljs-title.class_,
+.hljs-title,
+.hljs-params .hljs-type {
+  color: var(--code-type);
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-meta {
+  color: var(--comment);
+  font-style: italic;
+}
+
+.hljs-operator,
+.hljs-punctuation {
+  color: var(--muted);
+}
+
+/* admin form: live preview of text with code */
+.rich-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 8px;
+}
+
+.rich-preview__label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+/* grows with its content (where supported) so code answers aren't cramped */
+.textarea--autogrow {
+  field-sizing: content;
+  min-height: 36px;
+  max-height: 320px;
+  resize: vertical;
+  font-family: var(--font-mono);
+}
+
+/* a code-block answer option: the snippet sits under `var A =` */
+.option-entry__text--block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ---------- custom select (shared/ui/Select) ---------- */
+
+.dropdown {
+  position: relative;
+  min-width: 0;
+}
+
+.dropdown__trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  color: var(--text);
+  cursor: pointer;
+  padding-right: 12px; /* keeps the chevron off the edge */
+}
+
+.dropdown__trigger[aria-expanded='true'] {
+  border-color: var(--accent);
+}
+
+.dropdown__value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdown__value--placeholder {
+  color: var(--muted);
+}
+
+.dropdown__chevron {
+  color: var(--muted);
+  transition: transform 150ms;
+}
+
+.dropdown__popup {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 40;
+  min-width: 100%;
+  width: max-content;
+  max-width: min(320px, calc(100vw - 32px));
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  animation: dropdown-in 120ms ease-out;
+}
+
+.dropdown__popup--up {
+  top: auto;
+  bottom: calc(100% + 6px);
+}
+
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.dropdown__search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.dropdown__search input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  outline: none;
+  font-size: 13px;
+}
+
+.dropdown__list {
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  overflow-y: auto;
+  outline: none;
+}
+
+.dropdown__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dropdown__option--active {
+  background: var(--accent-soft);
+}
+
+.dropdown__option[aria-selected='true'] {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.dropdown__check {
+  color: var(--accent);
+}
+
+.dropdown__empty {
+  padding: 7px 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* native <select> (forms bound to react-hook-form): same chevron, inset from the edge */
+select.select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='%238a8f98' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+.btn--small {
+  min-height: 28px;
+  padding: 2px 10px;
+  font-size: 12.5px;
+  gap: 4px;
 }
 
 /* ---------- materials grid ---------- */
 
-.materials-grid {
+/* wiki-style index: contents sidebar + one section of plain links per category */
+
+/* The wiki uses the full window width instead of the centred reading column. */
+.app-main:has(.wiki) {
+  max-width: none;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.wiki {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'header'
+    'toc'
+    'content';
+  gap: 20px;
 }
 
-@media (min-width: 640px) {
-  .materials-grid {
-    grid-template-columns: repeat(2, 1fr);
+.wiki__header {
+  grid-area: header;
+}
+
+.wiki-toc {
+  grid-area: toc;
+}
+
+.wiki__content {
+  grid-area: content;
+}
+
+/* sidebar on the left edge, spanning the header and the sections */
+@media (min-width: 860px) {
+  .wiki {
+    grid-template-columns: 270px minmax(0, 1fr);
+    grid-template-areas:
+      'toc header'
+      'toc content';
+    grid-template-rows: auto 1fr;
+    column-gap: 36px;
+  }
+
+  .wiki-toc {
+    position: sticky;
+    top: 66px; /* below the sticky title bar */
+    align-self: start;
+  }
+
+  /* the rounded box itself scrolls, so the scrollbar stays inside it */
+  .wiki-toc__details {
+    max-height: calc(100vh - 66px - 56px); /* title bar above, status bar below */
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 }
 
-@media (min-width: 1024px) {
-  .materials-grid {
-    grid-template-columns: repeat(3, 1fr);
+.wiki__summary {
+  margin: -4px 0 12px;
+  font-size: 12.5px;
+}
+
+.wiki__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+}
+
+.wiki__filters .input {
+  flex: 1;
+  min-width: 200px;
+}
+
+.wiki-toc__details {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 0 6px 8px;
+}
+
+.wiki-toc__title {
+  /* stays put while the list scrolls under it */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--surface);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  padding: 10px 8px 6px;
+  cursor: pointer;
+}
+
+/* thin, rounded scrollbar for inner scroll areas (contents, dropdown lists);
+   the track is inset so the thumb never runs into rounded corners */
+/* Chrome ignores the ::-webkit-scrollbar rules below whenever scrollbar-width
+   or scrollbar-color is set, so the standard properties are Firefox-only. */
+@supports not selector(::-webkit-scrollbar) {
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
   }
+}
+
+.scroll-thin::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scroll-thin::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 8px 0;
+}
+
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+  border: 3px solid transparent; /* padding around the thumb */
+  background-clip: padding-box;
+}
+
+.scroll-thin::-webkit-scrollbar-thumb:hover {
+  background-color: var(--muted);
+}
+
+.wiki-toc__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.wiki-toc__list li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.wiki-toc__list a {
+  flex: 1;
+  min-width: 0;
+  padding: 3px 8px;
+  border-radius: 6px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.wiki-toc__list a[aria-current='location'] {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.wiki-toc__list a:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.wiki-toc__count {
+  font-size: 11.5px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  padding-right: 8px;
+}
+
+.wiki__content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.wiki-section {
+  scroll-margin-top: 66px;
+}
+
+.wiki-section__title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.wiki-section__anchor {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 400;
+  opacity: 0;
+  transition: opacity 120ms;
+}
+
+.wiki-section__title:hover .wiki-section__anchor,
+.wiki-section__anchor:focus-visible {
+  opacity: 1;
+}
+
+.wiki-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wiki-entry {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.wiki-entry__icon {
+  flex-shrink: 0;
+  color: var(--muted);
+  padding-top: 2px;
+}
+
+.wiki-entry__body {
+  min-width: 0;
+  font-size: 13.5px;
+}
+
+.wiki-entry__link {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.wiki-entry__link:hover {
+  text-decoration: underline;
+}
+
+.wiki-entry__link svg {
+  margin-left: 4px;
+  opacity: 0.6;
+  vertical-align: -1px;
+}
+
+.wiki-entry__desc {
+  margin: 2px 0 0;
+  color: var(--text);
+  opacity: 0.85;
+}
+
+.wiki-entry__see-also {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.wiki-entry__see-also a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+}
+
+.wiki-entry__see-also a:hover {
+  color: var(--accent);
 }
 
 /* ---------- build-test layout ---------- */

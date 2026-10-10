@@ -266,10 +266,35 @@ func TestAPI(t *testing.T) {
 	expect(t, "weak is per user", c.do("GET", "/api/questions/weak", graceTok, nil, &weak), 200)
 	expect(t, "grace has none", len(weak), 0)
 
+	// --- richer list filters: difficulty, per-user status, sort ---
+	expect(t, "difficulty", c.do("GET", "/api/questions?difficulty=easy", "", nil, &page), 200)
+	expect(t, "difficulty hit", vals(page.Total, page.Items[0].ID), vals(1, mc.ID))
+	expect(t, "bogus difficulty ignored", c.do("GET", "/api/questions?difficulty=nope", "", nil, &page), 200)
+	expect(t, "bogus difficulty total", page.Total, 3)
+	expect(t, "answered", c.do("GET", "/api/questions?status=answered", adaTok, nil, &page), 200)
+	expect(t, "answered total", page.Total, 2)
+	expect(t, "wrong", c.do("GET", "/api/questions?status=wrong", adaTok, nil, &page), 200)
+	expect(t, "wrong hit", vals(page.Total, page.Items[0].ID), vals(1, mc.ID))
+	expect(t, "unanswered", c.do("GET", "/api/questions?status=unanswered", adaTok, nil, &page), 200)
+	expect(t, "unanswered hit", vals(page.Total, page.Items[0].ID), vals(1, linked.ID))
+	expect(t, "status is per user", c.do("GET", "/api/questions?status=answered", graceTok, nil, &page), 200)
+	expect(t, "grace answered none", page.Total, 0)
+	expect(t, "anonymous status ignored", c.do("GET", "/api/questions?status=wrong", "", nil, &page), 200)
+	expect(t, "anonymous total", page.Total, 3)
+	expect(t, "newest", c.do("GET", "/api/questions?sort=newest", "", nil, &page), 200)
+	expect(t, "newest first", page.Items[0].ID, linked.ID)
+	var r1, r2 store.QuestionsPage
+	c.do("GET", "/api/questions?sort=random&seed=abc", "", nil, &r1)
+	c.do("GET", "/api/questions?sort=random&seed=abc", "", nil, &r2)
+	expect(t, "random is stable per seed", vals(r2.Items[0].ID, r2.Items[1].ID, r2.Items[2].ID),
+		vals(r1.Items[0].ID, r1.Items[1].ID, r1.Items[2].ID))
+
 	// --- bookmarks, notes, comments, bug reports ---
 	var bm struct{ Bookmarked bool }
 	expect(t, "bookmark on", c.do("POST", "/api/questions/"+mc.ID+"/bookmark", adaTok, nil, &bm), 200)
 	expect(t, "bookmarked", bm.Bookmarked, true)
+	expect(t, "bookmarked filter", c.do("GET", "/api/questions?status=bookmarked", adaTok, nil, &page), 200)
+	expect(t, "bookmarked filter hit", vals(page.Total, page.Items[0].ID), vals(1, mc.ID))
 	var bms []store.Question
 	c.do("GET", "/api/bookmarks", adaTok, nil, &bms)
 	expect(t, "bookmarks list", len(bms), 1)

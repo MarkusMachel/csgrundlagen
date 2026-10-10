@@ -28,23 +28,23 @@ export function MaterialTab({ questionId }: { questionId: string }) {
       {materials.map((m) => {
         const Icon = typeIcons[m.type];
         return (
-        <a
-          key={m.id}
-          className="material-item"
-          href={m.url}
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          <span className="material-item__glyph" aria-hidden>
-            <Icon size={16} />
-          </span>
-          <span style={{ minWidth: 0 }}>
-            <span className="material-item__title">{m.title}</span>
-            <span className="material-item__sub">
-              {m.author ? t('materials.by', { author: m.author }) : m.description}
+          <a
+            key={m.id}
+            className="material-item"
+            href={m.url}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <span className="material-item__glyph" aria-hidden>
+              <Icon size={16} />
             </span>
-          </span>
-        </a>
+            <span style={{ minWidth: 0 }}>
+              <span className="material-item__title">{m.title}</span>
+              <span className="material-item__sub">
+                {m.author ? t('materials.by', { author: m.author }) : m.description}
+              </span>
+            </span>
+          </a>
         );
       })}
     </div>

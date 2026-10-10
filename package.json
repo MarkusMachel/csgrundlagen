@@ -13,10 +13,14 @@
     "lint": "npm run lint -w @csgrundlagen/web",
     "typecheck": "npm run typecheck -w @csgrundlagen/web",
     "storybook": "npm run storybook -w @csgrundlagen/web",
+    "up": "docker compose up -d --build",
+    "down": "docker compose down",
+    "logs": "docker compose logs -f api web",
     "db:up": "docker compose up -d db",
     "db:down": "docker compose down",
     "api:dev": "cd apps/api && go run ./cmd/api",
     "api:test": "cd apps/api && go test ./...",
-    "api:adduser": "cd apps/api && go run ./cmd/adduser"
+    "api:adduser": "cd apps/api && go run ./cmd/adduser",
+    "api:seed": "cd apps/api && go run ./cmd/seed"
   }
 }

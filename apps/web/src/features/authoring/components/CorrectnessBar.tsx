@@ -45,11 +45,19 @@ export function CorrectnessBar({ correct, incorrect }: CorrectnessBarProps) {
           </div>
           <div className="chart-legend">
             <span>
-              <span className="chart-legend__swatch" style={{ background: 'var(--green)' }} aria-hidden />
+              <span
+                className="chart-legend__swatch"
+                style={{ background: 'var(--green)' }}
+                aria-hidden
+              />
               {t('authoring.stats.correct', { count: correct, pct: correctPct })}
             </span>
             <span>
-              <span className="chart-legend__swatch" style={{ background: 'var(--red)' }} aria-hidden />
+              <span
+                className="chart-legend__swatch"
+                style={{ background: 'var(--red)' }}
+                aria-hidden
+              />
               {t('authoring.stats.incorrect', { count: incorrect, pct: 100 - correctPct })}
             </span>
           </div>

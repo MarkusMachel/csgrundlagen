@@ -72,6 +72,29 @@ func ensureTags(ctx context.Context, tx pgx.Tx, tags []string) error {
 	return err
 }
 
+// nullIfEmpty stores an empty author id (seeded content) as NULL.
+func nullIfEmpty(s string) *string {
+	if s == "" {
+		return nil
+	}
+	return &s
+}
+
+// FindQuestionIDByPrompt returns the id of a question with exactly this
+// English prompt, or ErrNotFound.
+func (s *Store) FindQuestionIDByPrompt(ctx context.Context, prompt string) (string, error) {
+	var id string
+	err := s.pool.QueryRow(ctx, `SELECT id FROM questions WHERE prompt = $1 LIMIT 1`, prompt).Scan(&id)
+	return id, notFound(err)
+}
+
+// FindMaterialIDByURL returns the id of the material with this URL, or ErrNotFound.
+func (s *Store) FindMaterialIDByURL(ctx context.Context, url string) (string, error) {
+	var id string
+	err := s.pool.QueryRow(ctx, `SELECT id FROM materials WHERE url = $1 LIMIT 1`, url).Scan(&id)
+	return id, notFound(err)
+}
+
 func nonNil[T any](s []T) []T {
 	if s == nil {
 		return []T{}

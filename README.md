@@ -38,10 +38,23 @@ npm install
 npm run dev          # localhost:5173 — log in as demo@example.com / password
 ```
 
-Full stack, against Postgres:
+Full stack in Docker (Postgres, Go API, React app behind nginx):
 
 ```bash
 cp .env.example .env # once; adjust credentials/ports if needed
+npm run up           # builds and starts db, api (:8080) and web (localhost:3000)
+docker compose exec api adduser -email you@example.com -name "You" -role admin -password '…'
+docker compose exec api seed -file seeds/dotnet-interview.json   # optional question banks
+```
+
+nginx serves the production build and proxies `/api` to the api container, so the
+browser sees one origin. Rebuild after code changes with `npm run up` again.
+
+Full stack with hot reload (Postgres in Docker, API and web on the host):
+
+```bash
+cp .env.example .env # once; adjust credentials/ports if needed
+docker compose stop api web  # if the containers are running, free :8080
 npm run db:up        # Postgres in Docker
 npm run api:dev      # Go API on :8080 — applies migrations on startup
 npm run api:adduser -- -email you@example.com -name "You" -role admin -password '…'
@@ -65,7 +78,9 @@ Run from the repo root.
 | `npm run build` | Web: typecheck + production build |
 | `npm run e2e` | Web: Playwright journeys (first run: `npx playwright install chromium`) |
 | `npm run storybook` | Web: Storybook |
-| `npm run db:up` / `db:down` | Start / stop Postgres (data is kept) |
+| `npm run up` / `down` | Build and start / stop all containers: db, api, web (data is kept) |
+| `npm run logs` | Follow the api and web container logs |
+| `npm run db:up` / `db:down` | Start Postgres only / stop everything (data is kept) |
 | `npm run api:dev` | Run the Go API (`DATABASE_URL`, `PORT`) |
 | `npm run api:test` | Go tests — the integration suite needs Postgres running |
 | `npm run api:adduser` | Create a user with a hashed password |
@@ -101,8 +116,10 @@ internal/httpapi routes, auth middleware, handlers, integration tests
 - **Tests**: `go test ./...` creates a throwaway database next to
   `DATABASE_URL`, migrates it, drives every endpoint over HTTP, then drops it.
   It skips itself if Postgres isn't reachable.
-- **Docker**: `docker compose --profile api up -d` runs the API in a container
-  (distroless image) next to the database instead of `api:dev`.
+- **Docker**: `apps/api/Dockerfile` builds a distroless image with the `api`,
+  `adduser` and `seed` binaries plus `seeds/`. The web image
+  (`apps/web/Dockerfile`, built from the repo root) is a Vite build served by
+  nginx (`apps/web/nginx.conf`) with mocks off.
 
 ## Postgres
 

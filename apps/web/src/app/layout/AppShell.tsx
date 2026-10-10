@@ -1,4 +1,5 @@
 import { ArrowDown } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
@@ -8,10 +9,35 @@ import { Spinner } from '@/shared/ui';
 import { StatusBar } from './StatusBar';
 import { TopBar } from './TopBar';
 
+/** True when the page is scrolled to (or near) the bottom, or can't scroll at all. */
+function useNearBottom(threshold = 120) {
+  const [nearBottom, setNearBottom] = useState(false);
+  useEffect(() => {
+    const update = () => {
+      const { scrollHeight } = document.documentElement;
+      setNearBottom(window.innerHeight + window.scrollY >= scrollHeight - threshold);
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    // Content height changes (e.g. a page of questions loading) don't fire scroll.
+    const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(update);
+    observer?.observe(document.body);
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+      observer?.disconnect();
+    };
+  }, [threshold]);
+  return nearBottom;
+}
+
 export function AppShell() {
   const { t } = useTranslation();
   const status = useSessionBootstrap();
   const location = useLocation();
+  // Hidden at the bottom so it never covers the last controls, like the pagination.
+  const nearBottom = useNearBottom();
 
   if (status === 'unknown') {
     return (
@@ -31,14 +57,16 @@ export function AppShell() {
       <main className="app-main">
         <Outlet />
       </main>
-      <button
-        type="button"
-        className="scroll-fab"
-        aria-label={t('nav.scrollDown')}
-        onClick={() => window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' })}
-      >
-        <ArrowDown size={18} aria-hidden style={{ margin: 'auto' }} />
-      </button>
+      {!nearBottom && (
+        <button
+          type="button"
+          className="scroll-fab"
+          aria-label={t('nav.scrollDown')}
+          onClick={() => window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' })}
+        >
+          <ArrowDown size={18} aria-hidden style={{ margin: 'auto' }} />
+        </button>
+      )}
       <StatusBar />
     </>
   );

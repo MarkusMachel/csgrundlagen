@@ -44,7 +44,30 @@
     "allTags": "Todas as tags",
     "searchPlaceholder": "Pesquisar perguntas…",
     "noResults": "Nenhuma pergunta corresponde ao seu filtro",
-    "noResultsHint": "Tente outro termo de pesquisa ou tag."
+    "noResultsHint": "Tente outro termo de pesquisa ou limpe alguns filtros.",
+    "filterStatus": "Status",
+    "status": {
+      "all": "Todas as perguntas",
+      "unanswered": "Ainda não respondidas",
+      "answered": "Respondidas",
+      "wrong": "Erradas",
+      "bookmarked": "Salvas"
+    },
+    "sort": "Ordenar",
+    "sortBy": {
+      "oldest": "Mais antigas primeiro",
+      "newest": "Mais recentes primeiro",
+      "random": "Aleatória"
+    },
+    "reshuffle": "Embaralhar de novo",
+    "tags": "Tags",
+    "addTag": "+ Adicionar tag",
+    "removeTag": "Remover tag {{tag}}",
+    "clearFilters": "Limpar filtros",
+    "resultCount_one": "{{count}} pergunta",
+    "resultCount_other": "{{count}} perguntas",
+    "searchTags": "Buscar tags…",
+    "filters": "Filtros"
   },
   "question": {
     "submit": "Enviar resposta",
@@ -171,7 +194,14 @@
       "link": "Link"
     },
     "empty": "Nenhum material corresponde ao filtro atual",
-    "by": "por {{author}}"
+    "by": "por {{author}}",
+    "other": "Outros",
+    "summary": "{{count}} recursos em {{categories}} categorias",
+    "summaryFiltered": "{{count}} de {{total}} recursos",
+    "searchPlaceholder": "Buscar material…",
+    "contents": "Conteúdo",
+    "seeAlso": "Veja também:",
+    "linkToSection": "Link para {{name}}"
   },
   "status": {
     "feedPosition": "perguntas {{from}}–{{to}} de {{total}}",
@@ -256,6 +286,12 @@
       "noQuestionsYet": "Ainda não há questões",
       "noMaterialsYet": "Ainda não há material",
       "noAnswersYet": "Ainda não há respostas registradas"
-    }
+    },
+    "codeHint": "código: envolva um bloco em ```go … ``` (ou sql, cs, ts…) e `código inline` entre crases",
+    "preview": "Pré-visualização"
+  },
+  "code": {
+    "copy": "Copiar código",
+    "copied": "Copiado"
   }
 }

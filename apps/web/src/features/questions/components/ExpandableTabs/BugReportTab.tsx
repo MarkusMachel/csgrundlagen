@@ -11,7 +11,10 @@ type BugForm = z.infer<typeof bugSchema>;
 export function BugReportTab({ questionId }: { questionId: string }) {
   const { t } = useTranslation();
   const reportBug = useReportBug(questionId);
-  const form = useForm<BugForm>({ resolver: zodResolver(bugSchema), defaultValues: { message: '' } });
+  const form = useForm<BugForm>({
+    resolver: zodResolver(bugSchema),
+    defaultValues: { message: '' },
+  });
 
   const onSubmit = form.handleSubmit(async ({ message }) => {
     await reportBug.mutateAsync(message);
@@ -20,7 +23,9 @@ export function BugReportTab({ questionId }: { questionId: string }) {
 
   return (
     <form onSubmit={onSubmit} className="stack" style={{ gap: 10 }}>
-      {reportBug.isSuccess && <div className="alert alert--success">{t('question.bug.success')}</div>}
+      {reportBug.isSuccess && (
+        <div className="alert alert--success">{t('question.bug.success')}</div>
+      )}
       <div className={form.formState.errors.message ? 'field field--error' : 'field'}>
         <textarea
           className="textarea"

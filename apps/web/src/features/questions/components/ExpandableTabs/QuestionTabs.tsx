@@ -1,7 +1,6 @@
 import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-
 import { BugReportTab } from './BugReportTab';
 import { CommentedAnswerTab } from './CommentedAnswerTab';
 import { CommentsTab } from './CommentsTab';
@@ -21,7 +20,11 @@ interface QuestionTabsProps {
 type TabKey = 'explanation' | 'comments' | 'notes' | 'stats' | 'material' | 'bug';
 
 /** Editor-style bottom panel (like OUTPUT / PROBLEMS / TERMINAL). */
-export function QuestionTabs({ question, explanationRevealed, hideRevealingTabs }: QuestionTabsProps) {
+export function QuestionTabs({
+  question,
+  explanationRevealed,
+  hideRevealingTabs,
+}: QuestionTabsProps) {
   const { t } = useTranslation();
   const idBase = useId();
 

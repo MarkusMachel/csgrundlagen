@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next';
 
 import { ErrorState, Spinner } from '@/shared/ui';
 
-
 import { CategoricalBarChart } from './CategoricalBarChart';
 import { CorrectnessBar } from './CorrectnessBar';
 import { MagnitudeBarChart } from './MagnitudeBarChart';

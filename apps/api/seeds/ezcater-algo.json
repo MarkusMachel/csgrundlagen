@@ -1,0 +1,1100 @@
+{
+  "name": "ezCater algorithm, SQL and Go implementation practice",
+  "materials": [
+    {
+      "key": "lc-longest",
+      "type": "link",
+      "title": "LeetCode: Longest Substring Without Repeating Characters",
+      "url": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+      "author": "LeetCode",
+      "description": "Practice the problem with an online judge. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "lc-anagrams",
+      "type": "link",
+      "title": "LeetCode: Group Anagrams",
+      "url": "https://leetcode.com/problems/group-anagrams/",
+      "author": "LeetCode",
+      "description": "Practice the problem with an online judge. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "lc-two-sum",
+      "type": "link",
+      "title": "LeetCode: Two Sum",
+      "url": "https://leetcode.com/problems/two-sum/",
+      "author": "LeetCode",
+      "description": "Practice the problem with an online judge. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "lc-merge-intervals",
+      "type": "link",
+      "title": "LeetCode: Merge Intervals",
+      "url": "https://leetcode.com/problems/merge-intervals/",
+      "author": "LeetCode",
+      "description": "Practice the problem with an online judge. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "lc-lru",
+      "type": "link",
+      "title": "LeetCode: LRU Cache",
+      "url": "https://leetcode.com/problems/lru-cache/",
+      "author": "LeetCode",
+      "description": "Practice the problem with an online judge. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "x-rate",
+      "type": "article",
+      "title": "golang.org/x/time/rate",
+      "url": "https://pkg.go.dev/golang.org/x/time/rate",
+      "author": "The Go Authors",
+      "description": "The standard token-bucket limiter for Go. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "idempotent-consumer",
+      "type": "article",
+      "title": "Pattern: Idempotent consumer",
+      "url": "https://microservices.io/patterns/communication-style/idempotent-consumer.html",
+      "author": "microservices.io",
+      "description": "Handling duplicate messages safely."
+    },
+    {
+      "key": "lc-reverse",
+      "type": "link",
+      "title": "LeetCode: Reverse Linked List",
+      "url": "https://leetcode.com/problems/reverse-linked-list/",
+      "author": "LeetCode",
+      "description": "Practice the problem with an online judge. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "lc-course-schedule",
+      "type": "link",
+      "title": "LeetCode: Course Schedule II",
+      "url": "https://leetcode.com/problems/course-schedule-ii/",
+      "author": "LeetCode",
+      "description": "Practice the problem with an online judge. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "gobyexample-workers",
+      "type": "article",
+      "title": "Go by Example: Worker Pools",
+      "url": "https://gobyexample.com/worker-pools",
+      "author": "Go by Example",
+      "description": "A worker pool with channels and goroutines. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "lc-rotated",
+      "type": "link",
+      "title": "LeetCode: Search in Rotated Sorted Array",
+      "url": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+      "author": "LeetCode",
+      "description": "Practice the problem with an online judge. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "json-schema",
+      "type": "link",
+      "title": "JSON Schema",
+      "url": "https://json-schema.org/",
+      "author": "JSON Schema",
+      "description": "The specification that real payload validation builds on. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "lc-parentheses",
+      "type": "link",
+      "title": "LeetCode: Valid Parentheses",
+      "url": "https://leetcode.com/problems/valid-parentheses/",
+      "author": "LeetCode",
+      "description": "Practice the problem with an online judge. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "lc-duplicates",
+      "type": "link",
+      "title": "LeetCode: Find All Duplicates in an Array",
+      "url": "https://leetcode.com/problems/find-all-duplicates-in-an-array/",
+      "author": "LeetCode",
+      "description": "Practice the problem with an online judge. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "lc-islands",
+      "type": "link",
+      "title": "LeetCode: Number of Islands",
+      "url": "https://leetcode.com/problems/number-of-islands/",
+      "author": "LeetCode",
+      "description": "Practice the problem with an online judge. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "lc-kth",
+      "type": "link",
+      "title": "LeetCode: Kth Largest Element in an Array",
+      "url": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
+      "author": "LeetCode",
+      "description": "Practice the problem with an online judge. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "container-heap",
+      "type": "article",
+      "title": "container/heap package",
+      "url": "https://pkg.go.dev/container/heap",
+      "author": "The Go Authors",
+      "description": "Heap operations over any heap.Interface. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "lc-trie",
+      "type": "link",
+      "title": "LeetCode: Implement Trie (Prefix Tree)",
+      "url": "https://leetcode.com/problems/implement-trie-prefix-tree/",
+      "author": "LeetCode",
+      "description": "Practice the problem with an online judge. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "lc-merge-k",
+      "type": "link",
+      "title": "LeetCode: Merge k Sorted Lists",
+      "url": "https://leetcode.com/problems/merge-k-sorted-lists/",
+      "author": "LeetCode",
+      "description": "Practice the problem with an online judge. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "lc-second-highest",
+      "type": "link",
+      "title": "LeetCode: Second Highest Salary",
+      "url": "https://leetcode.com/problems/second-highest-salary/",
+      "author": "LeetCode",
+      "description": "Practice the problem with an online judge. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "pg-window",
+      "type": "article",
+      "title": "Window functions (tutorial)",
+      "url": "https://www.postgresql.org/docs/current/tutorial-window.html",
+      "author": "PostgreSQL documentation",
+      "description": "OVER, PARTITION BY and running totals. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "pg-join",
+      "type": "article",
+      "title": "Joins between tables (tutorial)",
+      "url": "https://www.postgresql.org/docs/current/tutorial-join.html",
+      "author": "PostgreSQL documentation",
+      "description": "Inner and outer joins, with examples. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "pg-agg",
+      "type": "article",
+      "title": "Aggregate functions (tutorial)",
+      "url": "https://www.postgresql.org/docs/current/tutorial-agg.html",
+      "author": "PostgreSQL documentation",
+      "description": "GROUP BY, HAVING and WHERE versus HAVING. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "pg-explain",
+      "type": "article",
+      "title": "Using EXPLAIN",
+      "url": "https://www.postgresql.org/docs/current/using-explain.html",
+      "author": "PostgreSQL documentation",
+      "description": "Reading query plans and actual row counts."
+    },
+    {
+      "key": "pg-multicol",
+      "type": "article",
+      "title": "Multicolumn indexes",
+      "url": "https://www.postgresql.org/docs/current/indexes-multicolumn.html",
+      "author": "PostgreSQL documentation",
+      "description": "Why column order matters in a composite index. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "wiki-3nf",
+      "type": "article",
+      "title": "Third normal form",
+      "url": "https://en.wikipedia.org/wiki/Third_normal_form",
+      "author": "Wikipedia",
+      "description": "Transitive dependencies and how to remove them. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "pg-constraints",
+      "type": "article",
+      "title": "Constraints",
+      "url": "https://www.postgresql.org/docs/current/ddl-constraints.html",
+      "author": "PostgreSQL documentation",
+      "description": "Unique, primary key and foreign key constraints. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "wiki-junction",
+      "type": "article",
+      "title": "Associative entity",
+      "url": "https://en.wikipedia.org/wiki/Associative_entity",
+      "author": "Wikipedia",
+      "description": "Junction tables for many-to-many relationships. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "http-shutdown",
+      "type": "article",
+      "title": "net/http: Server.Shutdown",
+      "url": "https://pkg.go.dev/net/http#Server.Shutdown",
+      "author": "The Go Authors",
+      "description": "Graceful shutdown that drains in-flight requests. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "http-handler",
+      "type": "article",
+      "title": "net/http: Handler",
+      "url": "https://pkg.go.dev/net/http#Handler",
+      "author": "The Go Authors",
+      "description": "The interface every middleware wraps. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "golang-jwt",
+      "type": "article",
+      "title": "golang-jwt/jwt v5",
+      "url": "https://pkg.go.dev/github.com/golang-jwt/jwt/v5",
+      "author": "golang-jwt",
+      "description": "The common JWT library for Go. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "sync-rwmutex",
+      "type": "article",
+      "title": "sync.RWMutex",
+      "url": "https://pkg.go.dev/sync#RWMutex",
+      "author": "The Go Authors",
+      "description": "Many readers or one writer. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "slog",
+      "type": "article",
+      "title": "log/slog package",
+      "url": "https://pkg.go.dev/log/slog",
+      "author": "The Go Authors",
+      "description": "Structured logging in the standard library. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "twelve-factor-config",
+      "type": "article",
+      "title": "The Twelve-Factor App: Config",
+      "url": "https://12factor.net/config",
+      "author": "Adam Wiggins",
+      "description": "Store config in the environment. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "pipelines",
+      "type": "article",
+      "title": "Go Concurrency Patterns: Pipelines and cancellation",
+      "url": "https://go.dev/blog/pipelines",
+      "author": "The Go Authors",
+      "description": "Fan-out, fan-in and bounded parallelism."
+    },
+    {
+      "key": "aws-backoff",
+      "type": "article",
+      "title": "Timeouts, retries and backoff with jitter",
+      "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+      "author": "Amazon Builders' Library",
+      "description": "How Amazon sets timeouts and avoids retry amplification."
+    },
+    {
+      "key": "circuit-breaker",
+      "type": "article",
+      "title": "Circuit Breaker pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker",
+      "author": "Microsoft Learn",
+      "description": "Failing fast when a dependency is unhealthy."
+    },
+    {
+      "key": "database-sql",
+      "type": "article",
+      "title": "database/sql package",
+      "url": "https://pkg.go.dev/database/sql",
+      "author": "The Go Authors",
+      "description": "Go's generic SQL interface. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "sync-once",
+      "type": "article",
+      "title": "sync.Once",
+      "url": "https://pkg.go.dev/sync#Once",
+      "author": "The Go Authors",
+      "description": "Run initialization exactly once. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "time-afterfunc",
+      "type": "article",
+      "title": "time.AfterFunc",
+      "url": "https://pkg.go.dev/time#AfterFunc",
+      "author": "The Go Authors",
+      "description": "Run a function after a delay on its own goroutine. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "context-pkg",
+      "type": "article",
+      "title": "context package",
+      "url": "https://pkg.go.dev/context",
+      "author": "The Go Authors",
+      "description": "Cancellation, deadlines and request-scoped values. Added as a standard reference; not from your notes."
+    }
+  ],
+  "questions": [
+    {
+      "prompt": "What is the most efficient approach to Longest Substring Without Repeating Characters?",
+      "tags": [
+        "Algorithms (Go)",
+        "ezCater prep",
+        "Sliding window"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Generate every substring and keep the longest one without duplicates.",
+        "Sort the string first, then count the longest run of distinct characters.",
+        "A sliding window with a map of each character's last index, jumping the left edge past a repeat: O(n) time.",
+        "Reset the window to empty whenever a character repeats, which runs in O(log n)."
+      ],
+      "correct": 2,
+      "explanation": "Maintain a window [left, right] that never contains a duplicate. Expand right one character at a time; if the new character was already seen inside the current window, move left past its previous occurrence instead of resetting, which keeps it O(n). A map from character to last-seen index lets left jump directly.\n\nComplexity: O(n) time, O(min(n, charset)) space.\nFollow-up: for Unicode, byte indexing breaks on multi-byte runes; range over the string or convert to []rune.\n\n```go\nfunc lengthOfLongestSubstring(s string) int {\n\tlastSeen := make(map[byte]int)\n\tlongest, left := 0, 0\n\tfor right := 0; right < len(s); right++ {\n\t\tc := s[right]\n\t\tif idx, ok := lastSeen[c]; ok && idx >= left {\n\t\t\tleft = idx + 1 // jump past the previous occurrence\n\t\t}\n\t\tlastSeen[c] = right\n\t\tif w := right - left + 1; w > longest {\n\t\t\tlongest = w\n\t\t}\n\t}\n\treturn longest\n}\n```",
+      "materials": [
+        "lc-longest"
+      ]
+    },
+    {
+      "prompt": "How do you group anagrams efficiently, and how can you avoid sorting each word?",
+      "tags": [
+        "Algorithms (Go)",
+        "ezCater prep",
+        "Hashing"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Sum the character codes of each word and use the sum as the map key.",
+        "Group words by length only, since anagrams always have the same length.",
+        "Key a map by each word's sorted letters (O(n·k log k)); to skip the sort, key by a 26-slot character count for O(n·k).",
+        "Compare every word against every other word letter by letter and merge matching pairs, which is already optimal at O(n·k) without any hashing at all."
+      ],
+      "correct": 2,
+      "explanation": "Two strings are anagrams exactly when their sorted characters are identical, so the sorted string is a perfect map key: sort each word's letters, use that as the key, append the original word to its bucket.\n\nComplexity: O(n · k log k) for average length k.\nFollow-up: avoid the sort with a 26-length character-count array as the key, giving O(n · k). (Summing character codes fails: different words can share a sum.)\n\n```go\nfunc groupAnagrams(strs []string) [][]string {\n\tgroups := make(map[string][]string)\n\tfor _, s := range strs {\n\t\tkey := sortString(s)\n\t\tgroups[key] = append(groups[key], s)\n\t}\n\tresult := make([][]string, 0, len(groups))\n\tfor _, group := range groups {\n\t\tresult = append(result, group)\n\t}\n\treturn result\n}\n\nfunc sortString(s string) string {\n\tb := []byte(s)\n\tsort.Slice(b, func(i, j int) bool { return b[i] < b[j] })\n\treturn string(b)\n}\n```",
+      "materials": [
+        "lc-anagrams"
+      ]
+    },
+    {
+      "prompt": "What is the O(n) approach to Two Sum?",
+      "tags": [
+        "Algorithms (Go)",
+        "ezCater prep",
+        "Hashing"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Binary search for each number's complement in the unsorted array.",
+        "Sort the array and walk two pointers inward from both ends.",
+        "Scan once with a map of seen values; for each number, check whether target minus it was already seen.",
+        "Check every pair with two nested loops, which is O(n)."
+      ],
+      "correct": 2,
+      "explanation": "Brute force checks every pair in O(n²). The trick: while scanning once, check for each number whether target - number was already seen; if so you've found the pair, with no second loop.\n\nComplexity: O(n) time, O(n) space.\n\n```go\nfunc twoSum(nums []int, target int) []int {\n\tseen := make(map[int]int) // value -> index\n\tfor i, n := range nums {\n\t\tif j, ok := seen[target-n]; ok {\n\t\t\treturn []int{j, i}\n\t\t}\n\t\tseen[n] = i\n\t}\n\treturn nil // no solution\n}\n```",
+      "materials": [
+        "lc-two-sum"
+      ]
+    },
+    {
+      "prompt": "How do you merge overlapping intervals?",
+      "tags": [
+        "Algorithms (Go)",
+        "ezCater prep",
+        "Sorting"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Use a hash map keyed by start time to find overlaps in O(1).",
+        "Sort by end time and merge only intervals with identical end points.",
+        "Compare every interval with every other interval repeatedly until no more merges happen, which is O(n) since each interval is merged at most once.",
+        "Sort by start time, then make one pass that extends the current interval while the next one starts before it ends."
+      ],
+      "correct": 3,
+      "explanation": "Sort intervals by start. Once sorted, overlaps can only occur between adjacent intervals, so a single linear pass works: keep a current merged interval and extend its end whenever the next interval's start is <= the current end; otherwise close it and start a new one.\n\nComplexity: O(n log n); the sort dominates.\nTie-in: this is the logic behind \"did this replay window overlap an already-processed window?\"\n\n```go\ntype Interval struct{ Start, End int }\n\nfunc mergeIntervals(intervals []Interval) []Interval {\n\tif len(intervals) == 0 {\n\t\treturn intervals\n\t}\n\tsort.Slice(intervals, func(i, j int) bool { return intervals[i].Start < intervals[j].Start })\n\tmerged := []Interval{intervals[0]}\n\tfor _, curr := range intervals[1:] {\n\t\tlast := &merged[len(merged)-1]\n\t\tif curr.Start <= last.End {\n\t\t\tif curr.End > last.End {\n\t\t\t\tlast.End = curr.End\n\t\t\t}\n\t\t} else {\n\t\t\tmerged = append(merged, curr)\n\t\t}\n\t}\n\treturn merged\n}\n```",
+      "materials": [
+        "lc-merge-intervals"
+      ]
+    },
+    {
+      "prompt": "How do you design an LRU cache with O(1) Get and Put?",
+      "tags": [
+        "Algorithms (Go)",
+        "ezCater prep",
+        "Design"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Use a sorted array of keys ordered by access time, binary searched.",
+        "Combine a hash map of key to list node with a doubly linked list ordered by recency, evicting from the tail.",
+        "Use a single map and scan it for the oldest timestamp on every eviction.",
+        "Use a queue and move accessed keys to the back by removing them in O(1)."
+      ],
+      "correct": 1,
+      "explanation": "Combine a hash map (O(1) lookup) with a doubly linked list (O(1) reordering and eviction). The map stores key -> node; every Get or Put moves the node to the front, and capacity overflow evicts from the tail.\n\nComplexity: O(1) for both operations.\nFollow-up: thread safety via sync.Mutex; an RWMutex doesn't help much because Get also mutates the list.\n\n```go\ntype lruNode struct {\n\tkey, value int\n\tprev, next *lruNode\n}\n\ntype LRUCache struct {\n\tcapacity   int\n\tcache      map[int]*lruNode\n\thead, tail *lruNode // sentinels: head.next = most recent, tail.prev = least recent\n}\n\nfunc NewLRUCache(capacity int) *LRUCache {\n\thead, tail := &lruNode{}, &lruNode{}\n\thead.next, tail.prev = tail, head\n\treturn &LRUCache{capacity: capacity, cache: make(map[int]*lruNode), head: head, tail: tail}\n}\n\nfunc (c *LRUCache) remove(n *lruNode)      { n.prev.next, n.next.prev = n.next, n.prev }\nfunc (c *LRUCache) insertFront(n *lruNode) {\n\tn.next, n.prev = c.head.next, c.head\n\tc.head.next.prev, c.head.next = n, n\n}\n\nfunc (c *LRUCache) Get(key int) (int, bool) {\n\tn, ok := c.cache[key]\n\tif !ok {\n\t\treturn 0, false\n\t}\n\tc.remove(n)\n\tc.insertFront(n)\n\treturn n.value, true\n}\n\nfunc (c *LRUCache) Put(key, value int) {\n\tif n, ok := c.cache[key]; ok {\n\t\tn.value = value\n\t\tc.remove(n)\n\t\tc.insertFront(n)\n\t\treturn\n\t}\n\tif len(c.cache) >= c.capacity {\n\t\tlru := c.tail.prev\n\t\tc.remove(lru)\n\t\tdelete(c.cache, lru.key)\n\t}\n\tn := &lruNode{key: key, value: value}\n\tc.cache[key] = n\n\tc.insertFront(n)\n}\n```",
+      "materials": [
+        "lc-lru"
+      ]
+    },
+    {
+      "prompt": "How do you implement a token-bucket rate limiter without a background goroutine?",
+      "tags": [
+        "Algorithms (Go)",
+        "ezCater prep",
+        "Rate limiting"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Refill lazily on each call from the time elapsed since the last check, capped at capacity, then spend one token if available.",
+        "Count requests per calendar minute and reset the counter at the top of the minute.",
+        "Sleep inside Allow until a token becomes available, so no request is ever rejected.",
+        "Run a ticker goroutine per bucket that adds one token every millisecond, since computing refills lazily at request time can't be made accurate."
+      ],
+      "correct": 0,
+      "explanation": "A bucket holds up to capacity tokens and refills at a steady rate; each request consumes one token or is rejected. Instead of a goroutine ticking constantly, compute tokens lazily at request time from the elapsed time since the last check: simpler, and no always-running timer.\n\nComplexity: O(1) per call.\nFollow-up: per partner, keep a map[partnerID]*TokenBucket behind its own mutex (or sync.Map), creating buckets lazily.\n\n```go\ntype TokenBucket struct {\n\tmu         sync.Mutex\n\tcapacity   float64\n\ttokens     float64\n\trefillRate float64 // tokens per second\n\tlastCheck  time.Time\n}\n\nfunc NewTokenBucket(capacity, refillRate float64) *TokenBucket {\n\treturn &TokenBucket{capacity: capacity, tokens: capacity, refillRate: refillRate, lastCheck: time.Now()}\n}\n\nfunc (b *TokenBucket) Allow() bool {\n\tb.mu.Lock()\n\tdefer b.mu.Unlock()\n\tnow := time.Now()\n\tb.tokens = math.Min(b.capacity, b.tokens+now.Sub(b.lastCheck).Seconds()*b.refillRate)\n\tb.lastCheck = now\n\tif b.tokens >= 1 {\n\t\tb.tokens--\n\t\treturn true\n\t}\n\treturn false\n}\n```",
+      "materials": [
+        "x-rate"
+      ]
+    },
+    {
+      "prompt": "How do you detect duplicate events within a time window, and what's the production caveat?",
+      "tags": [
+        "Algorithms (Go)",
+        "ezCater prep",
+        "Idempotency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Track each event id's last-seen time in a map, evicting expired entries; in production use a durable, shared Postgres unique constraint instead.",
+        "Keep every event id ever seen in an in-memory map forever, which is the production-grade approach because it survives restarts and works across instances.",
+        "Use a bloom filter that never forgets, so stale entries never need eviction.",
+        "Compare each event only with the immediately previous event."
+      ],
+      "correct": 0,
+      "explanation": "Keep a map of eventID -> last seen timestamp; an event seen within the window is a duplicate. Evict entries older than the window (lazily, on each call) so the map doesn't grow unbounded, which is the follow-up an interviewer will raise if you don't.\n\nComplexity: O(1) amortized per check.\nSay out loud: this in-memory approach doesn't survive a restart or scale across instances, which is why the real Integration Hub uses a Postgres unique constraint (durable, shared).\n\n```go\ntype Deduper struct {\n\tmu     sync.Mutex\n\twindow time.Duration\n\tseen   map[string]time.Time\n}\n\nfunc NewDeduper(window time.Duration) *Deduper {\n\treturn &Deduper{window: window, seen: make(map[string]time.Time)}\n}\n\nfunc (d *Deduper) IsDuplicate(eventID string, ts time.Time) bool {\n\td.mu.Lock()\n\tdefer d.mu.Unlock()\n\tif last, ok := d.seen[eventID]; ok && ts.Sub(last) < d.window {\n\t\treturn true\n\t}\n\td.seen[eventID] = ts\n\tfor id, t := range d.seen { // evict expired entries\n\t\tif ts.Sub(t) > d.window {\n\t\t\tdelete(d.seen, id)\n\t\t}\n\t}\n\treturn false\n}\n```",
+      "materials": [
+        "idempotent-consumer"
+      ]
+    },
+    {
+      "prompt": "How do you reverse a singly linked list in place?",
+      "tags": [
+        "Algorithms (Go)",
+        "ezCater prep",
+        "Linked lists"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Recurse to the end without saving next pointers, then relink on the way back up.",
+        "Swap the head and tail values only.",
+        "Copy all values into a slice, reverse the slice and build a brand-new list, which counts as in place because the original nodes are freed afterwards.",
+        "Walk the list once, saving next before pointing each node's next back at the previous node; return the new head."
+      ],
+      "correct": 3,
+      "explanation": "Walk the list once and flip each node's next pointer to point backwards. Save the next node before overwriting the pointer, or you lose the rest of the list.\n\nComplexity: O(n) time, O(1) space.\n\n```go\ntype ListNode struct {\n\tVal  int\n\tNext *ListNode\n}\n\nfunc reverseList(head *ListNode) *ListNode {\n\tvar prev *ListNode\n\tcurr := head\n\tfor curr != nil {\n\t\tnext := curr.Next // save before overwriting\n\t\tcurr.Next = prev\n\t\tprev = curr\n\t\tcurr = next\n\t}\n\treturn prev\n}\n```",
+      "materials": [
+        "lc-reverse"
+      ]
+    },
+    {
+      "prompt": "How do you order items with dependencies and detect a cycle?",
+      "tags": [
+        "Algorithms (Go)",
+        "ezCater prep",
+        "Graphs"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Repeatedly scan the whole list until nothing changes, which detects cycles in O(log n).",
+        "Run a depth-first search from the first node only; unreached nodes indicate a cycle.",
+        "Sort the items alphabetically and process them in that order.",
+        "Kahn's algorithm: queue zero-in-degree nodes, remove them while decrementing successors; fewer processed nodes than total means a cycle."
+      ],
+      "correct": 3,
+      "explanation": "Compute each node's in-degree (how many things must happen before it), start with all zero-in-degree nodes in a queue, and repeatedly remove a node, decrementing the in-degree of everything it points to; any node reaching zero joins the queue. If fewer nodes are processed than exist, there's a cycle.\n\nComplexity: O(V + E).\nTie-in: sequencing a strangler-fig monolith migration: which event types can move first given their dependencies.\n\n```go\nfunc topologicalSort(numNodes int, edges [][2]int) ([]int, bool) {\n\tadj := make(map[int][]int)\n\tinDegree := make([]int, numNodes)\n\tfor _, e := range edges {\n\t\tadj[e[0]] = append(adj[e[0]], e[1])\n\t\tinDegree[e[1]]++\n\t}\n\tqueue := []int{}\n\tfor i := 0; i < numNodes; i++ {\n\t\tif inDegree[i] == 0 {\n\t\t\tqueue = append(queue, i)\n\t\t}\n\t}\n\tvar order []int\n\tfor len(queue) > 0 {\n\t\tnode := queue[0]\n\t\tqueue = queue[1:]\n\t\torder = append(order, node)\n\t\tfor _, next := range adj[node] {\n\t\t\tinDegree[next]--\n\t\t\tif inDegree[next] == 0 {\n\t\t\t\tqueue = append(queue, next)\n\t\t\t}\n\t\t}\n\t}\n\treturn order, len(order) == numNodes // false means a cycle exists\n}\n```",
+      "materials": [
+        "lc-course-schedule"
+      ]
+    },
+    {
+      "prompt": "How do you process jobs with a fixed number of concurrent Go workers and collect all results?",
+      "tags": [
+        "Algorithms (Go)",
+        "ezCater prep",
+        "Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Process all jobs sequentially, then copy the results into a channel.",
+        "Feed a jobs channel to n workers that write to a results channel, and close results from a goroutine after wg.Wait() so the range ends.",
+        "Have each worker close the results channel when it finishes its own jobs.",
+        "Start one goroutine per job and range over the results channel without ever closing it, because Go closes channels automatically once every sender exits."
+      ],
+      "correct": 1,
+      "explanation": "Create a jobs channel and a results channel. Launch exactly numWorkers goroutines, each reading jobs until the channel is closed and writing to results. A separate goroutine closes results once all workers finish (sync.WaitGroup), so the final range over results terminates instead of blocking forever.\n\nFollow-up: a defer recover() inside each worker stops one bad job from crashing the pool.\n\n```go\nfunc processJobs(jobs []int, numWorkers int, process func(int) int) []int {\n\tjobCh := make(chan int, len(jobs))\n\tresultCh := make(chan int, len(jobs))\n\tvar wg sync.WaitGroup\n\tfor _, j := range jobs {\n\t\tjobCh <- j\n\t}\n\tclose(jobCh)\n\tfor w := 0; w < numWorkers; w++ {\n\t\twg.Add(1)\n\t\tgo func() {\n\t\t\tdefer wg.Done()\n\t\t\tfor j := range jobCh {\n\t\t\t\tresultCh <- process(j)\n\t\t\t}\n\t\t}()\n\t}\n\tgo func() {\n\t\twg.Wait()\n\t\tclose(resultCh)\n\t}()\n\tvar results []int\n\tfor r := range resultCh {\n\t\tresults = append(results, r)\n\t}\n\treturn results\n}\n```",
+      "materials": [
+        "gobyexample-workers"
+      ]
+    },
+    {
+      "prompt": "How do you search a rotated sorted array in O(log n)?",
+      "tags": [
+        "Algorithms (Go)",
+        "ezCater prep",
+        "Binary search"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Binary search on the middle value only; rotation never affects the result.",
+        "Binary search where each step finds which half is sorted, then checks whether the target lies in that half's range.",
+        "Find the pivot with a linear scan first and then binary search the correct half, which is still O(log n) overall because the scan stops early.",
+        "Sort the array again before every search, then run a normal binary search."
+      ],
+      "correct": 1,
+      "explanation": "At each step at least one half (left..mid or mid..right) is still sorted. Determine which by comparing endpoints, check whether the target falls within that half's range, and continue there or in the other half.\n\nComplexity: O(log n); the rotation doesn't break the guarantee because one half is always sorted.\n\n```go\nfunc search(nums []int, target int) int {\n\tleft, right := 0, len(nums)-1\n\tfor left <= right {\n\t\tmid := left + (right-left)/2\n\t\tif nums[mid] == target {\n\t\t\treturn mid\n\t\t}\n\t\tif nums[left] <= nums[mid] { // left half is sorted\n\t\t\tif nums[left] <= target && target < nums[mid] {\n\t\t\t\tright = mid - 1\n\t\t\t} else {\n\t\t\t\tleft = mid + 1\n\t\t\t}\n\t\t} else { // right half is sorted\n\t\t\tif nums[mid] < target && target <= nums[right] {\n\t\t\t\tleft = mid + 1\n\t\t\t} else {\n\t\t\t\tright = mid - 1\n\t\t\t}\n\t\t}\n\t}\n\treturn -1\n}\n```",
+      "materials": [
+        "lc-rotated"
+      ]
+    },
+    {
+      "prompt": "How do you validate that nested required fields (like order.id) exist in a webhook payload?",
+      "tags": [
+        "Algorithms (Go)",
+        "ezCater prep",
+        "Validation"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Check only the top-level keys, since nested fields can't be missing.",
+        "Marshal the payload back to a JSON string and search it for each field name with strings.Contains, which is exactly what JSON Schema validators do internally.",
+        "Use reflection to compare the payload with an empty struct.",
+        "Split each path on dots and walk the nested map level by level, failing if a level is missing or not a map; real JSON Schema also checks types."
+      ],
+      "correct": 3,
+      "explanation": "Split each required path on \".\", walk the nested map one level at a time, and fail fast if an intermediate level is missing or isn't itself a map. This is a simplified version of what a JSON Schema validator does.\n\nComplexity: O(total path depth).\nFollow-up: real JSON Schema also validates types, formats and array constraints, not just presence.\n\n```go\nfunc validateRequiredFields(payload map[string]interface{}, required []string) []string {\n\tvar missing []string\n\tfor _, path := range required {\n\t\tif !hasField(payload, strings.Split(path, \".\")) {\n\t\t\tmissing = append(missing, path)\n\t\t}\n\t}\n\treturn missing\n}\n\nfunc hasField(data map[string]interface{}, parts []string) bool {\n\tif len(parts) == 0 {\n\t\treturn false\n\t}\n\tvalue, ok := data[parts[0]]\n\tif !ok {\n\t\treturn false\n\t}\n\tif len(parts) == 1 {\n\t\treturn value != nil && value != \"\"\n\t}\n\tnested, ok := value.(map[string]interface{})\n\tif !ok {\n\t\treturn false\n\t}\n\treturn hasField(nested, parts[1:])\n}\n```",
+      "materials": [
+        "json-schema"
+      ]
+    },
+    {
+      "prompt": "How do you check that a string of brackets is validly matched and nested?",
+      "tags": [
+        "Algorithms (Go)",
+        "ezCater prep",
+        "Stacks"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Remove adjacent matching pairs once and check whether anything is left.",
+        "Check that the first and last characters form a matching pair.",
+        "Push opening brackets on a stack; each closer must match the top; the stack must be empty at the end.",
+        "Count opening and closing brackets of each kind and compare the totals."
+      ],
+      "correct": 2,
+      "explanation": "Push every opening bracket onto a stack. A closing bracket must match the top of the stack (the most recently opened, unclosed one); a mismatch or an empty stack means invalid. At the end the stack must be empty.\n\nComplexity: O(n) time and space.\n\n```go\nfunc isValid(s string) bool {\n\tpairs := map[byte]byte{')': '(', ']': '[', '}': '{'}\n\tvar stack []byte\n\tfor i := 0; i < len(s); i++ {\n\t\tc := s[i]\n\t\tif c == '(' || c == '[' || c == '{' {\n\t\t\tstack = append(stack, c)\n\t\t\tcontinue\n\t\t}\n\t\tif len(stack) == 0 || stack[len(stack)-1] != pairs[c] {\n\t\t\treturn false\n\t\t}\n\t\tstack = stack[:len(stack)-1] // pop\n\t}\n\treturn len(stack) == 0\n}\n```",
+      "materials": [
+        "lc-parentheses"
+      ]
+    },
+    {
+      "prompt": "How do you find all values that appear twice in an array?",
+      "tags": [
+        "Algorithms (Go)",
+        "ezCater prep",
+        "Hashing"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "One pass with a seen set, recording values met a second time; an in-place index-marking trick gives O(1) extra space.",
+        "Sort the array and compare every element with every other element afterwards, which needs no extra memory and is O(n) because the array is sorted.",
+        "Use binary search on the unsorted array to find each repeated value.",
+        "Sum all values and subtract the expected sum to recover every duplicate."
+      ],
+      "correct": 0,
+      "explanation": "A single pass with a seen set: any value encountered a second time goes into the result. The in-place variant uses the array's own indices as a hash, negating values to mark \"seen\", for O(1) extra space; worth mentioning as a follow-up.\n\nComplexity: O(n) time, O(n) space.\n\n```go\nfunc findDuplicates(nums []int) []int {\n\tseen := make(map[int]bool)\n\tvar duplicates []int\n\tfor _, n := range nums {\n\t\tif seen[n] {\n\t\t\tduplicates = append(duplicates, n)\n\t\t}\n\t\tseen[n] = true\n\t}\n\treturn duplicates\n}\n```",
+      "materials": [
+        "lc-duplicates"
+      ]
+    },
+    {
+      "prompt": "How do you count islands in a grid of land and water?",
+      "tags": [
+        "Algorithms (Go)",
+        "ezCater prep",
+        "Graphs"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "For each unvisited land cell, increment the count and flood-fill its island with BFS or DFS, marking cells visited in place.",
+        "Count rows that contain land, since each row holds one island.",
+        "Scan diagonally and count transitions from water to land.",
+        "Count every land cell and divide by four, because islands on a grid are always made of four connected cells."
+      ],
+      "correct": 0,
+      "explanation": "For every unvisited land cell, launch a BFS or DFS that marks the whole connected island as visited, incrementing the count once per launch. Marking visited in place (flipping '1' to '0') avoids a separate visited structure.\n\nComplexity: O(rows × cols).\nFollow-up: on a huge grid, recursion can overflow the stack; use an explicit queue-based BFS.\n\n```go\nfunc numIslands(grid [][]byte) int {\n\tif len(grid) == 0 {\n\t\treturn 0\n\t}\n\trows, cols, count := len(grid), len(grid[0]), 0\n\tvar fill func(r, c int)\n\tfill = func(r, c int) {\n\t\tif r < 0 || r >= rows || c < 0 || c >= cols || grid[r][c] != '1' {\n\t\t\treturn\n\t\t}\n\t\tgrid[r][c] = '0' // mark visited\n\t\tfill(r+1, c)\n\t\tfill(r-1, c)\n\t\tfill(r, c+1)\n\t\tfill(r, c-1)\n\t}\n\tfor r := 0; r < rows; r++ {\n\t\tfor c := 0; c < cols; c++ {\n\t\t\tif grid[r][c] == '1' {\n\t\t\t\tcount++\n\t\t\t\tfill(r, c)\n\t\t\t}\n\t\t}\n\t}\n\treturn count\n}\n```",
+      "materials": [
+        "lc-islands"
+      ]
+    },
+    {
+      "prompt": "How do you find the k-th largest element of an unsorted array efficiently?",
+      "tags": [
+        "Algorithms (Go)",
+        "ezCater prep",
+        "Heaps"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Sort the array in ascending order and take the k-th element from the front.",
+        "Keep a min-heap of size k, popping the smallest whenever it grows past k; the root is the answer in O(n log k).",
+        "Scan the array k times, removing the minimum each time.",
+        "Keep a max-heap of every element and pop k times, which is O(log k) overall because each pop only touches the top of the heap."
+      ],
+      "correct": 1,
+      "explanation": "Maintain a min-heap of size k: push each element and pop the smallest whenever the heap exceeds k. Only the k largest survive, so the root is the k-th largest.\n\nComplexity: O(n log k), better than sorting (O(n log n)) when k is small.\n\n```go\ntype MinHeap []int\n\nfunc (h MinHeap) Len() int            { return len(h) }\nfunc (h MinHeap) Less(i, j int) bool  { return h[i] < h[j] }\nfunc (h MinHeap) Swap(i, j int)       { h[i], h[j] = h[j], h[i] }\nfunc (h *MinHeap) Push(x interface{}) { *h = append(*h, x.(int)) }\nfunc (h *MinHeap) Pop() interface{} {\n\told := *h\n\tx := old[len(old)-1]\n\t*h = old[:len(old)-1]\n\treturn x\n}\n\nfunc findKthLargest(nums []int, k int) int {\n\th := &MinHeap{}\n\theap.Init(h)\n\tfor _, n := range nums {\n\t\theap.Push(h, n)\n\t\tif h.Len() > k {\n\t\t\theap.Pop(h)\n\t\t}\n\t}\n\treturn (*h)[0]\n}\n```",
+      "materials": [
+        "lc-kth",
+        "container-heap"
+      ]
+    },
+    {
+      "prompt": "How does a trie support Insert, Search and StartsWith, and where could the Integration Hub use one?",
+      "tags": [
+        "Algorithms (Go)",
+        "ezCater prep",
+        "Tries"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Tries can only store numbers, so words must be hashed first.",
+        "Each node maps the next character to a child and marks word ends; all three run in O(length), and it suits matching patterns like order.*.",
+        "A trie stores each whole word in a hash set, so StartsWith must scan every stored word, which makes prefix lookups O(n·k) but exact search O(1).",
+        "A trie is a balanced binary search tree ordered by word length."
+      ],
+      "correct": 1,
+      "explanation": "Each node holds a map from character to child plus an end-of-word flag. Insert walks or creates nodes along the word; Search and StartsWith walk the same path, with Search also requiring the end flag.\n\nComplexity: O(word length) for all three.\nTie-in: event-type subscription matching, such as a subscriber registering for \"order.*\".\n\n```go\ntype TrieNode struct {\n\tchildren map[byte]*TrieNode\n\tisEnd    bool\n}\n\ntype Trie struct{ root *TrieNode }\n\nfunc NewTrie() *Trie { return &Trie{root: &TrieNode{children: make(map[byte]*TrieNode)}} }\n\nfunc (t *Trie) Insert(word string) {\n\tnode := t.root\n\tfor i := 0; i < len(word); i++ {\n\t\tc := word[i]\n\t\tif node.children[c] == nil {\n\t\t\tnode.children[c] = &TrieNode{children: make(map[byte]*TrieNode)}\n\t\t}\n\t\tnode = node.children[c]\n\t}\n\tnode.isEnd = true\n}\n\nfunc (t *Trie) find(word string) *TrieNode {\n\tnode := t.root\n\tfor i := 0; i < len(word); i++ {\n\t\tif node = node.children[word[i]]; node == nil {\n\t\t\treturn nil\n\t\t}\n\t}\n\treturn node\n}\n\nfunc (t *Trie) Search(word string) bool     { n := t.find(word); return n != nil && n.isEnd }\nfunc (t *Trie) StartsWith(prefix string) bool { return t.find(prefix) != nil }\n```",
+      "materials": [
+        "lc-trie"
+      ]
+    },
+    {
+      "prompt": "How do you merge k sorted linked lists efficiently?",
+      "tags": [
+        "Algorithms (Go)",
+        "ezCater prep",
+        "Heaps"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Pick the smallest head by scanning all k lists every time, which is O(N log k).",
+        "Keep each list's current head in a min-heap; pop the smallest, append it, and push its successor, for O(N log k) overall.",
+        "Concatenate all lists and run bubble sort on the result.",
+        "Merge the lists one after another into a growing result list, which is the optimal approach because every merge step is linear in the list sizes."
+      ],
+      "correct": 1,
+      "explanation": "A min-heap holding the current head of each list yields the smallest available element in O(log k): pop it, append it to the result, and push that list's next node. This beats pairwise merging (O(N·k) in the worst case).\n\nComplexity: O(N log k) for N total nodes.\nTie-in: merging sorted event streams from several Kafka partitions into one order.\n\n```go\ntype ListHeap []*ListNode\n\nfunc (h ListHeap) Len() int            { return len(h) }\nfunc (h ListHeap) Less(i, j int) bool  { return h[i].Val < h[j].Val }\nfunc (h ListHeap) Swap(i, j int)       { h[i], h[j] = h[j], h[i] }\nfunc (h *ListHeap) Push(x interface{}) { *h = append(*h, x.(*ListNode)) }\nfunc (h *ListHeap) Pop() interface{} {\n\told := *h\n\tx := old[len(old)-1]\n\t*h = old[:len(old)-1]\n\treturn x\n}\n\nfunc mergeKLists(lists []*ListNode) *ListNode {\n\th := &ListHeap{}\n\theap.Init(h)\n\tfor _, l := range lists {\n\t\tif l != nil {\n\t\t\theap.Push(h, l)\n\t\t}\n\t}\n\tdummy := &ListNode{}\n\tcurr := dummy\n\tfor h.Len() > 0 {\n\t\tnode := heap.Pop(h).(*ListNode)\n\t\tcurr.Next = node\n\t\tcurr = node\n\t\tif node.Next != nil {\n\t\t\theap.Push(h, node.Next)\n\t\t}\n\t}\n\treturn dummy.Next\n}\n```",
+      "materials": [
+        "lc-merge-k",
+        "container-heap"
+      ]
+    },
+    {
+      "prompt": "How do you find the second-highest amount in a table, handling ties correctly?",
+      "tags": [
+        "SQL",
+        "ezCater prep",
+        "Window functions"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "SELECT MIN(amount) after removing the minimum value.",
+        "ORDER BY amount DESC LIMIT 1 OFFSET 1, which always returns the second-highest distinct value even when the top amount appears on several rows.",
+        "Take MAX below the overall MAX, or use DENSE_RANK() OVER (ORDER BY amount DESC) and pick rank 2, so ties don't skip a value.",
+        "Use ROW_NUMBER() and pick row 2, which handles ties the same way as DENSE_RANK."
+      ],
+      "correct": 2,
+      "explanation": "The inner query finds the true maximum; the outer finds the maximum of everything strictly below it. The general N-th version uses a window function. DENSE_RANK (not ROW_NUMBER) handles ties: two orders sharing the top amount both rank 1, so the true second-highest distinct value ranks 2. (LIMIT 1 OFFSET 1 returns the top value again when it's tied.)\n\n```sql\nSELECT MAX(amount_cents) AS second_highest\nFROM orders\nWHERE amount_cents < (SELECT MAX(amount_cents) FROM orders);\n\n-- General N-th highest:\nSELECT amount_cents FROM (\n  SELECT amount_cents, DENSE_RANK() OVER (ORDER BY amount_cents DESC) AS rnk\n  FROM orders\n) ranked\nWHERE rnk = 2;\n```",
+      "materials": [
+        "lc-second-highest",
+        "pg-window"
+      ]
+    },
+    {
+      "prompt": "How do you list partners with zero successful deliveries, including partners with no deliveries at all?",
+      "tags": [
+        "SQL",
+        "ezCater prep",
+        "Joins"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "LEFT JOIN deliveries ON the id AND status = 'success', then keep rows WHERE d.id IS NULL; the status filter belongs in the ON clause.",
+        "LEFT JOIN deliveries and filter WHERE d.status = 'success' AND d.id IS NULL, since filtering in WHERE is equivalent to filtering in the ON clause for outer joins.",
+        "INNER JOIN deliveries and keep rows where status is not 'success'.",
+        "SELECT partners whose COUNT(*) of deliveries is zero using an INNER JOIN."
+      ],
+      "correct": 0,
+      "explanation": "A LEFT JOIN keeps every subscription even without a matching delivery. Filtering the join to status = 'success' means a partner with only failed deliveries still has NULL on the right side and appears in the result. Putting the status filter in WHERE instead is the classic mistake: it silently turns the LEFT JOIN into an INNER JOIN for partners with failed rows.\n\n```sql\nSELECT s.partner_name\nFROM subscriptions s\nLEFT JOIN deliveries d\n  ON d.subscription_id = s.id AND d.status = 'success'\nWHERE d.id IS NULL;\n```",
+      "materials": [
+        "pg-join"
+      ]
+    },
+    {
+      "prompt": "How do you find partners with more than 10 failed deliveries in the last 24 hours?",
+      "tags": [
+        "SQL",
+        "ezCater prep",
+        "Aggregation"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Put COUNT(*) > 10 in the WHERE clause next to the status filter, because WHERE runs after GROUP BY and can already see the aggregates.",
+        "Filter rows with WHERE (status and time window), GROUP BY partner, then filter groups with HAVING COUNT(*) > 10.",
+        "Use DISTINCT instead of GROUP BY and compare the row count in WHERE.",
+        "Use HAVING for the time window and WHERE for the count threshold."
+      ],
+      "correct": 1,
+      "explanation": "WHERE filters rows before grouping (time window, status); HAVING filters groups after aggregation (the count threshold). Putting COUNT(*) > 10 in WHERE fails because the aggregate doesn't exist yet at that stage.\n\n```sql\nSELECT partner_name, COUNT(*) AS failure_count\nFROM deliveries d\nJOIN subscriptions s ON s.id = d.subscription_id\nWHERE d.status = 'failed'\n  AND d.created_at > NOW() - INTERVAL '24 hours'\nGROUP BY partner_name\nHAVING COUNT(*) > 10\nORDER BY failure_count DESC;\n```",
+      "materials": [
+        "pg-agg"
+      ]
+    },
+    {
+      "prompt": "A query filtering deliveries by subscription_id and created_at shows a Seq Scan. What do you do?",
+      "tags": [
+        "SQL",
+        "ezCater prep",
+        "Indexing"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Add a composite index on (subscription_id, created_at), re-run EXPLAIN ANALYZE, and expect an index scan; column order matters.",
+        "Increase work_mem, because Seq Scans happen when memory is too low.",
+        "Run VACUUM FULL, which converts sequential scans into index scans.",
+        "Add a single-column index on created_at alone."
+      ],
+      "correct": 0,
+      "explanation": "A Seq Scan on a large table means Postgres reads every row instead of using an index. Fix with a composite index matching the filters, then re-run EXPLAIN ANALYZE and expect an Index Scan or Bitmap Index Scan with lower cost and runtime.\n\nTalking point: column order matters. (subscription_id, created_at) serves this query but wouldn't help a filter on created_at alone, because the second column can't be used without an equality filter on the first.\n\n```sql\nEXPLAIN ANALYZE\nSELECT * FROM deliveries\nWHERE subscription_id = 42 AND created_at > '2026-09-01';\n\nCREATE INDEX idx_deliveries_subscription_created\nON deliveries (subscription_id, created_at);\n```",
+      "materials": [
+        "pg-explain",
+        "pg-multicol"
+      ]
+    },
+    {
+      "prompt": "How do you normalize a deliveries table that repeats partner_name and webhook_url on every row?",
+      "tags": [
+        "SQL",
+        "ezCater prep",
+        "Normalization"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Store partner details as a JSON string in each delivery row.",
+        "Keep the columns and add a trigger that updates every historical row when a URL changes, which is what third normal form recommends for such data.",
+        "Split deliveries into one table per partner, each with its own copy of the columns.",
+        "Move partner attributes into a partners table and reference it by foreign key from deliveries: third normal form."
+      ],
+      "correct": 3,
+      "explanation": "Repeating partner_name and partner_webhook_url on every delivery means a URL change requires updating thousands of rows and wastes storage. Move partner attributes into their own table referenced by a foreign key: the textbook fix for a transitive dependency (delivery -> partner_id -> partner_name), the core idea of 3NF.\n\nFollow-up: deliberate denormalization is fine for read-heavy reporting tables rebuilt periodically, as long as there's a clear source of truth.\n\n```sql\nCREATE TABLE partners (\n    id SERIAL PRIMARY KEY,\n    name TEXT NOT NULL,\n    webhook_url TEXT NOT NULL\n);\n\nCREATE TABLE deliveries (\n    id SERIAL PRIMARY KEY,\n    order_id INT NOT NULL,\n    partner_id INT NOT NULL REFERENCES partners(id),\n    status TEXT NOT NULL,\n    attempted_at TIMESTAMPTZ NOT NULL\n);\n```",
+      "materials": [
+        "wiki-3nf"
+      ]
+    },
+    {
+      "prompt": "How do you audit processed_events for duplicate idempotency keys, and what does a result mean?",
+      "tags": [
+        "SQL",
+        "ezCater prep",
+        "Data integrity"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "GROUP BY idempotency_key HAVING COUNT(*) > 1; any rows returned mean the unique constraint is missing, disabled or added after duplicates.",
+        "Use SELECT DISTINCT idempotency_key, which lists only the duplicated keys, and an empty result proves that the unique constraint was always in place.",
+        "Count all rows and compare with yesterday's count.",
+        "Duplicates are impossible in SQL tables, so no audit query is needed."
+      ],
+      "correct": 0,
+      "explanation": "With a unique constraint on idempotency_key in place, this query should always return zero rows. Getting results means the constraint is missing, disabled, or was added after duplicate data existed: a real diagnostic when investigating a suspected double-processing incident.\n\n```sql\nSELECT idempotency_key, COUNT(*) AS occurrences\nFROM processed_events\nGROUP BY idempotency_key\nHAVING COUNT(*) > 1;\n```",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "prompt": "How do you show each day's delivery count together with a running total?",
+      "tags": [
+        "SQL",
+        "ezCater prep",
+        "Window functions"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Use a correlated subquery that counts every earlier row for each day, which is faster than a window function because it avoids sorting the result.",
+        "Window functions run before GROUP BY, so they can't use aggregate results.",
+        "Use GROUP BY with ROLLUP, which produces a running total per day.",
+        "GROUP BY day for the daily COUNT, and wrap it in SUM(COUNT(*)) OVER (ORDER BY day) for the cumulative total."
+      ],
+      "correct": 3,
+      "explanation": "COUNT(*) aggregates per day via GROUP BY; SUM(...) OVER (ORDER BY ...) is a window function that adds up the daily counts up to the current row without collapsing per-day rows. Window functions run after grouping and aggregation, which is what makes the combination possible in one query.\n\n```sql\nSELECT\n  DATE(created_at) AS day,\n  COUNT(*) AS daily_count,\n  SUM(COUNT(*)) OVER (ORDER BY DATE(created_at)) AS running_total\nFROM deliveries\nGROUP BY DATE(created_at)\nORDER BY day;\n```",
+      "materials": [
+        "pg-window"
+      ]
+    },
+    {
+      "prompt": "How do you model subscribers that can subscribe to many event types, and event types with many subscribers?",
+      "tags": [
+        "SQL",
+        "ezCater prep",
+        "Modeling"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Duplicate each subscriber row once per event type.",
+        "Add a single event_type_id column to subscribers.",
+        "A junction table of (subscriber_id, event_type_id) foreign keys with a composite primary key, joined across both sides.",
+        "Add an event_type_ids array column on subscribers and a subscriber_ids array on event_types, keeping both arrays in sync from application code."
+      ],
+      "correct": 2,
+      "explanation": "Neither table references the other directly; the junction table holds the many-to-many relationship as pairs of foreign keys, and its composite primary key prevents registering the same subscription twice. This is exactly the shape of the Integration Hub's subscription model.\n\n```sql\nCREATE TABLE subscribers (id SERIAL PRIMARY KEY, name TEXT NOT NULL);\nCREATE TABLE event_types (id SERIAL PRIMARY KEY, name TEXT NOT NULL);\nCREATE TABLE subscriber_event_types (\n    subscriber_id INT REFERENCES subscribers(id),\n    event_type_id INT REFERENCES event_types(id),\n    PRIMARY KEY (subscriber_id, event_type_id)\n);\n\nSELECT s.name AS subscriber, et.name AS event_type\nFROM subscribers s\nJOIN subscriber_event_types set2 ON set2.subscriber_id = s.id\nJOIN event_types et ON et.id = set2.event_type_id\nORDER BY s.name, et.name;\n```",
+      "materials": [
+        "wiki-junction"
+      ]
+    },
+    {
+      "prompt": "How do you shut down a Go HTTP server gracefully?",
+      "tags": [
+        "Go Implementations",
+        "ezCater prep",
+        "HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Let the process be killed; HTTP clients retry dropped requests automatically.",
+        "Call srv.Close(), which waits for every active request to finish.",
+        "Run ListenAndServe in a goroutine, wait for SIGINT or SIGTERM, then call srv.Shutdown with a timeout so in-flight requests finish.",
+        "Middleware order never matters; net/http sorts it automatically."
+      ],
+      "correct": 2,
+      "explanation": "Run the server in a goroutine so main can wait for an OS signal. On SIGINT or SIGTERM, call Shutdown with a timeout context: it stops accepting new connections but lets in-flight requests finish, instead of killing the process mid-request.\n\nTie-in: this is what makes Kubernetes rolling deployments safe.\n\n```go\nfunc main() {\n\tmux := http.NewServeMux()\n\tmux.HandleFunc(\"/healthz\", healthHandler)\n\tsrv := &http.Server{Addr: \":8080\", Handler: mux}\n\n\tgo func() {\n\t\tif err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {\n\t\t\tlog.Fatalf(\"server error: %v\", err)\n\t\t}\n\t}()\n\n\tquit := make(chan os.Signal, 1)\n\tsignal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)\n\t<-quit // block until a signal arrives\n\n\tctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)\n\tdefer cancel()\n\tif err := srv.Shutdown(ctx); err != nil {\n\t\tlog.Printf(\"forced shutdown: %v\", err)\n\t}\n}\n```",
+      "materials": [
+        "http-shutdown"
+      ]
+    },
+    {
+      "prompt": "How do you chain logging, panic-recovery and correlation-id middleware in Go, and in what order?",
+      "tags": [
+        "Go Implementations",
+        "ezCater prep",
+        "HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Run logging first so the correlation id is generated by the logger.",
+        "Middleware order never matters in Go, because the net/http server sorts registered middleware automatically before it handles each incoming request.",
+        "Put recovery innermost so it only catches panics from the handler's own code.",
+        "Each middleware wraps an http.Handler; recovery goes outermost to catch any panic, and correlation id runs before logging so lines include it."
+      ],
+      "correct": 3,
+      "explanation": "A middleware is a function taking an http.Handler and returning a wrapped one, so independent concerns compose without knowing about each other. Order matters: withRecovery should wrap everything (outermost) so a panic anywhere is caught, and withCorrelationID should run before withLogging so each log line has an id.\n\n```go\ntype Middleware func(http.Handler) http.Handler\n\nfunc withCorrelationID(next http.Handler) http.Handler {\n\treturn http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {\n\t\tid := r.Header.Get(\"X-Correlation-ID\")\n\t\tif id == \"\" {\n\t\t\tid = uuid.NewString()\n\t\t}\n\t\tctx := context.WithValue(r.Context(), correlationIDKey, id)\n\t\tw.Header().Set(\"X-Correlation-ID\", id)\n\t\tnext.ServeHTTP(w, r.WithContext(ctx))\n\t})\n}\n\nfunc withRecovery(next http.Handler) http.Handler {\n\treturn http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {\n\t\tdefer func() {\n\t\t\tif err := recover(); err != nil {\n\t\t\t\tslog.Error(\"panic recovered\", \"error\", err)\n\t\t\t\thttp.Error(w, \"internal server error\", http.StatusInternalServerError)\n\t\t\t}\n\t\t}()\n\t\tnext.ServeHTTP(w, r)\n\t})\n}\n\nfunc chain(h http.Handler, mws ...Middleware) http.Handler {\n\tfor i := len(mws) - 1; i >= 0; i-- {\n\t\th = mws[i](h)\n\t}\n\treturn h\n}\n```",
+      "materials": [
+        "http-handler"
+      ]
+    },
+    {
+      "prompt": "Why must JWT middleware check the token's signing method inside the key function?",
+      "tags": [
+        "Go Implementations",
+        "ezCater prep",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "To block alg:none and algorithm-confusion attacks, where a forged token names a weaker or absent algorithm to skip signature verification.",
+        "Because checking the algorithm makes parsing faster, since the library otherwise tries every supported algorithm in turn before it can validate the token.",
+        "Because the signing method determines the token's expiry time.",
+        "It isn't necessary; the library always enforces HMAC by default."
+      ],
+      "correct": 0,
+      "explanation": "Explicitly checking t.Method is *jwt.SigningMethodHMAC inside the key function prevents a real vulnerability: the \"alg: none\" or algorithm-confusion attack, where a forged token claims a different, weaker or absent algorithm and tricks naive verification code into skipping the signature check.\n\n```go\nfunc withJWTAuth(secret []byte) Middleware {\n\treturn func(next http.Handler) http.Handler {\n\t\treturn http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {\n\t\t\tauthHeader := r.Header.Get(\"Authorization\")\n\t\t\ttokenStr := strings.TrimPrefix(authHeader, \"Bearer \")\n\t\t\tif tokenStr == authHeader {\n\t\t\t\thttp.Error(w, \"missing bearer token\", http.StatusUnauthorized)\n\t\t\t\treturn\n\t\t\t}\n\t\t\ttoken, err := jwt.Parse(tokenStr, func(t *jwt.Token) (interface{}, error) {\n\t\t\t\tif _, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {\n\t\t\t\t\treturn nil, fmt.Errorf(\"unexpected signing method: %v\", t.Header[\"alg\"])\n\t\t\t\t}\n\t\t\t\treturn secret, nil\n\t\t\t})\n\t\t\tif err != nil || !token.Valid {\n\t\t\t\thttp.Error(w, \"invalid token\", http.StatusUnauthorized)\n\t\t\t\treturn\n\t\t\t}\n\t\t\tclaims := token.Claims.(jwt.MapClaims)\n\t\t\tctx := context.WithValue(r.Context(), userIDKey, claims[\"sub\"])\n\t\t\tnext.ServeHTTP(w, r.WithContext(ctx))\n\t\t})\n\t}\n}\n```",
+      "materials": [
+        "golang-jwt"
+      ]
+    },
+    {
+      "prompt": "In a TTL cache, why check expiry in Get even though a background janitor deletes expired entries?",
+      "tags": [
+        "Go Implementations",
+        "ezCater prep",
+        "Caching"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Expired entries are returned on purpose, so callers can refresh them.",
+        "Get must check expiry because the janitor can only run when the cache is empty.",
+        "Get's lazy check guarantees a stale entry is never returned between sweeps, while the janitor only reclaims memory from never-read entries.",
+        "The check in Get is redundant, because the janitor goroutine deletes every expired entry at the exact instant it expires, so stale reads can't happen."
+      ],
+      "correct": 2,
+      "explanation": "Distinct from LRU (#5): entries expire by time, not capacity, which suits short-lived data like partner auth tokens. Get checks expiry lazily, so a stale but not-yet-swept entry is never returned; the background janitor exists purely to reclaim memory from entries that are never looked up again. Both mechanisms are needed.\n\n```go\ntype ttlEntry struct {\n\tvalue     interface{}\n\texpiresAt time.Time\n}\n\ntype TTLCache struct {\n\tmu         sync.RWMutex\n\tdata       map[string]ttlEntry\n\tdefaultTTL time.Duration\n}\n\nfunc (c *TTLCache) Get(key string) (interface{}, bool) {\n\tc.mu.RLock()\n\tdefer c.mu.RUnlock()\n\tentry, ok := c.data[key]\n\tif !ok || time.Now().After(entry.expiresAt) {\n\t\treturn nil, false\n\t}\n\treturn entry.value, true\n}\n\nfunc (c *TTLCache) janitor() {\n\tticker := time.NewTicker(time.Minute)\n\tfor range ticker.C {\n\t\tc.mu.Lock()\n\t\tnow := time.Now()\n\t\tfor k, v := range c.data {\n\t\t\tif now.After(v.expiresAt) {\n\t\t\t\tdelete(c.data, k)\n\t\t\t}\n\t\t}\n\t\tc.mu.Unlock()\n\t}\n}\n```",
+      "materials": [
+        "sync-rwmutex"
+      ]
+    },
+    {
+      "prompt": "How do you attach a correlation id to every log line within a request using log/slog?",
+      "tags": [
+        "Go Implementations",
+        "ezCater prep",
+        "Logging"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Store the id in a global variable read by the default logger.",
+        "Pass the correlation id as an explicit argument to every single log call by hand, since slog has no way to attach fields to a logger ahead of time.",
+        "Write the id once at the start of the request; later lines inherit it automatically.",
+        "Derive a logger with slog.Default().With(\"correlation_id\", id) from the request context, so every call through it includes the field."
+      ],
+      "correct": 3,
+      "explanation": "slog.Logger.With(...) returns a new logger that automatically includes the given fields on every subsequent call, so every log line in a request gets correlation_id without each call site passing it.\n\n```go\nfunc loggerFromContext(ctx context.Context) *slog.Logger {\n\tbase := slog.Default()\n\tif id, ok := ctx.Value(correlationIDKey).(string); ok {\n\t\treturn base.With(\"correlation_id\", id)\n\t}\n\treturn base\n}\n\nfunc handleEvent(ctx context.Context, event Event) error {\n\tlogger := loggerFromContext(ctx)\n\tlogger.Info(\"processing event\", \"event_id\", event.ID, \"type\", event.Type)\n\tif err := validate(event); err != nil {\n\t\tlogger.Error(\"validation failed\", \"error\", err)\n\t\treturn err\n\t}\n\tlogger.Info(\"event processed successfully\")\n\treturn nil\n}\n```",
+      "materials": [
+        "slog"
+      ]
+    },
+    {
+      "prompt": "What principle should an environment-based config loader follow?",
+      "tags": [
+        "Go Implementations",
+        "ezCater prep",
+        "Configuration"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Hard-code production values in the binary as fallbacks for missing variables.",
+        "Ignore parse errors and use zero values for anything invalid.",
+        "Load config lazily the first time each value is used, so the service starts quickly and missing values only matter if that code path is ever reached.",
+        "Fail fast at startup: validate required values and parse types before the server listens, instead of failing mid-request later."
+      ],
+      "correct": 3,
+      "explanation": "Every real service needs this. Fail fast at startup: return an error before the server listens rather than discovering a missing or malformed value the first time it's used mid-request. A startup failure is far easier to diagnose than a runtime one hours into production traffic.\n\n```go\ntype Config struct {\n\tPort         int\n\tDatabaseURL  string\n\tKafkaBrokers []string\n\tMaxRetries   int\n}\n\nfunc LoadConfig() (*Config, error) {\n\tport, err := strconv.Atoi(getEnvOrDefault(\"PORT\", \"8080\"))\n\tif err != nil {\n\t\treturn nil, fmt.Errorf(\"invalid PORT: %w\", err)\n\t}\n\tdbURL := os.Getenv(\"DATABASE_URL\")\n\tif dbURL == \"\" {\n\t\treturn nil, errors.New(\"DATABASE_URL is required\")\n\t}\n\tbrokers := strings.Split(getEnvOrDefault(\"KAFKA_BROKERS\", \"localhost:9092\"), \",\")\n\tmaxRetries, err := strconv.Atoi(getEnvOrDefault(\"MAX_RETRIES\", \"3\"))\n\tif err != nil {\n\t\treturn nil, fmt.Errorf(\"invalid MAX_RETRIES: %w\", err)\n\t}\n\treturn &Config{Port: port, DatabaseURL: dbURL, KafkaBrokers: brokers, MaxRetries: maxRetries}, nil\n}\n\nfunc getEnvOrDefault(key, fallback string) string {\n\tif v := os.Getenv(key); v != \"\" {\n\t\treturn v\n\t}\n\treturn fallback\n}\n```",
+      "materials": [
+        "twelve-factor-config"
+      ]
+    },
+    {
+      "prompt": "In an in-process channel pub/sub, what trade-off does a select with a default branch on publish make?",
+      "tags": [
+        "Go Implementations",
+        "ezCater prep",
+        "Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It never blocks the publisher but drops messages for slow subscribers: fine for a best-effort bus, wrong where delivery must be guaranteed.",
+        "It makes Publish block until all subscribers have read the message.",
+        "It sends each message only to the fastest subscriber.",
+        "It guarantees every subscriber receives every message, because the default branch retries the send until the subscriber's buffer has room again."
+      ],
+      "correct": 0,
+      "explanation": "A smaller-scale version of the platform's fan-out problem. The select/default pattern prioritizes never blocking the publisher over guaranteed delivery: when a subscriber's buffer is full, the message is dropped (count it in a metric rather than failing silently). Legitimate for a best-effort in-process bus, but not what the Integration Hub wants, which is why production uses Kafka plus the outbox.\n\n```go\ntype PubSub struct {\n\tmu   sync.RWMutex\n\tsubs map[string][]chan Event\n}\n\nfunc (p *PubSub) Subscribe(topic string) <-chan Event {\n\tp.mu.Lock()\n\tdefer p.mu.Unlock()\n\tch := make(chan Event, 10) // buffered so a slow subscriber doesn't block Publish\n\tp.subs[topic] = append(p.subs[topic], ch)\n\treturn ch\n}\n\nfunc (p *PubSub) Publish(topic string, event Event) {\n\tp.mu.RLock()\n\tdefer p.mu.RUnlock()\n\tfor _, ch := range p.subs[topic] {\n\t\tselect {\n\t\tcase ch <- event:\n\t\tdefault:\n\t\t\t// buffer full: drop rather than block; increment a metric here\n\t\t}\n\t}\n}\n```",
+      "materials": [
+        "pipelines"
+      ]
+    },
+    {
+      "prompt": "How do a circuit breaker and retries interact in a resilient HTTP client?",
+      "tags": [
+        "Go Implementations",
+        "ezCater prep",
+        "Resilience"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The breaker replaces retries entirely, so a client should never retry.",
+        "Retries must run before the breaker check, so every call is attempted at least three times.",
+        "Retry inside the breaker's open state, because an open circuit means the dependency just recovered and is now ready to accept a burst of retried calls.",
+        "Check the breaker before calling at all (fail fast on a known-down dependency); retries with backoff then handle transient failures within one call."
+      ],
+      "correct": 3,
+      "explanation": "The breaker check happens before even attempting the call, failing fast when the dependency is known to be down. Retries happen within a single call's attempt budget, handling transient failures on an otherwise healthy dependency. They operate at different time scales and layer cleanly.\n\n```go\nfunc (c *ResilientClient) Post(ctx context.Context, url string, body []byte) error {\n\tif !c.breaker.Allow() {\n\t\treturn errors.New(\"circuit open: refusing to call known-down endpoint\")\n\t}\n\tconst maxAttempts = 3\n\tvar lastErr error\n\tfor attempt := 1; attempt <= maxAttempts; attempt++ {\n\t\treq, err := http.NewRequestWithContext(ctx, http.MethodPost, url, bytes.NewReader(body))\n\t\tif err != nil {\n\t\t\treturn err // not retryable\n\t\t}\n\t\tresp, err := c.client.Do(req)\n\t\tif err == nil && resp.StatusCode < 500 {\n\t\t\tc.breaker.RecordSuccess()\n\t\t\tresp.Body.Close()\n\t\t\treturn nil\n\t\t}\n\t\tif resp != nil {\n\t\t\tresp.Body.Close()\n\t\t}\n\t\tlastErr = err\n\t\tc.breaker.RecordFailure()\n\t\tif attempt < maxAttempts {\n\t\t\ttime.Sleep(time.Duration(attempt) * 500 * time.Millisecond) // simple linear backoff\n\t\t}\n\t}\n\treturn fmt.Errorf(\"failed after %d attempts: %w\", maxAttempts, lastErr)\n}\n```",
+      "materials": [
+        "aws-backoff",
+        "circuit-breaker"
+      ]
+    },
+    {
+      "prompt": "Why should business logic depend on a repository interface rather than SQL calls scattered through the code?",
+      "tags": [
+        "Go Implementations",
+        "ezCater prep",
+        "Data access"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Because repositories make queries run faster by caching every result.",
+        "So tests can swap in an in-memory fake without a database; and when scanning rows, always check rows.Err() after the loop.",
+        "A naive nil check is already safe in Go.",
+        "Because it lets each handler open its own database connection."
+      ],
+      "correct": 1,
+      "explanation": "Business logic depends on SubscriptionRepository (the interface), not postgresSubscriptionRepo, so tests can use an in-memory fake without a real database: the same dependency inversion as injecting an HTTP client, applied to data access. Also check rows.Err() after iterating; a scan failure mid-stream is easy to miss otherwise.\n\n```go\ntype SubscriptionRepository interface {\n\tCreate(ctx context.Context, sub Subscription) error\n\tGetByPartner(ctx context.Context, partnerID string) ([]Subscription, error)\n\tDelete(ctx context.Context, id string) error\n}\n\ntype postgresSubscriptionRepo struct{ db *sql.DB }\n\nfunc (r *postgresSubscriptionRepo) GetByPartner(ctx context.Context, partnerID string) ([]Subscription, error) {\n\trows, err := r.db.QueryContext(ctx,\n\t\t`SELECT id, partner_id, event_type FROM subscriptions WHERE partner_id = $1`, partnerID)\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\tdefer rows.Close()\n\tvar subs []Subscription\n\tfor rows.Next() {\n\t\tvar s Subscription\n\t\tif err := rows.Scan(&s.ID, &s.PartnerID, &s.EventType); err != nil {\n\t\t\treturn nil, err\n\t\t}\n\t\tsubs = append(subs, s)\n\t}\n\treturn subs, rows.Err() // always check Err() after the loop\n}\n```",
+      "materials": [
+        "database-sql"
+      ]
+    },
+    {
+      "prompt": "Why use sync.Once for lazy singleton initialization in Go?",
+      "tags": [
+        "Go Implementations",
+        "ezCater prep",
+        "Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "sync.Once runs the function on every call but caches the result.",
+        "A naive if instance == nil check is already safe in Go, because the runtime serializes goroutines that touch the same package-level variable.",
+        "sync.Once is only needed when the program runs on a single CPU core.",
+        "Once.Do runs its function exactly once even under concurrent calls, avoiding the race in a naive nil check."
+      ],
+      "correct": 3,
+      "explanation": "sync.Once.Do guarantees its function runs exactly once even if called concurrently from many goroutines at startup. A naive if dbInstance == nil check races: two goroutines can both see nil and both initialize, defeating the singleton.\n\n```go\nvar (\n\tdbInstance *Database\n\tdbOnce     sync.Once\n)\n\nfunc GetDatabase(dsn string) *Database {\n\tdbOnce.Do(func() {\n\t\tconn, err := sql.Open(\"postgres\", dsn)\n\t\tif err != nil {\n\t\t\tlog.Fatalf(\"failed to open database: %v\", err)\n\t\t}\n\t\tdbInstance = &Database{conn: conn}\n\t})\n\treturn dbInstance\n}\n```",
+      "materials": [
+        "sync-once"
+      ]
+    },
+    {
+      "prompt": "What distinguishes debouncing from throttling, and how do you debounce in Go?",
+      "tags": [
+        "Go Implementations",
+        "ezCater prep",
+        "Timers"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Debouncing queues every call and runs each of them later in order.",
+        "Debounce resets a timer on every call so fn runs once after activity settles; throttling runs at a steady maximum rate regardless.",
+        "Debouncing runs fn immediately on every call and then sleeps.",
+        "Debouncing runs the function at a fixed maximum rate no matter how often it's called, which is exactly the same behaviour as throttling."
+      ],
+      "correct": 1,
+      "explanation": "Each call stops the pending timer and starts a new one, so fn only runs once activity has quieted for the full delay. Throttling, by contrast, guarantees execution at a steady maximum rate regardless of continued activity. Useful for things like flushing buffered log lines after activity settles.\n\n```go\nfunc debounce(delay time.Duration, fn func()) func() {\n\tvar mu sync.Mutex\n\tvar timer *time.Timer\n\treturn func() {\n\t\tmu.Lock()\n\t\tdefer mu.Unlock()\n\t\tif timer != nil {\n\t\t\ttimer.Stop()\n\t\t}\n\t\ttimer = time.AfterFunc(delay, fn)\n\t}\n}\n```",
+      "materials": [
+        "time-afterfunc"
+      ]
+    },
+    {
+      "prompt": "How does a worker pool shut down cleanly with context cancellation, and what doesn't it cancel?",
+      "tags": [
+        "Go Implementations",
+        "ezCater prep",
+        "Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Workers must drain every remaining job before they can observe cancellation.",
+        "Closing the context channel restarts all workers with fresh state.",
+        "Workers select on the jobs channel and ctx.Done(), so they stop taking new jobs on cancel; a job already running stops only if it honours ctx.",
+        "Cancelling the context immediately kills every running goroutine mid-job, because Go preempts goroutines whose context has been cancelled."
+      ],
+      "correct": 2,
+      "explanation": "The select between reading jobs and ctx.Done() means a worker responds to shutdown immediately instead of only after draining the channel. Call it out explicitly: this stops picking up new jobs on cancellation but doesn't interrupt a job already inside process(); true mid-task cancellation requires process to accept and respect the context.\n\n```go\nfunc runWorkerPool(ctx context.Context, jobs <-chan Job, numWorkers int, process func(Job)) {\n\tvar wg sync.WaitGroup\n\tfor i := 0; i < numWorkers; i++ {\n\t\twg.Add(1)\n\t\tgo func() {\n\t\t\tdefer wg.Done()\n\t\t\tfor {\n\t\t\t\tselect {\n\t\t\t\tcase job, ok := <-jobs:\n\t\t\t\t\tif !ok {\n\t\t\t\t\t\treturn // no more work coming\n\t\t\t\t\t}\n\t\t\t\t\tprocess(job)\n\t\t\t\tcase <-ctx.Done():\n\t\t\t\t\treturn // shutdown requested\n\t\t\t\t}\n\t\t\t}\n\t\t}()\n\t}\n\twg.Wait()\n}\n```",
+      "materials": [
+        "context-pkg"
+      ]
+    }
+  ]
+}

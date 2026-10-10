@@ -96,7 +96,7 @@ func (s *Store) CreateMaterial(ctx context.Context, createdBy string, n NewMater
 		if err := tx.QueryRow(ctx, `
 			INSERT INTO materials (type, title, url, author, description, created_by)
 			VALUES ($1::material_type, $2, $3, $4, $5, $6) RETURNING id`,
-			n.Type, n.Title, n.URL, emptyToNil(n.Author), emptyToNil(n.Description), createdBy,
+			n.Type, n.Title, n.URL, emptyToNil(n.Author), emptyToNil(n.Description), nullIfEmpty(createdBy),
 		).Scan(&id); err != nil {
 			return err
 		}

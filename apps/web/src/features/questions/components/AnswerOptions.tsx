@@ -1,8 +1,14 @@
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { InlineText, RichText } from '@/shared/ui';
+import { parseRichText, toPlainText } from '@/shared/utils/richText';
+
 import type { AnswerValue, Question } from '../types';
 import { ScissorsToggle } from './ScissorsToggle';
+
+const isCodeOption = (row: RowSpec) =>
+  parseRichText(row.label).some((segment) => segment.kind === 'code');
 
 export interface AnswerReveal {
   correctAnswer: AnswerValue;
@@ -25,15 +31,15 @@ interface AnswerOptionsProps {
 interface RowSpec {
   key: string; // option id ('A'…'E') or 'true'/'false'
   label: string; // accessible name + displayed value
-  /** What the code notation shows before `=`, e.g. options[0] or answer. */
+  /** The variable name in the code notation, e.g. A in `var A = "HTTP"`, or answer. */
   lhs: string;
-  /** Rendered right-hand side, e.g. "Transport layer" or true. */
+  /** Right-hand side for true/false (true / false); multiple choice renders `label`. */
   rhs: string;
   answerValue: AnswerValue;
 }
 
 /**
- * Answers rendered as array entries — `options[0] = "HTTP"` — per the
+ * Answers rendered as variable declarations — `var A = "HTTP"` — per the
  * editor-style design. Each row is a numbered code line; the native radio is
  * visually hidden and the whole entry is its label (aria-label carries the
  * plain option text so accessible names stay notation-free).
@@ -61,8 +67,8 @@ export function AnswerOptions({
     rows = options.map((o, i) => ({
       key: o.id,
       label: o.label,
-      lhs: `options[${i}]`,
-      rhs: `"${o.label}"`,
+      lhs: String.fromCharCode(65 + i), // A, B, C… by displayed position (options may be shuffled)
+      rhs: o.label,
       answerValue: o.id,
     }));
   } else {
@@ -75,7 +81,7 @@ export function AnswerOptions({
   const selectedKey = value === undefined ? '' : String(value);
 
   return (
-    <div role="radiogroup" aria-label={question.prompt}>
+    <div role="radiogroup" aria-label={toPlainText(question.prompt)}>
       {rows.map((row) => {
         const struck = struckOptions.has(row.key);
         const isSelected = selectedKey === row.key;
@@ -107,7 +113,7 @@ export function AnswerOptions({
               <div className="option-row">
                 {showScissors && (
                   <ScissorsToggle
-                    optionLabel={row.key === 'true' || row.key === 'false' ? row.label : row.key}
+                    optionLabel={question.type === 'multiple-choice' ? row.lhs : row.label}
                     struck={struck}
                     onToggle={() => onToggleStruck(row.key)}
                   />
@@ -119,14 +125,33 @@ export function AnswerOptions({
                     value={row.key}
                     checked={isSelected}
                     disabled={disabled}
-                    aria-label={row.label}
+                    aria-label={toPlainText(row.label)}
                     onChange={() => onChange(row.answerValue)}
                   />
-                  <span className="option-entry__text">
-                    <span className="tok-idx">{row.lhs}</span>
-                    <span className="muted"> = </span>
-                    <span className="tok-str">{row.rhs}</span>
-                  </span>
+                  {isCodeOption(row) ? (
+                    // a code-block answer: `var A =` with the highlighted snippet below
+                    <span className="option-entry__text option-entry__text--block">
+                      <span className="tok-kw">var</span> <span className="tok-idx">{row.lhs}</span>
+                      <span className="muted"> =</span>
+                      <RichText text={row.label} />
+                    </span>
+                  ) : (
+                    <span className="option-entry__text">
+                      <span className="tok-kw">var</span> <span className="tok-idx">{row.lhs}</span>
+                      <span className="muted"> = </span>
+                      <span className="tok-str">
+                        {question.type === 'multiple-choice' ? (
+                          <>
+                            &quot;
+                            <InlineText text={row.label} />
+                            &quot;
+                          </>
+                        ) : (
+                          row.rhs
+                        )}
+                      </span>
+                    </span>
+                  )}
                   {(isCorrect || isWrongPick) && (
                     <span
                       className={
