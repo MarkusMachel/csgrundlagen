@@ -1,5 +1,5 @@
 export type QuestionType =
-  'multiple-choice' | 'true-false' | 'multi-select' | 'ordering' | 'output';
+  'multiple-choice' | 'true-false' | 'multi-select' | 'ordering' | 'output' | 'flashcard';
 
 export interface BaseQuestion {
   id: string;
@@ -61,12 +61,21 @@ export interface OutputQuestion extends BaseQuestion {
   expectedOutput: string;
 }
 
+/**
+ * A flashcard (e.g. imported from Anki): the prompt is the front, the
+ * explanation the back, and the learner grades themselves (true = knew it).
+ */
+export interface FlashcardQuestion extends BaseQuestion {
+  type: 'flashcard';
+}
+
 export type Question =
   | MultipleChoiceQuestion
   | TrueFalseQuestion
   | MultiSelectQuestion
   | OrderingQuestion
-  | OutputQuestion;
+  | OutputQuestion
+  | FlashcardQuestion;
 
 /**
  * An answer: an option id (multiple choice), a boolean (true/false), option

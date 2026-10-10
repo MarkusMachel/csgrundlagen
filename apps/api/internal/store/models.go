@@ -52,6 +52,7 @@ type Option struct {
 //	multi-select     Options + CorrectOptionIDs (pick all that apply)
 //	ordering         Options + CorrectOrder (option ids in the right order)
 //	output           Code + CodeLanguage + ExpectedOutput (predict what it prints)
+//	flashcard        Prompt is the front, Explanation the back; self-graded (true = knew it)
 type Question struct {
 	ID               string   `json:"id"`
 	Type             string   `json:"type"`
@@ -98,6 +99,8 @@ func (q Question) Correct() any {
 		if q.ExpectedOutput != nil {
 			return *q.ExpectedOutput
 		}
+	case "flashcard":
+		return true
 	}
 	return nil
 }

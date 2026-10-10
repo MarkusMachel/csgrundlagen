@@ -10,6 +10,7 @@ export { MaterialManager } from './components/MaterialManager';
 export { QuestionManager } from './components/QuestionManager';
 export { MaterialForm } from './components/MaterialForm';
 export { QuestionForm } from './components/QuestionForm';
+export { TagInput } from './components/TagInput';
 export {
   useAdminStats,
   useBugReports,

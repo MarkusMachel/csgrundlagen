@@ -2,6 +2,7 @@ import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
 
+import { AnkiImportTab } from '@/features/anki';
 import {
   AdminStatsTab,
   BugReportQueue,
@@ -26,7 +27,8 @@ type Tab =
   | 'materials'
   | 'bugs'
   | 'comments'
-  | 'users';
+  | 'users'
+  | 'import';
 
 export function AdminPage() {
   const { t } = useTranslation();
@@ -50,6 +52,7 @@ export function AdminPage() {
     'bugs',
     'comments',
     'users',
+    'import',
   ];
 
   return (
@@ -112,6 +115,7 @@ export function AdminPage() {
           {tab === 'bugs' && <BugReportQueue />}
           {tab === 'comments' && <CommentModeration />}
           {tab === 'users' && <AdminUsersTab />}
+          {tab === 'import' && <AnkiImportTab />}
         </div>
       </div>
     </div>

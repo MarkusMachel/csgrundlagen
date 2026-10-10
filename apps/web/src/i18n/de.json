@@ -297,7 +297,8 @@
       "bugs": "Fehlermeldungen",
       "users": "Benutzer",
       "comments": "Kommentare",
-      "quality": "Qualität"
+      "quality": "Qualität",
+      "import": "Import"
     },
     "questionType": "Fragetyp",
     "type": {
@@ -305,7 +306,8 @@
       "true-false": "Wahr / Falsch",
       "multi-select": "Mehrfachauswahl",
       "ordering": "Reihenfolge",
-      "output": "Ausgabe vorhersagen"
+      "output": "Ausgabe vorhersagen",
+      "flashcard": "Karteikarte"
     },
     "prompt": "Fragetext",
     "options": "Antwortoptionen",
@@ -446,7 +448,10 @@
       "materialLabel": "Lesestoff zu Option {{option}}",
       "searchMaterials": "Materialien suchen…",
       "noMaterial": "Kein Lesestoff verknüpft"
-    }
+    },
+    "front": "Vorderseite",
+    "back": "Rückseite",
+    "flashcardHint": "Die Vorderseite ist die Frage, die Rückseite die Antwort; Lernende bewerten sich selbst."
   },
   "code": {
     "copy": "Code kopieren",
@@ -763,5 +768,31 @@
     "pending_one": "{{count}} Antwort wartet auf Synchronisierung",
     "pending_other": "{{count}} Antworten warten auf Synchronisierung",
     "savedForLater": "Auf diesem Gerät gespeichert; wird synchronisiert, sobald du wieder online bist."
+  },
+  "anki": {
+    "export": "Nach Anki exportieren",
+    "exportFailed": "Export fehlgeschlagen, erneut versuchen",
+    "exportHint": "Lade diese Fragen als Datei herunter, die Anki importieren kann (Datei → Importieren). Ein erneuter Export aktualisiert dieselben Karten.",
+    "importIntro": "Importiere ein Anki-Deck als Karteikarten: In Anki Datei → Exportieren → „Notizen als Klartext“ (mit HTML und Tags) wählen, dann die Datei hier auswählen. Karten mit bereits vorhandener Vorderseite werden übersprungen, ein erneuter Import ist also sicher.",
+    "file": "Anki-Textexport (.txt)",
+    "parsed_one": "{{count}} Karte in {{file}} gefunden.",
+    "parsed_other": "{{count}} Karten in {{file}} gefunden.",
+    "skippedLines_one": "{{count}} Zeile übersprungen (weniger als zwei Felder).",
+    "skippedLines_other": "{{count}} Zeilen übersprungen (weniger als zwei Felder).",
+    "topics": "Themen",
+    "andMore": "…und {{count}} weitere",
+    "useCardTags": "Anki-Tags der Karten als Themen verwenden (cs::Networking → Networking)",
+    "defaultTags_one": "Themen für die {{count}} Karte ohne Tags",
+    "defaultTags_other": "Themen für die {{count}} Karten ohne Tags",
+    "import_one": "{{count}} Karte importieren",
+    "import_other": "{{count}} Karten importieren",
+    "done": "{{created}} Karteikarten importiert; {{skipped}} gab es schon."
+  },
+  "flashcard": {
+    "show": "Antwort zeigen",
+    "answer": "Antwort",
+    "how": "Wusstest du es?",
+    "knew": "Gewusst",
+    "didnt": "Nicht gewusst"
   }
 }

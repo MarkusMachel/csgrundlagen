@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { AnkiExportButton } from '@/features/anki';
 import { WelcomePanel } from '@/features/onboarding';
 import {
   emptyFilters,
@@ -45,10 +46,24 @@ export function HomePage() {
               <QuestionCard question={daily.data} mode="feed" />
             ) : null}
           </section>
-          <h2 id="question-feed-title" style={{ margin: 0, scrollMarginTop: 60 }}>
-            <span className="tok-com">{'// '}</span>
-            {t('home.feedTitle')}
-          </h2>
+          <div
+            className="hstack"
+            style={{ justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}
+          >
+            <h2 id="question-feed-title" style={{ margin: 0, scrollMarginTop: 60 }}>
+              <span className="tok-com">{'// '}</span>
+              {t('home.feedTitle')}
+            </h2>
+            <AnkiExportButton
+              source={{
+                source: 'filter',
+                tags: filters.tags,
+                difficulties: filters.difficulties,
+                search: filters.search,
+                status: filters.status || undefined,
+              }}
+            />
+          </div>
         </>
       }
     />

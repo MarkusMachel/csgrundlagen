@@ -297,7 +297,8 @@
       "bugs": "Bug reports",
       "users": "Users",
       "comments": "Comments",
-      "quality": "Quality"
+      "quality": "Quality",
+      "import": "Import"
     },
     "questionType": "Question type",
     "type": {
@@ -305,7 +306,8 @@
       "true-false": "True / False",
       "multi-select": "Pick all that apply",
       "ordering": "Ordering",
-      "output": "Predict the output"
+      "output": "Predict the output",
+      "flashcard": "flashcard"
     },
     "prompt": "Prompt",
     "options": "Options",
@@ -446,7 +448,10 @@
       "materialLabel": "Reading for option {{option}}",
       "searchMaterials": "Search materials…",
       "noMaterial": "No reading linked"
-    }
+    },
+    "front": "Front",
+    "back": "Back",
+    "flashcardHint": "The front is the question, the back the answer; learners grade themselves."
   },
   "code": {
     "copy": "Copy code",
@@ -763,5 +768,31 @@
     "pending_one": "{{count}} answer waiting to sync",
     "pending_other": "{{count}} answers waiting to sync",
     "savedForLater": "Saved on this device; it syncs when you’re back online."
+  },
+  "anki": {
+    "export": "Export to Anki",
+    "exportFailed": "Export failed, retry",
+    "exportHint": "Download these questions as a file Anki can import (File → Import). Exporting again updates the same cards.",
+    "importIntro": "Import an Anki deck as flashcards: in Anki, use File → Export → “Notes in Plain Text” (with HTML and tags), then choose the file here. Cards whose front already exists are skipped, so importing again is safe.",
+    "file": "Anki text export (.txt)",
+    "parsed_one": "{{count}} card found in {{file}}.",
+    "parsed_other": "{{count}} cards found in {{file}}.",
+    "skippedLines_one": "{{count}} line was skipped (fewer than two fields).",
+    "skippedLines_other": "{{count}} lines were skipped (fewer than two fields).",
+    "topics": "Topics",
+    "andMore": "…and {{count}} more",
+    "useCardTags": "Use the cards’ Anki tags as topics (cs::Networking → Networking)",
+    "defaultTags_one": "Topics for the {{count}} card without tags",
+    "defaultTags_other": "Topics for the {{count}} cards without tags",
+    "import_one": "Import {{count}} card",
+    "import_other": "Import {{count}} cards",
+    "done": "Imported {{created}} flashcards; {{skipped}} already existed."
+  },
+  "flashcard": {
+    "show": "Show answer",
+    "answer": "Answer",
+    "how": "Did you know it?",
+    "knew": "I knew it",
+    "didnt": "I didn’t"
   }
 }

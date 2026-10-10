@@ -150,6 +150,24 @@ internal/httpapi routes, auth middleware, handlers, integration tests
   delete themselves). Set `PRIVACY_CONTACT` in `.env` so the policy names who runs
   the instance. Bump `PrivacyPolicyVersion` (Go) and `PRIVACY_POLICY_VERSION`
   (web) together when the policy text changes.
+- **Profile & accounts admin**: `PATCH /api/me` (name, language), email change via a
+  confirmation link (`POST /api/me/email`, `/api/me/email/confirm`); admins change
+  roles, block and delete accounts (`PATCH`/`DELETE /api/admin/users/{id}`) but
+  never the last admin.
+- **Moderation**: readers report comments (`POST /api/comments/{id}/report`),
+  authors and admins delete them, admins hide or dismiss from
+  `/api/admin/comments`.
+- **Content quality**: every question save is a revision
+  (`/api/questions/{id}/revisions`, restore included); `GET /api/admin/quality`
+  flags too easy/hard questions, likely wrong keys and unused options; wrong
+  options can carry feedback and a reading (returned only with the answer).
+- **Tests and offline**: unfinished attempts are drafts (`/api/tests/{id}/draft`);
+  `POST …/submit` accepts `answeredAt` for answers given offline. The web app is an
+  installable PWA (`public/sw.js`, production builds only) that queues offline
+  answers in IndexedDB.
+- **Anki**: `GET /api/export/anki` (bookmarks, a test, or feed filters) writes
+  Anki's plain-text import format with stable GUIDs; admins import Anki text
+  exports as self-graded `flashcard` questions (`POST /api/admin/import/flashcards`).
 - **Migrations**: numbered files in `internal/db/migrations`, embedded in the
   binary and applied in order on startup, each recorded in `schema_migrations`.
   Never edit an applied file — add the next number.

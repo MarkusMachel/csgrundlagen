@@ -367,6 +367,11 @@ func (s *Store) QuestionStats(ctx context.Context, questionID string) (QuestionS
 			{OptionID: "true", Label: "True", Count: counts["true"]},
 			{OptionID: "false", Label: "False", Count: counts["false"]},
 		}
+	case "flashcard":
+		dist = []AnswerStat{
+			{OptionID: "true", Label: "Knew it", Count: counts["true"]},
+			{OptionID: "false", Label: "Didn't", Count: counts["false"]},
+		}
 	default: // ordering, output: answers are too varied to list, so right vs wrong
 		dist = []AnswerStat{
 			{OptionID: "correct", Label: "Correct", Count: right},
@@ -484,8 +489,10 @@ func (n NewQuestion) validate() error {
 		if n.ExpectedOutput == nil {
 			return ErrInvalid{"output questions need expectedOutput"}
 		}
+	case "flashcard":
+		// front and back are prompt and explanation, checked above
 	default:
-		return ErrInvalid{"type must be multiple-choice, true-false, multi-select, ordering or output"}
+		return ErrInvalid{"type must be multiple-choice, true-false, multi-select, ordering, output or flashcard"}
 	}
 	return nil
 }

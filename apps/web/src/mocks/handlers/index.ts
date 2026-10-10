@@ -1,4 +1,5 @@
 import { adminHandlers } from './admin';
+import { ankiHandlers } from './anki';
 import { authHandlers } from './auth';
 import { deviceHandlers } from './devices';
 import { materialHandlers } from './materials';
@@ -16,6 +17,7 @@ export const handlers = [
   ...adminHandlers,
   ...deviceHandlers,
   ...privacyHandlers,
+  ...ankiHandlers,
   ...qualityHandlers,
   ...moderationHandlers,
   ...profileHandlers,

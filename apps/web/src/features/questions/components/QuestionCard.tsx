@@ -22,6 +22,7 @@ import { AnswerOptions, type AnswerReveal } from './AnswerOptions';
 const QuestionTabs = lazy(() =>
   import('./ExpandableTabs/QuestionTabs').then((m) => ({ default: m.QuestionTabs })),
 );
+import { FlashcardInput } from './FlashcardInput';
 import { initialOrder, OrderingInput } from './OrderingInput';
 import { OutputInput } from './OutputInput';
 import { RunnableCode } from './RunnableCode';
@@ -124,7 +125,8 @@ export function QuestionCard({
   const hasOptions = question.type !== 'ordering' && question.type !== 'output';
   const showScissors =
     hasOptions && (mode === 'feed' || mode === 'pick' || mode === 'test') && !isExam && !reveal;
-  const showSubmit = mode === 'feed';
+  // flashcards submit straight from their "knew it / didn't" buttons
+  const showSubmit = mode === 'feed' && question.type !== 'flashcard';
   // Practice keeps explanations reachable as the user goes (§15 open decision).
   const explanationRevealed =
     mode === 'review' || submitted || (mode === 'test' && testMode === 'practice');
@@ -207,7 +209,22 @@ export function QuestionCard({
           <span aria-hidden>&nbsp;</span>
         </CodeLine>
 
-        {question.type === 'ordering' ? (
+        {question.type === 'flashcard' ? (
+          <CodeLine numbered={false}>
+            <FlashcardInput
+              question={question}
+              value={(reveal?.givenAnswer ?? currentAnswer) as boolean | undefined}
+              disabled={answersDisabled}
+              revealed={mode === 'review'}
+              onGrade={(knewIt) => {
+                setAnswer(knewIt);
+                if (mode === 'feed' && !submitted && !submitAnswer.isPending) {
+                  submitAnswer.mutate(knewIt, { onSuccess: (r) => onAnswered?.(r) });
+                }
+              }}
+            />
+          </CodeLine>
+        ) : question.type === 'ordering' ? (
           <OrderingInput
             question={question}
             value={(reveal?.givenAnswer ?? currentAnswer) as string[]}

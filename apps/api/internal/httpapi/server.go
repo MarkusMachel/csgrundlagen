@@ -125,6 +125,8 @@ func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
 
 	mux.HandleFunc("GET /api/admin/stats", s.admin(s.adminStats))
 	mux.HandleFunc("GET /api/admin/quality", s.admin(s.qualityReport))
+	mux.HandleFunc("POST /api/admin/import/flashcards", s.admin(s.importFlashcards))
+	mux.HandleFunc("GET /api/export/anki", s.authed(s.exportAnki))
 	mux.HandleFunc("GET /api/admin/bug-reports", s.admin(s.listBugReports))
 	mux.HandleFunc("PATCH /api/admin/bug-reports/{id}", s.admin(s.setBugReportStatus))
 	mux.HandleFunc("GET /api/admin/comments", s.admin(s.moderationQueue))
@@ -247,7 +249,17 @@ func writeError(w http.ResponseWriter, status int, msg string) {
 }
 
 func decode(w http.ResponseWriter, r *http.Request, v any) bool {
-	dec := json.NewDecoder(io.LimitReader(r.Body, maxBody))
+	return decodeN(w, r, v, maxBody)
+}
+
+// decodeLarge is decode for the few endpoints that take big bodies (imports);
+// the caller bounds the body itself.
+func decodeLarge(w http.ResponseWriter, r *http.Request, v any) bool {
+	return decodeN(w, r, v, 8<<20)
+}
+
+func decodeN(w http.ResponseWriter, r *http.Request, v any, limit int64) bool {
+	dec := json.NewDecoder(io.LimitReader(r.Body, limit))
 	if err := dec.Decode(v); err != nil {
 		writeError(w, http.StatusBadRequest, "Invalid JSON body")
 		return false

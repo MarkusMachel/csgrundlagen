@@ -297,7 +297,8 @@
       "bugs": "Relatos de erro",
       "users": "Usuários",
       "comments": "Comentários",
-      "quality": "Qualidade"
+      "quality": "Qualidade",
+      "import": "Importar"
     },
     "questionType": "Tipo de questão",
     "type": {
@@ -305,7 +306,8 @@
       "true-false": "Verdadeiro / Falso",
       "multi-select": "Múltipla seleção",
       "ordering": "Ordenação",
-      "output": "Prever a saída"
+      "output": "Prever a saída",
+      "flashcard": "flashcard"
     },
     "prompt": "Enunciado",
     "options": "Alternativas",
@@ -446,7 +448,10 @@
       "materialLabel": "Leitura para a opção {{option}}",
       "searchMaterials": "Buscar materiais…",
       "noMaterial": "Nenhuma leitura vinculada"
-    }
+    },
+    "front": "Frente",
+    "back": "Verso",
+    "flashcardHint": "A frente é a pergunta, o verso a resposta; quem estuda avalia a si mesmo."
   },
   "code": {
     "copy": "Copiar código",
@@ -763,5 +768,31 @@
     "pending_one": "{{count}} resposta aguardando sincronização",
     "pending_other": "{{count}} respostas aguardando sincronização",
     "savedForLater": "Salva neste dispositivo; sincroniza quando você voltar a ficar online."
+  },
+  "anki": {
+    "export": "Exportar para o Anki",
+    "exportFailed": "Falha na exportação, tente de novo",
+    "exportHint": "Baixe estas perguntas num arquivo que o Anki importa (Arquivo → Importar). Exportar de novo atualiza os mesmos cartões.",
+    "importIntro": "Importe um baralho do Anki como flashcards: no Anki, use Arquivo → Exportar → “Notas em texto simples” (com HTML e tags) e escolha o arquivo aqui. Cartões cuja frente já existe são ignorados, então importar de novo é seguro.",
+    "file": "Exportação de texto do Anki (.txt)",
+    "parsed_one": "{{count}} cartão encontrado em {{file}}.",
+    "parsed_other": "{{count}} cartões encontrados em {{file}}.",
+    "skippedLines_one": "{{count}} linha ignorada (menos de dois campos).",
+    "skippedLines_other": "{{count}} linhas ignoradas (menos de dois campos).",
+    "topics": "Temas",
+    "andMore": "…e mais {{count}}",
+    "useCardTags": "Usar as tags do Anki como temas (cs::Networking → Networking)",
+    "defaultTags_one": "Temas para o {{count}} cartão sem tags",
+    "defaultTags_other": "Temas para os {{count}} cartões sem tags",
+    "import_one": "Importar {{count}} cartão",
+    "import_other": "Importar {{count}} cartões",
+    "done": "{{created}} flashcards importados; {{skipped}} já existiam."
+  },
+  "flashcard": {
+    "show": "Mostrar resposta",
+    "answer": "Resposta",
+    "how": "Você sabia?",
+    "knew": "Eu sabia",
+    "didnt": "Não sabia"
   }
 }

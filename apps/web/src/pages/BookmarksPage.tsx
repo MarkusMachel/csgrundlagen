@@ -2,6 +2,7 @@ import { Bookmark } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import { AnkiExportButton } from '@/features/anki';
 import { QuestionCard, useBookmarkedQuestions } from '@/features/questions';
 import { EmptyState, ErrorState, Spinner } from '@/shared/ui';
 
@@ -12,10 +13,13 @@ export function BookmarksPage() {
 
   return (
     <div className="stack">
-      <h1>
-        <span className="tok-com">{'// '}</span>
-        {t('bookmarks.title')}
-      </h1>
+      <div className="hstack" style={{ justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+        <h1 style={{ margin: 0 }}>
+          <span className="tok-com">{'// '}</span>
+          {t('bookmarks.title')}
+        </h1>
+        {questions && questions.length > 0 && <AnkiExportButton source={{ source: 'bookmarks' }} />}
+      </div>
       {isPending ? (
         <Spinner center />
       ) : isError ? (

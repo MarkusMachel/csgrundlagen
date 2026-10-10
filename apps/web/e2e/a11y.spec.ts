@@ -86,7 +86,7 @@ for (const theme of ['light', 'dark'] as const) {
           },
         ],
       ];
-      for (const tab of ['Stats', 'Quality', 'Questions', 'Bug reports', 'Comments', 'Users']) {
+      for (const tab of ['Stats', 'Quality', 'Questions', 'Bug reports', 'Comments', 'Users', 'Import']) {
         states.push([
           `admin: ${tab}`,
           async () => {

@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { http, HttpResponse } from 'msw';
 import { afterEach, describe, expect, it } from 'vitest';
 
-import { QuestionCard } from '@/features/questions/components/QuestionCard';
+import { QuestionCard } from '@/features/questions';
 import { db } from '@/mocks/db';
 import { server } from '@/mocks/server';
 import { loginAsDemo, loginAsRegularUser, renderWithProviders } from '@/test-utils';

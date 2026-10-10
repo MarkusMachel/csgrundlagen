@@ -24,6 +24,7 @@ const QUESTION_TYPES = [
   'true-false',
   'ordering',
   'output',
+  'flashcard',
 ] as const;
 const hasOptions = (type: string) =>
   type === 'multiple-choice' || type === 'multi-select' || type === 'ordering';
@@ -127,6 +128,8 @@ function answerValuesFrom(q: Question): Partial<FormValues> {
       return { code: q.code, codeLanguage: q.codeLanguage, expectedOutput: q.expectedOutput };
     case 'true-false':
       return { correctAnswer: q.correctAnswer };
+    case 'flashcard':
+      return {};
   }
 }
 
@@ -208,9 +211,9 @@ export function QuestionForm({ question, onSaved, onCancel }: QuestionFormProps)
       input.code = values.code;
       input.codeLanguage = values.codeLanguage;
       input.expectedOutput = values.expectedOutput;
-    } else {
+    } else if (values.type === 'true-false') {
       input.correctAnswer = values.correctAnswer;
-    }
+    } // flashcard: front and back are the prompt and explanation
     try {
       if (question) {
         const updated = await updateQuestion.mutateAsync({ id: question.id, input });
@@ -244,7 +247,9 @@ export function QuestionForm({ question, onSaved, onCancel }: QuestionFormProps)
         </div>
 
         <div className={err.prompt ? 'field field--error' : 'field'}>
-          <label htmlFor="q-prompt">{t('authoring.prompt')}</label>
+          <label htmlFor="q-prompt">
+            {type === 'flashcard' ? t('authoring.front') : t('authoring.prompt')}
+          </label>
           <textarea id="q-prompt" className="textarea" rows={3} {...form.register('prompt')} />
           <CodeFormatHint />
           <RichPreview text={form.watch('prompt')} />
@@ -349,6 +354,11 @@ export function QuestionForm({ question, onSaved, onCancel }: QuestionFormProps)
           </div>
         ) : type === 'output' ? (
           <OutputFields form={form} />
+        ) : type === 'flashcard' ? (
+          <p className="tok-com" style={{ margin: 0, fontSize: 12 }}>
+            {'// '}
+            {t('authoring.flashcardHint')}
+          </p>
         ) : (
           <div className="field">
             <label>{t('authoring.correctAnswer')}</label>
@@ -371,7 +381,9 @@ export function QuestionForm({ question, onSaved, onCancel }: QuestionFormProps)
         )}
 
         <div className={err.explanation ? 'field field--error' : 'field'}>
-          <label htmlFor="q-expl">{t('authoring.explanation')}</label>
+          <label htmlFor="q-expl">
+            {type === 'flashcard' ? t('authoring.back') : t('authoring.explanation')}
+          </label>
           <textarea id="q-expl" className="textarea" rows={3} {...form.register('explanation')} />
           <CodeFormatHint />
           <RichPreview text={form.watch('explanation')} />

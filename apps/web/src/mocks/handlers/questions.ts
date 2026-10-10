@@ -404,6 +404,8 @@ export function buildQuestion(id: string, body: CreateQuestionBody): Question {
         codeLanguage: body.codeLanguage ?? 'js',
         expectedOutput: body.expectedOutput ?? '',
       };
+    case 'flashcard':
+      return { ...base, type: 'flashcard' };
     default:
       return { ...base, type: 'true-false', correctAnswer: body.correctAnswer ?? true };
   }

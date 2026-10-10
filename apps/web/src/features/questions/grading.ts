@@ -18,6 +18,8 @@ export function correctAnswerOf(q: Question): AnswerValue {
       return q.correctOrder;
     case 'output':
       return q.expectedOutput;
+    case 'flashcard':
+      return true; // "I knew it"
   }
 }
 
@@ -57,6 +59,8 @@ export function isAnswerCorrect(q: Question, given: AnswerValue | undefined): bo
       return (
         typeof given === 'string' && normalizeOutput(given) === normalizeOutput(q.expectedOutput)
       );
+    case 'flashcard':
+      return given === true;
   }
 }
 
