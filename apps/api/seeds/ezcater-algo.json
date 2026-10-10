@@ -334,9 +334,9 @@
     {
       "prompt": "What is the most efficient approach to Longest Substring Without Repeating Characters?",
       "tags": [
-        "Algorithms (Go)",
-        "ezCater prep",
-        "Sliding window"
+        "Go",
+        "Algorithms & Data Structures",
+        "ezCater prep"
       ],
       "difficulty": "medium",
       "options": [
@@ -354,9 +354,9 @@
     {
       "prompt": "How do you group anagrams efficiently, and how can you avoid sorting each word?",
       "tags": [
-        "Algorithms (Go)",
-        "ezCater prep",
-        "Hashing"
+        "Go",
+        "Algorithms & Data Structures",
+        "ezCater prep"
       ],
       "difficulty": "medium",
       "options": [
@@ -374,9 +374,9 @@
     {
       "prompt": "What is the O(n) approach to Two Sum?",
       "tags": [
-        "Algorithms (Go)",
-        "ezCater prep",
-        "Hashing"
+        "Go",
+        "Algorithms & Data Structures",
+        "ezCater prep"
       ],
       "difficulty": "easy",
       "options": [
@@ -394,9 +394,9 @@
     {
       "prompt": "How do you merge overlapping intervals?",
       "tags": [
-        "Algorithms (Go)",
-        "ezCater prep",
-        "Sorting"
+        "Go",
+        "Algorithms & Data Structures",
+        "ezCater prep"
       ],
       "difficulty": "medium",
       "options": [
@@ -414,9 +414,9 @@
     {
       "prompt": "How do you design an LRU cache with O(1) Get and Put?",
       "tags": [
-        "Algorithms (Go)",
-        "ezCater prep",
-        "Design"
+        "Go",
+        "Algorithms & Data Structures",
+        "ezCater prep"
       ],
       "difficulty": "hard",
       "options": [
@@ -434,9 +434,10 @@
     {
       "prompt": "How do you implement a token-bucket rate limiter without a background goroutine?",
       "tags": [
-        "Algorithms (Go)",
+        "Go",
+        "Algorithms & Data Structures",
         "ezCater prep",
-        "Rate limiting"
+        "Resilience & Scalability"
       ],
       "difficulty": "medium",
       "options": [
@@ -454,9 +455,10 @@
     {
       "prompt": "How do you detect duplicate events within a time window, and what's the production caveat?",
       "tags": [
-        "Algorithms (Go)",
+        "Go",
+        "Algorithms & Data Structures",
         "ezCater prep",
-        "Idempotency"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "medium",
       "options": [
@@ -474,9 +476,9 @@
     {
       "prompt": "How do you reverse a singly linked list in place?",
       "tags": [
-        "Algorithms (Go)",
-        "ezCater prep",
-        "Linked lists"
+        "Go",
+        "Algorithms & Data Structures",
+        "ezCater prep"
       ],
       "difficulty": "easy",
       "options": [
@@ -494,9 +496,9 @@
     {
       "prompt": "How do you order items with dependencies and detect a cycle?",
       "tags": [
-        "Algorithms (Go)",
-        "ezCater prep",
-        "Graphs"
+        "Go",
+        "Algorithms & Data Structures",
+        "ezCater prep"
       ],
       "difficulty": "medium",
       "options": [
@@ -514,9 +516,10 @@
     {
       "prompt": "How do you process jobs with a fixed number of concurrent Go workers and collect all results?",
       "tags": [
-        "Algorithms (Go)",
+        "Go",
+        "Algorithms & Data Structures",
         "ezCater prep",
-        "Concurrency"
+        "Async & Concurrency"
       ],
       "difficulty": "medium",
       "options": [
@@ -534,9 +537,9 @@
     {
       "prompt": "How do you search a rotated sorted array in O(log n)?",
       "tags": [
-        "Algorithms (Go)",
-        "ezCater prep",
-        "Binary search"
+        "Go",
+        "Algorithms & Data Structures",
+        "ezCater prep"
       ],
       "difficulty": "medium",
       "options": [
@@ -554,9 +557,10 @@
     {
       "prompt": "How do you validate that nested required fields (like order.id) exist in a webhook payload?",
       "tags": [
-        "Algorithms (Go)",
+        "Go",
+        "Algorithms & Data Structures",
         "ezCater prep",
-        "Validation"
+        "APIs & HTTP"
       ],
       "difficulty": "easy",
       "options": [
@@ -574,9 +578,9 @@
     {
       "prompt": "How do you check that a string of brackets is validly matched and nested?",
       "tags": [
-        "Algorithms (Go)",
-        "ezCater prep",
-        "Stacks"
+        "Go",
+        "Algorithms & Data Structures",
+        "ezCater prep"
       ],
       "difficulty": "easy",
       "options": [
@@ -594,9 +598,9 @@
     {
       "prompt": "How do you find all values that appear twice in an array?",
       "tags": [
-        "Algorithms (Go)",
-        "ezCater prep",
-        "Hashing"
+        "Go",
+        "Algorithms & Data Structures",
+        "ezCater prep"
       ],
       "difficulty": "easy",
       "options": [
@@ -614,9 +618,9 @@
     {
       "prompt": "How do you count islands in a grid of land and water?",
       "tags": [
-        "Algorithms (Go)",
-        "ezCater prep",
-        "Graphs"
+        "Go",
+        "Algorithms & Data Structures",
+        "ezCater prep"
       ],
       "difficulty": "medium",
       "options": [
@@ -634,9 +638,9 @@
     {
       "prompt": "How do you find the k-th largest element of an unsorted array efficiently?",
       "tags": [
-        "Algorithms (Go)",
-        "ezCater prep",
-        "Heaps"
+        "Go",
+        "Algorithms & Data Structures",
+        "ezCater prep"
       ],
       "difficulty": "medium",
       "options": [
@@ -655,9 +659,9 @@
     {
       "prompt": "How does a trie support Insert, Search and StartsWith, and where could the Integration Hub use one?",
       "tags": [
-        "Algorithms (Go)",
-        "ezCater prep",
-        "Tries"
+        "Go",
+        "Algorithms & Data Structures",
+        "ezCater prep"
       ],
       "difficulty": "medium",
       "options": [
@@ -675,9 +679,9 @@
     {
       "prompt": "How do you merge k sorted linked lists efficiently?",
       "tags": [
-        "Algorithms (Go)",
-        "ezCater prep",
-        "Heaps"
+        "Go",
+        "Algorithms & Data Structures",
+        "ezCater prep"
       ],
       "difficulty": "hard",
       "options": [
@@ -696,9 +700,8 @@
     {
       "prompt": "How do you find the second-highest amount in a table, handling ties correctly?",
       "tags": [
-        "SQL",
-        "ezCater prep",
-        "Window functions"
+        "SQL & Databases",
+        "ezCater prep"
       ],
       "difficulty": "medium",
       "options": [
@@ -717,9 +720,8 @@
     {
       "prompt": "How do you list partners with zero successful deliveries, including partners with no deliveries at all?",
       "tags": [
-        "SQL",
-        "ezCater prep",
-        "Joins"
+        "SQL & Databases",
+        "ezCater prep"
       ],
       "difficulty": "medium",
       "options": [
@@ -737,9 +739,8 @@
     {
       "prompt": "How do you find partners with more than 10 failed deliveries in the last 24 hours?",
       "tags": [
-        "SQL",
-        "ezCater prep",
-        "Aggregation"
+        "SQL & Databases",
+        "ezCater prep"
       ],
       "difficulty": "easy",
       "options": [
@@ -757,9 +758,8 @@
     {
       "prompt": "A query filtering deliveries by subscription_id and created_at shows a Seq Scan. What do you do?",
       "tags": [
-        "SQL",
-        "ezCater prep",
-        "Indexing"
+        "SQL & Databases",
+        "ezCater prep"
       ],
       "difficulty": "medium",
       "options": [
@@ -778,9 +778,8 @@
     {
       "prompt": "How do you normalize a deliveries table that repeats partner_name and webhook_url on every row?",
       "tags": [
-        "SQL",
-        "ezCater prep",
-        "Normalization"
+        "SQL & Databases",
+        "ezCater prep"
       ],
       "difficulty": "medium",
       "options": [
@@ -798,9 +797,8 @@
     {
       "prompt": "How do you audit processed_events for duplicate idempotency keys, and what does a result mean?",
       "tags": [
-        "SQL",
-        "ezCater prep",
-        "Data integrity"
+        "SQL & Databases",
+        "ezCater prep"
       ],
       "difficulty": "easy",
       "options": [
@@ -818,9 +816,8 @@
     {
       "prompt": "How do you show each day's delivery count together with a running total?",
       "tags": [
-        "SQL",
-        "ezCater prep",
-        "Window functions"
+        "SQL & Databases",
+        "ezCater prep"
       ],
       "difficulty": "medium",
       "options": [
@@ -838,9 +835,8 @@
     {
       "prompt": "How do you model subscribers that can subscribe to many event types, and event types with many subscribers?",
       "tags": [
-        "SQL",
-        "ezCater prep",
-        "Modeling"
+        "SQL & Databases",
+        "ezCater prep"
       ],
       "difficulty": "easy",
       "options": [
@@ -858,9 +854,9 @@
     {
       "prompt": "How do you shut down a Go HTTP server gracefully?",
       "tags": [
-        "Go Implementations",
+        "Go",
         "ezCater prep",
-        "HTTP"
+        "APIs & HTTP"
       ],
       "difficulty": "medium",
       "options": [
@@ -878,9 +874,9 @@
     {
       "prompt": "How do you chain logging, panic-recovery and correlation-id middleware in Go, and in what order?",
       "tags": [
-        "Go Implementations",
+        "Go",
         "ezCater prep",
-        "HTTP"
+        "APIs & HTTP"
       ],
       "difficulty": "medium",
       "options": [
@@ -898,7 +894,7 @@
     {
       "prompt": "Why must JWT middleware check the token's signing method inside the key function?",
       "tags": [
-        "Go Implementations",
+        "Go",
         "ezCater prep",
         "Security"
       ],
@@ -918,9 +914,9 @@
     {
       "prompt": "In a TTL cache, why check expiry in Get even though a background janitor deletes expired entries?",
       "tags": [
-        "Go Implementations",
+        "Go",
         "ezCater prep",
-        "Caching"
+        "Resilience & Scalability"
       ],
       "difficulty": "medium",
       "options": [
@@ -938,9 +934,9 @@
     {
       "prompt": "How do you attach a correlation id to every log line within a request using log/slog?",
       "tags": [
-        "Go Implementations",
+        "Go",
         "ezCater prep",
-        "Logging"
+        "Testing & Operations"
       ],
       "difficulty": "easy",
       "options": [
@@ -958,9 +954,9 @@
     {
       "prompt": "What principle should an environment-based config loader follow?",
       "tags": [
-        "Go Implementations",
+        "Go",
         "ezCater prep",
-        "Configuration"
+        "Testing & Operations"
       ],
       "difficulty": "easy",
       "options": [
@@ -978,9 +974,9 @@
     {
       "prompt": "In an in-process channel pub/sub, what trade-off does a select with a default branch on publish make?",
       "tags": [
-        "Go Implementations",
+        "Go",
         "ezCater prep",
-        "Concurrency"
+        "Async & Concurrency"
       ],
       "difficulty": "medium",
       "options": [
@@ -998,9 +994,9 @@
     {
       "prompt": "How do a circuit breaker and retries interact in a resilient HTTP client?",
       "tags": [
-        "Go Implementations",
+        "Go",
         "ezCater prep",
-        "Resilience"
+        "Resilience & Scalability"
       ],
       "difficulty": "hard",
       "options": [
@@ -1019,9 +1015,9 @@
     {
       "prompt": "Why should business logic depend on a repository interface rather than SQL calls scattered through the code?",
       "tags": [
-        "Go Implementations",
+        "Go",
         "ezCater prep",
-        "Data access"
+        "SQL & Databases"
       ],
       "difficulty": "medium",
       "options": [
@@ -1039,9 +1035,9 @@
     {
       "prompt": "Why use sync.Once for lazy singleton initialization in Go?",
       "tags": [
-        "Go Implementations",
+        "Go",
         "ezCater prep",
-        "Concurrency"
+        "Async & Concurrency"
       ],
       "difficulty": "easy",
       "options": [
@@ -1059,9 +1055,9 @@
     {
       "prompt": "What distinguishes debouncing from throttling, and how do you debounce in Go?",
       "tags": [
-        "Go Implementations",
+        "Go",
         "ezCater prep",
-        "Timers"
+        "Async & Concurrency"
       ],
       "difficulty": "medium",
       "options": [
@@ -1079,9 +1075,9 @@
     {
       "prompt": "How does a worker pool shut down cleanly with context cancellation, and what doesn't it cancel?",
       "tags": [
-        "Go Implementations",
+        "Go",
         "ezCater prep",
-        "Concurrency"
+        "Async & Concurrency"
       ],
       "difficulty": "medium",
       "options": [

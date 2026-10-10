@@ -12,16 +12,17 @@ const m = (id: string, title: string, tags: string[]): MaterialItem => ({
 });
 
 describe('categorize', () => {
-  it('files each material once, under its most widely used tag', () => {
+  it('files each material once, under its most specific tag', () => {
     const cats = categorize([
-      m('1', 'B post', ['Go', 'Channels']),
+      m('1', 'B post', ['Go', 'Async & Concurrency']),
       m('2', 'A post', ['Go']),
-      m('3', 'C post', ['Channels', 'Go', 'ezCater prep']),
-      m('4', 'Solo', ['Kafka']),
+      m('3', 'C post', ['Async & Concurrency', 'Go', 'ezCater prep']),
+      m('4', 'D post', ['Go']),
     ]);
+    // "Go" is on all four, so the topic wins wherever a material has one
     expect(cats.map((c) => [c.name, c.items.map((i) => i.title)])).toEqual([
-      ['Go', ['A post', 'B post', 'C post']],
-      ['Kafka', ['Solo']],
+      ['Async & Concurrency', ['B post', 'C post']],
+      ['Go', ['A post', 'D post']],
     ]);
   });
 
