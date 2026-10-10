@@ -40,17 +40,14 @@ test('admin creates a question and links material, then sees them surface in the
 
   // --- the new material shows on the Curated Material page ---
   await page.getByRole('navigation').getByRole('link', { name: 'Curated Material' }).click();
-  await expect(page.getByRole('heading', { name: 'E2E IP primer' })).toBeVisible();
+  await expect(page.getByRole('link', { name: /E2E IP primer/ })).toBeVisible();
 
   // --- the new question is findable via search, and its Material tab shows the link ---
   await page.getByRole('button', { name: 'Open search' }).click();
   await page
     .getByRole('searchbox', { name: 'Search questions, material, tests…' })
     .fill('which layer does IP');
-  await page
-    .getByTestId('search-results')
-    .getByText('E2E: which layer does IP live at?')
-    .click();
+  await page.getByTestId('search-results').getByText('E2E: which layer does IP live at?').click();
 
   const card = page.getByTestId(/question-card-/).first();
   await card.getByRole('button', { name: 'Commented Answer' }).click();
@@ -73,9 +70,7 @@ test('a non-admin has no admin.cs tab and cannot reach /admin', async ({ page })
   await page.getByRole('button', { name: 'Log in' }).click();
   await expect(page.getByTestId('question-of-the-day')).toBeVisible();
 
-  await expect(
-    page.getByRole('navigation').getByRole('link', { name: 'Admin' }),
-  ).toHaveCount(0);
+  await expect(page.getByRole('navigation').getByRole('link', { name: 'Admin' })).toHaveCount(0);
 
   await page.goto('/admin');
   // redirected home

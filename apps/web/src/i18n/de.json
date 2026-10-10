@@ -193,7 +193,14 @@
       "link": "Link"
     },
     "empty": "Kein Material entspricht dem aktuellen Filter",
-    "by": "von {{author}}"
+    "by": "von {{author}}",
+    "other": "Sonstiges",
+    "summary": "{{count}} Ressourcen in {{categories}} Kategorien",
+    "summaryFiltered": "{{count}} von {{total}} Ressourcen",
+    "searchPlaceholder": "Material durchsuchen…",
+    "contents": "Inhalt",
+    "seeAlso": "Siehe auch:",
+    "linkToSection": "Link zu {{name}}"
   },
   "status": {
     "feedPosition": "Fragen {{from}}–{{to}} von {{total}}",

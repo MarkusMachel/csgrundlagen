@@ -1592,22 +1592,268 @@ select.select {
 
 /* ---------- materials grid ---------- */
 
-.materials-grid {
+/* wiki-style index: contents sidebar + one section of plain links per category */
+
+/* The wiki uses the full window width instead of the centred reading column. */
+.app-main:has(.wiki) {
+  max-width: none;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.wiki {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'header'
+    'toc'
+    'content';
+  gap: 20px;
 }
 
-@media (min-width: 640px) {
-  .materials-grid {
-    grid-template-columns: repeat(2, 1fr);
+.wiki__header {
+  grid-area: header;
+}
+
+.wiki-toc {
+  grid-area: toc;
+}
+
+.wiki__content {
+  grid-area: content;
+}
+
+/* sidebar on the left edge, spanning the header and the sections */
+@media (min-width: 860px) {
+  .wiki {
+    grid-template-columns: 270px minmax(0, 1fr);
+    grid-template-areas:
+      'toc header'
+      'toc content';
+    grid-template-rows: auto 1fr;
+    column-gap: 36px;
+  }
+
+  .wiki-toc {
+    position: sticky;
+    top: 66px; /* below the sticky title bar */
+    align-self: start;
+  }
+
+  /* the rounded box itself scrolls, so the scrollbar stays inside it */
+  .wiki-toc__details {
+    max-height: calc(100vh - 66px - 56px); /* title bar above, status bar below */
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 }
 
-@media (min-width: 1024px) {
-  .materials-grid {
-    grid-template-columns: repeat(3, 1fr);
+.wiki__summary {
+  margin: -4px 0 12px;
+  font-size: 12.5px;
+}
+
+.wiki__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+}
+
+.wiki__filters .input {
+  flex: 1;
+  min-width: 200px;
+}
+
+.wiki-toc__details {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 0 6px 8px;
+}
+
+.wiki-toc__title {
+  /* stays put while the list scrolls under it */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--surface);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  padding: 10px 8px 6px;
+  cursor: pointer;
+}
+
+/* thin, rounded scrollbar for inner scroll areas (contents, dropdown lists);
+   the track is inset so the thumb never runs into rounded corners */
+/* Chrome ignores the ::-webkit-scrollbar rules below whenever scrollbar-width
+   or scrollbar-color is set, so the standard properties are Firefox-only. */
+@supports not selector(::-webkit-scrollbar) {
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
   }
+}
+
+.scroll-thin::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scroll-thin::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 8px 0;
+}
+
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+  border: 3px solid transparent; /* padding around the thumb */
+  background-clip: padding-box;
+}
+
+.scroll-thin::-webkit-scrollbar-thumb:hover {
+  background-color: var(--muted);
+}
+
+.wiki-toc__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.wiki-toc__list li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.wiki-toc__list a {
+  flex: 1;
+  min-width: 0;
+  padding: 3px 8px;
+  border-radius: 6px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.wiki-toc__list a[aria-current='location'] {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.wiki-toc__list a:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.wiki-toc__count {
+  font-size: 11.5px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  padding-right: 8px;
+}
+
+.wiki__content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.wiki-section {
+  scroll-margin-top: 66px;
+}
+
+.wiki-section__title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.wiki-section__anchor {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 400;
+  opacity: 0;
+  transition: opacity 120ms;
+}
+
+.wiki-section__title:hover .wiki-section__anchor,
+.wiki-section__anchor:focus-visible {
+  opacity: 1;
+}
+
+.wiki-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wiki-entry {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.wiki-entry__icon {
+  flex-shrink: 0;
+  color: var(--muted);
+  padding-top: 2px;
+}
+
+.wiki-entry__body {
+  min-width: 0;
+  font-size: 13.5px;
+}
+
+.wiki-entry__link {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.wiki-entry__link:hover {
+  text-decoration: underline;
+}
+
+.wiki-entry__link svg {
+  margin-left: 4px;
+  opacity: 0.6;
+  vertical-align: -1px;
+}
+
+.wiki-entry__desc {
+  margin: 2px 0 0;
+  color: var(--text);
+  opacity: 0.85;
+}
+
+.wiki-entry__see-also {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.wiki-entry__see-also a {
+  color: var(--muted);
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+}
+
+.wiki-entry__see-also a:hover {
+  color: var(--accent);
 }
 
 /* ---------- build-test layout ---------- */

@@ -220,7 +220,7 @@ export function Select<T extends string>({
             aria-labelledby={labelledBy}
             aria-label={labelledBy ? undefined : ariaLabel}
             aria-activedescendant={!searchable && active >= 0 ? optionId(active) : undefined}
-            className="dropdown__list"
+            className="dropdown__list scroll-thin"
             style={{ maxHeight: LIST_MAX_HEIGHT }}
             onKeyDown={searchable ? undefined : onListKeyDown}
           >
