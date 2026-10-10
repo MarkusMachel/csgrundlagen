@@ -99,6 +99,11 @@ Run from the repo root.
 
 Web CI gate order (§13.4): **typecheck → lint → test → build → e2e** — cheapest first.
 
+CI (`.github/workflows/ci.yml`) runs on pushes to `main`/`development` and on pull
+requests, as three parallel jobs: **Web** (that gate), **API** (gofmt, `go vet`,
+`go test` against a Postgres service with `REQUIRE_DB=1`, so the integration
+tests can't silently skip) and **Mocks vs API contract** (`npm run contract`).
+
 ## API (`apps/api`)
 
 ```text
