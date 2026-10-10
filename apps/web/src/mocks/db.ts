@@ -4,6 +4,7 @@ import type {
   AnswerValue,
   Bookmark,
   BugReport,
+  CommentReportReason,
   QuestionComment,
   Question,
   QuestionNote,
@@ -52,7 +53,16 @@ interface Db {
   questions: SeedQuestion[];
   /** All materials (seeded + admin-created); mutable so links can be added. */
   materials: MaterialItem[];
-  comments: QuestionComment[];
+  comments: (QuestionComment & { hiddenAt?: string })[];
+  /** Mirrors comment_reports. */
+  commentReports: {
+    commentId: string;
+    userId: string;
+    reason: CommentReportReason;
+    note?: string;
+    createdAt: string;
+    resolved?: boolean;
+  }[];
   bookmarks: Bookmark[];
   notes: QuestionNote[];
   bugReports: BugReport[];
@@ -156,6 +166,7 @@ function freshDb(): Db {
     sessions: seedSessions(),
     loginEvents: seedLoginEvents(),
     revokedSessions: [],
+    commentReports: [],
     consents: [],
     questions: seedQuestions.map((s) => ({
       question: { ...s.question },

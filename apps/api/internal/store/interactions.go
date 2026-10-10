@@ -19,12 +19,19 @@ func (s *Store) questionExists(ctx context.Context, id string) error {
 	return nil
 }
 
-func (s *Store) Comments(ctx context.Context, questionID string) ([]Comment, error) {
+// Comments lists a question's comments as the viewer may see them: hidden
+// ones only for admins. viewer may be nil (signed out).
+func (s *Store) Comments(ctx context.Context, questionID string, viewer *User) ([]Comment, error) {
+	viewerID, admin := "", false
+	if viewer != nil {
+		viewerID, admin = viewer.ID, viewer.IsAdmin()
+	}
 	rows, err := s.pool.Query(ctx, `
-		SELECT c.id, c.question_id, c.user_id, u.name, c.body, c.created_at
+		SELECT c.id, c.question_id, c.user_id, u.name, c.body, c.created_at, c.hidden_at IS NOT NULL,
+		       EXISTS (SELECT 1 FROM comment_reports r WHERE r.comment_id = c.id AND r.user_id::text = $2)
 		FROM question_comments c JOIN users u ON u.id = c.user_id
-		WHERE c.question_id = $1
-		ORDER BY c.created_at`, questionID)
+		WHERE c.question_id = $1 AND (c.hidden_at IS NULL OR $3)
+		ORDER BY c.created_at`, questionID, viewerID, admin)
 	if err != nil {
 		return nil, err
 	}

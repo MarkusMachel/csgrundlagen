@@ -113,6 +113,8 @@ func (s *Store) ExportUserData(ctx context.Context, userID string) (json.RawMess
 		      SELECT question_id, body, updated_at FROM question_notes WHERE user_id = $1) t),
 		  'comments', (SELECT COALESCE(json_agg(t ORDER BY t.created_at), '[]') FROM (
 		      SELECT id, question_id, body, created_at FROM question_comments WHERE user_id = $1) t),
+		  'commentReports', (SELECT COALESCE(json_agg(t ORDER BY t.created_at), '[]') FROM (
+		      SELECT comment_id, reason, note, created_at FROM comment_reports WHERE user_id = $1) t),
 		  'bugReports', (SELECT COALESCE(json_agg(t ORDER BY t.created_at), '[]') FROM (
 		      SELECT id, question_id, message, status, created_at FROM bug_reports WHERE user_id = $1) t),
 		  'tests', (SELECT COALESCE(json_agg(t ORDER BY t.created_at), '[]') FROM (

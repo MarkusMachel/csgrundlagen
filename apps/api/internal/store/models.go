@@ -121,6 +121,10 @@ type Comment struct {
 	UserName   string    `json:"userName"`
 	Body       string    `json:"body"`
 	CreatedAt  time.Time `json:"createdAt"`
+	// Hidden is only ever true in an admin's view; others don't get hidden comments.
+	Hidden bool `json:"hidden"`
+	// ReportedByMe tells the viewer they already reported it.
+	ReportedByMe bool `json:"reportedByMe"`
 }
 
 type Note struct {

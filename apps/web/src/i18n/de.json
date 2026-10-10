@@ -130,7 +130,24 @@
       "placeholder": "Kommentar hinzufügen…",
       "post": "Posten",
       "empty": "Noch keine Kommentare — sei die/der Erste.",
-      "required": "Kommentar darf nicht leer sein"
+      "required": "Kommentar darf nicht leer sein",
+      "hidden": "ausgeblendet",
+      "report": "Melden",
+      "reportLabel": "Kommentar von {{name}} melden",
+      "reported": "Gemeldet",
+      "delete": "Löschen",
+      "deleteLabel": "Kommentar von {{name}} löschen",
+      "confirmDelete": "Löschen?",
+      "reportTitle": "Kommentar melden",
+      "why": "Was stimmt damit nicht?",
+      "note": "Noch etwas? (optional)",
+      "sendReport": "Meldung senden",
+      "reason": {
+        "spam": "Spam oder Werbung",
+        "offensive": "Beleidigend oder missbräuchlich",
+        "misleading": "Falsch oder irreführend",
+        "other": "Etwas anderes"
+      }
     },
     "notes": {
       "label": "Private Notiz",
@@ -266,7 +283,8 @@
       "questions": "Fragen",
       "materials": "Materialien",
       "bugs": "Fehlermeldungen",
-      "users": "Benutzer"
+      "users": "Benutzer",
+      "comments": "Kommentare"
     },
     "questionType": "Fragetyp",
     "type": {
@@ -610,5 +628,26 @@
       "on": "an",
       "off": "aus"
     }
+  },
+  "moderation": {
+    "filter": "Anzeigen",
+    "filters": {
+      "reported": "Gemeldet",
+      "hidden": "Ausgeblendet",
+      "all": "Alle Kommentare"
+    },
+    "empty": {
+      "reported": "Keine offenen Meldungen. Alles in Ordnung.",
+      "hidden": "Keine ausgeblendeten Kommentare.",
+      "all": "Noch keine Kommentare."
+    },
+    "by": "von {{name}} · {{date}}",
+    "reportedBy": "gemeldet von {{name}} · {{date}}",
+    "hide": "Ausblenden",
+    "unhide": "Einblenden",
+    "dismiss": "Meldungen verwerfen",
+    "commentBy": "Kommentar von {{name}}",
+    "openCount_one": "{{count}} gemeldeter Kommentar",
+    "openCount_other": "{{count}} gemeldete Kommentare"
   }
 }

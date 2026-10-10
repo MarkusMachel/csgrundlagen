@@ -130,7 +130,24 @@
       "placeholder": "Adicionar um comentário…",
       "post": "Publicar",
       "empty": "Nenhum comentário ainda — seja o primeiro.",
-      "required": "O comentário não pode ficar vazio"
+      "required": "O comentário não pode ficar vazio",
+      "hidden": "oculto",
+      "report": "Denunciar",
+      "reportLabel": "Denunciar comentário de {{name}}",
+      "reported": "Denunciado",
+      "delete": "Excluir",
+      "deleteLabel": "Excluir comentário de {{name}}",
+      "confirmDelete": "Excluir?",
+      "reportTitle": "Denunciar comentário",
+      "why": "Qual é o problema?",
+      "note": "Mais alguma coisa? (opcional)",
+      "sendReport": "Enviar denúncia",
+      "reason": {
+        "spam": "Spam ou propaganda",
+        "offensive": "Ofensivo ou abusivo",
+        "misleading": "Errado ou enganoso",
+        "other": "Outra coisa"
+      }
     },
     "notes": {
       "label": "Nota privada",
@@ -266,7 +283,8 @@
       "questions": "Perguntas",
       "materials": "Materiais",
       "bugs": "Relatos de erro",
-      "users": "Usuários"
+      "users": "Usuários",
+      "comments": "Comentários"
     },
     "questionType": "Tipo de questão",
     "type": {
@@ -610,5 +628,26 @@
       "on": "sim",
       "off": "não"
     }
+  },
+  "moderation": {
+    "filter": "Mostrar",
+    "filters": {
+      "reported": "Denunciados",
+      "hidden": "Ocultos",
+      "all": "Todos os comentários"
+    },
+    "empty": {
+      "reported": "Nenhuma denúncia aberta. Tudo certo.",
+      "hidden": "Nenhum comentário oculto.",
+      "all": "Nenhum comentário ainda."
+    },
+    "by": "de {{name}} · {{date}}",
+    "reportedBy": "denunciado por {{name}} · {{date}}",
+    "hide": "Ocultar",
+    "unhide": "Mostrar",
+    "dismiss": "Descartar denúncias",
+    "commentBy": "comentário de {{name}}",
+    "openCount_one": "{{count}} comentário denunciado",
+    "openCount_other": "{{count}} comentários denunciados"
   }
 }

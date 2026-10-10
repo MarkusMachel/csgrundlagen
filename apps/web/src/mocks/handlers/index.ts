@@ -2,6 +2,7 @@ import { adminHandlers } from './admin';
 import { authHandlers } from './auth';
 import { deviceHandlers } from './devices';
 import { materialHandlers } from './materials';
+import { moderationHandlers } from './moderation';
 import { privacyHandlers } from './privacy';
 import { profileHandlers } from './profile';
 import { questionHandlers } from './questions';
@@ -14,6 +15,7 @@ export const handlers = [
   ...adminHandlers,
   ...deviceHandlers,
   ...privacyHandlers,
+  ...moderationHandlers,
   ...profileHandlers,
   // materialHandlers before questionHandlers so /questions/:id/materials
   // wins over the generic /questions/:id matcher ordering concerns —

@@ -130,7 +130,24 @@
       "placeholder": "Add a comment…",
       "post": "Post",
       "empty": "No comments yet — be the first.",
-      "required": "Comment cannot be empty"
+      "required": "Comment cannot be empty",
+      "hidden": "hidden",
+      "report": "Report",
+      "reportLabel": "Report comment by {{name}}",
+      "reported": "Reported",
+      "delete": "Delete",
+      "deleteLabel": "Delete comment by {{name}}",
+      "confirmDelete": "Delete?",
+      "reportTitle": "Report comment",
+      "why": "What’s wrong with it?",
+      "note": "Anything else? (optional)",
+      "sendReport": "Send report",
+      "reason": {
+        "spam": "Spam or advertising",
+        "offensive": "Offensive or abusive",
+        "misleading": "Wrong or misleading",
+        "other": "Something else"
+      }
     },
     "notes": {
       "label": "Private note",
@@ -266,7 +283,8 @@
       "questions": "Questions",
       "materials": "Materials",
       "bugs": "Bug reports",
-      "users": "Users"
+      "users": "Users",
+      "comments": "Comments"
     },
     "questionType": "Question type",
     "type": {
@@ -610,5 +628,26 @@
       "on": "on",
       "off": "off"
     }
+  },
+  "moderation": {
+    "filter": "Show",
+    "filters": {
+      "reported": "Reported",
+      "hidden": "Hidden",
+      "all": "All comments"
+    },
+    "empty": {
+      "reported": "No open reports. All clear.",
+      "hidden": "No hidden comments.",
+      "all": "No comments yet."
+    },
+    "by": "by {{name}} · {{date}}",
+    "reportedBy": "reported by {{name}} · {{date}}",
+    "hide": "Hide",
+    "unhide": "Unhide",
+    "dismiss": "Dismiss reports",
+    "commentBy": "comment by {{name}}",
+    "openCount_one": "{{count}} reported comment",
+    "openCount_other": "{{count}} reported comments"
   }
 }

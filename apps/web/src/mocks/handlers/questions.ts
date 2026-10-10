@@ -149,10 +149,19 @@ export const questionHandlers = [
     return HttpResponse.json({ questionId: question.id, correct, correctAnswer, nextReviewAt });
   }),
 
-  http.get('/api/questions/:id/comments', ({ params }) => {
+  http.get('/api/questions/:id/comments', ({ request, params }) => {
+    const viewer = currentUser(request);
+    const admin = viewer?.role === 'admin';
     const comments = db.comments
-      .filter((c) => c.questionId === params.id)
-      .sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+      .filter((c) => c.questionId === params.id && (admin || !c.hiddenAt))
+      .sort((a, b) => a.createdAt.localeCompare(b.createdAt))
+      .map(({ hiddenAt, ...c }) => ({
+        ...c,
+        hidden: !!hiddenAt,
+        reportedByMe: db.commentReports.some(
+          (r) => r.commentId === c.id && r.userId === viewer?.id,
+        ),
+      }));
     return HttpResponse.json(comments);
   }),
 

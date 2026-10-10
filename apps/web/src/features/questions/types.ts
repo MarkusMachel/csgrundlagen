@@ -70,7 +70,12 @@ export interface QuestionComment {
   userName: string;
   body: string;
   createdAt: string;
+  /** Only admins ever receive hidden comments. */
+  hidden?: boolean;
+  reportedByMe?: boolean;
 }
+
+export type CommentReportReason = 'spam' | 'offensive' | 'misleading' | 'other';
 
 export interface AnswerStat {
   optionId: string; // option id, or 'true' / 'false'

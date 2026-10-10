@@ -333,7 +333,7 @@ func (s *Server) listComments(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	cs, err := s.store.Comments(r.Context(), id)
+	cs, err := s.store.Comments(r.Context(), id, s.optionalUser(r))
 	if err != nil {
 		s.fail(w, r, err)
 		return
