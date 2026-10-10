@@ -111,10 +111,16 @@ internal/httpapi routes, auth middleware, handlers, integration tests
 - **Contract**: identical paths and JSON shapes to the MSW handlers in
   `apps/web/src/mocks/handlers` — the field names in `internal/store/models.go`
   match `apps/web/src/features/*/types.ts`. Errors are `{"message": "…"}`.
-- **Auth**: `POST /api/auth/login` checks the bcrypt hash and returns a random
-  bearer token; only its SHA-256 is stored (`sessions` table, 30-day expiry).
-  `POST /api/auth/logout` revokes it. Admin-only routes return **403** for other
-  users, matching the mock.
+- **Auth**: `POST /api/auth/login` checks the bcrypt hash and sets a random
+  session token as the `cft_session` cookie (HttpOnly, SameSite=Lax, Path=/api,
+  Secure over HTTPS), so page scripts never see it; only its SHA-256 is stored
+  (`sessions` table, 30-day expiry). Unsafe requests authenticated by the cookie
+  must come from the same origin (`Sec-Fetch-Site`/`Origin` checks) as CSRF
+  protection. Scripts can send `X-Auth-Mode: token` to get the token in the body
+  and use `Authorization: Bearer …` instead; `POST /api/auth/cookie` turns such a
+  token into the cookie (used once to migrate sessions from the old localStorage
+  token). `POST /api/auth/logout` revokes the session and clears the cookie.
+  Admin-only routes return **403** for other users, matching the mock.
 - **Accounts**: `POST /api/auth/signup` (logs straight in), `POST /api/auth/password`
   (change; ends the user's other sessions), `POST /api/auth/password-reset` (always
   202, so it can't reveal who has an account) and `…/password-reset/confirm`

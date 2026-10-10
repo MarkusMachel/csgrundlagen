@@ -1,6 +1,7 @@
 import { lazy, Suspense, type ComponentType } from 'react';
 import { createBrowserRouter, Outlet } from 'react-router-dom';
 
+import { useSessionBootstrap } from '@/features/auth';
 import { ConsentLayer } from '@/features/privacy';
 import { HomePage } from '@/pages/HomePage';
 import { Spinner } from '@/shared/ui';
@@ -38,6 +39,7 @@ const WeakSpotsPage = page(() => import('@/pages/WeakSpotsPage'), 'WeakSpotsPage
 
 /** Wraps every page, signed in or not, so the consent banner is everywhere. */
 function RootLayout() {
+  useSessionBootstrap();
   return (
     <>
       <Suspense fallback={<Spinner center />}>

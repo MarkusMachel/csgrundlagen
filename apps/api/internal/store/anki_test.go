@@ -5,7 +5,6 @@ import (
 	"testing"
 )
 
-
 func TestAnkiExport(t *testing.T) {
 	out := AnkiExport([]Question{
 		{

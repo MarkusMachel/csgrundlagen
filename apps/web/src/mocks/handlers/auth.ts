@@ -4,11 +4,13 @@ import { PRIVACY_POLICY_VERSION } from '@/features/privacy/consent';
 
 import { db, nextId } from '../db';
 import {
+  clearedSessionCookie,
   currentSession,
   currentUser,
   openSession,
   recordLoginEvent,
   revokeSessions,
+  sessionCookie,
   unauthorized,
 } from './utils';
 import type { SeedUser } from '../seed/users';
@@ -33,7 +35,10 @@ export const authHandlers = [
       );
     }
     recordLoginEvent(request, user.id, 'login');
-    return HttpResponse.json({ token: openSession(request, user.id), user: publicUser(user) });
+    return HttpResponse.json(
+      { user: publicUser(user) },
+      { headers: sessionCookie(openSession(request, user.id)) },
+    );
   }),
 
   http.post('/api/auth/signup', async ({ request }) => {
@@ -71,15 +76,22 @@ export const authHandlers = [
     db.users.push(user);
     recordLoginEvent(request, user.id, 'signup');
     return HttpResponse.json(
-      { token: openSession(request, user.id), user: publicUser(user) },
-      { status: 201 },
+      { user: publicUser(user) },
+      { status: 201, headers: sessionCookie(openSession(request, user.id)) },
     );
   }),
 
   http.post('/api/auth/logout', ({ request }) => {
     const session = currentSession(request);
     if (session) revokeSessions((s) => s.id === session.id);
-    return new HttpResponse(null, { status: 204 });
+    return new HttpResponse(null, { status: 204, headers: clearedSessionCookie() });
+  }),
+
+  // Moves a pre-cookie session (Bearer token from localStorage) into the cookie.
+  http.post('/api/auth/cookie', ({ request }) => {
+    if (!currentSession(request)) return unauthorized();
+    const token = request.headers.get('Authorization')!.slice('Bearer '.length);
+    return new HttpResponse(null, { status: 204, headers: sessionCookie(token) });
   }),
 
   http.get('/api/auth/me', ({ request }) => {

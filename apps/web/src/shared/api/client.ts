@@ -8,23 +8,20 @@ export class ApiError extends Error {
   }
 }
 
-export const AUTH_TOKEN_KEY = 'cft.authToken';
-
-function authHeaders(): Record<string, string> {
-  try {
-    const token = localStorage.getItem(AUTH_TOKEN_KEY);
-    return token ? { Authorization: `Bearer ${token}` } : {};
-  } catch {
-    return {};
-  }
-}
+/**
+ * Where sessions used to keep their token, before the HttpOnly cookie. Only
+ * read once, to move an existing session into the cookie (useSessionBootstrap).
+ */
+export const LEGACY_TOKEN_KEY = 'cft.authToken';
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
+  // The session is an HttpOnly cookie the browser sends by itself; page
+  // scripts never see the token.
   const res = await fetch(`/api${path}`, {
     ...init,
+    credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',
-      ...authHeaders(),
       ...init?.headers,
     },
   });

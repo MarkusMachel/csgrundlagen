@@ -3,11 +3,11 @@ import { Suspense, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
-import { useSessionBootstrap } from '@/features/auth';
 import { PolicyUpdateModal, usePrivacySync } from '@/features/privacy';
 import { useOfflineSync } from '@/shared/offline/useOffline';
 import { Spinner } from '@/shared/ui';
 import { scrollBehavior } from '@/shared/utils/motion';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 import { StatusBar } from './StatusBar';
 import { TopBar } from './TopBar';
@@ -37,7 +37,7 @@ function useNearBottom(threshold = 120) {
 
 export function AppShell() {
   const { t } = useTranslation();
-  const status = useSessionBootstrap();
+  const status = useAuthStore((s) => s.status); // restored by the root layout
   usePrivacySync();
   useOfflineSync();
   const location = useLocation();

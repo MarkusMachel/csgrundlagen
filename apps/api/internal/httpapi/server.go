@@ -66,6 +66,7 @@ func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
 	mux.HandleFunc("POST /api/auth/login", s.limited(s.login))
 	mux.HandleFunc("POST /api/auth/signup", s.limited(s.signup))
 	mux.HandleFunc("POST /api/auth/logout", s.logout)
+	mux.HandleFunc("POST /api/auth/cookie", s.authed(s.tokenToCookie))
 	mux.HandleFunc("GET /api/auth/me", s.authed(s.me))
 	mux.HandleFunc("POST /api/auth/password", s.limited(s.authed(s.changePassword)))
 	mux.HandleFunc("POST /api/auth/password-reset", s.limited(s.requestPasswordReset))
@@ -144,7 +145,7 @@ func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
 		writeError(w, http.StatusNotFound, "Not found")
 	})
 
-	return s.recoverer(s.logRequests(mux))
+	return s.recoverer(s.logRequests(sameOrigin(mux)))
 }
 
 // --- middleware -------------------------------------------------------------
@@ -153,17 +154,9 @@ type ctxKey int
 
 const userKey ctxKey = iota
 
-func bearerToken(r *http.Request) string {
-	h := r.Header.Get("Authorization")
-	if t, ok := strings.CutPrefix(h, "Bearer "); ok {
-		return strings.TrimSpace(t)
-	}
-	return ""
-}
-
 // optionalUser resolves the bearer token if one is present; nil otherwise.
 func (s *Server) optionalUser(r *http.Request) *store.User {
-	token := bearerToken(r)
+	token := sessionToken(r)
 	if token == "" {
 		return nil
 	}

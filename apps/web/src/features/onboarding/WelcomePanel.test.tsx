@@ -5,7 +5,6 @@ import { describe, expect, it } from 'vitest';
 import { PRIVACY_POLICY_VERSION } from '@/features/privacy/consent';
 import { db } from '@/mocks/db';
 import { HomePage } from '@/pages/HomePage';
-import { AUTH_TOKEN_KEY } from '@/shared/api/client';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useUIStore } from '@/stores/useUIStore';
 import { loginAsDemo, renderWithProviders } from '@/test-utils';
@@ -26,7 +25,7 @@ function loginAsNewUser() {
     lastSeenAt: new Date().toISOString(),
     expiresAt: new Date(Date.now() + 86400_000).toISOString(),
   });
-  localStorage.setItem(AUTH_TOKEN_KEY, 'mock-token.u-new');
+  document.cookie = 'cft_session=mock-token.u-new; path=/';
   useAuthStore.setState({ user, status: 'authenticated' });
 }
 

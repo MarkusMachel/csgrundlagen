@@ -13,6 +13,7 @@ afterEach(() => {
   server.resetHandlers();
   resetDb();
   localStorage.clear();
+  document.cookie = 'cft_session=; path=/; max-age=0';
   useConsentStore.setState({ choice: null, settingsOpen: false });
 });
 

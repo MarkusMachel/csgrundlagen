@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"os"
 	"strconv"
 	"strings"
 	"testing"
@@ -24,7 +25,8 @@ import (
 )
 
 // newTestDB creates a throwaway database next to the one in DATABASE_URL,
-// migrates it, and drops it when the test ends. Skips if Postgres is down.
+// migrates it, and drops it when the test ends. Skips if Postgres is down,
+// unless REQUIRE_DB is set.
 func newTestDB(t *testing.T) *pgxpool.Pool {
 	t.Helper()
 	ctx := context.Background()
@@ -32,6 +34,11 @@ func newTestDB(t *testing.T) *pgxpool.Pool {
 
 	admin, err := db.Connect(ctx, base)
 	if err != nil {
+		// REQUIRE_DB=1 (set it in CI) makes a missing database a failure, so
+		// a green run can't silently mean "skipped".
+		if os.Getenv("REQUIRE_DB") != "" {
+			t.Fatalf("postgres not reachable and REQUIRE_DB is set: %v", err)
+		}
 		t.Skipf("postgres not reachable (start it with `npm run db:up`): %v", err)
 	}
 	name := fmt.Sprintf("csgrundlagen_test_%d", rand.Int64N(1<<40))
@@ -79,6 +86,7 @@ func (c client) do(method, path, token string, body, out any) int {
 	}
 	req, _ := http.NewRequest(method, c.srv.URL+path, r)
 	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("X-Auth-Mode", "token") // tests authenticate with bearer tokens
 	if token != "" {
 		req.Header.Set("Authorization", "Bearer "+token)
 	}

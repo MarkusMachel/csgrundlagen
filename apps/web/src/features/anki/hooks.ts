@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { api, AUTH_TOKEN_KEY } from '@/shared/api/client';
+import { api } from '@/shared/api/client';
 
 import type { AnkiCard } from './parseAnki';
 
@@ -34,15 +34,7 @@ function exportUrl(src: AnkiSource) {
 export function useAnkiExport() {
   return useMutation({
     mutationFn: async (src: AnkiSource) => {
-      let token = '';
-      try {
-        token = localStorage.getItem(AUTH_TOKEN_KEY) ?? '';
-      } catch {
-        // storage unavailable
-      }
-      const res = await fetch(exportUrl(src), {
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
-      });
+      const res = await fetch(exportUrl(src), { credentials: 'same-origin' });
       if (!res.ok) throw new Error(`export failed (${res.status})`);
       const name =
         res.headers.get('Content-Disposition')?.match(/filename="([^"]+)"/)?.[1] ??

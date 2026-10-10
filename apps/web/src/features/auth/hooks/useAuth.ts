@@ -1,13 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
-import { api, AUTH_TOKEN_KEY } from '@/shared/api/client';
+import { api, LEGACY_TOKEN_KEY } from '@/shared/api/client';
 import type { Locale, User } from '@/shared/types';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useUIStore } from '@/stores/useUIStore';
 
 interface LoginResponse {
-  token: string;
   user: User;
 }
 
@@ -16,7 +15,7 @@ export function useLogin() {
   return useMutation({
     mutationFn: (credentials: { email: string; password: string }) =>
       api.post<LoginResponse>('/auth/login', credentials),
-    onSuccess: ({ token, user }) => setSession(user, token),
+    onSuccess: ({ user }) => setSession(user),
   });
 }
 
@@ -34,7 +33,7 @@ export function useSignUp() {
   const setSession = useAuthStore((s) => s.setSession);
   return useMutation({
     mutationFn: (input: SignUpInput) => api.post<LoginResponse>('/auth/signup', input),
-    onSuccess: ({ token, user }) => setSession(user, token),
+    onSuccess: ({ user }) => setSession(user),
   });
 }
 
@@ -72,8 +71,35 @@ export function useLogout() {
 }
 
 /**
- * Restores the mock session on app start: if a token stub is in localStorage,
- * ask /auth/me who we are; otherwise mark the visitor anonymous.
+ * Moves a session from before the cookie (token in localStorage) into the
+ * HttpOnly cookie, then forgets the stored token. Runs once per browser.
+ */
+async function migrateLegacyToken() {
+  let token: string | null = null;
+  try {
+    token = localStorage.getItem(LEGACY_TOKEN_KEY);
+  } catch {
+    return;
+  }
+  if (!token) return;
+  try {
+    await fetch('/api/auth/cookie', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  } catch {
+    // offline or expired: the user signs in again
+  }
+  try {
+    localStorage.removeItem(LEGACY_TOKEN_KEY);
+  } catch {
+    // ignore
+  }
+}
+
+/**
+ * Restores the session on app start: the browser sends the session cookie,
+ * so /auth/me tells us who is signed in (401 = nobody).
  */
 export function useSessionBootstrap() {
   const status = useAuthStore((s) => s.status);
@@ -82,19 +108,9 @@ export function useSessionBootstrap() {
 
   useEffect(() => {
     if (status !== 'unknown') return;
-    let token: string | null = null;
-    try {
-      token = localStorage.getItem(AUTH_TOKEN_KEY);
-    } catch {
-      // storage unavailable
-    }
-    if (!token) {
-      setAnonymous();
-      return;
-    }
-    api
-      .get<User>('/auth/me')
-      .then((user) => setSession(user, token))
+    void migrateLegacyToken()
+      .then(() => api.get<User>('/auth/me'))
+      .then((user) => setSession(user))
       .catch(() => setAnonymous());
   }, [status, setSession, setAnonymous]);
 

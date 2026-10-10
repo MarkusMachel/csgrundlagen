@@ -34,7 +34,7 @@ export const policyContent: Record<Locale, PolicySection[]> = {
         'We use your browser’s local storage, not cookies, and no analytics, advertising or tracking of any kind.',
       ],
       items: [
-        'Essential (always on): your sign-in token (cft.authToken) and your privacy choice (cft.consent).',
+        'Essential (always on): your sign-in cookie (cft_session, HttpOnly) and your privacy choice (cft.consent).',
         'Preferences (only with consent): your theme and language (cft.ui).',
       ],
     },
@@ -90,7 +90,7 @@ export const policyContent: Record<Locale, PolicySection[]> = {
         'Wir nutzen den lokalen Speicher deines Browsers, keine Cookies, und keinerlei Analyse, Werbung oder Tracking.',
       ],
       items: [
-        'Notwendig (immer aktiv): dein Anmelde-Token (cft.authToken) und deine Datenschutz-Auswahl (cft.consent).',
+        'Notwendig (immer aktiv): dein Anmelde-Cookie (cft_session, HttpOnly) und deine Datenschutz-Auswahl (cft.consent).',
         'Einstellungen (nur mit Einwilligung): dein Farbschema und deine Sprache (cft.ui).',
       ],
     },
@@ -146,7 +146,7 @@ export const policyContent: Record<Locale, PolicySection[]> = {
         'Usamos o armazenamento local do navegador, não cookies, e nenhum tipo de análise, publicidade ou rastreamento.',
       ],
       items: [
-        'Essencial (sempre ativo): seu token de login (cft.authToken) e sua escolha de privacidade (cft.consent).',
+        'Essencial (sempre ativo): seu cookie de login (cft_session, HttpOnly) e sua escolha de privacidade (cft.consent).',
         'Preferências (só com consentimento): seu tema e idioma (cft.ui).',
       ],
     },

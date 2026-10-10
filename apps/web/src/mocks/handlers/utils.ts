@@ -11,18 +11,49 @@ import { localizeQuestion } from '../seed/questions';
 /**
  * The mock token stub encodes the user and session (`mock-token.<userId>.<sessionId>`),
  * so the session survives page reloads even though the mock "backend" lives in page
- * memory (§2: session persists via /auth/me + local storage token stub). A stub
- * without a session part means the user's seeded session `s-<userId>`.
+ * memory. Like the API it travels in the `cft_session` cookie (not HttpOnly here:
+ * the mock sets it from page scripts). A stub without a session part means the
+ * user's seeded session `s-<userId>`.
  */
 export function tokenFor(userId: string, sessionId: string): string {
   return `mock-token.${userId}.${sessionId}`;
 }
 
+export const SESSION_COOKIE = 'cft_session';
+
+function cookieValue(header: string | null | undefined, name: string): string | null {
+  for (const part of header?.split(';') ?? []) {
+    const [key, ...rest] = part.trim().split('=');
+    if (key === name) return rest.join('=');
+  }
+  return null;
+}
+
+/** The request's token: Bearer header (scripts, migration) first, else the cookie. */
+function requestToken(request: Request): string | null {
+  const auth = request.headers.get('Authorization');
+  if (auth?.startsWith('Bearer ')) return auth.slice('Bearer '.length);
+  // A service worker can't see the Cookie header, but the handler runs in the
+  // page, which can read the (non-HttpOnly) mock cookie.
+  return (
+    cookieValue(request.headers.get('Cookie'), SESSION_COOKIE) ??
+    cookieValue(globalThis.document?.cookie, SESSION_COOKIE)
+  );
+}
+
+/** Set-Cookie headers that start or end the mock session. */
+export function sessionCookie(token: string): HeadersInit {
+  return { 'Set-Cookie': `${SESSION_COOKIE}=${token}; Path=/; SameSite=Lax` };
+}
+export function clearedSessionCookie(): HeadersInit {
+  return { 'Set-Cookie': `${SESSION_COOKIE}=; Path=/; Max-Age=0` };
+}
+
 /** The session behind the request's token, or null if signed out or revoked. */
 export function currentSession(request: Request): MockSession | null {
-  const auth = request.headers.get('Authorization');
-  if (!auth?.startsWith('Bearer mock-token.')) return null;
-  const [userId, sessionId = `s-${userId}`] = auth.slice('Bearer mock-token.'.length).split('.');
+  const token = requestToken(request);
+  if (!token?.startsWith('mock-token.')) return null;
+  const [userId, sessionId = `s-${userId}`] = token.slice('mock-token.'.length).split('.');
   let session = db.sessions.find((s) => s.id === sessionId && s.userId === userId);
   if (!session) {
     // A page reload resets the mock database, so a token from an earlier page

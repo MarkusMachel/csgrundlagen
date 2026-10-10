@@ -15,7 +15,7 @@ func clientOf(r *http.Request) store.Client {
 // --- the signed-in user's own devices ------------------------------------------
 
 func (s *Server) mySessions(w http.ResponseWriter, r *http.Request) {
-	sessions, err := s.store.ListSessions(r.Context(), currentUser(r).ID, bearerToken(r))
+	sessions, err := s.store.ListSessions(r.Context(), currentUser(r).ID, sessionToken(r))
 	if err != nil {
 		s.fail(w, r, err)
 		return
@@ -44,7 +44,7 @@ func (s *Server) saveDevice(w http.ResponseWriter, r *http.Request) {
 	if !decode(w, r, &body) {
 		return
 	}
-	if err := s.store.SaveClientInfo(r.Context(), bearerToken(r), body); err != nil {
+	if err := s.store.SaveClientInfo(r.Context(), sessionToken(r), body); err != nil {
 		s.fail(w, r, err)
 		return
 	}

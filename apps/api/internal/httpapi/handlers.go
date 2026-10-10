@@ -34,16 +34,25 @@ func (s *Server) login(w http.ResponseWriter, r *http.Request) {
 		s.fail(w, r, err)
 		return
 	}
-	writeJSON(w, http.StatusOK, map[string]any{"token": token, "user": user})
+	s.writeSession(w, r, http.StatusOK, token, user)
 }
 
 func (s *Server) logout(w http.ResponseWriter, r *http.Request) {
-	if token := bearerToken(r); token != "" {
+	if token := sessionToken(r); token != "" {
 		if err := s.store.Logout(r.Context(), token); err != nil {
 			s.fail(w, r, err)
 			return
 		}
 	}
+	clearSessionCookie(w, r)
+	w.WriteHeader(http.StatusNoContent)
+}
+
+// tokenToCookie moves a bearer-token session into the cookie. The web app
+// calls it once for sessions started before it switched to cookies (their
+// token was kept in localStorage), so nobody is signed out by the change.
+func (s *Server) tokenToCookie(w http.ResponseWriter, r *http.Request) {
+	setSessionCookie(w, r, sessionToken(r))
 	w.WriteHeader(http.StatusNoContent)
 }
 
@@ -73,7 +82,7 @@ func (s *Server) signup(w http.ResponseWriter, r *http.Request) {
 		s.fail(w, r, err)
 		return
 	}
-	writeJSON(w, http.StatusCreated, map[string]any{"token": token, "user": user})
+	s.writeSession(w, r, http.StatusCreated, token, user)
 }
 
 func (s *Server) changePassword(w http.ResponseWriter, r *http.Request) {
@@ -84,7 +93,7 @@ func (s *Server) changePassword(w http.ResponseWriter, r *http.Request) {
 	if !decode(w, r, &body) {
 		return
 	}
-	if err := s.store.ChangePassword(r.Context(), currentUser(r).ID, bearerToken(r),
+	if err := s.store.ChangePassword(r.Context(), currentUser(r).ID, sessionToken(r),
 		body.CurrentPassword, body.NewPassword); err != nil {
 		s.fail(w, r, err)
 		return
