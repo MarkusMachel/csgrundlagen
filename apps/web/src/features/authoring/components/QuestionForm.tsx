@@ -136,7 +136,10 @@ export function QuestionForm({ onCreated }: { onCreated?: (id: string) => void }
                   checked={form.watch('correctOptionId') === OPTION_IDS[i]}
                   {...form.register('correctOptionId')}
                 />
-                <span className="tok-idx">options[{i}]</span>
+                <span>
+                  <span className="tok-kw">var</span>{' '}
+                  <span className="tok-idx">{OPTION_IDS[i]}</span>
+                </span>
               </label>
               <input
                 className="input"

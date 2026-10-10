@@ -25,7 +25,7 @@ interface AnswerOptionsProps {
 interface RowSpec {
   key: string; // option id ('A'…'E') or 'true'/'false'
   label: string; // accessible name + displayed value
-  /** What the code notation shows before `=`, e.g. options[0] or answer. */
+  /** The variable name in the code notation, e.g. A in `var A = "HTTP"`, or answer. */
   lhs: string;
   /** Rendered right-hand side, e.g. "Transport layer" or true. */
   rhs: string;
@@ -33,7 +33,7 @@ interface RowSpec {
 }
 
 /**
- * Answers rendered as array entries — `options[0] = "HTTP"` — per the
+ * Answers rendered as variable declarations — `var A = "HTTP"` — per the
  * editor-style design. Each row is a numbered code line; the native radio is
  * visually hidden and the whole entry is its label (aria-label carries the
  * plain option text so accessible names stay notation-free).
@@ -61,7 +61,7 @@ export function AnswerOptions({
     rows = options.map((o, i) => ({
       key: o.id,
       label: o.label,
-      lhs: `options[${i}]`,
+      lhs: String.fromCharCode(65 + i), // A, B, C… by displayed position (options may be shuffled)
       rhs: `"${o.label}"`,
       answerValue: o.id,
     }));
@@ -107,7 +107,7 @@ export function AnswerOptions({
               <div className="option-row">
                 {showScissors && (
                   <ScissorsToggle
-                    optionLabel={row.key === 'true' || row.key === 'false' ? row.label : row.key}
+                    optionLabel={question.type === 'multiple-choice' ? row.lhs : row.label}
                     struck={struck}
                     onToggle={() => onToggleStruck(row.key)}
                   />
@@ -123,7 +123,7 @@ export function AnswerOptions({
                     onChange={() => onChange(row.answerValue)}
                   />
                   <span className="option-entry__text">
-                    <span className="tok-idx">{row.lhs}</span>
+                    <span className="tok-kw">var</span> <span className="tok-idx">{row.lhs}</span>
                     <span className="muted"> = </span>
                     <span className="tok-str">{row.rhs}</span>
                   </span>

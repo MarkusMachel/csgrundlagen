@@ -656,9 +656,19 @@ button {
   min-width: 0;
 }
 
+/* struck out with the scissors: grey out the whole option, including the
+   separately coloured index and answer tokens */
 .option-entry--struck .option-entry__text {
   text-decoration: line-through;
+}
+
+.option-entry--struck .option-entry__text,
+.option-entry--struck .option-entry__text * {
   color: var(--muted);
+}
+
+.option-entry--struck {
+  opacity: 0.6;
 }
 
 .option-entry--correct .option-entry__text .tok-str {

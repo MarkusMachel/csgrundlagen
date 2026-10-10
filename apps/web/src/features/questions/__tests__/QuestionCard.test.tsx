@@ -30,18 +30,19 @@ const twoOption: Question = {
 };
 
 describe('QuestionCard', () => {
-  it('renders options as array entries, indexed for 5 and for 2 options', () => {
+  it('renders options as variable declarations, lettered for 5 and for 2 options', () => {
     loginAsDemo();
     const { unmount } = renderWithProviders(<QuestionCard question={mcq} mode="feed" />);
     expect(screen.getAllByRole('radio')).toHaveLength(5);
-    [0, 1, 2, 3, 4].forEach((i) => {
-      expect(screen.getByText(`options[${i}]`)).toBeInTheDocument();
+    ['A', 'B', 'C', 'D', 'E'].forEach((letter) => {
+      expect(screen.getByText(letter)).toBeInTheDocument();
     });
+    expect(screen.getAllByText('var')).toHaveLength(5);
     unmount();
 
     renderWithProviders(<QuestionCard question={twoOption} mode="feed" />);
     expect(screen.getAllByRole('radio')).toHaveLength(2);
-    expect(screen.queryByText('options[2]')).not.toBeInTheDocument();
+    expect(screen.queryByText('C')).not.toBeInTheDocument();
   });
 
   it('enforces single-select among options', async () => {
