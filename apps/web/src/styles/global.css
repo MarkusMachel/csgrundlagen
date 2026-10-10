@@ -28,6 +28,12 @@
   --orange: #b35c00;
   --line-hl: rgba(47, 95, 208, 0.07);
   --chart-bar: #2f5fd0; /* validated vs #ffffff (dataviz six checks) */
+  /* syntax highlighting (keywords use --accent, comments --comment) */
+  --code-bg: #f6f8fa;
+  --code-str: #0a3069;
+  --code-num: #0550ae;
+  --code-fn: #8250df;
+  --code-type: #953800;
   /* categorical chart series (validated vs #ffffff, all 4 PASS; series 3/4
      carry a WARN on contrast alone, so every bar keeps a direct text label) */
   --series-1: #2a78d6;
@@ -58,6 +64,11 @@
   --orange: #f5a623;
   --line-hl: rgba(110, 168, 254, 0.09);
   --chart-bar: #4c8ceb; /* validated vs #1a1b21 (dataviz six checks) */
+  --code-bg: #0a0a0c;
+  --code-str: #a5d6ff;
+  --code-num: #79c0ff;
+  --code-fn: #d2a8ff;
+  --code-type: #ffa657;
   /* categorical chart series (validated vs #131316, all 4 PASS) */
   --series-1: #3987e5;
   --series-2: #d95926;
@@ -1678,6 +1689,169 @@ table.data-table {
   margin: 0;
   padding: 4px 8px;
   color: var(--muted);
+}
+
+/* ---------- rich text: code blocks and inline code (shared/ui/RichText) ---------- */
+
+.rich-text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.rich-text__p {
+  margin: 0;
+  white-space: pre-wrap; /* keep the line breaks of the source text */
+}
+
+.inline-code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  color: var(--code-str);
+  font-weight: 500;
+}
+
+.code-block {
+  margin: 4px 0;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--code-bg);
+  overflow: hidden;
+}
+
+.code-block__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 6px 3px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.code-block__lang {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.code-block__copy {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 24px;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.code-block__copy:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.code-block__pre {
+  margin: 0;
+  padding: 10px 14px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.55;
+  tab-size: 4;
+  font-weight: 400;
+}
+
+.code-block .hljs {
+  color: var(--text);
+  background: none;
+}
+
+.hljs-keyword,
+.hljs-literal,
+.hljs-selector-tag,
+.hljs-meta .hljs-keyword {
+  color: var(--accent);
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-template-string,
+.hljs-attr,
+.hljs-symbol {
+  color: var(--code-str);
+}
+
+.hljs-number,
+.hljs-variable.language_,
+.hljs-variable.constant_ {
+  color: var(--code-num);
+}
+
+.hljs-title.function_,
+.hljs-title.function_.invoke__,
+.hljs-built_in {
+  color: var(--code-fn);
+}
+
+.hljs-type,
+.hljs-title.class_,
+.hljs-title,
+.hljs-params .hljs-type {
+  color: var(--code-type);
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-meta {
+  color: var(--comment);
+  font-style: italic;
+}
+
+.hljs-operator,
+.hljs-punctuation {
+  color: var(--muted);
+}
+
+/* admin form: live preview of text with code */
+.rich-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 8px;
+}
+
+.rich-preview__label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+/* grows with its content (where supported) so code answers aren't cramped */
+.textarea--autogrow {
+  field-sizing: content;
+  min-height: 36px;
+  max-height: 320px;
+  resize: vertical;
+  font-family: var(--font-mono);
+}
+
+/* a code-block answer option: the snippet sits under `var A =` */
+.option-entry__text--block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 /* ---------- custom select (shared/ui/Select) ---------- */

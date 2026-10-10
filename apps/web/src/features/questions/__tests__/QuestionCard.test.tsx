@@ -45,6 +45,31 @@ describe('QuestionCard', () => {
     expect(screen.queryByText('C')).not.toBeInTheDocument();
   });
 
+  it('renders code in the prompt and options, with plain-text accessible names', () => {
+    loginAsDemo();
+    const codeQuestion: Question = {
+      ...mcq,
+      id: 'q-code',
+      prompt: 'What does this print?\n\n```go\nfmt.Println(len("héllo"))\n```',
+      options: [
+        { id: 'A', label: '`5`' },
+        { id: 'B', label: '`6`, since `len` counts bytes' },
+        { id: 'C', label: '```go\npanic("utf8")\n```' },
+      ],
+      correctOptionId: 'B',
+    };
+    const { container } = renderWithProviders(<QuestionCard question={codeQuestion} mode="feed" />);
+    // prompt: prose line plus a highlighted Go block
+    expect(screen.getByText('What does this print?')).toBeInTheDocument();
+    expect(container.querySelectorAll('code.language-go')).toHaveLength(2);
+    // inline code inside a quoted answer, and radios named without the markup
+    expect(screen.getByRole('radio', { name: '6, since len counts bytes' })).toBeInTheDocument();
+    expect(screen.getByRole('radio', { name: 'panic("utf8")' })).toBeInTheDocument();
+    expect(screen.getByRole('radiogroup')).toHaveAccessibleName(
+      'What does this print?\nfmt.Println(len("héllo"))',
+    );
+  });
+
   it('enforces single-select among options', async () => {
     loginAsDemo();
     const user = userEvent.setup();

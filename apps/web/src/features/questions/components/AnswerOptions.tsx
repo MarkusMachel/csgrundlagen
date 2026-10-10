@@ -1,8 +1,14 @@
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { InlineText, RichText } from '@/shared/ui';
+import { parseRichText, toPlainText } from '@/shared/utils/richText';
+
 import type { AnswerValue, Question } from '../types';
 import { ScissorsToggle } from './ScissorsToggle';
+
+const isCodeOption = (row: RowSpec) =>
+  parseRichText(row.label).some((segment) => segment.kind === 'code');
 
 export interface AnswerReveal {
   correctAnswer: AnswerValue;
@@ -27,7 +33,7 @@ interface RowSpec {
   label: string; // accessible name + displayed value
   /** The variable name in the code notation, e.g. A in `var A = "HTTP"`, or answer. */
   lhs: string;
-  /** Rendered right-hand side, e.g. "Transport layer" or true. */
+  /** Right-hand side for true/false (true / false); multiple choice renders `label`. */
   rhs: string;
   answerValue: AnswerValue;
 }
@@ -62,7 +68,7 @@ export function AnswerOptions({
       key: o.id,
       label: o.label,
       lhs: String.fromCharCode(65 + i), // A, B, C… by displayed position (options may be shuffled)
-      rhs: `"${o.label}"`,
+      rhs: o.label,
       answerValue: o.id,
     }));
   } else {
@@ -75,7 +81,7 @@ export function AnswerOptions({
   const selectedKey = value === undefined ? '' : String(value);
 
   return (
-    <div role="radiogroup" aria-label={question.prompt}>
+    <div role="radiogroup" aria-label={toPlainText(question.prompt)}>
       {rows.map((row) => {
         const struck = struckOptions.has(row.key);
         const isSelected = selectedKey === row.key;
@@ -119,14 +125,33 @@ export function AnswerOptions({
                     value={row.key}
                     checked={isSelected}
                     disabled={disabled}
-                    aria-label={row.label}
+                    aria-label={toPlainText(row.label)}
                     onChange={() => onChange(row.answerValue)}
                   />
-                  <span className="option-entry__text">
-                    <span className="tok-kw">var</span> <span className="tok-idx">{row.lhs}</span>
-                    <span className="muted"> = </span>
-                    <span className="tok-str">{row.rhs}</span>
-                  </span>
+                  {isCodeOption(row) ? (
+                    // a code-block answer: `var A =` with the highlighted snippet below
+                    <span className="option-entry__text option-entry__text--block">
+                      <span className="tok-kw">var</span> <span className="tok-idx">{row.lhs}</span>
+                      <span className="muted"> =</span>
+                      <RichText text={row.label} />
+                    </span>
+                  ) : (
+                    <span className="option-entry__text">
+                      <span className="tok-kw">var</span> <span className="tok-idx">{row.lhs}</span>
+                      <span className="muted"> = </span>
+                      <span className="tok-str">
+                        {question.type === 'multiple-choice' ? (
+                          <>
+                            &quot;
+                            <InlineText text={row.label} />
+                            &quot;
+                          </>
+                        ) : (
+                          row.rhs
+                        )}
+                      </span>
+                    </span>
+                  )}
                   {(isCorrect || isWrongPick) && (
                     <span
                       className={

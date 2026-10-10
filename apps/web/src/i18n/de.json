@@ -286,6 +286,12 @@
       "noQuestionsYet": "Noch keine Fragen",
       "noMaterialsYet": "Noch kein Material",
       "noAnswersYet": "Noch keine Antworten erfasst"
-    }
+    },
+    "codeHint": "Code: Block in ```go … ``` (oder sql, cs, ts…) einschließen, `Inline-Code` in Backticks",
+    "preview": "Vorschau"
+  },
+  "code": {
+    "copy": "Code kopieren",
+    "copied": "Kopiert"
   }
 }

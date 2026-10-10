@@ -286,6 +286,12 @@
       "noQuestionsYet": "No questions yet",
       "noMaterialsYet": "No material yet",
       "noAnswersYet": "No answers recorded yet"
-    }
+    },
+    "codeHint": "code: wrap a block in ```go … ``` (or sql, cs, ts…), and `inline code` in backticks",
+    "preview": "Preview"
+  },
+  "code": {
+    "copy": "Copy code",
+    "copied": "Copied"
   }
 }

@@ -7,6 +7,8 @@ import { z } from 'zod';
 
 import { useMaterials } from '@/features/materials';
 import { useTags } from '@/features/questions';
+import { RichText } from '@/shared/ui';
+import { hasCode } from '@/shared/utils/richText';
 
 import { useCreateQuestion } from '../hooks/useAuthoring';
 import type { CreateQuestionInput } from '../types';
@@ -117,6 +119,8 @@ export function QuestionForm({ onCreated }: { onCreated?: (id: string) => void }
       <div className={err.prompt ? 'field field--error' : 'field'}>
         <label htmlFor="q-prompt">{t('authoring.prompt')}</label>
         <textarea id="q-prompt" className="textarea" rows={3} {...form.register('prompt')} />
+        <CodeFormatHint />
+        <RichPreview text={form.watch('prompt')} />
         {err.prompt && <span className="field-error-text">{t('authoring.required')}</span>}
       </div>
 
@@ -141,11 +145,18 @@ export function QuestionForm({ onCreated }: { onCreated?: (id: string) => void }
                   <span className="tok-idx">{OPTION_IDS[i]}</span>
                 </span>
               </label>
-              <input
-                className="input"
-                placeholder={`"${t('authoring.optionPlaceholder')}"`}
-                {...form.register(`options.${i}.label` as const)}
-              />
+              <div
+                style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 6 }}
+              >
+                {/* a textarea, so an answer can itself be a multi-line ``` code block */}
+                <textarea
+                  className="textarea textarea--autogrow"
+                  rows={1}
+                  placeholder={`"${t('authoring.optionPlaceholder')}"`}
+                  {...form.register(`options.${i}.label` as const)}
+                />
+                <RichPreview text={form.watch(`options.${i}.label`)} />
+              </div>
               {fields.length > 2 && (
                 <button
                   type="button"
@@ -198,6 +209,8 @@ export function QuestionForm({ onCreated }: { onCreated?: (id: string) => void }
       <div className={err.explanation ? 'field field--error' : 'field'}>
         <label htmlFor="q-expl">{t('authoring.explanation')}</label>
         <textarea id="q-expl" className="textarea" rows={3} {...form.register('explanation')} />
+        <CodeFormatHint />
+        <RichPreview text={form.watch('explanation')} />
         {err.explanation && <span className="field-error-text">{t('authoring.required')}</span>}
       </div>
 
@@ -265,5 +278,28 @@ export function QuestionForm({ onCreated }: { onCreated?: (id: string) => void }
         {t('authoring.createQuestion')}
       </button>
     </form>
+  );
+}
+
+/** Reminds authors how to write code: ```lang fences and `inline` spans. */
+function CodeFormatHint() {
+  const { t } = useTranslation();
+  return (
+    <span className="tok-com" style={{ fontSize: 12 }}>
+      {'// '}
+      {t('authoring.codeHint')}
+    </span>
+  );
+}
+
+/** Live preview, shown only once the text contains code, since plain text looks the same. */
+function RichPreview({ text }: { text: string | undefined }) {
+  const { t } = useTranslation();
+  if (!text || !hasCode(text)) return null;
+  return (
+    <div className="rich-preview" aria-label={t('authoring.preview')}>
+      <span className="rich-preview__label">{t('authoring.preview')}</span>
+      <RichText text={text} />
+    </div>
   );
 }
