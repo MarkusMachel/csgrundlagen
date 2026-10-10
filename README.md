@@ -165,6 +165,17 @@ internal/httpapi routes, auth middleware, handlers, integration tests
   the daily question and reviews; `GET /api/questions?type=design` lists them.
   The submit result adds `design: {score, total, rules}`, graded by the same
   rules in Go and TypeScript (`features/questions/design.ts`).
+  Besides the 18 generic components, the palette has ~95 real products
+  (`features/design/products.ts`): open source (Redis, Postgres, Kafka, …),
+  AWS, Azure, Google Cloud and services like Cloudflare or Auth0, searchable by
+  name or by kind. A product counts as its generic kind when checked (Redis is
+  a cache, SQS a queue), so rules stay vendor-neutral; nodes carry it as
+  `product`. Logos come from [Simple Icons](https://simpleicons.org) (CC0;
+  the trademarks stay their owners', shown only to identify the products).
+  AWS and Azure asked Simple Icons to remove their logos, so their services
+  show as a vendor-coloured badge with the service's short name; their official
+  architecture icon packs (free, licensed for architecture diagrams) can be
+  dropped in later if you accept their terms.
 - **Spaced repetition**: every answer updates `review_schedule` with a simplified
   SM-2 (`internal/store/review.go`); `GET /api/review/queue` serves what's due and
   `GET /api/me/progress?tz=…` the progress page.

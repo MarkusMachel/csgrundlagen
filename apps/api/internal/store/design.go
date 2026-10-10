@@ -64,6 +64,9 @@ type DesignNode struct {
 	ID    string `json:"id"`
 	Kind  string `json:"kind"`
 	Label string `json:"label,omitempty"`
+	// Product is the real product drawn (e.g. "redis", "aws-sqs"); it's for
+	// display only, rules check Kind.
+	Product string `json:"product,omitempty"`
 }
 
 type DesignEdge struct {

@@ -829,7 +829,17 @@
     },
     "palette": {
       "title": "Components",
-      "add": "Add {{kind}}"
+      "add": "Add {{kind}}",
+      "generic": "Generic",
+      "search": "Search components…",
+      "none": "Nothing matches.",
+      "groups": {
+        "oss": "Open source",
+        "aws": "AWS",
+        "azure": "Azure",
+        "gcp": "Google Cloud",
+        "saas": "Services"
+      }
     },
     "lists": {
       "components": "On the board ({{count}})",
@@ -881,7 +891,9 @@
       "replica": "Read replica",
       "object-storage": "Object storage",
       "search": "Search index"
-    }
+    },
+    "countsAs": "Counts as: {{kind}}",
+    "trademarks": "Product names and logos are trademarks of their owners and are shown only to identify the products; no endorsement is implied. Logos from Simple Icons (CC0)."
   },
   "filters": {
     "saved": "Saved filters",

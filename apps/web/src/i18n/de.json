@@ -829,7 +829,17 @@
     },
     "palette": {
       "title": "Bausteine",
-      "add": "{{kind}} hinzufügen"
+      "add": "{{kind}} hinzufügen",
+      "generic": "Allgemein",
+      "search": "Bausteine suchen…",
+      "none": "Keine Treffer.",
+      "groups": {
+        "oss": "Open Source",
+        "aws": "AWS",
+        "azure": "Azure",
+        "gcp": "Google Cloud",
+        "saas": "Dienste"
+      }
     },
     "lists": {
       "components": "Auf der Fläche ({{count}})",
@@ -881,7 +891,9 @@
       "replica": "Lesereplikat",
       "object-storage": "Objektspeicher",
       "search": "Suchindex"
-    }
+    },
+    "countsAs": "Zählt als: {{kind}}",
+    "trademarks": "Produktnamen und Logos sind Marken ihrer Inhaber und dienen nur zur Kennzeichnung der Produkte; eine Empfehlung ist damit nicht verbunden. Logos von Simple Icons (CC0)."
   },
   "filters": {
     "saved": "Gespeicherte Filter",

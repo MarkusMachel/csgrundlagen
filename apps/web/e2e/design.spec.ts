@@ -46,6 +46,16 @@ test('draw a design with the mouse, check it, compare with the reference', async
   await arrow(page, node('API gateway'), node('Service', 1));
   await expect(page.locator('.react-flow__edge')).toHaveCount(3);
 
+  // real products: a logo (Redis) and a vendor badge (AWS S3); left unconnected,
+  // so the score below doesn't change
+  const search = page.getByRole('searchbox', { name: 'Search components…' });
+  for (const name of ['Redis', 'S3']) {
+    await search.fill(name);
+    await page.getByRole('button', { name: `Add ${name}`, exact: true }).click();
+  }
+  await search.fill('');
+  await expect(page.locator('.react-flow__node', { hasText: 'Redis' })).toContainText('Cache');
+
   await page.getByRole('button', { name: 'Check my design' }).click();
   const results = page.getByTestId('design-results');
   // everything but the shared counter store

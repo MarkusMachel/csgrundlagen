@@ -829,7 +829,17 @@
     },
     "palette": {
       "title": "Componentes",
-      "add": "Adicionar {{kind}}"
+      "add": "Adicionar {{kind}}",
+      "generic": "Genéricos",
+      "search": "Buscar componentes…",
+      "none": "Nada encontrado.",
+      "groups": {
+        "oss": "Código aberto",
+        "aws": "AWS",
+        "azure": "Azure",
+        "gcp": "Google Cloud",
+        "saas": "Serviços"
+      }
     },
     "lists": {
       "components": "No quadro ({{count}})",
@@ -881,7 +891,9 @@
       "replica": "Réplica de leitura",
       "object-storage": "Armazenamento de objetos",
       "search": "Índice de busca"
-    }
+    },
+    "countsAs": "Conta como: {{kind}}",
+    "trademarks": "Nomes e logotipos de produtos são marcas de seus donos e aparecem apenas para identificar os produtos; nenhum endosso está implícito. Logotipos do Simple Icons (CC0)."
   },
   "filters": {
     "saved": "Filtros salvos",

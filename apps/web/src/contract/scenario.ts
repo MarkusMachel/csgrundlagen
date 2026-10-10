@@ -205,7 +205,7 @@ export async function runScenario(backend: Backend): Promise<Recorded[]> {
     reference: {
       nodes: [
         { id: 'c', kind: 'client' },
-        { id: 'lb', kind: 'load-balancer', label: 'LB' },
+        { id: 'lb', kind: 'load-balancer', label: 'LB', product: 'aws-alb' },
         { id: 's1', kind: 'service' },
         { id: 's2', kind: 'service' },
         { id: 'cdn', kind: 'cdn' },
@@ -238,7 +238,7 @@ export async function runScenario(backend: Backend): Promise<Recorded[]> {
       nodes: [
         { id: 'a', kind: 'client' },
         { id: 'b', kind: 'load-balancer' },
-        { id: 'x', kind: 'service', label: 'api-1' },
+        { id: 'x', kind: 'service', label: 'api-1', product: 'kubernetes' },
         { id: 'y', kind: 'service' },
       ],
       edges: [

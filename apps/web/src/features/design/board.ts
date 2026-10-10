@@ -4,6 +4,8 @@ import type { DesignGraph, DesignKind } from '@/features/questions';
 export interface BoardNode {
   id: string;
   kind: DesignKind;
+  /** A real product (products.ts) standing in for the kind, e.g. redis for a cache. */
+  product?: string;
   label?: string;
   x: number;
   y: number;
@@ -24,18 +26,21 @@ export const emptyBoard: BoardState = { nodes: [], edges: [] };
 /** What gets submitted and graded: the drawing without positions. */
 export function toGraph(board: BoardState): DesignGraph {
   return {
-    nodes: board.nodes.map(({ id, kind, label }) =>
-      label?.trim() ? { id, kind, label: label.trim() } : { id, kind },
-    ),
+    nodes: board.nodes.map(({ id, kind, label, product }) => ({
+      id,
+      kind,
+      ...(label?.trim() ? { label: label.trim() } : {}),
+      ...(product ? { product } : {}),
+    })),
     edges: board.edges.map(({ from, to }) => ({ from, to })),
   };
 }
 
-/** A fresh id for a component of a kind, e.g. cache-3. */
-export function nextNodeId(board: BoardState, kind: DesignKind): string {
+/** A fresh id for a component, e.g. cache-3 or redis-1. */
+export function nextNodeId(board: BoardState, base: string): string {
   let n = 1;
-  while (board.nodes.some((node) => node.id === `${kind}-${n}`)) n++;
-  return `${kind}-${n}`;
+  while (board.nodes.some((node) => node.id === `${base}-${n}`)) n++;
+  return `${base}-${n}`;
 }
 
 /** Arrows are one per direction; a component can't point at itself. */
@@ -48,8 +53,17 @@ export function canConnect(board: BoardState, from: string, to: string): boolean
   );
 }
 
-export function addNode(board: BoardState, kind: DesignKind, x: number, y: number): BoardState {
-  return { ...board, nodes: [...board.nodes, { id: nextNodeId(board, kind), kind, x, y }] };
+/** What the palette hands out: a generic kind, or a product of that kind. */
+export interface PaletteItem {
+  kind: DesignKind;
+  product?: string;
+}
+
+export function addNode(board: BoardState, item: PaletteItem, x: number, y: number): BoardState {
+  const { kind, product } = item;
+  const node: BoardNode = { id: nextNodeId(board, product ?? kind), kind, x, y };
+  if (product) node.product = product;
+  return { ...board, nodes: [...board.nodes, node] };
 }
 
 export function removeNode(board: BoardState, id: string): BoardState {

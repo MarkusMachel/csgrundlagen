@@ -20,7 +20,7 @@ func TestDesignQuestions(t *testing.T) {
 				"text": "A CDN", "explanation": "Static files load faster."},
 		},
 		"reference": map[string]any{
-			"nodes": []map[string]string{{"id": "c", "kind": "client"}, {"id": "lb", "kind": "load-balancer"},
+			"nodes": []map[string]string{{"id": "c", "kind": "client"}, {"id": "lb", "kind": "load-balancer", "product": "nginx"},
 				{"id": "s1", "kind": "service"}, {"id": "s2", "kind": "service"}, {"id": "cdn", "kind": "cdn"}},
 			"edges": []map[string]string{{"from": "c", "to": "lb"}, {"from": "lb", "to": "s1"},
 				{"from": "lb", "to": "s2"}, {"from": "c", "to": "cdn"}},
@@ -45,6 +45,7 @@ func TestDesignQuestions(t *testing.T) {
 	var q store.Question
 	expect(t, "create design", c.do("POST", "/api/questions", admin, body, &q), 201)
 	expect(t, "design round trip", vals(q.Type, len(q.Design.Rules), len(q.Design.Reference.Nodes)), "design 3 5")
+	expect(t, "reference keeps the product", q.Design.Reference.Nodes[1].Product, "nginx")
 
 	// it has its own list; the regular feed and the daily question leave it out
 	var mc store.Question
@@ -70,7 +71,7 @@ func TestDesignQuestions(t *testing.T) {
 	}
 	res := submit(
 		[]map[string]string{{"id": "a", "kind": "client"}, {"id": "b", "kind": "load-balancer"},
-			{"id": "x", "kind": "service", "label": "api-1"}, {"id": "y", "kind": "service"}},
+			{"id": "x", "kind": "service", "label": "api-1", "product": "kubernetes"}, {"id": "y", "kind": "service"}},
 		[]map[string]string{{"from": "a", "to": "b"}, {"from": "b", "to": "x"}, {"from": "b", "to": "y"}})
 	expect(t, "good design passes without the optional CDN", vals(res.Correct, res.Design.Score, res.Design.Total), "true 2 2")
 	expect(t, "optional rule reported", vals(res.Design.Rules[2].ID, res.Design.Rules[2].Passed), "cdn false")

@@ -9,13 +9,20 @@ import {
   offendingEdges,
   useQuestionMaterials,
   useSubmitAnswer,
-  type DesignKind,
   type DesignQuestion,
   type DesignResult,
 } from '@/features/questions';
 import { isSignInCancelled } from '@/stores/useAuthPrompt';
 
-import { addNode, autoLayout, loadDraft, saveDraft, toGraph, type BoardState } from '../board';
+import {
+  addNode,
+  autoLayout,
+  loadDraft,
+  saveDraft,
+  toGraph,
+  type BoardState,
+  type PaletteItem,
+} from '../board';
 import { BoardLists } from './BoardLists';
 import { DesignCanvas } from './DesignCanvas';
 import { DesignResults } from './DesignResults';
@@ -43,11 +50,11 @@ export function DesignChallenge({ question }: { question: DesignQuestion }) {
     [result, question.design, board],
   );
 
-  const add = (kind: DesignKind) => {
+  const add = (item: PaletteItem) => {
     // new components land in a free spot to the right of what's there
     const x = board.nodes.length ? Math.max(...board.nodes.map((n) => n.x)) + 200 : 0;
     const y = (board.nodes.length % 4) * 90;
-    setBoard(addNode(board, kind, x, y));
+    setBoard(addNode(board, item, x, y));
     refit();
   };
   const tidy = () => {
@@ -197,6 +204,7 @@ export function DesignChallenge({ question }: { question: DesignQuestion }) {
       )}
 
       {result && <DesignResults question={question} result={result} materials={materials} />}
+      <p className="design-trademarks">{t('design.trademarks')}</p>
     </div>
   );
 }
