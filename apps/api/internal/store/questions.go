@@ -379,7 +379,7 @@ func (s *Store) CreateQuestion(ctx context.Context, createdBy string, n NewQuest
 			INSERT INTO questions (type, prompt, difficulty, explanation, correct_answer, created_by)
 			VALUES ($1::question_type, $2, $3::question_difficulty, $4, $5, $6)
 			RETURNING id`,
-			n.Type, n.Prompt, n.Difficulty, n.Explanation, correctAnswer, createdBy,
+			n.Type, n.Prompt, n.Difficulty, n.Explanation, correctAnswer, nullIfEmpty(createdBy),
 		).Scan(&id); err != nil {
 			return err
 		}

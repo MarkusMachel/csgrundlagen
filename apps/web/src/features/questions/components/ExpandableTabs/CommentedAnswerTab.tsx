@@ -10,5 +10,6 @@ export function CommentedAnswerTab({ explanation, revealed }: CommentedAnswerTab
   if (!revealed) {
     return <div className="alert alert--info">{t('question.explanationHidden')}</div>;
   }
-  return <p style={{ margin: 0 }}>{explanation}</p>;
+  // pre-wrap keeps paragraph breaks and code indentation from seeded explanations.
+  return <p style={{ margin: 0, whiteSpace: 'pre-wrap', tabSize: 2 }}>{explanation}</p>;
 }

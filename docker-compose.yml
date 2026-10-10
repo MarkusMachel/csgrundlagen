@@ -17,11 +17,8 @@ services:
       timeout: 5s
       retries: 10
 
-  # The Go API. Usually you run it locally with `npm run api:dev` instead;
-  # start it here with `docker compose --profile api up -d`.
-  # It applies its own migrations on startup.
+  # The Go API. It applies its own migrations on startup.
   api:
-    profiles: ['api']
     build: ./apps/api
     container_name: csgrundlagen-api
     restart: unless-stopped
@@ -33,6 +30,18 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+  # The React app, built with Vite and served by nginx, which proxies /api to the api service.
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    container_name: csgrundlagen-web
+    restart: unless-stopped
+    ports:
+      - '${WEB_PORT:-3000}:80'
+    depends_on:
+      - api
 
 volumes:
   csgrundlagen_pgdata:

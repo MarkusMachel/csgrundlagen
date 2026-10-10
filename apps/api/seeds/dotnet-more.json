@@ -1,0 +1,1685 @@
+{
+  "name": "50 more .NET interview questions (51 to 100)",
+  "materials": [
+    {
+      "key": "cs12",
+      "type": "article",
+      "title": "What's new in C# 12",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-12",
+      "author": "Microsoft Learn",
+      "description": "Primary constructors, collection expressions and other C# 12 features."
+    },
+    {
+      "key": "required",
+      "type": "article",
+      "title": "required modifier (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/required",
+      "author": "Microsoft Learn",
+      "description": "Forcing callers to initialize a member at construction. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "lock-blog",
+      "type": "link",
+      "title": "Andrew Lock's blog",
+      "url": "https://andrewlock.net/",
+      "author": "Andrew Lock",
+      "description": "ASP.NET Core internals and C# language features in depth."
+    },
+    {
+      "key": "pattern-matching",
+      "type": "article",
+      "title": "Pattern matching overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/patterns/pattern-matching",
+      "author": "Microsoft Learn",
+      "description": "is, switch expressions and property patterns."
+    },
+    {
+      "key": "switch-expr",
+      "type": "article",
+      "title": "switch expression (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/switch-expression",
+      "author": "Microsoft Learn",
+      "description": "Arms, guards and exhaustiveness warnings. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "init",
+      "type": "article",
+      "title": "init keyword (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/init",
+      "author": "Microsoft Learn",
+      "description": "Init-only setters for immutable objects. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "with",
+      "type": "article",
+      "title": "with expression (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/with-expression",
+      "author": "Microsoft Learn",
+      "description": "Non-destructive mutation of records and structs. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "constraints",
+      "type": "article",
+      "title": "Constraints on type parameters",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters",
+      "author": "Microsoft Learn",
+      "description": "where clauses and what they let the compiler allow."
+    },
+    {
+      "key": "generic-math",
+      "type": "article",
+      "title": "Generic math",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/generics/math",
+      "author": "Microsoft Learn",
+      "description": "INumber<T> and static abstract interface members."
+    },
+    {
+      "key": "expression-trees",
+      "type": "article",
+      "title": "Expression trees",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/expression-trees/",
+      "author": "Microsoft Learn",
+      "description": "Code as data, and how providers translate it."
+    },
+    {
+      "key": "reflection",
+      "type": "article",
+      "title": "Reflection in .NET",
+      "url": "https://learn.microsoft.com/en-us/dotnet/fundamentals/reflection/overview",
+      "author": "Microsoft Learn",
+      "description": "Inspecting and invoking types at runtime. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "source-gen",
+      "type": "article",
+      "title": "Source generators overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/source-generators-overview",
+      "author": "Microsoft Learn",
+      "description": "Generating code at compile time with Roslyn."
+    },
+    {
+      "key": "stj-sourcegen",
+      "type": "article",
+      "title": "System.Text.Json source generation",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/source-generation",
+      "author": "Microsoft Learn",
+      "description": "Reflection-free, AOT-friendly JSON serialization."
+    },
+    {
+      "key": "dotnet-blog",
+      "type": "link",
+      "title": ".NET Blog",
+      "url": "https://devblogs.microsoft.com/dotnet/",
+      "author": ".NET Blog",
+      "description": "Performance write-ups and language news for every release."
+    },
+    {
+      "key": "async-streams",
+      "type": "article",
+      "title": "Generate and consume async streams",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/generate-consume-asynchronous-stream",
+      "author": "Microsoft Learn",
+      "description": "IAsyncEnumerable<T> and await foreach."
+    },
+    {
+      "key": "ref-struct",
+      "type": "article",
+      "title": "ref struct types (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/ref-struct",
+      "author": "Microsoft Learn",
+      "description": "Stack-only types and their restrictions. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "struct-types",
+      "type": "article",
+      "title": "Structure types (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct",
+      "author": "Microsoft Learn",
+      "description": "readonly structs, in parameters and copying behaviour."
+    },
+    {
+      "key": "lambdas",
+      "type": "article",
+      "title": "Lambda expressions (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions",
+      "author": "Microsoft Learn",
+      "description": "Captures, static lambdas and natural types."
+    },
+    {
+      "key": "stj-overview",
+      "type": "article",
+      "title": "System.Text.Json overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/overview",
+      "author": "Microsoft Learn",
+      "description": "The built-in JSON library, its defaults and options."
+    },
+    {
+      "key": "select-collection",
+      "type": "article",
+      "title": "Select a collection class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/collections/selecting-a-collection-class",
+      "author": "Microsoft Learn",
+      "description": "Choosing the right collection for the access pattern."
+    },
+    {
+      "key": "collections",
+      "type": "article",
+      "title": "Collections and data structures",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/collections/",
+      "author": "Microsoft Learn",
+      "description": "Overview of the .NET collection types."
+    },
+    {
+      "key": "dictionary",
+      "type": "article",
+      "title": "Dictionary<TKey,TValue> class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2",
+      "author": "Microsoft Learn",
+      "description": "API reference, including hashing and thread-safety remarks."
+    },
+    {
+      "key": "priorityqueue",
+      "type": "article",
+      "title": "PriorityQueue<TElement,TPriority> class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.priorityqueue-2",
+      "author": "Microsoft Learn",
+      "description": "A min-heap for schedulers and top-k problems."
+    },
+    {
+      "key": "threadsafe-collections",
+      "type": "article",
+      "title": "Thread-safe collections",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/collections/thread-safe/",
+      "author": "Microsoft Learn",
+      "description": "The System.Collections.Concurrent types and their guarantees."
+    },
+    {
+      "key": "concurrentdictionary",
+      "type": "article",
+      "title": "ConcurrentDictionary<TKey,TValue> class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.collections.concurrent.concurrentdictionary-2",
+      "author": "Microsoft Learn",
+      "description": "API reference, including GetOrAdd factory behaviour."
+    },
+    {
+      "key": "immutable",
+      "type": "article",
+      "title": "System.Collections.Immutable namespace",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable",
+      "author": "Microsoft Learn",
+      "description": "Immutable collections that are safe to share. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "frozen",
+      "type": "article",
+      "title": "FrozenDictionary<TKey,TValue> class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.collections.frozen.frozendictionary-2",
+      "author": "Microsoft Learn",
+      "description": "Read-optimized dictionaries built once. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "linq-overview",
+      "type": "article",
+      "title": "LINQ overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/linq/",
+      "author": "Microsoft Learn",
+      "description": "Language-Integrated Query across objects, databases and XML."
+    },
+    {
+      "key": "comparisons",
+      "type": "article",
+      "title": "Comparisons and sorts within collections",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/collections/comparisons-and-sorts-within-collections",
+      "author": "Microsoft Learn",
+      "description": "IComparable, IComparer and equality in collections. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "caching-overview",
+      "type": "article",
+      "title": "Caching overview in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/performance/caching/overview",
+      "author": "Microsoft Learn",
+      "description": "In-memory, distributed and output caching."
+    },
+    {
+      "key": "distributed-caching",
+      "type": "article",
+      "title": "Distributed caching in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/performance/caching/distributed",
+      "author": "Microsoft Learn",
+      "description": "IDistributedCache with Redis and SQL Server."
+    },
+    {
+      "key": "hybridcache",
+      "type": "article",
+      "title": "HybridCache library in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/performance/caching/hybrid",
+      "author": "Microsoft Learn",
+      "description": "Two-level caching with stampede protection. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "pg-isolation",
+      "type": "article",
+      "title": "Transaction isolation",
+      "url": "https://www.postgresql.org/docs/current/transaction-iso.html",
+      "author": "PostgreSQL documentation",
+      "description": "Isolation levels and the anomalies each prevents."
+    },
+    {
+      "key": "pg-docs",
+      "type": "link",
+      "title": "PostgreSQL documentation",
+      "url": "https://www.postgresql.org/docs/current/",
+      "author": "PostgreSQL documentation",
+      "description": "The best single reference for PostgreSQL behaviour."
+    },
+    {
+      "key": "pg-index-types",
+      "type": "article",
+      "title": "Index types",
+      "url": "https://www.postgresql.org/docs/current/indexes-types.html",
+      "author": "PostgreSQL documentation",
+      "description": "B-tree, hash, GiST, SP-GiST, GIN and BRIN."
+    },
+    {
+      "key": "pg-indexes",
+      "type": "article",
+      "title": "Indexes",
+      "url": "https://www.postgresql.org/docs/current/indexes.html",
+      "author": "PostgreSQL documentation",
+      "description": "Multicolumn, partial and expression indexes."
+    },
+    {
+      "key": "use-the-index-luke",
+      "type": "link",
+      "title": "Use The Index, Luke!",
+      "url": "https://use-the-index-luke.com/",
+      "author": "Markus Winand",
+      "description": "A free guide to SQL indexing and performance."
+    },
+    {
+      "key": "pg-explain",
+      "type": "article",
+      "title": "Using EXPLAIN",
+      "url": "https://www.postgresql.org/docs/current/using-explain.html",
+      "author": "PostgreSQL documentation",
+      "description": "Reading query plans and actual row counts."
+    },
+    {
+      "key": "postgis-docs",
+      "type": "link",
+      "title": "PostGIS documentation",
+      "url": "https://postgis.net/documentation/",
+      "author": "PostGIS",
+      "description": "Spatial types, functions and indexes. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "postgis-indexing",
+      "type": "article",
+      "title": "PostGIS workshop: spatial indexing",
+      "url": "https://postgis.net/workshops/postgis-intro/indexing.html",
+      "author": "PostGIS",
+      "description": "How GiST indexes speed up spatial queries. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "pg-partitioning",
+      "type": "article",
+      "title": "Table partitioning",
+      "url": "https://www.postgresql.org/docs/current/ddl-partitioning.html",
+      "author": "PostgreSQL documentation",
+      "description": "Declarative range, list and hash partitioning."
+    },
+    {
+      "key": "pg-rls",
+      "type": "article",
+      "title": "Row security policies",
+      "url": "https://www.postgresql.org/docs/current/ddl-rowsecurity.html",
+      "author": "PostgreSQL documentation",
+      "description": "Row-level security for tenant isolation."
+    },
+    {
+      "key": "pg-locking",
+      "type": "article",
+      "title": "Explicit locking",
+      "url": "https://www.postgresql.org/docs/current/explicit-locking.html",
+      "author": "PostgreSQL documentation",
+      "description": "Row locks, table locks and advisory locks."
+    },
+    {
+      "key": "pg-select",
+      "type": "article",
+      "title": "SELECT (locking clause)",
+      "url": "https://www.postgresql.org/docs/current/sql-select.html",
+      "author": "PostgreSQL documentation",
+      "description": "FOR UPDATE, NOWAIT and SKIP LOCKED."
+    },
+    {
+      "key": "pg-mvcc",
+      "type": "article",
+      "title": "Concurrency control (MVCC)",
+      "url": "https://www.postgresql.org/docs/current/mvcc.html",
+      "author": "PostgreSQL documentation",
+      "description": "Snapshots and row versions."
+    },
+    {
+      "key": "pg-vacuum",
+      "type": "article",
+      "title": "Routine vacuuming",
+      "url": "https://www.postgresql.org/docs/current/routine-vacuuming.html",
+      "author": "PostgreSQL documentation",
+      "description": "Reclaiming dead tuples and preventing bloat."
+    },
+    {
+      "key": "ef-migrations",
+      "type": "article",
+      "title": "Applying migrations (EF Core)",
+      "url": "https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying",
+      "author": "Microsoft Learn",
+      "description": "SQL scripts, bundles and why not to migrate at startup. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "parallel-change",
+      "type": "article",
+      "title": "Parallel change",
+      "url": "https://martinfowler.com/bliki/ParallelChange.html",
+      "author": "Martin Fowler",
+      "description": "Expand and contract for backward-compatible changes. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "ef-execute",
+      "type": "article",
+      "title": "ExecuteUpdate and ExecuteDelete",
+      "url": "https://learn.microsoft.com/en-us/ef/core/saving/execute-insert-update-delete",
+      "author": "Microsoft Learn",
+      "description": "Set-based updates and deletes without loading entities. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "ef-perf",
+      "type": "article",
+      "title": "Advanced performance topics (EF Core)",
+      "url": "https://learn.microsoft.com/en-us/ef/core/performance/advanced-performance-topics",
+      "author": "Microsoft Learn",
+      "description": "Compiled queries, pooling and other EF Core performance techniques."
+    },
+    {
+      "key": "npgsql-conn",
+      "type": "article",
+      "title": "Npgsql connection string parameters",
+      "url": "https://www.npgsql.org/doc/connection-string-parameters.html",
+      "author": "Npgsql",
+      "description": "Pooling, timeouts and other connection settings. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "npgsql-ef",
+      "type": "article",
+      "title": "Npgsql Entity Framework Core provider",
+      "url": "https://www.npgsql.org/efcore/",
+      "author": "Npgsql",
+      "description": "Using EF Core with PostgreSQL. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "owasp-api",
+      "type": "article",
+      "title": "OWASP API Security Top 10 (2023)",
+      "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
+      "author": "OWASP",
+      "description": "The ten most critical API security risks."
+    },
+    {
+      "key": "owasp-api-project",
+      "type": "link",
+      "title": "OWASP API Security Project",
+      "url": "https://owasp.org/www-project-api-security/",
+      "author": "OWASP",
+      "description": "The project behind the API Top 10."
+    },
+    {
+      "key": "rfc6749",
+      "type": "article",
+      "title": "The OAuth 2.0 Authorization Framework (RFC 6749)",
+      "url": "https://datatracker.ietf.org/doc/html/rfc6749",
+      "author": "IETF",
+      "description": "The core OAuth 2.0 specification."
+    },
+    {
+      "key": "rfc7636",
+      "type": "article",
+      "title": "Proof Key for Code Exchange (RFC 7636)",
+      "url": "https://datatracker.ietf.org/doc/html/rfc7636",
+      "author": "IETF",
+      "description": "PKCE for public clients."
+    },
+    {
+      "key": "oidc",
+      "type": "article",
+      "title": "OpenID Connect Core 1.0",
+      "url": "https://openid.net/specs/openid-connect-core-1_0.html",
+      "author": "OpenID Foundation",
+      "description": "Identity on top of OAuth 2.0."
+    },
+    {
+      "key": "app-secrets",
+      "type": "article",
+      "title": "Safe storage of app secrets in development",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets",
+      "author": "Microsoft Learn",
+      "description": "User secrets and keeping secrets out of source."
+    },
+    {
+      "key": "data-protection",
+      "type": "article",
+      "title": "ASP.NET Core Data Protection overview",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/security/data-protection/introduction",
+      "author": "Microsoft Learn",
+      "description": "Key management and encryption for app data."
+    },
+    {
+      "key": "cors",
+      "type": "article",
+      "title": "Enable Cross-Origin Requests (CORS)",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/security/cors",
+      "author": "Microsoft Learn",
+      "description": "Configuring cross-origin policies."
+    },
+    {
+      "key": "csrf",
+      "type": "article",
+      "title": "Prevent Cross-Site Request Forgery (CSRF)",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/security/anti-request-forgery",
+      "author": "Microsoft Learn",
+      "description": "Anti-forgery tokens and SameSite cookies."
+    },
+    {
+      "key": "xss",
+      "type": "article",
+      "title": "Prevent Cross-Site Scripting (XSS)",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/security/cross-site-scripting",
+      "author": "Microsoft Learn",
+      "description": "Output encoding and content security policy."
+    },
+    {
+      "key": "owasp-cheatsheets",
+      "type": "link",
+      "title": "OWASP Cheat Sheet Series",
+      "url": "https://cheatsheetseries.owasp.org/",
+      "author": "OWASP",
+      "description": "Short, practical security guidance."
+    },
+    {
+      "key": "sqli-cheatsheet",
+      "type": "article",
+      "title": "SQL Injection Prevention Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html",
+      "author": "OWASP",
+      "description": "Parameterized queries and other defences."
+    },
+    {
+      "key": "api-design",
+      "type": "article",
+      "title": "Web API design best practices",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design",
+      "author": "Microsoft Learn",
+      "description": "Resources, verbs, pagination and versioning."
+    },
+    {
+      "key": "rfc9110",
+      "type": "article",
+      "title": "HTTP Semantics (RFC 9110)",
+      "url": "https://datatracker.ietf.org/doc/html/rfc9110",
+      "author": "IETF",
+      "description": "Methods, status codes and idempotency."
+    },
+    {
+      "key": "rfc9457",
+      "type": "article",
+      "title": "Problem Details for HTTP APIs (RFC 9457)",
+      "url": "https://datatracker.ietf.org/doc/html/rfc9457",
+      "author": "IETF",
+      "description": "A standard error format for HTTP APIs."
+    },
+    {
+      "key": "api-versioning",
+      "type": "link",
+      "title": "ASP.NET API Versioning",
+      "url": "https://github.com/dotnet/aspnet-api-versioning",
+      "author": ".NET Foundation",
+      "description": "Versioning for ASP.NET Core APIs. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "openapi",
+      "type": "article",
+      "title": "OpenAPI support in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/overview",
+      "author": "Microsoft Learn",
+      "description": "Generating OpenAPI documents from your API. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "fixedtimeequals",
+      "type": "article",
+      "title": "CryptographicOperations.FixedTimeEquals",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicoperations.fixedtimeequals",
+      "author": "Microsoft Learn",
+      "description": "Constant-time comparison for signatures. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "grpc-comparison",
+      "type": "article",
+      "title": "Compare gRPC services with HTTP APIs",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/grpc/comparison",
+      "author": "Microsoft Learn",
+      "description": "When gRPC fits and when it doesn't. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "http3",
+      "type": "article",
+      "title": "Use HTTP/3 with Kestrel",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel/http3",
+      "author": "Microsoft Learn",
+      "description": "QUIC and HTTP/3 support in ASP.NET Core. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "kafka-docs",
+      "type": "link",
+      "title": "Apache Kafka documentation",
+      "url": "https://kafka.apache.org/documentation/",
+      "author": "Apache Kafka",
+      "description": "Topics, partitions, consumer groups and delivery semantics."
+    },
+    {
+      "key": "confluent",
+      "type": "article",
+      "title": "Confluent .NET client documentation",
+      "url": "https://docs.confluent.io/kafka-clients/dotnet/current/overview.html",
+      "author": "Confluent",
+      "description": "Producing and consuming Kafka messages from .NET. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "schema-registry",
+      "type": "article",
+      "title": "Schema Registry overview",
+      "url": "https://docs.confluent.io/platform/current/schema-registry/index.html",
+      "author": "Confluent",
+      "description": "Schemas and compatibility rules for Kafka messages. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "messaging-patterns",
+      "type": "article",
+      "title": "Messaging patterns",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/category/messaging",
+      "author": "Microsoft Learn",
+      "description": "Queues, pub-sub and related cloud patterns. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "temporal",
+      "type": "article",
+      "title": "Temporal .NET developer guide",
+      "url": "https://docs.temporal.io/develop/dotnet",
+      "author": "Temporal",
+      "description": "Durable workflows, activities and determinism rules in .NET. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "temporal-workflows",
+      "type": "article",
+      "title": "Temporal workflows",
+      "url": "https://docs.temporal.io/workflows",
+      "author": "Temporal",
+      "description": "Workflow execution, replay and versioning. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "containerize",
+      "type": "article",
+      "title": "Containerize a .NET app",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/docker/build-container",
+      "author": "Microsoft Learn",
+      "description": "Building container images for .NET services."
+    },
+    {
+      "key": "health-checks",
+      "type": "article",
+      "title": "Health checks in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks",
+      "author": "Microsoft Learn",
+      "description": "Liveness and readiness probes."
+    },
+    {
+      "key": "ci",
+      "type": "article",
+      "title": ".NET CLI and continuous integration",
+      "url": "https://learn.microsoft.com/en-us/dotnet/devops/dotnet-cli-and-continuous-integration",
+      "author": "Microsoft Learn",
+      "description": "Using the .NET CLI in CI pipelines. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "sre-slo",
+      "type": "article",
+      "title": "Service level objectives",
+      "url": "https://sre.google/sre-book/service-level-objectives/",
+      "author": "Google SRE",
+      "description": "SLIs, SLOs and error budgets."
+    },
+    {
+      "key": "queue-leveling",
+      "type": "article",
+      "title": "Queue-Based Load Leveling pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+      "author": "Microsoft Learn",
+      "description": "A queue as a buffer between bursty producers and steady consumers. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "strangler",
+      "type": "article",
+      "title": "Strangler Fig pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/strangler-fig",
+      "author": "Microsoft Learn",
+      "description": "Incrementally replacing a legacy system."
+    },
+    {
+      "key": "azure-patterns",
+      "type": "link",
+      "title": "Azure Architecture Center: cloud design patterns",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/",
+      "author": "Microsoft Learn",
+      "description": "One page per pattern, with when to use it and when not to."
+    },
+    {
+      "key": "adr",
+      "type": "link",
+      "title": "Architecture decision records",
+      "url": "https://adr.github.io/",
+      "author": "ADR GitHub organization",
+      "description": "Templates and tooling for recording decisions. Link not verified by the study guide; if it doesn't open, search for its title."
+    }
+  ],
+  "questions": [
+    {
+      "prompt": "What do primary constructors, required members and collection expressions give you?",
+      "tags": [
+        "Modern C#",
+        "C# 12"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Collection expressions work only with arrays; lists and spans still need the older initializer syntax.",
+        "Less boilerplate: primary-constructor parameters are captured state, required forces initialization, and [1, 2, 3] unifies collections.",
+        "required members are checked at runtime by the JIT, which throws if a JSON payload omits them.",
+        "Primary constructor parameters on a class become readonly fields automatically, so they can never be reassigned anywhere in the class body after construction."
+      ],
+      "correct": 1,
+      "explanation": "Primary constructors capture parameters without boilerplate fields; on a class the parameters are captured state, not readonly fields, so mutation surprises are possible. required forces callers to set a property at construction. Collection expressions ([1, 2, 3]) unify array, list and span initialization. Say which you would use in a domain model and which you would avoid.",
+      "materials": [
+        "cs12",
+        "required",
+        "lock-blog"
+      ]
+    },
+    {
+      "prompt": "How does pattern matching improve code, and what are its limits?",
+      "tags": [
+        "Modern C#",
+        "Pattern matching"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Patterns should replace all virtual methods, because polymorphism is slower and harder to read.",
+        "Switch expressions with property, relational and list patterns replace nested ifs and casts, but open hierarchies still need a default arm.",
+        "The compiler proves exhaustiveness for every class hierarchy, including open ones, so a default arm is never needed in a switch expression over any type.",
+        "Pattern matching works only on constants and enums; property patterns need reflection at runtime."
+      ],
+      "correct": 1,
+      "explanation": "is, switch expressions, property, relational, list and and/or/not patterns replace nested if and casts. The compiler checks exhaustiveness on closed sets, but not for open hierarchies, so a default arm still matters. Overuse can hide polymorphism that belongs in the type.",
+      "materials": [
+        "pattern-matching",
+        "switch-expr"
+      ]
+    },
+    {
+      "prompt": "How do init, readonly and with support immutable design?",
+      "tags": [
+        "Modern C#",
+        "Immutability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "init properties can be reassigned at any time, while readonly ones are set only in the constructor.",
+        "Immutable models remove all allocations, because changes are applied in place.",
+        "with performs a deep clone, so mutable collections inside a record are copied too.",
+        "init allows assignment only during construction and with copies with changes, but the copy is shallow, so nested collections stay shared."
+      ],
+      "correct": 3,
+      "explanation": "init allows assignment only during construction. with makes a copy with changes and is shallow, so a mutable collection inside is still shared. Immutable models make concurrency and caching easier, at the cost of allocations on every change.",
+      "materials": [
+        "init",
+        "with"
+      ]
+    },
+    {
+      "prompt": "How do generic constraints, static abstract members and generic math work?",
+      "tags": [
+        "Modern C#",
+        "Generics"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Constraints let the compiler allow operations on T, and static abstract interface members enable INumber<T> math without boxing.",
+        "Constraints are only checked at runtime, so they can change freely without affecting a public API.",
+        "Static abstract members can appear only on abstract classes, which is why INumber<T> is a class.",
+        "Generic math relies on dynamic dispatch through reflection, so every numeric value passed through an INumber<T> method is boxed and unboxed on each operation."
+      ],
+      "correct": 0,
+      "explanation": "Constraints (where T : struct, IComparable<T>) let the compiler allow operations on T. Static abstract interface members enable generic math (INumber<T>) without boxing or reflection. Know when a constraint beats a base class, and that constraints are part of your public contract.",
+      "materials": [
+        "constraints",
+        "generic-math"
+      ]
+    },
+    {
+      "prompt": "What do reflection and expression trees cost, and how do you reduce it?",
+      "tags": [
+        "Modern C#",
+        "Reflection"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Reflection is as fast as a direct call after the first use, and it behaves exactly the same under trimming and Native AOT, so there is nothing to optimize there.",
+        "Expression trees run faster than compiled code, so EF Core executes them directly instead of producing SQL.",
+        "Call MethodInfo.Invoke more often, since the runtime caches each result per argument value.",
+        "Reflection is slow per call and hurts trimming and AOT; cache metadata, compile delegates once, or move the work to source generators."
+      ],
+      "correct": 3,
+      "explanation": "Reflection is slow per call and defeats trimming and Native AOT. Cache MethodInfo, compile delegates or expression trees once, or move the work to build time with source generators. Expression trees are code as data; EF Core uses them to produce SQL.",
+      "materials": [
+        "expression-trees",
+        "reflection"
+      ]
+    },
+    {
+      "prompt": "What are source generators and why do they matter?",
+      "tags": [
+        "Modern C#",
+        "Source generators"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "They add code at compile time instead of using runtime reflection, giving speed and AOT-friendliness, as in System.Text.Json and LoggerMessage.",
+        "They are a Visual Studio-only feature, so CI builds ignore them and fall back to reflection.",
+        "They rewrite your source files on disk, so the generated changes must be committed.",
+        "They generate code at runtime the first time a type is used, which is why apps that rely on them usually start noticeably slower than reflection-based ones."
+      ],
+      "correct": 0,
+      "explanation": "They run at compile time and add code, replacing runtime reflection. Benefits: speed, AOT and trimming friendliness, compile-time errors. Examples: System.Text.Json serializers, logging (LoggerMessage), regex. Trade-offs: harder to debug and they slow the build if poorly written.",
+      "materials": [
+        "source-gen",
+        "stj-sourcegen",
+        "dotnet-blog"
+      ]
+    },
+    {
+      "prompt": "What is IAsyncEnumerable<T>, and when do you use it?",
+      "tags": [
+        "Modern C#",
+        "Async"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Cancellation is impossible with async streams, so a slow consumer can't release the producer.",
+        "A collection that loads every item into memory first and then exposes them one by one asynchronously.",
+        "An async stream consumed with await foreach, for items produced over time such as paged results, without loading everything first.",
+        "It replaces Task<T> for single results, since awaiting one value through a stream is faster."
+      ],
+      "correct": 2,
+      "explanation": "Async streams let a consumer await foreach over items produced over time, such as paged API results or a database cursor, without loading everything. Pass a CancellationToken with [EnumeratorCancellation]. Remember that ASP.NET Core can stream it as JSON, and that a slow consumer holds the producer's resources open.",
+      "materials": [
+        "async-streams"
+      ]
+    },
+    {
+      "prompt": "What are ref struct, readonly struct, in parameters and ref returns for?",
+      "tags": [
+        "Modern C#",
+        "Performance"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "ref struct types can be boxed and stored in collections like any other value type.",
+        "Avoiding copies and allocations: readonly struct prevents defensive copies, in passes read-only by reference, and ref returns expose storage.",
+        "in parameters copy the argument twice for safety, so they belong on every method by default.",
+        "They move structs onto the heap, so values can be stored in class fields, boxed into object and captured across await boundaries without any restrictions."
+      ],
+      "correct": 1,
+      "explanation": "They avoid copies and allocations. readonly struct stops defensive copies; in passes by reference read-only; ref returns hand back a reference into existing storage. A ref struct is stack-only, so no boxing, no fields in classes, no await across it. Use them only after measuring.",
+      "materials": [
+        "ref-struct",
+        "struct-types"
+      ]
+    },
+    {
+      "prompt": "How do closures and lambdas allocate, and how do you avoid it?",
+      "tags": [
+        "Modern C#",
+        "Performance"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A capturing lambda allocates a closure and often a delegate; static lambdas forbid captures, and state can be passed as a parameter instead.",
+        "Only non-capturing lambdas allocate, while capturing ones reuse a cached delegate.",
+        "static lambdas capture every local automatically, which avoids the closure object.",
+        "Lambdas never allocate, because the compiler inlines them into the caller."
+      ],
+      "correct": 0,
+      "explanation": "A lambda that captures variables allocates a closure object, and a delegate each time unless cached. Capturing a loop variable in older code was a classic bug. Use static lambdas to forbid captures, pass state as a parameter, and avoid lambdas in hot paths.",
+      "materials": [
+        "lambdas"
+      ]
+    },
+    {
+      "prompt": "Should you use System.Text.Json or Newtonsoft.Json?",
+      "tags": [
+        "Modern C#",
+        "Serialization"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Newtonsoft.Json is always faster, because System.Text.Json falls back to reflection for every property of every object it serializes, even with source generation enabled.",
+        "System.Text.Json is faster and stricter with source generation; Newtonsoft is more forgiving; silent mismatches at the boundary are the risk.",
+        "System.Text.Json ignores casing differences by default, so strict boundaries need no configuration.",
+        "They behave identically, so switching between them never changes how payloads are read."
+      ],
+      "correct": 1,
+      "explanation": "STJ is faster, lower-allocation, strict by default and has source generation; Newtonsoft is more forgiving and has more features. Know custom converters, naming policies, polymorphism, case-insensitivity and the danger of silently ignoring unknown or missing properties at an API boundary.",
+      "materials": [
+        "stj-overview"
+      ]
+    },
+    {
+      "prompt": "How do you choose between an array, List<T>, LinkedList<T> and Queue<T>?",
+      "tags": [
+        "Collections & Data Structures",
+        "Collections"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Queue<T> offers O(1) random access by index, making it a better general-purpose list.",
+        "LinkedList is the best default, because inserting in the middle is O(1) and allocating a separate node per item keeps the elements close together in memory.",
+        "List<T> appends cost O(n) every time, so growing data should always use a fixed array.",
+        "Arrays and lists are contiguous and cache-friendly with fast indexing; LinkedList rarely wins; Queue and Stack serve FIFO and LIFO."
+      ],
+      "correct": 3,
+      "explanation": "Arrays and lists are contiguous: fast indexing, cache-friendly, appends amortized O(1), inserts in the middle O(n). LinkedList rarely wins in practice because of per-node allocation and poor locality. Set an initial capacity when you know the size. Queue and stack for FIFO and LIFO access.",
+      "materials": [
+        "select-collection",
+        "collections"
+      ]
+    },
+    {
+      "prompt": "How does Dictionary<TKey,TValue> work, and what can go wrong?",
+      "tags": [
+        "Collections & Data Structures",
+        "Collections"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Mutating a key after insertion is fine, since the dictionary rehashes keys on every lookup.",
+        "A hash table with O(1) average lookup; keys need a stable GetHashCode and Equals, and a key mutated after insertion becomes unreachable.",
+        "It keeps its keys in a balanced search tree, so every lookup is O(log n) and the key's GetHashCode is never called by the dictionary at all.",
+        "It is safe for concurrent writes from many threads, because each operation takes an internal lock."
+      ],
+      "correct": 1,
+      "explanation": "A hash table with buckets: lookup is O(1) on average, O(n) if many keys collide. Keys need a correct, stable GetHashCode and Equals; a key mutated after insertion becomes unreachable. It is not thread-safe for concurrent writes. Mention resize cost and custom comparers (such as ordinal-ignore-case).",
+      "materials": [
+        "dictionary"
+      ]
+    },
+    {
+      "prompt": "When do you use HashSet, SortedDictionary, SortedSet or PriorityQueue?",
+      "tags": [
+        "Collections & Data Structures",
+        "Collections"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "PriorityQueue is stable for equal priorities, so ties come out in insertion order.",
+        "HashSet for membership and de-duplication, sorted collections for ordered iteration and ranges, and PriorityQueue for schedulers and top-k.",
+        "HashSet keeps insertion order, so it suits ordered iteration and range queries.",
+        "SortedSet gives O(1) lookups, which makes it faster than HashSet for membership."
+      ],
+      "correct": 1,
+      "explanation": "HashSet for fast membership and de-duplication. Sorted collections give ordered iteration and range queries at O(log n). PriorityQueue<TElement,TPriority> gives the next-highest-priority item, ideal for schedulers and top-k problems. Note it is not stable for equal priorities.",
+      "materials": [
+        "priorityqueue",
+        "select-collection"
+      ]
+    },
+    {
+      "prompt": "What are the traps of ConcurrentDictionary?",
+      "tags": [
+        "Collections & Data Structures",
+        "Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Every check-then-act sequence is atomic, because the whole dictionary is locked during each call.",
+        "Single operations are thread-safe but compound logic isn't, and the GetOrAdd factory may run more than once, so keep it free of side effects.",
+        "GetOrAdd guarantees that its value factory runs exactly once per key, even under heavy contention, so expensive or side-effecting factories are completely safe.",
+        "Count and enumeration are cheap, consistent snapshots that can be called freely in hot paths."
+      ],
+      "correct": 1,
+      "explanation": "Single operations are thread-safe, but compound logic is not. The factory delegate in GetOrAdd can run more than once and its result be discarded, so it must be side-effect free. Use Lazy<T> values when creation is expensive. Count and enumeration are not cheap snapshots.",
+      "materials": [
+        "threadsafe-collections",
+        "concurrentdictionary"
+      ]
+    },
+    {
+      "prompt": "What are immutable and frozen collections for?",
+      "tags": [
+        "Collections & Data Structures",
+        "Collections"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Frozen collections are cheaper to create than a normal Dictionary, so build them on every call.",
+        "Immutable collections modify themselves in place, which is why they are safe to share across threads.",
+        "FrozenDictionary is optimized for frequent writes, which makes it the natural choice for caches and counters that change on every single incoming request.",
+        "Immutable collections make thread-safe sharing trivial, while frozen ones are built once and optimized for very fast reads of fixed data."
+      ],
+      "correct": 3,
+      "explanation": "ImmutableArray and friends make safe sharing across threads trivial; updates return new instances. FrozenDictionary and FrozenSet are built once and optimized for very fast reads, which suits configuration and lookup tables that never change. Creation is slower than a normal dictionary.",
+      "materials": [
+        "immutable",
+        "frozen"
+      ]
+    },
+    {
+      "prompt": "What should a method accept and return: List<T>, IEnumerable<T> or IReadOnlyList<T>?",
+      "tags": [
+        "Collections & Data Structures",
+        "API design"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Accept List<T> so that callers must materialize their data first, and return IEnumerable<T> so the cost of any deferred query stays hidden from the caller.",
+        "Accept the most general type you need and return a useful read-only type such as IReadOnlyList<T>, not a mutable list or a deferred query.",
+        "Always return a mutable List<T> from properties, so callers can add to the object's internal state.",
+        "Return IEnumerable<T> everywhere, since callers can always get Count and index into it cheaply."
+      ],
+      "correct": 1,
+      "explanation": "Accept the most general type you need (often IEnumerable<T>); return the most useful read-only type (IReadOnlyList<T>) so callers know the count and can index it. Returning IEnumerable<T> from a deferred query hides cost; returning a mutable List<T> from a property lets callers corrupt state.",
+      "materials": [
+        "collections"
+      ]
+    },
+    {
+      "prompt": "What are common LINQ performance mistakes?",
+      "tags": [
+        "Collections & Data Structures",
+        "LINQ"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Using Any() instead of Count() > 0, since Any() reads the whole sequence.",
+        "Calling ToList() before Where() on a provider, which moves filtering into the database.",
+        "Count() > 0 instead of Any(), enumerating twice, Contains on a list inside a loop, and materializing a provider query before filtering.",
+        "Using a HashSet for lookups inside loops, which makes Contains O(n²)."
+      ],
+      "correct": 2,
+      "explanation": "Count() > 0 instead of Any(); enumerating twice; OrderBy inside a loop; Contains on a list inside a loop (O(n²), use a HashSet); LINQ over huge in-memory data in hot paths. Also know that ToList before Where on a query provider moves filtering to memory.",
+      "materials": [
+        "linq-overview"
+      ]
+    },
+    {
+      "prompt": "How do IComparable, IComparer and sort stability work?",
+      "tags": [
+        "Collections & Data Structures",
+        "Collections"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "List.Sort is stable and OrderBy is unstable, so equal elements keep their original relative order only when you sort a list in place with List.Sort.",
+        "IComparer can only be implemented by the element type itself, never by a separate class.",
+        "IComparable gives a natural order and IComparer an alternative one; List.Sort is unstable, OrderBy is stable, and comparers must be consistent.",
+        "A comparer may be inconsistent, because sorting algorithms detect and correct contradictions."
+      ],
+      "correct": 2,
+      "explanation": "IComparable<T> gives a type its natural order; IComparer<T> gives an alternative order. List.Sort is unstable; OrderBy is stable. A comparer must be consistent (transitive, antisymmetric) or sorting misbehaves. Compare strings ordinally or with an explicit culture.",
+      "materials": [
+        "comparisons"
+      ]
+    },
+    {
+      "prompt": "How do you cache in .NET, and what is a cache stampede?",
+      "tags": [
+        "Collections & Data Structures",
+        "Caching"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Giving every key the same expiration prevents stampedes, because all keys refresh together.",
+        "A stampede happens when the cache fills up and evicts every entry at once, and it is prevented by never setting an expiration on any cached key.",
+        "Distributed caches are for a single instance, while in-memory caches are shared across servers.",
+        "Use in-memory or distributed caching with expirations; a stampede is many requests rebuilding an expired hot key at once, fixed by coalescing."
+      ],
+      "correct": 3,
+      "explanation": "In-memory cache for one instance, distributed cache (Redis) for many. Set expirations and size limits. A stampede happens when a popular key expires and many requests rebuild it at once; prevent it with per-key locking, request coalescing or HybridCache, plus jittered expirations. Know what is safe to cache and how to invalidate.",
+      "materials": [
+        "caching-overview",
+        "distributed-caching",
+        "hybridcache"
+      ]
+    },
+    {
+      "prompt": "How would you find the top 10 most frequent items in a very large stream?",
+      "tags": [
+        "Collections & Data Structures",
+        "Algorithms"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Use a single List<T> and call Contains for each item, which keeps the work linear.",
+        "Sort the whole stream in memory and take the first ten items, which is O(n) for any input size because sorting large inputs is linear in .NET.",
+        "Keep a max-heap of every distinct item, since a heap of size 10 can't track frequencies.",
+        "Count with a dictionary if keys fit in memory and keep a size-10 min-heap; otherwise use approximate sketches, or partition by hash and merge."
+      ],
+      "correct": 3,
+      "explanation": "Count with a dictionary if the distinct keys fit in memory, then keep a min-heap of size 10 (O(n log 10)) instead of sorting everything. If they do not fit, discuss approximate structures (count-min sketch), partitioning by hash and merging, or pushing the work into the database. State complexity out loud.",
+      "materials": [
+        "priorityqueue"
+      ]
+    },
+    {
+      "prompt": "What do transaction isolation levels prevent, and how does PostgreSQL behave?",
+      "tags": [
+        "SQL, PostgreSQL & EF Core",
+        "PostgreSQL"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Repeatable read in PostgreSQL re-reads the latest committed data on every statement.",
+        "PostgreSQL defaults to serializable isolation, which takes table-level locks so that concurrent transactions never conflict and never need to be retried.",
+        "Read committed prevents write skew and phantom reads, so higher levels add nothing in PostgreSQL.",
+        "They guard against dirty, non-repeatable and phantom reads and write skew; Postgres defaults to read committed, and serializable may abort, so retry."
+      ],
+      "correct": 3,
+      "explanation": "Dirty read, non-repeatable read, phantom read, write skew. PostgreSQL's default is read committed; repeatable read gives a stable snapshot; serializable detects dangerous patterns and aborts one transaction, so the application must retry. Higher isolation costs retries, not locks.",
+      "materials": [
+        "pg-isolation",
+        "pg-docs"
+      ]
+    },
+    {
+      "prompt": "Which index types does PostgreSQL offer, and when do you use each?",
+      "tags": [
+        "SQL, PostgreSQL & EF Core",
+        "PostgreSQL"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "B-tree for equality and ranges, GIN for arrays, JSONB and full text, GiST for geometry and ranges, BRIN for huge naturally ordered tables.",
+        "GIN is the default for equality and range queries, and B-tree is reserved for full-text search.",
+        "BRIN suits small, randomly ordered tables, because it stores an entry for every single row.",
+        "Indexes add no cost to writes, so every column should get its own index."
+      ],
+      "correct": 0,
+      "explanation": "B-tree for equality and ranges (the default); GIN for arrays, JSONB and full text; GiST for geometry and ranges; BRIN for huge append-only, naturally ordered tables. Partial indexes cover a subset; multicolumn index order matters; every index slows writes.",
+      "materials": [
+        "pg-index-types",
+        "pg-indexes",
+        "use-the-index-luke"
+      ]
+    },
+    {
+      "prompt": "How do you find out why a PostgreSQL query is slow?",
+      "tags": [
+        "SQL, PostgreSQL & EF Core",
+        "PostgreSQL"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Run EXPLAIN (ANALYZE, BUFFERS), compare estimated and actual rows, look for big sequential scans and spilled sorts, then fix and re-measure.",
+        "Index every column the query touches, then skip measuring, since indexes always help.",
+        "Restart the database to reset statistics, because stale statistics make queries faster.",
+        "Run plain EXPLAIN without ANALYZE, because the actual row counts and timings are irrelevant to the planner and only the estimated costs matter for tuning."
+      ],
+      "correct": 0,
+      "explanation": "Run EXPLAIN (ANALYZE, BUFFERS). Compare estimated and actual rows (bad estimates mean stale statistics), look for sequential scans on big tables, nested loops over large sets, and sorts spilling to disk. Fix with an index, a rewrite or fresh statistics, then re-measure.",
+      "materials": [
+        "pg-explain"
+      ]
+    },
+    {
+      "prompt": "How does PostGIS index and query spatial data?",
+      "tags": [
+        "SQL, PostgreSQL & EF Core",
+        "PostGIS"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "PostGIS stores coordinates in B-tree indexes on latitude, so wrapping the column in a function still lets the planner use that index for every spatial query.",
+        "Geometry and geography are identical, and distances measured in degrees are accurate everywhere.",
+        "Spatial queries can't use indexes at all, so every search scans the full table.",
+        "A GiST index makes bounding-box searches fast and functions like ST_DWithin use it; know geometry versus geography and SRIDs."
+      ],
+      "correct": 3,
+      "explanation": "A GiST index over geometry or geography makes bounding-box searches fast; functions such as ST_DWithin use it, while wrapping the column in a function can defeat it. Know geometry versus geography (planar versus spherical), SRIDs, and why distance in degrees is wrong.",
+      "materials": [
+        "postgis-docs",
+        "postgis-indexing"
+      ]
+    },
+    {
+      "prompt": "How do you partition a table and isolate tenants in PostgreSQL?",
+      "tags": [
+        "SQL, PostgreSQL & EF Core",
+        "PostgreSQL"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Row-level security returns every row when the tenant setting is missing, which is the safe default.",
+        "The partition key is easy to change later, so it can be chosen arbitrarily at first.",
+        "Partition by range or list/hash for pruning and cheap drops, and add row-level security as a second line of tenant isolation.",
+        "Partitioning the table by tenant replaces the need for any isolation checks, because a query can never read rows from a partition other than its own."
+      ],
+      "correct": 2,
+      "explanation": "Declarative partitioning by range (time) or list/hash (tenant) speeds pruning and makes dropping old data instant. Row-level security enforces tenant isolation in the database as a second line of defence; set the tenant per connection or transaction and test that a missing setting returns nothing. Partition-key choice is hard to change later.",
+      "materials": [
+        "pg-partitioning",
+        "pg-rls"
+      ]
+    },
+    {
+      "prompt": "How do SELECT ... FOR UPDATE SKIP LOCKED and advisory locks help?",
+      "tags": [
+        "SQL, PostgreSQL & EF Core",
+        "PostgreSQL"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "SKIP LOCKED makes every worker wait on the same locked row until it is released, which guarantees that a queue table is processed in strict order.",
+        "Advisory locks lock the whole table, so they are best held for hours to keep a single leader.",
+        "SKIP LOCKED lets workers claim different queue or outbox rows without blocking, and advisory locks give application-level mutual exclusion.",
+        "Long transactions holding these locks help vacuum by freezing rows early."
+      ],
+      "correct": 2,
+      "explanation": "SKIP LOCKED lets many workers claim different rows from a queue or outbox table without blocking each other. Advisory locks give application-level mutual exclusion (such as one leader). Both need short transactions; a long-held lock blocks vacuum and other writers.",
+      "materials": [
+        "pg-locking",
+        "pg-select"
+      ]
+    },
+    {
+      "prompt": "What is MVCC, and why do vacuum and bloat matter?",
+      "tags": [
+        "SQL, PostgreSQL & EF Core",
+        "PostgreSQL"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "MVCC updates rows in place, so dead tuples never pile up and vacuum is unnecessary.",
+        "Idle-in-transaction sessions speed up vacuum, because they hold clean snapshots.",
+        "Under MVCC readers block writers, so long reports must run at night.",
+        "Updates create new row versions so readers don't block writers; dead versions pile up until vacuum runs, and long transactions block cleanup."
+      ],
+      "correct": 3,
+      "explanation": "Updates create new row versions; readers see a snapshot and do not block writers. Dead versions pile up until vacuum reclaims them. Long-running transactions and idle-in-transaction sessions stop cleanup, causing bloat and slowdowns. Monitor dead tuples and autovacuum.",
+      "materials": [
+        "pg-mvcc",
+        "pg-vacuum"
+      ]
+    },
+    {
+      "prompt": "How do you run EF Core migrations safely in production?",
+      "tags": [
+        "SQL, PostgreSQL & EF Core",
+        "EF Core"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Review generated SQL scripts, avoid auto-migrating from many instances at once, and use expand-and-contract across releases.",
+        "Call Database.Migrate() at startup in every instance, so all replicas race to apply the schema change and whichever finishes first wins the deployment.",
+        "Drop the old column in the same deployment that adds the new one, to keep the schema clean.",
+        "Rename columns in a single release, since old and new code never run at the same time."
+      ],
+      "correct": 0,
+      "explanation": "Generate SQL scripts and review them; do not auto-migrate at app start with many instances. Use expand-and-contract: add the new column, deploy code that writes both, backfill, switch reads, then drop the old column in a later release. Avoid long table locks and know your rollback.",
+      "materials": [
+        "ef-migrations",
+        "parallel-change"
+      ]
+    },
+    {
+      "prompt": "How do you make EF Core fast for bulk work and hot paths?",
+      "tags": [
+        "SQL, PostgreSQL & EF Core",
+        "EF Core"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Load every entity, change it in a loop and call SaveChanges after each one, because per-row round trips are what make bulk updates in EF Core fast and safe.",
+        "Avoid split queries, since cartesian explosions occur only with raw SQL.",
+        "Use ExecuteUpdate and ExecuteDelete, compiled queries, AsNoTracking projections and split queries, and raw SQL for the hottest paths.",
+        "Always keep tracking on for reads, because AsNoTracking makes projections slower."
+      ],
+      "correct": 2,
+      "explanation": "ExecuteUpdate and ExecuteDelete run set-based SQL without loading entities. Use compiled queries, AsNoTracking, projections to DTOs, split queries to avoid cartesian explosions, and batching. Drop to Dapper or raw SQL for the few hot or complex queries, and explain why.",
+      "materials": [
+        "ef-execute",
+        "ef-perf"
+      ]
+    },
+    {
+      "prompt": "How does connection pooling work, and how do you get pool exhaustion?",
+      "tags": [
+        "SQL, PostgreSQL & EF Core",
+        "PostgreSQL"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Every request opens a brand-new physical connection to the database, so the configured pool size has no measurable effect on the service's throughput.",
+        "Fix exhaustion by raising each instance's pool size, regardless of the database's connection limit.",
+        "The driver reuses connections up to a maximum; leaks, long transactions and slow queries exhaust it, so size pools against the server's limit.",
+        "Undisposed connections return to the pool automatically on the next garbage collection."
+      ],
+      "correct": 2,
+      "explanation": "The driver reuses open connections up to a maximum; each request holds one while it runs. Leaks (an undisposed connection), long transactions and slow queries exhaust the pool, so requests wait and time out. Size pools against the database's connection limit across all instances, and consider PgBouncer for many clients.",
+      "materials": [
+        "npgsql-conn",
+        "npgsql-ef"
+      ]
+    },
+    {
+      "prompt": "What are the biggest API security risks?",
+      "tags": [
+        "Security & API Design",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Broken object-level authorization tops OWASP's API list, alongside broken authentication, excessive data exposure and missing rate limits.",
+        "Returning full entities is safest, since clients can ignore fields they shouldn't see.",
+        "Once a user is authenticated, object-level checks are unnecessary because ids are hard to guess.",
+        "Slow response times top the OWASP API list, ahead of authorization flaws."
+      ],
+      "correct": 0,
+      "explanation": "Broken object-level authorization (a caller reads another tenant's record by changing an id) tops the OWASP API list. Also broken authentication, excessive data exposure, missing rate limits, and mass assignment. Mitigate with per-object authorization checks, DTOs instead of entities, and tests that try cross-tenant access.",
+      "materials": [
+        "owasp-api",
+        "owasp-api-project"
+      ]
+    },
+    {
+      "prompt": "What are OAuth 2.0 and OpenID Connect, and which flow fits which client?",
+      "tags": [
+        "Security & API Design",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "OpenID Connect handles authorization while OAuth 2.0 proves identity, and browser-based apps should keep using the implicit flow because it needs no back end.",
+        "Service-to-service calls should use authorization code with PKCE, because no user is present.",
+        "OAuth 2.0 delegates authorization and OIDC adds identity; apps use authorization code with PKCE, and services use client credentials.",
+        "ID tokens should be sent to APIs as access tokens, since they contain the user's scopes."
+      ],
+      "correct": 2,
+      "explanation": "OAuth 2.0 delegates authorization; OIDC adds identity on top. Browser or mobile apps use authorization code with PKCE; service-to-service uses client credentials. Know access versus ID versus refresh tokens, scopes, and why the implicit flow is discouraged.",
+      "materials": [
+        "rfc6749",
+        "rfc7636",
+        "oidc"
+      ]
+    },
+    {
+      "prompt": "How do you manage secrets and encryption keys in a .NET service?",
+      "tags": [
+        "Security & API Design",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Keep them out of source and images: use a secret store with managed identity, user-secrets locally, rotation, and shared Data Protection keys.",
+        "Bake secrets into the container image, so every instance has them without extra configuration.",
+        "Keep Data Protection keys in each instance's memory, since every instance decrypts only its own data.",
+        "Store secrets in appsettings.json in the repository, because the build pipeline encrypts configuration files automatically before they reach any environment."
+      ],
+      "correct": 0,
+      "explanation": "Never in source control or images. Use a secret store (Azure Key Vault or similar) with managed identity, user-secrets locally, and rotation. The Data Protection API handles app-level encryption keys, which need shared persistent storage across instances.",
+      "materials": [
+        "app-secrets",
+        "data-protection"
+      ]
+    },
+    {
+      "prompt": "What are CORS, CSRF and XSS, and what stops each?",
+      "tags": [
+        "Security & API Design",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "CSRF mostly affects bearer-token APIs, so anti-forgery tokens are mandatory on every JSON endpoint.",
+        "CORS relaxes cross-origin reads and isn't authentication; CSRF is stopped by anti-forgery tokens or SameSite; XSS by output encoding and a CSP.",
+        "CORS is an authentication mechanism that stops attackers from calling your API with stolen tokens, so enabling it correctly protects every endpoint.",
+        "XSS is prevented by allowing CORS from all origins, which stops injected scripts from running."
+      ],
+      "correct": 1,
+      "explanation": "CORS is a browser rule for cross-origin reads, relaxed by server headers; it is not authentication. CSRF tricks a browser into sending cookies to your site; stop it with anti-forgery tokens or SameSite cookies (not needed for bearer-token APIs). XSS injects script into pages; stop it with output encoding and a Content-Security-Policy.",
+      "materials": [
+        "cors",
+        "csrf",
+        "xss",
+        "owasp-cheatsheets"
+      ]
+    },
+    {
+      "prompt": "How do you prevent SQL injection and mass assignment?",
+      "tags": [
+        "Security & API Design",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Bind request bodies directly to entities, because EF Core ignores fields clients shouldn't set.",
+        "Escape the quotes in user input with string.Replace and then build the SQL by concatenation, which is just as safe as parameters and keeps the query readable.",
+        "SQL injection only affects stored procedures, so inline queries are safe without parameters.",
+        "Parameterize every query and bind requests to input DTOs with only the allowed fields, so clients can't set IsAdmin or TenantId."
+      ],
+      "correct": 3,
+      "explanation": "Parameterize every query (EF Core and Dapper do so by default; string-built SQL does not). Never bind request bodies straight to entities: use input DTOs with only the allowed fields, so a client cannot set IsAdmin or TenantId. Validate at the boundary and encode at output.",
+      "materials": [
+        "sqli-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What makes a REST API well designed?",
+      "tags": [
+        "Security & API Design",
+        "API design"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Resource nouns, correct verbs and status codes, respected idempotency, 201 with Location, and consistent ProblemDetails errors.",
+        "Expose database entities directly, so the API mirrors the internal model exactly.",
+        "Verbs in every URL, POST for every operation, and 200 OK with an error flag on failure.",
+        "POST is idempotent and PUT is not, so retries should always use POST."
+      ],
+      "correct": 0,
+      "explanation": "Nouns for resources, correct verbs and status codes, safe and idempotent methods respected (GET, PUT, DELETE idempotent; POST not). Know PUT versus PATCH, 201 with Location, 409 versus 422, consistent errors (ProblemDetails) and no leaking of internal models.",
+      "materials": [
+        "api-design",
+        "rfc9110",
+        "rfc9457"
+      ]
+    },
+    {
+      "prompt": "How do you version a public API without breaking partners?",
+      "tags": [
+        "Security & API Design",
+        "API design"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Keep changes additive, version in the URL or a header, deprecate on a published timeline, and diff the OpenAPI document in CI.",
+        "Remove old versions as soon as a new one ships, so partners are pushed to upgrade quickly.",
+        "Renaming a field is a non-breaking change, as long as the new field keeps the same type, because partners' JSON parsers match fields by type and position.",
+        "Changing a field's meaning while keeping its name and type is always backward compatible."
+      ],
+      "correct": 0,
+      "explanation": "Additive changes are compatible; removing or renaming fields, changing types or semantics is breaking. Version in the URL or a header, support old versions on a published deprecation timeline, and catch breaks automatically by diffing the OpenAPI document in CI.",
+      "materials": [
+        "api-versioning",
+        "openapi"
+      ]
+    },
+    {
+      "prompt": "How do you paginate, filter and cache API responses?",
+      "tags": [
+        "Security & API Design",
+        "API design"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Let clients request unlimited page sizes, so they can fetch everything in one call.",
+        "Prefer cursor (keyset) pagination for large changing data, cap the page size, and use ETags and Cache-Control for conditional caching.",
+        "ETags force a full response every time, so they should be avoided on GET requests.",
+        "Offset pagination stays stable and fast on huge tables, so cursors aren't needed."
+      ],
+      "correct": 1,
+      "explanation": "Offset pagination is simple but slow and unstable on large or changing data; cursor (keyset) pagination is stable and fast. Cap page size. Use ETags with If-None-Match for conditional GETs, and Cache-Control for what is safe to cache.",
+      "materials": [
+        "api-design"
+      ]
+    },
+    {
+      "prompt": "How do you design webhooks to be safe and reliable?",
+      "tags": [
+        "Security & API Design",
+        "Integration"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Process the event fully before responding, however long it takes, to guarantee ordering.",
+        "Sign payloads with HMAC plus a timestamp, deliver at-least-once with retries and event ids, and expose delivery logs and manual replay.",
+        "Skip signatures, since only the receiver knows the webhook URL and it can never leak.",
+        "Send each webhook exactly once with no retries, and verify the signature with an ordinary string equality check, since timing differences are too small to exploit."
+      ],
+      "correct": 1,
+      "explanation": "Sign each payload (HMAC with a shared secret, compared in constant time) and include a timestamp to stop replays. Deliver at-least-once with retries and backoff, include an event id so receivers can de-duplicate, respond fast and process async, and expose delivery logs and a manual replay.",
+      "materials": [
+        "fixedtimeequals"
+      ]
+    },
+    {
+      "prompt": "When do you choose REST, gRPC or GraphQL, and what do HTTP/2 and HTTP/3 change?",
+      "tags": [
+        "Security & API Design",
+        "API design"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "HTTP/3 runs over TCP, which adds the head-of-line blocking that HTTP/2 avoids.",
+        "gRPC is the best fit for public browser-facing APIs, because its binary protocol is the most cache-friendly option and every browser supports it natively.",
+        "REST for public cache-friendly APIs, gRPC for internal contracts, GraphQL for flexible queries; HTTP/2 multiplexes and HTTP/3 runs on QUIC.",
+        "GraphQL makes HTTP caching and query-cost control easier than REST does."
+      ],
+      "correct": 2,
+      "explanation": "REST for public, cache-friendly APIs; gRPC for efficient internal service calls with contracts; GraphQL when clients need flexible queries, at the cost of caching and query-cost control. HTTP/2 multiplexes requests on one connection; HTTP/3 runs over QUIC and avoids head-of-line blocking on lossy networks.",
+      "materials": [
+        "grpc-comparison",
+        "http3"
+      ]
+    },
+    {
+      "prompt": "How do Kafka partitions, consumer groups and offsets work?",
+      "tags": [
+        "Messaging, Delivery & System Design",
+        "Kafka"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Rebalances never pause consumption, so handler speed has no effect on group stability.",
+        "Kafka orders messages across all partitions of a topic, and any number of consumers in one group can read the same partition in parallel to scale out.",
+        "Committing offsets before processing gives at-least-once delivery, since nothing can be skipped.",
+        "Order holds only within a partition, each partition goes to one consumer in a group, and committing after processing gives at-least-once."
+      ],
+      "correct": 3,
+      "explanation": "A topic is split into partitions; order holds only within one. Each partition is read by one consumer in a group, so partitions cap parallelism. Offsets record progress; committing after processing gives at-least-once. A rebalance pauses consumption, so keep handlers fast and use static membership where it helps.",
+      "materials": [
+        "kafka-docs",
+        "confluent"
+      ]
+    },
+    {
+      "prompt": "How do you handle poison messages and schema changes in Kafka?",
+      "tags": [
+        "Messaging, Delivery & System Design",
+        "Kafka"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Reuse a removed field's name for a new meaning, since the schema registry tracks it.",
+        "Retry a poison message forever, blocking its partition until someone manually fixes the payload, so that no message is ever processed out of order.",
+        "Retry a bounded number of times, then dead-letter with error context, and use a schema registry with compatibility rules.",
+        "Make every new field required, so old consumers fail fast on new messages."
+      ],
+      "correct": 2,
+      "explanation": "Retry a bounded number of times, then send the message to a dead-letter topic with error context and alert. Use a schema registry with compatibility rules (backward, forward, full) so producers cannot break consumers; make fields optional and never reuse a field's meaning.",
+      "materials": [
+        "schema-registry"
+      ]
+    },
+    {
+      "prompt": "How do you choose between a message queue, an event stream and a database table?",
+      "tags": [
+        "Messaging, Delivery & System Design",
+        "Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Queues for task distribution with acknowledgements, streams for replayable ordered logs, and a SKIP LOCKED table for low-volume work.",
+        "Queues replay long-term history to many readers, which streams can't do.",
+        "A table can't serve as a queue, because rows can't be claimed concurrently.",
+        "Kafka is always right, since queues and tables can't distribute work."
+      ],
+      "correct": 0,
+      "explanation": "Queues (Service Bus, RabbitMQ) suit task distribution with per-message acknowledgement. Streams (Kafka) suit replayable, ordered event logs with many readers. A table with SKIP LOCKED is enough for low-volume work and avoids a new dependency. Pick by replay, ordering, throughput and operations cost.",
+      "materials": [
+        "messaging-patterns"
+      ]
+    },
+    {
+      "prompt": "What are Temporal's determinism rules, and why do they exist?",
+      "tags": [
+        "Messaging, Delivery & System Design",
+        "Temporal"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Workflow code can change freely, because running executions always restart from the start.",
+        "Activities must be deterministic, while workflow code may perform any I/O it needs.",
+        "Workflows are replayed from history, so they must decide identically: no randomness, wall-clock time or direct I/O; side effects go in activities.",
+        "Workflow code runs exactly once and is never replayed, so generating random numbers, reading the clock and making direct HTTP calls inside it are all perfectly safe."
+      ],
+      "correct": 2,
+      "explanation": "Workflow code is replayed from history after a crash, so it must make the same decisions each time: no random numbers, wall-clock time, direct I/O or non-deterministic iteration inside a workflow. Side effects belong in activities; use the workflow APIs for time and timers. Changing workflow code needs versioning for running executions.",
+      "materials": [
+        "temporal",
+        "temporal-workflows"
+      ]
+    },
+    {
+      "prompt": "How do you containerize and deploy a .NET service well?",
+      "tags": [
+        "Messaging, Delivery & System Design",
+        "Delivery"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Use the full SDK image as the runtime image and run the process as root, so compilers and debugging tools are always available inside production containers.",
+        "Liveness and readiness are interchangeable, so one endpoint can check the database for both.",
+        "Multi-stage builds, a small runtime image, a non-root user, liveness and readiness probes, config from the environment and graceful shutdown.",
+        "Ship migrations that break the old version, since rolling deploys stop old instances first."
+      ],
+      "correct": 2,
+      "explanation": "Multi-stage Dockerfile, a small runtime image, non-root user, health probes (liveness versus readiness), config from environment, graceful shutdown on SIGTERM. Deploy with rolling or blue-green releases, and keep migrations compatible with the old and new version running together.",
+      "materials": [
+        "containerize",
+        "health-checks"
+      ]
+    },
+    {
+      "prompt": "What belongs in a CI/CD pipeline for a back-end service?",
+      "tags": [
+        "Messaging, Delivery & System Design",
+        "Delivery"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Skip integration tests in CI, since staging will catch the same problems later anyway.",
+        "Deploy to production first, then smoke test in staging to save time.",
+        "Build, unit and Testcontainers integration tests, scanning, an OpenAPI breaking-change check, then one artifact promoted through environments.",
+        "Rebuild the artifact separately for every environment, so that staging and production each get a fresh build that includes the latest dependency versions."
+      ],
+      "correct": 2,
+      "explanation": "Build, unit and integration tests (Testcontainers), static analysis and vulnerability scanning, OpenAPI breaking-change check, container build, deploy to staging, smoke tests, then gated promotion. Keep it fast, and make the same artifact move through every environment.",
+      "materials": [
+        "ci"
+      ]
+    },
+    {
+      "prompt": "What are SLIs, SLOs and error budgets, and how do you use them?",
+      "tags": [
+        "Messaging, Delivery & System Design",
+        "Reliability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Error budgets must never be spent, so releases stop at the first error.",
+        "An SLI is a measurement, an SLO is its target, and the error budget is the allowed shortfall; alert on burn rate rather than single errors.",
+        "Alert on each failed request, because burn rates hide real problems.",
+        "An SLO is the measurement, and an SLI is the contract with penalties."
+      ],
+      "correct": 1,
+      "explanation": "An SLI is a measurement (such as the share of requests under 300 ms); an SLO is the target for it; the error budget is the allowed shortfall. Alert on budget burn rate rather than single errors, and spend the budget deliberately on releases. Pick SLOs users actually feel.",
+      "materials": [
+        "sre-slo"
+      ]
+    },
+    {
+      "prompt": "How would you design a system to send a million emails or SMS messages reliably?",
+      "tags": [
+        "Messaging, Delivery & System Design",
+        "System design"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Persist the job, fan out batches through a queue, rate limit per provider, send idempotently, and track per-recipient state and webhooks.",
+        "Skip per-recipient state, because providers guarantee delivery and never send bounces.",
+        "Send every message from one web request in a tight loop and retry each failure immediately, since providers handle any volume and dedupe repeated sends for you.",
+        "Use one provider with no rate limiting, because providers accept unlimited traffic."
+      ],
+      "correct": 0,
+      "explanation": "Clarify scale and deadlines. Accept the job, persist it, fan out in batches through a queue, rate limit per provider, make each send idempotent, track state per recipient, handle provider webhooks and bounces, and expose progress. Discuss backpressure, retries, cost and what to do when a provider is down.",
+      "materials": [
+        "queue-leveling"
+      ]
+    },
+    {
+      "prompt": "How do you migrate a legacy system with no downtime?",
+      "tags": [
+        "Messaging, Delivery & System Design",
+        "Migration"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Use the strangler fig: put a facade in front, move one capability at a time, run both in parallel and compare, then retire the old path.",
+        "Copy the old code into a new repository, which counts as a migration without risk.",
+        "Turn off the legacy system first, then build the replacement from its database.",
+        "Rewrite the entire system in one go and switch over during a single weekend cutover, skipping any parallel run so the team can focus on the new code."
+      ],
+      "correct": 0,
+      "explanation": "Strangler fig: put a facade in front, move one capability at a time to the new system, run both in parallel, compare results, then retire the old path. Use dual reads or shadow traffic to build confidence, and always keep a rollback plan.",
+      "materials": [
+        "strangler",
+        "azure-patterns"
+      ]
+    },
+    {
+      "prompt": "How should you answer \"tell me about a hard decision you made with incomplete information\"?",
+      "tags": [
+        "Messaging, Delivery & System Design",
+        "Behavioural"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Focus on who made the mistake, rather than on what you learned or would change.",
+        "Tell a short story: the context, options and costs, how you reduced uncertainty, who you involved, the decision, the outcome and lessons.",
+        "Describe only the final technology you picked and why it was objectively correct, leaving out the alternatives you rejected and what actually happened afterwards.",
+        "Explain that you never decide without full information, and wait until everything is known."
+      ],
+      "correct": 1,
+      "explanation": "Use a short story: the context, the options and their costs, how you reduced uncertainty (a spike, a measurement), who you involved, what you decided and why, what happened, and what you would change. Staff-level answers show influence beyond your own code and honesty about being wrong.",
+      "materials": [
+        "adr"
+      ]
+    }
+  ]
+}

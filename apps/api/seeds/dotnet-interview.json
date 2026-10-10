@@ -1,0 +1,1716 @@
+{
+  "name": "50 .NET interview questions",
+  "materials": [
+    {
+      "key": "types",
+      "type": "article",
+      "title": "The C# type system",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/",
+      "author": "Microsoft Learn",
+      "description": "Value types, reference types and how the C# type system fits together."
+    },
+    {
+      "key": "structs-spec",
+      "type": "article",
+      "title": "Structs (C# language specification)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/structs",
+      "author": "Microsoft Learn",
+      "description": "The formal rules for struct semantics, copying and default values."
+    },
+    {
+      "key": "records",
+      "type": "article",
+      "title": "Records (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record",
+      "author": "Microsoft Learn",
+      "description": "Record classes and record structs: value equality, with-expressions, immutability. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "boxing",
+      "type": "article",
+      "title": "Boxing and unboxing",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/types/boxing-and-unboxing",
+      "author": "Microsoft Learn",
+      "description": "What boxing allocates and how to avoid it."
+    },
+    {
+      "key": "conversions",
+      "type": "article",
+      "title": "Type conversions, casting and boxing",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/conversions",
+      "author": "Microsoft Learn",
+      "description": "Implicit and explicit conversions, casts and boxing."
+    },
+    {
+      "key": "nrt",
+      "type": "article",
+      "title": "Nullable reference types",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references",
+      "author": "Microsoft Learn",
+      "description": "How nullable annotations and warnings work, and their limits. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "nullable-value",
+      "type": "article",
+      "title": "Nullable value types",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types",
+      "author": "Microsoft Learn",
+      "description": "Nullable<T>, lifted operators and HasValue."
+    },
+    {
+      "key": "linq-intro",
+      "type": "article",
+      "title": "Introduction to LINQ queries",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/linq/get-started/introduction-to-linq-queries",
+      "author": "Microsoft Learn",
+      "description": "Query anatomy and deferred execution."
+    },
+    {
+      "key": "linq-overview",
+      "type": "article",
+      "title": "LINQ overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/linq/",
+      "author": "Microsoft Learn",
+      "description": "Language-Integrated Query across objects, databases and XML."
+    },
+    {
+      "key": "iqueryable",
+      "type": "article",
+      "title": "IQueryable interface",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.linq.iqueryable",
+      "author": "Microsoft Learn",
+      "description": "API reference: expression trees and query providers. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "delegates",
+      "type": "article",
+      "title": "Delegates overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/delegates-overview",
+      "author": "Microsoft Learn",
+      "description": "Delegates, Func and Action, multicast invocation. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "events",
+      "type": "article",
+      "title": "Events overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/events-overview",
+      "author": "Microsoft Learn",
+      "description": "Declaring, raising and subscribing to events. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "variance-cs",
+      "type": "article",
+      "title": "Covariance and contravariance (C#)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/covariance-contravariance/",
+      "author": "Microsoft Learn",
+      "description": "in/out variance on interfaces and delegates, and array covariance."
+    },
+    {
+      "key": "variance-generics",
+      "type": "article",
+      "title": "Covariance and contravariance in generics",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/generics/covariance-and-contravariance",
+      "author": "Microsoft Learn",
+      "description": "Variant generic interfaces and delegates in .NET."
+    },
+    {
+      "key": "string-ops",
+      "type": "article",
+      "title": "String operations: matching, performance and span-based search",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/string-operations",
+      "author": "Microsoft Learn",
+      "description": "Immutability, comparisons and allocation-free string handling."
+    },
+    {
+      "key": "value-equality",
+      "type": "article",
+      "title": "How to define value equality for a type",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/how-to-define-value-equality-for-a-type",
+      "author": "Microsoft Learn",
+      "description": "Implementing Equals, GetHashCode, == and IEquatable<T> correctly."
+    },
+    {
+      "key": "equality-comparisons",
+      "type": "article",
+      "title": "Equality comparisons",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/equality-comparisons",
+      "author": "Microsoft Learn",
+      "description": "Reference equality versus value equality in C#."
+    },
+    {
+      "key": "pattern-matching",
+      "type": "article",
+      "title": "Pattern matching overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/patterns/pattern-matching",
+      "author": "Microsoft Learn",
+      "description": "is, switch expressions and property patterns — a frequent follow-up question."
+    },
+    {
+      "key": "async-faq",
+      "type": "article",
+      "title": "Async/Await FAQ",
+      "url": "https://devblogs.microsoft.com/dotnet/asyncawait-faq/",
+      "author": ".NET Blog",
+      "description": "What the compiler and runtime actually do for async methods."
+    },
+    {
+      "key": "tap-consuming",
+      "type": "article",
+      "title": "Consuming the task-based asynchronous pattern",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/consuming-the-task-based-asynchronous-pattern",
+      "author": "Microsoft Learn",
+      "description": "Awaiting tasks, continuations, combinators and exceptions."
+    },
+    {
+      "key": "configureawait",
+      "type": "article",
+      "title": "ConfigureAwait FAQ",
+      "url": "https://devblogs.microsoft.com/dotnet/configureawait-faq/",
+      "author": ".NET Blog",
+      "description": "Stephen Toub on synchronization contexts and when ConfigureAwait(false) matters."
+    },
+    {
+      "key": "valuetask",
+      "type": "article",
+      "title": "Understanding the whys, whats and whens of ValueTask",
+      "url": "https://devblogs.microsoft.com/dotnet/understanding-the-whys-whats-and-whens-of-valuetask/",
+      "author": ".NET Blog",
+      "description": "When ValueTask saves allocations and the rules for consuming it."
+    },
+    {
+      "key": "valuetask-pooling",
+      "type": "article",
+      "title": "Async ValueTask pooling in .NET 5",
+      "url": "https://devblogs.microsoft.com/dotnet/async-valuetask-pooling-in-net-5/",
+      "author": ".NET Blog",
+      "description": "How the runtime pools async state machines behind ValueTask."
+    },
+    {
+      "key": "dont-block",
+      "type": "article",
+      "title": "Don't block on async code",
+      "url": "https://blog.stephencleary.com/2012/07/dont-block-on-async-code.html",
+      "author": "Stephen Cleary",
+      "description": "The classic explanation of the .Result / .Wait() deadlock."
+    },
+    {
+      "key": "threadpool",
+      "type": "article",
+      "title": "ThreadPool class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.threading.threadpool?view=net-10.0",
+      "author": "Microsoft Learn",
+      "description": "API reference for the managed thread pool."
+    },
+    {
+      "key": "threading-config",
+      "type": "article",
+      "title": "Runtime configuration options for threading",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/runtime-config/threading",
+      "author": "Microsoft Learn",
+      "description": "Thread-pool settings such as minimum threads."
+    },
+    {
+      "key": "cancellation",
+      "type": "article",
+      "title": "Cancellation in managed threads",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads",
+      "author": "Microsoft Learn",
+      "description": "The cooperative cancellation model with CancellationToken."
+    },
+    {
+      "key": "cleary-cancellation",
+      "type": "article",
+      "title": "Cancellation, part 1: overview",
+      "url": "https://blog.stephencleary.com/2022/02/cancellation-1-overview.html",
+      "author": "Stephen Cleary",
+      "description": "A practical series on cooperative cancellation."
+    },
+    {
+      "key": "using-threads",
+      "type": "article",
+      "title": "Using threads and threading",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/threading/using-threads-and-threading",
+      "author": "Microsoft Learn",
+      "description": "Creating threads and synchronizing access to shared data."
+    },
+    {
+      "key": "threading-basics",
+      "type": "article",
+      "title": "Managed threading basics",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/threading/managed-threading-basics",
+      "author": "Microsoft Learn",
+      "description": "Threads, synchronization primitives and their trade-offs."
+    },
+    {
+      "key": "channels",
+      "type": "article",
+      "title": "Channels",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/channels",
+      "author": "Microsoft Learn",
+      "description": "Bounded and unbounded async producer-consumer queues."
+    },
+    {
+      "key": "channels-intro",
+      "type": "article",
+      "title": "An introduction to System.Threading.Channels",
+      "url": "https://devblogs.microsoft.com/dotnet/an-introduction-to-system-threading-channels/",
+      "author": ".NET Blog",
+      "description": "Design and usage of channels, with backpressure."
+    },
+    {
+      "key": "foreachasync",
+      "type": "article",
+      "title": "Parallel.ForEachAsync method",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.parallel.foreachasync?view=net-7.0",
+      "author": "Microsoft Learn",
+      "description": "Bounded-concurrency async loops with MaxDegreeOfParallelism."
+    },
+    {
+      "key": "bgservice",
+      "type": "article",
+      "title": "BackgroundService gotcha: silent failures",
+      "url": "https://blog.stephencleary.com/2020/05/backgroundservice-gotcha-silent-failure.html",
+      "author": "Stephen Cleary",
+      "description": "Why exceptions in ExecuteAsync used to vanish, and how to handle them."
+    },
+    {
+      "key": "gc-fundamentals",
+      "type": "article",
+      "title": "Fundamentals of garbage collection",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/fundamentals",
+      "author": "Microsoft Learn",
+      "description": "Generations, the large object heap, compaction and background GC."
+    },
+    {
+      "key": "gc-overview",
+      "type": "article",
+      "title": ".NET garbage collection",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/",
+      "author": "Microsoft Learn",
+      "description": "Overview of automatic memory management in .NET."
+    },
+    {
+      "key": "aspnet-memory",
+      "type": "article",
+      "title": "Memory management and patterns in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/performance/memory?view=aspnetcore-9.0",
+      "author": "Microsoft Learn",
+      "description": "Allocation patterns, the LOH, pooling and HttpClient in web apps."
+    },
+    {
+      "key": "workstation-server",
+      "type": "article",
+      "title": "Workstation vs. server garbage collection",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/workstation-server-gc",
+      "author": "Microsoft Learn",
+      "description": "How the two GC flavours trade footprint for throughput."
+    },
+    {
+      "key": "gc-config",
+      "type": "article",
+      "title": "Runtime configuration options for garbage collection",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/runtime-config/garbage-collector",
+      "author": "Microsoft Learn",
+      "description": "GC settings, including behaviour under container limits."
+    },
+    {
+      "key": "dispose",
+      "type": "article",
+      "title": "Implement a Dispose method",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose",
+      "author": "Microsoft Learn",
+      "description": "The dispose pattern, finalizers and SafeHandle."
+    },
+    {
+      "key": "memory-span",
+      "type": "article",
+      "title": "Memory<T> and Span<T> usage guidelines",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/memory-and-spans/memory-t-usage-guidelines",
+      "author": "Microsoft Learn",
+      "description": "Ownership and lifetime rules for spans and memory."
+    },
+    {
+      "key": "span-api",
+      "type": "article",
+      "title": "Span<T> struct",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.span-1?view=net-10.0",
+      "author": "Microsoft Learn",
+      "description": "API reference for Span<T>."
+    },
+    {
+      "key": "span-video",
+      "type": "video",
+      "title": "A complete .NET developer's guide to Span with Stephen Toub",
+      "url": "https://learn.microsoft.com/en-us/shows/on-dotnet/a-complete-dotnet-developers-guide-to-span-with-stephen-toub",
+      "author": "Stephen Toub",
+      "description": "Deep-dive video on Span<T> internals and usage."
+    },
+    {
+      "key": "native-aot",
+      "type": "article",
+      "title": "Native AOT diagnostics",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/diagnostics",
+      "author": "Microsoft Learn",
+      "description": "What changes when there is no JIT at runtime."
+    },
+    {
+      "key": "net9-runtime",
+      "type": "article",
+      "title": "What's new in the .NET 9 runtime",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-9/runtime",
+      "author": "Microsoft Learn",
+      "description": "JIT, tiering and code-generation improvements in .NET 9."
+    },
+    {
+      "key": "benchmarkdotnet",
+      "type": "link",
+      "title": "BenchmarkDotNet overview",
+      "url": "https://benchmarkdotnet.org/articles/overview.html",
+      "author": "BenchmarkDotNet",
+      "description": "The standard .NET micro-benchmarking library. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "diagnostics",
+      "type": "article",
+      "title": ".NET diagnostics tools",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/diagnostics/",
+      "author": "Microsoft Learn",
+      "description": "Overview of counters, tracing and dump tools. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "dotnet-counters",
+      "type": "article",
+      "title": "dotnet-counters",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-counters",
+      "author": "Microsoft Learn",
+      "description": "Live GC, thread-pool and request counters. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "exceptions",
+      "type": "article",
+      "title": "Best practices for exceptions",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions",
+      "author": "Microsoft Learn",
+      "description": "When to throw, what to catch and how to rethrow. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "middleware",
+      "type": "article",
+      "title": "ASP.NET Core middleware",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/",
+      "author": "Microsoft Learn",
+      "description": "The request pipeline and middleware ordering."
+    },
+    {
+      "key": "custom-middleware",
+      "type": "article",
+      "title": "Write custom ASP.NET Core middleware",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write",
+      "author": "Microsoft Learn",
+      "description": "Building your own middleware components."
+    },
+    {
+      "key": "di",
+      "type": "article",
+      "title": "Dependency injection in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection",
+      "author": "Microsoft Learn",
+      "description": "Service lifetimes, scope validation and captive dependencies."
+    },
+    {
+      "key": "minimal-apis",
+      "type": "article",
+      "title": "Minimal APIs overview",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis",
+      "author": "Microsoft Learn",
+      "description": "Endpoint-based APIs with minimal ceremony."
+    },
+    {
+      "key": "aspnet-fundamentals",
+      "type": "article",
+      "title": "ASP.NET Core fundamentals",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/",
+      "author": "Microsoft Learn",
+      "description": "Hosting, configuration, routing and the overall app model."
+    },
+    {
+      "key": "options",
+      "type": "article",
+      "title": "Options pattern in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options",
+      "author": "Microsoft Learn",
+      "description": "IOptions, IOptionsSnapshot, IOptionsMonitor and validation. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "error-handling",
+      "type": "article",
+      "title": "Handle errors in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling",
+      "author": "Microsoft Learn",
+      "description": "Exception handling middleware and IExceptionHandler."
+    },
+    {
+      "key": "api-errors",
+      "type": "article",
+      "title": "Handle errors in ASP.NET Core APIs",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/web-api/handle-errors",
+      "author": "Microsoft Learn",
+      "description": "ProblemDetails responses for web APIs."
+    },
+    {
+      "key": "authn",
+      "type": "article",
+      "title": "Overview of ASP.NET Core authentication",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/security/authentication/",
+      "author": "Microsoft Learn",
+      "description": "Schemes, handlers and JWT bearer authentication."
+    },
+    {
+      "key": "minimal-security",
+      "type": "article",
+      "title": "Authentication and authorization in minimal APIs",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/security",
+      "author": "Microsoft Learn",
+      "description": "Securing endpoints with policies, roles and claims."
+    },
+    {
+      "key": "httpclientfactory",
+      "type": "article",
+      "title": "IHttpClientFactory with .NET",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/httpclient-factory",
+      "author": "Microsoft Learn",
+      "description": "Typed and named clients, and avoiding socket exhaustion. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "http-resilience",
+      "type": "article",
+      "title": "Build resilient HTTP apps",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/resilience/http-resilience",
+      "author": "Microsoft Learn",
+      "description": "The standard resilience handler: retries, breaker, timeouts."
+    },
+    {
+      "key": "rate-limit",
+      "type": "article",
+      "title": "Rate limiting middleware in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit",
+      "author": "Microsoft Learn",
+      "description": "Fixed window, sliding window, token bucket and concurrency limiters."
+    },
+    {
+      "key": "rate-limit-samples",
+      "type": "article",
+      "title": "Rate limiting samples",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit-samples",
+      "author": "Microsoft Learn",
+      "description": "Worked examples, including partitioned limiters."
+    },
+    {
+      "key": "change-tracking",
+      "type": "article",
+      "title": "Change tracking in EF Core",
+      "url": "https://learn.microsoft.com/en-us/ef/core/change-tracking/",
+      "author": "Microsoft Learn",
+      "description": "How the context tracks and diffs entities. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "related-data",
+      "type": "article",
+      "title": "Loading related data",
+      "url": "https://learn.microsoft.com/en-us/ef/core/querying/related-data/",
+      "author": "Microsoft Learn",
+      "description": "Eager, explicit and lazy loading, and split queries. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "ef-perf",
+      "type": "article",
+      "title": "Advanced performance topics (EF Core)",
+      "url": "https://learn.microsoft.com/en-us/ef/core/performance/advanced-performance-topics",
+      "author": "Microsoft Learn",
+      "description": "Compiled queries, pooling and other EF Core performance techniques."
+    },
+    {
+      "key": "ef-concurrency",
+      "type": "article",
+      "title": "Handling concurrency conflicts",
+      "url": "https://learn.microsoft.com/en-us/ef/core/saving/concurrency",
+      "author": "Microsoft Learn",
+      "description": "Optimistic concurrency with tokens and row versions."
+    },
+    {
+      "key": "ef-saving",
+      "type": "article",
+      "title": "Saving data (EF Core)",
+      "url": "https://learn.microsoft.com/en-us/ef/core/saving/",
+      "author": "Microsoft Learn",
+      "description": "SaveChanges, transactions and execution strategies."
+    },
+    {
+      "key": "ef-overview",
+      "type": "article",
+      "title": "Entity Framework Core overview",
+      "url": "https://learn.microsoft.com/en-us/ef/core/",
+      "author": "Microsoft Learn",
+      "description": "Getting started with EF Core."
+    },
+    {
+      "key": "web-architectures",
+      "type": "article",
+      "title": "Common web application architectures",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures",
+      "author": "Microsoft Learn",
+      "description": "Layered and clean architecture for ASP.NET Core apps."
+    },
+    {
+      "key": "netarchtest",
+      "type": "link",
+      "title": "NetArchTest",
+      "url": "https://github.com/BenMorris/NetArchTest",
+      "author": "Ben Morris",
+      "description": "A library for enforcing architecture rules in unit tests. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "microservices-guide",
+      "type": "article",
+      "title": ".NET microservices: architecture for containerized .NET applications",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/",
+      "author": "Microsoft Learn",
+      "description": "Microsoft's guide to designing and running microservices."
+    },
+    {
+      "key": "distributed-data",
+      "type": "article",
+      "title": "Distributed data",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/cloud-native/distributed-data",
+      "author": "Microsoft Learn",
+      "description": "Data consistency challenges across services."
+    },
+    {
+      "key": "cqrs",
+      "type": "article",
+      "title": "Apply simplified CQRS and DDD patterns in a microservice",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/apply-simplified-microservice-cqrs-ddd-patterns",
+      "author": "Microsoft Learn",
+      "description": "Separating read and write models without full event sourcing."
+    },
+    {
+      "key": "outbox",
+      "type": "article",
+      "title": "Pattern: Transactional outbox",
+      "url": "https://microservices.io/patterns/data/transactional-outbox.html",
+      "author": "microservices.io",
+      "description": "Publishing events reliably without dual writes."
+    },
+    {
+      "key": "log-tailing",
+      "type": "article",
+      "title": "Pattern: Transaction log tailing",
+      "url": "https://microservices.io/patterns/data/transaction-log-tailing.html",
+      "author": "microservices.io",
+      "description": "Relaying outbox messages with change data capture."
+    },
+    {
+      "key": "saga",
+      "type": "article",
+      "title": "Pattern: Saga",
+      "url": "https://microservices.io/patterns/data/saga.html",
+      "author": "microservices.io",
+      "description": "Maintaining consistency across services with compensations."
+    },
+    {
+      "key": "temporal",
+      "type": "article",
+      "title": "Temporal .NET developer guide",
+      "url": "https://docs.temporal.io/develop/dotnet",
+      "author": "Temporal",
+      "description": "Durable workflows, activities and determinism rules in .NET. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "retry-storm",
+      "type": "article",
+      "title": "Retry storm antipattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/antipatterns/retry-storm/",
+      "author": "Microsoft Learn",
+      "description": "How naive retries amplify outages, and how to avoid it."
+    },
+    {
+      "key": "transient-faults",
+      "type": "article",
+      "title": "Recommendations for handling transient faults",
+      "url": "https://learn.microsoft.com/en-us/azure/well-architected/design-guides/handle-transient-faults",
+      "author": "Microsoft Learn",
+      "description": "Backoff, jitter, idempotency and retry budgets."
+    },
+    {
+      "key": "resiliency-patterns",
+      "type": "article",
+      "title": "Application resiliency patterns",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/cloud-native/application-resiliency-patterns",
+      "author": "Microsoft Learn",
+      "description": "Retry, circuit breaker and other cloud-native resilience patterns."
+    },
+    {
+      "key": "resilience",
+      "type": "article",
+      "title": "Introduction to resilient app development",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/resilience/",
+      "author": "Microsoft Learn",
+      "description": "Microsoft.Extensions.Resilience and composing pipelines."
+    },
+    {
+      "key": "test-services",
+      "type": "article",
+      "title": "Testing ASP.NET Core services and web apps",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/test-aspnet-core-services-web-apps",
+      "author": "Microsoft Learn",
+      "description": "Unit, integration and functional tests for services."
+    },
+    {
+      "key": "integration-tests",
+      "type": "article",
+      "title": "Integration tests in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests",
+      "author": "Microsoft Learn",
+      "description": "WebApplicationFactory and in-memory test servers."
+    },
+    {
+      "key": "testcontainers",
+      "type": "link",
+      "title": "Testcontainers for .NET",
+      "url": "https://dotnet.testcontainers.org/",
+      "author": "Testcontainers",
+      "description": "Throwaway Docker dependencies for integration tests."
+    },
+    {
+      "key": "otel",
+      "type": "link",
+      "title": "OpenTelemetry .NET",
+      "url": "https://opentelemetry.io/docs/languages/dotnet/",
+      "author": "OpenTelemetry",
+      "description": "Logs, metrics and traces with one instrumentation API. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "confluent",
+      "type": "article",
+      "title": "Confluent .NET client documentation",
+      "url": "https://docs.confluent.io/kafka-clients/dotnet/current/overview.html",
+      "author": "Confluent",
+      "description": "Producing and consuming Kafka messages from .NET. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "cleary-blog",
+      "type": "link",
+      "title": "Stephen Cleary's blog",
+      "url": "https://blog.stephencleary.com/",
+      "author": "Stephen Cleary",
+      "description": "Async and concurrency done right."
+    },
+    {
+      "key": "lock-blog",
+      "type": "link",
+      "title": "Andrew Lock's blog",
+      "url": "https://andrewlock.net/",
+      "author": "Andrew Lock",
+      "description": "ASP.NET Core internals, explained in depth."
+    },
+    {
+      "key": "dotnet-blog",
+      "type": "link",
+      "title": ".NET Blog",
+      "url": "https://devblogs.microsoft.com/dotnet/",
+      "author": ".NET Blog",
+      "description": "Performance write-ups for every .NET release."
+    }
+  ],
+  "questions": [
+    {
+      "prompt": "What is the key difference between value types and reference types in C#?",
+      "tags": [
+        "C#"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A value type holds its data inline and is copied on assignment; a reference type points to a heap object, so assignment copies the reference.",
+        "Value types always live on the stack and reference types always live on the heap; that storage location is the defining difference, and it is why structs are always faster.",
+        "Assigning a reference type makes a deep copy of the object, while value types share a single instance between variables.",
+        "Value types can never be null or boxed, while reference types are always nullable at both compile time and runtime."
+      ],
+      "correct": 0,
+      "explanation": "A value type holds its data inline and is copied on assignment. A reference type holds a pointer to a heap object, and assignment copies the pointer. \"Structs live on the stack\" is a simplification: a struct field inside a class lives on the heap. Mention default values, null and mutation surprises.",
+      "materials": [
+        "types",
+        "structs-spec"
+      ]
+    },
+    {
+      "prompt": "When should you choose a struct, a class or a record?",
+      "tags": [
+        "C#",
+        "Records"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Choose a struct for large mutable entities with many fields, because copying a big struct is cheaper than passing a reference and it keeps related state together.",
+        "Choose a class whenever you need value-based equality, because classes compare their fields by default.",
+        "Struct for small, short-lived immutable values; class for identity, inheritance or shared state; record for value equality and concise immutable data.",
+        "Records are always value types allocated on the stack, so they should replace structs wherever possible."
+      ],
+      "correct": 2,
+      "explanation": "Struct for small, short-lived, immutable values; copying a big struct costs more than passing a reference. Class when you need identity, inheritance or shared state. Records give value-based equality, with copies and short immutable types; a record is a class, a record struct is a value type.",
+      "materials": [
+        "records",
+        "structs-spec"
+      ]
+    },
+    {
+      "prompt": "What is boxing, and why does it matter for performance?",
+      "tags": [
+        "C#"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Boxing converts a reference type into a value type so it can be stored without any heap allocation.",
+        "Converting a value type to object or an interface allocates a heap object and copies the value, adding GC pressure in hot paths.",
+        "Boxing is a compile-time cast with no runtime cost; it only affects which overload the compiler picks.",
+        "Boxing wraps a value in a struct so it can be passed by reference, which avoids copying large values."
+      ],
+      "correct": 1,
+      "explanation": "Converting a value type to object or an interface allocates a heap object and copies the value; unboxing copies it back. The cost is allocations and garbage collection pressure in hot paths. Avoid it with generics, generic collections and constrained interface calls.",
+      "materials": [
+        "boxing",
+        "conversions"
+      ]
+    },
+    {
+      "prompt": "How do nullable reference types differ from nullable value types?",
+      "tags": [
+        "C#",
+        "Nullability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Both are runtime types: string? compiles to Nullable<string> in the same way int? compiles to Nullable<int>.",
+        "Nullable reference types make the runtime throw at the point where null is assigned, whereas int? simply stores null and the check happens only when you read .Value.",
+        "The ! operator checks at runtime that a value is not null and throws an exception if it is.",
+        "int? is a real runtime type, while nullable reference types are compile-time annotations that only produce warnings."
+      ],
+      "correct": 3,
+      "explanation": "Nullable<T> (int?) is a real runtime type. Nullable reference types are compile-time annotations only: they warn, they do not change runtime behaviour. They do not protect you at boundaries such as JSON deserialization, and the ! operator silences the compiler without proving anything.",
+      "materials": [
+        "nrt",
+        "nullable-value"
+      ]
+    },
+    {
+      "prompt": "What is deferred execution in LINQ?",
+      "tags": [
+        "C#",
+        "LINQ"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "LINQ queries run as soon as they are declared and cache their results, so enumerating twice is free.",
+        "Operators such as Where and Select build an iterator that runs only when enumerated, so enumerating twice runs the query twice.",
+        "Deferred execution means LINQ runs each query on a background thread and returns a Task to await.",
+        "It applies only to IQueryable; LINQ to Objects evaluates the whole query eagerly when it is built, so in-memory queries can never run twice."
+      ],
+      "correct": 1,
+      "explanation": "Operators such as Where and Select build an iterator; nothing runs until you enumerate it. Enumerating twice runs the query twice, which against a database means two round trips. Materialize with ToList when you need a stable snapshot. Watch for captured variables that change before enumeration.",
+      "materials": [
+        "linq-intro",
+        "linq-overview"
+      ]
+    },
+    {
+      "prompt": "What is the difference between IEnumerable<T> and IQueryable<T>?",
+      "tags": [
+        "C#",
+        "LINQ"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "IQueryable builds an expression tree a provider such as EF Core translates to SQL; IEnumerable runs in memory with compiled delegates.",
+        "They are interchangeable; IQueryable is simply IEnumerable with an extra Count property for databases.",
+        "IEnumerable queries are translated to SQL by EF Core, while IQueryable queries always execute in memory.",
+        "IQueryable can call any custom C# method inside the expression, because the provider compiles the method body into SQL and runs it inside the database."
+      ],
+      "correct": 0,
+      "explanation": "IEnumerable runs in memory with compiled delegates. IQueryable builds an expression tree that a provider such as EF Core translates to SQL. Calling AsEnumerable or ToList too early pulls the whole table into memory, and a custom C# method inside the expression cannot be translated.",
+      "materials": [
+        "iqueryable",
+        "linq-overview"
+      ]
+    },
+    {
+      "prompt": "How do delegates and events relate, and what is the classic event-handler memory leak?",
+      "tags": [
+        "C#"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Events are a runtime mechanism unrelated to delegates, and subscribers are held through weak references, so they cannot leak.",
+        "Subscribers hold a reference to the publisher, so the leak happens when a short-lived subscriber outlives the long-lived object whose events it listens to.",
+        "An event restricts invoking a delegate to its declaring class; a long-lived publisher keeps every never-unsubscribed subscriber alive.",
+        "Func and Action cannot be multicast, which is why events are required whenever several handlers must run."
+      ],
+      "correct": 2,
+      "explanation": "A delegate is a type-safe function reference and can be multicast. An event restricts invocation to its declaring class. A subscriber is referenced by the publisher, so a long-lived publisher that is never unsubscribed keeps the subscriber alive.",
+      "materials": [
+        "delegates",
+        "events"
+      ]
+    },
+    {
+      "prompt": "Which statement about covariance and contravariance in C# is correct?",
+      "tags": [
+        "C#",
+        "Generics"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "IEnumerable<out T> is covariant because it only produces T, and Action<in T> is contravariant because it only consumes T.",
+        "Covariance lets a List<string> be assigned to a List<object> safely, because List<T> is a class.",
+        "Array covariance is fully type-safe, because the compiler rejects every invalid write into the array.",
+        "Contravariance means an interface method may return a less derived type than the one it declares."
+      ],
+      "correct": 0,
+      "explanation": "IEnumerable<out T> is covariant: an IEnumerable<string> can be used as IEnumerable<object>, because the type only produces values. Action<in T> is contravariant, because the type only consumes them. It applies to interfaces and delegates, not classes. Arrays are covariant too, but unsafe: a bad write throws at runtime.",
+      "materials": [
+        "variance-cs",
+        "variance-generics"
+      ]
+    },
+    {
+      "prompt": "Why are strings immutable in .NET, and when should you use StringBuilder?",
+      "tags": [
+        "C#",
+        "Strings"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Strings are mutable internally; StringBuilder exists only to apply culture-aware formatting rules.",
+        "Immutability exists only for thread safety, and the JIT rewrites concatenation inside a loop into a single allocation, so StringBuilder is rarely worth using today.",
+        "Use StringBuilder for every string operation, because plain concatenation is always slower and allocates more.",
+        "Immutability makes strings safe to share and intern; concatenating in a loop allocates each time, so use StringBuilder for many appends."
+      ],
+      "correct": 3,
+      "explanation": "Immutability makes strings safe to share and cache, and makes interning possible. Concatenating in a loop allocates a new string each time, so use StringBuilder for many appends. Prefer ordinal comparisons for speed and culture safety, and span-based APIs to slice without allocating.",
+      "materials": [
+        "string-ops"
+      ]
+    },
+    {
+      "prompt": "How must ==, Equals and GetHashCode relate when you define equality for a type?",
+      "tags": [
+        "C#"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Overriding Equals is enough; GetHashCode is only used for debugging output and can be left as is.",
+        "If you override Equals you must override GetHashCode consistently, and never base the hash on mutable fields.",
+        "== always calls Equals on reference types, so once Equals is overridden, overloading the == operator as well is never necessary.",
+        "Mutable fields make the best hash codes, because the hash then reflects the object's current state."
+      ],
+      "correct": 1,
+      "explanation": "== on a reference type compares references unless overloaded (string overloads it). If you override Equals you must override GetHashCode consistently, or dictionary lookups break. Never use mutable fields in a hash code. Implement IEquatable<T> on structs to avoid boxing. Records generate all of this.",
+      "materials": [
+        "value-equality",
+        "equality-comparisons",
+        "pattern-matching"
+      ]
+    },
+    {
+      "prompt": "What does async/await actually do?",
+      "tags": [
+        "Async & Concurrency",
+        "Async"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It runs the method on a new background thread, so the awaited work happens in parallel with the caller.",
+        "It blocks the calling thread until the awaited task finishes, but releases any locks the thread held while waiting, so other requests can use those resources meanwhile.",
+        "The compiler rewrites the method into a state machine; awaiting an incomplete task registers a continuation and returns, so no thread is blocked during I/O.",
+        "It converts thrown exceptions into return codes, so callers no longer need try/catch around awaited calls."
+      ],
+      "correct": 2,
+      "explanation": "The compiler rewrites the method into a state machine. An await on an incomplete task registers a continuation and returns to the caller, so no thread sits blocked during I/O. Exceptions are captured in the task. Async is about not blocking threads, not about running work in parallel.",
+      "materials": [
+        "async-faq",
+        "tap-consuming"
+      ]
+    },
+    {
+      "prompt": "When should you use ConfigureAwait(false)?",
+      "tags": [
+        "Async & Concurrency",
+        "Async"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "In library code, so continuations don't hop back to a captured context, avoiding deadlocks in context-bound hosts.",
+        "In UI event handlers, so the code after the await can update controls directly on the UI thread.",
+        "Never: it stops exceptions from the awaited task propagating to the caller.",
+        "Only in ASP.NET Core controllers, because they run on a single-threaded synchronization context."
+      ],
+      "correct": 0,
+      "explanation": "By default the continuation resumes on the captured context or scheduler. In library code, false avoids the hop back and avoids deadlocks in context-bound hosts. ASP.NET Core has no synchronization context, so it matters less in app code, but libraries should still do it.",
+      "materials": [
+        "configureawait"
+      ]
+    },
+    {
+      "prompt": "When should you return ValueTask instead of Task?",
+      "tags": [
+        "Async & Concurrency",
+        "Async"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Always, because ValueTask is strictly faster than Task and has no usage restrictions.",
+        "When several callers need to await the same result many times, because ValueTask caches its result and can safely be awaited repeatedly.",
+        "Whenever a method does CPU-bound work, because ValueTask runs on the thread pool automatically.",
+        "When the result is often available synchronously and a benchmark shows the allocations matter; await it only once."
+      ],
+      "correct": 3,
+      "explanation": "ValueTask avoids an allocation when the result is often ready synchronously. The price: await it once, never await it twice, never read .Result before it completes. Default to Task and switch only after a benchmark shows allocations matter.",
+      "materials": [
+        "valuetask",
+        "valuetask-pooling"
+      ]
+    },
+    {
+      "prompt": "Why does blocking on async code with .Result or .Wait() cause deadlocks?",
+      "tags": [
+        "Async & Concurrency",
+        "Async"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Because .Result cancels the underlying task, and that cancellation never completes.",
+        "Because the thread pool refuses to run continuations for tasks that were started from synchronous methods, so the awaited work never gets scheduled.",
+        "It blocks the very thread the continuation needs in hosts with a single-threaded context, such as classic ASP.NET or UI apps.",
+        "It deadlocks only in console apps, because console apps have no thread pool to run continuations."
+      ],
+      "correct": 2,
+      "explanation": ".Result or .Wait() blocks the thread that the continuation needs, in hosts with a single-threaded context such as classic ASP.NET or UI apps. In ASP.NET Core the usual failure is thread-pool starvation instead. Fix: async all the way up, and ConfigureAwait(false) in libraries.",
+      "materials": [
+        "dont-block"
+      ]
+    },
+    {
+      "prompt": "When is Task.Run appropriate, and what is thread-pool starvation?",
+      "tags": [
+        "Async & Concurrency",
+        "Thread pool"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Task.Run offloads CPU-bound work; starvation happens when blocking calls tie up pool threads faster than the pool adds new ones.",
+        "Wrap I/O calls in Task.Run so they don't occupy request threads; starvation means CPU usage has reached 100% and no core is free to run new work.",
+        "Task.Run creates a dedicated OS thread every time, so it can never contribute to starvation.",
+        "Starvation is when the GC pauses all threads, and Task.Run avoids it by running on a separate heap."
+      ],
+      "correct": 0,
+      "explanation": "Task.Run moves CPU-bound work to the pool. Wrapping I/O in it just burns a pool thread. Blocking calls on pool threads starve it, because the pool adds threads slowly. Symptom: high latency with low CPU. Diagnose with queue length and thread counts.",
+      "materials": [
+        "threadpool",
+        "threading-config"
+      ]
+    },
+    {
+      "prompt": "How does cancellation work in .NET?",
+      "tags": [
+        "Async & Concurrency",
+        "Async"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Cancelling a token forcibly aborts the thread that is running the operation, wherever it is.",
+        "CancellationToken works only with Task.Run; I/O APIs ignore any token they are given.",
+        "Disposing the CancellationTokenSource is what notifies every registered listener that the operation was cancelled, so you must dispose it to stop the work.",
+        "It is cooperative: the caller signals a CancellationToken, and the callee checks it and throws OperationCanceledException."
+      ],
+      "correct": 3,
+      "explanation": "Cooperative: the caller signals a CancellationToken, the callee checks it and throws OperationCanceledException. Pass the token through every async call, link tokens with CreateLinkedTokenSource, dispose sources, and use HttpContext.RequestAborted in web code.",
+      "materials": [
+        "cancellation",
+        "cleary-cancellation"
+      ]
+    },
+    {
+      "prompt": "When do lock, SemaphoreSlim and Interlocked each fit?",
+      "tags": [
+        "Async & Concurrency",
+        "Synchronization"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "lock for short synchronous sections, SemaphoreSlim.WaitAsync for async mutual exclusion or throttling, Interlocked for atomic single-variable updates.",
+        "lock is the right choice around await calls, because the compiler releases the monitor automatically while the method is suspended and reacquires it on resumption.",
+        "Interlocked is designed for throttling concurrent HTTP calls to a fixed maximum number at once.",
+        "Locking on this or a string literal is best practice, because every caller can share the same lock."
+      ],
+      "correct": 0,
+      "explanation": "lock guards a short synchronous section and cannot contain an await. SemaphoreSlim.WaitAsync gives async mutual exclusion or throttling. Interlocked makes single-variable updates atomic. Never lock on this, a public object or a string. Prefer immutable data or concurrent collections.",
+      "materials": [
+        "using-threads",
+        "threading-basics"
+      ]
+    },
+    {
+      "prompt": "What are System.Threading.Channels used for?",
+      "tags": [
+        "Async & Concurrency",
+        "Channels"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Sending messages between separate processes over named pipes on the same machine.",
+        "Replacing Kafka or RabbitMQ for durable messaging between services.",
+        "Async producer-consumer queues; a bounded channel applies backpressure when it is full, which protects memory.",
+        "Broadcasting UI events to every open window in a desktop application."
+      ],
+      "correct": 2,
+      "explanation": "System.Threading.Channels gives async producer-consumer queues. A bounded channel applies backpressure when full, which protects memory. Use them to hand work between stages or to a background consumer, instead of BlockingCollection.",
+      "materials": [
+        "channels",
+        "channels-intro"
+      ]
+    },
+    {
+      "prompt": "When should you prefer Parallel.ForEachAsync over Task.WhenAll?",
+      "tags": [
+        "Async & Concurrency",
+        "Async"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Never: Task.WhenAll already limits concurrency to the number of CPU cores on the machine.",
+        "When you need to bound concurrency so a database or partner API isn't overwhelmed; WhenAll starts everything at once.",
+        "When the work is purely synchronous CPU work, because ForEachAsync runs every iteration inline on the calling thread and so avoids thread-pool overhead.",
+        "When results must come back in the original order, which Task.WhenAll cannot guarantee."
+      ],
+      "correct": 1,
+      "explanation": "WhenAll starts everything at once, which can overwhelm a database or partner API. Parallel.ForEachAsync bounds concurrency with MaxDegreeOfParallelism. Use Parallel.For for CPU-bound loops and an async-aware limit for I/O.",
+      "materials": [
+        "foreachasync"
+      ]
+    },
+    {
+      "prompt": "What commonly goes wrong in a BackgroundService?",
+      "tags": [
+        "Async & Concurrency",
+        "Hosting"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Nothing needs handling, because a BackgroundService restarts automatically after any exception.",
+        "ExecuteAsync runs once per incoming HTTP request, so it must finish within the request timeout or the host cancels it and logs a warning.",
+        "Background services cannot use dependency injection, so all services must be created manually.",
+        "Since .NET 6 an unhandled exception in ExecuteAsync stops the host by default, so decide deliberately whether to catch, log and retry."
+      ],
+      "correct": 3,
+      "explanation": "An unhandled exception in ExecuteAsync used to fail silently; since .NET 6 the host stops by default, so decide on purpose: catch, log and retry, or let it stop. Long loops must honour the stopping token, and work must be idempotent because a restart repeats it.",
+      "materials": [
+        "bgservice",
+        "cleary-blog"
+      ]
+    },
+    {
+      "prompt": "How do garbage collection generations work in .NET?",
+      "tags": [
+        "Memory & Performance",
+        "GC"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Objects start in generation 2 and are moved down toward generation 0 as they get older.",
+        "Every collection scans the entire heap, regardless of which generation triggered it.",
+        "New objects start in gen 0 and survivors are promoted to gen 1, then gen 2; gen 0 collections are cheap and frequent.",
+        "Generations exist only in server GC; workstation GC keeps all objects in a single generation and always compacts the whole heap in one pass."
+      ],
+      "correct": 2,
+      "explanation": "New objects start in generation 0. Survivors are promoted to 1, then 2. Most objects die young, so gen 0 collections are cheap and frequent; gen 2 collections are rare and expensive. Collections can compact memory, and background GC lets gen 2 work run concurrently.",
+      "materials": [
+        "gc-fundamentals",
+        "gc-overview"
+      ]
+    },
+    {
+      "prompt": "What is the large object heap, and why can it cause problems?",
+      "tags": [
+        "Memory & Performance",
+        "GC"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Objects of about 85,000 bytes and up go there; it is collected with gen 2 and not compacted by default, so it can fragment.",
+        "It holds every object larger than 1 KB and is compacted after each gen 0 collection.",
+        "It is unmanaged memory that you must free manually with Marshal.FreeHGlobal.",
+        "Large objects are stored on the thread's stack, so allocating too many causes a stack overflow."
+      ],
+      "correct": 0,
+      "explanation": "Large objects (about 85,000 bytes and up) go to a separate heap that is collected with gen 2 and by default is not compacted, so it can fragment. Repeated large short-lived arrays cause memory growth and pauses. Rent buffers from ArrayPool instead.",
+      "materials": [
+        "gc-fundamentals",
+        "aspnet-memory"
+      ]
+    },
+    {
+      "prompt": "What is the difference between workstation and server GC?",
+      "tags": [
+        "Memory & Performance",
+        "GC"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Server GC uses a single shared heap to keep memory low, while workstation GC uses one heap per core so that desktop apps get maximum throughput.",
+        "Workstation GC favours low footprint and latency; server GC uses a heap and GC thread per core for throughput, using more memory.",
+        "They are identical, and the setting only changes how much the GC writes to the logs.",
+        "Server GC disables generations entirely to avoid pauses on busy servers."
+      ],
+      "correct": 1,
+      "explanation": "Workstation uses one heap and favours low footprint and latency. Server uses a heap and thread per core and favours throughput, using more memory. In containers, CPU and memory limits change the outcome, so measure rather than assume.",
+      "materials": [
+        "workstation-server",
+        "gc-config"
+      ]
+    },
+    {
+      "prompt": "How does IDisposable relate to finalizers?",
+      "tags": [
+        "Memory & Performance",
+        "Resources"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Every class that implements IDisposable must also declare a finalizer.",
+        "Finalizers run deterministically at the end of a using block, just before Dispose.",
+        "The DI container never disposes the services it creates, so every IDisposable service must be disposed manually, which is why finalizers are always required.",
+        "Dispose releases resources deterministically; a finalizer is only a safety net for unmanaged handles, and SafeHandle is usually better."
+      ],
+      "correct": 3,
+      "explanation": "Dispose releases resources deterministically, usually through using. A finalizer is only a safety net for unmanaged handles, and SafeHandle is usually better. A class holding only managed objects needs no finalizer. For async cleanup use IAsyncDisposable. The DI container disposes what it creates.",
+      "materials": [
+        "dispose"
+      ]
+    },
+    {
+      "prompt": "What are Span<T> and Memory<T>?",
+      "tags": [
+        "Memory & Performance",
+        "Span"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Span<T> is a thread-safe collection that grows automatically, much like List<T>.",
+        "Memory<T> is the stack-only type, while Span<T> is the heap-friendly one that can be stored in class fields and used freely across await boundaries.",
+        "Span<T> is a stack-only view over contiguous memory, so slicing allocates nothing; Memory<T> is its heap-friendly counterpart for async code.",
+        "Both copy the underlying data on every slice, so that the original buffer stays immutable."
+      ],
+      "correct": 2,
+      "explanation": "Span<T> is a stack-only view over contiguous memory, so slicing allocates nothing. Because it is a ref struct it cannot be a class field or live across an await. Memory<T> is the heap-friendly counterpart for async code. Typical use: parsing without substrings.",
+      "materials": [
+        "memory-span",
+        "span-api",
+        "span-video"
+      ]
+    },
+    {
+      "prompt": "What is the right way to cut allocations in an ASP.NET Core service?",
+      "tags": [
+        "Memory & Performance",
+        "Performance"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Turn off the garbage collector in production so allocations never need to be collected.",
+        "Measure first with a profiler or allocation counters, then pool buffers, avoid large objects and stream large payloads.",
+        "Convert every class into a struct, which removes heap allocations from the service entirely.",
+        "Call GC.Collect() at the end of every request so memory is freed as early as possible."
+      ],
+      "correct": 1,
+      "explanation": "Find them first with a profiler or allocation counters. Then pool buffers, avoid large objects, avoid closures and LINQ in hot paths, reuse HttpClient through the factory, and stream large payloads instead of buffering them.",
+      "materials": [
+        "aspnet-memory"
+      ]
+    },
+    {
+      "prompt": "How do tiered compilation, ReadyToRun and Native AOT differ?",
+      "tags": [
+        "Memory & Performance",
+        "Runtime"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Native AOT keeps the JIT available but precompiles the hot paths ahead of time, so reflection and dynamic code generation keep working unchanged.",
+        "ReadyToRun removes the runtime entirely and produces a single self-contained native executable.",
+        "Tiered compilation interprets IL indefinitely and never produces optimized machine code.",
+        "Tiering recompiles hot methods with more optimization, ReadyToRun precompiles for startup, and Native AOT has no JIT at all."
+      ],
+      "correct": 3,
+      "explanation": "Tiered compilation starts with quick code, then recompiles hot methods with more optimization. ReadyToRun precompiles for faster startup. Native AOT compiles ahead of time: tiny startup and memory, but no JIT, so reflection and dynamic code are restricted. Pick by workload: long-running API versus short-lived function.",
+      "materials": [
+        "native-aot",
+        "net9-runtime",
+        "dotnet-blog"
+      ]
+    },
+    {
+      "prompt": "How do you benchmark .NET code correctly?",
+      "tags": [
+        "Memory & Performance",
+        "Performance"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Wrap the code in a Stopwatch loop in a Debug build, run it a few times and keep the fastest run, since that shows the code's true speed.",
+        "Use BenchmarkDotNet in Release mode, which handles warmup, statistics and allocations, and compare against a baseline.",
+        "Measure only the very first call, because that is what users actually experience.",
+        "Run the benchmark under the debugger so you can step through the hot paths while timing them."
+      ],
+      "correct": 1,
+      "explanation": "Use BenchmarkDotNet, which handles warmup, statistics and allocation reporting, instead of a stopwatch in a loop. Run in release mode, compare against a baseline and report allocations. Profile before optimizing, since most time is rarely where you think.",
+      "materials": [
+        "benchmarkdotnet"
+      ]
+    },
+    {
+      "prompt": "How do you diagnose a memory leak or high CPU in production?",
+      "tags": [
+        "Memory & Performance",
+        "Diagnostics"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Start with live counters for GC and the thread pool, then capture traces or dumps and compare snapshots over time.",
+        "Restart the service on a fixed schedule, since leaks cannot be diagnosed in production.",
+        "Attach the Visual Studio debugger to the production process and step through requests.",
+        "Raise the container memory limit until the symptoms stop appearing."
+      ],
+      "correct": 0,
+      "explanation": "Start with live counters for GC and thread-pool behaviour, then capture a trace or a dump or GC dump, and compare snapshots over time to see what grows. Tools: dotnet-counters, dotnet-trace, dotnet-dump, dotnet-gcdump. Back it with metrics from OpenTelemetry.",
+      "materials": [
+        "diagnostics",
+        "dotnet-counters"
+      ]
+    },
+    {
+      "prompt": "What do exceptions cost, and how should you use them?",
+      "tags": [
+        "Memory & Performance",
+        "Exceptions"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Throwing is as cheap as a normal return, so exceptions are fine for ordinary control flow.",
+        "Rethrow with throw ex; inside the catch block, because it preserves the original stack trace while still letting you add context.",
+        "Catch Exception everywhere and swallow it, so that the service keeps running.",
+        "Throwing captures a stack trace and unwinds, far slower than a return; use TryParse-style APIs for expected cases."
+      ],
+      "correct": 3,
+      "explanation": "Throwing captures a stack trace and unwinds, which is far slower than a normal return. Do not use exceptions for expected flow: use TryParse-style methods. Catch only what you can handle, use throw; to keep the stack, and use exception filters.",
+      "materials": [
+        "exceptions"
+      ]
+    },
+    {
+      "prompt": "How does the ASP.NET Core middleware pipeline work, and why does order matter?",
+      "tags": [
+        "ASP.NET Core & EF Core",
+        "Middleware"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Middleware runs in alphabetical order of class name, so registration order doesn't matter.",
+        "Only the last middleware registered gets to see and modify the response.",
+        "Each middleware acts before and after the next and can short-circuit; order is registration order, so auth must follow routing correctly.",
+        "Authorization must run before authentication, so unauthenticated requests are rejected as early as possible and the authentication handler only sees allowed traffic."
+      ],
+      "correct": 2,
+      "explanation": "Each middleware can act before and after the next one, and can short-circuit the request. Order is the order of registration, so exception handling, routing, CORS, authentication and authorization must sit in the right sequence. Know how to write custom middleware.",
+      "materials": [
+        "middleware",
+        "custom-middleware",
+        "lock-blog"
+      ]
+    },
+    {
+      "prompt": "What are the DI lifetimes, and what is a captive dependency?",
+      "tags": [
+        "ASP.NET Core & EF Core",
+        "Dependency injection"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Transient, scoped (one per request) and singleton; a captive dependency is a singleton holding a scoped service, keeping it alive too long.",
+        "Scoped means one instance per thread, and singletons can safely depend on services of any lifetime because the container resolves them lazily on each call.",
+        "A captive dependency is a transient service that the container never disposes.",
+        "Singletons are created per request in development and once per application in production."
+      ],
+      "correct": 0,
+      "explanation": "Transient is new each time, scoped is one per request, singleton is one per app. A singleton that holds a scoped service keeps it alive far too long (a captive dependency), often with thread-safety bugs. Scope validation in development catches this. Use IServiceScopeFactory in background services.",
+      "materials": [
+        "di"
+      ]
+    },
+    {
+      "prompt": "How should you choose between minimal APIs and controllers?",
+      "tags": [
+        "ASP.NET Core & EF Core"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Minimal APIs bypass the middleware pipeline, so they cannot use authentication or authorization.",
+        "Controllers are deprecated in current ASP.NET Core and should all be migrated to minimal APIs.",
+        "Minimal APIs suit small services with less ceremony; controllers give filters and structure for large APIs; both share one pipeline.",
+        "Minimal APIs can only handle GET requests, so write endpoints need controllers."
+      ],
+      "correct": 2,
+      "explanation": "Minimal APIs have less ceremony, lower overhead and fit small services and endpoint groups. Controllers give filters, model binding conventions and a familiar structure for large APIs. Both share the same pipeline. Choose by team and size, not fashion.",
+      "materials": [
+        "minimal-apis",
+        "aspnet-fundamentals"
+      ]
+    },
+    {
+      "prompt": "What does the options pattern give you in ASP.NET Core?",
+      "tags": [
+        "ASP.NET Core & EF Core",
+        "Configuration"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "IOptions reloads configuration on every request, while IOptionsMonitor reads it once at startup and never changes afterwards, which makes it the faster option.",
+        "It stores secrets encrypted inside appsettings.json, so they are safe to commit.",
+        "It replaces configuration files, so settings can only come from environment variables.",
+        "Typed configuration: IOptions is a singleton snapshot, IOptionsSnapshot is per request, IOptionsMonitor reacts to changes."
+      ],
+      "correct": 3,
+      "explanation": "Bind configuration sections to typed classes. IOptions is a singleton snapshot, IOptionsSnapshot is per request, IOptionsMonitor reacts to changes. Validate with data annotations and ValidateOnStart so bad config fails at startup, not at 3am.",
+      "materials": [
+        "options"
+      ]
+    },
+    {
+      "prompt": "How should a web API handle errors consistently?",
+      "tags": [
+        "ASP.NET Core & EF Core",
+        "Error handling"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Return the full exception and stack trace in the response, so clients can debug problems themselves.",
+        "Use one global handler that maps exceptions to RFC 9457 ProblemDetails with a stable code and trace id, never leaking stack traces.",
+        "Catch and log exceptions in every method, then return 200 OK with an error flag in the body so clients and proxies never see a failing status code.",
+        "Return 500 for every error, including validation failures, so clients only handle one case."
+      ],
+      "correct": 1,
+      "explanation": "One global handler (IExceptionHandler or middleware) that maps exceptions to RFC 9457 ProblemDetails, with a stable error code and trace id. Never leak stack traces. Validation errors return 400 with details; log once, at the boundary.",
+      "materials": [
+        "error-handling",
+        "api-errors"
+      ]
+    },
+    {
+      "prompt": "How do authentication and authorization work with JWT bearer tokens?",
+      "tags": [
+        "ASP.NET Core & EF Core",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Authentication validates signature, issuer, audience and expiry to prove identity; authorization uses policies, roles and claims to decide access.",
+        "A JWT is encrypted by default with the signing key, so putting secrets such as passwords or connection strings in its claims is safe as long as HTTPS is used.",
+        "Authorization happens first, and authentication then confirms the role that was granted.",
+        "Expiry is optional; tokens should stay valid indefinitely to avoid refresh logic."
+      ],
+      "correct": 0,
+      "explanation": "Authentication proves who the caller is: validate signature, issuer, audience and expiry. Authorization decides what they may do: policies, roles and claims, plus resource-based checks. Know token lifetime, refresh, key rotation and why you never put secrets in a JWT.",
+      "materials": [
+        "authn",
+        "minimal-security"
+      ]
+    },
+    {
+      "prompt": "How should you use HttpClient and add resilience?",
+      "tags": [
+        "ASP.NET Core & EF Core",
+        "HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Create a new HttpClient for every call and dispose it in a using block.",
+        "Retry every request as many times as possible, including non-idempotent POSTs.",
+        "Use one static HttpClient with an infinite timeout, so long calls never fail.",
+        "Use IHttpClientFactory and typed clients, with timeouts, jittered retries and a circuit breaker; retry only idempotent calls."
+      ],
+      "correct": 3,
+      "explanation": "Never new HttpClient() per call (socket exhaustion); use IHttpClientFactory and typed clients. Add timeouts, retries with jitter, circuit breaker and a total budget through the standard resilience handler. Retry only idempotent calls.",
+      "materials": [
+        "httpclientfactory",
+        "http-resilience"
+      ]
+    },
+    {
+      "prompt": "How do you rate limit an ASP.NET Core API?",
+      "tags": [
+        "ASP.NET Core & EF Core",
+        "Rate limiting"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "In-process limiters coordinate automatically across all instances through the DI container, so a single AddRateLimiter call protects the whole cluster.",
+        "Return 503 with no headers, so clients back off at random intervals.",
+        "Use the built-in middleware, partition by tenant or API key, and return 429 with Retry-After; in-process limits don't span instances.",
+        "It can only be done at the load balancer, because ASP.NET Core has no built-in support."
+      ],
+      "correct": 2,
+      "explanation": "Built-in middleware offers fixed window, sliding window, token bucket and concurrency limiters. Partition by tenant or API key, return 429 with Retry-After, and remember in-process limits do not span instances; use a gateway or shared store for that.",
+      "materials": [
+        "rate-limit",
+        "rate-limit-samples"
+      ]
+    },
+    {
+      "prompt": "How does EF Core change tracking work, and what is the N+1 problem?",
+      "tags": [
+        "ASP.NET Core & EF Core",
+        "EF Core"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Change tracking is off by default, and N+1 means N tables joined into a single query, which you fix by splitting it into one query per table.",
+        "The context diffs tracked entities on SaveChanges; N+1 is one query for parents plus one per child, fixed with Include or projection.",
+        "N+1 only happens with raw SQL queries and never with LINQ queries.",
+        "AsNoTracking makes reads slower, because entities must be fetched again before saving."
+      ],
+      "correct": 1,
+      "explanation": "The context tracks entities and diffs them on SaveChanges. Use AsNoTracking for reads. N+1 is one query for parents plus one per child; fix with Include, projection or split queries. Check the generated SQL, and know when Dapper is the better tool.",
+      "materials": [
+        "change-tracking",
+        "related-data",
+        "ef-perf"
+      ]
+    },
+    {
+      "prompt": "How do you handle concurrency and transactions in EF Core?",
+      "tags": [
+        "ASP.NET Core & EF Core",
+        "EF Core"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "SaveChanges is not transactional, so every call must be wrapped in an explicit transaction or a partial save can leave inconsistent data.",
+        "EF Core takes pessimistic row locks by default, so concurrency conflicts can never occur.",
+        "Use optimistic concurrency with a row version, catch DbUpdateConcurrencyException and retry, merge or fail.",
+        "DbUpdateConcurrencyException means the database is down, so the call should be retried forever."
+      ],
+      "correct": 2,
+      "explanation": "Optimistic concurrency with a row version or concurrency token; catch DbUpdateConcurrencyException and decide to retry, merge or fail. SaveChanges is already transactional; use explicit transactions for multi-step work and execution strategies for transient retries.",
+      "materials": [
+        "ef-concurrency",
+        "ef-saving",
+        "ef-overview"
+      ]
+    },
+    {
+      "prompt": "How should a clean (layered) .NET solution be structured?",
+      "tags": [
+        "Architecture & Distributed Systems",
+        "Architecture"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The domain layer references Entity Framework and ASP.NET Core so entities can persist themselves.",
+        "Dependencies point outward, so the UI project sits at the centre and everything depends on it.",
+        "Every project should reference every other project, to avoid duplicating code between layers.",
+        "Dependencies point inward: a framework-free domain at the centre, use cases around it, infrastructure implementing ports."
+      ],
+      "correct": 3,
+      "explanation": "Dependencies point inward: domain at the centre, no framework references. Application layer holds use cases, infrastructure implements ports. Enforce the rules with architecture tests, and admit when the ceremony is not worth it for a small service.",
+      "materials": [
+        "web-architectures",
+        "netarchtest"
+      ]
+    },
+    {
+      "prompt": "When should you choose microservices over a modular monolith?",
+      "tags": [
+        "Architecture & Distributed Systems",
+        "Architecture"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Always start with microservices, because they are simpler to operate than a monolith and let every team pick its own stack from day one.",
+        "When team size, scaling or release cadence demands it, since microservices trade independence for network and consistency costs.",
+        "Whenever a project needs more than one database table, since each table needs its own service.",
+        "Never, because a modular monolith cannot enforce boundaries between modules."
+      ],
+      "correct": 1,
+      "explanation": "Microservices buy independent deploys and scaling at the cost of network failure, data consistency and operations. A modular monolith keeps boundaries without that cost. Split when team size, scaling or release cadence demands it. The Integration Hub is a justified split; say why.",
+      "materials": [
+        "microservices-guide",
+        "distributed-data"
+      ]
+    },
+    {
+      "prompt": "What is CQRS, and when is it overkill?",
+      "tags": [
+        "Architecture & Distributed Systems",
+        "CQRS"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Separating the write model from read models, useful when reads and writes differ in shape or load, and overkill for simple CRUD.",
+        "CQRS requires event sourcing; one cannot be used without the other, because the read models can only be built by replaying the full event history.",
+        "CQRS means caching every query result in Redis in front of the database.",
+        "It is required for any API that exposes both GET and POST endpoints."
+      ],
+      "correct": 0,
+      "explanation": "Separate the write model from read models, possibly with different stores. Useful when reads and writes have different shapes or load. Overkill for simple CRUD. Distinguish it from event sourcing.",
+      "materials": [
+        "cqrs"
+      ]
+    },
+    {
+      "prompt": "What do the transactional outbox and inbox patterns solve?",
+      "tags": [
+        "Architecture & Distributed Systems",
+        "Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "They use a distributed two-phase commit across the database and the message broker.",
+        "The outbox guarantees exactly-once delivery to every consumer, so consumers need no deduplication.",
+        "The change and its event are written in one local transaction and relayed later; the inbox makes redelivery harmless.",
+        "The inbox stores outgoing notification emails until the user has read them."
+      ],
+      "correct": 2,
+      "explanation": "Write the business change and the event in one local transaction, then a relay (poller or CDC) publishes it. That gives at-least-once delivery without dual writes. The inbox records processed message ids so redelivery is harmless. Know the ordering and cleanup trade-offs.",
+      "materials": [
+        "outbox",
+        "log-tailing"
+      ]
+    },
+    {
+      "prompt": "What is a saga, and how does Temporal fit?",
+      "tags": [
+        "Architecture & Distributed Systems",
+        "Sagas"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A saga is a distributed ACID transaction that locks the data in every participating service until the coordinator issues the final commit.",
+        "Temporal replaces sagas by guaranteeing that network calls between services never fail.",
+        "A saga has no compensations; when a step fails, the earlier steps are simply left as they are.",
+        "A saga is a sequence of local transactions with compensations; Temporal makes the orchestration durable across crashes."
+      ],
+      "correct": 3,
+      "explanation": "A saga is a sequence of local transactions with compensations in place of a distributed transaction. Temporal makes the orchestration durable: state survives crashes, retries are built in, and compensations are plain code. Know determinism rules and Continue-As-New.",
+      "materials": [
+        "saga",
+        "temporal"
+      ]
+    },
+    {
+      "prompt": "How do you make operations idempotent and avoid retry storms?",
+      "tags": [
+        "Architecture & Distributed Systems",
+        "Resilience"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Store results against an idempotency key, and retry with exponential backoff, jitter, budgets and circuit breakers.",
+        "Retry immediately in a tight loop until the call succeeds, to recover as fast as possible.",
+        "Give every request a fresh random id, so duplicate requests are always processed again.",
+        "Use the same fixed retry delay on every client, so that retries stay in sync and the recovering service sees one predictable wave of traffic."
+      ],
+      "correct": 0,
+      "explanation": "Accept an idempotency key and store the result against it; use natural keys or upserts internally. Retries need exponential backoff with jitter, budgets and circuit breakers, or they amplify an outage.",
+      "materials": [
+        "retry-storm",
+        "transient-faults"
+      ]
+    },
+    {
+      "prompt": "How should timeout, retry and circuit-breaker policies compose?",
+      "tags": [
+        "Architecture & Distributed Systems",
+        "Resilience"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Retry inside timeout inside circuit breaker, so retries continue until the overall timeout expires and only then does the breaker record a failure.",
+        "Timeout inside retry inside circuit breaker; each prevents a different failure, verified with fault injection.",
+        "They are mutually exclusive, so each HTTP client can use only one of them.",
+        "A circuit breaker retries failed calls faster, so the dependency recovers sooner."
+      ],
+      "correct": 1,
+      "explanation": "Timeout, retry, circuit breaker, bulkhead, fallback, rate limit, load shedding. Explain the failure each one prevents and how they compose (timeout inside retry inside breaker). Show how you would test them with fault injection.",
+      "materials": [
+        "resiliency-patterns",
+        "resilience"
+      ]
+    },
+    {
+      "prompt": "What is a good testing strategy for a .NET service?",
+      "tags": [
+        "Architecture & Distributed Systems",
+        "Testing"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Only end-to-end UI tests, because they exercise every layer at once.",
+        "Mock every dependency, including types you don't own such as DbContext and HttpClient.",
+        "Many fast unit tests, integration tests with WebApplicationFactory and Testcontainers, a few end-to-end and contract tests.",
+        "Skip automated tests and rely on production monitoring to catch regressions."
+      ],
+      "correct": 2,
+      "explanation": "Many fast unit tests (xUnit, NSubstitute) on domain logic, integration tests with WebApplicationFactory and real dependencies in Testcontainers, a few end-to-end tests, and contract tests for the public API. Avoid mocking what you do not own.",
+      "materials": [
+        "test-services",
+        "integration-tests",
+        "testcontainers"
+      ]
+    },
+    {
+      "prompt": "How do you make a service observable?",
+      "tags": [
+        "Architecture & Distributed Systems",
+        "Observability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Write every request to the console and alert on each individual error.",
+        "Use metrics only, because traces and logs duplicate the same information and add cost without improving incident response.",
+        "Alert on every exception as it happens, rather than on service-level objectives.",
+        "Emit structured logs, metrics and traces via OpenTelemetry, propagate trace context, and alert on SLO burn."
+      ],
+      "correct": 3,
+      "explanation": "Three signals: logs (structured, with correlation ids), metrics, and traces. OpenTelemetry gives one instrumentation API; propagate trace context across HTTP, Kafka and Temporal. Define SLIs and alert on SLO burn, not on every error.",
+      "materials": [
+        "otel"
+      ]
+    },
+    {
+      "prompt": "What delivery guarantees does Kafka give, and how do you consume safely?",
+      "tags": [
+        "Architecture & Distributed Systems",
+        "Kafka"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Exactly-once delivery to any external system is the default behaviour.",
+        "Kafka guarantees global ordering across all partitions of a topic.",
+        "At-least-once with ordering only within a partition; commit after processing and make handlers idempotent.",
+        "Commit offsets before processing, so that messages are never redelivered."
+      ],
+      "correct": 2,
+      "explanation": "At-least-once by default; ordering only within a partition, so key by entity. Disable auto-commit and commit after processing, make handlers idempotent, send poison messages to a dead-letter topic, and watch consumer lag. Exactly-once is limited to Kafka-to-Kafka.",
+      "materials": [
+        "confluent"
+      ]
+    }
+  ]
+}
