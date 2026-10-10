@@ -10,6 +10,7 @@ import {
   type FilterState,
 } from '@/features/questions';
 import { Spinner } from '@/shared/ui';
+import { scrollBehavior } from '@/shared/utils/motion';
 
 export function HomePage() {
   const { t } = useTranslation();
@@ -30,7 +31,7 @@ export function HomePage() {
               setFilters({ ...emptyFilters, tags: [tag] });
               document
                 .getElementById('question-feed-title')
-                ?.scrollIntoView?.({ behavior: 'smooth' });
+                ?.scrollIntoView?.({ behavior: scrollBehavior() });
             }}
           />
           <section data-testid="question-of-the-day" style={{ marginBottom: 12 }}>

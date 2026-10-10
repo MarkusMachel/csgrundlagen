@@ -6,6 +6,7 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useSessionBootstrap } from '@/features/auth';
 import { PolicyUpdateModal, usePrivacySync } from '@/features/privacy';
 import { Spinner } from '@/shared/ui';
+import { scrollBehavior } from '@/shared/utils/motion';
 
 import { StatusBar } from './StatusBar';
 import { TopBar } from './TopBar';
@@ -66,7 +67,9 @@ export function AppShell() {
           type="button"
           className="scroll-fab"
           aria-label={t('nav.scrollDown')}
-          onClick={() => window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' })}
+          onClick={() =>
+            window.scrollBy({ top: window.innerHeight * 0.8, behavior: scrollBehavior() })
+          }
         >
           <ArrowDown size={18} aria-hidden style={{ margin: 'auto' }} />
         </button>

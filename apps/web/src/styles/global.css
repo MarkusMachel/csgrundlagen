@@ -16,8 +16,9 @@
   --border: #e3e5e9;
   --border-strong: #c4c8d0;
   --text: #1f2430;
-  --muted: #69707f;
-  --comment: #7a8291;
+  /* both at least 4.5:1 on the white and tab-strip backgrounds (WCAG AA) */
+  --muted: #646b7a;
+  --comment: #666e7e;
   --accent: #2f5fd0;
   --accent-soft: rgba(47, 95, 208, 0.1);
   --accent-contrast: #ffffff;
@@ -127,6 +128,29 @@ a {
 }
 a:hover {
   text-decoration: underline;
+}
+
+/* Links inside running text are underlined too, so they don't rely on colour
+   alone to stand out (WCAG 1.4.1). */
+p a:not(.btn),
+li > a:not(.btn):not([class]),
+label a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Respect "reduce motion": no smooth scrolling, animations or transitions. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 input,
