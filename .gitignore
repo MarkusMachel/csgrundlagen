@@ -9,3 +9,6 @@ test-results
 coverage
 .env
 apps/api/bin
+
+# Python bytecode
+__pycache__/
