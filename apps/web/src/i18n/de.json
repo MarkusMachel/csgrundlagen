@@ -66,7 +66,8 @@
     "clearFilters": "Filter zurücksetzen",
     "resultCount_one": "{{count}} Frage",
     "resultCount_other": "{{count}} Fragen",
-    "searchTags": "Tags durchsuchen…"
+    "searchTags": "Tags durchsuchen…",
+    "filters": "Filter"
   },
   "question": {
     "submit": "Antwort absenden",

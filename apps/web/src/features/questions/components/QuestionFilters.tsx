@@ -24,11 +24,11 @@ export const emptyFilters: FilterState = {
   seed: '',
 };
 
-const DIFFICULTIES: Difficulty[] = ['easy', 'medium', 'hard'];
-const STATUSES: QuestionStatus[] = ['unanswered', 'answered', 'wrong', 'bookmarked'];
-const SORTS: QuestionSort[] = ['oldest', 'newest', 'random'];
+export const DIFFICULTIES: Difficulty[] = ['easy', 'medium', 'hard'];
+export const STATUSES: QuestionStatus[] = ['unanswered', 'answered', 'wrong', 'bookmarked'];
+export const SORTS: QuestionSort[] = ['oldest', 'newest', 'random'];
 
-const newSeed = () => Math.random().toString(36).slice(2, 10);
+export const newSeed = () => Math.random().toString(36).slice(2, 10);
 
 /** True when anything narrows the list (sort order alone doesn't count). */
 export function hasActiveFilters(f: FilterState) {

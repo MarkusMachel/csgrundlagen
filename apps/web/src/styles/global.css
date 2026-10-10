@@ -1450,6 +1450,226 @@ table.data-table {
   border-radius: 999px;
 }
 
+/* ---------- home: filters in a left sidebar ---------- */
+
+/* Like the material wiki, the home feed uses the full window width. */
+.app-main:has(.feed-layout) {
+  max-width: none;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.feed-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+}
+
+.feed-layout__main {
+  min-width: 0;
+}
+
+@media (min-width: 860px) {
+  .feed-layout {
+    grid-template-columns: 270px minmax(0, 1fr);
+    column-gap: 36px;
+  }
+
+  .feed-layout__sidebar {
+    position: sticky;
+    top: 66px; /* below the sticky title bar */
+    align-self: start;
+  }
+
+  /* the rounded panel itself scrolls, so the scrollbar stays inside it */
+  .filter-panel {
+    max-height: calc(100vh - 66px - 56px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
+.filter-panel {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 0 10px 12px;
+}
+
+.filter-panel__title {
+  list-style: none; /* the chevron replaces the default marker */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  padding: 10px 4px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.filter-panel__title::-webkit-details-marker {
+  display: none;
+}
+
+.filter-panel__chevron {
+  margin-left: auto;
+  transform: rotate(-90deg);
+  transition: transform 150ms;
+}
+
+.filter-panel[open] .filter-panel__chevron {
+  transform: none;
+}
+
+.filter-panel__badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.filter-panel__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.filter-panel__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 28px;
+  margin-top: -6px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.filter-panel__section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.filter-panel__heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 22px;
+  margin: 0;
+  padding: 0 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.filter-panel__heading-action {
+  margin-left: auto;
+  width: 26px;
+  min-width: 26px;
+  min-height: 26px;
+}
+
+.filter-panel__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-panel__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text);
+  font-size: 12.5px;
+  line-height: 1.45;
+  text-align: left;
+  cursor: pointer;
+}
+
+.filter-panel__item:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.filter-panel__item[aria-checked='true'],
+.filter-panel__item[aria-pressed='true'] {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* tag rows: a small checkbox, since several can be ticked */
+.filter-panel__box {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  background: var(--surface);
+}
+
+.filter-panel__item[aria-pressed='true'] .filter-panel__box {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.filter-panel__tag-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 4px;
+  padding: 5px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--muted);
+}
+
+.filter-panel__tag-search:focus-within {
+  border-color: var(--accent);
+}
+
+.filter-panel__tag-search input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  outline: none;
+  font-size: 12.5px;
+}
+
+.filter-panel__empty {
+  margin: 0;
+  padding: 4px 8px;
+  color: var(--muted);
+}
+
 /* ---------- custom select (shared/ui/Select) ---------- */
 
 .dropdown {

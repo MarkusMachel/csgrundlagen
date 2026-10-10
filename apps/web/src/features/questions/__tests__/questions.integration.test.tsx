@@ -98,6 +98,32 @@ describe('feed filters (integration)', () => {
   });
 });
 
+describe('home filter sidebar (integration)', () => {
+  it('filters by status and tags from the sidebar panel', async () => {
+    loginAsDemo();
+    const user = userEvent.setup();
+    renderWithProviders(<HomePage />);
+    const allText = (await screen.findByText(/^\d+ questions$/)).textContent;
+
+    await user.click(screen.getByRole('radio', { name: 'Got wrong' }));
+    expect(screen.getByRole('radio', { name: 'Got wrong' })).toHaveAttribute(
+      'aria-checked',
+      'true',
+    );
+    expect(await screen.findByText('2 questions')).toBeInTheDocument();
+    await user.click(screen.getByRole('radio', { name: 'All questions' }));
+    expect(await screen.findByText(allText!)).toBeInTheDocument();
+
+    // the tag search narrows the list of tags, and ticking one filters the feed
+    await user.type(screen.getByRole('textbox', { name: 'Search tags…' }), 'osi');
+    const tag = screen.getByRole('button', { name: 'OSI Model' });
+    await user.click(tag);
+    expect(tag).toHaveAttribute('aria-pressed', 'true');
+    await waitFor(() => expect(screen.getByText(/^\d+ questions?$/).textContent).not.toBe(allText));
+    expect(screen.getByRole('button', { name: 'Clear filters' })).toBeInTheDocument();
+  });
+});
+
 describe('bookmarks (integration)', () => {
   it('bookmarking in the feed makes the question appear on the Bookmarks page', async () => {
     loginAsDemo();
