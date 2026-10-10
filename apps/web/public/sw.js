@@ -13,7 +13,7 @@
  * Answers given offline are queued by the app itself (IndexedDB) and sent
  * when the connection is back; the worker never caches writes.
  */
-const VERSION = 'v1';
+const VERSION = 'v2'; // v2: new app icon
 const SHELL = `cft-shell-${VERSION}`;
 const ASSETS = 'cft-assets';
 const API = 'cft-api';
