@@ -53,21 +53,23 @@ type Option struct {
 //	ordering         Options + CorrectOrder (option ids in the right order)
 //	output           Code + CodeLanguage + ExpectedOutput (predict what it prints)
 //	flashcard        Prompt is the front, Explanation the back; self-graded (true = knew it)
+//	design           Design: draw a system from components, checked against rules (design.go)
 type Question struct {
-	ID               string   `json:"id"`
-	Type             string   `json:"type"`
-	Prompt           string   `json:"prompt"`
-	Tags             []string `json:"tags"`
-	Difficulty       *string  `json:"difficulty,omitempty"`
-	Explanation      string   `json:"explanation"`
-	Options          []Option `json:"options,omitempty"`
-	CorrectOptionID  *string  `json:"correctOptionId,omitempty"`
-	CorrectAnswer    *bool    `json:"correctAnswer,omitempty"`
-	CorrectOptionIDs []string `json:"correctOptionIds,omitempty"`
-	CorrectOrder     []string `json:"correctOrder,omitempty"`
-	Code             *string  `json:"code,omitempty"`
-	CodeLanguage     *string  `json:"codeLanguage,omitempty"`
-	ExpectedOutput   *string  `json:"expectedOutput,omitempty"`
+	ID               string      `json:"id"`
+	Type             string      `json:"type"`
+	Prompt           string      `json:"prompt"`
+	Tags             []string    `json:"tags"`
+	Difficulty       *string     `json:"difficulty,omitempty"`
+	Explanation      string      `json:"explanation"`
+	Options          []Option    `json:"options,omitempty"`
+	CorrectOptionID  *string     `json:"correctOptionId,omitempty"`
+	CorrectAnswer    *bool       `json:"correctAnswer,omitempty"`
+	CorrectOptionIDs []string    `json:"correctOptionIds,omitempty"`
+	CorrectOrder     []string    `json:"correctOrder,omitempty"`
+	Code             *string     `json:"code,omitempty"`
+	CodeLanguage     *string     `json:"codeLanguage,omitempty"`
+	ExpectedOutput   *string     `json:"expectedOutput,omitempty"`
+	Design           *DesignSpec `json:"design,omitempty"`
 }
 
 // HasOptions reports whether the type stores answer options.
@@ -101,6 +103,10 @@ func (q Question) Correct() any {
 		}
 	case "flashcard":
 		return true
+	case "design":
+		if q.Design != nil {
+			return q.Design.Reference
+		}
 	}
 	return nil
 }
@@ -121,6 +127,8 @@ type SubmitAnswerResult struct {
 	NextReviewAt *time.Time `json:"nextReviewAt,omitempty"`
 	// Feedback explains the wrong options picked, when the author wrote some.
 	Feedback []OptionFeedback `json:"feedback,omitempty"`
+	// Design is the rule-by-rule result for a design question.
+	Design *DesignResult `json:"design,omitempty"`
 }
 
 type Comment struct {

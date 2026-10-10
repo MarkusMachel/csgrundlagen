@@ -1,0 +1,1539 @@
+{
+  "name": ".NET interview guide by level (junior, mid, senior)",
+  "materials": [
+    {
+      "key": "minimal",
+      "type": "article",
+      "title": "Minimal APIs overview",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis",
+      "author": "Microsoft Learn",
+      "description": "Routing, binding and results in minimal APIs."
+    },
+    {
+      "key": "error-handling",
+      "type": "article",
+      "title": "Handle errors in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling",
+      "author": "Microsoft Learn",
+      "description": "IExceptionHandler, UseExceptionHandler and ProblemDetails."
+    },
+    {
+      "key": "api-errors",
+      "type": "article",
+      "title": "Handle errors in ASP.NET Core APIs",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/web-api/handle-errors",
+      "author": "Microsoft Learn",
+      "description": "Problem details and exception handling for web APIs."
+    },
+    {
+      "key": "validation",
+      "type": "article",
+      "title": "Model validation in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation",
+      "author": "Microsoft Learn",
+      "description": "DataAnnotations, ModelState and automatic 400s. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "return-types",
+      "type": "article",
+      "title": "Controller action return types",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/web-api/action-return-types",
+      "author": "Microsoft Learn",
+      "description": "ActionResult<T>, IActionResult and response types. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "web-api",
+      "type": "article",
+      "title": "Create web APIs with ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/web-api/",
+      "author": "Microsoft Learn",
+      "description": "ControllerBase, [ApiController] and conventions. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "rfc9457",
+      "type": "article",
+      "title": "Problem Details for HTTP APIs (RFC 9457)",
+      "url": "https://datatracker.ietf.org/doc/html/rfc9457",
+      "author": "IETF",
+      "description": "The standard error body for HTTP APIs."
+    },
+    {
+      "key": "logging",
+      "type": "article",
+      "title": "Logging in .NET",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/logging",
+      "author": "Microsoft Learn",
+      "description": "ILogger, message templates and providers. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "serilog",
+      "type": "link",
+      "title": "Serilog",
+      "url": "https://serilog.net/",
+      "author": "Serilog",
+      "description": "Structured logging library with file and many other sinks. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "middleware",
+      "type": "article",
+      "title": "ASP.NET Core middleware",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/",
+      "author": "Microsoft Learn",
+      "description": "The pipeline, ordering and short-circuiting."
+    },
+    {
+      "key": "write-middleware",
+      "type": "article",
+      "title": "Write custom ASP.NET Core middleware",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/write",
+      "author": "Microsoft Learn",
+      "description": "Convention-based middleware and per-request dependencies."
+    },
+    {
+      "key": "imiddleware",
+      "type": "article",
+      "title": "Factory-based middleware (IMiddleware)",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/extensibility",
+      "author": "Microsoft Learn",
+      "description": "Middleware activated per request from DI. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "configuration",
+      "type": "article",
+      "title": "Configuration in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/",
+      "author": "Microsoft Learn",
+      "description": "Providers, sections and environment variables. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "environments",
+      "type": "article",
+      "title": "Use multiple environments",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/environments",
+      "author": "Microsoft Learn",
+      "description": "ASPNETCORE_ENVIRONMENT and IHostEnvironment. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "options",
+      "type": "article",
+      "title": "Options pattern in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options",
+      "author": "Microsoft Learn",
+      "description": "IOptions, IOptionsSnapshot and IOptionsMonitor."
+    },
+    {
+      "key": "secrets",
+      "type": "article",
+      "title": "Safe storage of app secrets in development",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets",
+      "author": "Microsoft Learn",
+      "description": "User secrets and keeping secrets out of source."
+    },
+    {
+      "key": "migrations",
+      "type": "article",
+      "title": "Migrations overview (EF Core)",
+      "url": "https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/",
+      "author": "Microsoft Learn",
+      "description": "Code First schema evolution. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "scaffolding",
+      "type": "article",
+      "title": "Scaffolding (reverse engineering)",
+      "url": "https://learn.microsoft.com/en-us/ef/core/managing-schemas/scaffolding/",
+      "author": "Microsoft Learn",
+      "description": "Generating a model from an existing database. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "one-to-many",
+      "type": "article",
+      "title": "One-to-many relationships (EF Core)",
+      "url": "https://learn.microsoft.com/en-us/ef/core/modeling/relationships/one-to-many",
+      "author": "Microsoft Learn",
+      "description": "Conventions and fluent configuration. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "di",
+      "type": "article",
+      "title": "Dependency injection in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection",
+      "author": "Microsoft Learn",
+      "description": "Lifetimes, constructor and action injection."
+    },
+    {
+      "key": "filters",
+      "type": "article",
+      "title": "Filters in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters",
+      "author": "Microsoft Learn",
+      "description": "Authorization, resource, action, exception and result filters. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "endpoint-filters",
+      "type": "article",
+      "title": "Filters in minimal API apps",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/min-api-filters",
+      "author": "Microsoft Learn",
+      "description": "IEndpointFilter, the minimal API equivalent of filters. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "http-logging",
+      "type": "article",
+      "title": "HTTP logging in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-logging/",
+      "author": "Microsoft Learn",
+      "description": "Logging requests and responses with field allow-lists. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "model-binding",
+      "type": "article",
+      "title": "Model binding in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding",
+      "author": "Microsoft Learn",
+      "description": "Binding sources: body, query, route, form. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "apis-overview",
+      "type": "article",
+      "title": "Choose between controller-based APIs and minimal APIs",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/apis",
+      "author": "Microsoft Learn",
+      "description": "Trade-offs between the two styles. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "jwt",
+      "type": "article",
+      "title": "Configure JWT bearer authentication",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/security/authentication/configure-jwt-bearer-authentication",
+      "author": "Microsoft Learn",
+      "description": "Validating issuer, audience, lifetime and keys. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "policies",
+      "type": "article",
+      "title": "Policy-based authorization",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/security/authorization/policies",
+      "author": "Microsoft Learn",
+      "description": "Requirements, handlers and named policies. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "rfc9110",
+      "type": "article",
+      "title": "HTTP Semantics (RFC 9110)",
+      "url": "https://datatracker.ietf.org/doc/html/rfc9110",
+      "author": "IETF",
+      "description": "Methods and status codes, including 204 and 404."
+    },
+    {
+      "key": "api-versioning",
+      "type": "link",
+      "title": "ASP.NET API Versioning",
+      "url": "https://github.com/dotnet/aspnet-api-versioning",
+      "author": "dotnet",
+      "description": "URL, query and header versioning for ASP.NET Core."
+    },
+    {
+      "key": "sunset",
+      "type": "article",
+      "title": "The Sunset HTTP Header Field (RFC 8594)",
+      "url": "https://datatracker.ietf.org/doc/html/rfc8594",
+      "author": "IETF",
+      "description": "Announcing when an endpoint goes away. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "mapperly",
+      "type": "link",
+      "title": "Mapperly",
+      "url": "https://mapperly.riok.app/",
+      "author": "Riok",
+      "description": "Source-generated object mapping, no reflection. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "richardson",
+      "type": "article",
+      "title": "Richardson Maturity Model",
+      "url": "https://martinfowler.com/articles/richardsonMaturityModel.html",
+      "author": "Martin Fowler",
+      "description": "Levels of RESTfulness in practice."
+    },
+    {
+      "key": "monolith-first",
+      "type": "article",
+      "title": "Monolith First",
+      "url": "https://martinfowler.com/bliki/MonolithFirst.html",
+      "author": "Martin Fowler",
+      "description": "Start with a monolith; split when boundaries are clear."
+    },
+    {
+      "key": "gateway",
+      "type": "article",
+      "title": "Use API gateways in microservices",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/microservices/design/gateway",
+      "author": "Microsoft Learn",
+      "description": "Routing, aggregation and offloading at the edge."
+    },
+    {
+      "key": "yarp",
+      "type": "link",
+      "title": "YARP: Yet Another Reverse Proxy",
+      "url": "https://github.com/dotnet/yarp",
+      "author": "dotnet",
+      "description": "A reverse proxy library for building gateways in .NET. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "normalization",
+      "type": "article",
+      "title": "Database normalization",
+      "url": "https://en.wikipedia.org/wiki/Database_normalization",
+      "author": "Wikipedia",
+      "description": "Normal forms and update anomalies. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "ef-indexes",
+      "type": "article",
+      "title": "Indexes (EF Core)",
+      "url": "https://learn.microsoft.com/en-us/ef/core/modeling/indexes",
+      "author": "Microsoft Learn",
+      "description": "Declaring single and composite indexes. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "explain",
+      "type": "article",
+      "title": "Using EXPLAIN",
+      "url": "https://www.postgresql.org/docs/current/using-explain.html",
+      "author": "PostgreSQL documentation",
+      "description": "Reading query plans and actual row counts."
+    },
+    {
+      "key": "cap",
+      "type": "article",
+      "title": "CAP theorem",
+      "url": "https://en.wikipedia.org/wiki/CAP_theorem",
+      "author": "Wikipedia",
+      "description": "Consistency, availability and partition tolerance."
+    },
+    {
+      "key": "ddia",
+      "type": "book",
+      "title": "Designing Data-Intensive Applications",
+      "url": "https://dataintensive.net/",
+      "author": "Martin Kleppmann",
+      "description": "Consistency, replication, partitioning and messaging in depth. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "eventual",
+      "type": "article",
+      "title": "Eventually Consistent",
+      "url": "https://www.allthingsdistributed.com/2008/12/eventually_consistent.html",
+      "author": "Werner Vogels",
+      "description": "What eventual consistency means in practice. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "autoscale",
+      "type": "article",
+      "title": "Autoscaling",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling",
+      "author": "Microsoft Learn",
+      "description": "Scaling out versus up, and designing for it. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "data-stores",
+      "type": "article",
+      "title": "Understand data store models",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/data-store-overview",
+      "author": "Microsoft Learn",
+      "description": "Relational, document, key-value, graph and more. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "dist-lock",
+      "type": "article",
+      "title": "How to do distributed locking",
+      "url": "https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html",
+      "author": "Martin Kleppmann",
+      "description": "Why leases need fencing tokens."
+    },
+    {
+      "key": "pg-locking",
+      "type": "article",
+      "title": "Explicit locking",
+      "url": "https://www.postgresql.org/docs/current/explicit-locking.html",
+      "author": "PostgreSQL documentation",
+      "description": "Row locks and advisory locks."
+    },
+    {
+      "key": "ef-concurrency",
+      "type": "article",
+      "title": "Handling concurrency conflicts",
+      "url": "https://learn.microsoft.com/en-us/ef/core/saving/concurrency",
+      "author": "Microsoft Learn",
+      "description": "Optimistic concurrency with tokens and row versions."
+    },
+    {
+      "key": "tenancy-models",
+      "type": "article",
+      "title": "Tenancy models for a multitenant solution",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/considerations/tenancy-models",
+      "author": "Microsoft Learn",
+      "description": "Shared, schema and database per tenant."
+    },
+    {
+      "key": "query-filters",
+      "type": "article",
+      "title": "Global query filters (EF Core)",
+      "url": "https://learn.microsoft.com/en-us/ef/core/querying/filters",
+      "author": "Microsoft Learn",
+      "description": "Filtering every query by tenant or soft delete. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "pg-rls",
+      "type": "article",
+      "title": "Row security policies",
+      "url": "https://www.postgresql.org/docs/current/ddl-rowsecurity.html",
+      "author": "PostgreSQL documentation",
+      "description": "Enforcing tenant isolation in the database. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "cache-aside",
+      "type": "article",
+      "title": "Cache-Aside pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+      "author": "Microsoft Learn",
+      "description": "Load on miss, invalidate on write."
+    },
+    {
+      "key": "hybridcache",
+      "type": "article",
+      "title": "HybridCache library in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/performance/caching/hybrid",
+      "author": "Microsoft Learn",
+      "description": "Two-level caching with stampede protection."
+    },
+    {
+      "key": "grpc-compare",
+      "type": "article",
+      "title": "Compare gRPC services with HTTP APIs",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/grpc/comparison",
+      "author": "Microsoft Learn",
+      "description": "When gRPC beats JSON over HTTP."
+    },
+    {
+      "key": "graphql",
+      "type": "link",
+      "title": "Learn GraphQL",
+      "url": "https://graphql.org/learn/",
+      "author": "GraphQL Foundation",
+      "description": "Queries, schemas and resolvers. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "load-leveling",
+      "type": "article",
+      "title": "Queue-Based Load Leveling pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+      "author": "Microsoft Learn",
+      "description": "Absorbing spikes with a queue."
+    },
+    {
+      "key": "delivery",
+      "type": "article",
+      "title": "Message Delivery Guarantees",
+      "url": "https://docs.confluent.io/kafka/design/delivery-semantics.html",
+      "author": "Confluent",
+      "description": "At-most-once, at-least-once and exactly-once."
+    },
+    {
+      "key": "idempotent-consumer",
+      "type": "article",
+      "title": "Pattern: Idempotent consumer",
+      "url": "https://microservices.io/patterns/communication-style/idempotent-consumer.html",
+      "author": "microservices.io",
+      "description": "Handling duplicate messages safely."
+    },
+    {
+      "key": "outbox",
+      "type": "article",
+      "title": "Pattern: Transactional outbox",
+      "url": "https://microservices.io/patterns/data/transactional-outbox.html",
+      "author": "microservices.io",
+      "description": "Publishing events reliably without dual writes."
+    },
+    {
+      "key": "resilience",
+      "type": "article",
+      "title": "Introduction to resilient app development",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/resilience/",
+      "author": "Microsoft Learn",
+      "description": "Microsoft.Extensions.Resilience and Polly pipelines."
+    },
+    {
+      "key": "clean",
+      "type": "article",
+      "title": "The Clean Architecture",
+      "url": "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html",
+      "author": "Robert C. Martin",
+      "description": "Concentric layers and the dependency rule."
+    },
+    {
+      "key": "persistence",
+      "type": "article",
+      "title": "Design the infrastructure persistence layer",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design",
+      "author": "Microsoft Learn",
+      "description": "Repositories and Unit of Work with EF Core."
+    },
+    {
+      "key": "vertical-slice",
+      "type": "article",
+      "title": "Vertical slice architecture",
+      "url": "https://www.jimmybogard.com/vertical-slice-architecture/",
+      "author": "Jimmy Bogard",
+      "description": "Organizing by feature instead of layer."
+    },
+    {
+      "key": "rule-of-three",
+      "type": "article",
+      "title": "Rule of three (computer programming)",
+      "url": "https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming)",
+      "author": "Wikipedia",
+      "description": "Refactor duplication on the third occurrence. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "cqrs",
+      "type": "article",
+      "title": "CQRS",
+      "url": "https://martinfowler.com/bliki/CQRS.html",
+      "author": "Martin Fowler",
+      "description": "Separate models for reading and writing. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "cqrs-simple",
+      "type": "article",
+      "title": "Apply simplified CQRS and DDD patterns in a microservice",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/apply-simplified-microservice-cqrs-ddd-patterns",
+      "author": "Microsoft Learn",
+      "description": "CQRS with one database and separate read paths."
+    }
+  ],
+  "questions": [
+    {
+      "prompt": "How do you handle POST, PUT and DELETE in ASP.NET Core Minimal APIs?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Return Results.Ok() for every write so clients can always parse a body.",
+        "Map a handler per verb; parameters bind automatically, and TypedResults make 201, 204 and 404 explicit.",
+        "Minimal APIs only handle GET; writes require controllers derived from ControllerBase.",
+        "Use one MapPost handler for all three verbs and switch on the HTTP method inside it, since minimal APIs only support POST bodies."
+      ],
+      "correct": 1,
+      "explanation": "Map each verb to a handler; parameters bind from route, query, body or DI automatically. Return `TypedResults` so status codes are explicit and OpenAPI is accurate: `201` with a location for create, `200/204` for update, `204` for delete, `404` if missing.\n\n```csharp\nvar items = app.MapGroup(\"/items\");\nitems.MapPost(\"/\", async (CreateItem dto, IItemService svc) =>\n{\n    var item = await svc.CreateAsync(dto);\n    return TypedResults.Created($\"/items/{item.Id}\", item);\n});\nitems.MapPut(\"/{id:int}\", async (int id, UpdateItem dto, IItemService svc) =>\n    await svc.UpdateAsync(id, dto) ? TypedResults.NoContent() : Results.NotFound());\nitems.MapDelete(\"/{id:int}\", async (int id, IItemService svc) =>\n    await svc.DeleteAsync(id) ? TypedResults.NoContent() : Results.NotFound());\n```",
+      "materials": [
+        "minimal"
+      ]
+    },
+    {
+      "prompt": "How do you handle exceptions globally in ASP.NET Core (.NET 8+)?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Use AppDomain.UnhandledException, which turns exceptions into 500 responses.",
+        "Register an IExceptionHandler plus AddProblemDetails, and call UseExceptionHandler() first in the pipeline.",
+        "Wrap every controller action in try/catch, because ASP.NET Core has no global hook for unhandled exceptions in APIs.",
+        "Set a global catch in Main around app.Run(), which catches exceptions thrown inside any request."
+      ],
+      "correct": 1,
+      "explanation": "Register an `IExceptionHandler` (.NET 8+), add `ProblemDetails`, and put `UseExceptionHandler()` first in the pipeline. The handler maps known exceptions to status codes and hides internals for the rest.\n\n```csharp\nbuilder.Services.AddExceptionHandler<GlobalExceptionHandler>();\nbuilder.Services.AddProblemDetails();\napp.UseExceptionHandler();\n\npublic sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> log) : IExceptionHandler\n{\n    public async ValueTask<bool> TryHandleAsync(HttpContext ctx, Exception ex, CancellationToken ct)\n    {\n        log.LogError(ex, \"Unhandled exception\");\n        var status = ex is NotFoundException ? 404 : 500;\n        ctx.Response.StatusCode = status;\n        await ctx.Response.WriteAsJsonAsync(new ProblemDetails { Status = status, Title = \"Request failed\" }, ct);\n        return true;\n    }\n}\n```",
+      "materials": [
+        "error-handling",
+        "api-errors"
+      ]
+    },
+    {
+      "prompt": "How does ASP.NET Core validate request models, and what happens when one is invalid?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Invalid models throw a ValidationException that crashes the request with a 500.",
+        "The framework silently drops invalid fields and passes defaults to the action.",
+        "Validation never runs automatically; every action must call Validator.ValidateObject itself, in controllers and minimal APIs alike.",
+        "With [ApiController], validation runs automatically and returns 400 ValidationProblemDetails; minimal APIs need an explicit step."
+      ],
+      "correct": 3,
+      "explanation": "In controllers with `[ApiController]`, model validation runs automatically and returns `400` with `ValidationProblemDetails`. Use DataAnnotations for simple rules or FluentValidation for complex ones. Minimal APIs need an explicit validation step (a filter, FluentValidation, or the built-in support in the newest .NET versions).\n\n```csharp\npublic record CreateItem([Required, StringLength(100)] string Name, [Range(0.01, 100000)] decimal Price);\n```",
+      "materials": [
+        "validation"
+      ]
+    },
+    {
+      "prompt": "What makes a good controller action that takes a DTO, validates it and returns a custom error?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Accept a DTO, check business rules too, and return ProblemDetails with the right status (e.g. 409), or CreatedAtAction.",
+        "Return 200 with { success: false } so clients never see an error status.",
+        "Throw an exception for every validation failure and let the logs explain it.",
+        "Bind directly to the EF entity so validation and saving happen in one step, then return the exception message as plain text."
+      ],
+      "correct": 0,
+      "explanation": "Point out: a DTO instead of the entity, a consistent error shape (`ProblemDetails`), and the correct status.\n\n```csharp\n[HttpPost]\npublic async Task<IActionResult> Create(CreateItemDto dto)\n{\n    if (await _repo.ExistsAsync(dto.Name))\n        return Problem(statusCode: 409, title: \"Duplicate item\", detail: $\"'{dto.Name}' already exists\");\n    if (!ModelState.IsValid) return ValidationProblem(ModelState);\n    var item = _svc.Create(dto);\n    return CreatedAtAction(nameof(Get), new { id = item.Id }, item);\n}\n```",
+      "materials": [
+        "validation",
+        "api-errors"
+      ]
+    },
+    {
+      "prompt": "How do you return different HTTP status codes from a controller action?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Set Response.StatusCode at the start of the action, because result helpers always return 200 regardless of their name, and it behaves the same in controllers and minimal APIs.",
+        "Throw HttpException with the code, the same way classic ASP.NET did.",
+        "Status codes are chosen by the framework from the return type and can't be set.",
+        "Use result helpers (Ok, CreatedAtAction, NoContent, NotFound, Conflict, Problem) with ActionResult<T> and [ProducesResponseType]."
+      ],
+      "correct": 3,
+      "explanation": "Use result helpers (`Ok`, `Created`/`CreatedAtAction`, `NoContent`, `BadRequest`, `NotFound`, `Conflict`, `Problem`). Return `ActionResult<T>` and declare outcomes with `[ProducesResponseType]` so Swagger documents them.\n\n```csharp\n[ProducesResponseType<Item>(200)] [ProducesResponseType(404)]\npublic async Task<ActionResult<Item>> Get(int id)\n    => await _repo.FindAsync(id) is { } item ? Ok(item) : NotFound();\n```",
+      "materials": [
+        "return-types"
+      ]
+    },
+    {
+      "prompt": "ControllerBase or Controller: which should a Web API derive from?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "ControllerBase (with [ApiController]); Controller only adds view support (View, ViewBag) for Razor MVC.",
+        "Either; they are aliases kept for backward compatibility.",
+        "ControllerBase is for gRPC services and Controller for HTTP APIs.",
+        "Controller, because ControllerBase lacks Ok(), NotFound() and ModelState, which only the full Controller class provides."
+      ],
+      "correct": 0,
+      "explanation": "`ControllerBase` has everything an API needs (`Ok()`, `NotFound()`, `ModelState`, `User`, `Request`). `Controller` derives from it and adds view support (`View()`, `ViewBag`, `PartialView`) for MVC with Razor. Web APIs should derive from `ControllerBase` with `[ApiController]`; use `Controller` only when the controller returns views.",
+      "materials": [
+        "web-api"
+      ]
+    },
+    {
+      "prompt": "What is ProblemDetails, and why should an API return it?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A logging format for Serilog that replaces structured logs.",
+        "A debugging object that includes the stack trace so clients can report bugs, meant to be returned only in production.",
+        "The RFC 9457 error body (type, title, status, detail, instance): one consistent error shape every client can handle.",
+        "An EF Core type describing failed database queries."
+      ],
+      "correct": 2,
+      "explanation": "The standard error body for HTTP APIs (RFC 9457, formerly 7807): `type`, `title`, `status`, `detail`, `instance`, plus extensions. A consistent shape means clients can handle every error the same way. `AddProblemDetails()` makes the framework produce it for exceptions and status-code-only responses; `[ApiController]` already uses it for `400`s.",
+      "materials": [
+        "rfc9457",
+        "api-errors"
+      ]
+    },
+    {
+      "prompt": "What is structured logging, and why use message templates instead of string interpolation?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It writes logs to a relational table instead of files.",
+        "Logs with named properties, so they're queryable; templates capture each property and let identical messages group together.",
+        "It means logging only exceptions; templates are for formatting stack traces.",
+        "It's logging in a fixed column layout; interpolation is preferred because it's faster and keeps the property values, which is why most teams standardize on it."
+      ],
+      "correct": 1,
+      "explanation": "Logging with named properties instead of formatted strings, so logs are queryable data. Use message templates, not string interpolation, so the property is captured and the template can be grouped. Sinks (Serilog, OpenTelemetry) store it as JSON for search and alerting.\n\n```csharp\n_logger.LogInformation(\"Order {OrderId} placed by {CustomerId}\", order.Id, customerId); // good\n_logger.LogInformation($\"Order {order.Id} placed\");                                      // loses structure\n```",
+      "materials": [
+        "logging"
+      ]
+    },
+    {
+      "prompt": "How do you write ASP.NET Core logs to a file?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The built-in providers can't; use a provider such as Serilog's file sink with rolling, or log to stdout in containers.",
+        "Redirect Console.Out to a FileStream at startup.",
+        "Use the Debug provider, which writes to a file next to the binary.",
+        "Enable the built-in File provider in appsettings.json, which every ASP.NET Core template registers by default, and it behaves the same in controllers and minimal APIs."
+      ],
+      "correct": 0,
+      "explanation": "The built-in providers (console, debug, EventSource) do not write files. Use a third-party provider such as Serilog with `Serilog.Sinks.File` and a rolling interval. In containers prefer stdout and let the platform ship the logs.\n\n```csharp\nbuilder.Host.UseSerilog((ctx, cfg) => cfg\n    .ReadFrom.Configuration(ctx.Configuration)\n    .WriteTo.Console()\n    .WriteTo.File(\"logs/app-.log\", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 14));\n```",
+      "materials": [
+        "serilog",
+        "logging"
+      ]
+    },
+    {
+      "prompt": "How does a middleware stop the ASP.NET Core request pipeline?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It throws an OperationCanceledException, which is the only way to stop the remaining middleware from running.",
+        "It writes the response itself and doesn't call next (short-circuit); terminal middleware never calls next.",
+        "It calls next(ctx) with a null context.",
+        "It sets ctx.Items[\"stop\"] = true, which later middleware check."
+      ],
+      "correct": 1,
+      "explanation": "Do not call `next`; write the response yourself (short-circuit). Terminal middleware (`app.Run`) never calls next either.\n\n```csharp\napp.Use(async (ctx, next) =>\n{\n    if (!ctx.Request.Headers.ContainsKey(\"X-Api-Key\"))\n    {\n        ctx.Response.StatusCode = StatusCodes.Status401Unauthorized;\n        return;\n    }\n    await next(ctx);\n});\n```",
+      "materials": [
+        "middleware"
+      ]
+    },
+    {
+      "prompt": "How do you pass data between ASP.NET Core middleware components?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "IMemoryCache with the request path as the key.",
+        "A static dictionary keyed by thread id, because each request always runs on a single thread from start to finish.",
+        "Response headers, which later middleware read back.",
+        "HttpContext.Items (a per-request dictionary) or a scoped service; Features are for framework extension points."
+      ],
+      "correct": 3,
+      "explanation": "`HttpContext.Items` (a per-request dictionary), or a scoped service injected into both parts. `HttpContext.Features` is for framework-level extension points. Keep keys as constants.\n\n```csharp\nctx.Items[\"TenantId\"] = tenantId;            // set in middleware\nvar tenant = (string)ctx.Items[\"TenantId\"]!; // read later\n```",
+      "materials": [
+        "middleware"
+      ]
+    },
+    {
+      "prompt": "How do you read a configuration value such as a connection string in ASP.NET Core?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Hard-code it in a static class, because configuration can't be injected into controllers.",
+        "builder.Configuration.GetConnectionString in Program.cs; elsewhere inject IConfiguration, or better, bind a typed options class.",
+        "Read appsettings.json with File.ReadAllText and parse it, since IConfiguration is only available inside Program.cs, which is what the official docs recommend for production apps.",
+        "Use ConfigurationManager.AppSettings as in .NET Framework."
+      ],
+      "correct": 1,
+      "explanation": "`builder.Configuration` is available in `Program.cs`; in other classes inject `IConfiguration`, or better a strongly typed options class. Avoid reading `IConfiguration` all over controllers.\n\n```csharp\nvar cs = builder.Configuration.GetConnectionString(\"Default\");\n// or\nbuilder.Services.Configure<DbOptions>(builder.Configuration.GetSection(\"Db\"));\n```",
+      "materials": [
+        "configuration",
+        "options"
+      ]
+    },
+    {
+      "prompt": "How are environment variables read in ASP.NET Core?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Only through Environment.GetEnvironmentVariable, because IConfiguration never includes environment variables.",
+        "They're a configuration provider: values land in IConfiguration, with __ standing in for : in nested keys.",
+        "They must be prefixed with DOTNET_ or they are ignored.",
+        "They're loaded from a .env file that ASP.NET Core reads automatically."
+      ],
+      "correct": 1,
+      "explanation": "Environment variables are a configuration provider already: they are read into `IConfiguration`, and `__` replaces `:` for nested keys (`ConnectionStrings__Default`). `Environment.GetEnvironmentVariable` works too, and `IHostEnvironment` / `ASPNETCORE_ENVIRONMENT` tells you Development, Staging, Production. Secrets belong in a secret store, not in committed files.",
+      "materials": [
+        "configuration",
+        "environments",
+        "secrets"
+      ]
+    },
+    {
+      "prompt": "How do you pick up configuration changes without restarting an ASP.NET Core app?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Configuration can't change without a restart in .NET.",
+        "JSON files reload on change; read through IOptionsMonitor or IOptionsSnapshot. Environment variables need a restart.",
+        "Call Configuration.Reload() on every request, because file providers never watch for changes on their own, and that has been the default behaviour since .NET 8.",
+        "Environment variables reload automatically every few seconds."
+      ],
+      "correct": 1,
+      "explanation": "JSON file providers use `reloadOnChange: true` (the default for `appsettings.json`). Read the values through `IOptionsMonitor<T>` (or `IOptionsSnapshot<T>` per request) so changes are visible. Environment variables are read at startup and do not reload; use a config service (for example Azure App Configuration or a feature-flag service) for live changes.",
+      "materials": [
+        "configuration",
+        "options"
+      ]
+    },
+    {
+      "prompt": "What's the difference between IOptions<T>, IOptionsSnapshot<T> and IOptionsMonitor<T>?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Only IOptionsSnapshot can be injected into background services.",
+        "IOptions is scoped, IOptionsSnapshot is a singleton, and IOptionsMonitor is transient.",
+        "They are the same service registered three times for compatibility; any of them reloads values on every access, and that has been the default behaviour since .NET 8.",
+        "IOptions: singleton, read once. Snapshot: scoped, recomputed per request. Monitor: singleton with a live CurrentValue and OnChange."
+      ],
+      "correct": 3,
+      "explanation": "- `IOptions<T>`: singleton, values read once at startup; no reload.\n- `IOptionsSnapshot<T>`: scoped, recomputed per request, so changes show up on the next request; cannot be injected into singletons.\n- `IOptionsMonitor<T>`: singleton, `CurrentValue` is always fresh and `OnChange` fires on reload; use it in singletons and background services.",
+      "materials": [
+        "options"
+      ]
+    },
+    {
+      "prompt": "What is the difference between Code First and Database First in EF Core?",
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Code First writes raw SQL scripts by hand, while Database First generates the database from your classes.",
+        "Code First: classes are the source of truth and migrations evolve the schema. Database First: scaffold the model from an existing database.",
+        "They are performance modes: Code First caches queries, Database First doesn't.",
+        "Database First is the only option for PostgreSQL."
+      ],
+      "correct": 1,
+      "explanation": "Code First: classes and `DbContext` are the source of truth; migrations (`dotnet ef migrations add`, `database update`) create and evolve the schema. Database First: the database already exists; `dotnet ef dbcontext scaffold` generates the model, and you re-scaffold when the schema changes. Code First for new systems; Database First for legacy or DBA-owned databases.",
+      "materials": [
+        "migrations",
+        "scaffolding"
+      ]
+    },
+    {
+      "prompt": "How do you define a one-to-many relationship in EF Core?",
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Put a List on both classes; EF Core always creates a join table, even for one-to-many relationships, which is why most teams standardize on it.",
+        "Store the child ids as a comma-separated string on the parent.",
+        "The many side holds the foreign key, the one side a collection; conventions find it, or configure HasMany/WithOne.",
+        "Mark the parent with [OneToMany] and EF Core infers the rest."
+      ],
+      "correct": 2,
+      "explanation": "The \"many\" side holds the foreign key; the \"one\" side holds a collection. By convention this is enough, or configure it fluently.\n\n```csharp\npublic class Author { public int Id { get; set; } public List<Book> Books { get; set; } = []; }\npublic class Book   { public int Id { get; set; } public int AuthorId { get; set; } public Author Author { get; set; } = null!; }\n\nmodelBuilder.Entity<Author>().HasMany(a => a.Books).WithOne(b => b.Author).HasForeignKey(b => b.AuthorId);\n```",
+      "materials": [
+        "one-to-many"
+      ]
+    },
+    {
+      "prompt": "What is method injection in ASP.NET Core, and how does it differ from constructor injection?",
+      "tags": [
+        "C# & .NET",
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It's injecting through public settable properties after construction, which ASP.NET Core's container does by default.",
+        "It's identical to constructor injection but resolved lazily.",
+        "It supplies a dependency for one call ([FromServices] or a handler parameter) instead of for the object's lifetime.",
+        "It means calling the container's GetService inside each method (service locator)."
+      ],
+      "correct": 2,
+      "explanation": "Constructor injection supplies dependencies for the whole lifetime of the class; method injection supplies them for one call. In ASP.NET Core use `[FromServices]` on an action parameter (controllers) or just list the service as a parameter (Minimal APIs, `Middleware.InvokeAsync`). Use it when only one action needs a dependency or when you need a scoped service inside a singleton-like component.\n\n```csharp\npublic IActionResult Report([FromServices] IReportService reports) => Ok(reports.Build());\n```",
+      "materials": [
+        "di"
+      ]
+    },
+    {
+      "prompt": "What is the lifecycle of a controller in ASP.NET Core?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Each user session gets its own controller instance.",
+        "One controller instance is created at startup and shared by all requests, so fields act as an application-wide cache, which is what the official docs recommend for production apps.",
+        "Controllers are pooled and reused, so they must reset their state between requests.",
+        "A new instance per request from DI: routing, filters, model binding and validation, the action, result filters, then disposal."
+      ],
+      "correct": 3,
+      "explanation": "A new controller instance is created for every request (via DI), then disposed. Flow: routing selects an action, authorization and other filters run, model binding and validation fill parameters, action filters run before and after, the action executes, result filters run, the result is written. Because it is per request, controllers must not hold state between requests.",
+      "materials": [
+        "filters",
+        "web-api"
+      ]
+    },
+    {
+      "prompt": "What are action filters in ASP.NET Core, and what is the Minimal API equivalent?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Minimal APIs can't have filters of any kind.",
+        "Filters are attributes that only validate input; cross-cutting code like timing must live in middleware instead, and it behaves the same in controllers and minimal APIs.",
+        "They're LINQ predicates applied to the action's return value.",
+        "IActionFilter/IAsyncActionFilter run code around an action (timing, auditing); minimal APIs use IEndpointFilter."
+      ],
+      "correct": 3,
+      "explanation": "Filters run at defined points of the MVC pipeline (authorization, resource, action, exception, result). An action filter implements `IActionFilter`/`IAsyncActionFilter` to run code before and after an action: validation, timing, auditing, caching. Register globally, per controller or per action; use `[ServiceFilter]` or `[TypeFilter]` when the filter needs DI. For Minimal APIs the equivalent is `IEndpointFilter`.\n\n```csharp\npublic class TimingFilter(ILogger<TimingFilter> log) : IAsyncActionFilter\n{\n    public async Task OnActionExecutionAsync(ActionExecutingContext ctx, ActionExecutionDelegate next)\n    {\n        var sw = Stopwatch.StartNew();\n        await next();\n        log.LogInformation(\"{Action} took {Ms} ms\", ctx.ActionDescriptor.DisplayName, sw.ElapsedMilliseconds);\n    }\n}\n```",
+      "materials": [
+        "filters",
+        "endpoint-filters"
+      ]
+    },
+    {
+      "prompt": "How do you log HTTP requests and responses in ASP.NET Core safely?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Write a filter that serializes HttpContext to JSON.",
+        "Log full request and response bodies for every call, because that's the only way to debug production issues, and that has been the default behaviour since .NET 8.",
+        "Enable Debug-level logging for Microsoft.* in production.",
+        "Use the HTTP logging middleware with explicit fields; skip bodies by default, redact secrets, correlate with request ids."
+      ],
+      "correct": 3,
+      "explanation": "Use the built-in HTTP logging middleware and choose fields explicitly, or write your own middleware. Do not log bodies by default (privacy, size); redact tokens and personal data; correlate with a request id and trace id.\n\n```csharp\nbuilder.Services.AddHttpLogging(o =>\n{\n    o.LoggingFields = HttpLoggingFields.RequestPropertiesAndHeaders | HttpLoggingFields.ResponsePropertiesAndHeaders;\n    o.RequestHeaders.Add(\"X-Request-Id\");   // only allow-listed headers are logged\n});\napp.UseHttpLogging();\n```",
+      "materials": [
+        "http-logging"
+      ]
+    },
+    {
+      "prompt": "What do [FromBody], [FromQuery], [FromRoute] and [FromForm] control?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Where binding reads from: JSON body, query string, route segment, or form data (incl. files). Only one body parameter.",
+        "Which HTTP verbs the action accepts: FromBody for POST, FromQuery for GET, FromRoute for PUT, FromForm for DELETE, which avoids the overhead of the alternatives entirely.",
+        "How values are validated; the binding source is always the query string.",
+        "Which parameters are optional; all others are required."
+      ],
+      "correct": 0,
+      "explanation": "They say where binding reads from: JSON body, query string, route template segment, or form data (`application/x-www-form-urlencoded` and multipart, including files). Only one parameter can come from the body. `[ApiController]` infers complex types as `FromBody` and simple types as route or query.",
+      "materials": [
+        "model-binding"
+      ]
+    },
+    {
+      "prompt": "Why does middleware order matter in ASP.NET Core, and what's a typical order?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Middleware runs in registration order in, reverse out; e.g. exception handler, HTTPS, routing, CORS, authN, authZ, endpoints.",
+        "Authorization must come before authentication so anonymous users are rejected early.",
+        "Endpoints should be mapped first so routing is as fast as possible.",
+        "It doesn't: the framework sorts middleware by type before running, so registration order only affects startup time, so no extra configuration is needed for it to work."
+      ],
+      "correct": 0,
+      "explanation": "Middleware runs in the order registered on the way in, and in reverse on the way out. Wrong order gives bugs: authorization before authentication always fails, CORS after the endpoint adds no headers, the exception handler placed late misses earlier errors.\n\n```csharp\napp.UseExceptionHandler();\napp.UseHttpsRedirection();\napp.UseRouting();\napp.UseCors();\napp.UseAuthentication();\napp.UseAuthorization();\napp.MapControllers();\n```",
+      "materials": [
+        "middleware"
+      ]
+    },
+    {
+      "prompt": "When do you choose Minimal APIs and when controllers?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Minimal APIs are for prototypes only, since they can't use DI, authorization or OpenAPI in production, which is why most teams standardize on it.",
+        "Controllers are deprecated in .NET 8, so new code should only use minimal APIs.",
+        "Mix both in every endpoint for best performance.",
+        "Minimal APIs for small services and vertical slices; controllers when you want the full MVC feature set and conventions."
+      ],
+      "correct": 3,
+      "explanation": "Minimal APIs: less ceremony, fast, good for small services, microservices and vertical slices; filters via `IEndpointFilter`; group with `MapGroup`. Controllers: conventions, the filters pipeline, model binding features and content negotiation that large teams are used to; good when you need the full MVC feature set. Both run on the same hosting and middleware; pick one style per service for consistency.",
+      "materials": [
+        "apis-overview"
+      ]
+    },
+    {
+      "prompt": "How do you secure an ASP.NET Core API with JWT bearer tokens and authorization policies?",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Store the JWT in the database and compare strings on every request.",
+        "Use [AllowAnonymous] globally and check roles in the UI.",
+        "Validate issuer, audience, lifetime and signing key; define claim-based policies; apply with [Authorize] or RequireAuthorization.",
+        "Decode the JWT payload in each action and trust its claims, since tokens are signed by the client and can't be forged, which avoids the overhead of the alternatives entirely."
+      ],
+      "correct": 2,
+      "explanation": "Authentication proves who the caller is; authorization decides what they may do. Configure JWT bearer to validate issuer, audience, lifetime and signing key; define policies from claims or roles; apply with `[Authorize]` or `RequireAuthorization`. Keep tokens short-lived and validate on every request.\n\n```csharp\nbuilder.Services.AddAuthentication().AddJwtBearer(o => builder.Configuration.Bind(\"Jwt\", o));\nbuilder.Services.AddAuthorizationBuilder().AddPolicy(\"Admin\", p => p.RequireClaim(\"role\", \"admin\"));\napp.MapDelete(\"/items/{id}\", Delete).RequireAuthorization(\"Admin\");\n```",
+      "materials": [
+        "jwt",
+        "policies"
+      ]
+    },
+    {
+      "prompt": "How do you inject a scoped service into custom ASP.NET Core middleware?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Inject it through the constructor like any class; the container creates a new middleware instance per request, and that has been the default behaviour since .NET 8.",
+        "Call app.Services.GetRequiredService once at startup and store it in a field.",
+        "Middleware is a singleton, so take scoped services as InvokeAsync parameters, or implement IMiddleware (resolved per request).",
+        "Scoped services can't be used from middleware at all."
+      ],
+      "correct": 2,
+      "explanation": "Middleware is created once, so constructor injection is only for singleton dependencies. Scoped or transient services go into `InvokeAsync` parameters. Alternatively implement `IMiddleware` (created per request from DI, so constructor injection can use scoped services).\n\n```csharp\npublic class AuditMiddleware(RequestDelegate next)\n{\n    public async Task InvokeAsync(HttpContext ctx, IAuditService audit) // scoped service here\n    {\n        await next(ctx);\n        await audit.RecordAsync(ctx.Request.Path, ctx.Response.StatusCode);\n    }\n}\n```",
+      "materials": [
+        "write-middleware",
+        "imiddleware"
+      ]
+    },
+    {
+      "prompt": "When should an ASP.NET Core REST API return 404 Not Found and when 204 No Content?",
+      "tags": [
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "404 for an empty search result and 204 when the resource was not found, since neither has a body.",
+        "Always 200 with an error flag, so caches aren't confused.",
+        "204 for every DELETE, even when the id doesn't exist.",
+        "404 when the addressed resource doesn't exist; 204 when an operation succeeded with no body. An empty list is 200 with []."
+      ],
+      "correct": 3,
+      "explanation": "`404`: the resource addressed by the URL does not exist. `204`: the operation succeeded and there is deliberately no body (a successful `DELETE` or `PUT`). An empty list from a collection endpoint is `200` with `[]`, not `404` or `204`.",
+      "materials": [
+        "rfc9110"
+      ]
+    },
+    {
+      "prompt": "Can you make breaking changes to an existing .NET API, and how?",
+      "tags": [
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Only with a new version: keep the old one working, announce deprecation with dates, measure usage, protect with contract tests.",
+        "Yes, any time, as long as the OpenAPI document is regenerated so clients pick up the change automatically, which is why most teams standardize on it.",
+        "Yes, if the change is shipped on a Friday with release notes.",
+        "No, never; APIs must stay unchanged forever."
+      ],
+      "correct": 0,
+      "explanation": "Only with a version change; otherwise clients break. Make additive changes (optional fields, new endpoints), keep old behaviour working, publish a new version for real breaks, announce deprecation with dates (`Deprecation`/`Sunset` headers), measure usage of the old version, and protect with contract tests.",
+      "materials": [
+        "sunset",
+        "api-versioning"
+      ]
+    },
+    {
+      "prompt": "What's the most common way to version an ASP.NET Core API?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A custom X-Version request header, because URL versions break caching and can't be routed by ASP.NET Core, which avoids the overhead of the alternatives entirely.",
+        "Renaming the controller class for each version.",
+        "A URL segment (/api/v1/items): visible, cacheable, easy to route; Asp.Versioning also supports query and header versions.",
+        "A new port number per version."
+      ],
+      "correct": 2,
+      "explanation": "The URL segment (`/api/v1/items`): visible, cacheable, easy to route and document. Alternatives are a query string (`?api-version=1.0`) and a header. The `Asp.Versioning` packages support all of them and integrate with OpenAPI.\n\n```csharp\nbuilder.Services.AddApiVersioning(o => o.ApiVersionReader = new UrlSegmentApiVersionReader()).AddMvc();\n```",
+      "materials": [
+        "api-versioning"
+      ]
+    },
+    {
+      "prompt": "What is manual object mapping in .NET, and why do many teams prefer it now?",
+      "tags": [
+        "C# & .NET",
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Copying properties with reflection at runtime, which is preferred because it needs no code when classes change, which avoids the overhead of the alternatives entirely.",
+        "Using EF Core entities as API responses so no mapping is needed.",
+        "Explicit conversion code between DTOs and entities: obvious, type-safe, no leaked fields; AutoMapper is now commercial.",
+        "Serializing to JSON and back to convert types."
+      ],
+      "correct": 2,
+      "explanation": "Writing explicit conversion code between layers (request DTO, entity, response DTO), often as extension methods or constructors. It is verbose but obvious, type-safe, searchable, and prevents accidentally exposing fields. Reflection-based mappers hide bugs until runtime; AutoMapper has moved to a commercial license, so many teams now choose manual mapping or the source generator Mapperly.\n\n```csharp\npublic static ItemDto ToDto(this Item i) => new(i.Id, i.Name, i.PriceCents / 100m);\n```",
+      "materials": [
+        "mapperly"
+      ]
+    },
+    {
+      "prompt": "What are the levels of the Richardson Maturity Model?",
+      "tags": [
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "0: one endpoint, RPC; 1: resources; 2: proper verbs and status codes; 3: hypermedia (HATEOAS). Most APIs target 2.",
+        "Levels count how many versions an API has shipped.",
+        "It rates JSON schema strictness from 0 to 3.",
+        "0: no authentication; 1: API keys; 2: OAuth; 3: mutual TLS. Most APIs should aim for level 3, and it behaves the same in controllers and minimal APIs."
+      ],
+      "correct": 0,
+      "explanation": "A scale for how RESTful an API is. Level 0: one endpoint, HTTP as a tunnel (RPC). Level 1: separate resources with URLs. Level 2: proper verbs and status codes. Level 3: hypermedia controls (HATEOAS), where responses include links to possible next actions. Most real APIs target level 2.",
+      "materials": [
+        "richardson"
+      ]
+    },
+    {
+      "prompt": "Monolith, modular monolith or microservices: how do they differ for a .NET system?",
+      "tags": [
+        "Architecture & DDD",
+        "System Design"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Microservices are just a monolith split into class libraries, deployed together in one process for speed.",
+        "A modular monolith is a monolith with a plugin system loaded at runtime.",
+        "Modular monolith: one deployable with strict module boundaries and data ownership; microservices add independent deploys and data.",
+        "They differ only in which cloud provider hosts them."
+      ],
+      "correct": 2,
+      "explanation": "Monolith: one deployable unit, often with tangled dependencies. Modular monolith: one deployable but divided into modules with clear public contracts and separate data ownership; low operational cost and an easy path to extract services later. Microservices: separate deployable services with their own data, giving independent scaling and team autonomy at the cost of distributed-systems complexity. Start modular; split when a clear boundary and need exist.",
+      "materials": [
+        "monolith-first"
+      ]
+    },
+    {
+      "prompt": "What problems does an API gateway solve in a .NET microservice system?",
+      "tags": [
+        "APIs & HTTP",
+        "System Design"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "One entry point for routing plus auth, rate limiting, TLS, aggregation and caching (e.g. YARP); keep business logic out.",
+        "It's a load balancer for SQL Server read replicas.",
+        "It generates client SDKs from controllers.",
+        "It replaces the services' own databases with a shared cache, so services no longer need persistence, so no extra configuration is needed for it to work."
+      ],
+      "correct": 0,
+      "explanation": "A single entry point that routes requests to backend services and handles cross-cutting concerns: authentication, rate limiting, TLS termination, request aggregation, caching, logging. In .NET: YARP (reverse proxy library), Ocelot, or a managed gateway such as Azure API Management. Watch out for it becoming a bottleneck or a home for business logic.",
+      "materials": [
+        "gateway",
+        "yarp"
+      ]
+    },
+    {
+      "prompt": "What is data normalization, and when is denormalizing the right call?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Splitting each table into one table per column for speed.",
+        "Storing each fact once (up to 3NF) to avoid anomalies; denormalize deliberately for read-heavy paths and keep copies in sync.",
+        "Converting every column to a string so data is uniform; denormalize when you need numeric columns for math, and it behaves the same in controllers and minimal APIs.",
+        "Normalization is only for NoSQL stores."
+      ],
+      "correct": 1,
+      "explanation": "Normalization organizes data so each fact is stored once (1NF to 3NF), avoiding update anomalies and inconsistency. Denormalize on purpose when reads dominate and joins are too costly: reporting tables, read models, caches of computed totals. Keep the copies in sync (events, triggers, jobs) and measure before and after.",
+      "materials": [
+        "normalization"
+      ]
+    },
+    {
+      "prompt": "How do indexes speed up queries in EF Core apps, and what do too many cost?",
+      "tags": [
+        "SQL & Databases",
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Indexes only help ORDER BY, not WHERE or JOIN.",
+        "Indexes cache whole result sets in memory, so there's no cost to adding one for every column of every table, and that has been the default behaviour since .NET 8.",
+        "EF Core creates the right indexes automatically for every LINQ query.",
+        "A B-tree lets the engine seek instead of scan; too many slow every write, use storage and can confuse the planner."
+      ],
+      "correct": 3,
+      "explanation": "An index (a B-tree in most databases) lets the engine jump to matching rows instead of scanning the table. Too many indexes slow every insert, update and delete, use storage and memory, and can confuse the planner. Index columns used in `WHERE`, `JOIN` and `ORDER BY`, use composite indexes in the right column order, check plans with `EXPLAIN ANALYZE`, and remove unused ones.\n\n```csharp\nmodelBuilder.Entity<Order>().HasIndex(o => new { o.CustomerId, o.CreatedAt });\n```",
+      "materials": [
+        "ef-indexes",
+        "explain"
+      ]
+    },
+    {
+      "prompt": "What does each letter of the CAP theorem stand for, and what's the real choice?",
+      "tags": [
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Consistency, Availability, Partition tolerance; partitions happen, so during one you choose C or A, per operation.",
+        "Consistency, Availability, Performance; partitions are rare enough to ignore.",
+        "Concurrency, Atomicity, Persistence; a database can only guarantee two of them at the same time, which avoids the overhead of the alternatives entirely.",
+        "Caching, Availability, Performance; pick any two at design time."
+      ],
+      "correct": 0,
+      "explanation": "Consistency (every read sees the latest write), Availability (every request gets a non-error response), Partition tolerance (the system keeps working when the network splits). Partitions are unavoidable in distributed systems, so during a partition you choose consistency or availability. It is a per-operation choice (a payment may be CP, a product feed AP).",
+      "materials": [
+        "cap",
+        "ddia"
+      ]
+    },
+    {
+      "prompt": "What's the difference between strong and eventual consistency, and how do you design for the latter?",
+      "tags": [
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Strong: every read sees acknowledged writes. Eventual: replicas converge later; design with pending states and idempotency.",
+        "Eventual consistency only exists in NoSQL databases.",
+        "Strong means the data is encrypted; eventual means it's encrypted later by a background job.",
+        "They're the same once replicas are in the same region."
+      ],
+      "correct": 0,
+      "explanation": "Strong: after a write is acknowledged, every reader sees it (single leader, quorum reads/writes), at the cost of latency and availability. Eventual: replicas converge given time, so reads may be stale. Design for it: show pending states, use idempotent updates, read-your-writes where needed, and resolve conflicts deliberately.",
+      "materials": [
+        "eventual",
+        "ddia"
+      ]
+    },
+    {
+      "prompt": "Horizontal or vertical scaling for an ASP.NET Core app: what does each require?",
+      "tags": [
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "ASP.NET Core can only scale vertically.",
+        "Vertical: a bigger machine (simple, capped). Horizontal: more instances, which needs a stateless web tier and shared state.",
+        "Both are automatic once you enable server GC.",
+        "Horizontal means adding CPU cores to one machine, and vertical means adding more machines behind a load balancer, which is why most teams standardize on it."
+      ],
+      "correct": 1,
+      "explanation": "Vertical: a bigger machine (simple, limited, a single point of failure). Horizontal: more instances behind a load balancer (needs stateless services, externalized sessions and cache, sharded or replicated data). In .NET keep the web tier stateless so it can scale out, and scale the database separately (replicas, partitioning).",
+      "materials": [
+        "autoscale"
+      ]
+    },
+    {
+      "prompt": "When would you choose a NoSQL store over a relational database for a .NET service?",
+      "tags": [
+        "SQL & Databases",
+        "System Design"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Only when EF Core doesn't support the database.",
+        "By access pattern: massive key lookups, flexible documents, graphs, time series; relational for transactions and joins.",
+        "Always for new services, since NoSQL is faster at everything.",
+        "Whenever the data has more than a million rows, because relational databases can't index beyond that, which is what the official docs recommend for production apps."
+      ],
+      "correct": 1,
+      "explanation": "Look at access patterns, data shape, scale, consistency needs and the team. NoSQL fits: simple key lookups at massive scale, flexible documents, graph traversals, time series, wide-column writes. Relational fits: transactions, constraints, joins and ad hoc queries. PostgreSQL with `jsonb` often covers the \"flexible schema\" need without a second system.",
+      "materials": [
+        "data-stores"
+      ]
+    },
+    {
+      "prompt": "What is a distributed lock, and what makes it risky?",
+      "tags": [
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A file lock on a network share, which is perfectly safe.",
+        "A lock held inside one process across threads, which is risky only because lock statements are slow.",
+        "A lock across processes (Redis, advisory locks); expiry while paused, clocks and split brain make it unsafe without fencing tokens.",
+        "A database transaction that spans two databases; the risk is deadlock on the second one."
+      ],
+      "correct": 2,
+      "explanation": "A lock that coordinates several processes (Redis `SET NX PX`, Redlock implementations, PostgreSQL advisory locks, blob leases). Risks: the lock expiring while the holder is paused (GC, slow call), clock and network assumptions, split brain, forgotten release, and deadlocks. Mitigate with TTLs plus renewal, fencing tokens the resource checks, or avoid locks with idempotency, queues partitioned by key, and conditional updates.\n\n```csharp\nawait using var tx = await db.Database.BeginTransactionAsync();\nawait db.Database.ExecuteSqlRawAsync(\"SELECT pg_advisory_xact_lock({0})\", key); // PostgreSQL, released at commit\n```",
+      "materials": [
+        "dist-lock",
+        "pg-locking"
+      ]
+    },
+    {
+      "prompt": "Optimistic or pessimistic locking with EF Core: how do they work and when do you use each?",
+      "tags": [
+        "SQL & Databases",
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Both are the same; the names refer to retry counts.",
+        "Optimistic locks the whole table up front, pessimistic locks nothing; use optimistic when many writers collide, so no extra configuration is needed for it to work.",
+        "EF Core only supports pessimistic locking.",
+        "Pessimistic locks rows first (FOR UPDATE) for high contention; optimistic uses a concurrency token and handles the conflict."
+      ],
+      "correct": 3,
+      "explanation": "Pessimistic: lock the data first (`SELECT ... FOR UPDATE`), others wait; good for high contention and short critical sections. Optimistic: no lock; a version or concurrency token makes the update conditional, and a conflict raises an exception you retry or surface; good for low contention and web workloads.\n\n```csharp\npublic class Product { public int Id { get; set; } [Timestamp] public uint Version { get; set; } /* or xmin in PostgreSQL */ }\ntry { await db.SaveChangesAsync(); } catch (DbUpdateConcurrencyException) { /* reload, merge or return 409 */ }\n```",
+      "materials": [
+        "ef-concurrency",
+        "pg-locking"
+      ]
+    },
+    {
+      "prompt": "How do you design the database for a multitenant .NET SaaS?",
+      "tags": [
+        "SQL & Databases",
+        "System Design"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Store each tenant's data in a separate JSON file on disk.",
+        "Always one database per tenant, because sharing tables with a TenantId column can't be made secure.",
+        "Shared tables with TenantId (query filters + RLS), schema per tenant, or database per tenant; choose by isolation and cost.",
+        "Use one table per tenant inside a shared schema, named after the tenant."
+      ],
+      "correct": 2,
+      "explanation": "Shared tables with a `TenantId` column (cheapest; enforce with EF Core global query filters and PostgreSQL row-level security), schema per tenant (moderate isolation), database per tenant (strongest isolation, most expensive and hardest to migrate). Choose by isolation and compliance needs, tenant count, and noisy neighbours. Index `TenantId` first, resolve the tenant from the token, and test for cross-tenant leaks.\n\n```csharp\nmodelBuilder.Entity<Order>().HasQueryFilter(o => o.TenantId == _tenant.Id);\n```",
+      "materials": [
+        "tenancy-models",
+        "query-filters",
+        "pg-rls"
+      ]
+    },
+    {
+      "prompt": "Cache-aside, write-through or write-back: what's the difference in a .NET service?",
+      "tags": [
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Cache-aside loads on miss and invalidates on write; write-through writes both; write-back flushes later and can lose data.",
+        "They're HybridCache configuration flags with the same behaviour.",
+        "Write-through is the only pattern safe for multi-instance apps.",
+        "Cache-aside writes to the database first and never reads the cache; write-back reads the database on every request, so no extra configuration is needed for it to work."
+      ],
+      "correct": 0,
+      "explanation": "Cache-aside: the app checks the cache, on a miss loads from the database and fills the cache (most common; invalidate on write). Write-through: every write goes through the cache to the database (consistent, slower writes). Write-back: write to cache and flush to the database later (fast, risk of loss). In .NET 9+ `HybridCache` combines in-memory and distributed layers with stampede protection.\n\n```csharp\nvar item = await cache.GetOrCreateAsync($\"item:{id}\", async ct => await repo.GetAsync(id, ct));\n```",
+      "materials": [
+        "cache-aside",
+        "hybridcache"
+      ]
+    },
+    {
+      "prompt": "REST, gRPC or GraphQL: when do you use each?",
+      "tags": [
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Use all three on every endpoint for compatibility.",
+        "gRPC replaces REST everywhere since .NET 8.",
+        "REST for public, cacheable APIs; gRPC for typed, fast internal calls and streaming; GraphQL when clients shape their data.",
+        "GraphQL for internal service calls because it's binary, gRPC for public browser APIs, and REST only for file uploads, which is what the official docs recommend for production apps."
+      ],
+      "correct": 2,
+      "explanation": "REST: resource-oriented, cacheable, ideal for public APIs. gRPC: HTTP/2 and protobuf, strongly typed contracts, streaming, low latency; best for internal service-to-service calls (not directly callable from browsers without gRPC-Web). GraphQL: clients choose the fields and combine data in one request; good for varied front ends, with extra work for caching, authorization per field and query cost limits.",
+      "materials": [
+        "grpc-compare",
+        "graphql"
+      ]
+    },
+    {
+      "prompt": "When should services talk through a message queue instead of direct API calls?",
+      "tags": [
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Always, because queues are faster than HTTP and remove the need for idempotency.",
+        "Only for logging, since queues can't carry business data.",
+        "When the caller doesn't need the answer now: spikes, a consumer being down, retries, fan-out, long jobs.",
+        "When the caller needs an immediate, consistent answer."
+      ],
+      "correct": 2,
+      "explanation": "When the caller does not need the result immediately: absorbing traffic spikes, surviving a down consumer, retrying, fan-out to several consumers, long-running work. Use direct calls for queries that need an answer now. Queues bring eventual consistency, duplicates, ordering questions and extra monitoring.",
+      "materials": [
+        "load-leveling"
+      ]
+    },
+    {
+      "prompt": "At-most-once, at-least-once, exactly-once: what do the delivery guarantees mean?",
+      "tags": [
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "They describe how many consumers can read a message.",
+        "Exactly-once is guaranteed by HTTP retries.",
+        "At-most-once may lose, at-least-once may duplicate; exactly-once in practice is at-least-once plus idempotent handling.",
+        "At-least-once may lose messages but never duplicates; exactly-once is the default of every modern broker, and it behaves the same in controllers and minimal APIs."
+      ],
+      "correct": 2,
+      "explanation": "At-most-once: may lose messages, never duplicates. At-least-once: never loses, may deliver duplicates (the common default). Exactly-once processing is achieved in practice as at-least-once delivery plus idempotent handling (deduplicate by message id); broker-level exactly-once exists only in limited, closed settings (such as Kafka transactions).",
+      "materials": [
+        "delivery",
+        "ddia"
+      ]
+    },
+    {
+      "prompt": "Which .NET messaging libraries would you use, and how do you make handlers idempotent and retried safely?",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Use HttpClient polling instead of a library, since libraries can't retry.",
+        "MassTransit, Wolverine, Service Bus SDK…; an inbox of processed ids in the same transaction, backoff with jitter, DLQ, outbox.",
+        "Idempotency isn't needed if messages have timestamps.",
+        "Any library works; retry immediately in a tight loop and rely on the broker to remove duplicates automatically, which is what the official docs recommend for production apps."
+      ],
+      "correct": 1,
+      "explanation": "Options: MassTransit, Wolverine, NServiceBus, Rebus, `Azure.Messaging.ServiceBus`, `Confluent.Kafka`, Brighter, Dapr. Check current licensing, because some of these (NServiceBus, newer MassTransit versions) are commercial. Idempotency: a unique message id stored in an inbox table in the same transaction as the side effect, or naturally idempotent operations (upserts, conditional updates). Retries: exponential backoff with jitter via Polly / `Microsoft.Extensions.Resilience`, a retry cap, and a dead-letter queue; the outbox pattern guarantees the message is published when the transaction commits.\n\n```csharp\nif (await db.ProcessedMessages.AnyAsync(m => m.Id == msg.Id)) return; // duplicate, ignore\ndb.ProcessedMessages.Add(new(msg.Id));\nawait ApplyEffect(msg);\nawait db.SaveChangesAsync();   // effect and dedupe record commit together\n```",
+      "materials": [
+        "idempotent-consumer",
+        "outbox",
+        "resilience"
+      ]
+    },
+    {
+      "prompt": "What is Clean Architecture, and how do you enforce its dependency rule in .NET?",
+      "tags": [
+        "Architecture & DDD"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Domain at the center, dependencies only point inward; Application defines ports, Infrastructure implements; check with project refs and arch tests.",
+        "It means one project per class, referenced alphabetically.",
+        "Every layer references every other layer so any code can call the database directly; the rule only applies to UI code.",
+        "The domain project references EF Core so entities can save themselves."
+      ],
+      "correct": 0,
+      "explanation": "Layers arranged around the domain: Domain at the center, Application (use cases) around it, then Infrastructure and Presentation at the edge. Source dependencies point inward only: Domain references nothing; Application defines interfaces (ports); Infrastructure implements them; the API project wires everything in the composition root. Enforce with project references and architecture tests (for example NetArchTest). Do not add layers a small service does not need.",
+      "materials": [
+        "clean"
+      ]
+    },
+    {
+      "prompt": "Do you put Repository and Unit of Work on top of EF Core?",
+      "tags": [
+        "Architecture & DDD",
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Usually not generically: DbContext already is a Unit of Work and DbSet a repository; add specific aggregate repositories when useful.",
+        "Repositories are required for EF Core migrations to work.",
+        "Never use DbContext directly; wrap it in three layers of repositories.",
+        "Always add a generic IRepository<T> and IUnitOfWork, because DbContext can't run transactions without them."
+      ],
+      "correct": 0,
+      "explanation": "`DbContext` already implements Unit of Work and `DbSet<T>` is a repository, so a generic repository on top adds little and hides useful features (`Include`, projections). Add repositories when they express domain concepts (aggregate roots), protect the domain from EF Core, or simplify testing; keep them specific, not generic `IRepository<T>`. The use case owns the transaction (`SaveChanges` once).",
+      "materials": [
+        "persistence"
+      ]
+    },
+    {
+      "prompt": "What is Vertical Slice Architecture, and why does organizing by feature reduce coupling?",
+      "tags": [
+        "Architecture & DDD"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It means each developer owns one vertical layer of the stack.",
+        "Each feature keeps its endpoint, models, validation, handler and data access together, so changes stay in one folder.",
+        "It splits the app into one microservice per database table, deployed separately.",
+        "It's layering by technical concern: controllers, services and repositories folders."
+      ],
+      "correct": 1,
+      "explanation": "Group code by feature rather than by technical layer: each slice has its endpoint, request/response models, validation, handler and data access together. A change touches one folder; slices depend on each other very little, and each can use the simplest suitable approach (one may use raw SQL, another EF Core).",
+      "materials": [
+        "vertical-slice"
+      ]
+    },
+    {
+      "prompt": "How do you lay out a .NET project with vertical slices?",
+      "tags": [
+        "Architecture & DDD",
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Controllers/, Services/, Repositories/ and Models/ folders at the root, with one class per layer per feature, so no extra configuration is needed for it to work.",
+        "Put all slices in Program.cs so they're easy to find.",
+        "One project per HTTP verb.",
+        "Features/<Area>/<UseCase>/ with endpoint, request, validator and handler; a small Common folder; Program.cs maps the features."
+      ],
+      "correct": 3,
+      "explanation": "Keep the domain model for real business rules in a shared place; keep slices thin and explicit. A mediator library is optional; plain handler classes or Wolverine work, and MediatR is now commercial in newer versions.\n\n```text\nsrc/Api/\n  Features/\n    Orders/\n      CreateOrder/   Endpoint.cs  Request.cs  Validator.cs  Handler.cs\n      GetOrder/      Endpoint.cs  Query.cs    Handler.cs\n  Common/            ProblemDetails, behaviors, small shared kernel\n  Program.cs         (composition root, maps each feature's endpoints)\n```",
+      "materials": [
+        "vertical-slice"
+      ]
+    },
+    {
+      "prompt": "How do you handle duplicated code between vertical slices?",
+      "tags": [
+        "Architecture & DDD",
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Tolerate it; extract only after the third repetition and only stable concepts (domain rules, errors, cross-cutting behaviors).",
+        "Copy-paste is forbidden; route every slice through one generic handler.",
+        "Extract a shared base class as soon as two slices look alike, so no line of code ever appears twice.",
+        "Share request and response models between all slices to save lines."
+      ],
+      "correct": 0,
+      "explanation": "Tolerate duplication between slices: it is cheaper than the wrong shared abstraction. Extract after the third real repetition, and only for stable concepts: domain rules, error types, cross-cutting behaviors (validation, logging, transactions) and a small shared kernel. Do not share request/response models or data access between slices just to save lines.",
+      "materials": [
+        "rule-of-three",
+        "vertical-slice"
+      ]
+    },
+    {
+      "prompt": "How do you implement CQRS in simple, concrete terms in .NET?",
+      "tags": [
+        "Architecture & DDD",
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "CQRS requires event sourcing and a separate database for reads from day one, otherwise it isn't CQRS.",
+        "Separate commands (change state) from queries (read DTOs): same database first, projections for reads; a read model only if needed.",
+        "It's splitting controllers into GET and POST classes only.",
+        "It means every query must go through a message bus."
+      ],
+      "correct": 1,
+      "explanation": "Separate commands (change state, return little) from queries (read only, return DTOs). Simplest form: one database, a command handler using EF Core and a query handler using projections or Dapper. Next step: a separate read model updated by events, scaling reads independently at the price of eventual consistency. Start simple; add the read model only when a real read problem exists.\n\n```csharp\npublic record PlaceOrder(int CustomerId, List<Line> Lines);                 // command\npublic record GetOrderSummary(int OrderId);                                 // query\n// handlers: PlaceOrderHandler writes via DbContext; GetOrderSummaryHandler reads with AsNoTracking().Select(...)\n```",
+      "materials": [
+        "cqrs",
+        "cqrs-simple"
+      ]
+    }
+  ]
+}

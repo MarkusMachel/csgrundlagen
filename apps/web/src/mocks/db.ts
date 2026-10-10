@@ -8,12 +8,14 @@ import type {
   QuestionComment,
   Question,
   QuestionNote,
+  SavedFilter,
   UserQuestionStat,
 } from '@/features/questions/types';
 import { nextReview } from '@/features/review/srs';
 import type { ReviewState } from '@/features/review/types';
 
 import { seedComments } from './seed/comments';
+import { designSeedMaterials, designSeedQuestions } from './seed/design';
 import {
   seedLoginEvents,
   seedSessions,
@@ -81,6 +83,8 @@ interface Db {
   }[];
   /** Unfinished attempts, keyed `${testId}:${userId}`. */
   drafts: Record<string, TestDraft & { updatedAt: string }>;
+  /** Named filters (mirrors saved_filters). */
+  savedFilters: (SavedFilter & { userId: string })[];
   attempts: TestAttempt[];
   userQuestionStats: UserQuestionStat[];
   /** Spaced-repetition state, keyed `${userId}:${questionId}`. */
@@ -183,13 +187,14 @@ function freshDb(): Db {
     optionFeedback: {},
     revisions: [],
     drafts: {},
+    savedFilters: [],
     commentReports: [],
     consents: [],
-    questions: seedQuestions.map((s) => ({
+    questions: [...seedQuestions, ...designSeedQuestions].map((s) => ({
       question: { ...s.question },
       translations: s.translations,
     })),
-    materials: seedMaterials.map((m) => ({
+    materials: [...seedMaterials, ...designSeedMaterials].map((m) => ({
       ...m,
       relatedQuestionIds: m.relatedQuestionIds ? [...m.relatedQuestionIds] : undefined,
     })),
@@ -222,7 +227,7 @@ export function nextId(prefix: string): string {
  * option, each picked option (multi-select), or right/wrong (ordering, output).
  */
 export function statKeys(question: Question, answer: AnswerValue | undefined, correct: boolean) {
-  if (question.type === 'ordering' || question.type === 'output') {
+  if (question.type === 'ordering' || question.type === 'output' || question.type === 'design') {
     return [correct ? 'correct' : 'incorrect'];
   }
   if (question.type === 'multi-select') {

@@ -20,7 +20,7 @@ SELECT q.id, q.type::text, COALESCE(tr.prompt, q.prompt), q.difficulty::text,
        COALESCE((SELECT array_agg(t.name ORDER BY t.name)
                  FROM question_tags qt JOIN tags t ON t.id = qt.tag_id
                  WHERE qt.question_id = q.id), '{}'),
-       q.code, q.code_language, q.expected_output
+       q.code, q.code_language, q.expected_output, q.design
 FROM questions q
 LEFT JOIN question_translations tr ON tr.question_id = q.id AND tr.locale = $1::locale`
 
@@ -30,7 +30,7 @@ func scanQuestions(rows pgx.Rows) ([]Question, error) {
 	for rows.Next() {
 		var q Question
 		if err := rows.Scan(&q.ID, &q.Type, &q.Prompt, &q.Difficulty, &q.Explanation,
-			&q.CorrectAnswer, &q.Tags, &q.Code, &q.CodeLanguage, &q.ExpectedOutput); err != nil {
+			&q.CorrectAnswer, &q.Tags, &q.Code, &q.CodeLanguage, &q.ExpectedOutput, &q.Design); err != nil {
 			return nil, err
 		}
 		out = append(out, q)
@@ -128,6 +128,9 @@ type QuestionFilter struct {
 	// for a given Seed so paging doesn't reshuffle.
 	Sort string
 	Seed string
+	// Type "design" lists only system design challenges; otherwise they are
+	// left out (they have their own section).
+	Type string
 }
 
 func (s *Store) ListQuestions(ctx context.Context, f QuestionFilter) (QuestionsPage, error) {
@@ -136,6 +139,11 @@ func (s *Store) ListQuestions(ctx context.Context, f QuestionFilter) (QuestionsP
 	next := func(v any) string {
 		args = append(args, v)
 		return fmt.Sprintf("$%d", len(args)+1)
+	}
+	if f.Type == "design" {
+		where = append(where, `q.type = 'design'`)
+	} else if len(f.IDs) == 0 {
+		where = append(where, `q.type <> 'design'`)
 	}
 	idsParam := ""
 	if len(f.IDs) > 0 {
@@ -242,7 +250,8 @@ func (s *Store) QuestionsByIDs(ctx context.Context, ids []string, locale string)
 // so it stays the same across refreshes for the whole day.
 func (s *Store) DailyQuestion(ctx context.Context, day time.Time, locale string) (Question, error) {
 	var count int
-	if err := s.pool.QueryRow(ctx, `SELECT count(*) FROM questions`).Scan(&count); err != nil {
+	// design challenges need the drawing board, so they're never the daily question
+	if err := s.pool.QueryRow(ctx, `SELECT count(*) FROM questions WHERE type <> 'design'`).Scan(&count); err != nil {
 		return Question{}, err
 	}
 	if count == 0 {
@@ -252,7 +261,7 @@ func (s *Store) DailyQuestion(ctx context.Context, day time.Time, locale string)
 	_, _ = h.Write([]byte(day.UTC().Format("2006-01-02")))
 	offset := int(h.Sum32() % uint32(count))
 
-	qs, err := s.queryQuestions(ctx, locale, questionSelect+` ORDER BY q.created_at, q.id LIMIT 1 OFFSET $2`, offset)
+	qs, err := s.queryQuestions(ctx, locale, questionSelect+` WHERE q.type <> 'design' ORDER BY q.created_at, q.id LIMIT 1 OFFSET $2`, offset)
 	if err != nil {
 		return Question{}, err
 	}
@@ -312,8 +321,13 @@ func (s *Store) SubmitAnswer(ctx context.Context, userID, questionID string, ans
 	if err != nil {
 		return SubmitAnswerResult{}, err
 	}
-	return SubmitAnswerResult{QuestionID: q.ID, Correct: correct, CorrectAnswer: q.Correct(), NextReviewAt: &next,
-		Feedback: feedback}, nil
+	result := SubmitAnswerResult{QuestionID: q.ID, Correct: correct, CorrectAnswer: q.Correct(), NextReviewAt: &next,
+		Feedback: feedback}
+	if g, ok := designGraphOf(answer); ok && q.Design != nil {
+		d := GradeDesign(*q.Design, g)
+		result.Design = &d
+	}
+	return result, nil
 }
 
 // QuestionStats summarizes everyone's answers to a question: how often each
@@ -403,19 +417,20 @@ func (s *Store) Tags(ctx context.Context) ([]string, error) {
 // NewQuestion is the create/update payload. Which answer fields apply depends
 // on Type; for ordering, Options are given in the correct order.
 type NewQuestion struct {
-	Type               string   `json:"type"`
-	Prompt             string   `json:"prompt"`
-	Tags               []string `json:"tags"`
-	Difficulty         *string  `json:"difficulty"`
-	Explanation        string   `json:"explanation"`
-	Options            []Option `json:"options"`
-	CorrectOptionID    *string  `json:"correctOptionId"`
-	CorrectOptionIDs   []string `json:"correctOptionIds"`
-	CorrectAnswer      *bool    `json:"correctAnswer"`
-	Code               *string  `json:"code"`
-	CodeLanguage       *string  `json:"codeLanguage"`
-	ExpectedOutput     *string  `json:"expectedOutput"`
-	RelatedMaterialIDs []string `json:"relatedMaterialIds"`
+	Type               string      `json:"type"`
+	Prompt             string      `json:"prompt"`
+	Tags               []string    `json:"tags"`
+	Difficulty         *string     `json:"difficulty"`
+	Explanation        string      `json:"explanation"`
+	Options            []Option    `json:"options"`
+	CorrectOptionID    *string     `json:"correctOptionId"`
+	CorrectOptionIDs   []string    `json:"correctOptionIds"`
+	CorrectAnswer      *bool       `json:"correctAnswer"`
+	Code               *string     `json:"code"`
+	CodeLanguage       *string     `json:"codeLanguage"`
+	ExpectedOutput     *string     `json:"expectedOutput"`
+	Design             *DesignSpec `json:"design,omitempty"`
+	RelatedMaterialIDs []string    `json:"relatedMaterialIds"`
 }
 
 func (n NewQuestion) validate() error {
@@ -489,10 +504,12 @@ func (n NewQuestion) validate() error {
 		if n.ExpectedOutput == nil {
 			return ErrInvalid{"output questions need expectedOutput"}
 		}
+	case "design":
+		return n.Design.validate()
 	case "flashcard":
 		// front and back are prompt and explanation, checked above
 	default:
-		return ErrInvalid{"type must be multiple-choice, true-false, multi-select, ordering, output or flashcard"}
+		return ErrInvalid{"type must be multiple-choice, true-false, multi-select, ordering, output, flashcard or design"}
 	}
 	return nil
 }
@@ -517,11 +534,11 @@ func (s *Store) CreateQuestion(ctx context.Context, createdBy string, n NewQuest
 		code, lang, expected := n.outputFields()
 		if err := tx.QueryRow(ctx, `
 			INSERT INTO questions (type, prompt, difficulty, explanation, correct_answer, created_by,
-			                       code, code_language, expected_output)
-			VALUES ($1::question_type, $2, $3::question_difficulty, $4, $5, $6, $7, $8, $9)
+			                       code, code_language, expected_output, design)
+			VALUES ($1::question_type, $2, $3::question_difficulty, $4, $5, $6, $7, $8, $9, $10)
 			RETURNING id`,
 			n.Type, n.Prompt, n.Difficulty, n.Explanation, n.trueFalseAnswer(), nullIfEmpty(createdBy),
-			code, lang, expected,
+			code, lang, expected, n.designSpec(),
 		).Scan(&id); err != nil {
 			return err
 		}
@@ -568,9 +585,10 @@ func (s *Store) saveQuestion(ctx context.Context, editorID, id string, n NewQues
 			UPDATE questions
 			SET type = $2::question_type, prompt = $3, difficulty = $4::question_difficulty,
 			    explanation = $5, correct_answer = $6,
-			    code = $7, code_language = $8, expected_output = $9
+			    code = $7, code_language = $8, expected_output = $9, design = $10
 			WHERE id = $1`,
-			id, n.Type, n.Prompt, n.Difficulty, n.Explanation, n.trueFalseAnswer(), code, lang, expected)
+			id, n.Type, n.Prompt, n.Difficulty, n.Explanation, n.trueFalseAnswer(), code, lang, expected,
+			n.designSpec())
 		if err != nil {
 			return err
 		}
@@ -604,6 +622,14 @@ func (s *Store) DeleteQuestion(ctx context.Context, id string) error {
 		return ErrNotFound
 	}
 	return nil
+}
+
+// designSpec is the design for design questions and nil otherwise.
+func (n NewQuestion) designSpec() *DesignSpec {
+	if n.Type != "design" {
+		return nil
+	}
+	return n.Design
 }
 
 func (n NewQuestion) trueFalseAnswer() *bool {

@@ -38,6 +38,8 @@ type bank struct {
 		//   ordering         options, listed in the correct order
 		//   true-false       correctAnswer
 		//   output           code + codeLanguage + expectedOutput
+		//   design           design (requirements, rules, reference); a rule's
+		//                    materialKey links it to one of the bank's materials
 		Type           string   `json:"type"`
 		Prompt         string   `json:"prompt"`
 		Tags           []string `json:"tags"`
@@ -51,6 +53,13 @@ type bank struct {
 		ExpectedOutput *string  `json:"expectedOutput"`
 		Explanation    string   `json:"explanation"`
 		Materials      []string `json:"materials"` // material keys
+		Design         *struct {
+			store.DesignSpec
+			Rules []struct {
+				store.DesignRule
+				MaterialKey string `json:"materialKey"`
+			} `json:"rules"`
+		} `json:"design"`
 	} `json:"questions"`
 }
 
@@ -171,6 +180,22 @@ func run(file string) error {
 		}
 		if typ == "multiple-choice" {
 			nq.CorrectOptionID = &letters[q.Correct]
+		}
+		if q.Design != nil {
+			spec := q.Design.DesignSpec
+			spec.Rules = nil
+			for _, r := range q.Design.Rules {
+				rule := r.DesignRule
+				if r.MaterialKey != "" {
+					id, ok := materialID[r.MaterialKey]
+					if !ok {
+						return fmt.Errorf("question %d: rule %s: unknown material key %q", i+1, r.ID, r.MaterialKey)
+					}
+					rule.MaterialID = &id
+				}
+				spec.Rules = append(spec.Rules, rule)
+			}
+			nq.Design = &spec
 		}
 		if _, err := st.CreateQuestion(ctx, "", nq); err != nil {
 			return fmt.Errorf("question %d: %w", i+1, err)

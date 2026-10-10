@@ -169,6 +169,91 @@ export async function runScenario(backend: Backend): Promise<Recorded[]> {
     );
   }
 
+  // --- system design challenges ---
+  const designSpec = {
+    requirements: [{ id: 'up', text: 'Survive a server failure' }],
+    rules: [
+      {
+        id: 'lb',
+        requirement: 'up',
+        kind: 'path',
+        from: ['client'],
+        via: ['load-balancer'],
+        to: ['service'],
+        text: 'Requests go through a load balancer',
+        explanation: 'It routes around failed servers.',
+        materialId: material.id,
+      },
+      {
+        id: 'two',
+        requirement: 'up',
+        kind: 'has',
+        of: ['service'],
+        min: 2,
+        text: 'Two service instances',
+        explanation: 'One can fail.',
+      },
+      {
+        id: 'cdn',
+        kind: 'has',
+        of: ['cdn'],
+        optional: true,
+        text: 'A CDN',
+        explanation: 'Static files load faster.',
+      },
+    ],
+    reference: {
+      nodes: [
+        { id: 'c', kind: 'client' },
+        { id: 'lb', kind: 'load-balancer', label: 'LB' },
+        { id: 's1', kind: 'service' },
+        { id: 's2', kind: 'service' },
+        { id: 'cdn', kind: 'cdn' },
+      ],
+      edges: [
+        { from: 'c', to: 'lb' },
+        { from: 'lb', to: 's1' },
+        { from: 'lb', to: 's2' },
+        { from: 'c', to: 'cdn' },
+      ],
+    },
+  };
+  const designBody = {
+    type: 'design',
+    prompt: 'Design a resilient web app (contract)',
+    tags: ['Contract'],
+    difficulty: 'medium',
+    explanation: 'A load balancer in front of two instances.',
+    design: designSpec,
+  };
+  await call('create design question with failing reference', 'admin', 'POST', '/questions', {
+    ...designBody,
+    design: { ...designSpec, reference: { nodes: [{ id: 'c', kind: 'client' }], edges: [] } },
+  });
+  const design = await call('create design question', 'admin', 'POST', '/questions', designBody);
+  await call('design list', 'anon', 'GET', '/questions?type=design&pageSize=50');
+  await call('get design question', 'anon', 'GET', `/questions/${design.id}`);
+  await call('submit good design', 'user', 'POST', `/questions/${design.id}/submit`, {
+    answer: {
+      nodes: [
+        { id: 'a', kind: 'client' },
+        { id: 'b', kind: 'load-balancer' },
+        { id: 'x', kind: 'service', label: 'api-1' },
+        { id: 'y', kind: 'service' },
+      ],
+      edges: [
+        { from: 'a', to: 'b' },
+        { from: 'b', to: 'x' },
+        { from: 'b', to: 'y' },
+      ],
+    },
+  });
+  await call('submit weak design', 'user', 'POST', `/questions/${design.id}/submit`, {
+    answer: { nodes: [{ id: 'a', kind: 'client' }], edges: [] },
+  });
+  await call('design stats', 'anon', 'GET', `/questions/${design.id}/stats`);
+  await call('delete design question', 'admin', 'DELETE', `/questions/${design.id}`);
+
   // --- browsing ---
   await call('list questions', 'anon', 'GET', '/questions?pageSize=2');
   await call('list by tag', 'user', 'GET', '/questions?tags=Contract&search=udp');
@@ -276,6 +361,35 @@ export async function runScenario(backend: Backend): Promise<Recorded[]> {
   const sessions = await call<Row[]>('my sessions', 'user', 'GET', '/me/sessions');
   await call('update profile', 'user', 'PATCH', '/me', { name: 'Contract Person', locale: 'de' });
   await call('update profile invalid', 'user', 'PATCH', '/me', { name: '' });
+  // --- saved filters ---
+  await call('no saved filters', 'user', 'GET', '/me/filters');
+  const savedFilter = await call('save filter', 'user', 'POST', '/me/filters', {
+    name: ' Hard contract ',
+    filters: {
+      search: ' udp ',
+      tags: ['Contract'],
+      difficulties: ['hard'],
+      status: 'wrong',
+      sort: 'random',
+      seed: 'abc',
+    },
+  });
+  await call('save empty filter', 'user', 'POST', '/me/filters', { name: 'Everything', filters: {} });
+  await call('save duplicate filter name', 'user', 'POST', '/me/filters', {
+    name: 'hard CONTRACT',
+    filters: {},
+  });
+  await call('save filter bad status', 'user', 'POST', '/me/filters', {
+    name: 'Bad',
+    filters: { status: 'nope' },
+  });
+  await call('rename filter', 'user', 'PATCH', `/me/filters/${savedFilter.id}`, { name: 'Hard ones' });
+  await call('change filter of other user', 'admin', 'PATCH', `/me/filters/${savedFilter.id}`, {
+    name: 'mine',
+  });
+  await call('saved filters', 'user', 'GET', '/me/filters');
+  await call('saved filters anonymous', 'anon', 'GET', '/me/filters');
+
   await call('export my data', 'user', 'GET', '/me/export', undefined, [
     '$.testAttempts[].answers',
   ]);

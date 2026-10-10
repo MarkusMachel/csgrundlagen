@@ -116,7 +116,11 @@ function EditReportedQuestion({ id, onDone }: { id: string; onDone: () => void }
   return (
     <div className="stack" style={{ gap: 12 }}>
       <h2 style={{ margin: 0 }}>{t('authoring.editQuestion')}</h2>
-      <QuestionForm question={data} onSaved={onDone} onCancel={onDone} />
+      {data.type === 'design' ? (
+        <p className="alert alert--info">{t('authoring.designSeedOnly')}</p>
+      ) : (
+        <QuestionForm question={data} onSaved={onDone} onCancel={onDone} />
+      )}
     </div>
   );
 }

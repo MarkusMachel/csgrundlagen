@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { AnkiExportButton } from '@/features/anki';
@@ -8,7 +7,7 @@ import {
   QuestionCard,
   QuestionFeed,
   useDailyQuestion,
-  type FilterState,
+  useFilterState,
 } from '@/features/questions';
 import { Spinner } from '@/shared/ui';
 import { scrollBehavior } from '@/shared/utils/motion';
@@ -16,7 +15,8 @@ import { scrollBehavior } from '@/shared/utils/motion';
 export function HomePage() {
   const { t } = useTranslation();
   const daily = useDailyQuestion();
-  const [filters, setFilters] = useState<FilterState>(emptyFilters);
+  // in the URL, and remembered for the next visit
+  const [filters, setFilters] = useFilterState('home');
 
   // Filters live in the left sidebar; the Question of the Day leads the main column.
   return (

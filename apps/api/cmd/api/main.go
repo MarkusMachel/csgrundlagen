@@ -44,9 +44,16 @@ func run(log *slog.Logger) error {
 	st := store.New(pool)
 	go purgeLoop(ctx, st, log)
 
+	// Cached question responses are dropped whenever question content changes
+	// anywhere (see migration 0018).
+	cache := httpapi.NewCache()
+	go db.Listen(ctx, pool, "content_changed", cache.Clear, log)
+
 	srv := &http.Server{
-		Addr:              cfg.Addr,
-		Handler:           httpapi.New(st, log, httpapi.Options{BaseURL: cfg.BaseURL, GoPlaygroundURL: cfg.GoPlaygroundURL}),
+		Addr: cfg.Addr,
+		Handler: httpapi.New(st, log, httpapi.Options{
+			BaseURL: cfg.BaseURL, GoPlaygroundURL: cfg.GoPlaygroundURL, Cache: cache,
+		}),
 		ReadHeaderTimeout: 5 * time.Second,
 		ReadTimeout:       15 * time.Second,
 		WriteTimeout:      30 * time.Second,

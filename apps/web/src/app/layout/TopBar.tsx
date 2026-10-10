@@ -6,6 +6,7 @@ import {
   Home,
   LogIn,
   ListChecks,
+  Network,
   Moon,
   Repeat,
   ShieldCheck,
@@ -47,6 +48,7 @@ const fileTabs: FileTab[] = [
   { to: '/bookmarks', file: 'bookmarks.cs', icon: Bookmark, key: 'nav.bookmarks' },
   { to: '/build', file: 'build_test.cs', icon: ListChecks, key: 'nav.buildTest' },
   { to: '/my-tests', file: 'my_tests.cs', icon: ClipboardList, key: 'nav.myTests' },
+  { to: '/design', file: 'design.cs', icon: Network, key: 'nav.design' },
   { to: '/materials', file: 'material.cs', icon: BookOpen, key: 'nav.materials' },
   { to: '/admin', file: 'admin.cs', icon: ShieldCheck, key: 'nav.admin', adminOnly: true },
 ];

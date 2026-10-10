@@ -111,13 +111,14 @@ type ReviewQueue struct {
 func (s *Store) ReviewQueue(ctx context.Context, userID, locale string, limit, newLimit int) (ReviewQueue, error) {
 	var out ReviewQueue
 	if err := s.pool.QueryRow(ctx, `
-		SELECT count(*) FROM review_schedule WHERE user_id = $1 AND due_at <= now()`, userID,
+		SELECT count(*) FROM review_schedule rs JOIN questions q ON q.id = rs.question_id
+		WHERE rs.user_id = $1 AND rs.due_at <= now() AND q.type <> 'design'`, userID,
 	).Scan(&out.Due); err != nil {
 		return out, err
 	}
 	due, err := s.queryQuestions(ctx, locale, questionSelect+`
 		JOIN review_schedule rs ON rs.question_id = q.id AND rs.user_id = $2
-		WHERE rs.due_at <= now()
+		WHERE rs.due_at <= now() AND q.type <> 'design'
 		ORDER BY rs.due_at, q.id
 		LIMIT $3`, userID, limit)
 	if err != nil {
@@ -127,6 +128,7 @@ func (s *Store) ReviewQueue(ctx context.Context, userID, locale string, limit, n
 	if newLimit > 0 {
 		fresh, err := s.queryQuestions(ctx, locale, questionSelect+`
 			WHERE NOT EXISTS (SELECT 1 FROM review_schedule rs WHERE rs.question_id = q.id AND rs.user_id = $2)
+			  AND q.type <> 'design'
 			ORDER BY q.created_at, q.id
 			LIMIT $3`, userID, newLimit)
 		if err != nil {

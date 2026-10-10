@@ -1,6 +1,7 @@
 package store
 
 import (
+	"encoding/json"
 	"slices"
 	"strings"
 )
@@ -26,6 +27,13 @@ func AnswerKey(v any) string {
 	default:
 		if ids, ok := stringList(v); ok {
 			return strings.Join(ids, ",")
+		}
+		if g, ok := designGraphOf(v); ok {
+			// a design: kept as JSON when it fits
+			if raw, err := json.Marshal(g); err == nil && len(raw) <= maxAnswerKeyLen {
+				return string(raw)
+			}
+			return "design"
 		}
 		return "unanswered"
 	}
@@ -91,6 +99,9 @@ func isCorrect(q Question, given any) bool {
 		// self-graded: true means "I knew it"
 		b, ok := given.(bool)
 		return ok && b
+	case "design":
+		g, ok := designGraphOf(given)
+		return ok && q.Design != nil && GradeDesign(*q.Design, g).Passed()
 	}
 	return false
 }
@@ -104,7 +115,10 @@ func ValidAnswerShape(v any) bool {
 	case string:
 		return len(a) <= 10_000
 	default:
-		ids, ok := stringList(v)
-		return ok && len(ids) <= 5
+		if ids, ok := stringList(v); ok {
+			return len(ids) <= 5
+		}
+		_, ok := designGraphOf(v)
+		return ok
 	}
 }

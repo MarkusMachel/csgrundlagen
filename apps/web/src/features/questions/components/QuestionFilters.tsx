@@ -32,7 +32,6 @@ export const SORTS: QuestionSort[] = ['oldest', 'newest', 'random'];
 
 export const newSeed = () => Math.random().toString(36).slice(2, 10);
 
-/** True when anything narrows the list (sort order alone doesn't count). */
 /**
  * Applies a status filter. The statuses are about the user's own answers, so
  * signed out they ask to log in first and apply once logged in.
@@ -50,6 +49,7 @@ export function withStatus(
   }
 }
 
+/** True when anything narrows the list (sort order alone doesn't count). */
 export function hasActiveFilters(f: FilterState) {
   return f.search !== '' || f.tags.length > 0 || f.difficulties.length > 0 || f.status !== '';
 }

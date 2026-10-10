@@ -13,6 +13,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/markusmachel/csgrundlagen/apps/api/internal/cache"
 	"github.com/markusmachel/csgrundlagen/apps/api/internal/store"
 )
 
@@ -22,6 +23,7 @@ type Server struct {
 	opts        Options
 	authLimiter *rateLimiter
 	httpClient  *http.Client
+	cache       *cache.Cache
 }
 
 // Options configures the parts of the server that differ between
@@ -38,6 +40,9 @@ type Options struct {
 	// GoPlaygroundURL is where Go snippets are run (default: the official Go
 	// Playground); "off" disables running Go.
 	GoPlaygroundURL string
+	// Cache holds public question responses (default: 32 MB, 5 minutes).
+	// Pass one to clear it from outside too, e.g. on Postgres notifications.
+	Cache *cache.Cache
 }
 
 func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
@@ -54,10 +59,14 @@ func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
 	if opts.GoPlaygroundURL == "" {
 		opts.GoPlaygroundURL = DefaultGoPlaygroundURL
 	}
+	if opts.Cache == nil {
+		opts.Cache = NewCache()
+	}
 	s := &Server{
 		store: st, log: log, opts: opts,
 		authLimiter: newRateLimiter(opts.AuthRatePerMinute),
 		httpClient:  &http.Client{Timeout: runCallTimeout},
+		cache:       opts.Cache,
 	}
 	mux := http.NewServeMux()
 
@@ -95,6 +104,10 @@ func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
 	mux.HandleFunc("GET /api/bookmarks", s.authed(s.bookmarks))
 	mux.HandleFunc("GET /api/review/queue", s.authed(s.reviewQueue))
 	mux.HandleFunc("GET /api/me/progress", s.authed(s.progress))
+	mux.HandleFunc("GET /api/me/filters", s.authed(s.savedFilters))
+	mux.HandleFunc("POST /api/me/filters", s.authed(s.saveFilter))
+	mux.HandleFunc("PATCH /api/me/filters/{id}", s.authed(s.changeFilter))
+	mux.HandleFunc("DELETE /api/me/filters/{id}", s.authed(s.deleteFilter))
 	mux.HandleFunc("GET /api/me/sessions", s.authed(s.mySessions))
 	mux.HandleFunc("DELETE /api/me/sessions/{id}", s.authed(s.revokeMySession))
 	mux.HandleFunc("POST /api/me/device", s.authed(s.saveDevice))
@@ -229,6 +242,45 @@ func (s *Server) recoverer(next http.Handler) http.Handler {
 // --- JSON helpers -------------------------------------------------------------
 
 const maxBody = 1 << 20
+
+// NewCache is the response cache with its default budget.
+func NewCache() *cache.Cache { return cache.New(32<<20, 5*time.Minute) }
+
+// cachedJSON answers from the response cache, or builds the response, caches
+// it and answers. Only for responses that are the same for everyone (no
+// per-user data) and depend on nothing but key: question content, which the
+// write handlers clear with contentChanged.
+func (s *Server) cachedJSON(w http.ResponseWriter, r *http.Request, key string, build func() (any, error)) {
+	if body, ok := s.cache.Get(key); ok {
+		writeRaw(w, body, "hit")
+		return
+	}
+	gen := s.cache.Generation()
+	v, err := build()
+	if err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	body, err := json.Marshal(v)
+	if err != nil {
+		s.fail(w, r, err)
+		return
+	}
+	body = append(body, '\n') // the same bytes writeJSON's encoder writes
+	s.cache.SetIfCurrent(gen, key, body)
+	writeRaw(w, body, "miss")
+}
+
+func writeRaw(w http.ResponseWriter, body []byte, cacheStatus string) {
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("X-Cache", cacheStatus)
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write(body)
+}
+
+// contentChanged drops cached question responses after an edit through this
+// instance (others hear about it from Postgres, see db.Listen).
+func (s *Server) contentChanged() { s.cache.Clear() }
 
 func writeJSON(w http.ResponseWriter, status int, v any) {
 	w.Header().Set("Content-Type", "application/json")

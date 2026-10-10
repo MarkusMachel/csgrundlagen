@@ -26,18 +26,26 @@ export const reviewHandlers = [
     const due = mine
       .filter((r) => Date.parse(r.dueAt) <= now)
       .sort((a, b) => a.dueAt.localeCompare(b.dueAt));
-    const items = due
+    // design challenges need the drawing board, so reviews leave them out (like the API)
+    const reviewable = (q: Question | undefined): q is Question =>
+      q !== undefined && q.type !== 'design';
+    const dueReviewable = due.filter((r) => reviewable(findQuestion(r.questionId, locale)));
+    const items = dueReviewable
       .slice(0, limit)
       .map((r) => findQuestion(r.questionId, locale))
-      .filter((q): q is Question => q !== undefined);
+      .filter(reviewable);
     const seen = new Set(mine.map((r) => r.questionId));
     const fresh =
       newLimit > 0
         ? allQuestions(locale)
-            .filter((q) => !seen.has(q.id))
+            .filter((q) => !seen.has(q.id) && q.type !== 'design')
             .slice(0, newLimit)
         : [];
-    return HttpResponse.json({ items: [...items, ...fresh], due: due.length, new: fresh.length });
+    return HttpResponse.json({
+      items: [...items, ...fresh],
+      due: dueReviewable.length,
+      new: fresh.length,
+    });
   }),
 
   http.get('/api/me/progress', ({ request }) => {

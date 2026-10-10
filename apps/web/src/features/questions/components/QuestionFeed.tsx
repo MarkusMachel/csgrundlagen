@@ -10,6 +10,7 @@ import { useUIStore } from '@/stores/useUIStore';
 import { QuestionCard } from './QuestionCard';
 import { emptyFilters, QuestionFilters, type FilterState } from './QuestionFilters';
 import { QuestionFilterSidebar } from './QuestionFilterSidebar';
+import { SavedFilters } from './SavedFilters';
 import { useQuestions, useTags } from '../hooks/useQuestions';
 
 const PAGE_SIZE = 10; // §15 open decision: 10 per page
@@ -150,11 +151,15 @@ export function QuestionFeed({
     </>
   );
 
+  const saved = (
+    <SavedFilters value={filters} onApply={filterProps.onChange} showBuildLinks={mode === 'feed'} />
+  );
+
   if (layout === 'sidebar') {
     return (
       <div className="feed-layout">
         <aside className="feed-layout__sidebar">
-          <QuestionFilterSidebar {...filterProps} />
+          <QuestionFilterSidebar {...filterProps} extra={saved} />
         </aside>
         <div className="feed-layout__main stack">
           {lead}
@@ -166,6 +171,7 @@ export function QuestionFeed({
 
   return (
     <div className="stack">
+      {saved}
       <QuestionFilters {...filterProps} />
       {results}
     </div>

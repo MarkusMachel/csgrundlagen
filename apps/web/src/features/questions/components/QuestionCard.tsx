@@ -22,6 +22,7 @@ import { AnswerOptions, type AnswerReveal } from './AnswerOptions';
 const QuestionTabs = lazy(() =>
   import('./ExpandableTabs/QuestionTabs').then((m) => ({ default: m.QuestionTabs })),
 );
+import { DesignTeaser } from './DesignTeaser';
 import { FlashcardInput } from './FlashcardInput';
 import { initialOrder, OrderingInput } from './OrderingInput';
 import { OutputInput } from './OutputInput';
@@ -122,11 +123,13 @@ export function QuestionCard({
     reveal = { correctAnswer: submitAnswer.data.correctAnswer, givenAnswer: currentAnswer };
   }
 
-  const hasOptions = question.type !== 'ordering' && question.type !== 'output';
+  const hasOptions =
+    question.type !== 'ordering' && question.type !== 'output' && question.type !== 'design';
   const showScissors =
     hasOptions && (mode === 'feed' || mode === 'pick' || mode === 'test') && !isExam && !reveal;
   // flashcards submit straight from their "knew it / didn't" buttons
-  const showSubmit = mode === 'feed' && question.type !== 'flashcard';
+  // design challenges are answered on their own board page
+  const showSubmit = mode === 'feed' && question.type !== 'flashcard' && question.type !== 'design';
   // Practice keeps explanations reachable as the user goes (§15 open decision).
   const explanationRevealed =
     mode === 'review' || submitted || (mode === 'test' && testMode === 'practice');
@@ -209,7 +212,11 @@ export function QuestionCard({
           <span aria-hidden>&nbsp;</span>
         </CodeLine>
 
-        {question.type === 'flashcard' ? (
+        {question.type === 'design' ? (
+          <CodeLine numbered={false}>
+            <DesignTeaser question={question} />
+          </CodeLine>
+        ) : question.type === 'flashcard' ? (
           <CodeLine numbered={false}>
             <FlashcardInput
               question={question}

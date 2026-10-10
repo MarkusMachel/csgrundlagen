@@ -45,6 +45,7 @@ cp .env.example .env # once; adjust credentials/ports if needed
 npm run up           # builds and starts db, api (:8080) and web (localhost:3000)
 docker compose exec api adduser -email you@example.com -name "You" -role admin -password '…'
 docker compose exec api seed -file seeds/dotnet-interview.json   # optional question banks
+docker compose exec api seed -file seeds/system-design.json      # the system design challenges
 ```
 
 nginx serves the production build and proxies `/api` to the api container, so the
@@ -114,6 +115,14 @@ internal/store   domain models and every SQL query
 internal/httpapi routes, auth middleware, handlers, integration tests
 ```
 
+- **Response cache**: public question responses (`GET /api/questions` without a
+  personal `status` filter, `/questions/{id}`, `/questions/daily`, `/tags`) are
+  kept in memory (`internal/cache`: 32 MB, 5 minutes, least recently used out
+  first) and served as-is (`X-Cache: hit|miss`). Question edits through the API
+  clear it at once; triggers on the question tables (migration 0018) send
+  `NOTIFY content_changed`, so edits from the seed tool, by hand or from another
+  API instance clear it too (`db.Listen`, on its own connection, reconnecting).
+  On a 2-core box this took the feed page from ~700 to ~25,000 requests/s.
 - **Contract**: identical paths and JSON shapes to the MSW handlers in
   `apps/web/src/mocks/handlers` — the field names in `internal/store/models.go`
   match `apps/web/src/features/*/types.ts`. Errors are `{"message": "…"}`.
@@ -139,9 +148,23 @@ internal/httpapi routes, auth middleware, handlers, integration tests
   (single-use, 1-hour token; ends all sessions). Login, sign-up, reset and code
   runs are rate-limited to 20 requests per minute per IP and endpoint.
 - **Question types**: `multiple-choice`, `true-false`, `multi-select` (several
-  correct options), `ordering` (options carry a correct position) and `output`
-  (code + language + expected output). Grading lives in
-  `internal/store/grading.go`, mirrored by `apps/web/src/features/questions/grading.ts`.
+  correct options), `ordering` (options carry a correct position), `output`
+  (code + language + expected output), `flashcard` and `design` (below). Grading
+  lives in `internal/store/grading.go`, mirrored by
+  `apps/web/src/features/questions/grading.ts`.
+- **System design challenges** (`design.cs`, `/design`): draw a system from
+  components (load balancer, cache, queue, …) on a React Flow board and get it
+  checked. A challenge is a `design` question whose `design` JSON column holds
+  requirements, rules and a reference design (`internal/store/design.go`). Rules
+  check structure, not one exact diagram: `has` (at least N of a kind), `edge`
+  (A → B), `path` (A reaches B, optionally through C) and `no-edge`; `optional`
+  rules are good practice that doesn't count towards passing. A challenge is
+  refused if its reference design fails any of its own rules. Challenges live
+  in `seeds/system-design.json` (the mocks use a copy that a test keeps
+  identical), aren't edited in the admin form yet, and stay out of the feed,
+  the daily question and reviews; `GET /api/questions?type=design` lists them.
+  The submit result adds `design: {score, total, rules}`, graded by the same
+  rules in Go and TypeScript (`features/questions/design.ts`).
 - **Spaced repetition**: every answer updates `review_schedule` with a simplified
   SM-2 (`internal/store/review.go`); `GET /api/review/queue` serves what's due and
   `GET /api/me/progress?tz=…` the progress page.
@@ -253,6 +276,13 @@ app/ (providers, router, layout: tab strip + status bar)  →  pages/ (thin comp
   (`translations[locale]`); handlers resolve a `locale` query param. EN is complete,
   pt-BR/de are stubbed for the first questions to demonstrate the pattern (§5).
 - **Search** is a command-palette (⌘/Ctrl+K or the ⌕ icon) with grouped results.
+- **Filters**: Home and the test builder keep their filters in the URL
+  (`?q=…&tag=…&difficulty=…&status=…&sort=…&seed=…`, `features/questions/filterUrl.ts`),
+  so back/forward, bookmarks and shared links work, and remember the last ones
+  shown in the browser for the next visit (`useFilterState`). Signed-in users
+  can save named filters (`/api/me/filters`, up to 20, in the data export);
+  they show in the filter panel, and on Home each one links to the builder with
+  its filters.
 - **Signed-out browsing**: Home, questions and material are open to everyone.
   Anything that needs an account asks to log in in a modal and then carries on:
   the API client (`shared/api/client.ts`) holds back changes made while signed

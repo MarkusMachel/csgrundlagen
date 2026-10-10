@@ -2,12 +2,14 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { TestBuilderTray, useTestBuilderStore } from '@/features/custom-tests';
-import { QuestionFeed, useQuestions } from '@/features/questions';
+import { QuestionFeed, useFilterState, useQuestions } from '@/features/questions';
 
 export function BuildTestPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { selectedQuestionIds, toggleQuestion } = useTestBuilderStore();
+  // a saved filter on Home links here with its filters in the URL
+  const [filters, setFilters] = useFilterState('build');
 
   // Resolve the selected ids to question data for the tray's title list.
   const { data } = useQuestions({
@@ -28,6 +30,8 @@ export function BuildTestPage() {
           mode="pick"
           selectedIds={selectedQuestionIds}
           onToggleSelect={toggleQuestion}
+          filters={filters}
+          onFiltersChange={setFilters}
         />
       </div>
       <div className="build-layout__tray">

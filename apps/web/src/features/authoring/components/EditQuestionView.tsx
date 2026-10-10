@@ -49,7 +49,9 @@ export function EditQuestionView({ question, onDone }: { question: Question; onD
         </div>
       </div>
       <h2 style={{ margin: 0 }}>{t('authoring.editQuestion')}</h2>
-      {view === 'edit' ? (
+      {view === 'edit' && current.type === 'design' ? (
+        <p className="alert alert--info">{t('authoring.designSeedOnly')}</p>
+      ) : view === 'edit' && current.type !== 'design' ? (
         <QuestionForm
           key={`${current.id}-${formKey}`}
           question={current}

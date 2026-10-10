@@ -8,7 +8,8 @@ export class SignInCancelled extends Error {
   }
 }
 
-export const isSignInCancelled = (err: unknown) => err instanceof SignInCancelled;
+// a plain boolean, not a type guard: the error has the same shape as Error
+export const isSignInCancelled = (err: unknown): boolean => err instanceof SignInCancelled;
 
 interface AuthPromptState {
   open: boolean;

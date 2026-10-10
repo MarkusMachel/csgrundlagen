@@ -1,6 +1,7 @@
 package httpapi
 
 import (
+	"encoding/json"
 	"errors"
 	"net/http"
 	"net/url"
@@ -198,6 +199,9 @@ func (s *Server) listQuestions(w http.ResponseWriter, r *http.Request) {
 	if sort := q.Get("sort"); sort == "newest" || sort == "random" {
 		f.Sort = sort
 	}
+	if q.Get("type") == "design" {
+		f.Type = "design"
+	}
 	// Status filters are per user; anonymous callers just get them ignored.
 	switch status := q.Get("status"); status {
 	case "unanswered", "answered", "wrong", "bookmarked":
@@ -205,12 +209,19 @@ func (s *Server) listQuestions(w http.ResponseWriter, r *http.Request) {
 			f.Status, f.UserID = status, u.ID
 		}
 	}
-	page, err := s.store.ListQuestions(r.Context(), f)
-	if err != nil {
-		s.fail(w, r, err)
+	list := func() (any, error) { return s.store.ListQuestions(r.Context(), f) }
+	if f.Status != "" {
+		// per user: never cached
+		page, err := list()
+		if err != nil {
+			s.fail(w, r, err)
+			return
+		}
+		writeJSON(w, http.StatusOK, page)
 		return
 	}
-	writeJSON(w, http.StatusOK, page)
+	key, _ := json.Marshal(f)
+	s.cachedJSON(w, r, "list|"+string(key), list)
 }
 
 func (s *Server) getQuestion(w http.ResponseWriter, r *http.Request) {
@@ -218,21 +229,17 @@ func (s *Server) getQuestion(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	q, err := s.store.GetQuestion(r.Context(), id, locale(r))
-	if err != nil {
-		s.fail(w, r, err)
-		return
-	}
-	writeJSON(w, http.StatusOK, q)
+	loc := locale(r)
+	s.cachedJSON(w, r, "question|"+id+"|"+loc, func() (any, error) {
+		return s.store.GetQuestion(r.Context(), id, loc)
+	})
 }
 
 func (s *Server) dailyQuestion(w http.ResponseWriter, r *http.Request) {
-	q, err := s.store.DailyQuestion(r.Context(), time.Now(), locale(r))
-	if err != nil {
-		s.fail(w, r, err)
-		return
-	}
-	writeJSON(w, http.StatusOK, q)
+	now, loc := time.Now(), locale(r)
+	s.cachedJSON(w, r, "daily|"+now.UTC().Format(time.DateOnly)+"|"+loc, func() (any, error) {
+		return s.store.DailyQuestion(r.Context(), now, loc)
+	})
 }
 
 func (s *Server) weakQuestions(w http.ResponseWriter, r *http.Request) {
@@ -254,6 +261,7 @@ func (s *Server) createQuestion(w http.ResponseWriter, r *http.Request) {
 		s.fail(w, r, err)
 		return
 	}
+	s.contentChanged()
 	writeJSON(w, http.StatusCreated, q)
 }
 
@@ -271,6 +279,7 @@ func (s *Server) updateQuestion(w http.ResponseWriter, r *http.Request) {
 		s.fail(w, r, err)
 		return
 	}
+	s.contentChanged()
 	writeJSON(w, http.StatusOK, q)
 }
 
@@ -283,6 +292,7 @@ func (s *Server) deleteQuestion(w http.ResponseWriter, r *http.Request) {
 		s.fail(w, r, err)
 		return
 	}
+	s.contentChanged()
 	w.WriteHeader(http.StatusNoContent)
 }
 
@@ -474,12 +484,7 @@ func (s *Server) addBugReport(w http.ResponseWriter, r *http.Request) {
 // --- tags, search, materials, admin ---------------------------------------------
 
 func (s *Server) tags(w http.ResponseWriter, r *http.Request) {
-	tags, err := s.store.Tags(r.Context())
-	if err != nil {
-		s.fail(w, r, err)
-		return
-	}
-	writeJSON(w, http.StatusOK, tags)
+	s.cachedJSON(w, r, "tags", func() (any, error) { return s.store.Tags(r.Context()) })
 }
 
 func (s *Server) search(w http.ResponseWriter, r *http.Request) {
@@ -700,6 +705,7 @@ func (s *Server) restoreRevision(w http.ResponseWriter, r *http.Request) {
 		s.fail(w, r, err)
 		return
 	}
+	s.contentChanged()
 	writeJSON(w, http.StatusOK, q)
 }
 
