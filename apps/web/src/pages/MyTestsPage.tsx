@@ -3,12 +3,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  useDeleteTest,
-  useTestAttempts,
-  useTests,
-  type CustomTest,
-} from '@/features/custom-tests';
+import { useDeleteTest, useTestAttempts, useTests, type CustomTest } from '@/features/custom-tests';
 import { EmptyState, ErrorState, Spinner } from '@/shared/ui';
 
 function AttemptHistory({ testId, open }: { testId: string; open: boolean }) {
@@ -61,7 +56,9 @@ function TestCard({ test }: { test: CustomTest }) {
         <div style={{ flex: 1, minWidth: 0 }}>
           <h2 style={{ margin: 0 }}>{test.name}</h2>
           <div className="chip-row" style={{ margin: '6px 0' }}>
-            <span className="chip">{t('myTests.questions', { count: test.questionIds.length })}</span>
+            <span className="chip">
+              {t('myTests.questions', { count: test.questionIds.length })}
+            </span>
             <span className="chip">
               {test.timed
                 ? t('myTests.timed', { minutes: test.durationMinutes })

@@ -7,7 +7,8 @@ import { useQuestionStats } from '../../hooks/useQuestionExtras';
 
 interface StatsTabProps {
   questionId: string;
-  correctKey: string; // correctOptionId or 'true'/'false'
+  /** Rows to mark as right: option ids, 'true'/'false', or 'correct'. */
+  correctKeys: string[];
 }
 
 /**
@@ -16,7 +17,7 @@ interface StatsTabProps {
  * status green plus a ✓ so identity is never color-alone. Every row carries
  * its % as plain text, which doubles as the table view.
  */
-export function StatsTab({ questionId, correctKey }: StatsTabProps) {
+export function StatsTab({ questionId, correctKeys }: StatsTabProps) {
   const { t } = useTranslation();
   const { data: stats, isPending, isError, refetch } = useQuestionStats(questionId);
 
@@ -34,7 +35,7 @@ export function StatsTab({ questionId, correctKey }: StatsTabProps) {
       </span>
       <div className="bar-chart">
         {stats.distribution.map((d) => {
-          const correct = d.optionId === correctKey;
+          const correct = correctKeys.includes(d.optionId);
           return (
             <div
               key={d.optionId}

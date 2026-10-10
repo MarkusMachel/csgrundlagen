@@ -2,23 +2,33 @@ import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
 
-import { AdminStatsTab, MaterialForm, QuestionForm, useIsAdmin } from '@/features/authoring';
+import {
+  AdminStatsTab,
+  BugReportQueue,
+  MaterialForm,
+  MaterialManager,
+  QuestionForm,
+  QuestionManager,
+  useBugReports,
+  useIsAdmin,
+} from '@/features/authoring';
 
-type Tab = 'stats' | 'question' | 'material';
+type Tab = 'stats' | 'question' | 'material' | 'questions' | 'materials' | 'bugs';
 
 export function AdminPage() {
   const { t } = useTranslation();
   const isAdmin = useIsAdmin();
   const idBase = useId();
   const [tab, setTab] = useState<Tab>('stats');
+  const openBugs = useBugReports('open');
 
   // Client-side gate; the mock API also rejects non-admins (403).
   if (!isAdmin) return <Navigate to="/" replace />;
 
-  const tabs: Tab[] = ['stats', 'question', 'material'];
+  const tabs: Tab[] = ['stats', 'question', 'material', 'questions', 'materials', 'bugs'];
 
   return (
-    <div className="stack">
+    <div className="stack admin-page">
       <div>
         <h1 style={{ marginBottom: 4 }}>
           <span className="tok-com">{'// '}</span>
@@ -43,6 +53,14 @@ export function AdminPage() {
               onClick={() => setTab(key)}
             >
               {t(`authoring.tab.${key}`)}
+              {key === 'bugs' && (openBugs.data?.length ?? 0) > 0 && (
+                <span
+                  className="tab-badge"
+                  aria-label={t('authoring.bugs.openCount', { count: openBugs.data!.length })}
+                >
+                  {openBugs.data!.length}
+                </span>
+              )}
             </button>
           ))}
         </div>
@@ -55,6 +73,9 @@ export function AdminPage() {
           {tab === 'stats' && <AdminStatsTab />}
           {tab === 'question' && <QuestionForm />}
           {tab === 'material' && <MaterialForm />}
+          {tab === 'questions' && <QuestionManager />}
+          {tab === 'materials' && <MaterialManager />}
+          {tab === 'bugs' && <BugReportQueue />}
         </div>
       </div>
     </div>

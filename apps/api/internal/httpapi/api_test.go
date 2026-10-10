@@ -133,7 +133,8 @@ func TestAPI(t *testing.T) {
 		}
 	}
 
-	srv := httptest.NewServer(httpapi.New(st, slog.New(slog.NewTextHandler(io.Discard, nil))))
+	srv := httptest.NewServer(httpapi.New(st, slog.New(slog.NewTextHandler(io.Discard, nil)),
+		httpapi.Options{AuthRatePerMinute: -1}))
 	defer srv.Close()
 	c := client{t: t, srv: srv}
 

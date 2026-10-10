@@ -17,6 +17,12 @@ type ErrInvalid struct{ Msg string }
 
 func (e ErrInvalid) Error() string { return e.Msg }
 
+// ErrConflict is returned when a write collides with existing data, e.g. an
+// email that already has an account.
+type ErrConflict struct{ Msg string }
+
+func (e ErrConflict) Error() string { return e.Msg }
+
 type User struct {
 	ID        string  `json:"id"`
 	Name      string  `json:"name"`
@@ -33,29 +39,59 @@ type Option struct {
 	Label string `json:"label"`
 }
 
-// Question is the union of MultipleChoiceQuestion and TrueFalseQuestion:
-// Options/CorrectOptionID are set for 'multiple-choice', CorrectAnswer for
-// 'true-false'.
+// Question is the union of the question types (apps/web/src/features/questions/types.ts):
+//
+//	multiple-choice  Options + CorrectOptionID
+//	true-false       CorrectAnswer
+//	multi-select     Options + CorrectOptionIDs (pick all that apply)
+//	ordering         Options + CorrectOrder (option ids in the right order)
+//	output           Code + CodeLanguage + ExpectedOutput (predict what it prints)
 type Question struct {
-	ID              string   `json:"id"`
-	Type            string   `json:"type"`
-	Prompt          string   `json:"prompt"`
-	Tags            []string `json:"tags"`
-	Difficulty      *string  `json:"difficulty,omitempty"`
-	Explanation     string   `json:"explanation"`
-	Options         []Option `json:"options,omitempty"`
-	CorrectOptionID *string  `json:"correctOptionId,omitempty"`
-	CorrectAnswer   *bool    `json:"correctAnswer,omitempty"`
+	ID               string   `json:"id"`
+	Type             string   `json:"type"`
+	Prompt           string   `json:"prompt"`
+	Tags             []string `json:"tags"`
+	Difficulty       *string  `json:"difficulty,omitempty"`
+	Explanation      string   `json:"explanation"`
+	Options          []Option `json:"options,omitempty"`
+	CorrectOptionID  *string  `json:"correctOptionId,omitempty"`
+	CorrectAnswer    *bool    `json:"correctAnswer,omitempty"`
+	CorrectOptionIDs []string `json:"correctOptionIds,omitempty"`
+	CorrectOrder     []string `json:"correctOrder,omitempty"`
+	Code             *string  `json:"code,omitempty"`
+	CodeLanguage     *string  `json:"codeLanguage,omitempty"`
+	ExpectedOutput   *string  `json:"expectedOutput,omitempty"`
 }
 
-// Correct returns the answer value a submission must equal: the
-// option key for multiple choice, or the boolean for true/false.
-func (q Question) Correct() any {
-	if q.Type == "multiple-choice" && q.CorrectOptionID != nil {
-		return *q.CorrectOptionID
+// HasOptions reports whether the type stores answer options.
+func HasOptions(questionType string) bool {
+	switch questionType {
+	case "multiple-choice", "multi-select", "ordering":
+		return true
 	}
-	if q.CorrectAnswer != nil {
-		return *q.CorrectAnswer
+	return false
+}
+
+// Correct returns the answer a submission is graded against: an option key,
+// a boolean, a list of option keys, or the expected output text.
+func (q Question) Correct() any {
+	switch q.Type {
+	case "multiple-choice":
+		if q.CorrectOptionID != nil {
+			return *q.CorrectOptionID
+		}
+	case "true-false":
+		if q.CorrectAnswer != nil {
+			return *q.CorrectAnswer
+		}
+	case "multi-select":
+		return q.CorrectOptionIDs
+	case "ordering":
+		return q.CorrectOrder
+	case "output":
+		if q.ExpectedOutput != nil {
+			return *q.ExpectedOutput
+		}
 	}
 	return nil
 }
@@ -72,6 +108,8 @@ type SubmitAnswerResult struct {
 	QuestionID    string `json:"questionId"`
 	Correct       bool   `json:"correct"`
 	CorrectAnswer any    `json:"correctAnswer"`
+	// NextReviewAt is when spaced repetition will bring the question back.
+	NextReviewAt *time.Time `json:"nextReviewAt,omitempty"`
 }
 
 type Comment struct {

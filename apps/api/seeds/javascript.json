@@ -1046,7 +1046,7 @@
     {
       "prompt": "What are JavaScript's data types, and what are the two classic quirks of `typeof`?",
       "tags": [
-        "JS Core & Types"
+        "JavaScript"
       ],
       "difficulty": "easy",
       "options": [
@@ -1066,7 +1066,7 @@
     {
       "prompt": "What is the difference between `==` and `===`, and when is `==` acceptable?",
       "tags": [
-        "JS Core & Types"
+        "JavaScript"
       ],
       "difficulty": "easy",
       "options": [
@@ -1086,7 +1086,7 @@
     {
       "prompt": "How do `var`, `let` and `const` differ?",
       "tags": [
-        "JS Core & Types"
+        "JavaScript"
       ],
       "difficulty": "easy",
       "options": [
@@ -1106,7 +1106,7 @@
     {
       "prompt": "What is hoisting, and why can you call a function declaration before it appears but not a `var` function expression?",
       "tags": [
-        "JS Core & Types"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1125,7 +1125,7 @@
     {
       "prompt": "Which values are falsy, and why does `count || 10` go wrong when `count` is `0`?",
       "tags": [
-        "JS Core & Types"
+        "JavaScript"
       ],
       "difficulty": "easy",
       "options": [
@@ -1145,7 +1145,7 @@
     {
       "prompt": "What is the difference between `null` and `undefined`?",
       "tags": [
-        "JS Core & Types"
+        "JavaScript"
       ],
       "difficulty": "easy",
       "options": [
@@ -1165,7 +1165,7 @@
     {
       "prompt": "How are primitives and objects copied and compared?",
       "tags": [
-        "JS Core & Types"
+        "JavaScript"
       ],
       "difficulty": "easy",
       "options": [
@@ -1185,7 +1185,7 @@
     {
       "prompt": "How do you deep-copy an object, and what is wrong with `JSON.parse(JSON.stringify(x))`?",
       "tags": [
-        "JS Core & Types"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1205,7 +1205,7 @@
     {
       "prompt": "Why is `0.1 + 0.2 !== 0.3`, and when do you need `BigInt`?",
       "tags": [
-        "JS Core & Types"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1226,7 +1226,7 @@
     {
       "prompt": "What do `\"5\" + 1` and `\"5\" - 1` evaluate to, and why?",
       "tags": [
-        "JS Core & Types"
+        "JavaScript"
       ],
       "difficulty": "easy",
       "options": [
@@ -1246,7 +1246,7 @@
     {
       "prompt": "What is a closure, what is it good for, and what does it cost?",
       "tags": [
-        "JS Functions, Scope & Prototypes"
+        "JavaScript"
       ],
       "difficulty": "easy",
       "options": [
@@ -1266,7 +1266,7 @@
     {
       "prompt": "What does this print, and how do you fix it?\n\n```js\nfor (var i = 0; i < 3; i++) setTimeout(() => console.log(i), 0);\n```",
       "tags": [
-        "JS Functions, Scope & Prototypes"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1286,7 +1286,7 @@
     {
       "prompt": "How is the value of `this` determined?",
       "tags": [
-        "JS Functions, Scope & Prototypes"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1306,7 +1306,7 @@
     {
       "prompt": "What do `call`, `apply` and `bind` do?",
       "tags": [
-        "JS Functions, Scope & Prototypes"
+        "JavaScript"
       ],
       "difficulty": "easy",
       "options": [
@@ -1325,7 +1325,7 @@
     {
       "prompt": "How do arrow functions differ from regular functions?",
       "tags": [
-        "JS Functions, Scope & Prototypes"
+        "JavaScript"
       ],
       "difficulty": "easy",
       "options": [
@@ -1344,7 +1344,7 @@
     {
       "prompt": "How does the prototype chain work?",
       "tags": [
-        "JS Functions, Scope & Prototypes"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1364,7 +1364,7 @@
     {
       "prompt": "Are ES6 classes real classes, or something else underneath?",
       "tags": [
-        "JS Functions, Scope & Prototypes"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1383,7 +1383,7 @@
     {
       "prompt": "What does the `new` keyword do?",
       "tags": [
-        "JS Functions, Scope & Prototypes"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1402,7 +1402,7 @@
     {
       "prompt": "What is a higher-order function, and what is currying?",
       "tags": [
-        "JS Functions, Scope & Prototypes"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1422,7 +1422,7 @@
     {
       "prompt": "What is memoisation, and what are its limits?",
       "tags": [
-        "JS Functions, Scope & Prototypes"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1441,7 +1441,8 @@
     {
       "prompt": "In what order does this log, and why?\n\n```js\nconsole.log(\"A\");\nsetTimeout(() => console.log(\"timeout\"), 0);\nPromise.resolve().then(() => console.log(\"promise\"));\nconsole.log(\"B\");\n```",
       "tags": [
-        "JS Async & Event Loop"
+        "JavaScript",
+        "Async & Concurrency"
       ],
       "difficulty": "medium",
       "options": [
@@ -1462,7 +1463,8 @@
     {
       "prompt": "What is the difference between microtasks and macrotasks (tasks)?",
       "tags": [
-        "JS Async & Event Loop"
+        "JavaScript",
+        "Async & Concurrency"
       ],
       "difficulty": "medium",
       "options": [
@@ -1482,7 +1484,8 @@
     {
       "prompt": "What is callback hell, and how do you avoid it?",
       "tags": [
-        "JS Async & Event Loop"
+        "JavaScript",
+        "Async & Concurrency"
       ],
       "difficulty": "easy",
       "options": [
@@ -1502,7 +1505,8 @@
     {
       "prompt": "What are a promise's states, and how does chaining with `.then` work?",
       "tags": [
-        "JS Async & Event Loop"
+        "JavaScript",
+        "Async & Concurrency"
       ],
       "difficulty": "medium",
       "options": [
@@ -1523,7 +1527,8 @@
     {
       "prompt": "When do you use `Promise.all`, `allSettled`, `race` and `any`?",
       "tags": [
-        "JS Async & Event Loop"
+        "JavaScript",
+        "Async & Concurrency"
       ],
       "difficulty": "medium",
       "options": [
@@ -1542,7 +1547,8 @@
     {
       "prompt": "How do you handle errors with `async/await`, and what does `fetch` not reject on?",
       "tags": [
-        "JS Async & Event Loop"
+        "JavaScript",
+        "Async & Concurrency"
       ],
       "difficulty": "medium",
       "options": [
@@ -1562,7 +1568,8 @@
     {
       "prompt": "What is the performance trap with sequential `await`, and why is `forEach` with an async callback wrong?",
       "tags": [
-        "JS Async & Event Loop"
+        "JavaScript",
+        "Async & Concurrency"
       ],
       "difficulty": "medium",
       "options": [
@@ -1582,7 +1589,8 @@
     {
       "prompt": "What is an unhandled promise rejection, and what does modern Node do with one?",
       "tags": [
-        "JS Async & Event Loop"
+        "JavaScript",
+        "Async & Concurrency"
       ],
       "difficulty": "medium",
       "options": [
@@ -1602,7 +1610,8 @@
     {
       "prompt": "Does `setTimeout(fn, 0)` run immediately?",
       "tags": [
-        "JS Async & Event Loop"
+        "JavaScript",
+        "Async & Concurrency"
       ],
       "difficulty": "easy",
       "options": [
@@ -1622,7 +1631,8 @@
     {
       "prompt": "How do you cancel an async operation like a `fetch`?",
       "tags": [
-        "JS Async & Event Loop"
+        "JavaScript",
+        "Async & Concurrency"
       ],
       "difficulty": "medium",
       "options": [
@@ -1641,7 +1651,7 @@
     {
       "prompt": "What are destructuring, spread and rest, and what are their traps?",
       "tags": [
-        "Modern JavaScript"
+        "JavaScript"
       ],
       "difficulty": "easy",
       "options": [
@@ -1662,7 +1672,7 @@
     {
       "prompt": "How do ES modules differ from CommonJS?",
       "tags": [
-        "Modern JavaScript"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1682,7 +1692,7 @@
     {
       "prompt": "When do you use `Map`, `Set`, `WeakMap` and `WeakSet` instead of objects and arrays?",
       "tags": [
-        "Modern JavaScript"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1702,7 +1712,7 @@
     {
       "prompt": "What are iterators and generators?",
       "tags": [
-        "Modern JavaScript"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1722,7 +1732,7 @@
     {
       "prompt": "What do optional chaining (`?.`) and nullish coalescing (`??`) do, and how is `??` different from `||`?",
       "tags": [
-        "Modern JavaScript"
+        "JavaScript"
       ],
       "difficulty": "easy",
       "options": [
@@ -1742,7 +1752,7 @@
     {
       "prompt": "What are template literals and tagged templates?",
       "tags": [
-        "Modern JavaScript"
+        "JavaScript"
       ],
       "difficulty": "easy",
       "options": [
@@ -1761,7 +1771,7 @@
     {
       "prompt": "When shouldn't you use `forEach` or `reduce`?",
       "tags": [
-        "Modern JavaScript"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1781,7 +1791,7 @@
     {
       "prompt": "What are `Proxy` and `Reflect` used for?",
       "tags": [
-        "Modern JavaScript"
+        "JavaScript"
       ],
       "difficulty": "hard",
       "options": [
@@ -1800,7 +1810,7 @@
     {
       "prompt": "How do you make an object immutable, and how is `Object.freeze` different from `const`?",
       "tags": [
-        "Modern JavaScript"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1819,7 +1829,7 @@
     {
       "prompt": "What is the difference between `for...in` and `for...of`?",
       "tags": [
-        "Modern JavaScript"
+        "JavaScript"
       ],
       "difficulty": "easy",
       "options": [
@@ -1839,7 +1849,7 @@
     {
       "prompt": "How does Node.js handle concurrency if JavaScript is single-threaded?",
       "tags": [
-        "JS Runtime, Browser & Security"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1859,7 +1869,7 @@
     {
       "prompt": "What typically causes memory leaks in JavaScript, and how do you find them?",
       "tags": [
-        "JS Runtime, Browser & Security"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1879,7 +1889,7 @@
     {
       "prompt": "What is the difference between debounce and throttle in JavaScript, and when do you use each?",
       "tags": [
-        "JS Runtime, Browser & Security"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1898,7 +1908,7 @@
     {
       "prompt": "What are event bubbling, capturing and delegation?",
       "tags": [
-        "JS Runtime, Browser & Security"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1918,7 +1928,7 @@
     {
       "prompt": "What is CORS, and when does the browser send a preflight request?",
       "tags": [
-        "JS Runtime, Browser & Security"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1937,7 +1947,7 @@
     {
       "prompt": "What are XSS and CSRF, and how do you defend a JavaScript app against each?",
       "tags": [
-        "JS Runtime, Browser & Security"
+        "JavaScript"
       ],
       "difficulty": "hard",
       "options": [
@@ -1957,7 +1967,7 @@
     {
       "prompt": "When do you use `localStorage`, `sessionStorage`, cookies and IndexedDB?",
       "tags": [
-        "JS Runtime, Browser & Security"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -1978,7 +1988,7 @@
     {
       "prompt": "How do you keep the browser UI responsive during heavy work?",
       "tags": [
-        "JS Runtime, Browser & Security"
+        "JavaScript"
       ],
       "difficulty": "hard",
       "options": [
@@ -1998,7 +2008,7 @@
     {
       "prompt": "What does `\"use strict\"` change, and what does TypeScript add on top?",
       "tags": [
-        "JS Runtime, Browser & Security"
+        "JavaScript"
       ],
       "difficulty": "medium",
       "options": [
@@ -2018,7 +2028,7 @@
     {
       "prompt": "Implementing `Promise.all` by hand is a common exercise. What must a correct version handle?",
       "tags": [
-        "JS Runtime, Browser & Security"
+        "JavaScript"
       ],
       "difficulty": "hard",
       "options": [

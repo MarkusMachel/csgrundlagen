@@ -25,7 +25,10 @@
     "toggleTheme": "Alternar modo claro/escuro",
     "userMenu": "Conta",
     "scrollDown": "Rolar para baixo",
-    "admin": "Admin"
+    "admin": "Admin",
+    "account": "Conta",
+    "review": "Revisar",
+    "progress": "Progresso"
   },
   "auth": {
     "loginTitle": "Entrar",
@@ -35,7 +38,34 @@
     "loginFailed": "E-mail ou senha inválidos",
     "hint": "Login de demonstração: demo@example.com / password",
     "emailInvalid": "Digite um endereço de e-mail válido",
-    "passwordRequired": "A senha é obrigatória"
+    "passwordRequired": "A senha é obrigatória",
+    "name": "Nome",
+    "nameRequired": "Digite seu nome",
+    "signUp": "Criar conta",
+    "signUpTitle": "Criar conta",
+    "createAccount": "Criar uma conta",
+    "haveAccount": "Já tem uma conta?",
+    "forgotPassword": "Esqueceu a senha?",
+    "forgotTitle": "Redefinir senha",
+    "forgotIntro": "Digite o e-mail da sua conta e enviaremos um link para escolher uma nova senha.",
+    "sendResetLink": "Enviar link",
+    "resetSent": "Se existir uma conta com esse e-mail, um link está a caminho. Ele vale por uma hora.",
+    "backToLogin": "Voltar ao login",
+    "resetTitle": "Escolha uma nova senha",
+    "newPassword": "Nova senha",
+    "confirmPassword": "Confirmar senha",
+    "currentPassword": "Senha atual",
+    "setPassword": "Definir senha",
+    "resetDone": "Sua senha foi alterada. Você já pode entrar.",
+    "resetLinkInvalid": "Este link está incompleto. Abra o link do e-mail novamente ou peça um novo.",
+    "requestNewLink": "Pedir um novo link",
+    "changePassword": "Alterar senha",
+    "passwordChanged": "Senha alterada. Outros dispositivos foram desconectados.",
+    "passwordRules": "Use de 8 a 72 caracteres",
+    "passwordsDiffer": "As senhas não coincidem",
+    "emailTaken": "Já existe uma conta com este e-mail. Tente entrar.",
+    "tooManyAttempts": "Muitas tentativas. Aguarde um minuto e tente novamente.",
+    "genericError": "Algo deu errado. Tente novamente."
   },
   "home": {
     "questionOfTheDay": "Pergunta do Dia",
@@ -119,7 +149,15 @@
       "submit": "Reportar erro",
       "success": "Obrigado! Seu relatório foi registrado.",
       "required": "Descreva o problema"
-    }
+    },
+    "pickAll": "marque todas as corretas",
+    "orderHint": "coloque os passos na ordem certa",
+    "belongsAt": "✕ vai em [{{n}}]",
+    "moveUp": "Mover “{{item}}” para cima",
+    "moveDown": "Mover “{{item}}” para baixo",
+    "predictOutput": "o que isso imprime?",
+    "outputPlaceholder": "digite a saída exata, uma linha por linha impressa",
+    "expectedOutput": "saída esperada"
   },
   "builder": {
     "title": "Criar Teste",
@@ -222,12 +260,18 @@
     "tab": {
       "question": "Nova questão",
       "material": "Novo material",
-      "stats": "Estatísticas"
+      "stats": "Estatísticas",
+      "questions": "Perguntas",
+      "materials": "Materiais",
+      "bugs": "Relatos de erro"
     },
     "questionType": "Tipo de questão",
     "type": {
       "multiple-choice": "Múltipla escolha",
-      "true-false": "Verdadeiro / Falso"
+      "true-false": "Verdadeiro / Falso",
+      "multi-select": "Múltipla seleção",
+      "ordering": "Ordenação",
+      "output": "Prever a saída"
     },
     "prompt": "Enunciado",
     "options": "Alternativas",
@@ -288,10 +332,109 @@
       "noAnswersYet": "Ainda não há respostas registradas"
     },
     "codeHint": "código: envolva um bloco em ```go … ``` (ou sql, cs, ts…) e `código inline` entre crases",
-    "preview": "Pré-visualização"
+    "preview": "Pré-visualização",
+    "questionUpdated": "Pergunta salva.",
+    "materialUpdated": "Material salvo.",
+    "saveChanges": "Salvar alterações",
+    "editQuestion": "Editar pergunta",
+    "editMaterial": "Editar material",
+    "edit": "Editar",
+    "editLabel": "Editar {{label}}",
+    "delete": "Excluir",
+    "deleteLabel": "Excluir {{label}}",
+    "confirmDelete": "Excluir de vez?",
+    "prevPage": "Anterior",
+    "nextPage": "Próxima",
+    "bugs": {
+      "filter": "Filtrar por status",
+      "empty": "Nenhum relato aqui.",
+      "reportedBy": "relatado por {{name}} em {{date}}",
+      "editQuestion": "Editar pergunta",
+      "markReviewed": "Marcar como revisado",
+      "close": "Fechar",
+      "reopen": "Reabrir",
+      "openCount_one": "{{count}} relato aberto",
+      "openCount_other": "{{count}} relatos abertos",
+      "status": {
+        "open": "Aberto",
+        "reviewed": "Revisado",
+        "closed": "Fechado",
+        "all": "Todos"
+      }
+    },
+    "items": "Itens",
+    "orderingHint": "digite os itens na ordem correta; quem estuda vê embaralhado",
+    "multiSelectHint": "marque cada opção correta",
+    "code": "Código",
+    "codeLanguage": "Linguagem",
+    "runnableHint": "js roda no navegador, go no Go Playground; dá para executar depois de responder",
+    "notRunnableHint": "essa linguagem não pode ser executada, então só se prevê",
+    "expectedOutput": "Saída esperada",
+    "runToFill": "Executar para preencher a saída"
   },
   "code": {
     "copy": "Copiar código",
     "copied": "Copiado"
+  },
+  "account": {
+    "title": "Conta",
+    "role": {
+      "admin": "admin",
+      "user": "membro"
+    }
+  },
+  "review": {
+    "title": "Revisar",
+    "subtitle": "Repetição espaçada: as perguntas voltam pouco antes de você esquecê-las. Acertos esperam mais a cada vez; erros voltam em minutos.",
+    "nextReview": "· próxima revisão {{when}}",
+    "allDone": "Nada para revisar agora",
+    "allDoneHint": "Todas as perguntas que você respondeu estão agendadas para depois. Volte quando houver revisões pendentes ou comece perguntas novas.",
+    "learnNew_one": "Aprender {{count}} pergunta nova",
+    "learnNew_other": "Aprender {{count}} perguntas novas",
+    "sessionDone": "Sessão concluída",
+    "sessionScore": "{{correct}} de {{total}} corretas. Cada resposta foi reagendada.",
+    "checkAgain": "Procurar mais revisões",
+    "seeProgress": "Ver seu progresso",
+    "position": "Pergunta {{n}} de {{total}}",
+    "new": "nova",
+    "progressLabel": "Progresso da sessão",
+    "next": "Próxima",
+    "finish": "Concluir",
+    "dueBadge_one": "{{count}} revisão pendente",
+    "dueBadge_other": "{{count}} revisões pendentes"
+  },
+  "progress": {
+    "title": "Progresso",
+    "covered": "Cobertas",
+    "percentOfBank": "{{pct}}% de todas as perguntas",
+    "accuracy": "Acertos",
+    "answersCount_one": "{{count}} resposta",
+    "answersCount_other": "{{count}} respostas",
+    "dueNow": "Revisões pendentes",
+    "startReview": "Começar a revisar",
+    "nothingDue": "Tudo em dia",
+    "streak": "Sequência",
+    "days_one": "{{count}} dia",
+    "days_other": "{{count}} dias",
+    "streakHint": "dias seguidos com uma resposta",
+    "activity": "Últimos 30 dias",
+    "activityLabel": "Respostas por dia nos últimos 30 dias, com a parte correta destacada",
+    "correct": "corretas",
+    "wrong": "erradas",
+    "today": "hoje",
+    "upcoming": "Próximas revisões",
+    "byTopic": "Por tópico",
+    "topic": "Tópico",
+    "notStarted": "não iniciado"
+  },
+  "runner": {
+    "run": "Executar",
+    "runAgain": "Executar de novo",
+    "running": "Executando…",
+    "output": "saída",
+    "noOutput": "(sem saída)",
+    "predictFirst": "Executar libera depois que você responder: preveja primeiro",
+    "goNote": "roda no Go Playground",
+    "failed": "Não foi possível executar o código."
   }
 }

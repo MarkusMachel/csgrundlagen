@@ -13,7 +13,12 @@ export function TestModePicker({ onStart }: TestModePickerProps) {
   const [mode, setMode] = useState<TestMode>('practice');
 
   const options: { value: TestMode; icon: LucideIcon; label: string; desc: string }[] = [
-    { value: 'practice', icon: BookOpen, label: t('takeTest.practice'), desc: t('takeTest.practiceDesc') },
+    {
+      value: 'practice',
+      icon: BookOpen,
+      label: t('takeTest.practice'),
+      desc: t('takeTest.practiceDesc'),
+    },
     { value: 'exam', icon: GraduationCap, label: t('takeTest.exam'), desc: t('takeTest.examDesc') },
   ];
 

@@ -1,3 +1,5 @@
+import type { AnswerValue } from '@/features/questions/types';
+
 export type TestMode = 'practice' | 'exam';
 
 export interface CustomTest {
@@ -17,7 +19,7 @@ export interface TestAttempt {
   testId: string;
   userId: string;
   mode: TestMode;
-  answers: Record<string, string | boolean>;
+  answers: Record<string, AnswerValue>;
   score: number;
   startedAt: string;
   submittedAt?: string;
@@ -26,8 +28,8 @@ export interface TestAttempt {
 export interface TestSubmitResultItem {
   questionId: string;
   correct: boolean;
-  givenAnswer?: string | boolean;
-  correctAnswer: string | boolean;
+  givenAnswer?: AnswerValue;
+  correctAnswer: AnswerValue;
 }
 
 export interface TestSubmitResult {

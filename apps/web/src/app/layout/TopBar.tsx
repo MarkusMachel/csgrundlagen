@@ -1,10 +1,12 @@
 import {
   Bookmark,
   BookOpen,
+  ChartColumn,
   ClipboardList,
   Home,
   ListChecks,
   Moon,
+  Repeat,
   ShieldCheck,
   Sun,
   TrendingDown,
@@ -16,6 +18,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 import { useLogout } from '@/features/auth';
 import { useIsAdmin } from '@/features/authoring';
+import { useDueCount } from '@/features/review';
 import { GlobalSearch } from '@/features/search';
 import { SUPPORTED_LOCALES } from '@/i18n/config';
 import { useClickOutside } from '@/shared/hooks/useClickOutside';
@@ -29,11 +32,15 @@ interface FileTab {
   key: string;
   end?: boolean;
   adminOnly?: boolean;
+  /** Shows a count next to the file name ('due' = reviews due now). */
+  badge?: 'due';
 }
 
 /** The nav is a strip of open "files" — one per section (mockup design). */
 const fileTabs: FileTab[] = [
   { to: '/', file: 'home.cs', icon: Home, key: 'nav.home', end: true },
+  { to: '/review', file: 'review.cs', icon: Repeat, key: 'nav.review', badge: 'due' },
+  { to: '/progress', file: 'progress.cs', icon: ChartColumn, key: 'nav.progress' },
   { to: '/weak-spots', file: 'weak_spots.cs', icon: TrendingDown, key: 'nav.weakSpots' },
   { to: '/bookmarks', file: 'bookmarks.cs', icon: Bookmark, key: 'nav.bookmarks' },
   { to: '/build', file: 'build_test.cs', icon: ListChecks, key: 'nav.buildTest' },
@@ -54,11 +61,9 @@ export function TopBar() {
   const user = useAuthStore((s) => s.user);
   const isAdmin = useIsAdmin();
   const logout = useLogout();
+  const { data: dueCount } = useDueCount();
 
-  const visibleTabs = useMemo(
-    () => fileTabs.filter((tab) => !tab.adminOnly || isAdmin),
-    [isAdmin],
-  );
+  const visibleTabs = useMemo(() => fileTabs.filter((tab) => !tab.adminOnly || isAdmin), [isAdmin]);
 
   const [localeMenuOpen, setLocaleMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -69,12 +74,8 @@ export function TopBar() {
 
   return (
     <header className="titlebar" style={{ paddingRight: 8 }}>
-      <nav
-        className="tabstrip"
-        aria-label={t('common.appName')}
-        style={{ flex: 1, minWidth: 0 }}
-      >
-        {visibleTabs.map(({ to, file, icon: Icon, key, end }) => (
+      <nav className="tabstrip" aria-label={t('common.appName')} style={{ flex: 1, minWidth: 0 }}>
+        {visibleTabs.map(({ to, file, icon: Icon, key, end, badge }) => (
           <NavLink
             key={to}
             to={to}
@@ -86,6 +87,14 @@ export function TopBar() {
               <>
                 <Icon size={15} className="file-tab__icon" aria-hidden />
                 {file}
+                {badge === 'due' && (dueCount ?? 0) > 0 && (
+                  <span
+                    className="tab-badge tab-badge--accent"
+                    aria-label={t('review.dueBadge', { count: dueCount })}
+                  >
+                    {dueCount}
+                  </span>
+                )}
                 {isActive && <span className="file-tab__dot" aria-hidden />}
               </>
             )}
@@ -156,6 +165,19 @@ export function TopBar() {
                 <li role="none" className="menu-item menu-item--static">
                   {user.name}
                   <span className="search-result__sub">{user.email}</span>
+                </li>
+                <li role="none">
+                  <button
+                    type="button"
+                    role="menuitem"
+                    className="menu-item"
+                    onClick={() => {
+                      setUserMenuOpen(false);
+                      navigate('/account');
+                    }}
+                  >
+                    {t('nav.account')}
+                  </button>
                 </li>
                 <li role="none">
                   <button

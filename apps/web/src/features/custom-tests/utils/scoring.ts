@@ -1,15 +1,9 @@
+import { correctAnswerOf, isAnswerCorrect } from '@/features/questions/grading';
 import type { AnswerValue, Question } from '@/features/questions/types';
 
 import type { TestSubmitResultItem } from '../types';
 
-export function correctAnswerOf(question: Question): AnswerValue {
-  return question.type === 'multiple-choice' ? question.correctOptionId : question.correctAnswer;
-}
-
-export function isAnswerCorrect(question: Question, given: AnswerValue | undefined): boolean {
-  if (given === undefined) return false; // unanswered counts as wrong
-  return given === correctAnswerOf(question);
-}
+export { correctAnswerOf, isAnswerCorrect };
 
 export interface ScoreResult {
   score: number;

@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useId } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { z } from 'zod';
 
 import { useLogin } from '../hooks/useAuth';
@@ -75,6 +76,10 @@ export function LoginForm({ onSuccess }: { onSuccess?: () => void }) {
       <button type="submit" className="btn btn--primary" disabled={login.isPending}>
         {t('auth.login')}
       </button>
+      <div className="hstack" style={{ justifyContent: 'space-between', fontSize: 13 }}>
+        <Link to="/signup">{t('auth.createAccount')}</Link>
+        <Link to="/forgot-password">{t('auth.forgotPassword')}</Link>
+      </div>
       <p className="tok-com" style={{ margin: 0, fontSize: 12 }}>
         {'// '}
         {t('auth.hint')}

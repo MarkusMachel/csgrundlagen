@@ -25,7 +25,10 @@
     "toggleTheme": "Hell-/Dunkelmodus umschalten",
     "userMenu": "Konto",
     "scrollDown": "Nach unten scrollen",
-    "admin": "Admin"
+    "admin": "Admin",
+    "account": "Konto",
+    "review": "Wiederholen",
+    "progress": "Fortschritt"
   },
   "auth": {
     "loginTitle": "Anmelden",
@@ -35,7 +38,34 @@
     "loginFailed": "E-Mail oder Passwort ungültig",
     "hint": "Demo-Login: demo@example.com / password",
     "emailInvalid": "Gib eine gültige E-Mail-Adresse ein",
-    "passwordRequired": "Passwort ist erforderlich"
+    "passwordRequired": "Passwort ist erforderlich",
+    "name": "Name",
+    "nameRequired": "Gib deinen Namen ein",
+    "signUp": "Konto erstellen",
+    "signUpTitle": "Konto erstellen",
+    "createAccount": "Konto erstellen",
+    "haveAccount": "Schon ein Konto?",
+    "forgotPassword": "Passwort vergessen?",
+    "forgotTitle": "Passwort zurücksetzen",
+    "forgotIntro": "Gib die E-Mail-Adresse deines Kontos ein, und wir schicken dir einen Link, um ein neues Passwort festzulegen.",
+    "sendResetLink": "Link senden",
+    "resetSent": "Falls zu dieser E-Mail ein Konto existiert, ist ein Link unterwegs. Er ist eine Stunde gültig.",
+    "backToLogin": "Zurück zur Anmeldung",
+    "resetTitle": "Neues Passwort wählen",
+    "newPassword": "Neues Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "currentPassword": "Aktuelles Passwort",
+    "setPassword": "Passwort setzen",
+    "resetDone": "Dein Passwort wurde geändert. Du kannst dich jetzt anmelden.",
+    "resetLinkInvalid": "Dieser Link ist unvollständig. Öffne den Link aus der E-Mail erneut oder fordere einen neuen an.",
+    "requestNewLink": "Neuen Link anfordern",
+    "changePassword": "Passwort ändern",
+    "passwordChanged": "Passwort geändert. Andere Geräte wurden abgemeldet.",
+    "passwordRules": "8 bis 72 Zeichen",
+    "passwordsDiffer": "Die Passwörter stimmen nicht überein",
+    "emailTaken": "Zu dieser E-Mail gibt es schon ein Konto. Melde dich stattdessen an.",
+    "tooManyAttempts": "Zu viele Versuche. Warte eine Minute und versuche es erneut.",
+    "genericError": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
   },
   "home": {
     "questionOfTheDay": "Frage des Tages",
@@ -119,7 +149,15 @@
       "submit": "Fehler melden",
       "success": "Danke! Deine Meldung wurde erfasst.",
       "required": "Bitte beschreibe das Problem"
-    }
+    },
+    "pickAll": "alle zutreffenden auswählen",
+    "orderHint": "bring die Schritte in die richtige Reihenfolge",
+    "belongsAt": "✕ gehört an [{{n}}]",
+    "moveUp": "„{{item}}“ nach oben",
+    "moveDown": "„{{item}}“ nach unten",
+    "predictOutput": "was wird ausgegeben?",
+    "outputPlaceholder": "gib die genaue Ausgabe ein, eine Zeile pro ausgegebener Zeile",
+    "expectedOutput": "erwartete Ausgabe"
   },
   "builder": {
     "title": "Test erstellen",
@@ -222,12 +260,18 @@
     "tab": {
       "question": "Neue Frage",
       "material": "Neues Material",
-      "stats": "Statistik"
+      "stats": "Statistik",
+      "questions": "Fragen",
+      "materials": "Materialien",
+      "bugs": "Fehlermeldungen"
     },
     "questionType": "Fragetyp",
     "type": {
       "multiple-choice": "Multiple Choice",
-      "true-false": "Wahr / Falsch"
+      "true-false": "Wahr / Falsch",
+      "multi-select": "Mehrfachauswahl",
+      "ordering": "Reihenfolge",
+      "output": "Ausgabe vorhersagen"
     },
     "prompt": "Fragetext",
     "options": "Antwortoptionen",
@@ -288,10 +332,109 @@
       "noAnswersYet": "Noch keine Antworten erfasst"
     },
     "codeHint": "Code: Block in ```go … ``` (oder sql, cs, ts…) einschließen, `Inline-Code` in Backticks",
-    "preview": "Vorschau"
+    "preview": "Vorschau",
+    "questionUpdated": "Frage gespeichert.",
+    "materialUpdated": "Material gespeichert.",
+    "saveChanges": "Änderungen speichern",
+    "editQuestion": "Frage bearbeiten",
+    "editMaterial": "Material bearbeiten",
+    "edit": "Bearbeiten",
+    "editLabel": "{{label}} bearbeiten",
+    "delete": "Löschen",
+    "deleteLabel": "{{label}} löschen",
+    "confirmDelete": "Endgültig löschen?",
+    "prevPage": "Zurück",
+    "nextPage": "Weiter",
+    "bugs": {
+      "filter": "Nach Status filtern",
+      "empty": "Hier gibt es keine Meldungen.",
+      "reportedBy": "gemeldet von {{name}} am {{date}}",
+      "editQuestion": "Frage bearbeiten",
+      "markReviewed": "Als geprüft markieren",
+      "close": "Schließen",
+      "reopen": "Wieder öffnen",
+      "openCount_one": "{{count}} offene Meldung",
+      "openCount_other": "{{count}} offene Meldungen",
+      "status": {
+        "open": "Offen",
+        "reviewed": "Geprüft",
+        "closed": "Geschlossen",
+        "all": "Alle"
+      }
+    },
+    "items": "Elemente",
+    "orderingHint": "gib die Elemente in der richtigen Reihenfolge ein; Lernende sehen sie gemischt",
+    "multiSelectHint": "hake jede richtige Option an",
+    "code": "Code",
+    "codeLanguage": "Sprache",
+    "runnableHint": "js läuft im Browser, go im Go Playground; Lernende können nach dem Antworten ausführen",
+    "notRunnableHint": "diese Sprache kann nicht ausgeführt werden, Lernende sagen nur vorher",
+    "expectedOutput": "Erwartete Ausgabe",
+    "runToFill": "Ausführen und Ausgabe übernehmen"
   },
   "code": {
     "copy": "Code kopieren",
     "copied": "Kopiert"
+  },
+  "account": {
+    "title": "Konto",
+    "role": {
+      "admin": "Admin",
+      "user": "Mitglied"
+    }
+  },
+  "review": {
+    "title": "Wiederholen",
+    "subtitle": "Verteilte Wiederholung: Fragen kommen zurück, kurz bevor du sie vergessen würdest. Richtige Antworten warten jedes Mal länger, falsche kommen nach Minuten zurück.",
+    "nextReview": "· nächste Wiederholung {{when}}",
+    "allDone": "Gerade gibt es nichts zu wiederholen",
+    "allDoneHint": "Alle beantworteten Fragen sind für später eingeplant. Komm wieder, wenn Wiederholungen fällig sind, oder fang mit neuen Fragen an.",
+    "learnNew_one": "{{count}} neue Frage lernen",
+    "learnNew_other": "{{count}} neue Fragen lernen",
+    "sessionDone": "Runde abgeschlossen",
+    "sessionScore": "{{correct}} von {{total}} richtig. Jede Antwort wurde neu eingeplant.",
+    "checkAgain": "Nach weiteren Wiederholungen suchen",
+    "seeProgress": "Fortschritt ansehen",
+    "position": "Frage {{n}} von {{total}}",
+    "new": "neu",
+    "progressLabel": "Fortschritt der Runde",
+    "next": "Weiter",
+    "finish": "Fertig",
+    "dueBadge_one": "{{count}} Wiederholung fällig",
+    "dueBadge_other": "{{count}} Wiederholungen fällig"
+  },
+  "progress": {
+    "title": "Fortschritt",
+    "covered": "Abgedeckt",
+    "percentOfBank": "{{pct}} % aller Fragen",
+    "accuracy": "Trefferquote",
+    "answersCount_one": "{{count}} Antwort",
+    "answersCount_other": "{{count}} Antworten",
+    "dueNow": "Fällige Wiederholungen",
+    "startReview": "Jetzt wiederholen",
+    "nothingDue": "Alles erledigt",
+    "streak": "Serie",
+    "days_one": "{{count}} Tag",
+    "days_other": "{{count}} Tage",
+    "streakHint": "Tage in Folge mit einer Antwort",
+    "activity": "Letzte 30 Tage",
+    "activityLabel": "Antworten pro Tag in den letzten 30 Tagen, der richtige Anteil hervorgehoben",
+    "correct": "richtig",
+    "wrong": "falsch",
+    "today": "heute",
+    "upcoming": "Anstehende Wiederholungen",
+    "byTopic": "Nach Thema",
+    "topic": "Thema",
+    "notStarted": "noch nicht begonnen"
+  },
+  "runner": {
+    "run": "Ausführen",
+    "runAgain": "Erneut ausführen",
+    "running": "Läuft…",
+    "output": "Ausgabe",
+    "noOutput": "(keine Ausgabe)",
+    "predictFirst": "Ausführen geht nach dem Antworten: erst vorhersagen",
+    "goNote": "läuft im Go Playground",
+    "failed": "Der Code konnte nicht ausgeführt werden."
   }
 }

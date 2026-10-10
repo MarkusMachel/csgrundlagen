@@ -23,8 +23,11 @@ export function TakeTestPage() {
   const { id: testId = '' } = useParams();
 
   const { data: test, isPending, isError, refetch } = useTest(testId);
-  // Resolve the test's question ids against the (seed-scale) question pool.
-  const { data: pool } = useQuestions({ page: 1, pageSize: 50 });
+  // Fetch exactly the test's questions (any number, anywhere in the bank).
+  const { data: pool } = useQuestions({
+    ids: test?.questionIds ?? [],
+    pageSize: test?.questionIds.length ?? 1,
+  });
 
   const attempt = useTestAttemptStore();
   const submitTest = useSubmitTest(testId);
@@ -57,7 +60,8 @@ export function TakeTestPage() {
   }, [started, result, answeredCount, orderedQuestions.length, setStatus, t]);
 
   const optionOrderFor = (question: Question, index: number): string[] | undefined => {
-    if (!test?.shuffleOptions || question.type !== 'multiple-choice') return undefined;
+    if (!test?.shuffleOptions) return undefined;
+    if (question.type !== 'multiple-choice' && question.type !== 'multi-select') return undefined;
     return seededShuffle(
       question.options.map((o) => o.id),
       attempt.shuffleSeed + index + 1,

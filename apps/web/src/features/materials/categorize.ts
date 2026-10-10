@@ -20,9 +20,11 @@ export function slugify(name: string) {
 }
 
 /**
- * Files each material under one category: its broadest tag, i.e. the one
- * shared by the most materials, so each resource shows up in one section
- * instead of once per tag. Ties go to the alphabetically first tag.
+ * Files each material under one category: its most specific tag, i.e. the one
+ * shared by the fewest materials, so a resource tagged with a track and a topic
+ * ("JavaScript" + "Async & Concurrency") lands under the topic, and each
+ * resource shows up in one section instead of once per tag. Ties go to the
+ * alphabetically first tag.
  * Categories and their items are sorted alphabetically, like a wiki index.
  */
 export function categorize(materials: MaterialItem[]): MaterialCategory[] {
@@ -57,8 +59,8 @@ function primaryCategory(m: MaterialItem, tagCounts: Map<string, number>) {
   for (const tag of m.tags) {
     if (COLLECTION_TAGS.has(tag)) continue;
     const n = tagCounts.get(tag) ?? 0;
-    const bestN = tagCounts.get(best) ?? -1;
-    if (n > bestN || (n === bestN && tag.localeCompare(best) < 0)) best = tag;
+    const bestN = tagCounts.get(best) ?? Infinity;
+    if (n < bestN || (n === bestN && tag.localeCompare(best) < 0)) best = tag;
   }
   return best;
 }

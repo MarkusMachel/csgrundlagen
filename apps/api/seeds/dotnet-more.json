@@ -694,8 +694,7 @@
     {
       "prompt": "What do primary constructors, required members and collection expressions give you?",
       "tags": [
-        "Modern C#",
-        "C# 12"
+        "C# & .NET"
       ],
       "difficulty": "medium",
       "options": [
@@ -715,8 +714,7 @@
     {
       "prompt": "How does pattern matching improve code, and what are its limits?",
       "tags": [
-        "Modern C#",
-        "Pattern matching"
+        "C# & .NET"
       ],
       "difficulty": "medium",
       "options": [
@@ -735,8 +733,7 @@
     {
       "prompt": "How do init, readonly and with support immutable design?",
       "tags": [
-        "Modern C#",
-        "Immutability"
+        "C# & .NET"
       ],
       "difficulty": "medium",
       "options": [
@@ -755,8 +752,7 @@
     {
       "prompt": "How do generic constraints, static abstract members and generic math work?",
       "tags": [
-        "Modern C#",
-        "Generics"
+        "C# & .NET"
       ],
       "difficulty": "hard",
       "options": [
@@ -775,8 +771,7 @@
     {
       "prompt": "What do reflection and expression trees cost, and how do you reduce it?",
       "tags": [
-        "Modern C#",
-        "Reflection"
+        "C# & .NET"
       ],
       "difficulty": "hard",
       "options": [
@@ -795,8 +790,7 @@
     {
       "prompt": "What are source generators and why do they matter?",
       "tags": [
-        "Modern C#",
-        "Source generators"
+        "C# & .NET"
       ],
       "difficulty": "medium",
       "options": [
@@ -816,8 +810,8 @@
     {
       "prompt": "What is IAsyncEnumerable<T>, and when do you use it?",
       "tags": [
-        "Modern C#",
-        "Async"
+        "C# & .NET",
+        "Async & Concurrency"
       ],
       "difficulty": "medium",
       "options": [
@@ -835,8 +829,8 @@
     {
       "prompt": "What are ref struct, readonly struct, in parameters and ref returns for?",
       "tags": [
-        "Modern C#",
-        "Performance"
+        "C# & .NET",
+        "Performance & Memory"
       ],
       "difficulty": "hard",
       "options": [
@@ -855,8 +849,8 @@
     {
       "prompt": "How do closures and lambdas allocate, and how do you avoid it?",
       "tags": [
-        "Modern C#",
-        "Performance"
+        "C# & .NET",
+        "Performance & Memory"
       ],
       "difficulty": "medium",
       "options": [
@@ -874,8 +868,7 @@
     {
       "prompt": "Should you use System.Text.Json or Newtonsoft.Json?",
       "tags": [
-        "Modern C#",
-        "Serialization"
+        "C# & .NET"
       ],
       "difficulty": "medium",
       "options": [
@@ -893,8 +886,8 @@
     {
       "prompt": "How do you choose between an array, List<T>, LinkedList<T> and Queue<T>?",
       "tags": [
-        "Collections & Data Structures",
-        "Collections"
+        "C# & .NET",
+        "Algorithms & Data Structures"
       ],
       "difficulty": "easy",
       "options": [
@@ -913,8 +906,8 @@
     {
       "prompt": "How does Dictionary<TKey,TValue> work, and what can go wrong?",
       "tags": [
-        "Collections & Data Structures",
-        "Collections"
+        "C# & .NET",
+        "Algorithms & Data Structures"
       ],
       "difficulty": "medium",
       "options": [
@@ -932,8 +925,8 @@
     {
       "prompt": "When do you use HashSet, SortedDictionary, SortedSet or PriorityQueue?",
       "tags": [
-        "Collections & Data Structures",
-        "Collections"
+        "C# & .NET",
+        "Algorithms & Data Structures"
       ],
       "difficulty": "medium",
       "options": [
@@ -952,8 +945,9 @@
     {
       "prompt": "What are the traps of ConcurrentDictionary?",
       "tags": [
-        "Collections & Data Structures",
-        "Concurrency"
+        "C# & .NET",
+        "Algorithms & Data Structures",
+        "Async & Concurrency"
       ],
       "difficulty": "hard",
       "options": [
@@ -972,8 +966,8 @@
     {
       "prompt": "What are immutable and frozen collections for?",
       "tags": [
-        "Collections & Data Structures",
-        "Collections"
+        "C# & .NET",
+        "Algorithms & Data Structures"
       ],
       "difficulty": "medium",
       "options": [
@@ -992,8 +986,9 @@
     {
       "prompt": "What should a method accept and return: List<T>, IEnumerable<T> or IReadOnlyList<T>?",
       "tags": [
-        "Collections & Data Structures",
-        "API design"
+        "C# & .NET",
+        "Algorithms & Data Structures",
+        "APIs & HTTP"
       ],
       "difficulty": "medium",
       "options": [
@@ -1011,8 +1006,8 @@
     {
       "prompt": "What are common LINQ performance mistakes?",
       "tags": [
-        "Collections & Data Structures",
-        "LINQ"
+        "C# & .NET",
+        "Algorithms & Data Structures"
       ],
       "difficulty": "medium",
       "options": [
@@ -1030,8 +1025,8 @@
     {
       "prompt": "How do IComparable, IComparer and sort stability work?",
       "tags": [
-        "Collections & Data Structures",
-        "Collections"
+        "C# & .NET",
+        "Algorithms & Data Structures"
       ],
       "difficulty": "medium",
       "options": [
@@ -1049,8 +1044,9 @@
     {
       "prompt": "How do you cache in .NET, and what is a cache stampede?",
       "tags": [
-        "Collections & Data Structures",
-        "Caching"
+        "C# & .NET",
+        "Algorithms & Data Structures",
+        "Resilience & Scalability"
       ],
       "difficulty": "hard",
       "options": [
@@ -1070,8 +1066,8 @@
     {
       "prompt": "How would you find the top 10 most frequent items in a very large stream?",
       "tags": [
-        "Collections & Data Structures",
-        "Algorithms"
+        "C# & .NET",
+        "Algorithms & Data Structures"
       ],
       "difficulty": "hard",
       "options": [
@@ -1089,8 +1085,7 @@
     {
       "prompt": "What do transaction isolation levels prevent, and how does PostgreSQL behave?",
       "tags": [
-        "SQL, PostgreSQL & EF Core",
-        "PostgreSQL"
+        "SQL & Databases"
       ],
       "difficulty": "hard",
       "options": [
@@ -1109,8 +1104,7 @@
     {
       "prompt": "Which index types does PostgreSQL offer, and when do you use each?",
       "tags": [
-        "SQL, PostgreSQL & EF Core",
-        "PostgreSQL"
+        "SQL & Databases"
       ],
       "difficulty": "medium",
       "options": [
@@ -1130,8 +1124,7 @@
     {
       "prompt": "How do you find out why a PostgreSQL query is slow?",
       "tags": [
-        "SQL, PostgreSQL & EF Core",
-        "PostgreSQL"
+        "SQL & Databases"
       ],
       "difficulty": "medium",
       "options": [
@@ -1149,8 +1142,7 @@
     {
       "prompt": "How does PostGIS index and query spatial data?",
       "tags": [
-        "SQL, PostgreSQL & EF Core",
-        "PostGIS"
+        "SQL & Databases"
       ],
       "difficulty": "hard",
       "options": [
@@ -1169,8 +1161,7 @@
     {
       "prompt": "How do you partition a table and isolate tenants in PostgreSQL?",
       "tags": [
-        "SQL, PostgreSQL & EF Core",
-        "PostgreSQL"
+        "SQL & Databases"
       ],
       "difficulty": "hard",
       "options": [
@@ -1189,8 +1180,7 @@
     {
       "prompt": "How do SELECT ... FOR UPDATE SKIP LOCKED and advisory locks help?",
       "tags": [
-        "SQL, PostgreSQL & EF Core",
-        "PostgreSQL"
+        "SQL & Databases"
       ],
       "difficulty": "hard",
       "options": [
@@ -1209,8 +1199,7 @@
     {
       "prompt": "What is MVCC, and why do vacuum and bloat matter?",
       "tags": [
-        "SQL, PostgreSQL & EF Core",
-        "PostgreSQL"
+        "SQL & Databases"
       ],
       "difficulty": "hard",
       "options": [
@@ -1229,8 +1218,8 @@
     {
       "prompt": "How do you run EF Core migrations safely in production?",
       "tags": [
-        "SQL, PostgreSQL & EF Core",
-        "EF Core"
+        "SQL & Databases",
+        "C# & .NET"
       ],
       "difficulty": "hard",
       "options": [
@@ -1249,8 +1238,8 @@
     {
       "prompt": "How do you make EF Core fast for bulk work and hot paths?",
       "tags": [
-        "SQL, PostgreSQL & EF Core",
-        "EF Core"
+        "SQL & Databases",
+        "C# & .NET"
       ],
       "difficulty": "hard",
       "options": [
@@ -1269,8 +1258,7 @@
     {
       "prompt": "How does connection pooling work, and how do you get pool exhaustion?",
       "tags": [
-        "SQL, PostgreSQL & EF Core",
-        "PostgreSQL"
+        "SQL & Databases"
       ],
       "difficulty": "medium",
       "options": [
@@ -1289,8 +1277,8 @@
     {
       "prompt": "What are the biggest API security risks?",
       "tags": [
-        "Security & API Design",
-        "Security"
+        "Security",
+        "APIs & HTTP"
       ],
       "difficulty": "medium",
       "options": [
@@ -1309,8 +1297,8 @@
     {
       "prompt": "What are OAuth 2.0 and OpenID Connect, and which flow fits which client?",
       "tags": [
-        "Security & API Design",
-        "Security"
+        "Security",
+        "APIs & HTTP"
       ],
       "difficulty": "hard",
       "options": [
@@ -1330,8 +1318,8 @@
     {
       "prompt": "How do you manage secrets and encryption keys in a .NET service?",
       "tags": [
-        "Security & API Design",
-        "Security"
+        "Security",
+        "APIs & HTTP"
       ],
       "difficulty": "medium",
       "options": [
@@ -1350,8 +1338,8 @@
     {
       "prompt": "What are CORS, CSRF and XSS, and what stops each?",
       "tags": [
-        "Security & API Design",
-        "Security"
+        "Security",
+        "APIs & HTTP"
       ],
       "difficulty": "medium",
       "options": [
@@ -1372,8 +1360,8 @@
     {
       "prompt": "How do you prevent SQL injection and mass assignment?",
       "tags": [
-        "Security & API Design",
-        "Security"
+        "Security",
+        "APIs & HTTP"
       ],
       "difficulty": "medium",
       "options": [
@@ -1391,8 +1379,8 @@
     {
       "prompt": "What makes a REST API well designed?",
       "tags": [
-        "Security & API Design",
-        "API design"
+        "Security",
+        "APIs & HTTP"
       ],
       "difficulty": "medium",
       "options": [
@@ -1412,8 +1400,8 @@
     {
       "prompt": "How do you version a public API without breaking partners?",
       "tags": [
-        "Security & API Design",
-        "API design"
+        "Security",
+        "APIs & HTTP"
       ],
       "difficulty": "hard",
       "options": [
@@ -1432,8 +1420,8 @@
     {
       "prompt": "How do you paginate, filter and cache API responses?",
       "tags": [
-        "Security & API Design",
-        "API design"
+        "Security",
+        "APIs & HTTP"
       ],
       "difficulty": "medium",
       "options": [
@@ -1451,8 +1439,9 @@
     {
       "prompt": "How do you design webhooks to be safe and reliable?",
       "tags": [
-        "Security & API Design",
-        "Integration"
+        "Security",
+        "APIs & HTTP",
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "hard",
       "options": [
@@ -1470,8 +1459,8 @@
     {
       "prompt": "When do you choose REST, gRPC or GraphQL, and what do HTTP/2 and HTTP/3 change?",
       "tags": [
-        "Security & API Design",
-        "API design"
+        "Security",
+        "APIs & HTTP"
       ],
       "difficulty": "hard",
       "options": [
@@ -1490,8 +1479,7 @@
     {
       "prompt": "How do Kafka partitions, consumer groups and offsets work?",
       "tags": [
-        "Messaging, Delivery & System Design",
-        "Kafka"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "hard",
       "options": [
@@ -1510,8 +1498,7 @@
     {
       "prompt": "How do you handle poison messages and schema changes in Kafka?",
       "tags": [
-        "Messaging, Delivery & System Design",
-        "Kafka"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "hard",
       "options": [
@@ -1529,8 +1516,7 @@
     {
       "prompt": "How do you choose between a message queue, an event stream and a database table?",
       "tags": [
-        "Messaging, Delivery & System Design",
-        "Messaging"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "medium",
       "options": [
@@ -1548,8 +1534,7 @@
     {
       "prompt": "What are Temporal's determinism rules, and why do they exist?",
       "tags": [
-        "Messaging, Delivery & System Design",
-        "Temporal"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "hard",
       "options": [
@@ -1568,8 +1553,7 @@
     {
       "prompt": "How do you containerize and deploy a .NET service well?",
       "tags": [
-        "Messaging, Delivery & System Design",
-        "Delivery"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "medium",
       "options": [
@@ -1588,8 +1572,7 @@
     {
       "prompt": "What belongs in a CI/CD pipeline for a back-end service?",
       "tags": [
-        "Messaging, Delivery & System Design",
-        "Delivery"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "medium",
       "options": [
@@ -1607,8 +1590,8 @@
     {
       "prompt": "What are SLIs, SLOs and error budgets, and how do you use them?",
       "tags": [
-        "Messaging, Delivery & System Design",
-        "Reliability"
+        "Distributed Systems & Messaging",
+        "Resilience & Scalability"
       ],
       "difficulty": "medium",
       "options": [
@@ -1626,8 +1609,8 @@
     {
       "prompt": "How would you design a system to send a million emails or SMS messages reliably?",
       "tags": [
-        "Messaging, Delivery & System Design",
-        "System design"
+        "Distributed Systems & Messaging",
+        "System Design"
       ],
       "difficulty": "hard",
       "options": [
@@ -1645,8 +1628,8 @@
     {
       "prompt": "How do you migrate a legacy system with no downtime?",
       "tags": [
-        "Messaging, Delivery & System Design",
-        "Migration"
+        "Distributed Systems & Messaging",
+        "Architecture & DDD"
       ],
       "difficulty": "hard",
       "options": [
@@ -1665,8 +1648,8 @@
     {
       "prompt": "How should you answer \"tell me about a hard decision you made with incomplete information\"?",
       "tags": [
-        "Messaging, Delivery & System Design",
-        "Behavioural"
+        "Distributed Systems & Messaging",
+        "Career & Judgement"
       ],
       "difficulty": "medium",
       "options": [

@@ -70,10 +70,7 @@ export function GlobalSearch() {
         <Search size={17} aria-hidden />
       </button>
       {showPanel && (
-        <div
-          className="menu"
-          style={{ width: 'min(480px, calc(100vw - 24px))', padding: 8 }}
-        >
+        <div className="menu" style={{ width: 'min(480px, calc(100vw - 24px))', padding: 8 }}>
           <div className="search-wrap" style={{ maxWidth: 'none' }}>
             <span className="search-glyph" aria-hidden>
               <Search size={15} />

@@ -75,22 +75,28 @@ func emptyToNil(s *string) *string {
 	return s
 }
 
-func (s *Store) CreateMaterial(ctx context.Context, createdBy string, n NewMaterial) (Material, error) {
+func (n NewMaterial) validate() error {
 	if !materialTypes[n.Type] {
-		return Material{}, ErrInvalid{"type must be book, video, article or link"}
+		return ErrInvalid{"type must be book, video, article or link"}
 	}
 	if strings.TrimSpace(n.Title) == "" || strings.TrimSpace(n.URL) == "" {
-		return Material{}, ErrInvalid{"title and url are required"}
+		return ErrInvalid{"title and url are required"}
 	}
 	if len(n.Tags) == 0 {
-		return Material{}, ErrInvalid{"at least one tag is required"}
+		return ErrInvalid{"at least one tag is required"}
 	}
 	for _, id := range n.RelatedQuestionIDs {
 		if !IsUUID(id) {
-			return Material{}, ErrInvalid{"relatedQuestionIds contains an invalid id"}
+			return ErrInvalid{"relatedQuestionIds contains an invalid id"}
 		}
 	}
+	return nil
+}
 
+func (s *Store) CreateMaterial(ctx context.Context, createdBy string, n NewMaterial) (Material, error) {
+	if err := n.validate(); err != nil {
+		return Material{}, err
+	}
 	var id string
 	err := s.withTx(ctx, func(tx pgx.Tx) error {
 		if err := tx.QueryRow(ctx, `
@@ -100,27 +106,55 @@ func (s *Store) CreateMaterial(ctx context.Context, createdBy string, n NewMater
 		).Scan(&id); err != nil {
 			return err
 		}
-		if err := ensureTags(ctx, tx, n.Tags); err != nil {
-			return err
-		}
-		if _, err := tx.Exec(ctx, `
-			INSERT INTO material_tags (material_id, tag_id)
-			SELECT $1, id FROM tags WHERE name = ANY($2::text[])`, id, n.Tags); err != nil {
-			return err
-		}
-		if len(n.RelatedQuestionIDs) > 0 {
-			if _, err := tx.Exec(ctx, `
-				INSERT INTO material_questions (material_id, question_id)
-				SELECT $1, q.id FROM questions q WHERE q.id = ANY($2::uuid[])
-				ON CONFLICT DO NOTHING`, id, n.RelatedQuestionIDs); err != nil {
-				return err
-			}
-		}
-		return nil
+		return writeMaterialParts(ctx, tx, id, n)
 	})
 	if err != nil {
 		return Material{}, err
 	}
+	return s.material(ctx, id)
+}
+
+// UpdateMaterial replaces a material's fields, tags and question links.
+func (s *Store) UpdateMaterial(ctx context.Context, id string, n NewMaterial) (Material, error) {
+	if err := n.validate(); err != nil {
+		return Material{}, err
+	}
+	err := s.withTx(ctx, func(tx pgx.Tx) error {
+		tag, err := tx.Exec(ctx, `
+			UPDATE materials SET type = $2::material_type, title = $3, url = $4, author = $5, description = $6
+			WHERE id = $1`,
+			id, n.Type, n.Title, n.URL, emptyToNil(n.Author), emptyToNil(n.Description))
+		if err != nil {
+			return err
+		}
+		if tag.RowsAffected() == 0 {
+			return ErrNotFound
+		}
+		for _, table := range []string{"material_tags", "material_questions"} {
+			if _, err := tx.Exec(ctx, `DELETE FROM `+table+` WHERE material_id = $1`, id); err != nil {
+				return err
+			}
+		}
+		return writeMaterialParts(ctx, tx, id, n)
+	})
+	if err != nil {
+		return Material{}, err
+	}
+	return s.material(ctx, id)
+}
+
+func (s *Store) DeleteMaterial(ctx context.Context, id string) error {
+	tag, err := s.pool.Exec(ctx, `DELETE FROM materials WHERE id = $1`, id)
+	if err != nil {
+		return err
+	}
+	if tag.RowsAffected() == 0 {
+		return ErrNotFound
+	}
+	return nil
+}
+
+func (s *Store) material(ctx context.Context, id string) (Material, error) {
 	ms, err := s.queryMaterials(ctx, materialSelect+` WHERE m.id = $1`, id)
 	if err != nil {
 		return Material{}, err
@@ -129,4 +163,25 @@ func (s *Store) CreateMaterial(ctx context.Context, createdBy string, n NewMater
 		return Material{}, ErrNotFound
 	}
 	return ms[0], nil
+}
+
+// writeMaterialParts inserts a material's tags and question links.
+func writeMaterialParts(ctx context.Context, tx pgx.Tx, id string, n NewMaterial) error {
+	if err := ensureTags(ctx, tx, n.Tags); err != nil {
+		return err
+	}
+	if _, err := tx.Exec(ctx, `
+		INSERT INTO material_tags (material_id, tag_id)
+		SELECT $1, id FROM tags WHERE name = ANY($2::text[])`, id, n.Tags); err != nil {
+		return err
+	}
+	if len(n.RelatedQuestionIDs) > 0 {
+		if _, err := tx.Exec(ctx, `
+			INSERT INTO material_questions (material_id, question_id)
+			SELECT $1, q.id FROM questions q WHERE q.id = ANY($2::uuid[])
+			ON CONFLICT DO NOTHING`, id, n.RelatedQuestionIDs); err != nil {
+			return err
+		}
+	}
+	return nil
 }

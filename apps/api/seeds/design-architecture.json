@@ -710,8 +710,7 @@
     {
       "prompt": "Which description of the SOLID principles is accurate?",
       "tags": [
-        "Design Principles & Patterns",
-        "SOLID"
+        "Design Principles & Patterns"
       ],
       "difficulty": "medium",
       "options": [
@@ -768,8 +767,7 @@
     {
       "prompt": "How does dependency injection differ from inversion of control and a service locator?",
       "tags": [
-        "Design Principles & Patterns",
-        "Dependency injection"
+        "Design Principles & Patterns"
       ],
       "difficulty": "medium",
       "options": [
@@ -787,8 +785,7 @@
     {
       "prompt": "When is the Strategy pattern the right tool?",
       "tags": [
-        "Design Principles & Patterns",
-        "Patterns"
+        "Design Principles & Patterns"
       ],
       "difficulty": "easy",
       "options": [
@@ -807,8 +804,7 @@
     {
       "prompt": "How do Factory Method, Abstract Factory and Builder differ?",
       "tags": [
-        "Design Principles & Patterns",
-        "Patterns"
+        "Design Principles & Patterns"
       ],
       "difficulty": "medium",
       "options": [
@@ -827,8 +823,7 @@
     {
       "prompt": "How do Decorator, Adapter, Facade and Proxy differ?",
       "tags": [
-        "Design Principles & Patterns",
-        "Patterns"
+        "Design Principles & Patterns"
       ],
       "difficulty": "medium",
       "options": [
@@ -848,8 +843,7 @@
     {
       "prompt": "When is Observer or an in-process event bus a good idea, and when is it harmful?",
       "tags": [
-        "Design Principles & Patterns",
-        "Patterns"
+        "Design Principles & Patterns"
       ],
       "difficulty": "medium",
       "options": [
@@ -867,8 +861,7 @@
     {
       "prompt": "Why is the Singleton pattern often considered a smell?",
       "tags": [
-        "Design Principles & Patterns",
-        "Patterns"
+        "Design Principles & Patterns"
       ],
       "difficulty": "easy",
       "options": [
@@ -887,7 +880,8 @@
       "prompt": "Are Repository and Unit of Work still useful with EF Core?",
       "tags": [
         "Design Principles & Patterns",
-        "EF Core"
+        "C# & .NET",
+        "SQL & Databases"
       ],
       "difficulty": "medium",
       "options": [
@@ -905,8 +899,7 @@
     {
       "prompt": "What is a bounded context, and how do you find one?",
       "tags": [
-        "DDD & Application Architecture",
-        "DDD"
+        "Architecture & DDD"
       ],
       "difficulty": "medium",
       "options": [
@@ -925,8 +918,7 @@
     {
       "prompt": "What are entities, value objects and aggregates?",
       "tags": [
-        "DDD & Application Architecture",
-        "DDD"
+        "Architecture & DDD"
       ],
       "difficulty": "easy",
       "options": [
@@ -945,8 +937,7 @@
     {
       "prompt": "How should you design aggregate boundaries?",
       "tags": [
-        "DDD & Application Architecture",
-        "DDD"
+        "Architecture & DDD"
       ],
       "difficulty": "hard",
       "options": [
@@ -965,8 +956,7 @@
     {
       "prompt": "What is the difference between a domain event and an integration event?",
       "tags": [
-        "DDD & Application Architecture",
-        "DDD"
+        "Architecture & DDD"
       ],
       "difficulty": "medium",
       "options": [
@@ -984,8 +974,7 @@
     {
       "prompt": "What is the difference between an anemic and a rich domain model?",
       "tags": [
-        "DDD & Application Architecture",
-        "DDD"
+        "Architecture & DDD"
       ],
       "difficulty": "medium",
       "options": [
@@ -1003,8 +992,7 @@
     {
       "prompt": "What do clean, hexagonal and onion architecture have in common?",
       "tags": [
-        "DDD & Application Architecture",
-        "Architecture"
+        "Architecture & DDD"
       ],
       "difficulty": "medium",
       "options": [
@@ -1023,8 +1011,7 @@
     {
       "prompt": "When would you choose vertical slice over layered architecture?",
       "tags": [
-        "DDD & Application Architecture",
-        "Architecture"
+        "Architecture & DDD"
       ],
       "difficulty": "medium",
       "options": [
@@ -1042,8 +1029,8 @@
     {
       "prompt": "What is an anti-corruption layer, and when do you need one?",
       "tags": [
-        "DDD & Application Architecture",
-        "Integration"
+        "Architecture & DDD",
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "medium",
       "options": [
@@ -1061,8 +1048,7 @@
     {
       "prompt": "Is a mediator or in-process command bus worth it?",
       "tags": [
-        "DDD & Application Architecture",
-        "Architecture"
+        "Architecture & DDD"
       ],
       "difficulty": "medium",
       "options": [
@@ -1080,8 +1066,7 @@
     {
       "prompt": "Where does a business rule belong: entity, domain service or application service?",
       "tags": [
-        "DDD & Application Architecture",
-        "DDD"
+        "Architecture & DDD"
       ],
       "difficulty": "hard",
       "options": [
@@ -1099,8 +1084,7 @@
     {
       "prompt": "What do the CAP theorem and PACELC mean in practice?",
       "tags": [
-        "Distributed Systems",
-        "Consistency"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "hard",
       "options": [
@@ -1120,8 +1104,7 @@
     {
       "prompt": "What does eventual consistency mean for users?",
       "tags": [
-        "Distributed Systems",
-        "Consistency"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "medium",
       "options": [
@@ -1139,8 +1122,7 @@
     {
       "prompt": "Why avoid two-phase commit across services, and what do you use instead?",
       "tags": [
-        "Distributed Systems",
-        "Transactions"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "hard",
       "options": [
@@ -1160,8 +1142,7 @@
     {
       "prompt": "Should a saga use orchestration or choreography?",
       "tags": [
-        "Distributed Systems",
-        "Sagas"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "hard",
       "options": [
@@ -1180,8 +1161,7 @@
     {
       "prompt": "What is event sourcing, and what does it cost?",
       "tags": [
-        "Distributed Systems",
-        "Event sourcing"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "hard",
       "options": [
@@ -1200,8 +1180,7 @@
     {
       "prompt": "Is exactly-once delivery possible end to end?",
       "tags": [
-        "Distributed Systems",
-        "Messaging"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "medium",
       "options": [
@@ -1219,8 +1198,7 @@
     {
       "prompt": "How do distributed locks and leader election work, and why are they risky?",
       "tags": [
-        "Distributed Systems",
-        "Coordination"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "hard",
       "options": [
@@ -1239,8 +1217,7 @@
     {
       "prompt": "How do you order events across machines when clocks disagree?",
       "tags": [
-        "Distributed Systems",
-        "Ordering"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "hard",
       "options": [
@@ -1258,8 +1235,7 @@
     {
       "prompt": "What should a back-end engineer know about consensus algorithms such as Raft?",
       "tags": [
-        "Distributed Systems",
-        "Consensus"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "medium",
       "options": [
@@ -1277,8 +1253,7 @@
     {
       "prompt": "How do you keep a database and a message broker consistent?",
       "tags": [
-        "Distributed Systems",
-        "Messaging"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "hard",
       "options": [
@@ -1298,8 +1273,7 @@
     {
       "prompt": "How do timeouts, retries and circuit breakers fit together?",
       "tags": [
-        "Resilience & Scalability",
-        "Resilience"
+        "Resilience & Scalability"
       ],
       "difficulty": "medium",
       "options": [
@@ -1320,8 +1294,7 @@
     {
       "prompt": "What is the bulkhead pattern, and how does it limit blast radius?",
       "tags": [
-        "Resilience & Scalability",
-        "Resilience"
+        "Resilience & Scalability"
       ],
       "difficulty": "medium",
       "options": [
@@ -1339,8 +1312,7 @@
     {
       "prompt": "How do backpressure, load shedding and rate limiting differ?",
       "tags": [
-        "Resilience & Scalability",
-        "Scalability"
+        "Resilience & Scalability"
       ],
       "difficulty": "medium",
       "options": [
@@ -1360,8 +1332,7 @@
     {
       "prompt": "How do cache-aside, write-through and write-behind compare?",
       "tags": [
-        "Resilience & Scalability",
-        "Caching"
+        "Resilience & Scalability"
       ],
       "difficulty": "medium",
       "options": [
@@ -1380,8 +1351,7 @@
     {
       "prompt": "What makes a service horizontally scalable?",
       "tags": [
-        "Resilience & Scalability",
-        "Scalability"
+        "Resilience & Scalability"
       ],
       "difficulty": "easy",
       "options": [
@@ -1400,7 +1370,7 @@
       "prompt": "How do you shard data, and what is a hot partition?",
       "tags": [
         "Resilience & Scalability",
-        "Data"
+        "SQL & Databases"
       ],
       "difficulty": "hard",
       "options": [
@@ -1420,7 +1390,7 @@
       "prompt": "When do you use competing consumers and queue-based load leveling?",
       "tags": [
         "Resilience & Scalability",
-        "Messaging"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "medium",
       "options": [
@@ -1440,7 +1410,7 @@
       "prompt": "What distinguishes an API gateway, a backend for frontend and a service mesh?",
       "tags": [
         "Resilience & Scalability",
-        "Integration"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "medium",
       "options": [
@@ -1461,7 +1431,7 @@
       "prompt": "What is the difference between a command and an event, and what is a claim check?",
       "tags": [
         "Resilience & Scalability",
-        "Messaging"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "medium",
       "options": [
@@ -1481,7 +1451,7 @@
       "prompt": "How do blue-green, canary and feature-flag releases compare?",
       "tags": [
         "Resilience & Scalability",
-        "Delivery"
+        "Distributed Systems & Messaging"
       ],
       "difficulty": "medium",
       "options": [
@@ -1501,8 +1471,7 @@
     {
       "prompt": "How should you approach a system design interview question?",
       "tags": [
-        "System Design & Judgement",
-        "System design"
+        "System Design"
       ],
       "difficulty": "medium",
       "options": [
@@ -1520,8 +1489,7 @@
     {
       "prompt": "How would you design a distributed rate limiter?",
       "tags": [
-        "System Design & Judgement",
-        "System design"
+        "System Design"
       ],
       "difficulty": "hard",
       "options": [
@@ -1540,8 +1508,7 @@
     {
       "prompt": "How do you design a multi-tenant SaaS data layer?",
       "tags": [
-        "System Design & Judgement",
-        "Multi-tenancy"
+        "System Design"
       ],
       "difficulty": "hard",
       "options": [
@@ -1560,8 +1527,7 @@
     {
       "prompt": "How would you design a system that sends scheduled campaigns to millions of recipients?",
       "tags": [
-        "System Design & Judgement",
-        "System design"
+        "System Design"
       ],
       "difficulty": "hard",
       "options": [
@@ -1580,8 +1546,8 @@
     {
       "prompt": "How do you build an audit log or change history?",
       "tags": [
-        "System Design & Judgement",
-        "Data"
+        "System Design",
+        "SQL & Databases"
       ],
       "difficulty": "medium",
       "options": [
@@ -1600,8 +1566,8 @@
     {
       "prompt": "How do you design observability for a distributed system?",
       "tags": [
-        "System Design & Judgement",
-        "Observability"
+        "System Design",
+        "Testing & Operations"
       ],
       "difficulty": "medium",
       "options": [
@@ -1620,8 +1586,8 @@
     {
       "prompt": "How do you make and record an architectural decision?",
       "tags": [
-        "System Design & Judgement",
-        "Decisions"
+        "System Design",
+        "Career & Judgement"
       ],
       "difficulty": "medium",
       "options": [
@@ -1640,8 +1606,8 @@
     {
       "prompt": "What is evolutionary architecture, and when should you split a monolith?",
       "tags": [
-        "System Design & Judgement",
-        "Architecture"
+        "System Design",
+        "Architecture & DDD"
       ],
       "difficulty": "hard",
       "options": [
@@ -1660,8 +1626,8 @@
     {
       "prompt": "How do you decide build versus buy, and manage technical debt?",
       "tags": [
-        "System Design & Judgement",
-        "Decisions"
+        "System Design",
+        "Career & Judgement"
       ],
       "difficulty": "medium",
       "options": [
@@ -1680,8 +1646,8 @@
     {
       "prompt": "How do you communicate a design and lead without owning every line?",
       "tags": [
-        "System Design & Judgement",
-        "Leadership"
+        "System Design",
+        "Career & Judgement"
       ],
       "difficulty": "medium",
       "options": [

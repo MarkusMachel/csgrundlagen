@@ -3,7 +3,7 @@ import { http, HttpResponse } from 'msw';
 import { scoreAnswers, type CreateTestInput, type TestMode } from '@/features/custom-tests';
 import type { AnswerValue, Question } from '@/features/questions/types';
 
-import { db, nextId, recordAnswer } from '../db';
+import { db, nextId, recordAnswer, statKeys } from '../db';
 import { currentUser, findQuestion, unauthorized } from './utils';
 
 export const testHandlers = [
@@ -81,10 +81,11 @@ export const testHandlers = [
 
     const { score, total, breakdown } = scoreAnswers(questions, body.answers);
     breakdown.forEach((item) => {
+      const question = questions.find((q) => q.id === item.questionId)!;
       recordAnswer(
         user.id,
         item.questionId,
-        String(item.givenAnswer ?? 'unanswered'),
+        statKeys(question, item.givenAnswer, item.correct),
         item.correct,
       );
     });

@@ -766,7 +766,7 @@
     {
       "prompt": "How does error handling work in Go, and why doesn't Go use exceptions?",
       "tags": [
-        "Go Language & Idioms",
+        "Go",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -787,7 +787,7 @@
     {
       "prompt": "What's the difference between a pointer receiver and a value receiver on a Go method?",
       "tags": [
-        "Go Language & Idioms",
+        "Go",
         "ezCater prep"
       ],
       "difficulty": "easy",
@@ -808,7 +808,7 @@
     {
       "prompt": "How does Go's interface system differ from interfaces in C# or Java?",
       "tags": [
-        "Go Language & Idioms",
+        "Go",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -829,7 +829,7 @@
     {
       "prompt": "What's the difference between make([]T, 0) and var s []T, and when does it matter?",
       "tags": [
-        "Go Language & Idioms",
+        "Go",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -849,7 +849,7 @@
     {
       "prompt": "What does defer do, and what's the common mistake with defer inside a loop?",
       "tags": [
-        "Go Language & Idioms",
+        "Go",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -869,7 +869,7 @@
     {
       "prompt": "How would you structure a Go project with multiple packages, and what goes in internal/?",
       "tags": [
-        "Go Language & Idioms",
+        "Go",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -890,7 +890,7 @@
     {
       "prompt": "What happens if you send on a closed channel, and what about receiving from one?",
       "tags": [
-        "Go Language & Idioms",
+        "Go",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -911,7 +911,7 @@
     {
       "prompt": "How does Go's garbage collector affect how you write a high-throughput service?",
       "tags": [
-        "Go Language & Idioms",
+        "Go",
         "ezCater prep"
       ],
       "difficulty": "hard",
@@ -932,7 +932,8 @@
     {
       "prompt": "How would you fetch data from five APIs concurrently in Go and combine the results?",
       "tags": [
-        "Go Concurrency",
+        "Go",
+        "Async & Concurrency",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -953,7 +954,8 @@
     {
       "prompt": "What is a race condition, and how would you detect one in Go?",
       "tags": [
-        "Go Concurrency",
+        "Go",
+        "Async & Concurrency",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -974,7 +976,8 @@
     {
       "prompt": "What's the difference between a buffered and an unbuffered channel in Go?",
       "tags": [
-        "Go Concurrency",
+        "Go",
+        "Async & Concurrency",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -994,7 +997,8 @@
     {
       "prompt": "How would you limit how many goroutines run concurrently, so you don't open 10,000 HTTP connections?",
       "tags": [
-        "Go Concurrency",
+        "Go",
+        "Async & Concurrency",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -1014,7 +1018,8 @@
     {
       "prompt": "What's the difference between concurrency and parallelism, and what does GOMAXPROCS control?",
       "tags": [
-        "Go Concurrency",
+        "Go",
+        "Async & Concurrency",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -1034,7 +1039,7 @@
     {
       "prompt": "How would you version a public API so you can make breaking changes without breaking existing clients?",
       "tags": [
-        "API & Contract Design",
+        "APIs & HTTP",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -1055,7 +1060,7 @@
     {
       "prompt": "A partner team says your API response lacks a field they need. How do you handle it, and prevent it next time?",
       "tags": [
-        "API & Contract Design",
+        "APIs & HTTP",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -1075,7 +1080,7 @@
     {
       "prompt": "What makes an API RESTful, and does the Integration Hub need to be strictly REST?",
       "tags": [
-        "API & Contract Design",
+        "APIs & HTTP",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -1095,7 +1100,7 @@
     {
       "prompt": "How do you paginate an endpoint that could return millions of rows?",
       "tags": [
-        "API & Contract Design",
+        "APIs & HTTP",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -1115,7 +1120,7 @@
     {
       "prompt": "How do you design an API so a partner integration built today doesn't break when you add a required field next year?",
       "tags": [
-        "API & Contract Design",
+        "APIs & HTTP",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -1135,7 +1140,7 @@
     {
       "prompt": "How would you design a system that normalizes events from 50 partners, each with its own format, into one internal model?",
       "tags": [
-        "Event-Driven Architecture",
+        "Distributed Systems & Messaging",
         "ezCater prep"
       ],
       "difficulty": "hard",
@@ -1155,7 +1160,7 @@
     {
       "prompt": "How do you guarantee an event is never lost between your database write and publishing it to Kafka?",
       "tags": [
-        "Event-Driven Architecture",
+        "Distributed Systems & Messaging",
         "ezCater prep"
       ],
       "difficulty": "hard",
@@ -1176,7 +1181,7 @@
     {
       "prompt": "A consumer processes the same Kafka message twice. Is that a bug?",
       "tags": [
-        "Event-Driven Architecture",
+        "Distributed Systems & Messaging",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -1197,7 +1202,7 @@
     {
       "prompt": "What's the difference between choreography and orchestration, and which fits the Integration Hub?",
       "tags": [
-        "Event-Driven Architecture",
+        "Distributed Systems & Messaging",
         "ezCater prep"
       ],
       "difficulty": "hard",
@@ -1217,7 +1222,7 @@
     {
       "prompt": "A partner sends events out of order, with \"order shipped\" arriving before \"order created\". How do you handle it?",
       "tags": [
-        "Event-Driven Architecture",
+        "Distributed Systems & Messaging",
         "ezCater prep"
       ],
       "difficulty": "hard",
@@ -1236,7 +1241,7 @@
     {
       "prompt": "How would you let a new partner test their integration without touching production data?",
       "tags": [
-        "Event-Driven Architecture",
+        "Distributed Systems & Messaging",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -1256,7 +1261,7 @@
     {
       "prompt": "Do you need both a dead-letter queue and a circuit breaker?",
       "tags": [
-        "Event-Driven Architecture",
+        "Distributed Systems & Messaging",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -1275,7 +1280,7 @@
     {
       "prompt": "How would you implement idempotency for an endpoint that processes payments?",
       "tags": [
-        "Idempotency & Durable Execution",
+        "Distributed Systems & Messaging",
         "ezCater prep"
       ],
       "difficulty": "hard",
@@ -1295,7 +1300,7 @@
     {
       "prompt": "What's the difference between at-most-once, at-least-once and exactly-once delivery, and which suits the Integration Hub?",
       "tags": [
-        "Idempotency & Durable Execution",
+        "Distributed Systems & Messaging",
         "ezCater prep"
       ],
       "difficulty": "hard",
@@ -1315,7 +1320,7 @@
     {
       "prompt": "How does Temporal achieve durability without explicit checkpoint and recovery code?",
       "tags": [
-        "Idempotency & Durable Execution",
+        "Distributed Systems & Messaging",
         "ezCater prep"
       ],
       "difficulty": "hard",
@@ -1336,7 +1341,7 @@
     {
       "prompt": "What's a compensating transaction, and when do you need one instead of a retry?",
       "tags": [
-        "Idempotency & Durable Execution",
+        "Distributed Systems & Messaging",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -1355,7 +1360,7 @@
     {
       "prompt": "Your idempotency key is a hash of the request body. What could go wrong?",
       "tags": [
-        "Idempotency & Durable Execution",
+        "Distributed Systems & Messaging",
         "ezCater prep"
       ],
       "difficulty": "hard",
@@ -1375,7 +1380,7 @@
     {
       "prompt": "How would you handle a poison-pill message that crashes your consumer every time?",
       "tags": [
-        "Idempotency & Durable Execution",
+        "Distributed Systems & Messaging",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -1395,7 +1400,7 @@
     {
       "prompt": "Two requests race to update the same order's status. How do you prevent a lost update?",
       "tags": [
-        "Database & Data Modeling",
+        "SQL & Databases",
         "ezCater prep"
       ],
       "difficulty": "hard",
@@ -1415,7 +1420,7 @@
     {
       "prompt": "How would you design a schema that supports replaying events from an arbitrary point in the past?",
       "tags": [
-        "Database & Data Modeling",
+        "SQL & Databases",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -1436,7 +1441,7 @@
     {
       "prompt": "When would you use a JSONB column in Postgres instead of a fully normalized schema?",
       "tags": [
-        "Database & Data Modeling",
+        "SQL & Databases",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -1456,7 +1461,7 @@
     {
       "prompt": "How would you add a NOT NULL column to a production Postgres table without downtime?",
       "tags": [
-        "Database & Data Modeling",
+        "SQL & Databases",
         "ezCater prep"
       ],
       "difficulty": "hard",
@@ -1476,7 +1481,7 @@
     {
       "prompt": "What's a connection pool, and why does it matter more in Go than you might expect from .NET?",
       "tags": [
-        "Database & Data Modeling",
+        "SQL & Databases",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -1618,7 +1623,7 @@
     {
       "prompt": "How should you answer \"tell me about a technical decision you made with incomplete information\"?",
       "tags": [
-        "Ownership & Judgement",
+        "Career & Judgement",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -1637,7 +1642,7 @@
     {
       "prompt": "How do you decide when to use AI-assisted tooling and when rigor matters more?",
       "tags": [
-        "Ownership & Judgement",
+        "Career & Judgement",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -1656,7 +1661,7 @@
     {
       "prompt": "How should you answer \"tell me about a time you learned a new technology quickly to deliver something\"?",
       "tags": [
-        "Ownership & Judgement",
+        "Career & Judgement",
         "ezCater prep"
       ],
       "difficulty": "easy",
@@ -1676,7 +1681,7 @@
     {
       "prompt": "How do you approach code review, both giving and receiving it?",
       "tags": [
-        "Ownership & Judgement",
+        "Career & Judgement",
         "ezCater prep"
       ],
       "difficulty": "easy",
@@ -1695,7 +1700,7 @@
     {
       "prompt": "How should you describe a production incident you were involved in?",
       "tags": [
-        "Ownership & Judgement",
+        "Career & Judgement",
         "ezCater prep"
       ],
       "difficulty": "easy",
@@ -1715,7 +1720,7 @@
     {
       "prompt": "When asked to \"design the Integration Hub\", what should you do first?",
       "tags": [
-        "Integration Hub Design",
+        "System Design",
         "ezCater prep"
       ],
       "difficulty": "medium",
@@ -1734,7 +1739,7 @@
     {
       "prompt": "In the Integration Hub's ingestion path, where does the idempotency check belong relative to the outbox insert?",
       "tags": [
-        "Integration Hub Design",
+        "System Design",
         "ezCater prep"
       ],
       "difficulty": "hard",
@@ -1754,7 +1759,7 @@
     {
       "prompt": "If the Integration Hub must handle 10x the partners, what is the main bottleneck to watch?",
       "tags": [
-        "Integration Hub Design",
+        "System Design",
         "ezCater prep"
       ],
       "difficulty": "hard",

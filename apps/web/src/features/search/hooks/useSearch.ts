@@ -10,8 +10,7 @@ export function useSearch(query: string) {
   const q = query.trim();
   return useQuery({
     queryKey: ['search', q, locale],
-    queryFn: () =>
-      api.get<SearchResults>(`/search?q=${encodeURIComponent(q)}&locale=${locale}`),
+    queryFn: () => api.get<SearchResults>(`/search?q=${encodeURIComponent(q)}&locale=${locale}`),
     enabled: q.length >= 2,
   });
 }

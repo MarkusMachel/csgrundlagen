@@ -39,8 +39,7 @@ export const useUIStore = create<UIState>()(
       toggleThemeMode: () =>
         set((s) => ({ themeMode: s.themeMode === 'light' ? 'dark' : 'light' })),
       setLocale: (locale) => set({ locale }),
-      recordAnswerResult: (correct) =>
-        set((s) => ({ streak: correct ? s.streak + 1 : 0 })),
+      recordAnswerResult: (correct) => set((s) => ({ streak: correct ? s.streak + 1 : 0 })),
       setStatus: (statusText, statusDots = null) => set({ statusText, statusDots }),
     }),
     {

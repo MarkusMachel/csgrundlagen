@@ -3,13 +3,24 @@ import { useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { CodeBlock, InlineText } from '@/shared/ui';
+import { formatRelative } from '@/shared/utils/relativeTime';
 import { parseRichText, type RichSegment } from '@/shared/utils/richText';
 
-import { useIsBookmarked, useToggleBookmark } from '../hooks/useBookmark';
-import { useSubmitAnswer } from '../hooks/useSubmitAnswer';
-import type { AnswerValue, Question, QuestionMode, TestSubMode } from '../types';
+import { canSubmit, correctAnswerOf } from '../grading';
+import type {
+  AnswerValue,
+  Question,
+  QuestionMode,
+  SubmitAnswerResult,
+  TestSubMode,
+} from '../types';
 import { AnswerOptions, type AnswerReveal } from './AnswerOptions';
 import { QuestionTabs } from './ExpandableTabs/QuestionTabs';
+import { initialOrder, OrderingInput } from './OrderingInput';
+import { OutputInput } from './OutputInput';
+import { RunnableCode } from './RunnableCode';
+import { useIsBookmarked, useToggleBookmark } from '../hooks/useBookmark';
+import { useSubmitAnswer } from '../hooks/useSubmitAnswer';
 
 export interface QuestionCardProps {
   question: Question;
@@ -28,6 +39,8 @@ export interface QuestionCardProps {
   optionOrder?: string[];
   /** Optional heading like "Question 2 of 5" in test mode. */
   heading?: string;
+  /** feed mode: called once the answer is graded (e.g. to advance a review session). */
+  onAnswered?: (result: SubmitAnswerResult) => void;
 }
 
 /** One numbered (or blank-gutter) line inside the editor pane. */
@@ -50,8 +63,9 @@ export function QuestionCard({
   reviewGivenAnswer,
   optionOrder,
   heading,
+  onAnswered,
 }: QuestionCardProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const isExam = mode === 'test' && testMode === 'exam';
 
   // feed-mode local answer + submission result
@@ -76,21 +90,22 @@ export function QuestionCard({
   const toggleBookmark = useToggleBookmark(question.id);
 
   const controlled = mode === 'test';
-  const currentAnswer = controlled ? value : localAnswer;
+  // An ordering question always has an answer: the arrangement on screen.
+  const currentAnswer =
+    (controlled ? value : localAnswer) ??
+    (question.type === 'ordering' ? initialOrder(question) : undefined);
+  const setAnswer = (v: AnswerValue) => (controlled ? onChange?.(v) : setLocalAnswer(v));
 
   let reveal: AnswerReveal | undefined;
   if (mode === 'review') {
-    reveal = {
-      correctAnswer:
-        question.type === 'multiple-choice' ? question.correctOptionId : question.correctAnswer,
-      givenAnswer: reviewGivenAnswer,
-    };
+    reveal = { correctAnswer: correctAnswerOf(question), givenAnswer: reviewGivenAnswer };
   } else if (submitted && submitAnswer.data) {
     reveal = { correctAnswer: submitAnswer.data.correctAnswer, givenAnswer: currentAnswer };
   }
 
+  const hasOptions = question.type !== 'ordering' && question.type !== 'output';
   const showScissors =
-    (mode === 'feed' || mode === 'pick' || mode === 'test') && !isExam && !reveal;
+    hasOptions && (mode === 'feed' || mode === 'pick' || mode === 'test') && !isExam && !reveal;
   const showSubmit = mode === 'feed';
   // Practice keeps explanations reachable as the user goes (§15 open decision).
   const explanationRevealed =
@@ -163,21 +178,47 @@ export function QuestionCard({
           </CodeLine>
         ))}
 
+        {question.type === 'output' && (
+          <CodeLine>
+            {/* Predict first: the Run button appears once the answer is graded. */}
+            <RunnableCode code={question.code} language={question.codeLanguage} canRun={!!reveal} />
+          </CodeLine>
+        )}
+
         <CodeLine numbered={false}>
           <span aria-hidden>&nbsp;</span>
         </CodeLine>
 
-        <AnswerOptions
-          question={question}
-          value={currentAnswer}
-          onChange={(v) => (controlled ? onChange?.(v) : setLocalAnswer(v))}
-          disabled={answersDisabled}
-          reveal={reveal}
-          showScissors={showScissors}
-          struckOptions={struckOptions}
-          onToggleStruck={toggleStruck}
-          optionOrder={optionOrder}
-        />
+        {question.type === 'ordering' ? (
+          <OrderingInput
+            question={question}
+            value={(reveal?.givenAnswer ?? currentAnswer) as string[]}
+            onChange={setAnswer}
+            disabled={answersDisabled}
+            revealed={!!reveal}
+          />
+        ) : question.type === 'output' ? (
+          <CodeLine numbered={false}>
+            <OutputInput
+              value={String(reveal?.givenAnswer ?? currentAnswer ?? '')}
+              onChange={setAnswer}
+              disabled={answersDisabled}
+              expected={reveal ? String(reveal.correctAnswer) : undefined}
+            />
+          </CodeLine>
+        ) : (
+          <AnswerOptions
+            question={question}
+            value={currentAnswer}
+            onChange={setAnswer}
+            disabled={answersDisabled}
+            reveal={reveal}
+            showScissors={showScissors}
+            struckOptions={struckOptions}
+            onToggleStruck={toggleStruck}
+            optionOrder={optionOrder}
+          />
+        )}
 
         <CodeLine numbered={false}>
           <div className="pane-actions">
@@ -185,9 +226,13 @@ export function QuestionCard({
               <button
                 type="button"
                 className="btn"
-                disabled={currentAnswer === undefined || submitted || submitAnswer.isPending}
+                disabled={
+                  !canSubmit(question, currentAnswer) || submitted || submitAnswer.isPending
+                }
                 onClick={() => {
-                  if (currentAnswer !== undefined) submitAnswer.mutate(currentAnswer);
+                  if (currentAnswer !== undefined) {
+                    submitAnswer.mutate(currentAnswer, { onSuccess: (r) => onAnswered?.(r) });
+                  }
                 }}
               >
                 <span className="prompt-char" aria-hidden>
@@ -241,6 +286,14 @@ export function QuestionCard({
             >
               {'> '}
               {submitAnswer.data.correct ? t('question.correct') : t('question.incorrect')}
+              {submitAnswer.data.nextReviewAt && (
+                <span className="feedback-line__next">
+                  {' '}
+                  {t('review.nextReview', {
+                    when: formatRelative(submitAnswer.data.nextReviewAt, i18n.language),
+                  })}
+                </span>
+              )}
             </p>
           </CodeLine>
         )}

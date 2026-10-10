@@ -5,7 +5,6 @@ import type { SearchResults } from '@/features/search';
 import { db } from '../db';
 import { allQuestions, currentUser, localeOf } from './utils';
 
-
 export const searchHandlers = [
   http.get('/api/search', ({ request }) => {
     const url = new URL(request.url);
