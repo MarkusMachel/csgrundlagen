@@ -2,7 +2,9 @@ import { Lock } from 'lucide-react';
 import { useEffect, useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { SignInPrompt } from '@/features/auth';
 import { Spinner } from '@/shared/ui';
+import { useSignedIn } from '@/stores/useAuthStore';
 
 import { useQuestionNote, useSaveQuestionNote } from '../../hooks/useQuestionNote';
 
@@ -11,6 +13,11 @@ import { useQuestionNote, useSaveQuestionNote } from '../../hooks/useQuestionNot
  * private, no author attribution, saved on blur via PUT /questions/:id/notes.
  */
 export function MyNotesTab({ questionId }: { questionId: string }) {
+  const signedIn = useSignedIn();
+  return signedIn ? <NoteEditor questionId={questionId} /> : <SignInPrompt />;
+}
+
+function NoteEditor({ questionId }: { questionId: string }) {
   const { t } = useTranslation();
   const noteId = useId();
   const { data: note, isPending } = useQuestionNote(questionId);

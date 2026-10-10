@@ -67,7 +67,23 @@
     "passwordsDiffer": "Die Passwörter stimmen nicht überein",
     "emailTaken": "Zu dieser E-Mail gibt es schon ein Konto. Melde dich stattdessen an.",
     "tooManyAttempts": "Zu viele Versuche. Warte eine Minute und versuche es erneut.",
-    "genericError": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
+    "genericError": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+    "prompt": {
+      "loginTitle": "Melde dich an, um weiterzumachen",
+      "signUpTitle": "Konto erstellen",
+      "why": "Stöbern ist frei. Melde dich an, um zu antworten, Lesezeichen und Notizen zu speichern, Tests zu erstellen und deinen Fortschritt zu sehen.",
+      "inline": "zum Nutzen anmelden",
+      "gateTitle": "Diese Seite gehört dir, sobald du angemeldet bist",
+      "gateBody": "Fortschritt, Wiederholungen, Lesezeichen und Tests werden mit deinem Konto gespeichert.",
+      "gateHint": "anmelden oder kostenloses Konto erstellen"
+    },
+    "brand": {
+      "tagline": "Übe Informatik-Grundlagen, bis die Antworten sitzen.",
+      "f1": "Fragen zu Netzwerken, Betriebssystemen, Datenstrukturen und mehr",
+      "f2": "Wiederholung mit Abstand holt zurück, was du gleich vergessen würdest",
+      "f3": "Tests mit Zeitlimit, Schwachstellen und sichtbarer Fortschritt",
+      "browse": "Erst mal umsehen"
+    }
   },
   "home": {
     "questionOfTheDay": "Frage des Tages",

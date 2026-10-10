@@ -1,6 +1,8 @@
 import { Download } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
+import { isSignInCancelled } from '@/stores/useAuthPrompt';
+
 import { useAnkiExport, type AnkiSource } from './hooks';
 
 /** "Export to Anki" for bookmarks, a test, or the current filter. */
@@ -22,7 +24,9 @@ export function AnkiExportButton({
       onClick={() => exportAnki.mutate(source)}
     >
       <Download size={14} aria-hidden />
-      {exportAnki.isError ? t('anki.exportFailed') : t('anki.export')}
+      {exportAnki.isError && !isSignInCancelled(exportAnki.error)
+        ? t('anki.exportFailed')
+        : t('anki.export')}
     </button>
   );
 }

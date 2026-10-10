@@ -64,7 +64,7 @@ function DeleteAccountDialog({ open, onClose }: { open: boolean; onClose: () => 
   };
   const ready = password.length > 0 && confirm.trim() === CONFIRM_WORD;
   const submit = () =>
-    remove.mutate(password, { onSuccess: () => navigate('/login', { replace: true }) });
+    remove.mutate(password, { onSuccess: () => navigate('/', { replace: true }) });
 
   return (
     <Modal

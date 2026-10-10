@@ -22,7 +22,14 @@ const schema = z
   .refine((v) => v.password === v.confirm, { path: ['confirm'] });
 type Values = z.infer<typeof schema>;
 
-export function SignUpForm({ onSuccess }: { onSuccess?: () => void }) {
+export function SignUpForm({
+  onSuccess,
+  onSwitchToLogin,
+}: {
+  onSuccess?: () => void;
+  /** In the sign-in modal, "sign in" switches the modal instead of navigating. */
+  onSwitchToLogin?: () => void;
+}) {
   const { t } = useTranslation();
   const ids = { name: useId(), email: useId(), privacy: useId() };
   const locale = useUIStore((s) => s.locale);
@@ -95,7 +102,14 @@ export function SignUpForm({ onSuccess }: { onSuccess?: () => void }) {
         {t('auth.signUp')}
       </button>
       <p className="muted" style={{ margin: 0, fontSize: 13 }}>
-        {t('auth.haveAccount')} <Link to="/login">{t('auth.login')}</Link>
+        {t('auth.haveAccount')}{' '}
+        {onSwitchToLogin ? (
+          <button type="button" className="link-button" onClick={onSwitchToLogin}>
+            {t('auth.login')}
+          </button>
+        ) : (
+          <Link to="/login">{t('auth.login')}</Link>
+        )}
       </p>
     </form>
   );

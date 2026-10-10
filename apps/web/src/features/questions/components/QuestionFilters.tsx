@@ -3,6 +3,8 @@ import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Select } from '@/shared/ui';
+import { requestSignIn } from '@/stores/useAuthPrompt';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 import type { Difficulty, QuestionSort, QuestionStatus } from '../hooks/useQuestions';
 
@@ -31,6 +33,23 @@ export const SORTS: QuestionSort[] = ['oldest', 'newest', 'random'];
 export const newSeed = () => Math.random().toString(36).slice(2, 10);
 
 /** True when anything narrows the list (sort order alone doesn't count). */
+/**
+ * Applies a status filter. The statuses are about the user's own answers, so
+ * signed out they ask to log in first and apply once logged in.
+ */
+export function withStatus(
+  status: QuestionStatus | '',
+  set: (patch: { status: QuestionStatus | '' }) => void,
+) {
+  if (status && useAuthStore.getState().status === 'anonymous') {
+    requestSignIn()
+      .then(() => set({ status }))
+      .catch(() => {});
+  } else {
+    set({ status });
+  }
+}
+
 export function hasActiveFilters(f: FilterState) {
   return f.search !== '' || f.tags.length > 0 || f.difficulties.length > 0 || f.status !== '';
 }
@@ -73,7 +92,7 @@ export function QuestionFilters({ value, onChange, allTags, total }: QuestionFil
           <Select
             labelledBy={ids.status}
             value={value.status}
-            onChange={(status) => set({ status })}
+            onChange={(status) => withStatus(status, set)}
             options={[
               { value: '', label: t('home.status.all') },
               ...STATUSES.map((s) => ({ value: s, label: t(`home.status.${s}`) })),

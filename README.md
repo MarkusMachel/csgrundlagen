@@ -253,6 +253,16 @@ app/ (providers, router, layout: tab strip + status bar)  →  pages/ (thin comp
   (`translations[locale]`); handlers resolve a `locale` query param. EN is complete,
   pt-BR/de are stubbed for the first questions to demonstrate the pattern (§5).
 - **Search** is a command-palette (⌘/Ctrl+K or the ⌕ icon) with grouped results.
+- **Signed-out browsing**: Home, questions and material are open to everyone.
+  Anything that needs an account asks to log in in a modal and then carries on:
+  the API client (`shared/api/client.ts`) holds back changes made while signed
+  out until `requestSignIn()` (`stores/useAuthPrompt.ts`) resolves, so an answer,
+  bookmark or comment goes through right after logging in; closing the modal
+  rejects with `SignInCancelled`. Pages about the user's own data (review,
+  progress, tests, account, admin) are wrapped in `RequireSignIn`, and personal
+  queries are `enabled` only when signed in (`useSignedIn()`).
+- **Brand**: the `{✓}` mark (`src/assets/brand/`, `BrandMark` in `shared/ui`)
+  and the signed-out screens' brand panel (`features/auth/components/AuthLayout`).
 
 ## Content authoring (admin-gated)
 

@@ -13,7 +13,14 @@ const loginSchema = z.object({
 });
 type LoginFormValues = z.infer<typeof loginSchema>;
 
-export function LoginForm({ onSuccess }: { onSuccess?: () => void }) {
+interface LoginFormProps {
+  onSuccess?: () => void;
+  /** In the sign-in modal: no page heading, and sign-up switches the modal. */
+  compact?: boolean;
+  onSwitchToSignUp?: () => void;
+}
+
+export function LoginForm({ onSuccess, compact, onSwitchToSignUp }: LoginFormProps) {
   const { t } = useTranslation();
   const ids = { email: useId(), password: useId() };
   const login = useLogin();
@@ -33,15 +40,17 @@ export function LoginForm({ onSuccess }: { onSuccess?: () => void }) {
 
   return (
     <form onSubmit={onSubmit} className="stack" style={{ gap: 14 }}>
-      <div>
-        <p className="tok-com" style={{ margin: 0 }}>
-          {'// '}
-          {t('common.appName').toLowerCase()}
-        </p>
-        <h1 style={{ margin: 0 }}>
-          <span className="tok-kw">$</span> {t('auth.loginTitle').toLowerCase()}
-        </h1>
-      </div>
+      {!compact && (
+        <div>
+          <p className="tok-com" style={{ margin: 0 }}>
+            {'// '}
+            {t('common.appName').toLowerCase()}
+          </p>
+          <h1 style={{ margin: 0 }}>
+            <span className="tok-kw">$</span> {t('auth.loginTitle').toLowerCase()}
+          </h1>
+        </div>
+      )}
       {login.isError && (
         <div className="alert alert--error" role="alert">
           {t('auth.loginFailed')}
@@ -77,13 +86,21 @@ export function LoginForm({ onSuccess }: { onSuccess?: () => void }) {
         {t('auth.login')}
       </button>
       <div className="hstack" style={{ justifyContent: 'space-between', fontSize: 13 }}>
-        <Link to="/signup">{t('auth.createAccount')}</Link>
+        {onSwitchToSignUp ? (
+          <button type="button" className="link-button" onClick={onSwitchToSignUp}>
+            {t('auth.createAccount')}
+          </button>
+        ) : (
+          <Link to="/signup">{t('auth.createAccount')}</Link>
+        )}
         <Link to="/forgot-password">{t('auth.forgotPassword')}</Link>
       </div>
-      <p className="tok-com" style={{ margin: 0, fontSize: 12 }}>
-        {'// '}
-        {t('auth.hint')}
-      </p>
+      {!compact && (
+        <p className="tok-com" style={{ margin: 0, fontSize: 12 }}>
+          {'// '}
+          {t('auth.hint')}
+        </p>
+      )}
     </form>
   );
 }

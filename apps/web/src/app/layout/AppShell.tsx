@@ -1,8 +1,9 @@
 import { ArrowDown } from 'lucide-react';
 import { Suspense, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
+import { AuthModal } from '@/features/auth';
 import { PolicyUpdateModal, usePrivacySync } from '@/features/privacy';
 import { useOfflineSync } from '@/shared/offline/useOffline';
 import { Spinner } from '@/shared/ui';
@@ -40,7 +41,6 @@ export function AppShell() {
   const status = useAuthStore((s) => s.status); // restored by the root layout
   usePrivacySync();
   useOfflineSync();
-  const location = useLocation();
   // Hidden at the bottom so it never covers the last controls, like the pagination.
   const nearBottom = useNearBottom();
 
@@ -50,10 +50,6 @@ export function AppShell() {
         <Spinner />
       </div>
     );
-  }
-
-  if (status === 'anonymous') {
-    return <Navigate to="/login" replace state={{ from: location.pathname }} />;
   }
 
   return (
@@ -78,6 +74,7 @@ export function AppShell() {
       )}
       <StatusBar />
       <PolicyUpdateModal />
+      <AuthModal />
     </>
   );
 }

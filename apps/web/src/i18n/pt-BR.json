@@ -67,7 +67,23 @@
     "passwordsDiffer": "As senhas não coincidem",
     "emailTaken": "Já existe uma conta com este e-mail. Tente entrar.",
     "tooManyAttempts": "Muitas tentativas. Aguarde um minuto e tente novamente.",
-    "genericError": "Algo deu errado. Tente novamente."
+    "genericError": "Algo deu errado. Tente novamente.",
+    "prompt": {
+      "loginTitle": "Entre para continuar",
+      "signUpTitle": "Crie sua conta",
+      "why": "Navegar é livre. Entre para responder, salvar favoritos e notas, montar testes e acompanhar seu progresso.",
+      "inline": "entre para usar isto",
+      "gateTitle": "Esta página é sua assim que você entrar",
+      "gateBody": "Seu progresso, revisões, favoritos e testes ficam guardados na sua conta.",
+      "gateHint": "entre ou crie uma conta grátis"
+    },
+    "brand": {
+      "tagline": "Pratique os fundamentos da computação até as respostas ficarem.",
+      "f1": "perguntas sobre redes, sistemas operacionais, estruturas de dados e mais",
+      "f2": "repetição espaçada traz de volta o que você está para esquecer",
+      "f3": "testes cronometrados, pontos fracos e progresso visível",
+      "browse": "Dar uma olhada primeiro"
+    }
   },
   "home": {
     "questionOfTheDay": "Pergunta do Dia",

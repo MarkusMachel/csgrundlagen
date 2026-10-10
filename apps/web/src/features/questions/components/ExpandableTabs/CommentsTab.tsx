@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
 import { EmptyState, ErrorState, Modal, Spinner } from '@/shared/ui';
+import { isSignInCancelled } from '@/stores/useAuthPrompt';
 import { useAuthStore } from '@/stores/useAuthStore';
 
 import {
@@ -227,7 +228,7 @@ function ReportDialog({
           onChange={(e) => setNote(e.target.value)}
         />
       </div>
-      {report.isError && (
+      {report.isError && !isSignInCancelled(report.error) && (
         <div className="alert alert--error" role="alert" style={{ marginTop: 10 }}>
           {t('common.errorTitle')}
         </div>

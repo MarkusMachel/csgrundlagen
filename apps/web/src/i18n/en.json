@@ -67,7 +67,23 @@
     "passwordsDiffer": "Passwords don't match",
     "emailTaken": "An account with this email already exists. Try logging in instead.",
     "tooManyAttempts": "Too many attempts. Wait a minute and try again.",
-    "genericError": "Something went wrong. Please try again."
+    "genericError": "Something went wrong. Please try again.",
+    "prompt": {
+      "loginTitle": "Log in to continue",
+      "signUpTitle": "Create your account",
+      "why": "Browsing is free. Log in to answer, save bookmarks and notes, build tests and track your progress.",
+      "inline": "log in to use this",
+      "gateTitle": "This page is yours once you log in",
+      "gateBody": "Your progress, reviews, bookmarks and tests are kept with your account.",
+      "gateHint": "log in or create a free account"
+    },
+    "brand": {
+      "tagline": "Practise computer science fundamentals until the answers stick.",
+      "f1": "questions across networking, OS, data structures and more",
+      "f2": "spaced repetition brings back what you are about to forget",
+      "f3": "timed tests, weak spots and progress you can see",
+      "browse": "Look around first"
+    }
   },
   "home": {
     "questionOfTheDay": "Question of the Day",

@@ -29,3 +29,6 @@ export const useAuthStore = create<AuthState>()((set) => ({
     set({ user: null, status: 'anonymous' });
   },
 }));
+
+/** True once the session is known to be signed in. */
+export const useSignedIn = () => useAuthStore((s) => s.status === 'authenticated');

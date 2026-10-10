@@ -4,6 +4,7 @@ import {
   ChartColumn,
   ClipboardList,
   Home,
+  LogIn,
   ListChecks,
   Moon,
   Repeat,
@@ -22,6 +23,7 @@ import { useDueCount } from '@/features/review';
 import { GlobalSearch } from '@/features/search';
 import { SUPPORTED_LOCALES } from '@/i18n/config';
 import { useClickOutside } from '@/shared/hooks/useClickOutside';
+import { requestSignIn } from '@/stores/useAuthPrompt';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useUIStore } from '@/stores/useUIStore';
 
@@ -189,7 +191,7 @@ export function TopBar() {
                     className="menu-item"
                     onClick={() => {
                       setUserMenuOpen(false);
-                      logout.mutate(undefined, { onSettled: () => navigate('/login') });
+                      logout.mutate(undefined, { onSettled: () => navigate('/') });
                     }}
                   >
                     {t('nav.logout')}
@@ -198,6 +200,15 @@ export function TopBar() {
               </ul>
             )}
           </div>
+        )}
+        {!user && (
+          <button
+            type="button"
+            className="btn btn--primary btn--small titlebar__signin"
+            onClick={() => requestSignIn().catch(() => {})}
+          >
+            <LogIn size={14} aria-hidden /> {t('auth.login')}
+          </button>
         )}
       </div>
     </header>

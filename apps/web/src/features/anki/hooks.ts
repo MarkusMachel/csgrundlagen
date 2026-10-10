@@ -1,6 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { api } from '@/shared/api/client';
+import { requestSignIn } from '@/stores/useAuthPrompt';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 import type { AnkiCard } from './parseAnki';
 
@@ -34,6 +36,8 @@ function exportUrl(src: AnkiSource) {
 export function useAnkiExport() {
   return useMutation({
     mutationFn: async (src: AnkiSource) => {
+      // an export is of the user's own answers and bookmarks
+      if (useAuthStore.getState().status === 'anonymous') await requestSignIn();
       const res = await fetch(exportUrl(src), { credentials: 'same-origin' });
       if (!res.ok) throw new Error(`export failed (${res.status})`);
       const name =

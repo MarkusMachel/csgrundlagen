@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { api } from '@/shared/api/client';
+import { useSignedIn } from '@/stores/useAuthStore';
 
 import type { Progress } from '../types';
 
@@ -17,5 +18,6 @@ export function useProgress() {
   return useQuery({
     queryKey: ['progress'],
     queryFn: () => api.get<Progress>(`/me/progress?tz=${encodeURIComponent(timeZone())}`),
+    enabled: useSignedIn(),
   });
 }
