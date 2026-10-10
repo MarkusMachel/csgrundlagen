@@ -1480,7 +1480,8 @@ table.data-table {
 /* ---------- home: filters in a left sidebar ---------- */
 
 /* Like the material wiki, the home feed uses the full window width. */
-.app-main:has(.feed-layout) {
+.app-main:has(.feed-layout),
+.app-main:has(.admin-page) {
   max-width: none;
   padding-left: 24px;
   padding-right: 24px;
@@ -1858,6 +1859,41 @@ table.data-table {
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+
+/* ---------- admin: authoring forms ---------- */
+
+.authoring-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
+.authoring-form__main,
+.authoring-form__side,
+.authoring-form__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+/* wide screens: content on the left, metadata (difficulty, tags, links) on the right */
+@media (min-width: 1200px) {
+  .authoring-form {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+    column-gap: 32px;
+    align-items: start;
+  }
+
+  .authoring-form__side {
+    position: sticky;
+    top: 66px;
+  }
+
+  .authoring-form__footer {
+    grid-column: 1 / -1;
+  }
 }
 
 /* ---------- admin: content lists and bug queue ---------- */

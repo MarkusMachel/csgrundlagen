@@ -28,7 +28,7 @@ export function AdminPage() {
   const tabs: Tab[] = ['stats', 'question', 'material', 'questions', 'materials', 'bugs'];
 
   return (
-    <div className="stack">
+    <div className="stack admin-page">
       <div>
         <h1 style={{ marginBottom: 4 }}>
           <span className="tok-com">{'// '}</span>

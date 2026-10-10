@@ -82,95 +82,100 @@ export function MaterialForm({ material, onSaved, onCancel }: MaterialFormProps)
   const err = form.formState.errors;
 
   return (
-    <form onSubmit={onSubmit} className="stack" style={{ gap: 14 }}>
-      <div className="field">
-        <label htmlFor="m-type">{t('materials.filterType')}</label>
-        <select id="m-type" className="select" {...form.register('type')}>
-          {MATERIAL_TYPES.map((mt) => (
-            <option key={mt} value={mt}>
-              {t(`materials.type.${mt}`)}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className={err.title ? 'field field--error' : 'field'}>
-        <label htmlFor="m-title">{t('authoring.materialTitle')}</label>
-        <input id="m-title" className="input" {...form.register('title')} />
-        {err.title && <span className="field-error-text">{t('authoring.required')}</span>}
-      </div>
-
-      <div className={err.url ? 'field field--error' : 'field'}>
-        <label htmlFor="m-url">{t('authoring.url')}</label>
-        <input id="m-url" className="input" placeholder="https://…" {...form.register('url')} />
-        {err.url && <span className="field-error-text">{t('authoring.urlInvalid')}</span>}
-      </div>
-
-      <div className="field">
-        <label htmlFor="m-author">{t('authoring.authorOptional')}</label>
-        <input id="m-author" className="input" {...form.register('author')} />
-      </div>
-
-      <div className="field">
-        <label htmlFor="m-desc">{t('authoring.descriptionOptional')}</label>
-        <textarea id="m-desc" className="textarea" rows={2} {...form.register('description')} />
-      </div>
-
-      <Controller
-        control={form.control}
-        name="tags"
-        render={({ field }) => (
-          <TagInput
-            value={field.value}
-            onChange={field.onChange}
-            suggestions={tags ?? []}
-            error={err.tags ? t('authoring.tagsRequired') : undefined}
-          />
-        )}
-      />
-
-      <Controller
-        control={form.control}
-        name="relatedQuestionIds"
-        render={({ field }) => (
-          <LinkPicker
-            label={t('authoring.linkQuestions')}
-            hint={t('authoring.linkQuestionsHint')}
-            options={(questionsData?.items ?? []).map((q) => ({
-              id: q.id,
-              label: q.prompt,
-              sublabel: q.tags.join(', '),
-            }))}
-            value={field.value}
-            onChange={field.onChange}
-            emptyText={t('authoring.noQuestionsYet')}
-          />
-        )}
-      />
-
-      {save.isError && (
-        <div className="alert alert--error" role="alert">
-          {t('authoring.saveError')}
+    <form onSubmit={onSubmit} className="authoring-form">
+      {/* two columns on wide screens: content left, metadata right */}
+      <div className="authoring-form__main">
+        <div className="field">
+          <label htmlFor="m-type">{t('materials.filterType')}</label>
+          <select id="m-type" className="select" {...form.register('type')}>
+            {MATERIAL_TYPES.map((mt) => (
+              <option key={mt} value={mt}>
+                {t(`materials.type.${mt}`)}
+              </option>
+            ))}
+          </select>
         </div>
-      )}
-      {save.isSuccess && (
-        <div className="alert alert--success" id={successId} role="status">
-          {material ? t('authoring.materialUpdated') : t('authoring.materialCreated')}
-        </div>
-      )}
 
-      <div className="hstack" style={{ gap: 10 }}>
-        <button type="submit" className="btn btn--primary" disabled={save.isPending}>
-          <span className="prompt-char" aria-hidden>
-            $
-          </span>
-          {material ? t('authoring.saveChanges') : t('authoring.createMaterial')}
-        </button>
-        {onCancel && (
-          <button type="button" className="btn btn--ghost" onClick={onCancel}>
-            {t('common.cancel')}
+        <div className={err.title ? 'field field--error' : 'field'}>
+          <label htmlFor="m-title">{t('authoring.materialTitle')}</label>
+          <input id="m-title" className="input" {...form.register('title')} />
+          {err.title && <span className="field-error-text">{t('authoring.required')}</span>}
+        </div>
+
+        <div className={err.url ? 'field field--error' : 'field'}>
+          <label htmlFor="m-url">{t('authoring.url')}</label>
+          <input id="m-url" className="input" placeholder="https://…" {...form.register('url')} />
+          {err.url && <span className="field-error-text">{t('authoring.urlInvalid')}</span>}
+        </div>
+
+        <div className="field">
+          <label htmlFor="m-author">{t('authoring.authorOptional')}</label>
+          <input id="m-author" className="input" {...form.register('author')} />
+        </div>
+
+        <div className="field">
+          <label htmlFor="m-desc">{t('authoring.descriptionOptional')}</label>
+          <textarea id="m-desc" className="textarea" rows={2} {...form.register('description')} />
+        </div>
+      </div>
+      <div className="authoring-form__side">
+        <Controller
+          control={form.control}
+          name="tags"
+          render={({ field }) => (
+            <TagInput
+              value={field.value}
+              onChange={field.onChange}
+              suggestions={tags ?? []}
+              error={err.tags ? t('authoring.tagsRequired') : undefined}
+            />
+          )}
+        />
+
+        <Controller
+          control={form.control}
+          name="relatedQuestionIds"
+          render={({ field }) => (
+            <LinkPicker
+              label={t('authoring.linkQuestions')}
+              hint={t('authoring.linkQuestionsHint')}
+              options={(questionsData?.items ?? []).map((q) => ({
+                id: q.id,
+                label: q.prompt,
+                sublabel: q.tags.join(', '),
+              }))}
+              value={field.value}
+              onChange={field.onChange}
+              emptyText={t('authoring.noQuestionsYet')}
+            />
+          )}
+        />
+      </div>
+      <div className="authoring-form__footer">
+        {save.isError && (
+          <div className="alert alert--error" role="alert">
+            {t('authoring.saveError')}
+          </div>
+        )}
+        {save.isSuccess && (
+          <div className="alert alert--success" id={successId} role="status">
+            {material ? t('authoring.materialUpdated') : t('authoring.materialCreated')}
+          </div>
+        )}
+
+        <div className="hstack" style={{ gap: 10 }}>
+          <button type="submit" className="btn btn--primary" disabled={save.isPending}>
+            <span className="prompt-char" aria-hidden>
+              $
+            </span>
+            {material ? t('authoring.saveChanges') : t('authoring.createMaterial')}
           </button>
-        )}
+          {onCancel && (
+            <button type="button" className="btn btn--ghost" onClick={onCancel}>
+              {t('common.cancel')}
+            </button>
+          )}
+        </div>
       </div>
     </form>
   );

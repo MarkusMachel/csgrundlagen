@@ -202,215 +202,220 @@ export function QuestionForm({ question, onSaved, onCancel }: QuestionFormProps)
   const err = form.formState.errors;
 
   return (
-    <form onSubmit={onSubmit} className="stack" style={{ gap: 14 }}>
-      <div className="field">
-        <label>{t('authoring.questionType')}</label>
-        <div className="hstack" style={{ gap: 16, flexWrap: 'wrap' }}>
-          {QUESTION_TYPES.map((v) => (
-            <label key={v} className="checkbox-row">
-              <input type="radio" value={v} checked={type === v} {...form.register('type')} />
-              {t(`authoring.type.${v}`)}
-            </label>
-          ))}
-        </div>
-      </div>
-
-      <div className={err.prompt ? 'field field--error' : 'field'}>
-        <label htmlFor="q-prompt">{t('authoring.prompt')}</label>
-        <textarea id="q-prompt" className="textarea" rows={3} {...form.register('prompt')} />
-        <CodeFormatHint />
-        <RichPreview text={form.watch('prompt')} />
-        {err.prompt && <span className="field-error-text">{t('authoring.required')}</span>}
-      </div>
-
-      {hasOptions(type) ? (
-        <div
-          className={
-            err.options || err.correctOptionId || err.correctOptionIds
-              ? 'field field--error'
-              : 'field'
-          }
-        >
-          <label>{type === 'ordering' ? t('authoring.items') : t('authoring.options')}</label>
-          <span className="tok-com" style={{ fontSize: 12 }}>
-            {'// '}
-            {type === 'ordering'
-              ? t('authoring.orderingHint')
-              : type === 'multi-select'
-                ? t('authoring.multiSelectHint')
-                : t('authoring.optionsHint')}
-          </span>
-          {fields.map((f, i) => (
-            <div key={f.id} className="hstack" style={{ gap: 8 }}>
-              {type === 'ordering' ? (
-                <span className="tok-idx" style={{ minWidth: 64 }}>
-                  steps[{i}]
-                </span>
-              ) : (
-                <label className="checkbox-row" aria-label={t('authoring.markCorrect')}>
-                  {type === 'multi-select' ? (
-                    <input
-                      type="checkbox"
-                      checked={form.watch('correctOptionIds').includes(OPTION_IDS[i])}
-                      onChange={(e) => {
-                        const current = form.getValues('correctOptionIds');
-                        form.setValue(
-                          'correctOptionIds',
-                          e.target.checked
-                            ? [...current, OPTION_IDS[i]]
-                            : current.filter((id) => id !== OPTION_IDS[i]),
-                        );
-                      }}
-                    />
-                  ) : (
-                    <input
-                      type="radio"
-                      value={OPTION_IDS[i]}
-                      checked={form.watch('correctOptionId') === OPTION_IDS[i]}
-                      {...form.register('correctOptionId')}
-                    />
-                  )}
-                  <span>
-                    <span className="tok-kw">var</span>{' '}
-                    <span className="tok-idx">{OPTION_IDS[i]}</span>
-                  </span>
-                </label>
-              )}
-              <div
-                style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 6 }}
-              >
-                {/* a textarea, so an answer can itself be a multi-line ``` code block */}
-                <textarea
-                  className="textarea textarea--autogrow"
-                  rows={1}
-                  placeholder={`"${t('authoring.optionPlaceholder')}"`}
-                  {...form.register(`options.${i}.label` as const)}
-                />
-                <RichPreview text={form.watch(`options.${i}.label`)} />
-              </div>
-              {fields.length > 2 && (
-                <button
-                  type="button"
-                  className="btn btn--icon btn--danger"
-                  aria-label={t('authoring.removeOption', { n: i })}
-                  onClick={() => remove(i)}
-                >
-                  <X size={15} aria-hidden />
-                </button>
-              )}
-            </div>
-          ))}
-          {fields.length < 5 && (
-            <button
-              type="button"
-              className="btn"
-              style={{ alignSelf: 'flex-start' }}
-              onClick={() => append({ label: '' })}
-            >
-              <Plus size={15} aria-hidden />
-              {t('authoring.addOption')}
-            </button>
-          )}
-          {err.options && <span className="field-error-text">{t('authoring.optionsMin')}</span>}
-          {(err.correctOptionId || err.correctOptionIds) && (
-            <span className="field-error-text">{t('authoring.pickCorrect')}</span>
-          )}
-        </div>
-      ) : type === 'output' ? (
-        <OutputFields form={form} />
-      ) : (
+    <form onSubmit={onSubmit} className="authoring-form">
+      {/* two columns on wide screens: content left, metadata right */}
+      <div className="authoring-form__main">
         <div className="field">
-          <label>{t('authoring.correctAnswer')}</label>
-          <div className="hstack" style={{ gap: 16 }}>
-            {[
-              { v: true, label: t('question.true') },
-              { v: false, label: t('question.false') },
-            ].map(({ v, label }) => (
-              <label key={String(v)} className="checkbox-row">
-                <input
-                  type="radio"
-                  checked={form.watch('correctAnswer') === v}
-                  onChange={() => form.setValue('correctAnswer', v)}
-                />
-                {label}
+          <label>{t('authoring.questionType')}</label>
+          <div className="hstack" style={{ gap: 16, flexWrap: 'wrap' }}>
+            {QUESTION_TYPES.map((v) => (
+              <label key={v} className="checkbox-row">
+                <input type="radio" value={v} checked={type === v} {...form.register('type')} />
+                {t(`authoring.type.${v}`)}
               </label>
             ))}
           </div>
         </div>
-      )}
 
-      <div className={err.explanation ? 'field field--error' : 'field'}>
-        <label htmlFor="q-expl">{t('authoring.explanation')}</label>
-        <textarea id="q-expl" className="textarea" rows={3} {...form.register('explanation')} />
-        <CodeFormatHint />
-        <RichPreview text={form.watch('explanation')} />
-        {err.explanation && <span className="field-error-text">{t('authoring.required')}</span>}
-      </div>
-
-      <div className="field">
-        <label htmlFor="q-diff">{t('question.difficultyLabel')}</label>
-        <select id="q-diff" className="select" {...form.register('difficulty')}>
-          <option value="easy">{t('question.difficulty.easy')}</option>
-          <option value="medium">{t('question.difficulty.medium')}</option>
-          <option value="hard">{t('question.difficulty.hard')}</option>
-        </select>
-      </div>
-
-      <Controller
-        control={form.control}
-        name="tags"
-        render={({ field }) => (
-          <TagInput
-            value={field.value}
-            onChange={field.onChange}
-            suggestions={tags ?? []}
-            error={err.tags ? t('authoring.tagsRequired') : undefined}
-          />
-        )}
-      />
-
-      <Controller
-        control={form.control}
-        name="relatedMaterialIds"
-        render={({ field }) => (
-          <LinkPicker
-            label={t('authoring.linkMaterials')}
-            hint={t('authoring.linkMaterialsHint')}
-            options={(materialsData ?? []).map((m) => ({
-              id: m.id,
-              label: m.title,
-              sublabel: t(`materials.type.${m.type}`),
-            }))}
-            value={field.value}
-            onChange={field.onChange}
-            emptyText={t('authoring.noMaterialsYet')}
-          />
-        )}
-      />
-
-      {save.isError && (
-        <div className="alert alert--error" role="alert">
-          {t('authoring.saveError')}
+        <div className={err.prompt ? 'field field--error' : 'field'}>
+          <label htmlFor="q-prompt">{t('authoring.prompt')}</label>
+          <textarea id="q-prompt" className="textarea" rows={3} {...form.register('prompt')} />
+          <CodeFormatHint />
+          <RichPreview text={form.watch('prompt')} />
+          {err.prompt && <span className="field-error-text">{t('authoring.required')}</span>}
         </div>
-      )}
-      {save.isSuccess && (
-        <div className="alert alert--success" id={successId} role="status">
-          {question ? t('authoring.questionUpdated') : t('authoring.questionCreated')}
-        </div>
-      )}
 
-      <div className="hstack" style={{ gap: 10 }}>
-        <button type="submit" className="btn btn--primary" disabled={save.isPending}>
-          <span className="prompt-char" aria-hidden>
-            $
-          </span>
-          {question ? t('authoring.saveChanges') : t('authoring.createQuestion')}
-        </button>
-        {onCancel && (
-          <button type="button" className="btn btn--ghost" onClick={onCancel}>
-            {t('common.cancel')}
+        {hasOptions(type) ? (
+          <div
+            className={
+              err.options || err.correctOptionId || err.correctOptionIds
+                ? 'field field--error'
+                : 'field'
+            }
+          >
+            <label>{type === 'ordering' ? t('authoring.items') : t('authoring.options')}</label>
+            <span className="tok-com" style={{ fontSize: 12 }}>
+              {'// '}
+              {type === 'ordering'
+                ? t('authoring.orderingHint')
+                : type === 'multi-select'
+                  ? t('authoring.multiSelectHint')
+                  : t('authoring.optionsHint')}
+            </span>
+            {fields.map((f, i) => (
+              <div key={f.id} className="hstack" style={{ gap: 8 }}>
+                {type === 'ordering' ? (
+                  <span className="tok-idx" style={{ minWidth: 64 }}>
+                    steps[{i}]
+                  </span>
+                ) : (
+                  <label className="checkbox-row" aria-label={t('authoring.markCorrect')}>
+                    {type === 'multi-select' ? (
+                      <input
+                        type="checkbox"
+                        checked={form.watch('correctOptionIds').includes(OPTION_IDS[i])}
+                        onChange={(e) => {
+                          const current = form.getValues('correctOptionIds');
+                          form.setValue(
+                            'correctOptionIds',
+                            e.target.checked
+                              ? [...current, OPTION_IDS[i]]
+                              : current.filter((id) => id !== OPTION_IDS[i]),
+                          );
+                        }}
+                      />
+                    ) : (
+                      <input
+                        type="radio"
+                        value={OPTION_IDS[i]}
+                        checked={form.watch('correctOptionId') === OPTION_IDS[i]}
+                        {...form.register('correctOptionId')}
+                      />
+                    )}
+                    <span>
+                      <span className="tok-kw">var</span>{' '}
+                      <span className="tok-idx">{OPTION_IDS[i]}</span>
+                    </span>
+                  </label>
+                )}
+                <div
+                  style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 6 }}
+                >
+                  {/* a textarea, so an answer can itself be a multi-line ``` code block */}
+                  <textarea
+                    className="textarea textarea--autogrow"
+                    rows={1}
+                    placeholder={`"${t('authoring.optionPlaceholder')}"`}
+                    {...form.register(`options.${i}.label` as const)}
+                  />
+                  <RichPreview text={form.watch(`options.${i}.label`)} />
+                </div>
+                {fields.length > 2 && (
+                  <button
+                    type="button"
+                    className="btn btn--icon btn--danger"
+                    aria-label={t('authoring.removeOption', { n: i })}
+                    onClick={() => remove(i)}
+                  >
+                    <X size={15} aria-hidden />
+                  </button>
+                )}
+              </div>
+            ))}
+            {fields.length < 5 && (
+              <button
+                type="button"
+                className="btn"
+                style={{ alignSelf: 'flex-start' }}
+                onClick={() => append({ label: '' })}
+              >
+                <Plus size={15} aria-hidden />
+                {t('authoring.addOption')}
+              </button>
+            )}
+            {err.options && <span className="field-error-text">{t('authoring.optionsMin')}</span>}
+            {(err.correctOptionId || err.correctOptionIds) && (
+              <span className="field-error-text">{t('authoring.pickCorrect')}</span>
+            )}
+          </div>
+        ) : type === 'output' ? (
+          <OutputFields form={form} />
+        ) : (
+          <div className="field">
+            <label>{t('authoring.correctAnswer')}</label>
+            <div className="hstack" style={{ gap: 16 }}>
+              {[
+                { v: true, label: t('question.true') },
+                { v: false, label: t('question.false') },
+              ].map(({ v, label }) => (
+                <label key={String(v)} className="checkbox-row">
+                  <input
+                    type="radio"
+                    checked={form.watch('correctAnswer') === v}
+                    onChange={() => form.setValue('correctAnswer', v)}
+                  />
+                  {label}
+                </label>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className={err.explanation ? 'field field--error' : 'field'}>
+          <label htmlFor="q-expl">{t('authoring.explanation')}</label>
+          <textarea id="q-expl" className="textarea" rows={3} {...form.register('explanation')} />
+          <CodeFormatHint />
+          <RichPreview text={form.watch('explanation')} />
+          {err.explanation && <span className="field-error-text">{t('authoring.required')}</span>}
+        </div>
+      </div>
+      <div className="authoring-form__side">
+        <div className="field">
+          <label htmlFor="q-diff">{t('question.difficultyLabel')}</label>
+          <select id="q-diff" className="select" {...form.register('difficulty')}>
+            <option value="easy">{t('question.difficulty.easy')}</option>
+            <option value="medium">{t('question.difficulty.medium')}</option>
+            <option value="hard">{t('question.difficulty.hard')}</option>
+          </select>
+        </div>
+
+        <Controller
+          control={form.control}
+          name="tags"
+          render={({ field }) => (
+            <TagInput
+              value={field.value}
+              onChange={field.onChange}
+              suggestions={tags ?? []}
+              error={err.tags ? t('authoring.tagsRequired') : undefined}
+            />
+          )}
+        />
+
+        <Controller
+          control={form.control}
+          name="relatedMaterialIds"
+          render={({ field }) => (
+            <LinkPicker
+              label={t('authoring.linkMaterials')}
+              hint={t('authoring.linkMaterialsHint')}
+              options={(materialsData ?? []).map((m) => ({
+                id: m.id,
+                label: m.title,
+                sublabel: t(`materials.type.${m.type}`),
+              }))}
+              value={field.value}
+              onChange={field.onChange}
+              emptyText={t('authoring.noMaterialsYet')}
+            />
+          )}
+        />
+      </div>
+      <div className="authoring-form__footer">
+        {save.isError && (
+          <div className="alert alert--error" role="alert">
+            {t('authoring.saveError')}
+          </div>
+        )}
+        {save.isSuccess && (
+          <div className="alert alert--success" id={successId} role="status">
+            {question ? t('authoring.questionUpdated') : t('authoring.questionCreated')}
+          </div>
+        )}
+
+        <div className="hstack" style={{ gap: 10 }}>
+          <button type="submit" className="btn btn--primary" disabled={save.isPending}>
+            <span className="prompt-char" aria-hidden>
+              $
+            </span>
+            {question ? t('authoring.saveChanges') : t('authoring.createQuestion')}
           </button>
-        )}
+          {onCancel && (
+            <button type="button" className="btn btn--ghost" onClick={onCancel}>
+              {t('common.cancel')}
+            </button>
+          )}
+        </div>
       </div>
     </form>
   );
