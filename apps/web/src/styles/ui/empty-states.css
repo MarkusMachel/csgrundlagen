@@ -1,0 +1,17 @@
+/* ---------- empty / error states ---------- */
+
+.state-block {
+  text-align: center;
+  padding: 40px 16px;
+  color: var(--muted);
+}
+
+.state-block__glyph {
+  font-size: 26px;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+
+.state-block h3 {
+  color: var(--text);
+}

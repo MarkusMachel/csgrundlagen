@@ -10,7 +10,7 @@ interface ScissorsToggleProps {
 /**
  * Personal elimination aid (§10.4). Session-only by design (§15).
  * Hover-revealed on pointer devices, always visible on touch, revealed on
- * keyboard focus — see the `.scissors-toggle` rules in global.css.
+ * keyboard focus — see the `.scissors-toggle` rules in features/questions/styles/editor-pane.css.
  */
 export function ScissorsToggle({ optionLabel, struck, onToggle }: ScissorsToggleProps) {
   const { t } = useTranslation();

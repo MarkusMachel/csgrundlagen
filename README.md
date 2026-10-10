@@ -221,6 +221,9 @@ app/ (providers, router, layout: tab strip + status bar)  →  pages/ (thin comp
   theme/locale, session streak, status-bar context), feature-scoped stores inside the
   owning feature (test-builder selection, in-progress attempt incl. the per-attempt
   shuffle seed).
+- **Styles** are plain CSS, one file per area: shared tokens, base and UI pieces in
+  `src/styles/`, feature styles in each feature's `styles/` folder, all imported in
+  cascade order from `src/styles/index.css` (add new files there).
 - **Theming** is pure CSS custom properties: light tokens on `:root`, dark overrides
   under `[data-theme='dark']` (stamped on `<html>` from the UI store; defaults to the
   OS preference, persisted to `localStorage`). The Stats bar colors are validated for
@@ -266,7 +269,7 @@ the light surface.
 
 - **Scissors strike-through**: session-only, not persisted.
 - **Tabs vs accordions**: an editor-style bottom panel with tabs, used consistently.
-- **Pagination size**: 10 per page. Chart colors: validated tokens in `global.css`.
+- **Pagination size**: 10 per page. Chart colors: validated tokens in `src/styles/tokens.css`.
 - **"Weak" definition** (single constant in `src/features/weak-spots/weakness.ts`):
   accuracy < 60% with ≥ 2 attempts, **or** the most recent attempt was wrong.
 - **Practice mode**: the Commented Answer tab is available per-question as the user

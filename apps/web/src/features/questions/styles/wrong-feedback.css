@@ -1,0 +1,55 @@
+/* ---------- wrong-answer feedback ---------- */
+
+.wrong-feedback {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.wrong-feedback__item {
+  padding: 10px 12px;
+  border-left: 3px solid var(--red);
+  border-radius: 0 8px 8px 0;
+  background: color-mix(in srgb, var(--red) 7%, transparent);
+  font-size: 13px;
+}
+
+.wrong-feedback__head {
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+
+.wrong-feedback__read {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.wrong-feedback__read:hover {
+  text-decoration: underline;
+}
+
+.option-feedback summary {
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+  width: fit-content;
+}
+
+.option-feedback summary .chip {
+  margin-left: 6px;
+}
+
+.option-feedback[open] {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 8px;
+}

@@ -1,0 +1,139 @@
+/* ---------- custom select (shared/ui/Select) ---------- */
+
+.dropdown {
+  position: relative;
+  min-width: 0;
+}
+
+.dropdown__trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  color: var(--text);
+  cursor: pointer;
+  padding-right: 12px; /* keeps the chevron off the edge */
+}
+
+.dropdown__trigger[aria-expanded='true'] {
+  border-color: var(--accent);
+}
+
+.dropdown__value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdown__value--placeholder {
+  color: var(--muted);
+}
+
+.dropdown__chevron {
+  color: var(--muted);
+  transition: transform 150ms;
+}
+
+.dropdown__popup {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 40;
+  min-width: 100%;
+  width: max-content;
+  max-width: min(320px, calc(100vw - 32px));
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  animation: dropdown-in 120ms ease-out;
+}
+
+.dropdown__popup--up {
+  top: auto;
+  bottom: calc(100% + 6px);
+}
+
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.dropdown__search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.dropdown__search input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  outline: none;
+  font-size: 13px;
+}
+
+.dropdown__list {
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  overflow-y: auto;
+  outline: none;
+}
+
+.dropdown__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dropdown__option--active {
+  background: var(--accent-soft);
+}
+
+.dropdown__option[aria-selected='true'] {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.dropdown__check {
+  color: var(--accent);
+}
+
+.dropdown__empty {
+  padding: 7px 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* native <select> (forms bound to react-hook-form): same chevron, inset from the edge */
+select.select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='%238a8f98' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+.btn--small {
+  min-height: 28px;
+  padding: 2px 10px;
+  font-size: 12.5px;
+  gap: 4px;
+}

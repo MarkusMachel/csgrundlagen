@@ -1,0 +1,44 @@
+/* ---------- file tab strip (lives inside the title bar) ---------- */
+
+.tabstrip {
+  display: flex;
+  align-self: stretch;
+  align-items: stretch;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.file-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  color: var(--muted);
+  border-right: 1px solid var(--border);
+  border-top: 2px solid transparent;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.file-tab:hover {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.file-tab--active {
+  color: var(--text);
+  background: var(--bg);
+  border-top-color: var(--accent);
+}
+
+.file-tab__icon {
+  opacity: 0.75;
+}
+
+.file-tab__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}

@@ -1,0 +1,50 @@
+/* ---------- stats bars ---------- */
+
+.bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 520px;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: minmax(60px, auto) 1fr 52px;
+  align-items: center;
+  gap: 10px;
+}
+
+.bar-row__label {
+  color: var(--muted);
+  font-size: 12.5px;
+  text-align: right;
+}
+
+.bar-row__track {
+  height: 14px;
+  background: var(--gutter);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.bar-row__fill {
+  display: block;
+  height: 100%;
+  background: var(--chart-bar);
+  border-radius: 0 4px 4px 0; /* rounded data-end, flat baseline end */
+  min-width: 2px;
+}
+
+.bar-row--correct .bar-row__fill {
+  background: var(--green);
+}
+
+.bar-row__value {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.bar-row--correct .bar-row__value {
+  color: var(--green);
+  font-weight: 600;
+}

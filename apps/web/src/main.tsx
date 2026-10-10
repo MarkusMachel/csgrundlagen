@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 
 import { App } from './app/App';
 import { registerServiceWorker } from './shared/offline/registerServiceWorker';
-import './styles/global.css';
+import './styles/index.css';
 
 // MSW serves /api by default (dev, preview, and Playwright E2E). Set
 // VITE_USE_MOCKS=false (`npm run dev:real`) to talk to the Go API instead,

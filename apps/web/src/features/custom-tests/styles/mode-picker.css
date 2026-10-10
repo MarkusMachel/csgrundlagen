@@ -1,0 +1,37 @@
+/* ---------- mode picker ---------- */
+
+.mode-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 600px) {
+  .mode-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.mode-card {
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.mode-card:hover {
+  border-color: var(--border-strong);
+}
+
+.mode-card[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--line-hl);
+}
+
+.mode-card__glyph {
+  font-size: 20px;
+  color: var(--accent);
+}

@@ -13,7 +13,7 @@ interface CategoricalBarChartProps {
 
 /**
  * Magnitude-by-category bar list. Fixed hue order (--series-1…4, validated —
- * see src/styles/global.css), never cycled/reassigned by sort order. Two of
+ * see src/styles/tokens.css), never cycled/reassigned by sort order. Two of
  * the four slots carry a contrast WARN against the light surface, so identity
  * is never color-alone: every row keeps a visible text label and count.
  */

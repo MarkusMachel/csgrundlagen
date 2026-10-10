@@ -1,0 +1,17 @@
+/* ---------- filters / toolbars ---------- */
+
+.toolbar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.toolbar .field {
+  min-width: 160px;
+}
+
+.toolbar .field--grow {
+  flex: 1;
+  min-width: 200px;
+  justify-content: flex-end; /* line the search box up with the labelled selects */
+}

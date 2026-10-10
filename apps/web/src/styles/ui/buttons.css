@@ -1,0 +1,84 @@
+/* ---------- buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  min-height: 36px;
+  transition:
+    background 120ms,
+    border-color 120ms;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-contrast);
+  font-weight: 600;
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: var(--accent);
+  filter: brightness(1.1);
+}
+
+.btn--ghost {
+  border-color: transparent;
+  background: transparent;
+}
+
+.btn--ghost:hover:not(:disabled) {
+  background: var(--accent-soft);
+  border-color: transparent;
+}
+
+/* the armed "Delete for good?" step is red at rest; the first, ghost step only on hover */
+.btn--danger:not(.btn--ghost) {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.btn--danger:hover:not(:disabled) {
+  border-color: var(--red);
+  background: var(--red-soft);
+  color: var(--red);
+}
+
+.btn--icon {
+  padding: 0;
+  width: 38px;
+  min-width: 38px;
+  min-height: 38px;
+  justify-content: center;
+  border-color: transparent;
+  background: transparent;
+  border-radius: 8px;
+}
+
+.btn--icon:hover:not(:disabled) {
+  background: var(--accent-soft);
+}
+
+.btn .prompt-char {
+  color: var(--muted);
+}
+.btn--primary .prompt-char {
+  color: var(--accent-contrast);
+  opacity: 0.75;
+}
