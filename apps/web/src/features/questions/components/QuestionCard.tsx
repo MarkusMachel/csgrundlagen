@@ -2,11 +2,14 @@ import { Bookmark, ChevronDown } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
+
 import { CodeBlock, InlineText } from '@/shared/ui';
 import { formatRelative } from '@/shared/utils/relativeTime';
 import { parseRichText, type RichSegment } from '@/shared/utils/richText';
+import { randomSeed } from '@/shared/utils/shuffle';
 
 import { canSubmit, correctAnswerOf } from '../grading';
+import { shuffledOptionOrder } from '../optionShuffle';
 import type {
   AnswerValue,
   Question,
@@ -84,6 +87,13 @@ export function QuestionCard({
     });
 
   const [tabsOpen, setTabsOpen] = useState(mode === 'review');
+
+  // Outside tests (which have their own setting), options come in a new order
+  // every time a question is shown, so answers are learned, not positions.
+  // Drawn once per mounted card, so it doesn't move while you answer.
+  const [viewSeed] = useState(randomSeed);
+  const shownOrder =
+    optionOrder ?? (mode === 'feed' || mode === 'pick' ? shuffledOptionOrder(question, viewSeed) : undefined);
 
   const bookmarkable = mode === 'feed' || mode === 'pick';
   const isBookmarked = useIsBookmarked(question.id);
@@ -216,7 +226,7 @@ export function QuestionCard({
             showScissors={showScissors}
             struckOptions={struckOptions}
             onToggleStruck={toggleStruck}
-            optionOrder={optionOrder}
+            optionOrder={shownOrder}
           />
         )}
 
