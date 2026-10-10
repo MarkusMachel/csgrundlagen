@@ -74,5 +74,6 @@ func (s *Server) importFlashcards(w http.ResponseWriter, r *http.Request) {
 		s.fail(w, r, err)
 		return
 	}
+	s.contentChanged()
 	writeJSON(w, http.StatusOK, res)
 }

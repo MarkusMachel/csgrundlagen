@@ -115,6 +115,14 @@ internal/store   domain models and every SQL query
 internal/httpapi routes, auth middleware, handlers, integration tests
 ```
 
+- **Response cache**: public question responses (`GET /api/questions` without a
+  personal `status` filter, `/questions/{id}`, `/questions/daily`, `/tags`) are
+  kept in memory (`internal/cache`: 32 MB, 5 minutes, least recently used out
+  first) and served as-is (`X-Cache: hit|miss`). Question edits through the API
+  clear it at once; triggers on the question tables (migration 0018) send
+  `NOTIFY content_changed`, so edits from the seed tool, by hand or from another
+  API instance clear it too (`db.Listen`, on its own connection, reconnecting).
+  On a 2-core box this took the feed page from ~700 to ~25,000 requests/s.
 - **Contract**: identical paths and JSON shapes to the MSW handlers in
   `apps/web/src/mocks/handlers` — the field names in `internal/store/models.go`
   match `apps/web/src/features/*/types.ts`. Errors are `{"message": "…"}`.
