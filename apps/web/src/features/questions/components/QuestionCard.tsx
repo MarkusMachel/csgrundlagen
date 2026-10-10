@@ -86,7 +86,8 @@ export function QuestionCard({
     reveal = { correctAnswer: submitAnswer.data.correctAnswer, givenAnswer: currentAnswer };
   }
 
-  const showScissors = (mode === 'feed' || mode === 'pick' || mode === 'test') && !isExam && !reveal;
+  const showScissors =
+    (mode === 'feed' || mode === 'pick' || mode === 'test') && !isExam && !reveal;
   const showSubmit = mode === 'feed';
   // Practice keeps explanations reachable as the user goes (§15 open decision).
   const explanationRevealed =
@@ -94,7 +95,9 @@ export function QuestionCard({
   const hideRevealingTabs = isExam;
   const answersDisabled = mode === 'review' || (mode === 'feed' && submitted);
 
-  const breadcrumb = [...question.tags.map((tag) => tag.toLowerCase()), question.id];
+  // Short id like a git hash: the UUID up to its first hyphen (full id in the tooltip).
+  const shortId = question.id.split('-')[0];
+  const breadcrumb = [...question.tags.map((tag) => tag.toLowerCase()), shortId];
   const promptLines = question.prompt.split('\n').filter((line) => line.trim().length > 0);
 
   return (
@@ -103,7 +106,10 @@ export function QuestionCard({
         {heading && <span style={{ color: 'var(--text)', fontWeight: 600 }}>{heading}</span>}
         <span className="editor-pane__breadcrumb">
           {breadcrumb.map((part, i) => (
-            <span key={`${part}-${i}`}>
+            <span
+              key={`${part}-${i}`}
+              title={i === breadcrumb.length - 1 ? question.id : undefined}
+            >
               {i > 0 && <span className="crumb-sep"> / </span>}
               {part}
             </span>
@@ -128,7 +134,8 @@ export function QuestionCard({
           <CodeLine>
             <span className="tok-com">
               {'// '}
-              {t('question.difficultyLabel').toLowerCase()}: {t(`question.difficulty.${question.difficulty}`)}
+              {t('question.difficultyLabel').toLowerCase()}:{' '}
+              {t(`question.difficulty.${question.difficulty}`)}
             </span>
           </CodeLine>
         )}

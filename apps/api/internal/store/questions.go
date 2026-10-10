@@ -90,11 +90,20 @@ func (s *Store) queryQuestions(ctx context.Context, locale, sql string, args ...
 }
 
 type QuestionFilter struct {
-	Page     int
-	PageSize int
-	Tags     []string
-	Search   string
-	Locale   string
+	Page         int
+	PageSize     int
+	Tags         []string // match any
+	Difficulties []string // match any of easy, medium, hard
+	Search       string
+	Locale       string
+	// Status is per user and needs UserID: "unanswered", "answered",
+	// "wrong" (answered incorrectly at least once) or "bookmarked".
+	Status string
+	UserID string
+	// Sort is "oldest" (default), "newest" or "random"; random is stable
+	// for a given Seed so paging doesn't reshuffle.
+	Sort string
+	Seed string
 }
 
 func (s *Store) ListQuestions(ctx context.Context, f QuestionFilter) (QuestionsPage, error) {
@@ -108,11 +117,31 @@ func (s *Store) ListQuestions(ctx context.Context, f QuestionFilter) (QuestionsP
 		where = append(where, `EXISTS (SELECT 1 FROM question_tags qt JOIN tags t ON t.id = qt.tag_id
 			WHERE qt.question_id = q.id AND t.name = ANY(`+next(f.Tags)+`::text[]))`)
 	}
+	if len(f.Difficulties) > 0 {
+		where = append(where, `q.difficulty::text = ANY(`+next(f.Difficulties)+`::text[])`)
+	}
 	if f.Search != "" {
 		p := next(likePattern(f.Search))
 		where = append(where, `(COALESCE(tr.prompt, q.prompt) ILIKE `+p+` OR EXISTS (
 			SELECT 1 FROM question_tags qt JOIN tags t ON t.id = qt.tag_id
 			WHERE qt.question_id = q.id AND t.name ILIKE `+p+`))`)
+	}
+	if f.UserID != "" {
+		answered := func(extra string) string {
+			return `EXISTS (SELECT 1 FROM question_answers a
+				WHERE a.question_id = q.id AND a.user_id = ` + next(f.UserID) + `::uuid` + extra + `)`
+		}
+		switch f.Status {
+		case "unanswered":
+			where = append(where, "NOT "+answered(""))
+		case "answered":
+			where = append(where, answered(""))
+		case "wrong":
+			where = append(where, answered(" AND NOT a.is_correct"))
+		case "bookmarked":
+			where = append(where, `EXISTS (SELECT 1 FROM bookmarks b
+				WHERE b.question_id = q.id AND b.user_id = `+next(f.UserID)+`::uuid)`)
+		}
 	}
 	cond := ""
 	if len(where) > 0 {
@@ -126,9 +155,16 @@ func (s *Store) ListQuestions(ctx context.Context, f QuestionFilter) (QuestionsP
 		return QuestionsPage{}, err
 	}
 
+	order := `q.created_at, q.id`
+	switch f.Sort {
+	case "newest":
+		order = `q.created_at DESC, q.id DESC`
+	case "random":
+		order = `md5(q.id::text || ` + next(f.Seed) + `::text), q.id`
+	}
 	limit, offset := next(f.PageSize), next((f.Page-1)*f.PageSize)
 	items, err := s.queryQuestions(ctx, f.Locale,
-		questionSelect+cond+` ORDER BY q.created_at, q.id LIMIT `+limit+` OFFSET `+offset, args...)
+		questionSelect+cond+` ORDER BY `+order+` LIMIT `+limit+` OFFSET `+offset, args...)
 	if err != nil {
 		return QuestionsPage{}, err
 	}

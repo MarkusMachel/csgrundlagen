@@ -1,14 +1,15 @@
 import { ChevronLeft, ChevronRight, SearchX } from 'lucide-react';
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useDebounce } from '@/shared/hooks/useDebounce';
 import { EmptyState, ErrorState, Spinner } from '@/shared/ui';
+import { pageWindow } from '@/shared/utils/pageWindow';
 import { useUIStore } from '@/stores/useUIStore';
 
 import { QuestionCard } from './QuestionCard';
+import { emptyFilters, QuestionFilters, type FilterState } from './QuestionFilters';
 import { useQuestions, useTags } from '../hooks/useQuestions';
-
 
 const PAGE_SIZE = 10; // §15 open decision: 10 per page
 
@@ -25,17 +26,15 @@ interface QuestionFeedProps {
  */
 export function QuestionFeed({ mode, selectedIds = [], onToggleSelect }: QuestionFeedProps) {
   const { t } = useTranslation();
-  const tagSelectId = useId();
   const [page, setPage] = useState(1);
-  const [tag, setTag] = useState('');
-  const [search, setSearch] = useState('');
-  const debouncedSearch = useDebounce(search, 300);
+  const [filters, setFilters] = useState<FilterState>(emptyFilters);
+  const debouncedSearch = useDebounce(filters.search, 300);
 
   const { data: tags } = useTags();
   const { data, isPending, isError, refetch } = useQuestions({
+    ...filters,
     page,
     pageSize: PAGE_SIZE,
-    tags: tag ? [tag] : [],
     search: debouncedSearch,
   });
 
@@ -55,47 +54,26 @@ export function QuestionFeed({ mode, selectedIds = [], onToggleSelect }: Questio
 
   return (
     <div className="stack">
-      <div className="toolbar">
-        <div className="field field--grow">
-          <input
-            type="search"
-            className="input"
-            value={search}
-            onChange={(e) => {
-              setSearch(e.target.value);
-              setPage(1);
-            }}
-            placeholder={t('home.searchPlaceholder')}
-            aria-label={t('home.searchPlaceholder')}
-          />
-        </div>
-        <div className="field">
-          <label htmlFor={tagSelectId}>{t('home.filterByTag')}</label>
-          <select
-            id={tagSelectId}
-            className="select"
-            value={tag}
-            onChange={(e) => {
-              setTag(e.target.value);
-              setPage(1);
-            }}
-          >
-            <option value="">{t('home.allTags')}</option>
-            {(tags ?? []).map((tg) => (
-              <option key={tg} value={tg}>
-                {tg}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
+      <QuestionFilters
+        value={filters}
+        onChange={(next) => {
+          setFilters(next);
+          setPage(1);
+        }}
+        allTags={tags ?? []}
+        total={data?.total}
+      />
 
       {isPending ? (
         <Spinner center />
       ) : isError ? (
         <ErrorState onRetry={() => void refetch()} />
       ) : data.items.length === 0 ? (
-        <EmptyState title={t('home.noResults')} description={t('home.noResultsHint')} glyph={<SearchX size={28} />} />
+        <EmptyState
+          title={t('home.noResults')}
+          description={t('home.noResultsHint')}
+          glyph={<SearchX size={28} />}
+        />
       ) : (
         <>
           <div className="stack" data-testid="question-feed">
@@ -120,17 +98,23 @@ export function QuestionFeed({ mode, selectedIds = [], onToggleSelect }: Questio
               >
                 <ChevronLeft size={15} aria-hidden style={{ verticalAlign: '-2px' }} />
               </button>
-              {Array.from({ length: data.totalPages }, (_, i) => i + 1).map((p) => (
-                <button
-                  key={p}
-                  type="button"
-                  className={p === page ? 'page-btn page-btn--current' : 'page-btn'}
-                  aria-current={p === page ? 'page' : undefined}
-                  onClick={() => setPage(p)}
-                >
-                  {p}
-                </button>
-              ))}
+              {pageWindow(page, data.totalPages).map((p, i) =>
+                p === 'gap' ? (
+                  <span key={`gap-${i}`} className="page-gap" aria-hidden>
+                    …
+                  </span>
+                ) : (
+                  <button
+                    key={p}
+                    type="button"
+                    className={p === page ? 'page-btn page-btn--current' : 'page-btn'}
+                    aria-current={p === page ? 'page' : undefined}
+                    onClick={() => setPage(p)}
+                  >
+                    {p}
+                  </button>
+                ),
+              )}
               <button
                 type="button"
                 className="page-btn"

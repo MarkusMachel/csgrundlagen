@@ -5,18 +5,42 @@ import { useUIStore } from '@/stores/useUIStore';
 
 import type { Question, QuestionsPage } from '../types';
 
+export type Difficulty = NonNullable<Question['difficulty']>;
+/** Per-user filters; the API ignores them for anonymous callers. */
+export type QuestionStatus = 'unanswered' | 'answered' | 'wrong' | 'bookmarked';
+export type QuestionSort = 'oldest' | 'newest' | 'random';
+
 export interface QuestionsFilter {
   page?: number;
   pageSize?: number;
+  /** Match any of these tags. */
   tags?: string[];
+  /** Match any of these difficulties. */
+  difficulties?: Difficulty[];
+  status?: QuestionStatus | '';
   search?: string;
+  sort?: QuestionSort;
+  /** Keeps the 'random' order stable while paging. */
+  seed?: string;
 }
 
 export function useQuestions(filter: QuestionsFilter = {}) {
   const locale = useUIStore((s) => s.locale);
-  const { page = 1, pageSize = 10, tags = [], search = '' } = filter;
+  const {
+    page = 1,
+    pageSize = 10,
+    tags = [],
+    difficulties = [],
+    status = '',
+    search = '',
+    sort = 'oldest',
+    seed = '',
+  } = filter;
   return useQuery({
-    queryKey: ['questions', { page, pageSize, tags, search, locale }],
+    queryKey: [
+      'questions',
+      { page, pageSize, tags, difficulties, status, search, sort, seed, locale },
+    ],
     queryFn: () => {
       const params = new URLSearchParams({
         page: String(page),
@@ -25,6 +49,10 @@ export function useQuestions(filter: QuestionsFilter = {}) {
       });
       if (search) params.set('search', search);
       tags.forEach((t) => params.append('tags', t));
+      difficulties.forEach((d) => params.append('difficulty', d));
+      if (status) params.set('status', status);
+      if (sort !== 'oldest') params.set('sort', sort);
+      if (sort === 'random' && seed) params.set('seed', seed);
       return api.get<QuestionsPage>(`/questions?${params}`);
     },
     placeholderData: keepPreviousData,

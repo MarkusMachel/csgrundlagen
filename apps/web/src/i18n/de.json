@@ -44,7 +44,29 @@
     "allTags": "Alle Tags",
     "searchPlaceholder": "Fragen durchsuchen…",
     "noResults": "Keine Fragen entsprechen deinem Filter",
-    "noResultsHint": "Versuche einen anderen Suchbegriff oder Tag."
+    "noResultsHint": "Versuche einen anderen Suchbegriff oder setze Filter zurück.",
+    "filterStatus": "Status",
+    "status": {
+      "all": "Alle Fragen",
+      "unanswered": "Noch nicht beantwortet",
+      "answered": "Beantwortet",
+      "wrong": "Falsch beantwortet",
+      "bookmarked": "Gemerkt"
+    },
+    "sort": "Sortierung",
+    "sortBy": {
+      "oldest": "Älteste zuerst",
+      "newest": "Neueste zuerst",
+      "random": "Zufällig"
+    },
+    "reshuffle": "Neu mischen",
+    "tags": "Tags",
+    "addTag": "+ Tag hinzufügen",
+    "removeTag": "Tag {{tag}} entfernen",
+    "clearFilters": "Filter zurücksetzen",
+    "resultCount_one": "{{count}} Frage",
+    "resultCount_other": "{{count}} Fragen",
+    "searchTags": "Tags durchsuchen…"
   },
   "question": {
     "submit": "Antwort absenden",

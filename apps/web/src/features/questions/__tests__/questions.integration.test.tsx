@@ -9,6 +9,7 @@ import { WeakSpotsPage } from '@/pages/WeakSpotsPage';
 import { loginAsDemo, renderWithProviders } from '@/test-utils';
 
 import { QuestionCard } from '../components/QuestionCard';
+import { QuestionFeed } from '../components/QuestionFeed';
 import type { Question } from '../types';
 
 const q1: Question = {
@@ -44,9 +45,7 @@ describe('answering in the feed (integration)', () => {
     expect(await screen.findByText(/transport layer \(layer 4\)/i)).toBeInTheDocument();
 
     // and the per-user stat was recorded server-side
-    const stat = db.userQuestionStats.find(
-      (s) => s.userId === 'u1' && s.questionId === 'q1',
-    );
+    const stat = db.userQuestionStats.find((s) => s.userId === 'u1' && s.questionId === 'q1');
     expect(stat?.lastAnswerCorrect).toBe(true);
   });
 
@@ -71,6 +70,31 @@ describe('Home page (integration)', () => {
     await waitFor(() => expect(screen.getByTestId('question-feed')).toBeInTheDocument());
     // QotD is rendered with the same answerable Question Component
     expect(qotd.querySelector('[data-testid^="question-card-"]')).not.toBeNull();
+  });
+});
+
+describe('feed filters (integration)', () => {
+  it('narrows by status and difficulty, and clears back to everything', async () => {
+    loginAsDemo();
+    const user = userEvent.setup();
+    renderWithProviders(<QuestionFeed mode="feed" />);
+    const allText = (await screen.findByText(/^\d+ questions$/)).textContent;
+
+    // the demo user's seeded history has two questions with a wrong answer (q5, q12)
+    await user.click(screen.getByRole('button', { name: /^Status/ }));
+    await user.click(screen.getByRole('option', { name: 'Got wrong' }));
+    expect(await screen.findByText('2 questions')).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Clear filters' }));
+    expect(await screen.findByText(allText!)).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'easy' }));
+    expect(screen.getByRole('button', { name: 'easy' })).toHaveAttribute('aria-pressed', 'true');
+    await waitFor(() => {
+      const cards = screen.getAllByTestId(/^question-card-/);
+      expect(cards.length).toBeGreaterThan(0);
+      cards.forEach((card) => expect(card).toHaveTextContent('difficulty: easy'));
+    });
   });
 });
 

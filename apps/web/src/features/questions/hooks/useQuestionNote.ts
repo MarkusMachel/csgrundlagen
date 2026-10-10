@@ -15,8 +15,7 @@ export function useQuestionNote(questionId: string, enabled = true) {
 export function useSaveQuestionNote(questionId: string) {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (body: string) =>
-      api.put<QuestionNote>(`/questions/${questionId}/notes`, { body }),
+    mutationFn: (body: string) => api.put<QuestionNote>(`/questions/${questionId}/notes`, { body }),
     onSuccess: (note) => {
       queryClient.setQueryData(['questionNote', questionId], note);
     },

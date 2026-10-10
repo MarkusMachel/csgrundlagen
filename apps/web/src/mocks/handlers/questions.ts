@@ -4,9 +4,15 @@ import type { AnswerStat, AnswerValue, Question } from '@/features/questions/typ
 import type { MultipleChoiceOption } from '@/features/questions/types';
 import { isWeakStat } from '@/features/weak-spots';
 
-
 import { db, nextId, recordAnswer } from '../db';
-import { allQuestions, currentUser, findQuestion, forbidden, localeOf, unauthorized } from './utils';
+import {
+  allQuestions,
+  currentUser,
+  findQuestion,
+  forbidden,
+  localeOf,
+  unauthorized,
+} from './utils';
 
 interface CreateQuestionBody {
   type: Question['type'];
@@ -53,10 +59,18 @@ export const questionHandlers = [
     const pageSize = Math.min(50, Math.max(1, Number(url.searchParams.get('pageSize') ?? '10')));
     const tags = url.searchParams.getAll('tags').filter(Boolean);
     const search = (url.searchParams.get('search') ?? '').trim().toLowerCase();
+    const difficulties = url.searchParams.getAll('difficulty');
+    const status = url.searchParams.get('status');
+    const sort = url.searchParams.get('sort');
 
     let items = allQuestions(localeOf(request));
     if (tags.length > 0) {
       items = items.filter((q) => tags.some((t) => q.tags.includes(t)));
+    }
+    if (difficulties.length > 0) {
+      items = items.filter(
+        (q) => q.difficulty !== undefined && difficulties.includes(q.difficulty),
+      );
     }
     if (search) {
       items = items.filter(
@@ -64,6 +78,29 @@ export const questionHandlers = [
           q.prompt.toLowerCase().includes(search) ||
           q.tags.some((t) => t.toLowerCase().includes(search)),
       );
+    }
+    // Per-user status, ignored for anonymous callers (same as the Go API).
+    const user = currentUser(request);
+    if (user && status) {
+      const statOf = (id: string) =>
+        db.userQuestionStats.find((s) => s.userId === user.id && s.questionId === id);
+      const keep: Record<string, (q: Question) => boolean> = {
+        unanswered: (q) => !statOf(q.id),
+        answered: (q) => !!statOf(q.id),
+        wrong: (q) => {
+          const s = statOf(q.id);
+          return !!s && s.timesCorrect < s.timesAnswered;
+        },
+        bookmarked: (q) => db.bookmarks.some((b) => b.userId === user.id && b.questionId === q.id),
+      };
+      if (keep[status]) items = items.filter(keep[status]);
+    }
+    if (sort === 'newest') {
+      items = [...items].reverse();
+    } else if (sort === 'random') {
+      const seed = url.searchParams.get('seed') ?? '';
+      const hash = (s: string) => [...s].reduce((acc, ch) => (acc * 31 + ch.charCodeAt(0)) | 0, 7);
+      items = [...items].sort((a, b) => hash(a.id + seed) - hash(b.id + seed));
     }
     const total = items.length;
     const totalPages = Math.max(1, Math.ceil(total / pageSize));

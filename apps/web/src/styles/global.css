@@ -474,7 +474,7 @@ button {
 .app-main {
   max-width: 980px;
   margin: 0 auto;
-  padding: 20px 16px 72px; /* room for the status bar */
+  padding: 20px 16px 100px; /* room for the status bar and the scroll button */
 }
 
 .scroll-fab {
@@ -1013,13 +1013,22 @@ table.data-table {
   display: flex;
   gap: 6px;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+}
+
+.page-gap {
+  min-width: 20px;
+  text-align: center;
+  color: var(--muted);
+  user-select: none;
 }
 
 .page-btn {
   min-width: 36px;
   min-height: 36px;
   padding: 4px 10px;
+  font-variant-numeric: tabular-nums;
   border: 1px solid var(--border);
   background: var(--surface);
   border-radius: 8px;
@@ -1358,6 +1367,227 @@ table.data-table {
 .toolbar .field--grow {
   flex: 1;
   min-width: 200px;
+  justify-content: flex-end; /* line the search box up with the labelled selects */
+}
+
+/* ---------- question filters ---------- */
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filters__sort {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.filters__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+}
+
+.filters__group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.filters__label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-right: 2px;
+}
+
+.filters__summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 30px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.toggle-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 28px;
+  padding: 2px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 12.5px;
+  cursor: pointer;
+  transition:
+    border-color 120ms,
+    background 120ms,
+    color 120ms;
+}
+
+.toggle-chip:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.toggle-chip[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.select--compact {
+  width: auto;
+  min-height: 28px;
+  padding: 2px 10px 2px 12px;
+  font-size: 12.5px;
+  border-radius: 999px;
+}
+
+/* ---------- custom select (shared/ui/Select) ---------- */
+
+.dropdown {
+  position: relative;
+  min-width: 0;
+}
+
+.dropdown__trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  color: var(--text);
+  cursor: pointer;
+  padding-right: 12px; /* keeps the chevron off the edge */
+}
+
+.dropdown__trigger[aria-expanded='true'] {
+  border-color: var(--accent);
+}
+
+.dropdown__value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dropdown__value--placeholder {
+  color: var(--muted);
+}
+
+.dropdown__chevron {
+  color: var(--muted);
+  transition: transform 150ms;
+}
+
+.dropdown__popup {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 40;
+  min-width: 100%;
+  width: max-content;
+  max-width: min(320px, calc(100vw - 32px));
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  animation: dropdown-in 120ms ease-out;
+}
+
+.dropdown__popup--up {
+  top: auto;
+  bottom: calc(100% + 6px);
+}
+
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.dropdown__search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.dropdown__search input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  outline: none;
+  font-size: 13px;
+}
+
+.dropdown__list {
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  overflow-y: auto;
+  outline: none;
+}
+
+.dropdown__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dropdown__option--active {
+  background: var(--accent-soft);
+}
+
+.dropdown__option[aria-selected='true'] {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.dropdown__check {
+  color: var(--accent);
+}
+
+.dropdown__empty {
+  padding: 7px 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* native <select> (forms bound to react-hook-form): same chevron, inset from the edge */
+select.select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='%238a8f98' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+.btn--small {
+  min-height: 28px;
+  padding: 2px 10px;
+  font-size: 12.5px;
+  gap: 4px;
 }
 
 /* ---------- materials grid ---------- */
