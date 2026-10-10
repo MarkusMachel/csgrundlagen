@@ -30,7 +30,8 @@
     "admin": "Admin",
     "account": "Conta",
     "review": "Revisar",
-    "progress": "Progresso"
+    "progress": "Progresso",
+    "design": "Design de sistemas"
   },
   "auth": {
     "loginTitle": "Entrar",
@@ -467,7 +468,8 @@
     },
     "front": "Frente",
     "back": "Verso",
-    "flashcardHint": "A frente é a pergunta, o verso a resposta; quem estuda avalia a si mesmo."
+    "flashcardHint": "A frente é a pergunta, o verso a resposta; quem estuda avalia a si mesmo.",
+    "designSeedOnly": "Os desafios de design de sistemas vêm de arquivos seed (apps/api/seeds) e, por enquanto, são editados lá."
   },
   "code": {
     "copy": "Copiar código",
@@ -810,5 +812,75 @@
     "how": "Você sabia?",
     "knew": "Eu sabia",
     "didnt": "Não sabia"
+  },
+  "design": {
+    "title": "Desafios de design de sistemas",
+    "intro": "Escolha um sistema, desenhe a arquitetura com componentes e veja quais requisitos seu design atende.",
+    "none": "Nenhum desafio ainda",
+    "requirementCount_one": "{{count}} requisito",
+    "requirementCount_other": "{{count}} requisitos",
+    "backToList": "Todos os desafios",
+    "requirements": "Requisitos",
+    "openBoard": "Abrir o quadro",
+    "board": {
+      "label": "Quadro de desenho",
+      "empty": "Arraste componentes da paleta para cá ou clique em um para adicioná-lo.",
+      "hint": "As setas mostram para onde vão as requisições e os dados: arraste da borda direita de um componente para a borda esquerda de outro. Selecione e aperte Delete para remover."
+    },
+    "palette": {
+      "title": "Componentes",
+      "add": "Adicionar {{kind}}"
+    },
+    "lists": {
+      "components": "No quadro ({{count}})",
+      "noComponents": "Nada ainda.",
+      "rename": "Nome para {{name}}",
+      "remove": "Remover {{name}}",
+      "connections": "Setas ({{count}})",
+      "reverse": "Inverter {{edge}}",
+      "disconnect": "Remover seta {{edge}}",
+      "from": "De",
+      "to": "Para",
+      "connect": "Adicionar seta"
+    },
+    "check": "Verificar meu design",
+    "checkAgain": "Verificar de novo",
+    "checkFailed": "Não foi possível verificar o design. Tente de novo.",
+    "stale": "Alterado desde a última verificação.",
+    "tidy": "Organizar",
+    "clear": "Limpar",
+    "clearConfirm": "Remover tudo do quadro?",
+    "view": "Mostrar",
+    "mine": "Meu design",
+    "reference": "Design de referência",
+    "results": {
+      "title": "Resultado",
+      "allPassed": "Todos os requisitos foram atendidos. Muito bem!",
+      "score": "{{score}} de {{total}} verificações obrigatórias passaram.",
+      "practice": "Boas práticas",
+      "passed": "Passou",
+      "failed": "Faltando",
+      "optional": "opcional"
+    },
+    "kinds": {
+      "client": "Cliente",
+      "dns": "DNS",
+      "cdn": "CDN",
+      "load-balancer": "Balanceador de carga",
+      "api-gateway": "API gateway",
+      "rate-limiter": "Limitador de taxa",
+      "auth": "Serviço de autenticação",
+      "service": "Serviço",
+      "websocket": "Gateway WebSocket",
+      "worker": "Worker",
+      "scheduler": "Agendador",
+      "queue": "Fila",
+      "cache": "Cache",
+      "sql": "Banco SQL",
+      "nosql": "Banco NoSQL",
+      "replica": "Réplica de leitura",
+      "object-storage": "Armazenamento de objetos",
+      "search": "Índice de busca"
+    }
   }
 }

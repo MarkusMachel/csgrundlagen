@@ -14,6 +14,7 @@ import { nextReview } from '@/features/review/srs';
 import type { ReviewState } from '@/features/review/types';
 
 import { seedComments } from './seed/comments';
+import { designSeedMaterials, designSeedQuestions } from './seed/design';
 import {
   seedLoginEvents,
   seedSessions,
@@ -185,11 +186,11 @@ function freshDb(): Db {
     drafts: {},
     commentReports: [],
     consents: [],
-    questions: seedQuestions.map((s) => ({
+    questions: [...seedQuestions, ...designSeedQuestions].map((s) => ({
       question: { ...s.question },
       translations: s.translations,
     })),
-    materials: seedMaterials.map((m) => ({
+    materials: [...seedMaterials, ...designSeedMaterials].map((m) => ({
       ...m,
       relatedQuestionIds: m.relatedQuestionIds ? [...m.relatedQuestionIds] : undefined,
     })),
@@ -222,7 +223,7 @@ export function nextId(prefix: string): string {
  * option, each picked option (multi-select), or right/wrong (ordering, output).
  */
 export function statKeys(question: Question, answer: AnswerValue | undefined, correct: boolean) {
-  if (question.type === 'ordering' || question.type === 'output') {
+  if (question.type === 'ordering' || question.type === 'output' || question.type === 'design') {
     return [correct ? 'correct' : 'incorrect'];
   }
   if (question.type === 'multi-select') {

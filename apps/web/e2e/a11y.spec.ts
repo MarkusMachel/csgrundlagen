@@ -18,6 +18,8 @@ const PAGES = [
   { path: '/account' },
   { path: '/admin' },
   { path: '/questions/q1' },
+  { path: '/design' },
+  { path: '/design/q-sd-1', ready: 'design-board' },
 ];
 
 async function audit(page: Page) {

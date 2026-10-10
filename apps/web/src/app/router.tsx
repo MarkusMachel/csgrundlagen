@@ -25,6 +25,11 @@ const CuratedMaterialPage = page(
   () => import('@/pages/CuratedMaterialPage'),
   'CuratedMaterialPage',
 );
+const DesignChallengePage = page(
+  () => import('@/pages/DesignChallengePage'),
+  'DesignChallengePage',
+);
+const DesignListPage = page(() => import('@/pages/DesignListPage'), 'DesignListPage');
 const ForgotPasswordPage = page(() => import('@/pages/ForgotPasswordPage'), 'ForgotPasswordPage');
 const LoginPage = page(() => import('@/pages/LoginPage'), 'LoginPage');
 const MyTestsPage = page(() => import('@/pages/MyTestsPage'), 'MyTestsPage');
@@ -72,6 +77,8 @@ export const router = createBrowserRouter([
           { index: true, element: <HomePage /> },
           { path: 'questions/:id', element: <QuestionPage /> },
           { path: 'materials', element: <CuratedMaterialPage /> },
+          { path: 'design', element: <DesignListPage /> },
+          { path: 'design/:id', element: <DesignChallengePage /> },
           { path: 'review', element: own(<ReviewPage />) },
           { path: 'progress', element: own(<ProgressPage />) },
           { path: 'weak-spots', element: own(<WeakSpotsPage />) },

@@ -30,7 +30,8 @@
     "admin": "Admin",
     "account": "Account",
     "review": "Review",
-    "progress": "Progress"
+    "progress": "Progress",
+    "design": "System design"
   },
   "auth": {
     "loginTitle": "Log in",
@@ -467,7 +468,8 @@
     },
     "front": "Front",
     "back": "Back",
-    "flashcardHint": "The front is the question, the back the answer; learners grade themselves."
+    "flashcardHint": "The front is the question, the back the answer; learners grade themselves.",
+    "designSeedOnly": "System design challenges come from seed files (apps/api/seeds) and are edited there for now."
   },
   "code": {
     "copy": "Copy code",
@@ -810,5 +812,75 @@
     "how": "Did you know it?",
     "knew": "I knew it",
     "didnt": "I didn’t"
+  },
+  "design": {
+    "title": "System design challenges",
+    "intro": "Pick a system, draw its architecture from components and see which requirements your design meets.",
+    "none": "No challenges yet",
+    "requirementCount_one": "{{count}} requirement",
+    "requirementCount_other": "{{count}} requirements",
+    "backToList": "All challenges",
+    "requirements": "Requirements",
+    "openBoard": "Open the drawing board",
+    "board": {
+      "label": "Drawing board",
+      "empty": "Drag components here from the palette, or click one to add it.",
+      "hint": "Arrows point the way requests and data flow: drag from the right edge of a component to the left edge of another. Select and press Delete to remove."
+    },
+    "palette": {
+      "title": "Components",
+      "add": "Add {{kind}}"
+    },
+    "lists": {
+      "components": "On the board ({{count}})",
+      "noComponents": "Nothing yet.",
+      "rename": "Name for {{name}}",
+      "remove": "Remove {{name}}",
+      "connections": "Arrows ({{count}})",
+      "reverse": "Flip {{edge}}",
+      "disconnect": "Remove arrow {{edge}}",
+      "from": "From",
+      "to": "To",
+      "connect": "Add arrow"
+    },
+    "check": "Check my design",
+    "checkAgain": "Check again",
+    "checkFailed": "Couldn't check the design. Try again.",
+    "stale": "Changed since the last check.",
+    "tidy": "Tidy up",
+    "clear": "Clear",
+    "clearConfirm": "Remove everything from the board?",
+    "view": "Show",
+    "mine": "My design",
+    "reference": "Reference design",
+    "results": {
+      "title": "Results",
+      "allPassed": "Every requirement is covered. Nice work!",
+      "score": "{{score}} of {{total}} required checks pass.",
+      "practice": "Good practice",
+      "passed": "Passed",
+      "failed": "Missing",
+      "optional": "optional"
+    },
+    "kinds": {
+      "client": "Client",
+      "dns": "DNS",
+      "cdn": "CDN",
+      "load-balancer": "Load balancer",
+      "api-gateway": "API gateway",
+      "rate-limiter": "Rate limiter",
+      "auth": "Auth service",
+      "service": "Service",
+      "websocket": "WebSocket gateway",
+      "worker": "Worker",
+      "scheduler": "Scheduler",
+      "queue": "Queue",
+      "cache": "Cache",
+      "sql": "SQL database",
+      "nosql": "NoSQL database",
+      "replica": "Read replica",
+      "object-storage": "Object storage",
+      "search": "Search index"
+    }
   }
 }

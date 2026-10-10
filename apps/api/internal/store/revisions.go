@@ -32,7 +32,7 @@ func (q Question) asInput(materialIDs []string) NewQuestion {
 		Type: q.Type, Prompt: q.Prompt, Tags: q.Tags, Difficulty: q.Difficulty, Explanation: q.Explanation,
 		Options: q.Options, CorrectOptionID: q.CorrectOptionID, CorrectOptionIDs: q.CorrectOptionIDs,
 		CorrectAnswer: q.CorrectAnswer, Code: q.Code, CodeLanguage: q.CodeLanguage,
-		ExpectedOutput: q.ExpectedOutput, RelatedMaterialIDs: materialIDs,
+		ExpectedOutput: q.ExpectedOutput, Design: q.Design, RelatedMaterialIDs: materialIDs,
 	}
 	if q.Type == "ordering" && len(q.CorrectOrder) > 0 {
 		// ordering input lists the options in their correct order

@@ -1,0 +1,438 @@
+/* ---------- system design challenges ---------- */
+
+.design-list__items {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+}
+
+.design-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.design-card:hover {
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.design-card__icon {
+  flex: none;
+  color: var(--accent);
+}
+
+.design-card__body {
+  display: grid;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.design-card__title {
+  font-weight: 600;
+}
+
+.design-card__meta {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* the challenge page: the board gets the window's width, like the feed */
+
+.app-main:has(.design-challenge) {
+  max-width: 1600px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.design-challenge {
+  display: grid;
+  gap: 14px;
+}
+
+.design-challenge__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  font-size: 13px;
+}
+
+.design-brief {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+
+.design-difficulty {
+  padding: 1px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.design-brief__requirements {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 4px;
+}
+
+.design-brief__requirements li svg {
+  vertical-align: -3px;
+  margin-right: 6px;
+}
+
+.design-brief__hint {
+  margin: 0;
+  font-size: 13px;
+}
+
+.design-panel__title {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.design-workspace {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr) 260px;
+  gap: 14px;
+  align-items: start;
+}
+
+.design-workspace__main {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.design-palette__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.design-palette__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: grab;
+}
+
+.design-palette__item:hover,
+.design-palette__item:focus-visible {
+  border-color: var(--accent);
+}
+
+.design-palette__item svg {
+  flex: none;
+  color: var(--accent);
+}
+
+.design-canvas {
+  position: relative;
+  height: 560px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.design-canvas .react-flow {
+  --xy-background-color: var(--surface);
+  --xy-edge-stroke: var(--muted);
+  --xy-edge-stroke-selected: var(--accent);
+  --xy-controls-button-background-color: var(--surface);
+  --xy-controls-button-color: var(--text);
+  --xy-controls-button-border-color: var(--border);
+}
+
+.design-canvas__empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 24px;
+  color: var(--muted);
+  text-align: center;
+  pointer-events: none;
+}
+
+.design-node {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 140px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 13px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.design-node--selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+
+.design-node__icon {
+  flex: none;
+  color: var(--accent);
+}
+
+.design-node__text {
+  display: grid;
+  line-height: 1.25;
+}
+
+.design-node__label {
+  font-weight: 600;
+}
+
+.design-node__kind {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.design-node__handle {
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--surface);
+  background: var(--accent);
+}
+
+.design-canvas .design-edge--bad .react-flow__edge-path {
+  stroke: var(--red);
+  stroke-width: 2.5;
+  stroke-dasharray: 6 4;
+}
+
+.design-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.design-actions__stale {
+  font-size: 13px;
+}
+
+.design-lists {
+  display: grid;
+  gap: 18px;
+}
+
+.design-lists__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.design-lists__row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.design-lists__row > svg {
+  flex: none;
+  color: var(--accent);
+}
+
+.design-lists__row .input {
+  flex: 1;
+  min-width: 0;
+}
+
+.design-lists__edge {
+  display: inline-flex;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.design-lists__empty {
+  margin: 0;
+  font-size: 13px;
+}
+
+.design-lists__connect {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 6px 8px;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.design-lists__connect button {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+
+.design-reference {
+  display: grid;
+  gap: 10px;
+}
+
+.design-reference__explanation {
+  margin: 0;
+  max-width: 75ch;
+}
+
+/* results */
+
+.design-results {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.design-results__title {
+  margin: 0;
+}
+
+.design-results__group {
+  display: grid;
+  gap: 6px;
+}
+
+.design-results__requirement {
+  margin: 0;
+  font-size: 15px;
+}
+
+.design-results__rules {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.design-rule {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.design-rule__icon {
+  flex: none;
+  margin-top: 2px;
+}
+
+.design-rule--passed .design-rule__icon {
+  color: var(--green);
+}
+
+.design-rule--failed .design-rule__icon {
+  color: var(--red);
+}
+
+.design-rule__body {
+  display: grid;
+  gap: 2px;
+}
+
+.design-rule__text {
+  font-weight: 600;
+}
+
+.design-rule__optional {
+  margin-left: 8px;
+  padding: 0 6px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.design-rule__why {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.design-rule__read {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+  font-size: 13px;
+}
+
+/* a design challenge shown in a question list */
+
+.design-teaser {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+
+.design-teaser__requirements {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+}
+
+@media (max-width: 1099px) {
+  .design-workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .design-palette__list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .design-palette__item {
+    width: auto;
+  }
+
+  .design-canvas {
+    height: 420px;
+  }
+}
+
+.design-lists .input--small {
+  padding: 4px 8px;
+  font-size: 13px;
+}

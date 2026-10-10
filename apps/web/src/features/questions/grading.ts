@@ -1,3 +1,4 @@
+import { gradeDesign, isDesignGraph } from './design';
 import type { AnswerValue, Question } from './types';
 
 /**
@@ -20,6 +21,8 @@ export function correctAnswerOf(q: Question): AnswerValue {
       return q.expectedOutput;
     case 'flashcard':
       return true; // "I knew it"
+    case 'design':
+      return q.design.reference;
   }
 }
 
@@ -61,6 +64,11 @@ export function isAnswerCorrect(q: Question, given: AnswerValue | undefined): bo
       );
     case 'flashcard':
       return given === true;
+    case 'design': {
+      if (!isDesignGraph(given)) return false;
+      const r = gradeDesign(q.design, given);
+      return r.score === r.total;
+    }
   }
 }
 
@@ -69,11 +77,13 @@ export function canSubmit(q: Question, value: AnswerValue | undefined): boolean 
   if (value === undefined) return false;
   if (q.type === 'multi-select') return Array.isArray(value) && value.length > 0;
   if (q.type === 'output') return typeof value === 'string' && value.trim().length > 0;
+  if (q.type === 'design') return isDesignGraph(value) && value.nodes.length > 0;
   return true;
 }
 
 /** How an answer is stored and counted (option ids joined by commas). */
 export function answerKey(value: AnswerValue | undefined): string {
   if (value === undefined) return 'unanswered';
+  if (isDesignGraph(value)) return 'design';
   return Array.isArray(value) ? value.join(',') : String(value);
 }

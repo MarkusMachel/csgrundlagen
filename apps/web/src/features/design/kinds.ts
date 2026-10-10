@@ -1,0 +1,45 @@
+import {
+  Archive,
+  Clock,
+  Cog,
+  Copy,
+  Database,
+  DatabaseZap,
+  DoorOpen,
+  Earth,
+  Gauge,
+  Globe,
+  KeyRound,
+  Layers,
+  Monitor,
+  Radio,
+  Search,
+  Server,
+  Split,
+  Zap,
+  type LucideIcon,
+} from 'lucide-react';
+
+import type { DesignKind } from '@/features/questions';
+
+/** The icon drawn for each component kind. */
+export const KIND_ICON: Record<DesignKind, LucideIcon> = {
+  client: Monitor,
+  dns: Globe,
+  cdn: Earth,
+  'load-balancer': Split,
+  'api-gateway': DoorOpen,
+  'rate-limiter': Gauge,
+  auth: KeyRound,
+  service: Server,
+  websocket: Radio,
+  worker: Cog,
+  scheduler: Clock,
+  queue: Layers,
+  cache: Zap,
+  sql: Database,
+  nosql: DatabaseZap,
+  replica: Copy,
+  'object-storage': Archive,
+  search: Search,
+};

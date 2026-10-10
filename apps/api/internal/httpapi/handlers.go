@@ -198,6 +198,9 @@ func (s *Server) listQuestions(w http.ResponseWriter, r *http.Request) {
 	if sort := q.Get("sort"); sort == "newest" || sort == "random" {
 		f.Sort = sort
 	}
+	if q.Get("type") == "design" {
+		f.Type = "design"
+	}
 	// Status filters are per user; anonymous callers just get them ignored.
 	switch status := q.Get("status"); status {
 	case "unanswered", "answered", "wrong", "bookmarked":

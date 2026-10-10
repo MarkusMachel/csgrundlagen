@@ -30,7 +30,8 @@
     "admin": "Admin",
     "account": "Konto",
     "review": "Wiederholen",
-    "progress": "Fortschritt"
+    "progress": "Fortschritt",
+    "design": "Systemdesign"
   },
   "auth": {
     "loginTitle": "Anmelden",
@@ -467,7 +468,8 @@
     },
     "front": "Vorderseite",
     "back": "Rückseite",
-    "flashcardHint": "Die Vorderseite ist die Frage, die Rückseite die Antwort; Lernende bewerten sich selbst."
+    "flashcardHint": "Die Vorderseite ist die Frage, die Rückseite die Antwort; Lernende bewerten sich selbst.",
+    "designSeedOnly": "Systemdesign-Aufgaben stammen aus Seed-Dateien (apps/api/seeds) und werden vorerst dort bearbeitet."
   },
   "code": {
     "copy": "Code kopieren",
@@ -810,5 +812,75 @@
     "how": "Wusstest du es?",
     "knew": "Gewusst",
     "didnt": "Nicht gewusst"
+  },
+  "design": {
+    "title": "Systemdesign-Aufgaben",
+    "intro": "Wähle ein System, zeichne seine Architektur aus Bausteinen und sieh, welche Anforderungen dein Entwurf erfüllt.",
+    "none": "Noch keine Aufgaben",
+    "requirementCount_one": "{{count}} Anforderung",
+    "requirementCount_other": "{{count}} Anforderungen",
+    "backToList": "Alle Aufgaben",
+    "requirements": "Anforderungen",
+    "openBoard": "Zeichenfläche öffnen",
+    "board": {
+      "label": "Zeichenfläche",
+      "empty": "Zieh Bausteine aus der Palette hierher oder klick einen an, um ihn hinzuzufügen.",
+      "hint": "Pfeile zeigen, wohin Anfragen und Daten fließen: vom rechten Rand eines Bausteins zum linken Rand eines anderen ziehen. Auswählen und Entf drücken zum Entfernen."
+    },
+    "palette": {
+      "title": "Bausteine",
+      "add": "{{kind}} hinzufügen"
+    },
+    "lists": {
+      "components": "Auf der Fläche ({{count}})",
+      "noComponents": "Noch nichts.",
+      "rename": "Name für {{name}}",
+      "remove": "{{name}} entfernen",
+      "connections": "Pfeile ({{count}})",
+      "reverse": "{{edge}} umdrehen",
+      "disconnect": "Pfeil {{edge}} entfernen",
+      "from": "Von",
+      "to": "Nach",
+      "connect": "Pfeil hinzufügen"
+    },
+    "check": "Entwurf prüfen",
+    "checkAgain": "Erneut prüfen",
+    "checkFailed": "Der Entwurf konnte nicht geprüft werden. Versuch es noch einmal.",
+    "stale": "Seit der letzten Prüfung geändert.",
+    "tidy": "Aufräumen",
+    "clear": "Leeren",
+    "clearConfirm": "Alles von der Fläche entfernen?",
+    "view": "Anzeigen",
+    "mine": "Mein Entwurf",
+    "reference": "Referenzentwurf",
+    "results": {
+      "title": "Ergebnis",
+      "allPassed": "Alle Anforderungen sind abgedeckt. Gut gemacht!",
+      "score": "{{score}} von {{total}} Pflichtprüfungen bestanden.",
+      "practice": "Gute Praxis",
+      "passed": "Bestanden",
+      "failed": "Fehlt",
+      "optional": "optional"
+    },
+    "kinds": {
+      "client": "Client",
+      "dns": "DNS",
+      "cdn": "CDN",
+      "load-balancer": "Load Balancer",
+      "api-gateway": "API-Gateway",
+      "rate-limiter": "Rate Limiter",
+      "auth": "Auth-Dienst",
+      "service": "Dienst",
+      "websocket": "WebSocket-Gateway",
+      "worker": "Worker",
+      "scheduler": "Scheduler",
+      "queue": "Warteschlange",
+      "cache": "Cache",
+      "sql": "SQL-Datenbank",
+      "nosql": "NoSQL-Datenbank",
+      "replica": "Lesereplikat",
+      "object-storage": "Objektspeicher",
+      "search": "Suchindex"
+    }
   }
 }

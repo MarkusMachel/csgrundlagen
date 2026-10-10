@@ -1,7 +1,8 @@
 import { http, HttpResponse } from 'msw';
 
+import { DESIGN_KINDS, gradeDesign, isDesignGraph } from '@/features/questions/design';
 import { correctAnswerOf, isAnswerCorrect } from '@/features/questions/grading';
-import type { AnswerStat, AnswerValue, Question } from '@/features/questions/types';
+import type { AnswerStat, AnswerValue, DesignSpec, Question } from '@/features/questions/types';
 import type { MultipleChoiceOption } from '@/features/questions/types';
 import { isWeakStat } from '@/features/weak-spots';
 
@@ -28,6 +29,7 @@ export interface CreateQuestionBody {
   code?: string;
   codeLanguage?: string;
   expectedOutput?: string;
+  design?: DesignSpec;
   relatedMaterialIds?: string[];
 }
 
@@ -73,27 +75,80 @@ export function questionProblem(n: Partial<CreateQuestionBody>): string | null {
         return 'output questions need a codeLanguage such as js or go';
       }
       return n.expectedOutput === undefined ? 'output questions need expectedOutput' : null;
+    case 'design':
+      return designProblem(n.design);
     case 'ordering':
     case 'flashcard':
       return null;
     default:
-      return 'type must be multiple-choice, true-false, multi-select, ordering, output or flashcard';
+      return 'type must be multiple-choice, true-false, multi-select, ordering, output, flashcard or design';
   }
 }
 
-/** Like the API: an option id, a boolean, a list of option ids or text. */
+/** Mirrors store.DesignSpec.validate. */
+function designProblem(d: DesignSpec | undefined): string | null {
+  if (!d) return 'design questions need a design (requirements, rules and a reference)';
+  if (!d.requirements?.length || !d.rules?.length) {
+    return 'a design needs at least one requirement and one rule';
+  }
+  const reqs = new Set(d.requirements.map((r) => r.id));
+  if (reqs.size !== d.requirements.length || d.requirements.some((r) => !r.id || !r.text?.trim())) {
+    return 'requirements need unique ids and text';
+  }
+  const known = (kinds: string[] = []) =>
+    kinds.every((k) => (DESIGN_KINDS as string[]).includes(k));
+  const ruleIds = new Set<string>();
+  for (const r of d.rules) {
+    if (!r.id || ruleIds.has(r.id)) return 'rules need unique ids';
+    ruleIds.add(r.id);
+    if (r.requirement && !reqs.has(r.requirement)) {
+      return `rule ${r.id} names an unknown requirement`;
+    }
+    if (!r.text?.trim() || !r.explanation?.trim())
+      return `rule ${r.id} needs text and an explanation`;
+    if (!known(r.of) || !known(r.from) || !known(r.to) || !known(r.via)) {
+      return `rule ${r.id} uses an unknown component kind`;
+    }
+    if (r.kind === 'has') {
+      if (!r.of?.length) return `rule ${r.id}: has needs of`;
+    } else if (r.kind === 'edge' || r.kind === 'no-edge' || r.kind === 'path') {
+      if (!r.from?.length || !r.to?.length) return `rule ${r.id}: ${r.kind} needs from and to`;
+    } else {
+      return `rule ${r.id}: kind must be has, edge, path or no-edge`;
+    }
+  }
+  const nodes = new Set<string>();
+  for (const n of d.reference?.nodes ?? []) {
+    if (!n.id || nodes.has(n.id) || !known([n.kind])) {
+      return 'reference components need unique ids and known kinds';
+    }
+    nodes.add(n.id);
+  }
+  if ((d.reference?.edges ?? []).some((e) => !nodes.has(e.from) || !nodes.has(e.to))) {
+    return 'reference arrows must connect reference components';
+  }
+  const result = gradeDesign(d, d.reference);
+  const failed = result.rules.findIndex((r) => !r.passed);
+  return failed >= 0
+    ? `the reference design fails rule ${d.rules[failed].id} (${d.rules[failed].text})`
+    : null;
+}
+
+/** Like the API: an option id, a boolean, a list of option ids, text or a design. */
 export function isAnswerValue(answer: unknown): answer is AnswerValue {
   return (
     typeof answer === 'string' ||
     typeof answer === 'boolean' ||
-    (Array.isArray(answer) && answer.every((a) => typeof a === 'string'))
+    (Array.isArray(answer) && answer.every((a) => typeof a === 'string')) ||
+    isDesignGraph(answer)
   );
 }
 
 export const questionHandlers = [
   http.get('/api/questions/daily', ({ request }) => {
     // Deterministic by calendar date so it survives refreshes (§7).
-    const questions = allQuestions(localeOf(request));
+    // design challenges need the drawing board, so they're never the daily question
+    const questions = allQuestions(localeOf(request)).filter((q) => q.type !== 'design');
     const today = new Date().toISOString().slice(0, 10);
     const hash = [...today].reduce((acc, ch) => acc * 31 + ch.charCodeAt(0), 7);
     const question = questions[Math.abs(hash) % questions.length];
@@ -128,6 +183,12 @@ export const questionHandlers = [
     const sort = url.searchParams.get('sort');
 
     let items = allQuestions(localeOf(request));
+    // design challenges are listed on their own (type=design), like the API
+    if (url.searchParams.get('type') === 'design') {
+      items = items.filter((q) => q.type === 'design');
+    } else if (ids.length === 0) {
+      items = items.filter((q) => q.type !== 'design');
+    }
     if (ids.length > 0) {
       // a specific set, e.g. a test's questions, in the order asked for
       items = ids
@@ -214,6 +275,10 @@ export const questionHandlers = [
       correctAnswer,
       nextReviewAt,
       feedback: feedbackFor(question, answer),
+      design:
+        question.type === 'design' && isDesignGraph(answer)
+          ? gradeDesign(question.design, answer)
+          : undefined,
     });
   }),
 
@@ -473,6 +538,8 @@ export function buildQuestion(id: string, body: CreateQuestionBody): Question {
       };
     case 'flashcard':
       return { ...base, type: 'flashcard' };
+    case 'design':
+      return { ...base, type: 'design', design: body.design! };
     default:
       return { ...base, type: 'true-false', correctAnswer: body.correctAnswer ?? true };
   }

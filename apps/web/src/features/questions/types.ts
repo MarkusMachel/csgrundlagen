@@ -1,5 +1,11 @@
 export type QuestionType =
-  'multiple-choice' | 'true-false' | 'multi-select' | 'ordering' | 'output' | 'flashcard';
+  | 'multiple-choice'
+  | 'true-false'
+  | 'multi-select'
+  | 'ordering'
+  | 'output'
+  | 'flashcard'
+  | 'design';
 
 export interface BaseQuestion {
   id: string;
@@ -69,19 +75,91 @@ export interface FlashcardQuestion extends BaseQuestion {
   type: 'flashcard';
 }
 
+/** A component a design is built from (see DESIGN_KINDS in design.ts). */
+export type DesignKind =
+  | 'client'
+  | 'dns'
+  | 'cdn'
+  | 'load-balancer'
+  | 'api-gateway'
+  | 'service'
+  | 'worker'
+  | 'cache'
+  | 'sql'
+  | 'nosql'
+  | 'replica'
+  | 'queue'
+  | 'object-storage'
+  | 'search'
+  | 'rate-limiter'
+  | 'auth'
+  | 'websocket'
+  | 'scheduler';
+
+/** A drawn system: components and arrows in the direction requests and data flow. */
+export interface DesignGraph {
+  nodes: { id: string; kind: DesignKind; label?: string }[];
+  edges: { from: string; to: string }[];
+}
+
+/**
+ * One check on a design (mirrors store.DesignRule):
+ * has      at least `min` (default 1) components of a kind in `of`
+ * edge     a `from` component connects directly to a `to` one
+ * path     `from` reaches `to` following the arrows, through a `via` kind if set
+ * no-edge  no `from` component connects directly to a `to` one
+ * Optional rules are good practice: shown in the result, not needed to pass.
+ */
+export interface DesignRule {
+  id: string;
+  requirement?: string;
+  kind: 'has' | 'edge' | 'path' | 'no-edge';
+  of?: DesignKind[];
+  min?: number;
+  from?: DesignKind[];
+  to?: DesignKind[];
+  via?: DesignKind[];
+  optional?: boolean;
+  text: string;
+  explanation: string;
+  materialId?: string;
+}
+
+export interface DesignSpec {
+  requirements: { id: string; text: string }[];
+  rules: DesignRule[];
+  /** A model answer that passes every rule, shown after submitting. */
+  reference: DesignGraph;
+}
+
+/** Design the system in the prompt on a drawing board; checked against rules. */
+export interface DesignQuestion extends BaseQuestion {
+  type: 'design';
+  design: DesignSpec;
+}
+
+export interface DesignResult {
+  /** Required rules passed, out of `total` required rules. */
+  score: number;
+  total: number;
+  rules: { id: string; passed: boolean }[];
+}
+
 export type Question =
   | MultipleChoiceQuestion
   | TrueFalseQuestion
   | MultiSelectQuestion
   | OrderingQuestion
   | OutputQuestion
-  | FlashcardQuestion;
+  | FlashcardQuestion
+  | DesignQuestion;
 
 /**
  * An answer: an option id (multiple choice), a boolean (true/false), option
- * ids (multi-select: the picked set; ordering: the order) or text (output).
+ * ids (multi-select: the picked set; ordering: the order), text (output) or a
+ * drawn system (design).
  */
-export type AnswerValue = string | boolean | string[];
+export type AnswerValue = string | boolean | string[] | DesignGraph;
 
 export interface QuestionComment {
   id: string;
@@ -153,6 +231,8 @@ export interface SubmitAnswerResult {
   feedback?: OptionFeedback[];
   /** Graded on the device while offline; sent to the server later. */
   offline?: boolean;
+  /** Rule by rule, for design questions. */
+  design?: DesignResult;
 }
 
 export interface QuestionsPage {

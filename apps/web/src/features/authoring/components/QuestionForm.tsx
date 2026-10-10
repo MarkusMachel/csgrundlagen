@@ -74,7 +74,8 @@ type FormValues = QuestionFormValues;
 
 interface QuestionFormProps {
   /** Edit this question instead of creating a new one. */
-  question?: Question;
+  /** Design challenges aren't edited here (they come from seed files). */
+  question?: FormQuestion;
   onSaved?: (id: string) => void;
   /** Shows a Cancel button (edit mode). */
   onCancel?: () => void;
@@ -96,7 +97,10 @@ const EMPTY: FormValues = {
   relatedMaterialIds: [],
 };
 
-function valuesFrom(q: Question): FormValues {
+/** The question types this form edits. */
+export type FormQuestion = Exclude<Question, { type: 'design' }>;
+
+function valuesFrom(q: FormQuestion): FormValues {
   return {
     ...EMPTY,
     type: q.type,
@@ -108,7 +112,7 @@ function valuesFrom(q: Question): FormValues {
   };
 }
 
-function answerValuesFrom(q: Question): Partial<FormValues> {
+function answerValuesFrom(q: FormQuestion): Partial<FormValues> {
   const labels = (ids: string[], options: { id: string; label: string }[]) =>
     ids.map((id) => ({ label: options.find((o) => o.id === id)?.label ?? '' }));
   switch (q.type) {
