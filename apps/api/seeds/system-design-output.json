@@ -1,0 +1,927 @@
+{
+  "name": "System design: predict the output",
+  "materials": [
+    {
+      "key": "sdp",
+      "type": "link",
+      "title": "The System Design Primer",
+      "url": "https://github.com/donnemartin/system-design-primer",
+      "author": "Donne Martin",
+      "description": "Open-source guide to scalability, caching, load balancing, sharding and back-of-the-envelope estimates."
+    },
+    {
+      "key": "wiki-token",
+      "type": "article",
+      "title": "Token bucket",
+      "url": "https://en.wikipedia.org/wiki/Token_bucket",
+      "author": "Wikipedia",
+      "description": "How a token bucket allows bursts up to its capacity while enforcing an average rate."
+    },
+    {
+      "key": "wiki-leaky",
+      "type": "article",
+      "title": "Leaky bucket",
+      "url": "https://en.wikipedia.org/wiki/Leaky_bucket",
+      "author": "Wikipedia",
+      "description": "The leaky bucket algorithm as a meter and as a queue that smooths output to a constant rate."
+    },
+    {
+      "key": "wiki-cache-repl",
+      "type": "article",
+      "title": "Cache replacement policies",
+      "url": "https://en.wikipedia.org/wiki/Cache_replacement_policies",
+      "author": "Wikipedia",
+      "description": "Overview of eviction policies such as LRU, LFU and FIFO."
+    },
+    {
+      "key": "wiki-ch",
+      "type": "article",
+      "title": "Consistent hashing",
+      "url": "https://en.wikipedia.org/wiki/Consistent_hashing",
+      "author": "Wikipedia",
+      "description": "Hash rings, virtual nodes, and why only a fraction of keys move when servers change."
+    },
+    {
+      "key": "wiki-bloom",
+      "type": "article",
+      "title": "Bloom filter",
+      "url": "https://en.wikipedia.org/wiki/Bloom_filter",
+      "author": "Wikipedia",
+      "description": "Probabilistic set membership with false positives, no false negatives, and no deletion."
+    },
+    {
+      "key": "wiki-vc",
+      "type": "article",
+      "title": "Vector clock",
+      "url": "https://en.wikipedia.org/wiki/Vector_clock",
+      "author": "Wikipedia",
+      "description": "Detecting causality and concurrency between events in a distributed system."
+    },
+    {
+      "key": "wiki-lamport",
+      "type": "article",
+      "title": "Lamport timestamp",
+      "url": "https://en.wikipedia.org/wiki/Lamport_timestamp",
+      "author": "Wikipedia",
+      "description": "Logical clocks that order events consistently with message passing."
+    },
+    {
+      "key": "wiki-quorum",
+      "type": "article",
+      "title": "Quorum (distributed computing)",
+      "url": "https://en.wikipedia.org/wiki/Quorum_(distributed_computing)",
+      "author": "Wikipedia",
+      "description": "Read and write quorums and why overlapping quorums give consistency."
+    },
+    {
+      "key": "wiki-snowflake",
+      "type": "article",
+      "title": "Snowflake ID",
+      "url": "https://en.wikipedia.org/wiki/Snowflake_ID",
+      "author": "Wikipedia",
+      "description": "The 64-bit layout of timestamp, machine id and sequence used for sortable unique IDs."
+    },
+    {
+      "key": "fowler-cb",
+      "type": "article",
+      "title": "CircuitBreaker",
+      "url": "https://martinfowler.com/bliki/CircuitBreaker.html",
+      "author": "Martin Fowler",
+      "description": "The closed, open and half-open states of the circuit breaker pattern."
+    },
+    {
+      "key": "aws-backoff",
+      "type": "article",
+      "title": "Timeouts, retries, and backoff with jitter",
+      "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+      "author": "Marc Brooker (Amazon Builders' Library)",
+      "description": "How Amazon uses timeouts, capped exponential backoff and jitter, and why retries amplify load."
+    },
+    {
+      "key": "aws-idem",
+      "type": "article",
+      "title": "Making retries safe with idempotent APIs",
+      "url": "https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/",
+      "author": "Malcolm Featonby (Amazon Builders' Library)",
+      "description": "Using client request tokens so that retried mutations take effect only once."
+    },
+    {
+      "key": "kafka-docs",
+      "type": "link",
+      "title": "Apache Kafka documentation",
+      "url": "https://kafka.apache.org/documentation/",
+      "author": "Apache Software Foundation",
+      "description": "Official docs on partitions, keys, consumer groups, offsets and delivery semantics."
+    },
+    {
+      "key": "sre-avail",
+      "type": "article",
+      "title": "Availability Table",
+      "url": "https://sre.google/sre-book/availability-table/",
+      "author": "Google SRE Book",
+      "description": "How much downtime each availability level allows per year, quarter, month and day."
+    }
+  ],
+  "questions": [
+    {
+      "type": "output",
+      "prompt": "Predict the output: a fixed-window rate limiter (3 requests per 10-second window) receives requests around a window boundary.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "code": "const LIMIT = 3, WINDOW = 10;\nconst counts = new Map();\nfunction allow(t) {\n  const w = Math.floor(t / WINDOW);\n  const c = counts.get(w) ?? 0;\n  if (c >= LIMIT) return false;\n  counts.set(w, c + 1);\n  return true;\n}\nconst times = [7, 8, 9, 10, 11, 12, 13];\nconst out = times.map(t => (allow(t) ? \"A\" : \"D\")).join(\"\");\nconsole.log(out);\nconsole.log(\"allowed in [7,12]:\", [...out].filter((r, i) => times[i] <= 12 && r === \"A\").length);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "AAAAAAD\nallowed in [7,12]: 6\n",
+      "explanation": "Requests at 7, 8 and 9 fall in window 0 (floor(t/10) = 0) and use its 3 slots. At t = 10 a new window starts with a fresh counter, so 10, 11 and 12 are also allowed; only 13 (the 4th request in window 1) is denied. That gives 6 allowed requests within 6 seconds, twice the intended limit: the classic burst at a fixed-window boundary.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a sliding-window-log rate limiter (3 requests per 10 seconds) that keeps the timestamps of accepted requests.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\nfunc main() {\n\tconst limit, window = 3, 10\n\tvar log []int\n\tvar sb strings.Builder\n\tfor _, t := range []int{7, 8, 9, 10, 11, 12, 17, 18} {\n\t\tkept := log[:0]\n\t\tfor _, x := range log {\n\t\t\tif t-x < window {\n\t\t\t\tkept = append(kept, x)\n\t\t\t}\n\t\t}\n\t\tlog = kept\n\t\tif len(log) < limit {\n\t\t\tlog = append(log, t)\n\t\t\tsb.WriteString(\"A\")\n\t\t} else {\n\t\t\tsb.WriteString(\"D\")\n\t\t}\n\t}\n\tfmt.Println(sb.String())\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "AAADDDAA\n",
+      "explanation": "7, 8 and 9 are accepted. At 10, 11 and 12 all three logged timestamps are still less than 10 seconds old, so those are denied; unlike a fixed window, crossing t = 10 does not reset anything. At 17 the entry 7 is dropped (17 - 7 = 10 is not < 10), leaving 8 and 9, so 17 is accepted. At 18 the entry 8 is dropped, leaving 9 and 17, so 18 is accepted too.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a token bucket with capacity 3 that refills 0.5 tokens per second, starting full at t = 0.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "code": "const CAPACITY = 3, RATE = 0.5; // tokens per second\nlet tokens = CAPACITY, last = 0;\nfunction allow(now) {\n  tokens = Math.min(CAPACITY, tokens + (now - last) * RATE);\n  last = now;\n  if (tokens >= 1) { tokens -= 1; return \"A\"; }\n  return \"D\";\n}\nconst times = [0, 0, 0, 0, 1, 2, 3, 6, 6, 6, 6];\nconsole.log(times.map(allow).join(\"\"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "AAADDADAADD\n",
+      "explanation": "At t = 0 the full bucket allows a burst of 3 and the 4th request is denied. At t = 1 only 0.5 tokens have accumulated (denied); at t = 2 there is 1.0 token (allowed, back to 0). At t = 3 there is 0.5 (denied). From t = 3 to t = 6 another 1.5 tokens arrive, so there are 2.0 tokens: two requests are allowed and the last two are denied.",
+      "materials": [
+        "wiki-token"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a leaky bucket that queues at most 2 requests and sends exactly 1 request per tick.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tconst capacity = 2\n\tqueue, sent, dropped := 0, 0, 0\n\tfor _, arrivals := range []int{4, 0, 3, 0, 0} {\n\t\tfor i := 0; i < arrivals; i++ {\n\t\t\tif queue < capacity {\n\t\t\t\tqueue++\n\t\t\t} else {\n\t\t\t\tdropped++\n\t\t\t}\n\t\t}\n\t\tif queue > 0 {\n\t\t\tqueue--\n\t\t\tsent++\n\t\t}\n\t}\n\tfmt.Println(\"sent:\", sent, \"dropped:\", dropped, \"queued:\", queue)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "sent: 4 dropped: 3 queued: 0\n",
+      "explanation": "Tick 0: 4 arrive, 2 fit in the queue and 2 are dropped; 1 leaks out (queue 1). Tick 1: the remaining one leaks (queue 0). Tick 2: 3 arrive, 2 fit and 1 is dropped; 1 leaks (queue 1). Tick 3: the last one leaks. Tick 4: nothing to send. The output rate never exceeds 1 per tick, so bursts beyond the queue size are dropped: 4 sent, 3 dropped.",
+      "materials": [
+        "wiki-leaky"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an LRU cache of capacity 2 built on a JavaScript Map, which remembers insertion order.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "code": "class LRU {\n  constructor(cap) { this.cap = cap; this.map = new Map(); }\n  get(k) {\n    if (!this.map.has(k)) return -1;\n    const v = this.map.get(k);\n    this.map.delete(k);\n    this.map.set(k, v);\n    return v;\n  }\n  put(k, v) {\n    this.map.delete(k);\n    this.map.set(k, v);\n    if (this.map.size > this.cap) this.map.delete(this.map.keys().next().value);\n  }\n}\nconst c = new LRU(2);\nc.put(\"a\", 1); c.put(\"b\", 2);\nc.get(\"a\");\nc.put(\"c\", 3);\nconsole.log(c.get(\"b\"), [...c.map.keys()].join(\",\"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "-1 a,c\n",
+      "explanation": "A Map iterates in insertion order, so deleting and re-inserting a key on each access moves it to the end (most recently used). After get(\"a\") the order is b, a. Putting c makes the size 3, so the first key, b, is evicted, leaving a, c. get(\"b\") then misses and returns -1.",
+      "materials": [
+        "wiki-cache-repl"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: average read latency of a cache with a 1 ms hit and a 100 ms miss at two different hit ratios.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\thitMs, missMs := 1.0, 100.0\n\tfor _, ratio := range []float64{0.90, 0.99} {\n\t\tavg := ratio*hitMs + (1-ratio)*missMs\n\t\tfmt.Printf(\"hit ratio %.2f -> %.2f ms\\n\", ratio, avg)\n\t}\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "hit ratio 0.90 -> 10.90 ms\nhit ratio 0.99 -> 1.99 ms\n",
+      "explanation": "Average latency is hit% x hit cost + miss% x miss cost. At 90% hits: 0.9 x 1 + 0.1 x 100 = 10.9 ms. At 99%: 0.99 x 1 + 0.01 x 100 = 1.99 ms. Going from 90% to 99% looks like a small change but cuts the average latency more than five times, because misses dominate the cost.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an LFU cache of capacity 2 that breaks frequency ties by least recent use.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "code": "var cache = new Lfu(2);\ncache.Put(\"a\"); cache.Put(\"b\");\ncache.Get(\"a\"); cache.Get(\"a\"); cache.Get(\"b\");\ncache.Put(\"c\");\ncache.Get(\"c\");\ncache.Put(\"d\");\nConsole.WriteLine(string.Join(\",\", cache.Keys()));\n\nclass Lfu(int capacity)\n{\n    readonly Dictionary<string, (int Freq, int LastUsed)> items = new();\n    int clock;\n    public void Get(string k)\n    {\n        if (items.TryGetValue(k, out var e)) items[k] = (e.Freq + 1, ++clock);\n    }\n    public void Put(string k)\n    {\n        if (!items.ContainsKey(k) && items.Count == capacity)\n        {\n            var victim = items.OrderBy(p => p.Value.Freq).ThenBy(p => p.Value.LastUsed).First().Key;\n            Console.WriteLine($\"evict {victim}\");\n            items.Remove(victim);\n        }\n        items[k] = items.TryGetValue(k, out var e) ? (e.Freq + 1, ++clock) : (1, ++clock);\n    }\n    public IEnumerable<string> Keys() => items.Keys.OrderBy(k => k);\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "evict b\nevict c\na,d\n",
+      "explanation": "After the gets, a has frequency 3 and b has frequency 2. Putting c evicts the least frequently used key, b; c starts at frequency 1 and its get raises it to 2. Putting d now compares a (3) with c (2) and evicts c. LFU protects the long-time favourite a, while newer keys are evicted quickly because their counts start low.",
+      "materials": [
+        "wiki-cache-repl"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a cache entry with a 5-second TTL, read with a fake clock.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "code": "let now = 0;\nconst store = new Map();\nconst set = (k, v, ttl) => store.set(k, { v, expiresAt: now + ttl });\nconst get = k => {\n  const e = store.get(k);\n  if (!e) return \"miss\";\n  if (now >= e.expiresAt) { store.delete(k); return \"expired\"; }\n  return e.v;\n};\nset(\"session\", \"alice\", 5);\nnow = 4; console.log(get(\"session\"));\nnow = 5; console.log(get(\"session\"));\nnow = 6; console.log(get(\"session\"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "alice\nexpired\nmiss\n",
+      "explanation": "The entry expires at 0 + 5 = 5. At t = 4 it is still valid. At t = 5 the check now >= expiresAt is true, so it is reported expired and deleted lazily on that read. At t = 6 the key is gone, so the lookup is a plain miss.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: cache-aside reads, with the cache entry deleted when the database is updated.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tdb := map[string]string{\"a\": \"1\"}\n\tcache := map[string]string{}\n\thits, misses := 0, 0\n\tread := func(k string) string {\n\t\tif v, ok := cache[k]; ok {\n\t\t\thits++\n\t\t\treturn v\n\t\t}\n\t\tmisses++\n\t\tv := db[k]\n\t\tcache[k] = v\n\t\treturn v\n\t}\n\twrite := func(k, v string) { db[k] = v; delete(cache, k) }\n\n\tread(\"a\")\n\tread(\"a\")\n\twrite(\"a\", \"2\")\n\tfmt.Println(read(\"a\"), read(\"a\"))\n\tfmt.Println(\"hits:\", hits, \"misses:\", misses)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "2 2\nhits: 2 misses: 2\n",
+      "explanation": "The first read misses and loads \"1\" into the cache; the second hits. The write updates the database and deletes the cache entry, so the next read misses again and loads the new value \"2\", and the read after it hits. Total: 2 hits and 2 misses, and no stale value is returned.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: database writes for write-through versus write-back caching, where write-back flushes dirty keys after every 3 writes.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "code": "const writes = [\"x\", \"x\", \"x\", \"y\", \"x\", \"y\"];\nlet writeThrough = 0, writeBack = 0;\nconst dirty = new Set();\nwrites.forEach((key, i) => {\n  writeThrough++;            // write-through: cache and DB on every write\n  dirty.add(key);            // write-back: only mark the key dirty\n  if ((i + 1) % 3 === 0) {   // flush dirty keys after every 3 writes\n    writeBack += dirty.size;\n    dirty.clear();\n  }\n});\nconsole.log(writeThrough, writeBack);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "6 3\n",
+      "explanation": "Write-through sends every one of the 6 writes to the database. Write-back only marks keys dirty: the first flush sees just {x} (1 DB write), the second sees {y, x} (2 DB writes). Repeated writes to the same key collapse into one, so write-back does 3 DB writes, at the cost of losing unflushed data if the cache dies.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a consistent-hash ring with nodes at fixed positions and a key hash of (sum of character codes) mod 100.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\ntype node struct {\n\tname string\n\tpos  int\n}\n\nfunc hash(s string) int {\n\th := 0\n\tfor _, c := range s {\n\t\th += int(c)\n\t}\n\treturn h % 100\n}\n\nfunc lookup(ring []node, key string) string {\n\th := hash(key)\n\tfor _, n := range ring {\n\t\tif n.pos >= h {\n\t\t\treturn n.name\n\t\t}\n\t}\n\treturn ring[0].name\n}\n\nfunc main() {\n\tring := []node{{\"A\", 20}, {\"B\", 40}, {\"C\", 60}} // sorted by position\n\tvar out []string\n\tfor _, k := range []string{\"cat\", \"emu\", \"owl\", \"lynx\", \"stork\", \"ace\"} {\n\t\tout = append(out, fmt.Sprintf(\"%s:%d:%s\", k, hash(k), lookup(ring, k)))\n\t}\n\tfmt.Println(strings.Join(out, \" \"))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "cat:12:A emu:27:B owl:38:B lynx:59:C stork:63:A ace:97:A\n",
+      "explanation": "Each key goes to the first node clockwise whose position is >= the key's hash. cat (312 mod 100 = 12) goes to A at 20; emu (27) and owl (38) go to B at 40; lynx (59) goes to C at 60. stork (63) and ace (97) are past the last node, so they wrap around the ring to the first node, A.",
+      "materials": [
+        "wiki-ch"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a consistent-hash ring with two virtual nodes per server, before and after server C joins.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "code": "const hash = s => [...s].reduce((h, c) => h + c.charCodeAt(0), 0) % 100;\nconst lookup = (ring, key) => {\n  const sorted = [...ring].sort((a, b) => a[0] - b[0]);\n  return (sorted.find(([pos]) => pos >= hash(key)) ?? sorted[0])[1];\n};\nconst before = [[10, \"A\"], [60, \"A\"], [35, \"B\"], [85, \"B\"]];\nconst after = [...before, [20, \"C\"], [96, \"C\"]];\nfor (const key of [\"cat\", \"emu\", \"lynx\", \"stork\", \"cab\", \"ace\"]) {\n  const from = lookup(before, key), to = lookup(after, key);\n  if (from !== to) console.log(`${key} (${hash(key)}): ${from} -> ${to}`);\n}\n",
+      "codeLanguage": "js",
+      "expectedOutput": "cat (12): B -> C\ncab (94): A -> C\n",
+      "explanation": "Only keys whose hash falls just before a new virtual node move. C at 20 takes the arc (10, 20] from B at 35, so cat (12) moves B -> C. C at 96 takes the arc (85, 96] from the wrap-around owner A at 10, so cab (94) moves A -> C. emu (27), lynx (59), stork (63) and ace (97, past 96, still wraps to A) stay put. Because C has two virtual nodes, it takes load from both A and B instead of from a single neighbour.",
+      "materials": [
+        "wiki-ch"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: how many of 100 keys change server when hash-mod-N placement goes from 4 servers to 5.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tmoved := 0\n\tfor key := 0; key < 100; key++ {\n\t\tif key%4 != key%5 {\n\t\t\tmoved++\n\t\t}\n\t}\n\tfmt.Println(\"moved\", moved, \"of 100\")\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "moved 80 of 100\n",
+      "explanation": "key % 4 equals key % 5 only when key mod 20 is 0, 1, 2 or 3, which is 4 of every 20 keys, so 20 of 100 keys stay and 80 move. With mod-N placement, adding one server reshuffles most keys (about N/(N+1) of them); consistent hashing moves only about 1/(N+1).",
+      "materials": [
+        "wiki-ch"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a round-robin load balancer whose server list shrinks while its counter keeps going.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\nfunc main() {\n\tservers := []string{\"a\", \"b\", \"c\"}\n\tnext := 0\n\tpick := func() string {\n\t\ts := servers[next%len(servers)]\n\t\tnext++\n\t\treturn s\n\t}\n\tvar picks []string\n\tfor i := 0; i < 4; i++ {\n\t\tpicks = append(picks, pick())\n\t}\n\tservers = []string{\"a\", \"c\"} // b fails its health check\n\tfor i := 0; i < 3; i++ {\n\t\tpicks = append(picks, pick())\n\t}\n\tfmt.Println(strings.Join(picks, \" \"))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "a b c a a c a\n",
+      "explanation": "The first four picks use indexes 0..3 mod 3: a b c a. Then b is removed but the counter keeps going: 4 % 2 = 0 (a), 5 % 2 = 1 (c), 6 % 2 = 0 (a). So a is picked twice in a row right after the change; round robin is only even while the list stays stable.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: smooth weighted round robin (the algorithm nginx uses) with weights a=5, b=1, c=1.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "code": "const servers = [\n  { name: \"a\", weight: 5, current: 0 },\n  { name: \"b\", weight: 1, current: 0 },\n  { name: \"c\", weight: 1, current: 0 },\n];\nconst total = servers.reduce((s, x) => s + x.weight, 0);\nconst picks = [];\nfor (let i = 0; i < 7; i++) {\n  let best = null;\n  for (const s of servers) {\n    s.current += s.weight;\n    if (!best || s.current > best.current) best = s;\n  }\n  best.current -= total;\n  picks.push(best.name);\n}\nconsole.log(picks.join(\" \"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "a a b a c a a\n",
+      "explanation": "Each round adds every weight to its current value, picks the largest, and subtracts the total (7) from the winner. Round 1: (5,1,1) -> a, becomes (-2,1,1). Round 2: (3,2,2) -> a -> (-4,2,2). Round 3: (1,3,3) -> b (first max) -> (1,-4,3). Round 4: (6,-3,4) -> a -> (-1,-3,4). Round 5: (4,-2,5) -> c -> (4,-2,-2). Rounds 6 and 7 pick a. a still gets 5 of 7, but b and c are spread between them instead of 5 a's in a row.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a least-connections load balancer with requests of different durations on a fake clock (ties go to the lowest index).",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\ntype req struct{ start, dur int }\n\nfunc main() {\n\tactive := []int{0, 0, 0} // open connections on s0, s1, s2\n\tvar ends [][2]int        // {end time, server}\n\tvar picks []string\n\tfor _, r := range []req{{0, 10}, {1, 2}, {2, 10}, {4, 1}, {5, 3}, {6, 1}} {\n\t\tkept := ends[:0]\n\t\tfor _, e := range ends {\n\t\t\tif e[0] <= r.start {\n\t\t\t\tactive[e[1]]--\n\t\t\t} else {\n\t\t\t\tkept = append(kept, e)\n\t\t\t}\n\t\t}\n\t\tends = kept\n\t\tbest := 0\n\t\tfor i := range active {\n\t\t\tif active[i] < active[best] {\n\t\t\t\tbest = i\n\t\t\t}\n\t\t}\n\t\tactive[best]++\n\t\tends = append(ends, [2]int{r.start + r.dur, best})\n\t\tpicks = append(picks, fmt.Sprint(\"s\", best))\n\t}\n\tfmt.Println(strings.Join(picks, \" \"))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "s0 s1 s2 s1 s1 s0\n",
+      "explanation": "The first three requests land on s0, s1, s2. s1's request ends at t = 3, so at t = 4 s1 has 0 connections and gets the request (ending at 5). At t = 5 that one has finished, so s1 is again the least loaded. At t = 6 all three have one connection, and the tie goes to s0. Round robin would have kept rotating; least connections keeps sending work to the server that frees up fastest.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a circuit breaker that opens after 3 consecutive failures and allows a trial call 10 ms after opening.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "code": "var cb = new Breaker(threshold: 3, openMs: 10);\nvar calls = new (int T, bool Ok)[] { (0, false), (1, false), (2, false), (3, true), (12, false), (13, true), (25, true) };\nforeach (var (t, ok) in calls)\n    Console.WriteLine($\"t={t} {cb.Call(t, ok)}\");\n\nclass Breaker(int threshold, int openMs)\n{\n    string state = \"Closed\";\n    int failures, openedAt;\n\n    public string Call(int now, bool ok)\n    {\n        if (state == \"Open\")\n        {\n            if (now - openedAt < openMs) return \"rejected\";\n            state = \"HalfOpen\";\n        }\n        if (ok) { failures = 0; state = \"Closed\"; }\n        else if (state == \"HalfOpen\" || ++failures >= threshold) { state = \"Open\"; openedAt = now; }\n        return $\"{(ok ? \"ok\" : \"fail\")} -> {state}\";\n    }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "t=0 fail -> Closed\nt=1 fail -> Closed\nt=2 fail -> Open\nt=3 rejected\nt=12 fail -> Open\nt=13 rejected\nt=25 ok -> Closed\n",
+      "explanation": "Two failures keep the breaker Closed; the third opens it at t = 2. At t = 3 only 1 ms has passed, so the call is rejected without running. At t = 12 the 10 ms have elapsed, so the breaker goes HalfOpen and lets the call through; it fails, so the breaker reopens with a new timer from 12. t = 13 is rejected. At t = 25 another trial is allowed, it succeeds, and the breaker closes with the failure count reset.",
+      "materials": [
+        "fowler-cb"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: exponential backoff delays with a 100 ms base, doubling each attempt, capped at 1000 ms.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\nfunc main() {\n\tbase, capMs := 100, 1000\n\tvar delays []string\n\ttotal := 0\n\tfor attempt := 0; attempt < 6; attempt++ {\n\t\td := base << attempt\n\t\tif d > capMs {\n\t\t\td = capMs\n\t\t}\n\t\ttotal += d\n\t\tdelays = append(delays, fmt.Sprint(d))\n\t}\n\tfmt.Println(strings.Join(delays, \" \"))\n\tfmt.Println(\"total:\", total)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "100 200 400 800 1000 1000\ntotal: 3500\n",
+      "explanation": "base << attempt doubles the delay: 100, 200, 400, 800, then 1600 and 3200, which the cap clamps to 1000. The sum is 100 + 200 + 400 + 800 + 1000 + 1000 = 3500 ms. The cap keeps a long retry sequence from waiting minutes between attempts; real clients also add jitter.",
+      "materials": [
+        "aws-backoff"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: three stacked layers that each make up to 3 attempts against a database that is down.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "code": "let dbCalls = 0;\nconst db = () => { dbCalls++; throw new Error(\"down\"); };\nconst withRetries = fn => () => {\n  for (let attempt = 1; ; attempt++) {\n    try { return fn(); } catch (e) { if (attempt === 3) throw e; }\n  }\n};\nconst service = withRetries(db);\nconst api = withRetries(service);\nconst gateway = withRetries(api);\ntry { gateway(); } catch { }\nconsole.log(\"db calls:\", dbCalls);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "db calls: 27\n",
+      "explanation": "Each layer calls the layer below up to 3 times. One gateway request makes 3 api calls, each makes 3 service calls, each makes 3 database calls: 3 x 3 x 3 = 27. Retrying at every layer multiplies load on a struggling dependency, which is why the AWS Builders' Library recommends retrying at a single layer.",
+      "materials": [
+        "aws-backoff"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a payment endpoint that deduplicates requests by idempotency key and replays the first response.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\ntype req struct {\n\tkey    string\n\tamount int\n}\n\nfunc main() {\n\treqs := []req{{\"k1\", 10}, {\"k2\", 5}, {\"k1\", 10}, {\"k3\", 7}, {\"k2\", 5}, {\"k1\", 99}}\n\tseen := map[string]int{} // key -> amount charged by the first request\n\ttotal, replays := 0, 0\n\tfor _, r := range reqs {\n\t\tif prev, ok := seen[r.key]; ok {\n\t\t\treplays++\n\t\t\tfmt.Println(\"replay\", r.key, prev)\n\t\t\tcontinue\n\t\t}\n\t\tseen[r.key] = r.amount\n\t\ttotal += r.amount\n\t}\n\tfmt.Println(\"charged:\", total, \"replays:\", replays)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "replay k1 10\nreplay k2 5\nreplay k1 10\ncharged: 22 replays: 3\n",
+      "explanation": "Only the first request for each key is executed: k1 (10), k2 (5), k3 (7), for 22 in total. Later requests with a seen key return the stored result. Note the last one: k1 with amount 99 still replays the original 10. A real API should reject a reused key with a different payload rather than silently ignore the change.",
+      "materials": [
+        "aws-idem"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a consumer that receives duplicate deliveries under at-least-once semantics and deduplicates by message id.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "code": "const deliveries = [1, 2, 2, 3, 1, 4, 3];\nconst processed = new Set();\nlet balance = 0;\nfor (const id of deliveries) {\n  if (processed.has(id)) continue;\n  processed.add(id);\n  balance += 10;\n}\nconsole.log(deliveries.length, processed.size, balance);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "7 4 40\n",
+      "explanation": "At-least-once delivery can redeliver messages, here 7 deliveries for only 4 distinct ids (1, 2, 3, 4). Remembering processed ids makes the handler idempotent, so the balance increases once per message: 4 x 10 = 40.",
+      "materials": [
+        "kafka-docs"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: events assigned to 3 partitions by key, using (sum of key bytes) mod 3 as the partitioner.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc partition(key string, n int) int {\n\th := 0\n\tfor _, c := range key {\n\t\th += int(c)\n\t}\n\treturn h % n\n}\n\nfunc main() {\n\tparts := make([][]string, 3)\n\tevents := [][2]string{{\"u1\", \"login\"}, {\"u2\", \"login\"}, {\"u1\", \"click\"}, {\"u3\", \"login\"}, {\"u2\", \"logout\"}, {\"u1\", \"logout\"}}\n\tfor _, e := range events {\n\t\tp := partition(e[0], 3)\n\t\tparts[p] = append(parts[p], e[0]+\":\"+e[1])\n\t}\n\tfor i, p := range parts {\n\t\tfmt.Println(i, p)\n\t}\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "0 [u3:login]\n1 [u1:login u1:click u1:logout]\n2 [u2:login u2:logout]\n",
+      "explanation": "'u' is 117 and '1' is 49, so u1 hashes to 166 mod 3 = 1; u2 to 167 mod 3 = 2; u3 to 168 mod 3 = 0. Every event with the same key lands in the same partition, in the order it was sent, which is how Kafka keeps per-key ordering. There is no ordering across partitions.",
+      "materials": [
+        "kafka-docs"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: one order's events sent without a key (spread round robin over 3 partitions) and another order's events sent with a key, then drained partition by partition.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "code": "const partitions = [[], [], []];\nlet rr = 0;\nconst send = (key, value) => {\n  const p = key === null\n    ? rr++ % 3\n    : [...key].reduce((h, c) => h + c.charCodeAt(0), 0) % 3;\n  partitions[p].push(value);\n};\nfor (const step of [\"created\", \"paid\", \"shipped\"]) send(null, \"o1:\" + step);\nfor (const step of [\"created\", \"paid\", \"shipped\"]) send(\"o2\", \"o2:\" + step);\n// one consumer drains partition 2, then 1, then 0\nconsole.log([2, 1, 0].flatMap(p => partitions[p]).join(\" \"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "o1:shipped o2:created o2:paid o2:shipped o1:paid o1:created\n",
+      "explanation": "Without a key, o1's three events go to partitions 0, 1 and 2. With key \"o2\" (111 + 50 = 161, mod 3 = 2), all of o2's events go to partition 2 in send order. Order is only guaranteed within a partition, so draining 2, 1, 0 processes o1 backwards (shipped before paid before created) while o2 stays in order. Use the entity id as the key when per-entity order matters.",
+      "materials": [
+        "kafka-docs"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a consumer that commits its offset after every 3 messages and crashes after processing m4.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\nfunc main() {\n\tlog := []string{\"m0\", \"m1\", \"m2\", \"m3\", \"m4\", \"m5\"}\n\tcommitted := 0 // the next offset the group will read\n\tvar processed []string\n\tfor off := committed; off < len(log); off++ {\n\t\tprocessed = append(processed, log[off])\n\t\tif (off+1)%3 == 0 {\n\t\t\tcommitted = off + 1\n\t\t}\n\t\tif off == 4 {\n\t\t\tbreak // crash before the next commit\n\t\t}\n\t}\n\tfmt.Println(\"resume at\", committed)\n\tfor off := committed; off < len(log); off++ {\n\t\tprocessed = append(processed, log[off])\n\t}\n\tfmt.Println(strings.Join(processed, \" \"))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "resume at 3\nm0 m1 m2 m3 m4 m3 m4 m5\n",
+      "explanation": "A committed offset is the position of the next message to read. After m2 (offset 2) the consumer commits 3. It then processes m3 and m4 but crashes before the next commit, so after restart it resumes at 3 and processes m3 and m4 a second time. Processing before committing gives at-least-once delivery, so handlers must tolerate duplicates.",
+      "materials": [
+        "kafka-docs"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a consumer that commits each offset before processing the message, and crashes once in between.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "code": "const log = [\"m0\", \"m1\", \"m2\", \"m3\", \"m4\"];\nlet committed = 0;\nconst done = [];\nfunction run(crashAt) {\n  while (committed < log.length) {\n    const off = committed;\n    committed = off + 1;            // commit first...\n    if (off === crashAt) return;    // ...crash before processing\n    done.push(log[off]);            // ...then process\n  }\n}\nrun(2);\nrun(-1);\nconsole.log(done.join(\" \"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "m0 m1 m3 m4\n",
+      "explanation": "m0 and m1 are committed and processed. For m2 the offset 3 is committed first, then the consumer crashes before processing it. The restart resumes at the committed offset 3, so m2 is never processed. Committing before processing gives at-most-once delivery: no duplicates, but messages can be lost.",
+      "materials": [
+        "kafka-docs"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: which read/write quorum sizes guarantee that a read overlaps the latest write when N = 3.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tn := 3\n\tfor _, rw := range [][2]int{{1, 1}, {1, 2}, {2, 2}, {1, 3}, {3, 1}} {\n\t\tr, w := rw[0], rw[1]\n\t\tfmt.Printf(\"R=%d W=%d overlap=%v\\n\", r, w, r+w > n)\n\t}\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "R=1 W=1 overlap=false\nR=1 W=2 overlap=false\nR=2 W=2 overlap=true\nR=1 W=3 overlap=true\nR=3 W=1 overlap=true\n",
+      "explanation": "If R + W > N, every read set shares at least one replica with every write set, so a read always sees the latest acknowledged write. With N = 3 that holds for (2,2), (1,3) and (3,1). (1,1) and (1,2) have sums of 2 and 3, which are not greater than 3, so a read can hit only replicas that missed the write.",
+      "materials": [
+        "wiki-quorum"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: three replicas, a write acknowledged by 2 of them, and reads that pick the highest version and repair stale replicas they contacted.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "code": "const replicas = [{ v: 1, val: \"old\" }, { v: 1, val: \"old\" }, { v: 1, val: \"old\" }];\nconst write = (val, ids) => ids.forEach(i => (replicas[i] = { v: 2, val }));\nconst read = ids => {\n  const latest = ids.map(i => replicas[i]).reduce((a, b) => (b.v > a.v ? b : a));\n  ids.forEach(i => { if (replicas[i].v < latest.v) replicas[i] = latest; }); // read repair\n  return latest.val;\n};\nwrite(\"new\", [0, 1]);       // W = 2 of N = 3\nconsole.log(read([2]));     // R = 1\nconsole.log(read([1, 2]));  // R = 2\nconsole.log(read([2]));     // R = 1\n",
+      "codeLanguage": "js",
+      "expectedOutput": "old\nnew\nnew\n",
+      "explanation": "The write reached replicas 0 and 1 only. The first read uses R = 1 and asks replica 2, which still has version 1, so it returns \"old\" (R + W = 3 is not > N). The quorum read of replicas 1 and 2 sees version 2, returns \"new\", and repairs replica 2. Now even the R = 1 read of replica 2 returns \"new\".",
+      "materials": [
+        "wiki-quorum"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: vector clocks for three processes A, B and C exchanging two messages.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc send(v []int, i int) []int { v[i]++; return slices.Clone(v) }\n\nfunc recv(v, msg []int, i int) {\n\tfor j := range v {\n\t\tv[j] = max(v[j], msg[j])\n\t}\n\tv[i]++\n}\n\nfunc compare(a, b []int) string {\n\tless, greater := false, false\n\tfor i := range a {\n\t\tless = less || a[i] < b[i]\n\t\tgreater = greater || a[i] > b[i]\n\t}\n\tswitch {\n\tcase less && greater:\n\t\treturn \"concurrent\"\n\tcase less:\n\t\treturn \"before\"\n\tcase greater:\n\t\treturn \"after\"\n\t}\n\treturn \"equal\"\n}\n\nfunc main() {\n\ta, b, c := make([]int, 3), make([]int, 3), make([]int, 3)\n\ta[0]++                 // A: local event\n\trecv(b, send(a, 0), 1) // A -> B\n\tc[2]++                 // C: local event\n\trecv(c, send(b, 1), 2) // B -> C\n\ta[0]++                 // A: local event\n\tfmt.Println(a, b, c)\n\tfmt.Println(compare(a, c), compare(b, c))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "[3 0 0] [2 2 0] [2 2 2]\nconcurrent before\n",
+      "explanation": "A: local event [1 0 0], send [2 0 0]. B merges to [2 0 0] and ticks to [2 1 0]. C's local event gives [0 0 1]. B sends after ticking to [2 2 0]; C merges to [2 2 1] and ticks to [2 2 2]. A's last local event makes [3 0 0]. A vs C: A is ahead in slot 0 but behind in slots 1 and 2, so they are concurrent. B [2 2 0] is <= C in every slot and smaller in one, so B happened before C.",
+      "materials": [
+        "wiki-vc"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: Lamport clocks for two processes, where B has already done three local events before A's message arrives.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "code": "const clock = { A: 0, B: 0 };\nconst tick = p => ++clock[p];                                  // local event or send\nconst receive = (p, ts) => (clock[p] = Math.max(clock[p], ts) + 1);\ntick(\"B\"); tick(\"B\"); tick(\"B\");\nconst m1 = tick(\"A\");      // A sends m1\nreceive(\"B\", m1);\nconst m2 = tick(\"B\");      // B sends m2\nreceive(\"A\", m2);\nconsole.log(m1, m2, clock.A, clock.B);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "1 5 6 5\n",
+      "explanation": "B's local events take it to 3. A sends m1 with timestamp 1. B receives it: max(3, 1) + 1 = 4. B sends m2 at 5. A receives it: max(1, 5) + 1 = 6. Receiving jumps the local clock past the sender's timestamp, so every send is ordered before its receive (1 < 4, 5 < 6) even though the clocks are not synchronized.",
+      "materials": [
+        "wiki-lamport"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: availability of two 99% components in series and in parallel.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "code": "using System.Globalization;\n\ndouble a = 0.99;\ndouble series = a * a;\ndouble parallel = 1 - (1 - a) * (1 - a);\nConsole.WriteLine(series.ToString(\"F4\", CultureInfo.InvariantCulture));\nConsole.WriteLine(parallel.ToString(\"F4\", CultureInfo.InvariantCulture));\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "0.9801\n0.9999\n",
+      "explanation": "In series both must be up, so the availabilities multiply: 0.99 x 0.99 = 0.9801, lower than either part. In parallel the system is down only when both are down: 1 - 0.01 x 0.01 = 0.9999. Chaining dependencies lowers availability; redundancy raises it (assuming independent failures).",
+      "materials": [
+        "sre-avail"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: availability of a load balancer, a redundant pair of app servers, and one database in series.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tlb, app, db := 0.999, 0.99, 0.999\n\tapps := 1 - (1-app)*(1-app) // either app server can serve\n\ttotal := lb * apps * db\n\tfmt.Printf(\"%.4f\\n\", apps)\n\tfmt.Printf(\"%.4f\\n\", total)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "0.9999\n0.9979\n",
+      "explanation": "The two app servers in parallel give 1 - 0.01^2 = 0.9999. The whole path is the LB, the app tier and the DB in series: 0.999 x 0.9999 x 0.999 = 0.99790..., printed as 0.9979. The single-instance LB and DB (99.9% each) now limit availability; the redundant app tier is no longer the weak link.",
+      "materials": [
+        "sre-avail"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: yearly downtime allowed by three availability targets, rounded to whole minutes.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "code": "const minutesPerYear = 365 * 24 * 60;\nfor (const target of [0.99, 0.999, 0.9999]) {\n  console.log(target, Math.round(minutesPerYear * (1 - target)));\n}\n",
+      "codeLanguage": "js",
+      "expectedOutput": "0.99 5256\n0.999 526\n0.9999 53\n",
+      "explanation": "A year has 525,600 minutes. 1% of that is 5256 minutes (about 3.65 days), 0.1% is 525.6 (about 8.8 hours, rounded to 526), and 0.01% is 52.56 (rounded to 53). Each extra nine cuts the allowed downtime by a factor of 10.",
+      "materials": [
+        "sre-avail"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a back-of-the-envelope QPS estimate for 50 million daily users making 20 requests each, with peak at 3x average.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tdau := 50_000_000\n\treqPerUser := 20\n\tsecondsPerDay := 86_400\n\tavg := dau * reqPerUser / secondsPerDay\n\tfmt.Println(\"avg QPS:\", avg)\n\tfmt.Println(\"peak QPS:\", avg*3)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "avg QPS: 11574\npeak QPS: 34722\n",
+      "explanation": "50M x 20 = 1 billion requests per day. Dividing by 86,400 seconds gives 11574.07, and integer division truncates to 11574. A peak of 3x average is 34722. A handy rule: 1 billion requests per day is roughly 12K requests per second.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a yearly storage estimate computed with int variables and stored in a long.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "code": "int tweetsPerDay = 500_000_000;\nint bytesPerTweet = 300;\nint days = 365;\nlong wrong = tweetsPerDay * bytesPerTweet * days;\nlong right = (long)tweetsPerDay * bytesPerTweet * days;\nConsole.WriteLine(wrong == right);\nConsole.WriteLine($\"{right / 1_000_000_000_000} TB\");\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "False\n54 TB\n",
+      "explanation": "In the first line all operands are int, so the multiplication happens in 32-bit arithmetic and silently wraps (unchecked by default) before the result is widened to long. Casting the first operand to long makes the whole chain 64-bit: 500M x 300 x 365 = 54.75 x 10^12 bytes, which integer division prints as 54 TB.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: users sharded by the first letter of their name: a-h, i-p, q-z.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc shardFor(name string) int {\n\tswitch c := name[0]; {\n\tcase c <= 'h':\n\t\treturn 0\n\tcase c <= 'p':\n\t\treturn 1\n\tdefault:\n\t\treturn 2\n\t}\n}\n\nfunc main() {\n\tcounts := make([]int, 3)\n\tfor _, u := range []string{\"alice\", \"bob\", \"carol\", \"dave\", \"erin\", \"mallory\", \"trent\", \"zoe\", \"frank\"} {\n\t\tcounts[shardFor(u)]++\n\t}\n\tfmt.Println(counts)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "[6 1 2]\n",
+      "explanation": "alice, bob, carol, dave, erin and frank start with a-h (shard 0); only mallory falls in i-p (shard 1); trent and zoe go to q-z (shard 2). Range sharding keeps nearby keys together, which helps range scans, but real key distributions are uneven, so one shard can become a hotspot.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a 16-bit Bloom filter whose two hash functions are both derived from the sum of character codes.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "code": "const M = 16;\nconst bits = new Array(M).fill(false);\nconst sum = s => [...s].reduce((h, c) => h + c.charCodeAt(0), 0);\nconst hashes = s => [sum(s) % M, (sum(s) * 7) % M];\nconst add = s => hashes(s).forEach(i => (bits[i] = true));\nconst mightContain = s => hashes(s).every(i => bits[i]);\nadd(\"cat\");\nadd(\"dog\");\nfor (const w of [\"cat\", \"act\", \"emu\", \"dog\"]) console.log(w, mightContain(w));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "cat true\nact true\nemu false\ndog true\n",
+      "explanation": "Added items always report true (no false negatives). \"act\" was never added, but it has the same characters as \"cat\", so the same sum (312) and the same bits: a false positive. \"emu\" (sum 327) needs bits 7 and 1, which were never set, so it is definitely absent. A Bloom filter answers \"maybe present\" or \"definitely absent\".",
+      "materials": [
+        "wiki-bloom"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: deleting an item from a plain Bloom filter by clearing its bits.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\nvar bits [10]bool\n\nfunc idx(s string) [2]int {\n\th := 0\n\tfor _, c := range s {\n\t\th += int(c)\n\t}\n\treturn [2]int{h % 10, h / 10 % 10}\n}\n\nfunc add(s string) {\n\tfor _, i := range idx(s) {\n\t\tbits[i] = true\n\t}\n}\n\nfunc remove(s string) {\n\tfor _, i := range idx(s) {\n\t\tbits[i] = false\n\t}\n}\n\nfunc has(s string) bool {\n\tfor _, i := range idx(s) {\n\t\tif !bits[i] {\n\t\t\treturn false\n\t\t}\n\t}\n\treturn true\n}\n\nfunc main() {\n\tadd(\"cat\")\n\tadd(\"dog\")\n\tremove(\"cat\")\n\tfmt.Println(has(\"cat\"), has(\"dog\"))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "false false\n",
+      "explanation": "cat sums to 312 (bits 2 and 1) and dog to 314 (bits 4 and 1); they share bit 1. Clearing cat's bits also clears bit 1, so dog, which is still in the set, now reports false. Bits are shared between items, so a plain Bloom filter cannot delete; a counting Bloom filter keeps a counter per slot for that.",
+      "materials": [
+        "wiki-bloom"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: offset pagination over a newest-first feed while a new item is posted between page requests.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "code": "let items = [\"e\", \"d\", \"c\", \"b\", \"a\"];   // newest first\nconst page = (offset, limit) => items.slice(offset, offset + limit);\nconst p1 = page(0, 2);\nitems = [\"f\", ...items];                 // a new item is posted\nconst p2 = page(2, 2);\nconsole.log(p1.join(\",\"), \"|\", p2.join(\",\"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "e,d | d,c\n",
+      "explanation": "Page 1 is offset 0: e, d. Then f is inserted at the front, shifting every item one position. Offset 2 now points at d, so page 2 shows d again and then c. Offset pagination duplicates (or skips) items when the list changes between requests; cursor pagination avoids this.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: cursor pagination (\"items with id below the last id seen\") while one item is added and the cursor item itself is deleted.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\ntype item struct {\n\tid    int\n\ttitle string\n}\n\nfunc pageAfter(items []item, cursor, limit int) []item {\n\tvar out []item // items are sorted by id, newest first\n\tfor _, it := range items {\n\t\tif it.id < cursor && len(out) < limit {\n\t\t\tout = append(out, it)\n\t\t}\n\t}\n\treturn out\n}\n\nfunc main() {\n\titems := []item{{5, \"e\"}, {4, \"d\"}, {3, \"c\"}, {2, \"b\"}, {1, \"a\"}}\n\tp1 := pageAfter(items, 1<<30, 2)\n\titems = []item{{6, \"f\"}, {5, \"e\"}, {3, \"c\"}, {2, \"b\"}, {1, \"a\"}} // f added, d deleted\n\tp2 := pageAfter(items, p1[len(p1)-1].id, 2)\n\tfmt.Println(p1, p2)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "[{5 e} {4 d}] [{3 c} {2 b}]\n",
+      "explanation": "Page 1 returns ids 5 and 4, and the cursor is 4. The next page asks for ids below 4, which gives 3 and 2 no matter what changed above. The new item 6 does not shift anything, and deleting item 4 does not matter, because the cursor is a value to compare against, not a row that must still exist.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: packing a Snowflake-style ID (41-bit time, 10-bit machine, 12-bit sequence) with BigInt and reading the fields back.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "code": "const EPOCH = 1288834974657n;\nconst pack = (ms, machine, seq) =>\n  ((ms - EPOCH) << 22n) | (BigInt(machine) << 12n) | BigInt(seq);\nconst id = pack(EPOCH + 1n, 3, 5);\nconsole.log(id.toString());\nconsole.log(Number((id >> 12n) & 1023n), Number(id & 4095n));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "4206597\n3 5\n",
+      "explanation": "The timestamp is stored relative to the custom epoch, so 1 ms after it becomes 1 << 22 = 4194304. Machine 3 << 12 = 12288 and sequence 5 add 5, for 4194304 + 12288 + 5 = 4206597. Shifting right by 12 and masking with 1023 (10 bits) recovers machine 3; masking with 4095 (12 bits) recovers sequence 5.",
+      "materials": [
+        "wiki-snowflake"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: comparing Snowflake-style IDs (time << 22 | machine << 12 | sequence) from different machines and milliseconds.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc id(ms, machine, seq int64) int64 { return ms<<22 | machine<<12 | seq }\n\nfunc main() {\n\ta := id(1000, 1023, 4095) // last id machine 1023 can make in ms 1000\n\tb := id(1001, 0, 0)       // first id machine 0 makes in ms 1001\n\tc := id(1000, 2, 0)\n\tfmt.Println(a < b, c < a)\n\tfmt.Println(b - a)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "true true\n1\n",
+      "explanation": "The timestamp is in the high bits, so any ID from a later millisecond is larger than every ID from an earlier one: a < b. Within the same millisecond, the machine id decides: machine 2 < machine 1023, so c < a. a is the largest possible value for ms 1000 (all 22 low bits set), so b is exactly the next integer: b - a = 1. IDs sort roughly by time, but not by real order within one millisecond across machines.",
+      "materials": [
+        "wiki-snowflake"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a sliding-window-counter rate limiter that weights the previous window's count by how much of it still overlaps.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "code": "const int Limit = 10, WindowSec = 60;\nint previous = 9, current = 4;            // requests counted in the last and the current window\n\nforeach (int secondsIntoWindow in new[] { 15, 30 })\n{\n    double overlap = (WindowSec - secondsIntoWindow) / (double)WindowSec;\n    double estimate = previous * overlap + current;\n    string decision = estimate < Limit ? \"allow\" : \"deny\";\n    Console.WriteLine(FormattableString.Invariant($\"t+{secondsIntoWindow}s: {estimate} {decision}\"));\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "t+15s: 10.75 deny\nt+30s: 8.5 allow\n",
+      "explanation": "The algorithm assumes the previous window's requests were spread evenly. 15 s into the window, 45/60 = 0.75 of the previous window still falls inside the sliding 60 s, so the estimate is 9 x 0.75 + 4 = 10.75, which is not below 10: deny. At 30 s only half overlaps: 9 x 0.5 + 4 = 8.5, so the request is allowed. This approximates a sliding log with just two counters.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: reading from an asynchronous replica that applies writes 2 ticks after the primary.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "code": "let now = 0;\nconst primary = new Map([[\"name\", \"Ann\"]]);\nconst replica = new Map([[\"name\", \"Ann\"]]);\nconst pending = [];\nconst write = (k, v) => { primary.set(k, v); pending.push({ k, v, at: now + 2 }); };\nconst tick = () => {\n  now++;\n  while (pending.length && pending[0].at <= now) {\n    const { k, v } = pending.shift();\n    replica.set(k, v);\n  }\n};\nwrite(\"name\", \"Bob\");\nconst reads = [];\nfor (let i = 0; i < 3; i++) { reads.push(replica.get(\"name\")); tick(); }\nconsole.log(reads.join(\" \"), \"| primary:\", primary.get(\"name\"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "Ann Ann Bob | primary: Bob\n",
+      "explanation": "The write to Bob lands on the primary at t = 0 and is scheduled on the replica for t = 2. Replica reads at t = 0 and t = 1 still return Ann; the read at t = 2 sees Bob. A user who reads their own write from a lagging replica sees old data, which is why read-your-writes routes such reads to the primary or waits for the replica to catch up.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: request coalescing (single-flight): concurrent lookups of the same key share one in-flight database call.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "code": "let dbCalls = 0;\nconst fetchFromDb = async key => { dbCalls++; await null; return key.toUpperCase(); };\nconst inflight = new Map();\nfunction get(key) {\n  if (!inflight.has(key)) {\n    inflight.set(key, fetchFromDb(key).finally(() => inflight.delete(key)));\n  }\n  return inflight.get(key);\n}\nconst results = await Promise.all([get(\"a\"), get(\"a\"), get(\"b\"), get(\"a\")]);\nconsole.log(results.join(\"\"), dbCalls);\nconsole.log(await get(\"a\"), dbCalls);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "AABA 2\nA 3\n",
+      "explanation": "The four calls run synchronously before any promise settles. The first get(\"a\") starts a DB call and stores its promise; the other two \"a\" calls reuse it, and \"b\" starts a second call. That is 2 DB calls for 4 requests. When a promise settles, finally removes it from the map, so a later get(\"a\") starts a new call (3). This prevents a cache stampede on a hot key without caching stale results.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: bulkheads: each dependency gets its own cap on concurrent calls (payments 2, search 1) on a fake clock.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\ntype req struct {\n\tt, dur int\n\tdep    string\n}\n\nfunc main() {\n\tlimit := map[string]int{\"pay\": 2, \"search\": 1}\n\tbusy := map[string][]int{} // end times of in-flight calls per dependency\n\treqs := []req{{0, 5, \"pay\"}, {1, 5, \"pay\"}, {2, 5, \"pay\"}, {2, 1, \"search\"}, {3, 1, \"search\"}, {6, 1, \"pay\"}}\n\tvar out []string\n\tfor _, r := range reqs {\n\t\tvar live []int\n\t\tfor _, end := range busy[r.dep] {\n\t\t\tif end > r.t {\n\t\t\t\tlive = append(live, end)\n\t\t\t}\n\t\t}\n\t\tif len(live) < limit[r.dep] {\n\t\t\tlive = append(live, r.t+r.dur)\n\t\t\tout = append(out, r.dep+\":ok\")\n\t\t} else {\n\t\t\tout = append(out, r.dep+\":rejected\")\n\t\t}\n\t\tbusy[r.dep] = live\n\t}\n\tfmt.Println(strings.Join(out, \" \"))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "pay:ok pay:ok pay:rejected search:ok search:ok pay:ok\n",
+      "explanation": "The payment calls at t = 0 and t = 1 fill payments' 2 slots (ending at 5 and 6), so the third, at t = 2, is rejected. Search has its own slot and is unaffected: the call at t = 2 ends at 3, so the one at t = 3 finds the slot free. By t = 6 both payment calls have ended, so the last one is accepted. A slow dependency can only use up its own compartment.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a 1000 ms request deadline passed down a chain of service calls, each using part of the remaining budget.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "code": "int budget = 1000; // ms left for the whole request\nforeach (var (name, cost) in new[] { (\"auth\", 300), (\"orders\", 450), (\"payments\", 400) })\n{\n    if (cost > budget)\n    {\n        Console.WriteLine($\"{name}: timeout with {budget}ms left\");\n        break;\n    }\n    budget -= cost;\n    Console.WriteLine($\"{name}: ok, {budget}ms left\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "auth: ok, 700ms left\norders: ok, 250ms left\npayments: timeout with 250ms left\n",
+      "explanation": "Each hop receives what is left of the original deadline, not a fresh timeout of its own. auth leaves 700 ms, orders leaves 250 ms, and payments would need 400 ms, so it gives up right away instead of doing work the caller has already stopped waiting for.",
+      "materials": [
+        "aws-backoff"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: last-write-wins replication when the node that wrote first has a clock running 100 ms fast.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "code": "const store = { value: null, ts: -Infinity };\nconst write = (value, ts) => { if (ts > store.ts) Object.assign(store, { value, ts }); };\n// Real order: node1 writes \"v1\" at 1000 ms, node2 writes \"v2\" at 1050 ms.\n// node1's clock runs 100 ms fast, so it stamps its write with 1100.\nwrite(\"v1\", 1000 + 100);\nwrite(\"v2\", 1050);\nconsole.log(store.value, store.ts);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "v1 1100\n",
+      "explanation": "Last-write-wins keeps whichever write has the larger timestamp, not whichever happened last. Because of the skew, v1 is stamped 1100, and v2's 1050 is smaller, so the later write v2 is silently discarded. LWW depends on synchronized clocks; logical or vector clocks avoid this.",
+      "materials": [
+        "sdp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: majority quorum size and tolerated node failures for clusters of 3 to 6 nodes.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tfor _, n := range []int{3, 4, 5, 6} {\n\t\tfmt.Printf(\"n=%d majority=%d tolerates=%d\\n\", n, n/2+1, (n-1)/2)\n\t}\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "n=3 majority=2 tolerates=1\nn=4 majority=3 tolerates=1\nn=5 majority=3 tolerates=2\nn=6 majority=4 tolerates=2\n",
+      "explanation": "A majority is floor(n/2) + 1, and the cluster survives as long as a majority is up, so it tolerates n minus majority failures. A 4-node cluster tolerates only 1 failure, like a 3-node cluster, and 6 tolerates 2, like 5. That is why consensus clusters (Raft, ZooKeeper) use odd sizes.",
+      "materials": [
+        "wiki-quorum"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a client retrying POST and PUT three times because responses are lost, then deleting a field twice.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "code": "var orders = new List<string>();\nvar profile = new Dictionary<string, string>();\n\nvoid Post(string item) => orders.Add(item);           // create a new order\nvoid Put(string key, string v) => profile[key] = v;   // replace a field\nvoid Delete(string key) => profile.Remove(key);\n\nfor (int attempt = 0; attempt < 3; attempt++)         // the response is lost, so the client retries\n{\n    Post(\"order\");\n    Put(\"email\", \"a@x.io\");\n}\nConsole.WriteLine($\"orders={orders.Count} fields={profile.Count}\");\nDelete(\"email\");\nDelete(\"email\");\nConsole.WriteLine($\"orders={orders.Count} fields={profile.Count}\");\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "orders=3 fields=1\norders=3 fields=0\n",
+      "explanation": "POST creates a new resource each time, so three retries create three orders. PUT replaces the same field with the same value, so repeating it leaves one field. DELETE is idempotent too: the second delete changes nothing. That is why HTTP clients may retry PUT and DELETE automatically, but POST needs an idempotency key.",
+      "materials": [
+        "aws-idem"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a range-style assignment of partitions to consumers in a group: 7 partitions over 3 consumers, then 3 partitions over 4.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc assign(partitions, consumers int) [][]int {\n\tout := make([][]int, consumers)\n\tper, extra := partitions/consumers, partitions%consumers\n\tp := 0\n\tfor c := range out {\n\t\tn := per\n\t\tif c < extra {\n\t\t\tn++\n\t\t}\n\t\tout[c] = []int{}\n\t\tfor i := 0; i < n; i++ {\n\t\t\tout[c] = append(out[c], p)\n\t\t\tp++\n\t\t}\n\t}\n\treturn out\n}\n\nfunc main() {\n\tfmt.Println(assign(7, 3))\n\tfmt.Println(assign(3, 4))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "[[0 1 2] [3 4] [5 6]]\n[[0] [1] [2] []]\n",
+      "explanation": "7 / 3 = 2 per consumer with 1 left over, so the first consumer takes 3 and the others take 2 each: [0 1 2], [3 4], [5 6]. With 3 partitions and 4 consumers each of the first three gets one partition and the fourth gets none. A partition is consumed by at most one member of a group, so consumers beyond the partition count sit idle.",
+      "materials": [
+        "kafka-docs"
+      ]
+    }
+  ]
+}
