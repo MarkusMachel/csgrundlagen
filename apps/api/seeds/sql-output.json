@@ -1,0 +1,887 @@
+{
+  "name": "SQL: predict the output",
+  "materials": [
+    {
+      "key": "pg-comparison",
+      "type": "article",
+      "title": "Comparison functions and operators",
+      "url": "https://www.postgresql.org/docs/current/functions-comparison.html",
+      "author": "PostgreSQL documentation",
+      "description": "IS NULL, IS DISTINCT FROM and how comparisons treat NULL."
+    },
+    {
+      "key": "pg-conditional",
+      "type": "article",
+      "title": "Conditional expressions",
+      "url": "https://www.postgresql.org/docs/current/functions-conditional.html",
+      "author": "PostgreSQL documentation",
+      "description": "CASE, COALESCE, NULLIF, GREATEST and LEAST."
+    },
+    {
+      "key": "pg-aggregates",
+      "type": "article",
+      "title": "Aggregate functions",
+      "url": "https://www.postgresql.org/docs/current/functions-aggregate.html",
+      "author": "PostgreSQL documentation",
+      "description": "count, sum, string_agg, array_agg, bool_and and friends, and how they treat NULL."
+    },
+    {
+      "key": "pg-table-expr",
+      "type": "article",
+      "title": "Table expressions",
+      "url": "https://www.postgresql.org/docs/current/queries-table-expressions.html",
+      "author": "PostgreSQL documentation",
+      "description": "Joins, LATERAL, WITH ORDINALITY, GROUP BY, HAVING and ROLLUP."
+    },
+    {
+      "key": "pg-select",
+      "type": "article",
+      "title": "SELECT",
+      "url": "https://www.postgresql.org/docs/current/sql-select.html",
+      "author": "PostgreSQL documentation",
+      "description": "The SELECT reference: DISTINCT ON, UNION/INTERSECT/EXCEPT, LIMIT, OFFSET and FETCH."
+    },
+    {
+      "key": "pg-window-funcs",
+      "type": "article",
+      "title": "Window functions",
+      "url": "https://www.postgresql.org/docs/current/functions-window.html",
+      "author": "PostgreSQL documentation",
+      "description": "row_number, rank, dense_rank, lag, lead, first_value and last_value."
+    },
+    {
+      "key": "pg-expressions",
+      "type": "article",
+      "title": "Value expressions",
+      "url": "https://www.postgresql.org/docs/current/sql-expressions.html",
+      "author": "PostgreSQL documentation",
+      "description": "Aggregate and window call syntax, including FILTER, ORDER BY in aggregates and window frames."
+    },
+    {
+      "key": "pg-with",
+      "type": "article",
+      "title": "WITH queries (CTEs)",
+      "url": "https://www.postgresql.org/docs/current/queries-with.html",
+      "author": "PostgreSQL documentation",
+      "description": "Recursive CTEs, cycle termination and data-modifying statements in WITH."
+    },
+    {
+      "key": "pg-subquery",
+      "type": "article",
+      "title": "Subquery expressions",
+      "url": "https://www.postgresql.org/docs/current/functions-subquery.html",
+      "author": "PostgreSQL documentation",
+      "description": "EXISTS, IN, NOT IN, ANY and ALL, including their NULL rules."
+    },
+    {
+      "key": "pg-string",
+      "type": "article",
+      "title": "String functions and operators",
+      "url": "https://www.postgresql.org/docs/current/functions-string.html",
+      "author": "PostgreSQL documentation",
+      "description": "Concatenation, concat, split_part, substring and format."
+    },
+    {
+      "key": "pg-math",
+      "type": "article",
+      "title": "Mathematical functions and operators",
+      "url": "https://www.postgresql.org/docs/current/functions-math.html",
+      "author": "PostgreSQL documentation",
+      "description": "Integer division, modulo and round."
+    },
+    {
+      "key": "pg-datetime",
+      "type": "article",
+      "title": "Date/time functions and operators",
+      "url": "https://www.postgresql.org/docs/current/functions-datetime.html",
+      "author": "PostgreSQL documentation",
+      "description": "Date arithmetic and adding intervals."
+    },
+    {
+      "key": "pg-srf",
+      "type": "article",
+      "title": "Set returning functions",
+      "url": "https://www.postgresql.org/docs/current/functions-srf.html",
+      "author": "PostgreSQL documentation",
+      "description": "generate_series and generate_subscripts."
+    },
+    {
+      "key": "pg-returning",
+      "type": "article",
+      "title": "Returning data from modified rows",
+      "url": "https://www.postgresql.org/docs/current/dml-returning.html",
+      "author": "PostgreSQL documentation",
+      "description": "RETURNING on INSERT, UPDATE and DELETE."
+    },
+    {
+      "key": "pg-json",
+      "type": "article",
+      "title": "JSON functions and operators",
+      "url": "https://www.postgresql.org/docs/current/functions-json.html",
+      "author": "PostgreSQL documentation",
+      "description": "->, ->>, @> and jsonb aggregation."
+    }
+  ],
+  "questions": [
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): count(*), count(col), count(DISTINCT col) and sum over a column with NULLs.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "CREATE TEMP TABLE t (v int);\nINSERT INTO t VALUES (1), (NULL), (3), (NULL), (3);\nSELECT count(*), count(v), count(DISTINCT v), sum(v) FROM t;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "5|3|2|7\n",
+      "explanation": "count(*) counts all 5 rows. count(v) skips the two NULLs, giving 3. count(DISTINCT v) counts distinct non-NULL values (1 and 3), giving 2. sum(v) ignores NULLs: 1 + 3 + 3 = 7.",
+      "materials": [
+        "pg-aggregates"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): comparing NULL with = versus IS and IS DISTINCT FROM.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "SELECT NULL = NULL, NULL IS NULL, NULL IS DISTINCT FROM NULL, 1 IS DISTINCT FROM NULL;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "|t|f|t\n",
+      "explanation": "NULL = NULL is unknown, i.e. NULL, which psql prints as an empty field. IS NULL is true. IS DISTINCT FROM treats two NULLs as equal (false) and NULL versus 1 as different (true). Booleans print as t and f.",
+      "materials": [
+        "pg-comparison"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): NOT IN versus NOT EXISTS when the subquery contains a NULL.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE a (id int);\nCREATE TEMP TABLE b (id int);\nINSERT INTO a VALUES (1), (2), (3);\nINSERT INTO b VALUES (2), (NULL);\nSELECT 'not exists', count(*) FROM a\n WHERE NOT EXISTS (SELECT 1 FROM b WHERE b.id = a.id)\nUNION ALL\nSELECT 'not in', count(*) FROM a\n WHERE id NOT IN (SELECT id FROM b)\nORDER BY 1;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "not exists|2\nnot in|0\n",
+      "explanation": "NOT EXISTS only checks whether a matching row exists, so ids 1 and 3 qualify: 2. For NOT IN, `1 NOT IN (2, NULL)` means `1 <> 2 AND 1 <> NULL`, which is unknown, never true, so no row passes: 0. 'not exists' sorts before 'not in' because 'e' < 'i'.",
+      "materials": [
+        "pg-subquery"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): COALESCE combined with NULLIF.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "SELECT coalesce(NULL, NULLIF(5, 5), 0, 7),\n       NULLIF(3, 4),\n       coalesce(NULLIF('', ''), 'empty');\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "0|3|empty\n",
+      "explanation": "NULLIF(a, b) returns NULL when a = b, otherwise a. So NULLIF(5, 5) is NULL and COALESCE skips it, returning the first non-NULL argument, 0 (not 7). NULLIF(3, 4) is 3. NULLIF('', '') turns the empty string into NULL, so COALESCE falls through to 'empty'.",
+      "materials": [
+        "pg-conditional"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): row counts of INNER, LEFT and FULL joins.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "CREATE TEMP TABLE c (id int);\nCREATE TEMP TABLE o (cid int);\nINSERT INTO c VALUES (1), (2), (3);\nINSERT INTO o VALUES (1), (1), (2), (4);\nSELECT (SELECT count(*) FROM c JOIN o ON o.cid = c.id),\n       (SELECT count(*) FROM c LEFT JOIN o ON o.cid = c.id),\n       (SELECT count(*) FROM c FULL JOIN o ON o.cid = c.id);\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "3|4|5\n",
+      "explanation": "The inner join matches customer 1 twice and customer 2 once: 3 rows. LEFT JOIN adds customer 3 with NULLs: 4. FULL JOIN also adds the unmatched order with cid 4: 5.",
+      "materials": [
+        "pg-table-expr"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): summing columns after joining two child tables to the same parent key.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "CREATE TEMP TABLE orders (cust int, amount int);\nCREATE TEMP TABLE payments (cust int, paid int);\nINSERT INTO orders VALUES (1, 10), (1, 20);\nINSERT INTO payments VALUES (1, 5), (1, 5), (1, 5);\nSELECT sum(o.amount), sum(p.paid), count(*)\nFROM orders o\nJOIN payments p ON p.cust = o.cust;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "90|30|6\n",
+      "explanation": "Both tables join on cust only, so every order pairs with every payment: 2 x 3 = 6 rows. Each order amount appears 3 times ((10 + 20) x 3 = 90) and each payment appears twice (15 x 2 = 30). Aggregate each child table in its own subquery before joining to avoid this fan-out.",
+      "materials": [
+        "pg-table-expr"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): a LEFT JOIN condition placed in ON versus in WHERE.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE c (id int);\nCREATE TEMP TABLE o (cid int, status text);\nINSERT INTO c VALUES (1), (2), (3);\nINSERT INTO o VALUES (1, 'paid'), (2, 'open');\nSELECT count(*) FROM c LEFT JOIN o ON o.cid = c.id AND o.status = 'paid';\nSELECT count(*) FROM c LEFT JOIN o ON o.cid = c.id WHERE o.status = 'paid';\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "3\n1\n",
+      "explanation": "In the first query the status test is part of the join condition, so it only decides which orders match; every customer is still kept: 3 rows. In the second, WHERE runs after the join and discards rows where o.status is 'open' or NULL, turning the outer join into an inner one: 1 row.",
+      "materials": [
+        "pg-table-expr"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): GROUP BY with a HAVING filter on the group size.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "CREATE TEMP TABLE sales (region text, amount int);\nINSERT INTO sales VALUES ('N', 10), ('N', 20), ('S', 5), ('E', 40), ('S', 5);\nSELECT region, sum(amount)\nFROM sales\nGROUP BY region\nHAVING count(*) > 1\nORDER BY region;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "N|30\nS|10\n",
+      "explanation": "Groups are E (1 row, 40), N (2 rows, 30) and S (2 rows, 10). HAVING count(*) > 1 drops E even though it has the largest sum.",
+      "materials": [
+        "pg-table-expr"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): aggregating an empty table with and without GROUP BY.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "CREATE TEMP TABLE e (g int, v int);\nSELECT count(*), sum(v) IS NULL FROM e;\nSELECT count(*) FROM e GROUP BY g;\nSELECT 'end';\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "0|t\nend\n",
+      "explanation": "Without GROUP BY an aggregate query always returns exactly one row, even over no input: count(*) is 0 and sum is NULL. With GROUP BY there are no groups, so the second query returns zero rows and prints nothing. The last query prints end.",
+      "materials": [
+        "pg-aggregates",
+        "pg-table-expr"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): DISTINCT ON to pick one row per department.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE emp (dept text, name text, salary int);\nINSERT INTO emp VALUES\n  ('A', 'ann', 50), ('A', 'bob', 70),\n  ('B', 'cat', 60), ('B', 'dan', 60), ('B', 'eve', 40);\nSELECT DISTINCT ON (dept) dept, name\nFROM emp\nORDER BY dept, salary DESC, name;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "A|bob\nB|cat\n",
+      "explanation": "DISTINCT ON (dept) keeps the first row of each dept in ORDER BY order. In A that is bob (70). In B cat and dan tie on 60, and the extra sort key name makes cat first, so the result is deterministic.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): row_number, rank and dense_rank on tied scores.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "SELECT name,\n       row_number() OVER (ORDER BY score DESC, name),\n       rank()       OVER (ORDER BY score DESC),\n       dense_rank() OVER (ORDER BY score DESC)\nFROM (VALUES ('a', 90), ('b', 80), ('c', 80), ('d', 70)) AS t(name, score)\nORDER BY name;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "a|1|1|1\nb|2|2|2\nc|3|2|2\nd|4|4|3\n",
+      "explanation": "row_number always counts 1, 2, 3, 4. rank gives b and c the same rank 2 and then skips to 4 for d. dense_rank also ties b and c at 2 but does not leave a gap, so d gets 3.",
+      "materials": [
+        "pg-window-funcs"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): a running total ordered by a column that has ties.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "SELECT d, amt, sum(amt) OVER (ORDER BY d)\nFROM (VALUES (1, 10), (2, 20), (2, 30), (3, 40)) AS t(d, amt)\nORDER BY d, amt;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1|10|10\n2|20|60\n2|30|60\n3|40|100\n",
+      "explanation": "With ORDER BY and no explicit frame, the default frame is RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW, which includes all peers of the current row. Both d = 2 rows therefore see 10 + 20 + 30 = 60. Use ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW (plus a unique tiebreaker) for a row-by-row running total.",
+      "materials": [
+        "pg-expressions",
+        "pg-window-funcs"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): lag and lead with a default value.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "SELECT d,\n       v - lag(v) OVER (ORDER BY d),\n       lead(v, 1, 0) OVER (ORDER BY d)\nFROM (VALUES (1, 100), (2, 130), (3, 120)) AS t(d, v)\nORDER BY d;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1||130\n2|30|120\n3|-10|0\n",
+      "explanation": "lag(v) is NULL on the first row, so the difference is NULL and prints empty; then 130 - 100 = 30 and 120 - 130 = -10. lead(v, 1, 0) returns the next row's value, or the default 0 past the last row.",
+      "materials": [
+        "pg-window-funcs"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): first_value and last_value over a window with ORDER BY.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "SELECT v,\n       first_value(v) OVER w,\n       last_value(v)  OVER w\nFROM (VALUES (1), (2), (3)) AS t(v)\nWINDOW w AS (ORDER BY v)\nORDER BY v;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1|1|1\n2|1|2\n3|1|3\n",
+      "explanation": "The default frame ends at the current row (and its peers), so last_value is simply the current row's value, not 3. first_value is 1 for every row because the frame always starts at the partition start. Add ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING to get the real last value.",
+      "materials": [
+        "pg-window-funcs",
+        "pg-expressions"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): a recursive CTE that doubles a number until a condition fails.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "WITH RECURSIVE r(n) AS (\n  SELECT 1\n  UNION ALL\n  SELECT n * 2 FROM r WHERE n < 20\n)\nSELECT string_agg(n::text, ',' ORDER BY n) FROM r;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1,2,4,8,16,32\n",
+      "explanation": "The WHERE clause tests the previous value, not the new one. From 16 (which is < 20) the recursive step still produces 32; only from 32 does it produce nothing. So the values are 1, 2, 4, 8, 16, 32.",
+      "materials": [
+        "pg-with"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): counting employees per level of a recursive org chart.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE emp (id int, boss int);\nINSERT INTO emp VALUES (1, NULL), (2, 1), (3, 1), (4, 2), (5, 4);\nWITH RECURSIVE tree AS (\n  SELECT id, 0 AS depth FROM emp WHERE boss IS NULL\n  UNION ALL\n  SELECT e.id, t.depth + 1 FROM emp e JOIN tree t ON e.boss = t.id\n)\nSELECT depth, count(*) FROM tree GROUP BY depth ORDER BY depth;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "0|1\n1|2\n2|1\n3|1\n",
+      "explanation": "The anchor is the root (1) at depth 0. Its reports 2 and 3 are depth 1, 4 (reporting to 2) is depth 2 and 5 (reporting to 4) is depth 3.",
+      "materials": [
+        "pg-with"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): building paths in a recursive CTE.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE cat (id int, name text, parent int);\nINSERT INTO cat VALUES (1, 'root', NULL), (2, 'bin', 1), (3, 'usr', 1), (4, 'lib', 3);\nWITH RECURSIVE p AS (\n  SELECT id, name AS path FROM cat WHERE parent IS NULL\n  UNION ALL\n  SELECT c.id, p.path || '/' || c.name FROM cat c JOIN p ON c.parent = p.id\n)\nSELECT path FROM p ORDER BY path;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "root\nroot/bin\nroot/usr\nroot/usr/lib\n",
+      "explanation": "Each recursive step appends the child's name to its parent's path. lib's parent is usr, so its path is root/usr/lib. Sorted as text, root comes first because a prefix sorts before longer strings.",
+      "materials": [
+        "pg-with"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): a recursive CTE with UNION (not UNION ALL) over values that cycle.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "WITH RECURSIVE r(n) AS (\n  SELECT 1\n  UNION\n  SELECT n % 3 + 1 FROM r\n)\nSELECT count(*), max(n) FROM r;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "3|3\n",
+      "explanation": "The step produces 2, then 3, then 1 again. With UNION, rows already produced are discarded, so the working table becomes empty and recursion stops after 3 rows. With UNION ALL this query would never end.",
+      "materials": [
+        "pg-with"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): an INSERT inside a WITH clause and a SELECT on the same table.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "CREATE TEMP TABLE t (v int);\nINSERT INTO t VALUES (1), (2);\nWITH ins AS (INSERT INTO t VALUES (3) RETURNING v)\nSELECT (SELECT count(*) FROM t), (SELECT count(*) FROM ins);\nSELECT count(*) FROM t;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "2|1\n3\n",
+      "explanation": "All parts of a statement see the same snapshot taken before it ran, so the main query still counts 2 rows in t; the inserted row is only visible through the RETURNING output of ins (1 row). The next statement sees all 3 rows.",
+      "materials": [
+        "pg-with",
+        "pg-returning"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): ALL and ANY comparisons involving NULL and an empty subquery.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "SELECT 5 > ALL (SELECT x FROM (VALUES (1), (2)) AS s(x)),\n       5 > ALL (SELECT x FROM (VALUES (1), (NULL)) AS s(x)),\n       5 = ANY (SELECT x FROM (VALUES (5), (NULL)) AS s(x)),\n       3 > ALL (SELECT 1 WHERE false);\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "t||t|t\n",
+      "explanation": "5 > ALL(1, 2) is true. With a NULL, 5 > NULL is unknown and no comparison is false, so ALL yields NULL (printed empty). ANY is true as soon as one comparison is true, so the NULL does not matter. ALL over an empty set is vacuously true.",
+      "materials": [
+        "pg-subquery"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): UNION versus UNION ALL on duplicate rows.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "SELECT count(*) FROM (SELECT 1 UNION SELECT 1 UNION SELECT 2) AS a(x);\nSELECT count(*) FROM (SELECT 1 UNION ALL SELECT 1 UNION ALL SELECT 2) AS b(x);\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "2\n3\n",
+      "explanation": "UNION removes duplicate rows from the combined result, leaving 1 and 2. UNION ALL keeps every row: 1, 1, 2.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): EXCEPT versus EXCEPT ALL with repeated values.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE a (v int);\nCREATE TEMP TABLE b (v int);\nINSERT INTO a VALUES (1), (1), (1), (2), (3);\nINSERT INTO b VALUES (1), (3), (3);\nSELECT string_agg(v::text, ',' ORDER BY v) FROM (SELECT v FROM a EXCEPT SELECT v FROM b) x;\nSELECT string_agg(v::text, ',' ORDER BY v) FROM (SELECT v FROM a EXCEPT ALL SELECT v FROM b) x;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "2\n1,1,2\n",
+      "explanation": "EXCEPT works on distinct values: {1, 2, 3} minus {1, 3} = {2}. EXCEPT ALL subtracts counts: 1 appears 3 - 1 = 2 times, 2 appears once, 3 appears max(1 - 2, 0) = 0 times.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): a searched CASE whose conditions overlap.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "SELECT v,\n       CASE WHEN v > 10 THEN 'big'\n            WHEN v > 50 THEN 'huge'\n            ELSE 'small' END\nFROM (VALUES (5), (60)) AS t(v)\nORDER BY v;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "5|small\n60|big\n",
+      "explanation": "CASE returns the result of the first WHEN that is true. For 60 the first branch v > 10 already matches, so 'huge' is never reached. Put the narrower condition first.",
+      "materials": [
+        "pg-conditional"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): the || operator versus concat and concat_ws with a NULL argument.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "SELECT 'a' || NULL || 'b', concat('a', NULL, 'b'), concat_ws('-', 'a', NULL, 'b');\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "|ab|a-b\n",
+      "explanation": "|| with a NULL operand yields NULL (an empty first field). concat ignores NULL arguments, giving ab, and concat_ws skips NULLs instead of inserting extra separators, giving a-b.",
+      "materials": [
+        "pg-string"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): split_part and substring.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "SELECT split_part('2024-03-15', '-', 2),\n       substring('PostgreSQL' FROM 5 FOR 3),\n       split_part('a,b', ',', 5) = '';\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "03|gre|t\n",
+      "explanation": "split_part returns the second '-' separated field, 03 (as text, leading zero kept). substring positions are 1-based, so 3 characters from position 5 of PostgreSQL are gre. Asking for a field beyond the last returns an empty string, not NULL, so the comparison is true.",
+      "materials": [
+        "pg-string"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): string_agg with DISTINCT and ORDER BY per group.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "SELECT g, string_agg(DISTINCT n, '+' ORDER BY n)\nFROM (VALUES (1, 'b'), (1, 'a'), (1, 'b'), (2, 'c')) AS t(g, n)\nGROUP BY g\nORDER BY g;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1|a+b\n2|c\n",
+      "explanation": "Within group 1 the duplicate 'b' is removed and the remaining values are joined in sorted order: a+b. Group 2 has one value, so no separator appears.",
+      "materials": [
+        "pg-aggregates",
+        "pg-expressions"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): integer division and modulo with negative numbers.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "SELECT 7 / 2, -7 / 2, -7 % 3, 7 / 2 * 2.0;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "3|-3|-1|6.0\n",
+      "explanation": "Dividing two integers gives an integer truncated toward zero: 3 and -3 (not -4). The result of % takes the sign of the dividend: -1. In the last expression 7 / 2 is evaluated first as integer 3, then multiplied by the numeric 2.0, giving 6.0.",
+      "materials": [
+        "pg-math"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): round on numeric versus double precision values.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "SELECT round(2.5), round(-2.5), round(2.5::float8), round(3.14159, 2);\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "3|-3|2|3.14\n",
+      "explanation": "For numeric, round breaks ties away from zero: 3 and -3. For double precision it uses the platform's rounding, which is round-half-to-even, so 2.5::float8 rounds to 2. round(numeric, 2) keeps two decimals: 3.14.",
+      "materials": [
+        "pg-math"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): subtracting and adding integers to DATE values.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "SELECT DATE '2024-03-01' - DATE '2024-02-01',\n       DATE '2024-01-31' + 1,\n       DATE '2023-03-01' - 1;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "29|2024-02-01|2023-02-28\n",
+      "explanation": "date - date gives an integer number of days; February 2024 has 29 days. date + integer and date - integer shift by whole days and return a date: 2024-02-01 and 2023-02-28 (2023 is not a leap year).",
+      "materials": [
+        "pg-datetime"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): adding and subtracting a one-month interval at month end.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "SELECT (DATE '2024-01-31' + INTERVAL '1 month')::date,\n       (DATE '2024-03-31' - INTERVAL '1 month')::date,\n       (DATE '2024-01-31' + INTERVAL '1 month' + INTERVAL '1 month')::date;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "2024-02-29|2024-02-29|2024-03-29\n",
+      "explanation": "Adding a month keeps the day of month but clamps it to the last day of the target month, so January 31 + 1 month is February 29, 2024, and March 31 - 1 month is also February 29. Applying two separate months goes through February 29 and lands on March 29, not March 31.",
+      "materials": [
+        "pg-datetime"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): generate_series with a step, and with start greater than stop.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "SELECT string_agg(x::text, ' ') FROM generate_series(1, 10, 4) AS x;\nSELECT count(*) FROM generate_series(5, 1) AS x;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1 5 9\n0\n",
+      "explanation": "With step 4 the series is 1, 5, 9; 13 would exceed the stop value 10. With the default step of +1 and a start greater than the stop, the series is empty, so count(*) is 0.",
+      "materials": [
+        "pg-srf"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): LIMIT with OFFSET on a descending sort.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "SELECT v FROM generate_series(1, 10) AS v\nORDER BY v DESC\nLIMIT 3 OFFSET 2;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "8\n7\n6\n",
+      "explanation": "Sorted descending the rows are 10, 9, 8, 7, ... OFFSET 2 skips 10 and 9, then LIMIT 3 returns 8, 7, 6.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): FETCH FIRST ... WITH TIES.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "SELECT v\nFROM (VALUES (5), (3), (3), (1)) AS t(v)\nORDER BY v DESC\nFETCH FIRST 2 ROWS WITH TIES;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "5\n3\n3\n",
+      "explanation": "FETCH FIRST 2 ROWS would stop after 5 and the first 3. WITH TIES also returns every further row that ties with the last one on the ORDER BY key, so both 3s come back: 3 rows.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): an upsert with ON CONFLICT DO UPDATE and RETURNING.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE inv (sku text PRIMARY KEY, qty int);\nINSERT INTO inv VALUES ('a', 1);\nWITH u AS (\n  INSERT INTO inv VALUES ('a', 5), ('b', 2)\n  ON CONFLICT (sku) DO UPDATE SET qty = inv.qty + excluded.qty\n  RETURNING sku, qty\n)\nSELECT * FROM u ORDER BY sku;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "a|6\nb|2\n",
+      "explanation": "'a' already exists, so its row is updated: inv.qty (the existing 1) plus excluded.qty (the proposed 5) = 6. 'b' is inserted normally. RETURNING reports the final values of both rows, whether they were inserted or updated.",
+      "materials": [
+        "pg-returning"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): ON CONFLICT DO NOTHING combined with RETURNING.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE t (id int PRIMARY KEY);\nINSERT INTO t VALUES (1);\nWITH ins AS (\n  INSERT INTO t VALUES (1), (2), (3) ON CONFLICT DO NOTHING RETURNING id\n)\nSELECT string_agg(id::text, ',' ORDER BY id) FROM ins;\nSELECT count(*) FROM t;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "2,3\n3\n",
+      "explanation": "Row 1 conflicts and is skipped. DO NOTHING rows are not returned by RETURNING, so only 2 and 3 appear. The table now holds 1, 2 and 3.",
+      "materials": [
+        "pg-returning"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): DELETE ... RETURNING fed into an aggregate.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "CREATE TEMP TABLE t (v int);\nINSERT INTO t VALUES (1), (2), (3), (4);\nWITH d AS (DELETE FROM t WHERE v > 2 RETURNING v)\nSELECT count(*), sum(v) FROM d;\nSELECT string_agg(v::text, ',' ORDER BY v) FROM t;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "2|7\n1,2\n",
+      "explanation": "RETURNING hands back the deleted rows, 3 and 4, so the outer query sees 2 rows summing to 7. Afterwards only 1 and 2 remain in t.",
+      "materials": [
+        "pg-returning"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): UPDATE ... FROM joining a second table.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE prices (sku text, price int);\nCREATE TEMP TABLE changes (sku text, pct int);\nINSERT INTO prices VALUES ('a', 100), ('b', 200), ('c', 300);\nINSERT INTO changes VALUES ('a', 10), ('c', -50);\nUPDATE prices p SET price = p.price * (100 + c.pct) / 100\nFROM changes c WHERE c.sku = p.sku;\nSELECT sku, price FROM prices ORDER BY sku;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "a|110\nb|200\nc|150\n",
+      "explanation": "UPDATE ... FROM only touches rows that find a match: a becomes 100 x 110 / 100 = 110 and c becomes 300 x 50 / 100 = 150. b has no row in changes and keeps 200.",
+      "materials": [
+        "pg-returning",
+        "pg-table-expr"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): an UPDATE that assigns two columns from each other.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE t (a int, b int);\nINSERT INTO t VALUES (1, 2);\nUPDATE t SET a = b, b = a;\nSELECT a, b FROM t;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "2|1\n",
+      "explanation": "All expressions on the right-hand side of SET are evaluated against the old row, so b = a uses the original a (1). The values are swapped; no temporary variable is needed.",
+      "materials": [
+        "pg-returning"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): array_agg with ORDER BY and 1-based array subscripts.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "SELECT (array_agg(v ORDER BY v DESC))[1],\n       array_length(array_agg(v), 1),\n       (array_agg(v ORDER BY v))[0] IS NULL\nFROM (VALUES (3), (1), (2)) AS t(v);\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "3|3|t\n",
+      "explanation": "Sorted descending, the first element is 3. The array has 3 elements. PostgreSQL arrays start at index 1, and reading an out-of-range subscript such as [0] returns NULL instead of raising an error.",
+      "materials": [
+        "pg-aggregates"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): the -> and ->> jsonb operators.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "SELECT d -> 'a', d ->> 'a', d -> 'b' ->> 0, d ->> 'missing' IS NULL\nFROM (SELECT '{\"a\": \"x\", \"b\": [1, 2]}'::jsonb AS d) AS s;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "\"x\"|x|1|t\n",
+      "explanation": "-> returns jsonb, so the string prints with its JSON quotes: \"x\". ->> returns text without quotes: x. -> 'b' gets the array and ->> 0 takes its first element (0-based) as text: 1. A missing key yields NULL.",
+      "materials": [
+        "pg-json"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): jsonb containment with @>.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "SELECT '{\"a\": 1, \"b\": 2}'::jsonb @> '{\"a\": 1}',\n       '[1, 2, 3]'::jsonb @> '[3, 1]',\n       '{\"a\": {\"b\": 1, \"c\": 2}}'::jsonb @> '{\"a\": {\"b\": 1}}',\n       '{\"a\": 1}'::jsonb @> '{\"a\": \"1\"}';\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "t|t|t|f\n",
+      "explanation": "An object contains another if it has every key with a contained value, so the first and the nested third are true. Array containment ignores order and extra elements: true. The number 1 and the string \"1\" are different JSON values: false.",
+      "materials": [
+        "pg-json"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): casting JSON text with a duplicate key to jsonb.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "SELECT '{\"b\": 1, \"a\": 2, \"b\": 3}'::jsonb;\nSELECT '{\"b\": 1, \"a\": 2, \"b\": 3}'::json;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "{\"a\": 2, \"b\": 3}\n{\"b\": 1, \"a\": 2, \"b\": 3}\n",
+      "explanation": "jsonb stores a parsed form: duplicate keys keep only the last value, keys are reordered (shorter keys first, then by bytes) and whitespace is normalized on output. The json type stores the input text verbatim, duplicates and all.",
+      "materials": [
+        "pg-json"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): aggregates with FILTER, plus bool_and and bool_or.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "SELECT count(*) FILTER (WHERE v > 1),\n       sum(v) FILTER (WHERE v > 100),\n       bool_and(v > 0),\n       bool_or(v > 2)\nFROM (VALUES (1), (2), (3)) AS t(v);\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "2||t|t\n",
+      "explanation": "FILTER feeds only the matching rows to the aggregate: two values exceed 1. No value exceeds 100, so sum gets no input and returns NULL (empty field), not 0. All values are positive (t) and at least one is above 2 (t).",
+      "materials": [
+        "pg-expressions",
+        "pg-aggregates"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): GROUP BY on a column that contains NULLs.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "SELECT g, count(*)\nFROM (VALUES (1), (NULL), (NULL), (1), (2)) AS t(g)\nGROUP BY g\nORDER BY g;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1|2\n2|1\n|2\n",
+      "explanation": "Although NULL = NULL is not true, GROUP BY puts all NULLs into one group. In ascending order NULLs sort last by default, so the NULL group (printed as an empty field) comes after 1 and 2.",
+      "materials": [
+        "pg-table-expr"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): count(*) versus count(column) after a LEFT JOIN.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE c (id int);\nCREATE TEMP TABLE o (cid int);\nINSERT INTO c VALUES (1), (2);\nINSERT INTO o VALUES (1), (1);\nSELECT c.id, count(*), count(o.cid)\nFROM c LEFT JOIN o ON o.cid = c.id\nGROUP BY c.id\nORDER BY c.id;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1|2|2\n2|1|0\n",
+      "explanation": "Customer 2 has no orders, but the LEFT JOIN still produces one row for it with o.cid NULL. count(*) counts that row (1); count(o.cid) skips the NULL (0), which is the correct order count.",
+      "materials": [
+        "pg-aggregates",
+        "pg-table-expr"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): CROSS JOIN LATERAL for the top row per group.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "CREATE TEMP TABLE t (g text, v int);\nINSERT INTO t VALUES ('a', 1), ('a', 5), ('c', 7);\nSELECT d.name, x.v\nFROM (VALUES ('a'), ('b'), ('c')) AS d(name)\nCROSS JOIN LATERAL (\n  SELECT v FROM t WHERE t.g = d.name ORDER BY v DESC LIMIT 1\n) AS x\nORDER BY d.name;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "a|5\nc|7\n",
+      "explanation": "LATERAL lets the subquery reference d.name, so it runs once per outer row and returns that group's largest v. For 'b' the subquery returns no row, and a CROSS JOIN with an empty set drops 'b' entirely. LEFT JOIN LATERAL ... ON true would keep it with NULL.",
+      "materials": [
+        "pg-table-expr"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): format with %I and %L when building a dynamic SQL string.",
+      "tags": [
+        "SQL & Databases",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "code": "SELECT format('%I = %L', 'Name', 'it''s'), format('x = %L', NULL);\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "\"Name\" = 'it''s'|x = NULL\n",
+      "explanation": "%I quotes an identifier when needed; Name has an uppercase letter, so it is double-quoted to keep its case. %L produces a safely quoted literal with the embedded quote doubled. For a NULL argument %L outputs the unquoted keyword NULL. This is how PL/pgSQL code should build dynamic SQL instead of concatenating user input.",
+      "materials": [
+        "pg-string"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): AND and OR with a NULL operand.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "SELECT NULL AND false, NULL OR true, NOT NULL::boolean, NULL AND true;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "f|t||\n",
+      "explanation": "SQL uses three-valued logic. false AND anything is false and true OR anything is true, so the NULL does not matter there. NOT unknown is unknown, and unknown AND true is unknown, both printed as empty fields.",
+      "materials": [
+        "pg-comparison"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): filtering with <> on a column that contains NULL.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "CREATE TEMP TABLE t (v int);\nINSERT INTO t VALUES (1), (2), (NULL);\nSELECT count(*) FROM t WHERE v <> 1;\nSELECT count(*) FROM t WHERE v IS DISTINCT FROM 1;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1\n2\n",
+      "explanation": "NULL <> 1 is unknown, and WHERE keeps only rows where the condition is true, so only the row with 2 qualifies. IS DISTINCT FROM treats NULL as a comparable value, so 2 and NULL both qualify.",
+      "materials": [
+        "pg-comparison"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): DISTINCT and count(DISTINCT) on a column with NULLs.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "CREATE TEMP TABLE t (v int);\nINSERT INTO t VALUES (NULL), (NULL), (1), (1);\nSELECT count(*) FROM (SELECT DISTINCT v FROM t) AS s;\nSELECT count(DISTINCT v) FROM t;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "2\n1\n",
+      "explanation": "SELECT DISTINCT considers NULLs equal to each other, so it keeps one NULL row and one 1 row: 2. count(DISTINCT v), like every aggregate over a column, ignores NULLs, so only the value 1 is counted.",
+      "materials": [
+        "pg-select",
+        "pg-aggregates"
+      ]
+    }
+  ]
+}
