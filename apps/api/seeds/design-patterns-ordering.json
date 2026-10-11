@@ -1,0 +1,1082 @@
+{
+  "name": "Design patterns and principles: put in order",
+  "materials": [
+    {
+      "key": "refactoring-guru",
+      "type": "link",
+      "title": "Design Patterns Catalog",
+      "url": "https://refactoring.guru/design-patterns/catalog",
+      "author": "Alexander Shvets",
+      "description": "Illustrated catalog of the 22 classic GoF patterns with structure diagrams and code in many languages."
+    },
+    {
+      "key": "solid",
+      "type": "article",
+      "title": "SOLID",
+      "url": "https://en.wikipedia.org/wiki/SOLID",
+      "author": "Wikipedia",
+      "description": "Overview of the five SOLID principles, what each letter stands for and where they came from."
+    },
+    {
+      "key": "clean-arch",
+      "type": "article",
+      "title": "The Clean Architecture",
+      "url": "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html",
+      "author": "Robert C. Martin",
+      "description": "The concentric-circles diagram, the Dependency Rule and how control flows across a boundary."
+    },
+    {
+      "key": "hexagonal",
+      "type": "article",
+      "title": "Hexagonal Architecture",
+      "url": "https://alistair.cockburn.us/hexagonal-architecture/",
+      "author": "Alistair Cockburn",
+      "description": "The original Ports and Adapters article: driving and driven sides around an application core."
+    },
+    {
+      "key": "onion",
+      "type": "article",
+      "title": "The Onion Architecture: part 1",
+      "url": "https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/",
+      "author": "Jeffrey Palermo",
+      "description": "Introduces the Onion Architecture and its layers from the domain model outward."
+    },
+    {
+      "key": "uow",
+      "type": "article",
+      "title": "Unit of Work",
+      "url": "https://martinfowler.com/eaaCatalog/unitOfWork.html",
+      "author": "Martin Fowler",
+      "description": "Catalog entry from Patterns of Enterprise Application Architecture on tracking and committing changes as one unit."
+    },
+    {
+      "key": "cqrs",
+      "type": "article",
+      "title": "CQRS pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs",
+      "author": "Microsoft",
+      "description": "Azure Architecture Center description of separate command and query models."
+    },
+    {
+      "key": "event-sourcing",
+      "type": "article",
+      "title": "Event Sourcing pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing",
+      "author": "Microsoft",
+      "description": "Storing state as an append-only sequence of events, with replay, snapshots and projections."
+    },
+    {
+      "key": "outbox",
+      "type": "article",
+      "title": "Pattern: Transactional outbox",
+      "url": "https://microservices.io/patterns/data/transactional-outbox.html",
+      "author": "Chris Richardson",
+      "description": "Writing messages to an outbox table in the business transaction and relaying them to a broker."
+    },
+    {
+      "key": "claim-check",
+      "type": "article",
+      "title": "Claim-Check pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/claim-check",
+      "author": "Microsoft",
+      "description": "Sending a reference to a large payload through the message bus instead of the payload itself."
+    },
+    {
+      "key": "strangler",
+      "type": "article",
+      "title": "Strangler Fig Application",
+      "url": "https://martinfowler.com/bliki/StranglerFigApplication.html",
+      "author": "Martin Fowler",
+      "description": "Gradually replacing a legacy system by routing pieces of it to a new one."
+    },
+    {
+      "key": "bba",
+      "type": "article",
+      "title": "Branch By Abstraction",
+      "url": "https://martinfowler.com/bliki/BranchByAbstraction.html",
+      "author": "Martin Fowler",
+      "description": "Replacing a component in place behind an abstraction layer while trunk stays releasable."
+    },
+    {
+      "key": "tdd",
+      "type": "article",
+      "title": "Test Driven Development",
+      "url": "https://martinfowler.com/bliki/TestDrivenDevelopment.html",
+      "author": "Martin Fowler",
+      "description": "Short description of the red, green, refactor cycle."
+    },
+    {
+      "key": "aspnet-middleware",
+      "type": "article",
+      "title": "ASP.NET Core Middleware",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/",
+      "author": "Microsoft",
+      "description": "How the request pipeline is built and why middleware order matters."
+    },
+    {
+      "key": "aspnet-filters",
+      "type": "article",
+      "title": "Filters in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters",
+      "author": "Microsoft",
+      "description": "The filter types and the order they run in the MVC filter pipeline."
+    }
+  ],
+  "questions": [
+    {
+      "type": "ordering",
+      "prompt": "These function decorators each log on the way in and on the way out. Put the printed lines in order, first to last.\n\n```js\nconst wrap = (name, f) => () => { console.log(`${name} in`); const r = f(); console.log(`${name} out`); return r; };\nconst core = () => { console.log(\"core\"); };\nconst run = wrap(\"auth\", wrap(\"log\", core));\nrun();\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "auth in",
+        "log in",
+        "core",
+        "log out",
+        "auth out"
+      ],
+      "explanation": "`run` is `wrap(\"auth\", wrap(\"log\", core))`, so the outermost decorator is `auth`. Calling it prints `auth in`, then calls the wrapped function, which is the `log` decorator: `log in`. That calls `core`, which prints `core`. Control then unwinds: `log out` prints as the inner wrapper returns, and `auth out` prints last. The decorator applied last (outermost) is the first in and the last out.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A logging decorator wraps a caching decorator that wraps the real repository. Put the printed lines in order, first to last.\n\n```csharp\nIRepo repo = new Logging(new Caching(new Db()));\nrepo.Get(7);\nrepo.Get(7);\n\ninterface IRepo { string Get(int id); }\nclass Db : IRepo { public string Get(int id) { Console.WriteLine(\"db query\"); return \"row\"; } }\nclass Caching(IRepo inner) : IRepo {\n    readonly Dictionary<int, string> cache = new();\n    public string Get(int id) {\n        if (cache.TryGetValue(id, out var v)) { Console.WriteLine(\"cache hit\"); return v; }\n        Console.WriteLine(\"cache miss\");\n        return cache[id] = inner.Get(id);\n    }\n}\nclass Logging(IRepo inner) : IRepo {\n    int calls;\n    public string Get(int id) { Console.WriteLine($\"log call {++calls}\"); return inner.Get(id); }\n}\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "log call 1",
+        "cache miss",
+        "db query",
+        "log call 2",
+        "cache hit"
+      ],
+      "explanation": "The object graph is `Logging -> Caching -> Db`. The first `Get(7)` enters `Logging` (`log call 1`), which delegates to `Caching`. The cache is empty, so it prints `cache miss` and calls `Db` (`db query`), then stores the row. The second `Get(7)` again starts at the outermost decorator (`log call 2`), but `Caching` now finds the key and prints `cache hit` without calling `Db`. Each call walks the decorators from outside in.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A chain of approvers each handle a request or pass it on. Put the printed lines in order, first to last.\n\n```go\npackage main\n\nimport \"fmt\"\n\ntype Handler interface{ Handle(amount int) }\n\ntype Approver struct {\n\tname  string\n\tlimit int\n\tnext  Handler\n}\n\nfunc (a *Approver) Handle(amount int) {\n\tif amount <= a.limit {\n\t\tfmt.Println(a.name, \"approves\", amount)\n\t\treturn\n\t}\n\tfmt.Println(a.name, \"passes\", amount)\n\tif a.next != nil {\n\t\ta.next.Handle(amount)\n\t}\n}\n\nfunc main() {\n\tceo := &Approver{name: \"ceo\", limit: 100000}\n\tdirector := &Approver{name: \"director\", limit: 10000, next: ceo}\n\tmanager := &Approver{name: \"manager\", limit: 1000, next: director}\n\tlead := &Approver{name: \"lead\", limit: 100, next: manager}\n\tlead.Handle(50000)\n\tmanager.Handle(50)\n}\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "lead passes 50000",
+        "manager passes 50000",
+        "director passes 50000",
+        "ceo approves 50000",
+        "manager approves 50"
+      ],
+      "explanation": "The chain is lead -> manager -> director -> ceo. For 50000, lead (limit 100), manager (1000) and director (10000) are all too small, so each prints `passes` and forwards to its `next`; ceo (100000) approves. The second call starts the request at `manager` rather than at the head of the chain, and 50 is within manager's limit, so it approves straight away. A Chain of Responsibility walks handlers in link order starting from whichever handler receives the request.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`Generate` is a template method; the subclass overrides some of its steps and hooks. Put the printed lines in order, first to last.\n\n```csharp\nReport r = new SalesReport();\nr.Generate();\n\nabstract class Report {\n    public void Generate() {\n        Header();\n        if (IncludeSummary()) Console.WriteLine(\"summary\");\n        Body();\n        Console.WriteLine(\"footer\");\n    }\n    protected virtual void Header() => Console.WriteLine(\"header\");\n    protected virtual bool IncludeSummary() => false;\n    protected abstract void Body();\n}\nclass SalesReport : Report {\n    protected override void Header() { base.Header(); Console.WriteLine(\"sales logo\"); }\n    protected override bool IncludeSummary() => true;\n    protected override void Body() => Console.WriteLine(\"sales rows\");\n}\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "header",
+        "sales logo",
+        "summary",
+        "sales rows",
+        "footer"
+      ],
+      "explanation": "The template method fixes the skeleton: `Header()`, the optional summary, `Body()`, then the footer. `SalesReport.Header` calls `base.Header()` first (`header`) and then prints `sales logo`. The hook `IncludeSummary` is overridden to return true, so `summary` prints next. `Body` is the subclass's `sales rows`, and the non-virtual footer always prints last. Subclasses change the steps but never their order.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Observers are notified in the order they subscribed. Put the printed lines in order, first to last.\n\n```js\nclass Subject {\n  #observers = [];\n  subscribe(fn) { this.#observers.push(fn); return () => { this.#observers = this.#observers.filter(o => o !== fn); }; }\n  notify(msg) { for (const o of this.#observers) o(msg); }\n}\nconst s = new Subject();\ns.subscribe(m => console.log(\"email \" + m));\nconst stopSms = s.subscribe(m => console.log(\"sms \" + m));\ns.notify(\"A\");\nstopSms();\ns.subscribe(m => console.log(\"push \" + m));\ns.notify(\"B\");\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "email A",
+        "sms A",
+        "email B",
+        "push B"
+      ],
+      "explanation": "On `notify(\"A\")` the list is email, sms, so they print in that registration order. `stopSms()` removes sms. `push` then subscribes and goes to the end of the list. On `notify(\"B\")` the list is email, push. The subject iterates its observer list in insertion order and knows nothing else about them.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A fluent builder assembles a house. Put the printed lines in order, first to last.\n\n```go\npackage main\n\nimport \"fmt\"\n\ntype Builder struct{ parts []string }\n\nfunc (b *Builder) Walls() *Builder   { fmt.Println(\"walls\"); b.parts = append(b.parts, \"walls\"); return b }\nfunc (b *Builder) Roof() *Builder    { fmt.Println(\"roof\"); b.parts = append(b.parts, \"roof\"); return b }\nfunc (b *Builder) Windows() *Builder { fmt.Println(\"windows\"); b.parts = append(b.parts, \"windows\"); return b }\nfunc (b *Builder) Build() []string   { fmt.Println(\"build\", len(b.parts)); return b.parts }\n\nfunc Foundation() *Builder { fmt.Println(\"foundation\"); return &Builder{parts: []string{\"foundation\"}} }\n\nfunc main() {\n\tFoundation().Walls().Windows().Roof().Build()\n}\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "foundation",
+        "walls",
+        "windows",
+        "roof",
+        "build 4"
+      ],
+      "explanation": "`Foundation()` runs first because it creates the builder, then each chained method runs left to right: `Walls`, `Windows`, `Roof`. `Build()` is the last call in the chain and reports the four collected parts. With a fluent builder the call order on the chain is the construction order.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Commands go on an undo stack, and undone commands go on a redo stack. Put the printed lines in order, first to last.\n\n```js\nconst doc = [];\nconst done = [];\nconst undone = [];\nconst add = (t) => ({ run: () => doc.push(t), undo: () => doc.pop(), name: t });\nfunction exec(c) { c.run(); done.push(c); undone.length = 0; }\nfunction undo() { const c = done.pop(); c.undo(); undone.push(c); console.log(\"undo \" + c.name); }\nfunction redo() { const c = undone.pop(); c.run(); done.push(c); console.log(\"redo \" + c.name); }\nexec(add(\"a\")); exec(add(\"b\")); exec(add(\"c\"));\nundo(); undo(); redo();\nexec(add(\"d\"));\nundo();\nconsole.log(doc.join(\"\"));\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "undo c",
+        "undo b",
+        "redo b",
+        "undo d",
+        "ab"
+      ],
+      "explanation": "After executing a, b and c the undo stack is [a, b, c]. `undo()` pops from the top, so `undo c` and then `undo b`. `redo()` pops the most recently undone command, b, so `redo b` (doc is now `ab`). Executing d pushes it and clears the redo stack. The final `undo` pops d. The document ends as `ab`, which is the last line printed.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "An editor saves mementos onto a stack and restores from them. Put the printed lines in order, first to last.\n\n```csharp\nvar editor = new Editor();\nvar history = new Stack<Editor.Memento>();\neditor.Type(\"a\"); history.Push(editor.Save());\neditor.Type(\"b\"); history.Push(editor.Save());\neditor.Type(\"c\");\nConsole.WriteLine(editor.Text);\neditor.Restore(history.Pop()); Console.WriteLine(editor.Text);\neditor.Type(\"x\"); Console.WriteLine(editor.Text);\neditor.Restore(history.Pop()); Console.WriteLine(editor.Text);\neditor.Restore(new Editor().Save()); Console.WriteLine($\"[{editor.Text}]\");\n\nclass Editor {\n    public string Text { get; private set; } = \"\";\n    public void Type(string s) => Text += s;\n    public Memento Save() => new(Text);\n    public void Restore(Memento m) => Text = m.State;\n    public record Memento(string State);\n}\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "abc",
+        "ab",
+        "abx",
+        "a",
+        "[]"
+      ],
+      "explanation": "Typing a, b, c gives `abc`; the stack holds snapshots `a` (bottom) and `ab` (top). The first restore pops `ab`. Typing x gives `abx`, which was never saved. The next restore pops `a`. The last restore uses a memento from a brand-new editor, whose state is the empty string, so it prints `[]`. The originator stores and restores its own state; the caretaker (the stack) only holds the mementos.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A generator iterates over a tree of files. Put the printed lines in order, first to last.\n\n```js\nconst tree = { name: \"root\", children: [\n  { name: \"src\", children: [ { name: \"app.js\", children: [] }, { name: \"util.js\", children: [] } ] },\n  { name: \"README\", children: [] },\n] };\nfunction* walk(node) {\n  for (const child of node.children) yield* walk(child);\n  yield node.name;\n}\nfor (const name of walk(tree)) console.log(name);\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "app.js",
+        "util.js",
+        "src",
+        "README",
+        "root"
+      ],
+      "explanation": "`walk` yields all of a node's children first (recursively, via `yield*`) and only then the node itself, which is a post-order traversal. Under `src` that means `app.js`, `util.js`, then `src`. Next comes `README`, which has no children. `root` is yielded last, after everything below it. The iterator hides the traversal order behind a simple `for...of`.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "This is a Koa-style middleware pipeline where each middleware awaits `next()`. Put the printed lines in order, first to last.\n\n```js\nconst stack = [];\nconst use = (mw) => stack.push(mw);\nfunction run(ctx) {\n  const dispatch = async (i) => { const mw = stack[i]; if (mw) await mw(ctx, () => dispatch(i + 1)); };\n  return dispatch(0);\n}\nuse(async (ctx, next) => { console.log(\"timer start\"); await next(); console.log(\"timer end\"); });\nuse(async (ctx, next) => { console.log(\"auth check\"); await next(); console.log(\"auth done\"); });\nuse(async (ctx) => { console.log(\"handler\"); });\nrun({});\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "timer start",
+        "auth check",
+        "handler",
+        "auth done",
+        "timer end"
+      ],
+      "explanation": "Middleware runs in registration order on the way in: `timer start`, then `auth check`, then the `handler`. Each `await next()` waits for everything downstream to finish, so the code after it runs on the way back out, in reverse: `auth done` before `timer end`. This is the onion model: the first middleware registered wraps all the others.",
+      "materials": [
+        "aspnet-middleware"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`Chain` wraps a handler with middleware in the order given. Put the printed lines in order, first to last.\n\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"net/http/httptest\"\n)\n\ntype Middleware func(http.Handler) http.Handler\n\nfunc named(name string) Middleware {\n\treturn func(next http.Handler) http.Handler {\n\t\treturn http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {\n\t\t\tfmt.Println(name, \"before\")\n\t\t\tnext.ServeHTTP(w, r)\n\t\t\tfmt.Println(name, \"after\")\n\t\t})\n\t}\n}\n\nfunc Chain(h http.Handler, mws ...Middleware) http.Handler {\n\tfor _, mw := range mws {\n\t\th = mw(h)\n\t}\n\treturn h\n}\n\nfunc main() {\n\tapp := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { fmt.Println(\"handler\") })\n\th := Chain(app, named(\"logging\"), named(\"auth\"))\n\th.ServeHTTP(httptest.NewRecorder(), httptest.NewRequest(\"GET\", \"/\", nil))\n}\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "auth before",
+        "logging before",
+        "handler",
+        "logging after",
+        "auth after"
+      ],
+      "explanation": "`Chain` loops over the middleware and wraps the current handler each time: first `logging(app)`, then `auth(logging(app))`. So the last middleware in the list ends up outermost. A request therefore enters `auth` first, then `logging`, then the handler, and unwinds in reverse: `logging after`, then `auth after`. Many Go chain helpers loop in reverse precisely so that the first argument runs first; this one does not.",
+      "materials": [
+        "aspnet-middleware",
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A tiny reflection-based DI container resolves constructor parameters recursively. Put the printed lines in order, first to last.\n\n```csharp\nvar c = new Container();\nc.Resolve(typeof(OrderController));\n\nclass Container {\n    public object Resolve(Type t) {\n        var ctor = t.GetConstructors().Single();\n        var args = ctor.GetParameters().Select(p => Resolve(p.ParameterType)).ToArray();\n        return ctor.Invoke(args);\n    }\n}\nclass Clock { public Clock() => Console.WriteLine(\"Clock\"); }\nclass DbConnection { public DbConnection() => Console.WriteLine(\"DbConnection\"); }\nclass OrderRepository { public OrderRepository(DbConnection db) => Console.WriteLine(\"OrderRepository\"); }\nclass OrderService { public OrderService(OrderRepository repo, Clock clock) => Console.WriteLine(\"OrderService\"); }\nclass OrderController { public OrderController(OrderService svc) => Console.WriteLine(\"OrderController\"); }\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "DbConnection",
+        "OrderRepository",
+        "Clock",
+        "OrderService",
+        "OrderController"
+      ],
+      "explanation": "To construct `OrderController` the container must first resolve `OrderService`, which needs `OrderRepository` and then `Clock` (parameters are resolved left to right). `OrderRepository` needs `DbConnection`, so `DbConnection` is constructed first and `OrderRepository` second. Then `Clock` is built, and only then can `OrderService` and finally `OrderController` run their constructors. Dependencies are constructed deepest first; the root of the graph is created last.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A singleton is created lazily with `Lazy<T>`. Put the printed lines in order, first to last.\n\n```csharp\nConsole.WriteLine(\"start\");\nvar a = Config.Instance;\nConsole.WriteLine(\"got a\");\nvar b = Config.Instance;\nConsole.WriteLine(\"got b\");\n\nsealed class Config {\n    static readonly Lazy<Config> lazy = new(() => new Config());\n    public static Config Instance => lazy.Value;\n    Config() => Console.WriteLine(\"ctor\");\n}\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "start",
+        "ctor",
+        "got a",
+        "got b"
+      ],
+      "explanation": "`Lazy<T>` does not run the factory when the static field is initialised; it runs on the first read of `.Value`. So `start` prints first, then the first access to `Config.Instance` runs the private constructor (`ctor`). After that the same instance is returned, so the second access prints nothing and `got a` and `got b` follow. The constructor runs exactly once.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A visitor computes the total area of some shapes. Put the printed lines in order, first to last.\n\n```go\npackage main\n\nimport \"fmt\"\n\ntype Visitor interface {\n\tVisitCircle(c Circle)\n\tVisitSquare(s Square)\n}\n\ntype Shape interface{ Accept(v Visitor) }\n\ntype Circle struct{ R float64 }\ntype Square struct{ Side float64 }\n\nfunc (c Circle) Accept(v Visitor) { fmt.Println(\"circle accept\"); v.VisitCircle(c) }\nfunc (s Square) Accept(v Visitor) { fmt.Println(\"square accept\"); v.VisitSquare(s) }\n\ntype AreaVisitor struct{ total float64 }\n\nfunc (a *AreaVisitor) VisitCircle(c Circle) { fmt.Println(\"visit circle\"); a.total += 3 * c.R * c.R }\nfunc (a *AreaVisitor) VisitSquare(s Square) { fmt.Println(\"visit square\"); a.total += s.Side * s.Side }\n\nfunc main() {\n\tshapes := []Shape{Square{2}, Circle{1}}\n\tv := &AreaVisitor{}\n\tfor _, s := range shapes {\n\t\ts.Accept(v)\n\t}\n\tfmt.Println(\"total\", v.total)\n}\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "square accept",
+        "visit square",
+        "circle accept",
+        "visit circle",
+        "total 7"
+      ],
+      "explanation": "The slice holds the square first, then the circle. For each element, `Accept` runs first (`square accept`) and calls back the visitor method for its own concrete type (`visit square`). This is double dispatch: one call on the element, one call back on the visitor. The circle follows the same two steps, and the total is printed at the end (4 + 3 = 7).",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Each state object knows only its successor. Put the printed lines in order, first to last.\n\n```js\nconst states = {\n  green: { next: \"yellow\" },\n  yellow: { next: \"red\" },\n  red: { next: \"redYellow\" },\n  redYellow: { next: \"green\" },\n};\nlet current = \"red\";\nfor (let i = 0; i < 4; i++) { current = states[current].next; console.log(current); }\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "redYellow",
+        "green",
+        "yellow",
+        "red"
+      ],
+      "explanation": "The machine starts in `red` and prints the state after each of four transitions. `red` goes to `redYellow`, which goes to `green`, then `yellow`, and back to `red`. In the State pattern each state decides what comes next, so the order is set by the transition table rather than by the caller.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A virtual proxy delays loading an image. Put the printed lines in order, first to last.\n\n```csharp\nIImage img = new ImageProxy(\"cat.png\");\nConsole.WriteLine(\"proxy ready\");\nimg.Draw();\nimg.Draw();\n\ninterface IImage { void Draw(); }\nclass RealImage : IImage {\n    public RealImage(string f) => Console.WriteLine($\"load {f}\");\n    int draws;\n    public void Draw() => Console.WriteLine($\"draw {++draws}\");\n}\nclass ImageProxy(string file) : IImage {\n    RealImage? real;\n    public void Draw() { real ??= new RealImage(file); real.Draw(); }\n}\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "proxy ready",
+        "load cat.png",
+        "draw 1",
+        "draw 2"
+      ],
+      "explanation": "Constructing `ImageProxy` does not load anything, so `proxy ready` prints first. The first `Draw` finds no real image, creates it (`load cat.png`) and then forwards the call (`draw 1`). The second `Draw` reuses the same loaded object, so it prints `draw 2` without loading again. The proxy defers the expensive work until it is actually needed.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "An event-sourced account rebuilds its balance by folding over its events. Put the printed lines in order, first to last.\n\n```js\nconst events = [\n  { type: \"Opened\", amount: 0 },\n  { type: \"Deposited\", amount: 100 },\n  { type: \"Withdrew\", amount: 30 },\n  { type: \"Deposited\", amount: 50 },\n  { type: \"Withdrew\", amount: 70 },\n];\nconst apply = (bal, e) => e.type === \"Withdrew\" ? bal - e.amount : bal + e.amount;\nevents.reduce((bal, e) => { const next = apply(bal, e); console.log(`${e.type} -> ${next}`); return next; }, 0);\n```",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Opened -> 0",
+        "Deposited -> 100",
+        "Withdrew -> 70",
+        "Deposited -> 120",
+        "Withdrew -> 50"
+      ],
+      "explanation": "The reducer applies events in the order they were stored: Opened (0), +100 (100), -30 (70), +50 (120), -70 (50). Current state is never stored directly; it is the result of replaying the event stream from the start in order. Replaying the same events in a different order could give a different history of balances.",
+      "materials": [
+        "event-sourcing"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A connection and a transaction are acquired with stacked `using` statements. Put the printed lines in order, first to last.\n\n```csharp\nusing (var conn = new Res(\"connection\"))\nusing (var tx = new Res(\"transaction\"))\n{\n    Console.WriteLine(\"work\");\n}\n\nclass Res : IDisposable {\n    readonly string name;\n    public Res(string n) { name = n; Console.WriteLine($\"open {n}\"); }\n    public void Dispose() => Console.WriteLine($\"dispose {name}\");\n}\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "open connection",
+        "open transaction",
+        "work",
+        "dispose transaction",
+        "dispose connection"
+      ],
+      "explanation": "Resources are opened in the order written: connection, then transaction. The body runs (`work`). When the block ends, disposal happens in reverse order of acquisition, so the transaction is disposed before the connection it depends on. Stacked `using` statements nest exactly like `using (a) { using (b) { ... } }`.",
+      "materials": [
+        "uow"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Members talk only through a chat-room mediator. Put the printed lines in order, first to last.\n\n```js\nclass Room {\n  members = [];\n  join(m) { this.members.push(m); m.room = this; }\n  send(from, text) { for (const m of this.members) if (m !== from) m.receive(from.name, text); }\n}\nclass Member { constructor(name) { this.name = name; } say(t) { this.room.send(this, t); } receive(f, t) { console.log(`${this.name} got \"${t}\" from ${f}`); } }\nconst r = new Room();\nconst ann = new Member(\"ann\"), bob = new Member(\"bob\"), cy = new Member(\"cy\");\nr.join(cy); r.join(ann); r.join(bob);\nbob.say(\"hi\");\nann.say(\"yo\");\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "cy got \"hi\" from bob",
+        "ann got \"hi\" from bob",
+        "cy got \"yo\" from ann",
+        "bob got \"yo\" from ann"
+      ],
+      "explanation": "The room keeps members in join order: cy, ann, bob. When bob speaks, the mediator delivers to everyone except the sender in that order: cy then ann. When ann speaks, it delivers to cy then bob. Members never call each other directly; the mediator decides who gets the message and in which order.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A composite computes an order's total price. Put the printed lines in order, first to last.\n\n```go\npackage main\n\nimport \"fmt\"\n\ntype Item interface{ Price() int }\n\ntype Product struct {\n\tname  string\n\tprice int\n}\n\nfunc (p Product) Price() int { fmt.Println(\"price\", p.name); return p.price }\n\ntype Box struct {\n\tname  string\n\titems []Item\n}\n\nfunc (b Box) Price() int {\n\ttotal := 0\n\tfor _, it := range b.items {\n\t\ttotal += it.Price()\n\t}\n\tfmt.Println(\"box\", b.name, total)\n\treturn total\n}\n\nfunc main() {\n\torder := Box{\"order\", []Item{\n\t\tBox{\"small\", []Item{Product{\"pen\", 2}, Product{\"ink\", 5}}},\n\t\tProduct{\"book\", 20},\n\t}}\n\torder.Price()\n}\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "price pen",
+        "price ink",
+        "box small 7",
+        "price book",
+        "box order 27"
+      ],
+      "explanation": "`order.Price()` loops over its items. The first item is the `small` box, which in turn asks `pen` and `ink` for their prices before printing its own subtotal (`box small 7`). Then `order` asks `book`. Finally `order` prints its total after all children have answered. A box prints only after its children, so the output is a post-order walk of the tree.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Handlers are added to and removed from a C# event. Put the printed lines in order, first to last.\n\n```csharp\nvar shop = new Shop();\nEventHandler<string> mail = (_, s) => Console.WriteLine($\"mail {s}\");\nEventHandler<string> stock = (_, s) => Console.WriteLine($\"stock {s}\");\nEventHandler<string> audit = (_, s) => Console.WriteLine($\"audit {s}\");\nshop.Ordered += audit;\nshop.Ordered += mail;\nshop.Ordered += stock;\nshop.Ordered += mail;\nshop.Ordered -= mail;\nshop.Place(\"#1\");\nshop.Ordered -= stock;\nshop.Place(\"#2\");\n\nclass Shop {\n    public event EventHandler<string>? Ordered;\n    public void Place(string id) => Ordered?.Invoke(this, id);\n}\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "audit #1",
+        "mail #1",
+        "stock #1",
+        "audit #2",
+        "mail #2"
+      ],
+      "explanation": "The invocation list after the four `+=` is audit, mail, stock, mail. `-= mail` removes the last occurrence of `mail`, leaving audit, mail, stock, so `#1` is delivered to them in that order. `-= stock` leaves audit, mail for `#2`. Multicast delegates call handlers in the order they were added, and removal takes the most recently added matching handler.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A flyweight factory shares glyph objects. Put the printed lines in order, first to last.\n\n```js\nconst cache = new Map();\nfunction glyph(ch) {\n  if (cache.has(ch)) { console.log(\"reuse \" + ch); return cache.get(ch); }\n  console.log(\"create \" + ch);\n  const g = { ch }; cache.set(ch, g); return g;\n}\nfor (const ch of \"abba\") glyph(ch);\nconsole.log(\"objects \" + cache.size);\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "create a",
+        "create b",
+        "reuse b",
+        "reuse a",
+        "objects 2"
+      ],
+      "explanation": "The string `abba` is processed one character at a time. `a` and `b` are new and get created; the second `b` and the final `a` are found in the cache and reused. The factory ends up holding only two objects for four uses, which is the point of a flyweight.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "This Go 1.23+ iterator is consumed with `range` and the loop breaks early. Put the printed lines in order, first to last.\n\n```go\npackage main\n\nimport (\n\t\"fmt\"\n\t\"iter\"\n)\n\nfunc Countdown(from int) iter.Seq[int] {\n\treturn func(yield func(int) bool) {\n\t\tdefer fmt.Println(\"cleanup\")\n\t\tfor i := from; i > 0; i-- {\n\t\t\tfmt.Println(\"produce\", i)\n\t\t\tif !yield(i) {\n\t\t\t\tfmt.Println(\"stopped\")\n\t\t\t\treturn\n\t\t\t}\n\t\t}\n\t}\n}\n\nfunc main() {\n\tfor n := range Countdown(5) {\n\t\tif n == 4 {\n\t\t\tbreak\n\t\t}\n\t\tfmt.Println(\"consume\", n)\n\t}\n}\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "produce 5",
+        "consume 5",
+        "produce 4",
+        "stopped",
+        "cleanup"
+      ],
+      "explanation": "The iterator prints `produce 5` and calls `yield(5)`, which runs the loop body (`consume 5`) and returns true. It then prints `produce 4` and yields 4; the body hits `break`, so `yield` returns false. The iterator sees that, prints `stopped`, and returns, which runs its deferred `cleanup`. Breaking out of a range-over-func loop does not kill the iterator: it gets a false from `yield` and can clean up.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A hand-written iterator has both `next` and `return`. Put the printed lines in order, first to last.\n\n```js\nconst range = {\n  [Symbol.iterator]() {\n    let i = 0;\n    return {\n      next() { i++; console.log(\"next \" + i); return { value: i, done: i > 3 }; },\n      return() { console.log(\"return\"); return { done: true }; },\n    };\n  },\n};\nfor (const n of range) {\n  if (n === 2) break;\n  console.log(\"body \" + n);\n}\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "next 1",
+        "body 1",
+        "next 2",
+        "return"
+      ],
+      "explanation": "`for...of` calls `next()` before each iteration: `next 1` gives 1, and the body prints `body 1`. `next 2` gives 2, and the body breaks before printing. Exiting a `for...of` early makes the runtime call the iterator's `return()` method so it can release resources, so `return` is printed last. `next 3` is never called.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A macro command runs its steps in order. In what order are the `undo` lines printed, first to last?\n\n```csharp\nvar macro = new Macro(new Step(\"format\"), new Step(\"lint\"), new Step(\"test\"), new Step(\"save\"));\nmacro.Execute();\nmacro.Undo();\n\ninterface ICommand { void Execute(); void Undo(); }\nclass Step(string name) : ICommand {\n    public void Execute() { }\n    public void Undo() => Console.WriteLine($\"undo {name}\");\n}\nclass Macro(params ICommand[] steps) : ICommand {\n    public void Execute() { foreach (var s in steps) s.Execute(); }\n    public void Undo() { foreach (var s in steps.Reverse()) s.Undo(); }\n}\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "undo save",
+        "undo test",
+        "undo lint",
+        "undo format"
+      ],
+      "explanation": "The macro executed format, lint, test, save. Undoing a composite command must reverse its steps from last to first, so later steps that depend on earlier ones are rolled back before them: save, test, lint, format. `Undo` iterates `steps.Reverse()` for exactly that reason.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "The base class constructor calls a method that the subclass overrides. Put the printed lines in order, first to last.\n\n```js\nclass Base {\n  constructor() { console.log(\"base ctor\"); this.setup(); }\n  setup() { console.log(\"base setup\"); }\n}\nclass Widget extends Base {\n  color = (console.log(\"field init\"), \"red\");\n  constructor() { super(); console.log(\"widget ctor \" + this.color); }\n  setup() { console.log(\"widget setup \" + this.color); }\n}\nnew Widget();\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "base ctor",
+        "widget setup undefined",
+        "field init",
+        "widget ctor red"
+      ],
+      "explanation": "`new Widget()` runs `super()` first, so `base ctor` prints. The base constructor calls `this.setup()`, which dispatches to the subclass override, but the subclass's fields are not initialised until `super()` returns, so it prints `widget setup undefined`. Then the field initialiser runs (`field init`), and finally the rest of the Widget constructor prints `widget ctor red`. This is why template-method hooks should not be called from constructors.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A Unit of Work records changes in any order and writes them on `Commit`. Put the printed lines in order, first to last.\n\n```go\npackage main\n\nimport \"fmt\"\n\ntype UnitOfWork struct{ news, dirty, removed []string }\n\nfunc (u *UnitOfWork) RegisterNew(e string)     { u.news = append(u.news, e) }\nfunc (u *UnitOfWork) RegisterDirty(e string)   { u.dirty = append(u.dirty, e) }\nfunc (u *UnitOfWork) RegisterRemoved(e string) { u.removed = append(u.removed, e) }\n\nfunc (u *UnitOfWork) Commit() {\n\tfor _, e := range u.news {\n\t\tfmt.Println(\"INSERT\", e)\n\t}\n\tfor _, e := range u.dirty {\n\t\tfmt.Println(\"UPDATE\", e)\n\t}\n\tfor _, e := range u.removed {\n\t\tfmt.Println(\"DELETE\", e)\n\t}\n}\n\nfunc main() {\n\tu := &UnitOfWork{}\n\tu.RegisterRemoved(\"coupon\")\n\tu.RegisterDirty(\"customer\")\n\tu.RegisterNew(\"order\")\n\tu.RegisterDirty(\"stock\")\n\tu.RegisterNew(\"invoice\")\n\tu.Commit()\n}\n```",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "INSERT order",
+        "INSERT invoice",
+        "UPDATE customer",
+        "UPDATE stock",
+        "DELETE coupon"
+      ],
+      "explanation": "Following Fowler's Unit of Work, `Commit` writes all new objects first, then all dirty ones, then all removed ones, no matter in what order they were registered. Within each group the registration order is kept: order before invoice, customer before stock. The removed coupon is deleted last even though it was registered first.",
+      "materials": [
+        "uow"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the SOLID principles in the order their letters appear in the acronym, first to last.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Single Responsibility Principle",
+        "Open/Closed Principle",
+        "Liskov Substitution Principle",
+        "Interface Segregation Principle",
+        "Dependency Inversion Principle"
+      ],
+      "explanation": "S is Single Responsibility (a class has one reason to change), O is Open/Closed (open for extension, closed for modification), L is Liskov Substitution (subtypes must be usable wherever their base type is), I is Interface Segregation (clients should not depend on methods they don't use), and D is Dependency Inversion (depend on abstractions, not concretions).",
+      "materials": [
+        "solid"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the four circles of Uncle Bob's Clean Architecture diagram in order, innermost to outermost.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Entities",
+        "Use Cases",
+        "Interface Adapters",
+        "Frameworks and Drivers"
+      ],
+      "explanation": "Entities (enterprise business rules) sit at the centre. Use Cases (application business rules) wrap them. Interface Adapters (controllers, presenters, gateways) convert data between the use cases and the outside world. Frameworks and Drivers (web framework, database, UI) form the outer ring. Source code dependencies may only point inward.",
+      "materials": [
+        "clean-arch"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In a Ports and Adapters (hexagonal) app, an HTTP request leads to a database write. Put the parts it passes through in order, first to last.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "HTTP controller (driving adapter)",
+        "Use-case interface (driving port)",
+        "Application core",
+        "Repository interface (driven port)",
+        "SQL repository (driven adapter)"
+      ],
+      "explanation": "The request arrives at a driving (primary) adapter such as an HTTP controller, which calls the core through a driving port. The application core runs the use case. When it needs storage it calls a driven (secondary) port, an interface the core owns, and a driven adapter implements that port against the real database. The core sits in the middle and depends on neither adapter.",
+      "materials": [
+        "hexagonal"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the parts of a traditional layered architecture (the style the Onion Architecture argues against) in order, top to bottom.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "User interface layer",
+        "Business logic layer",
+        "Data access layer",
+        "Database"
+      ],
+      "explanation": "In the traditional layered style each layer depends only on the one beneath it. The UI calls the business logic, the business logic calls the data access layer, and the data access layer talks to the database at the bottom. Palermo's point is that this makes everything ultimately depend on data access, which the onion turns inside out.",
+      "materials": [
+        "onion"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In a CQRS system with a separate read store, put the steps of handling a command in order, first to last.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Client sends a command",
+        "Command handler loads the aggregate from the write model",
+        "Aggregate validates and changes its state",
+        "Write model saves the change and raises an event",
+        "Projection updates the read model"
+      ],
+      "explanation": "A command goes to its handler, which loads the aggregate from the write side. The aggregate checks its invariants and changes state. The write side then persists the change and publishes an event. Only after that can a projection update the denormalised read store, which is why the read side is eventually consistent.",
+      "materials": [
+        "cqrs"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In a CQRS system with a separate read store, put the steps of handling a query in order, first to last.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Client sends a query",
+        "Query handler receives it",
+        "Handler reads the denormalised read model",
+        "Handler returns a DTO to the client"
+      ],
+      "explanation": "A query never goes through the domain model or the aggregates. It goes to a query handler, which reads straight from the precomputed read store and returns a DTO shaped for the screen. Nothing is changed on the way.",
+      "materials": [
+        "cqrs"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "An event-sourced aggregate handles a new command. Put the steps in order, first to last.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Load the aggregate's event stream from the store",
+        "Replay the events to rebuild current state",
+        "Validate the command against that state",
+        "Append new events with the expected stream version",
+        "Publish the new events to subscribers"
+      ],
+      "explanation": "There is no stored current state, so the aggregate's events are loaded and replayed to rebuild it. The command is checked against that rebuilt state. If it is valid, the resulting events are appended with the version that was read, so a concurrent writer causes a conflict instead of a lost update. Only events that were stored are published to projections and other subscribers.",
+      "materials": [
+        "event-sourcing"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "An event-sourced aggregate is rebuilt using snapshots. Put the steps in order, first to last.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Load the latest snapshot for the stream",
+        "Read the snapshot's stream version",
+        "Load only events after that version",
+        "Apply those events in order to the snapshot state",
+        "Use the result as current state"
+      ],
+      "explanation": "A snapshot is a cached copy of state at some stream version. The loader takes the newest snapshot, reads which version it represents, and fetches only the events after that version. Applying them in order on top of the snapshot gives the same state as replaying the whole stream, just faster.",
+      "materials": [
+        "event-sourcing"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Using the transactional outbox pattern, put the steps of saving an order and publishing `OrderCreated` in order, first to last.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Begin a database transaction",
+        "Insert the order row",
+        "Insert the `OrderCreated` message into the outbox table",
+        "Commit the transaction",
+        "Relay publishes the outbox message to the broker"
+      ],
+      "explanation": "The order row and the outbox row are written in the same local transaction, so either both are stored or neither is. The message cannot be published before the commit, otherwise a rollback would leave a message for an order that doesn't exist. After the commit, a separate relay (polling or log tailing) reads the outbox and publishes to the broker.",
+      "materials": [
+        "outbox"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the steps of one test-driven development cycle in order, first to last.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Write a small test for the next behaviour",
+        "Run it and watch it fail",
+        "Write just enough code to pass",
+        "Run the tests and see them pass",
+        "Refactor while keeping the tests green"
+      ],
+      "explanation": "This is red, green, refactor. You write a test first and see it fail, which proves it tests something. Then you write the simplest code that makes it pass and confirm all tests are green. Only with passing tests do you clean up the design, because the tests tell you that refactoring didn't break anything.",
+      "materials": [
+        "tdd"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A team replaces a legacy system with the Strangler Fig pattern. Put the steps in order, first to last.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Put a routing facade in front of the legacy system",
+        "Build one feature in the new system",
+        "Route that feature's traffic to the new system",
+        "Repeat until no traffic reaches the legacy system",
+        "Decommission the legacy system"
+      ],
+      "explanation": "First all traffic is sent through a facade or proxy that still forwards everything to the old system. Then a piece of functionality is rebuilt in the new system and the facade starts routing that piece to it. This repeats feature by feature. Only when the legacy system receives no traffic can it be switched off.",
+      "materials": [
+        "strangler"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A Unit of Work commits the changes collected during a business transaction. Put the steps in order, first to last.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Business code registers new, changed and removed objects",
+        "Commit is called",
+        "A database transaction is opened",
+        "Pending inserts, updates and deletes are written",
+        "The transaction is committed and tracked changes are cleared"
+      ],
+      "explanation": "During the business operation the Unit of Work only records which objects are new, dirty or removed. Nothing touches the database until commit. Commit then opens one transaction, writes the pending changes, commits, and clears its lists so the same changes are not written twice.",
+      "materials": [
+        "uow"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In Uncle Bob's Clean Architecture, put the components a web request passes through in order, first to last.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Controller",
+        "Use case input port",
+        "Use case interactor",
+        "Use case output port",
+        "Presenter"
+      ],
+      "explanation": "The controller converts the request and calls the use case through its input port, an interface the interactor implements. The interactor runs the business logic and then calls the output port, an interface that the presenter implements. The presenter formats the result into a view model. Control flows out through the presenter, while source code dependencies still point inward.",
+      "materials": [
+        "clean-arch"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the layers of Jeffrey Palermo's Onion Architecture in order, innermost to outermost.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Domain model",
+        "Domain services",
+        "Application services",
+        "User interface, infrastructure and tests"
+      ],
+      "explanation": "The domain model sits at the centre and depends on nothing. Domain services wrap it, then application services, which orchestrate use cases. UI, infrastructure (such as data access) and tests form the outermost layer, so the database is a detail at the edge instead of the foundation.",
+      "materials": [
+        "onion"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these publications in order of when they first appeared, oldest to newest.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Design Patterns (Gang of Four book)",
+        "Patterns of Enterprise Application Architecture",
+        "Domain-Driven Design (Evans)",
+        "Hexagonal Architecture article (Cockburn)",
+        "Onion Architecture posts (Palermo)"
+      ],
+      "explanation": "The GoF Design Patterns book came out in 1994. Fowler's Patterns of Enterprise Application Architecture appeared in 2002 and Evans's Domain-Driven Design in 2003. Cockburn published Hexagonal Architecture in 2005, and Palermo's Onion Architecture posts date from 2008.",
+      "materials": [
+        "hexagonal",
+        "onion"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "An ASP.NET Core MVC action has filters of every type, and nothing short-circuits. Put the filters in the order they first run, first to last.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Authorization filters",
+        "Resource filters",
+        "Action filters",
+        "Result filters"
+      ],
+      "explanation": "Authorization filters run first and can reject the request. Resource filters run next, before model binding, which makes them useful for caching. Model binding happens, then action filters run around the action method. After the action returns a result, result filters run around its execution. Exception filters only run if something throws.",
+      "materials": [
+        "aspnet-filters"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Following the middleware order recommended in the ASP.NET Core docs, put these calls in order, first to last.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`app.UseExceptionHandler()`",
+        "`app.UseRouting()`",
+        "`app.UseAuthentication()`",
+        "`app.UseAuthorization()`"
+      ],
+      "explanation": "Middleware runs in the order it is added. The exception handler goes first so it can catch errors from everything after it. Routing must pick the endpoint before authorization can read its policies. Authentication identifies the user before authorization decides what they may do.",
+      "materials": [
+        "aspnet-middleware"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A DDD-style API changes an order. Put the steps in order, first to last.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Controller maps the request to a command",
+        "Application service starts the use case",
+        "Repository loads the Order aggregate",
+        "Aggregate method enforces the business rule",
+        "Repository saves the aggregate"
+      ],
+      "explanation": "The controller only translates HTTP into a command. The application service coordinates the use case: it loads the aggregate through the repository, asks the aggregate to do the work (the aggregate guards its own invariants), and saves it back through the same repository.",
+      "materials": [
+        "onion"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A projection updates a read model from an event stream with at-least-once delivery. Put its loop steps in order, first to last.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Load the saved checkpoint position",
+        "Read the events after that position",
+        "Apply each event to the read model",
+        "Save the new checkpoint position"
+      ],
+      "explanation": "The projector resumes from its last checkpoint and reads the next events. It must apply them before it saves the new checkpoint. If it crashed after saving the checkpoint but before applying, those events would be skipped forever; in this order a crash only causes events to be applied again, so handlers should be idempotent.",
+      "materials": [
+        "event-sourcing"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A constructor uses Go's functional options pattern. Put the printed lines in order, first to last.\n\n```go\npackage main\n\nimport \"fmt\"\n\ntype Server struct {\n\tport int\n\ttls  bool\n}\n\ntype Option func(*Server)\n\nfunc WithPort(p int) Option { return func(s *Server) { fmt.Println(\"port\", p); s.port = p } }\nfunc WithTLS() Option       { return func(s *Server) { fmt.Println(\"tls on\"); s.tls = true } }\n\nfunc NewServer(opts ...Option) *Server {\n\ts := &Server{port: 80}\n\tfmt.Println(\"defaults\", s.port)\n\tfor _, opt := range opts {\n\t\topt(s)\n\t}\n\tfmt.Println(\"ready\", s.port, s.tls)\n\treturn s\n}\n\nfunc main() {\n\tNewServer(WithTLS(), WithPort(8443))\n}\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "defaults 80",
+        "tls on",
+        "port 8443",
+        "ready 8443 true"
+      ],
+      "explanation": "`WithTLS()` and `WithPort(8443)` only build closures; nothing prints when they are evaluated. `NewServer` first sets its defaults and prints `defaults 80`. It then applies each option in the order passed: TLS first, then the port. The last line shows the final configuration after all options ran, so the port is 8443, not the default.",
+      "materials": [
+        "refactoring-guru"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A team replaces a library with Branch by Abstraction. Put the steps in order, first to last.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Add an abstraction layer over the old library",
+        "Move callers onto the abstraction",
+        "Build the new implementation behind the abstraction",
+        "Switch the abstraction to the new implementation",
+        "Delete the old implementation"
+      ],
+      "explanation": "First an abstraction is created over the part to be replaced, and callers are moved to use it, so nobody depends on the old library directly. The new implementation is then built behind the same abstraction while trunk keeps working. Once it is ready, the abstraction is switched over, and the old code can be removed.",
+      "materials": [
+        "bba"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A service sends a large file using the Claim-Check pattern. Put the steps in order, first to last.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Sender stores the payload in blob storage",
+        "Sender sends a message with the payload's reference",
+        "Receiver gets the message from the queue",
+        "Receiver fetches the payload using the reference"
+      ],
+      "explanation": "The big payload never goes through the message bus. The sender first stores it in external storage, then sends a small message holding only the claim check (a reference). The receiver takes that message off the queue and uses the reference to fetch the payload.",
+      "materials": [
+        "claim-check"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Writers A and B both read an event stream at version 5. A appends first; B uses optimistic concurrency. Put what happens in order, first to last.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A appends with expected version 5",
+        "Stream moves to version 6",
+        "B's append with expected version 5 is rejected",
+        "B reloads the stream at version 6",
+        "B retries with expected version 6"
+      ],
+      "explanation": "Both writers loaded version 5. A appends first with expected version 5, which matches, so the stream becomes version 6. B then tries to append with expected version 5, but the stream is now at 6, so the store rejects it. B reloads to see A's event, checks its command again against the new state, and retries with expected version 6.",
+      "materials": [
+        "event-sourcing"
+      ]
+    }
+  ]
+}
