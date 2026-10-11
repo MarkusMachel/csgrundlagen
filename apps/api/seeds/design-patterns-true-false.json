@@ -1,0 +1,798 @@
+{
+  "name": "Design patterns and principles: true or false",
+  "materials": [
+    {
+      "key": "rg",
+      "type": "link",
+      "title": "Design patterns catalog",
+      "url": "https://refactoring.guru/design-patterns/catalog",
+      "author": "Refactoring.Guru",
+      "description": "Illustrated catalog of the 22 classic GoF patterns with intent, structure and comparisons to related patterns."
+    },
+    {
+      "key": "srp",
+      "type": "article",
+      "title": "The Single Responsibility Principle",
+      "url": "https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html",
+      "author": "Robert C. Martin",
+      "description": "Uncle Bob explains that SRP is about reasons to change and the people who request those changes."
+    },
+    {
+      "key": "solid",
+      "type": "article",
+      "title": "SOLID",
+      "url": "https://en.wikipedia.org/wiki/SOLID",
+      "author": "Wikipedia",
+      "description": "Overview of the five SOLID object-oriented design principles and their origins."
+    },
+    {
+      "key": "cleanarch",
+      "type": "article",
+      "title": "The Clean Architecture",
+      "url": "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html",
+      "author": "Robert C. Martin",
+      "description": "Introduces the concentric-circle architecture and its Dependency Rule, building on Hexagonal and Onion architectures."
+    },
+    {
+      "key": "di",
+      "type": "article",
+      "title": "Inversion of Control Containers and the Dependency Injection pattern",
+      "url": "https://martinfowler.com/articles/injection.html",
+      "author": "Martin Fowler",
+      "description": "The article that named Dependency Injection and compares it with Service Locator."
+    },
+    {
+      "key": "anemic",
+      "type": "article",
+      "title": "Anemic Domain Model",
+      "url": "https://martinfowler.com/bliki/AnemicDomainModel.html",
+      "author": "Martin Fowler",
+      "description": "Why domain objects without behaviour are an anti-pattern."
+    },
+    {
+      "key": "cqrs",
+      "type": "article",
+      "title": "CQRS",
+      "url": "https://martinfowler.com/bliki/CQRS.html",
+      "author": "Martin Fowler",
+      "description": "Command Query Responsibility Segregation: separate models for updates and reads, and when to use them."
+    },
+    {
+      "key": "es",
+      "type": "article",
+      "title": "Event Sourcing",
+      "url": "https://martinfowler.com/eaaDev/EventSourcing.html",
+      "author": "Martin Fowler",
+      "description": "Capturing every change to application state as a sequence of events."
+    },
+    {
+      "key": "aggregate",
+      "type": "article",
+      "title": "DDD Aggregate",
+      "url": "https://martinfowler.com/bliki/DDD_Aggregate.html",
+      "author": "Martin Fowler",
+      "description": "Aggregates as clusters of domain objects treated as a unit, accessed through a root."
+    },
+    {
+      "key": "ddd",
+      "type": "article",
+      "title": "Domain Driven Design",
+      "url": "https://martinfowler.com/bliki/DomainDrivenDesign.html",
+      "author": "Martin Fowler",
+      "description": "Short overview of Eric Evans' Domain-Driven Design, its strategic and tactical patterns."
+    },
+    {
+      "key": "saga",
+      "type": "article",
+      "title": "Saga distributed transactions pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/saga",
+      "author": "Microsoft Learn",
+      "description": "Coordinating local transactions with compensating actions, via choreography or orchestration."
+    },
+    {
+      "key": "outbox",
+      "type": "article",
+      "title": "Pattern: Transactional outbox",
+      "url": "https://microservices.io/patterns/data/transactional-outbox.html",
+      "author": "Chris Richardson",
+      "description": "Atomically updating the database and publishing messages by writing them to an outbox table."
+    },
+    {
+      "key": "repository",
+      "type": "article",
+      "title": "Repository",
+      "url": "https://martinfowler.com/eaaCatalog/repository.html",
+      "author": "Martin Fowler",
+      "description": "Catalog entry from Patterns of Enterprise Application Architecture for the Repository pattern."
+    },
+    {
+      "key": "yagni",
+      "type": "article",
+      "title": "Yagni",
+      "url": "https://martinfowler.com/bliki/Yagni.html",
+      "author": "Martin Fowler",
+      "description": "Why you should not build capabilities for presumed future needs."
+    },
+    {
+      "key": "pragprog",
+      "type": "book",
+      "title": "The Pragmatic Programmer, 20th Anniversary Edition",
+      "url": "https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/",
+      "author": "David Thomas and Andrew Hunt",
+      "description": "The book that coined DRY and discusses decoupling, the Law of Demeter and the costs of inheritance."
+    }
+  ],
+  "questions": [
+    {
+      "type": "true-false",
+      "prompt": "A Decorator usually changes the interface of the object it wraps, whereas a Proxy keeps the same interface as its subject.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Both Decorator and Proxy implement the same interface as the object they wrap, so clients cannot tell them apart from the real object. It is Adapter that provides a different interface; Decorator enhances an object without changing its interface.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Flyweight saves memory by sharing the intrinsic (context-independent) state of many fine-grained objects, while the extrinsic state is passed in by the client.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Flyweight moves the repeated, shareable part of an object's state into shared instances, typically obtained from a factory that caches them. Because the shared state is used by many contexts, it must be immutable, and anything context-specific is supplied as method arguments.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A subclass satisfies the Liskov Substitution Principle as long as it compiles against the base class and overrides all of its abstract methods.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. LSP is about behaviour, not type-checking: an object of the subtype must be usable anywhere the base type is expected without breaking correctness. The subtype must not strengthen preconditions, weaken postconditions or break invariants; the classic Square extending Rectangle example compiles but violates LSP.",
+      "materials": [
+        "solid"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The Builder pattern separates the construction of a complex object from its representation, so the same step-by-step construction process can produce different representations.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. That is the GoF intent of Builder. It is useful when an object needs many construction steps or optional parts, and it avoids telescoping constructors with long parameter lists.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The Interface Segregation Principle states that clients should not be forced to depend on methods they do not use.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. ISP favours small, client-specific interfaces over one large general-purpose interface. That way a client is not recompiled, redeployed or broken by changes to methods it never calls.",
+      "materials": [
+        "solid"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The Dependency Rule of Clean Architecture states that source-code dependencies may only point inward, toward higher-level policies.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Nothing in an inner circle (entities, use cases) may mention anything declared in an outer circle (controllers, gateways, frameworks, databases), not even a class name. When control must flow outward, the inner circle declares an interface that the outer circle implements.",
+      "materials": [
+        "cleanarch"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "CQRS requires Event Sourcing, because the read model can only be built by replaying events.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. CQRS just means using separate models for commands (updates) and queries (reads). It is often paired with Event Sourcing, but the read side can equally be updated from the same database, views or ordinary change notifications, and Event Sourcing can be used without CQRS.",
+      "materials": [
+        "cqrs",
+        "es"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "DRY is primarily a rule that no two lines of identical code should appear anywhere in a codebase.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. As defined in The Pragmatic Programmer, DRY says every piece of knowledge must have a single, unambiguous, authoritative representation within a system. It is about duplicated knowledge and intent, not textual similarity; two identical-looking snippets that encode different rules can legitimately stay separate.",
+      "materials": [
+        "pragprog"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In an event-sourced system, the stored sequence of events is the source of truth, and current state is derived by replaying those events.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Event Sourcing records every change as an immutable event in an append-only log. Current state, or any past state, can be rebuilt by replaying the events, and snapshots are only an optimization over that log.",
+      "materials": [
+        "es"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In the classic Observer pattern, the subject must know the concrete classes of its observers in order to notify them.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. The subject only knows that its observers implement an abstract observer interface such as `update()`. That loose coupling is the point of the pattern: new kinds of observers can subscribe without the subject changing.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With a Service Locator, a class's dependencies are just as visible in its constructor signature as they are with constructor injection.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. With a Service Locator the class pulls its dependencies from the locator inside its own code, so you must read the implementation to discover them and every user also depends on the locator. Fowler notes that with injection the dependencies are explicit in the constructor or setters, which is the main argument for preferring it.",
+      "materials": [
+        "di"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A saga replaces one distributed ACID transaction with a sequence of local transactions, using compensating transactions to undo completed steps if a later step fails.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Each participant commits its own local transaction and then triggers the next step. Because earlier steps are already committed, failure is handled by running compensating transactions that semantically undo them, such as cancelling a reservation.",
+      "materials": [
+        "saga"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Two value objects are equal only if they are the same instance in memory.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Value objects have no identity of their own and are compared by their attribute values: two `Money(10, \"EUR\")` objects are equal. Identity-based equality is what characterizes entities, whose identity persists even when their attributes change.",
+      "materials": [
+        "ddd"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Robert C. Martin's refined statement of the Single Responsibility Principle is that a module should be responsible to one, and only one, actor.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. In his later writing and in Clean Architecture, Martin ties responsibilities to people: an actor is a group of stakeholders who request changes. Code that serves different actors (for example accounting and operations) should be separated so a change for one cannot break the other.",
+      "materials": [
+        "srp"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Martin Fowler calls a domain model anemic when its objects are mostly data with getters and setters while the business logic lives in separate service classes, and he considers it an anti-pattern.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Fowler argues that an anemic domain model pays the cost of a domain model, such as the object-relational mapping, without getting its benefits, because behaviour and data are no longer kept together. It is essentially procedural code in object clothing.",
+      "materials": [
+        "anemic"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A Facade provides a simplified, higher-level interface to a set of interfaces in a subsystem.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. This is the GoF intent of Facade: it makes a complex subsystem easier to use by offering a few convenient entry points. Unlike an Adapter, it defines a new interface rather than conforming to one that clients already expect.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The Iterator pattern requires a collection to expose its internal representation so that clients can traverse its elements.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. The intent of Iterator is the opposite: it provides sequential access to the elements of an aggregate without exposing its underlying representation. The same traversal interface can therefore be used for lists, trees or hash tables.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In the Memento pattern, the caretaker reads and modifies the originator's saved state stored in the memento in order to restore it.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Memento captures an object's internal state without violating encapsulation. Only the originator can read or write the memento's contents; the caretaker just stores mementos as opaque tokens and hands them back for restoring.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Martin Fowler's Repository pattern mediates between the domain and data-mapping layers using a collection-like interface for accessing domain objects.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. That is Fowler's definition in Patterns of Enterprise Application Architecture. Client code adds, removes and queries domain objects as if they were in an in-memory collection, while the repository hides the persistence mechanics.",
+      "materials": [
+        "repository"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The key difference between Abstract Factory and Factory Method is that Abstract Factory is a single creation method overridden in subclasses, while Factory Method is an object with a set of creation methods for a family of products.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. It is the other way around. Factory Method is a single method that subclasses override to decide which product class to instantiate (inheritance), while Abstract Factory is an object with several creation methods for a family of related products, passed to the client (composition).",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Strategy defines a family of interchangeable algorithms, encapsulates each one behind a common interface, and lets the algorithm be selected or swapped at runtime.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. This is the GoF intent of Strategy. The context delegates to a strategy object instead of hard-coding the algorithm, so new algorithms can be added without changing the context.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The Transactional Outbox pattern stores an outgoing message in an outbox table within the same database transaction as the business data change, and a separate relay later publishes it to the message broker.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Writing both in one local transaction avoids the dual-write problem where the database commit succeeds but the publish fails, or vice versa. A message relay, using polling or transaction-log tailing, then sends the outbox rows to the broker.",
+      "materials": [
+        "outbox"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Abstract Factory classes are often implemented using Factory Methods, one for each kind of product in the family.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. The GoF book notes that AbstractFactory classes are often implemented with factory methods, although they can also use Prototype. Each concrete factory overrides the creation methods to produce the products of its family.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The Single Responsibility Principle means that each class should do exactly one thing, ideally with a single public method.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Robert C. Martin stresses that SRP is not \"do one thing\" (that rule applies to functions). SRP says a module should have one reason to change: gather together the things that change for the same reasons and separate those that change for different reasons.",
+      "materials": [
+        "srp",
+        "solid"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The Dependency Inversion Principle is essentially the requirement to use a dependency injection container.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. DIP says high-level modules should not depend on low-level modules; both should depend on abstractions, and abstractions should not depend on details. Dependency injection is one technique for supplying those abstractions, and a container is an optional convenience; DIP can be followed with plain constructor arguments.",
+      "materials": [
+        "solid",
+        "di"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In Robert C. Martin's formulation of the Dependency Inversion Principle, the interface that a high-level policy depends on is conceptually owned by the high-level module, not by the low-level module that implements it.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. Martin describes this as an inversion of ownership: the client declares the abstraction it needs and the low-level detail implements it. That is why source-code dependencies point from the detail toward the policy, opposite to the flow of control.",
+      "materials": [
+        "solid",
+        "cleanarch"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "YAGNI advises against building capabilities for presumed future requirements until they are actually needed.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. YAGNI (\"You Aren't Gonna Need It\") comes from Extreme Programming. Fowler explains that presumptive features carry costs of building, delay, carrying complexity and repair when the guess turns out wrong, even when the feature is eventually needed.",
+      "materials": [
+        "yagni"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The Open/Closed Principle forbids modifying a class after it has been released, even to fix a bug.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. OCP says software entities should be open for extension but closed for modification: new behaviour should be addable, typically through abstractions and polymorphism, without editing existing working code. It does not prohibit fixing defects.",
+      "materials": [
+        "solid"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In DDD, external objects may hold references only to an aggregate's root, and the aggregate acts as the consistency boundary that a single transaction should not cross.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. In DDD an aggregate is a cluster of objects treated as one unit for data changes. Outside code goes through the root, which enforces the aggregate's invariants, and a transaction should modify only one aggregate; consistency between aggregates is usually eventual.",
+      "materials": [
+        "aggregate"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In Hexagonal Architecture (Ports and Adapters), the application core depends directly on adapters such as the database driver and the web framework.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. The core defines ports (interfaces) describing what it offers and what it needs, and adapters for the UI, database or messaging plug into those ports. Dependencies point from the adapters to the core, so the core can be tested and run without any of them.",
+      "materials": [
+        "cleanarch"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The Gang of Four advise favoring object composition over class inheritance, partly because inheritance exposes a subclass to details of its parent's implementation.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. The GoF book states \"favor object composition over class inheritance\" and notes that inheritance is often said to break encapsulation. Composition relies only on objects' interfaces and lets behaviour be changed at runtime, which many patterns such as Strategy and Decorator exploit.",
+      "materials": [
+        "rg",
+        "pragprog"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Proxy and Decorator have very similar structures and differ mainly in intent: a Proxy controls access to its subject, while a Decorator adds responsibilities to it.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Both wrap an object behind the same interface and delegate to it. A Proxy exists to control access (lazy creation, remote access, permission checks, caching) and often manages the subject's lifecycle itself, while Decorators add behaviour and are typically stacked by the client.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Any expression containing more than one dot, such as a chained builder call, violates the Law of Demeter.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. The Law of Demeter limits which objects a method talks to: itself, its parameters, objects it creates and its direct components. Counting dots is only a heuristic; fluent interfaces that keep returning the same object or pure data structures do not reach through strangers' internals and are not violations.",
+      "materials": [
+        "pragprog"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In Domain-Driven Design you should normally create a repository for every entity, mirroring each database table.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Evans recommends repositories only for aggregate roots. Objects inside an aggregate are loaded and saved through their root, which protects the aggregate's invariants; a repository per table would let code bypass the root.",
+      "materials": [
+        "aggregate",
+        "ddd"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In Chain of Responsibility, a request can reach the end of the chain without being handled by any handler.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. GoF notes explicitly that receipt is not guaranteed: each handler either processes the request or passes it on, and if nobody handles it, it falls off the end. If handling is mandatory, the chain needs a catch-all handler at the end.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Bridge is mainly used to make two existing, independently designed classes with incompatible interfaces work together after the fact.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. That describes Adapter, which makes things work after they are designed. Bridge is applied up front to decouple an abstraction from its implementation so that the two hierarchies can vary independently, for example shapes and rendering back ends.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A Unit of Work keeps track of the objects affected by a business transaction and coordinates writing out all of their changes together.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Fowler defines Unit of Work as maintaining a list of objects affected by a business transaction and coordinating the writing out of changes and the resolution of concurrency problems. ORMs such as Entity Framework's `DbContext` or Hibernate's session implement it.",
+      "materials": [
+        "repository"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The Singleton pattern makes every method on the single instance thread-safe.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Singleton only ensures that a class has one instance and provides a global point of access to it. Any mutable state on that instance is shared by all threads, so its methods still need their own synchronization, and even lazy creation of the instance must be made thread-safe explicitly.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The Adapter pattern converts the interface of an existing class into another interface that clients expect, letting classes with incompatible interfaces work together.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. This is the GoF intent of Adapter. It wraps an existing object (the adaptee) and translates calls from the target interface the client uses into calls the adaptee understands.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Template Method defines the skeleton of an algorithm in a base-class method and lets subclasses override certain steps without changing the algorithm's overall structure.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. The base class fixes the order of steps and calls abstract or hook methods that subclasses supply. It is an example of inversion of control: the parent class calls the subclass's code, not the other way around.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The Prototype pattern creates new objects by calling the constructor of a class chosen at runtime through reflection.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Prototype creates new objects by cloning an existing prototype instance, usually through a `clone` method declared on a common interface. This lets code copy objects without depending on their concrete classes, and no constructor lookup by reflection is involved.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A God object, a class that knows too much or does too much, typically violates the Single Responsibility Principle.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. A God object accumulates responsibilities that change for many different reasons and serve many actors, so nearly every change touches it. It is a classic anti-pattern that hurts cohesion, testability and parallel work on the codebase.",
+      "materials": [
+        "srp"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The Transactional Outbox pattern guarantees that each message is delivered to consumers exactly once.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. The outbox guarantees that a message is published if and only if the transaction commits, but the relay may publish the same message more than once, for example if it crashes after sending but before marking the row as sent. Delivery is at-least-once, so consumers must be idempotent.",
+      "materials": [
+        "outbox"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Because they use compensating transactions, sagas provide the same isolation guarantees as two-phase commit.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. Sagas lack isolation: intermediate results of committed local transactions are visible to other transactions before the saga finishes, which can cause lost updates and dirty reads. Designers use countermeasures such as semantic locks, commutative updates or rereading values to mitigate this.",
+      "materials": [
+        "saga"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Visitor is a good fit when the class hierarchy of elements changes often but the set of operations performed on them rarely changes.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. Visitor makes adding new operations easy (write a new visitor), but adding a new element class is costly because every visitor interface and implementation must gain a new method. It fits stable element hierarchies with frequently changing operations.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Mediator replaces many-to-many communication between colleague objects with one-to-many communication through a central mediator object.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Instead of components referring to each other directly, they notify the mediator, which coordinates the interaction. This reduces coupling between colleagues, at the risk of the mediator itself growing into a God object.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Strategy and State can be told apart by structure alone, because State uses composition while Strategy relies on inheritance.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. Both have essentially the same structure: a context holds a reference to an interface and delegates work to the current concrete object. The difference is intent. Strategies are usually independent and chosen by the client, while states may know about each other and switch the context to another state themselves.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In DDD, a term such as \"Customer\" should have a single, shared model across the whole enterprise.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. DDD divides a large domain into bounded contexts, each with its own model and ubiquitous language. The same word can legitimately mean different things in, say, Sales and Support, and the relationships between contexts are made explicit in a context map.",
+      "materials": [
+        "ddd"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The Command pattern turns a request into a stand-alone object, which makes it possible to queue requests, log them and support undoable operations.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. GoF describes Command as encapsulating a request as an object, letting you parameterize clients with different requests, queue or log them, and support undo. The invoker only knows the command interface, not the receiver that does the work.",
+      "materials": [
+        "rg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Template Method and Strategy both vary parts of an algorithm through object composition, so either can swap behaviour at runtime.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. Template Method is based on inheritance: the variation is fixed when a subclass is chosen, so it works at the class level and is static. Strategy is based on composition, so the algorithm can be swapped at runtime by giving the context a different strategy object.",
+      "materials": [
+        "rg"
+      ]
+    }
+  ]
+}
