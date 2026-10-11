@@ -30,7 +30,18 @@ function fmt(v, depth) {
   if (v === null || typeof v !== 'object') return String(v);
   if (depth > 2) return Array.isArray(v) ? '[Array]' : '[Object]';
   if (v instanceof Error) return v.stack && !nested ? v.name + ': ' + v.message : '[' + v.name + ': ' + v.message + ']';
-  if (Array.isArray(v)) return v.length ? '[ ' + v.map((x) => fmt(x, depth + 1)).join(', ') + ' ]' : '[]';
+  if (Array.isArray(v)) {
+    // Holes print like Node: '<1 empty item>', '<2 empty items>'.
+    const parts = [];
+    for (let i = 0; i < v.length; i++) {
+      if (i in v) { parts.push(fmt(v[i], depth + 1)); continue; }
+      let n = 0;
+      while (i < v.length && !(i in v)) { n++; i++; }
+      i--;
+      parts.push('<' + n + ' empty item' + (n === 1 ? '' : 's') + '>');
+    }
+    return parts.length ? '[ ' + parts.join(', ') + ' ]' : '[]';
+  }
   if (v instanceof Map) return 'Map(' + v.size + ') {' + (v.size ? ' ' + [...v].map(([k, x]) => fmt(k, depth + 1) + ' => ' + fmt(x, depth + 1)).join(', ') + ' ' : '') + '}';
   if (v instanceof Set) return 'Set(' + v.size + ') {' + (v.size ? ' ' + [...v].map((x) => fmt(x, depth + 1)).join(', ') + ' ' : '') + '}';
   if (v instanceof Promise) return 'Promise { <pending> }';
@@ -64,7 +75,8 @@ const tick = () => new Promise((r) => realSetTimeout(r, 0));
 self.onmessage = async (e) => {
   try {
     const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
-    await new AsyncFunction(e.data)();
+    // Strict, like an ES module in Node (where expected outputs come from).
+    await new AsyncFunction("'use strict';\n" + e.data)();
   } catch (err) {
     line('Uncaught ' + fmt(err, 0));
   }
