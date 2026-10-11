@@ -893,7 +893,10 @@
       "search": "Índice de busca"
     },
     "countsAs": "Conta como: {{kind}}",
-    "trademarks": "Nomes e logotipos de produtos são marcas de seus donos e aparecem apenas para identificar os produtos; nenhum endosso está implícito. Logotipos do Simple Icons (CC0)."
+    "trademarks": "Nomes e logotipos de produtos são marcas de seus donos e aparecem apenas para identificar os produtos; nenhum endosso está implícito. Logotipos do Simple Icons (CC0).",
+    "materials": {
+      "title": "Material de estudo"
+    }
   },
   "filters": {
     "saved": "Filtros salvos",

@@ -58,7 +58,7 @@ export function Palette({
   ].filter((s) => s.items.length > 0);
 
   return (
-    <section className="design-palette" aria-labelledby="design-palette-title">
+    <section className="design-palette scroll-thin" aria-labelledby="design-palette-title">
       <h2 id="design-palette-title" className="design-panel__title">
         {t('design.palette.title')}
       </h2>

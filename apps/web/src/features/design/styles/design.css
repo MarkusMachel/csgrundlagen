@@ -94,6 +94,44 @@
   margin-right: 6px;
 }
 
+.design-brief__materials summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none; /* the chevron replaces the default marker */
+  cursor: pointer;
+  color: var(--accent);
+  font-size: 14px;
+}
+
+.design-brief__materials summary::-webkit-details-marker {
+  display: none;
+}
+
+.design-brief__materials-chevron {
+  transition: transform 150ms;
+}
+
+.design-brief__materials[open] .design-brief__materials-chevron {
+  transform: rotate(180deg);
+}
+
+.design-brief__materials ul {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+}
+
+.design-brief__materials a svg {
+  vertical-align: -1px;
+}
+
+.design-brief__materials-desc {
+  display: block;
+  font-size: 13px;
+}
+
 .design-brief__hint {
   margin: 0;
   font-size: 13px;
@@ -110,7 +148,7 @@
 
 .design-workspace {
   display: grid;
-  grid-template-columns: 170px minmax(0, 1fr) 260px;
+  grid-template-columns: 230px minmax(0, 1fr) 260px;
   gap: 14px;
   align-items: start;
 }
@@ -527,8 +565,23 @@
 }
 
 .design-palette {
+  /* a rounded panel that scrolls inside itself, like the home filter panel */
   max-height: 640px;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 0 10px 12px;
+}
+
+.design-palette > .design-panel__title {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  margin: 0;
+  padding: 10px 4px 8px;
+  background: var(--surface);
 }
 
 .design-trademarks {

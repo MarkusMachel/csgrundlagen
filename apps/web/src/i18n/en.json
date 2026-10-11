@@ -893,7 +893,10 @@
       "search": "Search index"
     },
     "countsAs": "Counts as: {{kind}}",
-    "trademarks": "Product names and logos are trademarks of their owners and are shown only to identify the products; no endorsement is implied. Logos from Simple Icons (CC0)."
+    "trademarks": "Product names and logos are trademarks of their owners and are shown only to identify the products; no endorsement is implied. Logos from Simple Icons (CC0).",
+    "materials": {
+      "title": "Study material"
+    }
   },
   "filters": {
     "saved": "Saved filters",

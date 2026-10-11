@@ -893,7 +893,10 @@
       "search": "Suchindex"
     },
     "countsAs": "Zählt als: {{kind}}",
-    "trademarks": "Produktnamen und Logos sind Marken ihrer Inhaber und dienen nur zur Kennzeichnung der Produkte; eine Empfehlung ist damit nicht verbunden. Logos von Simple Icons (CC0)."
+    "trademarks": "Produktnamen und Logos sind Marken ihrer Inhaber und dienen nur zur Kennzeichnung der Produkte; eine Empfehlung ist damit nicht verbunden. Logos von Simple Icons (CC0).",
+    "materials": {
+      "title": "Lernmaterial"
+    }
   },
   "filters": {
     "saved": "Gespeicherte Filter",

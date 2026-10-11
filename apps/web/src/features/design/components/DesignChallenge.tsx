@@ -1,5 +1,15 @@
 import { ReactFlowProvider } from '@xyflow/react';
-import { ArrowLeft, CircleCheck, CircleX, LayoutGrid, Send, Trash2 } from 'lucide-react';
+import {
+  ArrowLeft,
+  BookOpen,
+  ChevronDown,
+  CircleCheck,
+  CircleX,
+  ExternalLink,
+  LayoutGrid,
+  Send,
+  Trash2,
+} from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -113,6 +123,28 @@ export function DesignChallenge({ question }: { question: DesignQuestion }) {
             );
           })}
         </ul>
+        {materials.length > 0 && (
+          // open any time, before or after checking a design
+          <details className="design-brief__materials">
+            <summary>
+              <BookOpen size={14} aria-hidden /> {t('design.materials.title')} ({materials.length})
+              <ChevronDown size={14} aria-hidden className="design-brief__materials-chevron" />
+            </summary>
+            <ul>
+              {materials.map((m) => (
+                <li key={m.id}>
+                  <a href={m.url} target="_blank" rel="noopener noreferrer">
+                    {m.title} <ExternalLink size={12} aria-hidden />
+                  </a>
+                  {m.author && <span className="muted"> · {m.author}</span>}
+                  {m.description && (
+                    <span className="design-brief__materials-desc muted">{m.description}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
         <p className="tok-com design-brief__hint">
           {'// '}
           {t('design.board.hint')}
