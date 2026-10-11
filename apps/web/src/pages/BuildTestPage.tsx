@@ -28,6 +28,7 @@ export function BuildTestPage() {
         <p className="muted">{t('builder.pickerHint')}</p>
         <QuestionFeed
           mode="pick"
+          layout="sidebar"
           selectedIds={selectedQuestionIds}
           onToggleSelect={toggleQuestion}
           filters={filters}
