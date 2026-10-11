@@ -1,0 +1,1084 @@
+{
+  "name": "SQL: put in order",
+  "materials": [
+    {
+      "key": "pg-select",
+      "type": "article",
+      "title": "SELECT",
+      "url": "https://www.postgresql.org/docs/current/sql-select.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Reference for SELECT, including its synopsis and the order in which its clauses are processed."
+    },
+    {
+      "key": "pg-order",
+      "type": "article",
+      "title": "Sorting rows (ORDER BY)",
+      "url": "https://www.postgresql.org/docs/current/queries-order.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "How ORDER BY sorts rows, including DESC, NULLS FIRST/LAST and sorting by output columns."
+    },
+    {
+      "key": "pg-union",
+      "type": "article",
+      "title": "Combining queries (UNION, INTERSECT, EXCEPT)",
+      "url": "https://www.postgresql.org/docs/current/queries-union.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Set operations, their precedence and how to parenthesize them."
+    },
+    {
+      "key": "pg-tableexpr",
+      "type": "article",
+      "title": "Table expressions",
+      "url": "https://www.postgresql.org/docs/current/queries-table-expressions.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "FROM, WHERE, GROUP BY, HAVING, GROUPING SETS/ROLLUP and window function processing."
+    },
+    {
+      "key": "pg-winfunc",
+      "type": "article",
+      "title": "Window functions",
+      "url": "https://www.postgresql.org/docs/current/functions-window.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "row_number, rank, dense_rank, ntile, lag and the other built-in window functions."
+    },
+    {
+      "key": "pg-wintut",
+      "type": "article",
+      "title": "Window functions tutorial",
+      "url": "https://www.postgresql.org/docs/current/tutorial-window.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Tutorial on OVER, PARTITION BY, ORDER BY inside OVER and the default window frame."
+    },
+    {
+      "key": "pg-wincall",
+      "type": "article",
+      "title": "Window function calls",
+      "url": "https://www.postgresql.org/docs/current/sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Syntax of a window function call: FILTER, OVER, PARTITION BY, ORDER BY and frame clauses."
+    },
+    {
+      "key": "pg-with",
+      "type": "article",
+      "title": "WITH queries (common table expressions)",
+      "url": "https://www.postgresql.org/docs/current/queries-with.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Non-recursive and recursive CTEs and how recursive evaluation works."
+    },
+    {
+      "key": "pg-trigger",
+      "type": "article",
+      "title": "Overview of trigger behavior",
+      "url": "https://www.postgresql.org/docs/current/trigger-definition.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "When BEFORE, AFTER, row-level and statement-level triggers fire and in what order."
+    },
+    {
+      "key": "pg-lexical",
+      "type": "article",
+      "title": "Lexical structure: operator precedence",
+      "url": "https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-PRECEDENCE",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Precedence and associativity of SQL operators in PostgreSQL."
+    },
+    {
+      "key": "pg-constraints",
+      "type": "article",
+      "title": "Constraints",
+      "url": "https://www.postgresql.org/docs/current/ddl-constraints.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Primary keys, foreign keys and how dependent objects relate."
+    },
+    {
+      "key": "pg-dml",
+      "type": "article",
+      "title": "INSERT",
+      "url": "https://www.postgresql.org/docs/current/sql-insert.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Reference for INSERT, including ON CONFLICT and RETURNING."
+    },
+    {
+      "key": "pg-createindex",
+      "type": "article",
+      "title": "CREATE INDEX",
+      "url": "https://www.postgresql.org/docs/current/sql-createindex.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Reference for CREATE INDEX, including CONCURRENTLY, INCLUDE and partial indexes."
+    },
+    {
+      "key": "pg-numeric",
+      "type": "article",
+      "title": "Numeric types",
+      "url": "https://www.postgresql.org/docs/current/datatype-numeric.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Integer, numeric and floating-point types, including how NaN and Infinity sort."
+    },
+    {
+      "key": "pg-policy",
+      "type": "article",
+      "title": "CREATE POLICY",
+      "url": "https://www.postgresql.org/docs/current/sql-createpolicy.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Reference for row-level security policies."
+    }
+  ],
+  "questions": [
+    {
+      "type": "ordering",
+      "prompt": "Order these clauses of a grouped `SELECT` by when PostgreSQL logically evaluates them, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "FROM",
+        "WHERE",
+        "GROUP BY",
+        "HAVING",
+        "SELECT list"
+      ],
+      "explanation": "FROM builds the input rows, WHERE filters individual rows, GROUP BY collapses the survivors into groups, HAVING filters whole groups, and only then is the SELECT list computed for each remaining group. That is why WHERE cannot use aggregates or output aliases.",
+      "materials": [
+        "pg-select",
+        "pg-tableexpr"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these steps of `SELECT DISTINCT ... WHERE ... ORDER BY ... LIMIT` by when they logically happen, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "WHERE filters rows",
+        "SELECT list is computed",
+        "DISTINCT removes duplicate output rows",
+        "ORDER BY sorts the output",
+        "LIMIT keeps the first rows"
+      ],
+      "explanation": "Rows are filtered by WHERE before any output exists. The SELECT list is then computed, DISTINCT removes duplicate output rows, ORDER BY sorts what remains, and LIMIT is applied last to the sorted result, which is why LIMIT without ORDER BY returns an unpredictable subset.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these by when PostgreSQL logically applies them in a query that joins, groups and uses a window function, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "JOIN ... ON condition",
+        "WHERE",
+        "GROUP BY",
+        "HAVING",
+        "Window functions"
+      ],
+      "explanation": "The join and its ON condition are part of FROM, so they come first. WHERE then filters joined rows, GROUP BY forms groups, HAVING filters groups, and window functions run after all of that, over the grouped rows. That is why a window function can wrap an aggregate, as in `rank() OVER (ORDER BY count(*))`, and why WHERE cannot reference a window function.",
+      "materials": [
+        "pg-tableexpr",
+        "pg-wintut"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these clauses as they must be written in a PostgreSQL `SELECT` statement, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "SELECT",
+        "FROM",
+        "WHERE",
+        "GROUP BY",
+        "HAVING"
+      ],
+      "explanation": "The written order follows the SELECT synopsis: the select list, then FROM, WHERE, GROUP BY and HAVING. The written order differs from the logical order, where FROM is evaluated first and the select list late.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these clauses as they must be written in a `SELECT` that defines a named window, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "WHERE",
+        "GROUP BY",
+        "HAVING",
+        "WINDOW w AS (ORDER BY total)",
+        "ORDER BY"
+      ],
+      "explanation": "In PostgreSQL's SELECT synopsis the named-window clause `WINDOW` comes after HAVING and before any set operation and ORDER BY. WHERE, GROUP BY and HAVING precede it in their usual order.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the parts of this job-queue query as they must be written, first to last: it claims one queued job without waiting on rows other workers hold.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "WHERE status = 'queued'",
+        "ORDER BY id",
+        "LIMIT 1",
+        "FOR UPDATE",
+        "SKIP LOCKED"
+      ],
+      "explanation": "WHERE comes before ORDER BY and LIMIT, and the locking clause comes after LIMIT at the very end of the statement. `SKIP LOCKED` is a modifier of the locking clause, so it follows `FOR UPDATE`.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the parts of an upsert as they must be written, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "INSERT INTO users (email, name)",
+        "VALUES ('a@x.io', 'Ana')",
+        "ON CONFLICT (email)",
+        "DO UPDATE SET name = EXCLUDED.name",
+        "RETURNING id"
+      ],
+      "explanation": "INSERT names the table and columns, VALUES supplies the rows, `ON CONFLICT (email)` names the conflict target, `DO UPDATE SET` is the conflict action that belongs to it, and RETURNING always comes last.",
+      "materials": [
+        "pg-dml"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the parts of an `UPDATE` that joins another table as they must be written, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "UPDATE orders o",
+        "SET status = 'vip'",
+        "FROM customers c",
+        "WHERE c.id = o.customer_id",
+        "RETURNING o.id"
+      ],
+      "explanation": "PostgreSQL's UPDATE synopsis is `UPDATE table SET ... FROM ... WHERE ... RETURNING ...`. Unlike SELECT, the FROM list comes after SET, and the join condition goes in WHERE.",
+      "materials": [
+        "pg-select",
+        "pg-dml"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the parts of a recursive CTE as they must be written, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "WITH RECURSIVE tree(id, depth) AS (",
+        "SELECT id, 0 FROM nodes WHERE parent_id IS NULL",
+        "UNION ALL",
+        "SELECT n.id, t.depth + 1 FROM nodes n JOIN tree t ON n.parent_id = t.id",
+        ") SELECT * FROM tree"
+      ],
+      "explanation": "A recursive CTE starts with `WITH RECURSIVE name AS (`, then the non-recursive (anchor) term, then UNION or UNION ALL, then the recursive term that references the CTE itself. The main query that reads the CTE follows the closing parenthesis.",
+      "materials": [
+        "pg-with"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the parts of this aggregate window call as they must be written, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "sum(amount)",
+        "FILTER (WHERE paid)",
+        "OVER (PARTITION BY customer_id",
+        "ORDER BY created_at",
+        "ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)"
+      ],
+      "explanation": "The FILTER clause belongs to the aggregate and comes before OVER. Inside OVER the order is fixed: PARTITION BY, then ORDER BY, then the frame clause.",
+      "materials": [
+        "pg-wincall"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the parts of this `CREATE INDEX` statement as they must be written, first to last.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "CREATE UNIQUE INDEX CONCURRENTLY orders_open_idx",
+        "ON orders",
+        "USING btree (customer_id)",
+        "INCLUDE (total)",
+        "WHERE status = 'open'"
+      ],
+      "explanation": "The synopsis is `CREATE [UNIQUE] INDEX [CONCURRENTLY] name ON table [USING method] (columns) [INCLUDE (...)] ... [WHERE predicate]`. The partial-index predicate is the last clause.",
+      "materials": [
+        "pg-createindex"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the parts of a row-level security policy as they must be written, first to last.",
+      "tags": [
+        "SQL & Databases",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "CREATE POLICY tenant_isolation ON invoices",
+        "AS RESTRICTIVE",
+        "FOR SELECT",
+        "TO app_user",
+        "USING (tenant_id = current_setting('app.tenant')::int)"
+      ],
+      "explanation": "CREATE POLICY's synopsis is `CREATE POLICY name ON table [AS PERMISSIVE|RESTRICTIVE] [FOR command] [TO roles] [USING (...)] [WITH CHECK (...)]`. The USING expression that filters visible rows comes after the roles.",
+      "materials": [
+        "pg-policy"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these PostgreSQL operators by precedence, from binding tightest to binding loosest.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "=",
+        "IS",
+        "NOT",
+        "AND",
+        "OR"
+      ],
+      "explanation": "Comparison operators such as `=` bind tighter than IS, so `1 = 1 IS TRUE` means `(1 = 1) IS TRUE`. IS binds tighter than NOT, so `NOT x IS NULL` means `NOT (x IS NULL)`. Then NOT binds tighter than AND, and AND binds tighter than OR, so `a OR b AND c` means `a OR (b AND c)`.",
+      "materials": [
+        "pg-lexical"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these PostgreSQL arithmetic and cast operators by precedence, from highest to lowest.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`::` (type cast)",
+        "unary `-`",
+        "`^` (exponent)",
+        "`*`",
+        "`+`"
+      ],
+      "explanation": "The PostgreSQL cast `::` binds tightest, so `-2::text` tries to negate a text value and fails. Unary minus comes next, which is why `-2 ^ 2` is `(-2) ^ 2 = 4`. Exponentiation binds tighter than multiplication (`2 * 3 ^ 2 = 18`), and multiplication binds tighter than addition.",
+      "materials": [
+        "pg-lexical"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "PostgreSQL evaluates `A UNION B INTERSECT C EXCEPT D ORDER BY 1 LIMIT 5` (no parentheses). Order the steps, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Compute B INTERSECT C",
+        "UNION A with that result",
+        "EXCEPT D from that result",
+        "Sort the combined result",
+        "Keep the first 5 rows"
+      ],
+      "explanation": "INTERSECT binds tighter than UNION and EXCEPT, so `B INTERSECT C` is computed first. UNION and EXCEPT have equal precedence and associate left to right, so A is unioned with that result and then D is subtracted. ORDER BY and LIMIT apply to the result of the whole set operation, so they come last.",
+      "materials": [
+        "pg-union"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Each table has a foreign key to the table before it in this chain: `country.region_id`, `city.country_id`, `address.city_id`, `customer.address_id`. Order the `CREATE TABLE` statements so each succeeds, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "CREATE TABLE region",
+        "CREATE TABLE country",
+        "CREATE TABLE city",
+        "CREATE TABLE address",
+        "CREATE TABLE customer"
+      ],
+      "explanation": "A foreign key can only reference a table that already exists, so the referenced table must be created first. region has no foreign key, country references region, city references country, address references city, and customer references address.",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In a library schema, `book` references `author`, `edition` references `book`, `copy` references `edition`, and `loan` references `copy`. Order the `DROP TABLE` statements (no CASCADE) so each succeeds, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "DROP TABLE loan",
+        "DROP TABLE copy",
+        "DROP TABLE edition",
+        "DROP TABLE book",
+        "DROP TABLE author"
+      ],
+      "explanation": "Without CASCADE, PostgreSQL refuses to drop a table that a foreign key still references. So drop in reverse dependency order: loan (nothing references it), then copy, edition, book and finally author.",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the steps PostgreSQL follows to evaluate a `WITH RECURSIVE` query using `UNION ALL`, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Evaluate the non-recursive term",
+        "Put its rows in the result and the working table",
+        "Evaluate the recursive term against the working table",
+        "Add new rows to the result and replace the working table with them",
+        "Stop once the working table is empty"
+      ],
+      "explanation": "Per the PostgreSQL docs, the non-recursive term runs once and its rows go into both the result and a working table. While the working table is not empty, the recursive term runs with the working table substituted for the self-reference, its rows are appended to the result and become the new working table. Iteration stops when a step produces no rows.",
+      "materials": [
+        "pg-with"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT name FROM (VALUES ('Mia'), ('Ben'), ('Zoe'), ('Ana'), ('Lou')) AS t(name)\nORDER BY name;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Ana",
+        "Ben",
+        "Lou",
+        "Mia",
+        "Zoe"
+      ],
+      "explanation": "ORDER BY sorts ascending by default, so the names come out alphabetically: Ana, Ben, Lou, Mia, Zoe. VALUES order does not matter once ORDER BY is present.",
+      "materials": [
+        "pg-order"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT item, price\nFROM (VALUES ('pen', 1.50), ('lamp', 24.00), ('mug', 8.25), ('desk', 199.00), ('book', 12.00)) AS t(item, price)\nORDER BY price DESC;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "desk | 199.00",
+        "lamp | 24.00",
+        "book | 12.00",
+        "mug | 8.25",
+        "pen | 1.50"
+      ],
+      "explanation": "DESC sorts from the largest price to the smallest: desk 199.00, lamp 24.00, book 12.00, mug 8.25, pen 1.50.",
+      "materials": [
+        "pg-order"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT name, score\nFROM (VALUES ('Ana', 7), ('Ben', NULL), ('Cy', 3), ('Di', 9)) AS t(name, score)\nORDER BY score;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Cy | 3",
+        "Ana | 7",
+        "Di | 9",
+        "Ben | NULL"
+      ],
+      "explanation": "In PostgreSQL NULL sorts as if it were larger than every non-null value, so with the default ascending order NULLs come last: Cy 3, Ana 7, Di 9, then Ben with NULL.",
+      "materials": [
+        "pg-order"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT name, score\nFROM (VALUES ('Ana', 7), ('Ben', NULL), ('Cy', 3), ('Di', 9), ('Ed', 5)) AS t(name, score)\nORDER BY score DESC;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Ben | NULL",
+        "Di | 9",
+        "Ana | 7",
+        "Ed | 5",
+        "Cy | 3"
+      ],
+      "explanation": "NULL sorts as larger than any value, so `DESC` defaults to `NULLS FIRST`: Ben (NULL) comes first, then 9, 7, 5, 3.",
+      "materials": [
+        "pg-order"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT name, score\nFROM (VALUES ('Ana', 7), ('Ben', NULL), ('Cy', 3), ('Di', 9), ('Ed', 5)) AS t(name, score)\nORDER BY score DESC NULLS LAST;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Di | 9",
+        "Ana | 7",
+        "Ed | 5",
+        "Cy | 3",
+        "Ben | NULL"
+      ],
+      "explanation": "`NULLS LAST` overrides the DESC default of NULLS FIRST, so the scores run 9, 7, 5, 3 and Ben's NULL is moved to the end.",
+      "materials": [
+        "pg-order"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT dept, name, salary\nFROM (VALUES ('ops', 'Ana', 50), ('dev', 'Ben', 70), ('ops', 'Cy', 60),\n             ('dev', 'Di', 90), ('dev', 'Ed', 80)) AS t(dept, name, salary)\nORDER BY dept, salary DESC;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "dev | Di | 90",
+        "dev | Ed | 80",
+        "dev | Ben | 70",
+        "ops | Cy | 60",
+        "ops | Ana | 50"
+      ],
+      "explanation": "Each sort key has its own direction. Rows are sorted by dept ascending (dev before ops), and within each dept by salary descending: dev Di 90, Ed 80, Ben 70, then ops Cy 60, Ana 50.",
+      "materials": [
+        "pg-order"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`code` is a `text` column. Order the rows this query returns, first to last.\n\n```sql\nSELECT code FROM (VALUES ('9'), ('10'), ('2'), ('100'), ('1')) AS t(code)\nORDER BY code;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "1",
+        "10",
+        "100",
+        "2",
+        "9"
+      ],
+      "explanation": "Text sorts character by character, not by numeric value. '1' is a prefix of '10', which is a prefix of '100', so those come first, then '2' and '9'. Cast with `ORDER BY code::int` to get numeric order.",
+      "materials": [
+        "pg-order"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`code` is a `text` column. Order the rows this query returns, first to last.\n\n```sql\nSELECT code FROM (VALUES ('9'), ('10'), ('2'), ('100'), ('1')) AS t(code)\nORDER BY code::int DESC;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "100",
+        "10",
+        "9",
+        "2",
+        "1"
+      ],
+      "explanation": "The cast makes the sort numeric, and DESC puts the largest number first: 100, 10, 9, 2, 1. Without the cast, the text values would sort as '1', '10', '100', '2', '9'.",
+      "materials": [
+        "pg-order"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT w FROM (VALUES ('apple'), ('Banana'), ('cherry'), ('Date'), ('elder')) AS t(w)\nORDER BY w COLLATE \"C\";\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Banana",
+        "Date",
+        "apple",
+        "cherry",
+        "elder"
+      ],
+      "explanation": "The \"C\" collation compares raw byte values, and in ASCII every uppercase letter (A-Z) comes before every lowercase letter (a-z). So Banana and Date sort before apple, cherry and elder. A linguistic collation such as en_US would instead give apple, Banana, cherry, Date, elder.",
+      "materials": [
+        "pg-order"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT ticket, priority\nFROM (VALUES (1, 'low'), (2, 'high'), (3, 'medium'), (4, 'high'), (5, 'low')) AS t(ticket, priority)\nORDER BY CASE priority WHEN 'high' THEN 1 WHEN 'medium' THEN 2 ELSE 3 END, ticket;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "2 | high",
+        "4 | high",
+        "3 | medium",
+        "1 | low",
+        "5 | low"
+      ],
+      "explanation": "The CASE expression maps high to 1, medium to 2 and low to 3, so rows sort by that rank and then by ticket: high tickets 2 and 4, then medium ticket 3, then low tickets 1 and 5.",
+      "materials": [
+        "pg-order"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT name, -score AS score\nFROM (VALUES ('Ana', 10), ('Ben', 30), ('Cy', 20), ('Di', 40)) AS t(name, score)\nORDER BY score;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Di | -40",
+        "Ben | -30",
+        "Cy | -20",
+        "Ana | -10"
+      ],
+      "explanation": "A bare name in ORDER BY refers to an output column first. The output column `score` is the negated value, so rows sort by -40, -30, -20, -10: Di, Ben, Cy, Ana. Writing `ORDER BY t.score` would sort by the input column instead.",
+      "materials": [
+        "pg-order"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT name, active\nFROM (VALUES ('Ana', true), ('Ben', false), ('Cy', true), ('Di', false), ('Ed', true)) AS t(name, active)\nORDER BY active, name;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Ben | f",
+        "Di | f",
+        "Ana | t",
+        "Cy | t",
+        "Ed | t"
+      ],
+      "explanation": "For boolean, false sorts before true. So the inactive users come first (Ben, Di), then the active ones (Ana, Cy, Ed), each group sorted by name. The psql output shows booleans as f and t.",
+      "materials": [
+        "pg-order"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT x FROM (VALUES ('NaN'::float8), ('Infinity'), ('-Infinity'), (0), (1e308)) AS t(x)\nORDER BY x;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "-Infinity",
+        "0",
+        "1e+308",
+        "Infinity",
+        "NaN"
+      ],
+      "explanation": "PostgreSQL sorts NaN as greater than every other floating-point value, including Infinity, so that sorting and indexing work. The order is -Infinity, 0, 1e+308, Infinity, NaN.",
+      "materials": [
+        "pg-numeric",
+        "pg-order"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT a FROM (VALUES ('{2}'::int[]), ('{1,10}'), ('{1}'), ('{1,2,3}'), ('{1,2}')) AS t(a)\nORDER BY a;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "{1}",
+        "{1,2}",
+        "{1,2,3}",
+        "{1,10}",
+        "{2}"
+      ],
+      "explanation": "Arrays compare element by element; if all common elements are equal, the shorter array sorts first. So {1} < {1,2} < {1,2,3} (each a prefix of the next), then {1,10} because 10 > 2 in the second position, and {2} is last because its first element is largest.",
+      "materials": [
+        "pg-order"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT n FROM generate_series(10, 1, -3) AS n;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "10",
+        "7",
+        "4",
+        "1"
+      ],
+      "explanation": "`generate_series(start, stop, step)` with a negative step counts down from 10 by 3 until it would pass 1: 10, 7, 4, 1.",
+      "materials": [
+        "pg-tableexpr"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT customer, count(*) AS n\nFROM (VALUES ('Ana'), ('Ben'), ('Ana'), ('Cy'), ('Di'), ('Ben'), ('Ana'), ('Eve'), ('Cy'), ('Ben'), ('Ben')) AS t(customer)\nGROUP BY customer\nHAVING count(*) >= 1\nORDER BY n DESC, customer;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Ben | 4",
+        "Ana | 3",
+        "Cy | 2",
+        "Di | 1",
+        "Eve | 1"
+      ],
+      "explanation": "GROUP BY counts orders per customer: Ben 4, Ana 3, Cy 2, Di 1, Eve 1. ORDER BY n DESC puts the biggest count first, and the name breaks the tie between Di and Eve.",
+      "materials": [
+        "pg-tableexpr",
+        "pg-order"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT DISTINCT ON (customer) customer, ordered_on, total\nFROM (VALUES ('Ben', DATE '2026-01-05', 30), ('Ana', DATE '2026-02-01', 15),\n             ('Ben', DATE '2026-03-09', 45), ('Cy',  DATE '2026-01-20', 70),\n             ('Ana', DATE '2026-01-11', 90), ('Di',  DATE '2026-02-14', 25),\n             ('Eve', DATE '2026-01-02', 10)) AS t(customer, ordered_on, total)\nORDER BY customer, ordered_on DESC;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Ana | 2026-02-01 | 15",
+        "Ben | 2026-03-09 | 45",
+        "Cy | 2026-01-20 | 70",
+        "Di | 2026-02-14 | 25",
+        "Eve | 2026-01-02 | 10"
+      ],
+      "explanation": "DISTINCT ON keeps the first row of each customer in ORDER BY order. Sorting by customer and then by date descending makes the first row of each group the latest order: Ana's 2026-02-01, Ben's 2026-03-09, and the only orders of Cy, Di and Eve. The output is ordered by customer.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the first five rows this query returns, first to last.\n\n```sql\nSELECT region, product, sum(qty) AS qty\nFROM (VALUES ('north', 'tea', 5), ('north', 'coffee', 3), ('south', 'tea', 4)) AS t(region, product, qty)\nGROUP BY ROLLUP (region, product)\nORDER BY region NULLS LAST, product NULLS LAST;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "north | coffee | 3",
+        "north | tea | 5",
+        "north | NULL | 8",
+        "south | tea | 4",
+        "south | NULL | 4"
+      ],
+      "explanation": "ROLLUP adds subtotal rows where the rolled-up columns are NULL. The rows are north/coffee 3 and north/tea 5, then north's subtotal (product NULL) 8, then south/tea 4, south's subtotal 4, and the grand total with both columns NULL, 12. NULLS LAST pushes every subtotal after its detail rows, and the grand total to the end. (Six rows exist; the options show the first five.)",
+      "materials": [
+        "pg-tableexpr"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT x FROM (VALUES (3), (1)) AS a(x)\nUNION ALL\nSELECT y FROM (VALUES (5), (2), (4)) AS b(y)\nORDER BY x DESC;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "5",
+        "4",
+        "3",
+        "2",
+        "1"
+      ],
+      "explanation": "An ORDER BY after a set operation applies to the combined result, not just the second SELECT. So all five values are sorted together descending: 5, 4, 3, 2, 1. The column takes its name, x, from the first SELECT.",
+      "materials": [
+        "pg-union"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT name, score,\n       rank()       OVER (ORDER BY score DESC) AS rnk,\n       dense_rank() OVER (ORDER BY score DESC) AS drnk\nFROM (VALUES ('Ana', 90), ('Ben', 85), ('Cy', 90), ('Di', 70), ('Ed', 85)) AS t(name, score)\nORDER BY score DESC, name;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Ana | 90 | 1 | 1",
+        "Cy | 90 | 1 | 1",
+        "Ben | 85 | 3 | 2",
+        "Ed | 85 | 3 | 2",
+        "Di | 70 | 5 | 3"
+      ],
+      "explanation": "Ana and Cy tie at 90 and both get rank 1 and dense_rank 1. rank leaves a gap after a tie, so Ben and Ed (85) get rank 3 but dense_rank 2. Di (70) gets rank 5 and dense_rank 3. The outer ORDER BY uses the name to order tied rows.",
+      "materials": [
+        "pg-winfunc"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT dept, name,\n       row_number() OVER (PARTITION BY dept ORDER BY salary DESC) AS rn\nFROM (VALUES ('ops', 'Ana', 50), ('dev', 'Ben', 70), ('ops', 'Cy', 60),\n             ('dev', 'Di', 90), ('dev', 'Ed', 80)) AS t(dept, name, salary)\nORDER BY dept, rn;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "dev | Di | 1",
+        "dev | Ed | 2",
+        "dev | Ben | 3",
+        "ops | Cy | 1",
+        "ops | Ana | 2"
+      ],
+      "explanation": "row_number restarts at 1 in every partition. In dev, salaries descending are Di 90, Ed 80, Ben 70 (1, 2, 3); in ops, Cy 60, Ana 50 (1, 2). The outer ORDER BY lists dev before ops and each partition by rn.",
+      "materials": [
+        "pg-winfunc",
+        "pg-wintut"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT day, amount, sum(amount) OVER (ORDER BY day) AS running\nFROM (VALUES (1, 10), (2, 5), (2, 20), (3, 1), (4, 4)) AS t(day, amount)\nORDER BY day, amount;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "1 | 10 | 10",
+        "2 | 5 | 35",
+        "2 | 20 | 35",
+        "3 | 1 | 36",
+        "4 | 4 | 40"
+      ],
+      "explanation": "With ORDER BY and no frame clause, the default frame is RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW, which includes the current row's peers. Both day-2 rows therefore see 10 + 5 + 20 = 35, not 15 and 35. Then day 3 gives 36 and day 4 gives 40.",
+      "materials": [
+        "pg-wintut",
+        "pg-wincall"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT day, amount, sum(amount) OVER (ORDER BY day ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING) AS s\nFROM (VALUES (1, 10), (2, 20), (3, 30), (4, 40), (5, 50)) AS t(day, amount)\nORDER BY day;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "1 | 10 | 30",
+        "2 | 20 | 60",
+        "3 | 30 | 90",
+        "4 | 40 | 120",
+        "5 | 50 | 90"
+      ],
+      "explanation": "The ROWS frame covers the previous, current and next row. Day 1 has no previous row: 10 + 20 = 30. Days 2 to 4 sum three rows: 60, 90, 120. Day 5 has no next row: 40 + 50 = 90.",
+      "materials": [
+        "pg-wincall"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT month, revenue, revenue - lag(revenue) OVER (ORDER BY month) AS change\nFROM (VALUES (1, 100), (2, 130), (3, 120), (4, 160), (5, 150)) AS t(month, revenue)\nORDER BY month;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "1 | 100 | NULL",
+        "2 | 130 | 30",
+        "3 | 120 | -10",
+        "4 | 160 | 40",
+        "5 | 150 | -10"
+      ],
+      "explanation": "lag(revenue) returns the previous row's revenue, or NULL for the first row, so month 1's change is NULL. Then 130 - 100 = 30, 120 - 130 = -10, 160 - 120 = 40 and 150 - 160 = -10.",
+      "materials": [
+        "pg-winfunc"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT name, ntile(2) OVER (ORDER BY name) AS bucket\nFROM (VALUES ('Ana'), ('Ben'), ('Cy'), ('Di'), ('Ed')) AS t(name)\nORDER BY name;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Ana | 1",
+        "Ben | 1",
+        "Cy | 1",
+        "Di | 2",
+        "Ed | 2"
+      ],
+      "explanation": "ntile(2) splits the 5 rows into 2 buckets as evenly as possible, and the extra row goes to the earlier bucket. Bucket 1 gets Ana, Ben and Cy, and bucket 2 gets Di and Ed.",
+      "materials": [
+        "pg-winfunc"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT day, price, last_value(price) OVER (ORDER BY day) AS lv\nFROM (VALUES (1, 5), (2, 8), (3, 6), (4, 9)) AS t(day, price)\nORDER BY day DESC;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "4 | 9 | 9",
+        "3 | 6 | 6",
+        "2 | 8 | 8",
+        "1 | 5 | 5"
+      ],
+      "explanation": "The default frame ends at the current row (and its peers), so last_value returns the current row's own price, not the last price of the table. Each row shows its own price. The outer ORDER BY day DESC lists day 4 first.",
+      "materials": [
+        "pg-winfunc",
+        "pg-wintut"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nWITH RECURSIVE r(n) AS (\n  SELECT 1\n  UNION ALL\n  SELECT n * 3 FROM r WHERE n < 50\n)\nSELECT n FROM r ORDER BY n DESC;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "81",
+        "27",
+        "9",
+        "3",
+        "1"
+      ],
+      "explanation": "The anchor yields 1. Each step multiplies by 3 while the previous value is below 50: 3, 9, 27, 81. 81 is not below 50, so the next step produces no rows and recursion stops. Sorted descending: 81, 27, 9, 3, 1.",
+      "materials": [
+        "pg-with"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`emp(name, boss)` holds Ada (no boss), Bob and Cat (boss Ada), Dan (boss Bob) and Eli (boss Cat). Order the rows this query returns, first to last.\n\n```sql\nWITH RECURSIVE t(name, depth) AS (\n  SELECT name, 0 FROM emp WHERE boss IS NULL\n  UNION ALL\n  SELECT e.name, t.depth + 1 FROM emp e JOIN t ON e.boss = t.name\n)\nSELECT name, depth FROM t ORDER BY depth DESC, name;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Dan | 2",
+        "Eli | 2",
+        "Bob | 1",
+        "Cat | 1",
+        "Ada | 0"
+      ],
+      "explanation": "Ada is the root at depth 0, Bob and Cat report to her (depth 1), and Dan and Eli are one level lower (depth 2). Sorting by depth descending and then name gives Dan, Eli, Bob, Cat, Ada.",
+      "materials": [
+        "pg-with"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`emp(name, boss)` holds Ada (no boss), Bob and Cat (boss Ada), Dan (boss Bob) and Eli (boss Cat). Order the rows this query returns, first to last.\n\n```sql\nWITH RECURSIVE t(name, path) AS (\n  SELECT name, ARRAY[name] FROM emp WHERE boss IS NULL\n  UNION ALL\n  SELECT e.name, t.path || e.name FROM emp e JOIN t ON e.boss = t.name\n)\nSELECT name FROM t ORDER BY path;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Ada",
+        "Bob",
+        "Dan",
+        "Cat",
+        "Eli"
+      ],
+      "explanation": "Each row carries the array of names from the root to itself. Arrays compare element by element and a prefix sorts first, so sorting by path gives a depth-first walk: {Ada}, {Ada,Bob}, {Ada,Bob,Dan}, {Ada,Cat}, {Ada,Cat,Eli}.",
+      "materials": [
+        "pg-with"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`log()` is a trigger function that prints the trigger name (and `NEW.id` for row-level triggers). Order the lines printed by the `INSERT`, first to last.\n\n```sql\nCREATE TRIGGER s_before BEFORE INSERT ON t FOR EACH STATEMENT EXECUTE FUNCTION log();\nCREATE TRIGGER r_before BEFORE INSERT ON t FOR EACH ROW EXECUTE FUNCTION log();\nCREATE TRIGGER r_after  AFTER  INSERT ON t FOR EACH ROW EXECUTE FUNCTION log();\n\nINSERT INTO t VALUES (1), (2);\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "s_before",
+        "r_before 1",
+        "r_before 2",
+        "r_after 1",
+        "r_after 2"
+      ],
+      "explanation": "The BEFORE STATEMENT trigger fires once, before any row is touched. BEFORE ROW triggers fire as each row is processed, so for row 1 and then row 2. AFTER ROW triggers are queued and fire at the end of the statement, again in row order: r_after 1, then r_after 2.",
+      "materials": [
+        "pg-trigger"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`log()` is a trigger function that prints the trigger name and `NEW.id`. All five are `BEFORE INSERT ... FOR EACH ROW` triggers on the same table, created in the order shown. Order the lines printed by the `INSERT`, first to last.\n\n```sql\nCREATE TRIGGER \"trg_2\"   BEFORE INSERT ON t FOR EACH ROW EXECUTE FUNCTION log();\nCREATE TRIGGER \"audit\"   BEFORE INSERT ON t FOR EACH ROW EXECUTE FUNCTION log();\nCREATE TRIGGER \"trg_10\"  BEFORE INSERT ON t FOR EACH ROW EXECUTE FUNCTION log();\nCREATE TRIGGER \"Zeta\"    BEFORE INSERT ON t FOR EACH ROW EXECUTE FUNCTION log();\nCREATE TRIGGER \"check_a\" BEFORE INSERT ON t FOR EACH ROW EXECUTE FUNCTION log();\n\nINSERT INTO t VALUES (7);\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Zeta 7",
+        "audit 7",
+        "check_a 7",
+        "trg_10 7",
+        "trg_2 7"
+      ],
+      "explanation": "When several triggers of the same kind fire for the same event, PostgreSQL runs them in alphabetical order by name, not in creation order. The comparison is by byte value, so the uppercase \"Zeta\" sorts before lowercase names, and \"trg_10\" sorts before \"trg_2\" because '1' < '2'. Prefixing names with zero-padded numbers keeps the order intentional.",
+      "materials": [
+        "pg-trigger"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the rows this query returns, first to last.\n\n```sql\nSELECT c.name, coalesce(sum(o.total), 0) AS spent\nFROM (VALUES (1, 'Ana'), (2, 'Ben'), (3, 'Cy'), (4, 'Di')) AS c(id, name)\nLEFT JOIN (VALUES (1, 20), (1, 30), (3, 70), (4, 10)) AS o(cid, total) ON o.cid = c.id\nGROUP BY c.name\nORDER BY spent DESC;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Cy | 70",
+        "Ana | 50",
+        "Di | 10",
+        "Ben | 0"
+      ],
+      "explanation": "The LEFT JOIN keeps Ben even though he has no orders, and coalesce turns his NULL sum into 0. The totals are Cy 70, Ana 50, Di 10, Ben 0, sorted from most to least.",
+      "materials": [
+        "pg-tableexpr",
+        "pg-order"
+      ]
+    }
+  ]
+}
