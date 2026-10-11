@@ -1,0 +1,1332 @@
+{
+  "name": "JavaScript: pick all that apply",
+  "materials": [
+    {
+      "key": "types",
+      "type": "article",
+      "title": "JavaScript data types and data structures",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures",
+      "author": "MDN Web Docs",
+      "description": "Overview of primitives, objects, typeof, Number, BigInt, String and Symbol."
+    },
+    {
+      "key": "equality",
+      "type": "article",
+      "title": "Equality comparisons and sameness",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness",
+      "author": "MDN Web Docs",
+      "description": "Explains ==, ===, Object.is and SameValueZero, including NaN and signed zero."
+    },
+    {
+      "key": "control-flow",
+      "type": "article",
+      "title": "Control flow and error handling",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling",
+      "author": "MDN Web Docs",
+      "description": "Guide covering falsy values in conditions, throw, try...catch...finally and error objects."
+    },
+    {
+      "key": "operators",
+      "type": "article",
+      "title": "Expressions and operators",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
+      "author": "MDN Web Docs",
+      "description": "Guide to operators including logical assignment, nullish coalescing, optional chaining and destructuring."
+    },
+    {
+      "key": "scope",
+      "type": "article",
+      "title": "Variable scope, closure",
+      "url": "https://javascript.info/closure",
+      "author": "javascript.info",
+      "description": "Lexical environments, block scope, closures and the temporal dead zone."
+    },
+    {
+      "key": "this",
+      "type": "article",
+      "title": "this",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this",
+      "author": "MDN Web Docs",
+      "description": "How the value of this is determined in functions, methods, arrow functions and with call, apply and bind."
+    },
+    {
+      "key": "classes",
+      "type": "article",
+      "title": "Classes",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes",
+      "author": "MDN Web Docs",
+      "description": "Class syntax, extends, static members, private elements and the prototype objects behind them."
+    },
+    {
+      "key": "array",
+      "type": "article",
+      "title": "Array",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+      "author": "MDN Web Docs",
+      "description": "Reference for Array methods, copying versus mutating methods, and iteration."
+    },
+    {
+      "key": "event-loop",
+      "type": "article",
+      "title": "Event loop: microtasks and macrotasks",
+      "url": "https://javascript.info/event-loop",
+      "author": "javascript.info",
+      "description": "Explains the event loop, the macrotask queue, microtasks and splitting CPU-heavy work."
+    },
+    {
+      "key": "promise",
+      "type": "article",
+      "title": "Promise",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+      "author": "MDN Web Docs",
+      "description": "Reference for promises, chaining and the combinators all, allSettled, any and race."
+    },
+    {
+      "key": "modules",
+      "type": "article",
+      "title": "JavaScript modules",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules",
+      "author": "MDN Web Docs",
+      "description": "Guide to ES module import and export semantics, strict mode and top-level await."
+    },
+    {
+      "key": "memory",
+      "type": "article",
+      "title": "Memory management",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_management",
+      "author": "MDN Web Docs",
+      "description": "Reachability, garbage collection, and WeakMap, WeakSet, WeakRef and FinalizationRegistry."
+    },
+    {
+      "key": "json",
+      "type": "article",
+      "title": "JSON.stringify()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify",
+      "author": "MDN Web Docs",
+      "description": "How values such as undefined, functions, symbols and BigInt are serialized or rejected."
+    },
+    {
+      "key": "iterators",
+      "type": "article",
+      "title": "Iterators and generators",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_generators",
+      "author": "MDN Web Docs",
+      "description": "The iteration protocols, built-in iterables, generator functions and next(value)."
+    },
+    {
+      "key": "strict-mode",
+      "type": "article",
+      "title": "Strict mode",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode",
+      "author": "MDN Web Docs",
+      "description": "What \"use strict\" changes, including errors that sloppy mode silently ignores."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multi-select",
+      "prompt": "Which of these values are falsy?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`NaN`",
+        "`0`",
+        "`[]` (empty array)",
+        "`\"\"` (empty string)",
+        "`\"0\"`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "`0`, the empty string and `NaN` are all in the fixed list of falsy values. `\"0\"` is a non-empty string, so it is truthy, and every object, including an empty array, is truthy.",
+      "materials": [
+        "control-flow"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these array methods mutate the array they are called on?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`splice`",
+        "`slice`",
+        "`map`",
+        "`reverse`",
+        "`push`"
+      ],
+      "correctIndices": [
+        0,
+        3,
+        4
+      ],
+      "explanation": "`push` appends in place, `splice` removes or inserts in place and `reverse` reverses in place. `map` returns a new array, and `slice` returns a shallow copy of part of the array.",
+      "materials": [
+        "array"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these expressions evaluate to the string `\"object\"`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`typeof {}`",
+        "`typeof function () {}`",
+        "`typeof null`",
+        "`typeof []`",
+        "`typeof undefined`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "`typeof null` is `\"object\"` (a historical quirk), and arrays and plain objects are both objects. Functions report `\"function\"`, and `typeof undefined` is `\"undefined\"`.",
+      "materials": [
+        "types"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these expressions evaluate to `true`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`null === undefined`",
+        "`NaN == NaN`",
+        "`\"5\" == 5`",
+        "`\"b\" > \"a\"`",
+        "`0 == \"\"`"
+      ],
+      "correctIndices": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "`\"5\" == 5` converts the string to the number 5, `0 == \"\"` converts the empty string to 0, and strings compare by code unit so `\"b\" > \"a\"`. `null` and `undefined` are different types, so `===` is false, and `NaN` is never equal to anything, itself included.",
+      "materials": [
+        "equality"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are primitive types in JavaScript?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Symbol",
+        "Array",
+        "Function",
+        "Date",
+        "BigInt"
+      ],
+      "correctIndices": [
+        0,
+        4
+      ],
+      "explanation": "BigInt and Symbol are primitives, alongside string, number, boolean, undefined and null. Arrays, dates and functions are all objects.",
+      "materials": [
+        "types"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these array methods return a new array and leave the original unchanged?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`toSorted`",
+        "`splice`",
+        "`fill`",
+        "`filter`",
+        "`sort`"
+      ],
+      "correctIndices": [
+        0,
+        3
+      ],
+      "explanation": "`filter` builds a new array, and `toSorted` (ES2023) returns a sorted copy. `sort` and `fill` change the array in place and return it, and `splice` changes it in place and returns the removed items.",
+      "materials": [
+        "array"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "For which values of `x` does `x ?? \"default\"` evaluate to `\"default\"`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`\"\"`",
+        "`0`",
+        "`false`",
+        "`undefined`",
+        "`null`"
+      ],
+      "correctIndices": [
+        3,
+        4
+      ],
+      "explanation": "`??` falls back only when the left side is `null` or `undefined`. Unlike `||`, it keeps other falsy values such as `0`, `\"\"` and `false`.",
+      "materials": [
+        "operators"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In which of these does the callback parameter or loop variable `v` receive each element's value (not its index)?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`for (const v in arr) { … }`",
+        "`arr.map((i, v) => { … })`",
+        "`for (const v of arr) { … }`",
+        "`Object.keys(arr).forEach((v) => { … })`",
+        "`arr.forEach((v) => { … })`"
+      ],
+      "correctIndices": [
+        2,
+        4
+      ],
+      "explanation": "`for...of` and the first `forEach` parameter both give values. `for...in` and `Object.keys` give the indexes as strings, and the second `map` parameter is the index, so `v` there is a number index.",
+      "materials": [
+        "array",
+        "iterators"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these create a shallow copy of the array `a` (a new array with the same elements)?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`a.slice()`",
+        "`[...a]`",
+        "`const b = a`",
+        "`Array.from(a)`",
+        "`a.concat()`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "explanation": "Spread, `slice()` with no arguments, `Array.from` and `concat()` with no arguments all return a new array holding the same elements. `const b = a` copies only the reference, so `b` and `a` are the same array.",
+      "materials": [
+        "array"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these `Promise` static methods take an iterable of promises?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`Promise.any`",
+        "`Promise.resolve`",
+        "`Promise.allSettled`",
+        "`Promise.race`",
+        "`Promise.all`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "explanation": "`all`, `race`, `any` and `allSettled` each take an iterable and combine its promises. `Promise.resolve` takes a single value and wraps it in a promise.",
+      "materials": [
+        "promise"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about arrow functions are true?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "They have their own `arguments` object",
+        "They can be generator functions",
+        "They take `this` from the enclosing scope",
+        "They cannot be called with `new`",
+        "They can be declared `async`"
+      ],
+      "correctIndices": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "Arrow functions are not constructors, so `new` throws a TypeError; they use the `this` of the enclosing scope; and `async () => {}` is valid. They have no own `arguments` (they see the enclosing function's), and there is no generator arrow syntax.",
+      "materials": [
+        "this"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these strings does `JSON.parse` accept without throwing?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`'{\"a\":1}'`",
+        "`'[1,2,]'`",
+        "`'{a:1}'`",
+        "`\"{'a':1}\"`",
+        "`'undefined'`"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "Only `'{\"a\":1}'` is valid JSON. JSON requires double-quoted strings and keys, so single quotes and unquoted keys fail; trailing commas are not allowed; and `undefined` is not a JSON value.",
+      "materials": [
+        "json"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these can be looped over directly with `for...of`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A string such as `\"abc\"`",
+        "A `Map`",
+        "A `WeakSet`",
+        "A `Set`",
+        "A plain object literal `{ a: 1 }`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Strings, `Map` and `Set` implement `Symbol.iterator`. Plain objects do not, so you use `Object.entries` instead, and a `WeakSet` is deliberately not iterable because its contents depend on garbage collection.",
+      "materials": [
+        "iterators"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Given `const o = { a: null, f: undefined };`, which of these expressions throw a TypeError?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`o.b?.c`",
+        "`o.a.b`",
+        "`o.a?.b`",
+        "`o.f?.()`",
+        "`o.x?.y.z`"
+      ],
+      "correctIndices": [
+        1
+      ],
+      "explanation": "`o.a.b` reads a property of `null`, which throws. `?.` stops and returns `undefined` when the value before it is `null` or `undefined`, and it short-circuits the rest of the chain, so `o.x?.y.z` is safe; `o.f?.()` skips the call because `o.f` is `undefined`.",
+      "materials": [
+        "operators"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these schedule a callback as a macrotask (task)?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The code after an `await`",
+        "`process.nextTick(cb)` in Node.js",
+        "`promise.then(cb)`",
+        "`setTimeout(cb, 0)`",
+        "`queueMicrotask(cb)`"
+      ],
+      "correctIndices": [
+        3
+      ],
+      "explanation": "Timers queue a macrotask. `queueMicrotask`, `.then` callbacks and the continuation after `await` are microtasks, and Node's `process.nextTick` has its own queue that is drained before the next macrotask.",
+      "materials": [
+        "event-loop"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these loose and relational comparisons evaluate to `true`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`[] == false`",
+        "`null >= 0`",
+        "`null == 0`",
+        "`undefined == 0`",
+        "`\"\" == 0`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "`[] == false` converts both sides to 0, `null >= 0` converts `null` to 0 for relational comparison, and `\"\" == 0` converts the string to 0. Loose equality never converts `null` or `undefined` to numbers; they are only `==` to each other, so `null == 0` and `undefined == 0` are false.",
+      "materials": [
+        "equality"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this code are true?\n\n```js\nfunction makeCounter() {\n  let count = 0;\n  return () => ++count;\n}\nconst a = makeCounter();\nconst b = makeCounter();\na(); a(); b();\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`count` stays alive after `makeCounter` returns",
+        "The next call to `b()` returns `2`",
+        "`a.count` reads the current counter value",
+        "The next call to `a()` returns `3`",
+        "`a` and `b` share one `count` variable"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Each `makeCounter` call creates a new `count` that its returned function closes over, so `a` is at 2 and `b` at 1, and the variables outlive the call. They are separate variables, and a closure variable is not a property of the function, so `a.count` is `undefined`.",
+      "materials": [
+        "scope"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this code are true?\n\n```js\nclass Animal { speak() {} }\nclass Dog extends Animal {}\nconst d = new Dog();\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`typeof Dog` is `\"class\"`",
+        "`d.hasOwnProperty(\"speak\")` is `true`",
+        "`d instanceof Animal` is `true`",
+        "`Object.getPrototypeOf(Dog) === Animal`",
+        "`Object.getPrototypeOf(d) === Dog.prototype`"
+      ],
+      "correctIndices": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "`extends` links `Dog.prototype` to `Animal.prototype` (so `instanceof Animal` holds) and links the constructor `Dog` to `Animal` for static inheritance. A class is a function, so `typeof` gives `\"function\"`, and `speak` lives on `Animal.prototype`, not on the instance.",
+      "materials": [
+        "classes"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the output of this code are true?\n\n```js\nconsole.log('A');\nsetTimeout(() => console.log('B'), 0);\nqueueMicrotask(() => console.log('C'));\nPromise.resolve().then(() => console.log('D'));\nconsole.log('E');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`C` is logged before `D`",
+        "`B` is logged right after `A`",
+        "`B` is logged last",
+        "`E` is logged before `C`",
+        "`B` is logged before `D`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "The output is A, E, C, D, B: synchronous code runs first, then microtasks in the order they were queued (C, then D), and the timer's macrotask runs only after the microtask queue is empty. So B is last, not before D or after A.",
+      "materials": [
+        "event-loop"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`p1` fulfills with `1` after 10 ms and `p2` rejects with `'x'` after 5 ms. Which statements are true?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Promise.all([p1, p2])` rejects with `'x'`",
+        "`Promise.allSettled([p1, p2])` rejects with `'x'`",
+        "`Promise.race([p1, p2])` fulfills with `1`",
+        "`Promise.any([p1, p2])` rejects with an `AggregateError`",
+        "`Promise.all([p1, p2])` fulfills with `[1]`"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "`Promise.all` rejects with the first rejection reason. `race` settles like the first promise to settle, which is the rejection; `any` fulfills with `1` because one input fulfilled; and `allSettled` never rejects, it fulfills with both outcomes.",
+      "materials": [
+        "promise"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this code are true?\n\n```js\nconst wait = (ms) => new Promise((r) => setTimeout(r, ms));\nasync function a() { await wait(100); await wait(100); }\nasync function b() { await Promise.all([wait(100), wait(100)]); }\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`a()` takes about 200 ms to settle",
+        "`b()` takes about 100 ms to settle",
+        "`a()` returns a Promise",
+        "`b()` blocks the thread for 100 ms",
+        "`a()` returns `undefined` to its caller"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`a` waits for the first timer before starting the second, so the waits add up, while `b` starts both timers first and waits for them together. Every async function returns a Promise at once (it resolves to `undefined` later), and awaiting does not block the thread.",
+      "materials": [
+        "promise"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `WeakMap`, `WeakSet` and `WeakRef` are true?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A `WeakSet` has a `size` property",
+        "`weakRef.deref()` can return `undefined` once the target is collected",
+        "A `WeakMap` entry does not keep its key object alive",
+        "A `WeakMap` has a `clear()` method",
+        "A string cannot be used as a `WeakMap` key"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        4
+      ],
+      "explanation": "`WeakMap` keys must be objects (or non-registered symbols), are held weakly, and `deref()` returns `undefined` after collection. Weak collections expose no `size` and are not iterable because their contents depend on GC, and `WeakMap.prototype.clear` was removed from the spec and does not exist.",
+      "materials": [
+        "memory"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `try...catch...finally` are true?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A surrounding `try` catches errors thrown later inside a `setTimeout` callback",
+        "A `return` inside `finally` overrides the `try` block's return value",
+        "The `catch` binding can be omitted, as in `catch { … }`",
+        "`throw` only accepts instances of `Error`",
+        "`finally` runs even when the `try` block executes `return`"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        4
+      ],
+      "explanation": "`finally` always runs, and its own `return` replaces the pending one; optional catch binding is ES2019. The timer callback runs later on an empty stack, outside the `try`, and `throw` accepts any value, such as a string or number.",
+      "materials": [
+        "control-flow"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these statements throw a `TypeError` (rather than some other error type)?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`null.x;`",
+        "`(1).toFixed(101);`",
+        "`undefinedVariable;`",
+        "`const c = 1; c = 2;`",
+        "`Symbol() + \"\";`"
+      ],
+      "correctIndices": [
+        0,
+        3,
+        4
+      ],
+      "explanation": "Reading a property of `null`, assigning to a `const` and implicitly converting a symbol to a string all throw TypeError. Referencing an undeclared variable throws ReferenceError, and `toFixed` with more than 100 digits throws RangeError.",
+      "materials": [
+        "control-flow"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these number expressions evaluate to `true`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`parseInt(\"08\") === 8`",
+        "`Math.max() === -Infinity`",
+        "`0.1 * 3 === 0.3`",
+        "`Number.isInteger(5.0)`",
+        "`Number.MAX_SAFE_INTEGER === 2 ** 53 - 1`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "explanation": "`5.0` is the same number as `5`; the largest safe integer is 2^53 − 1; modern `parseInt` reads `\"08\"` as decimal 8; and `Math.max()` with no arguments returns `-Infinity`. `0.1 * 3` is `0.30000000000000004` because of binary floating point.",
+      "materials": [
+        "types"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these BigInt expressions run without throwing?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Math.sqrt(4n)`",
+        "`+1n`",
+        "`5n / 2n`",
+        "`10n + 1`",
+        "`BigInt(1.5)`"
+      ],
+      "correctIndices": [
+        2
+      ],
+      "explanation": "`5n / 2n` is `2n`: BigInt division truncates. Mixing BigInt and Number in `+` throws TypeError, `BigInt(1.5)` throws RangeError for a non-integer, `Math` functions do not accept BigInt, and unary `+` on a BigInt throws TypeError.",
+      "materials": [
+        "types"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "For `const s = 'a😀';`, which of these produce an array in which the emoji is a single element?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`s.match(/./gu)`",
+        "`Object.values(s)`",
+        "`[...s]`",
+        "`s.split('')`",
+        "`Array.from(s)`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "Spread and `Array.from` use the string iterator, which yields whole code points, and a regex with the `u` flag matches by code point. `split('')` and `Object.values` work on UTF-16 code units, so the emoji becomes two surrogate halves.",
+      "materials": [
+        "types"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this code are true?\n\n```js\nclass Account {\n  #balance = 0;\n  static count = 0;\n  constructor() { Account.count++; }\n  deposit(n) { this.#balance += n; return this; }\n  get balance() { return this.#balance; }\n}\nconst acc = new Account().deposit(5).deposit(5);\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`acc.count` is `1`",
+        "`acc.balance` is `10`",
+        "`Account.count` is `1`",
+        "`Object.keys(acc)` returns `[]`",
+        "`'#balance' in acc` is `true`"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "`deposit` returns `this`, so chaining adds 10, the getter exposes it, and the constructor ran once. Static fields live on the class, so `acc.count` is `undefined`; the string `'#balance'` is not the private name, so `in` is false; and private fields are not keys, so `Object.keys` is empty.",
+      "materials": [
+        "classes"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these keep the page or Node.js process responsive while running a long CPU-heavy loop?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Moving the loop into a Web Worker or `worker_threads` worker",
+        "Putting the loop inside an `async` function",
+        "Running the loop from `Promise.resolve().then(...)`",
+        "Wrapping the loop in a `new Promise` executor",
+        "Splitting the work into chunks scheduled with `setTimeout`"
+      ],
+      "correctIndices": [
+        0,
+        4
+      ],
+      "explanation": "A worker runs the loop on another thread, and timer-scheduled chunks give the event loop a chance to run between them. An `async` function body and a Promise executor run synchronously until an `await`, and a microtask still blocks the thread until it finishes.",
+      "materials": [
+        "event-loop"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these expressions produce `[0, 1, 2]`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Array.from({ length: 3 }, (_, i) => i)`",
+        "`new Array(3).fill(0).map((_, i) => i)`",
+        "`Array(3).map((_, i) => i)`",
+        "`Array.of(3)`",
+        "`[...Array(3).keys()]`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "`Array.from` with a map function, spreading `keys()` and filling before mapping all visit every index. `Array(3)` has empty slots that `map` skips, so the result stays empty, and `Array.of(3)` creates `[3]`.",
+      "materials": [
+        "array"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about symbols are true?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Symbol('a') === Symbol('a')` is `true`",
+        "`Symbol.for('a') === Symbol.for('a')` is `true`",
+        "`new Symbol()` creates a symbol object",
+        "`Object.keys` skips symbol-keyed properties",
+        "`JSON.stringify` skips symbol-keyed properties"
+      ],
+      "correctIndices": [
+        1,
+        3,
+        4
+      ],
+      "explanation": "`Symbol.for` returns the same symbol from the global registry for a given key, and both `Object.keys` and `JSON.stringify` ignore symbol keys. Every `Symbol()` call creates a unique symbol even with the same description, and `Symbol` cannot be called with `new` (TypeError).",
+      "materials": [
+        "types"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these can keep a large object from being garbage-collected?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A global variable referencing it",
+        "A closure in a still-registered event listener referencing it",
+        "Using it as a key in a regular `Map` that is still reachable",
+        "Holding it only through a `WeakRef`",
+        "Using it only as a key in a `WeakMap`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "A reachable `Map`, a live listener's closure and a global all hold strong references. `WeakMap` keys and `WeakRef` targets are weak references, so they do not prevent collection on their own.",
+      "materials": [
+        "memory"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this code are true?\n\n```js\nconst parent = { inherited: 1 };\nconst o = Object.create(parent);\no.own = 2;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A `for...in` loop over `o` visits `inherited`",
+        "`'inherited' in o` is `true`",
+        "`Object.keys(o)` returns `['own', 'inherited']`",
+        "`JSON.stringify(o)` includes `inherited`",
+        "`Object.hasOwn(o, 'inherited')` is `true`"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "`in` and `for...in` both follow the prototype chain. `Object.hasOwn` and `Object.keys` look only at own properties, and `JSON.stringify` serializes only own enumerable properties, so it gives `{\"own\":2}`.",
+      "materials": [
+        "classes"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this async function are true?\n\n```js\nasync function f() {\n  throw new Error('boom');\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Calling `f()` returns a rejected Promise",
+        "Calling `f()` returns `undefined`",
+        "`try { await f(); } catch {}` catches the error",
+        "`f().catch(handler)` handles the error",
+        "Calling `f()` throws synchronously at the call site"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "An error thrown inside an async function becomes a rejection of the Promise it returns, so `await` inside `try` or `.catch` handles it. Nothing throws at the call site, and an async function always returns a Promise.",
+      "materials": [
+        "promise"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this promise chain are true?\n\n```js\nPromise.resolve(1)\n  .then((x) => x + 1)\n  .then((x) => { throw x; })\n  .catch((e) => e * 10)\n  .then((v) => console.log(v));\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It logs `2`",
+        "Without the `.catch`, the final `.then` callback would not run",
+        "It logs `20`",
+        "The `.then` callbacks run synchronously while the chain is built",
+        "Returning a value from the `catch` handler fulfills the next promise"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        4
+      ],
+      "explanation": "The value becomes 2, is thrown, caught and turned into 20, and the recovered chain logs it. Without `.catch` the rejection skips the final fulfillment handler. `.then` callbacks always run later as microtasks, never synchronously.",
+      "materials": [
+        "promise"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these method calls return `undefined`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`[1, 2].forEach((x) => x)`",
+        "`[1].push(2)`",
+        "`[1, 2].splice(0, 1)`",
+        "`[1, 2].find((x) => x > 5)`",
+        "`[1, 2].indexOf(5)`"
+      ],
+      "correctIndices": [
+        0,
+        3
+      ],
+      "explanation": "`forEach` always returns `undefined`, and `find` returns `undefined` when nothing matches. `push` returns the new length (2), `indexOf` returns `-1` when not found, and `splice` returns an array of the removed elements.",
+      "materials": [
+        "array"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "After this code runs, which statements are true?\n\n```js\nlet a = 0, b = null, c = 'x';\na ||= 5;\nb ??= 5;\nc &&= 5;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`c` is `5`",
+        "`b` is `5`",
+        "`c` is `'x'`",
+        "`a` is `5`",
+        "`a` is `0`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "`||=` assigns because `0` is falsy, `??=` assigns because `b` is `null`, and `&&=` assigns because `'x'` is truthy. So none of them keep their original values.",
+      "materials": [
+        "operators"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these snippets throw a `ReferenceError`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`f(); function f() {}`",
+        "`let x = 1; { console.log(x); let x = 2; }`",
+        "`console.log(b); var b = 1;`",
+        "`typeof neverDeclared;`",
+        "`typeof c; const c = 1;`"
+      ],
+      "correctIndices": [
+        1,
+        4
+      ],
+      "explanation": "The inner `let x` puts `x` in the temporal dead zone for the whole block, so it shadows the outer `x` and reading it throws; `typeof` on a TDZ binding throws too. `var` is hoisted and initialized to `undefined`, function declarations are hoisted with their body, and `typeof` on an undeclared name returns `\"undefined\"`.",
+      "materials": [
+        "scope"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In strict mode, which statements about this code are true?\n\n```js\n'use strict';\nconst obj = {\n  name: 'obj',\n  regular() { return this?.name; },\n  nested() { return [1].map(() => this.name)[0]; },\n};\nconst f = obj.regular;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`f()` returns `undefined`",
+        "`obj.nested()` returns `'obj'`",
+        "`obj.regular()` returns `'obj'`",
+        "`obj.regular.bind({ name: 'y' })()` returns `'obj'`",
+        "`f.call({ name: 'x' })` returns `'x'`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "A method call sets `this` to the object; a plain call of the extracted function has `this` `undefined` in strict mode, so `?.` yields `undefined`; the arrow inside `nested` takes `this` from `nested`; and `call` sets `this` explicitly. `bind` also sets `this`, so the bound call returns `'y'`.",
+      "materials": [
+        "this"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this generator are true?\n\n```js\nfunction* gen() {\n  const x = yield 1;\n  yield x * 2;\n}\nconst g = gen();\n// calls in order: g.next(), g.next(5), g.next()\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`g.next(5)` returns `{ value: NaN, done: false }`",
+        "`[...gen()]` evaluates to `[1, NaN]`",
+        "The third `g.next()` returns `done: true`",
+        "`g.next(5)` returns `{ value: 10, done: false }`",
+        "The first `g.next()` returns `{ value: 1, done: false }`"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "explanation": "The argument to `next` becomes the result of the paused `yield`, so `x` is 5 and the second value is 10; after the last `yield` the generator finishes with `done: true`. Spread calls `next()` with no argument, so `x` is `undefined` and `x * 2` is `NaN`.",
+      "materials": [
+        "iterators"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about ES modules in Node.js are true?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Assigning to an imported binding throws a `TypeError`",
+        "`__dirname` is defined, as in CommonJS",
+        "Top-level `this` is `undefined`",
+        "Module code runs in strict mode without a `\"use strict\"` directive",
+        "`import` declarations are processed before any of the module's own code runs"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "explanation": "Imports are hoisted and the dependencies evaluated first, imported bindings are read-only views, modules are always strict, and top-level `this` is `undefined`. `__dirname` is a CommonJS wrapper variable; in ES modules you use `import.meta.dirname` or `import.meta.url`.",
+      "materials": [
+        "modules"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these expressions evaluate to `-1`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`[NaN].findIndex(Number.isNaN)`",
+        "`\"abc\".search(\"z\")`",
+        "`\"abc\".indexOf(\"\")`",
+        "`[1, 2, 3].findIndex((x) => x > 5)`",
+        "`[1, 2, 3].indexOf(4)`"
+      ],
+      "correctIndices": [
+        1,
+        3,
+        4
+      ],
+      "explanation": "`indexOf`, `search` and `findIndex` return `-1` when nothing matches. `findIndex` with a predicate does find `NaN` (index 0), and the empty string is found at index 0 of any string.",
+      "materials": [
+        "array"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these `NaN` and signed-zero checks evaluate to `true`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`[0].includes(-0)`",
+        "`[NaN].indexOf(NaN) === 0`",
+        "`new Set([NaN, NaN]).size === 1`",
+        "`[NaN].includes(NaN)`",
+        "`Object.is(NaN, 0 / 0)`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "explanation": "`includes` and `Set` use SameValueZero, which treats `NaN` as equal to itself and `0` as equal to `-0`, and `Object.is` also treats any two `NaN`s as the same. `indexOf` uses strict equality, under which `NaN` never matches, so it returns `-1`.",
+      "materials": [
+        "equality"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `for await...of` are true?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It runs the loop body for all items concurrently",
+        "Calling `next()` on an async generator returns a Promise",
+        "It can be used inside a plain non-async function",
+        "It can be used at the top level of an ES module",
+        "It can iterate over an array of promises"
+      ],
+      "correctIndices": [
+        1,
+        3,
+        4
+      ],
+      "explanation": "`for await` accepts sync iterables of promises as well as async iterables, top-level await allows it in modules, and async generators return promises from `next()`. It is only allowed in async contexts, and it awaits each item before running the next iteration.",
+      "materials": [
+        "iterators",
+        "promise"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the `new Promise(executor)` constructor are true?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The executor runs synchronously inside the constructor call",
+        "`resolve(otherPromise)` makes the promise follow `otherPromise`",
+        "`.then` on an already-resolved promise runs its callback synchronously",
+        "A `throw` inside the executor rejects the promise",
+        "Calling `resolve` a second time has no effect"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "explanation": "The executor runs immediately, a promise settles only once, an executor exception becomes a rejection, and resolving with a thenable adopts its eventual state. `.then` callbacks are always queued as microtasks, even when the promise is already settled.",
+      "materials": [
+        "promise"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`fetchOne(id)` returns a Promise that settles after about 100 ms. With `const ids = [1, 2, 3];`, which of these finish in about 100 ms rather than about 300 ms?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`for await (const r of ids.map(fetchOne)) {}`",
+        "`for (const id of ids) await fetchOne(id);`",
+        "`await Promise.allSettled(ids.map(fetchOne));`",
+        "`await Promise.all(ids.map(fetchOne));`",
+        "`await ids.reduce((p, id) => p.then(() => fetchOne(id)), Promise.resolve());`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "`ids.map(fetchOne)` starts all three requests at once, so awaiting them with `all`, `allSettled` or `for await` takes about 100 ms. The `for...of` with `await` and the `reduce` chain each start the next request only after the previous one settles.",
+      "materials": [
+        "promise"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these calls throw an error?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`JSON.stringify({ n: 1n })`",
+        "`JSON.stringify(Symbol('s'))`",
+        "`JSON.stringify(undefined)`",
+        "`JSON.stringify(() => 1)`",
+        "`JSON.stringify({ d: new Date(0) })`"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "BigInt values have no JSON form, so serializing one throws a TypeError. `undefined`, a symbol or a function at the top level makes `JSON.stringify` return `undefined` rather than throw, and a Date serializes through its `toJSON` method as an ISO string.",
+      "materials": [
+        "json"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these throw an error in strict mode but fail silently or succeed in sloppy mode?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`delete Object.prototype`",
+        "Calling `undefined()`",
+        "Reading an undeclared variable",
+        "Assigning to a property of a frozen object",
+        "Assigning to an undeclared variable"
+      ],
+      "correctIndices": [
+        0,
+        3,
+        4
+      ],
+      "explanation": "Strict mode turns these silent mistakes into errors: an undeclared assignment throws ReferenceError instead of creating a global, and writing to a frozen property or deleting a non-configurable one throws TypeError. Calling `undefined` and reading an undeclared variable throw in both modes.",
+      "materials": [
+        "strict-mode"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "After this line runs, which statements are true?\n\n```js\nconst { a = 1, b = 2, c = 3 } = { a: undefined, b: null, c: 0 };\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`b` is `2`",
+        "`a` is `1`",
+        "`c` is `3`",
+        "`b` is `null`",
+        "`c` is `0`"
+      ],
+      "correctIndices": [
+        1,
+        3,
+        4
+      ],
+      "explanation": "A destructuring default applies only when the value is `undefined`, so `a` gets its default. `null` and `0` are real values, so `b` stays `null` and `c` stays `0`.",
+      "materials": [
+        "operators"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `arr.sort(compareFn)` are true?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It is guaranteed to be stable since ES2019",
+        "It returns the same array object it was called on",
+        "It returns a new sorted array and leaves `arr` unchanged",
+        "It sorts the array in place",
+        "A comparator that returns a boolean sorts reliably"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "`sort` reorders in place, returns `arr` itself, and has been required to be stable since ES2019. For a sorted copy use `toSorted`. The comparator must return a negative, zero or positive number; `true`/`false` become 1/0, never negative, so results are unreliable.",
+      "materials": [
+        "array"
+      ]
+    }
+  ]
+}
