@@ -1,0 +1,877 @@
+{
+  "name": "Design patterns and principles: predict the output",
+  "materials": [
+    {
+      "key": "rg-catalog",
+      "type": "link",
+      "title": "Design Patterns Catalog",
+      "url": "https://refactoring.guru/design-patterns/catalog",
+      "author": "Alexander Shvets (Refactoring.Guru)",
+      "description": "Illustrated catalog of the 22 classic GoF design patterns with examples in many languages."
+    },
+    {
+      "key": "rg-singleton",
+      "type": "article",
+      "title": "Singleton",
+      "url": "https://refactoring.guru/design-patterns/singleton",
+      "author": "Alexander Shvets (Refactoring.Guru)",
+      "description": "Explains the Singleton pattern, its implementations and why it is often considered an anti-pattern."
+    },
+    {
+      "key": "rg-decorator",
+      "type": "article",
+      "title": "Decorator",
+      "url": "https://refactoring.guru/design-patterns/decorator",
+      "author": "Alexander Shvets (Refactoring.Guru)",
+      "description": "Shows how decorators wrap objects to stack behaviour and why wrapping order matters."
+    },
+    {
+      "key": "rg-observer",
+      "type": "article",
+      "title": "Observer",
+      "url": "https://refactoring.guru/design-patterns/observer",
+      "author": "Alexander Shvets (Refactoring.Guru)",
+      "description": "Describes subscribing, unsubscribing and notifying observers of a subject."
+    },
+    {
+      "key": "rg-command",
+      "type": "article",
+      "title": "Command",
+      "url": "https://refactoring.guru/design-patterns/command",
+      "author": "Alexander Shvets (Refactoring.Guru)",
+      "description": "Turns requests into objects, enabling undo/redo histories and queued operations."
+    },
+    {
+      "key": "ms-lazy",
+      "type": "link",
+      "title": "Lazy<T> Class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.lazy-1",
+      "author": "Microsoft",
+      "description": "Reference for Lazy<T>, including thread-safety modes and exception caching."
+    },
+    {
+      "key": "fowler-es",
+      "type": "article",
+      "title": "Event Sourcing",
+      "url": "https://martinfowler.com/eaaDev/EventSourcing.html",
+      "author": "Martin Fowler",
+      "description": "Capturing every change as an event and rebuilding state, including temporal queries, by replaying them."
+    },
+    {
+      "key": "ms-es",
+      "type": "article",
+      "title": "Event Sourcing pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing",
+      "author": "Microsoft",
+      "description": "Azure Architecture Center guidance on append-only event stores and materializing current state."
+    },
+    {
+      "key": "fowler-cqrs",
+      "type": "article",
+      "title": "CQRS",
+      "url": "https://martinfowler.com/bliki/CQRS.html",
+      "author": "Martin Fowler",
+      "description": "Introduces separating the command model from query/read models and when that is worth it."
+    },
+    {
+      "key": "micro-cqrs",
+      "type": "article",
+      "title": "Pattern: Command Query Responsibility Segregation (CQRS)",
+      "url": "https://microservices.io/patterns/data/cqrs.html",
+      "author": "Chris Richardson",
+      "description": "Describes maintaining query-side views updated from domain events in a microservice architecture."
+    },
+    {
+      "key": "fowler-uow",
+      "type": "article",
+      "title": "Unit of Work",
+      "url": "https://martinfowler.com/eaaCatalog/unitOfWork.html",
+      "author": "Martin Fowler",
+      "description": "Catalog entry for tracking new, dirty and removed objects during a business transaction and committing them together."
+    },
+    {
+      "key": "fowler-repo",
+      "type": "article",
+      "title": "Repository",
+      "url": "https://martinfowler.com/eaaCatalog/repository.html",
+      "author": "Martin Fowler",
+      "description": "Catalog entry for mediating between the domain and data mapping through a collection-like interface."
+    },
+    {
+      "key": "fowler-di",
+      "type": "article",
+      "title": "Inversion of Control Containers and the Dependency Injection pattern",
+      "url": "https://martinfowler.com/articles/injection.html",
+      "author": "Martin Fowler",
+      "description": "The classic article naming Dependency Injection and comparing constructor, setter and interface injection."
+    },
+    {
+      "key": "cleancoder-ocp",
+      "type": "article",
+      "title": "The Open Closed Principle",
+      "url": "https://blog.cleancoder.com/uncle-bob/2014/05/12/TheOpenClosedPrinciple.html",
+      "author": "Robert C. Martin",
+      "description": "Uncle Bob explains how modules can be open for extension yet closed for modification."
+    }
+  ],
+  "questions": [
+    {
+      "type": "output",
+      "prompt": "Predict the output: an eagerly created Singleton counts how many times its private constructor ran.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "code": "var a = Config.Instance;\nvar b = Config.Instance;\nConsole.WriteLine(ReferenceEquals(a, b));\nConsole.WriteLine(Config.Created);\n\nclass Config\n{\n    public static readonly Config Instance = new Config();\n    public static int Created = 0;\n\n    private Config() { Created++; }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "True\n0\n",
+      "explanation": "Both reads return the same static field, so ReferenceEquals is True. Static field initializers run in textual order: Instance is initialized first, so the constructor runs and sets Created to 1. Then the next initializer, `Created = 0`, runs and resets it to 0. So the constructor did run once, but the counter prints 0. An explicit initializer on a field declared after the singleton silently overwrites what the constructor did.",
+      "materials": [
+        "rg-singleton"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a JavaScript Singleton constructor returns the existing instance when called with new again.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "class Config {\n  static #instance;\n  static created = 0;\n  constructor() {\n    if (Config.#instance) return Config.#instance;\n    Config.created++;\n    this.values = {};\n    Config.#instance = this;\n  }\n}\n\nconst a = new Config();\nconst b = new Config();\na.values.theme = \"dark\";\nconsole.log(a === b, Config.created, b.values.theme);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "true 1 dark\n",
+      "explanation": "When a constructor explicitly returns an object, `new` gives back that object instead of the freshly created `this`. The first `new Config()` stores itself in the private static field. The second call finds that field set and returns the stored object, so a === b is true and the counter only went up once. Since both names point to the same object, b sees the theme that was set through a.",
+      "materials": [
+        "rg-singleton"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a Go singleton getter uses sync.Once and is called with two different names.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\ntype DB struct{ name string }\n\nvar (\n\tonce     sync.Once\n\tinstance *DB\n)\n\nfunc Get(name string) *DB {\n\tonce.Do(func() { instance = &DB{name: name} })\n\treturn instance\n}\n\nfunc main() {\n\ta := Get(\"primary\")\n\tb := Get(\"replica\")\n\tfmt.Println(a == b, b.name)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "true primary\n",
+      "explanation": "once.Do runs its function only on the first call, no matter which function is passed later. The first Get creates the DB named \"primary\". The second call's closure (with \"replica\") never runs, and the same pointer is returned. So a == b is true and the name is \"primary\". Arguments given to a lazily created singleton after the first call are silently ignored.",
+      "materials": [
+        "rg-singleton"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a Lazy<T> singleton whose factory throws is read three times.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "code": "int calls = 0;\nvar lazy = new Lazy<string>(() =>\n{\n    calls++;\n    throw new InvalidOperationException(\"db down\");\n});\n\nfor (int i = 0; i < 3; i++)\n{\n    try { Console.WriteLine(lazy.Value); }\n    catch (InvalidOperationException) { Console.WriteLine(\"failed\"); }\n}\nConsole.WriteLine(calls);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "failed\nfailed\nfailed\n1\n",
+      "explanation": "`new Lazy<T>(factory)` uses LazyThreadSafetyMode.ExecutionAndPublication, and in that mode exceptions thrown by the factory are cached. The first read runs the factory (calls becomes 1) and throws. The second and third reads rethrow the cached exception without calling the factory again. So it prints failed three times and then 1. To retry after a failure you need PublicationOnly mode or a new Lazy.",
+      "materials": [
+        "ms-lazy"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: dialog subclasses override a Factory Method that creates their buttons.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "code": "class Dialog {\n  render() {\n    return `[${this.createButton().paint()}]`;\n  }\n}\nclass WebDialog extends Dialog {\n  createButton() { return { paint: () => \"html\" }; }\n}\nclass WinDialog extends Dialog {\n  createButton() { return { paint: () => \"win32\" }; }\n}\n\nfor (const os of [\"web\", \"windows\", \"web\"]) {\n  const dialog = os === \"web\" ? new WebDialog() : new WinDialog();\n  console.log(dialog.render());\n}\n",
+      "codeLanguage": "js",
+      "expectedOutput": "[html]\n[win32]\n[html]\n",
+      "explanation": "Dialog.render holds the shared logic but leaves creating the button to the factory method createButton, which each subclass overrides. A WebDialog creates a button that paints \"html\" and a WinDialog creates one that paints \"win32\". render wraps each in brackets, giving [html], [win32], [html].",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a factory looks up notifier constructors in a registry map.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport (\n\t\"errors\"\n\t\"fmt\"\n)\n\ntype Notifier interface{ Send(msg string) string }\n\ntype Email struct{}\ntype SMS struct{}\n\nfunc (Email) Send(m string) string { return \"email: \" + m }\nfunc (SMS) Send(m string) string   { return \"sms: \" + m }\n\nvar registry = map[string]func() Notifier{\n\t\"email\": func() Notifier { return Email{} },\n\t\"sms\":   func() Notifier { return SMS{} },\n}\n\nfunc New(kind string) (Notifier, error) {\n\tif f, ok := registry[kind]; ok {\n\t\treturn f(), nil\n\t}\n\treturn nil, errors.New(\"unknown kind \" + kind)\n}\n\nfunc main() {\n\tfor _, k := range []string{\"sms\", \"fax\", \"email\"} {\n\t\tn, err := New(k)\n\t\tif err != nil {\n\t\t\tfmt.Println(err)\n\t\t\tcontinue\n\t\t}\n\t\tfmt.Println(n.Send(\"hi\"))\n\t}\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "sms: hi\nunknown kind fax\nemail: hi\n",
+      "explanation": "The factory hides the concrete types behind the Notifier interface and picks a constructor from the map. \"sms\" and \"email\" are registered and produce their messages. \"fax\" isn't registered, so New returns an error, which is printed instead. The loop goes over a slice, not the map, so the order is fixed. You add a new kind by registering it, without changing the callers.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a Prototype is cloned with MemberwiseClone and then the clone is changed.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "var original = new Doc { Title = \"Draft\", Tags = new List<string> { \"a\" } };\nvar copy = original.Clone();\ncopy.Title = \"Copy\";\ncopy.Tags.Add(\"b\");\nConsole.WriteLine(original.Title);\nConsole.WriteLine(string.Join(\",\", original.Tags));\n\nclass Doc\n{\n    public string Title { get; set; } = \"\";\n    public List<string> Tags { get; set; } = new();\n    public Doc Clone() => (Doc)MemberwiseClone();\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "Draft\na,b\n",
+      "explanation": "MemberwiseClone makes a shallow copy: each field is copied, but a reference field still points to the same object. Giving the clone a new Title only changes the clone's field, so the original stays \"Draft\". Tags is a reference to one List shared by both objects, so adding \"b\" through the clone also shows up in the original: a,b. A deep clone would have to copy the list as well.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: one fluent builder is reused to build two pizzas.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "code": "class PizzaBuilder {\n  #size = \"medium\";\n  #toppings = [];\n  size(s) { this.#size = s; return this; }\n  add(t) { this.#toppings.push(t); return this; }\n  build() { return { size: this.#size, toppings: this.#toppings }; }\n}\n\nconst builder = new PizzaBuilder().add(\"cheese\");\nconst first = builder.build();\nconst second = builder.size(\"large\").add(\"ham\").build();\nconsole.log(first.size, first.toppings.join(\"+\"));\nconsole.log(second.size, second.toppings.join(\"+\"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "medium cheese+ham\nlarge cheese+ham\n",
+      "explanation": "build() copies the size string into the product, but it passes the toppings array by reference. Changing the size afterwards doesn't affect `first`, which keeps the default \"medium\". add(\"ham\") pushes onto the one array that both products share, so `first` gets ham too. A builder that may be reused should copy mutable state in build(), for example `[...this.#toppings]`.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a Go builder uses value receivers, and one call's result is discarded.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\ntype Builder struct {\n\thost string\n\tport int\n}\n\nfunc (b Builder) Host(h string) Builder { b.host = h; return b }\nfunc (b Builder) Port(p int) Builder    { b.port = p; return b }\nfunc (b Builder) Build() string         { return fmt.Sprintf(\"%s:%d\", b.host, b.port) }\n\nfunc main() {\n\tb := Builder{host: \"localhost\", port: 80}\n\tb.Port(8080)\n\tfmt.Println(b.Build())\n\n\tc := b.Host(\"example.com\").Port(443)\n\tfmt.Println(b.Build(), c.Build())\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "localhost:80\nlocalhost:80 example.com:443\n",
+      "explanation": "With value receivers, each method works on a copy and returns the changed copy. `b.Port(8080)` throws its result away, so b is still localhost:80. The chain creates new copies at each step and stores the final one in c, and b is still never changed. Value-receiver builders are immutable and safe to share, but only if you use the returned value. With pointer receivers, the first call would have changed b.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: text decorators are stacked in two different orders.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "code": "IText t = new Bold(new Italic(new Plain(\"hi\")));\nConsole.WriteLine(t.Render());\nIText u = new Italic(new Bold(new Plain(\"hi\")));\nConsole.WriteLine(u.Render());\n\ninterface IText { string Render(); }\nclass Plain(string s) : IText { public string Render() => s; }\nclass Bold(IText inner) : IText { public string Render() => $\"<b>{inner.Render()}</b>\"; }\nclass Italic(IText inner) : IText { public string Render() => $\"<i>{inner.Render()}</i>\"; }\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "<b><i>hi</i></b>\n<i><b>hi</b></i>\n",
+      "explanation": "Each decorator implements the same interface and wraps the result of the object it holds. The outermost decorator adds the outermost tags: Bold(Italic(Plain)) gives <b><i>hi</i></b>, and swapping the wrapping order swaps the tags. With decorators, the order you stack them in is the order the extra behaviour is applied, from the outside in.",
+      "materials": [
+        "rg-decorator"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: two objects created with Object.create share a prototype holding an array and a string.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "const proto = { tags: [], name: \"base\" };\nconst a = Object.create(proto);\nconst b = Object.create(proto);\n\na.tags.push(\"x\");\na.name = \"a\";\n\nconsole.log(b.tags.length, b.name);\nconsole.log(Object.hasOwn(a, \"tags\"), Object.hasOwn(a, \"name\"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "1 base\nfalse true\n",
+      "explanation": "`a.tags` isn't an own property, so reading it finds the prototype's array, and push changes that shared array. b sees one tag. Assigning `a.name` creates a new own property on a that hides the prototype's, so b.name is still \"base\". So a has an own `name` but no own `tags`. Mutable state on a shared prototype leaks between every object created from it.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a struct holding a slice and a map is used as a Prototype by plain assignment.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\ntype Template struct {\n\tName   string\n\tTags   []string\n\tLabels map[string]string\n}\n\nfunc main() {\n\tbase := Template{Name: \"base\", Tags: make([]string, 1, 4), Labels: map[string]string{\"env\": \"dev\"}}\n\tbase.Tags[0] = \"a\"\n\n\tclone := base\n\tclone.Name = \"clone\"\n\tclone.Tags[0] = \"z\"\n\tclone.Tags = append(clone.Tags, \"b\")\n\tclone.Labels[\"env\"] = \"prod\"\n\n\tfmt.Println(base.Name, base.Tags, len(base.Tags), base.Labels[\"env\"])\n\tfmt.Println(base.Tags[:2])\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "base [z] 1 prod\n[z b]\n",
+      "explanation": "Assigning a struct copies its fields. The string is independent, but a slice header and a map value both point to shared storage. clone.Tags[0] = \"z\" writes into the shared backing array, and the map write changes the one shared map, so base sees \"z\" and \"prod\". append fits within the capacity of 4, so it writes \"b\" into the same array but only updates clone's length. base still has length 1, and reslicing base to [:2] shows the hidden \"b\".",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a caching proxy sits in front of a slow price service.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "var real = new SlowPrices();\nvar proxy = new CachingPrices(real);\nIPrices prices = proxy;\nforeach (var id in new[] { 1, 2, 1, 1, 3, 2 })\n    prices.Get(id);\nConsole.WriteLine($\"real={real.Calls} hits={proxy.Hits}\");\n\ninterface IPrices { decimal Get(int id); }\nclass SlowPrices : IPrices\n{\n    public int Calls;\n    public decimal Get(int id) { Calls++; return id * 10m; }\n}\nclass CachingPrices(IPrices inner) : IPrices\n{\n    private readonly Dictionary<int, decimal> _cache = new();\n    public int Hits;\n    public decimal Get(int id)\n    {\n        if (_cache.TryGetValue(id, out var p)) { Hits++; return p; }\n        return _cache[id] = inner.Get(id);\n    }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "real=3 hits=3\n",
+      "explanation": "The proxy has the same interface as the real service and only forwards a call on a cache miss. The ids are 1, 2, 1, 1, 3, 2. The first time each of 1, 2 and 3 is seen is a miss, so the real service is called 3 times. The other three requests (the second and third 1, and the second 2) are served from the dictionary, so hits=3.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a config object is copied with spread syntax and with structuredClone, then the copies are changed.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "code": "const original = { name: \"cfg\", limits: { max: 10 } };\nconst shallow = { ...original };\nconst deep = structuredClone(original);\n\nshallow.limits.max = 20;\ndeep.limits.max = 30;\nshallow.name = \"copy\";\n\nconsole.log(original.name, original.limits.max);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "cfg 20\n",
+      "explanation": "Spread copies only the top-level properties, so `shallow.limits` is the same nested object as `original.limits`, and setting max to 20 changes the original. structuredClone copies recursively, so deep's change to 30 stays in the copy. Setting shallow.name replaces a top-level string on the copy only. The original ends up with name \"cfg\" and max 20.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a function type adapts plain functions to a Handler interface.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\ntype Handler interface{ Handle(req string) string }\n\ntype HandlerFunc func(string) string\n\nfunc (f HandlerFunc) Handle(req string) string { return f(req) }\n\nfunc main() {\n\tvar h Handler = HandlerFunc(strings.ToUpper)\n\tfmt.Println(h.Handle(\"ping\"))\n\tfmt.Println(HandlerFunc(strings.TrimSpace).Handle(\"  pong  \") + \"!\")\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "PING\npong!\n",
+      "explanation": "HandlerFunc is an adapter: it's a function type with a Handle method that just calls the function. Converting strings.ToUpper to HandlerFunc lets it satisfy Handler, so Handle(\"ping\") returns \"PING\". TrimSpace adapted the same way strips the spaces, giving \"pong\", and then \"!\" is appended. net/http's HandlerFunc uses the same trick.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a Square that inherits from Rectangle is resized by code written for rectangles.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "Resize(new Rectangle());\nResize(new Square());\n\nstatic void Resize(Rectangle r)\n{\n    r.Width = 5;\n    r.Height = 4;\n    Console.WriteLine(r.Area);\n}\n\nclass Rectangle\n{\n    public virtual int Width { get; set; }\n    public virtual int Height { get; set; }\n    public int Area => Width * Height;\n}\nclass Square : Rectangle\n{\n    public override int Width { set { base.Width = value; base.Height = value; } }\n    public override int Height { set { base.Width = value; base.Height = value; } }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "20\n16\n",
+      "explanation": "For a real Rectangle, setting Width to 5 and Height to 4 gives an area of 20. Square overrides both setters to keep its sides equal, so setting Height to 4 also sets Width back to 4, and the area is 16. Resize expects that setting one side leaves the other alone. Square breaks that expectation, so it cannot stand in for a Rectangle. This is the textbook violation of the Liskov Substitution Principle.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: function decorators for a discount and for tax are applied in both orders.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "code": "const withDiscount = (fn) => (x) => fn(x) - 10;\nconst withTax = (fn) => (x) => fn(x) * 1.5;\nconst price = (x) => x;\n\nconsole.log(withTax(withDiscount(price))(100));\nconsole.log(withDiscount(withTax(price))(100));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "135\n140\n",
+      "explanation": "Each decorator calls the function it wraps and then changes the result, so the innermost decorator acts first. withTax(withDiscount(price)) takes the discount first and then adds tax: (100 - 10) * 1.5 = 135. The other order adds tax first and then takes the discount: 100 * 1.5 - 10 = 140. Swapping the decorators changes the result.",
+      "materials": [
+        "rg-decorator"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an embedding struct shadows a method that the embedded struct calls internally.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\ntype Base struct{}\n\nfunc (Base) Name() string    { return \"base\" }\nfunc (b Base) Greet() string { return \"hello from \" + b.Name() }\n\ntype Derived struct{ Base }\n\nfunc (Derived) Name() string { return \"derived\" }\n\nfunc main() {\n\td := Derived{}\n\tfmt.Println(d.Name())\n\tfmt.Println(d.Greet())\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "derived\nhello from base\n",
+      "explanation": "d.Name() finds Derived's own method first. d.Greet() is promoted from the embedded Base, and its receiver is the Base value, so b.Name() inside it calls Base.Name. Go embedding is composition, not inheritance: there are no virtual methods, so the outer type can't override what the inner type calls on itself. To get a Template-Method-style hook, pass the variable step in, for example as an interface or a func field.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a checkout swaps its discount strategy at runtime.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "code": "var cart = new Checkout(new NoDiscount());\nConsole.WriteLine(cart.Total(100m));\ncart.Strategy = new PercentOff(20);\nConsole.WriteLine(cart.Total(100m));\ncart.Strategy = new FlatOff(30);\nConsole.WriteLine(cart.Total(20m));\n\ninterface IDiscount { decimal Apply(decimal amount); }\nclass NoDiscount : IDiscount { public decimal Apply(decimal a) => a; }\nclass PercentOff(int pct) : IDiscount { public decimal Apply(decimal a) => a - a * pct / 100; }\nclass FlatOff(decimal off) : IDiscount { public decimal Apply(decimal a) => Math.Max(0, a - off); }\nclass Checkout(IDiscount strategy)\n{\n    public IDiscount Strategy { get; set; } = strategy;\n    public decimal Total(decimal amount) => Strategy.Apply(amount);\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "100\n80\n0\n",
+      "explanation": "Checkout hands the calculation to whichever IDiscount it holds at the moment of the call. With NoDiscount, 100 stays 100. After switching to PercentOff(20), 100 - 20 = 80. After switching to FlatOff(30), 20 - 30 would be negative, so Math.Max clamps it to 0. Checkout never changes; you get new behaviour by swapping the strategy object.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a protection proxy's set trap refuses a write inside an ES module.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "code": "const account = { owner: \"ann\", balance: 100 };\nconst readOnly = new Proxy(account, {\n  set(target, key, value) {\n    console.log(`blocked ${String(key)}`);\n    return false;\n  },\n});\n\ntry {\n  readOnly.balance = 0;\n  console.log(\"assigned\");\n} catch (e) {\n  console.log(e.constructor.name);\n}\nconsole.log(account.balance);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "blocked balance\nTypeError\n100\n",
+      "explanation": "Every assignment through the proxy goes to the set trap, which logs and returns false without touching the target. ES modules always run in strict mode, and in strict mode a set trap that returns false makes the assignment throw a TypeError. So \"assigned\" is never printed. The real object was never written to, so its balance is still 100. In sloppy-mode scripts the same write would fail silently.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a Composite of files and nested directories computes its total size and file count.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\ntype Node interface {\n\tSize() int\n\tFiles() int\n}\n\ntype File struct{ size int }\ntype Dir struct{ children []Node }\n\nfunc (f File) Size() int  { return f.size }\nfunc (f File) Files() int { return 1 }\n\nfunc (d Dir) Size() int {\n\ttotal := 0\n\tfor _, c := range d.children {\n\t\ttotal += c.Size()\n\t}\n\treturn total\n}\n\nfunc (d Dir) Files() int {\n\tn := 0\n\tfor _, c := range d.children {\n\t\tn += c.Files()\n\t}\n\treturn n\n}\n\nfunc main() {\n\troot := Dir{children: []Node{\n\t\tFile{10},\n\t\tDir{children: []Node{File{5}, File{7}, Dir{}}},\n\t\tFile{3},\n\t}}\n\tfmt.Println(root.Size(), root.Files())\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "25 4\n",
+      "explanation": "Files and directories share the Node interface, so a directory just adds up whatever its children report, recursing through nested directories. Sizes: 10 + (5 + 7 + 0) + 3 = 25. Files: the empty directory contributes 0, so 1 + 2 + 1 = 4. The client calls root.Size() without caring how deep the tree goes.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an order moves through State objects that ignore actions they don't allow.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "var order = new Order();\nvar trail = new List<string>();\nforeach (var action in new[] { \"ship\", \"pay\", \"ship\", \"cancel\" })\n{\n    order.Handle(action);\n    trail.Add(order.State.Name);\n}\nConsole.WriteLine(string.Join(\" -> \", trail));\n\nclass Order\n{\n    public IState State { get; private set; } = new New();\n    public void Handle(string action) => State = action switch\n    {\n        \"pay\" => State.Pay(),\n        \"ship\" => State.Ship(),\n        \"cancel\" => State.Cancel(),\n        _ => State\n    };\n}\ninterface IState\n{\n    string Name { get; }\n    IState Pay() => this;\n    IState Ship() => this;\n    IState Cancel() => this;\n}\nclass New : IState { public string Name => \"New\"; public IState Pay() => new Paid(); public IState Cancel() => new Cancelled(); }\nclass Paid : IState { public string Name => \"Paid\"; public IState Ship() => new Shipped(); public IState Cancel() => new Cancelled(); }\nclass Shipped : IState { public string Name => \"Shipped\"; }\nclass Cancelled : IState { public string Name => \"Cancelled\"; }\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "New -> Paid -> Shipped -> Shipped\n",
+      "explanation": "Each state returns the next state, or itself (the default interface method) for an action it doesn't allow. \"ship\" while New is ignored, so the state stays New. \"pay\" moves it to Paid, and \"ship\" moves it to Shipped. Shipped doesn't override Cancel, so \"cancel\" keeps it Shipped. The trail is New -> Paid -> Shipped -> Shipped, and Order never needed an if/else on its current state.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a lazy-loading getter replaces itself with a plain value on first access.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "let loads = 0;\nconst report = {\n  get data() {\n    loads++;\n    const value = [1, 2, 3];\n    Object.defineProperty(this, \"data\", { value });\n    return value;\n  },\n};\n\nconsole.log(loads);\nconsole.log(report.data.length + report.data.length);\nconsole.log(loads);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "0\n6\n1\n",
+      "explanation": "Nothing is loaded until `data` is first read, so loads starts at 0. The first read runs the getter, which counts a load and uses defineProperty to replace the accessor with a plain data property holding the array. The second read just returns that stored value without calling the getter. 3 + 3 = 6, and only one load happened. This is a virtual proxy or lazy initialization written in a few lines.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a Flyweight factory shares tree-type objects across many trees.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\ntype TreeType struct{ species string }\n\nvar (\n\tpool    = map[string]*TreeType{}\n\tcreated = 0\n)\n\nfunc getType(species string) *TreeType {\n\tif t, ok := pool[species]; ok {\n\t\treturn t\n\t}\n\tcreated++\n\tt := &TreeType{species}\n\tpool[species] = t\n\treturn t\n}\n\ntype Tree struct {\n\tx, y int\n\ttyp  *TreeType\n}\n\nfunc main() {\n\tvar forest []Tree\n\tfor i, s := range []string{\"oak\", \"pine\", \"oak\", \"birch\", \"pine\", \"oak\"} {\n\t\tforest = append(forest, Tree{x: i, y: i * 2, typ: getType(s)})\n\t}\n\tfmt.Println(len(forest), created, forest[0].typ == forest[2].typ)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "6 3 true\n",
+      "explanation": "Each Tree keeps its own position (extrinsic state) but points to a shared TreeType (intrinsic state) from the pool. There are 6 trees, but only the first oak, pine and birch create a TreeType, so created is 3. Trees 0 and 2 are both oaks and share the same pointer, so the comparison is true. The map is only used for lookups, never iterated, so the output doesn't vary.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: Specification objects are combined with And, Or and Not.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "code": "var products = new[]\n{\n    new Product(\"Pen\", 2m, true),\n    new Product(\"Lamp\", 40m, false),\n    new Product(\"Desk\", 250m, true),\n    new Product(\"Mug\", 8m, true),\n};\nvar inStock = new Spec<Product>(p => p.InStock);\nvar cheap = new Spec<Product>(p => p.Price < 50m);\n\nvar pricyInStock = inStock.And(cheap.Not());\nConsole.WriteLine(string.Join(\",\", products.Where(pricyInStock.IsSatisfiedBy).Select(p => p.Name)));\nConsole.WriteLine(products.Count(inStock.Or(cheap).IsSatisfiedBy));\n\nrecord Product(string Name, decimal Price, bool InStock);\nclass Spec<T>(Func<T, bool> pred)\n{\n    public bool IsSatisfiedBy(T x) => pred(x);\n    public Spec<T> And(Spec<T> o) => new(x => IsSatisfiedBy(x) && o.IsSatisfiedBy(x));\n    public Spec<T> Or(Spec<T> o) => new(x => IsSatisfiedBy(x) || o.IsSatisfiedBy(x));\n    public Spec<T> Not() => new(x => !IsSatisfiedBy(x));\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "Desk\n4\n",
+      "explanation": "inStock.And(cheap.Not()) matches products that are in stock and cost at least 50. Only Desk (250, in stock) qualifies, because Lamp is out of stock. inStock.Or(cheap) matches Pen, Desk and Mug for being in stock, plus Lamp for being under 50, so all 4 products count. Each combinator builds a new specification out of existing ones, so you can reuse business rules without writing new predicate code.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an observer unsubscribes itself while the subject is notifying with forEach.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "code": "class Subject {\n  observers = [];\n  subscribe(fn) { this.observers.push(fn); }\n  unsubscribe(fn) { this.observers.splice(this.observers.indexOf(fn), 1); }\n  notify(msg) { this.observers.forEach((fn) => fn(msg)); }\n}\n\nconst s = new Subject();\nconst once = (m) => { console.log(\"once\", m); s.unsubscribe(once); };\ns.subscribe(once);\ns.subscribe((m) => console.log(\"A\", m));\ns.subscribe((m) => console.log(\"B\", m));\ns.notify(1);\ns.notify(2);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "once 1\nB 1\nA 2\nB 2\n",
+      "explanation": "forEach walks the live array by index. At index 0, `once` runs and splices itself out, so A moves to index 0 and B to index 1. forEach then goes on to index 1 and calls B. A is skipped for message 1. Message 2 sees [A, B] and calls both. To avoid this, notify a copy: `[...this.observers].forEach(...)`.",
+      "materials": [
+        "rg-observer"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: shipping cost strategies are plain function values that get swapped.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"math\"\n)\n\ntype Shipping func(kg float64) float64\n\nfunc main() {\n\tflat := Shipping(func(kg float64) float64 { return 5 })\n\tperKg := Shipping(func(kg float64) float64 { return 2 * kg })\n\n\tstrategy := flat\n\tfmt.Println(strategy(3))\n\tstrategy = perKg\n\tfmt.Println(strategy(3))\n\n\tcheapest := func(kg float64) float64 { return math.Min(flat(kg), perKg(kg)) }\n\tfmt.Println(cheapest(1), cheapest(10))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "5\n6\n2 5\n",
+      "explanation": "In Go a strategy can just be a function value. With the flat strategy, 3 kg costs 5. After swapping to per-kg, 3 kg costs 6. `cheapest` combines the two strategies: for 1 kg, min(5, 2) = 2; for 10 kg, min(5, 20) = 5. fmt prints whole-number float64 values without a decimal point.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an entity loaded from two in-memory repositories is changed without calling save.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "code": "IRepo[] repos = { new ReferenceRepo(), new CopyingRepo() };\nforeach (var repo in repos)\n{\n    repo.Add(new Customer { Id = 1, Name = \"Ann\" });\n    var c = repo.Get(1);\n    c.Name = \"Bob\"; // no Update or Save call\n    Console.WriteLine(repo.Get(1).Name);\n}\n\nclass Customer\n{\n    public int Id { get; set; }\n    public string Name { get; set; } = \"\";\n    public Customer Copy() => new() { Id = Id, Name = Name };\n}\ninterface IRepo { void Add(Customer c); Customer Get(int id); }\nclass ReferenceRepo : IRepo\n{\n    private readonly Dictionary<int, Customer> _items = new();\n    public void Add(Customer c) => _items[c.Id] = c;\n    public Customer Get(int id) => _items[id];\n}\nclass CopyingRepo : IRepo\n{\n    private readonly Dictionary<int, Customer> _items = new();\n    public void Add(Customer c) => _items[c.Id] = c.Copy();\n    public Customer Get(int id) => _items[id].Copy();\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "Bob\nAnn\n",
+      "explanation": "ReferenceRepo stores and returns the same object, so changing the returned Customer changes the stored one and the next Get sees \"Bob\", even though nothing was saved. CopyingRepo stores and returns copies, so the change stays local and the store still says \"Ann\". A database-backed repository behaves like the copying one, so an in-memory fake that hands out shared references can make tests pass that would fail in production.",
+      "materials": [
+        "fowler-repo"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a small Observer-style event emitter with one `on` listener and one `once` listener.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "code": "class Emitter {\n  #listeners = new Map();\n  on(event, fn) {\n    if (!this.#listeners.has(event)) this.#listeners.set(event, []);\n    this.#listeners.get(event).push(fn);\n  }\n  once(event, fn) {\n    const wrapper = (...args) => {\n      this.off(event, wrapper);\n      fn(...args);\n    };\n    this.on(event, wrapper);\n  }\n  off(event, fn) {\n    const list = this.#listeners.get(event) ?? [];\n    const i = list.indexOf(fn);\n    if (i >= 0) list.splice(i, 1);\n  }\n  emit(event, ...args) {\n    for (const fn of [...(this.#listeners.get(event) ?? [])]) fn(...args);\n  }\n  listenerCount(event) {\n    return (this.#listeners.get(event) ?? []).length;\n  }\n}\n\nconst bus = new Emitter();\nlet count = 0;\nbus.on(\"tick\", () => count++);\nbus.once(\"tick\", () => (count += 10));\n\nbus.emit(\"tick\");\nbus.emit(\"tick\");\nbus.emit(\"tick\");\nconsole.log(count, bus.listenerCount(\"tick\"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "13 1\n",
+      "explanation": "The `on` listener runs on every emit and adds 1 three times. `once` registers a wrapper that unsubscribes itself before calling the real listener, so it adds 10 only on the first emit. `emit` loops over a copy of the list, so removing a listener during notification is safe. 3 + 10 = 13, and afterwards only the `on` listener is left, so the count is 1. Node's `EventEmitter.once` behaves the same way.",
+      "materials": [
+        "rg-observer"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a vending machine delegates each button press and coin insert to its current State.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\ntype State interface {\n\tInsert(m *Machine)\n\tPress(m *Machine)\n}\n\ntype Machine struct {\n\tstate State\n\tstock int\n\tlog   []string\n}\n\nfunc (m *Machine) note(s string) { m.log = append(m.log, s) }\n\ntype idle struct{}\ntype paid struct{}\ntype soldOut struct{}\n\nfunc (idle) Insert(m *Machine) { m.state = paid{}; m.note(\"paid\") }\nfunc (idle) Press(m *Machine)  { m.note(\"pay first\") }\n\nfunc (paid) Insert(m *Machine) { m.note(\"refund\") }\nfunc (paid) Press(m *Machine) {\n\tm.stock--\n\tm.note(\"vend\")\n\tif m.stock == 0 {\n\t\tm.state = soldOut{}\n\t} else {\n\t\tm.state = idle{}\n\t}\n}\n\nfunc (soldOut) Insert(m *Machine) { m.note(\"refund\") }\nfunc (soldOut) Press(m *Machine)  { m.note(\"empty\") }\n\nfunc main() {\n\tm := &Machine{state: idle{}, stock: 1}\n\tm.state.Press(m)\n\tm.state.Insert(m)\n\tm.state.Insert(m)\n\tm.state.Press(m)\n\tm.state.Insert(m)\n\tm.state.Press(m)\n\tfmt.Println(strings.Join(m.log, \",\"))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "pay first,paid,refund,vend,refund,empty\n",
+      "explanation": "Pressing while idle prints \"pay first\". Inserting while idle moves to paid. A second coin while paid is refunded. Pressing while paid vends the only item and, with stock now 0, moves to soldOut. In soldOut a coin is refunded and a press gives \"empty\". Each state decides both the reaction and the next state, so the machine itself needs no switch on its state.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a Unit of Work tracks new, dirty and removed entities before commit.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "hard",
+      "code": "var uow = new UnitOfWork();\nuow.RegisterNew(\"A\");\nuow.RegisterNew(\"B\");\nuow.RegisterDirty(\"C\");\nuow.RegisterDirty(\"C\");\nuow.RegisterDirty(\"A\");\nuow.RegisterRemoved(\"B\");\nuow.RegisterRemoved(\"D\");\nConsole.WriteLine(uow.Commit());\n\nclass UnitOfWork\n{\n    private readonly HashSet<string> _new = new(), _dirty = new(), _removed = new();\n    public void RegisterNew(string id) => _new.Add(id);\n    public void RegisterDirty(string id) { if (!_new.Contains(id)) _dirty.Add(id); }\n    public void RegisterRemoved(string id)\n    {\n        if (_new.Remove(id)) return;\n        _dirty.Remove(id);\n        _removed.Add(id);\n    }\n    public string Commit() => $\"insert={_new.Count} update={_dirty.Count} delete={_removed.Count}\";\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "insert=1 update=1 delete=1\n",
+      "explanation": "A and B are registered as new. C is marked dirty twice, but it's a set, so it's counted once. Marking A dirty does nothing because A will be inserted with its latest state anyway. Removing B, which was never written, just cancels its insert. Removing D, which already exists, schedules a delete. That leaves inserts {A}, updates {C} and deletes {D}: one of each. This is how a Unit of Work collapses many in-memory changes into the smallest set of database writes.",
+      "materials": [
+        "fowler-uow"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: commands are undone and then a new command is executed before a redo.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "let value = 0;\nconst undoStack = [];\nconst redoStack = [];\nconst add = (n) => ({ do: () => (value += n), undo: () => (value -= n) });\n\nconst run = (cmd) => { cmd.do(); undoStack.push(cmd); redoStack.length = 0; };\nconst undo = () => { const c = undoStack.pop(); c.undo(); redoStack.push(c); };\nconst redo = () => { const c = redoStack.pop(); if (c) { c.do(); undoStack.push(c); } };\n\nrun(add(5)); run(add(3)); run(add(2));\nundo(); undo();\nrun(add(10));\nredo();\nconsole.log(value, undoStack.length, redoStack.length);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "15 2 0\n",
+      "explanation": "After the three commands, value is 10. Two undos take back +2 and +3, leaving 5 with two commands on the redo stack. Running a new command (+10) gives 15 and clears the redo stack, because the old future no longer applies after a new change. So redo() finds nothing to do. The undo stack holds +5 and +10, so it prints 15 2 0.",
+      "materials": [
+        "rg-command"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an event bus with subscription ids is published to before and after an unsubscribe.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\ntype sub struct {\n\tid int\n\tfn func(string)\n}\n\ntype Bus struct {\n\tnextID int\n\tsubs   []sub\n}\n\nfunc (b *Bus) Subscribe(fn func(string)) int {\n\tb.nextID++\n\tb.subs = append(b.subs, sub{b.nextID, fn})\n\treturn b.nextID\n}\n\nfunc (b *Bus) Unsubscribe(id int) {\n\tfor i, s := range b.subs {\n\t\tif s.id == id {\n\t\t\tb.subs = append(b.subs[:i], b.subs[i+1:]...)\n\t\t\treturn\n\t\t}\n\t}\n}\n\nfunc (b *Bus) Publish(msg string) {\n\tfor _, s := range b.subs {\n\t\ts.fn(msg)\n\t}\n}\n\nfunc main() {\n\ta, b, c := 0, 0, 0\n\tbus := &Bus{}\n\tidA := bus.Subscribe(func(string) { a++ })\n\tbus.Subscribe(func(string) { b++ })\n\tbus.Publish(\"x\")\n\tbus.Unsubscribe(idA)\n\tbus.Subscribe(func(string) { c++ })\n\tbus.Publish(\"y\")\n\tbus.Publish(\"z\")\n\tfmt.Println(a, b, c)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "1 3 2\n",
+      "explanation": "Observers only receive messages published while they are subscribed. A gets \"x\" and is then removed, so it ends at 1. B is subscribed the whole time and gets x, y and z, so 3. C joins after \"x\" and gets y and z, so 2. Go funcs can't be compared with ==, so the subscription id returned by Subscribe is the handle used to unsubscribe.",
+      "materials": [
+        "rg-observer"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a printer has overloads for each shape, and shapes also call it back through Accept.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "code": "Shape[] shapes = { new Circle(), new Square() };\nvar printer = new Printer();\nforeach (var s in shapes)\n{\n    printer.Print(s);\n    s.Accept(printer);\n}\n\nabstract class Shape { public abstract void Accept(Printer p); }\nclass Circle : Shape { public override void Accept(Printer p) => p.Print(this); }\nclass Square : Shape { public override void Accept(Printer p) => p.Print(this); }\nclass Printer\n{\n    public void Print(Shape s) => Console.WriteLine(\"shape\");\n    public void Print(Circle c) => Console.WriteLine(\"circle\");\n    public void Print(Square s) => Console.WriteLine(\"square\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "shape\ncircle\nshape\nsquare\n",
+      "explanation": "C# picks an overload at compile time from the static type, and `s` is declared as Shape, so printer.Print(s) always calls Print(Shape). Accept is virtual, so it runs Circle.Accept or Square.Accept (the first dispatch). Inside that method `this` has the concrete static type, so p.Print(this) picks the matching overload (the second dispatch). Each shape therefore prints \"shape\" and then its own name. Double dispatch is exactly why Visitor uses Accept.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: support tickets are routed along a Chain of Responsibility.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "code": "const chain = [\n  { name: \"bot\", handles: (t) => t.topic === \"password\" },\n  { name: \"agent\", handles: (t) => t.priority <= 2 },\n  { name: \"engineer\", handles: (t) => t.topic === \"bug\" },\n];\nconst route = (t) => chain.find((h) => h.handles(t))?.name ?? \"unhandled\";\n\nconsole.log(route({ topic: \"password\", priority: 5 }));\nconsole.log(route({ topic: \"bug\", priority: 1 }));\nconsole.log(route({ topic: \"bug\", priority: 4 }));\nconsole.log(route({ topic: \"billing\", priority: 3 }));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "bot\nagent\nengineer\nunhandled\n",
+      "explanation": "The ticket goes to the first handler in the chain that accepts it. A password ticket stops at the bot. The priority-1 bug is taken by the agent before it reaches the engineer. The priority-4 bug passes the bot and the agent and reaches the engineer. Billing at priority 3 matches no handler, so `find` returns undefined and the fallback is \"unhandled\". The order of the chain decides who handles what.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an editor saves one memento that shares its slice and one that copies it, then restores each.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\ntype Memento struct{ lines []string }\n\ntype Editor struct{ lines []string }\n\nfunc (e *Editor) Save() Memento     { return Memento{lines: e.lines} }\nfunc (e *Editor) SaveCopy() Memento { return Memento{lines: append([]string(nil), e.lines...)} }\nfunc (e *Editor) Restore(m Memento) { e.lines = m.lines }\n\nfunc main() {\n\te := &Editor{lines: []string{\"a\", \"b\"}}\n\tshared := e.Save()\n\tcopied := e.SaveCopy()\n\n\te.lines[0] = \"X\"\n\te.lines = append(e.lines, \"c\")\n\n\te.Restore(shared)\n\tfmt.Println(e.lines)\n\te.Restore(copied)\n\tfmt.Println(e.lines)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "[X b]\n[a b]\n",
+      "explanation": "Save keeps the same slice header, so the memento shares the backing array with the editor. Writing \"X\" at index 0 also changes the snapshot. The append exceeds the capacity of 2, so it moves the editor to a new array, which the snapshot never sees. Restoring `shared` therefore gives [X b]: it's corrupted, but it has no \"c\". SaveCopy took its own array, so restoring it gives the original [a b]. A memento must not share mutable state with its originator.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a greeter receives a fake clock through constructor injection.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "code": "var morning = new Greeter(new FakeClock(new DateTime(2024, 1, 1, 9, 0, 0)));\nConsole.WriteLine(morning.Greet(\"Ann\"));\nvar evening = new Greeter(new FakeClock(new DateTime(2024, 1, 1, 20, 30, 0)));\nConsole.WriteLine(evening.Greet(\"Ann\"));\n\ninterface IClock { DateTime Now { get; } }\nclass SystemClock : IClock { public DateTime Now => DateTime.Now; }\nclass FakeClock(DateTime fixedTime) : IClock { public DateTime Now => fixedTime; }\n\nclass Greeter(IClock clock)\n{\n    public string Greet(string name) => clock.Now.Hour switch\n    {\n        < 12 => $\"Good morning, {name}\",\n        < 18 => $\"Good afternoon, {name}\",\n        _ => $\"Good evening, {name}\",\n    };\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "Good morning, Ann\nGood evening, Ann\n",
+      "explanation": "Greeter depends on the IClock abstraction, not on DateTime.Now, so the caller decides which clock it gets. The fake clocks return fixed times, 9:00 and 20:30, which fall into the morning branch and the evening branch. The output is the same on every run. If Greeter had read the system clock itself, its result would change with the time of day and it couldn't be tested.",
+      "materials": [
+        "fowler-di"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a generator object and an iterable object are each spread twice.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "function* ids() {\n  yield 1;\n  yield 2;\n  yield 3;\n}\n\nconst it = ids();\nconsole.log([...it].length);\nconsole.log([...it].length);\n\nconst iterable = { *[Symbol.iterator]() { yield* ids(); } };\nconsole.log([...iterable].length, [...iterable].length);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "3\n0\n3 3\n",
+      "explanation": "A generator object is its own iterator and can only be used once. The first spread uses up all three values, and the second spread gets a finished iterator, so 0. An iterable whose [Symbol.iterator] is a generator method creates a new iterator every time it is spread, so both spreads see 3 values. Hand out iterables, not iterators, when callers may loop more than once.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a lookup that finds no logger returns a typed nil pointer through an interface.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\ntype Logger interface{ Log(string) }\n\ntype FileLogger struct{ path string }\n\nfunc (f *FileLogger) Log(m string) {\n\tif f == nil {\n\t\tfmt.Println(\"nil receiver:\", m)\n\t\treturn\n\t}\n\tfmt.Println(f.path, m)\n}\n\nfunc find(name string) *FileLogger { return nil }\n\nfunc logger(name string) Logger { return find(name) }\n\nfunc main() {\n\tl := logger(\"audit\")\n\tif l == nil {\n\t\tfmt.Println(\"no logger\")\n\t} else {\n\t\tfmt.Println(\"got logger\")\n\t}\n\tl.Log(\"hi\")\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "got logger\nnil receiver: hi\n",
+      "explanation": "An interface value is nil only if both its dynamic type and its value are nil. logger returns a Logger holding the type *FileLogger with a nil pointer, so `l == nil` is false and it prints \"got logger\". Calling a method on a nil pointer is allowed in Go, and Log checks for nil itself, so it prints \"nil receiver: hi\" without panicking. A nil-safe method like this is a cheap Null Object, but the interface comparison won't tell you it's nil.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a service falls back to a Null Object logger when none is injected.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "code": "var quiet = new OrderService();\nvar loud = new OrderService(new ConsoleLogger());\nConsole.WriteLine(quiet.Place(\"pen\"));\nConsole.WriteLine(loud.Place(\"ink\"));\n\ninterface ILogger { void Log(string message); }\nclass NullLogger : ILogger\n{\n    public static readonly NullLogger Instance = new();\n    public void Log(string message) { }\n}\nclass ConsoleLogger : ILogger { public void Log(string message) => Console.WriteLine(\"LOG \" + message); }\n\nclass OrderService(ILogger? logger = null)\n{\n    private readonly ILogger _log = logger ?? NullLogger.Instance;\n    public string Place(string item)\n    {\n        _log.Log($\"placing {item}\");\n        return $\"ok {item}\";\n    }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "ok pen\nLOG placing ink\nok ink\n",
+      "explanation": "The first service gets no logger, so it uses NullLogger, whose Log does nothing. Only \"ok pen\" is printed. The second service logs through ConsoleLogger before returning, so \"LOG placing ink\" comes before \"ok ink\". Because of the Null Object, Place never has to check whether the logger is null.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a CQRS read-model projection consumes an event stream that contains a redelivered event.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "code": "const events = [\n  { type: \"OrderPlaced\", id: 1, total: 30 },\n  { type: \"OrderPlaced\", id: 2, total: 50 },\n  { type: \"OrderCancelled\", id: 1 },\n  { type: \"OrderPlaced\", id: 3, total: 20 },\n  { type: \"OrderPlaced\", id: 2, total: 50 }, // redelivered\n];\n\nconst view = { open: new Map(), revenue: 0 };\nfor (const e of events) {\n  if (e.type === \"OrderPlaced\" && !view.open.has(e.id)) {\n    view.open.set(e.id, e.total);\n    view.revenue += e.total;\n  }\n  if (e.type === \"OrderCancelled\") {\n    view.revenue -= view.open.get(e.id);\n    view.open.delete(e.id);\n  }\n}\nconsole.log(view.open.size, view.revenue);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "2 70\n",
+      "explanation": "The projection turns events into a read model that is cheap to query. Orders 1 and 2 add 30 and 50. Cancelling order 1 takes back 30 and removes it. Order 3 adds 20. The redelivered OrderPlaced for order 2 is ignored because the projection already has that id, which makes it idempotent for this duplicate. Orders 2 and 3 remain open, and revenue is 30 + 50 - 30 + 20 = 70.",
+      "materials": [
+        "fowler-cqrs",
+        "micro-cqrs"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an event-sourced account is rebuilt from its events up to version 2 and then from all of them.",
+      "tags": [
+        "Design Principles & Patterns",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\ntype Event struct {\n\tKind   string\n\tAmount int\n}\n\nfunc replay(events []Event) int {\n\tbalance := 0\n\tfor _, e := range events {\n\t\tswitch e.Kind {\n\t\tcase \"deposited\":\n\t\t\tbalance += e.Amount\n\t\tcase \"withdrawn\":\n\t\t\tbalance -= e.Amount\n\t\tcase \"interest\":\n\t\t\tbalance += balance * e.Amount / 100\n\t\t}\n\t}\n\treturn balance\n}\n\nfunc main() {\n\tevents := []Event{\n\t\t{\"deposited\", 100},\n\t\t{\"interest\", 10},\n\t\t{\"withdrawn\", 30},\n\t\t{\"interest\", 10},\n\t}\n\tfmt.Println(replay(events[:2]))\n\tfmt.Println(replay(events))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "110\n88\n",
+      "explanation": "The current state isn't stored. It is computed by folding over the events in order. Replaying only the first two events (a temporal query as of version 2) gives 100, plus 10% interest = 110. Replaying all of them: 110 - 30 = 80, then 10% interest gives 88. Interest depends on the balance at that moment, so the order of events matters. That is why an event store keeps events strictly ordered within a stream.",
+      "materials": [
+        "fowler-es",
+        "ms-es"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an Adapter exposes a Fahrenheit sensor through a Celsius interface.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "code": "var legacy = new FahrenheitSensor { Value = 212 };\nICelsiusSensor sensor = new SensorAdapter(legacy);\nConsole.WriteLine(sensor.ReadCelsius());\nlegacy.Value = 50;\nConsole.WriteLine(sensor.ReadCelsius());\n\ninterface ICelsiusSensor { double ReadCelsius(); }\nclass FahrenheitSensor { public double Value { get; set; } }\nclass SensorAdapter(FahrenheitSensor adaptee) : ICelsiusSensor\n{\n    public double ReadCelsius() => (adaptee.Value - 32) * 5 / 9;\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "100\n10\n",
+      "explanation": "The adapter implements the interface the client expects and converts each call to the old API. It keeps a reference to the sensor instead of copying the reading, so every call sees the current value. 212F is (212 - 32) * 5 / 9 = 100, and after the sensor changes to 50F the next read gives (50 - 32) * 5 / 9 = 10.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a counting subclass overrides both add and addAll of its base list.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "code": "class List {\n  items = [];\n  add(x) { this.items.push(x); }\n  addAll(xs) { for (const x of xs) this.add(x); }\n}\n\nclass CountingList extends List {\n  added = 0;\n  add(x) { this.added++; super.add(x); }\n  addAll(xs) { this.added += xs.length; super.addAll(xs); }\n}\n\nconst list = new CountingList();\nlist.addAll([\"a\", \"b\", \"c\"]);\nconsole.log(list.added, list.items.length);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "6 3\n",
+      "explanation": "CountingList.addAll adds 3 and then calls the base addAll. The base addAll calls this.add for each item, which dispatches to the overriding CountingList.add, and that adds 1 three more times. Only 3 items were stored, but the count is 6. This is the fragile base class problem: the subclass depends on an implementation detail of the base (addAll calls add). Wrapping a list (composition) avoids it.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a Template Method in Go takes its steps and a hook through an interface.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\ntype Steps interface {\n\tBoil() string\n\tBrew() string\n\tWantsExtras() bool\n\tExtras() string\n}\n\nfunc Prepare(s Steps) string {\n\tout := []string{s.Boil(), s.Brew(), \"pour\"}\n\tif s.WantsExtras() {\n\t\tout = append(out, s.Extras())\n\t}\n\treturn strings.Join(out, \" > \")\n}\n\ntype defaults struct{}\n\nfunc (defaults) Boil() string      { return \"boil\" }\nfunc (defaults) WantsExtras() bool { return true }\nfunc (defaults) Extras() string    { return \"nothing\" }\n\ntype Tea struct{ defaults }\n\nfunc (Tea) Brew() string      { return \"steep\" }\nfunc (Tea) WantsExtras() bool { return false }\n\ntype Coffee struct{ defaults }\n\nfunc (Coffee) Brew() string   { return \"drip\" }\nfunc (Coffee) Extras() string { return \"milk\" }\n\nfunc main() {\n\tfmt.Println(Prepare(Tea{}))\n\tfmt.Println(Prepare(Coffee{}))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "boil > steep > pour\nboil > drip > pour > milk\n",
+      "explanation": "Prepare is the fixed algorithm: boil, brew, pour, then extras if the WantsExtras hook says yes. The embedded defaults provide Boil and the default hooks, and each type adds or shadows methods. Tea shadows WantsExtras to return false, so it stops after pour. Coffee keeps WantsExtras = true and shadows Extras, so \"milk\" is added. This works because Prepare calls through the interface on the outer value, so the shadowing methods are the ones chosen.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: shapes and renderers are combined through a Bridge.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "var shapes = new Shape[]\n{\n    new Circle(new Svg(), 2),\n    new Circle(new Ascii(), 2),\n    new Box(new Svg(), 3),\n    new Box(new Ascii(), 3),\n};\nforeach (var s in shapes) Console.WriteLine(s.Draw());\n\ninterface IRenderer { string Circle(int r); string Box(int w); }\nclass Svg : IRenderer\n{\n    public string Circle(int r) => $\"<circle r={r}/>\";\n    public string Box(int w) => $\"<rect w={w}/>\";\n}\nclass Ascii : IRenderer\n{\n    public string Circle(int r) => $\"O{r}\";\n    public string Box(int w) => new string('#', w);\n}\nabstract class Shape(IRenderer renderer)\n{\n    protected IRenderer Renderer => renderer;\n    public abstract string Draw();\n}\nclass Circle(IRenderer r, int radius) : Shape(r) { public override string Draw() => Renderer.Circle(radius); }\nclass Box(IRenderer r, int width) : Shape(r) { public override string Draw() => Renderer.Box(width); }\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "<circle r=2/>\nO2\n<rect w=3/>\n###\n",
+      "explanation": "The shape hierarchy (Circle, Box) and the renderer hierarchy (Svg, Ascii) vary on their own. Each shape holds a renderer and passes the drawing to it. Two shapes times two renderers gives four combinations from four classes instead of four subclasses such as SvgCircle and AsciiBox. Each line is the given renderer's version of the given shape: an SVG circle, \"O2\", an SVG rect, and three '#' characters.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a total-area function relies on polymorphism, and one new shape forgets to override area.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "code": "class Shape { area() { return 0; } }\nclass Rect extends Shape {\n  constructor(w, h) { super(); this.w = w; this.h = h; }\n  area() { return this.w * this.h; }\n}\nclass Circle extends Shape {\n  constructor(r) { super(); this.r = r; }\n  area() { return 3 * this.r ** 2; }\n}\nclass Triangle extends Shape {\n  constructor(b, h) { super(); this.b = b; this.h = h; }\n}\n\nconst total = (shapes) => shapes.reduce((sum, s) => sum + s.area(), 0);\nconsole.log(total([new Rect(2, 3), new Circle(2)]));\nconsole.log(total([new Rect(2, 3), new Circle(2), new Triangle(4, 5)]));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "18\n18\n",
+      "explanation": "`total` is closed for modification and open for extension: new shapes plug in without touching it. Rect gives 6 and Circle gives 3 * 4 = 12, so the total is 18. Triangle was added without an area override, so it inherits Shape's default of 0 and the total stays 18. Extending through polymorphism only works if each new type actually fulfils the contract; an abstract method (or a throwing default) would catch this.",
+      "materials": [
+        "cleancoder-ocp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a home-theater Facade drives several subsystems with two calls.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\ntype Lights struct{}\ntype Projector struct{}\ntype Amp struct{}\n\nfunc (Lights) Dim(pct int)   { fmt.Printf(\"lights %d%%\\n\", pct) }\nfunc (Projector) On()        { fmt.Println(\"projector on\") }\nfunc (Projector) Off()       { fmt.Println(\"projector off\") }\nfunc (Amp) Volume(level int) { fmt.Println(\"volume\", level) }\n\ntype HomeTheater struct {\n\tlights    Lights\n\tprojector Projector\n\tamp       Amp\n}\n\nfunc (h HomeTheater) Watch(movie string) {\n\th.lights.Dim(10)\n\th.projector.On()\n\th.amp.Volume(5)\n\tfmt.Println(\"playing\", movie)\n}\n\nfunc (h HomeTheater) End() {\n\th.projector.Off()\n\th.lights.Dim(100)\n}\n\nfunc main() {\n\tht := HomeTheater{}\n\tht.Watch(\"Up\")\n\tht.End()\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "lights 10%\nprojector on\nvolume 5\nplaying Up\nprojector off\nlights 100%\n",
+      "explanation": "The client makes only two calls. Watch runs the subsystem steps in a fixed order (dim the lights, turn on the projector, set the volume) and then plays. End turns off the projector and brings the lights back to full. In Printf, %% prints a literal percent sign. The facade hides the order and the details of the subsystems behind a simple interface.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an iterator method with yield return is created, counted and then asked for its first element.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "var evens = Evens(6);\nConsole.WriteLine(\"created\");\nConsole.WriteLine(evens.Count());\nConsole.WriteLine(evens.First());\n\nstatic IEnumerable<int> Evens(int max)\n{\n    Console.WriteLine(\"start\");\n    for (int i = 0; i <= max; i += 2) yield return i;\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "created\nstart\n4\nstart\n0\n",
+      "explanation": "An iterator method doesn't run when you call it; it returns an object, and the body only starts running when something enumerates that object. So \"created\" prints first. Count() enumerates it once, printing \"start\" and counting 0, 2, 4, 6 = 4. First() starts a brand-new enumeration, so \"start\" prints again, and it stops after the first value, 0. Enumerating a lazy sequence again runs the iterator body again.",
+      "materials": [
+        "rg-catalog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: behaviour is composed from mixin objects with Object.assign.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "const canFly = { move() { return \"fly\"; }, wings: 2 };\nconst canSwim = { move() { return \"swim\"; } };\n\nconst duck = Object.assign({}, canFly, canSwim);\nconst penguin = Object.assign({}, canSwim, canFly, { move() { return \"waddle\"; }, wings: 0 });\n\nconsole.log(duck.move(), duck.wings);\nconsole.log(penguin.move(), penguin.wings);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "swim 2\nwaddle 0\n",
+      "explanation": "Object.assign copies the sources from left to right, so a later source overwrites an earlier one with the same key. The duck gets wings from canFly, but its `move` is overwritten by canSwim, giving \"swim\". The penguin's last source overrides both `move` and `wings`, so it gets \"waddle\" and 0. When you compose with mixins, the order of the sources decides which one wins a conflict.",
+      "materials": [
+        "rg-catalog"
+      ]
+    }
+  ]
+}
