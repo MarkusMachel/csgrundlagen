@@ -71,6 +71,11 @@ func New(st *store.Store, log *slog.Logger, opts Options) http.Handler {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("GET /healthz", s.health)
+	// pages for search engines and link previews (see seo.go)
+	mux.HandleFunc("GET /api/seo/head", s.seoHead)
+	mux.HandleFunc("GET /api/seo/body", s.seoBody)
+	mux.HandleFunc("GET /api/seo/sitemap.xml", s.sitemap)
+	mux.HandleFunc("GET /api/seo/robots.txt", s.robots)
 
 	mux.HandleFunc("POST /api/auth/login", s.limited(s.login))
 	mux.HandleFunc("POST /api/auth/signup", s.limited(s.signup))
@@ -251,28 +256,35 @@ func NewCache() *cache.Cache { return cache.New(32<<20, 5*time.Minute) }
 // per-user data) and depend on nothing but key: question content, which the
 // write handlers clear with contentChanged.
 func (s *Server) cachedJSON(w http.ResponseWriter, r *http.Request, key string, build func() (any, error)) {
+	s.cachedPage(w, r, key, "application/json", func() ([]byte, error) {
+		v, err := build()
+		if err != nil {
+			return nil, err
+		}
+		body, err := json.Marshal(v)
+		// the same bytes writeJSON's encoder writes
+		return append(body, '\n'), err
+	})
+}
+
+// cachedPage is cachedJSON for any content type.
+func (s *Server) cachedPage(w http.ResponseWriter, r *http.Request, key, contentType string, build func() ([]byte, error)) {
 	if body, ok := s.cache.Get(key); ok {
-		writeRaw(w, body, "hit")
+		writeRaw(w, body, contentType, "hit")
 		return
 	}
 	gen := s.cache.Generation()
-	v, err := build()
+	body, err := build()
 	if err != nil {
 		s.fail(w, r, err)
 		return
 	}
-	body, err := json.Marshal(v)
-	if err != nil {
-		s.fail(w, r, err)
-		return
-	}
-	body = append(body, '\n') // the same bytes writeJSON's encoder writes
 	s.cache.SetIfCurrent(gen, key, body)
-	writeRaw(w, body, "miss")
+	writeRaw(w, body, contentType, "miss")
 }
 
-func writeRaw(w http.ResponseWriter, body []byte, cacheStatus string) {
-	w.Header().Set("Content-Type", "application/json")
+func writeRaw(w http.ResponseWriter, body []byte, contentType, cacheStatus string) {
+	w.Header().Set("Content-Type", contentType)
 	w.Header().Set("X-Cache", cacheStatus)
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write(body)

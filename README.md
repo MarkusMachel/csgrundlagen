@@ -115,6 +115,18 @@ internal/store   domain models and every SQL query
 internal/httpapi routes, auth middleware, handlers, integration tests
 ```
 
+- **Search engines and link previews**: the app is a single-page app, so nginx
+  fills each page in on the server. `index.html` carries server-side include
+  markers; nginx (`ssi on`, see `apps/web/nginx.conf`) inserts
+  `/api/seo/head` (title, description, canonical URL, Open Graph/Twitter tags,
+  JSON-LD) and `/api/seo/body` (the page as plain HTML) for `/`, `/questions/{id}`,
+  `/design`, `/design/{id}` and `/materials`. The React app replaces the plain
+  HTML when it starts. Question pages show only what the app shows before
+  answering (no answers or explanations; ordering options sorted A–Z), private
+  pages get `noindex`, `/sitemap.xml` lists every question and challenge, and
+  `/robots.txt` keeps private pages out. If the API is down, the default title
+  from `index.html` is used. Canonical URLs use `APP_BASE_URL`, so set it to the
+  public origin in production. The Vite dev server shows the defaults.
 - **Response cache**: public question responses (`GET /api/questions` without a
   personal `status` filter, `/questions/{id}`, `/questions/daily`, `/tags`) are
   kept in memory (`internal/cache`: 32 MB, 5 minutes, least recently used out

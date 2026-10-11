@@ -2,7 +2,20 @@
 import path from 'node:path';
 
 import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
+
+/**
+ * index.html carries nginx server-side include markers (per-page SEO tags,
+ * see nginx.conf). The dev server doesn't run them, so there it shows the
+ * fallback block as plain HTML; the build keeps the markers for nginx.
+ */
+function ssiFallbacksInDev(): Plugin {
+  return {
+    name: 'ssi-fallbacks-in-dev',
+    apply: 'serve',
+    transformIndexHtml: (html) => html.replace(/<!--#[^>]*-->/g, ''),
+  };
+}
 
 // Where /api goes when mocks are off. The Go API listens on :8080 by default.
 const apiProxy = {
@@ -10,7 +23,7 @@ const apiProxy = {
 };
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), ssiFallbacksInDev()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),

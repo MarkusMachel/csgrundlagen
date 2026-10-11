@@ -3,12 +3,14 @@ import { Navigate, useParams } from 'react-router-dom';
 
 import { DesignChallenge } from '@/features/design';
 import { useQuestion } from '@/features/questions';
+import { promptTitle, useDocumentTitle } from '@/shared/hooks/useDocumentTitle';
 import { ErrorState, Spinner } from '@/shared/ui';
 
 export function DesignChallengePage() {
   const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const { data, isPending, isError, refetch } = useQuestion(id);
+  useDocumentTitle(data && promptTitle(data.prompt));
   if (isPending) return <Spinner center />;
   if (isError || !data) return <ErrorState onRetry={() => void refetch()} />;
   // other questions open on their own page

@@ -18,6 +18,7 @@ import {
   type MaterialType,
 } from '@/features/materials';
 import { useDebounce } from '@/shared/hooks/useDebounce';
+import { useDocumentTitle } from '@/shared/hooks/useDocumentTitle';
 import { EmptyState, ErrorState, Spinner } from '@/shared/ui';
 
 const typeIcons: Record<MaterialType, LucideIcon> = {
@@ -72,6 +73,7 @@ export function CuratedMaterialPage() {
   const query = useDebounce(search, 150).trim().toLowerCase();
 
   const { data: materials, isPending, isError, refetch } = useMaterials();
+  useDocumentTitle(t('nav.materials'));
 
   // Categories come from the full list, so filtering never moves an entry.
   const categories = useMemo(() => categorize(materials ?? []), [materials]);

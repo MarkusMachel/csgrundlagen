@@ -3,15 +3,61 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      Per-page title, description and preview tags for search engines and link
+      previews: nginx fills these in from the API (server-side includes, see
+      nginx.conf and apps/api/internal/httpapi/seo.go); the block is the
+      fallback when that fails, and what the Vite dev server shows.
+    -->
+    <!--# block name="default_head" -->
     <title>CS Fundamentals Trainer</title>
+    <meta
+      name="description"
+      content="Practise computer science fundamentals with interview questions, spaced repetition, timed tests and system design challenges you draw and get checked."
+    />
+    <!--# endblock -->
+    <!--# include virtual="/api/seo/head?path=$seo_path" stub="default_head" -->
     <meta name="theme-color" content="#0e0e10" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
     <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <style>
+      /* the page as plain HTML, shown until the app loads (and to crawlers) */
+      .seo-fallback {
+        max-width: 860px;
+        margin: 40px auto;
+        padding: 0 16px;
+        font: 15px/1.6 ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+        color: #1f2430;
+      }
+      .seo-fallback a {
+        color: #2f5fd0;
+      }
+      .seo-fallback pre {
+        overflow-x: auto;
+        padding: 12px;
+        background: #f6f8fa;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #0e0e10;
+        }
+        .seo-fallback {
+          color: #e8e8ec;
+        }
+        .seo-fallback a {
+          color: #6ea8fe;
+        }
+        .seo-fallback pre {
+          background: #17171b;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <!-- the app replaces the page content inserted here once it starts -->
+    <div id="root"><!--# block name="empty" --><!--# endblock --><!--# include virtual="/api/seo/body?path=$seo_path" stub="empty" --></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
