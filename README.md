@@ -46,6 +46,7 @@ npm run up           # builds and starts db, api (:8080) and web (localhost:3000
 docker compose exec api adduser -email you@example.com -name "You" -role admin -password '…'
 docker compose exec api seed -file seeds/dotnet-interview.json   # optional question banks
 docker compose exec api seed -file seeds/system-design.json      # the system design challenges
+docker compose exec api seed -file seeds/javascript-big-o.json    # Big O of JavaScript snippets
 ```
 
 nginx serves the production build and proxies `/api` to the api container, so the

@@ -1,0 +1,1042 @@
+{
+  "name": "JavaScript Big O: time and space complexity of code snippets",
+  "materials": [
+    {
+      "key": "bigo-cheatsheet",
+      "type": "link",
+      "title": "Big-O Cheat Sheet",
+      "url": "https://www.bigocheatsheet.com/",
+      "author": "Eric Rowell",
+      "description": "Time and space complexity of common data structures and sorting algorithms."
+    },
+    {
+      "key": "jsi-recursion",
+      "type": "article",
+      "title": "javascript.info: Recursion and stack",
+      "url": "https://javascript.info/recursion",
+      "author": "javascript.info",
+      "description": "How recursive calls use the call stack, with memory costs."
+    },
+    {
+      "key": "mdn-sort",
+      "type": "article",
+      "title": "Array.prototype.sort()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort",
+      "author": "MDN Web Docs",
+      "description": "How sort compares elements; engines use O(n log n) algorithms such as TimSort."
+    },
+    {
+      "key": "mdn-set",
+      "type": "article",
+      "title": "Set",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+      "author": "MDN Web Docs",
+      "description": "Set lookups are sublinear on average, unlike Array.prototype.includes."
+    },
+    {
+      "key": "mdn-map",
+      "type": "article",
+      "title": "Map",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+      "author": "MDN Web Docs",
+      "description": "Keyed collection with fast average-case get and set."
+    },
+    {
+      "key": "khan-binary-search",
+      "type": "article",
+      "title": "Running time of binary search",
+      "url": "https://www.khanacademy.org/computing/computer-science/algorithms/binary-search/a/running-time-of-binary-search",
+      "author": "Khan Academy",
+      "description": "Why halving the range gives logarithmic time."
+    },
+    {
+      "key": "khan-merge-sort",
+      "type": "article",
+      "title": "Analysis of merge sort",
+      "url": "https://www.khanacademy.org/computing/computer-science/algorithms/merge-sort/a/analysis-of-merge-sort",
+      "author": "Khan Academy",
+      "description": "Where the n log n comes from, level by level."
+    }
+  ],
+  "questions": [
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction sum(arr) {\n  let total = 0;\n  for (let i = 0; i < arr.length; i++) {\n    total += arr[i];\n  }\n  return total;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(n²)"
+      ],
+      "correct": 2,
+      "explanation": "One pass over the array doing constant work per element: n iterations, so O(n).",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction first(arr) {\n  return arr[0];\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(n log n)"
+      ],
+      "correct": 0,
+      "explanation": "Reading an array element by index takes the same time whatever the array's length: O(1).",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction printPairs(arr) {\n  for (let i = 0; i < arr.length; i++) {\n    for (let j = 0; j < arr.length; j++) {\n      console.log(arr[i], arr[j]);\n    }\n  }\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(n)",
+        "O(n log n)",
+        "O(n²)",
+        "O(2ⁿ)"
+      ],
+      "correct": 2,
+      "explanation": "For each of the n values of i the inner loop runs n times: n · n = n² iterations.",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction hasDuplicate(arr) {\n  for (let i = 0; i < arr.length; i++) {\n    for (let j = i + 1; j < arr.length; j++) {\n      if (arr[i] === arr[j]) return true;\n    }\n  }\n  return false;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(n)",
+        "O(n log n)",
+        "O(n²)",
+        "O(n³)"
+      ],
+      "correct": 2,
+      "explanation": "The inner loop runs n-1, n-2, …, 1 times: n(n-1)/2 comparisons in the worst case (no duplicate). Halving n² doesn't change the growth rate, so it is still O(n²).",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction binarySearch(sorted, target) {\n  let lo = 0;\n  let hi = sorted.length - 1;\n  while (lo <= hi) {\n    const mid = Math.floor((lo + hi) / 2);\n    if (sorted[mid] === target) return mid;\n    if (sorted[mid] < target) lo = mid + 1;\n    else hi = mid - 1;\n  }\n  return -1;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(n log n)"
+      ],
+      "correct": 1,
+      "explanation": "Each iteration halves the remaining range, so it takes about log₂ n iterations to shrink n elements to one.",
+      "materials": [
+        "khan-binary-search",
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction halvings(n) {\n  let steps = 0;\n  while (n > 1) {\n    n = Math.floor(n / 2);\n    steps++;\n  }\n  return steps;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(√n)",
+        "O(n)"
+      ],
+      "correct": 1,
+      "explanation": "n is halved on every iteration, so the loop runs about log₂ n times.",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction work(n) {\n  let count = 0;\n  for (let i = 1; i < n; i *= 2) {\n    for (let j = 0; j < n; j++) {\n      count++;\n    }\n  }\n  return count;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(n)",
+        "O(log n)",
+        "O(n log n)",
+        "O(n²)"
+      ],
+      "correct": 2,
+      "explanation": "The outer loop doubles i, so it runs about log₂ n times; the inner loop always runs n times. n · log n.",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction sortNumbers(arr) {\n  return arr.sort((a, b) => a - b);\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(n)",
+        "O(n log n)",
+        "O(n²)",
+        "O(log n)"
+      ],
+      "correct": 1,
+      "explanation": "JavaScript engines implement sort with comparison sorts such as TimSort, which take O(n log n) comparisons.",
+      "materials": [
+        "mdn-sort",
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction fib(n) {\n  if (n < 2) return n;\n  return fib(n - 1) + fib(n - 2);\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(n)",
+        "O(n²)",
+        "O(2ⁿ)",
+        "O(n log n)"
+      ],
+      "correct": 2,
+      "explanation": "Every call makes two more calls, and the same values are recomputed over and over. The call tree has roughly 2ⁿ nodes (more precisely about 1.6ⁿ, which is still exponential and usually written O(2ⁿ)).",
+      "materials": [
+        "jsi-recursion",
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction fib(n, memo = new Map()) {\n  if (n < 2) return n;\n  if (memo.has(n)) return memo.get(n);\n  const value = fib(n - 1, memo) + fib(n - 2, memo);\n  memo.set(n, value);\n  return value;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(2ⁿ)"
+      ],
+      "correct": 2,
+      "explanation": "Each value from 2 to n is computed once and then read from the memo, so there are O(n) calls doing constant work each.",
+      "materials": [
+        "jsi-recursion",
+        "mdn-map"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code? (n is the length of a, m the length of b.)\n\n```js\nfunction logBoth(a, b) {\n  for (const x of a) console.log(x);\n  for (const y of b) console.log(y);\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(n · m)",
+        "O(n + m)",
+        "O(n²)",
+        "O(max(n, m)²)"
+      ],
+      "correct": 1,
+      "explanation": "Two loops one after the other: n iterations over a, then m over b. Sequential steps add: O(n + m).",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code? (n is the length of a, m the length of b.)\n\n```js\nfunction allPairs(a, b) {\n  for (const x of a) {\n    for (const y of b) {\n      console.log(x, y);\n    }\n  }\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(n + m)",
+        "O(n · m)",
+        "O(n²)",
+        "O(m log n)"
+      ],
+      "correct": 1,
+      "explanation": "Nested loops multiply: for each of the n elements of a, all m elements of b. Only when both have the same length does it become O(n²).",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code? (Both arrays have about n elements.)\n\n```js\nfunction common(a, b) {\n  const result = [];\n  for (const x of a) {\n    if (b.includes(x)) result.push(x);\n  }\n  return result;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(n)",
+        "O(n log n)",
+        "O(n²)",
+        "O(1)"
+      ],
+      "correct": 2,
+      "explanation": "includes scans the array linearly. Called once per element of a, that's n · n work when both arrays have about n elements. Turning b into a Set first brings it down to O(n).",
+      "materials": [
+        "mdn-set",
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code? (Both arrays have about n elements.)\n\n```js\nfunction common(a, b) {\n  const seen = new Set(b);\n  return a.filter((x) => seen.has(x));\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(n)",
+        "O(n log n)",
+        "O(n²)",
+        "O(log n)"
+      ],
+      "correct": 0,
+      "explanation": "Building the Set is O(n) and each has() is O(1) on average, so the filter is O(n) as well. O(n) + O(n) = O(n).",
+      "materials": [
+        "mdn-set"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction unique(arr) {\n  return arr.filter((x, i) => arr.indexOf(x) === i);\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(n)",
+        "O(n log n)",
+        "O(n²)",
+        "O(2ⁿ)"
+      ],
+      "correct": 2,
+      "explanation": "indexOf searches from the start of the array each time, up to n steps, and it runs for every element: O(n²). `[...new Set(arr)]` does the same job in O(n).",
+      "materials": [
+        "mdn-set",
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction countSquares(n) {\n  let count = 0;\n  for (let i = 1; i * i <= n; i++) {\n    count++;\n  }\n  return count;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(log n)",
+        "O(√n)",
+        "O(n)",
+        "O(n²)"
+      ],
+      "correct": 1,
+      "explanation": "The loop stops once i² passes n, that is after about √n iterations.",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction triples(arr) {\n  const n = arr.length;\n  let count = 0;\n  for (let i = 0; i < n; i++)\n    for (let j = 0; j < n; j++)\n      for (let k = 0; k < n; k++)\n        if (arr[i] + arr[j] + arr[k] === 0) count++;\n  return count;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(n²)",
+        "O(n³)",
+        "O(n log n)",
+        "O(3ⁿ)"
+      ],
+      "correct": 1,
+      "explanation": "Three nested loops of n iterations each: n · n · n = n³.",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction printWithDigits(arr) {\n  for (let i = 0; i < arr.length; i++) {\n    for (let d = 0; d < 10; d++) {\n      console.log(arr[i], d);\n    }\n  }\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(1)",
+        "O(n)",
+        "O(n²)",
+        "O(n log n)"
+      ],
+      "correct": 1,
+      "explanation": "The inner loop always runs 10 times, whatever the input. 10n iterations is O(n): a nested loop only makes it quadratic when the inner bound grows with n.",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction mergeSort(arr) {\n  if (arr.length <= 1) return arr;\n  const mid = Math.floor(arr.length / 2);\n  const left = mergeSort(arr.slice(0, mid));\n  const right = mergeSort(arr.slice(mid));\n  const out = [];\n  let i = 0, j = 0;\n  while (i < left.length && j < right.length) {\n    out.push(left[i] <= right[j] ? left[i++] : right[j++]);\n  }\n  return out.concat(left.slice(i), right.slice(j));\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(n)",
+        "O(n log n)",
+        "O(n²)",
+        "O(log n)"
+      ],
+      "correct": 1,
+      "explanation": "The array is halved log₂ n times, and at each level of the recursion the merges together touch all n elements: O(n) per level × log n levels.",
+      "materials": [
+        "khan-merge-sort",
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction sum(arr) {\n  if (arr.length === 0) return 0;\n  return arr[0] + sum(arr.slice(1));\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "O(n)",
+        "O(n log n)",
+        "O(n²)",
+        "O(2ⁿ)"
+      ],
+      "correct": 2,
+      "explanation": "There are n calls, but each one copies the rest of the array with slice: n-1, n-2, … elements. That adds up to about n²/2 copied elements. Passing an index instead of slicing makes it O(n).",
+      "materials": [
+        "jsi-recursion"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code? (n is exp.)\n\n```js\nfunction power(base, exp) {\n  if (exp === 0) return 1;\n  const half = power(base, Math.floor(exp / 2));\n  return exp % 2 === 0 ? half * half : half * half * base;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(√n)"
+      ],
+      "correct": 1,
+      "explanation": "Each call halves the exponent and calls itself once (the result is reused for both factors), so there are about log₂ n calls.",
+      "materials": [
+        "jsi-recursion"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction isPrime(n) {\n  if (n < 2) return false;\n  for (let d = 2; d * d <= n; d++) {\n    if (n % d === 0) return false;\n  }\n  return true;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(log n)",
+        "O(√n)",
+        "O(n)",
+        "O(n log n)"
+      ],
+      "correct": 1,
+      "explanation": "Any factor above √n pairs with one below it, so trying divisors up to √n is enough: about √n iterations when n is prime.",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code? (grid is n × n.)\n\n```js\nfunction flatten(grid) {\n  const out = [];\n  for (const row of grid) {\n    for (const cell of row) out.push(cell);\n  }\n  return out;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(n)",
+        "O(n²)",
+        "O(n log n)",
+        "O(2n)"
+      ],
+      "correct": 1,
+      "explanation": "Every one of the n × n cells is visited once: n² iterations.",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction isPalindrome(s) {\n  let i = 0;\n  let j = s.length - 1;\n  while (i < j) {\n    if (s[i] !== s[j]) return false;\n    i++;\n    j--;\n  }\n  return true;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(n²)"
+      ],
+      "correct": 2,
+      "explanation": "The two pointers meet in the middle after n/2 steps: O(n).",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction counts(words) {\n  const freq = new Map();\n  for (const w of words) {\n    freq.set(w, (freq.get(w) ?? 0) + 1);\n  }\n  return freq;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(1)",
+        "O(n)",
+        "O(n log n)",
+        "O(n²)"
+      ],
+      "correct": 1,
+      "explanation": "One pass, and Map get/set are O(1) on average: O(n) overall.",
+      "materials": [
+        "mdn-map"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction work(n) {\n  let count = 0;\n  for (let i = 1; i < n; i *= 2) {\n    for (let j = 0; j < i; j++) {\n      count++;\n    }\n  }\n  return count;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "O(log n)",
+        "O(n)",
+        "O(n log n)",
+        "O(n²)"
+      ],
+      "correct": 1,
+      "explanation": "The inner loop runs 1 + 2 + 4 + … + (largest power of 2 below n) times. That geometric series is less than 2n, so the total is O(n), not O(n log n).",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code? (n is the smaller of a and b.)\n\n```js\nfunction gcd(a, b) {\n  while (b !== 0) {\n    [a, b] = [b, a % b];\n  }\n  return a;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(√n)",
+        "O(n)"
+      ],
+      "correct": 1,
+      "explanation": "Euclid's algorithm: every two steps the remainder at least halves, so the number of steps is logarithmic in the smaller number.",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code? (A and B are n × n.)\n\n```js\nfunction multiply(A, B) {\n  const n = A.length;\n  const C = Array.from({ length: n }, () => new Array(n).fill(0));\n  for (let i = 0; i < n; i++)\n    for (let j = 0; j < n; j++)\n      for (let k = 0; k < n; k++)\n        C[i][j] += A[i][k] * B[k][j];\n  return C;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(n²)",
+        "O(n³)",
+        "O(n² log n)",
+        "O(2ⁿ)"
+      ],
+      "correct": 1,
+      "explanation": "n² result cells, each a sum of n products: n³ multiplications.",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction subsets(arr, i = 0) {\n  if (i === arr.length) return 1;\n  return subsets(arr, i + 1) + subsets(arr, i + 1);\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "O(n)",
+        "O(n²)",
+        "O(2ⁿ)",
+        "O(n!)"
+      ],
+      "correct": 2,
+      "explanation": "Each call branches into two calls until depth n (skip the element or take it), so the call tree has 2ⁿ leaves and about 2ⁿ⁺¹ calls in total.",
+      "materials": [
+        "jsi-recursion"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction permutations(arr) {\n  if (arr.length <= 1) return 1;\n  let count = 0;\n  for (let i = 0; i < arr.length; i++) {\n    count += permutations([...arr.slice(0, i), ...arr.slice(i + 1)]);\n  }\n  return count;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "O(2ⁿ)",
+        "O(n!)",
+        "O(n · n!)",
+        "O(n²)"
+      ],
+      "correct": 2,
+      "explanation": "A call on k elements makes k calls on k-1 elements, so there are about n! calls at the bottom and fewer above. Each call also copies its array (O(n) work), which gives O(n · n!).",
+      "materials": [
+        "jsi-recursion"
+      ]
+    },
+    {
+      "prompt": "What is the time complexity of this code?\n\n```js\nfunction maxProfit(prices) {\n  let min = Infinity;\n  let best = 0;\n  for (const p of prices) {\n    min = Math.min(min, p);\n    best = Math.max(best, p - min);\n  }\n  return best;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(1)",
+        "O(n)",
+        "O(n log n)",
+        "O(n²)"
+      ],
+      "correct": 1,
+      "explanation": "A single pass that keeps the lowest price so far. Trying every buy/sell pair would be O(n²); this is O(n).",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input.\n\n```js\nfunction sum(arr) {\n  let total = 0;\n  for (const x of arr) total += x;\n  return total;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(n²)"
+      ],
+      "correct": 0,
+      "explanation": "Only a fixed number of variables, however long the array: O(1) extra space.",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input.\n\n```js\nfunction doubled(arr) {\n  return arr.map((x) => x * 2);\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(n²)"
+      ],
+      "correct": 2,
+      "explanation": "map builds a new array of n elements, and the returned value counts: O(n).",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input.\n\n```js\nfunction factorial(n) {\n  if (n <= 1) return 1;\n  return n * factorial(n - 1);\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(n²)"
+      ],
+      "correct": 2,
+      "explanation": "Each call waits on the next one, so n frames are on the call stack at the deepest point. JavaScript engines don't eliminate tail calls in practice, so this is O(n) stack space.",
+      "materials": [
+        "jsi-recursion"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input.\n\n```js\nfunction binarySearch(sorted, target) {\n  let lo = 0, hi = sorted.length - 1;\n  while (lo <= hi) {\n    const mid = (lo + hi) >> 1;\n    if (sorted[mid] === target) return mid;\n    if (sorted[mid] < target) lo = mid + 1;\n    else hi = mid - 1;\n  }\n  return -1;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(n log n)"
+      ],
+      "correct": 0,
+      "explanation": "The iterative version keeps only three indices: O(1).",
+      "materials": [
+        "khan-binary-search"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input.\n\n```js\nfunction search(sorted, target, lo = 0, hi = sorted.length - 1) {\n  if (lo > hi) return -1;\n  const mid = (lo + hi) >> 1;\n  if (sorted[mid] === target) return mid;\n  return sorted[mid] < target\n    ? search(sorted, target, mid + 1, hi)\n    : search(sorted, target, lo, mid - 1);\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(n log n)"
+      ],
+      "correct": 1,
+      "explanation": "Same steps as the loop, but each halving adds a stack frame: about log₂ n frames at the deepest point.",
+      "materials": [
+        "jsi-recursion",
+        "khan-binary-search"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input.\n\n```js\nfunction grid(n) {\n  return Array.from({ length: n }, () => new Array(n).fill(0));\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(n)",
+        "O(n²)",
+        "O(2n)",
+        "O(n log n)"
+      ],
+      "correct": 1,
+      "explanation": "An n × n grid holds n² cells.",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input.\n\n```js\nfunction fib(n) {\n  if (n < 2) return n;\n  return fib(n - 1) + fib(n - 2);\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "O(1)",
+        "O(n)",
+        "O(2ⁿ)",
+        "O(n²)"
+      ],
+      "correct": 1,
+      "explanation": "The time is exponential, but space only depends on how deep the stack gets. fib(n-2) starts after fib(n-1) has returned, so at most n frames are alive at once: O(n).",
+      "materials": [
+        "jsi-recursion"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input.\n\n```js\nfunction fib(n, memo = new Map()) {\n  if (n < 2) return n;\n  if (memo.has(n)) return memo.get(n);\n  const value = fib(n - 1, memo) + fib(n - 2, memo);\n  memo.set(n, value);\n  return value;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(2ⁿ)"
+      ],
+      "correct": 2,
+      "explanation": "The memo holds up to n entries and the stack is up to n frames deep: O(n) + O(n) = O(n).",
+      "materials": [
+        "jsi-recursion",
+        "mdn-map"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input.\n\n```js\nfunction distinct(arr) {\n  return new Set(arr).size;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(n²)"
+      ],
+      "correct": 2,
+      "explanation": "The Set may hold up to n values (when they are all different), even though only a number is returned.",
+      "materials": [
+        "mdn-set"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input.\n\n```js\nfunction mergeSort(arr) {\n  if (arr.length <= 1) return arr;\n  const mid = Math.floor(arr.length / 2);\n  const left = mergeSort(arr.slice(0, mid));\n  const right = mergeSort(arr.slice(mid));\n  const out = [];\n  let i = 0, j = 0;\n  while (i < left.length && j < right.length) {\n    out.push(left[i] <= right[j] ? left[i++] : right[j++]);\n  }\n  return out.concat(left.slice(i), right.slice(j));\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(n log n)"
+      ],
+      "correct": 2,
+      "explanation": "At any moment the live copies are those along one path of the recursion: n/2 + n/4 + … ≤ n, plus the n-element output, and log n stack frames. That's O(n). Copies from finished calls can be garbage-collected.",
+      "materials": [
+        "khan-merge-sort",
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input.\n\n```js\nfunction reverseInPlace(arr) {\n  for (let i = 0, j = arr.length - 1; i < j; i++, j--) {\n    [arr[i], arr[j]] = [arr[j], arr[i]];\n  }\n  return arr;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(n²)"
+      ],
+      "correct": 0,
+      "explanation": "Elements are swapped inside the input array, and only two indices are kept: O(1) extra space. (The tiny temporary arrays for the swap are constant size.)",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input.\n\n```js\nfunction pairs(arr) {\n  const out = [];\n  for (let i = 0; i < arr.length; i++) {\n    for (let j = i + 1; j < arr.length; j++) {\n      out.push([arr[i], arr[j]]);\n    }\n  }\n  return out;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(1)",
+        "O(n)",
+        "O(n²)",
+        "O(n log n)"
+      ],
+      "correct": 2,
+      "explanation": "The result holds n(n-1)/2 pairs: O(n²).",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input.\n\n```js\nfunction subsets(arr) {\n  let result = [[]];\n  for (const x of arr) {\n    result = result.concat(result.map((s) => [...s, x]));\n  }\n  return result;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "O(2ⁿ)",
+        "O(n · 2ⁿ)",
+        "O(n²)",
+        "O(n!)"
+      ],
+      "correct": 1,
+      "explanation": "There are 2ⁿ subsets and each holds up to n elements (n/2 on average), so the result takes O(n · 2ⁿ) space.",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input. (Ignore the lowercased copy of the word.)\n\n```js\nfunction letterCounts(word) {\n  const counts = new Array(26).fill(0);\n  for (const ch of word.toLowerCase()) {\n    const i = ch.charCodeAt(0) - 97;\n    if (i >= 0 && i < 26) counts[i]++;\n  }\n  return counts;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "O(1)",
+        "O(n)",
+        "O(log n)",
+        "O(26n)"
+      ],
+      "correct": 0,
+      "explanation": "The counts array always has 26 slots, however long the word is: constant space, O(1). (Counting the lowercased copy of the word would make it O(n), which is why the question sets it aside.)",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input.\n\n```js\nfunction sum(arr) {\n  if (arr.length === 0) return 0;\n  return arr[0] + sum(arr.slice(1));\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "O(1)",
+        "O(n)",
+        "O(n log n)",
+        "O(n²)"
+      ],
+      "correct": 3,
+      "explanation": "At the deepest point there are n frames, and each still holds its slice of n-1, n-2, …, 1 elements. Those copies are all alive at once: about n²/2 elements. With an index parameter it's O(n) stack and no copies.",
+      "materials": [
+        "jsi-recursion"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input.\n\n```js\nfunction repeatChar(ch, n) {\n  const parts = [];\n  for (let i = 0; i < n; i++) parts.push(ch);\n  return parts.join(\"\");\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(n²)"
+      ],
+      "correct": 2,
+      "explanation": "The parts array and the returned string each hold n characters: O(n).",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input.\n\n```js\nfunction countHalvings(n) {\n  let steps = 0;\n  while (n > 1) {\n    n = Math.floor(n / 2);\n    steps++;\n  }\n  return steps;\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(√n)"
+      ],
+      "correct": 0,
+      "explanation": "The loop runs log n times but reuses the same two variables: O(1) space. Time and space are separate questions.",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input. (n is the length of a, m the length of b.)\n\n```js\nfunction merge(a, b) {\n  return [...a, ...b];\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(1)",
+        "O(n + m)",
+        "O(n · m)",
+        "O(max(n, m))"
+      ],
+      "correct": 1,
+      "explanation": "The new array holds every element of both inputs: n + m.",
+      "materials": [
+        "bigo-cheatsheet"
+      ]
+    },
+    {
+      "prompt": "What is the space complexity of this code? Count everything it allocates, including the returned value and the call stack, but not the input. (node is the root of a binary tree with n nodes and height h.)\n\n```js\nfunction depth(node) {\n  if (node === null) return 0;\n  return 1 + Math.max(depth(node.left), depth(node.right));\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(h)",
+        "O(n²)"
+      ],
+      "correct": 2,
+      "explanation": "The stack holds one frame per level on the current path, so space grows with the tree's height h: O(log n) for a balanced tree, O(n) for a degenerate one that is a linked list.",
+      "materials": [
+        "jsi-recursion"
+      ]
+    }
+  ]
+}
