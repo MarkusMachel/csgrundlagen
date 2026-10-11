@@ -1,0 +1,832 @@
+{
+  "name": "System design: true or false",
+  "materials": [
+    {
+      "key": "primer",
+      "type": "article",
+      "title": "The System Design Primer",
+      "url": "https://github.com/donnemartin/system-design-primer",
+      "author": "Donne Martin",
+      "description": "A free, community-maintained guide to designing large-scale systems, including caching, replication, load balancing and latency numbers."
+    },
+    {
+      "key": "lb",
+      "type": "article",
+      "title": "Load balancing (computing)",
+      "url": "https://en.wikipedia.org/wiki/Load_balancing_(computing)",
+      "author": "Wikipedia",
+      "description": "How load balancers spread requests across servers, which algorithms they use and how they route around failed backends."
+    },
+    {
+      "key": "stampede",
+      "type": "article",
+      "title": "Cache stampede",
+      "url": "https://en.wikipedia.org/wiki/Cache_stampede",
+      "author": "Wikipedia",
+      "description": "Why many simultaneous cache misses on a hot key can overload a backend, and the locking and early-expiration techniques that prevent it."
+    },
+    {
+      "key": "consistency",
+      "type": "article",
+      "title": "Consistency model",
+      "url": "https://en.wikipedia.org/wiki/Consistency_model",
+      "author": "Wikipedia",
+      "description": "An overview of consistency models such as linearizability, eventual consistency and client-centric guarantees like read-your-writes."
+    },
+    {
+      "key": "cap",
+      "type": "article",
+      "title": "CAP theorem",
+      "url": "https://en.wikipedia.org/wiki/CAP_theorem",
+      "author": "Wikipedia",
+      "description": "The trade-off between consistency and availability that a distributed data store faces during a network partition."
+    },
+    {
+      "key": "pacelc",
+      "type": "article",
+      "title": "PACELC theorem",
+      "url": "https://en.wikipedia.org/wiki/PACELC_theorem",
+      "author": "Wikipedia",
+      "description": "An extension of CAP that adds the latency-versus-consistency trade-off replicated systems face when there is no partition."
+    },
+    {
+      "key": "chash",
+      "type": "article",
+      "title": "Consistent hashing",
+      "url": "https://en.wikipedia.org/wiki/Consistent_hashing",
+      "author": "Wikipedia",
+      "description": "A hashing scheme that remaps only a small fraction of keys when nodes join or leave a cluster."
+    },
+    {
+      "key": "kafka",
+      "type": "link",
+      "title": "Apache Kafka documentation",
+      "url": "https://kafka.apache.org/documentation/",
+      "author": "Apache Software Foundation",
+      "description": "Official Kafka documentation covering topics, partitions, consumer groups and delivery semantics."
+    },
+    {
+      "key": "dlq",
+      "type": "link",
+      "title": "Using dead-letter queues in Amazon SQS",
+      "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html",
+      "author": "Amazon Web Services",
+      "description": "How a queue moves messages that repeatedly fail processing to a separate dead-letter queue."
+    },
+    {
+      "key": "tokenbucket",
+      "type": "article",
+      "title": "Token bucket",
+      "url": "https://en.wikipedia.org/wiki/Token_bucket",
+      "author": "Wikipedia",
+      "description": "The token bucket algorithm for rate limiting and traffic shaping, and how it compares with the leaky bucket."
+    },
+    {
+      "key": "backoff",
+      "type": "article",
+      "title": "Timeouts, retries, and backoff with jitter",
+      "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+      "author": "Marc Brooker (Amazon Builders' Library)",
+      "description": "How Amazon uses timeouts, bounded retries, exponential backoff and jitter to keep failures from cascading."
+    },
+    {
+      "key": "releaseit",
+      "type": "book",
+      "title": "Release It! Design and Deploy Production-Ready Software (2nd ed.)",
+      "url": "https://pragprog.com/titles/mnee2/release-it-second-edition/",
+      "author": "Michael T. Nygard",
+      "description": "The book that popularized stability patterns such as timeouts, circuit breakers and bulkheads."
+    },
+    {
+      "key": "slo",
+      "type": "article",
+      "title": "Service Level Objectives",
+      "url": "https://sre.google/sre-book/service-level-objectives/",
+      "author": "Google SRE Book",
+      "description": "Defines SLIs, SLOs and SLAs and explains why percentiles describe latency better than averages."
+    },
+    {
+      "key": "rfc9110",
+      "type": "link",
+      "title": "RFC 9110: HTTP Semantics",
+      "url": "https://www.rfc-editor.org/rfc/rfc9110",
+      "author": "IETF",
+      "description": "The HTTP specification that defines request methods and which of them are safe or idempotent."
+    },
+    {
+      "key": "uuid",
+      "type": "link",
+      "title": "RFC 9562: Universally Unique IDentifiers (UUIDs)",
+      "url": "https://www.rfc-editor.org/rfc/rfc9562",
+      "author": "IETF",
+      "description": "The UUID specification, including random UUIDv4, time-ordered UUIDv7 and the time-based ID schemes like Snowflake that motivated it."
+    }
+  ],
+  "questions": [
+    {
+      "type": "true-false",
+      "prompt": "Kafka's exactly-once semantics guarantee that a side effect in an external system, such as sending an email, happens exactly once.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. Kafka's exactly-once support (idempotent producers and transactions) covers reading from Kafka, processing, and writing back to Kafka atomically. Effects outside Kafka can still be repeated after a failure, so they need their own idempotency, such as deduplication keys or an outbox.",
+      "materials": [
+        "kafka"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A network round trip within the same data center usually takes longer than one disk seek on a spinning hard drive.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. A round trip inside a data center is around 0.5 ms, while a hard-drive seek is around 10 ms, about 20 times slower. This is why reading from a remote server's memory can beat reading from a local spinning disk.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Virtual nodes in consistent hashing give each physical server many positions on the hash ring to make the key distribution more even.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. With only one point per server, arcs on the ring vary a lot in size, so some servers get far more keys than others. Many virtual nodes per server average this out and also spread a failed server's load across many peers instead of one neighbor.",
+      "materials": [
+        "chash"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The bulkhead pattern gives each dependency its own pool of resources, such as threads or connections, so one slow dependency cannot exhaust them for everything else.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Like watertight compartments in a ship, separate pools contain a failure: if calls to one service hang, only its pool fills up. Calls to other dependencies keep their own capacity and continue to work.",
+      "materials": [
+        "releaseit"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Adding read replicas to a single-primary database scales read throughput but does not increase how many writes per second it can accept.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Replicas can serve reads, but every write still goes through the one primary, and every replica must also apply every write. To scale writes you need to shard the data or use a multi-leader or partitioned database.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A Twitter Snowflake ID packs a timestamp, a machine ID, and a per-machine sequence number into a 64-bit integer, so IDs generated later generally sort after earlier ones.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Snowflake uses a 41-bit millisecond timestamp, a 10-bit machine ID and a 12-bit sequence, so each node can generate unique IDs without coordinating. Because the timestamp occupies the high bits, IDs are roughly time-ordered.",
+      "materials": [
+        "uuid"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With asynchronous replication, a read from a replica made right after a successful write to the primary is guaranteed to return the new value.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Asynchronous replicas apply changes after the primary acknowledges them, so there is replication lag and the replica may still return the old value. Systems that need read-your-writes route such reads to the primary or wait for the replica to catch up.",
+      "materials": [
+        "primer",
+        "consistency"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "PACELC states that even when there is no network partition, a replicated system has to trade off latency against consistency.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. PACELC reads as: if Partition, choose Availability or Consistency; Else, choose Latency or Consistency. Keeping replicas strongly consistent means waiting for coordination on each operation, while answering from the nearest replica is faster but may be stale.",
+      "materials": [
+        "pacelc"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Adding random jitter to exponential backoff spreads out retries from many clients so they do not arrive in synchronized waves.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Clients that failed at the same moment and back off by the same schedule retry at the same moment too, hitting the recovering service in bursts. Randomizing each delay spreads the retries out and reduces peak load.",
+      "materials": [
+        "backoff"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Retrying failed calls at every layer of a deep call chain is safe because each layer's retries are independent of the others.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. Retries multiply across layers: if each of 5 layers makes up to 3 attempts, the bottom dependency can see up to 3^5 = 243 times the original load exactly when it is struggling. A common practice is to retry at a single layer and fail fast elsewhere.",
+      "materials": [
+        "backoff"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "An SLA is the internal reliability target a team sets for itself, while an SLO is the contract with customers that carries penalties if missed.",
+      "tags": [
+        "System Design",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. It is the other way round: an SLO is an internal target for an SLI (for example 99.9% of requests succeed), and an SLA is an agreement with customers that specifies consequences, such as refunds, when it is missed. SLOs are usually set stricter than SLAs to leave a safety margin.",
+      "materials": [
+        "slo"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "For a query using `LIMIT 20 OFFSET 100000`, the database can jump straight to row 100,001 without reading the rows it skips.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. With offset pagination the database generally has to produce and discard all 100,000 preceding rows, so deep pages get slower and slower. Cursor (keyset) pagination such as `WHERE id > :last_id ORDER BY id LIMIT 20` can seek directly through an index instead.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When a circuit breaker is open, calls are still sent to the failing dependency but their results are ignored.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. An open breaker fails calls immediately without contacting the dependency, which saves the caller's resources and gives the dependency time to recover. After a cooldown it moves to half-open and lets a few trial calls through to decide whether to close.",
+      "materials": [
+        "releaseit"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Letting only one request recompute an expired hot key while concurrent requests wait for its result is a way to prevent a cache stampede.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. A stampede happens when many requests miss the same hot key at once and all recompute it against the backend. Request coalescing or a per-key lock makes one caller rebuild the value while the others wait or are served the old value.",
+      "materials": [
+        "stampede"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Vertical scaling means giving a single machine more CPU, memory, or disk, while horizontal scaling means adding more machines.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Scaling up (vertical) makes one box bigger and eventually hits hardware and cost limits. Scaling out (horizontal) adds more nodes behind a load balancer or partitioning scheme, which also removes the single machine as a point of failure.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "One million requests per day works out to an average of roughly 12 requests per second.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. A day has 86,400 seconds, and 1,000,000 / 86,400 ≈ 11.6. Real traffic peaks are usually several times higher than this average, so capacity is planned for the peak.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With at-least-once delivery, a consumer never has to handle the same message twice.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. At-least-once means a message is redelivered whenever an acknowledgement is lost or a consumer crashes before committing, so duplicates are expected. Consumers must be idempotent or deduplicate, for example by message ID.",
+      "materials": [
+        "kafka"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Range-based sharding on a monotonically increasing key such as a creation timestamp sends nearly all new writes to the same shard.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. New rows all have the newest key values, so they fall into the last range and one shard becomes a hot partition while the others receive almost no writes. Hashing the key or adding a prefix spreads writes, at the cost of efficient range scans.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Adding more consumers to a Kafka consumer group than the topic has partitions increases that group's consumption parallelism.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. Within a consumer group each partition is assigned to at most one consumer, so the partition count caps the group's parallelism. Extra consumers sit idle (useful only as standbys); to scale further you must add partitions.",
+      "materials": [
+        "kafka"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Mean request latency reliably shows how slow the slowest requests are.",
+      "tags": [
+        "System Design",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. An average hides the tail: most requests can be fast while a few take seconds, and the mean still looks fine. High percentiles such as p99 show what the slowest users actually experience.",
+      "materials": [
+        "slo"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Storing 1 KB for each of 1 billion records needs about 1 GB of storage.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. 1 KB × 10^9 = 10^12 bytes, which is about 1 TB. Mixing up these powers of 1,000 is a classic estimation slip that is off by a factor of a thousand.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A dead-letter queue holds messages that still fail after a set number of processing attempts, so they stop blocking the main queue and can be inspected later.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Without a DLQ, a poison message is retried forever and wastes capacity or blocks ordered processing. After a maximum receive count the message is moved aside, where engineers can inspect, fix and replay it.",
+      "materials": [
+        "dlq"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A UUIDv7 starts with a 48-bit Unix timestamp in milliseconds, so newly generated UUIDv7 values sort roughly in creation order.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. RFC 9562 puts a 48-bit Unix-epoch millisecond timestamp in the most significant bits, followed by random bits. Unlike fully random UUIDv4, this keeps B-tree index inserts mostly at the end of the index.",
+      "materials": [
+        "uuid"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Adding random jitter to cache TTLs helps prevent many keys that were cached at the same time from expiring together and flooding the database.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. If a batch of keys is written with the same TTL, they all expire at once and the resulting misses hit the database simultaneously. Randomizing each TTL by a small amount spreads those expirations, and therefore the reloads, over time.",
+      "materials": [
+        "stampede"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Because webhook providers usually retry failed deliveries, a webhook receiver can receive the same event more than once.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. If the receiver times out or its response is lost, the provider cannot tell whether the event was processed and sends it again. Receivers should deduplicate by event ID and respond quickly, doing slow work asynchronously.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In an eventually consistent system, every read returns the most recent write.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Eventual consistency only promises that replicas converge to the same value once writes stop; in the meantime a read may return stale data. Always returning the latest write is the definition of strong consistency (linearizability).",
+      "materials": [
+        "consistency"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Two redundant replicas in parallel, each 99% available and failing independently, where either one can serve traffic, give a combined availability of 99.99%.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. The pair is only down when both are down: 0.01 × 0.01 = 0.0001, so availability is 1 − 0.0001 = 99.99%. This assumes truly independent failures and instant failover, which shared dependencies often break.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Horizontal scaling of web servers is easiest when each server keeps user session data in its own local memory.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Session state in local memory ties a user to one server, so you need sticky sessions and lose sessions when that server dies. Stateless servers that keep sessions in a shared store (or a signed token) can be added, removed and load-balanced freely.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Splitting a monolith into microservices reduces the total operational complexity of a system.",
+      "tags": [
+        "System Design",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Microservices buy independent deployment and scaling at the cost of more operational complexity: many deployables, network calls that can fail, distributed tracing, service discovery and data consistency across services. A monolith is simpler to run, which is why many teams start with one.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Read-your-writes consistency guarantees that a client sees its own earlier writes, but not necessarily the recent writes of other clients.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Read-your-writes is a client-centric guarantee: after you update your profile you will not see the old version. Another user may still read stale data until replication catches up, which is weaker than strong consistency.",
+      "materials": [
+        "consistency"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In HTTP, `PUT` and `DELETE` are defined as idempotent methods, while `POST` is not.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. RFC 9110 defines `PUT`, `DELETE` and the safe methods (`GET`, `HEAD`, `OPTIONS`, `TRACE`) as idempotent: repeating the request has the same intended effect as sending it once. `POST` is not, which is why APIs add idempotency keys to make retried `POST` requests safe.",
+      "materials": [
+        "rfc9110"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The CAP theorem says a distributed database must always give up consistency, availability, or partition tolerance, even while the network is working normally.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. CAP only forces a choice between consistency and availability while a network partition is happening; partitions cannot be opted out of in a real network. When there is no partition a system can be both consistent and available, which is why PACELC adds the latency-versus-consistency trade-off for normal operation.",
+      "materials": [
+        "cap",
+        "pacelc"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Object stores such as Amazon S3 let you overwrite a few bytes in the middle of an existing object in place.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Objects are written as a whole and treated as immutable; to change part of one you upload a new version of the entire object. Object storage is built for durable, cheap storage of whole files, not for in-place updates like a block device or database.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A leaky bucket implemented as a queue that drains at a fixed rate forwards bursts downstream at full speed as long as the average rate stays under the limit.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. The leaky bucket as a queue emits requests at a constant rate no matter how they arrive, so bursts are smoothed out (queued) and excess is dropped once the queue is full. Allowing bursts up to a capacity is the behavior of a token bucket.",
+      "materials": [
+        "tokenbucket"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A remote call made without a timeout can hold the calling thread or connection indefinitely if the dependency stops responding.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. A hung dependency never returns, so the caller's threads, connections or memory stay tied up until they run out and the caller fails too. Timeouts bound how long any one call can consume resources and turn hangs into errors you can handle.",
+      "materials": [
+        "backoff",
+        "releaseit"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In the cache-aside pattern, the application itself loads data from the database on a cache miss and then writes it into the cache.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. With cache-aside (lazy loading) the cache is passive: the application checks it, falls back to the database on a miss and populates the cache with the result. Only data that is actually requested ends up cached.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A Layer 4 load balancer decides where to send traffic using IP addresses and TCP/UDP ports, so it cannot route requests to different backends based on the HTTP URL path.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. A Layer 4 balancer forwards connections without parsing the application protocol. Routing by path, host header or cookie needs a Layer 7 balancer that terminates the connection (and TLS) and reads the HTTP request.",
+      "materials": [
+        "primer",
+        "lb"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With consistent hashing, adding one node to a cluster of N nodes requires remapping about half of all keys.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. Only the keys in the arc of the ring taken over by the new node move, roughly 1/(N+1) of all keys. It is plain `hash(key) mod N` placement that remaps most keys when N changes.",
+      "materials": [
+        "chash"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A request that must pass through two services in series, each 99.9% available and failing independently, has a combined availability of about 99.8%.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. In series both must be up, so availabilities multiply: 0.999 × 0.999 = 0.998001, about 99.8%. Every component added in series lowers overall availability.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Full-text search engines such as Elasticsearch use an inverted index that maps each term to the documents containing it.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Instead of scanning every document for a word, the engine looks the word up in the inverted index and gets the list of matching documents directly. This is why search engines answer keyword queries quickly where a SQL `LIKE '%word%'` would scan the table.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The HTTP specification defines `PATCH` as an idempotent method.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. `PATCH` (RFC 5789) is neither safe nor idempotent, and RFC 9110 does not list it among the idempotent methods. A particular patch such as setting a field can be idempotent, but one like appending to a list is not, so clients cannot assume it is safe to retry.",
+      "materials": [
+        "rfc9110"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Backpressure lets a slow consumer signal producers to slow down instead of letting queues grow without bound.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. If producers keep sending faster than consumers can process, buffers grow until latency explodes or memory runs out. Backpressure bounds the queue and pushes the slowdown upstream, for example by blocking, rejecting with a 503/429 or pausing reads.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A write-through cache acknowledges a write as soon as the cache is updated and saves it to the database later in the background.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. That describes write-back (write-behind). A write-through cache writes to the cache and the database synchronously before acknowledging, which is slower per write but does not lose acknowledged data if the cache node dies.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "An availability of 99.99% allows roughly 8.8 hours of downtime per year.",
+      "tags": [
+        "System Design",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. 0.01% of a year (8,760 hours) is about 0.88 hours, or roughly 53 minutes. About 8.8 hours per year corresponds to 99.9% availability.",
+      "materials": [
+        "primer",
+        "slo"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Sticky sessions help keep load spread evenly across backend servers.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Session affinity pins each client to one backend, so a few heavy clients can overload one server while others sit idle, and new servers only receive new clients. It also means sessions are lost when the pinned server fails.",
+      "materials": [
+        "lb"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The least-connections algorithm sends each new request to the server that has handled the fewest requests since the load balancer started.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Least connections picks the backend with the fewest currently active connections, not the lowest lifetime total. That makes it adapt to servers that are busy with long-lived or slow requests right now.",
+      "materials": [
+        "lb"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In client-side service discovery the client queries a service registry and picks an instance itself, while in server-side discovery a load balancer or router does the lookup for it.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Client-side discovery puts the lookup and load-balancing logic in the client (or its library). Server-side discovery hides it behind a load balancer, gateway or DNS name, so clients only need one stable address.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A token bucket rate limiter allows short bursts up to the bucket's capacity while enforcing a long-term average rate.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Tokens are added at a fixed rate up to a maximum capacity, and each request spends a token. An idle client accumulates tokens and can then send a burst as large as the bucket, but over time it cannot exceed the refill rate.",
+      "materials": [
+        "tokenbucket"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A CDN mainly speeds up a website by running the site's database queries on servers close to users.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. A CDN caches content such as images, scripts, video and cacheable pages at edge locations near users, so requests travel a shorter distance and skip the origin. Database queries still run at the origin unless you add separate infrastructure for that.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Kafka guarantees message ordering across all partitions of a topic.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Kafka only guarantees order within a single partition. To keep related events in order, give them the same key so they land in the same partition; a topic with many partitions has no global order.",
+      "materials": [
+        "kafka"
+      ]
+    }
+  ]
+}
