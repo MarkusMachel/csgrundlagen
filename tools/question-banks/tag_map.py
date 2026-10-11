@@ -12,8 +12,9 @@ PATTERNS, ARCH, DIST = "Design Principles & Patterns", "Architecture & DDD", "Di
 API, SEC, RES = "APIs & HTTP", "Security", "Resilience & Scalability"
 SYS, OPS, CAREER = "System Design", "Testing & Operations", "Career & Judgement"
 EZ = "ezCater prep"
+CAMERA = "Camera & Image Quality"
 
-CANONICAL = [CS, JS, GO, SQL, ASYNC, PERF, ALGO, PATTERNS, ARCH, DIST, API, SEC, RES, SYS, OPS, CAREER, EZ]
+CANONICAL = [CS, JS, GO, SQL, ASYNC, PERF, ALGO, PATTERNS, ARCH, DIST, API, SEC, RES, SYS, OPS, CAREER, EZ, CAMERA]
 
 # old tag -> canonical tags. Section tags carry a track and a topic; small topic tags fold into their topic.
 MAP = {
