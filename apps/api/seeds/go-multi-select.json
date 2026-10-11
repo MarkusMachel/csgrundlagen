@@ -1,0 +1,1352 @@
+{
+  "name": "Go: pick all that apply",
+  "materials": [
+    {
+      "key": "spec",
+      "type": "link",
+      "title": "The Go Programming Language Specification",
+      "url": "https://go.dev/ref/spec",
+      "author": "The Go Authors",
+      "description": "The authoritative definition of Go's syntax and semantics."
+    },
+    {
+      "key": "gofmt",
+      "type": "link",
+      "title": "Command gofmt",
+      "url": "https://pkg.go.dev/cmd/gofmt",
+      "author": "The Go Authors",
+      "description": "Reference for the standard Go source formatter."
+    },
+    {
+      "key": "errors",
+      "type": "link",
+      "title": "Package errors",
+      "url": "https://pkg.go.dev/errors",
+      "author": "The Go Authors",
+      "description": "Reference for errors.New, Is, As, Join and Unwrap."
+    },
+    {
+      "key": "sync",
+      "type": "link",
+      "title": "Package sync",
+      "url": "https://pkg.go.dev/sync",
+      "author": "The Go Authors",
+      "description": "Reference for Mutex, RWMutex, WaitGroup, Once, Pool and Map."
+    },
+    {
+      "key": "atomic",
+      "type": "link",
+      "title": "Package sync/atomic",
+      "url": "https://pkg.go.dev/sync/atomic",
+      "author": "The Go Authors",
+      "description": "Reference for atomic operations and typed atomic values."
+    },
+    {
+      "key": "context",
+      "type": "link",
+      "title": "Package context",
+      "url": "https://pkg.go.dev/context",
+      "author": "The Go Authors",
+      "description": "Reference for cancellation, deadlines and request-scoped values."
+    },
+    {
+      "key": "http",
+      "type": "link",
+      "title": "Package net/http",
+      "url": "https://pkg.go.dev/net/http",
+      "author": "The Go Authors",
+      "description": "Reference for Go's HTTP client and server."
+    },
+    {
+      "key": "json",
+      "type": "link",
+      "title": "Package encoding/json",
+      "url": "https://pkg.go.dev/encoding/json",
+      "author": "The Go Authors",
+      "description": "Reference for JSON encoding and decoding rules."
+    },
+    {
+      "key": "time",
+      "type": "link",
+      "title": "Package time",
+      "url": "https://pkg.go.dev/time",
+      "author": "The Go Authors",
+      "description": "Reference for durations, timers, tickers and time parsing."
+    },
+    {
+      "key": "io",
+      "type": "link",
+      "title": "Package io",
+      "url": "https://pkg.go.dev/io",
+      "author": "The Go Authors",
+      "description": "Reference for the Reader and Writer interfaces and helpers."
+    },
+    {
+      "key": "testing",
+      "type": "link",
+      "title": "Package testing",
+      "url": "https://pkg.go.dev/testing",
+      "author": "The Go Authors",
+      "description": "Reference for tests, subtests, benchmarks and fuzzing."
+    },
+    {
+      "key": "cmdgo",
+      "type": "link",
+      "title": "Command go",
+      "url": "https://pkg.go.dev/cmd/go",
+      "author": "The Go Authors",
+      "description": "Reference for go build, go test flags, go vet and go mod."
+    },
+    {
+      "key": "modref",
+      "type": "link",
+      "title": "Go Modules Reference",
+      "url": "https://go.dev/ref/mod",
+      "author": "The Go Authors",
+      "description": "Detailed reference for modules, version selection and go.sum."
+    },
+    {
+      "key": "gcguide",
+      "type": "article",
+      "title": "A Guide to the Go Garbage Collector",
+      "url": "https://go.dev/doc/gc-guide",
+      "author": "The Go Authors",
+      "description": "Explains the Go GC, GOGC, GOMEMLIMIT and escape analysis."
+    },
+    {
+      "key": "race",
+      "type": "article",
+      "title": "Data Race Detector",
+      "url": "https://go.dev/doc/articles/race_detector",
+      "author": "The Go Authors",
+      "description": "How to use the race detector and what it costs."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multi-select",
+      "prompt": "Which of these types can be used as the key type of a Go map?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`[]byte`",
+        "`[2]int`",
+        "`struct{ X, Y int }`",
+        "`map[string]int`",
+        "`*os.File`"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        4
+      ],
+      "explanation": "Map keys must be comparable. Arrays of comparable elements, structs with comparable fields and pointers all are; slices and maps are not comparable, so `map[[]byte]T` and `map[map[string]int]T` fail to compile.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this code are true?\n\n```go\na := []int{1, 2, 3, 4, 5}\nb := a[1:3]\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`len(b)` is 2",
+        "`cap(b)` is 4",
+        "`b[0] = 9` leaves `a[1]` unchanged",
+        "`b = append(b, 7)` overwrites `a[3]`",
+        "`b[2]` evaluates to 4"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "`b` covers indices 1 and 2, so its length is 2 and its capacity runs to the end of `a` (4). It shares `a`'s array, so writing `b[0]` changes `a[1]`, and appending within capacity writes 7 into `a[3]`. `b[2]` is past `len(b)` and panics with index out of range.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about converting between strings, bytes and numbers in Go are true?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`[]byte(s)` produces a new slice that does not alias `s`",
+        "`string(rune(65))` evaluates to `\"A\"`",
+        "`string(65)` with an `int` evaluates to `\"65\"`",
+        "`strconv.Itoa(65)` evaluates to `\"65\"`",
+        "`utf8.RuneCountInString(s)` returns the number of bytes"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Strings are immutable, so `[]byte(s)` gives a separate mutable slice. Converting an integer to `string` yields the UTF-8 encoding of that code point, so `string(rune(65))` and `string(65)` both give `\"A\"` (go vet warns about the latter); `strconv.Itoa` produces decimal digits. `RuneCountInString` counts runes, not bytes.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about built-in Go maps are true?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`v, ok := m[k]` gives the zero value and `false` for a missing key",
+        "`delete(m, k)` panics when `k` is not in the map",
+        "Deleting entries while ranging over the same map is allowed",
+        "Reading a key from a nil map panics",
+        "`m[k].f = 1` works when the map values are structs"
+      ],
+      "correctIndices": [
+        0,
+        2
+      ],
+      "explanation": "The comma-ok form reports absence with the zero value and `false`, and the spec explicitly allows deleting entries during a range loop. `delete` of a missing key is a no-op, reading from a nil map returns the zero value, and map elements are not addressable, so `m[k].f = 1` does not compile.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Given `type T struct{}` with `func (T) A()` and `func (*T) B()`, which statements are true?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The method set of `T` contains only `A`",
+        "The method set of `*T` contains both `A` and `B`",
+        "A `T` value satisfies `interface{ A(); B() }`",
+        "`&T{}` satisfies `interface{ B() }`",
+        "A `T` value satisfies `interface{ B() }`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "A value type's method set holds only value-receiver methods, while the pointer type's set holds both. So `&T{}` satisfies any interface over `A` and `B`, but a plain `T` value does not have `B` in its method set and cannot satisfy an interface that needs it.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about type assertions and type switches are true?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`v, ok := x.(T)` sets `ok` to false instead of panicking on mismatch",
+        "`v := x.(T)` panics when `x` does not hold a `T`",
+        "`v, ok := x.(T)` panics when `x` is a nil interface",
+        "A type switch may contain a `case nil` clause",
+        "A type assertion can be applied to a variable of type `int`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "The comma-ok form never panics (a nil interface just gives the zero value and false), while the single-result form panics on mismatch. Type switches accept `case nil` to match a nil interface. Assertions require an interface-typed operand, so asserting on an `int` variable is a compile error.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these `==` comparisons panics at run time?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Two `any` values that both hold a `[]int`",
+        "Two `any` values that both hold a `[2]int`",
+        "Two `any` values holding an `int` and a `string`",
+        "A `[]int` variable compared with `nil`",
+        "Two values of type `struct{ X int }`"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "Comparing interfaces whose dynamic type is a slice panics with \"comparing uncomparable type []int\". Arrays of comparable elements compare fine, interfaces with different dynamic types are simply unequal, a slice may be compared with `nil`, and structs with comparable fields are comparable.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about struct and interface embedding in Go are true?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "An embedded field is accessed by its type name, as in `s.Mutex`",
+        "Embedding `Inner` makes `*Outer` assignable to `*Inner`",
+        "A field or method at a shallower depth shadows a deeper one",
+        "Two promoted `M` methods at the same depth make `s.M()` a compile error",
+        "An interface type can embed another interface type"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "explanation": "The unqualified type name is the field name of an embedded field. Selectors resolve to the shallowest depth, and two candidates at the same depth make the selector ambiguous (an error only when used). Interfaces can embed interfaces. Embedding is not subtyping, so `*Outer` is not assignable to `*Inner`.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `errors` in Go 1.20+ are true?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`errors.Is(errors.Join(e1, e2), e2)` reports true",
+        "`errors.As` panics if its target is not a non-nil pointer",
+        "`fmt.Errorf` may contain more than one `%w` verb",
+        "`errors.Unwrap` on a joined error returns its first error",
+        "`errors.Is` compares errors using `reflect.DeepEqual`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Joined errors and multi-`%w` errors implement `Unwrap() []error`, which `Is` and `As` traverse. `As` panics on a nil or non-pointer target. `errors.Unwrap` only calls `Unwrap() error`, so for a joined error it returns nil. `Is` uses `==` (or an `Is` method), not `reflect.DeepEqual`.",
+      "materials": [
+        "errors"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this code are true?\n\n```go\nfunc f() (err error) {\n\tdefer func() {\n\t\tif r := recover(); r != nil {\n\t\t\terr = fmt.Errorf(\"recovered: %v\", r)\n\t\t}\n\t}()\n\tvar m map[string]int\n\tm[\"x\"] = 1\n\treturn nil\n}\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`f()` returns a non-nil error",
+        "Calling `f()` crashes the program",
+        "The error text mentions an assignment to a nil map entry",
+        "`recover()` returns nil inside the deferred function here",
+        "The `return nil` statement is never reached"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "Writing to a nil map panics with \"assignment to entry in nil map\", so execution never reaches `return nil`. The deferred closure's `recover()` returns that panic value, stops the panic, and sets the named result, so `f` returns an error instead of crashing.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `defer` are true?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Deferred calls run when the surrounding function panics",
+        "Deferred calls run when `os.Exit` is called",
+        "A `defer` inside a loop runs at the end of each iteration",
+        "Deferred calls run when a goroutine calls `runtime.Goexit`",
+        "A deferred method call evaluates its receiver at the `defer` statement"
+      ],
+      "correctIndices": [
+        0,
+        3,
+        4
+      ],
+      "explanation": "Deferred calls run while a panic unwinds and when `runtime.Goexit` terminates a goroutine. The function value, receiver and arguments are evaluated when `defer` executes. `os.Exit` ends the process immediately without running defers, and defers run when the function returns, not per loop iteration.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about goroutines are true?",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`go f()` returns immediately without waiting for `f` to finish",
+        "When `main` returns, the program exits without waiting for other goroutines",
+        "Every goroutine starts with a fixed 1 MB stack",
+        "The standard library exposes a public goroutine ID API",
+        "`x := go f()` captures the return value of `f`"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "A `go` statement starts `f` concurrently and continues, and program execution ends when `main` returns. Goroutine stacks start small and grow as needed, there is deliberately no public goroutine ID, and a `go` statement is not an expression, so its result cannot be assigned.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about closing channels are true?",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A receive on a closed, drained channel returns the zero value and `ok == false`",
+        "Sending on a closed channel panics",
+        "Every channel must be closed or it leaks memory",
+        "`for v := range ch` ends once `ch` is closed and drained",
+        "Closing a buffered channel discards the values still in its buffer"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "After close, buffered values can still be received, then receives yield the zero value with `ok == false`, which also ends a range loop. Sending on a closed channel panics. Unclosed channels are garbage collected like any other value; closing is only a signal to receivers.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about channel types are true?",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A `chan int` can be passed where a `<-chan int` is expected",
+        "Calling `close` on a `<-chan int` compiles",
+        "A `chan<- int` can be converted back to `chan int`",
+        "`cap` of an unbuffered channel is 0",
+        "`len(ch)` reports the number of elements currently buffered"
+      ],
+      "correctIndices": [
+        0,
+        3,
+        4
+      ],
+      "explanation": "A bidirectional channel is assignable to either directional type, `cap` is 0 for unbuffered channels and `len` counts queued elements. Closing a receive-only channel is a compile error, and a directional channel cannot be converted back to a bidirectional one.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Given `var ch chan int` (a nil channel), which operations block forever?",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`ch <- 1`",
+        "`<-ch`",
+        "`close(ch)`",
+        "`len(ch)`",
+        "`for range ch {}`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "Sends and receives on a nil channel block forever, and a range loop is a series of receives, so it blocks too. `close` on a nil channel panics with \"close of nil channel\", and `len` of a nil channel simply returns 0.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the `select` statement are true?",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`select {}` with no cases blocks forever",
+        "`break` inside a `select` in a `for` loop exits the loop",
+        "A `select` cannot contain send cases",
+        "The `default` case runs even when another case is ready",
+        "A `select` with a `default` case can block forever"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "An empty `select` blocks forever. `break` exits only the innermost `select`, so leaving the loop needs a label; send cases are allowed; `default` runs only when no other case can proceed, which also means a `select` with `default` never blocks.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `sync.Mutex` and `sync.RWMutex` are true?",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Several goroutines may hold an `RWMutex` read lock at the same time",
+        "The zero value of `sync.Mutex` is an unlocked mutex",
+        "Unlocking an unlocked `Mutex` is a fatal run-time error",
+        "Only the goroutine that locked a `Mutex` may unlock it",
+        "A reader can upgrade by calling `Lock` while holding `RLock`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`RWMutex` allows many readers, mutex zero values are ready to use, and `Unlock` of an unlocked mutex is a fatal error. The docs say a locked Mutex is not tied to a goroutine, so another goroutine may unlock it. Calling `Lock` while holding `RLock` deadlocks because the writer waits for all readers, including itself.",
+      "materials": [
+        "sync"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the `sync/atomic` package are true?",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`atomic.Int64` provides `Add`, `Load`, `Store` and `CompareAndSwap` methods",
+        "Mixing `atomic.AddInt64` writes with plain reads of the same variable is race-free",
+        "`atomic.Value` panics if `Store` gets values of different concrete types",
+        "Go's atomic operations behave as sequentially consistent",
+        "An `atomic.Int64` may be safely copied after first use"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "The typed atomics (Go 1.19) expose those methods, `atomic.Value` panics on inconsistently typed stores, and the Go memory model defines atomics as sequentially consistent. Every access must be atomic for the code to be race-free, and the typed atomics must not be copied (go vet flags it).",
+      "materials": [
+        "atomic"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `context.WithCancel` are true?",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The returned cancel function should be called to release resources",
+        "After cancel, `ctx.Err()` returns `context.Canceled`",
+        "Cancelling a parent context also cancels its children",
+        "Cancelling a child context also cancels its parent",
+        "`context.Background()` is never cancelled"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "Callers should always call cancel to free the context's resources; after it runs, `Err` reports `Canceled`, and cancellation flows down to derived contexts. It never flows up to the parent, and the background context has no deadline and is never cancelled.",
+      "materials": [
+        "context"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the `context` package are true?",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`WithValue` keys should use an unexported custom type, not `string`",
+        "`context.Background().Done()` returns nil",
+        "`context.WithoutCancel(parent)` is not cancelled when `parent` is",
+        "Storing a `Context` in a struct field is the recommended style",
+        "After a `WithTimeout` expires, `ctx.Err()` returns `context.Canceled`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The docs ask for custom key types to avoid collisions, and `Done` may return nil for contexts that can never be cancelled, which is the case for `Background`. `WithoutCancel` (Go 1.21) detaches from the parent's cancellation. The docs say to pass contexts explicitly rather than store them in structs, and an expired timeout reports `DeadlineExceeded`.",
+      "materials": [
+        "context"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about Go generics are true?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The `comparable` constraint allows `==` and `!=` on the type parameter",
+        "`any` is an alias for `interface{}`",
+        "Type arguments can often be inferred from function arguments",
+        "A generic type can be used uninstantiated, as in `var l List`",
+        "`cmp.Ordered` permits the `<` operator"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "`comparable` enables equality, `any` is a predeclared alias for the empty interface, function type arguments are inferred where possible and `cmp.Ordered` covers ordered types. A generic type must be instantiated, as in `List[int]`, before it can be used as a variable type.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these declarations compile?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`func Max[T cmp.Ordered](a, b T) T { if a > b { return a }; return b }`",
+        "`type Number interface{ ~int | ~float64 }; var n Number`",
+        "`type Stack[T any] struct{ items []T }`",
+        "`func Zero[T any]() T { return nil }`",
+        "`func Zero[T any]() T { var z T; return z }`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "`cmp.Ordered` allows `>`, generic struct types are fine and `var z T` yields the zero value of any type. An interface with a type union can only be used as a constraint, not as a variable type, and `nil` is not assignable to an arbitrary `T`.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about Go packages are true?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Importing a package without using it is a compile error",
+        "A package may contain several `init` functions",
+        "Package `init` functions run before `main` starts",
+        "A blank import `import _ \"pkg\"` runs the package's initialization",
+        "An `internal` package can be imported by any module"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "Unused imports are compile errors, a package (even a single file) can declare multiple `init` functions, all initialization completes before `main` runs, and a blank import exists to trigger that initialization. Packages under `internal/` can only be imported from within the tree rooted at the parent of `internal`.",
+      "materials": [
+        "spec",
+        "cmdgo"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about Go modules are true?",
+      "tags": [
+        "Go",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`go mod tidy` adds missing and removes unneeded requirements",
+        "`go.sum` records cryptographic hashes of module content",
+        "The go command uses minimal version selection to choose versions",
+        "`go get example.com/m` with no version picks the newest pre-release",
+        "`replace` directives in a dependency's `go.mod` apply to your build"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`tidy` syncs `go.mod` with the imports, `go.sum` stores hashes for verification, and builds use minimal version selection. `@latest` (the default) prefers the latest release over pre-releases, and `replace` directives only apply in the main module's `go.mod`.",
+      "materials": [
+        "modref"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which problems does `go vet` report with its default analyzers?",
+      "tags": [
+        "Go",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A `Printf` format verb that does not match its argument",
+        "A malformed struct tag such as `json:name`",
+        "Source code that is not gofmt-formatted",
+        "Unreachable code after a `return`",
+        "Tests in the package that fail"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "The printf, structtag and unreachable analyzers are part of the default vet suite. Formatting is gofmt's job, not vet's, and vet analyzes code statically without running tests (go test only runs a small vet subset before testing).",
+      "materials": [
+        "cmdgo"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `go test` flags are true?",
+      "tags": [
+        "Go",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`-run` takes a regular expression selecting tests to run",
+        "`-count=1` is the idiomatic way to bypass the test cache",
+        "`-v` makes all tests run in parallel",
+        "`-cover` enables coverage analysis",
+        "`-short` skips every test in the package"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "`-run` filters by regexp, `-count=1` disables caching, and `-cover` turns on coverage. `-v` only prints verbose output; parallelism comes from `t.Parallel`. `-short` merely sets `testing.Short()` so long tests can choose to shorten themselves.",
+      "materials": [
+        "cmdgo"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the Go race detector are true?",
+      "tags": [
+        "Go",
+        "Testing & Operations",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It finds races only in code paths that actually execute",
+        "It can raise memory use 5-10x and execution time 2-20x",
+        "The `-race` flag works with go test, go run, go build and go install",
+        "It reports deadlocks between goroutines",
+        "By default the program stops immediately at the first reported race"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The detector instruments memory accesses at run time, so it only sees races that happen in the run; the official doc quotes those overheads and lists all four commands. It does not detect deadlocks, and by default it prints a report and keeps running (exiting with status 66 at the end).",
+      "materials": [
+        "race"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about profiling with `go test` are true?",
+      "tags": [
+        "Go",
+        "Testing & Operations",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`-cpuprofile cpu.out` writes a CPU profile",
+        "`-memprofile mem.out` writes a memory profile",
+        "`go tool pprof` analyses the written profiles",
+        "`-blockprofile block.out` records goroutine blocking",
+        "Profiling flags require building with `-race`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "go test documents `-cpuprofile`, `-memprofile` and `-blockprofile`, and points to `go tool pprof` for viewing their output. Profiling is unrelated to the race detector and needs no special build mode.",
+      "materials": [
+        "cmdgo"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these make the compiler move a local variable to the heap?",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Returning the address of the local variable",
+        "Storing its address in a package-level variable",
+        "A goroutine closure that modifies the variable",
+        "A local `[4]int` used only within the function",
+        "Passing it by value to a function that is not inlined"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`go build -gcflags=-m` reports \"moved to heap\" when a variable's address outlives the frame: returned pointers, pointers saved in globals, and variables captured by a goroutine closure. A local array never referenced elsewhere stays on the stack, and passing by value copies it without taking its address.",
+      "materials": [
+        "gcguide"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the standard Go garbage collector are true?",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It is a concurrent mark-sweep collector",
+        "With `GOGC=100`, the heap can grow about 100% of the live heap before the next cycle",
+        "`GOMEMLIMIT` sets a soft memory limit for the runtime",
+        "`GOGC=off` with no memory limit turns garbage collection off",
+        "It frees memory using reference counting"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "The GC guide describes a concurrent, non-moving mark-sweep tracing collector whose heap target is set by GOGC, a soft limit set by GOMEMLIMIT (Go 1.19+), and GOGC=off disabling collection when no limit is set. It traces reachability rather than counting references.",
+      "materials": [
+        "gcguide"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about writing an `http.Handler` are true?",
+      "tags": [
+        "Go",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Handlers may run concurrently, so shared state needs synchronization",
+        "A handler must close `r.Body` itself",
+        "A `Write` before `WriteHeader` sends status 200",
+        "Calling `WriteHeader(500)` after `Write` changes the status to 500",
+        "`http.ListenAndServe` blocks and always returns a non-nil error"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "The server serves connections in their own goroutines, so handlers run concurrently; the first `Write` implies `WriteHeader(200)`; `ListenAndServe` only returns on failure. The server closes request bodies for you, and a `WriteHeader` after the header is sent is ignored with a \"superfluous WriteHeader\" log.",
+      "materials": [
+        "http"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the `net/http` client are true?",
+      "tags": [
+        "Go",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The caller must close `resp.Body` when finished with it",
+        "An `http.Client` is safe for concurrent use by multiple goroutines",
+        "Creating a new `http.Client` for each request is recommended",
+        "`http.NewRequest` sends the request immediately",
+        "When `err` is nil, `resp.Body` is nil"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "The docs require closing the response body and state that Clients are safe for concurrent use and should be reused. `NewRequest` only builds a request (`Client.Do` sends it), and on success `resp.Body` is always non-nil.",
+      "materials": [
+        "http"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `json.Marshal` are true?",
+      "tags": [
+        "Go",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Only exported struct fields are encoded",
+        "A field tagged `json:\"-\"` is omitted",
+        "`omitempty` omits a zero-length slice",
+        "Map keys are written in sorted order",
+        "An unexported field with a `json` tag is encoded"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "encoding/json ignores unexported fields even if tagged, skips `json:\"-\"` fields, treats empty slices as empty for `omitempty` and sorts map keys. Tags cannot make an unexported field visible to reflection-based encoding.",
+      "materials": [
+        "json"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about decoding JSON with `encoding/json` are true?",
+      "tags": [
+        "Go",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`json.Unmarshal` ignores JSON keys that match no struct field",
+        "`Decoder.DisallowUnknownFields` makes unknown keys an error",
+        "Keys match field names case-insensitively when no exact match exists",
+        "`json.Unmarshal` can decode into a non-pointer struct value",
+        "Struct fields missing from the JSON are reset to zero"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Unknown keys are ignored unless the decoder disallows them, and matching falls back to case-insensitive. Unmarshal requires a non-nil pointer and returns an InvalidUnmarshalError otherwise, and fields absent from the input keep their previous values.",
+      "materials": [
+        "json"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this code are true?\n\n```go\ntype T struct {\n\tA int    `json:\"a,omitempty\"`\n\tB string `json:\"b\"`\n\tc int\n\tD *int `json:\",omitempty\"`\n}\nout, _ := json.Marshal(T{c: 3})\n```",
+      "tags": [
+        "Go",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`out` is exactly `{\"b\":\"\"}`",
+        "`out` contains `\"a\":0`",
+        "`out` contains `\"c\":3`",
+        "`out` contains `\"D\":null`",
+        "`out` contains `\"B\":\"\"`"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "`A` is zero and `D` is a nil pointer, so `omitempty` drops both; `c` is unexported and never encoded; `B` is written under its tag name `b`. The result is exactly `{\"b\":\"\"}`.",
+      "materials": [
+        "json"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the `time` package are true?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`time.Duration` is an `int64` count of nanoseconds",
+        "Use `t.Equal(u)` rather than `==` to compare `time.Time` values",
+        "`time.Parse` layouts use tokens like `YYYY-MM-DD`",
+        "`time.Sleep(1)` pauses for one second",
+        "`time.Now().Unix()` returns milliseconds since the epoch"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "Duration is an int64 nanosecond count, and the docs recommend `Equal` because `==` also compares location and monotonic reading. Layouts are written with the reference time `2006-01-02`, `Sleep(1)` sleeps one nanosecond, and `Unix()` returns seconds (`UnixMilli` gives milliseconds).",
+      "materials": [
+        "time"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about timers and tickers in the `time` package are true?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`time.NewTicker(0)` panics",
+        "A `Ticker` drops ticks to make up for a slow receiver",
+        "`time.AfterFunc` calls its function in its own goroutine",
+        "`Timer.Reset` can be used to reuse a timer",
+        "`time.Tick` returns a `*time.Ticker`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "`NewTicker` panics on a non-positive interval, tickers adjust the interval or drop ticks for slow receivers, `AfterFunc` runs f in its own goroutine and `Reset` re-arms a timer. `time.Tick` returns only the channel (`<-chan Time`), not the Ticker.",
+      "materials": [
+        "time"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the `io.Reader` contract are true?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Read` may return `n > 0` together with `err == io.EOF`",
+        "`io.EOF` is the error `Read` returns when no more input is available",
+        "`io.Copy` returns `io.EOF` when it succeeds",
+        "`Read` must block until the whole buffer is filled",
+        "Returning `0, nil` from `Read` signals end of input"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "The io docs allow a final read to return data and EOF together, and define EOF as the end-of-input signal. A successful `io.Copy` returns nil, `Read` may return fewer bytes than requested, and a `0, nil` result means nothing happened, not EOF.",
+      "materials": [
+        "io"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these types implement `io.Writer`?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`*os.File`",
+        "`*bytes.Buffer`",
+        "`*strings.Builder`",
+        "`*strings.Reader`",
+        "`http.ResponseWriter`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "Files, byte buffers, string builders and HTTP response writers all have `Write([]byte) (int, error)`. `*strings.Reader` is read-only: it implements `io.Reader`, `io.Seeker` and friends but has no `Write` method.",
+      "materials": [
+        "io"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about ranging over integers and functions (Go 1.22+) are true?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`for i := range 10` iterates with `i` from 0 to 9",
+        "`for range 3 { }` compiles",
+        "The integer in `range n` must be a constant",
+        "Go 1.23 can range over a `func(yield func(int) bool)`",
+        "`for i := range n` panics when `n` is negative"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Go 1.22 added range over integers, counting from 0 to n-1, and the iteration variable may be omitted. Go 1.23 added range over iterator functions. `n` can be any integer expression, and a negative `n` runs zero iterations rather than panicking.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about Go 1.23 iterators are true?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`iter.Seq[V]` is defined as `func(yield func(V) bool)`",
+        "Calling `yield` again after it returned false causes a run-time panic",
+        "`maps.Keys` returns an `iter.Seq`",
+        "`slices.Collect` builds a slice from an `iter.Seq`",
+        "`break` is not allowed in a range-over-func loop"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "`iter.Seq` has that function type; when the loop body stops (break or return), yield returns false and further calls panic with \"range function continued iteration\". `maps.Keys` and `slices.Collect` were added in 1.23 for iterators. `break` and `return` are allowed; the compiler turns them into yield returning false.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the built-in `min`, `max` and `clear` (Go 1.21+) are true?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`min(3, 1, 2)` evaluates to 1",
+        "`max(\"a\", \"b\")` evaluates to `\"b\"`",
+        "`min(s...)` with a slice `s` compiles",
+        "`clear(s)` on a slice sets its length to 0",
+        "`max()` with no arguments returns the zero value"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "`min` and `max` take one or more ordered values, strings included. They cannot be called with `...` and need at least one argument. `clear` on a slice zeroes its elements but keeps its length.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `strings.Builder` are true?",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A non-zero `Builder` must not be copied",
+        "The zero value is ready to use",
+        "`String()` copies the accumulated bytes into a new string",
+        "`Grow(n)` preallocates room for at least `n` more bytes",
+        "It is safe for concurrent writes from several goroutines"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "The docs warn against copying a non-zero Builder, its zero value is usable and `Grow` reserves capacity. `String()` returns the accumulated bytes without copying, which is why Builder exists, and like most types it is not safe for concurrent use.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `gofmt` are true?",
+      "tags": [
+        "Go",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It uses tabs for indentation",
+        "It enforces a maximum line length",
+        "It has options to choose a brace style",
+        "`go build` fails on code that is not gofmt-formatted",
+        "`goimports` ships as part of the standard Go distribution"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "gofmt indents with tabs and aligns with spaces. It has no line-length limit or style options, `go build` does not check formatting, and goimports lives in golang.org/x/tools rather than the Go distribution.",
+      "materials": [
+        "gofmt"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the `testing` package are true?",
+      "tags": [
+        "Go",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`t.Run` starts a named subtest",
+        "`t.Cleanup` functions run after the test, last added first",
+        "A `TestMain(m *testing.M)` function can run setup and teardown",
+        "`t.Fatal` stops the whole test binary",
+        "Test files must have names ending in `_test.go`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "Subtests come from `t.Run`, cleanups run in LIFO order, TestMain wraps the test run, and only `_test.go` files are compiled for tests. `t.Fatal` stops only the current test (via runtime.Goexit); other tests keep running.",
+      "materials": [
+        "testing"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about native fuzzing in `go test` are true?",
+      "tags": [
+        "Go",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Fuzz targets are named `FuzzXxx` and take a `*testing.F`",
+        "Plain `go test` runs the seed corpus without fuzzing",
+        "`-fuzz` can fuzz several targets in one run",
+        "Failing inputs are saved under `testdata/fuzz`",
+        "Fuzzing works only on Linux"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Fuzz tests use the `Fuzz` prefix with `*testing.F`, seed inputs run as regular tests, and new failing inputs are written to `testdata/fuzz/FuzzXxx`. The `-fuzz` regexp must match exactly one target, and fuzzing is supported on other platforms such as macOS and Windows too.",
+      "materials": [
+        "testing"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about Go constants are true?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`const big = 1 << 100` compiles if never used as a sized integer",
+        "`iota` restarts at 0 in each `const` block",
+        "A constant can have a slice type",
+        "`const k = 10; var f float64 = k` compiles",
+        "A typed `int64` constant can be assigned to an `int` variable"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Untyped constants have arbitrary precision and take the type their context needs, and `iota` resets per declaration. Constants are limited to boolean, numeric and string types, and a typed constant needs a conversion to be assigned to a different type.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `switch` statements in Go are true?",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Cases do not fall through by default",
+        "`fallthrough` enters the next case body without testing its condition",
+        "A `switch` with no expression behaves like `switch true`",
+        "`fallthrough` is allowed in a type switch",
+        "A single `case` can list several values separated by commas"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "Go breaks automatically after each case, `fallthrough` jumps into the next body unconditionally, a tagless switch evaluates boolean cases, and cases may list several values. The compiler rejects `fallthrough` in a type switch.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In a Go 1.22+ module, which statements about this code are true when `len(urls) == 3`?\n\n```go\nfunc first(urls []string) string {\n\tch := make(chan string)\n\tfor _, u := range urls {\n\t\tgo func() { ch <- fetch(u) }()\n\t}\n\treturn <-ch\n}\n```",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Two goroutines stay blocked forever on their send",
+        "Making `ch` buffered with capacity `len(urls)` prevents that leak",
+        "Each goroutine sees its own copy of `u`",
+        "It always returns the result for `urls[0]`",
+        "It panics when `first` returns"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Only one value is received, so two senders block on the unbuffered channel forever; a buffer with room for every result lets them finish. Since Go 1.22, each iteration has its own `u`. The fastest goroutine wins, not necessarily the first URL, and blocked goroutines leak silently rather than panicking.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this code are true?\n\n```go\nx := 1\nif true {\n\tx, y := 2, 3\n\t_, _ = x, y\n}\nfmt.Println(x)\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It prints `1`",
+        "It prints `2`",
+        "It fails to compile because `x` is already declared",
+        "The inner `x` is the same variable as the outer `x`",
+        "`y` can still be used after the `if` block"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "The `if` body is a new scope, so `:=` declares new `x` and `y` that shadow the outer names. The outer `x` stays 1 and is printed, and the inner `y` goes out of scope at the closing brace.",
+      "materials": [
+        "spec"
+      ]
+    }
+  ]
+}

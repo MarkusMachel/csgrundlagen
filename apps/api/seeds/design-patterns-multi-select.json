@@ -1,0 +1,1325 @@
+{
+  "name": "Design patterns and principles: pick all that apply",
+  "materials": [
+    {
+      "key": "rg-patterns",
+      "type": "link",
+      "title": "Design Patterns Catalog",
+      "url": "https://refactoring.guru/design-patterns/catalog",
+      "author": "Alexander Shvets",
+      "description": "Illustrated catalog of the 22 classic GoF patterns with intent, structure, applicability and trade-offs."
+    },
+    {
+      "key": "rg-smells",
+      "type": "link",
+      "title": "Code Smells",
+      "url": "https://refactoring.guru/refactoring/smells",
+      "author": "Alexander Shvets",
+      "description": "Catalog of code smells grouped into Bloaters, OO Abusers, Change Preventers, Dispensables and Couplers."
+    },
+    {
+      "key": "fowler-eaa",
+      "type": "link",
+      "title": "Catalog of Patterns of Enterprise Application Architecture",
+      "url": "https://martinfowler.com/eaaCatalog/",
+      "author": "Martin Fowler",
+      "description": "Summaries of the PoEAA patterns such as Repository, Unit of Work, Active Record, Data Mapper and Identity Map."
+    },
+    {
+      "key": "fowler-cqrs",
+      "type": "article",
+      "title": "CQRS",
+      "url": "https://martinfowler.com/bliki/CQRS.html",
+      "author": "Martin Fowler",
+      "description": "Explains Command Query Responsibility Segregation, its roots in CQS and why it should be used sparingly."
+    },
+    {
+      "key": "fowler-es",
+      "type": "article",
+      "title": "Event Sourcing",
+      "url": "https://martinfowler.com/eaaDev/EventSourcing.html",
+      "author": "Martin Fowler",
+      "description": "Describes capturing every change to application state as a sequence of events and what that enables."
+    },
+    {
+      "key": "fowler-di",
+      "type": "article",
+      "title": "Inversion of Control Containers and the Dependency Injection pattern",
+      "url": "https://martinfowler.com/articles/injection.html",
+      "author": "Martin Fowler",
+      "description": "The article that named dependency injection, its three forms, and compared it with Service Locator."
+    },
+    {
+      "key": "fowler-anemic",
+      "type": "article",
+      "title": "AnemicDomainModel",
+      "url": "https://martinfowler.com/bliki/AnemicDomainModel.html",
+      "author": "Martin Fowler",
+      "description": "Describes the anemic domain model anti-pattern and quotes Evans on keeping the application layer thin."
+    },
+    {
+      "key": "fowler-yagni",
+      "type": "article",
+      "title": "Yagni",
+      "url": "https://martinfowler.com/bliki/Yagni.html",
+      "author": "Martin Fowler",
+      "description": "Explains You Aren't Gonna Need It, the costs of presumptive features, and what Yagni does not forbid."
+    },
+    {
+      "key": "vernon-aggregate",
+      "type": "article",
+      "title": "Effective Aggregate Design",
+      "url": "https://www.dddcommunity.org/library/vernon_2011/",
+      "author": "Vaughn Vernon",
+      "description": "Three-part essay giving rules of thumb for designing DDD aggregates."
+    },
+    {
+      "key": "msio-outbox",
+      "type": "article",
+      "title": "Pattern: Transactional outbox",
+      "url": "https://microservices.io/patterns/data/transactional-outbox.html",
+      "author": "Chris Richardson",
+      "description": "Describes reliably publishing messages by writing them to an outbox table in the same local transaction."
+    },
+    {
+      "key": "clean-arch",
+      "type": "article",
+      "title": "The Clean Architecture",
+      "url": "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html",
+      "author": "Robert C. Martin",
+      "description": "Introduces the concentric-circle Clean Architecture and its Dependency Rule, relating it to Hexagonal Architecture."
+    },
+    {
+      "key": "uncle-srp",
+      "type": "article",
+      "title": "The Single Responsibility Principle",
+      "url": "https://blog.cleancoder.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html",
+      "author": "Robert C. Martin",
+      "description": "Clarifies SRP as gathering together things that change for the same reasons, for the same people."
+    },
+    {
+      "key": "wiki-solid",
+      "type": "link",
+      "title": "SOLID",
+      "url": "https://en.wikipedia.org/wiki/SOLID",
+      "author": "Wikipedia",
+      "description": "Overview of the five SOLID principles of object-oriented design with links to each principle."
+    },
+    {
+      "key": "azure-patterns",
+      "type": "link",
+      "title": "Cloud Design Patterns",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/",
+      "author": "Microsoft",
+      "description": "Catalog of cloud and architecture patterns including Saga, Strangler Fig, Anti-Corruption Layer and CQRS."
+    },
+    {
+      "key": "ms-ef",
+      "type": "article",
+      "title": "Design the infrastructure persistence layer",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design",
+      "author": "Microsoft",
+      "description": "Explains the Repository and Unit of Work patterns in .NET and how EF Core's DbContext relates to them."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are structural patterns in the Gang of Four catalog?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Adapter",
+        "Composite",
+        "Observer",
+        "Flyweight",
+        "Builder"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Adapter, Composite and Flyweight are GoF structural patterns: they deal with how classes and objects are composed. Observer is behavioral (one-to-many notification), and Builder is creational (step-by-step construction).",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are creational patterns in the Gang of Four catalog?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Prototype",
+        "Bridge",
+        "Mediator",
+        "Composite",
+        "Chain of Responsibility"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "Only Prototype is creational: it creates objects by copying an existing instance. Bridge and Composite are structural; Mediator and Chain of Responsibility are behavioral.",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are behavioral patterns in the Gang of Four catalog?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Visitor",
+        "Memento",
+        "Proxy",
+        "Interpreter",
+        "State"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "explanation": "Visitor, Memento, Interpreter and State are all GoF behavioral patterns, concerned with algorithms and how responsibilities are assigned between objects. Proxy is structural: it places a surrogate in front of another object.",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which patterns wrap an object behind the same interface as the object they wrap?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Decorator",
+        "Proxy",
+        "Adapter",
+        "Facade",
+        "Bridge"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "A Decorator and a Proxy both implement the same interface as their wrapped object so clients cannot tell the difference. An Adapter exposes a different interface than its adaptee, a Facade offers a new simplified interface over a whole subsystem, and Bridge splits an abstraction from a separate implementation interface rather than wrapping one object behind its own interface.",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this code are true?\n\n```csharp\npublic static double Area(object shape)\n{\n    if (shape is Circle c) return Math.PI * c.R * c.R;\n    if (shape is Square s) return s.Side * s.Side;\n    throw new ArgumentException(\"Unknown shape\");\n}\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Supporting a new `Triangle` requires editing this method",
+        "It violates the Open/Closed Principle",
+        "A polymorphic `Area()` on each shape type would remove the type checks",
+        "It violates Liskov Substitution because `Square` is not a `Circle`",
+        "It is an implementation of the Visitor pattern"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Every new shape forces a change to this function, which is the classic Open/Closed violation; moving `Area()` onto each shape (polymorphism) lets new shapes be added without touching existing code. Liskov Substitution concerns subtypes honouring a base type's contract, and the two shapes are unrelated here. Visitor uses double dispatch through `Accept`/`Visit` methods, not a chain of type checks.",
+      "materials": [
+        "wiki-solid"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these subclass behaviours violate the Liskov Substitution Principle?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Throwing an exception the base type's contract does not allow",
+        "Requiring stricter preconditions than the base method",
+        "Guaranteeing weaker postconditions than the base method",
+        "Returning a more specific subtype from an overridden method",
+        "Accepting a wider range of inputs than the base method"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "A subtype must be usable wherever the base is expected, so it may not strengthen preconditions, weaken postconditions, or throw exceptions callers of the base were not promised. Covariant return types (returning a more derived type) and contravariant inputs (accepting more) keep every caller's expectations intact, so they are allowed.",
+      "materials": [
+        "wiki-solid"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which forms of dependency injection does Martin Fowler describe in his article that named the pattern?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Constructor injection",
+        "Setter injection",
+        "Interface injection",
+        "Service Locator lookup",
+        "Static factory lookup"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Fowler names three styles of dependency injection: constructor injection, setter injection and interface injection. He presents Service Locator as an alternative to injection, in which a class actively asks a registry for its dependencies, and a static factory lookup is likewise the class fetching its own dependency rather than having it injected.",
+      "materials": [
+        "fowler-di"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are examples of Inversion of Control?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A framework calling a template method you overrode",
+        "A DI container constructing your controller and its dependencies",
+        "A GUI toolkit invoking your click event handler",
+        "Your `Main` loop polling `Console.ReadLine` for commands",
+        "Your code calling `new SqlConnection()` itself"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Inversion of Control (the Hollywood principle, \"don't call us, we'll call you\") means a framework or container is in charge of the flow and calls into your code: overridden hooks, container-built objects and event handlers all qualify. A main loop that polls for input and code that constructs its own dependencies keep control in your code, so neither is inverted.",
+      "materials": [
+        "fowler-di"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these decisions violate YAGNI?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Building a plugin system that no current requirement needs",
+        "Making prices multi-currency in case the company expands abroad",
+        "Writing automated tests for the feature you are shipping now",
+        "Refactoring messy code you are changing today",
+        "Supporting three database vendors when only one is used"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "YAGNI warns against building capabilities for presumed future needs: an unneeded plugin system, speculative multi-currency support and support for unused database vendors all fit. Fowler stresses that YAGNI does not apply to effort that makes software easier to change, so tests for current work and refactoring code you are touching are not violations.",
+      "materials": [
+        "fowler-yagni"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In the sense Hunt and Thomas gave DRY (\"every piece of knowledge must have a single, authoritative representation\"), which of these are DRY violations?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The same discount rule coded separately in the frontend and the backend",
+        "Two functions with identical code that encode unrelated business rules",
+        "A sales-tax rate hard-coded as a literal in five places",
+        "A comment that restates step by step what the code below it does",
+        "Generating DTO classes from a single shared schema file"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "DRY is about duplicated knowledge: a business rule implemented twice, a tax rate repeated in five places and a comment that duplicates the code all represent the same knowledge more than once. Identical code that expresses two unrelated rules is coincidental duplication, not duplicated knowledge, and generating code from one schema is a way to keep a single authoritative source.",
+      "materials": [
+        "rg-smells"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are reasons the Gang of Four give for favoring object composition over class inheritance?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Inheritance exposes a subclass to its parent's implementation details",
+        "Composed objects are accessed only through their interfaces",
+        "Composition always produces faster code than inheritance",
+        "Implementation inherited from a parent is fixed at compile time",
+        "Composition lets behaviour be replaced at runtime"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "explanation": "The GoF argue that inheritance breaks encapsulation by exposing parent internals, that inherited implementation is fixed at compile time, while composed objects are reached only through their interfaces and can be swapped at runtime. They make no performance claim; composition often adds an extra indirection.",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Under the Law of Demeter, method `M` of object `O` may call methods on which of these?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`O` itself",
+        "`M`'s parameters",
+        "Objects created inside `M`",
+        "`O`'s direct component fields",
+        "Objects returned by calling a method on a parameter"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "The Law of Demeter (\"talk only to your immediate friends\") allows calls on `O` itself, on `M`'s parameters, on objects `M` creates and on `O`'s direct components. Calling methods on an object obtained from another call, such as `param.GetX().DoY()`, reaches through a stranger, which is what the law forbids.",
+      "materials": [
+        "rg-smells"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these calls violate the Law of Demeter? Assume `_repository` and `_logger` are fields, `builder` returns itself from each `With...` method, and `order` and `invoice` are parameters.",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`order.Customer.Wallet.Debit(10)`",
+        "`builder.WithName(\"a\").WithAge(3)`",
+        "`_repository.Save(order)`",
+        "`invoice.GetLines()[0].GetProduct().GetPrice()`",
+        "`_logger.Info(\"saved\")`"
+      ],
+      "correctIndices": [
+        0,
+        3
+      ],
+      "explanation": "Reaching through a customer to its wallet, or through invoice lines to a product's price, talks to strangers returned by other calls (the Message Chains smell). A fluent builder keeps calling the same object, so the dots do not reach a stranger, and calling a field or passing a parameter to a field are both permitted friends.",
+      "materials": [
+        "rg-smells"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which kinds of Proxy are described in the Gang of Four book?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Remote proxy",
+        "Virtual proxy",
+        "Protection proxy",
+        "Adapter proxy",
+        "Template proxy"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The GoF list remote proxies (a local stand-in for an object in another address space), virtual proxies (create expensive objects on demand), protection proxies (check access rights) and smart references. \"Adapter proxy\" and \"template proxy\" are not GoF terms; changing an interface is Adapter's job.",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are commonly cited drawbacks of the Singleton pattern?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It introduces hidden global state",
+        "It makes unit tests harder to isolate",
+        "It handles two jobs: its own behaviour and controlling its instance count",
+        "It prevents lazy initialization of the instance",
+        "It hides dependencies that callers fetch through a static accessor"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "A Singleton is global state reached through a static accessor, which hides dependencies and makes tests hard to isolate, and it mixes its real responsibility with managing its own instance, which refactoring.guru notes violates SRP. Lazy initialization is not prevented; it is one of the most common ways to implement a Singleton.",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the Observer pattern are true?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A subject notifies its registered observers when its state changes",
+        "Observers can subscribe and unsubscribe at runtime",
+        "Observers that never unsubscribe can cause memory leaks",
+        "The pattern guarantees the order in which observers are notified",
+        "The pattern requires a message broker between subject and observers"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Observer defines a one-to-many dependency where the subject notifies whatever observers are currently subscribed, and observers that forget to unsubscribe keep the subject referencing them (the lapsed listener problem). The pattern makes no promise about notification order, and it is an in-process object relationship that needs no broker.",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are participants in the Gang of Four Command pattern?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Invoker",
+        "Receiver",
+        "Client",
+        "Caretaker",
+        "Originator"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Command's participants are Command, ConcreteCommand, Client (creates the command and sets its receiver), Invoker (asks the command to run) and Receiver (does the actual work). Caretaker and Originator are participants of Memento.",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are commonly cited real-world examples of Chain of Responsibility?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The ASP.NET Core middleware pipeline",
+        "Express.js middleware calling `next()`",
+        "DOM events bubbling up through parent elements",
+        "A SQL query optimizer choosing an execution plan",
+        "An abstract factory choosing a widget family"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "In each of the first three, a request passes along a chain of handlers, each of which can handle it, stop it, or pass it on. A query optimizer compares candidate plans by cost rather than passing a request along handlers, and choosing a product family is Abstract Factory.",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statement about the Mediator pattern is true?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Colleague objects communicate through the mediator instead of directly",
+        "It is a structural pattern in the Gang of Four catalog",
+        "Colleagues keep direct references to each other for speed",
+        "It removes the need for any interfaces between objects",
+        "The mediator must be implemented as a Singleton"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "Mediator centralizes interaction so colleagues talk to the mediator rather than to each other. It is a behavioral pattern; keeping direct references between colleagues is what it removes; colleagues usually still depend on a mediator interface; and nothing requires a single global mediator instance.",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are consequences of applying the Visitor pattern?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Adding a new operation requires no change to the element classes",
+        "Adding a new element class requires changing every visitor",
+        "Operations are selected by double dispatch",
+        "Element classes no longer need an `Accept` method",
+        "Visitors may need access to element internals, weakening encapsulation"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "Visitor makes new operations cheap (write a new visitor) but new element types expensive (every visitor must change), relies on double dispatch through `element.Accept(visitor)` calling `visitor.VisitX(this)`, and often forces elements to expose state. The `Accept` method is essential to the pattern, not removed by it.",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the Composite pattern are true?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Clients treat single objects and groups of objects uniformly",
+        "It models part-whole hierarchies as trees",
+        "Operations on a composite often recurse into its children",
+        "It converts one interface into another that clients expect",
+        "It saves memory by sharing state among many objects"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Composite lets leaves and containers share one component interface so clients can treat them alike, building tree-shaped part-whole hierarchies where a container's operation typically delegates to its children. Converting interfaces is Adapter, and sharing state to save memory is Flyweight.",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are good candidates for the Flyweight pattern?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Character glyph objects in a text editor",
+        "Tree objects in a forest scene sharing mesh and texture data",
+        "A per-user shopping cart holding that user's items",
+        "A database transaction object for one request"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "Flyweight pays off when there are huge numbers of fine-grained objects whose intrinsic state can be shared, such as glyphs (shared font and shape) or trees (shared mesh and texture, with position kept extrinsic). A shopping cart and a transaction are few in number and hold state unique to one user or request, so there is nothing to share.",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which problems is the Bridge pattern designed to solve?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Avoiding a class explosion from two independent dimensions, such as shape and renderer",
+        "Letting an abstraction and its implementation vary independently",
+        "Making an existing class with an incompatible interface fit a client",
+        "Selecting or switching an implementation at runtime",
+        "Adding responsibilities to a single object dynamically"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Bridge splits an abstraction hierarchy from an implementation hierarchy so both can grow independently instead of multiplying subclasses, and the GoF note that the implementation can be configured or switched at runtime. Retrofitting an incompatible existing class is Adapter, and adding responsibilities to one object dynamically is Decorator.",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the Prototype pattern are true?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "New objects are created by copying an existing instance",
+        "The clone operation must decide between shallow and deep copying",
+        "It always relies on reflection to find the class to instantiate",
+        "It is a structural pattern in the Gang of Four catalog"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "Prototype creates objects by asking an existing instance to clone itself, and the implementation has to choose how deeply referenced objects are copied. It needs no reflection because the prototype object itself knows how to copy itself, and it is creational, not structural.",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the Gang of Four Adapter pattern are true?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "An object adapter wraps the adaptee through composition",
+        "A class adapter inherits from both the target and the adaptee",
+        "It requires modifying the adaptee's source code",
+        "It changes the adaptee's interface for all of its other clients"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "The GoF describe two variants: an object adapter that holds a reference to the adaptee, and a class adapter that uses multiple inheritance from target and adaptee. The point of Adapter is to reuse a class without touching its source, and other clients keep using the adaptee's original interface directly.",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In EF Core, which statements about `DbContext` and the Unit of Work pattern are true?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`DbContext` acts as a Unit of Work",
+        "By default, `SaveChanges` applies all pending changes in one transaction",
+        "`DbSet<T>.Add` immediately executes an `INSERT` statement",
+        "Results of an `AsNoTracking()` query are tracked for `SaveChanges`",
+        "Entities returned by normal queries are tracked by the change tracker"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "A `DbContext` tracks loaded and added entities in its change tracker and writes them all out when `SaveChanges` is called, inside a single transaction when the provider supports it, which is exactly Fowler's Unit of Work. `Add` only marks the entity as Added; no SQL runs until `SaveChanges`. `AsNoTracking()` exists precisely to skip change tracking.",
+      "materials": [
+        "ms-ef",
+        "fowler-eaa"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about CQRS are true?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It uses different models for updating and for reading information",
+        "The read side and the write side may use separate data stores",
+        "It can only be used together with event sourcing",
+        "Fowler cautions that it adds risky complexity for most systems",
+        "Every query must travel through a message broker"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "CQRS splits the conceptual model into a command (write) model and a query (read) model, which may live in different stores, and Fowler warns that for most systems it adds risky complexity. Event sourcing pairs well with CQRS but is not required, and nothing in CQRS mandates a broker for queries.",
+      "materials": [
+        "fowler-cqrs"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these methods violate Bertrand Meyer's Command-Query Separation?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`int Pop()` that removes and returns the top item",
+        "`int Count()` that returns the number of items",
+        "`void Push(int item)` that adds an item",
+        "`bool TryDequeue(out T item)` that removes an item and reports success",
+        "`int Peek()` that returns the top item without removing it"
+      ],
+      "correctIndices": [
+        0,
+        3
+      ],
+      "explanation": "Command-Query Separation says a method should either change state (a command) or return a result (a query), not both. `Pop` and `TryDequeue` both mutate the collection and return a value. `Count` and `Peek` are pure queries, and `Push` is a pure command.",
+      "materials": [
+        "fowler-cqrs"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are consequences of using Event Sourcing?",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A complete audit log of every state change",
+        "Past states can be reconstructed by replaying events",
+        "Changing event schemas requires a versioning strategy",
+        "Long event streams may need snapshots for fast loading",
+        "Ad hoc queries over current state need no projections"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "Storing every change as an event gives a full audit trail and lets you rebuild state as of any point in time, but stored events are immutable, so schema evolution needs versioning or upcasting, and replaying very long streams calls for snapshots. Because the store holds events rather than current state, querying current state usually needs projections or read models.",
+      "materials": [
+        "fowler-es"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about choreographed and orchestrated sagas are true?",
+      "tags": [
+        "Design Principles & Patterns",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "In choreography, participants react to each other's events without a central coordinator",
+        "In orchestration, a coordinator tells each participant which local transaction to run",
+        "The pivot transaction is the go/no-go point after which the remaining steps are retried until they succeed",
+        "Compensating transactions undo work by restoring a database snapshot",
+        "A saga holds locks in all participating services until it completes"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Sagas coordinate local transactions either by choreography (events) or orchestration (a central coordinator). Steps before the pivot are compensatable, steps after it are retryable and must eventually succeed. Compensations are new business transactions that semantically undo earlier steps, not snapshot restores, and each local transaction commits immediately, so no locks are held across the whole saga.",
+      "materials": [
+        "azure-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the Transactional Outbox pattern are true?",
+      "tags": [
+        "Design Principles & Patterns",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A relay publishes outbox rows by polling the table or tailing the transaction log",
+        "Consumers should be idempotent because a message may be published more than once",
+        "It avoids a dual write to the database and the message broker",
+        "It needs a two-phase commit between the database and the broker",
+        "Messages are sent to the broker before the database transaction commits"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The service writes the message to an outbox table in the same local transaction as its business data, then a relay (polling publisher or transaction log tailing) forwards it, so there is no dual write. The relay can crash after publishing but before marking the row sent, so duplicates are possible and consumers must be idempotent. The point is to avoid 2PC, and publishing happens only after the commit.",
+      "materials": [
+        "msio-outbox"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In Hexagonal Architecture (Ports and Adapters), which of these are adapters?",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A REST controller that turns HTTP requests into use-case calls",
+        "A SQL implementation of an `OrderRepository` interface",
+        "The `OrderRepository` interface defined by the application core",
+        "The `Order` domain entity",
+        "A Kafka consumer that turns messages into use-case calls"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "Adapters translate between the outside world and the core's ports: driving adapters such as REST controllers and message consumers call in, and driven adapters such as a SQL repository implement interfaces the core needs. The `OrderRepository` interface owned by the core is a port, and the `Order` entity is part of the core itself.",
+      "materials": [
+        "clean-arch"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In Robert C. Martin's Clean Architecture diagram, which of these belong to the two innermost circles (Entities and Use Cases)?",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Enterprise-wide business rules",
+        "Application-specific business rules",
+        "Use case output port interfaces",
+        "Web framework controllers",
+        "ORM mappings and database schema"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Entities hold enterprise-wide business rules and Use Cases hold application-specific rules, and the use case output port interface lives in the use case circle so outer layers implement it, preserving the Dependency Rule. Controllers belong to the Interface Adapters circle, and the database and its mappings belong to the outer circles.",
+      "materials": [
+        "clean-arch"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In a typical online ordering system, which of these are best modeled as DDD value objects?",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A `Money` amount with its currency",
+        "A `DateRange` for a promotion",
+        "A shipping address copied onto an order",
+        "A `Customer` with an account history",
+        "An `Order` that moves through statuses"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Value objects are defined by their attributes, are immutable and can be replaced wholesale: an amount, a date range and an address snapshot on an order fit. A customer and an order have identities that persist while their attributes change over time, so they are entities.",
+      "materials": [
+        "ms-ef"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are Vaughn Vernon's rules of thumb for aggregate design?",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Model true invariants inside consistency boundaries",
+        "Design small aggregates",
+        "Reference other aggregates by identity",
+        "Use eventual consistency outside the aggregate boundary",
+        "Modify several aggregates in one transaction by default"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "In Effective Aggregate Design, Vernon advises modeling true invariants in consistency boundaries, designing small aggregates, referencing other aggregates only by identity and using eventual consistency between aggregates. Changing one aggregate per transaction is the default; updating several in one transaction is the exception he warns against.",
+      "materials": [
+        "vernon-aggregate"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are tactical building blocks in Eric Evans's Domain-Driven Design?",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Entity",
+        "Value Object",
+        "Factory",
+        "Bounded Context",
+        "Domain Service"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "Entities, value objects, factories and domain services are tactical building blocks for a model, along with aggregates, repositories and modules. A bounded context is a strategic design concept that sets the boundary within which a model applies.",
+      "materials": [
+        "ms-ef"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about DDD domain events are true?",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "They are named in the past tense, such as `OrderPlaced`",
+        "They record something that has already happened in the domain",
+        "A handler can reject one to undo the fact it records",
+        "They must always be published to an external message broker"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "A domain event records a fact that already happened, which is why it uses a past-tense name. Because it is a fact, handlers can react to it but cannot veto it. Domain events are often dispatched in process to other parts of the same bounded context; integration events are the ones that usually cross a broker.",
+      "materials": [
+        "fowler-es"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which code smells does refactoring.guru classify as Change Preventers?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Divergent Change",
+        "Shotgun Surgery",
+        "Feature Envy",
+        "Parallel Inheritance Hierarchies",
+        "Long Method"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Change Preventers are smells where one change forces many edits: Divergent Change, Shotgun Surgery and Parallel Inheritance Hierarchies. Feature Envy is classified as a Coupler, and Long Method as a Bloater.",
+      "materials": [
+        "rg-smells"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these code smell definitions are correct?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Shotgun Surgery: one change forces small edits in many classes",
+        "Divergent Change: one class is changed for many unrelated reasons",
+        "Feature Envy: a method uses another object's data more than its own",
+        "Primitive Obsession: using small objects where primitives would do",
+        "Middle Man: a class that does too much work itself"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The first three definitions are correct. Primitive Obsession is the reverse: using primitives such as strings and ints where small objects (Money, Email) would fit. Middle Man is a class that delegates almost all its work to another class, not one that does too much.",
+      "materials": [
+        "rg-smells"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these is a recognized anti-pattern?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Golden Hammer",
+        "Strangler Fig",
+        "Anti-Corruption Layer",
+        "Circuit Breaker",
+        "Sidecar"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "Golden Hammer is the anti-pattern of applying a familiar tool or technique to every problem. Strangler Fig, Anti-Corruption Layer, Circuit Breaker and Sidecar are all patterns in Microsoft's cloud design pattern catalog.",
+      "materials": [
+        "azure-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which patterns help replace or integrate a legacy system incrementally?",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Strangler Fig",
+        "Anti-Corruption Layer",
+        "Flyweight",
+        "Memento",
+        "Prototype"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "Strangler Fig routes features one by one from the legacy system to new code until the old system can be retired, and an Anti-Corruption Layer translates between the legacy model and the new one so the legacy model does not leak in. Flyweight, Memento and Prototype are object-level GoF patterns unrelated to migration.",
+      "materials": [
+        "azure-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about Fowler's Active Record pattern are true?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Each object wraps a table row and has its own save and delete methods",
+        "Domain objects stay completely unaware of the database",
+        "It works well when domain logic closely mirrors the table structure",
+        "It requires a separate Data Mapper layer",
+        "It couples domain objects to the database schema"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "An Active Record object carries both data and persistence logic for one row, which suits simple domains that match the schema but ties the objects to the table layout. Keeping domain objects ignorant of the database is the point of a Data Mapper, which Active Record does without.",
+      "materials": [
+        "fowler-eaa"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Robert C. Martin defines the Single Responsibility Principle as \"a module should be responsible to one, and only one, actor\". Which of these classes violates it?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "An `Employee` class with `CalculatePay` (finance), `ReportHours` (operations) and `Save` (DBAs)",
+        "A `PayCalculator` used only by the payroll team",
+        "A `Money` value type with `Add` and `Subtract` methods",
+        "An `OrderValidator` with five rules all owned by the sales team"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "Martin's own example is an `Employee` whose methods serve three different actors (CFO, COO, CTO), so a change requested by one can break the others. The other classes may have several methods, but each serves a single actor, which SRP allows.",
+      "materials": [
+        "uncle-srp"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which designs violate the Interface Segregation Principle?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A print-only printer forced to implement `IMachine` with `Print`, `Scan` and `Fax`",
+        "A client depending on a 30-method `IOrderService` while calling one method",
+        "Splitting `IRepository` into separate `IReader` and `IWriter` interfaces",
+        "A role interface `IShippable` with a single method"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "ISP says clients should not be forced to depend on methods they do not use: a printer stuck with scan and fax, and a client coupled to 29 unused methods, both break it. Splitting a fat interface into role interfaces, or defining small role interfaces in the first place, is how you follow ISP.",
+      "materials": [
+        "wiki-solid"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this code are true?\n\n```csharp\npublic interface INotifier { void Send(string message); }\n\npublic class EmailNotifier : INotifier\n{\n    public void Send(string message) { /* send email */ }\n}\n\npublic class SmsNotifier : INotifier\n{\n    private readonly INotifier _inner;\n    public SmsNotifier(INotifier inner) => _inner = inner;\n    public void Send(string message)\n    {\n        _inner.Send(message);\n        /* send SMS */\n    }\n}\n```",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`SmsNotifier` is a Decorator",
+        "An `SmsNotifier` can be passed wherever an `INotifier` is expected",
+        "The wrapping order determines the order in which channels send",
+        "Adding a Slack channel requires modifying `EmailNotifier`",
+        "`SmsNotifier` is an Adapter because it changes the interface"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`SmsNotifier` implements `INotifier` and wraps another `INotifier`, adding behaviour around the delegated call, which is a Decorator usable anywhere the interface is expected; because it calls `_inner` first, the nesting order decides which channel sends first. A Slack channel would be one more decorator, leaving `EmailNotifier` untouched, and the interface is unchanged, so it is not an Adapter.",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which techniques make a message consumer idempotent?",
+      "tags": [
+        "Design Principles & Patterns",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Recording processed message IDs in the same transaction as the side effect",
+        "Applying changes as upserts keyed by a business identifier",
+        "Relying on the broker never to redeliver a message",
+        "Running more consumer instances in parallel",
+        "Acknowledging each message before processing it"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "An idempotent consumer makes repeated delivery harmless, either by remembering processed message IDs atomically with the effect or by making the operation naturally repeatable, such as an upsert on a business key. At-least-once brokers do redeliver, more instances do not prevent duplicates, and acknowledging before processing turns delivery into at-most-once (risking lost messages) without making the processing idempotent.",
+      "materials": [
+        "msio-outbox"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are signs of the Speculative Generality code smell?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Parameters kept unused \"for later\"",
+        "Hooks and abstractions that no current caller uses",
+        "Functions whose only callers are test cases",
+        "A method longer than a screen of code",
+        "The same code appearing in two sibling classes"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Speculative Generality is code written for anticipated needs that never arrived: unused parameters, unused hooks or abstract layers, and code exercised only by tests. It is the code-level form of a YAGNI violation. A very long method is the Long Method smell, and repeated code is Duplicate Code.",
+      "materials": [
+        "rg-smells",
+        "fowler-yagni"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In DDD layering, which responsibilities belong in an application service rather than in the domain model?",
+      "tags": [
+        "Design Principles & Patterns",
+        "Architecture & DDD"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Orchestrating a use case: load an aggregate, invoke it, persist it",
+        "Controlling the transaction boundary for the use case",
+        "Holding the domain's pricing and discount rules",
+        "Enforcing an aggregate's invariants on its own fields"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "Evans describes the application layer as thin: it coordinates tasks, manages transactions and delegates work to domain objects, holding no business rules. Pricing rules and aggregate invariants are business logic that belongs in the domain; putting them in services leads to the anemic domain model Fowler criticizes.",
+      "materials": [
+        "fowler-anemic"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the Iterator pattern are true?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It traverses a collection without exposing its internal representation",
+        "C# `foreach` works through `IEnumerable` and `IEnumerator`",
+        "JavaScript generator functions return iterator objects",
+        "Several traversals of one collection can be in progress at once",
+        "It requires the collection to support random access by index"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "Iterator moves traversal into a separate object, so the collection's structure stays hidden and each iterator keeps its own position, allowing several traversals at the same time. C#'s `IEnumerable`/`IEnumerator` and JavaScript's iterator protocol (which generators implement) are built-in versions. Sequential `next` access is all it needs, which is why it works for linked lists and trees.",
+      "materials": [
+        "rg-patterns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are consequences of Abstract Factory listed by the Gang of Four?",
+      "tags": [
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It isolates clients from concrete product classes",
+        "It makes exchanging whole product families easy",
+        "It promotes consistency among products used together",
+        "Supporting a new kind of product is difficult",
+        "It reduces the total number of classes in the system"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "The GoF list exactly four consequences: concrete classes are isolated, product families are easy to swap, products from one family are used consistently, and adding a new product kind is hard because every factory interface and implementation must change. The pattern adds factory classes, so it does not reduce class count.",
+      "materials": [
+        "rg-patterns"
+      ]
+    }
+  ]
+}

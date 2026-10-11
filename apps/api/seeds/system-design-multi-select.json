@@ -1,0 +1,1362 @@
+{
+  "name": "System design: pick all that apply",
+  "materials": [
+    {
+      "key": "primer",
+      "type": "article",
+      "title": "The System Design Primer",
+      "url": "https://github.com/donnemartin/system-design-primer",
+      "author": "Donne Martin",
+      "description": "A free, community-maintained guide to large-scale system design: load balancing, caching, CDNs, replication, sharding, CAP and latency numbers."
+    },
+    {
+      "key": "backoff",
+      "type": "article",
+      "title": "Timeouts, retries, and backoff with jitter",
+      "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+      "author": "Marc Brooker (Amazon Builders' Library)",
+      "description": "How Amazon picks timeouts, bounds retries and uses backoff with jitter so failures do not cascade."
+    },
+    {
+      "key": "slo",
+      "type": "article",
+      "title": "Service Level Objectives",
+      "url": "https://sre.google/sre-book/service-level-objectives/",
+      "author": "Google SRE Book",
+      "description": "Defines SLIs, SLOs and SLAs, explains percentiles and how error budgets follow from an SLO."
+    },
+    {
+      "key": "monitoring",
+      "type": "article",
+      "title": "Monitoring Distributed Systems",
+      "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+      "author": "Google SRE Book",
+      "description": "Introduces the four golden signals, black-box versus white-box monitoring and paging on symptoms."
+    },
+    {
+      "key": "kafka",
+      "type": "link",
+      "title": "Apache Kafka documentation",
+      "url": "https://kafka.apache.org/documentation/",
+      "author": "Apache Software Foundation",
+      "description": "Official Kafka documentation covering partitions, offsets, consumer groups, retention and delivery semantics."
+    },
+    {
+      "key": "rfc9110",
+      "type": "link",
+      "title": "RFC 9110: HTTP Semantics",
+      "url": "https://www.rfc-editor.org/rfc/rfc9110",
+      "author": "IETF",
+      "description": "The HTTP specification defining methods, their safety and idempotency, status codes and headers such as Retry-After."
+    },
+    {
+      "key": "rfc9111",
+      "type": "link",
+      "title": "RFC 9111: HTTP Caching",
+      "url": "https://www.rfc-editor.org/rfc/rfc9111",
+      "author": "IETF",
+      "description": "The HTTP caching specification, including the Cache-Control directives used by browsers and CDNs."
+    },
+    {
+      "key": "locking",
+      "type": "article",
+      "title": "How to do distributed locking",
+      "url": "https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html",
+      "author": "Martin Kleppmann",
+      "description": "Why lease-based distributed locks can let two clients act at once and how fencing tokens prevent it."
+    },
+    {
+      "key": "saga",
+      "type": "article",
+      "title": "Pattern: Saga",
+      "url": "https://microservices.io/patterns/data/saga.html",
+      "author": "Chris Richardson (microservices.io)",
+      "description": "How a saga keeps data consistent across services with a sequence of local transactions and compensating actions."
+    },
+    {
+      "key": "consistency",
+      "type": "article",
+      "title": "Consistency model",
+      "url": "https://en.wikipedia.org/wiki/Consistency_model",
+      "author": "Wikipedia",
+      "description": "An overview of consistency models from linearizability to causal and eventual consistency and client-centric guarantees."
+    },
+    {
+      "key": "dlq",
+      "type": "link",
+      "title": "Using dead-letter queues in Amazon SQS",
+      "url": "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html",
+      "author": "Amazon Web Services",
+      "description": "How a queue moves messages that repeatedly fail processing into a separate dead-letter queue."
+    },
+    {
+      "key": "tokenbucket",
+      "type": "article",
+      "title": "Token bucket",
+      "url": "https://en.wikipedia.org/wiki/Token_bucket",
+      "author": "Wikipedia",
+      "description": "The token bucket algorithm for rate limiting and how it relates to the leaky bucket."
+    },
+    {
+      "key": "cb",
+      "type": "article",
+      "title": "CircuitBreaker",
+      "url": "https://martinfowler.com/bliki/CircuitBreaker.html",
+      "author": "Martin Fowler",
+      "description": "Explains the circuit breaker pattern, its closed, open and half-open states and why it protects callers."
+    },
+    {
+      "key": "micro",
+      "type": "article",
+      "title": "Microservices",
+      "url": "https://martinfowler.com/articles/microservices.html",
+      "author": "James Lewis and Martin Fowler",
+      "description": "The classic description of microservice characteristics, including independent deployment and decentralized data."
+    },
+    {
+      "key": "uuid",
+      "type": "link",
+      "title": "RFC 9562: Universally Unique IDentifiers (UUIDs)",
+      "url": "https://www.rfc-editor.org/rfc/rfc9562",
+      "author": "IETF",
+      "description": "The UUID specification, covering random UUIDv4, time-ordered UUIDv7 and the text format."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are benefits of putting a load balancer in front of a pool of web servers?",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Makes each individual request run faster on its backend",
+        "Spreads incoming requests across several servers",
+        "Increases how many writes the database can accept",
+        "Lets you add or remove servers without clients noticing",
+        "Can terminate TLS so backends skip that work"
+      ],
+      "correctIndices": [
+        1,
+        3,
+        4
+      ],
+      "explanation": "A load balancer distributes requests, hides the server pool behind one address so servers can come and go, and often terminates TLS. It does nothing for database write capacity, and a single request still takes as long on its backend (it only adds a hop).",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are typically good candidates for caching on a CDN?",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A logged-in user's shopping cart response",
+        "A user's current bank account balance",
+        "JavaScript bundles with a content hash in the filename",
+        "Responses to POST requests that create orders",
+        "Static images and stylesheets"
+      ],
+      "correctIndices": [
+        2,
+        4
+      ],
+      "explanation": "Static, shared assets such as images, CSS and hashed bundles are ideal CDN content. A cart or bank balance is personal and changing, so a shared edge cache must not serve it to others, and order-creating POSTs are state changes that must reach the origin.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about HTTP `Cache-Control` directives are true?",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`s-maxage` applies only to shared caches",
+        "`private` means shared caches such as CDNs must not store it",
+        "`no-store` tells caches not to store the response at all",
+        "`no-cache` forbids caches from storing the response",
+        "`max-age` is given in milliseconds"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`no-store` forbids storing; `private` keeps the response out of shared caches; `s-maxage` overrides `max-age` for shared caches only. `no-cache` actually allows storing but requires revalidation before each reuse, and `max-age` is in seconds.",
+      "materials": [
+        "rfc9111"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which techniques help keep cached data from going stale after the source data changes?",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Setting a TTL so entries expire eventually",
+        "Putting a version number or content hash in the cache key",
+        "Deleting the cache key when the record is updated",
+        "Raising the cache's maximum memory limit",
+        "Evicting entries when change events are published"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "Explicit deletes, TTLs, versioned keys and event-driven eviction all bound how long stale data survives. More cache memory only lets old entries live longer; it does not refresh anything.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are the four golden signals of monitoring described in Google's SRE book?",
+      "tags": [
+        "System Design",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Traffic",
+        "Errors",
+        "Code coverage",
+        "Saturation",
+        "Latency"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "explanation": "The SRE book names latency, traffic, errors and saturation as the four golden signals for user-facing systems. Code coverage is a testing metric, not a runtime monitoring signal.",
+      "materials": [
+        "monitoring"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about latency percentiles are true?",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "p50 latency always equals the mean latency",
+        "A request waiting on 100 independent servers likely sees some server's p99",
+        "p99 latency is never lower than p50 latency",
+        "p99 is the latency that 99% of requests are at or below",
+        "Averaging the p99 of several servers gives the fleet-wide p99"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "p99 is the 99th-percentile value, and percentiles are monotonic so p99 >= p50. With 100 independent calls, the chance none is in its slowest 1% is 0.99^100 (about 37%), so hitting one is likely. Percentiles cannot be averaged across servers (merge histograms instead), and the median differs from the mean for skewed latency distributions.",
+      "materials": [
+        "slo"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are service level indicators (SLIs) rather than objectives or agreements?",
+      "tags": [
+        "System Design",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A contract refunding customers if uptime falls below 99.5%",
+        "99.9% of requests must succeed each calendar month",
+        "Requests per second handled by the service",
+        "The proportion of HTTP requests that did not return a 5xx",
+        "The fraction of requests served in under 300 ms"
+      ],
+      "correctIndices": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "An SLI is a measured quantity: latency fractions, error proportions and throughput all qualify. A target value for an SLI over a period is an SLO, and a contract with consequences such as refunds is an SLA.",
+      "materials": [
+        "slo"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A service has a 99.9% monthly availability SLO. Which statements are true?",
+      "tags": [
+        "System Design",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "About 43 minutes of full downtime in 30 days uses the whole budget",
+        "It allows about 8.8 hours of downtime per month",
+        "Its error budget is 0.1% of requests or time in the month",
+        "Teams often slow risky releases once the budget is exhausted",
+        "Spending none of the error budget is the intended goal"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "The budget is 1 minus the SLO, 0.1%, which is about 43.2 minutes in a 30-day month; when it runs out, teams typically freeze or slow risky launches. The budget is meant to be spent on releases and experiments, not hoarded, and 8.8 hours is the yearly allowance for 99.9%, not the monthly one.",
+      "materials": [
+        "slo"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which are common downsides of sharding a relational database?",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Transactions spanning shards need extra coordination",
+        "Joins across shards become expensive or move into the application",
+        "Each shard can hold only a single table",
+        "Rebalancing data when adding shards takes real effort",
+        "Lookups by the shard key must scan all shards"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Sharding makes cross-shard joins and transactions hard and adding shards means moving data. Shards can hold many tables, and a lookup by shard key goes straight to one shard, which is the point of choosing that key.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which are good reasons to replicate a database?",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Spreading read load across more machines",
+        "Running analytics queries without loading the primary",
+        "Reducing the total storage used",
+        "Serving reads from copies closer to users",
+        "Surviving the loss of a single machine"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "explanation": "Replicas give fault tolerance, geographic read locality, read scaling and a place for heavy analytics queries. Every replica stores another full copy, so total storage goes up, not down.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about single-leader database replication are true?",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Failing over under asynchronous replication can lose acknowledged writes",
+        "Every follower accepts client writes independently",
+        "Split brain is when two nodes both believe they are the leader",
+        "With synchronous replication the leader waits for a follower before acknowledging",
+        "Asynchronous replication makes reads from followers linearizable"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Synchronous replication delays the acknowledgement until a follower confirms; with asynchronous replication a promoted follower may lack the last writes; split brain means two leaders. Only the leader accepts writes in this model, and lagging asynchronous followers can return stale data, so their reads are not linearizable.",
+      "materials": [
+        "primer",
+        "consistency"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about message delivery guarantees are true?",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "At-most-once delivery can lose messages but never duplicates them",
+        "Acknowledging a message after processing it gives at-least-once behavior",
+        "At-least-once delivery means messages always arrive in order",
+        "Acknowledging a message before processing it gives at-most-once behavior",
+        "Amazon SQS standard queues deliver each message exactly once"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Ack-before-process loses the message if the consumer crashes (at most once); ack-after-process redelivers it after a crash (at least once). Delivery guarantees say nothing about ordering, and SQS standard queues are documented as at-least-once with best-effort ordering.",
+      "materials": [
+        "dlq",
+        "kafka"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about Apache Kafka are true?",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "With the default partitioner, records with the same key go to the same partition",
+        "Consumers track their progress by committing offsets per partition",
+        "A topic can be read by only one consumer group",
+        "Adding partitions can change which partition a key maps to",
+        "A topic's partition count can be decreased after creation"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "The default partitioner hashes the key modulo the partition count, so equal keys share a partition until that count changes; consumer progress is stored as committed offsets per partition. Kafka allows increasing but not decreasing partitions, and any number of consumer groups can read a topic independently.",
+      "materials": [
+        "kafka"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A queue message fails every time because its payload is malformed. Which statements are true?",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A maximum receive count followed by a move to a DLQ isolates it",
+        "Alarming on dead-letter queue depth helps catch such failures",
+        "Retrying it forever wastes consumer capacity and can block other messages",
+        "Emptying the dead-letter queue fixes the underlying bug",
+        "Exponential backoff will eventually make it succeed"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "A poison message keeps failing, so endless retries waste work; a redrive policy moves it to a DLQ after N receives, and a DLQ depth alarm surfaces the problem. Waiting longer cannot fix a malformed payload, and deleting dead letters only discards evidence while the bug remains.",
+      "materials": [
+        "dlq"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which mechanisms apply backpressure or shed load when a system is overloaded?",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "An unbounded in-memory queue in front of the workers",
+        "Clients retrying rejected requests immediately with no delay",
+        "TCP flow control's advertised receive window",
+        "Bounded queues that reject new work when full",
+        "Returning HTTP 429 or 503 to excess requests"
+      ],
+      "correctIndices": [
+        2,
+        3,
+        4
+      ],
+      "explanation": "Bounded queues, explicit rejection status codes and TCP's receive window all push back on senders. An unbounded queue hides overload until memory runs out and latency explodes, and immediate retries add load instead of reducing it.",
+      "materials": [
+        "primer",
+        "backoff"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are rate-limiting algorithms?",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Token bucket",
+        "Fixed window counter",
+        "Sliding window log",
+        "Leaky bucket",
+        "Round robin"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "Token bucket, leaky bucket, fixed window counters and sliding window logs all limit how many requests a client may make over time. Round robin is a load-balancing algorithm that rotates requests among servers.",
+      "materials": [
+        "tokenbucket"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about a fixed-window rate limiter (for example, 100 requests per minute) are true?",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It needs only a counter and a window start per client",
+        "A client can send nearly twice the limit around a window boundary",
+        "It prevents any burst inside a single window",
+        "It smooths bursts better than a sliding window"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "A client can use its full quota at the end of one window and again at the start of the next, and the state is just a counter per window. A sliding window smooths that boundary effect better, and a fixed window allows the whole quota to arrive in one burst.",
+      "materials": [
+        "tokenbucket"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which responses are appropriate when an API server rate-limits a client?",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Status 401 Unauthorized",
+        "A `Retry-After` header saying when to try again",
+        "Status 200 with an empty body",
+        "Status 301 Moved Permanently",
+        "Status 429 Too Many Requests"
+      ],
+      "correctIndices": [
+        1,
+        4
+      ],
+      "explanation": "429 (RFC 6585) signals rate limiting and `Retry-After` (RFC 9110) tells the client how long to wait. 401 means missing or bad credentials, 301 is a redirect, and a 200 hides the failure from the client.",
+      "materials": [
+        "rfc9110"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A client gets these failures from an HTTP API. Which are generally sensible to retry?",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "400 Bad Request caused by invalid JSON",
+        "503 Service Unavailable",
+        "429 Too Many Requests, after waiting",
+        "404 Not Found for a resource that does not exist",
+        "A connection timeout on an idempotent GET"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        4
+      ],
+      "explanation": "503s, timeouts on idempotent requests and 429s (after the indicated delay) are transient, so a later attempt can succeed. A malformed body or a missing resource fails the same way every time, so retrying only adds load.",
+      "materials": [
+        "backoff",
+        "rfc9110"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which practices keep client retries from making an outage worse?",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Exponential backoff between attempts",
+        "Retrying non-idempotent POSTs with no idempotency key",
+        "Retrying immediately in a tight loop",
+        "A retry budget that limits retries to a share of requests",
+        "Capping the number of attempts"
+      ],
+      "correctIndices": [
+        0,
+        3,
+        4
+      ],
+      "explanation": "Attempt caps, retry budgets and exponential backoff all limit the extra load retries create. Tight-loop retries multiply load on a struggling service, and blindly retrying non-idempotent POSTs risks duplicate side effects.",
+      "materials": [
+        "backoff"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about timeouts on remote calls are true?",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A timeout bounds how long the caller waits for a response",
+        "Basing a timeout on a high percentile such as p99.9 is common",
+        "A client timeout automatically stops the work on the server",
+        "No timeout at all is the safest default",
+        "Timeouts set too short can trigger retries that add load"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "A timeout caps waiting; the Amazon Builders' Library describes choosing it from a high latency percentile of the dependency, and too-tight timeouts fail healthy calls whose retries add load. The server usually keeps working after the client gives up, and no timeout lets stuck calls tie up threads and connections.",
+      "materials": [
+        "backoff"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the circuit breaker pattern are true?",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It gives a struggling dependency time to recover",
+        "It removes the need for timeouts on remote calls",
+        "It trips after failures pass a configured threshold",
+        "It retries each failed call until it succeeds",
+        "In the half-open state a limited number of trial calls are let through"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "A breaker trips on a failure threshold, fails fast while open so the dependency can recover, then allows trial calls when half-open. It relies on timeouts to detect slow failures rather than replacing them, and it stops calls instead of retrying them.",
+      "materials": [
+        "cb"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which availability levels allow at most about one hour of downtime per year?",
+      "tags": [
+        "System Design",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "99.95%",
+        "99.999%",
+        "99.9%",
+        "99%",
+        "99.99%"
+      ],
+      "correctIndices": [
+        1,
+        4
+      ],
+      "explanation": "A year has about 525,960 minutes: 99.99% allows about 53 minutes and 99.999% about 5 minutes. 99.95% allows about 4.4 hours, 99.9% about 8.8 hours and 99% about 3.65 days.",
+      "materials": [
+        "slo"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about failover setups are true?",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "In active-passive, a standby takes over when the active node fails",
+        "In active-passive, the standby normally serves half the traffic",
+        "In active-active, all nodes serve traffic at the same time",
+        "Heartbeats or health checks detect when to fail over",
+        "Active-passive doubles throughput compared with one node"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Active-passive keeps an idle standby ready to take over, active-active spreads live traffic across all nodes, and heartbeats detect failure. Because the passive node serves nothing in normal operation, it neither takes half the traffic nor adds throughput.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about monitoring distributed systems are true?",
+      "tags": [
+        "System Design",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Every alert should page a human immediately",
+        "Dashboards remove the need for alerting",
+        "White-box monitoring uses internals such as metrics and logs",
+        "Black-box monitoring tests behavior the way a user sees it",
+        "Paging on every internal cause beats paging on user-visible symptoms"
+      ],
+      "correctIndices": [
+        2,
+        3
+      ],
+      "explanation": "Black-box checks observe external behavior and white-box monitoring inspects internals. The SRE book recommends paging on symptoms users feel, keeping pages for urgent, actionable problems (others become tickets), and alerting because nobody watches dashboards all the time.",
+      "materials": [
+        "monitoring"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which are commonly cited benefits of microservices over a monolith?",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Different services can use different technology stacks",
+        "Calls between services are faster than in-process calls",
+        "Transactions spanning several services become simpler",
+        "Services can be deployed independently",
+        "Individual services can be scaled separately"
+      ],
+      "correctIndices": [
+        0,
+        3,
+        4
+      ],
+      "explanation": "Independent deployment, per-service scaling and decentralized technology choices are the classic benefits. Network calls are much slower than in-process calls, and cross-service transactions get harder, needing sagas or similar patterns.",
+      "materials": [
+        "micro"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the database-per-service pattern are true?",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Internal schema changes need not force other services to redeploy",
+        "It forbids services from keeping copies of other services' data",
+        "Other services reach the data only through the owning service's API",
+        "Sagas are a common way to coordinate multi-service updates",
+        "A single ACID transaction across two services' databases is straightforward"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Each service owns its data behind an API, so internal schema changes stay local, and multi-service workflows use sagas. Distributed ACID transactions across separate databases are hard and usually avoided, and services commonly keep read copies built from other services' events.",
+      "materials": [
+        "micro",
+        "saga"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about service discovery are true?",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "DNS-based discovery can return stale addresses because of caching",
+        "A registry tracks the network locations of live instances",
+        "Instances that fail health checks should leave the registry",
+        "Clients must restart to learn new instance addresses",
+        "Discovery becomes unnecessary once instances autoscale"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "A registry keeps current instance addresses, removes unhealthy ones, and DNS-based discovery can lag because resolvers cache records for their TTL. Autoscaling makes addresses change more often, which is why discovery is needed, and clients refresh lookups at runtime without restarting.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about storage types are true?",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Block storage exposes raw volumes that a filesystem or database sits on",
+        "Object storage suits large files such as videos and backups",
+        "Network file storage such as NFS lets many servers share a filesystem",
+        "Block storage is accessed by object key over HTTP",
+        "Object storage addresses data by key over an HTTP API"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "Block storage provides raw volumes, object storage stores blobs by key behind an HTTP API and suits large immutable files, and NFS shares one filesystem across machines. Key-over-HTTP access describes object storage, not block storage.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about health checks behind a load balancer or orchestrator are true?",
+      "tags": [
+        "System Design",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A load balancer stops routing to instances that fail health checks",
+        "A passing health check proves the instance returns correct responses",
+        "A failing Kubernetes readiness probe removes the pod from Service endpoints",
+        "Checks that call every downstream dependency can fail a whole fleet at once",
+        "A failing Kubernetes liveness probe gets the container restarted"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "explanation": "Load balancers drain failing targets; Kubernetes restarts on liveness failure and stops sending traffic on readiness failure. Deep checks that include a shared dependency make every instance unhealthy together when it blips. A health check only probes a narrow path, so passing it does not prove real requests are answered correctly.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about generating record IDs are true?",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Random UUIDv4 keys scatter inserts across a B-tree index",
+        "Auto-increment IDs reveal record counts and are easy to guess",
+        "UUIDv7 values are guaranteed never to collide",
+        "A UUIDv4 embeds the generating machine's MAC address",
+        "The standard text form of a UUID is 36 characters long"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "Random v4 keys land all over the index, sequential IDs leak volume and are enumerable, and the text form is 32 hex digits plus 4 hyphens. Version 1 UUIDs can contain a MAC address but v4 is random, and v7 has random bits that make collisions very unlikely, not impossible.",
+      "materials": [
+        "uuid"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which back-of-the-envelope figures are roughly correct?",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A day has about 1 million seconds",
+        "Writing 10 MB/s for a full day produces about 864 GB",
+        "A 30-day month has about 2.6 million seconds",
+        "2^30 is roughly one million",
+        "10 Gbit/s is about 10 gigabytes per second"
+      ],
+      "correctIndices": [
+        1,
+        2
+      ],
+      "explanation": "30 x 86,400 is about 2.59 million seconds, and 10 MB/s x 86,400 s is 864,000 MB, about 864 GB. 10 Gbit/s is only 1.25 GB/s, a day has 86,400 seconds, and 2^30 is about one billion (2^20 is about one million).",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about typical latency orders of magnitude are true?",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Reading 1 MB sequentially from memory is slower than from a spinning disk",
+        "Reading from main memory is faster than reading from an SSD",
+        "An L1 cache reference is slower than a main memory reference",
+        "A round trip within one data center takes about 100 ms",
+        "A round trip between continents takes tens to hundreds of milliseconds"
+      ],
+      "correctIndices": [
+        1,
+        4
+      ],
+      "explanation": "RAM is far faster than SSD, and intercontinental round trips are bounded by the speed of light at roughly 100-200 ms. L1 hits take about a nanosecond versus about 100 ns for RAM, memory streams data far faster than a disk, and an in-datacenter round trip is around 0.5 ms.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which HTTP methods are defined as both safe and idempotent?",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "POST",
+        "HEAD",
+        "DELETE",
+        "PUT",
+        "GET"
+      ],
+      "correctIndices": [
+        1,
+        4
+      ],
+      "explanation": "RFC 9110 defines GET and HEAD as safe (read-only), and all safe methods are idempotent. PUT and DELETE are idempotent but change state, so they are not safe, and POST is neither.",
+      "materials": [
+        "rfc9110"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "An API lists orders sorted by `(created_at, id)`. Which pagination approach stays fast deep into the list and does not skip or repeat rows when new orders arrive?",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`LIMIT`/`OFFSET` pagination with a page number",
+        "Offset pagination with a larger page size",
+        "Keyset pagination with a cursor holding the last seen `(created_at, id)`",
+        "Picking a random sample of rows on each page",
+        "Returning every row and letting the client page through it"
+      ],
+      "correctIndices": [
+        2
+      ],
+      "explanation": "A keyset cursor seeks directly to the next row through the index and is unaffected by inserts before it. OFFSET must read and discard the skipped rows and shifts when rows are inserted, whatever the page size; returning everything does not scale; and random sampling is not pagination.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A client retries `POST /payments` after a timeout. Which measure prevents a double charge?",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The client sends an idempotency key and the server returns the stored result for repeats",
+        "The server answers with 202 Accepted instead of 201 Created",
+        "The server requires HTTPS for the endpoint",
+        "The client uses a shorter timeout on its request",
+        "The client retries with exponential backoff and jitter"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "An idempotency key lets the server recognize a retry of a request it already processed and replay the original response. Status codes, shorter timeouts, backoff timing and TLS do not stop the server from processing the same payment twice.",
+      "materials": [
+        "backoff"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which load-balancing method sends requests from the same client IP to the same backend without the balancer storing session state?",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Random selection",
+        "Least connections",
+        "Weighted round robin",
+        "Source IP hashing",
+        "Round robin"
+      ],
+      "correctIndices": [
+        3
+      ],
+      "explanation": "Hashing the source IP picks the same backend every time while the pool is unchanged, with no session table. Round robin, weighted round robin, least connections and random choice all ignore who the client is.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which cache eviction policy removes the entry that has gone longest without being accessed?",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "FIFO (first in, first out)",
+        "LRU (least recently used)",
+        "LFU (least frequently used)",
+        "Random replacement",
+        "MRU (most recently used)"
+      ],
+      "correctIndices": [
+        1
+      ],
+      "explanation": "LRU evicts the entry with the oldest last access. LFU evicts by lowest access count, FIFO by insertion time regardless of use, MRU evicts the newest-accessed entry, and random ignores history.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A user posts a comment and someone else replies to it. Which consistency guarantee ensures no one ever sees the reply without the original comment?",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Read-your-writes consistency",
+        "Monotonic reads",
+        "Causal consistency",
+        "Monotonic writes",
+        "Eventual consistency"
+      ],
+      "correctIndices": [
+        2
+      ],
+      "explanation": "Causal consistency makes everyone see causally related writes in order, and the reply depends on the comment. Read-your-writes and monotonic writes only cover one client's own operations, monotonic reads stop one client going back in time, and eventual consistency allows any order until convergence.",
+      "materials": [
+        "consistency"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "With Kafka's default `delete` cleanup policy, what decides when records are removed from a topic?",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The producer that wrote them sending a delete request",
+        "A broker restart",
+        "The first consumer group reading them",
+        "All consumer groups having committed offsets past them",
+        "The topic's retention time or size limits"
+      ],
+      "correctIndices": [
+        4
+      ],
+      "explanation": "Kafka keeps records until `retention.ms` or `retention.bytes` is exceeded, regardless of who has read them. Consumption, producers and restarts do not delete records, which is why many groups can read and replay the same log.",
+      "materials": [
+        "kafka"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A table is sharded by `country`, and most users live in one country. What is the main problem?",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Range queries become impossible on every shard",
+        "The country values can no longer be hashed",
+        "Joins within a single shard stop working",
+        "Adding more shards is guaranteed to fix it",
+        "One shard receives a disproportionate share of data and load"
+      ],
+      "correctIndices": [
+        4
+      ],
+      "explanation": "A low-cardinality, skewed shard key piles most rows and traffic on one shard. Queries and joins still work, any value can be hashed, and more shards do not help because all rows with that country still map to one shard.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which change to a public JSON REST API is generally considered backward compatible for existing clients?",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Renaming an existing response field",
+        "Changing a field's type from number to string",
+        "Making a previously optional request field required",
+        "Removing an endpoint clients use",
+        "Adding a new optional field to responses"
+      ],
+      "correctIndices": [
+        4
+      ],
+      "explanation": "Clients that ignore unknown fields keep working when a new field appears. Renaming or retyping fields, tightening request requirements and removing endpoints all break existing callers and call for a new version.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about CDNs are true?",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "CDNs cannot cache any URL that has a query string",
+        "Purging lets you remove content before its TTL expires",
+        "A push CDN needs content uploaded to it ahead of time",
+        "A pull CDN fetches content from the origin on the first cache miss",
+        "A CDN removes the need for an origin server"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "Pull CDNs fill lazily from the origin, push CDNs are loaded in advance, and purges invalidate content early. Query strings can be part of the cache key, and the origin is still needed for misses, uncacheable requests and content updates.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about plain work queues versus log-based streams such as Kafka are true?",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A new work-queue consumer can reread every message ever sent",
+        "A stream keeps records in order within each partition",
+        "In a typical work queue a message is removed once a consumer acknowledges it",
+        "Stream consumers can replay old records by resetting their offsets",
+        "Several independent consumer groups can each read every record of a stream"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "explanation": "A log-based stream retains records, so many consumer groups read it independently, can rewind offsets to replay, and see per-partition order. A work queue deletes a message after it is acknowledged, so a consumer that joins later cannot read past messages.",
+      "materials": [
+        "kafka",
+        "dlq"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which approaches make a web tier stateless so any server can handle any request?",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Keeping session data in a shared store such as Redis",
+        "Saving user uploads to the local disk of whichever server received them",
+        "Keeping each user's session in the memory of the server they first hit",
+        "Putting session data in a signed token the client sends back"
+      ],
+      "correctIndices": [
+        0,
+        3
+      ],
+      "explanation": "A shared session store or a signed client-side token means no request depends on a particular server. Per-server memory sessions and uploads on local disk tie a user to one machine and are lost when it goes away.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about recovery point objective (RPO) and recovery time objective (RTO) are true?",
+      "tags": [
+        "System Design",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Taking backups more often mainly lowers the RTO",
+        "RPO is the maximum acceptable data loss, measured in time",
+        "RTO is the maximum acceptable time to restore service",
+        "RTO measures how often backups are taken",
+        "Hourly backups alone give an RPO of zero"
+      ],
+      "correctIndices": [
+        1,
+        2
+      ],
+      "explanation": "RPO is how far back in time you may lose data and RTO is how long recovery may take. Hourly backups can lose up to an hour of data, backup frequency drives RPO rather than RTO, and RTO is about restore duration, not backup schedule.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A single cache key receives more reads than one cache node can serve. Which techniques help?",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Adding more cache nodes while keeping one copy of the key",
+        "Storing several suffixed copies of the key and reading a random one",
+        "Adding a small in-process cache on each app server in front of the shared cache",
+        "Setting the key's TTL to zero",
+        "Replicating the hot key onto several cache nodes"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        4
+      ],
+      "explanation": "Replicas, local in-process caches and suffixed copies all spread one key's reads over more capacity. A zero TTL turns every read into a miss that hits the database, and extra nodes do not help when the key still lives on just one of them.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A lock service grants expiring leases to workers that write to shared storage. Which statements are true?",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Fencing tokens let the storage reject writes from a stale lock holder",
+        "A lock that never expires stays safe if its holder crashes",
+        "A worker stalled by a long GC pause may write after its lease expired",
+        "The storage must reject writes whose token is lower than one already seen",
+        "Lease expiry alone guarantees two workers never write at once"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "A paused process cannot notice its lease ran out, so it may write late; fencing tokens increase with every grant, and storage that rejects lower tokens blocks the stale writer. Expiry alone cannot stop that late write, and a lock with no expiry is held forever once its holder dies.",
+      "materials": [
+        "locking"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which techniques route users to a nearby data center?",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Raising the TTL on the site's DNS records",
+        "An anycast IP address announced from several locations",
+        "Sticky sessions on each region's load balancer",
+        "Plain round-robin DNS across every region",
+        "GeoDNS that answers with region-specific IP addresses"
+      ],
+      "correctIndices": [
+        1,
+        4
+      ],
+      "explanation": "GeoDNS or latency-based DNS picks a region per resolver, and anycast lets internet routing deliver packets to the nearest announcing site. Round-robin DNS rotates regions with no regard to location, sticky sessions act only inside a region, and a longer TTL only changes caching.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which measures reduce load on the primary database for a read-heavy workload?",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Adding indexes for the most frequent query patterns",
+        "Caching hot query results in Redis or Memcached",
+        "Precomputing results into materialized views or denormalized tables",
+        "Routing reads to read replicas",
+        "Wrapping every read in a serializable transaction"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "Caches and replicas take reads off the primary, precomputed views avoid repeating expensive queries, and indexes make each query do less work. Serializable isolation adds overhead and conflicts instead of reducing load.",
+      "materials": [
+        "primer"
+      ]
+    }
+  ]
+}

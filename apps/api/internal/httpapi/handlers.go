@@ -527,6 +527,7 @@ func (s *Server) createMaterial(w http.ResponseWriter, r *http.Request) {
 		s.fail(w, r, err)
 		return
 	}
+	s.contentChanged() // the reading list page shows materials
 	writeJSON(w, http.StatusCreated, m)
 }
 
@@ -544,6 +545,7 @@ func (s *Server) updateMaterial(w http.ResponseWriter, r *http.Request) {
 		s.fail(w, r, err)
 		return
 	}
+	s.contentChanged() // the reading list page shows materials
 	writeJSON(w, http.StatusOK, m)
 }
 
@@ -556,6 +558,7 @@ func (s *Server) deleteMaterial(w http.ResponseWriter, r *http.Request) {
 		s.fail(w, r, err)
 		return
 	}
+	s.contentChanged()
 	w.WriteHeader(http.StatusNoContent)
 }
 

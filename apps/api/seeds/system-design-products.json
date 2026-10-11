@@ -1,0 +1,3153 @@
+{
+  "name": "System design: product-scale challenges",
+  "materials": [
+    {
+      "key": "lb",
+      "type": "article",
+      "title": "Load balancing (computing)",
+      "url": "https://en.wikipedia.org/wiki/Load_balancing_(computing)",
+      "author": "Wikipedia",
+      "description": "How load balancers spread requests across servers and route around failed ones."
+    },
+    {
+      "key": "cdn",
+      "type": "article",
+      "title": "Content delivery network",
+      "url": "https://en.wikipedia.org/wiki/Content_delivery_network",
+      "author": "Wikipedia",
+      "description": "Serving content from servers close to the user."
+    },
+    {
+      "key": "cache-aside",
+      "type": "article",
+      "title": "Cache-Aside pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+      "author": "Microsoft Learn",
+      "description": "Load data into a cache on demand to speed up repeated reads."
+    },
+    {
+      "key": "search-index",
+      "type": "article",
+      "title": "Search engine indexing",
+      "url": "https://en.wikipedia.org/wiki/Search_engine_indexing",
+      "author": "Wikipedia",
+      "description": "How inverted indexes make text search fast."
+    },
+    {
+      "key": "websocket",
+      "type": "article",
+      "title": "WebSocket",
+      "url": "https://en.wikipedia.org/wiki/WebSocket",
+      "author": "Wikipedia",
+      "description": "A long-lived two-way connection between browser and server."
+    },
+    {
+      "key": "valet",
+      "type": "article",
+      "title": "Valet Key pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/valet-key",
+      "author": "Microsoft Learn",
+      "description": "Let clients upload and download straight from storage with a limited token."
+    },
+    {
+      "key": "competing",
+      "type": "article",
+      "title": "Competing Consumers pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/competing-consumers",
+      "author": "Microsoft Learn",
+      "description": "Several workers take messages from one queue to share the load."
+    },
+    {
+      "key": "queue-leveling",
+      "type": "article",
+      "title": "Queue-Based Load Leveling pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling",
+      "author": "Microsoft Learn",
+      "description": "A queue absorbs bursts so the backend works at a steady pace."
+    },
+    {
+      "key": "ratelimit",
+      "type": "article",
+      "title": "Rate Limiting pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/rate-limiting-pattern",
+      "author": "Microsoft Learn",
+      "description": "Limit how fast clients can use a service."
+    },
+    {
+      "key": "replication",
+      "type": "article",
+      "title": "Replication (computing)",
+      "url": "https://en.wikipedia.org/wiki/Replication_(computing)",
+      "author": "Wikipedia",
+      "description": "Keeping copies of data on several machines."
+    },
+    {
+      "key": "spotify-events",
+      "type": "article",
+      "title": "Spotify's Event Delivery: The Road to the Cloud (Part I)",
+      "url": "https://engineering.atspotify.com/2016/02/spotifys-event-delivery-the-road-to-the-cloud-part-i",
+      "author": "Spotify Engineering",
+      "description": "How Spotify moves billions of play events a day through a queue to storage."
+    },
+    {
+      "key": "open-connect",
+      "type": "link",
+      "title": "Netflix Open Connect",
+      "url": "https://openconnect.netflix.com/en/",
+      "author": "Netflix",
+      "description": "Netflix's own CDN: servers inside internet providers' networks."
+    },
+    {
+      "key": "abr",
+      "type": "article",
+      "title": "Adaptive bitrate streaming",
+      "url": "https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming",
+      "author": "Wikipedia",
+      "description": "Encoding video at several bitrates so the player can switch with the network."
+    },
+    {
+      "key": "netflix-viewing",
+      "type": "article",
+      "title": "Scaling Time Series Data Storage, Part I",
+      "url": "https://netflixtechblog.com/scaling-time-series-data-storage-part-i-ec2b6d44ba39",
+      "author": "Netflix Technology Blog",
+      "description": "How Netflix stores viewing history in Cassandra. The site blocks automated checks; if the link doesn't open, search for its title."
+    },
+    {
+      "key": "ot",
+      "type": "article",
+      "title": "Operational transformation",
+      "url": "https://en.wikipedia.org/wiki/Operational_transformation",
+      "author": "Wikipedia",
+      "description": "The algorithm family behind Google Docs' concurrent editing."
+    },
+    {
+      "key": "figma",
+      "type": "article",
+      "title": "How Figma's multiplayer technology works",
+      "url": "https://www.figma.com/blog/how-figmas-multiplayer-technology-works/",
+      "author": "Figma",
+      "description": "One server per document, WebSockets, and conflict handling in practice."
+    },
+    {
+      "key": "discord",
+      "type": "article",
+      "title": "How Discord Stores Trillions of Messages",
+      "url": "https://discord.com/blog/how-discord-stores-trillions-of-messages",
+      "author": "Discord",
+      "description": "Messages partitioned by channel and time in ScyllaDB."
+    },
+    {
+      "key": "slack-rtm",
+      "type": "article",
+      "title": "Real-time Messaging",
+      "url": "https://slack.engineering/real-time-messaging/",
+      "author": "Slack Engineering",
+      "description": "Gateway servers, channel servers and how a message reaches every client."
+    },
+    {
+      "key": "dropbox-sync",
+      "type": "article",
+      "title": "Rewriting the heart of our sync engine",
+      "url": "https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine",
+      "author": "Dropbox",
+      "description": "How Dropbox syncs metadata and file blocks across devices."
+    },
+    {
+      "key": "cas",
+      "type": "article",
+      "title": "Content-addressable storage",
+      "url": "https://en.wikipedia.org/wiki/Content-addressable_storage",
+      "author": "Wikipedia",
+      "description": "Storing data by the hash of its content, so duplicates are stored once."
+    },
+    {
+      "key": "waiting-room",
+      "type": "article",
+      "title": "Cloudflare Waiting Room",
+      "url": "https://developers.cloudflare.com/waiting-room/",
+      "author": "Cloudflare",
+      "description": "Admitting visitors at a rate the origin can handle during traffic spikes."
+    },
+    {
+      "key": "redis-expire",
+      "type": "article",
+      "title": "Redis EXPIRE",
+      "url": "https://redis.io/docs/latest/commands/expire/",
+      "author": "Redis",
+      "description": "Keys that delete themselves after a timeout, used for holds and sessions."
+    },
+    {
+      "key": "pg-locking",
+      "type": "article",
+      "title": "PostgreSQL: Explicit locking",
+      "url": "https://www.postgresql.org/docs/current/explicit-locking.html",
+      "author": "PostgreSQL documentation",
+      "description": "Row locks, SELECT FOR UPDATE and SKIP LOCKED."
+    },
+    {
+      "key": "stripe-idem",
+      "type": "article",
+      "title": "Designing robust and predictable APIs with idempotency",
+      "url": "https://stripe.com/blog/idempotency",
+      "author": "Stripe",
+      "description": "Idempotency keys make retried payment requests safe."
+    },
+    {
+      "key": "outbox",
+      "type": "article",
+      "title": "Pattern: Transactional outbox",
+      "url": "https://microservices.io/patterns/data/transactional-outbox.html",
+      "author": "Chris Richardson",
+      "description": "Publishing events reliably together with the database change."
+    },
+    {
+      "key": "stripe-webhooks",
+      "type": "article",
+      "title": "Stripe webhooks",
+      "url": "https://docs.stripe.com/webhooks",
+      "author": "Stripe",
+      "description": "Signed event notifications and automatic retries with backoff."
+    },
+    {
+      "key": "crawler",
+      "type": "article",
+      "title": "Web crawler",
+      "url": "https://en.wikipedia.org/wiki/Web_crawler",
+      "author": "Wikipedia",
+      "description": "URL frontier, politeness and recrawl policies."
+    },
+    {
+      "key": "robots",
+      "type": "article",
+      "title": "Robots Exclusion Protocol (RFC 9309)",
+      "url": "https://datatracker.ietf.org/doc/html/rfc9309",
+      "author": "IETF",
+      "description": "The robots.txt standard crawlers must respect."
+    },
+    {
+      "key": "hls",
+      "type": "article",
+      "title": "HTTP Live Streaming (RFC 8216)",
+      "url": "https://www.rfc-editor.org/rfc/rfc8216",
+      "author": "IETF",
+      "description": "Short video segments and playlists served over plain HTTP."
+    },
+    {
+      "key": "airflow",
+      "type": "article",
+      "title": "Apache Airflow: Architecture overview",
+      "url": "https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/overview.html",
+      "author": "Apache Airflow",
+      "description": "Scheduler, executor, workers and the metadata database."
+    },
+    {
+      "key": "dlq",
+      "type": "article",
+      "title": "Dead letter queue",
+      "url": "https://en.wikipedia.org/wiki/Dead_letter_queue",
+      "author": "Wikipedia",
+      "description": "Where messages go after they fail too many times."
+    }
+  ],
+  "questions": [
+    {
+      "type": "design",
+      "prompt": "Design music streaming like Spotify",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "explanation": "Audio files sit in object storage and reach listeners through a CDN, so a track starts from a server near them. The app talks to stateless API instances behind a gateway that checks the session with an auth service. Track and playlist metadata lives in a database with a cache in front, and catalog search uses a search index. Every play becomes an event on a queue; workers write the events to an archive for royalty reports and recommendations, so recording plays never slows playback down.",
+      "materials": [
+        "cache-aside",
+        "cdn",
+        "lb",
+        "search-index",
+        "spotify-events"
+      ],
+      "design": {
+        "requirements": [
+          {
+            "id": "play",
+            "text": "A track starts playing in under a second, anywhere in the world"
+          },
+          {
+            "id": "catalog",
+            "text": "Users browse and search a catalog of 100 million tracks"
+          },
+          {
+            "id": "events",
+            "text": "Every play is recorded for royalties and recommendations without slowing playback"
+          },
+          {
+            "id": "signin",
+            "text": "Only signed-in users can stream"
+          },
+          {
+            "id": "uptime",
+            "text": "The service keeps working when one server fails"
+          }
+        ],
+        "rules": [
+          {
+            "id": "audio-cdn",
+            "kind": "path",
+            "text": "Audio is streamed from a CDN backed by object storage",
+            "explanation": "Audio is most of the traffic. A CDN keeps popular tracks close to listeners and keeps the egress off your servers.",
+            "requirement": "play",
+            "materialKey": "cdn",
+            "from": [
+              "client"
+            ],
+            "via": [
+              "cdn"
+            ],
+            "to": [
+              "object-storage"
+            ]
+          },
+          {
+            "id": "front",
+            "kind": "path",
+            "text": "API requests reach the services through a gateway or load balancer",
+            "explanation": "One entry point spreads traffic and routes around failed instances.",
+            "requirement": "uptime",
+            "materialKey": "lb",
+            "from": [
+              "client"
+            ],
+            "via": [
+              "api-gateway",
+              "load-balancer"
+            ],
+            "to": [
+              "service"
+            ]
+          },
+          {
+            "id": "instances",
+            "kind": "has",
+            "text": "At least two API instances",
+            "explanation": "One instance is a single point of failure.",
+            "requirement": "uptime",
+            "materialKey": "lb",
+            "of": [
+              "service"
+            ],
+            "min": 2
+          },
+          {
+            "id": "auth",
+            "kind": "edge",
+            "text": "The gateway or API checks the session with an auth service",
+            "explanation": "Streaming is a paid product: every request must belong to a signed-in user.",
+            "requirement": "signin",
+            "from": [
+              "api-gateway",
+              "service"
+            ],
+            "to": [
+              "auth"
+            ]
+          },
+          {
+            "id": "metadata",
+            "kind": "edge",
+            "text": "Track and playlist metadata lives in a database",
+            "explanation": "Albums, artists and playlists are structured and must survive restarts.",
+            "requirement": "catalog",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "sql",
+              "nosql"
+            ]
+          },
+          {
+            "id": "search",
+            "kind": "edge",
+            "text": "Catalog search uses a search index",
+            "explanation": "Typo-tolerant, ranked search over 100 million titles needs an inverted index, not LIKE queries.",
+            "requirement": "catalog",
+            "materialKey": "search-index",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "search"
+            ]
+          },
+          {
+            "id": "events-queue",
+            "kind": "edge",
+            "text": "Play events go to a queue, not straight to a database",
+            "explanation": "Billions of events a day would overload a database on the request path; a queue absorbs them.",
+            "requirement": "events",
+            "materialKey": "spotify-events",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "queue"
+            ]
+          },
+          {
+            "id": "events-store",
+            "kind": "path",
+            "text": "Workers move events from the queue into storage",
+            "explanation": "Royalty reports and recommendation jobs read the archived events later, in bulk.",
+            "requirement": "events",
+            "materialKey": "spotify-events",
+            "from": [
+              "queue"
+            ],
+            "via": [
+              "worker"
+            ],
+            "to": [
+              "object-storage",
+              "nosql",
+              "sql"
+            ]
+          },
+          {
+            "id": "cache",
+            "kind": "edge",
+            "text": "Popular metadata is cached",
+            "explanation": "The same albums and playlists are read millions of times a day.",
+            "requirement": "catalog",
+            "optional": true,
+            "materialKey": "cache-aside",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "cache"
+            ]
+          },
+          {
+            "id": "no-direct",
+            "kind": "no-edge",
+            "text": "Clients never read storage or databases directly",
+            "explanation": "Audio goes through the CDN and data through the API, which checks access.",
+            "materialKey": "cdn",
+            "from": [
+              "client"
+            ],
+            "to": [
+              "sql",
+              "nosql",
+              "cache",
+              "search",
+              "object-storage"
+            ]
+          }
+        ],
+        "reference": {
+          "nodes": [
+            {
+              "id": "c",
+              "kind": "client",
+              "label": "Spotify apps"
+            },
+            {
+              "id": "gw",
+              "kind": "api-gateway"
+            },
+            {
+              "id": "a",
+              "kind": "auth"
+            },
+            {
+              "id": "s1",
+              "kind": "service",
+              "label": "api"
+            },
+            {
+              "id": "s2",
+              "kind": "service",
+              "label": "api"
+            },
+            {
+              "id": "db",
+              "kind": "sql",
+              "label": "catalog & playlists"
+            },
+            {
+              "id": "k",
+              "kind": "cache",
+              "label": "Redis"
+            },
+            {
+              "id": "se",
+              "kind": "search",
+              "label": "catalog search"
+            },
+            {
+              "id": "cdn",
+              "kind": "cdn",
+              "label": "audio CDN"
+            },
+            {
+              "id": "os",
+              "kind": "object-storage",
+              "label": "audio files"
+            },
+            {
+              "id": "q",
+              "kind": "queue",
+              "label": "play events"
+            },
+            {
+              "id": "w",
+              "kind": "worker",
+              "label": "event loader"
+            },
+            {
+              "id": "ar",
+              "kind": "object-storage",
+              "label": "event archive"
+            }
+          ],
+          "edges": [
+            {
+              "from": "c",
+              "to": "gw"
+            },
+            {
+              "from": "gw",
+              "to": "a"
+            },
+            {
+              "from": "gw",
+              "to": "s1"
+            },
+            {
+              "from": "gw",
+              "to": "s2"
+            },
+            {
+              "from": "s1",
+              "to": "db"
+            },
+            {
+              "from": "s1",
+              "to": "k"
+            },
+            {
+              "from": "s1",
+              "to": "se"
+            },
+            {
+              "from": "s1",
+              "to": "q"
+            },
+            {
+              "from": "s2",
+              "to": "db"
+            },
+            {
+              "from": "s2",
+              "to": "k"
+            },
+            {
+              "from": "s2",
+              "to": "se"
+            },
+            {
+              "from": "s2",
+              "to": "q"
+            },
+            {
+              "from": "q",
+              "to": "w"
+            },
+            {
+              "from": "w",
+              "to": "ar"
+            },
+            {
+              "from": "c",
+              "to": "cdn"
+            },
+            {
+              "from": "cdn",
+              "to": "os"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "design",
+      "prompt": "Design video streaming like Netflix",
+      "tags": [
+        "System Design",
+        "Performance & Memory",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "explanation": "Studios upload huge master files straight to object storage with a pre-signed URL. The upload API puts an encoding job on a queue, and a pool of encoders writes every resolution and bitrate back to storage, so players can switch quality as bandwidth changes. Viewers stream the segments from a CDN. The playback API records viewing positions in a wide-column store so any device can resume, and serves personalised rows from a cache that a scheduled batch job fills.",
+      "materials": [
+        "abr",
+        "cache-aside",
+        "competing",
+        "lb",
+        "netflix-viewing",
+        "open-connect",
+        "queue-leveling",
+        "valet"
+      ],
+      "design": {
+        "requirements": [
+          {
+            "id": "upload",
+            "text": "Studios upload master files of hundreds of gigabytes"
+          },
+          {
+            "id": "encode",
+            "text": "Each title is encoded into many resolutions and bitrates"
+          },
+          {
+            "id": "play",
+            "text": "Playback starts quickly and adapts to the viewer's bandwidth"
+          },
+          {
+            "id": "resume",
+            "text": "Viewers continue where they left off, on any device"
+          },
+          {
+            "id": "recs",
+            "text": "The home page shows personalised rows that load instantly"
+          }
+        ],
+        "rules": [
+          {
+            "id": "upload-direct",
+            "kind": "edge",
+            "text": "Masters upload straight to object storage",
+            "explanation": "Pushing hundreds of gigabytes through an API server wastes it; a pre-signed URL lets storage take the bytes.",
+            "requirement": "upload",
+            "materialKey": "valet",
+            "from": [
+              "client"
+            ],
+            "to": [
+              "object-storage"
+            ]
+          },
+          {
+            "id": "encode-queue",
+            "kind": "edge",
+            "text": "The upload service queues an encoding job",
+            "explanation": "Encoding takes hours; the request returns at once and the work happens in the background.",
+            "requirement": "encode",
+            "materialKey": "queue-leveling",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "queue"
+            ]
+          },
+          {
+            "id": "encoders",
+            "kind": "has",
+            "text": "Several encoders work in parallel",
+            "explanation": "One title becomes dozens of renditions; split the work.",
+            "requirement": "encode",
+            "materialKey": "competing",
+            "of": [
+              "worker"
+            ],
+            "min": 2
+          },
+          {
+            "id": "renditions",
+            "kind": "path",
+            "text": "Encoders write the renditions back to object storage",
+            "explanation": "Each resolution and bitrate is stored as short segments the player can switch between.",
+            "requirement": "encode",
+            "materialKey": "abr",
+            "from": [
+              "queue"
+            ],
+            "via": [
+              "worker"
+            ],
+            "to": [
+              "object-storage"
+            ]
+          },
+          {
+            "id": "cdn",
+            "kind": "path",
+            "text": "Viewers stream from a CDN in front of storage",
+            "explanation": "Video is most of the internet's traffic; Netflix puts caches inside internet providers.",
+            "requirement": "play",
+            "materialKey": "open-connect",
+            "from": [
+              "client"
+            ],
+            "via": [
+              "cdn"
+            ],
+            "to": [
+              "object-storage"
+            ]
+          },
+          {
+            "id": "front",
+            "kind": "path",
+            "text": "API calls go through a gateway or load balancer",
+            "explanation": "Spreads load and hides failed instances.",
+            "requirement": "play",
+            "materialKey": "lb",
+            "from": [
+              "client"
+            ],
+            "via": [
+              "api-gateway",
+              "load-balancer"
+            ],
+            "to": [
+              "service"
+            ]
+          },
+          {
+            "id": "history",
+            "kind": "edge",
+            "text": "Viewing positions are written to a wide-column store",
+            "explanation": "Millions of small writes a minute, read back by user and time: a good fit for Cassandra-style storage.",
+            "requirement": "resume",
+            "materialKey": "netflix-viewing",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "nosql"
+            ]
+          },
+          {
+            "id": "recs-cache",
+            "kind": "edge",
+            "text": "Personalised rows are served from a cache",
+            "explanation": "Ranking at request time is too slow.",
+            "requirement": "recs",
+            "materialKey": "cache-aside",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "cache"
+            ]
+          },
+          {
+            "id": "recs-batch",
+            "kind": "path",
+            "text": "A scheduled job precomputes recommendations",
+            "explanation": "Recommendations change slowly; compute them in batch and store the result.",
+            "requirement": "recs",
+            "from": [
+              "scheduler"
+            ],
+            "to": [
+              "worker"
+            ]
+          }
+        ],
+        "reference": {
+          "nodes": [
+            {
+              "id": "v",
+              "kind": "client",
+              "label": "TV & phone apps"
+            },
+            {
+              "id": "st",
+              "kind": "client",
+              "label": "studio uploader"
+            },
+            {
+              "id": "gw",
+              "kind": "api-gateway"
+            },
+            {
+              "id": "p1",
+              "kind": "service",
+              "label": "playback API"
+            },
+            {
+              "id": "p2",
+              "kind": "service",
+              "label": "playback API"
+            },
+            {
+              "id": "up",
+              "kind": "service",
+              "label": "upload API"
+            },
+            {
+              "id": "os",
+              "kind": "object-storage",
+              "label": "masters & segments"
+            },
+            {
+              "id": "q",
+              "kind": "queue",
+              "label": "encoding jobs"
+            },
+            {
+              "id": "e1",
+              "kind": "worker",
+              "label": "encoder"
+            },
+            {
+              "id": "e2",
+              "kind": "worker",
+              "label": "encoder"
+            },
+            {
+              "id": "cdn",
+              "kind": "cdn",
+              "label": "Open Connect"
+            },
+            {
+              "id": "h",
+              "kind": "nosql",
+              "label": "viewing history"
+            },
+            {
+              "id": "k",
+              "kind": "cache",
+              "label": "home rows"
+            },
+            {
+              "id": "sch",
+              "kind": "scheduler",
+              "label": "nightly"
+            },
+            {
+              "id": "rw",
+              "kind": "worker",
+              "label": "recommender"
+            }
+          ],
+          "edges": [
+            {
+              "from": "v",
+              "to": "gw"
+            },
+            {
+              "from": "st",
+              "to": "gw"
+            },
+            {
+              "from": "gw",
+              "to": "p1"
+            },
+            {
+              "from": "gw",
+              "to": "p2"
+            },
+            {
+              "from": "gw",
+              "to": "up"
+            },
+            {
+              "from": "st",
+              "to": "os"
+            },
+            {
+              "from": "up",
+              "to": "q"
+            },
+            {
+              "from": "q",
+              "to": "e1"
+            },
+            {
+              "from": "q",
+              "to": "e2"
+            },
+            {
+              "from": "e1",
+              "to": "os"
+            },
+            {
+              "from": "e2",
+              "to": "os"
+            },
+            {
+              "from": "v",
+              "to": "cdn"
+            },
+            {
+              "from": "cdn",
+              "to": "os"
+            },
+            {
+              "from": "p1",
+              "to": "h"
+            },
+            {
+              "from": "p1",
+              "to": "k"
+            },
+            {
+              "from": "p2",
+              "to": "h"
+            },
+            {
+              "from": "p2",
+              "to": "k"
+            },
+            {
+              "from": "sch",
+              "to": "rw"
+            },
+            {
+              "from": "rw",
+              "to": "k"
+            },
+            {
+              "from": "rw",
+              "to": "h"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "design",
+      "prompt": "Design real-time collaborative editing like Google Docs",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "explanation": "Editors keep a WebSocket open to a gateway, which checks document permissions and forwards each edit to the collaboration service that owns the document. That service orders concurrent operations (operational transformation or CRDTs) and appends them to a per-document log, then broadcasts them back. Recently opened documents stay in a cache. A worker compacts the log into snapshots in object storage, which keeps old versions restorable and lets large documents open quickly.",
+      "materials": [
+        "cache-aside",
+        "figma",
+        "lb",
+        "ot",
+        "queue-leveling",
+        "websocket"
+      ],
+      "design": {
+        "requirements": [
+          {
+            "id": "live",
+            "text": "Everyone editing a document sees the others' changes within a fraction of a second"
+          },
+          {
+            "id": "conflicts",
+            "text": "Concurrent edits to the same paragraph never lose text"
+          },
+          {
+            "id": "history",
+            "text": "Old versions can be viewed and restored"
+          },
+          {
+            "id": "share",
+            "text": "Only people the document is shared with can open it"
+          },
+          {
+            "id": "open",
+            "text": "Opening a large document is fast"
+          }
+        ],
+        "rules": [
+          {
+            "id": "ws",
+            "kind": "path",
+            "text": "Editors connect over WebSockets to a collaboration service",
+            "explanation": "Edits must be pushed both ways continuously; polling would be too slow and too costly.",
+            "requirement": "live",
+            "materialKey": "websocket",
+            "from": [
+              "client"
+            ],
+            "via": [
+              "websocket"
+            ],
+            "to": [
+              "service"
+            ]
+          },
+          {
+            "id": "gateways",
+            "kind": "has",
+            "text": "At least two WebSocket servers",
+            "explanation": "Millions of open connections don't fit on one server, and one server would be a single point of failure.",
+            "requirement": "live",
+            "materialKey": "lb",
+            "of": [
+              "websocket"
+            ],
+            "min": 2
+          },
+          {
+            "id": "oplog",
+            "kind": "edge",
+            "text": "Every operation is appended to a per-document log in a database",
+            "explanation": "One ordered log per document gives each edit a version, so concurrent edits can be transformed and none is lost.",
+            "requirement": "conflicts",
+            "materialKey": "ot",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "nosql",
+              "sql"
+            ]
+          },
+          {
+            "id": "acl",
+            "kind": "edge",
+            "text": "Permissions are checked before joining a document",
+            "explanation": "A shared link must not let anyone outside the sharing list read the document.",
+            "requirement": "share",
+            "from": [
+              "websocket",
+              "api-gateway",
+              "service"
+            ],
+            "to": [
+              "auth"
+            ]
+          },
+          {
+            "id": "snapshots",
+            "kind": "path",
+            "text": "Workers compact the log into snapshots in object storage",
+            "explanation": "Replaying years of operations is slow; periodic snapshots are the restore points for version history.",
+            "requirement": "history",
+            "materialKey": "figma",
+            "from": [
+              "service"
+            ],
+            "via": [
+              "worker"
+            ],
+            "to": [
+              "object-storage"
+            ]
+          },
+          {
+            "id": "cache",
+            "kind": "edge",
+            "text": "Open documents are kept in a cache",
+            "explanation": "Active documents are read on every join and reload.",
+            "requirement": "open",
+            "materialKey": "cache-aside",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "cache"
+            ]
+          },
+          {
+            "id": "queue",
+            "kind": "edge",
+            "text": "Snapshot work is queued, not done on the edit path",
+            "explanation": "Compaction is heavy; a queue keeps it from slowing typing down.",
+            "requirement": "open",
+            "optional": true,
+            "materialKey": "queue-leveling",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "queue"
+            ]
+          },
+          {
+            "id": "no-direct",
+            "kind": "no-edge",
+            "text": "Clients never talk to the database or storage",
+            "explanation": "All edits must be ordered and permission-checked by the service.",
+            "from": [
+              "client"
+            ],
+            "to": [
+              "sql",
+              "nosql",
+              "cache",
+              "search",
+              "object-storage"
+            ]
+          }
+        ],
+        "reference": {
+          "nodes": [
+            {
+              "id": "c",
+              "kind": "client",
+              "label": "browser"
+            },
+            {
+              "id": "lb",
+              "kind": "load-balancer"
+            },
+            {
+              "id": "g1",
+              "kind": "websocket",
+              "label": "edit gateway"
+            },
+            {
+              "id": "g2",
+              "kind": "websocket",
+              "label": "edit gateway"
+            },
+            {
+              "id": "a",
+              "kind": "auth"
+            },
+            {
+              "id": "s",
+              "kind": "service",
+              "label": "collaboration"
+            },
+            {
+              "id": "db",
+              "kind": "nosql",
+              "label": "operation log"
+            },
+            {
+              "id": "k",
+              "kind": "cache",
+              "label": "open documents"
+            },
+            {
+              "id": "q",
+              "kind": "queue",
+              "label": "compaction jobs"
+            },
+            {
+              "id": "w",
+              "kind": "worker",
+              "label": "snapshotter"
+            },
+            {
+              "id": "os",
+              "kind": "object-storage",
+              "label": "snapshots"
+            }
+          ],
+          "edges": [
+            {
+              "from": "c",
+              "to": "lb"
+            },
+            {
+              "from": "lb",
+              "to": "g1"
+            },
+            {
+              "from": "lb",
+              "to": "g2"
+            },
+            {
+              "from": "g1",
+              "to": "a"
+            },
+            {
+              "from": "g2",
+              "to": "a"
+            },
+            {
+              "from": "g1",
+              "to": "s"
+            },
+            {
+              "from": "g2",
+              "to": "s"
+            },
+            {
+              "from": "s",
+              "to": "db"
+            },
+            {
+              "from": "s",
+              "to": "k"
+            },
+            {
+              "from": "s",
+              "to": "q"
+            },
+            {
+              "from": "q",
+              "to": "w"
+            },
+            {
+              "from": "w",
+              "to": "db"
+            },
+            {
+              "from": "w",
+              "to": "os"
+            },
+            {
+              "from": "s",
+              "to": "w"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "design",
+      "prompt": "Design group chat like Discord or Slack",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "explanation": "Clients keep a WebSocket to one of many gateway servers. A message goes to the messages service, which stores it in a wide-column database partitioned by channel and time, then publishes it on a pub/sub bus; every gateway with members of that channel pushes it to them. An indexer worker reads the same stream into a search index. A rate limiter in front stops spam floods.",
+      "materials": [
+        "discord",
+        "ratelimit",
+        "search-index",
+        "slack-rtm",
+        "websocket"
+      ],
+      "design": {
+        "requirements": [
+          {
+            "id": "deliver",
+            "text": "A message reaches everyone online in the channel within a second"
+          },
+          {
+            "id": "scale",
+            "text": "Servers with 100,000 members and millions of concurrent connections"
+          },
+          {
+            "id": "store",
+            "text": "History is kept forever and loads newest first"
+          },
+          {
+            "id": "search",
+            "text": "Users can search old messages"
+          }
+        ],
+        "rules": [
+          {
+            "id": "ws",
+            "kind": "path",
+            "text": "Clients connect through WebSocket gateways",
+            "explanation": "Messages are pushed, not polled.",
+            "requirement": "deliver",
+            "materialKey": "websocket",
+            "from": [
+              "client"
+            ],
+            "via": [
+              "websocket"
+            ],
+            "to": [
+              "service"
+            ]
+          },
+          {
+            "id": "gateways",
+            "kind": "has",
+            "text": "Several gateway servers",
+            "explanation": "Millions of connections are spread across many gateways.",
+            "requirement": "scale",
+            "materialKey": "slack-rtm",
+            "of": [
+              "websocket"
+            ],
+            "min": 2
+          },
+          {
+            "id": "fanout",
+            "kind": "path",
+            "text": "Messages fan out to gateways through pub/sub",
+            "explanation": "The sender's gateway doesn't know where the other members are connected; a bus delivers to all of them.",
+            "requirement": "deliver",
+            "materialKey": "slack-rtm",
+            "from": [
+              "service"
+            ],
+            "via": [
+              "queue"
+            ],
+            "to": [
+              "websocket"
+            ]
+          },
+          {
+            "id": "store",
+            "kind": "edge",
+            "text": "Messages are stored in a wide-column store",
+            "explanation": "Partitioning by channel and time bucket makes 'latest 50 messages' one fast read, even at trillions of rows.",
+            "requirement": "store",
+            "materialKey": "discord",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "nosql"
+            ]
+          },
+          {
+            "id": "search",
+            "kind": "path",
+            "text": "An indexer feeds a search index from the message stream",
+            "explanation": "Searching trillions of messages needs an inverted index, updated asynchronously.",
+            "requirement": "search",
+            "materialKey": "search-index",
+            "from": [
+              "queue"
+            ],
+            "via": [
+              "worker"
+            ],
+            "to": [
+              "search"
+            ]
+          },
+          {
+            "id": "limit",
+            "kind": "path",
+            "text": "A rate limiter stops spam floods",
+            "explanation": "One bot must not be able to flood a channel.",
+            "optional": true,
+            "materialKey": "ratelimit",
+            "from": [
+              "client"
+            ],
+            "via": [
+              "rate-limiter"
+            ],
+            "to": [
+              "websocket"
+            ]
+          },
+          {
+            "id": "no-direct",
+            "kind": "no-edge",
+            "text": "Clients never talk to the stores directly",
+            "explanation": "Permissions and ordering are enforced by the service.",
+            "from": [
+              "client"
+            ],
+            "to": [
+              "sql",
+              "nosql",
+              "cache",
+              "search",
+              "object-storage"
+            ]
+          }
+        ],
+        "reference": {
+          "nodes": [
+            {
+              "id": "c",
+              "kind": "client",
+              "label": "apps"
+            },
+            {
+              "id": "rl",
+              "kind": "rate-limiter"
+            },
+            {
+              "id": "lb",
+              "kind": "load-balancer"
+            },
+            {
+              "id": "g1",
+              "kind": "websocket",
+              "label": "gateway"
+            },
+            {
+              "id": "g2",
+              "kind": "websocket",
+              "label": "gateway"
+            },
+            {
+              "id": "s",
+              "kind": "service",
+              "label": "messages"
+            },
+            {
+              "id": "db",
+              "kind": "nosql",
+              "label": "messages (ScyllaDB)"
+            },
+            {
+              "id": "q",
+              "kind": "queue",
+              "label": "pub/sub"
+            },
+            {
+              "id": "ix",
+              "kind": "worker",
+              "label": "indexer"
+            },
+            {
+              "id": "se",
+              "kind": "search",
+              "label": "message search"
+            }
+          ],
+          "edges": [
+            {
+              "from": "c",
+              "to": "rl"
+            },
+            {
+              "from": "rl",
+              "to": "lb"
+            },
+            {
+              "from": "lb",
+              "to": "g1"
+            },
+            {
+              "from": "lb",
+              "to": "g2"
+            },
+            {
+              "from": "g1",
+              "to": "s"
+            },
+            {
+              "from": "g2",
+              "to": "s"
+            },
+            {
+              "from": "s",
+              "to": "db"
+            },
+            {
+              "from": "s",
+              "to": "q"
+            },
+            {
+              "from": "q",
+              "to": "g1"
+            },
+            {
+              "from": "q",
+              "to": "g2"
+            },
+            {
+              "from": "q",
+              "to": "ix"
+            },
+            {
+              "from": "ix",
+              "to": "se"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "design",
+      "prompt": "Design file sync like Dropbox",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "explanation": "Clients split files into blocks named by their hash. They ask the metadata API which blocks are new (a block index in a key-value store makes duplicates free) and upload only those straight to object storage with pre-signed URLs, so an interrupted upload resumes from the last block. File and folder metadata lives in a relational database with transactions. Each change is published on a queue, and a notification service pushes it over a long-lived connection to the user's other devices.",
+      "materials": [
+        "cas",
+        "dropbox-sync",
+        "lb",
+        "valet",
+        "websocket"
+      ],
+      "design": {
+        "requirements": [
+          {
+            "id": "upload",
+            "text": "Files of many gigabytes upload, and an interrupted upload resumes"
+          },
+          {
+            "id": "sync",
+            "text": "A change on one device appears on the user's other devices within seconds"
+          },
+          {
+            "id": "dedup",
+            "text": "Identical content is stored only once"
+          },
+          {
+            "id": "meta",
+            "text": "Folder listings and file versions are always consistent"
+          },
+          {
+            "id": "uptime",
+            "text": "The service keeps working when one server fails"
+          }
+        ],
+        "rules": [
+          {
+            "id": "blocks",
+            "kind": "edge",
+            "text": "Clients upload blocks straight to object storage",
+            "explanation": "Big uploads shouldn't pass through API servers; per-block uploads also make resuming trivial.",
+            "requirement": "upload",
+            "materialKey": "valet",
+            "from": [
+              "client"
+            ],
+            "to": [
+              "object-storage"
+            ]
+          },
+          {
+            "id": "metadata",
+            "kind": "edge",
+            "text": "Metadata lives in a relational database",
+            "explanation": "Moves and renames must be atomic.",
+            "requirement": "meta",
+            "materialKey": "dropbox-sync",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "sql"
+            ]
+          },
+          {
+            "id": "dedup",
+            "kind": "edge",
+            "text": "Block hashes are indexed in a key-value store",
+            "explanation": "Looking up a block by its hash lets the client skip anything already stored.",
+            "requirement": "dedup",
+            "materialKey": "cas",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "nosql"
+            ]
+          },
+          {
+            "id": "push",
+            "kind": "path",
+            "text": "Devices hold a connection to a notification service",
+            "explanation": "Devices learn about changes at once.",
+            "requirement": "sync",
+            "materialKey": "websocket",
+            "from": [
+              "client"
+            ],
+            "via": [
+              "websocket"
+            ],
+            "to": [
+              "service"
+            ]
+          },
+          {
+            "id": "changes",
+            "kind": "path",
+            "text": "Changes are published through a queue to the notifier",
+            "explanation": "The API that saved the change doesn't know where the user's other devices are connected.",
+            "requirement": "sync",
+            "from": [
+              "service"
+            ],
+            "via": [
+              "queue"
+            ],
+            "to": [
+              "websocket"
+            ]
+          },
+          {
+            "id": "front",
+            "kind": "path",
+            "text": "API requests go through a load balancer",
+            "explanation": "Routes around failed instances.",
+            "requirement": "uptime",
+            "materialKey": "lb",
+            "from": [
+              "client"
+            ],
+            "via": [
+              "load-balancer",
+              "api-gateway"
+            ],
+            "to": [
+              "service"
+            ]
+          },
+          {
+            "id": "instances",
+            "kind": "has",
+            "text": "At least two API instances",
+            "explanation": "One instance is a single point of failure.",
+            "requirement": "uptime",
+            "materialKey": "lb",
+            "of": [
+              "service"
+            ],
+            "min": 2
+          },
+          {
+            "id": "no-db",
+            "kind": "no-edge",
+            "text": "Clients never touch the databases",
+            "explanation": "Only the API may change metadata.",
+            "from": [
+              "client"
+            ],
+            "to": [
+              "sql",
+              "nosql"
+            ]
+          }
+        ],
+        "reference": {
+          "nodes": [
+            {
+              "id": "c",
+              "kind": "client",
+              "label": "desktop & phone"
+            },
+            {
+              "id": "lb",
+              "kind": "load-balancer"
+            },
+            {
+              "id": "s1",
+              "kind": "service",
+              "label": "metadata API"
+            },
+            {
+              "id": "s2",
+              "kind": "service",
+              "label": "metadata API"
+            },
+            {
+              "id": "db",
+              "kind": "sql",
+              "label": "metadata"
+            },
+            {
+              "id": "kv",
+              "kind": "nosql",
+              "label": "block index"
+            },
+            {
+              "id": "os",
+              "kind": "object-storage",
+              "label": "blocks"
+            },
+            {
+              "id": "q",
+              "kind": "queue",
+              "label": "change events"
+            },
+            {
+              "id": "n",
+              "kind": "websocket",
+              "label": "notifier"
+            }
+          ],
+          "edges": [
+            {
+              "from": "c",
+              "to": "lb"
+            },
+            {
+              "from": "lb",
+              "to": "s1"
+            },
+            {
+              "from": "lb",
+              "to": "s2"
+            },
+            {
+              "from": "s1",
+              "to": "db"
+            },
+            {
+              "from": "s1",
+              "to": "kv"
+            },
+            {
+              "from": "s1",
+              "to": "q"
+            },
+            {
+              "from": "s2",
+              "to": "db"
+            },
+            {
+              "from": "s2",
+              "to": "kv"
+            },
+            {
+              "from": "s2",
+              "to": "q"
+            },
+            {
+              "from": "c",
+              "to": "os"
+            },
+            {
+              "from": "c",
+              "to": "n"
+            },
+            {
+              "from": "n",
+              "to": "s1"
+            },
+            {
+              "from": "q",
+              "to": "n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "design",
+      "prompt": "Design ticket sales for a sold-out concert like Ticketmaster",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "explanation": "A virtual waiting room in front admits fans at the rate the booking service can handle. Seats and orders live in a relational database, where a conditional update or row lock makes double selling impossible. A chosen seat is held in Redis with a 10-minute expiry while the fan pays. Payment confirmation goes through a queue to workers that use idempotency keys, so a double click never charges twice; a scheduler releases holds that expired without payment.",
+      "materials": [
+        "cdn",
+        "lb",
+        "pg-locking",
+        "redis-expire",
+        "stripe-idem",
+        "waiting-room"
+      ],
+      "design": {
+        "requirements": [
+          {
+            "id": "spike",
+            "text": "2 million fans arrive in the first minute for 50,000 seats"
+          },
+          {
+            "id": "oversell",
+            "text": "A seat is never sold twice"
+          },
+          {
+            "id": "hold",
+            "text": "A chosen seat is held for 10 minutes while the fan pays"
+          },
+          {
+            "id": "pay",
+            "text": "A retry or double click never charges twice"
+          }
+        ],
+        "rules": [
+          {
+            "id": "waiting-room",
+            "kind": "path",
+            "text": "A waiting room admits fans at a safe rate",
+            "explanation": "Letting everyone in at once overloads the database; a waiting room is fairer than random errors.",
+            "requirement": "spike",
+            "materialKey": "waiting-room",
+            "from": [
+              "client"
+            ],
+            "via": [
+              "rate-limiter"
+            ],
+            "to": [
+              "service"
+            ]
+          },
+          {
+            "id": "instances",
+            "kind": "has",
+            "text": "At least two booking instances",
+            "explanation": "Peak traffic needs horizontal capacity.",
+            "requirement": "spike",
+            "materialKey": "lb",
+            "of": [
+              "service"
+            ],
+            "min": 2
+          },
+          {
+            "id": "seats",
+            "kind": "edge",
+            "text": "Seats and orders are in a relational database",
+            "explanation": "A transaction with a row lock or a conditional UPDATE guarantees one buyer per seat.",
+            "requirement": "oversell",
+            "materialKey": "pg-locking",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "sql"
+            ]
+          },
+          {
+            "id": "holds",
+            "kind": "edge",
+            "text": "Seat holds live in a cache with a TTL",
+            "explanation": "An expiring key releases the seat automatically if the fan walks away.",
+            "requirement": "hold",
+            "materialKey": "redis-expire",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "cache"
+            ]
+          },
+          {
+            "id": "payments",
+            "kind": "path",
+            "text": "Payments run through a queue and workers",
+            "explanation": "Payment providers are slow and flaky; a queue retries safely, and idempotency keys stop double charges.",
+            "requirement": "pay",
+            "materialKey": "stripe-idem",
+            "from": [
+              "service"
+            ],
+            "via": [
+              "queue"
+            ],
+            "to": [
+              "worker"
+            ]
+          },
+          {
+            "id": "release",
+            "kind": "path",
+            "text": "A scheduler releases expired holds",
+            "explanation": "Seats from abandoned checkouts go back on sale.",
+            "requirement": "hold",
+            "optional": true,
+            "from": [
+              "scheduler"
+            ],
+            "to": [
+              "worker"
+            ]
+          },
+          {
+            "id": "cdn",
+            "kind": "edge",
+            "text": "Event pages come from a CDN",
+            "explanation": "Static pages shouldn't touch the booking servers.",
+            "optional": true,
+            "materialKey": "cdn",
+            "from": [
+              "client"
+            ],
+            "to": [
+              "cdn"
+            ]
+          },
+          {
+            "id": "no-direct",
+            "kind": "no-edge",
+            "text": "Clients never reach the stores directly",
+            "explanation": "All bookings go through the service.",
+            "from": [
+              "client"
+            ],
+            "to": [
+              "sql",
+              "nosql",
+              "cache",
+              "search",
+              "object-storage"
+            ]
+          }
+        ],
+        "reference": {
+          "nodes": [
+            {
+              "id": "c",
+              "kind": "client",
+              "label": "fans"
+            },
+            {
+              "id": "cdn",
+              "kind": "cdn",
+              "label": "event pages"
+            },
+            {
+              "id": "wr",
+              "kind": "rate-limiter",
+              "label": "waiting room"
+            },
+            {
+              "id": "lb",
+              "kind": "load-balancer"
+            },
+            {
+              "id": "s1",
+              "kind": "service",
+              "label": "booking"
+            },
+            {
+              "id": "s2",
+              "kind": "service",
+              "label": "booking"
+            },
+            {
+              "id": "k",
+              "kind": "cache",
+              "label": "seat holds"
+            },
+            {
+              "id": "db",
+              "kind": "sql",
+              "label": "seats & orders"
+            },
+            {
+              "id": "q",
+              "kind": "queue",
+              "label": "payments"
+            },
+            {
+              "id": "w",
+              "kind": "worker",
+              "label": "payment"
+            },
+            {
+              "id": "sch",
+              "kind": "scheduler",
+              "label": "hold expiry"
+            },
+            {
+              "id": "rw",
+              "kind": "worker",
+              "label": "release holds"
+            }
+          ],
+          "edges": [
+            {
+              "from": "c",
+              "to": "cdn"
+            },
+            {
+              "from": "c",
+              "to": "wr"
+            },
+            {
+              "from": "wr",
+              "to": "lb"
+            },
+            {
+              "from": "lb",
+              "to": "s1"
+            },
+            {
+              "from": "lb",
+              "to": "s2"
+            },
+            {
+              "from": "s1",
+              "to": "k"
+            },
+            {
+              "from": "s1",
+              "to": "db"
+            },
+            {
+              "from": "s1",
+              "to": "q"
+            },
+            {
+              "from": "s2",
+              "to": "k"
+            },
+            {
+              "from": "s2",
+              "to": "db"
+            },
+            {
+              "from": "s2",
+              "to": "q"
+            },
+            {
+              "from": "q",
+              "to": "w"
+            },
+            {
+              "from": "w",
+              "to": "db"
+            },
+            {
+              "from": "sch",
+              "to": "rw"
+            },
+            {
+              "from": "rw",
+              "to": "db"
+            },
+            {
+              "from": "rw",
+              "to": "k"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "design",
+      "prompt": "Design a payments API like Stripe",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "explanation": "Merchants call the API through a rate limiter and a gateway that validates their API key. The payments service stores an idempotency key with each request in the same transaction as the charge, so a retry returns the first result. Money movements are rows in an append-only double-entry ledger, replicated to a standby. Events are written to an outbox and published on a queue; webhook workers deliver them, and a scheduler retries failed deliveries with backoff.",
+      "materials": [
+        "outbox",
+        "ratelimit",
+        "replication",
+        "stripe-idem",
+        "stripe-webhooks"
+      ],
+      "design": {
+        "requirements": [
+          {
+            "id": "idem",
+            "text": "A retried request never creates a second charge"
+          },
+          {
+            "id": "ledger",
+            "text": "Every money movement is recorded and survives a database failure"
+          },
+          {
+            "id": "webhooks",
+            "text": "Merchants are notified of events, with retries if their server is down"
+          },
+          {
+            "id": "keys",
+            "text": "Only merchants with a valid API key can create charges"
+          },
+          {
+            "id": "limit",
+            "text": "One merchant's burst can't take the API down for others"
+          }
+        ],
+        "rules": [
+          {
+            "id": "gateway",
+            "kind": "path",
+            "text": "Requests pass through an API gateway",
+            "explanation": "One place to authenticate and route.",
+            "requirement": "keys",
+            "from": [
+              "client"
+            ],
+            "via": [
+              "api-gateway"
+            ],
+            "to": [
+              "service"
+            ]
+          },
+          {
+            "id": "keys",
+            "kind": "edge",
+            "text": "The gateway validates API keys with an auth service",
+            "explanation": "No key, no charge.",
+            "requirement": "keys",
+            "from": [
+              "api-gateway",
+              "service"
+            ],
+            "to": [
+              "auth"
+            ]
+          },
+          {
+            "id": "limit",
+            "kind": "path",
+            "text": "A rate limiter in front of the API",
+            "explanation": "Per-merchant limits isolate noisy neighbours.",
+            "requirement": "limit",
+            "materialKey": "ratelimit",
+            "from": [
+              "client"
+            ],
+            "via": [
+              "rate-limiter"
+            ],
+            "to": [
+              "service"
+            ]
+          },
+          {
+            "id": "idem",
+            "kind": "edge",
+            "text": "Charges and idempotency keys are in a relational database",
+            "explanation": "A unique key stored in the same transaction as the charge makes retries safe.",
+            "requirement": "idem",
+            "materialKey": "stripe-idem",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "sql"
+            ]
+          },
+          {
+            "id": "standby",
+            "kind": "edge",
+            "text": "The ledger database replicates to a standby",
+            "explanation": "Losing committed payments is not acceptable; a synchronous standby takes over.",
+            "requirement": "ledger",
+            "materialKey": "replication",
+            "from": [
+              "sql"
+            ],
+            "to": [
+              "replica"
+            ]
+          },
+          {
+            "id": "events",
+            "kind": "path",
+            "text": "Events go through a queue to webhook workers",
+            "explanation": "Written to an outbox in the payment's transaction, then published, so no event is lost or invented.",
+            "requirement": "webhooks",
+            "materialKey": "outbox",
+            "from": [
+              "service"
+            ],
+            "via": [
+              "queue"
+            ],
+            "to": [
+              "worker"
+            ]
+          },
+          {
+            "id": "retries",
+            "kind": "path",
+            "text": "A scheduler retries failed webhooks",
+            "explanation": "Merchant servers go down; retries with exponential backoff over days.",
+            "requirement": "webhooks",
+            "materialKey": "stripe-webhooks",
+            "from": [
+              "scheduler"
+            ],
+            "to": [
+              "worker"
+            ]
+          },
+          {
+            "id": "no-direct",
+            "kind": "no-edge",
+            "text": "Merchants never reach the database",
+            "explanation": "All writes are validated by the service.",
+            "from": [
+              "client"
+            ],
+            "to": [
+              "sql",
+              "replica",
+              "cache",
+              "nosql"
+            ]
+          }
+        ],
+        "reference": {
+          "nodes": [
+            {
+              "id": "c",
+              "kind": "client",
+              "label": "merchant server"
+            },
+            {
+              "id": "rl",
+              "kind": "rate-limiter"
+            },
+            {
+              "id": "gw",
+              "kind": "api-gateway"
+            },
+            {
+              "id": "a",
+              "kind": "auth"
+            },
+            {
+              "id": "s1",
+              "kind": "service",
+              "label": "payments"
+            },
+            {
+              "id": "s2",
+              "kind": "service",
+              "label": "payments"
+            },
+            {
+              "id": "db",
+              "kind": "sql",
+              "label": "ledger & idempotency keys"
+            },
+            {
+              "id": "r",
+              "kind": "replica",
+              "label": "standby"
+            },
+            {
+              "id": "q",
+              "kind": "queue",
+              "label": "events"
+            },
+            {
+              "id": "w",
+              "kind": "worker",
+              "label": "webhook sender"
+            },
+            {
+              "id": "sch",
+              "kind": "scheduler",
+              "label": "webhook retries"
+            }
+          ],
+          "edges": [
+            {
+              "from": "c",
+              "to": "rl"
+            },
+            {
+              "from": "rl",
+              "to": "gw"
+            },
+            {
+              "from": "gw",
+              "to": "a"
+            },
+            {
+              "from": "gw",
+              "to": "s1"
+            },
+            {
+              "from": "gw",
+              "to": "s2"
+            },
+            {
+              "from": "s1",
+              "to": "db"
+            },
+            {
+              "from": "s1",
+              "to": "q"
+            },
+            {
+              "from": "s2",
+              "to": "db"
+            },
+            {
+              "from": "s2",
+              "to": "q"
+            },
+            {
+              "from": "db",
+              "to": "r"
+            },
+            {
+              "from": "q",
+              "to": "w"
+            },
+            {
+              "from": "sch",
+              "to": "w"
+            },
+            {
+              "from": "w",
+              "to": "db"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "design",
+      "prompt": "Design a web crawler and search engine like Google",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "explanation": "A scheduler decides which URLs are due and feeds a URL frontier queue. Many crawler workers take URLs from it, check per-host timing and cached robots.txt in a shared cache to stay polite, store the raw pages in object storage and push newly found links back onto the frontier. Indexer workers build an inverted index from the pages. A query service behind a load balancer answers searches from the index and caches popular queries.",
+      "materials": [
+        "cache-aside",
+        "competing",
+        "crawler",
+        "lb",
+        "robots",
+        "search-index"
+      ],
+      "design": {
+        "requirements": [
+          {
+            "id": "crawl",
+            "text": "Crawl billions of pages and recrawl popular ones often"
+          },
+          {
+            "id": "polite",
+            "text": "Never hit one site too fast, and respect robots.txt"
+          },
+          {
+            "id": "store",
+            "text": "Keep the raw pages so the index can be rebuilt"
+          },
+          {
+            "id": "query",
+            "text": "Answer searches in under 200 ms"
+          }
+        ],
+        "rules": [
+          {
+            "id": "frontier",
+            "kind": "path",
+            "text": "A scheduler feeds a URL frontier queue that crawlers consume",
+            "explanation": "The frontier decides what to fetch next and how often to come back.",
+            "requirement": "crawl",
+            "materialKey": "crawler",
+            "from": [
+              "scheduler"
+            ],
+            "via": [
+              "queue"
+            ],
+            "to": [
+              "worker"
+            ]
+          },
+          {
+            "id": "crawlers",
+            "kind": "has",
+            "text": "Many crawler workers",
+            "explanation": "Billions of pages need thousands of parallel fetches.",
+            "requirement": "crawl",
+            "materialKey": "competing",
+            "of": [
+              "worker"
+            ],
+            "min": 2
+          },
+          {
+            "id": "polite",
+            "kind": "edge",
+            "text": "Crawlers share per-host timing and robots.txt in a cache",
+            "explanation": "Every crawler must know when a host was last hit and what it allows.",
+            "requirement": "polite",
+            "materialKey": "robots",
+            "from": [
+              "worker"
+            ],
+            "to": [
+              "cache"
+            ]
+          },
+          {
+            "id": "raw",
+            "kind": "edge",
+            "text": "Raw pages are stored in object storage",
+            "explanation": "Re-indexing must not mean re-crawling.",
+            "requirement": "store",
+            "from": [
+              "worker"
+            ],
+            "to": [
+              "object-storage"
+            ]
+          },
+          {
+            "id": "index",
+            "kind": "edge",
+            "text": "Indexers build a search index",
+            "explanation": "An inverted index maps words to pages.",
+            "requirement": "query",
+            "materialKey": "search-index",
+            "from": [
+              "worker"
+            ],
+            "to": [
+              "search"
+            ]
+          },
+          {
+            "id": "front",
+            "kind": "path",
+            "text": "Searches go through a load balancer to a query service",
+            "explanation": "Spreads the load.",
+            "requirement": "query",
+            "materialKey": "lb",
+            "from": [
+              "client"
+            ],
+            "via": [
+              "load-balancer",
+              "api-gateway"
+            ],
+            "to": [
+              "service"
+            ]
+          },
+          {
+            "id": "serve",
+            "kind": "edge",
+            "text": "The query service reads the index",
+            "explanation": "Answers come from the index, never from crawling.",
+            "requirement": "query",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "search"
+            ]
+          },
+          {
+            "id": "cache",
+            "kind": "edge",
+            "text": "Popular queries are cached",
+            "explanation": "A small share of queries is most of the traffic.",
+            "requirement": "query",
+            "optional": true,
+            "materialKey": "cache-aside",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "cache"
+            ]
+          },
+          {
+            "id": "no-direct",
+            "kind": "no-edge",
+            "text": "Users never query the index directly",
+            "explanation": "The service ranks and filters results.",
+            "from": [
+              "client"
+            ],
+            "to": [
+              "sql",
+              "nosql",
+              "cache",
+              "search",
+              "object-storage"
+            ]
+          }
+        ],
+        "reference": {
+          "nodes": [
+            {
+              "id": "sch",
+              "kind": "scheduler",
+              "label": "recrawl planner"
+            },
+            {
+              "id": "q",
+              "kind": "queue",
+              "label": "URL frontier"
+            },
+            {
+              "id": "w1",
+              "kind": "worker",
+              "label": "crawler"
+            },
+            {
+              "id": "w2",
+              "kind": "worker",
+              "label": "crawler"
+            },
+            {
+              "id": "k",
+              "kind": "cache",
+              "label": "host timing & robots.txt"
+            },
+            {
+              "id": "os",
+              "kind": "object-storage",
+              "label": "raw pages"
+            },
+            {
+              "id": "pq",
+              "kind": "queue",
+              "label": "fetched pages"
+            },
+            {
+              "id": "ix",
+              "kind": "worker",
+              "label": "indexer"
+            },
+            {
+              "id": "se",
+              "kind": "search",
+              "label": "inverted index"
+            },
+            {
+              "id": "c",
+              "kind": "client",
+              "label": "browser"
+            },
+            {
+              "id": "lb",
+              "kind": "load-balancer"
+            },
+            {
+              "id": "s",
+              "kind": "service",
+              "label": "query"
+            }
+          ],
+          "edges": [
+            {
+              "from": "sch",
+              "to": "q"
+            },
+            {
+              "from": "q",
+              "to": "w1"
+            },
+            {
+              "from": "q",
+              "to": "w2"
+            },
+            {
+              "from": "w1",
+              "to": "k"
+            },
+            {
+              "from": "w1",
+              "to": "os"
+            },
+            {
+              "from": "w1",
+              "to": "pq"
+            },
+            {
+              "from": "w1",
+              "to": "q"
+            },
+            {
+              "from": "w2",
+              "to": "k"
+            },
+            {
+              "from": "w2",
+              "to": "os"
+            },
+            {
+              "from": "w2",
+              "to": "pq"
+            },
+            {
+              "from": "w2",
+              "to": "q"
+            },
+            {
+              "from": "pq",
+              "to": "ix"
+            },
+            {
+              "from": "ix",
+              "to": "os"
+            },
+            {
+              "from": "ix",
+              "to": "se"
+            },
+            {
+              "from": "c",
+              "to": "lb"
+            },
+            {
+              "from": "lb",
+              "to": "s"
+            },
+            {
+              "from": "s",
+              "to": "se"
+            },
+            {
+              "from": "s",
+              "to": "k"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "design",
+      "prompt": "Design live streaming with chat like Twitch",
+      "tags": [
+        "System Design",
+        "Performance & Memory",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "explanation": "The streamer sends one high-quality stream to an ingest service near them. Transcoder workers turn it into several qualities and write short segments and playlists to storage, and viewers fetch them through a CDN, so a million viewers cost the origin almost nothing and stay a few seconds behind. Chat is separate: viewers hold WebSockets to chat gateways, and a pub/sub bus fans each message out to every gateway.",
+      "materials": [
+        "abr",
+        "cdn",
+        "hls",
+        "lb",
+        "slack-rtm",
+        "websocket"
+      ],
+      "design": {
+        "requirements": [
+          {
+            "id": "ingest",
+            "text": "Streamers send one high-quality stream"
+          },
+          {
+            "id": "qualities",
+            "text": "Viewers can choose from several qualities"
+          },
+          {
+            "id": "latency",
+            "text": "Viewers are only a few seconds behind the streamer"
+          },
+          {
+            "id": "scale",
+            "text": "A single stream can have a million viewers"
+          },
+          {
+            "id": "chat",
+            "text": "Viewers chat live with each other"
+          }
+        ],
+        "rules": [
+          {
+            "id": "ingest",
+            "kind": "path",
+            "text": "Streams reach an ingest service through a load balancer",
+            "explanation": "Ingest servers are spread out so streamers connect to one close by.",
+            "requirement": "ingest",
+            "materialKey": "lb",
+            "from": [
+              "client"
+            ],
+            "via": [
+              "load-balancer",
+              "dns"
+            ],
+            "to": [
+              "service"
+            ]
+          },
+          {
+            "id": "transcode",
+            "kind": "edge",
+            "text": "Ingest hands the stream to transcoders",
+            "explanation": "Each quality is a separate encode.",
+            "requirement": "qualities",
+            "materialKey": "abr",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "worker"
+            ]
+          },
+          {
+            "id": "segments",
+            "kind": "edge",
+            "text": "Transcoders write short segments to storage",
+            "explanation": "Two-second segments and a playlist keep viewers close to live.",
+            "requirement": "latency",
+            "materialKey": "hls",
+            "from": [
+              "worker"
+            ],
+            "to": [
+              "object-storage"
+            ]
+          },
+          {
+            "id": "cdn",
+            "kind": "path",
+            "text": "Viewers watch through a CDN",
+            "explanation": "A million viewers must not hit the origin.",
+            "requirement": "scale",
+            "materialKey": "cdn",
+            "from": [
+              "client"
+            ],
+            "via": [
+              "cdn"
+            ],
+            "to": [
+              "object-storage"
+            ]
+          },
+          {
+            "id": "chat-ws",
+            "kind": "path",
+            "text": "Chat runs over WebSockets",
+            "explanation": "Messages are pushed instantly.",
+            "requirement": "chat",
+            "materialKey": "websocket",
+            "from": [
+              "client"
+            ],
+            "via": [
+              "websocket"
+            ],
+            "to": [
+              "service"
+            ]
+          },
+          {
+            "id": "chat-fanout",
+            "kind": "path",
+            "text": "Chat messages fan out through pub/sub",
+            "explanation": "Viewers of one channel are spread over many gateways.",
+            "requirement": "chat",
+            "materialKey": "slack-rtm",
+            "from": [
+              "service"
+            ],
+            "via": [
+              "queue"
+            ],
+            "to": [
+              "websocket"
+            ]
+          },
+          {
+            "id": "no-origin",
+            "kind": "no-edge",
+            "text": "Viewers never read the origin storage directly",
+            "explanation": "That would bypass the CDN.",
+            "materialKey": "cdn",
+            "from": [
+              "client"
+            ],
+            "to": [
+              "object-storage"
+            ]
+          }
+        ],
+        "reference": {
+          "nodes": [
+            {
+              "id": "st",
+              "kind": "client",
+              "label": "streamer (OBS)"
+            },
+            {
+              "id": "v",
+              "kind": "client",
+              "label": "viewers"
+            },
+            {
+              "id": "lb",
+              "kind": "load-balancer"
+            },
+            {
+              "id": "ing",
+              "kind": "service",
+              "label": "ingest"
+            },
+            {
+              "id": "t1",
+              "kind": "worker",
+              "label": "transcoder"
+            },
+            {
+              "id": "t2",
+              "kind": "worker",
+              "label": "transcoder"
+            },
+            {
+              "id": "os",
+              "kind": "object-storage",
+              "label": "segments"
+            },
+            {
+              "id": "cdn",
+              "kind": "cdn"
+            },
+            {
+              "id": "g1",
+              "kind": "websocket",
+              "label": "chat gateway"
+            },
+            {
+              "id": "g2",
+              "kind": "websocket",
+              "label": "chat gateway"
+            },
+            {
+              "id": "cs",
+              "kind": "service",
+              "label": "chat"
+            },
+            {
+              "id": "q",
+              "kind": "queue",
+              "label": "chat pub/sub"
+            }
+          ],
+          "edges": [
+            {
+              "from": "st",
+              "to": "lb"
+            },
+            {
+              "from": "lb",
+              "to": "ing"
+            },
+            {
+              "from": "ing",
+              "to": "t1"
+            },
+            {
+              "from": "ing",
+              "to": "t2"
+            },
+            {
+              "from": "t1",
+              "to": "os"
+            },
+            {
+              "from": "t2",
+              "to": "os"
+            },
+            {
+              "from": "v",
+              "to": "cdn"
+            },
+            {
+              "from": "cdn",
+              "to": "os"
+            },
+            {
+              "from": "v",
+              "to": "g1"
+            },
+            {
+              "from": "v",
+              "to": "g2"
+            },
+            {
+              "from": "g1",
+              "to": "cs"
+            },
+            {
+              "from": "g2",
+              "to": "cs"
+            },
+            {
+              "from": "cs",
+              "to": "q"
+            },
+            {
+              "from": "q",
+              "to": "g1"
+            },
+            {
+              "from": "q",
+              "to": "g2"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "design",
+      "prompt": "Design a distributed job scheduler like Airflow",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "explanation": "Users define jobs through an API that stores definitions and runs in a relational database. Two or more schedulers claim due runs from that database with row locks (SELECT ... FOR UPDATE SKIP LOCKED), so a run is started once even if a scheduler crashes. Claimed runs go on a queue to a pool of workers, which record each attempt in the database and ship logs to object storage. Runs that keep failing move to a dead-letter queue.",
+      "materials": [
+        "airflow",
+        "competing",
+        "dlq",
+        "lb",
+        "pg-locking",
+        "queue-leveling"
+      ],
+      "design": {
+        "requirements": [
+          {
+            "id": "schedule",
+            "text": "Millions of jobs start at their scheduled time, to the minute"
+          },
+          {
+            "id": "once",
+            "text": "A run starts once, even if a scheduler crashes or two run at the same time"
+          },
+          {
+            "id": "retry",
+            "text": "Failed runs retry and end in a dead-letter queue after too many attempts"
+          },
+          {
+            "id": "status",
+            "text": "Users see each run's status and logs"
+          }
+        ],
+        "rules": [
+          {
+            "id": "api",
+            "kind": "path",
+            "text": "Users manage jobs through an API behind a load balancer",
+            "explanation": "One entry point.",
+            "requirement": "status",
+            "materialKey": "lb",
+            "from": [
+              "client"
+            ],
+            "via": [
+              "load-balancer",
+              "api-gateway"
+            ],
+            "to": [
+              "service"
+            ]
+          },
+          {
+            "id": "store",
+            "kind": "edge",
+            "text": "Jobs and runs live in a relational database",
+            "explanation": "Runs and their state need transactions.",
+            "requirement": "status",
+            "materialKey": "airflow",
+            "from": [
+              "service"
+            ],
+            "to": [
+              "sql"
+            ]
+          },
+          {
+            "id": "schedulers",
+            "kind": "has",
+            "text": "At least two schedulers",
+            "explanation": "One scheduler is a single point of failure.",
+            "requirement": "once",
+            "of": [
+              "scheduler"
+            ],
+            "min": 2
+          },
+          {
+            "id": "claim",
+            "kind": "edge",
+            "text": "Schedulers claim due runs from the database",
+            "explanation": "Row locks with SKIP LOCKED let several schedulers share the work without starting a run twice.",
+            "requirement": "once",
+            "materialKey": "pg-locking",
+            "from": [
+              "scheduler"
+            ],
+            "to": [
+              "sql"
+            ]
+          },
+          {
+            "id": "dispatch",
+            "kind": "path",
+            "text": "Runs go through a queue to workers",
+            "explanation": "Workers scale separately from schedulers.",
+            "requirement": "schedule",
+            "materialKey": "queue-leveling",
+            "from": [
+              "scheduler"
+            ],
+            "via": [
+              "queue"
+            ],
+            "to": [
+              "worker"
+            ]
+          },
+          {
+            "id": "workers",
+            "kind": "has",
+            "text": "A pool of workers",
+            "explanation": "Jobs run in parallel.",
+            "requirement": "schedule",
+            "materialKey": "competing",
+            "of": [
+              "worker"
+            ],
+            "min": 2
+          },
+          {
+            "id": "attempts",
+            "kind": "edge",
+            "text": "Workers record each attempt",
+            "explanation": "Retries need to know how many attempts were made.",
+            "requirement": "retry",
+            "from": [
+              "worker"
+            ],
+            "to": [
+              "sql"
+            ]
+          },
+          {
+            "id": "dlq",
+            "kind": "has",
+            "text": "A separate dead-letter queue",
+            "explanation": "Poison jobs must stop retrying and wait for a person.",
+            "requirement": "retry",
+            "materialKey": "dlq",
+            "of": [
+              "queue"
+            ],
+            "min": 2
+          },
+          {
+            "id": "logs",
+            "kind": "edge",
+            "text": "Workers ship logs to object storage",
+            "explanation": "Logs are large and read rarely.",
+            "requirement": "status",
+            "from": [
+              "worker"
+            ],
+            "to": [
+              "object-storage"
+            ]
+          }
+        ],
+        "reference": {
+          "nodes": [
+            {
+              "id": "c",
+              "kind": "client",
+              "label": "web UI & CLI"
+            },
+            {
+              "id": "lb",
+              "kind": "load-balancer"
+            },
+            {
+              "id": "s",
+              "kind": "service",
+              "label": "jobs API"
+            },
+            {
+              "id": "db",
+              "kind": "sql",
+              "label": "jobs & runs"
+            },
+            {
+              "id": "sc1",
+              "kind": "scheduler"
+            },
+            {
+              "id": "sc2",
+              "kind": "scheduler"
+            },
+            {
+              "id": "q",
+              "kind": "queue",
+              "label": "ready runs"
+            },
+            {
+              "id": "dq",
+              "kind": "queue",
+              "label": "dead letters"
+            },
+            {
+              "id": "w1",
+              "kind": "worker"
+            },
+            {
+              "id": "w2",
+              "kind": "worker"
+            },
+            {
+              "id": "os",
+              "kind": "object-storage",
+              "label": "logs"
+            }
+          ],
+          "edges": [
+            {
+              "from": "c",
+              "to": "lb"
+            },
+            {
+              "from": "lb",
+              "to": "s"
+            },
+            {
+              "from": "s",
+              "to": "db"
+            },
+            {
+              "from": "sc1",
+              "to": "db"
+            },
+            {
+              "from": "sc1",
+              "to": "q"
+            },
+            {
+              "from": "sc2",
+              "to": "db"
+            },
+            {
+              "from": "sc2",
+              "to": "q"
+            },
+            {
+              "from": "q",
+              "to": "w1"
+            },
+            {
+              "from": "q",
+              "to": "w2"
+            },
+            {
+              "from": "w1",
+              "to": "db"
+            },
+            {
+              "from": "w1",
+              "to": "os"
+            },
+            {
+              "from": "w1",
+              "to": "dq"
+            },
+            {
+              "from": "w2",
+              "to": "db"
+            },
+            {
+              "from": "w2",
+              "to": "os"
+            },
+            {
+              "from": "w2",
+              "to": "dq"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

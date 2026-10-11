@@ -46,6 +46,13 @@ npm run up           # builds and starts db, api (:8080) and web (localhost:3000
 docker compose exec api adduser -email you@example.com -name "You" -role admin -password '…'
 docker compose exec api seed -file seeds/dotnet-interview.json   # optional question banks
 docker compose exec api seed -file seeds/system-design.json      # the system design challenges
+docker compose exec api seed -file seeds/javascript-big-o.json    # Big O of JavaScript snippets
+# 7 topics × 4 formats × 50 questions: true/false, pick all, put in order, predict the output
+for t in dotnet go database sql javascript system-design design-patterns; do
+  for k in true-false multi-select ordering output; do
+    docker compose exec api seed -file seeds/$t-$k.json
+  done
+done
 ```
 
 nginx serves the production build and proxies `/api` to the api container, so the
@@ -115,6 +122,18 @@ internal/store   domain models and every SQL query
 internal/httpapi routes, auth middleware, handlers, integration tests
 ```
 
+- **Search engines and link previews**: the app is a single-page app, so nginx
+  fills each page in on the server. `index.html` carries server-side include
+  markers; nginx (`ssi on`, see `apps/web/nginx.conf`) inserts
+  `/api/seo/head` (title, description, canonical URL, Open Graph/Twitter tags,
+  JSON-LD) and `/api/seo/body` (the page as plain HTML) for `/`, `/questions/{id}`,
+  `/design`, `/design/{id}` and `/materials`. The React app replaces the plain
+  HTML when it starts. Question pages show only what the app shows before
+  answering (no answers or explanations; ordering options sorted A–Z), private
+  pages get `noindex`, `/sitemap.xml` lists every question and challenge, and
+  `/robots.txt` keeps private pages out. If the API is down, the default title
+  from `index.html` is used. Canonical URLs use `APP_BASE_URL`, so set it to the
+  public origin in production. The Vite dev server shows the defaults.
 - **Response cache**: public question responses (`GET /api/questions` without a
   personal `status` filter, `/questions/{id}`, `/questions/daily`, `/tags`) are
   kept in memory (`internal/cache`: 32 MB, 5 minutes, least recently used out
@@ -165,6 +184,17 @@ internal/httpapi routes, auth middleware, handlers, integration tests
   the daily question and reviews; `GET /api/questions?type=design` lists them.
   The submit result adds `design: {score, total, rules}`, graded by the same
   rules in Go and TypeScript (`features/questions/design.ts`).
+  Besides the 18 generic components, the palette has ~95 real products
+  (`features/design/products.ts`): open source (Redis, Postgres, Kafka, …),
+  AWS, Azure, Google Cloud and services like Cloudflare or Auth0, searchable by
+  name or by kind. A product counts as its generic kind when checked (Redis is
+  a cache, SQS a queue), so rules stay vendor-neutral; nodes carry it as
+  `product`. Logos come from [Simple Icons](https://simpleicons.org) (CC0;
+  the trademarks stay their owners', shown only to identify the products).
+  AWS and Azure asked Simple Icons to remove their logos, so their services
+  show as a vendor-coloured badge with the service's short name; their official
+  architecture icon packs (free, licensed for architecture diagrams) can be
+  dropped in later if you accept their terms.
 - **Spaced repetition**: every answer updates `review_schedule` with a simplified
   SM-2 (`internal/store/review.go`); `GET /api/review/queue` serves what's due and
   `GET /api/me/progress?tz=…` the progress page.

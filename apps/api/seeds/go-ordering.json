@@ -1,0 +1,1089 @@
+{
+  "name": "Go: put in order",
+  "materials": [
+    {
+      "key": "spec",
+      "type": "link",
+      "title": "The Go Programming Language Specification",
+      "url": "https://go.dev/ref/spec",
+      "author": "The Go Authors",
+      "description": "The authoritative definition of Go's syntax, evaluation order and initialization rules."
+    },
+    {
+      "key": "blogdefer",
+      "type": "article",
+      "title": "Defer, Panic, and Recover",
+      "url": "https://go.dev/blog/defer-panic-and-recover",
+      "author": "The Go Authors",
+      "description": "Go blog post explaining how deferred calls, panics and recover interact."
+    },
+    {
+      "key": "http",
+      "type": "link",
+      "title": "Package net/http",
+      "url": "https://pkg.go.dev/net/http",
+      "author": "The Go Authors",
+      "description": "Reference for Go's HTTP server, ServeMux patterns and client transport."
+    },
+    {
+      "key": "context",
+      "type": "link",
+      "title": "Package context",
+      "url": "https://pkg.go.dev/context",
+      "author": "The Go Authors",
+      "description": "Reference for cancellation, deadlines and how cancellation reaches derived contexts."
+    },
+    {
+      "key": "sync",
+      "type": "link",
+      "title": "Package sync",
+      "url": "https://pkg.go.dev/sync",
+      "author": "The Go Authors",
+      "description": "Reference for WaitGroup, Mutex, Once and other synchronization primitives."
+    },
+    {
+      "key": "testing",
+      "type": "link",
+      "title": "Package testing",
+      "url": "https://pkg.go.dev/testing",
+      "author": "The Go Authors",
+      "description": "Reference for TestMain, subtests, t.Parallel and t.Cleanup."
+    },
+    {
+      "key": "runtime",
+      "type": "link",
+      "title": "Package runtime",
+      "url": "https://pkg.go.dev/runtime",
+      "author": "The Go Authors",
+      "description": "Reference for runtime functions such as Goexit, GC and GOMAXPROCS."
+    },
+    {
+      "key": "runtimesrc",
+      "type": "link",
+      "title": "Go runtime source (src/runtime)",
+      "url": "https://github.com/golang/go/tree/master/src/runtime",
+      "author": "The Go Authors",
+      "description": "Source of the Go runtime, including the scheduler, allocator and garbage collector."
+    },
+    {
+      "key": "gcguide",
+      "type": "article",
+      "title": "A Guide to the Go Garbage Collector",
+      "url": "https://go.dev/doc/gc-guide",
+      "author": "The Go Authors",
+      "description": "Explains the Go GC cycle, GOGC, GOMEMLIMIT and allocation costs."
+    },
+    {
+      "key": "compiler",
+      "type": "article",
+      "title": "Introduction to the Go compiler",
+      "url": "https://github.com/golang/go/blob/master/src/cmd/compile/README.md",
+      "author": "The Go Authors",
+      "description": "Overview of the gc compiler's phases from parsing to machine code."
+    },
+    {
+      "key": "modref",
+      "type": "link",
+      "title": "Go Modules Reference",
+      "url": "https://go.dev/ref/mod",
+      "author": "The Go Authors",
+      "description": "Reference for module versions, pseudo-versions and semantic version ordering."
+    },
+    {
+      "key": "release",
+      "type": "link",
+      "title": "Release History",
+      "url": "https://go.dev/doc/devel/release",
+      "author": "The Go Authors",
+      "description": "List of Go releases with dates and links to their release notes."
+    },
+    {
+      "key": "go122",
+      "type": "article",
+      "title": "Go 1.22 Release Notes",
+      "url": "https://go.dev/doc/go1.22",
+      "author": "The Go Authors",
+      "description": "Release notes describing per-iteration loop variables and range over integers."
+    },
+    {
+      "key": "errors",
+      "type": "link",
+      "title": "Package errors",
+      "url": "https://pkg.go.dev/errors",
+      "author": "The Go Authors",
+      "description": "Reference for error wrapping, Unwrap, Is, As and Join."
+    },
+    {
+      "key": "time",
+      "type": "link",
+      "title": "Package time",
+      "url": "https://pkg.go.dev/time",
+      "author": "The Go Authors",
+      "description": "Reference for durations, layouts, timers and tickers."
+    }
+  ],
+  "questions": [
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nfunc main() {\n\tfmt.Println(\"start\")\n\tdefer fmt.Println(\"one\")\n\tdefer fmt.Println(\"two\")\n\tdefer fmt.Println(\"three\")\n\tfmt.Println(\"end\")\n}\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "start",
+        "end",
+        "three",
+        "two",
+        "one"
+      ],
+      "explanation": "The ordinary statements run first, so `start` and then `end` print. Deferred calls run only when `main` returns, and they run last-in, first-out: `three` was deferred last so it runs first, then `two`, then `one`.",
+      "materials": [
+        "spec",
+        "blogdefer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these Go types by `unsafe.Sizeof` on a 64-bit platform, smallest to largest.",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`bool`",
+        "`int16`",
+        "`float32`",
+        "`int64`",
+        "`complex128`"
+      ],
+      "explanation": "The spec's size guarantees give `bool` 1 byte, `int16` 2 bytes, `float32` 4 bytes, `int64` 8 bytes and `complex128` 16 bytes, since it holds two `float64` values. Running `unsafe.Sizeof` on each prints 1, 2, 4, 8, 16.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these string literals by the value `len()` returns for them, smallest to largest.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`\"a\"`",
+        "`\"é\"`",
+        "`\"€\"`",
+        "`\"😀\"`",
+        "`\"ab😀\"`"
+      ],
+      "explanation": "`len` of a string counts UTF-8 bytes, not characters. `a` is 1 byte, `é` (U+00E9) is 2, `€` (U+20AC) is 3, and the emoji (U+1F600) is 4. `\"ab😀\"` is 1 + 1 + 4 = 6. Running it prints 1, 2, 3, 4, 6.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these `time` package constants from shortest duration to longest.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`time.Nanosecond`",
+        "`time.Microsecond`",
+        "`time.Millisecond`",
+        "`time.Second`",
+        "`time.Minute`"
+      ],
+      "explanation": "`time.Duration` counts nanoseconds. `Nanosecond` is 1, `Microsecond` is 1,000, `Millisecond` is 1,000,000, `Second` is 1,000,000,000 and `Minute` is 60 seconds.",
+      "materials": [
+        "time"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these integer types by the largest value they can hold, smallest to largest.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`int8`",
+        "`uint8`",
+        "`int16`",
+        "`uint16`",
+        "`int32`"
+      ],
+      "explanation": "`int8` holds up to 127, `uint8` up to 255, `int16` up to 32,767, `uint16` up to 65,535, and `int32` up to 2,147,483,647. An unsigned type of a given width goes about twice as high as the signed type of the same width, but less than the next wider signed type.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these operations on a collection of n elements by time complexity, slowest-growing to fastest-growing.",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Looking up one key in a `map`",
+        "`sort.Search` on a sorted slice",
+        "`slices.Index` on an unsorted slice",
+        "`slices.Sort` on a slice",
+        "Comparing every pair of elements with nested loops"
+      ],
+      "explanation": "A map lookup is O(1) on average. `sort.Search` is a binary search, O(log n). `slices.Index` scans one element at a time, O(n). `slices.Sort` is a comparison sort, O(n log n). Nested loops over all pairs do about n²/2 comparisons, O(n²).",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nvar x = initX()\n\nfunc initX() int { fmt.Println(\"var x initialized\"); return 1 }\n\nfunc init() { fmt.Println(\"first init\") }\nfunc init() { fmt.Println(\"second init\") }\n\nfunc main() { fmt.Println(\"main\") }\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "var x initialized",
+        "first init",
+        "second init",
+        "main"
+      ],
+      "explanation": "A package is initialized before `main` runs. First every package-level variable gets its value, so `initX` prints. Then the `init` functions run in the order they appear in the source. Only after all of them finish does `main` start.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nfunc compute() int { fmt.Println(\"compute runs\"); return 42 }\n\nfunc f() int {\n\tdefer fmt.Println(\"deferred call runs\")\n\tfmt.Println(\"f body\")\n\treturn compute()\n}\n\nfunc main() {\n\tv := f()\n\tfmt.Println(\"caller got\", v)\n}\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "f body",
+        "compute runs",
+        "deferred call runs",
+        "caller got 42"
+      ],
+      "explanation": "`f body` prints first. `return compute()` evaluates its operand before the function returns, so `compute runs` prints next. The deferred call runs after the result is set but before control goes back to the caller. Last, `main` prints the value it received.",
+      "materials": [
+        "spec",
+        "blogdefer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nfunc main() {\n\tch := make(chan int, 3)\n\tch <- 1\n\tch <- 2\n\tch <- 3\n\tclose(ch)\n\tfor i := 0; i < 4; i++ {\n\t\tv, ok := <-ch\n\t\tfmt.Println(v, ok)\n\t}\n}\n```",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "1 true",
+        "2 true",
+        "3 true",
+        "0 false"
+      ],
+      "explanation": "A buffered channel is a FIFO queue, so `1`, `2` and `3` come out in the order they were sent. Closing it doesn't throw away buffered values; they can still be received with `ok == true`. Once the buffer is empty, a receive on the closed channel returns the zero value `0` and `ok == false` straight away.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nfunc main() {\n\tping := make(chan string)\n\tpong := make(chan string)\n\tdone := make(chan struct{})\n\tgo func() {\n\t\tfmt.Println(\"worker got\", <-ping)\n\t\tpong <- \"pong\"\n\t\tfmt.Println(\"worker got\", <-ping)\n\t\tclose(done)\n\t}()\n\tfmt.Println(\"main sends ping\")\n\tping <- \"ping\"\n\tfmt.Println(\"main got\", <-pong)\n\tping <- \"bye\"\n\t<-done\n\tfmt.Println(\"main done\")\n}\n```",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "main sends ping",
+        "worker got ping",
+        "main got pong",
+        "worker got bye",
+        "main done"
+      ],
+      "explanation": "Each send on an unbuffered channel waits for the matching receive, so the program alternates between the two goroutines. `main` prints and then sends `ping`. The worker can only print after receiving it. `main` can only print `pong` after the worker sends it. The worker prints `bye` only after `main` sends it, and `main done` waits for `done` to be closed.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nfunc main() {\n\tvar wg sync.WaitGroup\n\tdefer fmt.Println(\"main deferred\")\n\twg.Add(1)\n\tgo func() {\n\t\tdefer wg.Done()\n\t\tdefer fmt.Println(\"worker deferred\")\n\t\tfmt.Println(\"worker body\")\n\t}()\n\twg.Wait()\n\tfmt.Println(\"after Wait\")\n}\n```",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "worker body",
+        "worker deferred",
+        "after Wait",
+        "main deferred"
+      ],
+      "explanation": "`wg.Wait` blocks `main` until the counter reaches zero. Inside the goroutine, the body prints first. Its defers then run LIFO: `worker deferred` prints, and only after that does `wg.Done` run. Now `Wait` returns and `after Wait` prints. `main deferred` prints last, when `main` returns.",
+      "materials": [
+        "sync",
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nfunc main() {\n\terr := fmt.Errorf(\"load config: %w\", fmt.Errorf(\"open file: %w\", fs.ErrNotExist))\n\terr = fmt.Errorf(\"start app: %w\", err)\n\tfor e := err; e != nil; e = errors.Unwrap(e) {\n\t\tfmt.Println(e)\n\t}\n}\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "start app: load config: open file: file does not exist",
+        "load config: open file: file does not exist",
+        "open file: file does not exist",
+        "file does not exist"
+      ],
+      "explanation": "The loop starts at the outermost error, whose message includes every wrapped message. Each `errors.Unwrap` peels off one `%w` layer and moves inward. The innermost error is `fs.ErrNotExist`, and it wraps nothing, so `Unwrap` returns nil and the loop stops.",
+      "materials": [
+        "errors"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nfunc v(n int) int { fmt.Println(\"eval\", n); return n }\n\nfunc main() {\n\tx := 3\n\tswitch x {\n\tcase v(1), v(2):\n\t\tfmt.Println(\"case A\")\n\tcase v(3), v(4):\n\t\tfmt.Println(\"case B\")\n\tcase v(5):\n\t\tfmt.Println(\"case C\")\n\t}\n}\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "eval 1",
+        "eval 2",
+        "eval 3",
+        "case B"
+      ],
+      "explanation": "Switch case expressions are evaluated left to right and top to bottom, and evaluation stops at the first one equal to the tag. `v(1)` and `v(2)` don't match, `v(3)` does, so `v(4)` and `v(5)` never run and the `case B` body executes.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nfunc items() []string {\n\tfmt.Println(\"range expression evaluated\")\n\treturn []string{\"a\", \"b\", \"c\"}\n}\n\nfunc main() {\n\tfmt.Println(\"before loop\")\n\tfor i, v := range items() {\n\t\tif i == 2 {\n\t\t\tbreak\n\t\t}\n\t\tfmt.Println(\"body\", v)\n\t}\n\tfmt.Println(\"after loop\")\n}\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "before loop",
+        "range expression evaluated",
+        "body a",
+        "body b",
+        "after loop"
+      ],
+      "explanation": "The range expression is evaluated once, before the first iteration, so `items` prints a single time. The body then runs for `a` and `b`. At index 2 the loop breaks, and execution continues after it.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these Go milestones by the release that introduced them, earliest to latest.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The Go 1 compatibility promise",
+        "A compiler and runtime written entirely in Go",
+        "Modules (`go.mod`)",
+        "The `//go:embed` directive",
+        "Type parameters (generics)"
+      ],
+      "explanation": "Go 1.0 (March 2012) came with the compatibility promise. Go 1.5 (August 2015) removed the last C code from the compiler and runtime. Go 1.11 (August 2018) introduced modules. Go 1.16 (February 2021) added `//go:embed`. Go 1.18 (March 2022) added generics.",
+      "materials": [
+        "release"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these values by `unsafe.Sizeof` on a 64-bit platform, smallest to largest.",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`struct{}{}`",
+        "a `*int`",
+        "a `string`",
+        "a `[]byte`",
+        "a `[4]int64`"
+      ],
+      "explanation": "An empty struct takes 0 bytes. A pointer is one machine word, 8 bytes. A string header is a pointer plus a length, 16 bytes. A slice header adds a capacity, 24 bytes. `Sizeof` doesn't count what these headers point to. An array stores its elements inline, so four `int64` take 32 bytes. Running it prints 0, 8, 16, 24, 32.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nfunc t(s string) bool { fmt.Println(\"t\", s); return true }\nfunc f(s string) bool { fmt.Println(\"f\", s); return false }\n\nfunc main() {\n\tif f(\"a\") && t(\"b\") || t(\"c\") && f(\"d\") || t(\"e\") {\n\t\tfmt.Println(\"taken\")\n\t}\n}\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "f a",
+        "t c",
+        "f d",
+        "t e",
+        "taken"
+      ],
+      "explanation": "`&&` binds tighter than `||`, so the condition is `(f(a) && t(b)) || (t(c) && f(d)) || t(e)`. `f(a)` is false, so `t(b)` is skipped. `t(c)` is true, so `f(d)` runs and returns false. The first two groups are both false, so `t(e)` runs, returns true, and the body executes.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nfunc main() {\n\tfor i := 0; i < 3; i++ {\n\t\tdefer fmt.Println(\"arg\", i)\n\t}\n\tx := 10\n\tdefer func() { fmt.Println(\"closure\", x) }()\n\tdefer fmt.Println(\"value\", x)\n\tx = 20\n}\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "value 10",
+        "closure 20",
+        "arg 2",
+        "arg 1",
+        "arg 0"
+      ],
+      "explanation": "A deferred call's arguments are evaluated when the `defer` statement runs, but the call itself runs at return, last-in first-out. The last defer was `fmt.Println(\"value\", x)` with `x` already evaluated as 10. Next comes the closure, which reads `x` when it runs and sees 20. Then the loop's defers run in reverse, each with the `i` copied at the time of the `defer`.",
+      "materials": [
+        "spec",
+        "blogdefer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nfunc risky() {\n\tdefer fmt.Println(\"risky deferred\")\n\tfmt.Println(\"risky start\")\n\tpanic(\"boom\")\n}\n\nfunc safe() {\n\tdefer func() {\n\t\tif r := recover(); r != nil {\n\t\t\tfmt.Println(\"recovered:\", r)\n\t\t}\n\t}()\n\trisky()\n\tfmt.Println(\"after risky\")\n}\n\nfunc main() {\n\tsafe()\n\tfmt.Println(\"main continues\")\n}\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "risky start",
+        "risky deferred",
+        "recovered: boom",
+        "main continues"
+      ],
+      "explanation": "The panic stops `risky` and runs its deferred calls first. It then unwinds into `safe`, skipping `after risky`, and runs `safe`'s deferred function, which recovers. `safe` returns normally, so `main` keeps going.",
+      "materials": [
+        "blogdefer",
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nfunc p(s string, v int) int { fmt.Println(\"call\", s); return v }\n\nfunc main() {\n\ta := []int{0, 0, 0}\n\ta[p(\"index\", 1)] = p(\"left\", 1) + p(\"mid\", 2)*p(\"right\", 3) - p(\"last\", 0)\n}\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "call index",
+        "call left",
+        "call mid",
+        "call right",
+        "call last"
+      ],
+      "explanation": "The spec evaluates function calls in lexical left-to-right order, and that includes the index expression on the left of the assignment. Operator precedence decides how the results are combined (`mid*right` before the addition), not the order the calls run in. So the calls run index, left, mid, right, last.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nfunc arg() int { fmt.Println(\"argument evaluated\"); return 7 }\n\nfunc main() {\n\tstart := make(chan struct{})\n\tdone := make(chan struct{})\n\twork := func(n int) {\n\t\t<-start\n\t\tfmt.Println(\"goroutine runs with\", n)\n\t\tclose(done)\n\t}\n\tgo work(arg())\n\tfmt.Println(\"go statement returned\")\n\tclose(start)\n\t<-done\n\tfmt.Println(\"main exits\")\n}\n```",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "argument evaluated",
+        "go statement returned",
+        "goroutine runs with 7",
+        "main exits"
+      ],
+      "explanation": "The function value and arguments in a `go` statement are evaluated in the calling goroutine, so `arg()` prints before the `go` statement completes. The new goroutine blocks on `start` until `main` has printed and closed it. `main` then waits on `done`, so it prints last.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nfunc main() {\n\tparent, cancelParent := context.WithCancel(context.Background())\n\tchild, cancelChild := context.WithCancel(parent)\n\tdefer cancelChild()\n\tstopped := make(chan struct{})\n\tgo func() {\n\t\t<-child.Done()\n\t\tfmt.Println(\"child sees:\", child.Err())\n\t\tclose(stopped)\n\t}()\n\tfmt.Println(\"parent err before:\", parent.Err())\n\tcancelParent()\n\t<-stopped\n\tfmt.Println(\"parent err after:\", parent.Err())\n\tfmt.Println(\"main exits\")\n}\n```",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "parent err before: <nil>",
+        "child sees: context canceled",
+        "parent err after: context canceled",
+        "main exits"
+      ],
+      "explanation": "Before cancellation `Err` is nil. Canceling the parent also cancels every context derived from it, so `child.Done()` closes and the goroutine prints `context canceled`. `main` waits on `stopped` before it prints the parent's error and exits.",
+      "materials": [
+        "context"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nfunc main() {\n\ta := make(chan string, 1)\n\tb := make(chan string)\n\tpick := func() {\n\t\tselect {\n\t\tcase v := <-a:\n\t\t\tfmt.Println(\"from a:\", v)\n\t\tcase _, ok := <-b:\n\t\t\tfmt.Println(\"from b, ok =\", ok)\n\t\tdefault:\n\t\t\tfmt.Println(\"default\")\n\t\t}\n\t}\n\tpick()\n\ta <- \"hello\"\n\tpick()\n\tclose(b)\n\tpick()\n\tb = nil\n\ta <- \"world\"\n\tpick()\n}\n```",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "default",
+        "from a: hello",
+        "from b, ok = false",
+        "from a: world"
+      ],
+      "explanation": "In each call only one case can proceed, so the output is fixed. At first no case is ready and `default` runs. Then only `a` has a value. After `close(b)`, `a` is empty and only the closed `b` is ready, and it yields `ok == false`. Last, `b` is nil, and a nil channel case is never chosen, so `a`'s new value is received.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program write its lines (all to standard error), first to last?\n\n```go\nfunc main() {\n\tdefer println(\"deferred in main\")\n\tfunc() {\n\t\tdefer println(\"deferred in helper\")\n\t\tprintln(\"helper starts\")\n\t\tpanic(\"boom\")\n\t}()\n}\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "helper starts",
+        "deferred in helper",
+        "deferred in main",
+        "panic: boom",
+        "goroutine 1 [running]:"
+      ],
+      "explanation": "An unrecovered panic first unwinds the stack and runs every deferred call on the way: the helper's, then `main`'s. Only when nothing recovers does the runtime print `panic: boom`, followed by the stack trace of the goroutine, and exit with status 2.",
+      "materials": [
+        "blogdefer",
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In a module with `go 1.22` or later in `go.mod`, in what order does this program print its lines, first to last?\n\n```go\nfunc main() {\n\tfor i := 0; i < 3; i++ {\n\t\tdefer func() { fmt.Println(\"closure sees\", i) }()\n\t}\n\tfmt.Println(\"loop finished\")\n}\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "loop finished",
+        "closure sees 2",
+        "closure sees 1",
+        "closure sees 0"
+      ],
+      "explanation": "Since Go 1.22, each iteration of a `for` loop has its own `i`, so every closure captures a different variable holding 0, 1 or 2. The deferred closures run LIFO after `loop finished`, so 2 prints first. Before Go 1.22 all three shared one `i` and would have printed 3 three times.",
+      "materials": [
+        "go122",
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Package `main` imports `mid` and `base`, and `mid` imports `base`. In what order are these lines printed, first to last?\n\n```go\n// package base\nvar V = initV()\nfunc initV() int { fmt.Println(\"base: var\"); return 1 }\nfunc init()      { fmt.Println(\"base: init\") }\n\n// package mid (imports base)\nvar M = base.V + 1\nfunc init() { fmt.Println(\"mid: init\") }\n\n// package main (imports mid and base)\nvar x = func() int { fmt.Println(\"main: var\"); return 0 }()\nfunc init() { fmt.Println(\"main: init\") }\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "base: var",
+        "base: init",
+        "mid: init",
+        "main: var",
+        "main: init"
+      ],
+      "explanation": "A package is fully initialized (variables, then `init` functions) before any package that imports it, and each package is initialized only once even when imported twice. `base` has no dependencies, so it goes first. `mid` depends only on `base` and goes next. `main` is initialized last, and `main.main` runs after that.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order do these lines print when a request reaches `logging(auth(handler))`? Each middleware prints `<name> before`, calls `next.ServeHTTP`, then prints `<name> after`.",
+      "tags": [
+        "Go",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "logging before",
+        "auth before",
+        "handler",
+        "auth after",
+        "logging after"
+      ],
+      "explanation": "The outermost wrapper gets the request first. `logging` prints and calls `auth`, which prints and calls the handler. When the handler returns, the stack unwinds in reverse: `auth` finishes first, then `logging`. Running it through `httptest` prints exactly this.",
+      "materials": [
+        "http"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A client opens one keep-alive connection, makes a single request, then closes its idle connections. Order the `http.ConnState` values the server's `ConnState` hook sees, first to last.",
+      "tags": [
+        "Go",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`StateNew`",
+        "`StateActive`",
+        "`StateIdle`",
+        "`StateClosed`"
+      ],
+      "explanation": "A freshly accepted connection is `StateNew`. Reading the first byte of a request moves it to `StateActive`. After the response is written, a keep-alive connection waits for the next request in `StateIdle`. When the client closes it, the server reports `StateClosed`. A test server logged `[new active idle closed]`.",
+      "materials": [
+        "http"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order what `http.Server.Shutdown` does, first to last.",
+      "tags": [
+        "Go",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Closes all open listeners",
+        "Closes connections that are currently idle",
+        "Waits for active connections to finish and go idle, closing them",
+        "Returns once no connections remain (or the context ends)"
+      ],
+      "explanation": "The documentation says Shutdown first closes all open listeners so no new connections arrive, then closes all idle connections, then waits for active connections to return to idle and closes them too. It returns when that's done, or with the context's error if the context expires first.",
+      "materials": [
+        "http"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Running `go test -v` on this file, in what order are the lines printed, first to last?\n\n```go\nfunc TestMain(m *testing.M) {\n\tfmt.Println(\"TestMain before m.Run\")\n\tcode := m.Run()\n\tfmt.Println(\"TestMain after m.Run\")\n\tos.Exit(code)\n}\n\nfunc TestZeta(t *testing.T)  { fmt.Println(\"TestZeta\") }\nfunc TestAlpha(t *testing.T) { fmt.Println(\"TestAlpha\") }\nfunc TestMid(t *testing.T)   { fmt.Println(\"TestMid\") }\n```",
+      "tags": [
+        "Go",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "TestMain before m.Run",
+        "TestZeta",
+        "TestAlpha",
+        "TestMid",
+        "TestMain after m.Run"
+      ],
+      "explanation": "`TestMain` takes over the test binary's `main`. Its setup prints first. `m.Run` runs the tests, and tests that don't call `t.Parallel` run one after another in source order, not alphabetical order. When `m.Run` returns, the teardown line prints.",
+      "materials": [
+        "testing"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Running `go test -v`, in what order does this test print its lines, first to last?\n\n```go\nfunc TestX(t *testing.T) {\n\tt.Cleanup(func() { fmt.Println(\"cleanup 1\") })\n\tt.Cleanup(func() { fmt.Println(\"cleanup 2\") })\n\tdefer fmt.Println(\"deferred\")\n\tfmt.Println(\"body\")\n}\n```",
+      "tags": [
+        "Go",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "body",
+        "deferred",
+        "cleanup 2",
+        "cleanup 1"
+      ],
+      "explanation": "The body prints first. Deferred calls run as the test function returns. Cleanup functions run after the test function (and any subtests) have finished, in last-added-first-called order, so `cleanup 2` runs before `cleanup 1`.",
+      "materials": [
+        "testing"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these module versions as Go's minimal version selection compares them, lowest to highest.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`v0.0.0-20230101120000-abcdefabcdef`",
+        "`v1.2.0-rc.1`",
+        "`v1.2.0`",
+        "`v1.10.0`",
+        "`v2.0.0`"
+      ],
+      "explanation": "A pseudo-version based on `v0.0.0` sorts below any tagged `v0`/`v1` release. A pre-release such as `-rc.1` sorts below its release, so `v1.2.0-rc.1` < `v1.2.0`. Version parts compare as numbers, not strings, so `v1.10.0` > `v1.2.0`. The major version 2 is highest. `golang.org/x/mod/semver.Sort` gives this order.",
+      "materials": [
+        "modref"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these language and library additions by the Go release that introduced them, earliest to latest.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`errors.Join`",
+        "Built-in `min` and `max`",
+        "Per-iteration `for` loop variables",
+        "Range over iterator functions",
+        "Generic type aliases enabled by default"
+      ],
+      "explanation": "`errors.Join` came in Go 1.20. The `min`, `max` and `clear` built-ins came in Go 1.21. Go 1.22 gave each loop iteration its own variables. Go 1.23 allowed `range` over functions such as `iter.Seq`. Go 1.24 fully supported generic type aliases.",
+      "materials": [
+        "release",
+        "go122"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these Go binary operators by precedence, highest to lowest.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`<<`",
+        "`|`",
+        "`<`",
+        "`&&`",
+        "`||`"
+      ],
+      "explanation": "Go has five precedence levels. Level 5 is `* / % << >> & &^`, level 4 is `+ - | ^`, level 3 is the comparisons `== != < <= > >=`, level 2 is `&&` and level 1 is `||`. Unlike C, `<<` binds as tightly as `*`, and `|` is at the same level as `+`, above the comparisons.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these stages of turning a Go package into an executable, first to last.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Parse source files into syntax trees",
+        "Type-check the syntax trees",
+        "Convert functions to SSA form and optimize",
+        "Lower SSA and emit machine code",
+        "Link object files into a binary"
+      ],
+      "explanation": "The `cmd/compile` README describes the pipeline. The compiler parses the source and type-checks it (with `types2`), builds its IR and runs middle-end passes, converts each function to SSA and runs optimization passes, then lowers the SSA to architecture-specific instructions and emits machine code. `cmd/link` then combines the object files into an executable.",
+      "materials": [
+        "compiler"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the phases of one Go garbage collection cycle, first to last.",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Sweep termination",
+        "Mark",
+        "Mark termination",
+        "Sweep"
+      ],
+      "explanation": "The runtime's `mgc.go` describes the cycle. Sweep termination stops the world and finishes any leftover sweeping. The concurrent mark phase, with the write barrier on, traces reachable objects. Mark termination stops the world again to finish marking and turn the write barrier off. Concurrent sweeping then frees unmarked memory, lazily and in the background, until the next cycle.",
+      "materials": [
+        "runtimesrc",
+        "gcguide"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the steps when an `http.Server` handles one request on a new connection, first to last.",
+      "tags": [
+        "Go",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The listener's `Accept` returns a new connection",
+        "The server reads and parses the request line and headers",
+        "The `ServeMux` picks the handler whose pattern matches",
+        "The handler's `ServeHTTP` runs and writes the response",
+        "The server finishes the response on the connection"
+      ],
+      "explanation": "`Serve` loops on `Accept` and starts a goroutine per connection. That goroutine reads and parses the request, then calls the server's handler. With a `ServeMux` that means finding the matching pattern first. The chosen handler writes headers and body through the `ResponseWriter`, and when it returns, the server flushes and finishes the response.",
+      "materials": [
+        "http"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these struct types by `unsafe.Sizeof` on a 64-bit platform, smallest to largest.",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`struct{}`",
+        "`struct{ a, b bool }`",
+        "`struct{ a bool; b int32 }`",
+        "`struct{ b int64; a, c bool }`",
+        "`struct{ a bool; b int64; c bool }`"
+      ],
+      "explanation": "Field alignment adds padding. The empty struct is 0 bytes. Two bools are 2. `bool` + `int32` pads the bool to 4, giving 8. Putting the `int64` first leaves 2 bytes of bools padded to 8: 16. Putting the `int64` between bools pads each bool to 8: 24. `unsafe.Sizeof` prints 0, 2, 8, 16, 24.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nvar (\n\ta = f(\"a\") + c + b\n\tb = f(\"b\")\n\tc = f(\"c\")\n\td = f(\"d\")\n)\n\nfunc f(s string) int { fmt.Println(\"init\", s); return 1 }\n\nfunc init() { fmt.Println(\"init func\") }\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "init b",
+        "init c",
+        "init a",
+        "init d",
+        "init func"
+      ],
+      "explanation": "Package variables are initialized by repeatedly picking the earliest variable in declaration order that has no uninitialized dependencies. `a` depends on `b` and `c`, so it isn't ready. `b` is the earliest ready one, then `c`. Now `a` is ready, and it comes before `d`. `init` functions run only after every variable is initialized.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nfunc f() (n int) {\n\tdefer func() { fmt.Println(\"defer A sees\", n); n *= 10 }()\n\tdefer func() { fmt.Println(\"defer B sees\", n); n++ }()\n\tn = 1\n\tfmt.Println(\"body sets\", n)\n\treturn n + 1\n}\n\nfunc main() { fmt.Println(\"result\", f()) }\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "body sets 1",
+        "defer B sees 2",
+        "defer A sees 3",
+        "result 30"
+      ],
+      "explanation": "`return n + 1` assigns 2 to the named result before any deferred call runs. Defers run LIFO. B sees 2 and increments it to 3. A sees 3 and multiplies it to 30. Deferred closures can change named results, so the caller gets 30.",
+      "materials": [
+        "spec",
+        "blogdefer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\ntype T struct{ n int }\n\nfunc (t T) V()  { fmt.Println(\"V\", t.n) }\nfunc (t *T) P() { fmt.Println(\"P\", t.n) }\n\nfunc main() {\n\tt := T{1}\n\tdefer t.V()\n\tdefer t.P()\n\tt.n = 2\n\tf := t.V\n\tt.n = 3\n\tf()\n\tt.n = 4\n\tfmt.Println(\"main returning\")\n}\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "V 2",
+        "main returning",
+        "P 4",
+        "V 1"
+      ],
+      "explanation": "Evaluating a method value or a deferred method call evaluates and saves the receiver right away. For a value receiver that is a copy: `f` holds a copy with `n == 2`, and the first `defer t.V()` holds a copy with `n == 1`. `defer t.P()` saves `&t`, so it sees the final value 4. `f()` runs inline, then `main returning`, then the defers run LIFO: `P 4` before `V 1`.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nfunc main() {\n\tdefer func() {\n\t\tfmt.Println(\"recovered:\", recover())\n\t}()\n\tdefer func() {\n\t\tfmt.Println(\"second deferred runs\")\n\t\tpanic(\"second panic\")\n\t}()\n\tdefer fmt.Println(\"first deferred runs\")\n\tfmt.Println(\"start\")\n\tpanic(\"first panic\")\n}\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "start",
+        "first deferred runs",
+        "second deferred runs",
+        "recovered: second panic"
+      ],
+      "explanation": "The first panic runs defers LIFO. `first deferred runs` prints, then the next deferred function prints and raises a new panic. The new panic takes over, and the remaining deferred function's `recover` returns the most recent panic value, `second panic`.",
+      "materials": [
+        "blogdefer",
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does this program print its lines, first to last?\n\n```go\nfunc main() {\n\tdone := make(chan struct{})\n\tgo func() {\n\t\tdefer close(done)\n\t\tdefer fmt.Println(\"outer deferred\")\n\t\tfunc() {\n\t\t\tdefer fmt.Println(\"inner deferred\")\n\t\t\tfmt.Println(\"calling Goexit\")\n\t\t\truntime.Goexit()\n\t\t}()\n\t\tfmt.Println(\"unreachable\")\n\t}()\n\t<-done\n\tfmt.Println(\"main resumes\")\n}\n```",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "calling Goexit",
+        "inner deferred",
+        "outer deferred",
+        "main resumes"
+      ],
+      "explanation": "`runtime.Goexit` ends only the calling goroutine, but first it runs all of that goroutine's deferred calls, innermost frame first. `inner deferred` prints, then `outer deferred`, then `close(done)` runs, which releases `main`. Code after the inner function never runs.",
+      "materials": [
+        "runtime"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed (all `init` and package-level variables live in package `main`, built with `go run .`)?\n\n```go\n// a.go\nfunc init() { fmt.Println(\"init in a.go\") }\n\n// b.go\nfunc init() { fmt.Println(\"init in b.go\") }\nvar vb = func() int { fmt.Println(\"var in b.go\"); return 0 }()\n\n// c.go\nvar vc = func() int { fmt.Println(\"var in c.go\"); return 0 }()\nfunc init() { fmt.Println(\"init in c.go\") }\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "var in b.go",
+        "var in c.go",
+        "init in a.go",
+        "init in b.go",
+        "init in c.go"
+      ],
+      "explanation": "All package-level variables of a package are initialized before any of its `init` functions run, no matter which file they're in. The `go` command hands files to the compiler sorted by file name, as the spec recommends. So the variables initialize in b, c order, then the `init` functions run in a, b, c order.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A `ServeMux` (Go 1.22+) has all of these patterns registered. Order them by which one wins for `GET /items/42`, highest precedence first.",
+      "tags": [
+        "Go",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`GET /items/42`",
+        "`/items/42`",
+        "`/items/{id}`",
+        "`/items/`",
+        "`/`"
+      ],
+      "explanation": "When patterns overlap, the most specific one wins, meaning the one that matches a strict subset of requests. A method makes a pattern more specific than the same path without one. A literal segment is more specific than a `{id}` wildcard. A single-segment wildcard is more specific than the `/items/` prefix, which in turn beats `/`. Removing the winner each time confirms this order.",
+      "materials": [
+        "http"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Running `go test -v`, in what order does this test print its lines, first to last?\n\n```go\nfunc TestParent(t *testing.T) {\n\tt.Cleanup(func() { fmt.Println(\"parent cleanup\") })\n\tt.Run(\"sub\", func(t *testing.T) {\n\t\tfmt.Println(\"sub before Parallel\")\n\t\tt.Parallel()\n\t\tfmt.Println(\"sub after Parallel\")\n\t})\n\tfmt.Println(\"parent body ends\")\n}\n```",
+      "tags": [
+        "Go",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "sub before Parallel",
+        "parent body ends",
+        "sub after Parallel",
+        "parent cleanup"
+      ],
+      "explanation": "`t.Run` starts the subtest, which prints and then calls `t.Parallel`. That pauses it and makes `t.Run` return. Parallel subtests resume only after the parent's function body returns, so `parent body ends` comes before `sub after Parallel`. The parent's cleanup waits until all its subtests have finished.",
+      "materials": [
+        "testing"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these pre-release versions of `v1.0.0`, plus the release itself, from lowest to highest semantic-version precedence.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`v1.0.0-alpha`",
+        "`v1.0.0-alpha.1`",
+        "`v1.0.0-beta.2`",
+        "`v1.0.0-beta.11`",
+        "`v1.0.0`"
+      ],
+      "explanation": "Pre-release identifiers compare field by field. A shorter list sorts first when all preceding fields are equal, so `alpha` < `alpha.1`. Alphanumeric fields compare as text (`alpha` < `beta`). Numeric fields compare as numbers, so `2` < `11`. Any pre-release sorts below the release. `golang.org/x/mod/semver.Sort` agrees.",
+      "materials": [
+        "modref"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "When a small object is allocated and the current `mcache` span for its size class is full, order the places the allocator falls back to, first to last.",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The P's `mcache` span for that size class",
+        "The size class's `mcentral`",
+        "The `mheap`",
+        "The operating system (new memory mapped in)"
+      ],
+      "explanation": "`mallocgc` serves small objects from the per-P `mcache` without locking. When that span runs out, `mcache.refill` asks the shared `mcentral` for a span with free space. If `mcentral` has none, it grows by allocating pages from the `mheap`. If the heap has no free pages, it grows by mapping new memory from the OS.",
+      "materials": [
+        "runtimesrc"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Leaving out the occasional fairness check of the global queue, in what order does the Go scheduler's `findRunnable` look for a goroutine to run, first to last?",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The current P's local run queue",
+        "The global run queue",
+        "A non-blocking network poll",
+        "Stealing work from other Ps"
+      ],
+      "explanation": "In `runtime/proc.go`, `findRunnable` tries the cheapest sources first. It checks the P's own local run queue, then the shared global run queue (which needs a lock), then a non-blocking `netpoll` for goroutines whose I/O is ready. Only if all of these come up empty does a spinning M try to steal from other Ps' queues.",
+      "materials": [
+        "runtimesrc"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "For a GET to `http://localhost:8080/` with no reusable connection, order these `httptrace.ClientTrace` hooks as they fire, first to last.",
+      "tags": [
+        "Go",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`DNSStart`",
+        "`ConnectStart`",
+        "`GotConn`",
+        "`WroteRequest`",
+        "`GotFirstResponseByte`"
+      ],
+      "explanation": "The transport first has to resolve the host name (`DNSStart`), then dial it (`ConnectStart`). Once the connection is set up, `GotConn` fires. The request is written and `WroteRequest` fires. Last, the first byte of the server's response arrives. A traced run printed this sequence on every request.",
+      "materials": [
+        "http"
+      ]
+    }
+  ]
+}

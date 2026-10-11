@@ -1,0 +1,893 @@
+{
+  "name": ".NET and C#: predict the output",
+  "materials": [
+    {
+      "key": "value-types",
+      "type": "article",
+      "title": "Value types (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-types",
+      "author": "Microsoft Learn",
+      "description": "How value types are copied on assignment and how they differ from reference types."
+    },
+    {
+      "key": "records",
+      "type": "article",
+      "title": "Records (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record",
+      "author": "Microsoft Learn",
+      "description": "Positional records, value-based equality, ToString output and nondestructive mutation with `with`."
+    },
+    {
+      "key": "equality",
+      "type": "article",
+      "title": "Equality comparisons (C# programming guide)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/equality-comparisons",
+      "author": "Microsoft Learn",
+      "description": "Reference equality versus value equality, and how ==, Equals and ReferenceEquals relate."
+    },
+    {
+      "key": "patterns",
+      "type": "article",
+      "title": "Pattern matching - the is and switch expressions",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns",
+      "author": "Microsoft Learn",
+      "description": "Type, relational, property, list, logical and positional patterns in C#."
+    },
+    {
+      "key": "arithmetic",
+      "type": "article",
+      "title": "Arithmetic operators (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/arithmetic-operators",
+      "author": "Microsoft Learn",
+      "description": "Integer division, remainder, floating-point behaviour and arithmetic overflow in checked and unchecked contexts."
+    },
+    {
+      "key": "math-round",
+      "type": "article",
+      "title": "Math.Round method",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.math.round",
+      "author": "Microsoft Learn",
+      "description": "API reference for Math.Round, including the default to-even midpoint rounding and MidpointRounding options."
+    },
+    {
+      "key": "linq",
+      "type": "article",
+      "title": "Language Integrated Query (LINQ)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/linq/",
+      "author": "Microsoft Learn",
+      "description": "Overview of LINQ queries, deferred execution and the standard query operators."
+    },
+    {
+      "key": "yield",
+      "type": "article",
+      "title": "yield statement (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/yield",
+      "author": "Microsoft Learn",
+      "description": "How iterator methods produce values lazily with yield return and yield break."
+    },
+    {
+      "key": "exceptions",
+      "type": "article",
+      "title": "Exception-handling statements (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements",
+      "author": "Microsoft Learn",
+      "description": "throw, try-catch, try-finally, exception filters and how finally blocks run."
+    },
+    {
+      "key": "async",
+      "type": "article",
+      "title": "Asynchronous programming with async and await",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/",
+      "author": "Microsoft Learn",
+      "description": "The task-based asynchronous model in C# and how await composes tasks."
+    },
+    {
+      "key": "lambdas",
+      "type": "article",
+      "title": "Lambda expressions and anonymous functions (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions",
+      "author": "Microsoft Learn",
+      "description": "Lambda syntax and how lambdas capture outer variables."
+    },
+    {
+      "key": "override-new",
+      "type": "article",
+      "title": "Knowing when to use override and new keywords",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/knowing-when-to-use-override-and-new-keywords",
+      "author": "Microsoft Learn",
+      "description": "Virtual dispatch with override compared with member hiding with new."
+    },
+    {
+      "key": "method-params",
+      "type": "article",
+      "title": "Method parameters (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/method-parameters",
+      "author": "Microsoft Learn",
+      "description": "Passing by value and by reference with ref, out, in and params."
+    },
+    {
+      "key": "static-ctor",
+      "type": "article",
+      "title": "Static constructors (C# programming guide)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-constructors",
+      "author": "Microsoft Learn",
+      "description": "When static constructors run and how static members are initialized."
+    },
+    {
+      "key": "collections",
+      "type": "article",
+      "title": "Collections and data structures",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/collections/",
+      "author": "Microsoft Learn",
+      "description": "Overview of the generic collections in .NET such as List, Dictionary, HashSet, Stack and Queue."
+    }
+  ],
+  "questions": [
+    {
+      "type": "output",
+      "prompt": "Predict the output: a struct read out of a List and then modified.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "code": "var list = new List<Point> { new Point { X = 1 } };\nvar p = list[0];\np.X = 5;\nConsole.WriteLine(list[0].X);\nConsole.WriteLine(p.X);\n\nstruct Point { public int X; }\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "1\n5\n",
+      "explanation": "The List indexer returns a copy of the struct, so `p` is an independent value. Changing `p.X` to 5 does not touch the element stored in the list, which still has X = 1.",
+      "materials": [
+        "value-types"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: assigning a class instance versus a struct instance and then mutating the copy.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "code": "var a = new Box { V = 1 };\nvar b = a;\nb.V = 2;\n\nvar s = new SBox { V = 1 };\nvar t = s;\nt.V = 2;\n\nConsole.WriteLine($\"{a.V} {s.V}\");\n\nclass Box { public int V; }\nstruct SBox { public int V; }\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "2 1\n",
+      "explanation": "`b = a` copies a reference, so `a` and `b` point to the same object and `a.V` becomes 2. `t = s` copies the whole struct, so changing `t.V` leaves `s.V` at 1. The line is `2 1`.",
+      "materials": [
+        "value-types"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a positional record, `with` and record equality.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "code": "var p1 = new Person(\"Ann\", 30);\nvar p2 = p1 with { Age = 31 };\nConsole.WriteLine(p1);\nConsole.WriteLine(p2.Age);\nConsole.WriteLine(p1 == (p2 with { Age = 30 }));\n\nrecord Person(string Name, int Age);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "Person { Name = Ann, Age = 30 }\n31\nTrue\n",
+      "explanation": "`with` creates a new record and leaves `p1` unchanged, so p1 prints through the compiler-generated ToString as `Person { Name = Ann, Age = 30 }`. `p2.Age` is 31. Making another copy with Age = 30 gives a record whose properties all equal p1's, and record == compares values, so it prints True.",
+      "materials": [
+        "records"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: calling string methods without using their return values.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "code": "string s = \"hello\";\ns.ToUpper();\ns.Replace('h', 'j');\nConsole.WriteLine(s);\n\nstring t = s;\ns += \"!\";\nConsole.WriteLine(t);\nConsole.WriteLine(s);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "hello\nhello\nhello!\n",
+      "explanation": "Strings are immutable: ToUpper and Replace return new strings that are thrown away, so `s` is still `hello`. `s += \"!\"` creates a new string and points `s` at it; `t` still refers to the old `hello`. Output: hello, hello, hello!.",
+      "materials": [
+        "equality"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: boxing an int and comparing boxed values.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "code": "int x = 1;\nobject o = x;\nx = 2;\nConsole.WriteLine(o);\n\nobject a = 5, b = 5;\nConsole.WriteLine(a == b);\nConsole.WriteLine(a.Equals(b));\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "1\nFalse\nTrue\n",
+      "explanation": "Boxing copies the value into a new heap object, so `o` keeps 1 after `x` changes. `a` and `b` are two separate boxes; `==` on `object` compares references, giving False. `Equals` is virtual and Int32.Equals compares the values, giving True.",
+      "materials": [
+        "value-types",
+        "equality"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: comparing strings through `string` and through `object` variables.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "string a = \"hi\";\nstring b = new string(new[] { 'h', 'i' });\nobject oa = a, ob = b;\n\nConsole.WriteLine(a == b);\nConsole.WriteLine(oa == ob);\nConsole.WriteLine(oa.Equals(ob));\nConsole.WriteLine(ReferenceEquals(a, \"hi\"));\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "True\nFalse\nTrue\nTrue\n",
+      "explanation": "With static type string, `==` calls the string overload and compares characters: True. With static type object, `==` is reference equality, and `b` is a separately allocated string: False. `Equals` is virtual, so String.Equals runs and compares contents: True. Literals are interned, so `a` and the literal \"hi\" are the same object: True.",
+      "materials": [
+        "equality"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: records whose property is an array.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "var r1 = new R(new[] { 1, 2 });\nvar r2 = new R(new[] { 1, 2 });\nConsole.WriteLine(r1 == r2);\n\nvar arr = new[] { 1, 2 };\nConsole.WriteLine(new R(arr) == new R(arr));\n\nrecord R(int[] Items);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "False\nTrue\n",
+      "explanation": "Record equality compares each property with EqualityComparer<T>.Default. For an array that is reference equality, so two different arrays with the same contents make the records unequal (False). When both records hold the very same array, the property compares equal and the records are equal (True).",
+      "materials": [
+        "records"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: list patterns with a slice.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "Console.WriteLine(Describe(new int[0]));\nConsole.WriteLine(Describe(new[] { 7 }));\nConsole.WriteLine(Describe(new[] { 1, 2, 3, 4 }));\nConsole.WriteLine(Describe(new[] { 9, 8 }));\n\nstatic string Describe(int[] a) => a switch\n{\n    [] => \"empty\",\n    [var x] => $\"one {x}\",\n    [1, .. var rest] => $\"starts with 1, {rest.Length} more\",\n    [var f, .., var l] => $\"{f}..{l}\",\n};\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "empty\none 7\nstarts with 1, 3 more\n9..8\n",
+      "explanation": "`[]` matches only an empty array and `[var x]` exactly one element. `[1, .. var rest]` matches arrays starting with 1 and captures the remaining elements as a new array (length 3). `[9, 8]` does not start with 1, so the last arm binds first = 9 and last = 8.",
+      "materials": [
+        "patterns"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: property patterns, type patterns and null in one switch.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "object?[] items = { new Order(5, \"EU\"), new Order(150, \"US\"), new Order(20, \"US\"), 42, null, \"text\" };\nforeach (var i in items)\n{\n    Console.WriteLine(i switch\n    {\n        Order { Total: > 100, Region: \"US\" } => \"big US\",\n        Order { Region: \"EU\" } o => $\"EU {o.Total}\",\n        Order => \"other order\",\n        int n => $\"int {n}\",\n        null => \"null\",\n        _ => \"unknown\",\n    });\n}\n\nrecord Order(int Total, string Region);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "EU 5\nbig US\nother order\nint 42\nnull\nunknown\n",
+      "explanation": "Each item takes the first matching arm. Order(5, EU) fails the first property pattern but matches Region EU. Order(150, US) matches `Total > 100` and Region US. Order(20, US) only matches the plain type pattern. 42 is an int, null hits the null pattern, and the string falls to the discard.",
+      "materials": [
+        "patterns"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: lifted operators on a null `int?`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "int? a = null;\nConsole.WriteLine(a ?? -1);\nConsole.WriteLine(a + 5 == null);\nConsole.WriteLine(a > 0);\nConsole.WriteLine(a <= 0);\nConsole.WriteLine(a == null);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "-1\nTrue\nFalse\nFalse\nTrue\n",
+      "explanation": "`??` substitutes -1 for null. Arithmetic on a null nullable yields null, so `a + 5 == null` is True. Lifted comparison operators (<, >, <=, >=) return false whenever an operand is null, so both `a > 0` and `a <= 0` are False. Lifted == treats two nulls as equal, so the last line is True.",
+      "materials": [
+        "value-types"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: boxing a nullable value type.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "code": "int? none = null;\nobject o1 = none;\nConsole.WriteLine(o1 == null);\n\nint? some = 3;\nobject o2 = some;\nConsole.WriteLine(o2.GetType().Name);\nConsole.WriteLine(o2 is int);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "True\nInt32\nTrue\n",
+      "explanation": "Boxing a Nullable<T> without a value produces a null reference, not a box holding an empty Nullable: True. Boxing a Nullable<T> that has a value boxes the underlying int, so GetType reports Int32 (there is no boxed Nullable<int>), and `o2 is int` is True.",
+      "materials": [
+        "value-types"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: int overflow in the default unchecked context versus inside `checked`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "code": "int max = int.MaxValue;\nint y = max + 1;\nConsole.WriteLine(y);\n\ntry\n{\n    int z = checked(max + 1);\n    Console.WriteLine(z);\n}\ncatch (OverflowException)\n{\n    Console.WriteLine(\"overflow\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "-2147483648\noverflow\n",
+      "explanation": "Non-constant integer arithmetic is unchecked by default, so int.MaxValue + 1 silently wraps to int.MinValue, -2147483648. Inside `checked(...)` the same addition throws OverflowException, so `overflow` is printed instead.",
+      "materials": [
+        "arithmetic"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: integer division and remainder with negative numbers.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "code": "using System.Globalization;\n\nConsole.WriteLine(7 / 2);\nConsole.WriteLine(-7 / 2);\nConsole.WriteLine(-7 % 3);\nConsole.WriteLine((7 / 2.0).ToString(CultureInfo.InvariantCulture));\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "3\n-3\n-1\n3.5\n",
+      "explanation": "Integer division truncates toward zero: 7/2 = 3 and -7/2 = -3 (not -4). The remainder takes the sign of the dividend, so -7 % 3 = -1. With a double operand the division is floating point: 3.5.",
+      "materials": [
+        "arithmetic"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: Math.Round on midpoint values and casting a double to int.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "Console.WriteLine(Math.Round(2.5));\nConsole.WriteLine(Math.Round(3.5));\nConsole.WriteLine(Math.Round(-2.5));\nConsole.WriteLine(Math.Round(2.5, MidpointRounding.AwayFromZero));\nConsole.WriteLine((int)2.7);\nConsole.WriteLine((int)-2.7);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "2\n4\n-2\n3\n2\n-2\n",
+      "explanation": "Math.Round defaults to MidpointRounding.ToEven (banker's rounding): 2.5 goes to 2, 3.5 to 4, -2.5 to -2. AwayFromZero rounds 2.5 to 3. Casting a double to int truncates toward zero, so 2.7 becomes 2 and -2.7 becomes -2.",
+      "materials": [
+        "math-round"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: comparing floating-point and decimal sums.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "Console.WriteLine(0.1 + 0.2 == 0.3);\nConsole.WriteLine(0.1m + 0.2m == 0.3m);\nConsole.WriteLine(double.IsPositiveInfinity(1.0 / 0));\n\nfloat f = 16777217;\nConsole.WriteLine(f == 16777216f);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "False\nTrue\nTrue\nTrue\n",
+      "explanation": "0.1 and 0.2 have no exact binary representation, so their double sum is slightly off 0.3: False. decimal is base 10 and represents them exactly: True. Floating-point division by zero yields infinity instead of throwing: True. A float has a 24-bit significand, so 16777217 (2^24 + 1) rounds to 16777216: True.",
+      "materials": [
+        "arithmetic"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: NaN with ==, Equals, HashSet and Contains.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "code": "double n = double.NaN;\nConsole.WriteLine(n == n);\nConsole.WriteLine(n.Equals(n));\n\nvar set = new HashSet<double> { n, n };\nConsole.WriteLine(set.Count);\nConsole.WriteLine(new[] { n }.Contains(n));\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "False\nTrue\n1\nTrue\n",
+      "explanation": "IEEE 754 says NaN is not equal to anything, so `==` is False. Double.Equals is defined so that NaN equals NaN (to keep collections working): True. HashSet and Contains use EqualityComparer<double>.Default, which calls Equals, so the set holds one element and Contains finds it.",
+      "materials": [
+        "arithmetic",
+        "equality"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: deferred execution of a Where query versus ToList.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "code": "var list = new List<int> { 1, 2, 3 };\nvar query = list.Where(x => x > 1);\nlist.Add(4);\nConsole.WriteLine(query.Count());\n\nvar snapshot = list.Where(x => x > 1).ToList();\nlist.Add(5);\nConsole.WriteLine(snapshot.Count);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "3\n3\n",
+      "explanation": "A LINQ query is only a description until it is enumerated. Count() runs it after 4 was added, so it sees 2, 3 and 4: 3. ToList() runs the query immediately and stores the results, so adding 5 later does not change the snapshot: 3.",
+      "materials": [
+        "linq"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: the order in which Where and Select lambdas run while iterating.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "var q = new[] { 1, 2, 3 }\n    .Where(x => { Console.Write($\"W{x} \"); return x != 2; })\n    .Select(x => { Console.Write($\"S{x} \"); return x; });\n\nforeach (var x in q)\n    Console.Write($\"[{x}] \");\nConsole.WriteLine();\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "W1 S1 [1] W2 W3 S3 [3] \n",
+      "explanation": "LINQ operators stream: each element flows through the whole pipeline before the next is pulled. 1 passes Where and Select and is printed; 2 is rejected by Where so Select never sees it; 3 passes both. The operators do not run one after another over the full list.",
+      "materials": [
+        "linq"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: GroupBy over a list of words.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "var words = new[] { \"apple\", \"bob\", \"cat\", \"avocado\", \"banana\", \"cherry\", \"ant\" };\nforeach (var g in words.GroupBy(w => w[0]))\n    Console.WriteLine($\"{g.Key}: {string.Join(\",\", g)}\");\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "a: apple,avocado,ant\nb: bob,banana\nc: cat,cherry\n",
+      "explanation": "GroupBy yields groups in the order their keys first appear in the source (a, b, c), and the elements within each group keep their original relative order. It does not sort.",
+      "materials": [
+        "linq"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: OrderBy with equal keys, and a descending ThenBy.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "var people = new[] { (\"Ann\", 30), (\"Bob\", 25), (\"Cid\", 30), (\"Dee\", 25) };\n\nConsole.WriteLine(string.Join(\" \", people.OrderBy(p => p.Item2).Select(p => p.Item1)));\nConsole.WriteLine(string.Join(\" \",\n    people.OrderByDescending(p => p.Item2).ThenByDescending(p => p.Item1).Select(p => p.Item1)));\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "Bob Dee Ann Cid\nCid Ann Dee Bob\n",
+      "explanation": "LINQ's OrderBy is a stable sort, so people with equal ages keep their source order: Bob before Dee, Ann before Cid. In the second query ages are descending (30s first) and ties are broken by name descending: Cid, Ann, then Dee, Bob.",
+      "materials": [
+        "linq"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: Distinct on class instances, DistinctBy, and a custom comparer.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "var items = new[] { new Item(1), new Item(1), new Item(2) };\nConsole.WriteLine(items.Distinct().Count());\nConsole.WriteLine(items.DistinctBy(i => i.Id).Count());\nConsole.WriteLine(new[] { \"a\", \"A\", \"b\" }.Distinct(StringComparer.OrdinalIgnoreCase).Count());\n\nclass Item { public int Id; public Item(int id) => Id = id; }\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "3\n2\n2\n",
+      "explanation": "Item does not override Equals/GetHashCode, so Distinct uses reference equality and all three instances are distinct: 3. DistinctBy compares the projected Id values (1, 1, 2): 2. With OrdinalIgnoreCase, \"a\" and \"A\" are equal: 2.",
+      "materials": [
+        "linq",
+        "equality"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: First, Single and FirstOrDefault when there are several matches or none.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "var nums = new[] { 1, 2, 3, 4 };\nTry(() => nums.First(n => n > 2));\nTry(() => nums.Single(n => n > 2));\nTry(() => nums.FirstOrDefault(n => n > 10));\nTry(() => nums.Single(n => n > 3));\n\nstatic void Try(Func<int> f)\n{\n    try { Console.WriteLine(f()); }\n    catch (InvalidOperationException) { Console.WriteLine(\"IOE\"); }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "3\nIOE\n0\n4\n",
+      "explanation": "First returns the first match, 3. Single requires exactly one match; 3 and 4 both match, so it throws InvalidOperationException. FirstOrDefault returns default(int) = 0 when nothing matches. Single(n > 3) has exactly one match, 4.",
+      "materials": [
+        "linq"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: lambdas capturing a `for` loop variable versus a `foreach` loop variable.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "var actions = new List<Action>();\nfor (int i = 0; i < 3; i++)\n    actions.Add(() => Console.Write(i));\nforeach (var j in new[] { 0, 1, 2 })\n    actions.Add(() => Console.Write(j));\n\nforeach (var a in actions) a();\nConsole.WriteLine();\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "333012\n",
+      "explanation": "A `for` loop declares one variable shared by all iterations; the lambdas capture that variable, which is 3 when they run, so they print 333. Since C# 5 each `foreach` iteration gets a fresh variable, so those lambdas print 0, 1 and 2.",
+      "materials": [
+        "lambdas"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a lambda capturing a local that changes afterwards, and a counter closure.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "code": "int x = 1;\nFunc<int> f = () => x * 10;\nx = 5;\nConsole.WriteLine(f());\n\nvar next = MakeCounter();\nnext();\nnext();\nConsole.WriteLine(next());\n\nstatic Func<int> MakeCounter()\n{\n    int c = 0;\n    return () => ++c;\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "50\n3\n",
+      "explanation": "Lambdas capture variables, not values, so `f` reads x when called: 5 * 10 = 50. MakeCounter's local `c` lives on in the closure after the method returns; each call increments the same variable, so the third call returns 3.",
+      "materials": [
+        "lambdas"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: when the body of an iterator method actually runs.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "IEnumerable<int> Gen()\n{\n    Console.WriteLine(\"start\");\n    yield return 1;\n    Console.WriteLine(\"middle\");\n    yield return 2;\n    Console.WriteLine(\"end\");\n}\n\nvar seq = Gen();\nConsole.WriteLine(\"created\");\nforeach (var n in seq.Take(1))\n    Console.WriteLine(n);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "created\nstart\n1\n",
+      "explanation": "Calling an iterator method runs none of its body; it only creates the enumerator. `created` prints first. Enumerating runs the body up to the first yield (start, then 1). Take(1) stops asking after one element, so `middle` and `end` never print.",
+      "materials": [
+        "yield"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: breaking out of a foreach over an iterator with try/finally.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "code": "IEnumerable<int> Gen()\n{\n    try\n    {\n        yield return 1;\n        yield return 2;\n    }\n    finally\n    {\n        Console.WriteLine(\"cleanup\");\n    }\n}\n\nforeach (var n in Gen())\n{\n    Console.WriteLine(n);\n    break;\n}\nConsole.WriteLine(\"after\");\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "1\ncleanup\nafter\n",
+      "explanation": "After printing 1 the loop breaks. foreach disposes the enumerator, and disposing an iterator suspended inside a try runs its finally block, so `cleanup` prints before `after`. The second yield is never reached.",
+      "materials": [
+        "yield",
+        "exceptions"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: argument validation inside an iterator method.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "code": "IEnumerable<int> Repeat(int n)\n{\n    if (n < 0) throw new ArgumentException(\"negative\");\n    for (int i = 0; i < n; i++) yield return i;\n}\n\nvar s = Repeat(-1);\nConsole.WriteLine(\"got sequence\");\ntry\n{\n    foreach (var x in s) { }\n}\ncatch (ArgumentException e)\n{\n    Console.WriteLine(\"thrown on enumeration: \" + e.Message);\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "got sequence\nthrown on enumeration: negative\n",
+      "explanation": "Because the method contains yield, even the guard clause is deferred: calling Repeat(-1) succeeds and returns an enumerator. The exception only happens on the first MoveNext, inside the foreach. That is why library code puts validation in a non-iterator wrapper method.",
+      "materials": [
+        "yield"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a `return` inside try with a finally block.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "code": "Console.WriteLine(F());\n\nstatic int F()\n{\n    try\n    {\n        Console.WriteLine(\"try\");\n        return 1;\n    }\n    finally\n    {\n        Console.WriteLine(\"finally\");\n    }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "try\nfinally\n1\n",
+      "explanation": "The try block prints `try` and evaluates the return value, but before control leaves the method the finally block runs and prints `finally`. Only then does the caller get 1 and print it.",
+      "materials": [
+        "exceptions"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a finally block that changes the variable being returned.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "code": "Console.WriteLine(G());\nConsole.WriteLine(H().Count);\n\nstatic int G()\n{\n    int x = 1;\n    try { return x; }\n    finally { x = 2; }\n}\n\nstatic List<int> H()\n{\n    var list = new List<int>();\n    try { return list; }\n    finally { list.Add(9); }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "1\n1\n",
+      "explanation": "`return x` evaluates and stores the value 1 before finally runs, so reassigning x afterwards has no effect: 1. In H the stored return value is a reference to the list; finally mutates that same object, so the caller sees one element: 1.",
+      "materials": [
+        "exceptions"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an exception filter that returns false.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "code": "try\n{\n    try\n    {\n        throw new InvalidOperationException(\"boom\");\n    }\n    catch (Exception e) when (Log(e))\n    {\n        Console.WriteLine(\"inner\");\n    }\n}\ncatch (InvalidOperationException e)\n{\n    Console.WriteLine(\"outer \" + e.Message);\n}\n\nstatic bool Log(Exception e)\n{\n    Console.WriteLine(\"filter saw \" + e.GetType().Name);\n    return false;\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "filter saw InvalidOperationException\nouter boom\n",
+      "explanation": "The filter expression runs when the exception is being matched, so Log prints its message. It returns false, so the inner catch is skipped as if it did not match, and the exception continues to the outer handler, which prints `outer boom`. `inner` never prints.",
+      "materials": [
+        "exceptions"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: catch clause order and finally.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "code": "try\n{\n    Console.WriteLine(\"A\");\n    throw new ArgumentNullException(\"x\");\n}\ncatch (ArgumentException)\n{\n    Console.WriteLine(\"B\");\n}\ncatch (Exception)\n{\n    Console.WriteLine(\"C\");\n}\nfinally\n{\n    Console.WriteLine(\"D\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "A\nB\nD\n",
+      "explanation": "ArgumentNullException derives from ArgumentException, so the first catch clause that fits is the ArgumentException one: B. Only one catch runs, so C is skipped. finally always runs: D.",
+      "materials": [
+        "exceptions"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a finally block that throws while another exception is in flight.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "code": "try\n{\n    try\n    {\n        throw new Exception(\"first\");\n    }\n    finally\n    {\n        Console.WriteLine(\"in finally\");\n        throw new Exception(\"second\");\n    }\n}\ncatch (Exception e)\n{\n    Console.WriteLine(e.Message);\n    Console.WriteLine(e.InnerException == null);\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "in finally\nsecond\nTrue\n",
+      "explanation": "The first exception triggers the finally block. When finally throws, the new exception replaces the one in flight; the original is lost entirely, not attached as InnerException. The catch sees `second` and InnerException is null: True.",
+      "materials": [
+        "exceptions"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: code before and after the first await in an async method that is not awaited immediately.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "code": "Console.WriteLine(\"1\");\nvar t = Work();\nConsole.WriteLine(\"3\");\nawait t;\nConsole.WriteLine(\"5\");\n\nstatic async Task Work()\n{\n    Console.WriteLine(\"2\");\n    await Task.Delay(100);\n    Console.WriteLine(\"4\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "1\n2\n3\n4\n5\n",
+      "explanation": "An async method runs synchronously on the caller's thread until its first await of an incomplete task. So Work prints 2 before returning a Task. The caller prints 3, then awaits; when the delay finishes, Work prints 4 and completes, and the caller prints 5.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an async method that throws before any await.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "code": "var t = Fail();\nConsole.WriteLine(\"called\");\ntry\n{\n    await t;\n}\ncatch (InvalidOperationException e)\n{\n    Console.WriteLine(\"caught \" + e.Message);\n}\n\n#pragma warning disable CS1998\nstatic async Task Fail()\n{\n    throw new InvalidOperationException(\"bad\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "called\ncaught bad\n",
+      "explanation": "In an async method, exceptions are never thrown to the caller directly; they are captured into the returned Task. So calling Fail() returns a faulted task and `called` prints. The exception is rethrown when the task is awaited and caught there.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: the result order of Task.WhenAll with tasks that finish at different times.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "code": "var results = await Task.WhenAll(Square(3, 60), Square(1, 10), Square(2, 30));\nConsole.WriteLine(string.Join(\",\", results));\n\nstatic async Task<int> Square(int v, int ms)\n{\n    await Task.Delay(ms);\n    return v * v;\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "9,1,4\n",
+      "explanation": "Task.WhenAll returns results in the same order as the tasks were passed in, regardless of which finished first. The squares of 3, 1 and 2 are 9, 1 and 4.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: writing through a Span slice versus a range-indexed array copy.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "code": "int[] arr = { 1, 2, 3, 4, 5 };\nSpan<int> s = arr.AsSpan(1, 3);\ns[0] = 20;\nConsole.WriteLine(string.Join(\",\", arr));\nConsole.WriteLine(s.Length);\n\nint[] copy = arr[1..3];\ncopy[0] = 99;\nConsole.WriteLine(arr[1]);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "1,20,3,4,5\n3\n20\n",
+      "explanation": "A Span is a view over existing memory, so s[0] is arr[1] and writing 20 changes the array. The slice covers 3 elements. Applying a range to an array (arr[1..3]) allocates a new array copy, so writing 99 into it does not affect arr, which still has 20.",
+      "materials": [
+        "value-types"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: Dictionary indexer assignment, Add with a duplicate key, and TryGetValue.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "code": "var d = new Dictionary<string, int>();\nd[\"a\"] = 1;\nd[\"a\"] = 2;\ntry { d.Add(\"a\", 3); }\ncatch (ArgumentException) { Console.WriteLine(\"duplicate\"); }\nConsole.WriteLine(d[\"a\"]);\nConsole.WriteLine($\"{d.TryGetValue(\"b\", out var v)} {v}\");\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "duplicate\n2\nFalse 0\n",
+      "explanation": "The indexer setter adds or overwrites, so the value becomes 2. Add refuses an existing key and throws ArgumentException. TryGetValue on a missing key returns false and sets the out parameter to default(int), 0.",
+      "materials": [
+        "collections"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: Stack and Queue built from the same array.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "code": "var stack = new Stack<int>(new[] { 1, 2, 3 });\nvar queue = new Queue<int>(new[] { 1, 2, 3 });\nConsole.WriteLine($\"{stack.Pop()} {queue.Dequeue()}\");\nConsole.WriteLine(string.Join(\",\", stack));\nConsole.WriteLine(string.Join(\",\", queue));\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "3 1\n2,1\n2,3\n",
+      "explanation": "The Stack constructor pushes 1, 2, 3 in order, so 3 is on top and Pop returns it; the Queue dequeues from the front, 1. Enumerating a stack goes from top to bottom (2,1), while a queue enumerates front to back (2,3).",
+      "materials": [
+        "collections"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: mutating an object after adding it to a HashSet.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "code": "var k = new Key { Id = 1 };\nvar set = new HashSet<Key> { k };\nk.Id = 2;\nConsole.WriteLine(set.Contains(k));\nConsole.WriteLine(set.Count);\nConsole.WriteLine(set.Contains(new Key { Id = 1 }));\n\nclass Key\n{\n    public int Id;\n    public override bool Equals(object? o) => o is Key x && x.Id == Id;\n    public override int GetHashCode() => Id;\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "False\n1\nFalse\n",
+      "explanation": "The set placed k in the bucket for hash 1. After Id changes to 2, Contains(k) looks in the bucket for hash 2 and finds nothing: False, even though the object is still inside (Count is 1). Looking up Id = 1 finds the right bucket, but Equals compares against the mutated object (Id 2) and fails: False. Keys must not change while in a hashed collection.",
+      "materials": [
+        "collections",
+        "equality"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a static field in a generic class used with different type arguments.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "code": "Counter<int>.Count++;\nCounter<int>.Count++;\nCounter<string>.Count++;\nConsole.WriteLine($\"{Counter<int>.Count} {Counter<string>.Count} {Counter<long>.Count}\");\n\nstatic class Counter<T>\n{\n    public static int Count;\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "2 1 0\n",
+      "explanation": "Each closed generic type (Counter<int>, Counter<string>, Counter<long>) is a separate type with its own copy of the static field. Counter<int> was incremented twice, Counter<string> once, and Counter<long> never.",
+      "materials": [
+        "static-ctor"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: when a static constructor runs.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "Console.WriteLine(\"start\");\nConsole.WriteLine(Config.Value);\nConsole.WriteLine(Config.Value);\n\nstatic class Config\n{\n    public static int Value = 42;\n    static Config() { Console.WriteLine(\"init\"); }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "start\ninit\n42\n42\n",
+      "explanation": "A static constructor runs once, just before the type is first used. `start` prints first; the first access to Config.Value triggers the field initializer and then the static constructor body (`init`) and returns 42. The second access does not run it again.",
+      "materials": [
+        "static-ctor"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: override versus `new` when called through a base-class reference.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "Base b = new Derived();\nDerived d = (Derived)b;\nb.Virt();\nb.Hide();\nd.Hide();\n\nclass Base\n{\n    public virtual void Virt() => Console.WriteLine(\"Base.Virt\");\n    public void Hide() => Console.WriteLine(\"Base.Hide\");\n}\nclass Derived : Base\n{\n    public override void Virt() => Console.WriteLine(\"Derived.Virt\");\n    public new void Hide() => Console.WriteLine(\"Derived.Hide\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "Derived.Virt\nBase.Hide\nDerived.Hide\n",
+      "explanation": "An override replaces the virtual slot, so calling Virt through a Base reference runs Derived.Virt. A `new` method only hides the base method: the compiler picks it by static type, so via `b` (typed Base) you get Base.Hide and via `d` (typed Derived) you get Derived.Hide.",
+      "materials": [
+        "override-new"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a virtual method called from a base-class constructor.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "code": "new Derived();\n\nclass Base\n{\n    public Base() => Show();\n    public virtual void Show() => Console.WriteLine(\"Base.Show\");\n}\nclass Derived : Base\n{\n    string field = \"initialized\";\n    string? set;\n    public Derived() => set = \"ctor ran\";\n    public override void Show() => Console.WriteLine($\"{field} / {set ?? \"null\"}\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "initialized / null\n",
+      "explanation": "Virtual dispatch works even inside the base constructor, so Derived.Show runs. In C#, field initializers of the derived class run before the base constructor is called, so `field` is already set, but the Derived constructor body has not run yet, so `set` is still null.",
+      "materials": [
+        "override-new"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an interface default method, with and without a class implementation.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "IGreeter plain = new Plain();\nIGreeter custom = new Custom();\nConsole.WriteLine(plain.Greet());\nConsole.WriteLine(custom.Greet());\n\ninterface IGreeter\n{\n    string Name { get; }\n    string Greet() => $\"Hello {Name}\";\n}\nclass Plain : IGreeter { public string Name => \"plain\"; }\nclass Custom : IGreeter\n{\n    public string Name => \"custom\";\n    public string Greet() => \"Hi!\";\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "Hello plain\nHi!\n",
+      "explanation": "Plain does not implement Greet, so calling it through the interface uses the default body, which reads Plain's Name. Custom has a public Greet that implicitly implements the interface member, so it replaces the default.",
+      "materials": [
+        "override-new"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a class with an overloaded + operator, ==, and +=.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "var a = new Money(5);\nvar b = new Money(7);\nConsole.WriteLine((a + b).Amount);\nConsole.WriteLine(a == new Money(5));\n\nvar c = a;\nc += b;\nConsole.WriteLine($\"{a.Amount} {c.Amount}\");\n\nclass Money\n{\n    public int Amount { get; }\n    public Money(int amount) => Amount = amount;\n    public static Money operator +(Money x, Money y) => new(x.Amount + y.Amount);\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "12\nFalse\n5 12\n",
+      "explanation": "The overloaded + returns a new Money with 12. Overloading + does not overload ==, so == on a class is reference equality: False. `c += b` means `c = c + b`, which points c at a new object; `a` is unchanged at 5, while c is 12.",
+      "materials": [
+        "equality"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an extension method with the same name as an instance method, and one called on null.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "var t = new Thing();\nt.Say();\nt.Shout();\nThing? none = null;\nnone.Shout();\n\nclass Thing { public void Say() => Console.WriteLine(\"instance Say\"); }\n\nstatic class ThingExtensions\n{\n    public static void Say(this Thing t) => Console.WriteLine(\"extension Say\");\n    public static void Shout(this Thing? t) => Console.WriteLine(t is null ? \"extension on null\" : \"extension Shout\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "instance Say\nextension Shout\nextension on null\n",
+      "explanation": "Instance methods always win over extension methods with the same signature, so t.Say() runs the instance method. Shout exists only as an extension. Extension calls are just static calls with the receiver as the first argument, so calling one on null does not throw a NullReferenceException.",
+      "materials": [
+        "method-params"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: nested using blocks and a using declaration.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "using (var a = new Res(\"A\"))\nusing (var b = new Res(\"B\"))\n{\n    Console.WriteLine(\"body\");\n}\nusing var c = new Res(\"C\");\nConsole.WriteLine(\"end\");\n\nclass Res : IDisposable\n{\n    readonly string name;\n    public Res(string name) { this.name = name; Console.WriteLine(\"open \" + name); }\n    public void Dispose() => Console.WriteLine(\"close \" + name);\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "open A\nopen B\nbody\nclose B\nclose A\nopen C\nend\nclose C\n",
+      "explanation": "Resources are disposed in reverse order of acquisition: B is closed before A, right after the block. A using declaration (`using var`) disposes at the end of the enclosing scope, here the end of the top-level statements, so `close C` comes after `end`.",
+      "materials": [
+        "exceptions"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: calling a mutating method on a struct stored in a readonly field.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "code": "var h = new Holder();\nh.Bump();\nh.Bump();\nConsole.WriteLine(h.Report());\n\nclass Holder\n{\n    readonly Counter frozen;\n    Counter normal;\n    public void Bump() { frozen.Inc(); normal.Inc(); }\n    public string Report() => $\"{frozen.N} {normal.N}\";\n}\n\nstruct Counter\n{\n    public int N;\n    public void Inc() => N++;\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "0 2\n",
+      "explanation": "To protect a readonly struct field, the compiler calls methods on a defensive copy, so frozen.Inc() increments a temporary and the field stays 0. The non-readonly field is called in place and reaches 2. This hidden copy is also a performance cost; marking the struct `readonly` avoids it.",
+      "materials": [
+        "value-types"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: passing an int and an array by value versus by ref.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "code": "int a = 1, b = 1;\nInc(a);\nIncRef(ref b);\nConsole.WriteLine($\"{a} {b}\");\n\nvar arr = new[] { 1 };\nReassign(arr);\nMutate(arr);\nConsole.WriteLine(arr[0]);\n\nstatic void Inc(int x) => x++;\nstatic void IncRef(ref int x) => x++;\nstatic void Reassign(int[] x) => x = new[] { 100 };\nstatic void Mutate(int[] x) => x[0] = 7;\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "1 2\n7\n",
+      "explanation": "Inc receives a copy of a, so a stays 1; IncRef aliases b, so b becomes 2. An array reference is also passed by value: Reassign only changes its local copy of the reference, but Mutate writes through the reference into the shared array, so arr[0] is 7.",
+      "materials": [
+        "method-params"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: ref locals and a method returning by ref.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "code": "int[] arr = { 1, 2, 3 };\nref int r = ref arr[1];\nr = 50;\nConsole.WriteLine(arr[1]);\n\nref int big = ref Largest(arr);\nbig = 0;\nConsole.WriteLine(string.Join(\",\", arr));\n\nstatic ref int Largest(int[] a)\n{\n    int idx = 0;\n    for (int i = 1; i < a.Length; i++)\n        if (a[i] > a[idx]) idx = i;\n    return ref a[idx];\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "50\n1,0,3\n",
+      "explanation": "A ref local is an alias for a storage location, so assigning r writes arr[1] = 50. Largest returns a reference to the biggest element (50 at index 1), and assigning through that ref local sets it to 0, giving 1,0,3.",
+      "materials": [
+        "method-params"
+      ]
+    }
+  ]
+}

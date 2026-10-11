@@ -77,6 +77,32 @@ describe('system design challenge (integration)', () => {
     expect(screen.getByText(/A load balancer in front of two or more/)).toBeInTheDocument();
   });
 
+  it('builds with real products found by searching the palette', async () => {
+    loginAsDemo();
+    const user = userEvent.setup();
+    renderWithProviders(<DesignChallenge question={shortener()} />);
+    const search = screen.getByRole('searchbox', { name: 'Search components…' });
+    // searching by kind finds every vendor's product of that kind
+    await user.type(search, 'cache');
+    expect(screen.getByRole('button', { name: 'Add Redis' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Add ElastiCache' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Add Apache Kafka' })).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Add Redis' }));
+    await user.clear(search);
+    await user.type(search, 'Kubernetes');
+    await user.click(screen.getByRole('button', { name: 'Add Kubernetes' }));
+    await arrow(user, 'Kubernetes', 'Redis');
+    await user.click(screen.getByRole('button', { name: 'Check my design' }));
+
+    // Redis counts as the cache the rule asks for
+    const results = await screen.findByTestId('design-results');
+    const cacheRule = within(results)
+      .getByText('The service checks a cache before the database')
+      .closest('li')!;
+    expect(cacheRule).toHaveTextContent('Passed');
+  });
+
   it('keeps the board in this browser between visits', async () => {
     loginAsDemo();
     const user = userEvent.setup();

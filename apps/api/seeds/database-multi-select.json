@@ -1,0 +1,1347 @@
+{
+  "name": "Databases: pick all that apply",
+  "materials": [
+    {
+      "key": "pg-isolation",
+      "type": "article",
+      "title": "Transaction Isolation",
+      "url": "https://www.postgresql.org/docs/current/transaction-iso.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "How PostgreSQL implements Read Committed, Repeatable Read and Serializable, and which anomalies each level prevents."
+    },
+    {
+      "key": "pg-locking",
+      "type": "article",
+      "title": "Explicit Locking",
+      "url": "https://www.postgresql.org/docs/current/explicit-locking.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Table-level and row-level lock modes, which statements take them, and deadlock detection."
+    },
+    {
+      "key": "pg-index-types",
+      "type": "article",
+      "title": "Index Types",
+      "url": "https://www.postgresql.org/docs/current/indexes-types.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "B-tree, hash, GiST, SP-GiST, GIN and BRIN indexes and the operators each one supports."
+    },
+    {
+      "key": "luke",
+      "type": "book",
+      "title": "Use The Index, Luke!",
+      "url": "https://use-the-index-luke.com/",
+      "author": "Markus Winand",
+      "description": "A free guide to how B-tree indexes work and how to design them for real queries."
+    },
+    {
+      "key": "pg-explain",
+      "type": "article",
+      "title": "Using EXPLAIN",
+      "url": "https://www.postgresql.org/docs/current/using-explain.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Reading query plans, EXPLAIN ANALYZE output and the caveats of measuring execution."
+    },
+    {
+      "key": "pg-planner-stats",
+      "type": "article",
+      "title": "Statistics Used by the Planner",
+      "url": "https://www.postgresql.org/docs/current/planner-stats.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Per-column statistics gathered by ANALYZE and extended statistics created with CREATE STATISTICS."
+    },
+    {
+      "key": "wiki-normalization",
+      "type": "article",
+      "title": "Database normalization",
+      "url": "https://en.wikipedia.org/wiki/Database_normalization",
+      "author": "Wikipedia",
+      "description": "The normal forms from 1NF to BCNF, the anomalies they prevent, and worked examples."
+    },
+    {
+      "key": "pg-wal",
+      "type": "article",
+      "title": "Reliability and the Write-Ahead Log",
+      "url": "https://www.postgresql.org/docs/current/wal.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "WAL, asynchronous commit, checkpoints and the settings that trade durability for speed."
+    },
+    {
+      "key": "pg-ha",
+      "type": "article",
+      "title": "High Availability, Load Balancing, and Replication",
+      "url": "https://www.postgresql.org/docs/current/high-availability.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Streaming and logical replication, synchronous standbys, replication slots and hot standby."
+    },
+    {
+      "key": "pg-backup",
+      "type": "article",
+      "title": "Backup and Restore",
+      "url": "https://www.postgresql.org/docs/current/backup.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "SQL dumps with pg_dump, file system backups, and continuous archiving with point-in-time recovery."
+    },
+    {
+      "key": "pg-vacuum",
+      "type": "article",
+      "title": "Routine Vacuuming",
+      "url": "https://www.postgresql.org/docs/current/routine-vacuuming.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Why VACUUM is needed: dead row versions, the visibility map, freezing and autovacuum."
+    },
+    {
+      "key": "pg-partitioning",
+      "type": "article",
+      "title": "Table Partitioning",
+      "url": "https://www.postgresql.org/docs/current/ddl-partitioning.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Declarative range, list and hash partitioning, partition pruning and partition maintenance."
+    },
+    {
+      "key": "jepsen",
+      "type": "article",
+      "title": "Consistency Models",
+      "url": "https://jepsen.io/consistency",
+      "author": "Jepsen",
+      "description": "A map of consistency models, from linearizability and serializability to session guarantees."
+    },
+    {
+      "key": "ddia",
+      "type": "book",
+      "title": "Designing Data-Intensive Applications",
+      "url": "https://dataintensive.net/",
+      "author": "Martin Kleppmann",
+      "description": "Replication, partitioning, transactions, consistency and the trade-offs behind relational and NoSQL systems."
+    },
+    {
+      "key": "pgbouncer",
+      "type": "article",
+      "title": "PgBouncer Features",
+      "url": "https://www.pgbouncer.org/features.html",
+      "author": "PgBouncer project",
+      "description": "Session, transaction and statement pooling modes and which PostgreSQL features each mode supports."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multi-select",
+      "prompt": "Which of these does the atomicity guarantee in ACID provide?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Either all of a transaction's changes take effect or none do",
+        "A failed or aborted transaction leaves no partial changes behind",
+        "Committed changes survive a later server crash",
+        "Concurrent transactions never see each other's uncommitted changes",
+        "Declared constraints hold after every transaction"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "Atomicity means all-or-nothing, so a transaction that fails or is rolled back leaves no partial changes. Surviving a crash after commit is durability, hiding uncommitted changes from others is isolation, and keeping constraints satisfied is consistency.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which anomalies can occur at PostgreSQL's Read Committed isolation level?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Dirty read",
+        "Nonrepeatable read",
+        "Phantom read",
+        "Serialization anomaly"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "Each statement under Read Committed takes a new snapshot, so re-reading a row (nonrepeatable read) or re-running a range query (phantom) can show other transactions' new commits, and serialization anomalies are possible. Dirty reads never happen in PostgreSQL at any level.",
+      "materials": [
+        "pg-isolation"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about a PostgreSQL transaction running at Repeatable Read are true?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Its snapshot is taken when its first non-transaction-control statement starts",
+        "Every query in the transaction sees the same snapshot",
+        "Its queries can see rows other transactions commit after its snapshot",
+        "It prevents write skew between concurrent transactions",
+        "The application must be ready to retry it after a serialization failure"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "The snapshot is taken at the first statement after BEGIN, not at BEGIN itself, and all later queries reuse it, so rows committed afterwards stay invisible. Write skew is still possible at this level (only Serializable prevents it), and conflicting updates raise serialization failures that the application must retry.",
+      "materials": [
+        "pg-isolation"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about PostgreSQL's Serializable isolation level (Serializable Snapshot Isolation) are true?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Its predicate locks never block other transactions",
+        "It may abort a transaction with SQLSTATE `40001` to prevent an anomaly",
+        "A `READ ONLY DEFERRABLE` transaction may wait at start and then cannot fail serialization",
+        "Its predicate locks appear in `pg_locks` with the mode `SIReadLock`",
+        "It executes concurrent transactions one at a time to guarantee correctness"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "SSI tracks read/write dependencies with non-blocking SIRead predicate locks (visible in pg_locks) and aborts a transaction with serialization_failure (40001) when a dangerous pattern forms. A read-only deferrable transaction waits for a safe snapshot and then runs without risk of serialization failure. Transactions still run concurrently; nothing is serialized one at a time.",
+      "materials": [
+        "pg-isolation"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about PostgreSQL's multiversion concurrency control (MVCC) are true?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "An `UPDATE` writes a new version of the row",
+        "Old row versions stay on disk until `VACUUM` removes them",
+        "Plain `SELECT` queries take row locks that block writers",
+        "Each row version records creating and deleting transaction IDs (`xmin`, `xmax`)",
+        "A `DELETE` immediately frees the row's space for reuse"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "PostgreSQL never overwrites a row in place: an UPDATE creates a new version and marks the old one with its xmax, and each version carries xmin/xmax so snapshots can decide visibility. Dead versions remain until VACUUM reclaims them, so a DELETE does not free space immediately, and plain reads take no row locks.",
+      "materials": [
+        "pg-vacuum",
+        "ddia"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements describe how PostgreSQL handles a deadlock between two transactions?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It aborts one of the transactions with an error",
+        "Which transaction gets aborted is hard to predict",
+        "The check runs after a lock wait exceeds `deadlock_timeout`",
+        "It rolls back both transactions",
+        "The transaction that is not aborted must be retried"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "After a transaction has waited on a lock for deadlock_timeout (1 s by default), PostgreSQL checks for a cycle and aborts one participant, and the docs say which one is hard to predict. The other transaction continues normally and does not need a retry; only the aborted one does.",
+      "materials": [
+        "pg-locking"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are valid row-level locking clauses in a PostgreSQL `SELECT`?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`FOR UPDATE`",
+        "`FOR NO KEY UPDATE`",
+        "`FOR SHARE`",
+        "`FOR KEY SHARE`",
+        "`FOR EXCLUSIVE`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "PostgreSQL has exactly four row-level lock strengths: FOR UPDATE, FOR NO KEY UPDATE, FOR SHARE and FOR KEY SHARE. EXCLUSIVE is a table-level lock mode, not a row locking clause.",
+      "materials": [
+        "pg-locking"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In PostgreSQL, a plain `UPDATE` changes a row but none of its unique-key columns. Which statements are true?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It takes a `FOR NO KEY UPDATE` lock on the row",
+        "It does not conflict with `FOR KEY SHARE` locks held by foreign key checks",
+        "It takes a `ROW EXCLUSIVE` lock on the table",
+        "It blocks concurrent plain `SELECT`s of that row",
+        "It takes an `ACCESS EXCLUSIVE` lock on the table"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "An UPDATE that leaves key columns alone uses the weaker FOR NO KEY UPDATE row lock, which is compatible with the FOR KEY SHARE locks taken when inserting referencing rows, and every UPDATE takes ROW EXCLUSIVE on the table. Plain SELECTs read an MVCC snapshot and are never blocked, and ACCESS EXCLUSIVE is reserved for DDL such as DROP TABLE.",
+      "materials": [
+        "pg-locking"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements describe optimistic concurrency control?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Conflicts are detected when writing, for example via a version column",
+        "Rows stay locked while a user edits them in a form",
+        "The losing writer must retry or report the conflict",
+        "It suits workloads where conflicts are frequent",
+        "`SELECT ... FOR UPDATE` is an example of it"
+      ],
+      "correctIndices": [
+        0,
+        2
+      ],
+      "explanation": "Optimistic control lets work proceed without locks and checks at write time (a version or timestamp match) whether someone else changed the data, so the loser retries or reports a conflict. Holding locks during an edit and SELECT ... FOR UPDATE are pessimistic, and frequent conflicts make optimistic control waste work on retries.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are index access methods built into PostgreSQL, usable as `CREATE INDEX ... USING <method>`?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`btree`",
+        "`gin`",
+        "`brin`",
+        "`bitmap`",
+        "`gist`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "Core PostgreSQL ships btree, hash, gist, spgist, gin and brin. It has no persistent bitmap index type; bitmaps are built in memory during a Bitmap Index Scan.",
+      "materials": [
+        "pg-index-types"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A `jsonb` column `d` has a GIN index with the default operator class. Which predicates can that index serve?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`d @> '{\"status\": \"paid\"}'`",
+        "`d ? 'discount'`",
+        "`d ->> 'status' = 'paid'`",
+        "`d < '{\"a\": 1}'`"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "The default jsonb_ops GIN operator class supports containment (@>) and key-existence operators (?, ?|, ?&) plus jsonpath matches. Extracting a field with ->> and comparing it needs an expression index on that expression, and GIN does not support ordering comparisons such as <.",
+      "materials": [
+        "pg-index-types"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about PostgreSQL BRIN indexes are true?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "They store a summary, such as min and max, per range of table blocks",
+        "They are typically far smaller than a B-tree on the same column",
+        "They work best when column values correlate with physical row order",
+        "They locate a single row without reading any table blocks",
+        "They suit a column of random UUIDv4 values"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "BRIN keeps one small summary per block range, so it is tiny and effective when values follow insertion order, such as timestamps in an append-only table. It is lossy: matching block ranges must be read and rechecked, and random values make every range's min/max span almost everything, so it cannot narrow the search.",
+      "materials": [
+        "pg-index-types"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A table has a B-tree index on `(a, b)` with default ordering. Which query shapes can be answered by scanning that index in order, with no sort step?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`WHERE a = 1 ORDER BY b`",
+        "`ORDER BY a, b`",
+        "`ORDER BY a DESC, b DESC`",
+        "`ORDER BY a, b DESC`",
+        "`ORDER BY b`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "With a fixed a, entries are already sorted by b, the full (a, b) order matches the index, and reversing both columns is a backward index scan. Mixing directions (a ASC, b DESC) does not match either scan direction, so PostgreSQL adds an (incremental) sort, and b alone is not sorted across different a values.",
+      "materials": [
+        "luke"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about PostgreSQL index-only scans are true?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "B-tree indexes support them",
+        "GIN indexes support them",
+        "`INCLUDE` columns can let an index cover a query",
+        "They skip row visibility checks entirely",
+        "`EXPLAIN ANALYZE` reports their `Heap Fetches`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "B-tree supports index-only scans, and non-key INCLUDE columns let an index carry extra columns a query needs. GIN cannot return the indexed values, so it never does index-only scans. Visibility must still be checked: pages marked all-visible in the visibility map skip the heap, the rest cause the Heap Fetches shown by EXPLAIN ANALYZE.",
+      "materials": [
+        "pg-index-types",
+        "luke"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Given `CREATE INDEX ON orders (created_at) WHERE status = 'open'`, which queries can use this partial index?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`WHERE status = 'open' AND created_at > now() - interval '1 day'`",
+        "`WHERE status = 'open'`",
+        "`WHERE created_at > now() - interval '1 day'`",
+        "`WHERE status = 'closed' AND created_at > now() - interval '1 day'`",
+        "`WHERE status = $1` in a generic prepared plan"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "The planner uses a partial index only when it can prove the query's WHERE clause implies the index predicate status = 'open'. Without the status condition, with a different status, or with a parameter whose value is unknown at plan time, that cannot be proven, so the index is unusable.",
+      "materials": [
+        "luke"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Given `CREATE INDEX ON users (lower(email))`, which queries can use this index?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`WHERE lower(email) = 'ann@example.com'`",
+        "`WHERE lower(email) IN ('a@x.io', 'b@x.io')`",
+        "`WHERE email = 'ann@example.com'`",
+        "`ORDER BY lower(email) LIMIT 10`",
+        "`WHERE upper(email) = 'ANN@EXAMPLE.COM'`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "An expression index stores lower(email), so it serves equality, IN lists and ordering on exactly that expression. A predicate on the raw column or on a different expression such as upper(email) does not match the indexed expression.",
+      "materials": [
+        "luke"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `EXPLAIN ANALYZE` in PostgreSQL are true?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It actually executes the statement",
+        "For an `UPDATE`, wrapping it in `BEGIN` ... `ROLLBACK` discards its changes",
+        "It shows estimated and actual row counts for each plan node",
+        "Its timings include sending the result rows to the client",
+        "The `BUFFERS` option reports shared buffer hits and reads"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "ANALYZE runs the query, so data-modifying statements really change data unless rolled back, and each node shows estimated versus actual rows, with BUFFERS adding hit/read counts. The output rows are discarded rather than sent, so network transfer and output conversion are not included in the timings.",
+      "materials": [
+        "pg-explain"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which per-column statistics does PostgreSQL's `ANALYZE` collect for the planner?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A list of the most common values and their frequencies",
+        "Histogram bounds for the remaining values",
+        "The fraction of NULL values",
+        "An estimate of the number of distinct values",
+        "An exact row count for every distinct value"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "pg_stats exposes most_common_vals/most_common_freqs, histogram_bounds, null_frac and n_distinct, all estimated from a random sample of rows. ANALYZE samples rather than counting every value exactly, which is why estimates can be off.",
+      "materials": [
+        "pg-planner-stats"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which are valid statistics kinds for PostgreSQL's `CREATE STATISTICS` (extended statistics)?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`ndistinct`",
+        "`dependencies`",
+        "`mcv`",
+        "`correlation`",
+        "`histogram`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Extended statistics support ndistinct (distinct counts of column combinations), dependencies (functional dependencies between columns) and mcv (multi-column most-common values). Correlation and histograms exist only as single-column statistics in pg_stats, not as CREATE STATISTICS kinds.",
+      "materials": [
+        "pg-planner-stats"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about a candidate key are true?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Its values uniquely identify each row",
+        "No column can be removed from it without losing uniqueness",
+        "A table can have at most one candidate key",
+        "It must consist of exactly one column",
+        "It must be numeric"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "A candidate key is a minimal set of columns whose values are unique for every row. A table can have several (one is chosen as the primary key), they may span multiple columns, and their type is irrelevant.",
+      "materials": [
+        "wiki-normalization"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`order_lines(order_id, product_id, product_name, quantity)` has the primary key `(order_id, product_id)`. Which statements are true?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`product_name` depends on only part of the key",
+        "The table violates second normal form",
+        "`quantity` depends on the whole key",
+        "The table is already in third normal form",
+        "Moving `product_name` into a `products` table removes the partial dependency"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "product_name is determined by product_id alone, a partial dependency on a composite key, which breaks 2NF; quantity needs both order and product. Since it is not in 2NF it cannot be in 3NF, and storing product_name once per product in its own table removes the partial dependency.",
+      "materials": [
+        "wiki-normalization"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`employees(emp_id, dept_id, dept_name)` has primary key `emp_id`, and each `dept_id` has one `dept_name`. Which statements are true?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`dept_name` depends on `emp_id` transitively, through `dept_id`",
+        "The table violates third normal form",
+        "Renaming a department means updating many rows",
+        "The table violates first normal form",
+        "Deleting a department's last employee loses the department's name"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "emp_id determines dept_id, which determines dept_name: a transitive dependency on a non-key column, so the table breaks 3NF and suffers update and deletion anomalies. Every column holds a single atomic value, so 1NF is satisfied.",
+      "materials": [
+        "wiki-normalization"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about surrogate keys, such as an identity column, are true?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "They carry no business meaning",
+        "They stay stable when business attributes such as an email change",
+        "They make unique constraints on natural keys unnecessary",
+        "They must be UUIDs",
+        "They prevent duplicate rows for the same real-world entity"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "A surrogate key is a generated value with no business meaning, so it never needs to change when attributes do. Because it is always unique, it does nothing to stop the same customer being inserted twice; you still need unique constraints on the natural key. Integers and UUIDs both work.",
+      "materials": [
+        "wiki-normalization"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about foreign keys in PostgreSQL are true?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The referenced columns must be covered by a primary key or unique constraint or index",
+        "PostgreSQL automatically indexes the referencing columns",
+        "`ON DELETE CASCADE` deletes referencing rows when the referenced row is deleted",
+        "A foreign key may reference another column of the same table",
+        "With the default `MATCH SIMPLE`, a NULL in a referencing column skips the check"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "explanation": "The referenced side must be unique, CASCADE propagates deletes, self-references model hierarchies, and under MATCH SIMPLE a row with any NULL foreign key column is not checked. PostgreSQL does not create an index on the referencing columns, which is why deletes on the parent can be slow without one.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about PostgreSQL's write-ahead log (WAL) are true?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Changes are logged before the modified data pages are written",
+        "Crash recovery replays WAL from the last checkpoint",
+        "A commit must flush the changed data files to disk",
+        "WAL is the basis of streaming replication and point-in-time recovery",
+        "WAL is discarded as soon as each transaction commits"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Logging changes first means only the sequential WAL needs flushing at commit; data pages are written later, and after a crash WAL is replayed from the last checkpoint. Standbys and PITR consume the same WAL stream. WAL segments are kept until a checkpoint no longer needs them (and archiving or replication is done with them), not discarded per commit.",
+      "materials": [
+        "pg-wal"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In PostgreSQL, turning off which of these settings risks losing or corrupting committed data after a power failure?",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`fsync`",
+        "`full_page_writes`",
+        "`synchronous_commit`",
+        "`wal_compression`",
+        "`log_checkpoints`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "fsync off can corrupt the cluster, full_page_writes off allows torn pages that recovery cannot repair, and synchronous_commit off can lose the most recently reported commits (without corruption). wal_compression only shrinks full-page images in WAL and log_checkpoints only controls logging.",
+      "materials": [
+        "pg-wal"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about PostgreSQL streaming (physical) replication are true?",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It copies the entire database cluster, not individual tables",
+        "A hot standby can serve read-only queries",
+        "It can replicate a single chosen table",
+        "Primary and standby must run the same major version",
+        "A standby accepts writes from applications"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Streaming replication ships WAL, which describes changes to the whole cluster at the block level, so the standby must run the same major version and cannot pick tables. With hot standby, a replica answers read-only queries but rejects writes until it is promoted.",
+      "materials": [
+        "pg-ha"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about PostgreSQL logical replication are true?",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It can replicate a chosen subset of tables",
+        "It can replicate between different major versions",
+        "It replicates DDL such as `ALTER TABLE` automatically",
+        "It is configured with publications and subscriptions",
+        "It copies WAL blocks byte for byte to the subscriber"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Logical replication decodes row changes for the tables in a publication and applies them on a subscriber, which makes table subsets and cross-version upgrades possible. Schema changes are not replicated and must be applied on both sides, and it sends decoded row changes, not raw WAL blocks.",
+      "materials": [
+        "pg-ha"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A PostgreSQL primary has a synchronous standby listed in `synchronous_standby_names`. With which `synchronous_commit` values does a commit wait for that standby?",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`remote_apply`",
+        "`on`",
+        "`remote_write`",
+        "`local`",
+        "`off`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "remote_apply waits until the standby has replayed the commit, on waits until it has flushed the WAL to disk, and remote_write waits until the standby has written it to the OS. local waits only for the primary's own disk flush, and off does not even wait for that.",
+      "materials": [
+        "pg-ha"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about PostgreSQL backup tools are true?",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`pg_dump` takes a consistent snapshot of one database",
+        "A `pg_dump` output cannot be rolled forward with WAL for point-in-time recovery",
+        "`pg_basebackup` makes a physical copy of the entire cluster",
+        "`pg_dump` dumps only one database per run",
+        "`pg_dump` blocks all writes to the database while it runs"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "pg_dump runs inside one snapshot, so it is consistent, and it writes one database per run (pg_dumpall covers the cluster). It is a logical dump, so archived WAL cannot be replayed on top of it; PITR needs a physical base backup such as pg_basebackup produces. pg_dump takes only ACCESS SHARE locks, so normal reads and writes continue.",
+      "materials": [
+        "pg-backup"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which partitioning methods does PostgreSQL's declarative partitioning support?",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Range",
+        "List",
+        "Hash",
+        "Round-robin",
+        "Random"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "PARTITION BY accepts RANGE, LIST and HASH. A row's partition is always derived from its partition key, so round-robin or random placement is not offered.",
+      "materials": [
+        "pg-partitioning"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about PostgreSQL declarative partitioned tables are true?",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Dropping a partition removes its rows far faster than a `DELETE`",
+        "Rows inserted into the parent are routed to the matching partition",
+        "A `DEFAULT` partition can hold rows that match no other partition",
+        "An `UPDATE` that changes the partition key moves the row to the right partition",
+        "Partitioning makes every query on the table faster"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "Dropping or detaching a partition is a metadata operation with no dead rows to vacuum, inserts are routed automatically, a DEFAULT partition catches unmatched rows, and since PostgreSQL 11 an UPDATE of the key moves the row. Queries that cannot prune partitions must visit all of them, so partitioning can make some queries slower.",
+      "materials": [
+        "pg-partitioning"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about consistent hashing for distributing keys across nodes are true?",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Adding a node moves only about 1/N of the keys on average",
+        "Virtual nodes spread load more evenly across physical nodes",
+        "Plain `hash(key) % N` instead moves most keys when N changes",
+        "It makes range scans over the key efficient",
+        "It guarantees that no node becomes a hotspot"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "On a hash ring a new node takes over only its neighbours' ranges, while modulo hashing remaps most keys, and many virtual nodes per server smooth out uneven ranges. Hashing scatters adjacent keys, so range scans must hit every node, and one very popular key still overloads its node.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the CAP theorem are true?",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "During a partition, a CP system may refuse requests to stay consistent",
+        "During a partition, an AP system keeps answering, possibly with stale data",
+        "The C in CAP means linearizability",
+        "A distributed system can choose to give up partition tolerance",
+        "The C in CAP means the same as the C in ACID"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "CAP says that when the network partitions you must choose between consistency (linearizable reads and writes, possibly refusing requests) and availability (every request answered, possibly stale). Partitions happen whether you like it or not, so P is not optional, and ACID's consistency is about application invariants, not replica agreement.",
+      "materials": [
+        "ddia",
+        "jepsen"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are session guarantees, the consistency properties defined per client session?",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Read your writes",
+        "Monotonic reads",
+        "Monotonic writes",
+        "Writes follow reads",
+        "Linearizability"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "The four session guarantees from Terry et al. are read your writes, monotonic reads, monotonic writes and writes follow reads. Linearizability is a much stronger global model that orders all operations by real time across all clients.",
+      "materials": [
+        "jepsen"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about linearizability and serializability are true?",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Linearizability concerns single-object operations and respects real-time order",
+        "Serializability means transactions behave as if run in some serial order",
+        "Strict serializability combines serializability with real-time ordering",
+        "Serializability requires the serial order to match real-time commit order",
+        "A linearizable key-value register provides multi-key transactions"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Linearizability makes each single-object operation appear to happen at one instant between its start and end. Serializability is about multi-object transactions and allows any serial order, even one that contradicts real time; adding the real-time constraint gives strict serializability. Linearizability says nothing about grouping operations into transactions.",
+      "materials": [
+        "jepsen"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A leaderless store keeps N = 3 replicas of each key and uses strict quorums. With which read quorum R and write quorum W is a read guaranteed to overlap the latest acknowledged write?",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "R = 2, W = 2",
+        "R = 1, W = 3",
+        "R = 3, W = 1",
+        "R = 1, W = 1",
+        "R = 1, W = 2"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Read and write sets must overlap in at least one replica, which requires R + W > N, here more than 3. 2+2, 1+3 and 3+1 all reach 4; 1+1 and 1+2 can read only from replicas the write never reached.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which pairings of product and NoSQL data model are correct?",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Redis: key-value store",
+        "MongoDB: document store",
+        "Apache Cassandra: wide-column store",
+        "Neo4j: graph database",
+        "Amazon DynamoDB: graph database"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "Redis maps keys to values and data structures, MongoDB stores JSON-like documents, Cassandra organises rows into partitions of columns, and Neo4j stores nodes and relationships. DynamoDB is a key-value and document store, not a graph database.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about MongoDB are true?",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It supports secondary indexes on document fields",
+        "A document can embed arrays and nested subdocuments",
+        "Every collection requires a schema declared before inserting",
+        "A write to a single document is atomic",
+        "It has no query language, only key lookups"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "MongoDB indexes arbitrary fields, embeds related data inside a document, and makes every single-document write atomic. Schemas are optional (validation rules can be added), and it has a rich query language and aggregation pipeline, not just key lookups.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "With PgBouncer in transaction pooling mode, which of these break when used across transactions on a single client connection?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Session-level `SET` of a parameter",
+        "Session-level advisory locks",
+        "`LISTEN` for notifications",
+        "Temporary tables that should persist between transactions",
+        "Single-statement autocommit queries"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "In transaction mode a client gets a server connection only for one transaction, so the next transaction may land on another backend that lacks the session's settings, advisory locks, LISTEN registrations and temp tables. Self-contained single-statement queries need no session state and work fine.",
+      "materials": [
+        "pgbouncer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about a plain `VACUUM` (without `FULL`) in PostgreSQL are true?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It makes space of dead row versions reusable",
+        "It updates the visibility map",
+        "It freezes old transaction IDs when needed",
+        "It compacts the table and returns all free space to the OS",
+        "It blocks reads and writes on the table while running"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Plain VACUUM marks dead tuples' space reusable within the table, sets all-visible bits in the visibility map, and freezes old XIDs to prevent wraparound. It runs alongside normal reads and writes (SHARE UPDATE EXCLUSIVE lock) and generally keeps the file size, only truncating empty pages at the end; full compaction is VACUUM FULL.",
+      "materials": [
+        "pg-vacuum"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these PostgreSQL commands take an `ACCESS EXCLUSIVE` lock on the table?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`DROP TABLE`",
+        "`TRUNCATE`",
+        "`VACUUM FULL`",
+        "Plain `SELECT`",
+        "`CREATE INDEX CONCURRENTLY`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "DROP TABLE, TRUNCATE and VACUUM FULL take ACCESS EXCLUSIVE, which blocks even reads. A plain SELECT takes ACCESS SHARE, and CREATE INDEX CONCURRENTLY takes SHARE UPDATE EXCLUSIVE so normal reads and writes continue.",
+      "materials": [
+        "pg-locking"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which conditions make PostgreSQL's autovacuum vacuum a table?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Dead tuples exceed the threshold plus the scale factor times the table's row count",
+        "Rows inserted since the last vacuum exceed the insert threshold",
+        "The table's oldest unfrozen XID passes `autovacuum_freeze_max_age`",
+        "A fixed time of day configured in `postgresql.conf` is reached",
+        "The table grows larger than `shared_buffers`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Autovacuum vacuums when dead tuples exceed autovacuum_vacuum_threshold + autovacuum_vacuum_scale_factor * reltuples, when inserts exceed the insert threshold (since PostgreSQL 13), and forcibly for wraparound protection once XID age passes autovacuum_freeze_max_age, even if autovacuum is disabled. It has no time-of-day schedule and ignores table size relative to shared_buffers.",
+      "materials": [
+        "pg-vacuum"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these can stop `VACUUM` from removing dead row versions on a PostgreSQL primary?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A transaction that has stayed open for hours",
+        "A forgotten prepared transaction from `PREPARE TRANSACTION`",
+        "A long query on a standby with `hot_standby_feedback = on`",
+        "A table with many indexes",
+        "A high `fillfactor` setting on the table"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "VACUUM can only remove versions older than the oldest snapshot that might still need them. Long open transactions, orphaned prepared transactions and standby queries reported through hot_standby_feedback all hold that horizon back. The number of indexes and fillfactor affect vacuum cost and page free space, not which rows are removable.",
+      "materials": [
+        "pg-vacuum"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which table lock does a plain (non-concurrent) `CREATE INDEX` take in PostgreSQL?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`SHARE`",
+        "`ACCESS EXCLUSIVE`",
+        "`ROW EXCLUSIVE`",
+        "`SHARE UPDATE EXCLUSIVE`",
+        "`EXCLUSIVE`"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "CREATE INDEX takes SHARE, which allows reads but blocks INSERT, UPDATE and DELETE (which need ROW EXCLUSIVE) until it finishes. CREATE INDEX CONCURRENTLY takes SHARE UPDATE EXCLUSIVE instead; ACCESS EXCLUSIVE and EXCLUSIVE are not used by index builds.",
+      "materials": [
+        "pg-locking"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which PostgreSQL view or extension gives cumulative execution statistics per normalized query, such as total time and call count?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`pg_stat_statements`",
+        "`pg_stat_activity`",
+        "`pg_locks`",
+        "`pg_stat_user_tables`"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "pg_stat_statements aggregates calls, total and mean time and rows per normalized statement. pg_stat_activity shows only what each session is doing now, pg_locks shows current locks, and pg_stat_user_tables has per-table counters.",
+      "materials": [
+        "pg-explain"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which normal form requires that every determinant of a functional dependency is a candidate key?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Boyce-Codd normal form",
+        "Third normal form",
+        "Second normal form",
+        "First normal form",
+        "Fifth normal form"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "BCNF demands that for every non-trivial dependency X -> Y, X is a superkey. 3NF relaxes this for prime attributes, 2NF only forbids partial dependencies, 1NF requires atomic values, and 5NF is about join dependencies.",
+      "materials": [
+        "wiki-normalization"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which PostgreSQL isolation level prevents write skew, where two transactions read overlapping data and then update different rows?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Read Uncommitted",
+        "Read Committed",
+        "Repeatable Read",
+        "Serializable"
+      ],
+      "correctIndices": [
+        3
+      ],
+      "explanation": "Only Serializable detects the read/write dependency cycle behind write skew and aborts one transaction. Repeatable Read gives each transaction a stable snapshot, but both can still act on stale reads, and the lower levels give even less protection; Read Uncommitted behaves as Read Committed in PostgreSQL.",
+      "materials": [
+        "pg-isolation"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which PostgreSQL feature makes the primary keep WAL until a particular standby has received it, even while that standby is disconnected?",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A replication slot",
+        "`wal_keep_size`",
+        "`hot_standby_feedback`",
+        "`archive_timeout`",
+        "`synchronous_standby_names`"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "A replication slot records how far its consumer has got and retains WAL until then (bounded only if max_slot_wal_keep_size is set). wal_keep_size keeps a fixed amount regardless of any standby, hot_standby_feedback reports the standby's oldest snapshot, archive_timeout forces segment switches, and synchronous_standby_names chooses which standbys commits wait for.",
+      "materials": [
+        "pg-ha"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which table-level lock does a plain `SELECT` take in PostgreSQL?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`ACCESS SHARE`",
+        "`ROW SHARE`",
+        "No table lock at all",
+        "`ROW EXCLUSIVE`",
+        "`SHARE`"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "A plain SELECT takes ACCESS SHARE, the weakest mode, which conflicts only with ACCESS EXCLUSIVE so that the table cannot be dropped or rewritten mid-query. ROW SHARE is for SELECT ... FOR UPDATE/SHARE, ROW EXCLUSIVE for INSERT/UPDATE/DELETE, and SHARE for CREATE INDEX.",
+      "materials": [
+        "pg-locking"
+      ]
+    }
+  ]
+}

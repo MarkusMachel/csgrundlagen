@@ -1,0 +1,787 @@
+{
+  "name": "SQL: true or false",
+  "materials": [
+    {
+      "key": "pg-select",
+      "type": "article",
+      "title": "SELECT",
+      "url": "https://www.postgresql.org/docs/current/sql-select.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Reference for SELECT: joins, GROUP BY, HAVING, DISTINCT ON, UNION/INTERSECT/EXCEPT, ORDER BY and LIMIT."
+    },
+    {
+      "key": "pg-comparison",
+      "type": "article",
+      "title": "Comparison functions and operators",
+      "url": "https://www.postgresql.org/docs/current/functions-comparison.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "How =, IS NULL and IS DISTINCT FROM behave when NULLs are involved."
+    },
+    {
+      "key": "pg-logical",
+      "type": "article",
+      "title": "Logical operators",
+      "url": "https://www.postgresql.org/docs/current/functions-logical.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Truth tables for AND, OR and NOT under three-valued logic."
+    },
+    {
+      "key": "pg-aggregate",
+      "type": "article",
+      "title": "Aggregate functions",
+      "url": "https://www.postgresql.org/docs/current/functions-aggregate.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Built-in aggregates such as count, sum and avg, and how they treat NULLs and empty input."
+    },
+    {
+      "key": "pg-window",
+      "type": "article",
+      "title": "Window functions",
+      "url": "https://www.postgresql.org/docs/current/functions-window.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "ROW_NUMBER, RANK, DENSE_RANK, LAG, LEAD, LAST_VALUE and their frame behaviour."
+    },
+    {
+      "key": "pg-window-calls",
+      "type": "article",
+      "title": "Window function calls",
+      "url": "https://www.postgresql.org/docs/current/sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Syntax of OVER, PARTITION BY and frame clauses, including the default frame."
+    },
+    {
+      "key": "pg-with",
+      "type": "article",
+      "title": "WITH queries (common table expressions)",
+      "url": "https://www.postgresql.org/docs/current/queries-with.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Non-recursive and recursive CTEs, data-modifying statements in WITH, and CTE materialization."
+    },
+    {
+      "key": "pg-subquery",
+      "type": "article",
+      "title": "Subquery expressions",
+      "url": "https://www.postgresql.org/docs/current/functions-subquery.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "EXISTS, IN, NOT IN, ANY and ALL, including their NULL behaviour."
+    },
+    {
+      "key": "pg-conditional",
+      "type": "article",
+      "title": "Conditional expressions",
+      "url": "https://www.postgresql.org/docs/current/functions-conditional.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "CASE, COALESCE, NULLIF, GREATEST and LEAST."
+    },
+    {
+      "key": "pg-math",
+      "type": "article",
+      "title": "Mathematical functions and operators",
+      "url": "https://www.postgresql.org/docs/current/functions-math.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Arithmetic operators, including integer division that truncates toward zero."
+    },
+    {
+      "key": "pg-matching",
+      "type": "article",
+      "title": "Pattern matching",
+      "url": "https://www.postgresql.org/docs/current/functions-matching.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "LIKE, ILIKE, SIMILAR TO and regular expressions."
+    },
+    {
+      "key": "pg-constraints",
+      "type": "article",
+      "title": "Constraints",
+      "url": "https://www.postgresql.org/docs/current/ddl-constraints.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "CHECK, NOT NULL, UNIQUE, PRIMARY KEY and FOREIGN KEY constraints with referential actions."
+    },
+    {
+      "key": "pg-insert",
+      "type": "article",
+      "title": "INSERT",
+      "url": "https://www.postgresql.org/docs/current/sql-insert.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "INSERT syntax including ON CONFLICT (upsert) and RETURNING."
+    },
+    {
+      "key": "pg-truncate",
+      "type": "article",
+      "title": "TRUNCATE",
+      "url": "https://www.postgresql.org/docs/current/sql-truncate.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "How TRUNCATE empties tables, its transaction safety and its interaction with triggers."
+    },
+    {
+      "key": "owasp-sqli",
+      "type": "article",
+      "title": "SQL Injection Prevention Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html",
+      "author": "OWASP Foundation",
+      "description": "Parameterized queries as the primary defence against SQL injection, and how to handle identifiers safely."
+    }
+  ],
+  "questions": [
+    {
+      "type": "true-false",
+      "prompt": "In SQL, the expression `NULL = NULL` evaluates to TRUE.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Comparing NULL with anything using `=`, even another NULL, yields NULL (unknown), and a WHERE clause keeps only rows where the condition is TRUE. To test for NULL use `IS NULL`, or `IS NOT DISTINCT FROM` to compare two values treating NULLs as equal.",
+      "materials": [
+        "pg-comparison"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`COUNT(*)` counts every row in the group, while `COUNT(col)` counts only the rows where `col` is not NULL.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. `COUNT(*)` counts rows regardless of their contents, even rows whose columns are all NULL. `COUNT(col)`, like other aggregates over an expression, skips NULL inputs.",
+      "materials": [
+        "pg-aggregate"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "If the subquery returns at least one NULL, the following query returns no rows at all:\n\n```sql\nSELECT name\nFROM employees\nWHERE id NOT IN (SELECT manager_id FROM employees);\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. `x NOT IN (a, b, NULL)` means `x <> a AND x <> b AND x <> NULL`; the last comparison is NULL, so the whole condition can never be TRUE, only FALSE or NULL. Use `NOT EXISTS` or filter out NULLs in the subquery to get the intended anti-join.",
+      "materials": [
+        "pg-subquery"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`COALESCE(a, b, c)` returns the first of its arguments that is not NULL, and returns NULL only if all of them are NULL.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. COALESCE evaluates its arguments left to right and returns the first non-NULL one. It is commonly used to substitute a default, for example `COALESCE(nickname, first_name)`.",
+      "materials": [
+        "pg-conditional"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "HAVING can be used without GROUP BY, in which case all rows that pass WHERE are treated as a single group.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. For example, `SELECT count(*) FROM orders HAVING count(*) > 100` returns one row if the condition holds and no rows otherwise. Without GROUP BY, the presence of HAVING (or an aggregate) turns the query into a single-group aggregate.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In PostgreSQL, `SELECT 7 / 2;` returns `3.5`.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. When both operands are integers, `/` performs integer division and truncates the result, so `7 / 2` returns `3`. Make one operand numeric, e.g. `7 / 2.0` or `7::numeric / 2`, to get `3.5`.",
+      "materials": [
+        "pg-math"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A table can declare more than one PRIMARY KEY constraint, as long as each one covers different columns.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. A table can have at most one primary key, although that key may span several columns. Additional candidate keys are declared with UNIQUE (plus NOT NULL) constraints.",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "By default in PostgreSQL, a UNIQUE constraint on a nullable column allows several rows to have NULL in that column.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. NULLs are not considered equal to each other, so they do not conflict under a standard UNIQUE constraint. Since PostgreSQL 15 you can write `UNIQUE NULLS NOT DISTINCT` to allow at most one NULL.",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In the following query, customers without any orders still appear in the result, with NULL order columns:\n\n```sql\nSELECT c.name, o.total\nFROM customers c\nLEFT JOIN orders o ON o.customer_id = c.id\nWHERE o.status = 'paid';\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. For customers without orders, `o.status` is NULL, so `WHERE o.status = 'paid'` is not TRUE and those rows are removed, which effectively turns the query into an inner join. Put the condition in the ON clause (`ON o.customer_id = c.id AND o.status = 'paid'`) to keep unmatched customers.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A CROSS JOIN between a table with 3 rows and a table with 4 rows returns 7 rows.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. A CROSS JOIN produces the Cartesian product, pairing every row of the first table with every row of the second, so it returns 3 x 4 = 12 rows.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Logically, WHERE filters individual rows before GROUP BY forms groups, and HAVING filters the groups afterwards.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. The logical order is FROM/JOIN, WHERE, GROUP BY, HAVING, SELECT, DISTINCT, ORDER BY, LIMIT. That is why aggregates such as `count(*)` are allowed in HAVING but not in WHERE.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "PostgreSQL lets you reference a column alias defined in the SELECT list inside the WHERE clause of the same query, for example `SELECT price * qty AS total FROM items WHERE total > 100`.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. WHERE is evaluated before the SELECT list, so the alias does not exist yet and PostgreSQL raises `column \"total\" does not exist`. Repeat the expression, or wrap the query in a subquery or CTE; aliases can, however, be used in ORDER BY.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In PostgreSQL, `SELECT sum(amount) FROM payments WHERE false;` returns `0`.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. With no input rows, `sum` returns NULL, not 0 (only `count` returns 0 on empty input). Use `COALESCE(sum(amount), 0)` when you need a zero.",
+      "materials": [
+        "pg-aggregate",
+        "pg-conditional"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "For a column containing the values 1, NULL and 2, `avg(col)` returns 1.5.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Aggregate functions other than `count(*)` ignore NULL inputs, so the average is (1 + 2) / 2 = 1.5. If you want NULLs treated as zero you must write `avg(COALESCE(col, 0))`, which would return 1.",
+      "materials": [
+        "pg-aggregate"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Running `SELECT * FROM orders LIMIT 10` without an ORDER BY is guaranteed to return the same 10 rows every time, as long as the table has not changed.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Without ORDER BY, SQL does not define the row order, so which rows LIMIT keeps is unspecified; plan changes, parallel or synchronized scans can return a different subset. Always pair LIMIT/OFFSET with an ORDER BY that is unique.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In PostgreSQL, `ORDER BY col DESC` places NULL values first by default.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. PostgreSQL sorts NULLs as if they were larger than every other value, so they come last in ascending order and first in descending order. Use `NULLS FIRST` or `NULLS LAST` to override this.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "For the scores 10, 20, 20, 30 ordered ascending, `RANK()` assigns the score 30 the rank 3.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. RANK leaves gaps after ties: the two 20s share rank 2, so 30 gets rank 4. DENSE_RANK has no gaps and would assign 3, while ROW_NUMBER assigns 1, 2, 3, 4.",
+      "materials": [
+        "pg-window"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`ROW_NUMBER()` assigns distinct numbers to rows that tie on the ORDER BY columns, and which of the tied rows gets the lower number is unspecified unless you add a tie-breaker.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. ROW_NUMBER never repeats a number within a partition, even for peers. Because the order among peers is not defined, add a unique column (such as the primary key) to the window ORDER BY to make results deterministic.",
+      "materials": [
+        "pg-window"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "PostgreSQL lets you filter on a window function directly in WHERE, as in `WHERE row_number() OVER (PARTITION BY customer_id ORDER BY created_at DESC) = 1`.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Window functions are evaluated after WHERE, GROUP BY and HAVING, so they are not allowed in those clauses. Compute the window function in a subquery or CTE and filter on its result in the outer query.",
+      "materials": [
+        "pg-window",
+        "pg-window-calls"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In this query, the two rows with `v = 20` both get a running total of 50:\n\n```sql\nSELECT v, sum(v) OVER (ORDER BY v)\nFROM (VALUES (10), (20), (20), (30)) AS s(v);\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. With ORDER BY and no explicit frame, the default frame is `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`, which includes all peers of the current row. Both 20s therefore see 10 + 20 + 20 = 50; use `ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` for a row-by-row total.",
+      "materials": [
+        "pg-window-calls"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`last_value(v) OVER (ORDER BY v)` returns the last value of the whole partition for every row.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. With the default frame, the window ends at the current row (and its peers), so `last_value` usually just returns the current row's value. Specify `ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING` to see the true last value of the partition.",
+      "materials": [
+        "pg-window",
+        "pg-window-calls"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`LAG(v) OVER (ORDER BY created_at)` returns NULL for the first row, because there is no previous row, unless a default value is passed as the third argument.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. `LAG(value, offset, default)` looks back `offset` rows (1 by default) within the partition and returns `default`, which is NULL unless given, when no such row exists. LEAD works the same way looking forward.",
+      "materials": [
+        "pg-window"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Adding `PARTITION BY department` to a window function collapses each department into a single output row, just like GROUP BY.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Window functions never reduce the number of rows: PARTITION BY only defines which rows each output row's calculation can see. Every input row stays in the result with the window value added alongside it.",
+      "materials": [
+        "pg-window-calls"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "This query returns `15`:\n\n```sql\nWITH RECURSIVE r(n) AS (\n  SELECT 1\n  UNION ALL\n  SELECT n + 1 FROM r WHERE n < 5\n)\nSELECT sum(n) FROM r;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. The non-recursive term produces 1, and the recursive term keeps adding rows 2, 3, 4, 5 until `n < 5` fails, producing no new rows. The sum of 1 through 5 is 15.",
+      "materials": [
+        "pg-with"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Since PostgreSQL 12, a side-effect-free, non-recursive CTE that is referenced only once can be inlined into the outer query, and `AS MATERIALIZED` forces it to be computed separately instead.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. Before version 12 every CTE acted as an optimization fence. Now the planner inlines simple single-reference CTEs so outer filters can be pushed down, and `MATERIALIZED` / `NOT MATERIALIZED` let you override the default.",
+      "materials": [
+        "pg-with"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In PostgreSQL, a WITH clause can contain a data-modifying statement such as `DELETE ... RETURNING`, whose returned rows the main query can read.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. Data-modifying statements in WITH let you, for example, move rows in one statement: `WITH moved AS (DELETE FROM orders WHERE ... RETURNING *) INSERT INTO archive SELECT * FROM moved`. The modification is executed exactly once, whether or not the main query reads all its output.",
+      "materials": [
+        "pg-with"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`WHERE EXISTS (SELECT NULL FROM orders o WHERE o.customer_id = c.id)` is always false, because the subquery selects NULL.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. EXISTS only checks whether the subquery returns at least one row; the values in its select list are never examined. `SELECT 1`, `SELECT *` and `SELECT NULL` behave identically inside EXISTS.",
+      "materials": [
+        "pg-subquery"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The expression `1 IN (1, NULL)` evaluates to TRUE.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. IN is TRUE as soon as one element equals the left value; NULL elements only matter when no match is found, in which case the result is NULL instead of FALSE. So `1 IN (1, NULL)` is TRUE, while `3 IN (1, NULL)` is NULL.",
+      "materials": [
+        "pg-subquery"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "UNION removes duplicate rows from the combined result, while UNION ALL keeps them and avoids the extra deduplication work.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. UNION behaves like UNION ALL followed by DISTINCT, which requires a sort or hash step. When duplicates are impossible or acceptable, UNION ALL is cheaper.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "This query returns two rows, `1` and `2`:\n\n```sql\n(SELECT 1 UNION ALL SELECT 1 UNION ALL SELECT 2)\nEXCEPT ALL\n(SELECT 1);\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. EXCEPT ALL removes one occurrence from the left side for each matching row on the right, so one of the two 1s survives along with the 2. Plain EXCEPT would remove every 1 and return only `2`.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In `SELECT 1 AS first UNION SELECT 2 AS second`, the output column is named `second`, because the last SELECT determines the column names.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. The column names of a UNION, INTERSECT or EXCEPT result come from the first SELECT, so the column is named `first`. Aliases in later branches are ignored.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A CASE expression with no matching WHEN branch and no ELSE clause returns NULL.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. If no condition is true and ELSE is omitted, the result of CASE is NULL. Add an explicit ELSE when a NULL result would be a surprise.",
+      "materials": [
+        "pg-conditional"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The simple CASE form `CASE status WHEN NULL THEN 'missing' ELSE 'present' END` returns `'missing'` for rows where `status` is NULL.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. Simple CASE compares with `=`, and `NULL = NULL` is not TRUE, so the WHEN NULL branch never matches and the result is `'present'`. Use the searched form: `CASE WHEN status IS NULL THEN 'missing' ELSE 'present' END`.",
+      "materials": [
+        "pg-conditional",
+        "pg-comparison"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In PostgreSQL, `LIKE` is case-sensitive, while `ILIKE` matches case-insensitively.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. `'abc' LIKE 'A%'` is false, while `'abc' ILIKE 'A%'` is true. ILIKE is a PostgreSQL extension and not part of the SQL standard.",
+      "materials": [
+        "pg-matching"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In a LIKE pattern, the underscore `_` matches any sequence of zero or more characters.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. `_` matches exactly one character; `%` is the wildcard for any sequence of zero or more characters. To match a literal underscore, escape it, as in `'a\\_c'`.",
+      "materials": [
+        "pg-matching"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In PostgreSQL, a TRUNCATE executed inside a transaction can be undone with ROLLBACK.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. TRUNCATE is transaction-safe in PostgreSQL: if the surrounding transaction rolls back, the data is still there. It does, however, take an ACCESS EXCLUSIVE lock on the table, which blocks all concurrent access until the transaction ends.",
+      "materials": [
+        "pg-truncate"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "TRUNCATE fires the table's `ON DELETE` row-level triggers for every row it removes, just like `DELETE` without a WHERE clause.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. TRUNCATE does not scan the table and does not fire ON DELETE triggers; it fires only ON TRUNCATE triggers. That is part of why it is so much faster than DELETE for emptying a large table.",
+      "materials": [
+        "pg-truncate"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Without `ON DELETE CASCADE`, deleting a parent row that is still referenced by a foreign key silently deletes the referencing child rows as well.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. The default referential action is NO ACTION, which raises an error when the delete would leave child rows pointing at a missing parent. Child rows are removed automatically only if the foreign key is declared with `ON DELETE CASCADE`.",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A constraint `CHECK (price > 0)` rejects rows where `price` is NULL.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. A CHECK constraint is satisfied when its expression is TRUE or NULL, and `NULL > 0` is NULL, so the row is accepted. Add `NOT NULL` to the column if NULL must also be rejected.",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In `INSERT ... ON CONFLICT (id) DO UPDATE SET qty = items.qty + EXCLUDED.qty`, `EXCLUDED` refers to the row that was proposed for insertion.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. In the DO UPDATE clause, the table name (or its alias) refers to the existing row and the special `EXCLUDED` table refers to the row that failed to insert. This makes increment-style upserts possible in a single atomic statement.",
+      "materials": [
+        "pg-insert"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A single `INSERT ... VALUES (5, 1), (5, 2) ON CONFLICT (id) DO UPDATE SET v = EXCLUDED.v` succeeds, leaving `v = 2` for id 5.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. PostgreSQL raises `ON CONFLICT DO UPDATE command cannot affect row a second time` when two proposed rows in the same statement target the same key. Deduplicate the input first, for example with DISTINCT ON in the source query.",
+      "materials": [
+        "pg-insert"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In PostgreSQL, the RETURNING clause works only with INSERT, not with UPDATE or DELETE.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. INSERT, UPDATE, DELETE and MERGE (since PostgreSQL 17) all support RETURNING, which can return columns and computed expressions from the affected rows. It saves a separate SELECT, for example to fetch generated ids.",
+      "materials": [
+        "pg-insert"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Passing user input as bound parameters of a prepared or parameterized statement prevents SQL injection through those values, because they are sent separately and never parsed as SQL.",
+      "tags": [
+        "SQL & Databases",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. With parameterized queries the SQL text is fixed and the values are transmitted as data, so input such as `' OR '1'='1` is compared literally rather than changing the query. This is the primary defence recommended by OWASP.",
+      "materials": [
+        "owasp-sqli"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A query parameter placeholder such as `$1` can be used in place of a table or column name, for example `SELECT * FROM $1`.",
+      "tags": [
+        "SQL & Databases",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. Placeholders stand only for values, not identifiers or keywords such as table names, column names or sort direction. Dynamic identifiers must be checked against an allow-list (or quoted with `quote_ident` / `format('%I', ...)`) before being put into the SQL text.",
+      "materials": [
+        "owasp-sqli"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In PostgreSQL, if the GROUP BY clause contains a table's primary key, other columns of that table may appear in the SELECT list without being aggregated.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. PostgreSQL recognises that the other columns are functionally dependent on the primary key, so each group has exactly one value for them. Without such a dependency, selecting an ungrouped, unaggregated column raises `must appear in the GROUP BY clause or be used in an aggregate function`.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`SELECT DISTINCT ON (customer_id) * FROM orders ORDER BY customer_id, created_at DESC` returns one row per customer: that customer's most recent order.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. DISTINCT ON keeps the first row of each group of equal DISTINCT ON values, where first is determined by ORDER BY. The leading ORDER BY expressions must match the DISTINCT ON expressions. DISTINCT ON is a PostgreSQL extension.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Joining a table to itself, for example to list each employee next to their manager, requires a recursive CTE.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. A plain self join with two aliases does this: `FROM employees e LEFT JOIN employees m ON m.id = e.manager_id`. Recursive CTEs are only needed to walk an arbitrary number of levels, such as an entire management chain.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In PostgreSQL, an empty string `''` is treated as NULL, so `'' IS NULL` returns TRUE.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. That is Oracle behaviour; in PostgreSQL and standard SQL the empty string is a real value, so `'' IS NULL` returns FALSE. Use `NULLIF(col, '')` if you want to treat empty strings as NULL.",
+      "materials": [
+        "pg-comparison"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Under SQL's three-valued logic, `NULL AND FALSE` evaluates to FALSE.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. FALSE AND anything is FALSE, whatever the unknown value turns out to be. By contrast, `NULL AND TRUE` is NULL, and `NULL OR TRUE` is TRUE.",
+      "materials": [
+        "pg-logical"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With `ORDER BY id LIMIT 10 OFFSET 100000`, PostgreSQL still has to produce and discard the first 100,000 rows, so deep offset pages get slower.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. OFFSET only skips rows after they are generated, so the work grows with the offset. Keyset pagination, such as `WHERE id > :last_seen_id ORDER BY id LIMIT 10`, avoids this by seeking directly with an index.",
+      "materials": [
+        "pg-select"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,812 @@
+{
+  "name": ".NET and C#: true or false",
+  "materials": [
+    {
+      "key": "value-types",
+      "type": "article",
+      "title": "Value types (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-types",
+      "author": "Microsoft Learn",
+      "description": "How structs and other value types are copied and stored."
+    },
+    {
+      "key": "ref-types",
+      "type": "article",
+      "title": "Built-in reference types (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/reference-types",
+      "author": "Microsoft Learn",
+      "description": "The object, string, delegate and dynamic types, including string immutability."
+    },
+    {
+      "key": "records",
+      "type": "article",
+      "title": "Records (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record",
+      "author": "Microsoft Learn",
+      "description": "Value equality, positional syntax and with expressions for record classes and record structs."
+    },
+    {
+      "key": "nullable",
+      "type": "article",
+      "title": "Nullable reference types",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references",
+      "author": "Microsoft Learn",
+      "description": "How the compiler's null-state analysis and annotations work."
+    },
+    {
+      "key": "patterns",
+      "type": "article",
+      "title": "Pattern matching overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching",
+      "author": "Microsoft Learn",
+      "description": "Type, null, property and list patterns plus switch expressions."
+    },
+    {
+      "key": "linq",
+      "type": "article",
+      "title": "Language Integrated Query (LINQ)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/linq/",
+      "author": "Microsoft Learn",
+      "description": "Query syntax, deferred execution and LINQ providers."
+    },
+    {
+      "key": "gc",
+      "type": "article",
+      "title": "Fundamentals of garbage collection",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/fundamentals",
+      "author": "Microsoft Learn",
+      "description": "Generations, the large object heap and how unmanaged resources are cleaned up."
+    },
+    {
+      "key": "async",
+      "type": "article",
+      "title": "Asynchronous programming with async and await",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/",
+      "author": "Microsoft Learn",
+      "description": "The task-based asynchronous programming model in C#."
+    },
+    {
+      "key": "di",
+      "type": "article",
+      "title": "Dependency injection in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection",
+      "author": "Microsoft Learn",
+      "description": "Service lifetimes, scope validation and disposal of services."
+    },
+    {
+      "key": "middleware",
+      "type": "article",
+      "title": "ASP.NET Core middleware",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/",
+      "author": "Microsoft Learn",
+      "description": "How the request pipeline is built, ordered and short-circuited."
+    },
+    {
+      "key": "ef-perf",
+      "type": "article",
+      "title": "Efficient querying (EF Core)",
+      "url": "https://learn.microsoft.com/en-us/ef/core/performance/efficient-querying",
+      "author": "Microsoft Learn",
+      "description": "Tracking vs no-tracking, loading related data, N+1 and split queries."
+    },
+    {
+      "key": "collections",
+      "type": "article",
+      "title": "Collections and data structures",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/collections/",
+      "author": "Microsoft Learn",
+      "description": "Choosing collection types, capacity growth and thread-safe collections."
+    },
+    {
+      "key": "spans",
+      "type": "article",
+      "title": "Memory- and span-related types",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/memory-and-spans/",
+      "author": "Microsoft Learn",
+      "description": "Span<T>, Memory<T> and slicing memory without copying."
+    },
+    {
+      "key": "native-aot",
+      "type": "article",
+      "title": "Native AOT deployment overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/",
+      "author": "Microsoft Learn",
+      "description": "Publishing apps compiled ahead of time to native code and its limitations."
+    },
+    {
+      "key": "xunit",
+      "type": "article",
+      "title": "Unit testing C# with xUnit",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-csharp-with-xunit",
+      "author": "Microsoft Learn",
+      "description": "Writing Fact and Theory tests with xUnit and the dotnet CLI."
+    }
+  ],
+  "questions": [
+    {
+      "type": "true-false",
+      "prompt": "Assigning one struct variable to another copies all of its fields, so changing a field on the copy does not affect the original.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Structs are value types, so assignment copies the whole value. The two variables then hold independent data, unlike class references that point to the same object.",
+      "materials": [
+        "value-types"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`string` is a value type in C#, which is why two strings with the same characters compare equal with `==`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. `string` (System.String) is a reference type. It compares by content with `==` only because the type overloads the equality operators to compare characters.",
+      "materials": [
+        "ref-types"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Calling `s.Replace(\"a\", \"b\")` changes the characters stored in the string `s`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Strings are immutable, so `Replace` returns a new string and leaves the original untouched. You must assign the result, e.g. `s = s.Replace(\"a\", \"b\")`.",
+      "materials": [
+        "ref-types"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Assigning an `int` to a variable of type `object` allocates a new object on the heap that holds a copy of the value.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. This is boxing: the runtime allocates a heap object and copies the value into it. Unboxing copies it back out, and both add allocation and GC cost in hot paths.",
+      "materials": [
+        "value-types"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Two instances of the same `record class` type whose properties all hold equal values compare equal with `==`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Records have compiler-generated value equality: `Equals`, `==` and `GetHashCode` compare the members instead of the references. Ordinary classes compare by reference unless you override equality.",
+      "materials": [
+        "records"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A positional `record struct` such as `record struct Point(int X, int Y);` is immutable, just like a positional `record class`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. For a positional `record struct` the compiler generates read-write properties (`get; set;`). Only a `readonly record struct` gets init-only properties like a positional `record class` does.",
+      "materials": [
+        "records"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `with` expression on a record creates a copy with the specified properties changed and leaves the original instance unchanged.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. `p with { X = 5 }` clones the record and then applies the listed changes to the clone. This is nondestructive mutation; the source instance is not modified.",
+      "materials": [
+        "records"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With nullable reference types enabled, the runtime throws an exception when `null` is assigned to a variable declared as non-nullable `string`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Nullable reference types are a compile-time feature: the compiler issues warnings, but nothing is checked at run time. A `string` variable can still hold `null` if warnings are ignored or suppressed.",
+      "materials": [
+        "nullable"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The null-forgiving operator `!` only suppresses compiler nullability warnings and adds no null check at run time.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. `x!` tells the compiler to treat `x` as not null; it has no runtime effect. If `x` is actually null, you will still get a `NullReferenceException` later when it is dereferenced.",
+      "materials": [
+        "nullable"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Calling `Where` on an `IEnumerable<T>` does not run the filter until the result is enumerated.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. `Where` uses deferred execution: it returns a query object, and the predicate runs only when something like `foreach`, `ToList()` or `Count()` enumerates it.",
+      "materials": [
+        "linq"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Enumerating the same deferred LINQ query twice runs it only once, because the first enumeration caches the results.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. A deferred query is re-executed on every enumeration, so its source is read and its predicates run again each time. Call `ToList()` or `ToArray()` to materialize the results once.",
+      "materials": [
+        "linq"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `Where` applied to an EF Core `IQueryable<T>` is translated into SQL, but the same `Where` applied after `AsEnumerable()` filters the rows in memory.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. `IQueryable<T>` builds an expression tree that the provider translates into the database query. After `AsEnumerable()` the rest of the query uses LINQ to Objects, so every row is fetched first and then filtered on the client.",
+      "materials": [
+        "linq",
+        "ef-perf"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `List<int>` stores its elements without boxing them.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Generic collections are specialized for value types, so `List<int>` keeps the values in an internal `int[]`. The non-generic `ArrayList` is the one that boxes every `int`.",
+      "materials": [
+        "collections",
+        "value-types"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Like Java, C# erases generic type arguments at compile time, so at run time `List<int>` and `List<string>` are the same type.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. .NET generics are reified: the runtime knows the type arguments, so `typeof(List<int>) != typeof(List<string>)`, and `typeof(T)` works inside generic code. Value-type instantiations even get their own specialized native code.",
+      "materials": [
+        "collections"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `switch` expression that does not handle every possible input compiles with a warning and throws a `SwitchExpressionException` at run time if no arm matches.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. The compiler reports a non-exhaustive switch expression as a warning, not an error. If no pattern matches at run time, the generated code throws `System.Runtime.CompilerServices.SwitchExpressionException`.",
+      "materials": [
+        "patterns"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "If a class overloads `==`, the pattern `x is null` calls that overloaded operator.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. `is null` is a constant pattern that always does a plain reference (or `HasValue`) check and ignores user-defined operators. That is why `is null` is the reliable null test even when `==` is overloaded.",
+      "materials": [
+        "patterns"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Statement about this code: it checks whether `shape` is a `Circle` and, if so, assigns it to `c`.\n\n```csharp\nif (shape is Circle c)\n{\n    Console.WriteLine(c.Radius);\n}\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. This is a declaration pattern: it tests the runtime type and, on success, assigns the converted value to the new variable `c`, which is definitely assigned inside the `if` block.",
+      "materials": [
+        "patterns"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Newly allocated small objects start in generation 0 of the managed heap.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Small objects are allocated in generation 0, and objects that survive a collection are promoted to generation 1 and then generation 2. Most objects die young, so gen 0 collections are cheap and frequent.",
+      "materials": [
+        "gc"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "An object of 85,000 bytes or more is allocated in generation 0 like any other new object.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Objects of 85,000 bytes or more go to the large object heap (LOH), which is logically part of generation 2 and collected only with gen 2 collections. That makes large short-lived allocations relatively expensive.",
+      "materials": [
+        "gc"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Calling `Dispose()` on an object makes the garbage collector reclaim that object's memory immediately.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. `Dispose` releases resources such as file handles or connections deterministically, but the object's managed memory is reclaimed only later, when the GC finds it unreachable.",
+      "materials": [
+        "gc"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "An unreachable object with a finalizer survives at least one extra garbage collection, because its finalizer must run before its memory can be reclaimed.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. When the GC finds a finalizable object unreachable, it queues it for the finalizer thread and keeps it alive, promoting it. The memory is freed only by a later collection, which is why `Dispose` patterns call `GC.SuppressFinalize`.",
+      "materials": [
+        "gc"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A Native AOT app still ships with a JIT compiler so it can compile code it discovers at run time, such as assemblies loaded with `Assembly.LoadFile`.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. Native AOT apps contain no JIT: all code is compiled ahead of time. Dynamic loading of assemblies and runtime code generation such as `System.Reflection.Emit` are not supported.",
+      "materials": [
+        "native-aot"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Publishing with Native AOT produces a self-contained native executable that runs without a separately installed .NET runtime.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Native AOT compiles the app and the parts of the runtime it needs into a single native binary for the target platform. The target machine does not need the .NET runtime installed.",
+      "materials": [
+        "native-aot"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Marking a method `async` makes it run on a background thread.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. An `async` method runs synchronously on the caller's thread until its first `await` of an incomplete task. `async` only enables `await`; use `Task.Run` if you actually want work on the thread pool.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "ASP.NET Core has no `SynchronizationContext`, so code after an `await` in a controller may resume on a different thread-pool thread.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Unlike classic ASP.NET, ASP.NET Core does not install a synchronization context. Continuations run on any thread-pool thread, so you cannot rely on thread affinity across awaits.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Blocking on `task.Result` in an ASP.NET Core controller deadlocks because the continuation waits for the request's `SynchronizationContext`, exactly as in classic ASP.NET.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. ASP.NET Core has no `SynchronizationContext`, so that classic context deadlock does not occur. Blocking on async code is still harmful because it ties up thread-pool threads and can lead to thread-pool starvation under load.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`await task.ConfigureAwait(false)` makes the awaited operation itself run on a thread-pool thread.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. `ConfigureAwait(false)` does not change where the awaited operation runs. It only tells the awaiter not to resume the continuation on the captured synchronization context or task scheduler.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `ValueTask<T>` can safely be awaited multiple times, just like a `Task<T>`.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. A `ValueTask<T>` may be backed by a pooled, reusable source, so it should be awaited only once. If you need to await it more than once, convert it with `AsTask()` first.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "An exception thrown inside an `async void` method cannot be caught by a `try`/`catch` around the call, because the caller gets no `Task` to observe.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Exceptions from `async void` methods are raised directly on the synchronization context (or thread pool) and can crash the process. That is why `async void` should be limited to event handlers.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When several tasks passed to `Task.WhenAll` fail, `await Task.WhenAll(...)` throws an `AggregateException` containing all of their exceptions.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. `await` unwraps the aggregate and rethrows only the first exception. All exceptions are still available through the returned task's `Exception` property, which is an `AggregateException`.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A service registered as transient gets a new instance every time it is resolved from the container.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Transient services are created each time they are requested, singletons once for the app, and scoped services once per scope (per request in ASP.NET Core).",
+      "materials": [
+        "di"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A scoped service in ASP.NET Core is shared across all requests from the same user session.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. In ASP.NET Core a scope is created per HTTP request, so a scoped service lives for one request. Sessions have nothing to do with DI lifetimes.",
+      "materials": [
+        "di"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In the Development environment, the default ASP.NET Core host throws an exception when a singleton service depends on a scoped service.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. Scope validation is enabled by default in Development, and it rejects consuming a scoped service from a singleton. Otherwise the singleton would capture one scoped instance for the app's lifetime (a captive dependency).",
+      "materials": [
+        "di"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "An instance you create yourself and register with `AddSingleton(instance)` is disposed by the DI container when the app shuts down.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. The container disposes only the `IDisposable` services it created itself. Instances you construct and pass in are your responsibility to dispose.",
+      "materials": [
+        "di"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "ASP.NET Core middleware runs in the order it is added in `Program.cs`, and the response passes back through it in reverse order.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. The pipeline is a chain of delegates: each middleware runs code, calls `next`, and then runs code on the way out. Order matters, for example authentication must come before authorization.",
+      "materials": [
+        "middleware"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A middleware that writes a response and does not call `next` short-circuits the pipeline, so the middleware registered after it never runs.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Not calling the next delegate ends the request pipeline at that component. Static files middleware does this when it serves a file, for example.",
+      "materials": [
+        "middleware"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Middleware added with `app.Run` passes the request on to the middleware registered after it.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. `app.Run` adds terminal middleware: its delegate receives no `next` parameter, so anything registered after it is never reached for that branch.",
+      "materials": [
+        "middleware"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "By default, entities returned by an EF Core query are tracked by the `DbContext`, so changes made to them are saved by `SaveChanges()`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Queries that return entity types are tracking queries by default. The change tracker detects modifications and writes them on `SaveChanges()`.",
+      "materials": [
+        "ef-perf"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Entities loaded with `AsNoTracking()` are written back to the database when you modify them and call `SaveChanges()`.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. No-tracking entities are not in the change tracker, so `SaveChanges()` ignores changes to them. You would have to attach them (e.g. `Update`) first; `AsNoTracking` is meant for read-only queries.",
+      "materials": [
+        "ef-perf"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Accessing a lazy-loaded navigation property inside a loop over N parent entities can send one extra database query per parent.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. This is the N+1 query problem: one query for the parents plus one per parent for the navigation. Eager loading with `Include` or a projection avoids it.",
+      "materials": [
+        "ef-perf"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "EF Core lazy-loads navigation properties by default.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Lazy loading is opt-in: you must use the proxies package with `UseLazyLoadingProxies()` or inject `ILazyLoader`. Without it, unloaded navigations simply stay null or empty.",
+      "materials": [
+        "ef-perf"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "By default, EF Core loads an entity with several `Include`d collection navigations in a single SQL query, which can cause a cartesian explosion; `AsSplitQuery()` loads them with separate queries instead.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. Since EF Core 5, single-query mode is the default, and JOINing several collections duplicates rows. `AsSplitQuery()` (or a global setting) issues one query per collection at the cost of extra round trips.",
+      "materials": [
+        "ef-perf"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Looking up a key in a `Dictionary<TKey,TValue>` is O(n) because it scans all entries.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. `Dictionary<TKey,TValue>` is a hash table, so lookups by key are close to O(1) on average. Performance degrades only with a poor `GetHashCode` that causes many collisions.",
+      "materials": [
+        "collections"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When adding an element to a `List<T>` exceeds its capacity, the list allocates a larger internal array and copies the existing elements into it.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. `List<T>` is backed by an array that grows (doubling) when full, which costs a copy. Setting an initial capacity avoids repeated reallocations when the size is known.",
+      "materials": [
+        "collections"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`ConcurrentDictionary.GetOrAdd(key, valueFactory)` guarantees the value factory runs at most once per key, even under concurrent calls.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. The factory runs outside the dictionary's locks, so concurrent callers may each invoke it, though only one result is stored and returned to all. Wrap values in `Lazy<T>` if the factory must run only once.",
+      "materials": [
+        "collections"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Removing items from a `List<T>` inside a `foreach` loop over that same list is safe.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. The list's enumerator detects the modification and throws `InvalidOperationException` on the next iteration. Iterate backwards with a `for` loop or use `RemoveAll` instead.",
+      "materials": [
+        "collections"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`Span<T>` is a `ref struct`, so it cannot be stored in a field of a class or used across an `await`.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. Ref structs must stay on the stack, so they cannot be boxed, be class fields, or live across `await` or `yield` boundaries. Use `Memory<T>` when you need to store or pass the buffer asynchronously.",
+      "materials": [
+        "spans"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`\"hello world\".AsSpan(0, 5)` returns a `ReadOnlySpan<char>` over the original string's characters without allocating a new string.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. A span is a view over existing memory, so slicing only adjusts a reference and a length. `Substring`, by contrast, allocates a new string.",
+      "materials": [
+        "spans"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "An xUnit `[Theory]` with several `[InlineData]` attributes runs the test method once for each data row.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. `[Theory]` marks a parameterized test, and each `[InlineData]` supplies one set of arguments that is reported as a separate test case. `[Fact]` is for tests without parameters.",
+      "materials": [
+        "xunit"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "xUnit creates a single instance of a test class and shares it across all its test methods, so fields set in one test are visible in the next.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. xUnit creates a new instance of the test class for every test, so the constructor acts as per-test setup. Shared state needs an explicit class fixture (`IClassFixture<T>`) or collection fixture.",
+      "materials": [
+        "xunit"
+      ]
+    }
+  ]
+}

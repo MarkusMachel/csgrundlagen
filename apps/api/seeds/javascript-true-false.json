@@ -1,0 +1,790 @@
+{
+  "name": "JavaScript: true or false",
+  "materials": [
+    {
+      "key": "data-structures",
+      "type": "article",
+      "title": "JavaScript data types and data structures",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures",
+      "author": "MDN Web Docs",
+      "description": "Overview of JavaScript primitives, objects, strings as UTF-16 sequences, Number and BigInt."
+    },
+    {
+      "key": "equality",
+      "type": "article",
+      "title": "Equality comparisons and sameness",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness",
+      "author": "MDN Web Docs",
+      "description": "Explains ==, ===, Object.is and SameValueZero, including NaN and signed zero."
+    },
+    {
+      "key": "hoisting",
+      "type": "article",
+      "title": "Hoisting",
+      "url": "https://developer.mozilla.org/en-US/docs/Glossary/Hoisting",
+      "author": "MDN Web Docs",
+      "description": "Glossary entry on how function, var, let, const and class declarations are hoisted."
+    },
+    {
+      "key": "closures",
+      "type": "article",
+      "title": "Closures",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures",
+      "author": "MDN Web Docs",
+      "description": "How functions capture their lexical environment, including the classic closures-in-loops mistake."
+    },
+    {
+      "key": "this",
+      "type": "article",
+      "title": "this",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this",
+      "author": "MDN Web Docs",
+      "description": "Reference for how the value of this is determined in functions, methods, arrow functions and classes."
+    },
+    {
+      "key": "classes",
+      "type": "article",
+      "title": "Classes",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes",
+      "author": "MDN Web Docs",
+      "description": "Reference for class syntax, static members, private elements and class strict mode."
+    },
+    {
+      "key": "object-copy",
+      "type": "article",
+      "title": "Object references and copying",
+      "url": "https://javascript.info/object-copy",
+      "author": "javascript.info",
+      "description": "Covers reference semantics, const objects, shallow copies and deep cloning with structuredClone."
+    },
+    {
+      "key": "array",
+      "type": "article",
+      "title": "Array",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+      "author": "MDN Web Docs",
+      "description": "Reference for Array methods, sparse arrays and copying versus mutating methods."
+    },
+    {
+      "key": "event-loop",
+      "type": "article",
+      "title": "Event loop: microtasks and macrotasks",
+      "url": "https://javascript.info/event-loop",
+      "author": "javascript.info",
+      "description": "Explains the event loop, the macrotask queue and why microtasks run before the next task."
+    },
+    {
+      "key": "promise",
+      "type": "article",
+      "title": "Promise",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+      "author": "MDN Web Docs",
+      "description": "Reference for promises and the concurrency methods all, allSettled, any and race."
+    },
+    {
+      "key": "modules",
+      "type": "article",
+      "title": "JavaScript modules",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules",
+      "author": "MDN Web Docs",
+      "description": "Guide to ES module import/export semantics, including top-level await."
+    },
+    {
+      "key": "memory",
+      "type": "article",
+      "title": "Memory management",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_management",
+      "author": "MDN Web Docs",
+      "description": "Explains reachability, mark-and-sweep garbage collection, and WeakMap/WeakSet."
+    },
+    {
+      "key": "json",
+      "type": "article",
+      "title": "JSON.stringify()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify",
+      "author": "MDN Web Docs",
+      "description": "Reference for how values such as undefined, functions, Map and BigInt are serialized."
+    },
+    {
+      "key": "iterators",
+      "type": "article",
+      "title": "Iterators and generators",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_generators",
+      "author": "MDN Web Docs",
+      "description": "Guide to the iteration protocols, iterables and generator functions."
+    },
+    {
+      "key": "node-unhandled",
+      "type": "link",
+      "title": "process: 'unhandledRejection' event",
+      "url": "https://nodejs.org/api/process.html#event-unhandledrejection",
+      "author": "Node.js",
+      "description": "Node.js documentation for unhandled promise rejections and the default throw behaviour."
+    }
+  ],
+  "questions": [
+    {
+      "type": "true-false",
+      "prompt": "`typeof null` evaluates to `\"object\"`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. This is a long-standing quirk from the first implementation of JavaScript that was kept for backwards compatibility. `null` is a primitive, but `typeof null` returns `\"object\"`, so a null check needs `value === null`.",
+      "materials": [
+        "data-structures"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`NaN === NaN` evaluates to `true`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. `NaN` is the only value that is not equal to itself under both `==` and `===`, so the comparison is `false`. Use `Number.isNaN(x)` or `Object.is(x, NaN)` to test for it.",
+      "materials": [
+        "equality"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Reading a `let` variable before its declaration in the same scope returns `undefined`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. `let` and `const` bindings are hoisted but stay uninitialized in the temporal dead zone until the declaration runs, so reading one early throws a `ReferenceError`. Only `var` gives `undefined` before its declaration.",
+      "materials": [
+        "hoisting"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A function declaration can be called earlier in its scope than the line where it is declared.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Function declarations are hoisted together with their body, so the whole function is available from the start of the enclosing scope. Function expressions assigned to variables are not callable that early.",
+      "materials": [
+        "hoisting"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`Object.is(-0, 0)` returns `false`, even though `-0 === 0` is `true`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. `Object.is` uses the SameValue algorithm, which tells `+0` and `-0` apart and treats `NaN` as equal to itself. Strict equality `===` treats the two zeros as equal.",
+      "materials": [
+        "equality"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Declaring an object with `const` makes its properties read-only.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. `const` only prevents reassigning the variable to a different value; the object it points to can still be mutated. To prevent property changes you need something like `Object.freeze`.",
+      "materials": [
+        "object-copy"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "This code logs `0`, `1`, `2`:\n\n```js\nfor (var i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 0);\n}\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. It logs `3` three times: `var` is function-scoped, so all three callbacks close over the same `i`, which is `3` by the time the timers fire. Declaring the loop variable with `let` creates a fresh binding per iteration and logs `0`, `1`, `2`.",
+      "materials": [
+        "closures"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Calling an arrow function with `fn.call(obj)` does not change the value of `this` inside it.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Arrow functions have no `this` of their own; they use the `this` of the enclosing lexical scope. `call`, `apply` and `bind` can still pass arguments, but their `thisArg` is ignored.",
+      "materials": [
+        "this"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In strict mode, `this` is `undefined` when a method is extracted into a variable and called as a plain function, as in `const f = obj.method; f();`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. `this` is determined by how a function is called, not where it was defined. A plain call `f()` has no receiver, so in strict mode `this` is `undefined` (in sloppy mode it would be the global object).",
+      "materials": [
+        "this"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`Array.prototype.forEach` returns a new array containing the callback's return values.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. `forEach` always returns `undefined` and is used only for side effects. `map` is the method that returns a new array built from the callback's return values.",
+      "materials": [
+        "array"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Calling `.bind(otherObj)` on a function that was already bound changes its `this` to `otherObj`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. Once a function is bound, its `this` is fixed; binding it again creates a new function but cannot override the original `this`. A second `bind` can only pre-fill additional arguments.",
+      "materials": [
+        "this"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Code inside a class body, including its methods, always runs in strict mode, even without a `\"use strict\"` directive.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. The specification makes all class bodies strict mode code. For example, a plain function call inside a method gets `this === undefined` rather than the global object.",
+      "materials": [
+        "classes"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A private field declared as `#count` in a class can be read from outside the class with `obj['#count']`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Private elements are not string-keyed properties, so `obj['#count']` just looks up an ordinary (nonexistent) property named \"#count\" and returns `undefined`. Writing `obj.#count` outside the class body is a syntax error.",
+      "materials": [
+        "classes"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`[10, 9, 1].sort()` returns `[1, 10, 9]`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Without a comparator, `sort` converts elements to strings and compares them in UTF-16 code unit order, so \"10\" comes before \"9\". Pass `(a, b) => a - b` to sort numbers numerically.",
+      "materials": [
+        "array"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `static` method declared in a class can be called directly on instances of that class.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Static methods live on the class constructor itself, not on its prototype, so `instance.method` is `undefined`. Call them as `ClassName.method()` or via `this.constructor.method()` from an instance.",
+      "materials": [
+        "classes"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Like function declarations, a class declaration can be instantiated with `new` before the line where it is declared.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Class declarations are hoisted but, like `let`, they remain in the temporal dead zone until evaluated. Using the class before its declaration throws a `ReferenceError`.",
+      "materials": [
+        "hoisting",
+        "classes"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`[] == ![]` evaluates to `true`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. `![]` is `false` because every object is truthy. Then `[] == false` coerces both sides to numbers: `[]` becomes `\"\"` and then `0`, `false` becomes `0`, so the comparison is `true`.",
+      "materials": [
+        "equality"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Copying an object with spread syntax, `{ ...original }`, also creates independent copies of nested objects.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Spread makes a shallow copy: top-level properties are copied, but nested objects are shared by reference. Use `structuredClone` or a custom deep copy for independent nested data.",
+      "materials": [
+        "object-copy"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`structuredClone` throws a `DataCloneError` when the object contains a function.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. The structured clone algorithm cannot serialize functions (or DOM nodes), so it throws a `DataCloneError` instead of silently dropping them. This differs from `JSON.stringify`, which silently omits function-valued properties.",
+      "materials": [
+        "object-copy"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`structuredClone` can copy objects that contain circular references.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. The structured clone algorithm tracks already-visited objects, so a self-referencing object is cloned with the cycle preserved in the copy. By contrast, `JSON.stringify` throws a `TypeError` on circular structures.",
+      "materials": [
+        "object-copy"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`arr.toSorted()` returns a sorted copy and leaves `arr` unchanged.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. `toSorted` (ES2023) is the non-mutating counterpart of `sort`, alongside `toReversed`, `toSpliced` and `with`. `sort` itself sorts the array in place and returns the same array.",
+      "materials": [
+        "array"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Calling `reduce` on an empty array without an initial value returns `undefined`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. It throws a `TypeError` (\"Reduce of empty array with no initial value\"). Passing an initial value, such as `arr.reduce(fn, 0)`, makes it return that value for an empty array.",
+      "materials": [
+        "array"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`map` does not invoke its callback for empty slots of a sparse array, and the result keeps those slots empty.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. For `[1, , 3].map(fn)` the callback runs only twice, and the result has a hole at index 1. Most older array methods skip holes, while newer ones such as `toSorted` treat them as `undefined`.",
+      "materials": [
+        "array"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Assigning to an index of a string, as in `s[0] = 'X'`, changes the string's first character.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Strings are immutable primitives, so the string stays the same. In sloppy mode the assignment is silently ignored and in strict mode it throws a `TypeError`; build a new string instead, for example `'X' + s.slice(1)`.",
+      "materials": [
+        "data-structures"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`'😀'.length` is `2`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. `length` counts UTF-16 code units, and characters outside the Basic Multilingual Plane, like most emoji, are stored as a surrogate pair of two code units. `[...'😀'].length` iterates by code point and gives `1`.",
+      "materials": [
+        "data-structures"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`0.1 + 0.2 === 0.3` evaluates to `true`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Numbers are IEEE 754 double-precision floats, and neither 0.1 nor 0.2 is exactly representable, so the sum is `0.30000000000000004`. Compare with a tolerance such as `Number.EPSILON`, or use integers for money.",
+      "materials": [
+        "data-structures"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`Number.MAX_SAFE_INTEGER + 1 === Number.MAX_SAFE_INTEGER + 2` evaluates to `true`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. Beyond 2^53 - 1, doubles can no longer represent every integer: `MAX_SAFE_INTEGER + 2` (2^53 + 1) rounds to 2^53, the same value as `MAX_SAFE_INTEGER + 1`. Use `BigInt` for exact integer arithmetic beyond this range.",
+      "materials": [
+        "data-structures"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`1n + 1` throws a `TypeError`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Arithmetic operators do not implicitly mix `BigInt` and `Number`, to avoid silent precision loss. Convert explicitly, for example `1n + BigInt(1)` or `Number(1n) + 1`.",
+      "materials": [
+        "data-structures"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Two separate object literals with identical contents, such as `{ a: 1 } == { a: 1 }`, compare as equal with `==`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Objects are compared by reference with both `==` and `===`, so two distinct objects are never equal, whatever their contents. Comparing contents requires a deep-equality helper or comparing serialized forms.",
+      "materials": [
+        "equality"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "This code logs `sync`, `then`, `timeout` in that order:\n\n```js\nsetTimeout(() => console.log('timeout'), 0);\nPromise.resolve().then(() => console.log('then'));\nconsole.log('sync');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Synchronous code runs to completion first, then the microtask queue (promise callbacks) is drained before the event loop takes the next macrotask. The `setTimeout` callback is a macrotask, so it runs last.",
+      "materials": [
+        "event-loop"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`setTimeout(fn, 0)` runs `fn` synchronously, before the statement that follows it.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. `setTimeout` always schedules `fn` as a future task, so it runs only after the current script finishes and pending microtasks are processed. The delay of 0 is a minimum, not a guarantee of immediate execution.",
+      "materials": [
+        "event-loop"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`Promise.all` rejects as soon as any one of its input promises rejects, without waiting for the others to settle.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. `Promise.all` is fail-fast: it rejects with the first rejection reason. The other promises keep running, but their results are ignored.",
+      "materials": [
+        "promise"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`Promise.allSettled` rejects if any of its input promises rejects.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. `Promise.allSettled` waits for every input to settle and then fulfills with an array of `{ status, value }` or `{ status, reason }` objects. It is meant for cases where you want every outcome, including failures.",
+      "materials": [
+        "promise"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When every input promise rejects, `Promise.any` rejects with an `AggregateError` that holds all the rejection reasons.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. `Promise.any` fulfills with the first fulfilled value and ignores rejections until all inputs have rejected. It then rejects with an `AggregateError` whose `errors` array lists each reason.",
+      "materials": [
+        "promise"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`Promise.race` ignores rejections and settles with the first promise that fulfills.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. `Promise.race` settles the same way as the first input to settle, whether that is a fulfillment or a rejection. Waiting for the first fulfillment while ignoring rejections is what `Promise.any` does.",
+      "materials": [
+        "promise"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Since Node.js 15, an unhandled promise rejection terminates the process by default when no `unhandledRejection` listener is registered.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. Node 15 changed the default `--unhandled-rejections` mode to `throw`, which raises the rejection as an uncaught exception and exits with a non-zero code. Earlier versions only printed a deprecation warning.",
+      "materials": [
+        "node-unhandled"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Code after `await` on a non-Promise value, such as `await 42`, continues synchronously without yielding to the caller.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. `await` wraps any value in a resolved promise and always suspends the async function, resuming it in a microtask. The caller's code after the call runs first, even when the awaited value is not a promise.",
+      "materials": [
+        "event-loop"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "An `async` function always returns a Promise, even when its body returns a plain value.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. A returned value is wrapped in a fulfilled promise, and a thrown error becomes a rejected promise. Callers therefore have to `await` the result or use `.then` to get the value.",
+      "materials": [
+        "promise"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Calling a generator function runs its body up to the first `yield`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Calling a generator function runs none of its body; it only returns a generator object. The body starts executing on the first `next()` call and runs until the first `yield`.",
+      "materials": [
+        "iterators"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `for...of` loop can iterate over a plain object literal such as `{ a: 1, b: 2 }`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Plain objects do not implement `Symbol.iterator`, so `for...of` throws a `TypeError` saying the object is not iterable. Use `for...in`, or iterate `Object.keys`, `Object.values` or `Object.entries`.",
+      "materials": [
+        "iterators"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Bindings imported with ES module `import` are live: if the exporting module later reassigns an exported `let`, importers see the new value.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. ES module imports are read-only live views of the exporting module's bindings, not copies. CommonJS `require` instead returns the `module.exports` object, so a destructured value does not update.",
+      "materials": [
+        "modules"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `WeakMap` can be iterated with `for...of` and exposes a `size` property.",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. `WeakMap` is deliberately not iterable and has no `size`, because its entries can disappear whenever the garbage collector reclaims a key. It only offers `get`, `set`, `has` and `delete`.",
+      "materials": [
+        "memory"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When an ES module uses top-level `await`, modules that import it do not run their own code until that awaited promise settles.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. Top-level `await` makes the module's evaluation asynchronous, and dependent modules wait for it to finish before executing. Sibling modules that do not depend on it can still be evaluated.",
+      "materials": [
+        "modules"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Two objects that reference each other in a cycle are never garbage-collected, even when nothing else references them.",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Modern engines use mark-and-sweep, which frees everything that is not reachable from the roots, so isolated cycles are collected. Cycles were only a problem for naive reference-counting collectors.",
+      "materials": [
+        "memory"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `Map` can use `NaN` as a key, and `map.get(NaN)` retrieves the stored value.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. `Map` and `Set` compare keys using SameValueZero, which treats `NaN` as equal to itself (and `+0` equal to `-0`). So `NaN` works as a key even though `NaN === NaN` is `false`.",
+      "materials": [
+        "equality"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Using `delete arr[i]` on an array element removes it and shifts later elements down, reducing `length` by one.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. `delete` only removes the property, leaving an empty slot, and `length` is unchanged. Use `splice(i, 1)` (or the non-mutating `toSpliced`) to remove the element and shift the rest.",
+      "materials": [
+        "array"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`JSON.stringify` omits object properties whose value is `undefined`, but turns `undefined` elements inside arrays into `null`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. `JSON.stringify({ a: undefined, b: [undefined] })` returns `'{\"b\":[null]}'`. Functions and symbols follow the same rule: dropped as object properties, converted to `null` in arrays, so array positions are preserved.",
+      "materials": [
+        "json"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `Set` treats the number `1` and the string `'1'` as the same value.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. `Set` uses SameValueZero, which does no type coercion, so `new Set([1, '1']).size` is `2`. Only values that are the same type and value (with `NaN` matching `NaN`) count as duplicates.",
+      "materials": [
+        "equality"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`JSON.stringify(new Map([[1, 2]]))` returns `'{}'`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. `JSON.stringify` serializes only an object's own enumerable properties, and a `Map` stores its entries internally rather than as properties. Convert first, for example with `Object.fromEntries(map)` or `[...map]`.",
+      "materials": [
+        "json"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`null == undefined` evaluates to `true`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Loose equality treats `null` and `undefined` as equal to each other and to nothing else, so `x == null` is a common way to check for either. With strict equality, `null === undefined` is `false`.",
+      "materials": [
+        "equality"
+      ]
+    }
+  ]
+}

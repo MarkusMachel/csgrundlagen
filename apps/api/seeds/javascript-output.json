@@ -1,0 +1,893 @@
+{
+  "name": "JavaScript: predict the output",
+  "materials": [
+    {
+      "key": "mdn-equality",
+      "type": "article",
+      "title": "Equality comparisons and sameness",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness",
+      "author": "MDN Web Docs",
+      "description": "How ==, === and Object.is compare values, including the coercion rules."
+    },
+    {
+      "key": "mdn-closures",
+      "type": "article",
+      "title": "Closures",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures",
+      "author": "MDN Web Docs",
+      "description": "How functions capture variables from their enclosing scope."
+    },
+    {
+      "key": "mdn-this",
+      "type": "article",
+      "title": "this",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this",
+      "author": "MDN Web Docs",
+      "description": "How the value of this is determined for regular functions, methods, arrows and classes."
+    },
+    {
+      "key": "mdn-classes",
+      "type": "article",
+      "title": "Classes",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes",
+      "author": "MDN Web Docs",
+      "description": "Class syntax: constructors, super, static members, getters and private fields."
+    },
+    {
+      "key": "mdn-array",
+      "type": "article",
+      "title": "Array",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+      "author": "MDN Web Docs",
+      "description": "Reference for array methods, sparse arrays and length semantics."
+    },
+    {
+      "key": "mdn-string",
+      "type": "article",
+      "title": "String",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+      "author": "MDN Web Docs",
+      "description": "Reference for string methods such as slice, substring, split and replaceAll."
+    },
+    {
+      "key": "mdn-number",
+      "type": "article",
+      "title": "Number",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+      "author": "MDN Web Docs",
+      "description": "Floating point numbers, safe integers, parsing and formatting."
+    },
+    {
+      "key": "mdn-destructuring",
+      "type": "article",
+      "title": "Destructuring assignment",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment",
+      "author": "MDN Web Docs",
+      "description": "Unpacking arrays and objects, with defaults and rest elements."
+    },
+    {
+      "key": "mdn-iteration",
+      "type": "article",
+      "title": "Iteration protocols",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols",
+      "author": "MDN Web Docs",
+      "description": "The iterable and iterator protocols used by for...of, spread and generators."
+    },
+    {
+      "key": "mdn-map",
+      "type": "article",
+      "title": "Map",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+      "author": "MDN Web Docs",
+      "description": "Key equality (SameValueZero), insertion order and how Map differs from objects."
+    },
+    {
+      "key": "mdn-promise",
+      "type": "article",
+      "title": "Promise",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+      "author": "MDN Web Docs",
+      "description": "Promise chaining, error handling and the all/allSettled/race/any combinators."
+    },
+    {
+      "key": "mdn-json",
+      "type": "article",
+      "title": "JSON.stringify()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify",
+      "author": "MDN Web Docs",
+      "description": "Which values JSON.stringify keeps, drops or converts to null."
+    },
+    {
+      "key": "jsinfo-event-loop",
+      "type": "article",
+      "title": "Event loop: microtasks and macrotasks",
+      "url": "https://javascript.info/event-loop",
+      "author": "Ilya Kantor (javascript.info)",
+      "description": "Why promise callbacks run before timers and how the queues are drained."
+    },
+    {
+      "key": "mdn-object",
+      "type": "article",
+      "title": "Object",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+      "author": "MDN Web Docs",
+      "description": "Reference for Object.assign, Object.keys, freeze and property ordering."
+    },
+    {
+      "key": "mdn-template",
+      "type": "article",
+      "title": "Template literals",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals",
+      "author": "MDN Web Docs",
+      "description": "Template literal interpolation and tagged templates."
+    }
+  ],
+  "questions": [
+    {
+      "type": "output",
+      "prompt": "Predict the output: loose equality between null, undefined, numbers, strings and booleans.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "console.log(null == undefined, null == 0);\nconsole.log(\"\" == 0, \"0\" == false);\nconsole.log(null === undefined);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "true false\ntrue true\nfalse\n",
+      "explanation": "`null` and `undefined` are loosely equal only to each other, so `null == 0` is false even though `null` would become 0 in arithmetic. `\"\" == 0` converts the string to the number 0. `\"0\" == false` converts the boolean to 0 and the string to 0, so it is true. Strict equality never converts, and `null` and `undefined` are different types.",
+      "materials": [
+        "mdn-equality"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: which values are truthy?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "console.log(Boolean([]), Boolean({}), Boolean(\"0\"));\nconsole.log(Boolean(0n), Boolean(\"\"), Boolean(\" \"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "true true true\nfalse false true\n",
+      "explanation": "Only a handful of values are falsy: `false`, `0`, `-0`, `0n`, `\"\"`, `null`, `undefined` and `NaN`. Every object (including an empty array or object) is truthy, and any non-empty string is truthy, including `\"0\"` and a single space.",
+      "materials": [
+        "mdn-equality"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an object with both valueOf and toString used in different contexts.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "code": "const obj = {\n  valueOf() { return 42; },\n  toString() { return \"str\"; },\n};\nconsole.log(obj + 1);\nconsole.log(`${obj}`);\nconsole.log(obj + \"\");\nconsole.log(String(obj), obj * 2);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "43\nstr\n42\nstr 84\n",
+      "explanation": "Binary `+` converts with the \"default\" hint, which calls `valueOf` first, so `obj + 1` is 43 and `obj + \"\"` is `\"42\"`. Template literals and `String()` use the \"string\" hint and call `toString` first. Multiplication uses the \"number\" hint, so `valueOf` gives 42 and the result is 84.",
+      "materials": [
+        "mdn-equality"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: comparing NaN, -0 and +0 with ===, Object.is and includes.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "console.log(NaN === NaN, Object.is(NaN, NaN));\nconsole.log(0 === -0, Object.is(0, -0));\nconsole.log([NaN].includes(NaN), [NaN].indexOf(NaN));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "false true\ntrue false\ntrue -1\n",
+      "explanation": "`===` says NaN is not equal to itself and that 0 and -0 are equal. `Object.is` (SameValue) flips both of those cases. `includes` uses SameValueZero, which treats NaN as equal to NaN, while `indexOf` uses `===` and therefore never finds NaN.",
+      "materials": [
+        "mdn-equality",
+        "mdn-array"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: typeof applied to various values.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "console.log(typeof NaN, typeof 10n, typeof Symbol());\nconsole.log(typeof class {}, typeof undefinedVariable);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "number bigint symbol\nfunction undefined\n",
+      "explanation": "NaN is still of type number. BigInt literals have their own type, `bigint`, and symbols are `symbol`. A class is a special kind of function, so `typeof` reports `function`. `typeof` on an identifier that was never declared does not throw; it returns `\"undefined\"`.",
+      "materials": [
+        "mdn-equality"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: reading a let variable before its declaration.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "function test() {\n  try {\n    console.log(x);\n  } catch (e) {\n    console.log(e.name);\n  }\n  let x = 5;\n  console.log(x);\n}\ntest();\n",
+      "codeLanguage": "js",
+      "expectedOutput": "ReferenceError\n5\n",
+      "explanation": "`let` declarations are hoisted to the top of their block but stay uninitialized until the declaration line runs. Accessing them earlier (the temporal dead zone) throws a ReferenceError, which is caught and its name printed. After `let x = 5` runs, the variable can be read normally.",
+      "materials": [
+        "mdn-closures"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a let loop variable that is also modified inside the loop body.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "code": "const fns = [];\nfor (let i = 0; i < 4; i++) {\n  fns.push(() => i);\n  i++;\n}\nconsole.log(fns.map((f) => f()));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "[ 1, 3 ]\n",
+      "explanation": "A `for (let ...)` loop creates a fresh binding of `i` for each iteration, and each closure captures its iteration's binding. The `i++` in the body changes that same binding before the closure is called, so the first closure sees 1. The update step then copies 1 into the next iteration's binding and increments it to 2; the body pushes a closure and bumps it to 3. Next, 4 fails the condition. So two closures exist and return 1 and 3.",
+      "materials": [
+        "mdn-closures"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: two independent counters created by the same factory function.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "function makeCounter() {\n  let count = 0;\n  return () => ++count;\n}\nconst a = makeCounter();\nconst b = makeCounter();\na(); a();\nconsole.log(a(), b(), a());\n",
+      "codeLanguage": "js",
+      "expectedOutput": "3 1 4\n",
+      "explanation": "Every call to `makeCounter` creates a new `count` variable, and the returned arrow closes over that one. `a` has been called twice already, so the next call returns 3; `b` has its own counter starting at 0 and returns 1; then `a` returns 4.",
+      "materials": [
+        "mdn-closures"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a memoizing wrapper that counts how often the real function runs.",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "code": "let calls = 0;\nfunction slowSquare(n) { calls++; return n * n; }\nfunction memo(fn) {\n  const cache = new Map();\n  return (n) => {\n    if (!cache.has(n)) cache.set(n, fn(n));\n    return cache.get(n);\n  };\n}\nconst sq = memo(slowSquare);\nconsole.log(sq(4), sq(4), sq(5), sq(4));\nconsole.log(calls);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "16 16 25 16\n2\n",
+      "explanation": "The closure keeps a private `Map` between calls. The first `sq(4)` misses the cache and calls `slowSquare`; the second `sq(4)` and the last one hit the cache. `sq(5)` is another miss. So the underlying function ran only twice.",
+      "materials": [
+        "mdn-closures",
+        "mdn-map"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: breaking out of nested loops with a label.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "const found = [];\nouter: for (let i = 0; i < 3; i++) {\n  for (let j = 0; j < 3; j++) {\n    if (j === 1) continue outer;\n    if (i === 2) break outer;\n    found.push(`${i}${j}`);\n  }\n}\nconsole.log(found.join(\" \"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "00 10\n",
+      "explanation": "`continue outer` skips the rest of the inner loop and moves the outer loop to its next iteration, so for each `i` only `j = 0` is reached. When `i` is 2, `break outer` ends both loops before anything is pushed. That leaves `00` and `10`.",
+      "materials": [
+        "mdn-closures"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: calling a method after extracting it from its object (ES module, strict mode).",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "const user = {\n  name: \"Ada\",\n  greet() { return \"hi \" + this.name; },\n};\nconst greet = user.greet;\nconsole.log(user.greet());\ntry {\n  console.log(greet());\n} catch (e) {\n  console.log(e instanceof TypeError);\n}\n",
+      "codeLanguage": "js",
+      "expectedOutput": "hi Ada\ntrue\n",
+      "explanation": "`this` is decided by how a function is called, not where it was defined. `user.greet()` sets `this` to `user`. The extracted `greet()` is a plain call, and in strict mode (all ES modules are strict) `this` is `undefined`, so reading `this.name` throws a TypeError.",
+      "materials": [
+        "mdn-this"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an arrow function vs a regular method inside an object literal.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "const obj = {\n  name: \"box\",\n  regular() { return this.name; },\n  arrow: () => typeof this,\n  nested() { return [1].map(() => this.name)[0]; },\n};\nconsole.log(obj.regular(), obj.arrow(), obj.nested());\n",
+      "codeLanguage": "js",
+      "expectedOutput": "box undefined box\n",
+      "explanation": "Arrow functions do not get their own `this`; they use the `this` of the surrounding scope. For `arrow` that scope is the top level of an ES module, where `this` is `undefined`. Inside `nested`, the arrow passed to `map` inherits `this` from `nested`, which was called as `obj.nested()`, so it sees `obj`.",
+      "materials": [
+        "mdn-this"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: bind, call and a bound function being bound again.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "code": "function who() { return this.id; }\nconst a = { id: \"a\" };\nconst b = { id: \"b\" };\nconst boundA = who.bind(a);\nconsole.log(who.call(b), boundA.call(b));\nconsole.log(boundA.bind(b)());\n",
+      "codeLanguage": "js",
+      "expectedOutput": "b a\na\n",
+      "explanation": "`call` sets `this` for a single call, so `who.call(b)` returns `b`. A function returned by `bind` has its `this` permanently fixed: neither `call` nor a second `bind` can change it, so both later calls still return `a`.",
+      "materials": [
+        "mdn-this"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: overriding a method and calling the parent version with super.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "class Animal {\n  speak() { return `${this.name} makes a sound`; }\n  constructor(name) { this.name = name; }\n}\nclass Dog extends Animal {\n  speak() { return super.speak() + \" and barks\"; }\n}\nconst d = new Dog(\"Rex\");\nconsole.log(d.speak());\nconsole.log(d instanceof Animal, Object.getPrototypeOf(Dog) === Animal);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "Rex makes a sound and barks\ntrue true\n",
+      "explanation": "`Dog` has no constructor, so the default one forwards the arguments to `Animal`'s constructor. `super.speak()` calls the parent method with the same `this`, so it uses `d.name`. `d` is an `Animal` through the prototype chain, and `extends` also sets `Dog`'s own prototype to `Animal` so static members are inherited.",
+      "materials": [
+        "mdn-classes"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: static methods, inheritance and `this` inside a static method.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "class Base {\n  static create() { return new this(); }\n  static label = \"base\";\n  describe() { return this.constructor.label; }\n}\nclass Child extends Base {\n  static label = \"child\";\n}\nconsole.log(Child.create().describe());\nconsole.log(Base.create() instanceof Child, typeof new Base().create);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "child\nfalse undefined\n",
+      "explanation": "Static methods are inherited, and inside `Child.create()` the value of `this` is `Child`, so `new this()` builds a `Child`. Its `constructor.label` is the static field on `Child`. `Base.create()` builds a plain `Base`, which is not a `Child`. Static methods live on the class itself, not on instances, so `new Base().create` is undefined.",
+      "materials": [
+        "mdn-classes"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: private fields and what reflection and JSON can see.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "code": "class Account {\n  #balance = 100;\n  owner = \"Lin\";\n  static isAccount(o) { return #balance in o; }\n  get balance() { return this.#balance; }\n}\nconst acc = new Account();\nconsole.log(Object.keys(acc), JSON.stringify(acc));\nconsole.log(acc.balance, acc[\"#balance\"]);\nconsole.log(Account.isAccount(acc), Account.isAccount({}));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "[ 'owner' ] {\"owner\":\"Lin\"}\n100 undefined\ntrue false\n",
+      "explanation": "Private `#` fields are not properties: `Object.keys` and `JSON.stringify` only see the public field `owner`, and the getter lives on the prototype so it is not listed either. Reading `acc[\"#balance\"]` looks up an ordinary property with that string name, which doesn't exist. `#balance in o` is the ergonomic brand check, true only for objects created by the class.",
+      "materials": [
+        "mdn-classes"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a getter that has a side effect each time it is read.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "let reads = 0;\nconst config = {\n  get port() { reads++; return 8080; },\n};\nconst { port } = config;\nconst copy = { ...config };\nconsole.log(port, copy.port, config.port);\nconsole.log(reads);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "8080 8080 8080\n3\n",
+      "explanation": "Destructuring reads the getter once. Object spread also reads it once and copies the resulting value into `copy` as a plain data property, so `copy.port` runs no code. The final `config.port` runs the getter a third time.",
+      "materials": [
+        "mdn-classes",
+        "mdn-object"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an own property shadowing a property on the prototype.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "code": "const proto = { color: \"red\", tags: [] };\nconst a = Object.create(proto);\nconst b = Object.create(proto);\na.color = \"blue\";\na.tags.push(\"x\");\nconsole.log(a.color, b.color);\nconsole.log(b.tags, Object.hasOwn(a, \"tags\"), \"color\" in b);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "blue red\n[ 'x' ] false true\n",
+      "explanation": "Assigning `a.color` creates an own property on `a` that shadows the prototype's value; `b` still sees `red`. But `a.tags.push` is not an assignment to `a`: it reads `tags` from the shared prototype and mutates that one array, so `b` sees the change and `a` still has no own `tags`. The `in` operator looks through the prototype chain.",
+      "materials": [
+        "mdn-classes",
+        "mdn-object"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: merging objects with spread and Object.assign.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "const defaults = { a: 1, b: 2 };\nconst merged = { ...defaults, b: 3, c: 4 };\nconst target = { z: 0 };\nconst result = Object.assign(target, { a: 9 }, { a: 10 });\nconsole.log(merged);\nconsole.log(result === target, target.a);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "{ a: 1, b: 3, c: 4 }\ntrue 10\n",
+      "explanation": "Later properties win in an object literal, so `b: 3` overrides the spread value. `Object.assign` copies sources left to right onto the target, mutating it and returning that same object, so the last `a` (10) sticks and `result === target`.",
+      "materials": [
+        "mdn-object"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: the order of keys when an object has integer-like and string keys.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "const o = { b: 1, 10: \"x\", a: 2, 2: \"y\", \"-1\": \"z\" };\nconsole.log(Object.keys(o).join(\",\"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "2,10,b,a,-1\n",
+      "explanation": "Own string keys are ordered with array-index-like keys first, in ascending numeric order, followed by the other string keys in insertion order. `\"-1\"` is not a valid array index, so it is treated as an ordinary string key and comes last.",
+      "materials": [
+        "mdn-object"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: JSON.stringify with undefined, functions, NaN and nested values.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "const data = {\n  a: undefined,\n  b: () => 1,\n  c: NaN,\n  d: [undefined, () => 1],\n  e: { toJSON() { return \"custom\"; } },\n};\nconsole.log(JSON.stringify(data));\nconsole.log(JSON.stringify(undefined), JSON.stringify(null));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "{\"c\":null,\"d\":[null,null],\"e\":\"custom\"}\nundefined null\n",
+      "explanation": "Object properties whose value is `undefined` or a function are omitted. Inside arrays they cannot be omitted without shifting positions, so they become `null`. `NaN` and `Infinity` also serialize as `null`. A `toJSON` method replaces the value. Stringifying `undefined` itself returns the value `undefined`, not a string.",
+      "materials": [
+        "mdn-json"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: using the delete operator on an object property and an array element.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "const obj = { a: 1, b: 2 };\nconst arr = [1, 2, 3];\ndelete obj.a;\ndelete arr[1];\nconsole.log(obj, \"a\" in obj);\nconsole.log(arr.length, arr[1], 1 in arr);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "{ b: 2 } false\n3 undefined false\n",
+      "explanation": "`delete` removes the property entirely, so `a` is no longer in the object. On an array it removes the element but does not reindex or shrink: the length stays 3, reading the slot gives `undefined`, and the index is now a hole, so `1 in arr` is false.",
+      "materials": [
+        "mdn-object",
+        "mdn-array"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: calling sort() on an array of numbers without a comparator.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "const nums = [10, 1, 5, 100, 25];\nnums.sort();\nconsole.log(nums.join(\" \"));\nconsole.log([...nums].sort((a, b) => a - b).join(\" \"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "1 10 100 25 5\n1 5 10 25 100\n",
+      "explanation": "Without a comparator, `sort` converts elements to strings and compares them by UTF-16 code units, so `\"100\"` sorts before `\"25\"` and `\"5\"`. Passing `(a, b) => a - b` gives numeric order.",
+      "materials": [
+        "mdn-array"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: array methods applied to a sparse array with holes.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "const arr = [1, , 3];\nlet visits = 0;\narr.forEach(() => visits++);\nconsole.log(arr.length, visits);\nconsole.log(arr.map((x) => x * 2));\nconsole.log(Object.keys(arr), [...arr]);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "3 2\n[ 2, <1 empty item>, 6 ]\n[ '0', '2' ] [ 1, undefined, 3 ]\n",
+      "explanation": "The hole counts toward `length` but has no property, so `forEach` skips it and `map` keeps it as a hole in the result. `Object.keys` lists only existing indices. Spread uses the iterator, which reads every index from 0 to length-1, so the hole becomes `undefined`.",
+      "materials": [
+        "mdn-array"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: flattening nested arrays with flat().",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "const nested = [1, [2, [3, [4]]]];\nconsole.log(nested.flat());\nconsole.log(nested.flat(Infinity));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "[ 1, 2, [ 3, [ 4 ] ] ]\n[ 1, 2, 3, 4 ]\n",
+      "explanation": "`flat()` defaults to a depth of 1, so only the first level of nesting is removed. Passing `Infinity` flattens every level.",
+      "materials": [
+        "mdn-array"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: writing to an array's length property and to an index past the end.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "const arr = [1, 2, 3, 4, 5];\narr.length = 2;\nconsole.log(arr);\narr[4] = 9;\nconsole.log(arr.length, arr.indexOf(undefined));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "[ 1, 2 ]\n5 -1\n",
+      "explanation": "Setting `length` to a smaller value truncates the array and deletes the extra elements. Writing to index 4 extends the length to 5 and leaves holes at 2 and 3. `indexOf` skips holes, so it does not find `undefined`.",
+      "materials": [
+        "mdn-array"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: toSorted, toReversed and with compared to their mutating counterparts.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "const orig = [3, 1, 2];\nconst sorted = orig.toSorted();\nconst changed = orig.with(0, 9);\nconsole.log(orig, sorted, changed);\norig.reverse();\nconsole.log(orig);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "[ 3, 1, 2 ] [ 1, 2, 3 ] [ 9, 1, 2 ]\n[ 2, 1, 3 ]\n",
+      "explanation": "`toSorted` and `with` return new arrays and leave the original untouched. `reverse` (unlike `toReversed`) reverses the array in place.",
+      "materials": [
+        "mdn-array"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: negative arguments to slice and substring.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "const s = \"JavaScript\";\nconsole.log(s.slice(-6), s.slice(2, -6));\nconsole.log(s.substring(-3, 4), s.substring(4, 1));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "Script va\nJava ava\n",
+      "explanation": "`slice` counts negative indices from the end: `-6` is index 4. `substring` treats negative values as 0 and swaps its arguments if the start is greater than the end, so `substring(4, 1)` behaves like `substring(1, 4)`.",
+      "materials": [
+        "mdn-string"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: replace vs replaceAll with a string pattern.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "const s = \"a-b-c\";\nconsole.log(s.replace(\"-\", \"+\"));\nconsole.log(s.replaceAll(\"-\", \"+\"));\nconsole.log(s.replace(/-/g, \"\"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "a+b-c\na+b+c\nabc\n",
+      "explanation": "With a string pattern, `replace` only replaces the first occurrence. `replaceAll` replaces every occurrence. A regular expression with the `g` flag makes `replace` global too.",
+      "materials": [
+        "mdn-string"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a tagged template function that receives strings and values.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "code": "function tag(strings, ...values) {\n  console.log(strings.length, values.length);\n  console.log(JSON.stringify(strings));\n  return strings.raw[0];\n}\nconst n = 2;\nconsole.log(tag`a\\n${n}b${n * 2}`);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "3 2\n[\"a\\n\",\"b\",\"\"]\na\\n\n",
+      "explanation": "The tag receives the literal text segments and the evaluated expressions separately. There is always one more string than values; since the template ends with an expression, the last segment is an empty string. `strings` holds the cooked text (a real newline, shown escaped by JSON), while `strings.raw` keeps the backslash-n exactly as typed.",
+      "materials": [
+        "mdn-template"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: adding decimal fractions.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "console.log(0.1 + 0.2);\nconsole.log(0.1 + 0.2 === 0.3);\nconsole.log(Math.abs(0.1 + 0.2 - 0.3) < Number.EPSILON);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "0.30000000000000004\nfalse\ntrue\n",
+      "explanation": "Numbers are IEEE 754 doubles, and 0.1 and 0.2 have no exact binary representation, so their sum is slightly above 0.3. Compare floats with a tolerance such as `Number.EPSILON` instead of `===`.",
+      "materials": [
+        "mdn-number"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: parseInt with different inputs and radixes.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "console.log(parseInt(\"42px\"), parseInt(\"px42\"));\nconsole.log(parseInt(\"0x1F\"), parseInt(\"101\", 2));\nconsole.log(parseInt(0.0000005));\nconsole.log([\"10\", \"10\", \"10\"].map(parseInt));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "42 NaN\n31 5\n5\n[ 10, NaN, 2 ]\n",
+      "explanation": "`parseInt` reads digits until the first invalid character, and gives NaN if there are none at the start. A `0x` prefix means hexadecimal. A number argument is converted to a string first, and `0.0000005` becomes `\"5e-7\"`, so it parses 5. `map` passes the index as the radix: radix 0 means default (10), radix 1 is invalid (NaN), and radix 2 reads `\"10\"` as 2.",
+      "materials": [
+        "mdn-number"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: integers beyond Number.MAX_SAFE_INTEGER.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "const max = Number.MAX_SAFE_INTEGER;\nconsole.log(max);\nconsole.log(max + 1 === max + 2);\nconsole.log(Number.isSafeInteger(max + 1), 2 ** 53 + 1);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "9007199254740991\ntrue\nfalse 9007199254740992\n",
+      "explanation": "Above 2^53 - 1, doubles cannot represent every integer. `max + 1` and `max + 2` both round to 2^53, so they compare equal, and `2 ** 53 + 1` rounds back down to 2^53. `max + 1` is outside the safe range.",
+      "materials": [
+        "mdn-number"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: BigInt arithmetic and mixing BigInt with Number.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "console.log(7n / 2n, 2n ** 64n);\nconsole.log(1n == 1, 1n === 1);\ntry {\n  console.log(1n + 1);\n} catch (e) {\n  console.log(e.name);\n}\n",
+      "codeLanguage": "js",
+      "expectedOutput": "3n 18446744073709551616n\ntrue false\nTypeError\n",
+      "explanation": "BigInt division truncates toward zero. BigInts are arbitrary precision, so 2^64 is exact. Loose equality compares the mathematical values, but strict equality also compares types. Arithmetic mixing BigInt and Number is not allowed and throws a TypeError.",
+      "materials": [
+        "mdn-number"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: destructuring defaults with undefined, null and missing values.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "const { a = 1, b = 2, c = 3 } = { a: undefined, b: null };\nconst [x = \"x\", y = \"y\"] = [0];\nconsole.log(a, b, c);\nconsole.log(x, y);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "1 null 3\n0 y\n",
+      "explanation": "Defaults apply only when the value is `undefined` (explicitly or because it's missing). `null` is a real value, so `b` stays `null`. Likewise `0` is used for `x`, and only the missing second element falls back to its default.",
+      "materials": [
+        "mdn-destructuring"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: optional chaining and nullish coalescing on missing data.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "const user = { profile: null, settings: { theme: \"\" } };\nconsole.log(user.profile?.name, user.getName?.());\nconsole.log(user.settings.theme ?? \"dark\", user.settings.theme || \"dark\");\nconsole.log(user.missing?.deep.deeper ?? \"none\");\n",
+      "codeLanguage": "js",
+      "expectedOutput": "undefined undefined\n dark\nnone\n",
+      "explanation": "`?.` stops and returns `undefined` when the left side is `null` or `undefined`, including for a method that doesn't exist. `??` only falls back on `null`/`undefined`, so the empty string is kept (printing an empty value before the space), while `||` falls back on any falsy value. Optional chaining short-circuits the whole chain, so `.deeper` is never evaluated.",
+      "materials": [
+        "mdn-destructuring"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a generator with a return statement used with next() and for...of.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "function* gen() {\n  yield 1;\n  yield 2;\n  return 3;\n}\nconst it = gen();\nconsole.log(it.next(), it.next().value);\nconsole.log(it.next(), it.next());\nconsole.log([...gen()]);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "{ value: 1, done: false } 2\n{ value: 3, done: true } { value: undefined, done: true }\n[ 1, 2 ]\n",
+      "explanation": "Each `next()` runs the generator to its next `yield`. The `return` value appears once with `done: true`; after that the generator is finished and keeps returning `undefined`. Spread and `for...of` stop as soon as `done` is true and ignore the returned value, so only 1 and 2 are collected.",
+      "materials": [
+        "mdn-iteration"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: sending values into a generator with next(value).",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "code": "function* adder() {\n  let total = 0;\n  while (true) {\n    const x = yield total;\n    total += x;\n  }\n}\nconst g = adder();\nconsole.log(g.next(5).value);\nconsole.log(g.next(10).value, g.next(1).value);\nconsole.log(g.return(99), g.next(1).done);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "0\n10 11\n{ value: 99, done: true } true\n",
+      "explanation": "The first `next()` only starts the generator and runs to the first `yield`; the argument 5 has nowhere to go and is discarded. Each later `next(v)` makes the paused `yield` expression evaluate to `v`. `return(99)` finishes the generator with that value, and every later call reports `done: true`.",
+      "materials": [
+        "mdn-iteration"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a class implementing Symbol.iterator.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "class Range {\n  constructor(from, to) { this.from = from; this.to = to; }\n  *[Symbol.iterator]() {\n    for (let i = this.from; i <= this.to; i++) yield i;\n  }\n}\nconst r = new Range(2, 5);\nconsole.log([...r]);\nconst [first, , third] = r;\nconsole.log(first, third, Math.max(...r));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "[ 2, 3, 4, 5 ]\n2 4 5\n",
+      "explanation": "Defining `[Symbol.iterator]` as a generator method makes instances iterable. Spread, array destructuring and spreading into function arguments all call it and get a fresh iterator each time, so the range can be consumed repeatedly. The skipped slot in the destructuring pattern consumes the value 3.",
+      "materials": [
+        "mdn-iteration"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: breaking out of a for...of loop over a generator that has a finally block.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "code": "function* items() {\n  try {\n    yield \"a\";\n    yield \"b\";\n    yield \"c\";\n  } finally {\n    console.log(\"cleanup\");\n  }\n}\nfor (const x of items()) {\n  console.log(x);\n  if (x === \"b\") break;\n}\nconsole.log(\"done\");\n",
+      "codeLanguage": "js",
+      "expectedOutput": "a\nb\ncleanup\ndone\n",
+      "explanation": "When a `for...of` loop exits early with `break`, it calls the iterator's `return()` method. For a generator that resumes it as if a `return` happened at the paused `yield`, so the `finally` block runs before the loop's following code.",
+      "materials": [
+        "mdn-iteration"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: Map keys that are NaN, objects and strings.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "code": "const m = new Map();\nm.set(NaN, \"nan\").set(NaN, \"nan2\");\nm.set({}, \"obj1\").set({}, \"obj2\");\nm.set(\"1\", \"str\").set(1, \"num\");\nconsole.log(m.size, m.get(NaN), m.get({}));\nconst o = {};\no[1] = \"num\"; o[\"1\"] = \"str\";\nconsole.log(Object.keys(o).length);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "5 nan2 undefined\n1\n",
+      "explanation": "Map uses SameValueZero, so NaN matches NaN and the second `set` overwrites the first. Objects are compared by identity: two different `{}` literals are two keys, and a third `{}` passed to `get` matches neither. The string `\"1\"` and the number 1 are distinct Map keys, giving 5 entries. Plain object keys are converted to strings, so `o[1]` and `o[\"1\"]` are the same property.",
+      "materials": [
+        "mdn-map"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: deduplicating values with a Set.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "const s = new Set([3, 1, 3, \"3\", 1, NaN, NaN]);\nconsole.log([...s]);\nconsole.log(new Set([[1], [1]]).size);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "[ 3, 1, '3', NaN ]\n2\n",
+      "explanation": "A Set keeps the first occurrence of each value in insertion order. The string `\"3\"` differs from the number 3, and NaN is treated as equal to itself. Arrays are objects compared by reference, so two separate `[1]` arrays are both kept.",
+      "materials": [
+        "mdn-map"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: two async functions that each await several times, started one after the other.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "code": "async function a() {\n  console.log(\"a1\");\n  await null;\n  console.log(\"a2\");\n  await null;\n  console.log(\"a3\");\n}\nasync function b() {\n  console.log(\"b1\");\n  await null;\n  console.log(\"b2\");\n}\na();\nb();\nconsole.log(\"sync\");\n",
+      "codeLanguage": "js",
+      "expectedOutput": "a1\nb1\nsync\na2\nb2\na3\n",
+      "explanation": "Calling an async function runs its body synchronously up to the first `await`, so `a1` and `b1` print right away, then `sync`. Each `await` schedules the rest of the function as a microtask: `a` resumed first, so `a2` prints, then `b2`. `a`'s second `await` queued another microtask behind `b`'s, so `a3` prints last.",
+      "materials": [
+        "jsinfo-event-loop"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: two promise chains whose then callbacks interleave.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "code": "Promise.resolve()\n  .then(() => console.log(\"a1\"))\n  .then(() => console.log(\"a2\"))\n  .then(() => console.log(\"a3\"));\nPromise.resolve()\n  .then(() => console.log(\"b1\"))\n  .then(() => console.log(\"b2\"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "a1\nb1\na2\nb2\na3\n",
+      "explanation": "Each `.then` callback is queued as a microtask only when the previous promise in its chain settles. Initially `a1` and `b1` are queued. Running `a1` settles its promise and queues `a2` behind `b1`, and so on, so the two chains alternate step by step.",
+      "materials": [
+        "jsinfo-event-loop",
+        "mdn-promise"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: Promise.all and Promise.allSettled with one rejected promise.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "code": "const ps = () => [Promise.resolve(1), Promise.reject(new Error(\"boom\")), Promise.resolve(3)];\ntry {\n  await Promise.all(ps());\n} catch (e) {\n  console.log(\"all:\", e.message);\n}\nconst results = await Promise.allSettled(ps());\nconsole.log(results.map((r) => r.status).join(\",\"));\nconsole.log(results[1].reason.message, results[2].value);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "all: boom\nfulfilled,rejected,fulfilled\nboom 3\n",
+      "explanation": "`Promise.all` rejects as soon as any input rejects, with that reason. `Promise.allSettled` never rejects; it waits for everything and reports each outcome as `{ status, value }` or `{ status, reason }` in input order.",
+      "materials": [
+        "mdn-promise"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: Promise.race vs Promise.any with timers of different lengths.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "code": "const wait = (ms, v, fail) =>\n  new Promise((res, rej) => setTimeout(() => (fail ? rej(new Error(v)) : res(v)), ms));\nconst race = await Promise.race([wait(20, \"slow\"), wait(5, \"fast-fail\", true)]).catch((e) => \"caught \" + e.message);\nconst any = await Promise.any([wait(20, \"slow\"), wait(5, \"fast-fail\", true)]);\nconsole.log(race);\nconsole.log(any);\ntry {\n  await Promise.any([Promise.reject(1), Promise.reject(2)]);\n} catch (e) {\n  console.log(e.constructor.name, e.errors);\n}\n",
+      "codeLanguage": "js",
+      "expectedOutput": "caught fast-fail\nslow\nAggregateError [ 1, 2 ]\n",
+      "explanation": "`race` settles like whichever input settles first, even if that's a rejection. `any` ignores rejections and fulfills with the first fulfilled value; it only rejects when every input rejects, using an `AggregateError` whose `errors` array lists all the reasons.",
+      "materials": [
+        "mdn-promise"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a promise chain that recovers from an error with catch.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "code": "Promise.resolve(1)\n  .then((v) => { throw new Error(\"bad \" + v); })\n  .then(() => console.log(\"skipped\"))\n  .catch((e) => { console.log(e.message); return 10; })\n  .then((v) => console.log(\"after\", v))\n  .finally(() => console.log(\"finally\"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "bad 1\nafter 10\nfinally\n",
+      "explanation": "A thrown error rejects the promise returned by that `then`, and the rejection skips fulfillment handlers until a `catch`. The value returned from `catch` fulfills the next promise, so the chain continues normally with 10. `finally` runs regardless of the outcome.",
+      "materials": [
+        "mdn-promise"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: return vs return await inside an async function's try/catch.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "code": "const fail = async () => { throw new Error(\"nope\"); };\nasync function a() {\n  try { return fail(); } catch { return \"a caught\"; }\n}\nasync function b() {\n  try { return await fail(); } catch { return \"b caught\"; }\n}\nconsole.log(await a().catch((e) => \"outer \" + e.message));\nconsole.log(await b());\n",
+      "codeLanguage": "js",
+      "expectedOutput": "outer nope\nb caught\n",
+      "explanation": "In `a`, `return fail()` hands back the promise without waiting for it. The `try` block finishes before the promise rejects, so the local `catch` never sees the error and the caller gets the rejection. In `b`, `await` pauses inside the `try`, so the rejection is thrown there and caught locally.",
+      "materials": [
+        "mdn-promise"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: awaiting in a loop compared with starting all promises first.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "code": "const log = [];\nconst task = (name, ms) =>\n  new Promise((res) => setTimeout(() => { log.push(name); res(name); }, ms));\nfor (const [n, ms] of [[\"A\", 30], [\"B\", 10]]) await task(n, ms);\nconst results = await Promise.all([task(\"C\", 30), task(\"D\", 10)]);\nconsole.log(log.join(\" \"));\nconsole.log(results.join(\" \"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "A B D C\nC D\n",
+      "explanation": "In the loop, `B` is not even started until `A` has finished, so they complete in order. With `Promise.all`, both timers start at once and `D` (10 ms) finishes before `C` (30 ms). Even so, `Promise.all` returns results in input order, not completion order.",
+      "materials": [
+        "mdn-promise",
+        "jsinfo-event-loop"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: the order of logs around an async function containing two awaits.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "code": "async function job(name) {\n  console.log(name, 1);\n  await null;\n  console.log(name, 2);\n  await null;\n  console.log(name, 3);\n}\njob(\"x\");\njob(\"y\");\nconsole.log(\"main\");\n",
+      "codeLanguage": "js",
+      "expectedOutput": "x 1\ny 1\nmain\nx 2\ny 2\nx 3\ny 3\n",
+      "explanation": "An async function runs synchronously until its first `await`, so both `1` lines print immediately, followed by `main`. Each `await` schedules the rest of the function as a microtask, so after the synchronous code the two functions take turns: `x 2`, `y 2`, then `x 3`, `y 3`.",
+      "materials": [
+        "jsinfo-event-loop"
+      ]
+    }
+  ]
+}

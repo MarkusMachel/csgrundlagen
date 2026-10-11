@@ -11,7 +11,8 @@ import {
   type BoardNode,
   type BoardState,
 } from '../board';
-import { KIND_ICON } from '../kinds';
+import { productById } from '../products';
+import { NodeIcon } from './NodeIcon';
 
 /**
  * The board as lists: rename or remove components and add, flip or remove
@@ -32,7 +33,7 @@ export function BoardLists({
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
   const name = (n: BoardNode | undefined) =>
-    n ? n.label?.trim() || t(`design.kinds.${n.kind}`) : '?';
+    n ? n.label?.trim() || productById(n.product)?.name || t(`design.kinds.${n.kind}`) : '?';
   const byId = (id: string) => board.nodes.find((n) => n.id === id);
   // two components of a kind need telling apart in the menus
   const optionName = (n: BoardNode) =>
@@ -49,14 +50,13 @@ export function BoardLists({
         ) : (
           <ul className="design-lists__list">
             {board.nodes.map((n) => {
-              const Icon = KIND_ICON[n.kind];
               return (
                 <li key={n.id} className="design-lists__row">
-                  <Icon size={15} aria-hidden />
+                  <NodeIcon kind={n.kind} product={n.product} size={14} />
                   <input
                     className="input input--small"
                     value={n.label ?? ''}
-                    placeholder={t(`design.kinds.${n.kind}`)}
+                    placeholder={productById(n.product)?.name ?? t(`design.kinds.${n.kind}`)}
                     aria-label={t('design.lists.rename', { name: optionName(n) })}
                     maxLength={40}
                     disabled={readOnly}

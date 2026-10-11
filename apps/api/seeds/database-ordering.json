@@ -1,0 +1,1094 @@
+{
+  "name": "Databases: put in order",
+  "materials": [
+    {
+      "key": "pg-iso",
+      "type": "article",
+      "title": "PostgreSQL: Transaction Isolation",
+      "url": "https://www.postgresql.org/docs/current/transaction-iso.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "How Read Committed, Repeatable Read and Serializable behave in PostgreSQL, including concurrent updates."
+    },
+    {
+      "key": "pg-wal",
+      "type": "article",
+      "title": "PostgreSQL: WAL Configuration",
+      "url": "https://www.postgresql.org/docs/current/wal-configuration.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Checkpoints, the REDO point, full-page writes and how crash recovery replays WAL."
+    },
+    {
+      "key": "pg-locking",
+      "type": "article",
+      "title": "PostgreSQL: Explicit Locking",
+      "url": "https://www.postgresql.org/docs/current/explicit-locking.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Table-level and row-level lock modes, their conflict tables, and deadlock handling."
+    },
+    {
+      "key": "pg-docs",
+      "type": "link",
+      "title": "PostgreSQL Documentation (current)",
+      "url": "https://www.postgresql.org/docs/current/",
+      "author": "PostgreSQL Global Development Group",
+      "description": "The full official manual: internals overview, triggers, constraints, pg_dump, logical replication, progress reporting and release notes."
+    },
+    {
+      "key": "pg-storage",
+      "type": "article",
+      "title": "PostgreSQL: Database Physical Storage",
+      "url": "https://www.postgresql.org/docs/current/storage.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Data directory layout, segment files, TOAST and the layout of pages and tuples."
+    },
+    {
+      "key": "pg-pitr",
+      "type": "article",
+      "title": "PostgreSQL: Continuous Archiving and Point-in-Time Recovery",
+      "url": "https://www.postgresql.org/docs/current/continuous-archiving.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Base backups, WAL archiving and recovering to a chosen point in time."
+    },
+    {
+      "key": "pg-vacuum",
+      "type": "article",
+      "title": "PostgreSQL: Routine Vacuuming",
+      "url": "https://www.postgresql.org/docs/current/routine-vacuuming.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Why VACUUM is needed under MVCC, and how freezing prevents transaction ID wraparound."
+    },
+    {
+      "key": "pg-protocol",
+      "type": "article",
+      "title": "PostgreSQL: Frontend/Backend Protocol Message Flow",
+      "url": "https://www.postgresql.org/docs/current/protocol-flow.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Message sequences for startup, simple queries and the extended query protocol."
+    },
+    {
+      "key": "pg-config",
+      "type": "article",
+      "title": "PostgreSQL: Server Configuration",
+      "url": "https://www.postgresql.org/docs/current/runtime-config.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Every server setting with its default: memory, WAL, planner costs, replication and vacuum."
+    },
+    {
+      "key": "pg-ha",
+      "type": "article",
+      "title": "PostgreSQL: High Availability, Load Balancing, and Replication",
+      "url": "https://www.postgresql.org/docs/current/high-availability.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Streaming replication, standby servers, synchronous replication and failover."
+    },
+    {
+      "key": "luke",
+      "type": "article",
+      "title": "Use The Index, Luke: Anatomy of an SQL Index",
+      "url": "https://use-the-index-luke.com/sql/anatomy",
+      "author": "Markus Winand",
+      "description": "How a B-tree index is structured and the three steps of an index lookup."
+    },
+    {
+      "key": "jepsen",
+      "type": "article",
+      "title": "Jepsen: Consistency Models",
+      "url": "https://jepsen.io/consistency",
+      "author": "Kyle Kingsbury",
+      "description": "A clickable map of consistency models showing which models imply which."
+    },
+    {
+      "key": "raft",
+      "type": "article",
+      "title": "In Search of an Understandable Consensus Algorithm (Raft)",
+      "url": "https://raft.github.io/raft.pdf",
+      "author": "Diego Ongaro and John Ousterhout",
+      "description": "The Raft paper: leader election, log replication and safety."
+    },
+    {
+      "key": "ddia",
+      "type": "book",
+      "title": "Designing Data-Intensive Applications",
+      "url": "https://dataintensive.net/",
+      "author": "Martin Kleppmann",
+      "description": "Storage engines (LSM-trees, B-trees), replication, quorums, transactions, two-phase commit and consensus."
+    },
+    {
+      "key": "normalization",
+      "type": "article",
+      "title": "Database normalization",
+      "url": "https://en.wikipedia.org/wiki/Database_normalization",
+      "author": "Wikipedia contributors",
+      "description": "Overview of the normal forms from 1NF to 6NF and what each one adds."
+    }
+  ],
+  "questions": [
+    {
+      "type": "ordering",
+      "prompt": "Order the SQL-standard transaction isolation levels from weakest to strongest.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Read Uncommitted",
+        "Read Committed",
+        "Repeatable Read",
+        "Serializable"
+      ],
+      "explanation": "Each level forbids everything the one before it forbids, plus more. Read Uncommitted allows dirty reads; Read Committed forbids them; Repeatable Read also forbids non-repeatable reads; Serializable forbids phantoms and every other anomaly, so the result equals some serial order. (PostgreSQL treats Read Uncommitted like Read Committed and its Repeatable Read is snapshot isolation.)",
+      "materials": [
+        "pg-iso"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these normal forms from weakest to strongest (each one implies the ones before it).",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "1NF",
+        "2NF",
+        "3NF",
+        "Boyce-Codd normal form (BCNF)",
+        "4NF"
+      ],
+      "explanation": "1NF requires atomic values; 2NF adds no partial dependency on a composite key; 3NF adds no transitive dependency on a key; BCNF tightens 3NF so every determinant is a candidate key; 4NF additionally forbids non-trivial multivalued dependencies. 5NF (join dependencies) would come after 4NF.",
+      "materials": [
+        "normalization"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these operations by typical latency, fastest to slowest.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Read from L1 CPU cache",
+        "Read from main memory (RAM)",
+        "Random read from an NVMe SSD",
+        "Random read from a spinning hard disk",
+        "Network round trip between continents"
+      ],
+      "explanation": "Rough orders of magnitude: L1 cache about 1 ns, RAM about 100 ns, SSD random read tens of microseconds, HDD seek several milliseconds, and an intercontinental round trip 100 ms or more. Each step is roughly 100 to 1000 times slower than the one before, which is why databases cache pages in RAM and avoid cross-region round trips on the commit path.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the stages a query passes through inside a PostgreSQL server, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Client connection is established",
+        "Parser builds a parse tree",
+        "Rewriter applies rules such as view definitions",
+        "Planner/optimizer chooses an execution plan",
+        "Executor runs the plan and returns rows"
+      ],
+      "explanation": "The manual's 'Path of a Query': a connection exists first, then the parser checks syntax and builds a query tree, the rewrite system expands views and rules, the planner picks the cheapest plan, and finally the executor walks the plan tree and returns rows to the client.",
+      "materials": [
+        "pg-docs"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the pages PostgreSQL visits for an `Index Scan` on a single key in a 3-level B-tree, first to last.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Root page",
+        "Internal (branch) page",
+        "Leaf page",
+        "Heap page holding the row"
+      ],
+      "explanation": "A B-tree lookup starts at the root, follows the pointer for the key range into an internal page, then descends to the leaf page that holds the index entry. The leaf entry contains the row's TID, and a plain Index Scan then fetches that heap page to read the row (an Index-Only Scan may skip this if the page is all-visible).",
+      "materials": [
+        "luke"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these PostgreSQL sizes (default build) from smallest to largest.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Heap tuple header (about 23 bytes)",
+        "TOAST threshold for a row (about 2 kB)",
+        "Data page (8 kB)",
+        "WAL segment file (16 MB)",
+        "Maximum size of one field value (1 GB)"
+      ],
+      "explanation": "The fixed tuple header is 23 bytes; TOAST kicks in when a row exceeds about 2 kB (a quarter page); pages are 8 kB (`block_size` = 8192); WAL segments default to 16 MB (`wal_segment_size`); a single field value can be at most 1 GB. All verified with `SHOW`/`pg_settings` on PostgreSQL 16.",
+      "materials": [
+        "pg-storage"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these PostgreSQL storage units from smallest to largest, where each one contains the one before it.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Row (heap tuple)",
+        "Page (8 kB block)",
+        "Segment file (up to 1 GB)",
+        "Table (relation)",
+        "Database"
+      ],
+      "explanation": "Tuples are stored inside 8 kB pages; pages are stored in segment files that are split at 1 GB; a table's main fork is one or more such segment files; a database contains many tables, and a cluster contains many databases.",
+      "materials": [
+        "pg-storage"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "With `synchronous_commit = on` and no replicas, order these events of an `UPDATE` and its `COMMIT`, first to last (assume the next checkpoint writes the page).",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The change is added to the WAL buffers as a WAL record",
+        "The commit's WAL is flushed to disk",
+        "The client receives the COMMIT acknowledgement",
+        "The checkpoint writes the dirty data page to its file"
+      ],
+      "explanation": "Write-ahead logging means the WAL record exists before anything else is made durable. At commit, WAL up to the commit record is flushed (fsync); only then is the client told the commit succeeded. The modified data page stays dirty in shared buffers and is written later, here by the checkpoint. If the server crashes before that, replaying the WAL rebuilds the change.",
+      "materials": [
+        "pg-wal"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the steps of PostgreSQL crash recovery after a power loss, first to last.",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Read `pg_control` to find the last checkpoint",
+        "Seek to that checkpoint's REDO location in WAL",
+        "Replay WAL records forward to the end of valid WAL",
+        "Start accepting client connections"
+      ],
+      "explanation": "On startup `pg_control` shows the server was not shut down cleanly and points at the latest checkpoint record. Recovery starts at that checkpoint's REDO point and replays every WAL record until it runs out of valid WAL. Uncommitted transactions need no undo pass because MVCC simply treats them as aborted. Only after replay does the server accept connections.",
+      "materials": [
+        "pg-wal"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the steps of a successful two-phase commit, first to last.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Coordinator sends PREPARE to all participants",
+        "Each participant makes its changes durable and votes yes",
+        "Coordinator durably logs the commit decision",
+        "Coordinator sends COMMIT to all participants",
+        "Participants commit and release their locks"
+      ],
+      "explanation": "Phase 1 (prepare/vote): participants promise they can commit by persisting their work and voting yes. Once all votes are yes, the coordinator writes its decision to its own log; that is the commit point. Phase 2: it tells everyone to commit, and they finish and release locks. If the coordinator crashes after logging the decision, it re-sends COMMIT on recovery.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the steps of a PostgreSQL point-in-time recovery, first to last.",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Enable continuous WAL archiving",
+        "Take a base backup",
+        "Restore the base backup into an empty data directory",
+        "Set `restore_command` and `recovery_target_time`, create `recovery.signal`",
+        "Start the server so it replays archived WAL up to the target"
+      ],
+      "explanation": "Archiving must already be on when the backup is taken, or the WAL needed to roll forward is missing. After the incident you restore the base backup files, then configure recovery inside that restored directory (the signal file belongs there), and finally start the server: it fetches archived WAL with `restore_command` and replays it until the target time.",
+      "materials": [
+        "pg-pitr"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these events in the life of an old row version in PostgreSQL, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`UPDATE` sets `xmax` on the old version and inserts a new one",
+        "The updating transaction commits",
+        "The last snapshot that could still see the old version ends",
+        "`VACUUM` removes the dead version and records the free space",
+        "A later `INSERT` reuses that space in the page"
+      ],
+      "explanation": "MVCC never overwrites in place: the old tuple is marked with the updater's xid and a new tuple is written. After commit the old version is dead to new snapshots but may still be visible to older ones; only once no snapshot can see it can `VACUUM` reclaim it and record the space in the free space map, which later inserts use.",
+      "materials": [
+        "pg-vacuum"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the steps of a safe manual failover from a failed PostgreSQL primary to a streaming standby, first to last.",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Confirm the primary has failed",
+        "Fence the old primary so it cannot accept writes",
+        "Promote the standby with `pg_promote()` or `pg_ctl promote`",
+        "Point applications at the new primary",
+        "Rebuild the old primary as a standby with `pg_rewind`"
+      ],
+      "explanation": "You first decide the primary is really gone, then fence it (STONITH) before promotion, otherwise two primaries could accept writes (split brain). Promotion ends recovery and starts a new timeline; only then can clients be redirected to it. The old primary is repaired last: `pg_rewind` syncs it to the new timeline so it can follow the new primary.",
+      "materials": [
+        "pg-ha"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the steps of a Raft leader election, first to last.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A follower's election timeout expires without a heartbeat",
+        "It increments its term and becomes a candidate",
+        "It votes for itself and sends RequestVote RPCs",
+        "It receives votes from a majority of servers",
+        "It becomes leader and sends AppendEntries heartbeats"
+      ],
+      "explanation": "A follower that hears nothing from a leader for a randomized timeout starts an election: new term, candidate state, self-vote, then RequestVote to all peers. A majority of votes in that term makes it leader, and it immediately sends heartbeats (empty AppendEntries) to stop other elections.",
+      "materials": [
+        "raft"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these single-object consistency models from weakest to strongest, where each one implies the one before it.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Monotonic reads",
+        "PRAM (pipelined RAM)",
+        "Causal consistency",
+        "Sequential consistency",
+        "Linearizability"
+      ],
+      "explanation": "On the Jepsen map: PRAM is the combination of monotonic reads, monotonic writes and read-your-writes, so it implies monotonic reads. Causal consistency adds writes-follow-reads and therefore implies PRAM. Sequential consistency requires one total order consistent with each process's order, which implies causal. Linearizability additionally respects real time, so it implies sequential.",
+      "materials": [
+        "jepsen"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these transactional consistency models from weakest to strongest, where each one implies the one before it.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Read uncommitted",
+        "Read committed",
+        "Monotonic atomic view",
+        "Snapshot isolation"
+      ],
+      "explanation": "Per Jepsen's hierarchy: read committed forbids dirty reads that read uncommitted allows. Monotonic atomic view strengthens read committed: once you see one write of a transaction you see all of them. Snapshot isolation reads from a single consistent snapshot, which implies monotonic atomic view. (Serializable is not on this chain: it neither implies nor is implied by snapshot isolation.)",
+      "materials": [
+        "jepsen"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these PostgreSQL table-level lock modes from weakest to strongest (each conflicts with every mode the previous one conflicts with, plus more).",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`ROW SHARE`",
+        "`SHARE UPDATE EXCLUSIVE`",
+        "`SHARE ROW EXCLUSIVE`",
+        "`EXCLUSIVE`",
+        "`ACCESS EXCLUSIVE`"
+      ],
+      "explanation": "From the conflict table: ROW SHARE conflicts with EXCLUSIVE and ACCESS EXCLUSIVE (2 modes). SHARE UPDATE EXCLUSIVE adds itself, SHARE and SHARE ROW EXCLUSIVE (5). SHARE ROW EXCLUSIVE also adds ROW EXCLUSIVE (6). EXCLUSIVE also adds ROW SHARE (7). ACCESS EXCLUSIVE conflicts with everything, including plain SELECT's ACCESS SHARE (8).",
+      "materials": [
+        "pg-locking"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these PostgreSQL commands by how many lock modes their table lock conflicts with, fewest to most.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`SELECT`",
+        "`INSERT`",
+        "`CREATE INDEX` (not concurrently)",
+        "`CREATE TRIGGER`",
+        "`ALTER TABLE ... ADD COLUMN`"
+      ],
+      "explanation": "Checked in `pg_locks` on PostgreSQL 16: SELECT takes ACCESS SHARE (conflicts with 1 mode), INSERT takes ROW EXCLUSIVE (4), CREATE INDEX takes SHARE (5, so it blocks writes but not reads), CREATE TRIGGER takes SHARE ROW EXCLUSIVE (6), and ADD COLUMN takes ACCESS EXCLUSIVE (all 8, so it blocks even SELECT).",
+      "materials": [
+        "pg-locking"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order PostgreSQL's row-level lock modes from weakest to strongest.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`FOR KEY SHARE`",
+        "`FOR SHARE`",
+        "`FOR NO KEY UPDATE`",
+        "`FOR UPDATE`"
+      ],
+      "explanation": "FOR KEY SHARE conflicts only with FOR UPDATE; FOR SHARE also conflicts with FOR NO KEY UPDATE; FOR NO KEY UPDATE (taken by an UPDATE that changes no key columns) also conflicts with FOR SHARE; FOR UPDATE conflicts with all four. Foreign key checks use FOR KEY SHARE so they don't block ordinary updates of non-key columns.",
+      "materials": [
+        "pg-locking"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "For a one-row `UPDATE` on a PostgreSQL table with all four kinds of trigger, order the triggers as they fire, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`BEFORE` statement trigger",
+        "`BEFORE` row trigger",
+        "`AFTER` row trigger",
+        "`AFTER` statement trigger"
+      ],
+      "explanation": "Verified on PostgreSQL 16: the BEFORE STATEMENT trigger runs once before any row is touched, BEFORE ROW runs just before the row is changed (and can modify or skip it), AFTER ROW runs once the change is done (queued until the statement ends), and AFTER STATEMENT runs last. Several triggers of the same kind fire in alphabetical order by name.",
+      "materials": [
+        "pg-docs"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "An `INSERT` in PostgreSQL violates every check below. Order them by when PostgreSQL applies them, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`BEFORE INSERT` row trigger",
+        "`NOT NULL` constraint",
+        "`CHECK` constraint",
+        "Unique / primary key index",
+        "Foreign key constraint"
+      ],
+      "explanation": "Verified on PostgreSQL 16 by fixing one violation at a time: the BEFORE trigger always ran, then the NOT NULL error appeared, then CHECK, then the duplicate-key error from the unique index, and finally the foreign key error. NOT NULL and CHECK are tested on the finished row (after BEFORE triggers can change it), uniqueness is enforced when the index entry is inserted, and foreign keys are checked by internal AFTER triggers.",
+      "materials": [
+        "pg-docs"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these `synchronous_commit` settings (with a synchronous standby configured) from least to most work the primary waits for before confirming a commit.",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`off`",
+        "`local`",
+        "`remote_write`",
+        "`on`",
+        "`remote_apply`"
+      ],
+      "explanation": "`off` doesn't even wait for the local WAL flush. `local` waits for the local flush only. `remote_write` also waits until the standby has written the WAL to its OS. `on` waits until the standby has flushed it to disk. `remote_apply` waits until the standby has replayed it, so the change is visible to queries there.",
+      "materials": [
+        "pg-config",
+        "pg-ha"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these PostgreSQL planner cost settings by their default value, smallest to largest.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`cpu_operator_cost`",
+        "`cpu_index_tuple_cost`",
+        "`cpu_tuple_cost`",
+        "`seq_page_cost`",
+        "`random_page_cost`"
+      ],
+      "explanation": "Defaults (checked with `pg_settings`): cpu_operator_cost 0.0025, cpu_index_tuple_cost 0.005, cpu_tuple_cost 0.01, seq_page_cost 1.0, random_page_cost 4.0. Costs are in units of one sequential page read; random reads are assumed 4x more expensive, which on SSDs is often lowered toward 1.1.",
+      "materials": [
+        "pg-config"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these transaction-ID ages (PostgreSQL defaults) from smallest to largest.",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`vacuum_freeze_min_age`",
+        "`vacuum_freeze_table_age`",
+        "`autovacuum_freeze_max_age`",
+        "`vacuum_failsafe_age`",
+        "XID wraparound limit (about 2^31)"
+      ],
+      "explanation": "Defaults: 50 million, 150 million, 200 million and 1.6 billion. Rows older than freeze_min_age get frozen when touched; at freeze_table_age VACUUM scans the whole table aggressively; at autovacuum_freeze_max_age an anti-wraparound autovacuum is forced; at failsafe age VACUUM skips index cleanup and cost delays to finish fast. All of these sit below the about 2.1 billion distance where xid comparison would wrap around.",
+      "materials": [
+        "pg-vacuum",
+        "pg-config"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these PostgreSQL memory settings by their default value, smallest to largest.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`work_mem`",
+        "`temp_buffers`",
+        "`maintenance_work_mem`",
+        "`shared_buffers`",
+        "`effective_cache_size`"
+      ],
+      "explanation": "Defaults: work_mem 4 MB (per sort or hash operation), temp_buffers 8 MB, maintenance_work_mem 64 MB (VACUUM, CREATE INDEX), shared_buffers 128 MB and effective_cache_size 4 GB. effective_cache_size allocates nothing; it is only the planner's guess of how much the OS plus PostgreSQL can cache.",
+      "materials": [
+        "pg-config"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these PostgreSQL time settings by their default value, shortest to longest.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`wal_writer_delay`",
+        "`deadlock_timeout`",
+        "`max_standby_streaming_delay`",
+        "`autovacuum_naptime`",
+        "`checkpoint_timeout`"
+      ],
+      "explanation": "Defaults (checked with `pg_settings`): wal_writer_delay 200 ms, deadlock_timeout 1 s, max_standby_streaming_delay 30 s, autovacuum_naptime 1 min and checkpoint_timeout 5 min.",
+      "materials": [
+        "pg-config"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "For a plan `Bitmap Heap Scan` over `BitmapAnd` of two `Bitmap Index Scan`s, order the work from first to last.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Each Bitmap Index Scan collects matching row locations",
+        "BitmapAnd intersects the two bitmaps",
+        "Bitmap Heap Scan reads heap pages in physical order",
+        "Rows on lossy pages are rechecked against the condition",
+        "Matching rows are passed to the parent node"
+      ],
+      "explanation": "The child index scans run first and produce bitmaps of TIDs; BitmapAnd combines them. The heap scan then visits pages in block order (avoiding random I/O); if memory forced a page to be stored lossily, every row on it must be rechecked against the original condition before it is returned upward.",
+      "materials": [
+        "pg-docs",
+        "pg-config"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the messages a client sends to run one prepared query with PostgreSQL's extended query protocol, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Parse`",
+        "`Bind`",
+        "`Describe` (portal)",
+        "`Execute`",
+        "`Sync`"
+      ],
+      "explanation": "Parse creates a prepared statement from SQL text; Bind supplies parameter values and creates a portal; Describe on that portal asks for the row format (it needs the portal, so it follows Bind); Execute runs the portal; Sync ends the cycle, commits an implicit transaction and makes the server send ReadyForQuery.",
+      "materials": [
+        "pg-protocol"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the messages a PostgreSQL server sends back for a simple-protocol `SELECT` that returns rows, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`RowDescription`",
+        "`DataRow` (one per row)",
+        "`CommandComplete`",
+        "`ReadyForQuery`"
+      ],
+      "explanation": "The server first describes the columns, then streams one DataRow per result row, then CommandComplete with the tag (for example `SELECT 3`), and finally ReadyForQuery, which tells the client it may send the next query and reports the transaction status.",
+      "materials": [
+        "pg-protocol"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the steps of a new client connection to a PostgreSQL server, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The postmaster accepts the TCP connection",
+        "The postmaster forks a new backend process",
+        "The backend authenticates the client using `pg_hba.conf`",
+        "The backend sends `ReadyForQuery`"
+      ],
+      "explanation": "PostgreSQL uses one process per connection: the postmaster only accepts the socket and forks a backend. Authentication against `pg_hba.conf` runs in that child process, so a slow login can't stall the postmaster. After successful authentication and startup the backend sends ReadyForQuery and the session can run queries.",
+      "materials": [
+        "pg-docs",
+        "pg-protocol"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the phases of a plain `VACUUM` on a table with indexes as `pg_stat_progress_vacuum` first reports them, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "scanning heap",
+        "vacuuming indexes",
+        "vacuuming heap",
+        "cleaning up indexes",
+        "truncating heap"
+      ],
+      "explanation": "VACUUM first scans the heap to collect dead tuple IDs; it then removes those IDs from every index (index entries must go before the heap line pointers can be reused); then it marks the heap items unused; then it does per-index cleanup such as updating statistics; finally it may truncate empty pages at the end of the table. The index and heap vacuuming phases can repeat if the dead-TID memory fills up.",
+      "materials": [
+        "pg-docs",
+        "pg-vacuum"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the parts of a PostgreSQL heap page from the start of the page to the end.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Page header (24 bytes)",
+        "Line pointer array (ItemIdData)",
+        "Free space",
+        "Tuples (items)",
+        "Special space"
+      ],
+      "explanation": "A page starts with a 24-byte header, followed by line pointers that grow forward, then unallocated free space, then the tuples which are allocated from the end backward, and finally the special space (empty on ordinary heap pages, used by index access methods such as B-tree for sibling links).",
+      "materials": [
+        "pg-storage"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the parts of a PostgreSQL heap tuple from its first byte to its last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Fixed header (23 bytes)",
+        "Null bitmap",
+        "Alignment padding up to `t_hoff`",
+        "Column values"
+      ],
+      "explanation": "Every tuple starts with the fixed HeapTupleHeaderData (xmin, xmax, ctid and so on). If any column is null, a null bitmap follows. The user data must start at a MAXALIGN-aligned offset recorded in `t_hoff`, so padding may come next, and then the column values themselves.",
+      "materials": [
+        "pg-storage"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the steps of a write in an LSM-tree storage engine (Cassandra/RocksDB style), first to last.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Append the write to the commit log",
+        "Insert it into the in-memory memtable",
+        "Acknowledge the write to the client",
+        "Flush the full memtable to an SSTable on disk",
+        "Compaction merges SSTables"
+      ],
+      "explanation": "The commit log makes the write durable, the memtable makes it readable; after both the write is acknowledged. Later, when the memtable reaches its size limit, it is written out as an immutable sorted SSTable, and in the background compaction merges SSTables and drops overwritten or deleted values.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the places an LSM-tree engine like RocksDB looks for a key during a point read, first to last.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Active memtable",
+        "Immutable memtables waiting to be flushed",
+        "Level-0 SSTables",
+        "Level-1 SSTables",
+        "Bottom-level SSTables"
+      ],
+      "explanation": "A read checks data from newest to oldest and stops at the first hit, because newer values shadow older ones: the active memtable, then memtables that are being flushed, then level 0 (newest files first), then each deeper level in turn. Bloom filters let it skip most SSTables that can't contain the key.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these database milestones from earliest to latest.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "IBM IMS hierarchical database (Apollo program)",
+        "Codd's paper on the relational model",
+        "Oracle V2, an early commercial SQL database",
+        "Amazon's Dynamo paper",
+        "Google's Spanner paper"
+      ],
+      "explanation": "IMS was built for the Apollo program in the late 1960s; Codd published 'A Relational Model of Data for Large Shared Data Banks' in 1970; Oracle V2 shipped in 1979; the Dynamo paper appeared at SOSP 2007 and inspired many NoSQL stores; the Spanner paper (globally distributed, externally consistent transactions) appeared at OSDI 2012.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the PostgreSQL releases that introduced these features, earliest to latest.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`jsonb` type (9.4)",
+        "Declarative table partitioning (10)",
+        "`CREATE PROCEDURE` with transaction control (11)",
+        "Generated columns (12)",
+        "`MERGE` statement (15)"
+      ],
+      "explanation": "jsonb arrived in 9.4 (2014), declarative partitioning with `PARTITION BY` in 10 (2017), procedures in 11 (2018), stored generated columns in 12 (2019), and SQL-standard MERGE in 15 (2022).",
+      "materials": [
+        "pg-docs"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the messages of one successful round of single-decree Paxos, first to last.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Proposer sends Prepare(n)",
+        "Acceptors reply Promise(n)",
+        "Proposer sends Accept(n, value)",
+        "Acceptors reply Accepted(n, value)",
+        "Learners learn the chosen value"
+      ],
+      "explanation": "Phase 1: the proposer picks ballot n and asks a majority to promise to ignore smaller ballots; the promises report any value already accepted. Phase 2: it asks acceptors to accept a value (the highest-numbered previously accepted one, or its own). Once a majority accepts, the value is chosen and learners are informed.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the steps of committing a client command in Raft, first to last.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The client sends the command to the leader",
+        "The leader appends it to its own log",
+        "The leader sends AppendEntries to its followers",
+        "A majority stores the entry, so it is committed",
+        "The leader applies it to its state machine and replies"
+      ],
+      "explanation": "Only the leader accepts client commands. It writes the entry to its log, replicates it with AppendEntries, and counts it committed once a majority of servers has stored it. Then it applies the entry to its state machine and returns the result; followers apply it after learning the new commit index.",
+      "materials": [
+        "raft"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the steps of starting PostgreSQL logical replication for an existing table, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`CREATE PUBLICATION` on the publisher",
+        "`CREATE SUBSCRIPTION` on the subscriber",
+        "A replication slot is created on the publisher",
+        "The table's existing rows are copied to the subscriber",
+        "Ongoing changes are streamed and applied"
+      ],
+      "explanation": "The publication must exist before a subscription can name it. Creating the subscription connects to the publisher and creates a replication slot there, so no change after that point is lost. Table synchronization workers then copy the existing data, and after that the apply worker streams and applies new changes.",
+      "materials": [
+        "pg-docs"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the steps of a PostgreSQL checkpoint, first to last.",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Record the current WAL position as the REDO point",
+        "Write all dirty shared buffers to the data files",
+        "Write the checkpoint record to WAL",
+        "Update `pg_control` with the new checkpoint location",
+        "Remove or recycle WAL segments older than the REDO point"
+      ],
+      "explanation": "The REDO point is fixed first: every change after it will be replayed on recovery. Then dirty buffers are written (spread out over time) and fsynced. Only when all data is on disk is the checkpoint record written and `pg_control` updated to point at it. WAL older than the new REDO point is no longer needed for crash recovery and can be removed or recycled.",
+      "materials": [
+        "pg-wal"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order what happens when a PostgreSQL backend runs into a deadlock, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It blocks waiting for a lock",
+        "It sleeps for `deadlock_timeout`",
+        "It runs the deadlock check on the wait-for graph",
+        "It finds a cycle of waiting transactions",
+        "It aborts its transaction with a deadlock error"
+      ],
+      "explanation": "Deadlock checks are expensive, so a waiting backend first sleeps for deadlock_timeout (1 s by default), hoping the lock is released. If it is still waiting, it examines the wait-for graph; if it finds a cycle, it aborts its own transaction with SQLSTATE 40P01 so the others can proceed.",
+      "materials": [
+        "pg-locking"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Under Read Committed in PostgreSQL, T1 has updated a row but not committed, and T2 runs `UPDATE` on the same row. Order what happens, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "T2 finds the row locked by T1",
+        "T2 blocks until T1 finishes",
+        "T1 commits",
+        "T2 re-checks its `WHERE` clause on the new row version",
+        "T2 updates the new row version"
+      ],
+      "explanation": "T2 can't update a row version another transaction is changing, so it waits. When T1 commits, T2 doesn't fail (that's only at Repeatable Read or Serializable); instead it takes the newest version of the row, re-evaluates its WHERE condition against it, and if it still matches applies its update to that version.",
+      "materials": [
+        "pg-iso"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these PostgreSQL backup setups by worst-case data loss (RPO) after losing the primary, largest to smallest.",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Nightly `pg_dump`",
+        "Hourly base backups without WAL archiving",
+        "WAL archiving with `archive_timeout = 5min`",
+        "Synchronous replication with `synchronous_commit = on`"
+      ],
+      "explanation": "A nightly dump can lose up to a day; hourly backups up to an hour. Continuous archiving with archive_timeout forces a WAL segment switch at least every 5 minutes, bounding loss to about that. Synchronous replication confirms a commit only after a standby has flushed it, so no acknowledged commit is lost.",
+      "materials": [
+        "pg-pitr",
+        "pg-ha"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In a Cassandra cluster with replication factor 5, order these write consistency levels by the number of replica acknowledgements they require, fewest to most.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`ANY`",
+        "`ONE`",
+        "`TWO`",
+        "`QUORUM`",
+        "`ALL`"
+      ],
+      "explanation": "ANY can succeed with zero replica writes (a hint stored on the coordinator counts). ONE needs 1, TWO needs 2, QUORUM needs a majority of 5, which is 3, and ALL needs all 5 replicas.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these anomalies by the weakest SQL-standard isolation level that prevents them, from prevented at the weakest level to prevented only at the strongest.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Dirty write",
+        "Dirty read",
+        "Non-repeatable read",
+        "Phantom read"
+      ],
+      "explanation": "Dirty writes are forbidden at every level, even Read Uncommitted. Dirty reads are first prevented at Read Committed, non-repeatable reads at Repeatable Read, and phantoms only at Serializable in the SQL-standard table. (PostgreSQL's Repeatable Read happens to prevent phantoms too.)",
+      "materials": [
+        "pg-iso"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these sections of a plain-text `pg_dump` script for a schema with a foreign key, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`CREATE TABLE` statements",
+        "`COPY` of the table data",
+        "Primary keys and indexes",
+        "Foreign key constraints"
+      ],
+      "explanation": "Verified with pg_dump 16: tables are created bare, data is loaded with COPY (fast, no index maintenance or FK checks), then primary keys and indexes are built in bulk, and foreign keys come last because they need the referenced unique index and all data to be present.",
+      "materials": [
+        "pg-docs"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A row in PostgreSQL is larger than the TOAST threshold. Order what TOAST does, first to last.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Notice the row exceeds about 2 kB",
+        "Try compressing wide `EXTENDED` columns inline",
+        "Move values that are still too large into the TOAST table",
+        "Store a TOAST pointer in the main row"
+      ],
+      "explanation": "TOAST only runs when a row exceeds TOAST_TUPLE_THRESHOLD (about 2 kB). For EXTENDED columns compression is tried first; if the row is still above the target, values are moved out of line into the table's TOAST relation in chunks, and the main row keeps a small pointer to them.",
+      "materials": [
+        "pg-storage"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the steps of bringing up a new PostgreSQL streaming standby, first to last.",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Run `pg_basebackup -R` against the primary",
+        "Start the standby server",
+        "The walreceiver connects and streams WAL from the primary",
+        "Replay reaches a consistent state",
+        "The standby accepts read-only queries"
+      ],
+      "explanation": "pg_basebackup copies the data directory and with `-R` writes `standby.signal` and `primary_conninfo`. On start the standby enters recovery and its walreceiver streams WAL from the backup's starting point. Once enough WAL is replayed for the data to be consistent, a hot standby begins accepting read-only connections.",
+      "materials": [
+        "pg-ha"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "With `full_page_writes = on`, order these WAL events for one data page, first to last.",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A checkpoint begins (new REDO point)",
+        "The first change to the page logs a full page image",
+        "Later changes to the page log only small records",
+        "The next checkpoint begins",
+        "The next change to the page logs a full image again"
+      ],
+      "explanation": "To survive torn pages, the first modification of each page after a checkpoint's REDO point writes the whole 8 kB page into WAL; subsequent changes before the next checkpoint log only the delta. When the next checkpoint starts the cycle repeats. This is why very frequent checkpoints inflate WAL volume.",
+      "materials": [
+        "pg-wal",
+        "pg-config"
+      ]
+    }
+  ]
+}

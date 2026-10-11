@@ -1,5 +1,15 @@
 import { ReactFlowProvider } from '@xyflow/react';
-import { ArrowLeft, CircleCheck, CircleX, LayoutGrid, Send, Trash2 } from 'lucide-react';
+import {
+  ArrowLeft,
+  BookOpen,
+  ChevronDown,
+  CircleCheck,
+  CircleX,
+  ExternalLink,
+  LayoutGrid,
+  Send,
+  Trash2,
+} from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -9,13 +19,20 @@ import {
   offendingEdges,
   useQuestionMaterials,
   useSubmitAnswer,
-  type DesignKind,
   type DesignQuestion,
   type DesignResult,
 } from '@/features/questions';
 import { isSignInCancelled } from '@/stores/useAuthPrompt';
 
-import { addNode, autoLayout, loadDraft, saveDraft, toGraph, type BoardState } from '../board';
+import {
+  addNode,
+  autoLayout,
+  loadDraft,
+  saveDraft,
+  toGraph,
+  type BoardState,
+  type PaletteItem,
+} from '../board';
 import { BoardLists } from './BoardLists';
 import { DesignCanvas } from './DesignCanvas';
 import { DesignResults } from './DesignResults';
@@ -43,11 +60,11 @@ export function DesignChallenge({ question }: { question: DesignQuestion }) {
     [result, question.design, board],
   );
 
-  const add = (kind: DesignKind) => {
+  const add = (item: PaletteItem) => {
     // new components land in a free spot to the right of what's there
     const x = board.nodes.length ? Math.max(...board.nodes.map((n) => n.x)) + 200 : 0;
     const y = (board.nodes.length % 4) * 90;
-    setBoard(addNode(board, kind, x, y));
+    setBoard(addNode(board, item, x, y));
     refit();
   };
   const tidy = () => {
@@ -106,6 +123,28 @@ export function DesignChallenge({ question }: { question: DesignQuestion }) {
             );
           })}
         </ul>
+        {materials.length > 0 && (
+          // open any time, before or after checking a design
+          <details className="design-brief__materials">
+            <summary>
+              <BookOpen size={14} aria-hidden /> {t('design.materials.title')} ({materials.length})
+              <ChevronDown size={14} aria-hidden className="design-brief__materials-chevron" />
+            </summary>
+            <ul>
+              {materials.map((m) => (
+                <li key={m.id}>
+                  <a href={m.url} target="_blank" rel="noopener noreferrer">
+                    {m.title} <ExternalLink size={12} aria-hidden />
+                  </a>
+                  {m.author && <span className="muted"> · {m.author}</span>}
+                  {m.description && (
+                    <span className="design-brief__materials-desc muted">{m.description}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
         <p className="tok-com design-brief__hint">
           {'// '}
           {t('design.board.hint')}
@@ -197,6 +236,7 @@ export function DesignChallenge({ question }: { question: DesignQuestion }) {
       )}
 
       {result && <DesignResults question={question} result={result} materials={materials} />}
+      <p className="design-trademarks">{t('design.trademarks')}</p>
     </div>
   );
 }

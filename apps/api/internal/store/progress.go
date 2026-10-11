@@ -3,6 +3,8 @@ package store
 import (
 	"context"
 	"time"
+
+	"github.com/jackc/pgx/v5"
 )
 
 // Progress is one user's learning overview (GET /api/me/progress).
@@ -41,61 +43,93 @@ type DayCount struct {
 
 // UserProgress builds the overview. Days are calendar days in loc (the
 // user's time zone), so "today" and the streak match their clock.
+//
+// The four queries go to the database in one round trip, and the answer
+// queries read only idx_question_answers_user_time.
 func (s *Store) UserProgress(ctx context.Context, userID string, loc *time.Location) (Progress, error) {
 	var p Progress
-	t := &p.Totals
-	if err := s.pool.QueryRow(ctx, `
-		SELECT (SELECT count(*) FROM questions),
-		       (SELECT count(DISTINCT question_id) FROM question_answers WHERE user_id = $1),
-		       (SELECT count(*) FROM question_answers WHERE user_id = $1),
-		       (SELECT count(*) FROM question_answers WHERE user_id = $1 AND is_correct),
-		       (SELECT count(*) FROM review_schedule WHERE user_id = $1 AND due_at <= now())`, userID,
-	).Scan(&t.Questions, &t.Seen, &t.Answers, &t.Correct, &t.DueNow); err != nil {
-		return p, err
-	}
-
-	var err error
-	if p.ByTag, err = collect[TagProgress](s.pool.Query(ctx, `
-		SELECT t.name,
-		       count(DISTINCT qt.question_id),
-		       count(DISTINCT a.question_id),
-		       count(a.id),
-		       count(a.id) FILTER (WHERE a.is_correct)
-		FROM tags t
-		JOIN question_tags qt ON qt.tag_id = t.id
-		LEFT JOIN question_answers a ON a.question_id = qt.question_id AND a.user_id = $1
-		GROUP BY t.name
-		ORDER BY t.name`, userID)); err != nil {
-		return p, err
-	}
-
 	tz := loc.String()
 	now := time.Now().In(loc)
 	today := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, loc)
 
+	b := &pgx.Batch{}
+	t := &p.Totals
+	b.Queue(`
+		SELECT (SELECT count(*) FROM questions),
+		       count(DISTINCT question_id),
+		       count(*),
+		       count(*) FILTER (WHERE is_correct),
+		       (SELECT count(*) FROM review_schedule WHERE user_id = $1 AND due_at <= now())
+		FROM question_answers WHERE user_id = $1`, userID,
+	).QueryRow(func(row pgx.Row) error {
+		return row.Scan(&t.Questions, &t.Seen, &t.Answers, &t.Correct, &t.DueNow)
+	})
+
+	// Per question first, so each question's answers are counted once per tag
+	// without DISTINCT over the joined rows.
+	b.Queue(`
+		WITH mine AS (
+		  SELECT question_id, count(*) AS answers, count(*) FILTER (WHERE is_correct) AS correct
+		  FROM question_answers WHERE user_id = $1
+		  GROUP BY question_id
+		)
+		SELECT t.name,
+		       count(*)::int,
+		       count(m.question_id)::int,
+		       coalesce(sum(m.answers), 0)::int,
+		       coalesce(sum(m.correct), 0)::int
+		FROM tags t
+		JOIN question_tags qt ON qt.tag_id = t.id
+		LEFT JOIN mine m ON m.question_id = qt.question_id
+		GROUP BY t.name
+		ORDER BY t.name`, userID,
+	).Query(func(rows pgx.Rows) error {
+		var err error
+		p.ByTag, err = collect[TagProgress](rows, nil)
+		return err
+	})
+
 	// Answers per local day for the last year (activity chart + streak).
-	rows, err := s.pool.Query(ctx, `
-		SELECT to_char((answered_at AT TIME ZONE $2)::date, 'YYYY-MM-DD'),
+	byDay := map[string]DayActivity{}
+	b.Queue(`
+		SELECT (answered_at AT TIME ZONE $2)::date AS day,
 		       count(*), count(*) FILTER (WHERE is_correct)
 		FROM question_answers
 		WHERE user_id = $1 AND answered_at > now() - interval '366 days'
-		GROUP BY 1`, userID, tz)
-	if err != nil {
-		return p, err
-	}
-	byDay := map[string]DayActivity{}
-	for rows.Next() {
+		GROUP BY day`, userID, tz,
+	).Query(func(rows pgx.Rows) error {
+		var day time.Time
 		var d DayActivity
-		if err := rows.Scan(&d.Date, &d.Answers, &d.Correct); err != nil {
-			rows.Close()
-			return p, err
-		}
-		byDay[d.Date] = d
-	}
-	rows.Close()
-	if err := rows.Err(); err != nil {
+		_, err := pgx.ForEachRow(rows, []any{&day, &d.Answers, &d.Correct}, func() error {
+			d.Date = day.Format("2006-01-02")
+			byDay[d.Date] = d
+			return nil
+		})
+		return err
+	})
+
+	// Reviews per local day for the next week; overdue ones count as today.
+	upcoming := map[string]int{}
+	b.Queue(`
+		SELECT greatest((due_at AT TIME ZONE $2)::date, (now() AT TIME ZONE $2)::date) AS day,
+		       count(*)
+		FROM review_schedule
+		WHERE user_id = $1 AND due_at < $3
+		GROUP BY day`, userID, tz, today.AddDate(0, 0, 7),
+	).Query(func(rows pgx.Rows) error {
+		var day time.Time
+		var n int
+		_, err := pgx.ForEachRow(rows, []any{&day, &n}, func() error {
+			upcoming[day.Format("2006-01-02")] = n
+			return nil
+		})
+		return err
+	})
+
+	if err := s.pool.SendBatch(ctx, b).Close(); err != nil {
 		return p, err
 	}
+
 	for i := 29; i >= 0; i-- {
 		date := today.AddDate(0, 0, -i).Format("2006-01-02")
 		d := byDay[date]
@@ -116,30 +150,6 @@ func (s *Store) UserProgress(ctx context.Context, userID string, loc *time.Locat
 		day = day.AddDate(0, 0, -1)
 	}
 
-	// Reviews per local day for the next week; overdue ones count as today.
-	rows, err = s.pool.Query(ctx, `
-		SELECT to_char(greatest((due_at AT TIME ZONE $2)::date, (now() AT TIME ZONE $2)::date), 'YYYY-MM-DD'),
-		       count(*)
-		FROM review_schedule
-		WHERE user_id = $1 AND due_at < $3
-		GROUP BY 1`, userID, tz, today.AddDate(0, 0, 7))
-	if err != nil {
-		return p, err
-	}
-	upcoming := map[string]int{}
-	for rows.Next() {
-		var date string
-		var n int
-		if err := rows.Scan(&date, &n); err != nil {
-			rows.Close()
-			return p, err
-		}
-		upcoming[date] = n
-	}
-	rows.Close()
-	if err := rows.Err(); err != nil {
-		return p, err
-	}
 	for i := 0; i < 7; i++ {
 		date := today.AddDate(0, 0, i).Format("2006-01-02")
 		p.Upcoming = append(p.Upcoming, DayCount{Date: date, Count: upcoming[date]})

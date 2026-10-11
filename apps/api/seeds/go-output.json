@@ -1,0 +1,926 @@
+{
+  "name": "Go: predict the output",
+  "materials": [
+    {
+      "key": "spec",
+      "type": "link",
+      "title": "The Go Programming Language Specification",
+      "url": "https://go.dev/ref/spec",
+      "author": "The Go Authors",
+      "description": "The authoritative definition of Go's syntax and semantics."
+    },
+    {
+      "key": "effective",
+      "type": "article",
+      "title": "Effective Go",
+      "url": "https://go.dev/doc/effective_go",
+      "author": "The Go Authors",
+      "description": "Official guide to writing clear, idiomatic Go code."
+    },
+    {
+      "key": "slices-blog",
+      "type": "article",
+      "title": "Go Slices: usage and internals",
+      "url": "https://go.dev/blog/slices-intro",
+      "author": "The Go Authors",
+      "description": "Explains how slices relate to arrays, length, capacity and append."
+    },
+    {
+      "key": "strings-blog",
+      "type": "article",
+      "title": "Strings, bytes, runes and characters in Go",
+      "url": "https://go.dev/blog/strings",
+      "author": "The Go Authors",
+      "description": "Explains how Go strings hold bytes and how range decodes UTF-8 runes."
+    },
+    {
+      "key": "defer-blog",
+      "type": "article",
+      "title": "Defer, Panic, and Recover",
+      "url": "https://go.dev/blog/defer-panic-and-recover",
+      "author": "The Go Authors",
+      "description": "Describes the rules for deferred calls, panics and recover."
+    },
+    {
+      "key": "errors-blog",
+      "type": "article",
+      "title": "Working with Errors in Go 1.13",
+      "url": "https://go.dev/blog/go1.13-errors",
+      "author": "The Go Authors",
+      "description": "Introduces error wrapping with %w, errors.Is and errors.As."
+    },
+    {
+      "key": "errors-pkg",
+      "type": "link",
+      "title": "Package errors",
+      "url": "https://pkg.go.dev/errors",
+      "author": "The Go Authors",
+      "description": "Reference documentation for the standard errors package."
+    },
+    {
+      "key": "loopvar",
+      "type": "article",
+      "title": "Fixing For Loops in Go 1.22",
+      "url": "https://go.dev/blog/loopvar-preview",
+      "author": "The Go Authors",
+      "description": "Explains the per-iteration loop variable semantics introduced in Go 1.22."
+    },
+    {
+      "key": "generics",
+      "type": "article",
+      "title": "Tutorial: Getting started with generics",
+      "url": "https://go.dev/doc/tutorial/generics",
+      "author": "The Go Authors",
+      "description": "Official tutorial on type parameters, constraints and type inference."
+    },
+    {
+      "key": "faq",
+      "type": "article",
+      "title": "Go FAQ",
+      "url": "https://go.dev/doc/faq",
+      "author": "The Go Authors",
+      "description": "Official answers to common questions, including why a nil error can be non-nil."
+    },
+    {
+      "key": "slices-pkg",
+      "type": "link",
+      "title": "Package slices",
+      "url": "https://pkg.go.dev/slices",
+      "author": "The Go Authors",
+      "description": "Reference documentation for the generic slices package."
+    },
+    {
+      "key": "fmt-pkg",
+      "type": "link",
+      "title": "Package fmt",
+      "url": "https://pkg.go.dev/fmt",
+      "author": "The Go Authors",
+      "description": "Reference documentation for formatted I/O and the printing verbs."
+    },
+    {
+      "key": "sync-pkg",
+      "type": "link",
+      "title": "Package sync",
+      "url": "https://pkg.go.dev/sync",
+      "author": "The Go Authors",
+      "description": "Reference documentation for Mutex, WaitGroup, Once and other primitives."
+    },
+    {
+      "key": "maps-blog",
+      "type": "article",
+      "title": "Go maps in action",
+      "url": "https://go.dev/blog/maps",
+      "author": "The Go Authors",
+      "description": "Covers map creation, zero values, deletion and iteration order."
+    }
+  ],
+  "questions": [
+    {
+      "type": "output",
+      "prompt": "Predict the output: two appends to the same slice that has spare capacity.",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta := make([]int, 3, 10)\n\tb := append(a, 4)\n\tc := append(a, 5)\n\tfmt.Println(b[3], c[3])\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "5 5\n",
+      "explanation": "a has length 3 but capacity 10, so neither append needs to allocate: both write index 3 of the same backing array. The first append stores 4 there, the second overwrites it with 5. b and c are two slice headers over the same memory, so both see 5.",
+      "materials": [
+        "slices-blog",
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: assigning one array variable to another and modifying the copy.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta := [3]int{1, 2, 3}\n\tb := a\n\tb[0] = 9\n\tfmt.Println(a[0], b[0])\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "1 9\n",
+      "explanation": "Arrays are values in Go. b := a copies all three elements, so changing b[0] leaves a untouched: a[0] is still 1 and b[0] is 9.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a function that appends to and then modifies the slice it received.",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc add(s []int) {\n\ts = append(s, 4)\n\ts[0] = 100\n}\n\nfunc main() {\n\ts := []int{1, 2, 3}\n\tadd(s)\n\tfmt.Println(s)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "[1 2 3]\n",
+      "explanation": "The literal has length 3 and capacity 3. Inside add, append has no room, so it allocates a new array and the local s points there. s[0] = 100 then changes the new array only. The caller's slice still points at the original array: [1 2 3].",
+      "materials": [
+        "slices-blog",
+        "effective"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: how the capacity of a nil []int grows during the first five appends.",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar s []int\n\tvar caps []int\n\tfor i := 0; i < 5; i++ {\n\t\ts = append(s, i)\n\t\tcaps = append(caps, cap(s))\n\t}\n\tfmt.Println(caps)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "[1 2 4 4 8]\n",
+      "explanation": "Starting from nil, append allocates room for 1 element, then doubles as needed while the slice is small: 1, 2, 4, 4 (the fourth element fits), 8. The exact growth policy is a runtime detail, but for small int slices it doubles like this.",
+      "materials": [
+        "slices-blog",
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: the return value of copy when the source is longer than the destination.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tdst := make([]int, 2)\n\tn := copy(dst, []int{7, 8, 9})\n\tfmt.Println(n, dst)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "2 [7 8]\n",
+      "explanation": "copy copies min(len(dst), len(src)) elements and returns that count. dst has length 2, so only 7 and 8 are copied and n is 2.",
+      "materials": [
+        "spec",
+        "slices-blog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: appending to a slice created with a full slice expression (three indices).",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta := []int{1, 2, 3, 4, 5}\n\tb := a[1:3:3]\n\tb = append(b, 99)\n\tfmt.Println(a)\n\tfmt.Println(b)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "[1 2 3 4 5]\n[2 3 99]\n",
+      "explanation": "a[1:3:3] has length 2 and capacity 3-1 = 2, so it has no spare room. append must allocate a new array for b, and a keeps its original fourth element. Without the third index, cap would be 4 and the append would have overwritten a[3] with 99.",
+      "materials": [
+        "spec",
+        "slices-blog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: reslicing beyond the length but within the capacity.",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ts := make([]int, 2, 5)\n\ts[0], s[1] = 1, 2\n\tt := s[1:4]\n\tfmt.Println(len(t), cap(t), t)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "3 4 [2 0 0]\n",
+      "explanation": "A slice expression may extend up to the capacity, not just the length. t starts at index 1 and ends before 4, so its length is 3 and its capacity is 5-1 = 4. The elements beyond the old length are the zero-initialized parts of the backing array: [2 0 0].",
+      "materials": [
+        "slices-blog",
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: reading a key that is not in the map.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tm := map[string]int{\"a\": 1}\n\tv, ok := m[\"b\"]\n\tfmt.Println(m[\"b\"], v, ok, len(m))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "0 0 false 1\n",
+      "explanation": "Indexing a map with a missing key returns the zero value of the element type (0) and does not insert anything. The comma-ok form reports false. The map still holds one entry.",
+      "materials": [
+        "maps-blog",
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: deleting entries while ranging over a map, then printing the sorted keys.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"maps\"\n\t\"slices\"\n)\n\nfunc main() {\n\tm := map[int]bool{1: true, 2: true, 3: true, 4: true}\n\tfor k := range m {\n\t\tif k%2 == 0 {\n\t\t\tdelete(m, k)\n\t\t}\n\t}\n\tfmt.Println(slices.Sorted(maps.Keys(m)))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "[1 3]\n",
+      "explanation": "The spec allows deleting entries during a range loop; a removed entry that has not been reached yet is simply not produced. The even keys are removed, and slices.Sorted(maps.Keys(m)) collects the remaining keys in sorted order, which hides the random iteration order.",
+      "materials": [
+        "spec",
+        "maps-blog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: reading from and writing to a nil map.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar m map[string]int\n\tfmt.Println(m[\"x\"], len(m), m == nil)\n\tdefer func() {\n\t\tfmt.Println(\"recovered:\", recover() != nil)\n\t}()\n\tm[\"x\"] = 1\n\tfmt.Println(\"unreachable\")\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "0 0 true\nrecovered: true\n",
+      "explanation": "A nil map behaves like an empty map for reads: lookups return the zero value and len is 0. Writing to it panics (assignment to entry in nil map). The deferred function runs during the panic, recover returns the panic value (non-nil), and the last Println never executes.",
+      "materials": [
+        "maps-blog",
+        "defer-blog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: len of a string with a non-ASCII character versus its rune count.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"unicode/utf8\"\n)\n\nfunc main() {\n\ts := \"héllo\"\n\tfmt.Println(len(s), utf8.RuneCountInString(s), len([]rune(s)))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "6 5 5\n",
+      "explanation": "len on a string counts bytes. 'é' takes two bytes in UTF-8, so the string is 6 bytes long. RuneCountInString and converting to []rune both count code points, of which there are 5.",
+      "materials": [
+        "strings-blog",
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: the indices produced by ranging over a string.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tfor i, r := range \"aéb\" {\n\t\tfmt.Printf(\"%d:%c\\n\", i, r)\n\t}\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "0:a\n1:é\n3:b\n",
+      "explanation": "range over a string decodes UTF-8 and yields the byte offset where each rune starts. 'a' is at 0, 'é' starts at 1 and occupies two bytes, so 'b' starts at byte 3.",
+      "materials": [
+        "strings-blog",
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: returning a nil pointer of a concrete type as an error.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\ntype MyErr struct{}\n\nfunc (*MyErr) Error() string { return \"boom\" }\n\nfunc get() error {\n\tvar p *MyErr = nil\n\treturn p\n}\n\nfunc main() {\n\terr := get()\n\tfmt.Println(err == nil)\n\tfmt.Printf(\"%T\\n\", err)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "false\n*main.MyErr\n",
+      "explanation": "An interface value is nil only if both its dynamic type and value are nil. Returning p stores the type *MyErr with a nil pointer in the error interface, so the interface itself is not nil and err == nil is false. %T shows the dynamic type *main.MyErr.",
+      "materials": [
+        "faq",
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a type switch over several dynamic types.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc describe(v any) string {\n\tswitch x := v.(type) {\n\tcase int:\n\t\treturn fmt.Sprint(\"int \", x*2)\n\tcase string:\n\t\treturn \"string \" + x\n\tcase nil:\n\t\treturn \"nil\"\n\tdefault:\n\t\treturn fmt.Sprintf(\"other %T\", x)\n\t}\n}\n\nfunc main() {\n\tfmt.Println(describe(21))\n\tfmt.Println(describe(\"hi\"))\n\tfmt.Println(describe(nil))\n\tfmt.Println(describe(3.5))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "int 42\nstring hi\nnil\nother float64\n",
+      "explanation": "In each case x has the type named by that case, so x*2 works for int and string concatenation works for string. A nil interface matches case nil. The untyped constant 3.5 becomes float64 when stored in an any, which falls to default.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: changing a struct after storing it in an interface variable.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\ntype Getter interface{ Get() int }\n\ntype Counter struct{ n int }\n\nfunc (c Counter) Get() int { return c.n }\n\nfunc main() {\n\tc := Counter{1}\n\tvar g Getter = c\n\tc.n = 5\n\tfmt.Println(g.Get(), c.Get())\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "1 5\n",
+      "explanation": "Assigning a non-pointer value to an interface copies it into the interface. Later changes to c do not affect the copy held by g, so g.Get() returns 1 while c.Get() returns 5.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an embedded struct whose field name is shadowed by the outer struct.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\ntype Base struct{ Name string }\n\nfunc (b Base) Hello() string { return \"base \" + b.Name }\n\ntype Derived struct {\n\tBase\n\tName string\n}\n\nfunc main() {\n\td := Derived{Base{\"b\"}, \"d\"}\n\tfmt.Println(d.Name, d.Base.Name, d.Hello())\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "d b base b\n",
+      "explanation": "The shallower field wins: d.Name refers to Derived.Name. The embedded field is still reachable as d.Base.Name. Hello is promoted from Base and its receiver is the embedded Base value, so it uses Base.Name.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a promoted method that calls another method which the outer type redefines.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\ntype Animal struct{}\n\nfunc (Animal) Sound() string   { return \"...\" }\nfunc (a Animal) Speak() string { return a.Sound() }\n\ntype Dog struct{ Animal }\n\nfunc (Dog) Sound() string { return \"woof\" }\n\nfunc main() {\n\td := Dog{}\n\tfmt.Println(d.Sound(), d.Speak())\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "woof ...\n",
+      "explanation": "Embedding is not inheritance. d.Sound() resolves to Dog.Sound. d.Speak() is promoted from Animal and is called with the embedded Animal as receiver, so inside it a.Sound() is Animal.Sound. There is no virtual dispatch back to Dog.",
+      "materials": [
+        "effective",
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: deferring calls inside a loop.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tfor i := 0; i < 3; i++ {\n\t\tdefer fmt.Println(i)\n\t}\n\tfmt.Println(\"start\")\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "start\n2\n1\n0\n",
+      "explanation": "Deferred calls run when main returns, in last-in-first-out order. 'start' prints first, then the deferred calls run in reverse: 2, 1, 0.",
+      "materials": [
+        "defer-blog",
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: changing a variable after it was passed to a deferred call.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tx := 1\n\tdefer fmt.Println(\"deferred\", x)\n\tx = 2\n\tfmt.Println(\"now\", x)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "now 2\ndeferred 1\n",
+      "explanation": "The arguments of a deferred call are evaluated when the defer statement runs, not when the call happens. The deferred Println captured x = 1, so it prints 1 after 'now 2'.",
+      "materials": [
+        "defer-blog",
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a deferred closure modifying a result, with and without a named result parameter.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc f() (n int) {\n\tdefer func() { n *= 2 }()\n\treturn 5\n}\n\nfunc g() int {\n\tn := 5\n\tdefer func() { n *= 2 }()\n\treturn n\n}\n\nfunc main() {\n\tfmt.Println(f(), g())\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "10 5\n",
+      "explanation": "In f, return 5 assigns 5 to the named result n, then the deferred closure doubles n before the function actually returns, giving 10. In g, the return value is copied out of the local n before the deferred function runs; doubling the local afterwards does not change the result, which stays 5.",
+      "materials": [
+        "defer-blog",
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: converting a runtime panic into an error with recover.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc safeDiv(a, b int) (q int, err error) {\n\tdefer func() {\n\t\tif r := recover(); r != nil {\n\t\t\terr = fmt.Errorf(\"recovered: %v\", r)\n\t\t}\n\t}()\n\treturn a / b, nil\n}\n\nfunc main() {\n\tfmt.Println(safeDiv(6, 3))\n\tfmt.Println(safeDiv(1, 0))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "2 <nil>\n0 recovered: runtime error: integer divide by zero\n",
+      "explanation": "6/3 returns normally: 2 and a nil error. Dividing by zero panics before the return assigns anything, so q stays 0. The deferred function recovers the runtime error and stores it in the named result err, which the caller then receives.",
+      "materials": [
+        "defer-blog",
+        "errors-pkg"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a panic in an inner function with several deferred calls.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tdefer fmt.Println(\"main defer\")\n\tfunc() {\n\t\tdefer func() { fmt.Println(\"recover:\", recover()) }()\n\t\tdefer fmt.Println(\"inner defer\")\n\t\tpanic(\"oops\")\n\t}()\n\tfmt.Println(\"after\")\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "inner defer\nrecover: oops\nafter\nmain defer\n",
+      "explanation": "The panic starts unwinding the inner function and runs its defers in LIFO order: first 'inner defer', then the recover closure, which stops the panic and prints its value. The inner function then returns normally, so main prints 'after' and its own defer runs at the end.",
+      "materials": [
+        "defer-blog",
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: two closures created by the same factory function.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc counter() func() int {\n\tc := 0\n\treturn func() int {\n\t\tc++\n\t\treturn c\n\t}\n}\n\nfunc main() {\n\ta, b := counter(), counter()\n\tfmt.Println(a(), a(), b(), a())\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "1 2 1 3\n",
+      "explanation": "Each call to counter creates a new variable c that the returned closure captures. a and b have independent counters: a goes 1, 2, b starts at 1, then a continues at 3.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: closures created inside a three-clause for loop (Go 1.22+).",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar fs []func() int\n\tfor i := 0; i < 3; i++ {\n\t\tfs = append(fs, func() int { return i })\n\t}\n\tfor _, f := range fs {\n\t\tfmt.Print(f(), \" \")\n\t}\n\tfmt.Println()\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "0 1 2 \n",
+      "explanation": "Since Go 1.22 each iteration of a for loop has its own copy of the loop variable, so each closure captures a different i: 0, 1, 2. Before Go 1.22 all closures shared one variable and would have printed 3 3 3.",
+      "materials": [
+        "loopvar",
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: len and cap of a buffered channel, then ranging over it after close.",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan int, 3)\n\tch <- 1\n\tch <- 2\n\tfmt.Println(len(ch), cap(ch))\n\tclose(ch)\n\tfor v := range ch {\n\t\tfmt.Println(v)\n\t}\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "2 3\n1\n2\n",
+      "explanation": "len reports how many values are queued (2) and cap the buffer size (3). Closing a channel does not discard buffered values: range drains 1 and 2, then ends because the channel is closed and empty.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: receiving twice from a closed buffered channel with the comma-ok form.",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tch := make(chan string, 1)\n\tch <- \"a\"\n\tclose(ch)\n\tv1, ok1 := <-ch\n\tv2, ok2 := <-ch\n\tfmt.Printf(\"%q %v %q %v\\n\", v1, ok1, v2, ok2)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "\"a\" true \"\" false\n",
+      "explanation": "The buffered value is still delivered after close, with ok true. Once the buffer is empty, receives on a closed channel never block: they return the zero value (an empty string) and ok false.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: select statements where only some cases can proceed.",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta := make(chan int)\n\tb := make(chan int, 1)\n\tb <- 7\n\tselect {\n\tcase v := <-a:\n\t\tfmt.Println(\"a\", v)\n\tcase v := <-b:\n\t\tfmt.Println(\"b\", v)\n\t}\n\tselect {\n\tcase v := <-a:\n\t\tfmt.Println(\"a\", v)\n\tdefault:\n\t\tfmt.Println(\"none\")\n\t}\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "b 7\nnone\n",
+      "explanation": "select picks among the cases that can proceed. a is unbuffered with no sender, so only the receive from b is ready and it gets 7. In the second select nothing is ready, so the default case runs instead of blocking.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: 100 goroutines adding to a shared total guarded by a mutex.",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tvar mu sync.Mutex\n\tvar wg sync.WaitGroup\n\ttotal := 0\n\tfor i := 1; i <= 100; i++ {\n\t\twg.Add(1)\n\t\tgo func() {\n\t\t\tdefer wg.Done()\n\t\t\tmu.Lock()\n\t\t\ttotal += i\n\t\t\tmu.Unlock()\n\t\t}()\n\t}\n\twg.Wait()\n\tfmt.Println(total)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "5050\n",
+      "explanation": "Each goroutine captures its own i (Go 1.22 per-iteration variables) and adds it under the mutex, so no update is lost. wg.Wait blocks until all 100 have finished, and the order of additions does not matter: 1+2+...+100 = 5050.",
+      "materials": [
+        "sync-pkg",
+        "loopvar"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: goroutines that each write their own index of a results slice.",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"sync\"\n)\n\nfunc main() {\n\tresults := make([]int, 5)\n\tvar wg sync.WaitGroup\n\tfor i := range 5 {\n\t\twg.Add(1)\n\t\tgo func() {\n\t\t\tdefer wg.Done()\n\t\t\tresults[i] = i * i\n\t\t}()\n\t}\n\twg.Wait()\n\tfmt.Println(results)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "[0 1 4 9 16]\n",
+      "explanation": "range 5 (Go 1.22) iterates i = 0..4. Each goroutine writes a different element, so there is no data race and no lock is needed. After Wait, the slice holds the squares in index order regardless of which goroutine finished first.",
+      "materials": [
+        "sync-pkg",
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a generic Map function whose type arguments are inferred.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"strconv\"\n)\n\nfunc Map[T, U any](s []T, f func(T) U) []U {\n\tout := make([]U, 0, len(s))\n\tfor _, v := range s {\n\t\tout = append(out, f(v))\n\t}\n\treturn out\n}\n\nfunc main() {\n\tstrs := Map([]int{1, 2, 3}, func(i int) string { return strconv.Itoa(i * 10) })\n\tfmt.Println(strs, len(strs[2]))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "[10 20 30] 2\n",
+      "explanation": "The compiler infers T = int from the slice and U = string from the function's result type, so Map returns []string. Println shows it as [10 20 30], and strs[2] is the two-character string \"30\".",
+      "materials": [
+        "generics",
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a generic Sum constrained by ~int | ~float64, called with different arguments.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\ntype Number interface {\n\t~int | ~float64\n}\n\nfunc Sum[T Number](xs ...T) T {\n\tvar s T\n\tfor _, x := range xs {\n\t\ts += x\n\t}\n\treturn s\n}\n\ntype Celsius float64\n\nfunc main() {\n\ta := Sum(1, 2, 3)\n\tb := Sum(1.5, 2)\n\tc := Sum(Celsius(10), 5)\n\tfmt.Printf(\"%v %v %v %T\\n\", a, b, c, c)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "6 3.5 15 main.Celsius\n",
+      "explanation": "With only untyped constants, inference picks the default type of the 'largest' kind: int for 1, 2, 3 and float64 for 1.5, 2, giving 6 and 3.5. In the third call the typed argument fixes T = Celsius, which satisfies ~float64; the constant 5 converts to Celsius, so c is 15 of type main.Celsius.",
+      "materials": [
+        "generics",
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a generic stack popped more times than it was pushed.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\ntype Stack[T any] struct{ items []T }\n\nfunc (s *Stack[T]) Push(v T) { s.items = append(s.items, v) }\n\nfunc (s *Stack[T]) Pop() (T, bool) {\n\tvar zero T\n\tif len(s.items) == 0 {\n\t\treturn zero, false\n\t}\n\tv := s.items[len(s.items)-1]\n\ts.items = s.items[:len(s.items)-1]\n\treturn v, true\n}\n\nfunc main() {\n\ts := Stack[string]{}\n\ts.Push(\"a\")\n\ts.Push(\"b\")\n\tv1, _ := s.Pop()\n\tv2, _ := s.Pop()\n\tv3, ok := s.Pop()\n\tfmt.Printf(\"%s %s %q %v\\n\", v1, v2, v3, ok)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "b a \"\" false\n",
+      "explanation": "The stack is LIFO, so the pops return b then a. The third pop finds no items and returns the zero value of T, which for string is the empty string (printed by %q as \"\"), together with false.",
+      "materials": [
+        "generics",
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: wrapping a sentinel error with %w and comparing it.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport (\n\t\"errors\"\n\t\"fmt\"\n)\n\nvar ErrNotFound = errors.New(\"not found\")\n\nfunc main() {\n\terr := fmt.Errorf(\"load user 42: %w\", ErrNotFound)\n\tfmt.Println(err)\n\tfmt.Println(err == ErrNotFound, errors.Is(err, ErrNotFound))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "load user 42: not found\nfalse true\n",
+      "explanation": "The wrapped error's message is the format string with the inner message substituted. The wrapper is a different value, so == is false, but errors.Is walks the Unwrap chain and finds ErrNotFound.",
+      "materials": [
+        "errors-blog",
+        "errors-pkg"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: extracting a custom error type from a wrapped error.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport (\n\t\"errors\"\n\t\"fmt\"\n)\n\ntype HTTPError struct{ Code int }\n\nfunc (e *HTTPError) Error() string { return fmt.Sprintf(\"http %d\", e.Code) }\n\nfunc main() {\n\terr := fmt.Errorf(\"fetch: %w\", &HTTPError{404})\n\tfmt.Println(err)\n\tvar he *HTTPError\n\tif errors.As(err, &he) {\n\t\tfmt.Println(\"code\", he.Code)\n\t}\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "fetch: http 404\ncode 404\n",
+      "explanation": "The message combines the prefix with the inner Error() result. errors.As walks the chain, finds a value assignable to *HTTPError, stores it in he and returns true, so the field is accessible.",
+      "materials": [
+        "errors-blog",
+        "errors-pkg"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: iota with a blank identifier and an expression that changes partway through a const block.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nconst (\n\tA = iota\n\tB\n\t_\n\tD\n\tE = iota * 10\n\tF\n)\n\nfunc main() {\n\tfmt.Println(A, B, D, E, F)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "0 1 3 40 50\n",
+      "explanation": "iota counts the lines of the const block starting at 0. Lines without an expression repeat the previous one: B = 1, the blank line consumes 2, D = 3. E uses iota = 4, so 40, and F repeats iota*10 with iota = 5, giving 50.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: incrementing the largest int8 and decrementing a zero uint8.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tvar x int8 = 127\n\tx++\n\tvar u uint8 = 0\n\tu--\n\tfmt.Println(x, u)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "-128 255\n",
+      "explanation": "Integer arithmetic on variables wraps around silently in Go. 127 + 1 does not fit in int8 and wraps to -128; 0 - 1 on uint8 wraps to 255. (The same thing with constants would be a compile-time error.)",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: integer division and remainder with negative operands.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta, b := -7, 2\n\tfmt.Println(a/b, a%b, 7%-b)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "-3 -1 1\n",
+      "explanation": "Go's integer division truncates toward zero, so -7/2 is -3. The remainder has the sign of the dividend: -7 % 2 is -1, and 7 % -2 is 1.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: declaring variables with := inside an if block that also exist outside it.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc find() (int, error) { return 42, nil }\n\nfunc main() {\n\tvar n int\n\tvar err error\n\tif true {\n\t\tn, err := find()\n\t\t_, _ = n, err\n\t}\n\tfmt.Println(n, err)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "0 <nil>\n",
+      "explanation": "The if body is a new scope, so := declares new variables n and err that shadow the outer ones. The result of find goes into the inner variables, which disappear at the closing brace. The outer n and err keep their zero values: 0 and <nil>.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a switch case that uses fallthrough.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tswitch x := 2; x {\n\tcase 1:\n\t\tfmt.Println(\"one\")\n\tcase 2:\n\t\tfmt.Println(\"two\")\n\t\tfallthrough\n\tcase 3:\n\t\tfmt.Println(\"three\")\n\tcase 4:\n\t\tfmt.Println(\"four\")\n\t}\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "two\nthree\n",
+      "explanation": "Go cases do not fall through by default. Case 2 matches and prints 'two'; fallthrough transfers control to the body of the next case without checking its condition, printing 'three'. It stops there because case 3 has no fallthrough.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: nested loops with labeled continue and break.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\nouter:\n\tfor i := 0; i < 3; i++ {\n\t\tfor j := 0; j < 3; j++ {\n\t\t\tif j == 1 {\n\t\t\t\tcontinue outer\n\t\t\t}\n\t\t\tif i == 2 {\n\t\t\t\tbreak outer\n\t\t\t}\n\t\t\tfmt.Println(i, j)\n\t\t}\n\t}\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "0 0\n1 0\n",
+      "explanation": "For i = 0 and i = 1, j = 0 prints, then j == 1 continues the outer loop, skipping j = 2. For i = 2, the check i == 2 at j = 0 breaks out of both loops before printing anything.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a break statement inside a switch inside a for loop.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tfor i := 0; i < 5; i++ {\n\t\tswitch i {\n\t\tcase 3:\n\t\t\tbreak\n\t\t}\n\t\tfmt.Print(i)\n\t}\n\tfmt.Println()\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "01234\n",
+      "explanation": "An unlabeled break terminates the innermost for, switch or select. Here that is the switch, not the loop, so the break at i == 3 only leaves the switch and every i is printed. Breaking the loop would need a label.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: printing a struct with %v, %+v and %T.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\ntype P struct {\n\tX, Y int\n\tName string\n}\n\nfunc main() {\n\tp := P{1, 2, \"pt\"}\n\tfmt.Printf(\"%v\\n%+v\\n%T\\n\", p, p, &p)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "{1 2 pt}\n{X:1 Y:2 Name:pt}\n*main.P\n",
+      "explanation": "%v prints the field values in braces, %+v adds the field names, and %T prints the Go type of the operand. The last argument is &p, so its type is *main.P.",
+      "materials": [
+        "fmt-pkg"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: stable sorting structs by one field in descending order.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport (\n\t\"cmp\"\n\t\"fmt\"\n\t\"slices\"\n)\n\ntype Person struct {\n\tName string\n\tAge  int\n}\n\nfunc main() {\n\tpeople := []Person{{\"bob\", 30}, {\"al\", 25}, {\"cy\", 30}}\n\tslices.SortStableFunc(people, func(a, b Person) int {\n\t\treturn cmp.Compare(b.Age, a.Age)\n\t})\n\tfor _, p := range people {\n\t\tfmt.Println(p.Name)\n\t}\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "bob\ncy\nal\n",
+      "explanation": "Comparing b.Age with a.Age sorts by age descending. bob and cy are both 30; a stable sort keeps equal elements in their original order, so bob stays before cy, and al (25) comes last.",
+      "materials": [
+        "slices-pkg"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: building a string with strings.Builder.",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\nfunc main() {\n\tvar b strings.Builder\n\tfor i := 3; i > 0; i-- {\n\t\tfmt.Fprintf(&b, \"%d...\", i)\n\t}\n\tb.WriteString(\"go!\")\n\tfmt.Println(b.String(), b.Len())\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "3...2...1...go! 15\n",
+      "explanation": "strings.Builder implements io.Writer, so Fprintf appends to it. The loop writes 3..., 2..., 1... (4 bytes each) and then go! (3 bytes): 12 + 3 = 15 bytes.",
+      "materials": [
+        "effective",
+        "fmt-pkg"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: slices.Delete and what remains in the original slice afterwards.",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"slices\"\n)\n\nfunc main() {\n\ts := []int{1, 2, 3, 4}\n\tt := slices.Delete(s, 1, 2)\n\tfmt.Println(t)\n\tfmt.Println(s)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "[1 3 4]\n[1 3 4 0]\n",
+      "explanation": "slices.Delete removes s[1:2] in place by shifting the later elements left, and returns a slice of length 3 over the same array. Since Go 1.22 it also zeroes the now-unused tail elements, so the original slice, still length 4, ends with 0.",
+      "materials": [
+        "slices-pkg",
+        "slices-blog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: modifying struct elements through the range value versus through the index.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "code": "package main\n\nimport \"fmt\"\n\ntype Item struct{ N int }\n\nfunc main() {\n\titems := []Item{{1}, {2}}\n\tfor _, it := range items {\n\t\tit.N *= 10\n\t}\n\tfmt.Println(items)\n\tfor i := range items {\n\t\titems[i].N *= 10\n\t}\n\tfmt.Println(items)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "[{1} {2}]\n[{10} {20}]\n",
+      "explanation": "The range value is a copy of each element, so the first loop only changes the copies. The second loop indexes the slice and modifies the elements themselves.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: changing an array while ranging over it by value.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\ta := [3]int{1, 2, 3}\n\tvar seen []int\n\tfor i, v := range a {\n\t\tif i == 0 {\n\t\t\ta[1] = 100\n\t\t}\n\t\tseen = append(seen, v)\n\t}\n\tfmt.Println(seen, a)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "[1 2 3] [1 100 3]\n",
+      "explanation": "The range expression is evaluated once before the loop, and ranging over an array (not a pointer or slice) iterates over a copy of it. The write to a[1] changes the original array but not the copy being iterated, so v takes 1, 2, 3. Afterwards a itself does contain 100.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a nil slice versus an empty slice, compared to nil and encoded as JSON.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport (\n\t\"encoding/json\"\n\t\"fmt\"\n)\n\nfunc main() {\n\tvar a []int\n\tb := []int{}\n\tfmt.Println(a == nil, b == nil, len(a), len(b))\n\tja, _ := json.Marshal(a)\n\tjb, _ := json.Marshal(b)\n\tfmt.Println(string(ja), string(jb))\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "true false 0 0\nnull []\n",
+      "explanation": "Both slices have length 0, but only the zero-value slice is nil; the literal []int{} is non-nil. encoding/json makes the difference visible: a nil slice encodes as null, an empty one as [].",
+      "materials": [
+        "spec",
+        "slices-blog"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a method value taken before the receiver is modified.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc (t T) Show() { fmt.Println(t.n) }\n\nfunc main() {\n\tt := T{1}\n\tf := t.Show\n\tt.n = 2\n\tf()\n\tt.Show()\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "1\n2\n",
+      "explanation": "Evaluating the method value t.Show binds the receiver at that moment. Show has a value receiver, so a copy of t (with n = 1) is saved inside f. Changing t afterwards does not affect f, while calling t.Show() directly uses the current value 2.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: printing a value and a pointer when String() has a pointer receiver.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\ntype T struct{ n int }\n\nfunc (t *T) String() string { return \"T!\" }\n\nfunc main() {\n\tt := T{5}\n\tfmt.Println(t, &t)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "{5} T!\n",
+      "explanation": "fmt uses String() only if the operand implements fmt.Stringer. The method is on *T, so only *T has it in its method set. The value t is printed with the default struct format {5}, while &t uses String().",
+      "materials": [
+        "fmt-pkg",
+        "spec"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,815 @@
+{
+  "name": "Databases: true or false",
+  "materials": [
+    {
+      "key": "pg-isolation",
+      "type": "article",
+      "title": "Transaction Isolation",
+      "url": "https://www.postgresql.org/docs/current/transaction-iso.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "How PostgreSQL implements Read Committed, Repeatable Read and Serializable, and which anomalies each prevents."
+    },
+    {
+      "key": "pg-mvcc",
+      "type": "article",
+      "title": "Concurrency Control: Introduction",
+      "url": "https://www.postgresql.org/docs/current/mvcc-intro.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Overview of multiversion concurrency control and why readers and writers do not block each other."
+    },
+    {
+      "key": "pg-locking",
+      "type": "article",
+      "title": "Explicit Locking",
+      "url": "https://www.postgresql.org/docs/current/explicit-locking.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Table-level and row-level lock modes, conflicts between them, and deadlock handling."
+    },
+    {
+      "key": "pg-index-types",
+      "type": "article",
+      "title": "Index Types",
+      "url": "https://www.postgresql.org/docs/current/indexes-types.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "B-tree, hash, GiST, SP-GiST, GIN and BRIN indexes and the operators each supports."
+    },
+    {
+      "key": "luke",
+      "type": "book",
+      "title": "Use The Index, Luke!",
+      "url": "https://use-the-index-luke.com/",
+      "author": "Markus Winand",
+      "description": "A free guide to how database indexes work and how to design them for real queries."
+    },
+    {
+      "key": "pg-connection",
+      "type": "article",
+      "title": "How Connections Are Established",
+      "url": "https://www.postgresql.org/docs/current/connect-estab.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "PostgreSQL's process-per-connection client/server model."
+    },
+    {
+      "key": "wiki-normalization",
+      "type": "article",
+      "title": "Database normalization",
+      "url": "https://en.wikipedia.org/wiki/Database_normalization",
+      "author": "Wikipedia",
+      "description": "The normal forms from 1NF to BCNF and beyond, with worked examples."
+    },
+    {
+      "key": "pg-wal",
+      "type": "article",
+      "title": "Write-Ahead Logging (WAL)",
+      "url": "https://www.postgresql.org/docs/current/wal-intro.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Why logging changes before writing data pages gives durability and crash recovery."
+    },
+    {
+      "key": "pg-ha",
+      "type": "article",
+      "title": "High Availability, Load Balancing, and Replication",
+      "url": "https://www.postgresql.org/docs/current/high-availability.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Streaming replication, synchronous vs asynchronous standbys and hot standby read queries."
+    },
+    {
+      "key": "pg-pitr",
+      "type": "article",
+      "title": "Continuous Archiving and Point-in-Time Recovery (PITR)",
+      "url": "https://www.postgresql.org/docs/current/continuous-archiving.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Base backups plus archived WAL for restoring a database to any moment in time."
+    },
+    {
+      "key": "pg-vacuum",
+      "type": "article",
+      "title": "Routine Vacuuming",
+      "url": "https://www.postgresql.org/docs/current/routine-vacuuming.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Why VACUUM and ANALYZE are needed: reclaiming dead rows, planner statistics, the visibility map and wraparound."
+    },
+    {
+      "key": "pg-partitioning",
+      "type": "article",
+      "title": "Table Partitioning",
+      "url": "https://www.postgresql.org/docs/current/ddl-partitioning.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Declarative partitioning, partition pruning and the limitations of partitioned tables."
+    },
+    {
+      "key": "jepsen",
+      "type": "article",
+      "title": "Consistency Models",
+      "url": "https://jepsen.io/consistency",
+      "author": "Jepsen",
+      "description": "A map of consistency models, from linearizability and serializability to session guarantees."
+    },
+    {
+      "key": "wiki-cap",
+      "type": "article",
+      "title": "CAP theorem",
+      "url": "https://en.wikipedia.org/wiki/CAP_theorem",
+      "author": "Wikipedia",
+      "description": "The trade-off between consistency and availability during a network partition, and its PACELC extension."
+    },
+    {
+      "key": "wiki-nosql",
+      "type": "article",
+      "title": "NoSQL",
+      "url": "https://en.wikipedia.org/wiki/NoSQL",
+      "author": "Wikipedia",
+      "description": "Key-value, document, wide-column and graph databases and the trade-offs they make."
+    }
+  ],
+  "questions": [
+    {
+      "type": "true-false",
+      "prompt": "Durability means that once a transaction has been reported as committed, its changes survive a subsequent crash of the database server.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Durability is the D in ACID. PostgreSQL achieves it by flushing the transaction's write-ahead log records to stable storage before reporting the commit, so the changes can be replayed after a crash.",
+      "materials": [
+        "pg-wal"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The \"C\" in ACID guarantees that every replica of a distributed database returns the latest written value.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. ACID consistency means a transaction moves the database from one valid state to another, preserving constraints and invariants. Every replica returning the latest value is the C of the CAP theorem, which is linearizability, a different concept.",
+      "materials": [
+        "wiki-cap",
+        "jepsen"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In PostgreSQL, if one statement inside a `BEGIN ... COMMIT` block fails, the statements that succeeded before it are still committed by `COMMIT`.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. After an error the transaction is aborted: further commands are rejected with \"current transaction is aborted\", and `COMMIT` actually performs a `ROLLBACK`. Atomicity means all or nothing; use a `SAVEPOINT` if you want to recover from an error and keep earlier work.",
+      "materials": [
+        "pg-isolation",
+        "pg-mvcc"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "PostgreSQL's default transaction isolation level is Read Committed.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Unless `default_transaction_isolation` is changed, every transaction runs at Read Committed, where each statement sees a snapshot of data committed before that statement began.",
+      "materials": [
+        "pg-isolation"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A PostgreSQL hash index can serve range predicates such as `WHERE price BETWEEN 10 AND 20`.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Hash indexes store only a hash of the key and support nothing but the `=` operator. Range conditions, sorting and prefix matches need an ordered structure such as a B-tree.",
+      "materials": [
+        "pg-index-types"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A dirty read happens when a transaction reads data written by another transaction that has not yet committed.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. That is the definition of a dirty read. If the writing transaction later rolls back, the reader has acted on data that never officially existed. PostgreSQL never allows dirty reads at any isolation level.",
+      "materials": [
+        "pg-isolation"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Setting a PostgreSQL transaction to `READ UNCOMMITTED` lets it see other transactions' uncommitted changes.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. PostgreSQL accepts `READ UNCOMMITTED` but treats it exactly like Read Committed, so dirty reads never occur. The SQL standard only defines the minimum guarantees per level, and stronger behaviour is allowed.",
+      "materials": [
+        "pg-isolation"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Under PostgreSQL's Repeatable Read, two transactions can each check that two doctors are on call, each take a different doctor off call, and both commit, leaving nobody on call.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. This is write skew: each transaction reads the same snapshot and updates a different row, so there is no write-write conflict for snapshot isolation to detect. Running both at Serializable (or locking the rows read with `SELECT ... FOR UPDATE`) prevents it.",
+      "materials": [
+        "pg-isolation",
+        "jepsen"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Adding an index speeds up reads and has no cost for `INSERT`, `UPDATE` and `DELETE` statements.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Every index must be maintained on writes: an insert adds an entry to each index, a delete eventually removes them, and updates can touch several indexes. More indexes also mean more WAL and more storage, so unused indexes are pure overhead.",
+      "materials": [
+        "luke"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In PostgreSQL's MVCC, reading data does not block writers and writing data does not block readers.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Each statement or transaction reads a snapshot, and writers create new row versions instead of overwriting old ones. So a plain `SELECT` never waits for an `UPDATE` on the same rows, and vice versa.",
+      "materials": [
+        "pg-mvcc"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "PostgreSQL's Repeatable Read level allows phantom reads, as the SQL standard permits for that level.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. The standard allows phantoms at Repeatable Read, but PostgreSQL implements this level as snapshot isolation: the transaction sees one snapshot for its whole life, so new rows inserted and committed by others never appear in repeated queries.",
+      "materials": [
+        "pg-isolation"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A transaction left open for a long time in PostgreSQL can prevent `VACUUM` from removing dead row versions, causing table bloat.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. `VACUUM` may only remove row versions that no running transaction could still need to see. An old open transaction (including one sitting \"idle in transaction\") holds back that horizon, so dead rows accumulate until it ends.",
+      "materials": [
+        "pg-vacuum"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In PostgreSQL, an `UPDATE` overwrites the existing row in place on its data page.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Under MVCC an `UPDATE` writes a new version of the row and marks the old one as expired. The old version stays until `VACUUM` reclaims it, which is why update-heavy tables need vacuuming.",
+      "materials": [
+        "pg-mvcc",
+        "pg-vacuum"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Autovacuum is disabled by default in PostgreSQL, so production databases need a scheduled job that runs `VACUUM`.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. The `autovacuum` setting is on by default, and its launcher automatically runs `VACUUM` and `ANALYZE` on tables that have changed enough. Tuning it is common, but turning it off is strongly discouraged.",
+      "materials": [
+        "pg-vacuum"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "At PostgreSQL's Repeatable Read level, a transaction that tries to update a row that a concurrent transaction changed and committed after its snapshot was taken fails with a serialization error instead of overwriting the change.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. PostgreSQL raises \"could not serialize access due to concurrent update\", which prevents lost updates. The application should retry the whole transaction. Read Committed behaves differently: it re-checks the row's newest version and proceeds.",
+      "materials": [
+        "pg-isolation"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "PostgreSQL does not detect deadlocks; deadlocked transactions wait until a timeout fires or forever.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. After waiting `deadlock_timeout` (1 second by default), PostgreSQL runs a deadlock check, and if it finds a cycle it aborts one of the transactions with a deadlock error so the others can continue. Taking locks in a consistent order avoids most deadlocks.",
+      "materials": [
+        "pg-locking"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "First normal form requires that each column holds a single atomic value and that the table has no repeating groups.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. 1NF forbids storing lists or repeating column groups (`phone1`, `phone2`, `phone3`) in a row. Each fact goes in its own row, often in a separate related table.",
+      "materials": [
+        "wiki-normalization"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "PostgreSQL implements Serializable isolation with shared read locks that make readers block concurrent writers.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. PostgreSQL uses Serializable Snapshot Isolation: it records what each transaction read with non-blocking predicate locks and aborts a transaction with a serialization failure when it detects a dangerous pattern. Readers and writers still do not block each other.",
+      "materials": [
+        "pg-isolation"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "PostgreSQL's planner chooses plans using table statistics collected by `ANALYZE`, so stale statistics can lead it to a poor plan.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Row-count and value-distribution estimates come from `pg_statistic`, filled by `ANALYZE` (run manually or by autovacuum). After a large bulk load the estimates can be badly off until statistics are refreshed.",
+      "materials": [
+        "pg-vacuum"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "PostgreSQL's default index type, created by a plain `CREATE INDEX`, is a B-tree.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Without a `USING` clause PostgreSQL builds a B-tree, which supports equality, range comparisons, sorting and `IS NULL`. Other types such as hash, GIN, GiST and BRIN must be requested explicitly.",
+      "materials": [
+        "pg-index-types"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "PostgreSQL escalates row locks to a table lock once a transaction has locked a large number of rows.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. PostgreSQL has no lock escalation. Row locks are recorded in the row versions themselves rather than in shared memory, so there is no limit on how many rows a transaction can lock at once.",
+      "materials": [
+        "pg-locking"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A composite B-tree index on `(last_name, first_name)` can be used by a query that filters only on `last_name`.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. A B-tree is sorted by the first column, then by the second within it, so the leading column alone can be searched efficiently. A filter on `first_name` alone cannot use the index the same way.",
+      "materials": [
+        "luke"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When designing a composite B-tree index, the most selective column should always go first, regardless of which columns the queries filter on.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. This is a well-known myth. Column order should follow how queries use the index: columns filtered with equality usually go before columns used in ranges, and a leading column the query does not filter on makes the index far less useful, however selective it is.",
+      "materials": [
+        "luke"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Optimistic concurrency control, such as an `UPDATE ... WHERE id = $1 AND version = $2` that fails when zero rows are affected, works best when conflicts are rare.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Optimistic control holds no locks while the user or application works and detects conflicts only at write time, which is cheap when they rarely happen. When conflicts are frequent, the repeated retries make pessimistic locking (for example `SELECT ... FOR UPDATE`) the better choice.",
+      "materials": [
+        "pg-locking",
+        "pg-isolation"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A sequential scan in an `EXPLAIN` plan always means an index is missing.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. For small tables, or conditions that match a large share of rows, reading the table sequentially is cheaper than many random index lookups, and the planner chooses it on purpose. A seq scan is only a problem when the query selects few rows from a large table.",
+      "materials": [
+        "luke",
+        "pg-vacuum"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A query whose columns all appear in an index can still need to visit the table in PostgreSQL, because an index-only scan must check row visibility on pages not marked all-visible in the visibility map.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. Index entries carry no visibility information. For pages the visibility map marks as all-visible, the heap visit is skipped; otherwise PostgreSQL must fetch the row to check it. Recently modified tables therefore benefit less from covering indexes until `VACUUM` updates the map.",
+      "materials": [
+        "pg-vacuum",
+        "luke"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Running `EXPLAIN` without `ANALYZE` executes the query to report actual row counts and timings.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Plain `EXPLAIN` only shows the planner's chosen plan with estimated costs and row counts; it does not run the query. `EXPLAIN ANALYZE` executes it and adds actual times and row counts, so be careful using it on data-modifying statements.",
+      "materials": [
+        "luke"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`SELECT ... FOR UPDATE` in PostgreSQL makes concurrent `UPDATE` or `DELETE` statements on the same rows wait until the locking transaction ends.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. `FOR UPDATE` takes row-level locks that conflict with updates, deletes and other `FOR UPDATE` locks, a form of pessimistic locking. Plain `SELECT` statements are not blocked because they read from their snapshot.",
+      "materials": [
+        "pg-locking"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A table in third normal form is always also in Boyce-Codd normal form.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. BCNF is stricter: every determinant of a non-trivial functional dependency must be a superkey. 3NF still allows a dependency whose right side is a prime attribute (part of a candidate key), so some 3NF tables, usually with overlapping candidate keys, violate BCNF.",
+      "materials": [
+        "wiki-normalization"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A table in first normal form whose candidate keys each consist of a single column is automatically in second normal form.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. 2NF forbids non-key attributes that depend on only part of a candidate key. When every candidate key is a single column, no such partial dependency can exist, so 2NF only matters for tables with composite keys.",
+      "materials": [
+        "wiki-normalization"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Denormalization deliberately adds redundant data to make reads faster, at the cost of extra work to keep the copies consistent.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Storing precomputed or duplicated data (for example an order total or a customer name on each order) avoids joins or aggregation at read time. Every write must then update all copies, and the copies can drift apart if that is done incorrectly.",
+      "materials": [
+        "wiki-normalization"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Random UUIDv4 primary keys insert into a B-tree index as efficiently as sequentially increasing integer keys, because the tree stays balanced either way.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Sequential keys always append to the rightmost leaf page, which stays in memory. Random keys land on arbitrary pages throughout the index, causing more page splits, more cache misses and more WAL; time-ordered identifiers such as UUIDv7 avoid most of this.",
+      "materials": [
+        "luke"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Setting `synchronous_commit = off` in PostgreSQL risks database corruption if the server crashes.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. With asynchronous commit a crash can lose the last few transactions that were reported as committed, but the database stays consistent because WAL is still written in order. Corruption is the risk of `fsync = off`, which is a different setting.",
+      "materials": [
+        "pg-wal"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Reads from an asynchronous read replica always reflect the latest writes committed on the primary.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. An asynchronous replica applies changes after the primary commits, so it can lag behind by milliseconds or, under load, much longer. Reads that must see a user's own recent write should go to the primary or wait until the replica catches up.",
+      "materials": [
+        "pg-ha"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In PostgreSQL synchronous replication with `synchronous_commit = on`, a query on the standby issued right after the commit returns is guaranteed to see the committed data.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. With `on`, the primary waits only until the standby has flushed the WAL to disk, not until it has replayed it, so a standby query may briefly still see old data. The `remote_apply` setting waits for replay and gives that read-after-commit guarantee.",
+      "materials": [
+        "pg-ha"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A read replica is not a substitute for backups, because an accidental `DELETE` on the primary is replicated to it as well.",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Replication copies every change, including mistakes and malicious ones, within moments. Protection against those needs backups, ideally with point-in-time recovery so you can restore to just before the error.",
+      "materials": [
+        "pg-pitr",
+        "pg-ha"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Point-in-time recovery in PostgreSQL restores a base backup and then replays archived WAL up to a chosen target, such as a timestamp.",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Continuous archiving keeps every WAL segment after a base backup. During recovery PostgreSQL replays them and stops at the target set by `recovery_target_time` (or a transaction ID, LSN or named restore point).",
+      "materials": [
+        "pg-pitr"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With declarative partitioning, PostgreSQL can skip partitions that cannot contain matching rows, which is called partition pruning.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. When a query's `WHERE` clause constrains the partition key, the planner (and in some cases the executor) excludes partitions whose bounds cannot match. This is a large part of why partitioning helps queries on very big tables.",
+      "materials": [
+        "pg-partitioning"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "PostgreSQL needs `VACUUM` to freeze old rows because transaction IDs are 32-bit counters that eventually wrap around.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. Row visibility compares 32-bit transaction IDs using modulo arithmetic, so a row older than about two billion transactions would suddenly look like it is in the future. Freezing marks old rows as visible to everyone; if it falls far enough behind, PostgreSQL stops assigning new transaction IDs to protect the data.",
+      "materials": [
+        "pg-vacuum"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Routing rows with `hash(key) % N` makes adding a new shard cheap, because only a small fraction of the keys have to move.",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Changing N changes the result of the modulo for most keys, so nearly all data has to be relocated. Consistent hashing or a fixed number of logical shards mapped to servers keeps the movement close to 1/N of the data.",
+      "materials": [
+        "wiki-nosql"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In PostgreSQL, a primary key or unique constraint on a partitioned table must include all of the partition key columns.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. Each partition enforces uniqueness with its own local index, so PostgreSQL can only guarantee global uniqueness when the partition key is part of the constraint. Creating the constraint without those columns fails with an error.",
+      "materials": [
+        "pg-partitioning"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The CAP theorem lets a multi-node database choose consistency and availability while giving up partition tolerance.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. In a distributed system network partitions are not optional; they happen. CAP says that during a partition you must choose between consistency and availability, so \"CA\" is only meaningful for a single node.",
+      "materials": [
+        "wiki-cap"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "PACELC extends CAP by stating that even when there is no network partition, a distributed database trades off latency against consistency.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. PACELC reads: if Partitioned, choose Availability or Consistency; Else, choose Latency or Consistency. Waiting for replicas to confirm every write costs latency even in normal operation.",
+      "materials": [
+        "wiki-cap"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Eventual consistency guarantees that a client always reads its own most recent writes.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Eventual consistency only promises that replicas converge once writes stop; a client may read from a replica that has not received its write yet. Read-your-writes is a separate session guarantee that a system must provide explicitly.",
+      "materials": [
+        "jepsen"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A database that guarantees serializability also guarantees linearizability.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. Serializability only requires that transactions appear to run in some serial order, which need not match real time. Linearizability is a real-time guarantee on single operations. A system that provides both is called strictly serializable.",
+      "materials": [
+        "jepsen"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Graph databases are designed for queries that follow many relationships, such as finding friends of friends.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Graph databases store edges as first-class data, so traversing several hops is cheap and does not require repeated joins. They suit social networks, recommendations and fraud detection.",
+      "materials": [
+        "wiki-nosql"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Key-value stores typically support efficient ad hoc queries on any attribute inside the stored values.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. A key-value store treats the value as opaque and is optimised for lookups by key. Querying by something inside the value usually means scanning everything or maintaining your own secondary index.",
+      "materials": [
+        "wiki-nosql"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Wide-column stores such as Apache Cassandra are usually modelled around the queries you will run, often duplicating data across tables instead of joining.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Cassandra has no joins, and data is partitioned by key, so each query pattern typically gets its own table with a matching partition key. Writes are cheap, so duplication is the accepted trade-off.",
+      "materials": [
+        "wiki-nosql"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Document databases such as MongoDB cannot run ACID transactions that span multiple documents.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. MongoDB has supported multi-document ACID transactions since version 4.0 (replica sets) and 4.2 (sharded clusters). Single-document operations are atomic without them, which is why document modelling still tries to keep related data in one document.",
+      "materials": [
+        "wiki-nosql"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Each PostgreSQL client connection is served by its own server process, which is one reason applications with many clients use a connection pooler.",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. PostgreSQL follows a process-per-connection model: the postmaster forks a backend process for every connection. Thousands of mostly idle connections cost memory and scheduling overhead, so poolers such as PgBouncer let many clients share a small number of server connections.",
+      "materials": [
+        "pg-connection"
+      ]
+    }
+  ]
+}

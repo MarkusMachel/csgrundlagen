@@ -13,16 +13,16 @@ import {
 
 describe('design board', () => {
   it('gives each new component a free id of its kind', () => {
-    let b = addNode(emptyBoard, 'service', 0, 0);
-    b = addNode(b, 'service', 10, 0);
-    b = addNode(b, 'cache', 20, 0);
+    let b = addNode(emptyBoard, { kind: 'service' }, 0, 0);
+    b = addNode(b, { kind: 'service' }, 10, 0);
+    b = addNode(b, { kind: 'cache' }, 20, 0);
     expect(b.nodes.map((n) => n.id)).toEqual(['service-1', 'service-2', 'cache-1']);
-    b = addNode(removeNode(b, 'service-1'), 'service', 0, 0);
+    b = addNode(removeNode(b, 'service-1'), { kind: 'service' }, 0, 0);
     expect(b.nodes.map((n) => n.id)).toContain('service-1');
   });
 
   it('allows one arrow per direction and none to itself', () => {
-    let b = addNode(addNode(emptyBoard, 'client', 0, 0), 'service', 0, 0);
+    let b = addNode(addNode(emptyBoard, { kind: 'client' }, 0, 0), { kind: 'service' }, 0, 0);
     expect(canConnect(b, 'client-1', 'client-1')).toBe(false);
     b = connect(b, 'client-1', 'service-1');
     expect(canConnect(b, 'client-1', 'service-1')).toBe(false);
@@ -32,13 +32,13 @@ describe('design board', () => {
   });
 
   it('removing a component removes its arrows', () => {
-    let b = addNode(addNode(emptyBoard, 'client', 0, 0), 'service', 0, 0);
+    let b = addNode(addNode(emptyBoard, { kind: 'client' }, 0, 0), { kind: 'service' }, 0, 0);
     b = connect(b, 'client-1', 'service-1');
     expect(removeNode(b, 'service-1').edges).toEqual([]);
   });
 
   it('submits names and arrows, not positions', () => {
-    let b = addNode(addNode(emptyBoard, 'client', 5, 5), 'service', 9, 9);
+    let b = addNode(addNode(emptyBoard, { kind: 'client' }, 5, 5), { kind: 'service' }, 9, 9);
     b = {
       ...b,
       nodes: b.nodes.map((n) => (n.kind === 'service' ? { ...n, label: '  api  ' } : n)),

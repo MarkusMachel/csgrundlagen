@@ -1,0 +1,1324 @@
+{
+  "name": "SQL: pick all that apply",
+  "materials": [
+    {
+      "key": "pg-select",
+      "type": "article",
+      "title": "SELECT",
+      "url": "https://www.postgresql.org/docs/current/sql-select.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Reference for SELECT: FROM and LATERAL, GROUP BY with grouping sets, DISTINCT, set operations, ORDER BY and LIMIT."
+    },
+    {
+      "key": "pg-comparison",
+      "type": "article",
+      "title": "Comparison functions and operators",
+      "url": "https://www.postgresql.org/docs/current/functions-comparison.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "How comparison operators, IS DISTINCT FROM and the IS TRUE / IS UNKNOWN predicates treat NULL."
+    },
+    {
+      "key": "pg-aggregate",
+      "type": "article",
+      "title": "Aggregate functions",
+      "url": "https://www.postgresql.org/docs/current/functions-aggregate.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Built-in aggregates such as count, sum, avg and array_agg, and what they return for empty input."
+    },
+    {
+      "key": "pg-window",
+      "type": "article",
+      "title": "Window functions",
+      "url": "https://www.postgresql.org/docs/current/functions-window.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Ranking and offset window functions such as rank, dense_rank, lag and lead, and how aggregates behave over a window frame."
+    },
+    {
+      "key": "pg-with",
+      "type": "article",
+      "title": "WITH queries (common table expressions)",
+      "url": "https://www.postgresql.org/docs/current/queries-with.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Chained and recursive CTEs, how recursion terminates, and CTE materialization."
+    },
+    {
+      "key": "pg-subquery",
+      "type": "article",
+      "title": "Subquery expressions",
+      "url": "https://www.postgresql.org/docs/current/functions-subquery.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "EXISTS, IN, NOT IN, ANY and ALL with subqueries, including their NULL behaviour."
+    },
+    {
+      "key": "pg-conditional",
+      "type": "article",
+      "title": "Conditional expressions",
+      "url": "https://www.postgresql.org/docs/current/functions-conditional.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "CASE, COALESCE, NULLIF, GREATEST and LEAST."
+    },
+    {
+      "key": "pg-string",
+      "type": "article",
+      "title": "String functions and operators",
+      "url": "https://www.postgresql.org/docs/current/functions-string.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Concatenation, length, substring, format and quote_ident."
+    },
+    {
+      "key": "pg-datetime",
+      "type": "article",
+      "title": "Date/time functions and operators",
+      "url": "https://www.postgresql.org/docs/current/functions-datetime.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Date arithmetic, date_trunc, extract and the current-time functions."
+    },
+    {
+      "key": "pg-matching",
+      "type": "article",
+      "title": "Pattern matching",
+      "url": "https://www.postgresql.org/docs/current/functions-matching.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "LIKE, ILIKE, SIMILAR TO and POSIX regular expression operators."
+    },
+    {
+      "key": "pg-constraints",
+      "type": "article",
+      "title": "Constraints",
+      "url": "https://www.postgresql.org/docs/current/ddl-constraints.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "CHECK, NOT NULL, UNIQUE (including NULLS NOT DISTINCT), PRIMARY KEY and FOREIGN KEY constraints."
+    },
+    {
+      "key": "pg-insert",
+      "type": "article",
+      "title": "INSERT",
+      "url": "https://www.postgresql.org/docs/current/sql-insert.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "INSERT syntax including ON CONFLICT, OVERRIDING SYSTEM VALUE and RETURNING."
+    },
+    {
+      "key": "pg-createview",
+      "type": "article",
+      "title": "CREATE VIEW",
+      "url": "https://www.postgresql.org/docs/current/sql-createview.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Plain views, CREATE OR REPLACE rules, automatically updatable views and WITH CHECK OPTION."
+    },
+    {
+      "key": "pg-index-types",
+      "type": "article",
+      "title": "Index types",
+      "url": "https://www.postgresql.org/docs/current/indexes-types.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Which operators and predicates a B-tree index can serve, including anchored LIKE patterns."
+    },
+    {
+      "key": "owasp-sqli",
+      "type": "article",
+      "title": "SQL Injection Prevention Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html",
+      "author": "OWASP Foundation",
+      "description": "Parameterized queries as the main defence against SQL injection, plus allow-listing for identifiers."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multi-select",
+      "prompt": "Which of these PostgreSQL expressions evaluate to NULL?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`NULL = NULL`",
+        "`1 + NULL`",
+        "`NULL IS DISTINCT FROM NULL`",
+        "`NULL <> 1`",
+        "`NULL IN (1, 2)`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "explanation": "Comparing or doing arithmetic with NULL yields NULL, so `NULL = NULL`, `1 + NULL` and `NULL <> 1` are all NULL. `NULL IN (1, 2)` is NULL too, because no element matches and the comparisons are unknown. `IS DISTINCT FROM` treats NULLs as comparable values and returns FALSE for two NULLs, never NULL.",
+      "materials": [
+        "pg-comparison"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these PostgreSQL expressions evaluate to TRUE?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`NULL AND TRUE`",
+        "`NULL OR TRUE`",
+        "`NULL OR FALSE`",
+        "`NULL::boolean IS UNKNOWN`",
+        "`NULL::boolean IS NOT TRUE`"
+      ],
+      "correctIndices": [
+        1,
+        3,
+        4
+      ],
+      "explanation": "`NULL OR TRUE` is TRUE because one TRUE operand decides an OR. `IS UNKNOWN` and `IS NOT TRUE` never return NULL; both are TRUE for a NULL boolean. `NULL AND TRUE` and `NULL OR FALSE` depend on the unknown operand, so both are NULL.",
+      "materials": [
+        "pg-comparison"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Column `v` holds the values 2, NULL, 2 and 4 (four rows). Which expressions return `2`?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`count(v)`",
+        "`count(DISTINCT v)`",
+        "`avg(v)`",
+        "`min(v)`",
+        "`sum(v) / count(*)`"
+      ],
+      "correctIndices": [
+        1,
+        3,
+        4
+      ],
+      "explanation": "`count(DISTINCT v)` counts the distinct non-NULL values 2 and 4, giving 2. `min(v)` ignores NULL and returns 2. `sum(v) / count(*)` is the integer division 8 / 4 = 2. `count(v)` skips the NULL and returns 3. `avg(v)` averages only non-NULL values: 8 / 3, about 2.67.",
+      "materials": [
+        "pg-aggregate"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Table `a` has `id` values 1, 2, 3. Table `b` has `a_id` values 2, 3, 3, 4. Which queries return exactly 3 rows?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`SELECT * FROM a JOIN b ON b.a_id = a.id`",
+        "`SELECT * FROM a LEFT JOIN b ON b.a_id = a.id`",
+        "`SELECT * FROM a FULL JOIN b ON b.a_id = a.id`",
+        "`SELECT DISTINCT a_id FROM b`",
+        "`SELECT * FROM a WHERE id IN (SELECT a_id FROM b)`"
+      ],
+      "correctIndices": [
+        0,
+        3
+      ],
+      "explanation": "The inner join matches id 2 once and id 3 twice: 3 rows. `DISTINCT a_id` gives 2, 3 and 4: 3 rows. The LEFT JOIN adds unmatched id 1 (4 rows). The FULL JOIN also adds unmatched a_id 4 (5 rows). The IN filter returns each matching `a` row once, so only ids 2 and 3 (2 rows).",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which queries include customers that have no orders at all in their result?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`FROM customers c LEFT JOIN orders o ON o.customer_id = c.id AND o.status = 'paid'`",
+        "`FROM customers c LEFT JOIN orders o ON o.customer_id = c.id WHERE o.status = 'paid'`",
+        "`FROM customers c JOIN orders o ON o.customer_id = c.id`",
+        "`FROM orders o RIGHT JOIN customers c ON o.customer_id = c.id`",
+        "`FROM customers c LEFT JOIN orders o ON o.customer_id = c.id WHERE o.status = 'paid' OR o.id IS NULL`"
+      ],
+      "correctIndices": [
+        0,
+        3,
+        4
+      ],
+      "explanation": "A condition in ON only limits which orders match, so the LEFT JOIN still keeps every customer. A RIGHT JOIN with customers on the right keeps all customers. The `OR o.id IS NULL` filter keeps the NULL-extended rows of customers without orders. Filtering `o.status = 'paid'` in WHERE removes the NULL-extended rows, turning the LEFT JOIN into an inner join. A plain JOIN drops unmatched customers.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In which clauses of a PostgreSQL SELECT can an aggregate such as `sum(amount)` appear?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The SELECT list",
+        "WHERE",
+        "HAVING",
+        "GROUP BY",
+        "ORDER BY"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "Aggregates are computed per group, so they are allowed in the SELECT list, HAVING and ORDER BY. WHERE filters rows before groups exist, and PostgreSQL rejects aggregates there. GROUP BY defines the groups, and aggregates in it are an error too.",
+      "materials": [
+        "pg-aggregate",
+        "pg-select"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Given `emp(id int PRIMARY KEY, dept text, salary int)`, which statements does PostgreSQL accept?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`SELECT dept, count(*) FROM emp GROUP BY 1`",
+        "`SELECT dept, salary FROM emp GROUP BY dept`",
+        "`SELECT dept AS d, count(*) FROM emp GROUP BY d`",
+        "`SELECT count(*) FROM emp GROUP BY dept`",
+        "`SELECT dept, count(*) FROM emp GROUP BY dept ORDER BY salary`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "GROUP BY can name an output column by position or by its alias, and the grouping column does not have to be selected. Selecting `salary` without grouping or aggregating it is an error, and so is ordering by it, because each group can contain several salaries.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Table `s` holds `v` = 10, 20, 20, 30. Which expressions return `3` for both rows where `v = 20`?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`rank() OVER (ORDER BY v)`",
+        "`dense_rank() OVER (ORDER BY v)`",
+        "`count(*) OVER (ORDER BY v)`",
+        "`sum(1) OVER (ORDER BY v)`",
+        "`count(*) OVER (PARTITION BY v)`"
+      ],
+      "correctIndices": [
+        2,
+        3
+      ],
+      "explanation": "With ORDER BY and no frame clause, the default frame runs from the start to the current row's last peer, so both 20s see rows 10, 20, 20: `count(*)` and `sum(1)` return 3. `rank()` and `dense_rank()` both return 2 for the tied 20s. `count(*) OVER (PARTITION BY v)` counts the two rows with v = 20, giving 2.",
+      "materials": [
+        "pg-window"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Table `f` has rows `(id, v)` = (1, 1), (2, 2), (3, 3), (4, 4). Which values appear in the output of `sum(v) OVER (ORDER BY id ROWS BETWEEN 1 PRECEDING AND CURRENT ROW)`?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`1`",
+        "`3`",
+        "`5`",
+        "`7`",
+        "`10`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "The frame holds the current row and the one before it, so the sums are 1 (only row 1), 1+2 = 3, 2+3 = 5 and 3+4 = 7. 10 would be a running total over the whole table, which this two-row frame never covers.",
+      "materials": [
+        "pg-window"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Table `g` has rows `(id, v)` = (1, 10), (2, 20), (3, 30), (4, 40). Which expressions, each with `OVER (ORDER BY id)`, return NULL on the row with `id = 4`?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`lead(v)`",
+        "`lag(v)`",
+        "`lead(v, 1, 0)`",
+        "`first_value(v)`",
+        "`last_value(v)`"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "`lead(v)` looks one row ahead and there is no row after id 4, so it returns NULL. `lag(v)` returns 30 from the previous row. `lead(v, 1, 0)` returns its default 0 instead of NULL. `first_value(v)` returns 10, and `last_value(v)` returns 40 because the default frame ends at the current row.",
+      "materials": [
+        "pg-window"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which queries return one top-paid employee per department in PostgreSQL?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A subquery computing `row_number() OVER (PARTITION BY dept ORDER BY salary DESC) AS rn`, filtered with `WHERE rn = 1` outside",
+        "The same `row_number()` in a CTE, filtered with `WHERE rn = 1` in the main query",
+        "`SELECT *, row_number() OVER (PARTITION BY dept ORDER BY salary DESC) AS rn FROM emp QUALIFY rn = 1`",
+        "`SELECT DISTINCT ON (dept) * FROM emp ORDER BY dept, salary DESC`",
+        "`SELECT * FROM emp GROUP BY dept HAVING salary = max(salary)`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Window results can be filtered once they are columns of a subquery or CTE, and `DISTINCT ON (dept)` keeps the first row of each department in the given order. PostgreSQL has no QUALIFY clause, so that query is a syntax error. The GROUP BY query is rejected because `*` and `salary` are neither grouped nor aggregated.",
+      "materials": [
+        "pg-window",
+        "pg-select"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these WITH queries does PostgreSQL accept?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`WITH x AS (SELECT 1 AS n) SELECT n FROM x`",
+        "`WITH x AS (SELECT 1 AS n), y AS (SELECT n FROM x) SELECT * FROM y`",
+        "`WITH x AS (SELECT n FROM y), y AS (SELECT 1 AS n) SELECT * FROM x`",
+        "`WITH x AS MATERIALIZED (SELECT 1) SELECT * FROM x`",
+        "`WITH x(n) AS (SELECT 1) SELECT n FROM x`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "explanation": "A CTE may reference CTEs defined before it, may be forced with MATERIALIZED, and may name its columns in a list. Referencing a later CTE (`x` reading `y`) is a forward reference, which PostgreSQL rejects unless the query uses WITH RECURSIVE.",
+      "materials": [
+        "pg-with"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Each option is the body of `WITH RECURSIVE r(n) AS (...)`, followed by the outer query shown. Which ones terminate?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`SELECT 1 UNION ALL SELECT n + 1 FROM r WHERE n < 5`, then `SELECT * FROM r`",
+        "`SELECT 1 UNION SELECT n % 3 + 1 FROM r`, then `SELECT * FROM r`",
+        "`SELECT 1 UNION ALL SELECT n % 3 + 1 FROM r`, then `SELECT * FROM r`",
+        "`SELECT 1 UNION ALL SELECT n + 1 FROM r`, then `SELECT n FROM r LIMIT 5`",
+        "`SELECT 1 UNION SELECT n + 1 FROM r`, then `SELECT * FROM r`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "The WHERE clause stops the first query after 5 rows. With UNION, rows already produced are discarded, so the cycle 1, 2, 3 runs dry and recursion stops. The outer LIMIT stops the evaluation after 5 rows, as the docs describe. The UNION ALL cycle keeps producing duplicates forever, and `n + 1` with UNION always produces a new value, so both run forever.",
+      "materials": [
+        "pg-with"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Table `a` holds one row with `x = 2`. Table `b` holds two rows, `x = 1` and `x = NULL`. Which queries return the row from `a`?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`SELECT x FROM a WHERE x NOT IN (SELECT x FROM b)`",
+        "`SELECT x FROM a WHERE NOT EXISTS (SELECT 1 FROM b WHERE b.x = a.x)`",
+        "`SELECT x FROM a WHERE x <> ALL (SELECT x FROM b)`",
+        "`SELECT x FROM a WHERE x NOT IN (SELECT x FROM b WHERE x IS NOT NULL)`",
+        "`SELECT a.x FROM a LEFT JOIN b ON b.x = a.x WHERE b.x IS NULL`"
+      ],
+      "correctIndices": [
+        1,
+        3,
+        4
+      ],
+      "explanation": "NOT EXISTS only asks whether a matching row exists, the filtered NOT IN no longer sees the NULL, and the LEFT JOIN anti-join keeps `a` rows with no match: all three return 2. `NOT IN` and `<> ALL` evaluate `2 <> NULL` as NULL, so the whole condition is NULL and the row is dropped.",
+      "materials": [
+        "pg-subquery"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Table `t` has two rows, `v = 1` and `v = 2`. Which of these statements raise an error in PostgreSQL 16 or later?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`SELECT (SELECT v FROM t)`",
+        "`SELECT (SELECT v FROM t WHERE false)`",
+        "`SELECT (SELECT v, v FROM t LIMIT 1)`",
+        "`SELECT * FROM (SELECT 1)`",
+        "`SELECT 1 WHERE EXISTS (SELECT v, v FROM t)`"
+      ],
+      "correctIndices": [
+        0,
+        2
+      ],
+      "explanation": "A scalar subquery must return at most one row and exactly one column, so the two-row and the two-column versions fail. A scalar subquery that returns no rows yields NULL. Since PostgreSQL 16 a subquery in FROM no longer needs an alias. EXISTS only checks for rows, so its select list can have any number of columns.",
+      "materials": [
+        "pg-subquery",
+        "pg-select"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Table `a` holds `v` = 1, 2, 2, 3 and table `b` holds `v` = 2, 4. Which queries return the value 2 at least once?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`SELECT v FROM a UNION SELECT v FROM b`",
+        "`SELECT v FROM a INTERSECT SELECT v FROM b`",
+        "`SELECT v FROM a EXCEPT SELECT v FROM b`",
+        "`SELECT v FROM a EXCEPT ALL SELECT v FROM b`",
+        "`SELECT v FROM b EXCEPT SELECT v FROM a`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "UNION returns 1, 2, 3, 4 and INTERSECT returns 2. EXCEPT ALL removes one 2 for the single 2 in `b`, leaving 1, 2, 3. Plain EXCEPT removes every 2, returning 1 and 3. `b EXCEPT a` returns only 4.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these UNION queries does PostgreSQL accept?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`SELECT 1, 'a' UNION SELECT 2, 'b'`",
+        "`SELECT 1 UNION SELECT 1, 2`",
+        "`SELECT 1 UNION SELECT 'x'`",
+        "`SELECT 1 UNION SELECT 2.5`",
+        "`SELECT v FROM a UNION SELECT v FROM b ORDER BY 1`"
+      ],
+      "correctIndices": [
+        0,
+        3,
+        4
+      ],
+      "explanation": "Both sides of a UNION must have the same number of columns with compatible types. Integer and numeric resolve to numeric, and an ORDER BY at the end sorts the combined result. A one-column and a two-column SELECT cannot be combined. In `SELECT 1 UNION SELECT 'x'`, the untyped literal is resolved as integer and fails with an invalid input error.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these CASE expressions evaluate to `'big'`?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`CASE WHEN 10 > 5 THEN 'big' WHEN 10 > 8 THEN 'huge' END`",
+        "`CASE WHEN 10 > 8 THEN 'huge' WHEN 10 > 5 THEN 'big' END`",
+        "`CASE 10 WHEN 10 THEN 'big' END`",
+        "`CASE WHEN 10 < 5 THEN 'small' END`",
+        "`CASE WHEN NULL THEN 'big' ELSE 'small' END`"
+      ],
+      "correctIndices": [
+        0,
+        2
+      ],
+      "explanation": "CASE returns the result of the first WHEN that is true, so the first expression gives 'big' and the second gives 'huge'. The simple form `CASE 10 WHEN 10` matches and gives 'big'. With no match and no ELSE the result is NULL. A NULL condition counts as not true, so the last one falls through to 'small'.",
+      "materials": [
+        "pg-conditional"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these NULLIF, GREATEST, LEAST and COALESCE calls evaluate to NULL?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`NULLIF(5, 5)`",
+        "`GREATEST(1, NULL)`",
+        "`NULLIF(5, NULL)`",
+        "`LEAST(NULL, NULL)`",
+        "`COALESCE(NULL, 0)`"
+      ],
+      "correctIndices": [
+        0,
+        3
+      ],
+      "explanation": "`NULLIF` returns NULL when its two arguments are equal, so `NULLIF(5, 5)` is NULL. PostgreSQL's GREATEST and LEAST ignore NULL arguments and return NULL only when all arguments are NULL, so `LEAST(NULL, NULL)` is NULL but `GREATEST(1, NULL)` is 1. `NULLIF(5, NULL)` returns 5 because the values are not equal. `COALESCE(NULL, 0)` returns 0.",
+      "materials": [
+        "pg-conditional"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these PostgreSQL expressions return `'abc'`?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`lower('ABC')`",
+        "`substr('xabcx', 2, 3)`",
+        "`substring('abcdef' FROM 0 FOR 3)`",
+        "`concat('a', NULL, 'bc')`",
+        "`left('abcd', -1)`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "explanation": "`lower` folds case, `substr` from position 2 with length 3 gives 'abc', `concat` skips NULL arguments, and a negative length in `left` returns all but the last characters. `substring` FROM 0 FOR 3 covers positions 0 to 2, and position 0 lies before the first character, so it returns only 'ab'.",
+      "materials": [
+        "pg-string"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In a UTF-8 PostgreSQL database, which of these expressions return `5`?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`length('héllo')`",
+        "`octet_length('héllo')`",
+        "`char_length('hello')`",
+        "`length('hello  '::char(7))`",
+        "`length(' hello')`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "`length` and `char_length` count characters, so 'héllo' and 'hello' both give 5. For `char(n)`, trailing spaces are not significant and `length` ignores them, giving 5. `octet_length` counts bytes, and 'é' takes two bytes in UTF-8, so it returns 6. A leading space is a real character, so `length(' hello')` is 6.",
+      "materials": [
+        "pg-string"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these date arithmetic expressions evaluate to TRUE in PostgreSQL?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`date '2026-02-28' + 1 = date '2026-03-01'`",
+        "`date '2026-01-31' + interval '1 month' = date '2026-02-28'`",
+        "`date '2026-03-01' - date '2026-02-01' = 28`",
+        "`date '2024-02-29' + interval '1 year' = date '2025-03-01'`",
+        "`extract(dow FROM date '2026-10-11') = 7`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Adding an integer to a date adds days, and subtracting two dates gives an integer number of days (28 in February 2026). Adding a month to 31 January clamps to the last day of February. Adding a year to 29 February 2024 likewise clamps to 2025-02-28, not 1 March. 11 October 2026 is a Sunday, and `dow` numbers Sunday 0, not 7; `isodow` would give 7.",
+      "materials": [
+        "pg-datetime"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Inside a single PostgreSQL transaction, which functions return the same value every time they are called?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`now()`",
+        "`clock_timestamp()`",
+        "`current_timestamp`",
+        "`statement_timestamp()`",
+        "`transaction_timestamp()`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "`now()`, `current_timestamp` and `transaction_timestamp()` all return the start time of the current transaction, so they stay fixed until it ends. `statement_timestamp()` changes with each new statement, and `clock_timestamp()` returns the actual current time and can change even within one statement.",
+      "materials": [
+        "pg-datetime"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Table `u` is `(id int PRIMARY KEY, email text UNIQUE, qty int CHECK (qty >= 0))` and already holds `(1, 'a@x', 5)`. Which inserts succeed?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`INSERT INTO u VALUES (2, 'b@x', 0)`",
+        "`INSERT INTO u VALUES (NULL, 'c@x', 1)`",
+        "`INSERT INTO u VALUES (3, 'A@x', 1)`",
+        "`INSERT INTO u VALUES (4, 'a@x', 1)`",
+        "`INSERT INTO u VALUES (6, 'e@x', -1)`"
+      ],
+      "correctIndices": [
+        0,
+        2
+      ],
+      "explanation": "Row 2 satisfies every constraint, since 0 passes `qty >= 0`. 'A@x' differs from 'a@x' because text comparison is case-sensitive, so the UNIQUE constraint allows it. A primary key column cannot be NULL, 'a@x' duplicates an existing email, and -1 fails the CHECK.",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`orders.customer_id` references `customers(id)`, and some orders point to customer 7. With which foreign key definitions does `DELETE FROM customers WHERE id = 7` succeed?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`REFERENCES customers ON DELETE CASCADE`",
+        "`REFERENCES customers ON DELETE RESTRICT`",
+        "`REFERENCES customers ON DELETE NO ACTION`",
+        "`REFERENCES customers` with no ON DELETE clause",
+        "`REFERENCES customers ON UPDATE CASCADE`"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "Only ON DELETE CASCADE lets the delete through; it also deletes the referencing orders. RESTRICT and NO ACTION reject the delete, and NO ACTION is the default when ON DELETE is omitted. ON UPDATE CASCADE only affects updates of the key, so deletes still use the default NO ACTION.",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which kinds of constraint can be declared DEFERRABLE in PostgreSQL?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "UNIQUE",
+        "FOREIGN KEY",
+        "CHECK",
+        "NOT NULL",
+        "PRIMARY KEY"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "PostgreSQL accepts DEFERRABLE on UNIQUE, PRIMARY KEY, EXCLUDE and FOREIGN KEY (REFERENCES) constraints, so their checks can be postponed until commit. CHECK and NOT NULL constraints are always checked immediately, and declaring them DEFERRABLE is a syntax error.",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Table `inv` is `(id int PRIMARY KEY, sku text UNIQUE, qty int)`. Which of these INSERT statements does PostgreSQL accept?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`INSERT INTO inv VALUES (1, 'x', 5) ON CONFLICT DO NOTHING`",
+        "`INSERT INTO inv VALUES (1, 'x', 5) ON CONFLICT DO UPDATE SET qty = 1`",
+        "`INSERT INTO inv VALUES (2, 'x', 5) ON CONFLICT (sku) DO UPDATE SET qty = EXCLUDED.qty`",
+        "`INSERT INTO inv VALUES (3, 'y', 5) ON CONFLICT (qty) DO NOTHING`",
+        "`INSERT INTO inv VALUES (1, 'z', 5) ON CONFLICT ON CONSTRAINT inv_pkey DO NOTHING`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "DO NOTHING may omit the conflict target, while DO UPDATE needs one. A target can name the column of a unique constraint, such as `(sku)`, or the constraint itself with ON CONSTRAINT. Omitting the target with DO UPDATE is an error. `(qty)` is not covered by any unique index or constraint, so PostgreSQL rejects that target.",
+      "materials": [
+        "pg-insert"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Table `k(id int PRIMARY KEY, note text)` holds `(1, 'orig')`. Which statements about the following statement are true?\n\n```sql\nINSERT INTO k VALUES (1, 'new'), (2, 'new')\nON CONFLICT DO NOTHING\nRETURNING id;\n```",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It returns one row, with `id` 2",
+        "It returns two rows, with `id` 1 and 2",
+        "Row 1 still has `note` 'orig' afterwards",
+        "It fails with a unique violation and inserts nothing",
+        "Its command tag reports one inserted row"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "DO NOTHING skips the conflicting row 1 without an error and leaves it unchanged. RETURNING only reports rows that were actually inserted, so it returns id 2 and the command tag is `INSERT 0 1`. Nothing about row 1 is returned or raised.",
+      "materials": [
+        "pg-insert"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about views in PostgreSQL are true?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A plain view stores no rows; it is a saved query that runs on each use",
+        "A view over a single table with plain columns is automatically updatable",
+        "A materialized view is refreshed automatically when its base tables change",
+        "`CREATE OR REPLACE VIEW` can remove columns from an existing view",
+        "`REFRESH MATERIALIZED VIEW CONCURRENTLY` needs a unique index on the view"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "A plain view is expanded into each query that uses it, and simple single-table views accept INSERT, UPDATE and DELETE automatically. CONCURRENTLY requires a unique index on the materialized view so it can compare rows. Materialized views only change when you run REFRESH. CREATE OR REPLACE VIEW can only add columns at the end, never drop them.",
+      "materials": [
+        "pg-createview"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "View `cv` is `SELECT * FROM cb WHERE qty > 0 WITH CHECK OPTION`, over table `cb(id int, qty int)`. Starting with `cv` showing row `(1, 5)`, which statements succeed?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`INSERT INTO cv VALUES (2, 3)`",
+        "`INSERT INTO cv VALUES (3, 0)`",
+        "`UPDATE cv SET qty = -1 WHERE id = 1`",
+        "`DELETE FROM cv WHERE id = 1`",
+        "`INSERT INTO cb VALUES (4, -5)`"
+      ],
+      "correctIndices": [
+        0,
+        3,
+        4
+      ],
+      "explanation": "WITH CHECK OPTION rejects rows written through the view that would not be visible in it. So inserting qty 3 works, while inserting qty 0 or updating to -1 fails. DELETE writes no new row and is allowed. Inserting directly into the base table bypasses the view's check.",
+      "materials": [
+        "pg-createview"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In Node.js with the `pg` driver, which of these calls are safe from SQL injection through the user-supplied `name`?",
+      "tags": [
+        "SQL & Databases",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`client.query('SELECT * FROM users WHERE name = $1', [name])`",
+        "`client.query(\"SELECT * FROM users WHERE name = '\" + name + \"'\")`",
+        "Interpolating `name` into the SQL string with a JS template literal",
+        "`client.query(\"SELECT * FROM users WHERE name = '\" + name.trim() + \"'\")`",
+        "A PL/pgSQL `EXECUTE format('SELECT * FROM users WHERE name = %L', name)`"
+      ],
+      "correctIndices": [
+        0,
+        4
+      ],
+      "explanation": "A bound parameter is sent separately from the SQL text, so it can never change the query's structure. `format` with `%L` quotes the value as a literal and escapes embedded quotes. String concatenation and template literals paste raw input into the SQL, and trimming whitespace does not stop a quote from ending the string.",
+      "materials": [
+        "owasp-sqli",
+        "pg-string"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Users choose which column to sort by, and the column name ends up in `ORDER BY`. Which approaches both sort correctly and prevent SQL injection?",
+      "tags": [
+        "SQL & Databases",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Map the input to one of a fixed set of known column names",
+        "Build the SQL in PL/pgSQL with `format('... ORDER BY %I', col)`",
+        "Reject input that contains a semicolon, then concatenate it",
+        "Build the SQL with `format('... ORDER BY %L', col)`",
+        "Strip spaces from the input, then concatenate it"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "An allow-list never lets user text into the SQL, and `%I` quotes the value as an identifier, so it can only name a column. `%L` produces a string literal, so `ORDER BY 'name'` sorts by a constant and has no effect. Blocking semicolons or stripping spaces still lets attackers inject expressions or subqueries.",
+      "materials": [
+        "owasp-sqli",
+        "pg-string"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Table `orders` has a B-tree index on `created_at` (type `timestamp`). Which WHERE clauses can use it as an index range scan?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`created_at >= '2026-01-01' AND created_at < '2026-02-01'`",
+        "`date_trunc('month', created_at) = '2026-01-01'`",
+        "`created_at::date = '2026-01-15'`",
+        "`created_at BETWEEN '2026-01-01' AND '2026-01-31'`",
+        "`created_at > now() - interval '1 day'`"
+      ],
+      "correctIndices": [
+        0,
+        3,
+        4
+      ],
+      "explanation": "The index can serve comparisons of the bare column against a value, including BETWEEN and a value computed from `now()`, which is constant for the statement. Wrapping the column in `date_trunc` or a cast creates a new expression that this index does not store, so those predicates are not sargable.",
+      "materials": [
+        "pg-index-types"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In a non-C-locale database, `users` has the index `CREATE INDEX ON users (email text_pattern_ops)`. Which predicates can use that index?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`email LIKE 'bob%'`",
+        "`email LIKE '%bob'`",
+        "`lower(email) = 'bob@x.com'`",
+        "`email = 'bob@x.com'`",
+        "`email || '' = 'bob@x.com'`"
+      ],
+      "correctIndices": [
+        0,
+        3
+      ],
+      "explanation": "The `text_pattern_ops` operator class compares character by character, so a left-anchored LIKE turns into a range scan. The class also supports plain equality. A leading wildcard has no fixed prefix to search for. `lower(email)` and `email || ''` are expressions over the column that the index does not store.",
+      "materials": [
+        "pg-index-types"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which LIKE patterns match the string `'data_base'`?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`'data%'`",
+        "`'%Base'`",
+        "`'data\\_base'`",
+        "`'data_bas'`",
+        "`'data_'`"
+      ],
+      "correctIndices": [
+        0,
+        2
+      ],
+      "explanation": "`'data%'` matches any string starting with 'data'. `'data\\_base'` uses the default escape character to match a literal underscore. LIKE is case-sensitive, so `'%Base'` fails. A pattern without `%` must match the whole string, so `'data_bas'` and `'data_'` are too short.",
+      "materials": [
+        "pg-matching"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these regular expression and SIMILAR TO matches evaluate to TRUE?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`'abc' ~ 'b'`",
+        "`'ABC' ~ 'abc'`",
+        "`'ABC' ~* 'abc'`",
+        "`'abc' SIMILAR TO 'b'`",
+        "`'abc' SIMILAR TO 'a%'`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "A POSIX regex with `~` matches anywhere in the string unless it is anchored, so 'b' is found in 'abc'. `~*` matches case-insensitively, while `~` is case-sensitive. SIMILAR TO must match the whole string: 'a%' does, and 'b' does not.",
+      "materials": [
+        "pg-matching"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Column `v` holds 3, NULL and 1. Which ORDER BY clauses put the NULL row first?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`ORDER BY v`",
+        "`ORDER BY v NULLS FIRST`",
+        "`ORDER BY v DESC NULLS FIRST`",
+        "`ORDER BY v IS NOT NULL, v`",
+        "`ORDER BY coalesce(v, 0), v`"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "explanation": "PostgreSQL sorts NULL as larger than any value, so plain ascending order puts it last. NULLS FIRST overrides that in either direction. `v IS NOT NULL` is false for the NULL row and false sorts before true. `coalesce(v, 0)` turns the NULL into 0, which is below 1 and 3.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these clauses are valid in PostgreSQL and guarantee at most 10 rows?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`LIMIT 10`",
+        "`SELECT TOP 10 ...`",
+        "`FETCH FIRST 10 ROWS WITH TIES`",
+        "`LIMIT 10, 20`",
+        "`WHERE ROWNUM <= 10`"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "`LIMIT 10` caps the result at 10 rows. `TOP` is SQL Server syntax and a syntax error here. WITH TIES also returns rows that tie with the 10th, so it can return more. PostgreSQL rejects MySQL's `LIMIT #,#` form, and ROWNUM is an Oracle pseudo-column.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Table `t(x, y)` holds `(1, 'a')`, `(1, 'b')` and `(2, 'a')`. Which queries return exactly 2 rows?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`SELECT DISTINCT x FROM t`",
+        "`SELECT DISTINCT x, y FROM t`",
+        "`SELECT DISTINCT ON (x) x, y FROM t ORDER BY x, y`",
+        "`SELECT x FROM t GROUP BY x`",
+        "`SELECT count(DISTINCT y) FROM t`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Distinct `x` values are 1 and 2. DISTINCT ON (x) keeps one row per x, and GROUP BY x forms two groups. DISTINCT over both columns keeps all 3 rows, since every pair differs. The count query is an aggregate without GROUP BY, so it returns a single row with the value 2.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Table `t(country, city)` holds `('DE', 'Berlin')`, `('DE', 'Munich')` and `('FR', 'Paris')`. Which `SELECT country, city, count(*) FROM t ...` queries return exactly 6 rows?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`GROUP BY ROLLUP (country, city)`",
+        "`GROUP BY GROUPING SETS ((country, city), (country), ())`",
+        "`GROUP BY CUBE (country, city)`",
+        "`GROUP BY GROUPING SETS ((country), (city), ())`",
+        "`GROUP BY country, city`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "ROLLUP is shorthand for the second option: 3 city rows, 2 country subtotals and 1 grand total, 6 in all. Grouping by country (2), city (3) and the empty set (1) also gives 6. CUBE adds both the country and the city subtotals: 3 + 2 + 3 + 1 = 9. A plain GROUP BY returns only the 3 detail rows.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`orders.status` is NOT NULL and the table has rows. Which expressions return the number of orders with status `'paid'`?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`count(*) FILTER (WHERE status = 'paid')`",
+        "`sum(CASE WHEN status = 'paid' THEN 1 ELSE 0 END)`",
+        "`count(CASE WHEN status = 'paid' THEN 1 END)`",
+        "`count(status = 'paid')`",
+        "`sum((status = 'paid')::int)`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "FILTER restricts the rows the aggregate sees. Summing 1s and 0s, or summing the boolean cast to int, adds one per paid order. `count` of a CASE without ELSE skips the NULLs that non-paid rows produce. `count(status = 'paid')` counts every non-NULL boolean, including false, so it returns the total number of orders.",
+      "materials": [
+        "pg-aggregate",
+        "pg-conditional"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these FROM clauses does PostgreSQL accept?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`FROM a, LATERAL (SELECT * FROM b WHERE b.a_id = a.id LIMIT 3) x`",
+        "`FROM a, (SELECT * FROM b WHERE b.a_id = a.id) x`",
+        "`FROM a, generate_series(1, a.n)`",
+        "`FROM a LEFT JOIN LATERAL (SELECT * FROM b WHERE b.a_id = a.id) x ON true`",
+        "`FROM (SELECT * FROM b WHERE b.a_id = a.id) x, a`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "LATERAL lets a subquery reference columns of FROM items to its left, including in a LEFT JOIN with `ON true`. A function call in FROM can reference earlier items even without the keyword, because LATERAL is optional for functions. A subquery without LATERAL cannot see `a`, in either position, so both of those fail.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Table `e(v int)` is empty. Which of these aggregates return NULL for `SELECT ... FROM e`?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`count(*)`",
+        "`max(v)`",
+        "`avg(v)`",
+        "`count(v)`",
+        "`array_agg(v)`"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        4
+      ],
+      "explanation": "Over zero rows, aggregates other than count return NULL, so `max`, `avg` and `array_agg` give NULL rather than an empty value. Both forms of `count` return 0 for empty input.",
+      "materials": [
+        "pg-aggregate"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Table `t` is `(id int GENERATED ALWAYS AS IDENTITY, name text)`. Which statements succeed?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`INSERT INTO t (name) VALUES ('a')`",
+        "`INSERT INTO t (id, name) VALUES (5, 'a')`",
+        "`INSERT INTO t (id, name) OVERRIDING SYSTEM VALUE VALUES (5, 'a')`",
+        "`INSERT INTO t (id, name) VALUES (DEFAULT, 'a')`",
+        "`UPDATE t SET id = 10`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Leaving out `id` or writing DEFAULT lets the identity generate it, and OVERRIDING SYSTEM VALUE allows an explicit value. GENERATED ALWAYS rejects an explicit value without that clause. An UPDATE can only set such a column to DEFAULT.",
+      "materials": [
+        "pg-insert"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which definitions of an `email text` column reject inserting two rows that both have a NULL email?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`email text UNIQUE`",
+        "`email text UNIQUE NULLS NOT DISTINCT`",
+        "`email text NOT NULL`",
+        "`email text PRIMARY KEY`",
+        "`email text CHECK (email <> '')`"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "NULLS NOT DISTINCT (PostgreSQL 15+) makes the unique constraint treat NULLs as equal, so the second NULL fails. NOT NULL and PRIMARY KEY reject any NULL at all. A plain UNIQUE treats NULLs as distinct and allows both rows. A CHECK whose result is NULL counts as passed.",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these comparisons involving quoted literals evaluate to TRUE in PostgreSQL?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`'10' < '9'`",
+        "`'abc' = 'abc '`",
+        "`10 < 9`",
+        "`'9' < '10'`",
+        "`'2' > 10`"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "Two quoted literals compare as text, character by character, and '1' sorts before '9', so `'10' < '9'` is TRUE and `'9' < '10'` is FALSE. For text, a trailing space is significant, so 'abc' and 'abc ' differ. In `'2' > 10` the literal is resolved as an integer, giving the FALSE comparison 2 > 10.",
+      "materials": [
+        "pg-comparison"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these queries return exactly one row, containing `2`?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`SELECT 1 UNION SELECT 2 INTERSECT SELECT 2`",
+        "`(SELECT 1 UNION SELECT 2) INTERSECT SELECT 2`",
+        "`SELECT 2 INTERSECT SELECT 2 UNION SELECT 1`",
+        "`SELECT 1 UNION ALL SELECT 2 EXCEPT SELECT 1`",
+        "`SELECT 2 INTERSECT ALL SELECT 2 UNION ALL SELECT 2`"
+      ],
+      "correctIndices": [
+        1,
+        3
+      ],
+      "explanation": "INTERSECT binds more tightly than UNION and EXCEPT, which are evaluated left to right. So the parenthesized query yields 2, and `(1 UNION ALL 2) EXCEPT 1` yields 2. The first query is `1 UNION (2 INTERSECT 2)`, which returns 1 and 2. The third is `(2 INTERSECT 2) UNION 1`, also 1 and 2. The last returns 2 twice.",
+      "materials": [
+        "pg-select"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these PostgreSQL expressions return NULL?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`'a' || NULL`",
+        "`concat('a', NULL)`",
+        "`concat_ws(',', 'a', NULL)`",
+        "`coalesce('a' || NULL, '')`",
+        "`format('%s', NULL)`"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "The `||` operator returns NULL when either text operand is NULL. `concat` and `concat_ws` skip NULL arguments and return 'a'. `coalesce` replaces the NULL with an empty string. `format` writes a NULL `%s` argument as an empty string.",
+      "materials": [
+        "pg-string"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Table `emp` has salaries 30, 30, 20 and 10. Which queries return `20`, the second-highest distinct salary?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`SELECT max(salary) FROM emp WHERE salary < (SELECT max(salary) FROM emp)`",
+        "`SELECT salary FROM emp ORDER BY salary DESC LIMIT 1 OFFSET 1`",
+        "`SELECT DISTINCT salary FROM emp ORDER BY salary DESC LIMIT 1 OFFSET 1`",
+        "Filtering `dense_rank() OVER (ORDER BY salary DESC) = 2` in a subquery",
+        "Filtering `rank() OVER (ORDER BY salary DESC) = 2` in a subquery"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "The max below the overall max is 20. After DISTINCT, the second value in descending order is 20. `dense_rank` gives 30 rank 1 and 20 rank 2. Without DISTINCT, OFFSET 1 lands on the second 30. `rank()` leaves a gap after the tie (1, 1, 3, 4), so no row has rank 2.",
+      "materials": [
+        "pg-select",
+        "pg-window"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Given `emp(id int PRIMARY KEY, dept text, salary int)`, which of these queries mixing GROUP BY and window functions does PostgreSQL accept?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`SELECT dept, sum(salary), rank() OVER (ORDER BY sum(salary) DESC) FROM emp GROUP BY dept`",
+        "`SELECT dept, sum(sum(salary)) OVER () FROM emp GROUP BY dept`",
+        "`SELECT dept, rank() OVER (ORDER BY salary) FROM emp GROUP BY dept`",
+        "`SELECT sum(rank() OVER (ORDER BY salary)) FROM emp`",
+        "`SELECT dept, count(*) OVER (PARTITION BY dept) FROM emp GROUP BY dept`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "Window functions run after grouping, so they can order by or wrap an aggregate, like `rank() OVER (ORDER BY sum(salary))` or `sum(sum(salary)) OVER ()`. They can also partition by a grouping column. Ordering a window by the ungrouped `salary` is an error after GROUP BY. An aggregate cannot contain a window function call.",
+      "materials": [
+        "pg-window",
+        "pg-aggregate"
+      ]
+    }
+  ]
+}

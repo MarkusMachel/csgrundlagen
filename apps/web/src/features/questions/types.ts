@@ -98,7 +98,8 @@ export type DesignKind =
 
 /** A drawn system: components and arrows in the direction requests and data flow. */
 export interface DesignGraph {
-  nodes: { id: string; kind: DesignKind; label?: string }[];
+  /** `product` is a real product (e.g. redis) shown on the board; grading uses `kind`. */
+  nodes: { id: string; kind: DesignKind; label?: string; product?: string }[];
   edges: { from: string; to: string }[];
 }
 

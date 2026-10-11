@@ -1,0 +1,1349 @@
+{
+  "name": ".NET and C#: pick all that apply",
+  "materials": [
+    {
+      "key": "csharp-ref",
+      "type": "article",
+      "title": "C# language reference",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/",
+      "author": "Microsoft Learn",
+      "description": "Types, keywords, operators, patterns and statements of the C# language."
+    },
+    {
+      "key": "nullable",
+      "type": "article",
+      "title": "Nullable reference types",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references",
+      "author": "Microsoft Learn",
+      "description": "How the compiler's null-state analysis, annotations and nullable contexts work."
+    },
+    {
+      "key": "linq",
+      "type": "article",
+      "title": "Language Integrated Query (LINQ)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/linq/",
+      "author": "Microsoft Learn",
+      "description": "Query operators, deferred and immediate execution, and LINQ providers."
+    },
+    {
+      "key": "gc",
+      "type": "article",
+      "title": "Fundamentals of garbage collection",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/fundamentals",
+      "author": "Microsoft Learn",
+      "description": "Generations, compaction and how unmanaged resources are released."
+    },
+    {
+      "key": "spans",
+      "type": "article",
+      "title": "Memory- and span-related types",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/memory-and-spans/",
+      "author": "Microsoft Learn",
+      "description": "Span<T>, Memory<T> and working with memory without copying."
+    },
+    {
+      "key": "native-aot",
+      "type": "article",
+      "title": "Native AOT deployment overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/",
+      "author": "Microsoft Learn",
+      "description": "Publishing ahead-of-time compiled apps and the features they cannot use."
+    },
+    {
+      "key": "async",
+      "type": "article",
+      "title": "Asynchronous programming with async and await",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/",
+      "author": "Microsoft Learn",
+      "description": "The task-based asynchronous programming model in C#."
+    },
+    {
+      "key": "di",
+      "type": "article",
+      "title": "Dependency injection in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection",
+      "author": "Microsoft Learn",
+      "description": "Service lifetimes, keyed services, scope validation and disposal."
+    },
+    {
+      "key": "middleware",
+      "type": "article",
+      "title": "ASP.NET Core middleware",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/",
+      "author": "Microsoft Learn",
+      "description": "How the request pipeline is built, ordered and short-circuited."
+    },
+    {
+      "key": "config",
+      "type": "article",
+      "title": "Configuration in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/",
+      "author": "Microsoft Learn",
+      "description": "Configuration providers, their precedence and key naming rules."
+    },
+    {
+      "key": "minimal",
+      "type": "article",
+      "title": "Minimal APIs quick reference",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis",
+      "author": "Microsoft Learn",
+      "description": "Route handlers, parameter binding, responses and authorization in Minimal APIs."
+    },
+    {
+      "key": "ef-perf",
+      "type": "article",
+      "title": "Efficient querying (EF Core)",
+      "url": "https://learn.microsoft.com/en-us/ef/core/performance/efficient-querying",
+      "author": "Microsoft Learn",
+      "description": "Tracking vs no-tracking, loading related data, N+1 and split queries."
+    },
+    {
+      "key": "ef-concurrency",
+      "type": "article",
+      "title": "Handling concurrency conflicts (EF Core)",
+      "url": "https://learn.microsoft.com/en-us/ef/core/saving/concurrency",
+      "author": "Microsoft Learn",
+      "description": "Optimistic concurrency with concurrency tokens and resolving conflicts."
+    },
+    {
+      "key": "collections",
+      "type": "article",
+      "title": "Collections and data structures",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/collections/",
+      "author": "Microsoft Learn",
+      "description": "Choosing collection types, their complexity and thread-safe collections."
+    },
+    {
+      "key": "xunit",
+      "type": "article",
+      "title": "Unit testing C# with xUnit",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-csharp-with-xunit",
+      "author": "Microsoft Learn",
+      "description": "Writing Fact and Theory tests with xUnit and the dotnet CLI."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multi-select",
+      "prompt": "Which of these C# types are value types?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`int`",
+        "`string`",
+        "`DateTime`",
+        "`int[]`",
+        "`object`"
+      ],
+      "correctIndices": [
+        0,
+        2
+      ],
+      "explanation": "`int` is a built-in struct and `DateTime` is a struct, so both are value types. `string` is a reference type despite its value-like equality, every array (even `int[]`) is a reference type, and `object` is the root reference type.",
+      "materials": [
+        "csharp-ref"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Given `record Person(string Name, int Age);`, which members does the compiler generate?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Value-based `Equals` and `GetHashCode`",
+        "A `Deconstruct(out string Name, out int Age)` method",
+        "Public `init`-only `Name` and `Age` properties",
+        "A public parameterless constructor",
+        "A `ToString` that prints property names and values"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "A positional record class gets value equality, a `Deconstruct` method, public init-only properties for each parameter and a `ToString` like `Person { Name = A, Age = 1 }`. It does not get a parameterless constructor: `new Person()` fails with CS7036 because the primary constructor's parameters are required.",
+      "materials": [
+        "csharp-ref"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this code are true?\n\n```csharp\nstruct Counter { public int Value; public void Inc() => Value++; }\n\nvar arr = new[] { new Counter() };\nvar list = new List<Counter> { new Counter() };\n```",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`arr[0].Inc()` increments the `Counter` stored in the array",
+        "`list[0].Inc()` increments the `Counter` stored in the list",
+        "`list[0].Value = 5;` fails to compile",
+        "`var c = arr[0]; c.Inc();` leaves `arr[0].Value` unchanged",
+        "`arr[0].Value = 5;` fails to compile"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "An array element access is a variable, so `arr[0].Inc()` mutates the stored struct and `arr[0].Value = 5` compiles. The `List<T>` indexer returns a copy, so `list[0].Inc()` compiles but mutates a temporary copy, and assigning a field of that copy is error CS1612. Assigning `arr[0]` to `c` copies the struct, so mutating `c` leaves the array alone.",
+      "materials": [
+        "csharp-ref"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "With nullable reference types enabled (`<Nullable>enable</Nullable>`), which statements are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`string?` and `string` are the same type at run time",
+        "Assigning `null` to a `string` variable produces a warning, not an error, by default",
+        "`string?` compiles to `Nullable<string>`",
+        "`#nullable enable` turns the analysis on for the following lines of a file",
+        "Parameters declared as `string` get automatic run-time null checks"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Nullable annotations on reference types exist only for the compiler, so `string?` and `string` are both `System.String` at run time, and violations are warnings unless you treat them as errors. `#nullable` directives change the context for part of a file. `Nullable<T>` requires a value type, so `string?` is not `Nullable<string>`, and the compiler inserts no run-time null checks.",
+      "materials": [
+        "nullable"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are valid pattern-matching expressions in C# 12 (assume suitably typed `x`, `list` and `obj`)?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`x is > 0 and < 10`",
+        "`obj is not null`",
+        "`list is [1, .., 9]`",
+        "`obj is string { Length: > 3 } s`",
+        "`x is in (1, 2, 3)`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "Relational patterns combined with `and`, the `not null` pattern, list patterns with a slice `..` and property patterns with a designation are all valid C#. There is no `in (...)` pattern; you write `x is 1 or 2 or 3` instead, and `x is in (1, 2, 3)` is a syntax error.",
+      "materials": [
+        "csharp-ref"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this method are true?\n\n```csharp\nstatic string Classify(object? o) => o switch\n{\n    int n when n < 0 => \"negative\",\n    int => \"int\",\n    string { Length: 0 } => \"empty\",\n    string s => s,\n    null => \"null\",\n    _ => \"other\"\n};\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Classify(-5)` returns `\"negative\"`",
+        "`Classify(\"\")` returns `\"empty\"`",
+        "`Classify(null)` returns `\"other\"`",
+        "`Classify(5L)` returns `\"int\"`",
+        "`Classify(0)` returns `\"negative\"`"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "Arms are tested in order: `-5` matches the guarded `int` arm and `\"\"` matches the empty-string property pattern. `null` hits the explicit `null` arm, not the discard. `5L` is a boxed `long`, which no `int` pattern matches, so it returns `\"other\"`. `0` fails the `n < 0` guard and returns `\"int\"`.",
+      "materials": [
+        "csharp-ref"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these assignments compile? Assume `actionOfObject` is an `Action<object>` and `funcOfString` is a `Func<string>`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`IEnumerable<object> a = new List<string>();`",
+        "`List<object> b = new List<string>();`",
+        "`IEnumerable<object> c = new List<int>();`",
+        "`Action<string> d = actionOfObject;`",
+        "`Func<object> e = funcOfString;`"
+      ],
+      "correctIndices": [
+        0,
+        3,
+        4
+      ],
+      "explanation": "`IEnumerable<out T>` and `Func<out TResult>` are covariant and `Action<in T>` is contravariant, so those three conversions compile. `List<T>` is a class and classes cannot be variant, so `List<string>` is not a `List<object>`. Variance only applies to reference type arguments, so `List<int>` does not convert to `IEnumerable<object>`.",
+      "materials": [
+        "csharp-ref"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about C# extension methods are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "They must be declared in a non-generic static class",
+        "Their first parameter is marked with the `this` modifier",
+        "They can read private fields of the type they extend",
+        "An instance method with the same signature wins over them",
+        "They can also be called like ordinary static methods"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "explanation": "Extension methods live in a non-generic static class, mark the extended type with `this`, and can be called as `Ext.Method(obj)`. When an applicable instance method exists, overload resolution picks it before considering extensions. They are just static methods, so they see only accessible members; reading a private field is error CS0122.",
+      "materials": [
+        "csharp-ref"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about strings in .NET are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`string.Equals(\"a\", \"A\", StringComparison.OrdinalIgnoreCase)` returns `true`",
+        "`\"abc\" + null` throws a `NullReferenceException`",
+        "`string.IsNullOrEmpty(\" \")` returns `true`",
+        "`==` between two `string` variables compares references",
+        "Interpolating a `null` value in `$\"{x}\"` throws"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "An ordinal case-insensitive comparison treats `a` and `A` as equal. Concatenating `null` treats it as an empty string, giving `\"abc\"`. A single space is not empty, so `IsNullOrEmpty` returns `false` (`IsNullOrWhiteSpace` would return `true`). `string` overloads `==` to compare characters, and interpolation formats `null` as an empty string.",
+      "materials": [
+        "csharp-ref"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these expressions allocate a new object on the managed heap? Assume `s` is a `string`, `arr` an `int[]` and `span` a `Span<int>`.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`s.Substring(1, 3)`",
+        "`s.AsSpan(1, 3)`",
+        "`arr.AsSpan().Slice(2)`",
+        "`Span<int> buf = stackalloc int[16];`",
+        "`span.ToArray()`"
+      ],
+      "correctIndices": [
+        0,
+        4
+      ],
+      "explanation": "`Substring` (for a range other than the whole string) creates a new string, and `ToArray` copies the span into a new array. `AsSpan` and `Slice` return a view over existing memory, and `stackalloc` assigned to a `Span<int>` uses stack memory, so none of those three allocate on the heap.",
+      "materials": [
+        "spans"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `Memory<T>` are true?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It can be stored in a field of a class",
+        "It can be held across an `await`",
+        "Its `.Span` property gives a `Span<T>` over the same memory",
+        "It is a `ref struct` like `Span<T>`",
+        "It can wrap memory obtained with `stackalloc`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`Memory<T>` exists precisely because `Span<T>` is stack-only: it is an ordinary struct that can live on the heap, in fields and across `await`, and you get a `Span<T>` from `.Span` when you need to work on it synchronously. Because it may live on the heap it is not a `ref struct`, and it cannot point at stack memory from `stackalloc`.",
+      "materials": [
+        "spans"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these statements box a value?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`object o = 42;`",
+        "`int x = (int)o;` where `o` is a boxed `int`",
+        "`list.Add(5);` where `list` is a `List<int>`",
+        "`int? n = 5;`",
+        "`Span<int> s = arr;` where `arr` is an `int[]`"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "Assigning an `int` to `object` copies it into a new heap object, which is boxing. Casting back is unboxing, not boxing. `List<int>` stores ints in an `int[]` without boxing, `int?` is the struct `Nullable<int>` holding the value inline, and a span over an array references the array without boxing.",
+      "materials": [
+        "csharp-ref"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these generic constraints are valid in C# 12?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`where T : struct`",
+        "`where T : new()`",
+        "`where T : notnull`",
+        "`where T : unmanaged`",
+        "`where T : int`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "`struct`, `new()`, `notnull` and `unmanaged` are all valid constraints. A constraint type must be an interface, a non-sealed class or a type parameter; `int` is a sealed struct, so `where T : int` is error CS0701.",
+      "materials": [
+        "csharp-ref"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which LINQ calls throw `InvalidOperationException` when the source sequence is a `List<int>`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`First()` on an empty list",
+        "`FirstOrDefault()` on an empty list",
+        "`Single()` on a list with two elements",
+        "`SingleOrDefault()` on a list with two elements",
+        "`Max()` on an empty list"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "explanation": "`First` needs at least one element, `Single` and `SingleOrDefault` both throw when there is more than one element (the `OrDefault` only covers the empty case), and `Max` over an empty sequence of a non-nullable value type throws. `FirstOrDefault()` on an empty `List<int>` returns `default(int)`, which is `0`.",
+      "materials": [
+        "linq"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this code are true after the last line runs?\n\n```csharp\nvar nums = new List<int> { 1, 2, 3 };\nvar q = nums.Where(n => n > 1);\nnums.Add(4);\nvar count = q.Count();\nvar list = q.ToList();\nnums.Add(5);\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`count` is 3",
+        "`list.Count` is 3",
+        "Calling `q.Count()` now returns 4",
+        "`count` is 2",
+        "`list` now also contains 5"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`Where` is deferred, so `count` sees 2, 3 and 4 and is 3, and `ToList` snapshots those same three items. Re-running `q.Count()` enumerates again and also sees 5, giving 4. `count` would only be 2 if the filter had run before `Add(4)`, and the list copy does not change when `nums` changes.",
+      "materials": [
+        "linq"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the .NET garbage collector are true?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Objects that survive a generation 0 collection are promoted to generation 1",
+        "Calling `GC.Collect()` regularly improves throughput in most apps",
+        "It uses reference counting, so object cycles leak",
+        "It runs on a fixed timer, independent of allocations",
+        "A local variable must be set to `null` before its object can be collected"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "Survivors of a gen 0 collection move to gen 1 (and gen 1 survivors to gen 2). Forcing collections usually hurts performance, the GC is a tracing collector that handles cycles, collections are triggered mainly by allocation thresholds and memory pressure, and the JIT already treats a local as dead after its last use in optimized code.",
+      "materials": [
+        "gc"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `IDisposable` and the `using` statement are true?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`using var x = ...;` disposes `x` at the end of the enclosing scope",
+        "`using` calls `Dispose` even when an exception is thrown",
+        "`Dispose` should be safe to call more than once",
+        "A finalizer runs as soon as the variable goes out of scope",
+        "`GC.SuppressFinalize(this)` in `Dispose` stops the finalizer from running"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "A `using` declaration disposes at the end of its scope, and `using` expands to `try`/`finally`, so `Dispose` runs on exceptions too. The dispose pattern requires `Dispose` to tolerate repeated calls, and calling `GC.SuppressFinalize` removes the object from finalization. Finalizers run at some later point after a GC finds the object unreachable, never deterministically at scope exit.",
+      "materials": [
+        "gc"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about finalizers in .NET 8 are true?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "They run on a dedicated finalizer thread",
+        "The order in which finalizers of unreachable objects run is not guaranteed",
+        "A class with a finalizer must also implement `IDisposable`",
+        "`~MyClass()` compiles to an override of `Object.Finalize`",
+        "Pending finalizers are run when the process exits"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "The runtime runs finalizers on its finalizer thread, in no guaranteed order, and C#'s destructor syntax compiles to a `Finalize` override. Implementing `IDisposable` is recommended but not required. Unlike .NET Framework, .NET (Core) and .NET 5+ do not run finalizers on application exit.",
+      "materials": [
+        "gc"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which features are unavailable in an app published with Native AOT?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Loading assemblies at run time with `Assembly.LoadFile`",
+        "Generating code at run time with `System.Reflection.Emit`",
+        "`async` and `await`",
+        "LINQ to Objects queries",
+        "Generic collections such as `Dictionary<TKey,TValue>`"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "Native AOT compiles everything ahead of time and ships no JIT, so dynamic assembly loading and run-time code generation with `Reflection.Emit` are not supported. `async`/`await` is a compiler transformation, and LINQ to Objects and generic collections compile to native code like any other library code, so they work.",
+      "materials": [
+        "native-aot"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are valid return types for an `async` method (one that uses `await`, without `yield`)?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`Task<int>`",
+        "`int`",
+        "`IEnumerable<int>`",
+        "`ValueTask`",
+        "`string`"
+      ],
+      "correctIndices": [
+        0,
+        3
+      ],
+      "explanation": "Async methods return `void`, `Task`, `Task<T>`, `ValueTask`, `ValueTask<T>` or another task-like type (or `IAsyncEnumerable<T>` when they also use `yield`). Plain `int`, `string` and `IEnumerable<int>` are not task-like, so they are compile errors on an async method.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this code are true?\n\n```csharp\nasync Task<int> GetAsync() { await Task.Delay(100); return 1; }\n\nvar t1 = GetAsync();\nvar t2 = GetAsync();\nvar results = await Task.WhenAll(t1, t2);\n```",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The two delays overlap, so the whole thing takes about 100 ms",
+        "`results` is an `int[]`",
+        "Each `GetAsync()` call starts running before `Task.WhenAll` is called",
+        "`Task.WhenAll` is what starts `t1` and `t2`",
+        "The second call waits until the first task completes"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Calling an async method runs it synchronously until its first incomplete `await` and returns a hot task, so both delays are already in progress and overlap. `WhenAll` over `Task<int>`s yields an `int[]`. It only waits for tasks that are already running; it does not start them, and nothing makes the second call wait for the first.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this code are true once `t` has completed?\n\n```csharp\nTask t = Task.Run(() => throw new InvalidOperationException());\n```",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`await t` throws `InvalidOperationException`",
+        "`t.Wait()` throws `AggregateException`",
+        "`t.Exception` is an `AggregateException`",
+        "`t.Status` is `TaskStatus.Faulted`",
+        "If nobody observes the exception, the process crashes by default"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "A faulted task stores its exceptions in an `AggregateException` (`t.Exception`) and has status `Faulted`. `await` unwraps and rethrows the first inner exception, while `Wait()` and `Result` throw the `AggregateException`. Since .NET Framework 4.5 an unobserved task exception only raises `TaskScheduler.UnobservedTaskException`; it does not crash the process.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these correctly protects a critical section that contains an `await`?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`await semaphore.WaitAsync()`, then the work, with `semaphore.Release()` in `finally`",
+        "`lock (gate) { await DoWorkAsync(); }`",
+        "`Monitor.Enter(gate)` before the `await` and `Monitor.Exit(gate)` after it",
+        "`mutex.WaitOne()` before the `await` and `mutex.ReleaseMutex()` after it"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "`SemaphoreSlim` has no thread affinity and an async wait, so it works across `await`. `await` inside `lock` is compile error CS1996. `Monitor` and `Mutex` are owned by the acquiring thread, and the code after `await` may resume on a different thread, so releasing there throws.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `IAsyncEnumerable<T>` are true?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It is consumed with `await foreach`",
+        "An `async` iterator method can mix `await` and `yield return`",
+        "`WithCancellation(token)` passes a token to the enumerator",
+        "Calling the iterator method runs its body up to the first `yield`",
+        "It is a `Task<IEnumerable<T>>` under the hood"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Async streams are consumed with `await foreach`, produced by async iterators that combine `await` and `yield return`, and `WithCancellation` flows a token (received via `[EnumeratorCancellation]`). Like synchronous iterators they are lazy: the body does not start until enumeration begins. Unlike a `Task<IEnumerable<T>>`, items arrive one at a time as they are produced.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these collections are safe for multiple threads to add and remove items at the same time without extra locking?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`ConcurrentDictionary<TKey,TValue>`",
+        "`ConcurrentQueue<T>`",
+        "`List<T>`",
+        "`Dictionary<TKey,TValue>`",
+        "`HashSet<T>`"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "The `System.Collections.Concurrent` types are built for concurrent reads and writes. `List<T>`, `Dictionary<TKey,TValue>` and `HashSet<T>` support concurrent readers only; concurrent writes can corrupt them, so they need external locking.",
+      "materials": [
+        "collections"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `ConcurrentDictionary<TKey,TValue>` are true?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`TryAdd` returns `false` when the key already exists",
+        "The update delegate of `AddOrUpdate` can run more than once for one call",
+        "Writing to it while another thread enumerates it throws `InvalidOperationException`",
+        "Reading its `Count` property is lock-free",
+        "Assigning through the indexer overwrites an existing value"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "`TryAdd` reports failure instead of throwing, and `dict[key] = value` adds or overwrites. `AddOrUpdate` runs its delegates outside the locks and retries on contention, so a delegate can run several times. Its enumerator is safe during concurrent writes (it is not a snapshot, but never throws), and `Count` acquires all internal locks.",
+      "materials": [
+        "collections"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these operations take O(1) time on average?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`HashSet<T>.Contains`",
+        "`Dictionary<TKey,TValue>.ContainsKey`",
+        "`List<T>.Contains`",
+        "`SortedSet<T>.Contains`",
+        "`LinkedList<T>.Contains`"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "`HashSet<T>` and `Dictionary<TKey,TValue>` are hash tables with average O(1) lookups. `List<T>.Contains` and `LinkedList<T>.Contains` scan linearly (O(n)), and `SortedSet<T>` is a red-black tree with O(log n) lookups.",
+      "materials": [
+        "collections"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A `ServiceProvider` is built with scope validation on, as it is by default in the Development environment. Which of these resolutions throw?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Resolving a singleton whose constructor takes a scoped service",
+        "Resolving, from a request scope, a scoped service that takes a singleton",
+        "Resolving, from a request scope, a transient service that takes a scoped service",
+        "Resolving a scoped service directly from the root provider",
+        "Resolving, from a request scope, a scoped service that takes a transient"
+      ],
+      "correctIndices": [
+        0,
+        3
+      ],
+      "explanation": "Scope validation catches captive dependencies, so a singleton consuming a scoped service throws, and so does resolving a scoped service from the root provider (it would effectively become a singleton). Within a scope, scoped services may use singletons and transients, and a transient may use a scoped service, so those resolve fine.",
+      "materials": [
+        "di"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about keyed services (.NET 8) are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`AddKeyedScoped<ICache, RedisCache>(\"redis\")` registers a keyed service",
+        "A constructor parameter can select it with `[FromKeyedServices(\"redis\")]`",
+        "Service keys must be strings",
+        "`provider.GetRequiredKeyedService<ICache>(\"redis\")` resolves it",
+        "Resolving `ICache` without a key returns the keyed registration"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Keyed registrations use the `AddKeyed*` methods and are resolved with `[FromKeyedServices]` or `GetRequiredKeyedService`. The key is an `object`, so an `int` or enum key works too. Keyed registrations are separate from unkeyed ones: `GetService<ICache>()` returns `null` when only a keyed `ICache` is registered.",
+      "materials": [
+        "di"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about ordering ASP.NET Core middleware are true?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`UseExceptionHandler` should come early so it catches exceptions from later middleware",
+        "`UseAuthorization` should come before `UseAuthentication`",
+        "`UseCors` should come after `UseRouting` and before `UseAuthorization`",
+        "`UseHttpsRedirection` must come after `UseAuthorization`"
+      ],
+      "correctIndices": [
+        0,
+        2
+      ],
+      "explanation": "Middleware wraps everything registered after it, so the exception handler goes first, and the documented order puts `UseCors` after `UseRouting` and before authorization. Authentication must run before authorization, because authorization needs the authenticated user. HTTPS redirection belongs near the start of the pipeline, not after authorization.",
+      "materials": [
+        "middleware"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about writing custom ASP.NET Core middleware are true?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`app.Use(async (context, next) => { ...; await next(context); })` defines inline middleware",
+        "A convention-based class needs a `RequestDelegate` constructor parameter and an `InvokeAsync(HttpContext)` method",
+        "A class implementing `IMiddleware` must be registered in the DI container",
+        "A convention-based middleware class is constructed once per request",
+        "Scoped services can be added as extra parameters of `InvokeAsync`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "Inline middleware, convention-based classes and factory-based `IMiddleware` are all supported, and `IMiddleware` instances are resolved from DI, so they must be registered. Convention-based middleware is constructed once at app startup, which is why scoped services go into `InvokeAsync` parameters rather than its constructor.",
+      "materials": [
+        "middleware"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "With the default `WebApplication.CreateBuilder` configuration, which statements are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The environment variable `Smtp__Host` sets the configuration key `Smtp:Host`",
+        "Configuration keys are case-insensitive",
+        "`appsettings.json` overrides environment variables",
+        "Command-line arguments override `appsettings.json`",
+        "`appsettings.Production.json` overrides `appsettings.json` in Production"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "explanation": "Double underscores in environment variable names map to the `:` separator, and keys are case-insensitive. Providers added later win, and the default order is `appsettings.json`, `appsettings.{Environment}.json`, user secrets (Development), environment variables, then command-line arguments, so environment variables override `appsettings.json`, not the reverse.",
+      "materials": [
+        "config"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these route-mapping methods exist on `WebApplication` in ASP.NET Core 8?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`MapGet`",
+        "`MapPost`",
+        "`MapPatch`",
+        "`MapMethods`",
+        "`MapFetch`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "Minimal APIs provide `MapGet`, `MapPost`, `MapPut`, `MapDelete` and `MapPatch`, plus `MapMethods` for arbitrary HTTP verbs. There is no `MapFetch`; fetch is a browser API, not an HTTP method.",
+      "materials": [
+        "minimal"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this Minimal API endpoint are true?\n\n```csharp\napp.MapGet(\"/items/{id}\", (int id, int page, ILogger<Program> log) => $\"{id}-{page}\");\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`id` is bound from the route",
+        "`page` is bound from the query string",
+        "`log` is resolved from dependency injection",
+        "A request without `?page=` gets a 400 Bad Request",
+        "`page` defaults to 0 when the query string omits it"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "A parameter whose name matches a route segment binds from the route, other simple types bind from the query string, and registered services come from DI. Because `page` is a non-nullable `int` without a default value it is required, so a missing value produces 400; declare `int? page` or `int page = 1` to make it optional.",
+      "materials": [
+        "minimal"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about binding in `app.MapPost(\"/todos\", (Todo todo, HttpContext ctx, CancellationToken ct) => todo)` are true, where `Todo` is a record?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`todo` is deserialized from the JSON request body",
+        "Adding a second complex parameter that is also inferred from the body works",
+        "`ctx` receives the current `HttpContext`",
+        "`ct` is bound to the request-aborted token",
+        "Property names in the JSON body are matched case-sensitively by default"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Complex types are inferred as the body, and `HttpContext` and `CancellationToken` are special types bound to the current request and `RequestAborted`. Only one parameter may come from the body; two inferred body parameters fail with `InvalidOperationException: Failure to infer one or more parameters`. Minimal APIs use web JSON defaults, which match property names case-insensitively.",
+      "materials": [
+        "minimal"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which Minimal API handlers send a response with `Content-Type: application/json`?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`() => new Todo(1, \"a\")`",
+        "`() => \"hi\"`",
+        "`() => Results.Ok(new { id = 1 })`",
+        "`() => TypedResults.NoContent()`",
+        "`() => Results.Text(\"hi\")`"
+      ],
+      "correctIndices": [
+        0,
+        2
+      ],
+      "explanation": "Returning a plain object, or passing one to `Results.Ok`, serializes it as JSON. A returned `string` is written as `text/plain`, `NoContent` sends a 204 with no body, and `Results.Text` writes `text/plain`.",
+      "materials": [
+        "minimal"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "An API uses JWT bearer authentication as its default scheme plus authorization. Which statements are true?",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "An anonymous request to an endpoint requiring authorization gets 401",
+        "An authenticated user who fails the endpoint's policy gets 403",
+        "`[AllowAnonymous]` lets requests skip authorization for that endpoint",
+        "`.RequireAuthorization()` adds an authorization requirement to a Minimal API endpoint",
+        "Authentication decides what a user may do; authorization establishes who they are"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "When authorization fails for an unauthenticated user the scheme issues a challenge (401), and for an authenticated user a forbid (403). `[AllowAnonymous]` and `RequireAuthorization()` turn authorization off and on per endpoint. The last option reverses the terms: authentication establishes identity, authorization decides access.",
+      "materials": [
+        "minimal"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about ASP.NET Core authorization policies are true?",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Every requirement in a policy must be satisfied for the policy to succeed",
+        "`[Authorize(Policy = \"Admin\")]` applies the policy registered under that name",
+        "A configured `FallbackPolicy` applies to endpoints with no authorization metadata",
+        "`[Authorize(Roles = \"a,b\")]` requires the user to have both roles",
+        "Calling `AddPolicy` makes the policy apply to every endpoint"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "A policy is a set of requirements that all have to pass, named policies are applied with `[Authorize(Policy = ...)]` or `RequireAuthorization(\"Admin\")`, and the fallback policy covers endpoints that declare nothing. A comma-separated `Roles` list means any one of the roles; stack two `[Authorize]` attributes to require both. `AddPolicy` only registers a policy; the default and fallback policies are set separately.",
+      "materials": [
+        "minimal"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are ways EF Core can load related entities?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Eager loading with `Include`",
+        "Explicit loading with `context.Entry(blog).Collection(b => b.Posts).Load()`",
+        "Lazy loading through proxies, after opting in",
+        "Eager loading of deeper levels with `ThenInclude`",
+        "`AsNoTracking()`, which loads every navigation property"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "EF Core supports eager loading (`Include`/`ThenInclude`), explicit loading through the entry API and opt-in lazy loading (for example `UseLazyLoadingProxies`). `AsNoTracking` only turns off change tracking; it loads no navigations by itself.",
+      "materials": [
+        "ef-perf"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about EF Core change tracking are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`AsNoTracking()` makes read-only queries cheaper",
+        "A tracking query returns the same instance for rows with the same key",
+        "`Find` can return an already-tracked entity without querying the database",
+        "Projecting to an anonymous type of scalar properties tracks the entity",
+        "`SaveChanges` sends an `UPDATE` for every tracked entity, changed or not"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "No-tracking queries skip snapshotting and identity resolution, tracking queries resolve identity through the change tracker, and `Find` checks the tracker before going to the database. Projections that contain only scalar values track nothing, and `SaveChanges` only issues commands for entities whose state is `Added`, `Modified` or `Deleted`.",
+      "materials": [
+        "ef-perf"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about EF Core split queries are true?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`AsSplitQuery()` sends a separate SQL query for each included collection",
+        "They avoid the cartesian explosion caused by joining several collections",
+        "Without a serializable transaction, they can return inconsistent data if rows change between queries",
+        "`UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)` makes splitting the default",
+        "They are always faster than single queries"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "Split queries load the root and each included collection with their own SQL statements, which avoids duplicating parent rows across joins, and can be enabled per query or as the context default. Because the statements run separately, concurrent updates can make the results inconsistent, and the extra round trips mean they are not always faster.",
+      "materials": [
+        "ef-perf"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about optimistic concurrency in EF Core are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "On SQL Server, a `[Timestamp]` `byte[]` property maps to a `rowversion` column",
+        "A concurrency token is included in the `WHERE` clause of `UPDATE` and `DELETE`",
+        "A conflict makes `SaveChanges` throw `DbUpdateConcurrencyException`",
+        "EF Core takes row locks while entities are tracked",
+        "Concurrency tokens are checked when an entity is first queried"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`[Timestamp]` (or `IsRowVersion()`) maps to an auto-updated `rowversion`, and EF adds the original token value to the `WHERE` clause, so zero affected rows means a conflict and `DbUpdateConcurrencyException`. EF Core does not lock rows while tracking (that would be pessimistic concurrency), and the check happens at save time, not at query time.",
+      "materials": [
+        "ef-concurrency"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these attributes come from xUnit?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`[Fact]`",
+        "`[Theory]`",
+        "`[TestMethod]`",
+        "`[Test]`",
+        "`[TestCase]`"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "xUnit uses `[Fact]` for plain tests and `[Theory]` for parameterized ones. `[TestMethod]` belongs to MSTest, and `[Test]` and `[TestCase]` belong to NUnit.",
+      "materials": [
+        "xunit"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about xUnit (v2) test lifecycle and parallelism are true?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`IClassFixture<T>` shares one fixture instance across all tests in a class",
+        "Tests within one test class run in parallel with each other by default",
+        "Test classes in different collections can run in parallel by default",
+        "`IAsyncLifetime` provides async `InitializeAsync` and `DisposeAsync` hooks",
+        "Putting two classes in the same `[Collection]` stops them running in parallel"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "explanation": "Class fixtures are created once per test class, and `IAsyncLifetime` adds async setup and teardown. By default each class is its own collection; collections run in parallel with each other, while tests inside one collection, including all tests of one class, run one at a time. Sharing a `[Collection]` name therefore serializes classes.",
+      "materials": [
+        "xunit"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about C# 12 primary constructors on a class, such as `class Pc(int start) { ... }`, are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`start` is in scope throughout the class body",
+        "`start` does not become a public property",
+        "`start` is read-only and cannot be assigned in methods",
+        "Any other constructor must chain to it with `: this(...)`",
+        "Structs can declare primary constructors too"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "explanation": "Primary constructor parameters are visible in the whole type body, and on a non-record class they are not turned into public properties. Every other constructor must call the primary one through `this(...)`, and structs support them as well. The parameters are ordinary mutable variables, so `start++` in a method compiles.",
+      "materials": [
+        "csharp-ref"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these collection expressions compile in C# 12?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`int[] a = [1, 2, 3];`",
+        "`List<int> l = [];`",
+        "`int[] b = [..a, 4];`",
+        "`var x = [1, 2];`",
+        "`Span<int> s = [1, 2, 3];`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "Collection expressions convert to arrays, `List<T>`, spans and other collection types, and `..` spreads another collection. They have no natural type, so `var x = [1, 2];` is error CS9176.",
+      "materials": [
+        "csharp-ref"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about exceptions in C# are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Inside a `catch`, `throw;` rethrows while preserving the original stack trace",
+        "`throw ex;` preserves the original stack trace",
+        "`catch (Exception)` catches a `StackOverflowException`",
+        "A `finally` block is skipped when the `catch` rethrows",
+        "An exception filter (`when`) runs only after inner `finally` blocks have run"
+      ],
+      "correctIndices": [
+        0
+      ],
+      "explanation": "`throw;` keeps the stack trace, whereas `throw ex;` resets it to the rethrow point. A stack overflow terminates the process and cannot be caught. `finally` still runs when an exception leaves the `catch`. Exception filters run during the first pass, before the stack unwinds and before inner `finally` blocks execute.",
+      "materials": [
+        "csharp-ref"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this code are true?\n\n```csharp\nrecord Bag(List<int> Items);\n\nvar a = new Bag(new List<int> { 1 });\nvar b = new Bag(new List<int> { 1 });\nvar c = a with { };\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`a == b` is `false`",
+        "`a.Equals(b)` is `true`",
+        "`c.Items` and `a.Items` refer to the same list",
+        "`c == a` is `true`",
+        "`ReferenceEquals(c, a)` is `true`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Record equality compares each property with its default equality comparer, and `List<int>` compares by reference, so two bags with different lists are unequal under both `==` and `Equals`. `with` makes a shallow copy: `c` is a new object whose `Items` points to the same list, so `c == a` is true while `ReferenceEquals(c, a)` is false.",
+      "materials": [
+        "csharp-ref"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about this code are true?\n\n```csharp\nvar actions = new List<Func<int>>();\nfor (int i = 0; i < 3; i++) actions.Add(() => i);\nforeach (var x in new[] { 0, 1, 2 }) actions.Add(() => x);\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The three lambdas from the `for` loop all return 3",
+        "The three lambdas from the `foreach` loop return 0, 1 and 2",
+        "The three lambdas from the `for` loop return 0, 1 and 2",
+        "Copying `i` into a local declared inside the `for` body makes them return 0, 1 and 2",
+        "The three lambdas from the `foreach` loop all return 2"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "A `for` loop has one `i` variable shared by all iterations, so every lambda sees its final value 3. Since C# 5, a `foreach` loop variable is fresh per iteration, so those lambdas capture 0, 1 and 2. Declaring a local inside the `for` body gives each iteration its own captured variable.",
+      "materials": [
+        "csharp-ref"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about C# iterator methods (using `yield return`) are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The body does not run until the caller starts enumerating",
+        "`yield break` ends the sequence",
+        "Leaving a `foreach` early still runs the iterator's `finally` blocks",
+        "Argument checks at the top of the iterator throw as soon as the method is called",
+        "`yield return` is allowed inside a `try` block that has a `catch`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Iterators are lazy, `yield break` ends iteration, and `foreach` disposes the enumerator when it exits early, which runs pending `finally` blocks. Because nothing runs until `MoveNext`, argument checks in the iterator are also deferred (hence the wrapper-method idiom). `yield return` inside a `try` with a `catch` is error CS1626.",
+      "materials": [
+        "csharp-ref"
+      ]
+    }
+  ]
+}

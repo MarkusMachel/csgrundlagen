@@ -6,6 +6,14 @@
 .tok-com {
   color: var(--comment);
 }
+/* Titles written as `// Title` (a heading that starts with a .tok-com "// ")
+   are green throughout, like a comment in a code editor. */
+:is(h1, h2, h3):has(> .tok-com:first-child) {
+  color: var(--comment-title);
+}
+:is(h1, h2, h3) > .tok-com:first-child {
+  color: inherit;
+}
 .tok-kw {
   color: var(--accent);
 }

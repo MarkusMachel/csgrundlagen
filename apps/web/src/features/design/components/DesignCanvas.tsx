@@ -14,10 +14,17 @@ import {
 import { useCallback, useEffect, useMemo, useState, type DragEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import type { DesignKind } from '@/features/questions';
 import { useUIStore } from '@/stores/useUIStore';
 
-import { addNode, canConnect, connect, disconnect, removeNode, type BoardState } from '../board';
+import {
+  addNode,
+  canConnect,
+  connect,
+  disconnect,
+  removeNode,
+  type BoardState,
+  type PaletteItem,
+} from '../board';
 import { nodeTypes, type ComponentFlowNode } from './ComponentNode';
 
 export const DRAG_TYPE = 'application/x-design-kind';
@@ -73,7 +80,7 @@ export function DesignCanvas({
         id: n.id,
         type: 'component',
         position: { x: n.x, y: n.y },
-        data: { kind: n.kind, label: n.label },
+        data: { kind: n.kind, product: n.product, label: n.label },
         selected: selection.has(n.id),
         measured: measured[n.id],
         draggable: !readOnly,
@@ -153,10 +160,16 @@ export function DesignCanvas({
 
   const onDrop = (e: DragEvent) => {
     e.preventDefault();
-    const kind = e.dataTransfer.getData(DRAG_TYPE) as DesignKind;
-    if (!kind || readOnly) return;
+    const raw = e.dataTransfer.getData(DRAG_TYPE);
+    if (!raw || readOnly) return;
+    let item: PaletteItem;
+    try {
+      item = JSON.parse(raw) as PaletteItem;
+    } catch {
+      return;
+    }
     const p = flow.screenToFlowPosition({ x: e.clientX, y: e.clientY });
-    onChange(addNode(board, kind, p.x - 70, p.y - 24));
+    onChange(addNode(board, item, p.x - 70, p.y - 24));
   };
 
   return (

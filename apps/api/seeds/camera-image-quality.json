@@ -1,0 +1,1643 @@
+{
+  "name": "52 camera and image quality questions",
+  "materials": [
+    {
+      "key": "cs178",
+      "type": "video",
+      "title": "Stanford CS 178: Digital Photography",
+      "url": "https://graphics.stanford.edu/courses/cs178/",
+      "author": "Marc Levoy",
+      "description": "Slides and lectures on optics, exposure, sensors, sampling and HDR."
+    },
+    {
+      "key": "webvision",
+      "type": "book",
+      "title": "Webvision: The Organization of the Retina and Visual System",
+      "url": "https://webvision.med.utah.edu/",
+      "author": "University of Utah",
+      "description": "Free textbook on photoreceptors, color vision and adaptation."
+    },
+    {
+      "key": "wandell",
+      "type": "book",
+      "title": "Foundations of Vision",
+      "url": "https://foundationsofvision.stanford.edu/",
+      "author": "Brian Wandell",
+      "description": "Free online book on how the visual system encodes images."
+    },
+    {
+      "key": "gamma-faq",
+      "type": "article",
+      "title": "Gamma FAQ",
+      "url": "https://www.cs.tufts.edu/~nr/cs257/archive/charles-poynton/GammaFAQ.pdf",
+      "author": "Charles Poynton",
+      "description": "Why image data is gamma encoded, and what that means for processing."
+    },
+    {
+      "key": "color-faq",
+      "type": "article",
+      "title": "Color FAQ",
+      "url": "https://www.cs.tufts.edu/~nr/cs257/archive/charles-poynton/ColorFAQ.pdf",
+      "author": "Charles Poynton",
+      "description": "Colorimetry, XYZ, color spaces and transfer functions."
+    },
+    {
+      "key": "szeliski",
+      "type": "book",
+      "title": "Computer Vision: Algorithms and Applications",
+      "url": "https://szeliski.org/Book/",
+      "author": "Richard Szeliski",
+      "description": "Free book; image formation, lens models and computational photography."
+    },
+    {
+      "key": "hdrplus",
+      "type": "article",
+      "title": "Burst photography for high dynamic range and low-light imaging on mobile cameras",
+      "url": "https://research.google/pubs/burst-photography-for-high-dynamic-range-and-low-light-imaging-on-mobile-cameras/",
+      "author": "Hasinoff et al. (Google)",
+      "description": "The HDR+ paper: aligning and merging short bursts on phones."
+    },
+    {
+      "key": "night-sight",
+      "type": "article",
+      "title": "Night Sight: Seeing in the Dark on Pixel Phones",
+      "url": "https://research.google/blog/night-sight-seeing-in-the-dark-on-pixel-phones/",
+      "author": "Google Research",
+      "description": "How Pixel phones take handheld photos in very low light."
+    },
+    {
+      "key": "emva",
+      "type": "article",
+      "title": "EMVA 1288 standard",
+      "url": "https://www.emva.org/standards-technology/emva-1288/",
+      "author": "EMVA",
+      "description": "Characterizing image sensors and cameras: noise, sensitivity, dynamic range."
+    },
+    {
+      "key": "vcx",
+      "type": "link",
+      "title": "VCX Forum",
+      "url": "https://www.vcx-forum.org/",
+      "author": "VCX Forum",
+      "description": "Open test specification for phone camera image and video quality."
+    },
+    {
+      "key": "imatest-sfr",
+      "type": "article",
+      "title": "Imatest: Using SFR (slanted-edge MTF)",
+      "url": "https://www.imatest.com/docs/sfr_instructions/",
+      "author": "Imatest",
+      "description": "Measuring sharpness and MTF with a slanted edge."
+    },
+    {
+      "key": "imatest-sharp",
+      "type": "article",
+      "title": "Imatest: Sharpness",
+      "url": "https://www.imatest.com/docs/sharpness/",
+      "author": "Imatest",
+      "description": "MTF50, acutance and edge overshoot from sharpening. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "imatest-color",
+      "type": "article",
+      "title": "Imatest: Colorcheck",
+      "url": "https://www.imatest.com/docs/colorcheck/",
+      "author": "Imatest",
+      "description": "Color accuracy from a ColorChecker: ΔE, saturation and white balance."
+    },
+    {
+      "key": "imatest-distortion",
+      "type": "article",
+      "title": "Imatest: Distortion",
+      "url": "https://www.imatest.com/docs/distortion/",
+      "author": "Imatest",
+      "description": "Measuring barrel and pincushion distortion from a grid."
+    },
+    {
+      "key": "imatest-dynamic",
+      "type": "article",
+      "title": "Imatest: Dynamic range",
+      "url": "https://www.imatest.com/docs/dynamic/",
+      "author": "Imatest",
+      "description": "Dynamic range from step charts and SNR thresholds. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "imatest-noise",
+      "type": "article",
+      "title": "Imatest: Noise in photographic images",
+      "url": "https://www.imatest.com/docs/noise/",
+      "author": "Imatest",
+      "description": "Noise sources and how noise is measured. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "imatest-docs",
+      "type": "link",
+      "title": "Imatest documentation",
+      "url": "https://www.imatest.com/docs/",
+      "author": "Imatest",
+      "description": "Test charts, lab setup and measurement procedures, including video."
+    },
+    {
+      "key": "trichromacy",
+      "type": "article",
+      "title": "Trichromacy",
+      "url": "https://en.wikipedia.org/wiki/Trichromacy",
+      "author": "Wikipedia",
+      "description": "Three cone types and three-channel color."
+    },
+    {
+      "key": "luminous-eff",
+      "type": "article",
+      "title": "Luminous efficiency function",
+      "url": "https://en.wikipedia.org/wiki/Luminous_efficiency_function",
+      "author": "Wikipedia",
+      "description": "Why green carries most of the brightness."
+    },
+    {
+      "key": "csf",
+      "type": "article",
+      "title": "Contrast sensitivity",
+      "url": "https://en.wikipedia.org/wiki/Contrast_sensitivity",
+      "author": "Wikipedia",
+      "description": "Sensitivity to contrast across spatial frequency."
+    },
+    {
+      "key": "weber",
+      "type": "article",
+      "title": "Weber–Fechner law",
+      "url": "https://en.wikipedia.org/wiki/Weber%E2%80%93Fechner_law",
+      "author": "Wikipedia",
+      "description": "We notice relative, not absolute, changes."
+    },
+    {
+      "key": "jnd",
+      "type": "article",
+      "title": "Just-noticeable difference",
+      "url": "https://en.wikipedia.org/wiki/Just-noticeable_difference",
+      "author": "Wikipedia",
+      "description": "The smallest change an observer detects."
+    },
+    {
+      "key": "gestalt",
+      "type": "article",
+      "title": "Gestalt psychology",
+      "url": "https://en.wikipedia.org/wiki/Gestalt_psychology",
+      "author": "Wikipedia",
+      "description": "Perceiving the whole before the parts."
+    },
+    {
+      "key": "checker",
+      "type": "article",
+      "title": "Checker shadow illusion",
+      "url": "https://en.wikipedia.org/wiki/Checker_shadow_illusion",
+      "author": "Wikipedia",
+      "description": "Adelson's identical squares that look different."
+    },
+    {
+      "key": "cie1931",
+      "type": "article",
+      "title": "CIE 1931 color space",
+      "url": "https://en.wikipedia.org/wiki/CIE_1931_color_space",
+      "author": "Wikipedia",
+      "description": "XYZ, the standard observer and the xy diagram."
+    },
+    {
+      "key": "srgb",
+      "type": "article",
+      "title": "sRGB",
+      "url": "https://en.wikipedia.org/wiki/SRGB",
+      "author": "Wikipedia",
+      "description": "The default color space of the web and SDR displays."
+    },
+    {
+      "key": "p3",
+      "type": "article",
+      "title": "DCI-P3",
+      "url": "https://en.wikipedia.org/wiki/DCI-P3",
+      "author": "Wikipedia",
+      "description": "The wider gamut used by cinema and many phones (Display P3)."
+    },
+    {
+      "key": "rec2020",
+      "type": "article",
+      "title": "Rec. 2020",
+      "url": "https://en.wikipedia.org/wiki/Rec._2020",
+      "author": "Wikipedia",
+      "description": "The UHD/HDR video gamut."
+    },
+    {
+      "key": "color-diff",
+      "type": "article",
+      "title": "Color difference",
+      "url": "https://en.wikipedia.org/wiki/Color_difference",
+      "author": "Wikipedia",
+      "description": "ΔE formulas from CIE76 to CIEDE2000."
+    },
+    {
+      "key": "metamerism",
+      "type": "article",
+      "title": "Metamerism (color)",
+      "url": "https://en.wikipedia.org/wiki/Metamerism_(color)",
+      "author": "Wikipedia",
+      "description": "Different spectra that look the same."
+    },
+    {
+      "key": "ciecam",
+      "type": "article",
+      "title": "CIECAM02",
+      "url": "https://en.wikipedia.org/wiki/CIECAM02",
+      "author": "Wikipedia",
+      "description": "A color appearance model for viewing conditions."
+    },
+    {
+      "key": "unsharp",
+      "type": "article",
+      "title": "Unsharp masking",
+      "url": "https://en.wikipedia.org/wiki/Unsharp_masking",
+      "author": "Wikipedia",
+      "description": "The classic sharpening filter and its halos."
+    },
+    {
+      "key": "acutance",
+      "type": "article",
+      "title": "Acutance",
+      "url": "https://en.wikipedia.org/wiki/Acutance",
+      "author": "Wikipedia",
+      "description": "Perceived sharpness from edge contrast."
+    },
+    {
+      "key": "airy",
+      "type": "article",
+      "title": "Airy disk",
+      "url": "https://en.wikipedia.org/wiki/Airy_disk",
+      "author": "Wikipedia",
+      "description": "The diffraction pattern that limits resolution."
+    },
+    {
+      "key": "dof",
+      "type": "article",
+      "title": "Depth of field",
+      "url": "https://en.wikipedia.org/wiki/Depth_of_field",
+      "author": "Wikipedia",
+      "description": "What controls the range of acceptable sharpness."
+    },
+    {
+      "key": "ev",
+      "type": "article",
+      "title": "Exposure value",
+      "url": "https://en.wikipedia.org/wiki/Exposure_value",
+      "author": "Wikipedia",
+      "description": "EV, stops and equivalent exposures."
+    },
+    {
+      "key": "metering",
+      "type": "article",
+      "title": "Metering mode",
+      "url": "https://en.wikipedia.org/wiki/Metering_mode",
+      "author": "Wikipedia",
+      "description": "Average, center-weighted, spot and matrix metering."
+    },
+    {
+      "key": "beta",
+      "type": "article",
+      "title": "Beta movement",
+      "url": "https://en.wikipedia.org/wiki/Beta_movement",
+      "author": "Wikipedia",
+      "description": "Apparent motion from stills shown in sequence."
+    },
+    {
+      "key": "phi",
+      "type": "article",
+      "title": "Phi phenomenon",
+      "url": "https://en.wikipedia.org/wiki/Phi_phenomenon",
+      "author": "Wikipedia",
+      "description": "Motion perceived without a moving object."
+    },
+    {
+      "key": "motion-blur",
+      "type": "article",
+      "title": "Motion blur",
+      "url": "https://en.wikipedia.org/wiki/Motion_blur",
+      "author": "Wikipedia",
+      "description": "Blur from movement during the exposure."
+    },
+    {
+      "key": "judder",
+      "type": "article",
+      "title": "Judder",
+      "url": "https://en.wikipedia.org/wiki/Judder",
+      "author": "Wikipedia",
+      "description": "Jerky motion from low frame rates and pulldown."
+    },
+    {
+      "key": "shutter-angle",
+      "type": "article",
+      "title": "Shutter angle",
+      "url": "https://en.wikipedia.org/wiki/Shutter_angle",
+      "author": "Wikipedia",
+      "description": "Exposure time as a fraction of the frame interval."
+    },
+    {
+      "key": "rolling",
+      "type": "article",
+      "title": "Rolling shutter",
+      "url": "https://en.wikipedia.org/wiki/Rolling_shutter",
+      "author": "Wikipedia",
+      "description": "Row-by-row readout and its skew artifacts."
+    },
+    {
+      "key": "stabilization",
+      "type": "article",
+      "title": "Image stabilization",
+      "url": "https://en.wikipedia.org/wiki/Image_stabilization",
+      "author": "Wikipedia",
+      "description": "Optical and electronic stabilization."
+    },
+    {
+      "key": "artifacts",
+      "type": "article",
+      "title": "Compression artifact",
+      "url": "https://en.wikipedia.org/wiki/Compression_artifact",
+      "author": "Wikipedia",
+      "description": "Blocking, ringing, mosquito noise and banding."
+    },
+    {
+      "key": "gop",
+      "type": "article",
+      "title": "Video compression picture types",
+      "url": "https://en.wikipedia.org/wiki/Video_compression_picture_types",
+      "author": "Wikipedia",
+      "description": "I, P and B frames."
+    },
+    {
+      "key": "demosaic",
+      "type": "article",
+      "title": "Demosaicing",
+      "url": "https://en.wikipedia.org/wiki/Demosaicing",
+      "author": "Wikipedia",
+      "description": "Reconstructing full color from a mosaic."
+    },
+    {
+      "key": "bayer",
+      "type": "article",
+      "title": "Bayer filter",
+      "url": "https://en.wikipedia.org/wiki/Bayer_filter",
+      "author": "Wikipedia",
+      "description": "The RGGB color filter array."
+    },
+    {
+      "key": "sensor",
+      "type": "article",
+      "title": "Image sensor",
+      "url": "https://en.wikipedia.org/wiki/Image_sensor",
+      "author": "Wikipedia",
+      "description": "CCD and CMOS sensors compared."
+    },
+    {
+      "key": "bsi",
+      "type": "article",
+      "title": "Back-illuminated sensor",
+      "url": "https://en.wikipedia.org/wiki/Back-illuminated_sensor",
+      "author": "Wikipedia",
+      "description": "Wiring behind the photodiodes for more light."
+    },
+    {
+      "key": "nyquist",
+      "type": "article",
+      "title": "Nyquist–Shannon sampling theorem",
+      "url": "https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem",
+      "author": "Wikipedia",
+      "description": "Sampling limits and aliasing."
+    },
+    {
+      "key": "moire",
+      "type": "article",
+      "title": "Moiré pattern",
+      "url": "https://en.wikipedia.org/wiki/Moir%C3%A9_pattern",
+      "author": "Wikipedia",
+      "description": "False patterns from fine detail."
+    },
+    {
+      "key": "binning",
+      "type": "article",
+      "title": "Pixel binning",
+      "url": "https://en.wikipedia.org/wiki/Pixel_binning",
+      "author": "Wikipedia",
+      "description": "Combining pixels for low light."
+    },
+    {
+      "key": "chroma-sub",
+      "type": "article",
+      "title": "Chroma subsampling",
+      "url": "https://en.wikipedia.org/wiki/Chroma_subsampling",
+      "author": "Wikipedia",
+      "description": "4:4:4, 4:2:2 and 4:2:0."
+    },
+    {
+      "key": "jpeg",
+      "type": "article",
+      "title": "JPEG",
+      "url": "https://en.wikipedia.org/wiki/JPEG",
+      "author": "Wikipedia",
+      "description": "DCT, quantization and entropy coding."
+    },
+    {
+      "key": "mos",
+      "type": "article",
+      "title": "Mean opinion score",
+      "url": "https://en.wikipedia.org/wiki/Mean_opinion_score",
+      "author": "Wikipedia",
+      "description": "Averaged category ratings from observers."
+    },
+    {
+      "key": "psnr",
+      "type": "article",
+      "title": "Peak signal-to-noise ratio",
+      "url": "https://en.wikipedia.org/wiki/Peak_signal-to-noise_ratio",
+      "author": "Wikipedia",
+      "description": "The simplest full-reference metric."
+    },
+    {
+      "key": "vmaf",
+      "type": "article",
+      "title": "VMAF",
+      "url": "https://en.wikipedia.org/wiki/VMAF",
+      "author": "Wikipedia",
+      "description": "Netflix's learned perceptual video quality metric."
+    },
+    {
+      "key": "ssim",
+      "type": "article",
+      "title": "Structural similarity index measure",
+      "url": "https://en.wikipedia.org/wiki/Structural_similarity_index_measure",
+      "author": "Wikipedia",
+      "description": "SSIM: luminance, contrast and structure comparison. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "dynamic-range",
+      "type": "article",
+      "title": "Dynamic range",
+      "url": "https://en.wikipedia.org/wiki/Dynamic_range",
+      "author": "Wikipedia",
+      "description": "Ratio of largest to smallest usable signal. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "tone-mapping",
+      "type": "article",
+      "title": "Tone mapping",
+      "url": "https://en.wikipedia.org/wiki/Tone_mapping",
+      "author": "Wikipedia",
+      "description": "Compressing HDR scenes for a display. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "hdr",
+      "type": "article",
+      "title": "High-dynamic-range imaging",
+      "url": "https://en.wikipedia.org/wiki/High-dynamic-range_imaging",
+      "author": "Wikipedia",
+      "description": "Bracketing, merging and rendering HDR. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "flare",
+      "type": "article",
+      "title": "Lens flare",
+      "url": "https://en.wikipedia.org/wiki/Lens_flare",
+      "author": "Wikipedia",
+      "description": "Ghosts, flare and veiling glare from stray light. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "aberration",
+      "type": "article",
+      "title": "Optical aberration",
+      "url": "https://en.wikipedia.org/wiki/Optical_aberration",
+      "author": "Wikipedia",
+      "description": "Spherical, coma, astigmatism, chromatic and more. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "distortion",
+      "type": "article",
+      "title": "Distortion (optics)",
+      "url": "https://en.wikipedia.org/wiki/Distortion_(optics)",
+      "author": "Wikipedia",
+      "description": "Barrel, pincushion and mustache distortion. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "gamma",
+      "type": "article",
+      "title": "Gamma correction",
+      "url": "https://en.wikipedia.org/wiki/Gamma_correction",
+      "author": "Wikipedia",
+      "description": "Transfer functions from sRGB to PQ and HLG. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "shot-noise",
+      "type": "article",
+      "title": "Shot noise",
+      "url": "https://en.wikipedia.org/wiki/Shot_noise",
+      "author": "Wikipedia",
+      "description": "Poisson noise from counting photons. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "otf",
+      "type": "article",
+      "title": "Optical transfer function",
+      "url": "https://en.wikipedia.org/wiki/Optical_transfer_function",
+      "author": "Wikipedia",
+      "description": "MTF and how systems lose contrast. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "noise-red",
+      "type": "article",
+      "title": "Noise reduction",
+      "url": "https://en.wikipedia.org/wiki/Noise_reduction",
+      "author": "Wikipedia",
+      "description": "Spatial and temporal denoising. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "color-constancy",
+      "type": "article",
+      "title": "Color constancy",
+      "url": "https://en.wikipedia.org/wiki/Color_constancy",
+      "author": "Wikipedia",
+      "description": "Stable object colors under changing light. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "chromatic-adapt",
+      "type": "article",
+      "title": "Chromatic adaptation",
+      "url": "https://en.wikipedia.org/wiki/Chromatic_adaptation",
+      "author": "Wikipedia",
+      "description": "How the eye and cameras discount the illuminant. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "color-balance",
+      "type": "article",
+      "title": "Color balance",
+      "url": "https://en.wikipedia.org/wiki/Color_balance",
+      "author": "Wikipedia",
+      "description": "White balance and illuminant estimation. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "depth-perception",
+      "type": "article",
+      "title": "Depth perception",
+      "url": "https://en.wikipedia.org/wiki/Depth_perception",
+      "author": "Wikipedia",
+      "description": "Monocular and binocular depth cues. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "isp",
+      "type": "article",
+      "title": "Image processor",
+      "url": "https://en.wikipedia.org/wiki/Image_processor",
+      "author": "Wikipedia",
+      "description": "The camera's image signal processor. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "frame-rate",
+      "type": "article",
+      "title": "Frame rate",
+      "url": "https://en.wikipedia.org/wiki/Frame_rate",
+      "author": "Wikipedia",
+      "description": "Temporal sampling of video. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "subjective-vq",
+      "type": "article",
+      "title": "Subjective video quality",
+      "url": "https://en.wikipedia.org/wiki/Subjective_video_quality",
+      "author": "Wikipedia",
+      "description": "Observer-based quality tests. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "iqa",
+      "type": "article",
+      "title": "Image quality assessment",
+      "url": "https://en.wikipedia.org/wiki/Image_quality_assessment",
+      "author": "Wikipedia",
+      "description": "Objective and subjective quality methods. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "dxomark",
+      "type": "article",
+      "title": "DxOMark",
+      "url": "https://en.wikipedia.org/wiki/DxOMark",
+      "author": "Wikipedia",
+      "description": "A commercial camera benchmark and its scoring. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "comp-photo",
+      "type": "article",
+      "title": "Computational photography",
+      "url": "https://en.wikipedia.org/wiki/Computational_photography",
+      "author": "Wikipedia",
+      "description": "Multi-frame and learned processing in phones. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "aliasing",
+      "type": "article",
+      "title": "Aliasing",
+      "url": "https://en.wikipedia.org/wiki/Aliasing",
+      "author": "Wikipedia",
+      "description": "Undersampled detail folding into false patterns. Added as a standard reference; not from your notes."
+    }
+  ],
+  "questions": [
+    {
+      "prompt": "How does the human eye detect light and color?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The lens splits light into colors like a prism.",
+        "Rods for low light without color; three cone types (S, M, L) for daylight trichromatic color.",
+        "One kind of receptor that measures wavelength directly.",
+        "Rods detect red and green while cones detect blue, which is why night vision looks bluish, and the same is true for DSLRs and mirrorless cameras."
+      ],
+      "correct": 1,
+      "explanation": "The retina has rods (very sensitive, night vision, no color) and three cone types (S, M, L, peaks near 420, 530 and 560 nm) that work in daylight and give trichromatic vision. Cones crowd the fovea, which gives sharp central vision. Daylight luminous efficiency peaks near 555 nm (green), which is why green carries most of the brightness in cameras and displays, and three cone types is why three color channels suffice.",
+      "materials": [
+        "webvision",
+        "trichromacy",
+        "luminous-eff",
+        "wandell"
+      ]
+    },
+    {
+      "prompt": "What does the contrast sensitivity function (CSF) describe, and why does it matter for cameras?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The number of colors a person can name.",
+        "Sensitivity to contrast per spatial frequency: it explains why fine noise hides, chroma can be subsampled, and sharpness depends on viewing size.",
+        "The ratio between the brightest and darkest pixel, used only to set the display's contrast ratio.",
+        "How fast the pupil reacts to a flash."
+      ],
+      "correct": 1,
+      "explanation": "The CSF describes sensitivity to contrast at each spatial frequency (cycles per degree). It peaks at a few cycles per degree, falls for very fine and very coarse detail, and is lower for color than for luminance. So fine noise is less visible than coarse noise, chroma can be subsampled, and sharpness must be judged at the viewing distance and image size, not at 100 percent pixels.",
+      "materials": [
+        "csf",
+        "cs178"
+      ]
+    },
+    {
+      "prompt": "What does Weber's law say about just noticeable differences, and why is image data gamma or log encoded?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "JNDs are only defined for sound.",
+        "Gamma encoding exists only to save CPU time.",
+        "We notice absolute changes of a fixed size, so linear encoding wastes no code values anywhere.",
+        "We notice relative changes (about 1–2 % in luminance), so perception is roughly logarithmic and encoding spends codes on dark tones."
+      ],
+      "correct": 3,
+      "explanation": "A JND is the smallest change detected (typically half the time). Weber's law: the JND is roughly proportional to the stimulus magnitude. So brightness perception is closer to logarithmic or power-law than linear, which is why image data are gamma or log encoded. JNDs also serve as a unit of quality loss so different attributes share one scale.",
+      "materials": [
+        "weber",
+        "jnd",
+        "gamma-faq"
+      ]
+    },
+    {
+      "prompt": "Bottom-up versus top-down perception: what does it mean for camera design?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Recognition uses both edges and parts and whole-scene expectations, so cameras must preserve edges, detail and shape cues.",
+        "Top-down perception means people only see what is at the top of the frame.",
+        "It only matters for black-and-white photos.",
+        "Perception is purely bottom-up, so only pixel count matters for recognizing objects."
+      ],
+      "correct": 0,
+      "explanation": "Bottom-up theories (Marr; Biederman's recognition-by-components with geons) build objects from edges, surfaces and simple parts. Top-down or Gestalt views start with the whole and expectations (the Dalmatian image). Real vision mixes both. For cameras: edges, sharpness, bit depth and low distortion preserve the cues recognition depends on.",
+      "materials": [
+        "gestalt"
+      ]
+    },
+    {
+      "prompt": "Why can't you trust your eyes when judging a photo?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Eyes are accurate light meters, but screens lie, so measuring the display fixes everything, and the same is true for DSLRs and mirrorless cameras.",
+        "Only colorblind people are fooled by illusions.",
+        "Because the eye has fewer pixels than a camera.",
+        "Perception is relative: simultaneous contrast, adaptation and filling-in make equal pixel values look different."
+      ],
+      "correct": 3,
+      "explanation": "Perception is relative and constructive. Simultaneous contrast: a gray patch looks lighter on a dark surround. Chromatic adaptation: a cast fades after a while. Filling-in: the brain fills the blind spot and can create faint colors (watercolor illusion). Adelson's checker shadow shows two identical squares looking very different. So pixel values and patch measurements don't always match perception, and subjective tests and viewing conditions matter.",
+      "materials": [
+        "checker",
+        "webvision"
+      ]
+    },
+    {
+      "prompt": "How does visual adaptation affect how a photo looks?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The eye adjusts to light level and illuminant color, so viewing conditions change appearance and an 'off' white balance can look natural.",
+        "It makes photos look sharper over time.",
+        "It only affects people wearing glasses.",
+        "Adaptation only happens in cameras; the eye sees each photo identically wherever it is viewed."
+      ],
+      "correct": 0,
+      "explanation": "The visual system adjusts sensitivity to ambient light (light and dark adaptation, seconds to many minutes) and to the illuminant color (chromatic adaptation, partly in seconds). The same photo looks different in a dark room, on a phone outdoors or as a print under tungsten light. Display brightness, surround and the viewing environment are part of the image quality system.",
+      "materials": [
+        "webvision",
+        "chromatic-adapt"
+      ]
+    },
+    {
+      "prompt": "What does the CIE 1931 standard observer let you do?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Convert RGB to CMYK for printing.",
+        "Predict exactly how a color looks to every person in any viewing condition, which applies to video as well.",
+        "Turn any spectrum into XYZ so equal XYZ values predict a color match for the average observer.",
+        "Measure the sharpness of a lens."
+      ],
+      "correct": 2,
+      "explanation": "Colorimetry quantifies color matches from spectra. The 1931 CIE color matching functions turn any spectrum into XYZ such that spectra with equal XYZ match for the standard observer; Y is luminance. It predicts matches, not appearance, and individuals vary (observer metamerism).",
+      "materials": [
+        "cie1931",
+        "color-faq"
+      ]
+    },
+    {
+      "prompt": "How do sRGB, Display P3 and Rec. 2020 gamuts compare?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "sRGB is the widest because it is the oldest.",
+        "sRGB (Rec. 709 primaries) is smallest, Display P3 is wider in reds and greens, Rec. 2020 is much wider still.",
+        "Rec. 2020 is the smallest, used for low-end phones.",
+        "They have identical gamuts and differ only in file size and compression."
+      ],
+      "correct": 1,
+      "explanation": "A gamut is the set of colors a space can represent, a triangle on the xy diagram. sRGB is the web and SDR default; Display P3 is wider and used on many phones and laptops; Rec. 2020 is much wider (UHD/HDR, few displays cover it). Images must be tagged with their color space, and out-of-gamut colors need gamut mapping.",
+      "materials": [
+        "srgb",
+        "p3",
+        "rec2020"
+      ]
+    },
+    {
+      "prompt": "Roughly what ΔE (CIELAB color difference) is just noticeable side by side?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "About 1; around 2–3 is usually acceptable in photos, and larger differences are clearly visible.",
+        "Exactly 0.01.",
+        "ΔE can't be related to visibility.",
+        "About 50, because CIELAB values range from 0 to 100 and smaller steps cannot be seen, which is how most phone cameras handle it."
+      ],
+      "correct": 0,
+      "explanation": "CIELAB is approximately perceptually uniform, so distance approximates visible difference. CIEDE2000 (ΔE00) improves uniformity in blues and neutrals. ΔE ≈ 1 is near a JND for side-by-side patches; 2–3 is typically acceptable in photos. ΔE ignores spatial context and viewing conditions.",
+      "materials": [
+        "color-diff"
+      ]
+    },
+    {
+      "prompt": "How does a camera do white balance?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Add the same fixed offset to all three channels so that the brightest pixel becomes pure white, which is what the ISO standards assume.",
+        "Estimate the illuminant (gray world, white patch, statistics or learned models), then scale channels so neutrals come out neutral.",
+        "Convert the image to grayscale and back.",
+        "Raise the ISO until colors look right."
+      ],
+      "correct": 1,
+      "explanation": "The illuminant tints everything; white balance scales channels so neutral objects stay neutral (like chromatic adaptation). The camera estimates the illuminant (gray world, white patch, statistics, learned models) and applies gains, often with a Bradford or von Kries style transform. Hard cases: mixed light, one dominant color, very low light. In video, stability matters as much as accuracy.",
+      "materials": [
+        "color-balance",
+        "chromatic-adapt"
+      ]
+    },
+    {
+      "prompt": "What is color constancy, and is it perfect in people?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Another name for gamut.",
+        "The guarantee that a camera records identical RGB values under every light, perfect in people, so no calibration is needed for it.",
+        "A display setting that locks the color temperature.",
+        "Perceiving stable object colors under changing light; it isn't perfect, which is why 'correct' and 'pleasing' can differ."
+      ],
+      "correct": 3,
+      "explanation": "Color constancy is seeing stable object colors despite illumination changes. Humans use adaptation and context; algorithms estimate the illuminant (statistical, gamut and physics-based methods, deep networks trained on datasets) and correct for it. It is imperfect in people too.",
+      "materials": [
+        "color-constancy"
+      ]
+    },
+    {
+      "prompt": "What is observer metamerism?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Color shifts caused by JPEG compression.",
+        "A color pair that matches for one person can mismatch for another, because cone sensitivities differ.",
+        "Two spectra that look different to everyone under every light, the opposite of a metameric match, which is what the ISO standards assume.",
+        "A camera seeing two colors identically under daylight."
+      ],
+      "correct": 1,
+      "explanation": "Metamers are different spectra that look the same under one light but can differ under another. Observer metamerism is the same between people: individual cone sensitivities differ, and the variation can exceed the difference between standard observer models. It's why a display and a print can match for you and not a colleague.",
+      "materials": [
+        "metamerism"
+      ]
+    },
+    {
+      "prompt": "What are color appearance models such as CIECAM02 and CAM16 for?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Compressing color images losslessly by storing only the hue channel of each pixel, which is what the ISO standards assume.",
+        "Predicting how a color looks given illuminant, adapting luminance, background and surround.",
+        "Naming colors in different languages.",
+        "Measuring a lens's chromatic aberration."
+      ],
+      "correct": 1,
+      "explanation": "They predict appearance under viewing conditions and output perceptual correlates (lightness, chroma, hue). They let you reproduce a scene's appearance on another medium (a dim display versus a print in bright light) and underlie HDR-to-SDR rendering and many color spaces used in quality metrics.",
+      "materials": [
+        "ciecam"
+      ]
+    },
+    {
+      "prompt": "Why can't a camera reproduce colors exactly as the eye sees them?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Because displays can only show 256 colors.",
+        "Its filter sensitivities don't match the eye's (Luther condition fails), so a 3×3 matrix is a compromise.",
+        "Because sensors only record brightness, and color is added afterwards from a lookup of typical scenes, so no calibration is needed for it.",
+        "Because JPEG removes all color information."
+      ],
+      "correct": 1,
+      "explanation": "The color filters' spectral sensitivities rarely equal the eye's, so the camera sees some metamers differently. The ISP applies white balance gains, a 3×3 color correction matrix or LUTs fitted to patches such as a ColorChecker, then tone mapping and gamma. Accuracy is a compromise across scenes, and makers add 'preferred' rendering such as bluer skies.",
+      "materials": [
+        "color-faq",
+        "isp"
+      ]
+    },
+    {
+      "prompt": "How do you measure a camera's color accuracy?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Ask the manufacturer for the gamut.",
+        "Compare the file size of the raw and JPEG images.",
+        "Photograph any colorful scene and count how many distinct colors appear in the histogram, which is what the ISO standards assume.",
+        "Shoot a reference chart under a controlled illuminant and compare patches to reference values with ΔE in CIELAB."
+      ],
+      "correct": 3,
+      "explanation": "Photograph a standard chart (24-patch ColorChecker or larger) under a controlled illuminant, white balance, and compare patches to references in CIELAB with ΔE, including saturation and hue errors. Color uniformity compares color across the field. Report illuminant, exposure, white balance method and patches used, because results change with them.",
+      "materials": [
+        "imatest-color",
+        "color-diff"
+      ]
+    },
+    {
+      "prompt": "What goes wrong with oversharpening?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Nothing visible; sharpening only raises resolution, so more is always better for every scene.",
+        "Halos and overshoot at edges, amplified noise, crunchy textures and ringing.",
+        "Colors become desaturated.",
+        "The image gets darker."
+      ],
+      "correct": 1,
+      "explanation": "Edges carry shape, so clear edges raise perceived sharpness. Sharpening (unsharp mask or similar) boosts edge contrast, but too much creates halos, amplifies noise, produces crunchy textures and ringing. Perceived sharpness (acutance) depends on edge contrast and noise, so evaluate sharpness with noise and artifacts.",
+      "materials": [
+        "unsharp",
+        "acutance",
+        "imatest-sharp"
+      ]
+    },
+    {
+      "prompt": "Why can a camera score well on a sharpness chart yet render faces waxy?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Sharpness charts are printed in color, while faces are measured in grayscale, so they disagree, so no calibration is needed for it.",
+        "Faces are always out of focus on phones.",
+        "Noise reduction erases low-contrast texture while high-contrast edges stay sharp; dead-leaves charts measure texture.",
+        "Because charts are larger than faces."
+      ],
+      "correct": 2,
+      "explanation": "Texture is fine, low-contrast detail (pores, hair, foliage). Denoising can't tell it from noise, so it smooths it away (waxy faces, watercolor foliage) while high-contrast edges stay sharp. Texture metrics use the dead leaves chart, whose statistics resemble natural scenes, and measure how much of its power spectrum survives.",
+      "materials": [
+        "noise-red",
+        "imatest-sharp"
+      ]
+    },
+    {
+      "prompt": "How do phones with small sensors simulate shallow depth of field?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "They open the aperture wider, since phone lenses have adjustable f-numbers like DSLRs, which is what the ISO standards assume.",
+        "They crop the image.",
+        "Estimate a depth map (dual pixels, stereo, ToF or neural nets) and blur the background synthetically.",
+        "They use a longer exposure."
+      ],
+      "correct": 2,
+      "explanation": "Photos convey depth through monocular cues (occlusion, size, perspective, texture gradient, haze, shading). Small sensors give large depth of field, so portrait mode estimates depth and blurs synthetically; edges (hair, glasses) are typical artifacts.",
+      "materials": [
+        "depth-perception",
+        "dof",
+        "cs178"
+      ]
+    },
+    {
+      "prompt": "Why does stopping a lens down past a certain f-number make images softer?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The sensor heats up.",
+        "Smaller apertures increase spherical aberration, which always gets worse when the lens is stopped down, which applies to video as well.",
+        "Less light means the autofocus fails.",
+        "Diffraction: the Airy disk grows with the f-number (about 2.44·λ·N), eventually larger than the pixels."
+      ],
+      "correct": 3,
+      "explanation": "Depth of field grows with a higher f-number, shorter focal length, longer distance and smaller sensor. Diffraction spreads a point into an Airy disk of about 2.44·λ·N; at f/8 green light spreads ≈10 µm, larger than many pixels. The best aperture balances aberrations (worse wide open) against diffraction (worse stopped down).",
+      "materials": [
+        "airy",
+        "dof",
+        "cs178"
+      ]
+    },
+    {
+      "prompt": "Which lens defects can software correct well?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "None; lens defects can't be corrected after capture.",
+        "Spherical aberration and defocus blur, which can be removed completely at no cost in noise, as most camera reviews point out.",
+        "Flare and ghosting, which software removes perfectly.",
+        "Distortion, lateral chromatic aberration and vignetting, because they are smooth and repeatable."
+      ],
+      "correct": 3,
+      "explanation": "Monochromatic aberrations: spherical, coma, astigmatism, field curvature, distortion. Chromatic: longitudinal and lateral. Also vignetting, flare and ghosts. Distortion, lateral CA and vignetting correct well; blur from spherical aberration, coma and defocus only partly, at a noise cost.",
+      "materials": [
+        "aberration",
+        "flare"
+      ]
+    },
+    {
+      "prompt": "How is geometric distortion measured, and what does correcting it cost?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It can't be measured, only seen.",
+        "Measure the lens's focal length; correction is free because it only changes metadata.",
+        "Count the pixels in the image.",
+        "Fit a photographed grid to an ideal one and report percent distortion; correction stretches corners, costing sharpness and field of view."
+      ],
+      "correct": 3,
+      "explanation": "Image a regular grid, fit detected points to an ideal grid, and report barrel or pincushion distortion as a percentage (e.g. TV distortion). Wide-angle phones correct in software, stretching corners and reducing corner sharpness and field of view. Distortion affects straight lines and faces at the frame edge.",
+      "materials": [
+        "imatest-distortion",
+        "distortion",
+        "szeliski"
+      ]
+    },
+    {
+      "prompt": "What does ISO change in a digital camera?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The gain applied to the signal, a signal-to-noise trade-off, not extra light.",
+        "The amount of light reaching the sensor, like a wider aperture, so no calibration is needed for it.",
+        "The size of the sensor.",
+        "The focal length."
+      ],
+      "correct": 0,
+      "explanation": "Light on the sensor depends on aperture area (1/N²) and exposure time t; ISO is gain. EV = log₂(N²/t) at ISO 100, each step one stop. Aperture, shutter and ISO trade off with side effects in depth of field, motion blur and noise. Phones have a fixed aperture, so time, ISO and multi-frame stacking are the controls.",
+      "materials": [
+        "ev",
+        "cs178"
+      ]
+    },
+    {
+      "prompt": "Why is a sensor's dynamic range figure meaningless without an SNR threshold?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The bottom of the range is where the signal becomes 'usable', which depends on the SNR you require (1, 10, ...).",
+        "Because dynamic range only depends on lens quality.",
+        "It isn't; dynamic range is a fixed property of the pixel size.",
+        "Because dynamic range is always measured in percent and SNR converts it to stops, and the same is true for DSLRs and mirrorless cameras."
+      ],
+      "correct": 0,
+      "explanation": "Dynamic range is the ratio of the largest to the smallest usable signal, in stops or dB. Scenes can exceed 15–20 stops; sensors give about 10–14; SDR displays roughly 6–10 depending on room light. It's measured with a step chart and an OECF, and the lower end depends on the chosen minimum SNR.",
+      "materials": [
+        "dynamic-range",
+        "imatest-dynamic",
+        "emva"
+      ]
+    },
+    {
+      "prompt": "Why is image data gamma encoded instead of linear?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Because sensors respond nonlinearly, and gamma makes their output linear again, as most camera reviews point out.",
+        "To make images look more saturated.",
+        "Because JPEG requires it for compression.",
+        "So code values go where vision is most sensitive (dark tones) and 8 bits show no banding."
+      ],
+      "correct": 3,
+      "explanation": "Sensors are linear; storage and displays use a nonlinear curve (≈1/2.2 for sRGB) so codes are spent where vision is sensitive and 8 bits avoid banding. Processing (blurring, resizing, blending) is physically correct in linear light. HDR uses PQ or HLG.",
+      "materials": [
+        "gamma-faq",
+        "gamma"
+      ]
+    },
+    {
+      "prompt": "How do phones capture and render a scene with more dynamic range than the sensor?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Use a smaller aperture.",
+        "Crop out the bright parts.",
+        "Merge bracketed or burst frames in linear light, then tone map (globally or locally) for the display.",
+        "Raise the ISO until highlights and shadows both fit, then save it as a 16-bit JPEG, as most camera reviews point out."
+      ],
+      "correct": 2,
+      "explanation": "Capture: bracketing, aligned burst merging, dual conversion gain or split pixels. Merge in linear light or fuse directly. Render: tone mapping, global (a curve) or local (bilateral or Laplacian filters) to keep local contrast; local methods risk halos and a flat HDR look. Check highlight and shadow detail, naturalness, halos and ghosting.",
+      "materials": [
+        "hdrplus",
+        "hdr",
+        "tone-mapping"
+      ]
+    },
+    {
+      "prompt": "What is veiling glare and why does it limit dynamic range?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A sensor defect that clips highlights early, which a higher bit depth fully removes, which applies to video as well.",
+        "Reflections off the screen while viewing.",
+        "Stray light scatters into a haze that raises the black level, whatever the sensor can do.",
+        "Noise from long exposures."
+      ],
+      "correct": 2,
+      "explanation": "Internal reflections and scattering create ghosts, flare and a low-contrast haze (veiling glare) that raises the black level and limits the usable range of the lens-plus-sensor system. It's measured with a bright source or a black hole in a bright field (glare ratio). Phones are sensitive to bright light near the frame.",
+      "materials": [
+        "flare"
+      ]
+    },
+    {
+      "prompt": "How does dynamic range affect perceived gloss and realism?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Gloss is a color property only, so dynamic range has no influence on how glossy a surface looks, and the same is true for DSLRs and mirrorless cameras.",
+        "More dynamic range always makes surfaces look matte.",
+        "Gloss can only be seen in video.",
+        "Specular highlights need range; clipping them flattens gloss, so more range raises perceived glossiness."
+      ],
+      "correct": 3,
+      "explanation": "Glossy surfaces have highlights far brighter than diffuse areas, so limited range clips them. Studies show more dynamic range raises perceived gloss; gloss, translucency and texture are part of material appearance. That's why highlight rendering affects realism ratings even when measured accuracy is unchanged.",
+      "materials": [
+        "hdr"
+      ]
+    },
+    {
+      "prompt": "Why does automatic exposure fail on snow or backlit scenes?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Metering aims for an average mid-gray, which is wrong for very bright or backlit scenes.",
+        "AE always measures only the center pixel, and snow is usually at the edges of the frame, which is how most phone cameras handle it.",
+        "Because of the lens's focal length.",
+        "The sensor can't detect white."
+      ],
+      "correct": 0,
+      "explanation": "The camera meters (average, center-weighted, matrix, face priority or learned), picks time, gain and aperture for a target brightness and adapts over frames. Failures: backlight, snow or night where 'average gray' is wrong, flicker, slow or hunting convergence in video. Good AE also considers motion and protects highlights.",
+      "materials": [
+        "metering",
+        "cs178"
+      ]
+    },
+    {
+      "prompt": "How do phones take good photos in very low light?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Use one very long exposure at the lowest ISO, since phones are always held perfectly still, which is how most phone cameras handle it.",
+        "Increase the JPEG quality.",
+        "Merge many aligned short frames (noise falls with √frames), bin pixels, and use learned denoising and tone mapping.",
+        "Turn on the flash for every photo."
+      ],
+      "correct": 2,
+      "explanation": "Shot noise dominates, so collect more light: stacked exposures with motion-aware alignment (noise drops with the square root of the frame count), bigger pixels or binning, learned denoising and tone mapping that keeps texture. Trade-offs: blur, ghosting, smooth textures, color shifts.",
+      "materials": [
+        "night-sight",
+        "hdrplus"
+      ]
+    },
+    {
+      "prompt": "Why do a sequence of still frames look like continuous motion?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Persistence of vision: each frame stays on the retina until the next one arrives, as most camera reviews point out.",
+        "The display blurs frames together.",
+        "Apparent motion: the visual system matches features across close frames (beta movement, phi phenomenon).",
+        "Because frames are interlaced."
+      ],
+      "correct": 2,
+      "explanation": "Frames close enough in time and space are seen as motion: beta movement (a stimulus jumping between positions) and the phi phenomenon (motion from rapid alternation). Persistence of vision is not the real explanation. Motion areas (MT/V5) match features between frames, which also produces illusions like the wagon-wheel effect.",
+      "materials": [
+        "beta",
+        "phi"
+      ]
+    },
+    {
+      "prompt": "What is the 180° shutter rule and what happens without enough motion blur?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Expose for 1/(2·fps); too little blur at low frame rates gives stroboscopic judder.",
+        "Always use the fastest shutter for the sharpest video.",
+        "It sets the field of view.",
+        "Rotate the camera 180° between shots; without it the image appears upside down on some displays."
+      ],
+      "correct": 0,
+      "explanation": "Frame rate sets temporal sampling (24 cinema, 30/60 video, higher for sports). Shutter angle sets motion blur: 180° means exposure 1/(2·fps). Too little blur at low rates gives judder; too much loses detail. Displays add sample-and-hold blur, interpolation and pulldown.",
+      "materials": [
+        "shutter-angle",
+        "judder",
+        "motion-blur",
+        "frame-rate"
+      ]
+    },
+    {
+      "prompt": "What causes rolling-shutter skew?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The lens rotating during capture, which only happens with optical stabilization switched on.",
+        "JPEG compression of moving objects.",
+        "Rows are exposed and read one after another, so fast motion between rows skews the image.",
+        "A slow autofocus motor."
+      ],
+      "correct": 2,
+      "explanation": "Most CMOS sensors expose and read rows sequentially, so moving objects skew, propellers bend and flashes light part of a frame. A global shutter exposes all pixels at once (needs per-pixel storage, with noise and fill factor trade-offs). Fast readout, stacked sensors and software correction mitigate it.",
+      "materials": [
+        "rolling",
+        "sensor"
+      ]
+    },
+    {
+      "prompt": "How does electronic image stabilization differ from optical?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "OIS moves optics to cut blur during exposure; EIS smooths the camera path and crops/warps frames.",
+        "They are identical; the names are marketing.",
+        "OIS only works for photos, EIS only for audio.",
+        "EIS moves the sensor with magnets, while OIS is software that warps frames after capture, so no calibration is needed for it."
+      ],
+      "correct": 0,
+      "explanation": "OIS moves a lens or sensor to counter shake during exposure. EIS estimates motion (gyro or features), smooths the path and crops/warps frames (needs a crop margin, can also fix rolling shutter). Artifacts: wobble, jumps when the path saturates, resolution loss, and blur that doesn't match the corrected motion.",
+      "materials": [
+        "stabilization"
+      ]
+    },
+    {
+      "prompt": "What artifacts does low-bitrate video compression cause?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Inverted colors.",
+        "Blocking, ringing and mosquito noise at edges, lost texture, banding, I-frame flicker and pumping.",
+        "Only a lower frame rate; modern codecs never produce spatial artifacts at any bitrate, and the same is true for DSLRs and mirrorless cameras.",
+        "Rolling-shutter skew."
+      ],
+      "correct": 1,
+      "explanation": "Codecs (H.264, HEVC, AV1) predict blocks from other frames with motion vectors, transform the residual, quantize and entropy-code it, in I, P and B frame groups. Low bitrate gives blocking, ringing, mosquito noise, texture loss, banding, I-frame flicker and pumping. Quality depends on bitrate, content and encoder settings.",
+      "materials": [
+        "artifacts",
+        "gop"
+      ]
+    },
+    {
+      "prompt": "Which quality attributes do video benchmarks add beyond still image quality?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Only file size.",
+        "None; a video is scored by grabbing one frame and running the still-image tests on it.",
+        "Only the maximum resolution.",
+        "Frame-rate consistency, exposure/white-balance/focus stability and responsiveness, stabilization, temporal noise, A/V sync."
+      ],
+      "correct": 3,
+      "explanation": "Frame rate and dropped frames, AE and AWB responsiveness and stability, AF speed and hunting, stabilization, temporal and fixed-pattern noise, audio/video sync and compression artifacts. Setups use moving rigs, lighting transitions and LED timers.",
+      "materials": [
+        "vcx",
+        "imatest-docs"
+      ]
+    },
+    {
+      "prompt": "What are the main steps of a camera image pipeline (ISP)?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Black level and defects, lens shading, demosaic, white balance, denoise, color correction, tone/gamma, sharpen, compress.",
+        "Sharpen, then capture, then focus.",
+        "Compress first to save bandwidth, then demosaic and color correct the decompressed JPEG, so no calibration is needed for it.",
+        "Only demosaicing; everything else happens on the display."
+      ],
+      "correct": 0,
+      "explanation": "Optics, sensor, black level and defect correction, lens shading, demosaicing, white balance, noise reduction, color correction, tone mapping and gamma, sharpening, color space conversion and compression. Phones add multi-frame fusion, semantic processing and neural networks. Each stage affects several attributes, so benchmarks measure the whole system.",
+      "materials": [
+        "isp",
+        "comp-photo",
+        "cs178"
+      ]
+    },
+    {
+      "prompt": "Which artifacts does demosaicing cause?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Zippering and mazes at edges, false color and moiré near fine detail, and lower chroma resolution.",
+        "Rolling-shutter skew.",
+        "Vignetting and barrel distortion, since demosaicing remaps pixel positions, which applies to video as well.",
+        "Motion blur."
+      ],
+      "correct": 0,
+      "explanation": "A Bayer array gives each pixel one of R, G, B (50 % green); demosaicing interpolates the rest. Artifacts: zippering and mazes, false color and moiré (especially without an optical low-pass filter), chroma resolution loss. Good methods are edge-directed or learned joint demosaic-denoise.",
+      "materials": [
+        "demosaic",
+        "bayer"
+      ]
+    },
+    {
+      "prompt": "Why did CMOS sensors replace CCDs?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "CCDs can't capture color.",
+        "Lower power, faster readout, on-chip processing and cheaper manufacturing; BSI and stacking closed the noise gap.",
+        "CCDs were banned for consumer devices.",
+        "CMOS sensors always had lower noise and better uniformity than CCDs from the start, which applies to video as well."
+      ],
+      "correct": 1,
+      "explanation": "CCDs shift charge to one readout (low noise and good uniformity historically, but high power and special fabs). CMOS reads each pixel with transistors and column converters (low power, fast, on-chip processing, cheap). Back-side illumination, stacking and better column circuits closed the gap.",
+      "materials": [
+        "sensor",
+        "bsi"
+      ]
+    },
+    {
+      "prompt": "Which noise source dominates at normal and high light levels?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Dark current, at any exposure time.",
+        "Photon shot noise, with SNR = √N for N collected photons; read noise dominates in shadows.",
+        "Quantization noise.",
+        "Read noise, which grows with brightness and therefore dominates the highlights of every image."
+      ],
+      "correct": 1,
+      "explanation": "Shot noise (Poisson, SNR = √N) dominates normal and bright light; read noise dominates shadows; dark current grows with time and temperature; fixed-pattern noise (offsets, PRNU) is spatial and repeatable. Photon transfer curves separate them. Total light over the sensor area is what counts, not pixel size alone.",
+      "materials": [
+        "shot-noise",
+        "emva",
+        "imatest-noise"
+      ]
+    },
+    {
+      "prompt": "Why does chroma noise get filtered more aggressively than luminance noise?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Because luminance noise can't be filtered.",
+        "Because chroma noise is always louder, while luminance noise is invisible on every display, which applies to video as well.",
+        "Vision is less sensitive to fine color detail, so removing chroma noise costs little visible texture.",
+        "Because chroma channels have more bits."
+      ],
+      "correct": 2,
+      "explanation": "Spatial filters (bilateral, non-local means, BM3D) smooth using neighbors while keeping edges; temporal filters average frames; learned denoisers do both. Removing luminance noise removes texture, while chroma noise can be filtered harder. Evaluate noise, texture and sharpness together.",
+      "materials": [
+        "noise-red",
+        "csf"
+      ]
+    },
+    {
+      "prompt": "How does the slanted-edge method measure MTF, and how can it be fooled?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Photograph a flat gray card and compute its noise.",
+        "Count resolvable line pairs by eye on a printed chart; it can't be fooled because it is visual, and the same is true for DSLRs and mirrorless cameras.",
+        "Measure file size at different JPEG qualities.",
+        "Oversample a tilted edge, differentiate to the line spread function, Fourier transform; sharpening can push MTF above 1."
+      ],
+      "correct": 3,
+      "explanation": "MTF is the contrast kept per spatial frequency. Metrics: MTF50, MTF at chosen frequencies, or CSF-weighted acutance. The slanted edge (ISO 12233) gives an oversampled edge profile, differentiated to the LSF and Fourier transformed. It measures the whole system, so sharpening can raise MTF above 1.",
+      "materials": [
+        "imatest-sfr",
+        "otf"
+      ]
+    },
+    {
+      "prompt": "What happens to detail finer than the Nyquist limit (fs/2)?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The sensor stores it in extra bits.",
+        "It is simply lost as blur, which is why aliasing never produces visible patterns.",
+        "It aliases: it folds back into false patterns such as moiré and color moiré.",
+        "It gets sharper."
+      ],
+      "correct": 2,
+      "explanation": "Sampling at fs represents detail up to fs/2. Finer detail folds back as moiré, jaggies and color moiré on a mosaic. Optical low-pass filters, lens blur and diffraction limit what reaches the sensor; many cameras drop the filter for sharpness and accept some aliasing, which sharpness tests must account for.",
+      "materials": [
+        "nyquist",
+        "moire",
+        "aliasing"
+      ]
+    },
+    {
+      "prompt": "Are more megapixels always better on a small sensor?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "No: smaller pixels collect fewer photons, hit the diffraction limit sooner, and screens rarely show the extra pixels.",
+        "Yes, as long as the JPEG quality is high.",
+        "No, because megapixels only affect video.",
+        "Yes: doubling the megapixels always doubles visible detail, at no cost in noise or light, which is what the ISO standards assume."
+      ],
+      "correct": 0,
+      "explanation": "Smaller pixels have lower per-pixel SNR and reach diffraction sooner, and the lens must resolve the detail. Most screens are far below 50 MP. Quad-Bayer binning acts as large pixels in low light and full resolution in bright light. Limits: lens MTF, pixel size, full well, ISP and viewing scale.",
+      "materials": [
+        "binning",
+        "airy",
+        "cs178"
+      ]
+    },
+    {
+      "prompt": "What does 4:2:0 chroma subsampling do in JPEG, and why is it acceptable?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Converts the image to grayscale.",
+        "Reduces bit depth from 8 to 4 bits per channel.",
+        "Halves chroma resolution in both directions, relying on the eye's lower color acuity.",
+        "Removes every other frame, which is acceptable because JPEG images never move, which is how most phone cameras handle it."
+      ],
+      "correct": 2,
+      "explanation": "JPEG converts to luma/chroma, subsamples chroma, splits 8×8 blocks, applies a DCT, quantizes (the lossy step) and entropy codes. Artifacts: blocking, ringing, banding, color bleeding at saturated edges. HEIF, AVIF and JPEG XL are more efficient.",
+      "materials": [
+        "chroma-sub",
+        "jpeg"
+      ]
+    },
+    {
+      "prompt": "Why does an image quality benchmark need both objective and subjective assessment?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Objective tests are always enough, since subjective tests just repeat the same measurements slower, which is how most phone cameras handle it.",
+        "Subjective tests are only for marketing.",
+        "Objective tests are repeatable but limited to chosen attributes; subjective tests are ground truth, so they validate the metrics.",
+        "Objective tests are only for video."
+      ],
+      "correct": 2,
+      "explanation": "Objective measurements are repeatable but only capture what you measure. Subjective assessment is the ground truth for perceived quality but costly and variable. A practical benchmark uses objective metrics validated against subjective results so they predict perception.",
+      "materials": [
+        "iqa",
+        "subjective-vq"
+      ]
+    },
+    {
+      "prompt": "How do you design a reliable subjective image quality test?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Show all images at once and ask for a favorite.",
+        "Use only the photographer's opinion.",
+        "Screened observers (15+), fixed viewing conditions, randomized order, anchors, then paired comparison or MOS with statistics.",
+        "Ask one expert to rate each image once, with no reference, under whatever lighting is available, as most camera reviews point out."
+      ],
+      "correct": 2,
+      "explanation": "Choose scenes, screen observers (15 or more), fix distance and display, randomize, use anchors. Methods: paired comparison, category rating and MOS, rank order, JND-anchored scales. Analysis: Thurstone or Bradley–Terry for comparisons, confidence intervals for MOS, outlier checks. Report conditions.",
+      "materials": [
+        "mos",
+        "subjective-vq"
+      ]
+    },
+    {
+      "prompt": "Why can't PSNR, SSIM or VMAF directly compare two different cameras?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "They are too slow to run on photos.",
+        "They are full-reference metrics: they need an aligned reference image, which a real scene doesn't provide.",
+        "They only measure audio quality.",
+        "They only work on black-and-white images, and cameras produce color."
+      ],
+      "correct": 1,
+      "explanation": "PSNR = 10·log₁₀(MAX²/MSE) is simple but weakly perceptual; SSIM compares luminance, contrast and structure; VMAF fuses features with a trained model for video. All need an aligned reference, so they suit codec and processing comparisons, and can be gamed by processing that raises the score.",
+      "materials": [
+        "psnr",
+        "ssim",
+        "vmaf"
+      ]
+    },
+    {
+      "prompt": "Why must a benchmark define viewing conditions such as display, distance and magnification?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Sharpness and noise visibility depend on scale and distance, so results differ between a phone screen and a large print.",
+        "Viewing conditions only matter for printed photos.",
+        "Because exposure and white balance change completely with the viewing distance.",
+        "They don't; quality is a property of the file."
+      ],
+      "correct": 0,
+      "explanation": "Resolution and sharpness are scale dependent: a photo looks sharper downsampled on a phone than enlarged on a 4K TV or print, while exposure and tone don't change with scale. Benchmarks define use cases (phone, laptop, UHD TV, large print) and weight metrics per use case.",
+      "materials": [
+        "csf",
+        "iqa"
+      ]
+    },
+    {
+      "prompt": "What is photospace, and how does it guide test scene choice?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The distribution of subject illuminance and distance in real photos; it tells you which lighting and distances to test and weight.",
+        "The area of the sensor.",
+        "The free storage on a phone.",
+        "The color space a camera stores photos in, which decides which charts to buy."
+      ],
+      "correct": 0,
+      "explanation": "Photospace is the joint probability distribution of subject illuminance and distance in consumers' pictures. It shows which combinations matter (indoor portraits, daylight outdoors, dim events), guiding lab conditions, scene categories and weighting.",
+      "materials": [
+        "iqa"
+      ]
+    },
+    {
+      "prompt": "What makes a camera test lab setup repeatable?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Using one chart for every attribute.",
+        "Controlled, uniform, flicker-free lighting of known color temperature, stable mounts, aligned charts and recorded settings.",
+        "Daylight from a window, so that every test reflects real-world conditions that day.",
+        "Testing handheld so stabilization is included."
+      ],
+      "correct": 1,
+      "explanation": "Controlled lighting (D65 or tungsten, measured and uniform illuminance, flicker-free), a stable mount, aligned charts filling the intended frame area, matte surroundings, calibrated meters. Charts: ISO 12233, ColorChecker, OECF steps, dead leaves, noise and uniformity, distortion grids. Record everything.",
+      "materials": [
+        "imatest-docs",
+        "imatest-sfr"
+      ]
+    },
+    {
+      "prompt": "How are many image quality metrics combined into one score?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Average the raw metric values directly, since MTF, ΔE and noise share the same units.",
+        "Multiply all the metrics together.",
+        "Use only the best metric and ignore the rest.",
+        "Convert each to a common perceptual scale (JNDs of quality loss), weight per use case, combine with Minkowski summation."
+      ],
+      "correct": 3,
+      "explanation": "Put metrics on a common scale such as JNDs of quality loss, weight by use case, and combine with weighted sums or Minkowski summation (a higher exponent weights the worst attribute more). Validate against subjective ranking, and publish sub-scores because one number hides trade-offs.",
+      "materials": [
+        "iqa",
+        "dxomark"
+      ]
+    },
+    {
+      "prompt": "What is the main risk of tuning a camera's processing to benchmark charts?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Overfitting: great chart scores while real scenes get worse, especially with scene-adaptive processing.",
+        "It makes the camera slower to focus.",
+        "None, because charts are designed to contain every kind of real-world scene content, which is how most phone cameras handle it.",
+        "Charts wear out faster."
+      ],
+      "correct": 0,
+      "explanation": "Pitfalls: tuning the ISP to charts, unrepresentative scenes, adaptive processing that treats charts differently from photos, unrepresentative observers, and unmeasured attributes. Mitigate with real-scene tests, subjective validation, repeated measurements and published methodology.",
+      "materials": [
+        "dxomark",
+        "comp-photo"
+      ]
+    }
+  ]
+}

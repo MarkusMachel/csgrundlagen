@@ -40,18 +40,20 @@ func TestReviewAndProgress(t *testing.T) {
 	expect(t, "only q3 is new", vals(queue.Due, queue.New, queue.Items[0].ID), vals(0, 1, q3.ID))
 
 	// --- progress ---
+	// A second wrong answer to q2: answers count twice, the question once.
+	c.do("POST", "/api/questions/"+q2.ID+"/submit", ada, map[string]any{"answer": false}, &res)
 	var p store.Progress
 	expect(t, "progress", c.do("GET", "/api/me/progress?tz=Europe/Berlin", ada, nil, &p), 200)
-	expect(t, "totals", vals(p.Totals.Questions, p.Totals.Seen, p.Totals.Answers, p.Totals.Correct, p.Totals.StreakDays), "3 2 2 1 1")
+	expect(t, "totals", vals(p.Totals.Questions, p.Totals.Seen, p.Totals.Answers, p.Totals.Correct, p.Totals.StreakDays), "3 2 3 1 1")
 	byTag := map[string]store.TagProgress{}
 	for _, tp := range p.ByTag {
 		byTag[tp.Tag] = tp
 	}
-	expect(t, "sql tag", vals(byTag["SQL & Databases"].Questions, byTag["SQL & Databases"].Seen, byTag["SQL & Databases"].Correct), "2 2 1")
+	expect(t, "sql tag", vals(byTag["SQL & Databases"].Questions, byTag["SQL & Databases"].Seen, byTag["SQL & Databases"].Answers, byTag["SQL & Databases"].Correct), "2 2 3 1")
 	expect(t, "go tag untouched", vals(byTag["Go"].Questions, byTag["Go"].Seen), "1 0")
 	expect(t, "30 days of activity", len(p.Activity), 30)
 	today := p.Activity[29]
-	expect(t, "today's activity", vals(today.Answers, today.Correct), "2 1")
+	expect(t, "today's activity", vals(today.Answers, today.Correct), "3 1")
 	expect(t, "7 days ahead", len(p.Upcoming), 7)
 	expect(t, "q2 due today", p.Upcoming[0].Count, 1)
 	expect(t, "bad tz falls back", c.do("GET", "/api/me/progress?tz=Not/AZone", ada, nil, &p), 200)

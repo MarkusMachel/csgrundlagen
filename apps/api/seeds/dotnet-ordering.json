@@ -1,0 +1,1099 @@
+{
+  "name": ".NET and C#: put in order",
+  "materials": [
+    {
+      "key": "middleware",
+      "type": "link",
+      "title": "ASP.NET Core Middleware",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/",
+      "author": "Microsoft",
+      "description": "How the request pipeline is built from middleware and the recommended order of built-in middleware."
+    },
+    {
+      "key": "config",
+      "type": "link",
+      "title": "Configuration in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/",
+      "author": "Microsoft",
+      "description": "Configuration providers, the default sources and which source overrides which."
+    },
+    {
+      "key": "filters",
+      "type": "link",
+      "title": "Filters in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters",
+      "author": "Microsoft",
+      "description": "The MVC filter types and the order in which they run around an action."
+    },
+    {
+      "key": "blazor",
+      "type": "link",
+      "title": "ASP.NET Core Razor component lifecycle",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/blazor/components/lifecycle",
+      "author": "Microsoft",
+      "description": "The lifecycle methods of Razor components and when each is called."
+    },
+    {
+      "key": "host",
+      "type": "link",
+      "title": ".NET Generic Host",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/generic-host",
+      "author": "Microsoft",
+      "description": "How the generic host starts and stops hosted services and raises lifetime events."
+    },
+    {
+      "key": "di",
+      "type": "link",
+      "title": "Dependency injection in .NET",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection",
+      "author": "Microsoft",
+      "description": "Service lifetimes, scopes and how the container creates and disposes services."
+    },
+    {
+      "key": "options",
+      "type": "link",
+      "title": "Options pattern in .NET",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/options",
+      "author": "Microsoft",
+      "description": "Binding, configuring, post-configuring and validating options classes."
+    },
+    {
+      "key": "exceptions",
+      "type": "link",
+      "title": "Exception-handling statements (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements",
+      "author": "Microsoft",
+      "description": "throw, try-catch, try-finally and exception filters in C#."
+    },
+    {
+      "key": "gc",
+      "type": "link",
+      "title": "Fundamentals of garbage collection",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/fundamentals",
+      "author": "Microsoft",
+      "description": "Generations, the phases of a collection and how the .NET GC reclaims memory."
+    },
+    {
+      "key": "managed",
+      "type": "link",
+      "title": "Managed execution process",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/managed-execution-process",
+      "author": "Microsoft",
+      "description": "How C# source becomes IL and then native code through the JIT compiler."
+    },
+    {
+      "key": "efcore",
+      "type": "link",
+      "title": "Change Tracking in EF Core",
+      "url": "https://learn.microsoft.com/en-us/ef/core/change-tracking/",
+      "author": "Microsoft",
+      "description": "Entity states, DetectChanges and what SaveChanges does with tracked entities."
+    },
+    {
+      "key": "async",
+      "type": "link",
+      "title": "Asynchronous programming with async and await",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/",
+      "author": "Microsoft",
+      "description": "How async methods run, yield at await and resume later."
+    },
+    {
+      "key": "operators",
+      "type": "link",
+      "title": "C# operators and expressions",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/",
+      "author": "Microsoft",
+      "description": "The C# operators with their precedence and associativity table."
+    },
+    {
+      "key": "spec",
+      "type": "link",
+      "title": "C# language specification: Classes",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/classes",
+      "author": "Microsoft",
+      "description": "Normative rules for constructors, field initialization, static constructors, accessibility and iterators."
+    },
+    {
+      "key": "http",
+      "type": "link",
+      "title": "Make HTTP requests using IHttpClientFactory in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests",
+      "author": "Microsoft",
+      "description": "Typed clients and outgoing request middleware built from DelegatingHandler."
+    }
+  ],
+  "questions": [
+    {
+      "type": "ordering",
+      "prompt": "This program creates a `Derived`. In what order are these lines printed, first to last?\n\n```csharp\nnew Derived();\n\nclass Base\n{\n    static Base() => Console.WriteLine(\"Base static ctor\");\n    public Base() => Console.WriteLine(\"Base ctor\");\n}\n\nclass Derived : Base\n{\n    int x = Init();\n    static Derived() => Console.WriteLine(\"Derived static ctor\");\n    public Derived() => Console.WriteLine(\"Derived ctor\");\n    static int Init() { Console.WriteLine(\"Derived field initializer\"); return 1; }\n}\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Derived static ctor",
+        "Derived field initializer",
+        "Base static ctor",
+        "Base ctor",
+        "Derived ctor"
+      ],
+      "explanation": "Creating the first `Derived` triggers its static constructor before anything else. Then the instance constructor runs: in C# the derived class's instance field initializers execute first, before the call to the base constructor. The base constructor's first use of `Base` triggers `Base`'s static constructor, then the `Base` constructor body runs, and the `Derived` constructor body runs last.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nConsole.WriteLine(\"start\");\nConsole.WriteLine(Config.Name);\nConsole.WriteLine(\"end\");\n\nstatic class Config\n{\n    public static readonly string Name = Load();\n    static Config() => Console.WriteLine(\"static ctor\");\n    static string Load() { Console.WriteLine(\"field initializer\"); return \"value\"; }\n}\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "start",
+        "field initializer",
+        "static ctor",
+        "value",
+        "end"
+      ],
+      "explanation": "A class with an explicit static constructor is initialized at its first use, not at program start, so `start` comes first. When `Config.Name` is first read, the static field initializers run in textual order, then the static constructor body. Only then is the field value returned and printed, followed by `end`.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nvar p = new Point { Y = 2, X = 1 };\nConsole.WriteLine($\"({p.X}, {p.Y})\");\n\nclass Point\n{\n    int x, y;\n    string tag = Log(\"field initializer\");\n    public Point() => Console.WriteLine(\"ctor\");\n    public int X { get => x; set { x = value; Console.WriteLine($\"X = {value}\"); } }\n    public int Y { get => y; set { y = value; Console.WriteLine($\"Y = {value}\"); } }\n    static string Log(string m) { Console.WriteLine(m); return m; }\n}\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "field initializer",
+        "ctor",
+        "Y = 2",
+        "X = 1",
+        "(1, 2)"
+      ],
+      "explanation": "An object initializer is sugar for calling the constructor and then assigning the members in the order they are written. The field initializer runs as part of construction, before the constructor body. Then `Y` is set before `X` because that is their order inside the braces, and finally the point is printed.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nMake().Show(b: Get(\"B\"), a: Get(\"A\"), c: Get(\"C\"));\n\nstatic Printer Make() { Console.WriteLine(\"receiver\"); return new Printer(); }\nstatic char Get(string s) { Console.WriteLine($\"eval {s}\"); return s[0]; }\n\nclass Printer\n{\n    public void Show(char a, char b, char c) => Console.WriteLine($\"Show {a}{b}{c}\");\n}\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "receiver",
+        "eval B",
+        "eval A",
+        "eval C",
+        "Show ABC"
+      ],
+      "explanation": "C# evaluates the receiver of an instance call first, then the arguments left to right in the order they appear at the call site, even when named arguments are written in a different order than the parameters. So `B` is evaluated before `A`. The method body runs last and sees the values matched to the right parameters.",
+      "materials": [
+        "operators"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\ntry\n{\n    Console.WriteLine(\"try\");\n    Fail();\n}\ncatch (Exception ex) { Console.WriteLine($\"catch: {ex.Message}\"); }\nfinally { Console.WriteLine(\"outer finally\"); }\nConsole.WriteLine(\"after\");\n\nstatic void Fail()\n{\n    try { throw new Exception(\"boom\"); }\n    finally { Console.WriteLine(\"inner finally\"); }\n}\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "try",
+        "inner finally",
+        "catch: boom",
+        "outer finally",
+        "after"
+      ],
+      "explanation": "The exception thrown inside `Fail` unwinds out of the inner `try`, so the inner `finally` runs before control reaches the outer `catch`. The `catch` handles it, then the outer `finally` runs, and execution continues after the statement.",
+      "materials": [
+        "exceptions"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nConsole.WriteLine(\"before\");\nConsole.WriteLine($\"result {Compute()}\");\n\nstatic int Compute()\n{\n    int x = 1;\n    try { Console.WriteLine(\"try\"); return x; }\n    finally { x = 99; Console.WriteLine($\"finally x={x}\"); }\n}\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "before",
+        "try",
+        "finally x=99",
+        "result 1"
+      ],
+      "explanation": "The `return x;` evaluates `x` (1) and stores it as the return value, but the `finally` block still runs before the method actually returns. Changing `x` in `finally` does not change the value already chosen, so the caller prints `result 1` last.",
+      "materials": [
+        "exceptions"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\ntry { Fail(); }\ncatch (Exception) when (Log(\"filter\")) { Console.WriteLine(\"catch\"); }\nfinally { Console.WriteLine(\"outer finally\"); }\n\nstatic bool Log(string m) { Console.WriteLine(m); return true; }\n\nstatic void Fail()\n{\n    try { Console.WriteLine(\"throw\"); throw new Exception(); }\n    finally { Console.WriteLine(\"inner finally\"); }\n}\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "throw",
+        "filter",
+        "inner finally",
+        "catch",
+        "outer finally"
+      ],
+      "explanation": ".NET handles exceptions in two passes. The first pass searches up the stack for a handler and evaluates exception filters (`when`) without unwinding, so the filter runs before the inner `finally`. Once a handler is chosen, the second pass unwinds the stack, running the inner `finally`, then the `catch` body executes, then the outer `finally`.",
+      "materials": [
+        "exceptions"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nRun();\n\nstatic void Run()\n{\n    using var a = new Res(\"A\");\n    using var b = new Res(\"B\");\n    Console.WriteLine(\"body\");\n}\n\nclass Res : IDisposable\n{\n    readonly string name;\n    public Res(string name) { this.name = name; Console.WriteLine($\"open {name}\"); }\n    public void Dispose() => Console.WriteLine($\"dispose {name}\");\n}\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "open A",
+        "open B",
+        "body",
+        "dispose B",
+        "dispose A"
+      ],
+      "explanation": "`using var` declarations are disposed when the enclosing scope ends, in the reverse order of declaration. Both resources are created first, the body runs, and then `B` (declared last) is disposed before `A`.",
+      "materials": [
+        "exceptions"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nforeach (var n in Numbers())\n{\n    Console.WriteLine($\"got {n}\");\n    if (n == 2) break;\n}\nConsole.WriteLine(\"done\");\n\nstatic IEnumerable<int> Numbers()\n{\n    try\n    {\n        Console.WriteLine(\"start\");\n        yield return 1;\n        yield return 2;\n        yield return 3;\n    }\n    finally { Console.WriteLine(\"cleanup\"); }\n}\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "start",
+        "got 1",
+        "got 2",
+        "cleanup",
+        "done"
+      ],
+      "explanation": "The iterator body does not run until the first `MoveNext`, which prints `start` and yields 1. The second `MoveNext` yields 2. When the loop `break`s, `foreach` disposes the enumerator, and disposing a suspended iterator runs its pending `finally` block, so `cleanup` prints before `done`. The third `yield` is never reached.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nvar q = new[] { 1, 2 }\n    .Where(n => { Console.WriteLine($\"where {n}\"); return n > 1; })\n    .Select(n => { Console.WriteLine($\"select {n}\"); return n * 10; });\nConsole.WriteLine(\"query built\");\nforeach (var x in q) Console.WriteLine($\"got {x}\");\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "query built",
+        "where 1",
+        "where 2",
+        "select 2",
+        "got 20"
+      ],
+      "explanation": "LINQ operators like `Where` and `Select` are deferred: building the query runs no lambdas, so `query built` prints first. During `foreach`, each element streams through the whole chain before the next is pulled: 1 fails the filter and never reaches `Select`, then 2 passes the filter, is projected, and is printed.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nConsole.WriteLine(\"main start\");\nTask t = WorkAsync();\nConsole.WriteLine(\"main continues\");\nawait t;\nConsole.WriteLine(\"main done\");\n\nstatic async Task WorkAsync()\n{\n    Console.WriteLine(\"work before await\");\n    await Task.Delay(200);\n    Console.WriteLine(\"work after await\");\n}\n```",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "main start",
+        "work before await",
+        "main continues",
+        "work after await",
+        "main done"
+      ],
+      "explanation": "Calling an async method runs it synchronously up to the first `await` of an incomplete task, so `work before await` prints during the call. `Task.Delay` is not complete, so the method returns a task and `main continues` prints. When the delay finishes the rest of `WorkAsync` runs, completing the task, and only then does the awaiting code print `main done`.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nConsole.WriteLine(\"main start\");\nTask t = WorkAsync();\nConsole.WriteLine(\"main continues\");\nawait t;\n\nstatic async Task WorkAsync()\n{\n    Console.WriteLine(\"before\");\n    await Task.CompletedTask;\n    Console.WriteLine(\"after completed await\");\n    await Task.Yield();\n    Console.WriteLine(\"after yield\");\n}\n```",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "main start",
+        "before",
+        "after completed await",
+        "main continues",
+        "after yield"
+      ],
+      "explanation": "Awaiting an already-completed task does not suspend: the method keeps running synchronously, so `after completed await` prints before the call returns. `Task.Yield()` always suspends, so `WorkAsync` returns its task at that point and `main continues` prints. The continuation after the yield runs later on the thread pool.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nusing var cts = new CancellationTokenSource();\ncts.Token.Register(() => Console.WriteLine(\"callback A\"));\ncts.Token.Register(() => Console.WriteLine(\"callback B\"));\ncts.Token.Register(() => Console.WriteLine(\"callback C\"));\nConsole.WriteLine(\"cancelling\");\ncts.Cancel();\nConsole.WriteLine($\"requested: {cts.IsCancellationRequested}\");\n```",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "cancelling",
+        "callback C",
+        "callback B",
+        "callback A",
+        "requested: True"
+      ],
+      "explanation": "`Cancel()` runs the registered callbacks synchronously on the calling thread before it returns, and `CancellationTokenSource` invokes them in reverse order of registration (last registered first). So C, B, A print between `cancelling` and the final line.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nAction a = () => Console.WriteLine(\"A\");\na += () => Console.WriteLine(\"B\");\nAction c = () => Console.WriteLine(\"C\");\na += c;\na += () => Console.WriteLine(\"D\");\na -= c;\na += c;\na();\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A",
+        "B",
+        "D",
+        "C"
+      ],
+      "explanation": "A multicast delegate calls its targets in the order they were added. `-= c` removes `C` from the middle of the list, and `+= c` appends it again at the end, so the invocation list is A, B, D, C.",
+      "materials": [
+        "operators"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nif (F(\"a\") && T(\"b\") || T(\"c\") && F(\"d\") || T(\"e\"))\n    Console.WriteLine(\"then\");\n\nstatic bool T(string s) { Console.WriteLine($\"check {s}\"); return true; }\nstatic bool F(string s) { Console.WriteLine($\"check {s}\"); return false; }\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "check a",
+        "check c",
+        "check d",
+        "check e",
+        "then"
+      ],
+      "explanation": "`&&` binds tighter than `||`, so the condition is `(a && b) || (c && d) || e`, evaluated left to right with short-circuiting. `a` is false, so `b` is skipped. `c` is true, so `d` is evaluated; it is false, so `e` is evaluated, which is true, so the body prints `then`.",
+      "materials": [
+        "operators"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nforeach (var x in new Bag()) Console.WriteLine($\"body {x}\");\n\nclass Bag\n{\n    public Cursor GetEnumerator() { Console.WriteLine(\"GetEnumerator\"); return new Cursor(); }\n}\n\nclass Cursor : IDisposable\n{\n    int i;\n    public int Current => i;\n    public bool MoveNext() { bool ok = ++i <= 1; Console.WriteLine($\"MoveNext: {ok}\"); return ok; }\n    public void Dispose() => Console.WriteLine(\"Dispose\");\n}\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "GetEnumerator",
+        "MoveNext: True",
+        "body 1",
+        "MoveNext: False",
+        "Dispose"
+      ],
+      "explanation": "`foreach` is pattern-based: it calls `GetEnumerator()` once, then loops calling `MoveNext()` and reading `Current` for the body until `MoveNext()` returns false. Because the enumerator implements `IDisposable`, the compiler wraps the loop in `try/finally` and calls `Dispose()` at the end.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nusing System.Net;\n\nvar handler = new Logging(\"outer\") { InnerHandler = new Logging(\"inner\") { InnerHandler = new Stub() } };\nusing var client = new HttpClient(handler);\nawait client.GetAsync(\"http://example.test/\");\n\nclass Logging(string name) : DelegatingHandler\n{\n    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage req, CancellationToken ct)\n    {\n        Console.WriteLine($\"{name} request\");\n        var res = await base.SendAsync(req, ct);\n        Console.WriteLine($\"{name} response\");\n        return res;\n    }\n}\n\nclass Stub : HttpMessageHandler\n{\n    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage req, CancellationToken ct)\n    {\n        Console.WriteLine(\"stub\");\n        return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK));\n    }\n}\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "outer request",
+        "inner request",
+        "stub",
+        "inner response",
+        "outer response"
+      ],
+      "explanation": "`DelegatingHandler`s form a chain like middleware. The outermost handler sees the request first and passes it to its `InnerHandler`; the innermost handler (here a stub instead of the network) produces the response, which then travels back out through the handlers in reverse order.",
+      "materials": [
+        "http"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`A` depends on `B` and both are registered as scoped. In what order are these lines printed, first to last?\n\n```csharp\nusing Microsoft.Extensions.DependencyInjection;\n\nvar services = new ServiceCollection();\nservices.AddScoped<A>();\nservices.AddScoped<B>();\nusing var provider = services.BuildServiceProvider();\nusing (var scope = provider.CreateScope())\n{\n    scope.ServiceProvider.GetRequiredService<A>();\n    Console.WriteLine(\"resolved\");\n}\n\nclass A : IDisposable\n{\n    public A(B b) => Console.WriteLine(\"A created\");\n    public void Dispose() => Console.WriteLine(\"A disposed\");\n}\n\nclass B : IDisposable\n{\n    public B() => Console.WriteLine(\"B created\");\n    public void Dispose() => Console.WriteLine(\"B disposed\");\n}\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "B created",
+        "A created",
+        "resolved",
+        "A disposed",
+        "B disposed"
+      ],
+      "explanation": "To build `A` the container must first build its dependency `B`, so `B`'s constructor runs first. The scope tracks every disposable it created and, when the scope is disposed, disposes them in reverse order of creation, so `A` is disposed before the `B` it depends on.",
+      "materials": [
+        "di"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nusing Microsoft.Extensions.DependencyInjection;\nusing Microsoft.Extensions.Options;\n\nvar services = new ServiceCollection();\nservices.AddOptions<MyOptions>()\n    .PostConfigure(o => Console.WriteLine(\"PostConfigure\"))\n    .Configure(o => Console.WriteLine(\"Configure first\"))\n    .Validate(o => { Console.WriteLine(\"Validate\"); return true; });\nservices.Configure<MyOptions>(o => Console.WriteLine(\"Configure second\"));\n\nvar provider = services.BuildServiceProvider();\nConsole.WriteLine(\"before Value\");\n_ = provider.GetRequiredService<IOptions<MyOptions>>().Value;\n\nclass MyOptions { }\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "before Value",
+        "Configure first",
+        "Configure second",
+        "PostConfigure",
+        "Validate"
+      ],
+      "explanation": "Options are built lazily, the first time `.Value` is read. The options factory then runs all `Configure` actions in registration order, then all `PostConfigure` actions (regardless of where they were registered), and validates last. Registering `PostConfigure` first does not make it run first.",
+      "materials": [
+        "options"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A .NET 8 generic host has one hosted service that implements `IHostedLifecycleService`. Put these startup events in the order they happen, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`builder.Build()` returns",
+        "`StartingAsync`",
+        "`StartAsync`",
+        "`StartedAsync`",
+        "`ApplicationStarted` callbacks run"
+      ],
+      "explanation": "The host is built before anything starts. On start, the host calls `StartingAsync` on all lifecycle services, then `StartAsync` on all hosted services, then `StartedAsync`. Only after every hosted service has started does `IHostApplicationLifetime` signal `ApplicationStarted`.",
+      "materials": [
+        "host"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "The same .NET 8 host is running in `host.Run()` when the process receives Ctrl+C or SIGTERM. Put these shutdown events in the order they happen, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`ApplicationStopping` callbacks run",
+        "`StoppingAsync`",
+        "`StopAsync`",
+        "`StoppedAsync`",
+        "`ApplicationStopped` callbacks run"
+      ],
+      "explanation": "The console lifetime handles the signal by calling `StopApplication()`, which signals `ApplicationStopping` right away so the app can stop taking new work. `Run()` then stops the host, which calls `StoppingAsync`, `StopAsync` and `StoppedAsync` on the hosted services. `ApplicationStopped` is signalled last, once the services have stopped. (Calling `host.StopAsync()` directly instead runs `StoppingAsync` before `ApplicationStopping`.)",
+      "materials": [
+        "host"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "One HTTP request reaches this app. In what order are these lines printed, first to last?\n\n```csharp\nvar app = WebApplication.Create(args);\napp.Use(async (ctx, next) =>\n{\n    Console.WriteLine(\"A in\");\n    await next(ctx);\n    Console.WriteLine(\"A out\");\n});\napp.Use(async (ctx, next) =>\n{\n    Console.WriteLine(\"B in\");\n    await next(ctx);\n    Console.WriteLine(\"B out\");\n});\napp.Run(ctx => { Console.WriteLine(\"terminal\"); return ctx.Response.WriteAsync(\"hi\"); });\napp.Run();\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A in",
+        "B in",
+        "terminal",
+        "B out",
+        "A out"
+      ],
+      "explanation": "Middleware runs in the order it is added. Each `Use` delegate does its work, calls `next` to pass the request on, and resumes after `next` returns. The request flows A, B, terminal, and the response flows back B, then A, like nested function calls.",
+      "materials": [
+        "middleware"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A controller action has a global authorization, resource, action and result filter. Put these filter calls in the order they run for one successful request, first to last.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`OnAuthorization`",
+        "`OnResourceExecuting`",
+        "`OnActionExecuting`",
+        "`OnResultExecuting`",
+        "`OnResourceExecuted`"
+      ],
+      "explanation": "Authorization filters run first and can short-circuit the request. Resource filters wrap everything after them, including model binding. Action filters wrap the action method itself. After the action returns, result filters wrap execution of the result. Finally control unwinds back out to the resource filter's `OnResourceExecuted`.",
+      "materials": [
+        "filters"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these types from the most derived to the base of the hierarchy.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`ArgumentNullException`",
+        "`ArgumentException`",
+        "`SystemException`",
+        "`Exception`",
+        "`object`"
+      ],
+      "explanation": "`ArgumentNullException` derives from `ArgumentException`, which derives from `SystemException`, which derives from `Exception`, and every class ultimately derives from `object`. This is also the order `catch` clauses must appear in: a more specific type has to be caught before its base type.",
+      "materials": [
+        "exceptions"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these `MaxValue` constants from smallest to largest.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`int.MaxValue`",
+        "`long.MaxValue`",
+        "`decimal.MaxValue`",
+        "`float.MaxValue`",
+        "`double.MaxValue`"
+      ],
+      "explanation": "`int.MaxValue` is about 2.1 x 10^9 and `long.MaxValue` about 9.2 x 10^18. `decimal` trades range for precision and tops out near 7.9 x 10^28. Binary floating point has a far larger range: `float.MaxValue` is about 3.4 x 10^38 and `double.MaxValue` about 1.8 x 10^308.",
+      "materials": [
+        "operators"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these types by `sizeof`, smallest to largest.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`byte`",
+        "`short`",
+        "`int`",
+        "`long`",
+        "`decimal`"
+      ],
+      "explanation": "`byte` is 1 byte, `short` 2, `int` 4 and `long` 8. `decimal` is a 128-bit type, so `sizeof(decimal)` is 16.",
+      "materials": [
+        "operators"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A new `Blog` is added with `Add`, saved, edited, then removed with `Remove`. Order the EF Core entity states it moves through, first to last.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Detached`",
+        "`Added`",
+        "`Unchanged`",
+        "`Modified`",
+        "`Deleted`"
+      ],
+      "explanation": "A freshly constructed entity is not tracked (`Detached`). `Add` starts tracking it as `Added`. `SaveChanges` inserts it and marks it `Unchanged`. Changing a property makes change detection mark it `Modified`. `Remove` marks it `Deleted`; after the next `SaveChanges` it is deleted from the database and becomes `Detached` again.",
+      "materials": [
+        "efcore"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`SaveChanges()` is called on a relational EF Core 8 context with two new entities and default settings. Put these steps in the order they happen, first to last.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`SavingChanges` event is raised",
+        "`DetectChanges` scans tracked entities",
+        "Transaction begins",
+        "Transaction commits",
+        "`SavedChanges` event is raised"
+      ],
+      "explanation": "`SaveChanges` raises `SavingChanges` first, then (with `AutoDetectChangesEnabled`) runs `DetectChanges` to find what to write. Because more than one statement is needed, it opens a transaction, executes the INSERT commands and commits. The tracked entities are then accepted as `Unchanged`, and `SavedChanges` is raised last.",
+      "materials": [
+        "efcore"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A Razor component is rendered for the first time. Put these lifecycle methods in the order they are called, first to last.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`SetParametersAsync`",
+        "`OnInitialized`",
+        "`OnInitializedAsync`",
+        "`OnParametersSet`",
+        "`OnAfterRender(firstRender: true)`"
+      ],
+      "explanation": "`SetParametersAsync` receives the parameters and, in `ComponentBase`, drives the rest. On first render it calls `OnInitialized` and then `OnInitializedAsync`, then `OnParametersSet{Async}`. The component then renders, and only after the rendered output is applied does `OnAfterRender` run with `firstRender` set to true.",
+      "materials": [
+        "blazor"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In an app created with `WebApplication.CreateBuilder(args)` running in the Development environment, the same key is set in all of these sources. Order them from lowest priority (overridden by everything else) to highest priority.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`appsettings.json`",
+        "`appsettings.Development.json`",
+        "User secrets",
+        "Environment variables",
+        "Command-line arguments"
+      ],
+      "explanation": "Configuration providers are added in this order and a later provider overrides earlier ones for the same key. The default builder adds `appsettings.json`, then the environment-specific `appsettings.{Environment}.json`, then user secrets (only in Development), then environment variables, and finally command-line arguments, which win.",
+      "materials": [
+        "config"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these calls as the ASP.NET Core docs recommend placing them in `Program.cs`, first to last.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`app.UseExceptionHandler(\"/Error\")`",
+        "`app.UseHttpsRedirection()`",
+        "`app.UseRouting()`",
+        "`app.UseAuthentication()`",
+        "`app.UseAuthorization()`"
+      ],
+      "explanation": "The exception handler goes first so it can catch exceptions from everything after it. HTTPS redirection comes early so later middleware sees only HTTPS requests. Routing must run before authentication and authorization so they can see the selected endpoint and its metadata. Authentication establishes who the user is, which authorization needs before it can decide what they may do.",
+      "materials": [
+        "middleware"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these stages of running a C# program in order, first to last.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "You write C# source code",
+        "Roslyn compiles it to IL",
+        "IL and metadata are stored in an assembly",
+        "The JIT compiles a method to native code",
+        "The CPU executes the native code"
+      ],
+      "explanation": "The C# compiler (Roslyn) translates source into intermediate language (IL) and stores it with metadata in an assembly (.dll or .exe). At run time the CLR's JIT compiler turns each method's IL into machine code the first time the method is called, and the processor then runs that native code.",
+      "materials": [
+        "managed"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these C# operators from highest precedence (binds tightest) to lowest.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`*`",
+        "`+`",
+        "`<`",
+        "`==`",
+        "`&&`"
+      ],
+      "explanation": "Multiplicative operators bind tighter than additive ones, which bind tighter than relational comparisons such as `<`, which bind tighter than equality (`==`). Conditional AND (`&&`) is lower than all of them, so `a + b * c < d == e && f` groups as `(((a + (b * c)) < d) == e) && f`.",
+      "materials": [
+        "operators"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these C# binary operators by precedence, from the one that binds tightest to the one that binds loosest.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`<<`",
+        "`==`",
+        "`&`",
+        "`|`",
+        "`??`"
+      ],
+      "explanation": "Shift operators sit just below additive operators and above relational and equality operators, so `<<` binds tighter than `==`. The bitwise logical operators come next in the order `&`, `^`, `|`, all below equality, which is why `x & 1 == 0` means `x & (1 == 0)`. `??` is lower than all of these and the conditional logical operators.",
+      "materials": [
+        "operators"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these operations on `n` elements by how their running time grows, slowest-growing to fastest-growing.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Dictionary<K,V>.TryGetValue`",
+        "`List<T>.BinarySearch` on a sorted list",
+        "`List<T>.Contains`",
+        "`List<T>.Sort` (average case)",
+        "Comparing every pair with nested loops"
+      ],
+      "explanation": "`Dictionary` lookup is O(1) on average thanks to hashing. Binary search halves the range each step, O(log n). `List<T>.Contains` scans linearly, O(n). `List<T>.Sort` uses introsort, O(n log n) on average. Comparing all pairs with nested loops is O(n^2).",
+      "materials": [
+        "gc"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A blocking, compacting garbage collection is triggered because the generation 0 allocation budget is exceeded. Put these steps in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Managed threads are suspended",
+        "Marking phase finds live objects",
+        "Relocating phase updates references",
+        "Compacting phase moves survivors together",
+        "Managed threads resume"
+      ],
+      "explanation": "The GC first suspends managed threads so the heap cannot change under it. It then marks live objects by tracing from roots, updates references to objects that will move (relocating), and compacts the survivors, reclaiming the space of dead objects. Only then are the managed threads resumed.",
+      "materials": [
+        "gc"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A long-lived small object survives every collection. Order the stages of its life in the GC heap, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Allocated in generation 0",
+        "Survives a gen 0 collection",
+        "Lives in generation 1",
+        "Survives a gen 1 collection",
+        "Lives in generation 2"
+      ],
+      "explanation": "New small objects are allocated in generation 0. An object that survives a gen 0 collection is promoted to generation 1, and one that survives a gen 1 collection is promoted to generation 2, where long-lived objects stay and are collected only by full collections.",
+      "materials": [
+        "gc"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A client calls an ASP.NET Core API protected with JWT bearer authentication and `[Authorize]`. Put these steps in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Client obtains a token from the identity provider",
+        "Client sends `Authorization: Bearer <token>`",
+        "Authentication middleware validates the token",
+        "`HttpContext.User` is set from the token's claims",
+        "Authorization middleware evaluates the policy"
+      ],
+      "explanation": "The client first needs a token, then sends it in the `Authorization` header. The JWT bearer handler, run by the authentication middleware, validates signature, issuer, audience and lifetime, and builds a `ClaimsPrincipal` that it assigns to `HttpContext.User`. The authorization middleware then checks that principal against the endpoint's policy before the endpoint runs.",
+      "materials": [
+        "middleware"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`dotnet app.dll` starts a framework-dependent app. Put these components in the order they take part in startup, first to last.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`dotnet` muxer",
+        "`hostfxr` resolves the framework",
+        "`hostpolicy` builds the probe paths",
+        "CoreCLR runtime is initialized",
+        "`Main` runs"
+      ],
+      "explanation": "The `dotnet` executable is only a muxer: it loads `hostfxr`, which reads `app.runtimeconfig.json` and resolves which shared framework version to use. `hostfxr` loads that framework's `hostpolicy`, which assembles the list of assemblies and probe paths from `.deps.json`. `hostpolicy` then loads and initializes CoreCLR, which finally calls the app's `Main`.",
+      "materials": [
+        "managed"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these C# access modifiers from most restrictive (accessible from the fewest places) to least restrictive.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`private`",
+        "`private protected`",
+        "`protected`",
+        "`protected internal`",
+        "`public`"
+      ],
+      "explanation": "`private` limits access to the containing type. `private protected` adds derived types, but only in the same assembly. `protected` allows derived types in any assembly. `protected internal` is the union of `protected` and `internal`, so it also adds any code in the same assembly. `public` allows everyone. Each level is a strict superset of the one before.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these lines of a minimal ASP.NET Core `Program.cs`, first to last.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`var builder = WebApplication.CreateBuilder(args);`",
+        "`builder.Services.AddControllers();`",
+        "`var app = builder.Build();`",
+        "`app.MapControllers();`",
+        "`app.Run();`"
+      ],
+      "explanation": "Services must be registered on `builder.Services` before `Build()`, because the service collection becomes read-only once the app is built. Middleware and endpoints are added to the built `app`, and `app.Run()` starts the server and blocks, so it must come last.",
+      "materials": [
+        "middleware",
+        "di"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A task created with `new Task(...)` is started and finishes successfully. Order the `TaskStatus` values it passes through, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`Created`",
+        "`WaitingToRun`",
+        "`Running`",
+        "`RanToCompletion`"
+      ],
+      "explanation": "A task constructed with `new Task` starts as `Created`. `Start()` schedules it, putting it in `WaitingToRun` until the scheduler picks it up. While the delegate executes it is `Running`, and when it returns without an exception it ends in `RanToCompletion`.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "An `async Task` method is called and awaits a task that is not yet complete. Put these steps in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Caller invokes the method; its state machine starts",
+        "Code before the `await` runs synchronously",
+        "A continuation is registered on the awaited task",
+        "The caller receives an incomplete `Task`",
+        "The awaited task completes and the method resumes"
+      ],
+      "explanation": "The compiler turns the method into a state machine that starts running immediately on the caller's thread. It runs until it reaches an `await` on an incomplete task, registers itself as that task's continuation, and returns its own incomplete `Task` to the caller. When the awaited task completes, the continuation calls back into the state machine, which resumes after the `await`.",
+      "materials": [
+        "async"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nint n = 7;\nstring size = n switch\n{\n    _ when Check(n, 100) => \"huge\",\n    _ when Check(n, 10) => \"large\",\n    _ when Check(n, 5) => \"medium\",\n    _ when Check(n, 0) => \"small\",\n    _ => \"none\",\n};\nConsole.WriteLine(size);\n\nstatic bool Check(int n, int limit) { Console.WriteLine($\"check > {limit}\"); return n > limit; }\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "check > 100",
+        "check > 10",
+        "check > 5",
+        "medium"
+      ],
+      "explanation": "A switch expression tests its arms from top to bottom and stops at the first one that matches, evaluating `when` guards only for arms whose pattern matches. 7 fails `> 100` and `> 10`, passes `> 5`, so `medium` is chosen and later arms are never checked.",
+      "materials": [
+        "operators"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "An object whose class overrides `Finalize` becomes unreachable. Put these events in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The last reference to the object is dropped",
+        "A GC finds the object is unreachable",
+        "The object is moved to the f-reachable queue",
+        "The finalizer thread runs its `Finalize` method",
+        "A later GC reclaims its memory"
+      ],
+      "explanation": "Dropping the last reference does nothing immediately. When a GC finds the object unreachable, it sees it is registered for finalization and moves it to the f-reachable queue instead of freeing it, which keeps it alive. The dedicated finalizer thread later calls `Finalize`. Only a subsequent collection can reclaim the memory, which is why finalizable objects survive at least one extra GC.",
+      "materials": [
+        "gc"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A LINQ query against a `DbSet` is enumerated with `ToList()` in EF Core. Put these steps in order, first to last.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The LINQ expression tree is built",
+        "EF Core translates it to SQL",
+        "The database executes the SQL",
+        "Rows are materialized into entity instances",
+        "The entities are tracked by the context"
+      ],
+      "explanation": "Writing the query only builds an expression tree; nothing runs until it is enumerated. EF Core then compiles the expression into SQL, sends it to the database, reads the result rows and creates entity objects from them, and finally attaches those entities to the change tracker (unless the query uses `AsNoTracking`).",
+      "materials": [
+        "efcore"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the steps the compiler generates for `lock (obj) { Work(); }` (on an `object`), first to last.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`bool lockTaken = false;`",
+        "Enter a `try` block",
+        "`Monitor.Enter(obj, ref lockTaken);`",
+        "`Work();`",
+        "`if (lockTaken) Monitor.Exit(obj);` in `finally`"
+      ],
+      "explanation": "The compiler declares `lockTaken`, then enters a `try` block and calls `Monitor.Enter(obj, ref lockTaken)` inside it, so that if an exception hits right after the lock is acquired, `lockTaken` is already true. The body runs, and the `finally` releases the lock only if it was actually taken.",
+      "materials": [
+        "exceptions"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "An anonymous browser user requests a page marked `[Authorize]` in an app using cookie authentication. Put these steps in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Authentication middleware finds no auth cookie",
+        "Authorization middleware denies the anonymous user",
+        "The cookie handler issues a challenge",
+        "Browser is redirected to the login page",
+        "Login succeeds and `SignInAsync` sets the cookie"
+      ],
+      "explanation": "With no cookie, authentication produces an anonymous user. Authorization then fails the `[Authorize]` requirement and calls `ChallengeAsync`, and the cookie handler responds to a challenge by redirecting to the configured login path. After the user enters valid credentials, the login handler calls `SignInAsync`, which writes the authentication cookie used on later requests.",
+      "materials": [
+        "middleware"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Items are added one at a time to `new List<int>()`. Order the values of `Capacity` it reports along the way, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "0",
+        "4",
+        "8",
+        "16",
+        "32"
+      ],
+      "explanation": "An empty `List<T>` starts with capacity 0 and allocates no array. The first `Add` allocates room for 4 items, and each time the array is full it doubles: 8, 16, 32 and so on. Doubling keeps `Add` amortized O(1).",
+      "materials": [
+        "gc"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nTask t = FailAsync();\nConsole.WriteLine($\"faulted: {t.IsFaulted}\");\ntry\n{\n    Console.WriteLine(\"awaiting\");\n    await t;\n}\ncatch (Exception ex) { Console.WriteLine($\"caught: {ex.Message}\"); }\nConsole.WriteLine(\"done\");\n\nstatic async Task FailAsync()\n{\n    Console.WriteLine(\"before throw\");\n    throw new Exception(\"boom\");\n}\n```",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "before throw",
+        "faulted: True",
+        "awaiting",
+        "caught: boom",
+        "done"
+      ],
+      "explanation": "An exception thrown in an `async Task` method does not propagate out of the call. It is captured in the returned task, which is already faulted when the call returns. The exception is rethrown only when the task is awaited, so the `catch` runs after `awaiting`.",
+      "materials": [
+        "async"
+      ]
+    }
+  ]
+}

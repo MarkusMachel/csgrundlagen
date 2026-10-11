@@ -1,0 +1,2939 @@
+{
+  "name": "100 SQL and database interview questions (PostgreSQL)",
+  "materials": [
+    {
+      "key": "pg-commands",
+      "type": "article",
+      "title": "SQL commands",
+      "url": "https://www.postgresql.org/docs/current/sql-commands.html",
+      "author": "PostgreSQL documentation",
+      "description": "Reference for every SQL command PostgreSQL supports."
+    },
+    {
+      "key": "pg-select",
+      "type": "article",
+      "title": "SELECT",
+      "url": "https://www.postgresql.org/docs/current/sql-select.html",
+      "author": "PostgreSQL documentation",
+      "description": "GROUP BY, HAVING, DISTINCT ON and the locking clause."
+    },
+    {
+      "key": "pg-queries",
+      "type": "article",
+      "title": "Queries",
+      "url": "https://www.postgresql.org/docs/current/queries.html",
+      "author": "PostgreSQL documentation",
+      "description": "How a query is built from FROM to LIMIT."
+    },
+    {
+      "key": "pg-comparison",
+      "type": "article",
+      "title": "Comparison functions and operators",
+      "url": "https://www.postgresql.org/docs/current/functions-comparison.html",
+      "author": "PostgreSQL documentation",
+      "description": "IS NULL, IS DISTINCT FROM and friends."
+    },
+    {
+      "key": "pg-table-expr",
+      "type": "article",
+      "title": "Table expressions",
+      "url": "https://www.postgresql.org/docs/current/queries-table-expressions.html",
+      "author": "PostgreSQL documentation",
+      "description": "Joins, aliases, LATERAL and grouping sets."
+    },
+    {
+      "key": "pg-union",
+      "type": "article",
+      "title": "Combining queries",
+      "url": "https://www.postgresql.org/docs/current/queries-union.html",
+      "author": "PostgreSQL documentation",
+      "description": "UNION, INTERSECT and EXCEPT."
+    },
+    {
+      "key": "pg-subquery",
+      "type": "article",
+      "title": "Subquery expressions",
+      "url": "https://www.postgresql.org/docs/current/functions-subquery.html",
+      "author": "PostgreSQL documentation",
+      "description": "EXISTS, IN, NOT IN, ANY and ALL."
+    },
+    {
+      "key": "pg-conditional",
+      "type": "article",
+      "title": "Conditional expressions",
+      "url": "https://www.postgresql.org/docs/current/functions-conditional.html",
+      "author": "PostgreSQL documentation",
+      "description": "CASE, COALESCE and NULLIF."
+    },
+    {
+      "key": "pg-truncate",
+      "type": "article",
+      "title": "TRUNCATE",
+      "url": "https://www.postgresql.org/docs/current/sql-truncate.html",
+      "author": "PostgreSQL documentation",
+      "description": "Emptying tables quickly, with CASCADE."
+    },
+    {
+      "key": "pg-delete",
+      "type": "article",
+      "title": "DELETE",
+      "url": "https://www.postgresql.org/docs/current/sql-delete.html",
+      "author": "PostgreSQL documentation",
+      "description": "Deleting rows, USING and RETURNING."
+    },
+    {
+      "key": "pg-window-tutorial",
+      "type": "article",
+      "title": "Window functions tutorial",
+      "url": "https://www.postgresql.org/docs/current/tutorial-window.html",
+      "author": "PostgreSQL documentation",
+      "description": "Window functions compared with GROUP BY."
+    },
+    {
+      "key": "pg-window-funcs",
+      "type": "article",
+      "title": "Window functions",
+      "url": "https://www.postgresql.org/docs/current/functions-window.html",
+      "author": "PostgreSQL documentation",
+      "description": "row_number, rank, dense_rank, lag, lead."
+    },
+    {
+      "key": "pg-expressions",
+      "type": "article",
+      "title": "Value expressions",
+      "url": "https://www.postgresql.org/docs/current/sql-expressions.html",
+      "author": "PostgreSQL documentation",
+      "description": "Aggregate expressions, FILTER and window frames."
+    },
+    {
+      "key": "pg-with",
+      "type": "article",
+      "title": "WITH queries (CTEs)",
+      "url": "https://www.postgresql.org/docs/current/queries-with.html",
+      "author": "PostgreSQL documentation",
+      "description": "Materialization, recursion and data-modifying CTEs."
+    },
+    {
+      "key": "pg-matviews",
+      "type": "article",
+      "title": "Materialized views",
+      "url": "https://www.postgresql.org/docs/current/rules-materializedviews.html",
+      "author": "PostgreSQL documentation",
+      "description": "Stored query results refreshed on demand."
+    },
+    {
+      "key": "pg-identity",
+      "type": "article",
+      "title": "Identity columns",
+      "url": "https://www.postgresql.org/docs/current/ddl-identity-columns.html",
+      "author": "PostgreSQL documentation",
+      "description": "The standard replacement for serial."
+    },
+    {
+      "key": "pg-uuid",
+      "type": "article",
+      "title": "UUID type",
+      "url": "https://www.postgresql.org/docs/current/datatype-uuid.html",
+      "author": "PostgreSQL documentation",
+      "description": "Storing and generating UUIDs."
+    },
+    {
+      "key": "pg-constraints",
+      "type": "article",
+      "title": "Constraints",
+      "url": "https://www.postgresql.org/docs/current/ddl-constraints.html",
+      "author": "PostgreSQL documentation",
+      "description": "NOT NULL, UNIQUE, CHECK, foreign keys and exclusion."
+    },
+    {
+      "key": "pg-partial",
+      "type": "article",
+      "title": "Partial indexes",
+      "url": "https://www.postgresql.org/docs/current/indexes-partial.html",
+      "author": "PostgreSQL documentation",
+      "description": "Indexing a subset of rows."
+    },
+    {
+      "key": "pg-ranges",
+      "type": "article",
+      "title": "Range types",
+      "url": "https://www.postgresql.org/docs/current/rangetypes.html",
+      "author": "PostgreSQL documentation",
+      "description": "tstzrange, daterange and their operators."
+    },
+    {
+      "key": "pg-numeric",
+      "type": "article",
+      "title": "Numeric types",
+      "url": "https://www.postgresql.org/docs/current/datatype-numeric.html",
+      "author": "PostgreSQL documentation",
+      "description": "Integers, numeric and floating point."
+    },
+    {
+      "key": "pg-datetime",
+      "type": "article",
+      "title": "Date/time types",
+      "url": "https://www.postgresql.org/docs/current/datatype-datetime.html",
+      "author": "PostgreSQL documentation",
+      "description": "timestamptz versus timestamp."
+    },
+    {
+      "key": "pg-json",
+      "type": "article",
+      "title": "JSON types",
+      "url": "https://www.postgresql.org/docs/current/datatype-json.html",
+      "author": "PostgreSQL documentation",
+      "description": "json, jsonb and jsonb indexing."
+    },
+    {
+      "key": "pg-json-funcs",
+      "type": "article",
+      "title": "JSON functions and operators",
+      "url": "https://www.postgresql.org/docs/current/functions-json.html",
+      "author": "PostgreSQL documentation",
+      "description": "->, ->>, @>, ? and SQL/JSON path."
+    },
+    {
+      "key": "pg-ltree",
+      "type": "article",
+      "title": "ltree",
+      "url": "https://www.postgresql.org/docs/current/ltree.html",
+      "author": "PostgreSQL documentation",
+      "description": "Materialized paths for tree-like data."
+    },
+    {
+      "key": "pg-index-types",
+      "type": "article",
+      "title": "Index types",
+      "url": "https://www.postgresql.org/docs/current/indexes-types.html",
+      "author": "PostgreSQL documentation",
+      "description": "B-tree, Hash, GiST, SP-GiST, GIN and BRIN."
+    },
+    {
+      "key": "pg-multicol",
+      "type": "article",
+      "title": "Multicolumn indexes",
+      "url": "https://www.postgresql.org/docs/current/indexes-multicolumn.html",
+      "author": "PostgreSQL documentation",
+      "description": "How column order affects which queries an index serves."
+    },
+    {
+      "key": "pg-ios",
+      "type": "article",
+      "title": "Index-only scans and covering indexes",
+      "url": "https://www.postgresql.org/docs/current/indexes-index-only-scans.html",
+      "author": "PostgreSQL documentation",
+      "description": "INCLUDE columns and the visibility map."
+    },
+    {
+      "key": "pg-expr-index",
+      "type": "article",
+      "title": "Indexes on expressions",
+      "url": "https://www.postgresql.org/docs/current/indexes-expressional.html",
+      "author": "PostgreSQL documentation",
+      "description": "Indexing lower(email) and similar."
+    },
+    {
+      "key": "pg-stats",
+      "type": "article",
+      "title": "The cumulative statistics system",
+      "url": "https://www.postgresql.org/docs/current/monitoring-stats.html",
+      "author": "PostgreSQL documentation",
+      "description": "pg_stat_user_tables, pg_stat_user_indexes, pg_stat_activity."
+    },
+    {
+      "key": "pg-trgm",
+      "type": "article",
+      "title": "pg_trgm",
+      "url": "https://www.postgresql.org/docs/current/pgtrgm.html",
+      "author": "PostgreSQL documentation",
+      "description": "Trigram matching for substring and fuzzy search."
+    },
+    {
+      "key": "pg-fts",
+      "type": "article",
+      "title": "Full text search",
+      "url": "https://www.postgresql.org/docs/current/textsearch.html",
+      "author": "PostgreSQL documentation",
+      "description": "tsvector, tsquery and ranking."
+    },
+    {
+      "key": "pg-create-index",
+      "type": "article",
+      "title": "CREATE INDEX",
+      "url": "https://www.postgresql.org/docs/current/sql-createindex.html",
+      "author": "PostgreSQL documentation",
+      "description": "Including building indexes CONCURRENTLY."
+    },
+    {
+      "key": "pg-explain",
+      "type": "article",
+      "title": "Using EXPLAIN",
+      "url": "https://www.postgresql.org/docs/current/using-explain.html",
+      "author": "PostgreSQL documentation",
+      "description": "Reading plans, estimated and actual rows."
+    },
+    {
+      "key": "pg-planner",
+      "type": "article",
+      "title": "Planner/optimizer",
+      "url": "https://www.postgresql.org/docs/current/planner-optimizer.html",
+      "author": "PostgreSQL documentation",
+      "description": "Scan and join strategies the planner chooses between."
+    },
+    {
+      "key": "pg-planner-stats",
+      "type": "article",
+      "title": "Statistics used by the planner",
+      "url": "https://www.postgresql.org/docs/current/planner-stats.html",
+      "author": "PostgreSQL documentation",
+      "description": "pg_stats, histograms and extended statistics."
+    },
+    {
+      "key": "pg-stat-statements",
+      "type": "article",
+      "title": "pg_stat_statements",
+      "url": "https://www.postgresql.org/docs/current/pgstatstatements.html",
+      "author": "PostgreSQL documentation",
+      "description": "Per-query execution statistics."
+    },
+    {
+      "key": "pg-auto-explain",
+      "type": "article",
+      "title": "auto_explain",
+      "url": "https://www.postgresql.org/docs/current/auto-explain.html",
+      "author": "PostgreSQL documentation",
+      "description": "Logging plans of slow queries automatically."
+    },
+    {
+      "key": "pg-populate",
+      "type": "article",
+      "title": "Populating a database",
+      "url": "https://www.postgresql.org/docs/current/populate.html",
+      "author": "PostgreSQL documentation",
+      "description": "Fast bulk loading."
+    },
+    {
+      "key": "pg-copy",
+      "type": "article",
+      "title": "COPY",
+      "url": "https://www.postgresql.org/docs/current/sql-copy.html",
+      "author": "PostgreSQL documentation",
+      "description": "Bulk import and export."
+    },
+    {
+      "key": "pg-prepare",
+      "type": "article",
+      "title": "PREPARE",
+      "url": "https://www.postgresql.org/docs/current/sql-prepare.html",
+      "author": "PostgreSQL documentation",
+      "description": "Prepared statements, custom and generic plans."
+    },
+    {
+      "key": "pg-query-config",
+      "type": "article",
+      "title": "Query planning configuration",
+      "url": "https://www.postgresql.org/docs/current/runtime-config-query.html",
+      "author": "PostgreSQL documentation",
+      "description": "plan_cache_mode and planner settings."
+    },
+    {
+      "key": "pg-tx",
+      "type": "article",
+      "title": "Transactions",
+      "url": "https://www.postgresql.org/docs/current/tutorial-transactions.html",
+      "author": "PostgreSQL documentation",
+      "description": "BEGIN, COMMIT and all-or-nothing work."
+    },
+    {
+      "key": "pg-iso",
+      "type": "article",
+      "title": "Transaction isolation",
+      "url": "https://www.postgresql.org/docs/current/transaction-iso.html",
+      "author": "PostgreSQL documentation",
+      "description": "Read Committed, Repeatable Read, Serializable and anomalies."
+    },
+    {
+      "key": "pg-mvcc",
+      "type": "article",
+      "title": "Concurrency control",
+      "url": "https://www.postgresql.org/docs/current/mvcc.html",
+      "author": "PostgreSQL documentation",
+      "description": "MVCC: readers and writers do not block each other."
+    },
+    {
+      "key": "pg-locking",
+      "type": "article",
+      "title": "Explicit locking",
+      "url": "https://www.postgresql.org/docs/current/explicit-locking.html",
+      "author": "PostgreSQL documentation",
+      "description": "Table and row locks, deadlocks, advisory locks."
+    },
+    {
+      "key": "pg-insert",
+      "type": "article",
+      "title": "INSERT ... ON CONFLICT",
+      "url": "https://www.postgresql.org/docs/current/sql-insert.html",
+      "author": "PostgreSQL documentation",
+      "description": "Atomic upserts."
+    },
+    {
+      "key": "pg-merge",
+      "type": "article",
+      "title": "MERGE",
+      "url": "https://www.postgresql.org/docs/current/sql-merge.html",
+      "author": "PostgreSQL documentation",
+      "description": "Conditional insert, update and delete from a source."
+    },
+    {
+      "key": "pg-client-config",
+      "type": "article",
+      "title": "Client connection defaults",
+      "url": "https://www.postgresql.org/docs/current/runtime-config-client.html",
+      "author": "PostgreSQL documentation",
+      "description": "statement_timeout, lock_timeout, idle_in_transaction_session_timeout."
+    },
+    {
+      "key": "pg-vacuum",
+      "type": "article",
+      "title": "Routine vacuuming",
+      "url": "https://www.postgresql.org/docs/current/routine-vacuuming.html",
+      "author": "PostgreSQL documentation",
+      "description": "Autovacuum, freezing and wraparound."
+    },
+    {
+      "key": "pg-reindex",
+      "type": "article",
+      "title": "Routine reindexing",
+      "url": "https://www.postgresql.org/docs/current/routine-reindex.html",
+      "author": "PostgreSQL documentation",
+      "description": "When and how to rebuild indexes."
+    },
+    {
+      "key": "pg-wal",
+      "type": "article",
+      "title": "Write-ahead logging",
+      "url": "https://www.postgresql.org/docs/current/wal-intro.html",
+      "author": "PostgreSQL documentation",
+      "description": "Durability through a sequential log."
+    },
+    {
+      "key": "pg-wal-config",
+      "type": "article",
+      "title": "WAL configuration",
+      "url": "https://www.postgresql.org/docs/current/wal-configuration.html",
+      "author": "PostgreSQL documentation",
+      "description": "Checkpoints, max_wal_size, checkpoint_timeout."
+    },
+    {
+      "key": "pg-ha",
+      "type": "article",
+      "title": "High availability and replication",
+      "url": "https://www.postgresql.org/docs/current/high-availability.html",
+      "author": "PostgreSQL documentation",
+      "description": "Streaming replication and standbys."
+    },
+    {
+      "key": "pg-logical-rep",
+      "type": "article",
+      "title": "Logical replication",
+      "url": "https://www.postgresql.org/docs/current/logical-replication.html",
+      "author": "PostgreSQL documentation",
+      "description": "Publications and subscriptions."
+    },
+    {
+      "key": "pg-backup",
+      "type": "article",
+      "title": "Backup and restore",
+      "url": "https://www.postgresql.org/docs/current/backup.html",
+      "author": "PostgreSQL documentation",
+      "description": "pg_dump, file-system backups and archiving."
+    },
+    {
+      "key": "pg-pitr",
+      "type": "article",
+      "title": "Continuous archiving and PITR",
+      "url": "https://www.postgresql.org/docs/current/continuous-archiving.html",
+      "author": "PostgreSQL documentation",
+      "description": "Restoring to a point in time."
+    },
+    {
+      "key": "pg-alter-table",
+      "type": "article",
+      "title": "ALTER TABLE",
+      "url": "https://www.postgresql.org/docs/current/sql-altertable.html",
+      "author": "PostgreSQL documentation",
+      "description": "Lock levels, NOT VALID and VALIDATE CONSTRAINT."
+    },
+    {
+      "key": "pg-toast",
+      "type": "article",
+      "title": "TOAST",
+      "url": "https://www.postgresql.org/docs/current/storage-toast.html",
+      "author": "PostgreSQL documentation",
+      "description": "How large values are stored out of line."
+    },
+    {
+      "key": "pg-page",
+      "type": "article",
+      "title": "Database page layout",
+      "url": "https://www.postgresql.org/docs/current/storage-page-layout.html",
+      "author": "PostgreSQL documentation",
+      "description": "8 KB pages and tuple layout."
+    },
+    {
+      "key": "pg-hot-standby",
+      "type": "article",
+      "title": "Hot standby",
+      "url": "https://www.postgresql.org/docs/current/hot-standby.html",
+      "author": "PostgreSQL documentation",
+      "description": "Queries on replicas and replay conflicts."
+    },
+    {
+      "key": "pg-partitioning",
+      "type": "article",
+      "title": "Table partitioning",
+      "url": "https://www.postgresql.org/docs/current/ddl-partitioning.html",
+      "author": "PostgreSQL documentation",
+      "description": "Range, list and hash partitions and pruning."
+    },
+    {
+      "key": "pg-rls",
+      "type": "article",
+      "title": "Row security policies",
+      "url": "https://www.postgresql.org/docs/current/ddl-rowsecurity.html",
+      "author": "PostgreSQL documentation",
+      "description": "Row-level security per role or tenant."
+    },
+    {
+      "key": "pg-brin",
+      "type": "article",
+      "title": "BRIN indexes",
+      "url": "https://www.postgresql.org/docs/current/brin.html",
+      "author": "PostgreSQL documentation",
+      "description": "Block range indexes for naturally ordered data."
+    },
+    {
+      "key": "pg-logical-decoding",
+      "type": "article",
+      "title": "Logical decoding",
+      "url": "https://www.postgresql.org/docs/current/logicaldecoding.html",
+      "author": "PostgreSQL documentation",
+      "description": "Streaming row changes out of the WAL."
+    },
+    {
+      "key": "pg-create-matview",
+      "type": "article",
+      "title": "CREATE MATERIALIZED VIEW",
+      "url": "https://www.postgresql.org/docs/current/sql-creatematerializedview.html",
+      "author": "PostgreSQL documentation",
+      "description": "Defining a materialized view."
+    },
+    {
+      "key": "pg-refresh",
+      "type": "article",
+      "title": "REFRESH MATERIALIZED VIEW",
+      "url": "https://www.postgresql.org/docs/current/sql-refreshmaterializedview.html",
+      "author": "PostgreSQL documentation",
+      "description": "Refreshing, CONCURRENTLY with a unique index."
+    },
+    {
+      "key": "pg-plpgsql",
+      "type": "article",
+      "title": "PL/pgSQL",
+      "url": "https://www.postgresql.org/docs/current/plpgsql.html",
+      "author": "PostgreSQL documentation",
+      "description": "The procedural language for functions and procedures."
+    },
+    {
+      "key": "pg-triggers",
+      "type": "article",
+      "title": "Triggers",
+      "url": "https://www.postgresql.org/docs/current/triggers.html",
+      "author": "PostgreSQL documentation",
+      "description": "Row and statement triggers."
+    },
+    {
+      "key": "pg-generated",
+      "type": "article",
+      "title": "Generated columns",
+      "url": "https://www.postgresql.org/docs/current/ddl-generated-columns.html",
+      "author": "PostgreSQL documentation",
+      "description": "Stored columns computed from other columns."
+    },
+    {
+      "key": "pg-srf",
+      "type": "article",
+      "title": "Set returning functions",
+      "url": "https://www.postgresql.org/docs/current/functions-srf.html",
+      "author": "PostgreSQL documentation",
+      "description": "generate_series and friends."
+    },
+    {
+      "key": "pg-aggregates",
+      "type": "article",
+      "title": "Aggregate functions",
+      "url": "https://www.postgresql.org/docs/current/functions-aggregate.html",
+      "author": "PostgreSQL documentation",
+      "description": "Including ordered-set aggregates such as percentile_cont."
+    },
+    {
+      "key": "pg-tablefunc",
+      "type": "article",
+      "title": "tablefunc (crosstab)",
+      "url": "https://www.postgresql.org/docs/current/tablefunc.html",
+      "author": "PostgreSQL documentation",
+      "description": "Pivoting rows into columns."
+    },
+    {
+      "key": "pg-range-funcs",
+      "type": "article",
+      "title": "Range functions and operators",
+      "url": "https://www.postgresql.org/docs/current/functions-range.html",
+      "author": "PostgreSQL documentation",
+      "description": "&&, @>, and range arithmetic."
+    },
+    {
+      "key": "pg12",
+      "type": "article",
+      "title": "PostgreSQL 12 release notes",
+      "url": "https://www.postgresql.org/docs/12/release-12.html",
+      "author": "PostgreSQL documentation",
+      "description": "Includes CTE inlining."
+    },
+    {
+      "key": "dont-do-this",
+      "type": "article",
+      "title": "Don't Do This",
+      "url": "https://wiki.postgresql.org/wiki/Don%27t_Do_This",
+      "author": "PostgreSQL wiki",
+      "description": "Common mistakes: NOT IN, money, timestamp, varchar(n)."
+    },
+    {
+      "key": "slow-query",
+      "type": "article",
+      "title": "Slow Query Questions",
+      "url": "https://wiki.postgresql.org/wiki/Slow_Query_Questions",
+      "author": "PostgreSQL wiki",
+      "description": "What to gather when a query is slow."
+    },
+    {
+      "key": "slow-counting",
+      "type": "article",
+      "title": "Slow Counting",
+      "url": "https://wiki.postgresql.org/wiki/Slow_Counting",
+      "author": "PostgreSQL wiki",
+      "description": "Why count(*) scans and what to do instead."
+    },
+    {
+      "key": "conn-count",
+      "type": "article",
+      "title": "Number Of Database Connections",
+      "url": "https://wiki.postgresql.org/wiki/Number_Of_Database_Connections",
+      "author": "PostgreSQL wiki",
+      "description": "Sizing connection pools."
+    },
+    {
+      "key": "dedupe-wiki",
+      "type": "article",
+      "title": "Deleting duplicates",
+      "url": "https://wiki.postgresql.org/wiki/Deleting_duplicates",
+      "author": "PostgreSQL wiki",
+      "description": "Removing duplicate rows. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "utl-anatomy",
+      "type": "article",
+      "title": "Use The Index, Luke: Anatomy of an index",
+      "url": "https://use-the-index-luke.com/sql/anatomy",
+      "author": "Markus Winand",
+      "description": "B-tree structure and leaf node chains."
+    },
+    {
+      "key": "utl-concat",
+      "type": "article",
+      "title": "Use The Index, Luke: Concatenated indexes",
+      "url": "https://use-the-index-luke.com/sql/where-clause/the-equals-operator/concatenated-keys",
+      "author": "Markus Winand",
+      "description": "Column order in multicolumn indexes."
+    },
+    {
+      "key": "utl-ios",
+      "type": "article",
+      "title": "Use The Index, Luke: Index-only scan",
+      "url": "https://use-the-index-luke.com/sql/clustering/index-only-scan-covering-index",
+      "author": "Markus Winand",
+      "description": "Covering indexes."
+    },
+    {
+      "key": "utl-partial",
+      "type": "article",
+      "title": "Use The Index, Luke: Partial indexes",
+      "url": "https://use-the-index-luke.com/sql/where-clause/partial-and-filtered-indexes",
+      "author": "Markus Winand",
+      "description": "Indexing only the rows you query."
+    },
+    {
+      "key": "utl-functions",
+      "type": "article",
+      "title": "Use The Index, Luke: Functions in the WHERE clause",
+      "url": "https://use-the-index-luke.com/sql/where-clause/functions",
+      "author": "Markus Winand",
+      "description": "Why wrapping a column hides the index."
+    },
+    {
+      "key": "utl-where",
+      "type": "article",
+      "title": "Use The Index, Luke: The WHERE clause",
+      "url": "https://use-the-index-luke.com/sql/where-clause",
+      "author": "Markus Winand",
+      "description": "How predicates use indexes."
+    },
+    {
+      "key": "utl-plans",
+      "type": "article",
+      "title": "Use The Index, Luke: PostgreSQL execution plan operations",
+      "url": "https://use-the-index-luke.com/sql/explain-plan/postgresql/operations",
+      "author": "Markus Winand",
+      "description": "What each plan node means."
+    },
+    {
+      "key": "no-offset",
+      "type": "article",
+      "title": "We need tool support for keyset pagination",
+      "url": "https://use-the-index-luke.com/no-offset",
+      "author": "Markus Winand",
+      "description": "Why OFFSET is slow and how seek pagination works."
+    },
+    {
+      "key": "modern-sql",
+      "type": "link",
+      "title": "Modern SQL",
+      "url": "https://modern-sql.com/",
+      "author": "Markus Winand",
+      "description": "Standard SQL features and their support."
+    },
+    {
+      "key": "ms-3vl",
+      "type": "article",
+      "title": "Modern SQL: Three-valued logic",
+      "url": "https://modern-sql.com/concept/three-valued-logic",
+      "author": "Markus Winand",
+      "description": "True, false and unknown."
+    },
+    {
+      "key": "ms-filter",
+      "type": "article",
+      "title": "Modern SQL: FILTER",
+      "url": "https://modern-sql.com/feature/filter",
+      "author": "Markus Winand",
+      "description": "Conditional aggregation."
+    },
+    {
+      "key": "ms-over",
+      "type": "article",
+      "title": "Modern SQL: OVER and window functions",
+      "url": "https://modern-sql.com/feature/over",
+      "author": "Markus Winand",
+      "description": "Window functions explained."
+    },
+    {
+      "key": "ms-lateral",
+      "type": "article",
+      "title": "Modern SQL: LATERAL",
+      "url": "https://modern-sql.com/feature/lateral",
+      "author": "Markus Winand",
+      "description": "Subqueries that reference earlier FROM items. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "sqlbolt",
+      "type": "link",
+      "title": "SQLBolt",
+      "url": "https://sqlbolt.com/",
+      "author": "SQLBolt",
+      "description": "Interactive SQL lessons."
+    },
+    {
+      "key": "mode-having",
+      "type": "article",
+      "title": "Mode SQL tutorial: HAVING",
+      "url": "https://mode.com/sql-tutorial/sql-having",
+      "author": "Mode",
+      "description": "Filtering aggregated results."
+    },
+    {
+      "key": "pgex",
+      "type": "link",
+      "title": "PG Exercises",
+      "url": "https://pgexercises.com/",
+      "author": "Alisdair Owens",
+      "description": "PostgreSQL practice: joins, aggregates, windows, recursion."
+    },
+    {
+      "key": "leetcode-db",
+      "type": "link",
+      "title": "LeetCode database problems",
+      "url": "https://leetcode.com/problemset/database/",
+      "author": "LeetCode",
+      "description": "SQL interview exercises."
+    },
+    {
+      "key": "sqlzoo",
+      "type": "link",
+      "title": "SQLZoo",
+      "url": "https://www.sqlzoo.net/",
+      "author": "SQLZoo",
+      "description": "Interactive SQL tutorials and exercises."
+    },
+    {
+      "key": "dalibo",
+      "type": "link",
+      "title": "explain.dalibo.com",
+      "url": "https://explain.dalibo.com/",
+      "author": "Dalibo",
+      "description": "Visualizes PostgreSQL plans."
+    },
+    {
+      "key": "hermitage",
+      "type": "link",
+      "title": "Hermitage",
+      "url": "https://github.com/ept/hermitage",
+      "author": "Martin Kleppmann",
+      "description": "Isolation level tests across databases."
+    },
+    {
+      "key": "jepsen",
+      "type": "article",
+      "title": "Jepsen: Consistency models",
+      "url": "https://jepsen.io/consistency",
+      "author": "Jepsen",
+      "description": "A map of consistency models."
+    },
+    {
+      "key": "strong-migrations",
+      "type": "link",
+      "title": "strong_migrations",
+      "url": "https://github.com/ankane/strong_migrations",
+      "author": "Andrew Kane",
+      "description": "Catalog of unsafe migrations and safe alternatives."
+    },
+    {
+      "key": "pgbouncer",
+      "type": "article",
+      "title": "PgBouncer features",
+      "url": "https://www.pgbouncer.org/features.html",
+      "author": "PgBouncer",
+      "description": "Pool modes and what each supports."
+    },
+    {
+      "key": "pg-repack",
+      "type": "link",
+      "title": "pg_repack",
+      "url": "https://github.com/reorg/pg_repack",
+      "author": "reorg",
+      "description": "Online table and index rewrite to remove bloat."
+    },
+    {
+      "key": "patroni",
+      "type": "link",
+      "title": "Patroni",
+      "url": "https://patroni.readthedocs.io/",
+      "author": "Zalando",
+      "description": "High-availability orchestration for PostgreSQL."
+    },
+    {
+      "key": "pgbackrest",
+      "type": "link",
+      "title": "pgBackRest",
+      "url": "https://pgbackrest.org/",
+      "author": "pgBackRest",
+      "description": "Backup and restore with WAL archiving."
+    },
+    {
+      "key": "postgres-exporter",
+      "type": "link",
+      "title": "postgres_exporter",
+      "url": "https://github.com/prometheus-community/postgres_exporter",
+      "author": "Prometheus community",
+      "description": "PostgreSQL metrics for Prometheus and Grafana."
+    },
+    {
+      "key": "pg-partman",
+      "type": "link",
+      "title": "pg_partman",
+      "url": "https://github.com/pgpartman/pg_partman",
+      "author": "pg_partman",
+      "description": "Automated partition management."
+    },
+    {
+      "key": "citus",
+      "type": "link",
+      "title": "Citus documentation",
+      "url": "https://docs.citusdata.com/",
+      "author": "Citus Data",
+      "description": "Distributed PostgreSQL and multitenancy."
+    },
+    {
+      "key": "timescale",
+      "type": "link",
+      "title": "TimescaleDB documentation",
+      "url": "https://docs.timescale.com/",
+      "author": "Timescale",
+      "description": "Time-series on PostgreSQL. Link not verified by the study guide; if it doesn't open, search for its title."
+    },
+    {
+      "key": "debezium",
+      "type": "link",
+      "title": "Debezium",
+      "url": "https://debezium.io/",
+      "author": "Debezium",
+      "description": "Change data capture from the database log."
+    },
+    {
+      "key": "outbox",
+      "type": "article",
+      "title": "Pattern: Transactional outbox",
+      "url": "https://microservices.io/patterns/data/transactional-outbox.html",
+      "author": "Chris Richardson",
+      "description": "Publishing events reliably with the business change."
+    },
+    {
+      "key": "postgis-docs",
+      "type": "link",
+      "title": "PostGIS documentation",
+      "url": "https://postgis.net/docs/",
+      "author": "PostGIS",
+      "description": "Spatial types, functions and indexes."
+    },
+    {
+      "key": "postgis-intro",
+      "type": "article",
+      "title": "Introduction to PostGIS",
+      "url": "https://postgis.net/workshops/postgis-intro/",
+      "author": "PostGIS",
+      "description": "Hands-on spatial SQL workshop."
+    },
+    {
+      "key": "ef-related",
+      "type": "article",
+      "title": "EF Core: Loading related data",
+      "url": "https://learn.microsoft.com/en-us/ef/core/querying/related-data/",
+      "author": "Microsoft Learn",
+      "description": "Eager, explicit and lazy loading."
+    },
+    {
+      "key": "ef-concurrency",
+      "type": "article",
+      "title": "EF Core: Handling concurrency conflicts",
+      "url": "https://learn.microsoft.com/en-us/ef/core/saving/concurrency",
+      "author": "Microsoft Learn",
+      "description": "Concurrency tokens and optimistic locking."
+    },
+    {
+      "key": "rogov",
+      "type": "book",
+      "title": "PostgreSQL 14 Internals",
+      "url": "https://edu.postgrespro.com/postgresql_internals-14_en.pdf",
+      "author": "Egor Rogov",
+      "description": "Free book on MVCC, vacuum, planning and statistics."
+    },
+    {
+      "key": "interdb",
+      "type": "book",
+      "title": "The Internals of PostgreSQL",
+      "url": "https://www.interdb.jp/pg/",
+      "author": "Hironobu Suzuki",
+      "description": "Free online book on PostgreSQL internals."
+    },
+    {
+      "key": "normalization",
+      "type": "article",
+      "title": "Database normalization",
+      "url": "https://en.wikipedia.org/wiki/Database_normalization",
+      "author": "Wikipedia",
+      "description": "Normal forms and update anomalies. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "cmu-445",
+      "type": "video",
+      "title": "CMU 15-445/645 Intro to Database Systems",
+      "url": "https://15445.courses.cs.cmu.edu/",
+      "author": "Andy Pavlo",
+      "description": "Lectures on storage, indexes, joins and transactions. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "ddia",
+      "type": "book",
+      "title": "Designing Data-Intensive Applications",
+      "url": "https://dataintensive.net/",
+      "author": "Martin Kleppmann",
+      "description": "Replication, partitioning, transactions and storage engines. Added as a standard reference; not from your notes."
+    }
+  ],
+  "questions": [
+    {
+      "prompt": "What are DDL, DML, DQL, DCL and TCL in SQL?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Five storage engines: DDL for disk, DML for memory, DQL for queues, DCL for caches, TCL for temp tables, and it is the cheapest option in practice.",
+        "Index types that PostgreSQL chooses between automatically.",
+        "Isolation levels, ordered from weakest (DDL) to strongest (TCL).",
+        "Structure (CREATE/ALTER), data changes (INSERT/UPDATE), queries (SELECT), access (GRANT), transactions (COMMIT)."
+      ],
+      "correct": 3,
+      "explanation": "DDL defines structure (`CREATE`, `ALTER`, `DROP`). DML changes data (`INSERT`, `UPDATE`, `DELETE`, `MERGE`). DQL queries (`SELECT`). DCL controls access (`GRANT`, `REVOKE`). TCL controls transactions (`BEGIN`, `COMMIT`, `ROLLBACK`, `SAVEPOINT`). In PostgreSQL even DDL is transactional, so a failed migration can roll back completely; in MySQL most DDL commits implicitly.",
+      "materials": [
+        "pg-commands",
+        "sqlbolt"
+      ]
+    },
+    {
+      "prompt": "What is the difference between WHERE and HAVING?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "WHERE filters rows before grouping and can't use aggregates; HAVING filters groups after aggregation.",
+        "HAVING only works with ORDER BY.",
+        "HAVING filters rows before grouping and WHERE filters groups afterwards, so aggregates belong in WHERE.",
+        "They are synonyms; HAVING is just the older spelling."
+      ],
+      "correct": 0,
+      "explanation": "`WHERE` filters rows before grouping and cannot use aggregates. `HAVING` filters groups after aggregation. Put every condition that can go in `WHERE` there, because it shrinks the data before the expensive grouping.\n\n```sql\nSELECT customer_id, count(*) AS n, sum(total_cents) AS spent\nFROM orders\nWHERE status = 'paid'             -- rows first\nGROUP BY customer_id\nHAVING sum(total_cents) > 100000; -- groups after\n```",
+      "materials": [
+        "pg-select",
+        "mode-having"
+      ]
+    },
+    {
+      "prompt": "In what order does a SELECT logically execute, and why can't WHERE use a column alias?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Top to bottom exactly as written, starting with SELECT.",
+        "SELECT runs first so its aliases exist everywhere; WHERE just can't use them for historical reasons, which is how PostgreSQL behaves by default.",
+        "ORDER BY runs first so rows can be filtered in sorted order.",
+        "FROM/JOIN, WHERE, GROUP BY, HAVING, windows, SELECT, DISTINCT, ORDER BY, LIMIT: aliases exist only after SELECT."
+      ],
+      "correct": 3,
+      "explanation": "`FROM` and `JOIN`, then `WHERE`, `GROUP BY`, `HAVING`, window functions, `SELECT` (expressions and aliases), `DISTINCT`, `ORDER BY`, `LIMIT/OFFSET`. That is why an alias works in `ORDER BY` but not in `WHERE`, and why window functions cannot appear in `WHERE` (wrap them in a subquery or CTE). The optimizer may physically reorder work as long as the result is the same.",
+      "materials": [
+        "pg-queries",
+        "modern-sql"
+      ]
+    },
+    {
+      "prompt": "How does NULL behave in SQL comparisons and aggregates?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "NULL = NULL is unknown, WHERE keeps only true; use IS NULL or IS NOT DISTINCT FROM; aggregates skip NULLs.",
+        "NULL is stored as 0 or an empty string depending on the column type.",
+        "Comparing with NULL raises an error.",
+        "NULL = NULL is true, like in most programming languages, and count(col) counts NULLs too."
+      ],
+      "correct": 0,
+      "explanation": "`NULL` means unknown, so `NULL = NULL` is `NULL`. Conditions are true, false or unknown, and `WHERE` keeps only true. Use `IS NULL` / `IS NOT NULL`, and `IS NOT DISTINCT FROM` for null-safe equality. Aggregates ignore NULLs (`count(col)` counts non-null; `count(*)` counts rows). `NULL` sorts last ascending in PostgreSQL by default.\n\n```sql\nSELECT NULL = NULL;                    -- NULL\nSELECT NULL IS NOT DISTINCT FROM NULL; -- true\nSELECT count(*), count(country) FROM customers; -- differ if country has NULLs\n```",
+      "materials": [
+        "pg-comparison",
+        "ms-3vl"
+      ]
+    },
+    {
+      "prompt": "In a LEFT JOIN, what happens if you filter on the right table in WHERE instead of ON?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The NULL rows for unmatched left rows fail the filter, so it silently becomes an inner join; put it in ON.",
+        "It becomes a FULL OUTER JOIN.",
+        "Nothing changes: the optimizer moves WHERE conditions into ON for outer joins, so both give the same rows, which most teams rely on in production.",
+        "PostgreSQL rejects the query."
+      ],
+      "correct": 0,
+      "explanation": "`INNER` keeps matching rows, `LEFT` keeps all left rows with NULLs where no match, `RIGHT` mirrors it, `FULL` keeps both sides, `CROSS` is the Cartesian product. A condition on the right table in `WHERE` removes the NULL rows and turns a `LEFT JOIN` into an inner join; put it in `ON` to keep unmatched left rows.\n\n```sql\n-- all customers, with only their paid orders\nSELECT c.id, o.id\nFROM customers c\nLEFT JOIN orders o ON o.customer_id = c.id AND o.status = 'paid';\n```",
+      "materials": [
+        "pg-table-expr",
+        "pgex"
+      ]
+    },
+    {
+      "prompt": "What does PostgreSQL's DISTINCT ON do?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Same as DISTINCT but faster because it skips sorting.",
+        "Removes duplicate columns rather than duplicate rows, keeping the first column with each name in the select list.",
+        "Creates a unique index on the column for the query.",
+        "Keeps the first row for each distinct value of the given expression, according to ORDER BY."
+      ],
+      "correct": 3,
+      "explanation": "`DISTINCT` removes duplicate result rows. `GROUP BY` collapses rows into groups for aggregation; every non-aggregated column must be in `GROUP BY` (unless functionally dependent on the primary key). `DISTINCT ON (x)` is PostgreSQL-specific: the first row per `x` according to `ORDER BY`.\n\n```sql\nSELECT DISTINCT ON (customer_id) customer_id, id, created_at\nFROM orders\nORDER BY customer_id, created_at DESC;  -- latest order per customer\n```",
+      "materials": [
+        "pg-select",
+        "dont-do-this"
+      ]
+    },
+    {
+      "prompt": "What is the difference between UNION and UNION ALL?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "UNION removes duplicates (extra sort or hash); UNION ALL just appends and is faster.",
+        "UNION ALL removes duplicates and UNION keeps them; the ALL means all rows are checked against each other.",
+        "UNION works only on tables with the same name.",
+        "UNION ALL also includes rows that failed the WHERE clause."
+      ],
+      "correct": 0,
+      "explanation": "`UNION` appends and removes duplicates; `UNION ALL` just appends and is faster, so use it unless you need dedupe. `INTERSECT` keeps rows in both; `EXCEPT` keeps rows in the first but not the second. Column counts and compatible types must match.\n\n```sql\nSELECT id FROM customers\nEXCEPT\nSELECT customer_id FROM orders;   -- customers without orders\n```",
+      "materials": [
+        "pg-union"
+      ]
+    },
+    {
+      "prompt": "Why do you often prefer EXISTS over a join when checking that related rows exist?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "EXISTS caches its result across queries.",
+        "A join is always rewritten as a nested loop over every row, while EXISTS is answered from the index alone.",
+        "EXISTS is a semi-join: it stops at the first match and never duplicates the outer row.",
+        "Joins cannot use indexes on the right-hand table."
+      ],
+      "correct": 2,
+      "explanation": "`EXISTS` is a semi-join: it stops at the first match and never duplicates the outer row. A join can multiply rows when the right side has several matches, so you may need `DISTINCT`. `IN (subquery)` is equivalent for non-null data and usually gets the same plan; prefer `EXISTS` for readability and NULL-safety.\n\n```sql\nSELECT c.* FROM customers c\nWHERE EXISTS (SELECT 1 FROM orders o WHERE o.customer_id = c.id AND o.status = 'paid');\n```",
+      "materials": [
+        "pg-subquery"
+      ]
+    },
+    {
+      "prompt": "How do you compute several conditional counts and sums in one pass over a table?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Use a window function with PARTITION BY each condition.",
+        "Run one query per condition and UNION ALL them, since an aggregate can only have one condition per scan.",
+        "Use GROUP BY on every condition column.",
+        "Conditional aggregation: count(*) FILTER (WHERE …) or sum(CASE WHEN … THEN x ELSE 0 END)."
+      ],
+      "correct": 3,
+      "explanation": "`CASE` is SQL's if/else and works in `SELECT`, `WHERE`, `ORDER BY` and inside aggregates. Conditional aggregation computes several metrics in one pass; PostgreSQL's `FILTER` clause is the cleaner form.\n\n```sql\nSELECT\n  count(*)                                AS total,\n  count(*) FILTER (WHERE status = 'paid') AS paid,\n  sum(CASE WHEN status = 'refunded' THEN total_cents ELSE 0 END) AS refunded_cents\nFROM orders;\n```",
+      "materials": [
+        "pg-conditional",
+        "pg-expressions",
+        "ms-filter"
+      ]
+    },
+    {
+      "prompt": "What is the difference between DELETE, TRUNCATE and DROP TABLE in PostgreSQL?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "DELETE without WHERE drops the table definition.",
+        "DELETE removes chosen rows with triggers and leaves dead tuples; TRUNCATE empties fast under a lock; DROP removes the table.",
+        "They are identical except for speed.",
+        "TRUNCATE can't be rolled back in PostgreSQL and DROP keeps the table definition, unlike DELETE which removes it, and the same holds in MySQL and SQL Server."
+      ],
+      "correct": 1,
+      "explanation": "`DELETE` removes selected rows, fires row triggers, can use `WHERE`, and leaves dead tuples for vacuum. `TRUNCATE` empties the table by dropping its data files, takes an `ACCESS EXCLUSIVE` lock, ignores row triggers, and is transactional in PostgreSQL. `DROP TABLE` removes the table and its definition. `TRUNCATE ... CASCADE` truncates referencing tables too.",
+      "materials": [
+        "pg-truncate",
+        "pg-delete"
+      ]
+    },
+    {
+      "prompt": "How do you list each employee with their manager's name from one employees table?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "You can't join a table to itself, so copy the managers into a temporary table first and join to that copy, which is how PostgreSQL behaves by default.",
+        "Use UNION between employees and employees.",
+        "A self join: join employees to itself with aliases on m.id = e.manager_id, LEFT JOIN to keep the top boss.",
+        "Use GROUP BY manager_id."
+      ],
+      "correct": 2,
+      "explanation": "Join the table to itself with aliases. For one level a self join is enough; use a recursive CTE for unlimited depth.\n\n```sql\nSELECT e.name AS employee, m.name AS manager\nFROM employees e\nLEFT JOIN employees m ON m.id = e.manager_id;\n```",
+      "materials": [
+        "pgex",
+        "pg-table-expr"
+      ]
+    },
+    {
+      "prompt": "Why is NOT IN (subquery) dangerous, and what do you use instead?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "NOT IN is limited to 1000 values.",
+        "NOT IN can't use indexes at all, so it is only slow; the results are always the same as NOT EXISTS, so no extra configuration is needed.",
+        "One NULL in the subquery makes every comparison unknown and the query returns nothing; use NOT EXISTS.",
+        "NOT IN locks the subquery's table."
+      ],
+      "correct": 2,
+      "explanation": "If the subquery returns even one `NULL`, `x NOT IN (...)` is unknown for every row and returns nothing. Use `NOT EXISTS` (null-safe, efficient anti-join) or `LEFT JOIN ... WHERE right.id IS NULL`.\n\n```sql\nSELECT c.id FROM customers c\nWHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.customer_id = c.id);\n\nSELECT 1 WHERE 1 NOT IN (2, NULL);  -- returns no rows\n```",
+      "materials": [
+        "dont-do-this",
+        "pg-subquery"
+      ]
+    },
+    {
+      "prompt": "How does a window function differ from GROUP BY?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It collapses each partition into one row like GROUP BY but lets you also select non-aggregated columns.",
+        "It runs in a separate transaction.",
+        "It computes over related rows without collapsing them, so every input row stays in the output.",
+        "It only works on date columns."
+      ],
+      "correct": 2,
+      "explanation": "A window function computes a value across a set of related rows (the window) without collapsing them. `GROUP BY` returns one row per group. Syntax: `function() OVER (PARTITION BY ... ORDER BY ... frame)`.\n\n```sql\nSELECT id, customer_id, total_cents,\n       avg(total_cents) OVER (PARTITION BY customer_id) AS customer_avg\nFROM orders;\n```",
+      "materials": [
+        "pg-window-tutorial",
+        "pgex"
+      ]
+    },
+    {
+      "prompt": "With ties, how do ROW_NUMBER, RANK and DENSE_RANK differ?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "They are aliases kept for compatibility.",
+        "DENSE_RANK only works with numeric columns.",
+        "ROW_NUMBER is unique (1,2,3), RANK repeats and skips (1,1,3), DENSE_RANK repeats without gaps (1,1,2).",
+        "RANK numbers rows uniquely, ROW_NUMBER repeats ties with gaps, and DENSE_RANK skips every second number."
+      ],
+      "correct": 2,
+      "explanation": "`ROW_NUMBER` gives unique numbers (arbitrary among ties), `RANK` gives ties the same rank and skips (1, 1, 3), `DENSE_RANK` gives ties the same rank without gaps (1, 1, 2). Use `DENSE_RANK` for \"nth highest\" questions.\n\n```sql\nSELECT name, salary,\n  row_number() OVER w, rank() OVER w, dense_rank() OVER w\nFROM employees\nWINDOW w AS (ORDER BY salary DESC);\n```",
+      "materials": [
+        "pg-window-funcs",
+        "ms-over"
+      ]
+    },
+    {
+      "prompt": "Why can sum(x) OVER (ORDER BY created_at) give tied rows the same running total?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Because sum ignores duplicates in windows.",
+        "Because ORDER BY in a window sorts descending by default.",
+        "The default frame is RANGE … CURRENT ROW, which includes peers; use ROWS for a strict row-by-row total.",
+        "Window sums are computed once per partition and copied to every row, so ties are just a display rounding."
+      ],
+      "correct": 2,
+      "explanation": "With `ORDER BY` the default frame is `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW`, which treats ties as peers (same total). Use `ROWS` for a strict running total or a moving window, and add a unique tiebreaker.\n\n```sql\nSELECT created_at, total_cents,\n  sum(total_cents) OVER (ORDER BY created_at, id\n                         ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running,\n  avg(total_cents) OVER (ORDER BY created_at, id ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS moving_avg_7\nFROM orders;\n```",
+      "materials": [
+        "pg-expressions"
+      ]
+    },
+    {
+      "prompt": "What do LAG and LEAD do?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Lock the previous or next row for update so concurrent writers wait for the current transaction.",
+        "Measure replication lag between primary and replica.",
+        "Read a value from the previous or next row in the window, without a self join.",
+        "Shift a timestamp column by one time zone."
+      ],
+      "correct": 2,
+      "explanation": "They read a value from the previous or next row in the window. Uses: difference from the previous period, time between events, detecting changes.\n\n```sql\nSELECT id, created_at,\n       created_at - lag(created_at) OVER (PARTITION BY customer_id ORDER BY created_at) AS since_prev_order\nFROM orders;\n```",
+      "materials": [
+        "pg-window-funcs"
+      ]
+    },
+    {
+      "prompt": "How do you get the latest 3 orders per customer?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Use HAVING count(*) <= 3.",
+        "ORDER BY created_at DESC LIMIT 3 on the whole table.",
+        "GROUP BY customer_id with LIMIT 3, which PostgreSQL applies to each group separately.",
+        "row_number() OVER (PARTITION BY customer ORDER BY created_at DESC) filtered to ≤ 3, or LATERAL … LIMIT 3."
+      ],
+      "correct": 3,
+      "explanation": "A window with `row_number()` filtered in an outer query; `DISTINCT ON` for N = 1; or `LATERAL` with `LIMIT`, fastest when there is an index on (group, order).\n\n```sql\nSELECT * FROM (\n  SELECT o.*, row_number() OVER (PARTITION BY customer_id ORDER BY created_at DESC) rn\n  FROM orders o) t\nWHERE rn <= 3;\n\nSELECT c.id, x.*\nFROM customers c\nCROSS JOIN LATERAL (SELECT * FROM orders o WHERE o.customer_id = c.id\n                    ORDER BY o.created_at DESC LIMIT 3) x;\n```",
+      "materials": [
+        "pg-table-expr",
+        "pgex"
+      ]
+    },
+    {
+      "prompt": "Are CTEs optimization fences in PostgreSQL?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Yes, always: every CTE is computed once into a temporary table, which is why subqueries are faster, which most teams rely on in production.",
+        "CTEs are cached across queries in the same session.",
+        "Only recursive CTEs are inlined.",
+        "Not since 12: a side-effect-free CTE used once is inlined; MATERIALIZED / NOT MATERIALIZED force it."
+      ],
+      "correct": 3,
+      "explanation": "`WITH name AS (query)` names a subquery. Before PostgreSQL 12 every CTE was materialized (a fence). From 12, a non-recursive, side-effect-free CTE used once is inlined; `MATERIALIZED` or `NOT MATERIALIZED` forces the behavior.\n\n```sql\nWITH paid AS NOT MATERIALIZED (\n  SELECT * FROM orders WHERE status = 'paid'\n)\nSELECT customer_id, sum(total_cents) FROM paid GROUP BY customer_id;\n```",
+      "materials": [
+        "pg-with",
+        "pg12"
+      ]
+    },
+    {
+      "prompt": "How does a recursive CTE walk an org chart?",
+      "tags": [
+        "SQL & Databases",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It sorts the table by manager_id and reads it in one pass.",
+        "The CTE calls itself once per row in a nested loop until a stack limit is reached, so depth is capped at 32, which is how PostgreSQL behaves by default.",
+        "An anchor (the root rows) UNION ALL a step joining the CTE to the table, repeated until no new rows; guard cycles.",
+        "It needs a PL/pgSQL loop around it."
+      ],
+      "correct": 2,
+      "explanation": "An anchor query `UNION ALL` a recursive part that refers to the CTE. The engine repeats the recursive step on the newest rows until none are produced. Guard against cycles with a path array or depth limit.\n\n```sql\nWITH RECURSIVE org AS (\n  SELECT id, name, manager_id, 0 AS depth, ARRAY[id] AS path\n  FROM employees WHERE manager_id IS NULL\n  UNION ALL\n  SELECT e.id, e.name, e.manager_id, o.depth + 1, o.path || e.id\n  FROM employees e JOIN org o ON e.manager_id = o.id\n  WHERE NOT e.id = ANY(o.path)       -- cycle guard\n)\nSELECT * FROM org ORDER BY path;\n```",
+      "materials": [
+        "pg-with",
+        "pgex"
+      ]
+    },
+    {
+      "prompt": "What does LATERAL allow in a FROM clause?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A subquery that references columns of earlier FROM items, so it runs per outer row (top-N, unnest, jsonb arrays).",
+        "Joining tables from different databases on the same server without a foreign data wrapper.",
+        "Running a subquery in parallel workers.",
+        "Joining without an ON condition."
+      ],
+      "correct": 0,
+      "explanation": "A `LATERAL` subquery may reference columns of tables listed before it, so it runs once per outer row. Uses: top-N per group, set-returning functions per row (`unnest`, `jsonb_array_elements`), computing a value once and reusing it.\n\n```sql\nSELECT o.id, i.*\nFROM orders o\nCROSS JOIN LATERAL jsonb_array_elements('[{\"sku\":\"a\"},{\"sku\":\"b\"}]'::jsonb) AS i;\n```",
+      "materials": [
+        "pg-table-expr",
+        "ms-lateral"
+      ]
+    },
+    {
+      "prompt": "Storing customer_name inside orders violates which normal form, and why?",
+      "tags": [
+        "SQL & Databases",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "BCNF only; it is fine in 3NF.",
+        "1NF, because a name is not an atomic value and must be split into first and last name columns, so no extra configuration is needed.",
+        "None; names never cause anomalies.",
+        "3NF: customer_name depends on customer_id, a non-key column, not on the order key (a transitive dependency)."
+      ],
+      "correct": 3,
+      "explanation": "1NF: atomic values, no repeating groups. 2NF: no column depends on part of a composite key. 3NF: no column depends on another non-key column. \"The key, the whole key, and nothing but the key.\" BCNF: every determinant is a candidate key. `customer_name` in `orders` depends on `customer_id`, so it violates 3NF.",
+      "materials": [
+        "normalization",
+        "cmu-445"
+      ]
+    },
+    {
+      "prompt": "When is denormalizing a schema justified, and what does it cost?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "When reads dominate and indexes aren't enough, or for snapshots; it costs drift, update anomalies and write work.",
+        "Whenever a query has more than two joins, because joins are always slower than reading duplicated columns, and it is the cheapest option in practice.",
+        "Never; denormalized schemas can't be indexed.",
+        "Only for tables under 1000 rows."
+      ],
+      "correct": 0,
+      "explanation": "Denormalize when reads dominate and joins or aggregates are too slow even with indexes, or when you need a historical snapshot. Costs: duplicated data that can drift, update anomalies, more write work. Safer forms: materialized views, summary tables, and snapshot columns that are meant to be copies (price on `order_items`). Measure first.",
+      "materials": [
+        "pg-matviews",
+        "ddia"
+      ]
+    },
+    {
+      "prompt": "Why can random UUIDv4 primary keys hurt insert performance compared with bigint identity or UUIDv7?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "UUID columns can't be indexed with B-trees.",
+        "Random values scatter inserts across the B-tree (page splits, cache misses); sequential keys append at the end.",
+        "UUIDv4 requires a network call to generate.",
+        "UUIDs are compared as strings, character by character, so every insert compares 36 bytes per index level, and the same holds in MySQL and SQL Server."
+      ],
+      "correct": 1,
+      "explanation": "Prefer a surrogate primary key plus `UNIQUE` on the natural key. `bigint GENERATED ALWAYS AS IDENTITY` is compact and index-friendly. Random UUIDv4 scatters inserts across the index; time-ordered UUIDv7 keeps inserts append-like (native `uuidv7()` in PostgreSQL 18). Use UUIDs when ids come from clients or many services, or must not leak counts.\n\n```sql\nCREATE TABLE customers (\n  id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,\n  email text NOT NULL UNIQUE\n);\n```",
+      "materials": [
+        "pg-identity",
+        "pg-uuid"
+      ]
+    },
+    {
+      "prompt": "Does PostgreSQL index a foreign key column automatically?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Only when ON DELETE CASCADE is used.",
+        "No: only the referenced key is indexed; index the referencing column or joins and parent deletes scan the child.",
+        "Only for bigint columns.",
+        "Yes, every REFERENCES clause creates an index on both sides, so adding one manually duplicates it, which is what the documentation recommends."
+      ],
+      "correct": 1,
+      "explanation": "A foreign key guarantees the referenced row exists. Actions: `NO ACTION`/`RESTRICT`, `CASCADE`, `SET NULL`, `SET DEFAULT`. PostgreSQL does not index the referencing column; add an index on every foreign key you join or delete by.\n\n```sql\nCREATE TABLE orders (\n  id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,\n  customer_id bigint NOT NULL REFERENCES customers(id) ON DELETE RESTRICT\n);\nCREATE INDEX ON orders (customer_id);\n```",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "prompt": "Why enforce business rules with database constraints and not only in application code?",
+      "tags": [
+        "SQL & Databases",
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "ORMs can't run validation code.",
+        "Constraints are needed for backups to work.",
+        "The database sees every writer (APIs, scripts, migrations, people), so it is the only place invariants always hold.",
+        "Constraints are faster than application checks, so the application validation can be removed entirely, and it is the cheapest option in practice."
+      ],
+      "correct": 2,
+      "explanation": "`NOT NULL`, `UNIQUE`, `PRIMARY KEY`, `FOREIGN KEY`, `CHECK`, and `EXCLUDE`. The database sees every writer, so invariants belong there as well as in application code. Constraints also help the planner and document the model.\n\n```sql\nALTER TABLE orders\n  ADD CONSTRAINT chk_total CHECK (total_cents >= 0),\n  ADD CONSTRAINT chk_status CHECK (status IN ('new','paid','refunded','cancelled'));\n```",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "prompt": "How do you model a many-to-many relationship between products and tags?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A junction table with foreign keys to both, a composite primary key, and an index on the second column.",
+        "A tags text column on products holding a comma-separated list, split in the application when reading, and the same holds in MySQL and SQL Server.",
+        "Two foreign keys pointing at each other.",
+        "A product_id array column on tags with no constraints."
+      ],
+      "correct": 0,
+      "explanation": "A junction table with foreign keys to both sides and a composite primary key, plus attributes of the relationship. One-to-one: the child's primary key is also a foreign key to the parent. Index the second column of the composite key for lookups from the other side.\n\n```sql\nCREATE TABLE product_tags (\n  product_id bigint REFERENCES products(id) ON DELETE CASCADE,\n  tag_id     bigint REFERENCES tags(id)     ON DELETE CASCADE,\n  PRIMARY KEY (product_id, tag_id)\n);\nCREATE INDEX ON product_tags (tag_id, product_id);\n```",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "prompt": "With soft deletes (deleted_at), how do you keep email unique among active users?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A partial unique index: UNIQUE (email) WHERE deleted_at IS NULL.",
+        "A trigger that renames deleted emails is the only way.",
+        "A CHECK constraint comparing email with other rows.",
+        "A normal UNIQUE constraint on email, because deleted rows are skipped by unique checks automatically."
+      ],
+      "correct": 0,
+      "explanation": "Soft delete adds `deleted_at`; every query must filter it (a view or RLS) and unique constraints must become partial indexes. Audit history: an append-only table fed by triggers or events. Temporal data: `tstzrange` with an exclusion constraint. Decide retention and erasure up front.\n\n```sql\nCREATE UNIQUE INDEX uq_user_email_active ON users (email) WHERE deleted_at IS NULL;\n```",
+      "materials": [
+        "pg-partial",
+        "pg-ranges"
+      ]
+    },
+    {
+      "prompt": "Which PostgreSQL types should you use for money and for points in time?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "double precision for money because it is fastest, and timestamp without time zone so values never shift.",
+        "varchar(20) for both, parsed in the application.",
+        "numeric or integer cents plus a currency for money; timestamptz for time.",
+        "The money type and text dates."
+      ],
+      "correct": 2,
+      "explanation": "Money: `numeric(12,2)` or integer minor units plus a currency code; never `float`. Time: `timestamptz`. Text: `text` (`varchar(n)` only adds a length check). Ids: `bigint` identity or `uuid`. Avoid the `money` type and numbers stored as text.\n\n```sql\nSELECT 0.1::float8 + 0.2::float8 = 0.3::float8 AS float_ok,      -- false\n       0.1::numeric + 0.2::numeric = 0.3::numeric AS numeric_ok; -- true\n```",
+      "materials": [
+        "dont-do-this",
+        "pg-numeric",
+        "pg-datetime"
+      ]
+    },
+    {
+      "prompt": "When should data go in a jsonb column instead of regular columns?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Only for primary keys.",
+        "For sparse, variable or external-shaped attributes; data you filter, join, constrain or report on gets columns.",
+        "Never; jsonb can't be indexed.",
+        "Always: jsonb is indexed and typed automatically, so it is faster and safer than separate columns, which most teams rely on in production."
+      ],
+      "correct": 1,
+      "explanation": "Use columns for data you filter, join, constrain or report on. Use `jsonb` for sparse, variable or externally shaped attributes. Costs: no type or FK enforcement, weak planner statistics, rewriting the whole value on update. Index with GIN or an expression index; promote hot keys to columns.\n\n```sql\nCREATE INDEX idx_events_payload ON events USING gin (payload jsonb_path_ops);\nSELECT * FROM events WHERE payload @> '{\"type\":\"signup\"}';\n```",
+      "materials": [
+        "pg-json",
+        "pg-json-funcs"
+      ]
+    },
+    {
+      "prompt": "What are the main ways to store a tree (hierarchy) in a relational database?",
+      "tags": [
+        "SQL & Databases",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Only adjacency lists work in SQL; every other model needs a graph database.",
+        "One table per tree level.",
+        "A JSON column with the whole tree, which is the only indexable option.",
+        "Adjacency list (parent_id + recursive CTE), materialized path (ltree), closure table, nested sets."
+      ],
+      "correct": 3,
+      "explanation": "Adjacency list (`parent_id`, simplest, query with recursive CTE), materialized path (`ltree`, fast subtree queries, harder moves), closure table (every ancestor/descendant pair, fast reads, more writes), nested sets (fast reads, expensive updates). Adjacency list plus recursive CTE is the default.",
+      "materials": [
+        "pg-ltree",
+        "pg-with"
+      ]
+    },
+    {
+      "prompt": "Which queries can a B-tree index serve?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Only queries on primary keys.",
+        "=, <, >, BETWEEN, IN, IS NULL, prefix LIKE 'abc%', and ORDER BY in index order.",
+        "Only equality; ranges and ORDER BY always need a sequential scan followed by a sort.",
+        "Only LIKE '%abc%' substring searches."
+      ],
+      "correct": 1,
+      "explanation": "A balanced tree of sorted keys pointing to rows: lookups cost O(log n) page reads, and leaves are linked so range scans and `ORDER BY` read in order. It supports `=`, `<`, `>`, `BETWEEN`, `IN`, prefix `LIKE 'abc%'` (with the right collation or operator class), and `IS NULL`.",
+      "materials": [
+        "utl-anatomy",
+        "pg-index-types",
+        "cmu-445"
+      ]
+    },
+    {
+      "prompt": "An index on (customer_id, created_at): which queries can use it efficiently?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "customer_id = ?, and customer_id = ? with a created_at range or sort; not created_at alone.",
+        "Only queries filtering on both columns with equality.",
+        "Only created_at queries, since the last column is the sort key.",
+        "Any query on either column, because PostgreSQL scans composite indexes column by column independently."
+      ],
+      "correct": 0,
+      "explanation": "The index is sorted by the first column, then the second within it, so it serves leftmost prefixes. Put equality columns first, then the range or sort column.\n\n```sql\nCREATE INDEX idx_orders_cust_created ON orders (customer_id, created_at DESC);\n```",
+      "materials": [
+        "utl-concat",
+        "pg-multicol"
+      ]
+    },
+    {
+      "prompt": "What does INCLUDE add to a PostgreSQL index?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Rows from another table, like a join index.",
+        "Non-key payload columns, so the index covers the query for an index-only scan without widening the search key.",
+        "Extra key columns that are searched after the first ones, the same as listing them in the column list, which most teams rely on in production.",
+        "A filter predicate, like a partial index."
+      ],
+      "correct": 1,
+      "explanation": "If an index contains every column the query needs, the engine answers from the index. In PostgreSQL that also needs a current visibility map (vacuumed). `INCLUDE` adds payload columns without widening the key.\n\n```sql\nCREATE INDEX idx_orders_cust_inc ON orders (customer_id) INCLUDE (total_cents);\nEXPLAIN SELECT customer_id, total_cents FROM orders WHERE customer_id = 7; -- Index Only Scan\n```",
+      "materials": [
+        "pg-ios",
+        "utl-ios"
+      ]
+    },
+    {
+      "prompt": "When is a partial index the right tool?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "When the table is too large for one index, so the index is split into parts across several disks.",
+        "When queries never use WHERE.",
+        "When queries target a small, well-defined subset (open jobs, active rows), or uniqueness among non-deleted rows.",
+        "When the column has mostly unique values."
+      ],
+      "correct": 2,
+      "explanation": "An index on a subset of rows defined by `WHERE`: smaller, cheaper to maintain, ideal for skewed data. The query's condition must imply the index predicate for the planner to use it.\n\n```sql\nCREATE INDEX idx_orders_open ON orders (created_at) WHERE status = 'new';\n```",
+      "materials": [
+        "pg-partial",
+        "utl-partial"
+      ]
+    },
+    {
+      "prompt": "Why can't WHERE date(created_at) = '2026-10-01' use an index on created_at, and how do you fix it?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Indexes on timestamptz only support equality.",
+        "The literal must be cast to timestamp first.",
+        "Wrapping the column in a function hides it from the index; compare the raw column to a half-open range.",
+        "date() is volatile so PostgreSQL never caches it; mark it IMMUTABLE and the index on created_at will be used."
+      ],
+      "correct": 2,
+      "explanation": "A sargable predicate lets the engine use an index. Functions on the column hide it. Rewrite to a range on the raw column, or create an expression index matching the expression exactly.\n\n```sql\nSELECT * FROM orders WHERE created_at >= '2026-10-01' AND created_at < '2026-10-02';\nCREATE INDEX idx_customers_lower_email ON customers (lower(email));\n```",
+      "materials": [
+        "pg-expr-index",
+        "utl-functions"
+      ]
+    },
+    {
+      "prompt": "Which PostgreSQL index type fits jsonb containment, full-text or array searches?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A plain B-tree on the whole value.",
+        "BRIN, because it summarizes each block of rows and works well for any value with many elements in it.",
+        "GIN, which indexes many values per row.",
+        "Hash, because containment is an equality test."
+      ],
+      "correct": 2,
+      "explanation": "B-tree (default, ordering and equality). Hash (equality only). GIN (many values per row: arrays, `jsonb`, full-text, trigrams). GiST (geometry, ranges, nearest neighbor, exclusion). SP-GiST (tries, quadtrees). BRIN (tiny, for huge naturally ordered tables).",
+      "materials": [
+        "pg-index-types"
+      ]
+    },
+    {
+      "prompt": "The planner ignores your index. What are common reasons?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The index name is too long.",
+        "Indexes are only used after a server restart, or after REINDEX has been run once since the table was created, which is how PostgreSQL behaves by default.",
+        "Seq scan is cheaper for many rows, stale stats, function or type cast on the column, leading wildcard, wrong column order.",
+        "The query uses lowercase keywords."
+      ],
+      "correct": 2,
+      "explanation": "Reasons: small table or low selectivity (seq scan is cheaper and the planner is right); stale statistics (`ANALYZE`); a function or cast on the column; a type mismatch; a leading wildcard; wrong composite order; `OR` across columns; collation or operator class mismatch. Check with `EXPLAIN`.",
+      "materials": [
+        "slow-query",
+        "utl-where"
+      ]
+    },
+    {
+      "prompt": "What does every extra index cost, and how do you find unused ones?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "They slow down SELECTs only.",
+        "Write work, disk, cache and lost HOT updates; find idx_scan = 0 in pg_stat_user_indexes (not backing a constraint).",
+        "Indexes cost only during CREATE INDEX.",
+        "Nothing on writes, only disk; unused indexes are dropped automatically by autovacuum after 30 days."
+      ],
+      "correct": 1,
+      "explanation": "Every index adds work to each `INSERT`, indexed `UPDATE` and `DELETE`, uses disk and cache, and can block HOT updates.\n\n```sql\nSELECT schemaname, relname, indexrelname, idx_scan, pg_size_pretty(pg_relation_size(indexrelid))\nFROM pg_stat_user_indexes\nWHERE idx_scan = 0\nORDER BY pg_relation_size(indexrelid) DESC;\n```",
+      "materials": [
+        "pg-stats"
+      ]
+    },
+    {
+      "prompt": "How do you make ILIKE '%silva%' searches fast in PostgreSQL?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It can't be indexed; cache the results instead.",
+        "A B-tree index with text_pattern_ops, which supports wildcards at both ends of the pattern.",
+        "A hash index on lower(name).",
+        "pg_trgm with a GIN or GiST trigram index (or full-text search for word-based queries)."
+      ],
+      "correct": 3,
+      "explanation": "A B-tree cannot help with a leading wildcard. Use `pg_trgm` with GIN/GiST, full-text search for words, `text_pattern_ops` for prefix search, or a search engine for heavy needs.\n\n```sql\nCREATE EXTENSION IF NOT EXISTS pg_trgm;\nCREATE INDEX idx_customers_name_trgm ON customers USING gin (name gin_trgm_ops);\nSELECT * FROM customers WHERE name ILIKE '%silva%';\n```",
+      "materials": [
+        "pg-trgm",
+        "pg-fts"
+      ]
+    },
+    {
+      "prompt": "How do you add an index to a busy production table without blocking writes?",
+      "tags": [
+        "SQL & Databases",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Create it on a replica; it is copied to the primary automatically.",
+        "Disable autovacuum while it builds.",
+        "CREATE INDEX CONCURRENTLY outside a transaction; if it fails, drop the INVALID index and retry.",
+        "Run CREATE INDEX inside a transaction with SERIALIZABLE isolation so writers keep going, which most teams rely on in production."
+      ],
+      "correct": 2,
+      "explanation": "`CREATE INDEX` blocks writes. `CONCURRENTLY` doesn't, takes longer, can't run in a transaction, and leaves an `INVALID` index on failure. Set `lock_timeout`, build in a quiet period, watch disk and I/O. `REINDEX CONCURRENTLY` rebuilds similarly.\n\n```sql\nCREATE INDEX CONCURRENTLY idx_orders_created ON orders (created_at);\nSELECT indexrelid::regclass FROM pg_index WHERE NOT indisvalid; -- failed builds\n```",
+      "materials": [
+        "pg-create-index",
+        "strong-migrations"
+      ]
+    },
+    {
+      "prompt": "What do you look for in EXPLAIN (ANALYZE, BUFFERS) output?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Only the total cost on the top line; actual times are unreliable and should be ignored.",
+        "Estimated vs actual rows gaps, seq scans on big tables, sorts spilling to disk, huge loop counts, where time goes.",
+        "The order of tables in FROM.",
+        "Whether the query uses uppercase keywords."
+      ],
+      "correct": 1,
+      "explanation": "`EXPLAIN` shows the plan with estimates. `EXPLAIN (ANALYZE, BUFFERS)` runs it and adds actual time, rows, loops and buffers. Read inside out. `ANALYZE` really executes writes, so wrap those in `BEGIN; ... ROLLBACK;`.\n\n```sql\nEXPLAIN (ANALYZE, BUFFERS)\nSELECT * FROM orders WHERE customer_id = 7 ORDER BY created_at DESC LIMIT 10;\n```",
+      "materials": [
+        "pg-explain",
+        "dalibo",
+        "utl-plans"
+      ]
+    },
+    {
+      "prompt": "What is a bitmap heap scan good for?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Reading the whole table in parallel.",
+        "Scanning tables stored as bitmaps, which is how PostgreSQL stores boolean columns.",
+        "Only for primary-key lookups returning one row.",
+        "Medium selectivity: collect row locations from one or more indexes, sort by page, read each page once."
+      ],
+      "correct": 3,
+      "explanation": "Sequential scan: read the whole table. Index scan: walk the index and fetch rows one by one. Index-only scan: answer from the index. Bitmap scan: collect locations from indexes, sort by page, read pages once; good for medium selectivity and for combining indexes with `AND`/`OR`.",
+      "materials": [
+        "pg-planner"
+      ]
+    },
+    {
+      "prompt": "When does the planner prefer a hash join over a nested loop?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Only when work_mem is set to zero.",
+        "For large unsorted inputs with an equality join: hash the smaller side and probe it with the other.",
+        "Only for joins on text columns.",
+        "Whenever an index exists on the inner table, because hashing reuses the index's internal hash values."
+      ],
+      "correct": 1,
+      "explanation": "Nested loop: probe the inner side per outer row; great with an index and few outer rows. Hash join: build a hash table of the smaller input; good for large unsorted equality joins; spills if `work_mem` is too small. Merge join: sort both sides and merge; good when inputs are already sorted.",
+      "materials": [
+        "pg-planner",
+        "cmu-445"
+      ]
+    },
+    {
+      "prompt": "Two columns like city and zip are correlated and the planner badly underestimates rows. What helps?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "VACUUM FULL on the table.",
+        "CREATE STATISTICS (dependencies) on the columns, then ANALYZE, so it stops treating them as independent.",
+        "Setting random_page_cost to zero.",
+        "A composite index on both columns, because the planner reads row estimates from index sizes, so no extra configuration is needed."
+      ],
+      "correct": 1,
+      "explanation": "The planner estimates rows from `pg_stats`. Stale or insufficient statistics produce bad plans. `ANALYZE` refreshes them; raise the statistics target for skewed columns; `CREATE STATISTICS` for correlated columns.\n\n```sql\nANALYZE orders;\nCREATE STATISTICS st_city_zip (dependencies) ON city, zip FROM addresses;\n```",
+      "materials": [
+        "pg-planner-stats",
+        "rogov"
+      ]
+    },
+    {
+      "prompt": "What is the N+1 query problem and how do you fix it?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "One query for a list then one per item (often ORM lazy loading); fix with a join, eager loading or one batched query.",
+        "A query that returns one row too many because of an off-by-one LIMIT, fixed with LIMIT n-1.",
+        "Opening one more connection than the pool allows.",
+        "A join between N+1 tables."
+      ],
+      "correct": 0,
+      "explanation": "Loading a list (1 query) and then one query per item (N), usually via lazy loading. Fix with a join or eager loading (`Include` in EF Core), a batched query, or a data loader; confirm with query logs or `pg_stat_statements`.\n\n```sql\nSELECT * FROM order_items WHERE order_id = ANY ($1::bigint[]);\n```",
+      "materials": [
+        "ef-related"
+      ]
+    },
+    {
+      "prompt": "Why is OFFSET pagination slow on deep pages, and what replaces it?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "OFFSET still reads and discards earlier rows; keyset pagination seeks after the last seen sort key via an index.",
+        "OFFSET sorts the whole table on every page; adding an index on the sort column makes deep pages free, which is what the documentation recommends.",
+        "It isn't slow; only the network is.",
+        "OFFSET disables indexes; use LIMIT alone."
+      ],
+      "correct": 0,
+      "explanation": "`OFFSET n` reads and discards n rows, and results shift when rows are inserted. Keyset pagination remembers the last sort key and asks for rows after it, so every page costs the same. Use a unique tiebreaker and a row-value comparison.\n\n```sql\nSELECT id, created_at FROM orders\nWHERE (created_at, id) < ($1, $2)\nORDER BY created_at DESC, id DESC LIMIT 20;\n```",
+      "materials": [
+        "no-offset"
+      ]
+    },
+    {
+      "prompt": "How do you find which queries to optimize first in production PostgreSQL?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Add an index to every column.",
+        "Optimize the single slowest query in the log first, since total time is dominated by the worst outlier, so no extra configuration is needed.",
+        "Run VACUUM FULL on every table.",
+        "Rank pg_stat_statements by total time (calls × mean), then EXPLAIN ANALYZE the top ones with real parameters."
+      ],
+      "correct": 3,
+      "explanation": "Find (`pg_stat_statements`, `log_min_duration_statement`, `auto_explain`), reproduce with `EXPLAIN (ANALYZE, BUFFERS)`, diagnose, fix, verify. Rank by total time, not only the slowest single query.\n\n```sql\nSELECT query, calls, round(total_exec_time) AS total_ms, round(mean_exec_time::numeric, 2) AS mean_ms\nFROM pg_stat_statements ORDER BY total_exec_time DESC LIMIT 10;\n```",
+      "materials": [
+        "pg-stat-statements",
+        "pg-auto-explain"
+      ]
+    },
+    {
+      "prompt": "Why is count(*) slow on a large PostgreSQL table?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "PostgreSQL recounts every column of every row, so count(id) is much faster than count(*), which is how PostgreSQL behaves by default.",
+        "MVCC: visibility depends on the transaction, so there is no stored exact count and it must scan.",
+        "count(*) takes an exclusive lock and waits for writers.",
+        "Because count(*) ignores indexes by design."
+      ],
+      "correct": 1,
+      "explanation": "Each row's visibility depends on the transaction, so there's no single exact count. Options: an estimate (`pg_class.reltuples`), a trigger-maintained counter, caching, a smaller filter, or a UI without totals.\n\n```sql\nSELECT reltuples::bigint AS estimate FROM pg_class WHERE relname = 'orders';\n```",
+      "materials": [
+        "slow-counting",
+        "pg-ios"
+      ]
+    },
+    {
+      "prompt": "What is the fastest way to load millions of rows into PostgreSQL?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Many parallel connections each inserting one row at a time.",
+        "COPY (or the driver's copy API), with indexes and foreign keys added after, then ANALYZE.",
+        "INSERT ... SELECT from a CSV file path.",
+        "One INSERT per row with autocommit, so each row is durable and a failure loses only one row."
+      ],
+      "correct": 1,
+      "explanation": "Use `COPY`, not row-by-row inserts. Otherwise batch many rows per statement in one transaction. For big loads: create indexes and FKs after, consider unlogged staging tables, then `ANALYZE`. For upserts, stage then `ON CONFLICT` or `MERGE`.\n\n```sql\nCOPY customers (name, country) FROM '/data/customers.csv' WITH (FORMAT csv, HEADER);\n```",
+      "materials": [
+        "pg-populate",
+        "pg-copy"
+      ]
+    },
+    {
+      "prompt": "Why can a prepared statement suddenly get a bad plan for some parameter values?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Parameters are always treated as text, so indexes are skipped.",
+        "Prepared statements can't use indexes.",
+        "Prepared statements are planned once at server start, before any statistics exist for the table.",
+        "After a few runs PostgreSQL may switch to a generic plan, which is wrong for skewed values; see plan_cache_mode."
+      ],
+      "correct": 3,
+      "explanation": "A prepared statement is parsed once and run with parameters (and prevents SQL injection). PostgreSQL plans the first executions with real values (custom plans) and may switch to a generic plan; skewed data can make it bad. Behind a transaction-mode pooler, protocol-level prepared statements need pooler support.\n\n```sql\nPREPARE by_cust (bigint) AS SELECT * FROM orders WHERE customer_id = $1;\nEXECUTE by_cust(7);\n```",
+      "materials": [
+        "pg-prepare",
+        "pg-query-config",
+        "pgbouncer"
+      ]
+    },
+    {
+      "prompt": "What does ACID stand for?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Atomicity, Consistency, Isolation, Durability.",
+        "Availability, Concurrency, Indexing, Distribution: the four properties a database cluster must provide.",
+        "Asynchronous, Consistent, Indexed, Durable.",
+        "Atomicity, Caching, Isolation, Denormalization."
+      ],
+      "correct": 0,
+      "explanation": "Atomicity: all or nothing. Consistency: valid state to valid state (constraints hold). Isolation: concurrent transactions don't see each other's partial work, to a degree set by the isolation level. Durability: committed data survives crashes (WAL flushed).",
+      "materials": [
+        "pg-tx",
+        "ddia"
+      ]
+    },
+    {
+      "prompt": "What is PostgreSQL's default isolation level, and what must you do under SERIALIZABLE?",
+      "tags": [
+        "SQL & Databases",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Repeatable Read; disable autocommit.",
+        "Read Uncommitted; nothing special.",
+        "Serializable is the default, and conflicts block until the other transaction commits, so no retries are needed.",
+        "Read Committed; under Serializable, retry the whole transaction on serialization failures (SQLSTATE 40001)."
+      ],
+      "correct": 3,
+      "explanation": "Default is Read Committed: each statement sees data committed before it started. Repeatable Read is snapshot isolation. Serializable uses SSI and aborts dangerous patterns with a serialization failure the application must retry. Read Uncommitted behaves as Read Committed.\n\n```sql\nBEGIN ISOLATION LEVEL SERIALIZABLE;\n-- ...\nCOMMIT;  -- may fail with SQLSTATE 40001: retry the whole transaction\n```",
+      "materials": [
+        "pg-iso",
+        "hermitage",
+        "jepsen"
+      ]
+    },
+    {
+      "prompt": "Two on-call doctors each check that someone else is on call, then both go off duty. Which anomaly is this?",
+      "tags": [
+        "SQL & Databases",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A deadlock.",
+        "A lost update on a single row.",
+        "Write skew: each read overlapping data, then wrote different rows, together breaking the invariant.",
+        "A dirty read, because each transaction saw the other's uncommitted update to the on-call row, which is what the documentation recommends."
+      ],
+      "correct": 2,
+      "explanation": "Dirty read: uncommitted data. Non-repeatable read: a row changes between reads. Phantom: a query returns different rows. Lost update: read-then-write overwrites. Write skew: decisions on overlapping reads with writes to different rows. Fixes: `FOR UPDATE`, atomic updates, constraints, or Serializable.",
+      "materials": [
+        "pg-iso",
+        "ddia"
+      ]
+    },
+    {
+      "prompt": "How does MVCC let readers and writers avoid blocking each other in PostgreSQL?",
+      "tags": [
+        "SQL & Databases",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Readers take shared locks that writers ignore, and writers overwrite rows in place after copying them to a log, and the same holds in MySQL and SQL Server.",
+        "Reads go to a replica while writes go to the primary.",
+        "Updates write new row versions stamped with xmin/xmax; each transaction reads versions visible to its snapshot.",
+        "All queries run single-threaded in commit order."
+      ],
+      "correct": 2,
+      "explanation": "Updates create a new row version and mark the old one (`xmin` created it, `xmax` deleted it). Each transaction reads the versions visible to its snapshot. Old versions are dead tuples cleaned by `VACUUM`: the price of MVCC is bloat and vacuum work.",
+      "materials": [
+        "pg-mvcc",
+        "interdb"
+      ]
+    },
+    {
+      "prompt": "How do several workers take jobs from a PostgreSQL table without picking the same job or blocking each other?",
+      "tags": [
+        "SQL & Databases",
+        "Async & Concurrency",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "SELECT … FOR UPDATE SKIP LOCKED LIMIT 1 inside the claiming UPDATE.",
+        "Give each worker its own copy of the table.",
+        "SELECT … FOR UPDATE NOWAIT and retry the same row in a loop until it succeeds.",
+        "Use SERIALIZABLE and let them collide."
+      ],
+      "correct": 0,
+      "explanation": "`FOR UPDATE` locks selected rows until the transaction ends. `NOWAIT` fails immediately. `SKIP LOCKED` skips locked rows, which makes a table a job queue.\n\n```sql\nWITH next AS (\n  SELECT id FROM jobs WHERE status = 'queued'\n  ORDER BY id LIMIT 1 FOR UPDATE SKIP LOCKED\n)\nUPDATE jobs SET status = 'running' FROM next WHERE jobs.id = next.id RETURNING jobs.*;\n```",
+      "materials": [
+        "pg-locking",
+        "pg-select"
+      ]
+    },
+    {
+      "prompt": "How do you prevent deadlocks between transactions?",
+      "tags": [
+        "SQL & Databases",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Raise deadlock_timeout so PostgreSQL waits long enough for the other transaction to finish first, which is how PostgreSQL behaves by default.",
+        "Use more indexes.",
+        "Run all transactions at Read Uncommitted.",
+        "Lock rows and tables in a consistent order, keep transactions short, and retry the one PostgreSQL aborts."
+      ],
+      "correct": 3,
+      "explanation": "Two transactions each hold a lock the other needs; PostgreSQL detects it after `deadlock_timeout` and aborts one. Prevent: consistent lock order, short transactions, no user interaction inside, lock what you need up front, retry. `log_lock_waits` helps investigate.",
+      "materials": [
+        "pg-locking"
+      ]
+    },
+    {
+      "prompt": "How do you implement optimistic locking in SQL?",
+      "tags": [
+        "SQL & Databases",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "SELECT … FOR UPDATE when the user opens the edit form, held until they press save.",
+        "A version column checked in the UPDATE's WHERE; zero rows affected means a conflict to reload or report (409).",
+        "An advisory lock per user.",
+        "Use SERIALIZABLE and never check affected rows."
+      ],
+      "correct": 1,
+      "explanation": "Read the version with the row; update conditionally on it. If zero rows are affected, someone else changed it. No locks are held across user think time; good for low contention.\n\n```sql\nUPDATE products\nSET stock = stock - 1, version = version + 1\nWHERE id = $1 AND version = $2;   -- 0 rows updated = conflict\n```",
+      "materials": [
+        "ef-concurrency"
+      ]
+    },
+    {
+      "prompt": "How do you make a payment insert safe against retried requests in PostgreSQL?",
+      "tags": [
+        "SQL & Databases",
+        "APIs & HTTP",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A unique idempotency key with INSERT … ON CONFLICT (key) DO NOTHING, which is atomic and race-free.",
+        "Retry until the insert succeeds twice.",
+        "Disable retries in the client.",
+        "SELECT first to see whether the key exists, then INSERT if not; both run in Read Committed so it is atomic."
+      ],
+      "correct": 0,
+      "explanation": "An upsert inserts or updates if the row exists. `ON CONFLICT` is atomic, unlike select-then-insert. With a unique idempotency key, retries and replayed messages are safe. `MERGE` (15+) handles more complex logic.\n\n```sql\nINSERT INTO payments (idempotency_key, order_id, amount_cents)\nVALUES ($1, $2, $3)\nON CONFLICT (idempotency_key) DO NOTHING\nRETURNING id;   -- no row returned means it already existed\n```",
+      "materials": [
+        "pg-insert",
+        "pg-merge"
+      ]
+    },
+    {
+      "prompt": "What are PostgreSQL advisory locks used for?",
+      "tags": [
+        "SQL & Databases",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "App-defined locks keyed by a number, e.g. only one worker runs a job; use the transaction-level variant behind poolers.",
+        "Locks on rows that are only advisory, so writers can ignore them.",
+        "Read-only locks on system catalogs.",
+        "Locks the planner suggests in EXPLAIN output, which you apply with a hint comment."
+      ],
+      "correct": 0,
+      "explanation": "Application-defined locks not tied to rows. Session locks last until released; `pg_advisory_xact_lock` releases at commit. Use for single-runner jobs or serializing per business key. Prefer the transaction-level variant with transaction-mode poolers.\n\n```sql\nSELECT pg_try_advisory_xact_lock(hashtext('nightly-report'));  -- true if acquired\n```",
+      "materials": [
+        "pg-locking"
+      ]
+    },
+    {
+      "prompt": "Why are sessions stuck \"idle in transaction\" harmful?",
+      "tags": [
+        "SQL & Databases",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "They make the WAL unreadable.",
+        "They disable indexes on the tables they read.",
+        "They are harmless: idle sessions use no resources and PostgreSQL rolls them back after a minute, which is what the documentation recommends.",
+        "They hold a snapshot (vacuum can't clean, bloat grows), may hold locks that block DDL, and use a connection."
+      ],
+      "correct": 3,
+      "explanation": "An open transaction holds its snapshot, blocking cleanup of newer dead rows, can hold locks blocking writers and DDL, and uses a connection. Defend with `idle_in_transaction_session_timeout`, `statement_timeout`, `lock_timeout`, short transactions, and monitoring.\n\n```sql\nSELECT pid, state, now() - xact_start AS xact_age, query\nFROM pg_stat_activity\nWHERE state IN ('idle in transaction', 'active') ORDER BY xact_start LIMIT 10;\n```",
+      "materials": [
+        "pg-client-config",
+        "pg-stats"
+      ]
+    },
+    {
+      "prompt": "What does VACUUM do in PostgreSQL?",
+      "tags": [
+        "SQL & Databases",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Rebuilds every index from scratch.",
+        "Deletes rows older than a retention period.",
+        "Returns all free space to the operating system and rewrites the table, which is why it locks it exclusively.",
+        "Makes dead tuples' space reusable, updates the visibility map, and freezes old transaction ids."
+      ],
+      "correct": 3,
+      "explanation": "`VACUUM` marks dead-row space reusable, updates the visibility map (enabling index-only scans), and freezes old xids. Autovacuum runs it and `ANALYZE` in the background. Tune busy tables per table. `VACUUM FULL` rewrites under an exclusive lock: avoid on live systems.\n\n```sql\nALTER TABLE orders SET (autovacuum_vacuum_scale_factor = 0.02, autovacuum_analyze_scale_factor = 0.02);\n```",
+      "materials": [
+        "pg-vacuum",
+        "rogov"
+      ]
+    },
+    {
+      "prompt": "What causes table bloat and how do you remove it online?",
+      "tags": [
+        "SQL & Databases",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Large TOAST values; fix it by running VACUUM FULL during peak hours so it finishes fastest.",
+        "Too many indexes; drop all of them.",
+        "Bloat only affects replicas.",
+        "Heavy updates/deletes, long transactions, lagging autovacuum, stale slots; fix the cause, then pg_repack or REINDEX CONCURRENTLY."
+      ],
+      "correct": 3,
+      "explanation": "Dead tuples and empty space vacuum can't reclaim or return. Causes: update/delete churn, long transactions holding snapshots, autovacuum behind, abandoned replication slots. Fixes: remove the cause, tune autovacuum, `REINDEX CONCURRENTLY`, `pg_repack`; lower `fillfactor` for HOT updates.",
+      "materials": [
+        "pg-repack",
+        "pg-reindex"
+      ]
+    },
+    {
+      "prompt": "What is transaction ID wraparound, and how do you watch for it?",
+      "tags": [
+        "SQL & Databases",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "32-bit xids wrap after ~2 billion; vacuum must freeze old rows. Monitor age(datfrozenxid) per database.",
+        "Serial primary keys overflowing int4; switch them to bigint and the problem disappears.",
+        "The WAL file counter resetting.",
+        "Timestamps rolling over in 2038."
+      ],
+      "correct": 0,
+      "explanation": "Transaction ids are 32-bit and compared in a circle, so old rows would appear to be in the future. Vacuum freezes them; if it falls behind, PostgreSQL forces aggressive vacuums and in the worst case refuses writes.\n\n```sql\nSELECT datname, age(datfrozenxid) FROM pg_database ORDER BY 2 DESC;\n```",
+      "materials": [
+        "pg-vacuum"
+      ]
+    },
+    {
+      "prompt": "What are the write-ahead log and checkpoints for?",
+      "tags": [
+        "SQL & Databases",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Checkpoints mark where replicas must resync from scratch.",
+        "The WAL stores query history for auditing, and checkpoints are saved backups taken every five minutes.",
+        "The WAL caches query results.",
+        "Changes are logged sequentially and flushed at commit for durability; checkpoints flush dirty pages so recovery replays less."
+      ],
+      "correct": 3,
+      "explanation": "Changes are appended to a log and flushed at commit; data pages are written later. After a crash the server replays the WAL. Checkpoints trade write smoothness against recovery time (`max_wal_size`, `checkpoint_timeout`). The WAL also feeds replication and PITR. `synchronous_commit = off` risks losing the last commits, not corruption.",
+      "materials": [
+        "pg-wal",
+        "pg-wal-config"
+      ]
+    },
+    {
+      "prompt": "How does physical (streaming) replication differ from logical replication?",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Logical replication is only for backups.",
+        "Physical copies WAL for the whole cluster to read-only standbys; logical publishes row changes per table across versions.",
+        "Physical replication sends SQL statements, logical replication copies the data files byte for byte.",
+        "They are two names for the same feature."
+      ],
+      "correct": 1,
+      "explanation": "Streaming replication copies WAL byte for byte: whole cluster, same major version, read-only replicas for HA and read scaling. Logical replication publishes row changes per table: different versions or schemas, CDC, zero-downtime upgrades. Abandoned slots can fill the disk. Sync waits for the standby; async doesn't.",
+      "materials": [
+        "pg-ha",
+        "pg-logical-rep",
+        "patroni"
+      ]
+    },
+    {
+      "prompt": "What do you need for point-in-time recovery in PostgreSQL?",
+      "tags": [
+        "SQL & Databases",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A physical base backup plus continuous WAL archiving, replayed up to the chosen moment.",
+        "Daily pg_dump files; restore the latest one and the database returns to the exact moment you choose.",
+        "VACUUM disabled so old rows remain.",
+        "A streaming replica, which keeps every past version of each row."
+      ],
+      "correct": 0,
+      "explanation": "`pg_dump` is portable but slow to restore. Physical backups (`pg_basebackup`, pgBackRest, Barman) plus continuous WAL archiving allow PITR: restore the base backup and replay WAL to a moment, such as before an accidental `DELETE`. Define RPO and RTO and test restores regularly.",
+      "materials": [
+        "pg-backup",
+        "pg-pitr",
+        "pgbackrest"
+      ]
+    },
+    {
+      "prompt": "Why put PgBouncer in front of PostgreSQL, and what does transaction mode change?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It replicates writes to standbys.",
+        "Each connection is a process, so pooling multiplexes clients; transaction mode frees the server connection after each transaction.",
+        "It encrypts traffic, which PostgreSQL can't.",
+        "PgBouncer caches query results, and transaction mode makes every statement its own transaction."
+      ],
+      "correct": 1,
+      "explanation": "PostgreSQL uses a process per connection; a pooler multiplexes many clients onto few server connections. Session mode holds a connection per session; transaction mode only during a transaction (session state like `SET`, session advisory locks and some prepared statements need care); statement mode is rare. Size the pool near the database's cores.",
+      "materials": [
+        "pgbouncer",
+        "conn-count"
+      ]
+    },
+    {
+      "prompt": "Which PostgreSQL metrics do you monitor?",
+      "tags": [
+        "SQL & Databases",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "CPU only, because every PostgreSQL problem shows up first as high CPU usage on the host.",
+        "Query time, sessions and waits, locks, cache hits, dead tuples and autovacuum, replication and slot lag, disk, xid age.",
+        "Only the size of the last backup.",
+        "Only the number of tables."
+      ],
+      "correct": 1,
+      "explanation": "Throughput and latency (`pg_stat_statements`), sessions and wait events, locks, cache hit ratio and I/O, dead tuples and last autovacuum, bloat, replication and slot lag, WAL growth, disk, connections, xid age, checkpoints. Alert on trends.\n\n```sql\nSELECT relname, n_live_tup, n_dead_tup, last_autovacuum FROM pg_stat_user_tables ORDER BY n_dead_tup DESC LIMIT 10;\n```",
+      "materials": [
+        "pg-stats",
+        "postgres-exporter"
+      ]
+    },
+    {
+      "prompt": "How do you add a NOT NULL rule to a big live table without a long lock?",
+      "tags": [
+        "SQL & Databases",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Add CHECK (col IS NOT NULL) NOT VALID, backfill in batches, then VALIDATE CONSTRAINT under a weaker lock.",
+        "ALTER COLUMN SET NOT NULL in a SERIALIZABLE transaction, which validates rows without locking, and it is the cheapest option in practice.",
+        "Drop and recreate the table.",
+        "Add the constraint on a replica first."
+      ],
+      "correct": 0,
+      "explanation": "A waiting `ALTER` blocks everything behind it, so set `lock_timeout` and retry. `ADD COLUMN` with a constant default is instant; build indexes `CONCURRENTLY`; add FKs `NOT VALID` then validate. Expand and contract: add, dual-write, backfill, switch reads, remove old.\n\n```sql\nSET lock_timeout = '3s';\nALTER TABLE orders ADD COLUMN currency text;\nALTER TABLE orders ADD CONSTRAINT chk_cur CHECK (currency IS NOT NULL) NOT VALID;\nALTER TABLE orders VALIDATE CONSTRAINT chk_cur; -- weaker lock\n```",
+      "materials": [
+        "strong-migrations",
+        "pg-alter-table"
+      ]
+    },
+    {
+      "prompt": "What are TOAST and fillfactor in PostgreSQL?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "TOAST is a backup format; fillfactor sets the default for NULL values.",
+        "TOAST compresses large values and moves them out of line; fillfactor leaves page space so updates stay HOT.",
+        "TOAST is the transaction log and fillfactor controls how full the WAL segments get before rotation, and the same holds in MySQL and SQL Server.",
+        "Both are index types."
+      ],
+      "correct": 1,
+      "explanation": "Data lives in 8 KB pages and a row can't span pages, so large values are compressed and moved to a TOAST table; that is why `SELECT *` on wide rows is expensive. `fillfactor` leaves free space so updates stay on the same page (HOT), reducing index churn.",
+      "materials": [
+        "pg-toast",
+        "pg-page"
+      ]
+    },
+    {
+      "prompt": "A user saves a form and the next page, read from a replica, shows old data. How do you handle it?",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Clear the browser cache.",
+        "Replication lag: route that user's reads to the primary for a short window (read-your-writes), and monitor lag.",
+        "Restart the replica.",
+        "Make every replica synchronous, which removes lag entirely at no cost to write latency."
+      ],
+      "correct": 1,
+      "explanation": "Replicas apply changes asynchronously, so a read after a write may be stale. Route read-your-writes traffic to the primary briefly, use session or token routing, accept staleness where harmless, monitor lag. Long replica queries can conflict with replay (`hot_standby_feedback`).",
+      "materials": [
+        "pg-hot-standby",
+        "ddia"
+      ]
+    },
+    {
+      "prompt": "What do you gain from range-partitioning an events table by month?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Partition pruning, cheap retention by dropping old partitions, smaller indexes; the PK must include the key.",
+        "Rows are spread across servers.",
+        "Every query becomes faster automatically, and unique constraints no longer need the partition key, so no extra configuration is needed.",
+        "Indexes are no longer needed."
+      ],
+      "correct": 0,
+      "explanation": "Benefits: pruning, cheap retention (`DROP`/`DETACH`), smaller indexes, parallel maintenance. Caveats: PK and unique indexes must include the partition key, too many partitions slow planning, it's not a substitute for indexes.\n\n```sql\nCREATE TABLE events (\n  id bigint GENERATED ALWAYS AS IDENTITY,\n  created_at timestamptz NOT NULL,\n  payload jsonb,\n  PRIMARY KEY (id, created_at)\n) PARTITION BY RANGE (created_at);\nCREATE TABLE events_2026_10 PARTITION OF events\n  FOR VALUES FROM ('2026-10-01') TO ('2026-11-01');\n```",
+      "materials": [
+        "pg-partitioning",
+        "pg-partman"
+      ]
+    },
+    {
+      "prompt": "When is sharding a database justified?",
+      "tags": [
+        "SQL & Databases",
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "When writes or storage outgrow one machine after indexes, caching, replicas, partitioning and bigger hardware.",
+        "As early as possible, because resharding later is impossible and cross-shard queries are free.",
+        "When reads are slow, since replicas can't help reads.",
+        "Whenever there are more than ten tables."
+      ],
+      "correct": 0,
+      "explanation": "Splitting data across nodes by a shard key scales writes and storage but adds cross-shard queries and transactions, resharding, hot shards and operational cost. Exhaust simpler steps first; pick a key that keeps related data together (tenant id); consider Citus or Vitess.",
+      "materials": [
+        "citus",
+        "ddia"
+      ]
+    },
+    {
+      "prompt": "When should you not cache database results?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory",
+        "System Design"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "When the data changes rarely, because the cache will never be invalidated, so no extra configuration is needed.",
+        "When the query is slow.",
+        "When the table has an index.",
+        "When staleness breaks correctness, such as balances or stock reservations."
+      ],
+      "correct": 3,
+      "explanation": "Cache-aside: read the cache, on miss read the database and fill; invalidate or update on write; TTLs; protect against stampedes. Database-side: materialized views and summary tables. Be explicit about acceptable staleness per query.",
+      "materials": [
+        "pg-matviews",
+        "ddia"
+      ]
+    },
+    {
+      "prompt": "Why is column-oriented storage better for analytics than row storage?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Column stores keep each row in one place, so single-row lookups by id are faster than in row stores, which most teams rely on in production.",
+        "Analytics scan many rows but few columns; columnar storage reads only those columns and compresses well.",
+        "Row stores can't run aggregates.",
+        "Column stores don't need disk."
+      ],
+      "correct": 1,
+      "explanation": "OLTP: many small transactions on few rows; row storage and indexes. OLAP: large scans over many rows and few columns; columnar storage compresses and reads only needed columns. Run heavy analytics on a replica or a warehouse fed by CDC, not the primary.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "prompt": "In a shared-schema multitenant database, how should indexes and keys treat tenant_id?",
+      "tags": [
+        "SQL & Databases",
+        "Security",
+        "Architecture & DDD"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Put tenant_id last in every index so queries for all tenants stay fast, and filter it in application code.",
+        "Lead indexes with tenant_id, include it in unique keys and foreign keys, and consider row-level security.",
+        "Store tenant_id only in a separate mapping table.",
+        "Leave it out of indexes; it has low cardinality."
+      ],
+      "correct": 1,
+      "explanation": "Models: shared tables with `tenant_id` (cheapest, needs strict filtering, ideally RLS), schema per tenant, database per tenant (strongest isolation). With a shared schema, lead indexes with `tenant_id`, include it in unique keys and FKs, test for leaks, and handle noisy neighbors.\n\n```sql\nCREATE TABLE campaigns (tenant_id bigint NOT NULL, id bigint NOT NULL, name text, PRIMARY KEY (tenant_id, id));\n```",
+      "materials": [
+        "pg-rls",
+        "citus"
+      ]
+    },
+    {
+      "prompt": "Which index type suits a huge append-only time-series table queried by time range?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "No index; partition pruning is enough for every query.",
+        "GIN on the timestamp.",
+        "A hash index on the timestamp, since time-range queries are equality tests on each second, which is what the documentation recommends.",
+        "BRIN: a tiny index of block ranges, effective because rows are physically ordered by time."
+      ],
+      "correct": 3,
+      "explanation": "Append-only inserts, queries by time range and entity. Partition by time, use BRIN or (entity, time) B-trees, drop old partitions, pre-aggregate rollups, compress cold data. TimescaleDB automates much of this.",
+      "materials": [
+        "pg-brin",
+        "timescale"
+      ]
+    },
+    {
+      "prompt": "Where does a single-primary PostgreSQL with synchronous replication sit in CAP terms?",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It favours consistency: during a partition it can refuse writes rather than accept divergent ones.",
+        "It favours availability: writes always succeed and conflicts are merged after the partition heals, and it is the cheapest option in practice.",
+        "CAP doesn't apply to relational databases.",
+        "It is both fully consistent and fully available during partitions."
+      ],
+      "correct": 0,
+      "explanation": "Synchronous replication favours consistency over availability during a partition. Async replicas are available but may be stale. Multi-leader and leaderless systems favour availability and need conflict resolution. Know your guarantees: linearizable writes on the primary, read-your-writes only from it.",
+      "materials": [
+        "jepsen",
+        "ddia"
+      ]
+    },
+    {
+      "prompt": "What problem does the transactional outbox pattern solve?",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The dual write: the change and its event row commit together, then a relay or CDC publishes the event.",
+        "Duplicate deliveries, so consumers no longer need idempotency.",
+        "Slow inserts: rows go into an outbox table first and are copied to the real table in batches later, which is what the documentation recommends.",
+        "Message ordering across partitions."
+      ],
+      "correct": 0,
+      "explanation": "CDC streams committed changes out of the database (logical decoding, Debezium). The outbox writes the business change and an event row in one transaction; a relay publishes it, avoiding the dual-write problem. Consumers must be idempotent because delivery is at least once.\n\n```sql\nBEGIN;\nUPDATE orders SET status = 'paid' WHERE id = 42;\nINSERT INTO outbox (aggregate_id, type, payload) VALUES (42, 'OrderPaid', '{\"id\":42}');\nCOMMIT;\n```",
+      "materials": [
+        "outbox",
+        "debezium",
+        "pg-logical-decoding"
+      ]
+    },
+    {
+      "prompt": "Which database scaling step comes first?",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability",
+        "System Design"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Move to a NoSQL database.",
+        "Shard by customer id, since the other steps only delay the inevitable and make sharding harder later, and the same holds in MySQL and SQL Server.",
+        "Add read replicas.",
+        "Measure and fix queries and indexes, before pooling, caching, bigger hardware, replicas, partitioning or sharding."
+      ],
+      "correct": 3,
+      "explanation": "1) Fix queries and indexes. 2) Pooling. 3) Cache read-heavy data. 4) Scale up. 5) Read replicas. 6) Partition large tables. 7) Offload analytics. 8) Archive cold data. 9) Shard or move workloads to specialized stores. Each step costs more than the last.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "prompt": "What is the difference between a view and a materialized view?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Views can't be queried with WHERE.",
+        "A view reruns its query every time; a materialized view stores the result and is stale until refreshed.",
+        "A materialized view reruns its query every time, while a view stores rows and must be refreshed, and the same holds in MySQL and SQL Server.",
+        "Only materialized views can join tables."
+      ],
+      "correct": 1,
+      "explanation": "A view stores a query and runs it each time. A materialized view stores the result and is refreshed on demand. `REFRESH ... CONCURRENTLY` avoids blocking readers but needs a unique index.\n\n```sql\nCREATE MATERIALIZED VIEW daily_sales AS\n  SELECT date_trunc('day', created_at) AS day, sum(total_cents) AS cents FROM orders GROUP BY 1;\nCREATE UNIQUE INDEX ON daily_sales (day);\nREFRESH MATERIALIZED VIEW CONCURRENTLY daily_sales;\n```",
+      "materials": [
+        "pg-create-matview",
+        "pg-refresh"
+      ]
+    },
+    {
+      "prompt": "When are triggers and stored functions appropriate?",
+      "tags": [
+        "SQL & Databases",
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Only for sending emails.",
+        "For all business logic, because code in the database is always faster and easier to test and version.",
+        "For data integrity and audit (updated_at, history); keep business workflows in application code.",
+        "Never; PostgreSQL triggers are deprecated."
+      ],
+      "correct": 2,
+      "explanation": "Functions put reusable logic near the data; procedures can `COMMIT` inside (11+); triggers react to changes. Costs: hidden logic, harder testing and debugging, cascades and performance surprises.\n\n```sql\nCREATE FUNCTION set_updated_at() RETURNS trigger LANGUAGE plpgsql AS $$\nBEGIN NEW.updated_at = now(); RETURN NEW; END $$;\nCREATE TRIGGER trg_orders_updated BEFORE UPDATE ON orders\n  FOR EACH ROW EXECUTE FUNCTION set_updated_at();\n```",
+      "materials": [
+        "pg-plpgsql",
+        "pg-triggers"
+      ]
+    },
+    {
+      "prompt": "In PostgreSQL jsonb, what is the difference between -> and ->>?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "They are identical.",
+        "-> returns text and ->> returns jsonb, which is why comparisons with strings need ->.",
+        "->> follows a nested path; -> reads one key.",
+        "-> returns jsonb (object or element); ->> returns the value as text."
+      ],
+      "correct": 3,
+      "explanation": "`->` returns jsonb, `->>` text, `#>` a path, `@>` containment, `?` key exists, plus SQL/JSON path. Index with GIN (`jsonb_path_ops` for `@>`) or an expression index on one key.\n\n```sql\nSELECT payload->>'email' FROM events WHERE payload @> '{\"type\":\"signup\"}';\nCREATE INDEX idx_events_type ON events ((payload->>'type'));\n```",
+      "materials": [
+        "pg-json-funcs",
+        "pg-json"
+      ]
+    },
+    {
+      "prompt": "How do you set up PostgreSQL full-text search on articles?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A B-tree on body with LIKE '%word%', which PostgreSQL rewrites into a full-text search automatically, so no extra configuration is needed.",
+        "A hash index on title.",
+        "A generated tsvector column with a GIN index, queried with @@ and websearch_to_tsquery, ranked with ts_rank.",
+        "Store each word in its own row."
+      ],
+      "correct": 2,
+      "explanation": "Documents become `tsvector` (stemmed lexemes), queries `tsquery`; `@@` matches; `ts_rank` scores. For typo tolerance and facets, a search engine.\n\n```sql\nALTER TABLE articles ADD COLUMN tsv tsvector\n  GENERATED ALWAYS AS (to_tsvector('english', coalesce(title,'') || ' ' || coalesce(body,''))) STORED;\nCREATE INDEX idx_articles_tsv ON articles USING gin (tsv);\nSELECT title FROM articles WHERE tsv @@ websearch_to_tsquery('english', 'postgres index');\n```",
+      "materials": [
+        "pg-fts",
+        "pg-generated"
+      ]
+    },
+    {
+      "prompt": "In PostGIS, how do you find stores within 5 km efficiently?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "ST_Distance(...) < 5000 on a B-tree index, since distances are plain numbers.",
+        "Load all stores and filter in the application.",
+        "Compare latitude and longitude with BETWEEN only.",
+        "ST_DWithin on a GiST-indexed geography column, not ST_Distance(...) < 5000."
+      ],
+      "correct": 3,
+      "explanation": "`geometry` is planar (fast, units by SRID); `geography` is on the spheroid in meters. SRID 4326 is WGS84 lon/lat. Index with GiST; `ST_DWithin` is index-assisted, `ST_Distance < x` isn't; `<->` orders by nearest.\n\n```sql\nCREATE INDEX idx_stores_geog ON stores USING gist (location);   -- geography(Point, 4326)\nSELECT name FROM stores\nWHERE ST_DWithin(location, ST_MakePoint(-34.88, -8.05)::geography, 5000);\n```",
+      "materials": [
+        "postgis-docs",
+        "postgis-intro"
+      ]
+    },
+    {
+      "prompt": "Why use GENERATED ALWAYS AS IDENTITY instead of serial?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "serial was removed in PostgreSQL 16.",
+        "It is standard SQL, the sequence belongs to the column, and ALWAYS blocks accidental manual ids.",
+        "Identity columns are random, so they don't leak counts.",
+        "serial is faster but limited to 32 767 rows, while identity columns have no limit at all, which is what the documentation recommends."
+      ],
+      "correct": 1,
+      "explanation": "Identity columns are the standard replacement for `serial`: the sequence is owned by the column and `ALWAYS` prevents manual ids. A generated column (`GENERATED ALWAYS AS (...) STORED`) computes values from other columns.",
+      "materials": [
+        "pg-identity",
+        "pg-generated"
+      ]
+    },
+    {
+      "prompt": "What is row-level security, and who bypasses it by default?",
+      "tags": [
+        "SQL & Databases",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Table policies decide which rows each role sees or changes; table owners and superusers bypass it unless forced.",
+        "A column permission system; only the postgres user is subject to it, so app roles are unaffected.",
+        "A replication filter.",
+        "Encryption of each row with its own key."
+      ],
+      "correct": 0,
+      "explanation": "Policies on a table decide row visibility, enforced in the database. Common for multitenancy with a session variable per request. Owners and superusers bypass unless `FORCE ROW LEVEL SECURITY`; test the overhead.\n\n```sql\nALTER TABLE campaigns ENABLE ROW LEVEL SECURITY;\nCREATE POLICY tenant_isolation ON campaigns\n  USING (tenant_id = current_setting('app.tenant_id')::bigint);\n```",
+      "materials": [
+        "pg-rls"
+      ]
+    },
+    {
+      "prompt": "What does GROUP BY ROLLUP (country, status) return?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Totals per (country, status), per country, and a grand total, in one query.",
+        "Only the grand total.",
+        "Every combination of country and status including per-status totals, the same as CUBE.",
+        "One row per country, with status ignored."
+      ],
+      "correct": 0,
+      "explanation": "`ROLLUP (a, b)` gives (a, b), (a), and the grand total; `CUBE` every combination; `GROUPING SETS` exactly the listed ones. `GROUPING()` tells subtotal rows from real NULLs.\n\n```sql\nSELECT country, status, sum(total_cents)\nFROM orders o JOIN customers c ON c.id = o.customer_id\nGROUP BY ROLLUP (country, status);\n```",
+      "materials": [
+        "pg-table-expr"
+      ]
+    },
+    {
+      "prompt": "How do you prevent double bookings of a room at the database level?",
+      "tags": [
+        "SQL & Databases",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Check for overlaps in the application before inserting.",
+        "An EXCLUDE USING gist (room_id WITH =, period WITH &&) constraint on a tstzrange column.",
+        "A UNIQUE constraint on (room_id, start_time), which also rejects overlapping intervals, which is how PostgreSQL behaves by default.",
+        "A trigger that sleeps until other inserts finish."
+      ],
+      "correct": 1,
+      "explanation": "Range types represent intervals with operators like `&&` (overlap). An exclusion constraint forbids overlapping ranges for the same resource, race-free.\n\n```sql\nCREATE EXTENSION IF NOT EXISTS btree_gist;\nCREATE TABLE bookings (\n  room_id int, period tstzrange,\n  EXCLUDE USING gist (room_id WITH =, period WITH &&)\n);\n```",
+      "materials": [
+        "pg-ranges",
+        "pg-constraints"
+      ]
+    },
+    {
+      "prompt": "How do you move old orders into an archive table in a single statement?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "ALTER TABLE orders MOVE TO orders_archive.",
+        "A data-modifying CTE: DELETE … RETURNING * feeding INSERT INTO orders_archive.",
+        "COPY the rows out and back in.",
+        "INSERT … SELECT then DELETE in two statements is the only way, since a CTE can't modify data."
+      ],
+      "correct": 1,
+      "explanation": "`RETURNING` gives back affected rows in one round trip. A data-modifying CTE chains writes. `generate_series` produces numbers or dates for calendars, gap-filling and test data.\n\n```sql\nWITH moved AS (\n  DELETE FROM orders WHERE created_at < now() - interval '2 years' RETURNING *\n)\nINSERT INTO orders_archive SELECT * FROM moved;\n\nSELECT d::date FROM generate_series('2026-10-01'::date, '2026-10-07', '1 day') d;\n```",
+      "materials": [
+        "pg-with",
+        "pg-srf"
+      ]
+    },
+    {
+      "prompt": "How do you delete duplicate customers by email, keeping the lowest id?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "SELECT DISTINCT into the same table.",
+        "DELETE FROM customers WHERE email IN (SELECT email … HAVING count(*) > 1), which keeps one row per email, and it is the cheapest option in practice.",
+        "Add the UNIQUE constraint; it removes duplicates.",
+        "Rank rows with row_number() OVER (PARTITION BY email ORDER BY id), delete rank > 1, then add UNIQUE (email)."
+      ],
+      "correct": 3,
+      "explanation": "Find duplicates with `GROUP BY ... HAVING count(*) > 1`; to delete, rank within each group and delete rank > 1. Add a unique constraint afterwards.\n\n```sql\nDELETE FROM customers c\nUSING (\n  SELECT id, row_number() OVER (PARTITION BY email ORDER BY id) AS rn FROM customers\n) d\nWHERE c.id = d.id AND d.rn > 1;\n\nALTER TABLE customers ADD CONSTRAINT uq_customers_email UNIQUE (email);\n```",
+      "materials": [
+        "leetcode-db",
+        "dedupe-wiki"
+      ]
+    },
+    {
+      "prompt": "How do you get the second-highest salary in each department, handling ties?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "max(salary) - 1 per department.",
+        "row_number() per department and keep row 2, which skips tied salaries correctly.",
+        "ORDER BY salary DESC LIMIT 1 OFFSET 1 across the whole table.",
+        "dense_rank() OVER (PARTITION BY dept_id ORDER BY salary DESC) and keep rank 2."
+      ],
+      "correct": 3,
+      "explanation": "`DENSE_RANK` handles ties. For a single value `DISTINCT` plus `OFFSET` also works, but ranking generalizes to groups.\n\n```sql\nSELECT dept_id, name, salary\nFROM (SELECT *, dense_rank() OVER (PARTITION BY dept_id ORDER BY salary DESC) AS r FROM employees) t\nWHERE r = 2;\n```",
+      "materials": [
+        "pg-window-tutorial",
+        "leetcode-db"
+      ]
+    },
+    {
+      "prompt": "How do you find the longest streak of consecutive order days (gaps and islands)?",
+      "tags": [
+        "SQL & Databases",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Use lag() and sum the differences.",
+        "Subtract row_number() from each distinct date: consecutive days share the same value, so group by it.",
+        "Sort by date and take max - min.",
+        "Self join each day to the next with LEFT JOIN and count NULLs, which gives the streak length directly."
+      ],
+      "correct": 1,
+      "explanation": "Number the distinct days and subtract the row number from the date: consecutive days produce the same constant, which identifies an island.\n\n```sql\nWITH d AS (\n  SELECT DISTINCT customer_id, created_at::date AS day FROM orders\n), g AS (\n  SELECT customer_id, day,\n         day - (row_number() OVER (PARTITION BY customer_id ORDER BY day))::int AS grp\n  FROM d\n)\nSELECT customer_id, min(day) AS streak_start, max(day) AS streak_end, count(*) AS days\nFROM g GROUP BY customer_id, grp\nORDER BY days DESC LIMIT 1;\n```",
+      "materials": [
+        "ms-over"
+      ]
+    },
+    {
+      "prompt": "How do you find moments when an account's running balance went negative?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "WHERE sum(amount) OVER (...) < 0 directly, since window functions can be filtered in WHERE.",
+        "A trigger on every insert is the only way.",
+        "sum(amount) OVER (PARTITION BY account ORDER BY posted_at, id) in a subquery, filtered balance < 0 outside.",
+        "GROUP BY account HAVING sum(amount) < 0."
+      ],
+      "correct": 2,
+      "explanation": "A window sum per account ordered by time with a deterministic tiebreaker, filtered in an outer query (windows can't appear in `WHERE`).\n\n```sql\nSELECT * FROM (\n  SELECT account_id, posted_at, amount_cents,\n         sum(amount_cents) OVER (PARTITION BY account_id ORDER BY posted_at, id) AS balance\n  FROM ledger\n) t WHERE balance < 0;\n```",
+      "materials": [
+        "pg-expressions"
+      ]
+    },
+    {
+      "prompt": "How do you pivot order totals into one column per status for each month?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "PIVOT (status), a PostgreSQL keyword.",
+        "One query per status joined with UNION.",
+        "Group by month and use sum(total) FILTER (WHERE status = …) per column (or crosstab).",
+        "GROUP BY month, status, which returns one column per status automatically, which most teams rely on in production."
+      ],
+      "correct": 2,
+      "explanation": "Conditional aggregation with `FILTER` is portable and readable; `crosstab` from `tablefunc` is the PostgreSQL alternative with a fixed column list.\n\n```sql\nSELECT date_trunc('month', created_at) AS month,\n       sum(total_cents) FILTER (WHERE status = 'paid')     AS paid,\n       sum(total_cents) FILTER (WHERE status = 'refunded') AS refunded\nFROM orders GROUP BY 1 ORDER BY 1;\n```",
+      "materials": [
+        "pg-tablefunc",
+        "ms-filter"
+      ]
+    },
+    {
+      "prompt": "How do you compute the median and 95th percentile of order totals in PostgreSQL?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "avg(total_cents) for the median and max(total_cents) * 0.95 for the 95th percentile.",
+        "ntile(100) in WHERE.",
+        "percentile_cont(0.5) and percentile_cont(0.95) WITHIN GROUP (ORDER BY total_cents).",
+        "median(total_cents), a built-in aggregate."
+      ],
+      "correct": 2,
+      "explanation": "Ordered-set aggregates: `percentile_cont` interpolates, `percentile_disc` returns an actual value.\n\n```sql\nSELECT percentile_cont(0.5) WITHIN GROUP (ORDER BY total_cents) AS median,\n       percentile_cont(0.95) WITHIN GROUP (ORDER BY total_cents) AS p95\nFROM orders;\n```",
+      "materials": [
+        "pg-aggregates"
+      ]
+    },
+    {
+      "prompt": "When do two intervals [a.start, a.end) and [b.start, b.end) overlap?",
+      "tags": [
+        "SQL & Databases",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "When a.end > b.end.",
+        "When a.start = b.start or a.end = b.end, since overlapping intervals always share an endpoint.",
+        "When a.start < b.end AND b.start < a.end (with range types, a && b).",
+        "When a.start BETWEEN b.start AND b.end only."
+      ],
+      "correct": 2,
+      "explanation": "Two ranges overlap when `a.start < b.end AND b.start < a.end`; with range types use `&&`. To merge, sort by start and begin a new group whenever a start is after the running maximum end.\n\n```sql\nSELECT a.id, b.id\nFROM bookings a JOIN bookings b\n  ON a.room_id = b.room_id AND a.id < b.id AND a.period && b.period;\n```",
+      "materials": [
+        "pg-range-funcs"
+      ]
+    },
+    {
+      "prompt": "How do you find customers who bought all of products 1, 2 and 3?",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "WHERE product_id = 1 AND product_id = 2 AND product_id = 3 on order_items.",
+        "INTERSECT of three full table scans with no filter.",
+        "WHERE product_id IN (1, 2, 3) alone.",
+        "Filter to those products, group by customer, and keep HAVING count(DISTINCT product_id) = 3."
+      ],
+      "correct": 3,
+      "explanation": "Relational division: count distinct matching products per customer and compare with the set size, or use double `NOT EXISTS`.\n\n```sql\nSELECT o.customer_id\nFROM orders o JOIN order_items i ON i.order_id = o.id\nWHERE i.product_id IN (1, 2, 3)\nGROUP BY o.customer_id\nHAVING count(DISTINCT i.product_id) = 3;\n```",
+      "materials": [
+        "sqlzoo",
+        "pgex"
+      ]
+    },
+    {
+      "prompt": "A query that was fast now takes 10 seconds. What is your method?",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Rewrite it as a stored procedure.",
+        "Increase the statement timeout.",
+        "Clarify what changed, EXPLAIN ANALYZE with real parameters, narrow (stats, plan flip, locks, bloat), mitigate, then prevent.",
+        "Add indexes on every column in the query and restart the server, then check whether it got faster."
+      ],
+      "correct": 2,
+      "explanation": "(1) Clarify: since when, which parameters, what changed. (2) Measure: `EXPLAIN (ANALYZE, BUFFERS)`, compare plans. (3) Narrow: bad estimates, plan flip, missing or bloated index, lock waits, I/O, more rows, generic plan, long transaction blocking vacuum. (4) Mitigate: `ANALYZE`, index concurrently, rewrite, cancel the blocker. (5) Prevent: latency monitoring and realistic-volume tests.",
+      "materials": [
+        "slow-query",
+        "pg-explain"
+      ]
+    },
+    {
+      "prompt": "Designing orders, payments and inventory tables: how do you stop overselling and double charging?",
+      "tags": [
+        "SQL & Databases",
+        "System Design"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Lock the whole products table on every order.",
+        "CHECK (stock >= 0) with an atomic UPDATE stock = stock - n, and a UNIQUE idempotency_key on payments.",
+        "Store stock in a cache and sync nightly.",
+        "Read the stock in the application, compare, then write the new value; payments are deduplicated by amount."
+      ],
+      "correct": 1,
+      "explanation": "State the invariants first, then enforce them with keys and constraints, and make writes idempotent and transactional.\n\n```sql\nCREATE TABLE products (\n  id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,\n  sku text NOT NULL UNIQUE,\n  stock int NOT NULL CHECK (stock >= 0)\n);\nCREATE TABLE payments (\n  id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,\n  order_id bigint NOT NULL REFERENCES orders(id),\n  idempotency_key text NOT NULL UNIQUE,\n  amount_cents bigint NOT NULL CHECK (amount_cents > 0)\n);\n-- reserve stock atomically: fails the CHECK instead of overselling\nUPDATE products SET stock = stock - $2 WHERE id = $1;\n```",
+      "materials": [
+        "pg-constraints"
+      ]
+    }
+  ]
+}

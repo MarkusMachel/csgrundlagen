@@ -1,0 +1,907 @@
+{
+  "name": "Databases: predict the output",
+  "materials": [
+    {
+      "key": "pg-savepoint",
+      "type": "article",
+      "title": "SAVEPOINT",
+      "url": "https://www.postgresql.org/docs/current/sql-savepoint.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Defining savepoints inside a transaction and rolling back to them."
+    },
+    {
+      "key": "pg-mvcc",
+      "type": "article",
+      "title": "Concurrency Control: Introduction",
+      "url": "https://www.postgresql.org/docs/current/mvcc-intro.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "How PostgreSQL uses multiversion concurrency control and snapshots."
+    },
+    {
+      "key": "pg-system-columns",
+      "type": "article",
+      "title": "System Columns",
+      "url": "https://www.postgresql.org/docs/current/ddl-system-columns.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "The hidden columns xmin, xmax, ctid and tableoid on every row."
+    },
+    {
+      "key": "pg-constraints",
+      "type": "article",
+      "title": "Constraints",
+      "url": "https://www.postgresql.org/docs/current/ddl-constraints.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "CHECK, NOT NULL, UNIQUE, primary key, foreign key and exclusion constraints."
+    },
+    {
+      "key": "pg-sequences",
+      "type": "article",
+      "title": "Sequence Manipulation Functions",
+      "url": "https://www.postgresql.org/docs/current/functions-sequence.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "nextval, currval, setval and why sequence values are never rolled back."
+    },
+    {
+      "key": "pg-insert",
+      "type": "article",
+      "title": "INSERT",
+      "url": "https://www.postgresql.org/docs/current/sql-insert.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "INSERT syntax including RETURNING and ON CONFLICT (upsert)."
+    },
+    {
+      "key": "pg-triggers",
+      "type": "article",
+      "title": "Overview of Trigger Behavior",
+      "url": "https://www.postgresql.org/docs/current/trigger-definition.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Row versus statement triggers, BEFORE and AFTER, and what return values mean."
+    },
+    {
+      "key": "pg-createview",
+      "type": "article",
+      "title": "CREATE VIEW",
+      "url": "https://www.postgresql.org/docs/current/sql-createview.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "View definitions, automatically updatable views and WITH CHECK OPTION."
+    },
+    {
+      "key": "pg-matviews",
+      "type": "article",
+      "title": "Materialized Views",
+      "url": "https://www.postgresql.org/docs/current/rules-materializedviews.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Views that store their result until refreshed."
+    },
+    {
+      "key": "pg-partitioning",
+      "type": "article",
+      "title": "Table Partitioning",
+      "url": "https://www.postgresql.org/docs/current/ddl-partitioning.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Declarative range, list and hash partitioning and row routing."
+    },
+    {
+      "key": "pg-plpgsql-errors",
+      "type": "article",
+      "title": "PL/pgSQL Control Structures",
+      "url": "https://www.postgresql.org/docs/current/plpgsql-control-structures.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Includes trapping errors with EXCEPTION blocks and GET DIAGNOSTICS."
+    },
+    {
+      "key": "pg-datatypes",
+      "type": "article",
+      "title": "Data Types",
+      "url": "https://www.postgresql.org/docs/current/datatype.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Numeric, character, date/time, JSON, array and range types."
+    },
+    {
+      "key": "pg-locking",
+      "type": "article",
+      "title": "Explicit Locking",
+      "url": "https://www.postgresql.org/docs/current/explicit-locking.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Table and row lock modes and advisory locks."
+    },
+    {
+      "key": "pg-createtable",
+      "type": "article",
+      "title": "CREATE TABLE",
+      "url": "https://www.postgresql.org/docs/current/sql-createtable.html",
+      "author": "PostgreSQL Global Development Group",
+      "description": "Table options such as temporary tables, ON COMMIT and generated columns."
+    },
+    {
+      "key": "ddia",
+      "type": "book",
+      "title": "Designing Data-Intensive Applications",
+      "url": "https://dataintensive.net/",
+      "author": "Martin Kleppmann",
+      "description": "Replication, partitioning, transactions and storage engines explained."
+    }
+  ],
+  "questions": [
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): a transaction that rolls back to a savepoint and then commits.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "CREATE TEMP TABLE t (id int);\nBEGIN;\nINSERT INTO t VALUES (1);\nSAVEPOINT a;\nINSERT INTO t VALUES (2);\nROLLBACK TO SAVEPOINT a;\nINSERT INTO t VALUES (3);\nCOMMIT;\nSELECT id FROM t ORDER BY id;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1\n3\n",
+      "explanation": "ROLLBACK TO SAVEPOINT undoes only the work done after the savepoint was set (the insert of 2). The transaction itself stays open, so the insert of 3 still happens and COMMIT makes 1 and 3 permanent.",
+      "materials": [
+        "pg-savepoint"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a savepoint is released and then the whole transaction is rolled back.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "CREATE TEMP TABLE t (id int);\nBEGIN;\nSAVEPOINT a;\nINSERT INTO t VALUES (1);\nRELEASE SAVEPOINT a;\nROLLBACK;\nSELECT count(*) FROM t;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "0\n",
+      "explanation": "RELEASE SAVEPOINT only forgets the savepoint marker and folds its work into the surrounding transaction; it does not commit anything. The final ROLLBACK discards everything since BEGIN, including the released savepoint's insert.",
+      "materials": [
+        "pg-savepoint"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): a serial column after a rolled-back insert.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "CREATE TEMP TABLE t (id serial, name text);\nINSERT INTO t (name) VALUES ('a');\nBEGIN;\nINSERT INTO t (name) VALUES ('b');\nROLLBACK;\nINSERT INTO t (name) VALUES ('c');\nSELECT id, name FROM t ORDER BY id;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1|a\n3|c\n",
+      "explanation": "A serial column takes its value from a sequence, and nextval() is never rolled back so that concurrent transactions never block each other on it. The rolled-back insert consumed 2, so the next row gets 3 and the ids have a gap.",
+      "materials": [
+        "pg-sequences"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a sequence with a small range and CYCLE.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "CREATE TEMP SEQUENCE s MINVALUE 1 MAXVALUE 3 CYCLE;\nSELECT string_agg(nextval('s')::text, ',') FROM generate_series(1, 5);\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1,2,3,1,2\n",
+      "explanation": "The sequence starts at MINVALUE 1 and counts up to MAXVALUE 3. Because CYCLE is set, the call after reaching the maximum wraps back to MINVALUE instead of raising an error, so five calls give 1,2,3,1,2.",
+      "materials": [
+        "pg-sequences"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one value per line): an identity column defined BY DEFAULT after a row was inserted with an explicit id.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "CREATE TEMP TABLE t (id int GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY, v text);\nINSERT INTO t (id, v) VALUES (1, 'manual');\nCREATE FUNCTION pg_temp.add(val text) RETURNS text LANGUAGE plpgsql AS $$\nBEGIN\n  INSERT INTO t (v) VALUES (val);\n  RETURN 'ok';\nEXCEPTION WHEN unique_violation THEN\n  RETURN 'duplicate';\nEND $$;\nSELECT pg_temp.add('x');\nSELECT pg_temp.add('y');\nSELECT max(id) FROM t;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "duplicate\nok\n2\n",
+      "explanation": "BY DEFAULT accepts an explicit id without touching the identity sequence, so the sequence still hands out 1 first. That collides with the manual row (duplicate). The failed insert still consumed 1, so the next default is 2 and succeeds. With GENERATED ALWAYS the explicit insert would have been rejected instead.",
+      "materials": [
+        "pg-sequences",
+        "pg-constraints"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): TRUNCATE ... RESTART IDENTITY versus DELETE on tables with serial ids.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "CREATE TEMP TABLE a (id serial);\nCREATE TEMP TABLE b (id serial);\nINSERT INTO a DEFAULT VALUES; INSERT INTO a DEFAULT VALUES;\nINSERT INTO b DEFAULT VALUES; INSERT INTO b DEFAULT VALUES;\nDELETE FROM a;\nTRUNCATE b RESTART IDENTITY;\nINSERT INTO a DEFAULT VALUES;\nINSERT INTO b DEFAULT VALUES;\nSELECT (SELECT id FROM a), (SELECT id FROM b);\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "3|1\n",
+      "explanation": "DELETE removes rows but leaves the owned sequence alone, so table a continues at 3. TRUNCATE ... RESTART IDENTITY also resets the sequences owned by the table's columns, so table b starts again at 1.",
+      "materials": [
+        "pg-sequences"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one value per line): a UNIQUE column receiving NULLs, with and without NULLS NOT DISTINCT.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE a (email text UNIQUE);\nCREATE TEMP TABLE b (email text UNIQUE NULLS NOT DISTINCT);\nINSERT INTO a VALUES (NULL), (NULL);\nCREATE FUNCTION pg_temp.try() RETURNS text LANGUAGE plpgsql AS $$\nBEGIN\n  INSERT INTO b VALUES (NULL), (NULL);\n  RETURN 'ok';\nEXCEPTION WHEN unique_violation THEN\n  RETURN 'unique_violation';\nEND $$;\nSELECT count(*) FROM a;\nSELECT pg_temp.try();\nSELECT count(*) FROM b;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "2\nunique_violation\n0\n",
+      "explanation": "By default NULLs are treated as distinct from each other, so a plain UNIQUE column accepts any number of them. PostgreSQL 15+ adds NULLS NOT DISTINCT, which makes the second NULL a duplicate; the whole multi-row INSERT fails, so b stays empty.",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a CHECK constraint and a NULL value.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE t (qty int CHECK (qty > 0));\nINSERT INTO t VALUES (5), (NULL);\nSELECT count(*), count(qty) FROM t;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "2|1\n",
+      "explanation": "A CHECK constraint only rejects a row when its expression is false. NULL > 0 evaluates to NULL (unknown), which counts as satisfied, so the NULL row is accepted. count(*) counts both rows, count(qty) skips the NULL. Add NOT NULL if NULL must be rejected.",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a column DEFAULT when the insert explicitly supplies NULL.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "CREATE TEMP TABLE t (id int, status text DEFAULT 'new');\nINSERT INTO t (id) VALUES (1);\nINSERT INTO t (id, status) VALUES (2, NULL);\nINSERT INTO t VALUES (3, DEFAULT);\nSELECT string_agg(coalesce(status, '<null>'), ',' ORDER BY id) FROM t;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "new,<null>,new\n",
+      "explanation": "A default is used only when the column is omitted or the DEFAULT keyword is written. An explicit NULL is a real value and is stored as-is; the default does not replace it.",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one value per line): a CHECK constraint that is NOT VALID and then validated.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "CREATE TEMP TABLE t (price int);\nINSERT INTO t VALUES (-1);\nALTER TABLE t ADD CONSTRAINT positive CHECK (price > 0) NOT VALID;\nCREATE FUNCTION pg_temp.try(cmd text) RETURNS text LANGUAGE plpgsql AS $$\nBEGIN\n  EXECUTE cmd;\n  RETURN 'ok';\nEXCEPTION WHEN check_violation THEN\n  RETURN 'check_violation';\nEND $$;\nSELECT pg_temp.try('INSERT INTO t VALUES (-2)');\nSELECT pg_temp.try('ALTER TABLE t VALIDATE CONSTRAINT positive');\nSELECT count(*) FROM t;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "check_violation\ncheck_violation\n1\n",
+      "explanation": "NOT VALID skips checking the rows that already exist, so adding the constraint succeeds despite the -1. New rows are checked immediately, so inserting -2 fails. VALIDATE CONSTRAINT scans the existing rows and fails because of the old -1, which is still the only row.",
+      "materials": [
+        "pg-constraints",
+        "pg-plpgsql-errors"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one value per line): incrementing a unique column with UPDATE, with a non-deferrable and a deferrable constraint.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "CREATE TEMP TABLE a (n int UNIQUE);\nCREATE TEMP TABLE b (n int UNIQUE DEFERRABLE INITIALLY IMMEDIATE);\nINSERT INTO a VALUES (1), (2), (3);\nINSERT INTO b VALUES (1), (2), (3);\nCREATE FUNCTION pg_temp.bump(tbl text) RETURNS text LANGUAGE plpgsql AS $$\nBEGIN\n  EXECUTE format('UPDATE %I SET n = n + 1', tbl);\n  RETURN 'ok';\nEXCEPTION WHEN unique_violation THEN\n  RETURN 'unique_violation';\nEND $$;\nSELECT pg_temp.bump('a');\nSELECT pg_temp.bump('b');\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "unique_violation\nok\n",
+      "explanation": "A non-deferrable unique constraint in PostgreSQL is checked row by row as the UPDATE proceeds: changing 1 to 2 collides with the row that still holds 2. A DEFERRABLE constraint, even INITIALLY IMMEDIATE, is checked at the end of the statement, when the values are 2,3,4 and unique again.",
+      "materials": [
+        "pg-constraints",
+        "pg-plpgsql-errors"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one value per line): a partial unique index that allows only one active row per user.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE sub (user_id int, active boolean);\nCREATE UNIQUE INDEX one_active ON sub (user_id) WHERE active;\nCREATE FUNCTION pg_temp.add(u int, a boolean) RETURNS text LANGUAGE plpgsql AS $$\nBEGIN\n  INSERT INTO sub VALUES (u, a);\n  RETURN 'ok';\nEXCEPTION WHEN unique_violation THEN\n  RETURN 'dup';\nEND $$;\nSELECT pg_temp.add(1, false) || ' ' || pg_temp.add(1, false);\nSELECT pg_temp.add(1, true) || ' ' || pg_temp.add(1, true);\nSELECT pg_temp.add(2, true);\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "ok ok\nok dup\nok\n",
+      "explanation": "A partial index only contains rows matching its WHERE clause, so uniqueness is enforced only among active rows. Any number of inactive rows per user is fine, the second active row for user 1 is rejected, and user 2 gets their own active row.",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one value per line): an exclusion constraint on integer ranges.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "CREATE TEMP TABLE booking (room int, slot int4range, EXCLUDE USING gist (slot WITH &&));\nCREATE FUNCTION pg_temp.book(r int4range) RETURNS text LANGUAGE plpgsql AS $$\nBEGIN\n  INSERT INTO booking VALUES (1, r);\n  RETURN r::text || ' ok';\nEXCEPTION WHEN exclusion_violation THEN\n  RETURN r::text || ' rejected';\nEND $$;\nSELECT pg_temp.book('[1,5)');\nSELECT pg_temp.book('[5,10)');\nSELECT pg_temp.book('[3,6)');\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "[1,5) ok\n[5,10) ok\n[3,6) rejected\n",
+      "explanation": "The exclusion constraint forbids any two rows whose slots overlap (&&). [1,5) excludes 5, so [5,10) touches but does not overlap it. [3,6) overlaps both existing ranges and is rejected with exclusion_violation.",
+      "materials": [
+        "pg-constraints",
+        "pg-datatypes"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): deleting a parent row with ON DELETE CASCADE and ON DELETE SET NULL children.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE parent (id int PRIMARY KEY);\nCREATE TEMP TABLE c1 (pid int REFERENCES parent ON DELETE CASCADE);\nCREATE TEMP TABLE c2 (pid int REFERENCES parent ON DELETE SET NULL);\nINSERT INTO parent VALUES (1), (2);\nINSERT INTO c1 VALUES (1), (1), (2);\nINSERT INTO c2 VALUES (1), (2);\nDELETE FROM parent WHERE id = 1;\nSELECT (SELECT count(*) FROM c1), (SELECT count(*) FROM c2), (SELECT count(pid) FROM c2);\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1|2|1\n",
+      "explanation": "CASCADE deletes the two c1 rows that referenced parent 1, leaving one. SET NULL keeps both c2 rows but sets the referencing column to NULL in one of them, so count(pid) sees only one non-NULL value.",
+      "materials": [
+        "pg-constraints"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): a stored generated column after an UPDATE of its inputs.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "CREATE TEMP TABLE item (\n  price numeric, qty int,\n  total numeric GENERATED ALWAYS AS (price * qty) STORED\n);\nINSERT INTO item (price, qty) VALUES (2.50, 4);\nUPDATE item SET qty = 10;\nSELECT price, qty, total FROM item;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "2.50|10|25.00\n",
+      "explanation": "A stored generated column is recomputed whenever the row is written, so after the UPDATE it reflects the new qty. numeric keeps the scale of its inputs, so 2.50 * 10 prints as 25.00.",
+      "materials": [
+        "pg-createtable",
+        "pg-datatypes"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): system columns xmin and ctid before and after an UPDATE that sets a column to its current value.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE t (id int, v int);\nINSERT INTO t VALUES (1, 10);\nCREATE TEMP TABLE before AS SELECT xmin AS x, ctid AS c FROM t;\nUPDATE t SET v = v;\nSELECT t.xmin = b.x, t.ctid = b.c FROM t, before b;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "f|f\n",
+      "explanation": "PostgreSQL's MVCC never updates a row in place: every UPDATE, even one that changes nothing, writes a new row version. The new version carries the updating transaction's id in xmin and lives at a new physical location (ctid), so both comparisons are false.",
+      "materials": [
+        "pg-mvcc",
+        "pg-system-columns"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one value per line): whether the current transaction has been assigned a transaction id yet.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "CREATE TEMP TABLE t (id int);\nBEGIN;\nSELECT pg_current_xact_id_if_assigned() IS NULL;\nSELECT count(*) FROM t;\nSELECT pg_current_xact_id_if_assigned() IS NULL;\nINSERT INTO t VALUES (1);\nSELECT pg_current_xact_id_if_assigned() IS NULL;\nCOMMIT;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "t\n0\nt\nf\n",
+      "explanation": "PostgreSQL assigns a transaction id lazily, only when the transaction first writes something. Read-only work runs with a virtual transaction id, so the function returns NULL until the INSERT forces a real xid to be allocated.",
+      "materials": [
+        "pg-mvcc",
+        "pg-system-columns"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one value per line): an exception block inside a PL/pgSQL DO block.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE t (id int);\nDO $$\nBEGIN\n  INSERT INTO t VALUES (1);\n  BEGIN\n    INSERT INTO t VALUES (2);\n    PERFORM 1 / 0;\n  EXCEPTION WHEN division_by_zero THEN\n    INSERT INTO t VALUES (3);\n  END;\nEND $$;\nSELECT id FROM t ORDER BY id;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1\n3\n",
+      "explanation": "A PL/pgSQL block with an EXCEPTION clause runs inside an implicit savepoint. When the error is caught, everything done inside that inner block (the insert of 2) is rolled back, but work done before the block (1) is kept, and the handler's insert (3) runs normally.",
+      "materials": [
+        "pg-plpgsql-errors",
+        "pg-savepoint"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): optimistic locking with a version column, applied twice with the same expected version.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE acct (id int, balance int, version int);\nINSERT INTO acct VALUES (1, 100, 1);\nCREATE FUNCTION pg_temp.withdraw(amount int, expected int) RETURNS int LANGUAGE plpgsql AS $$\nDECLARE n int;\nBEGIN\n  UPDATE acct SET balance = balance - amount, version = version + 1\n  WHERE id = 1 AND version = expected;\n  GET DIAGNOSTICS n = ROW_COUNT;\n  RETURN n;\nEND $$;\nSELECT pg_temp.withdraw(30, 1);\nSELECT pg_temp.withdraw(50, 1);\nSELECT balance, version FROM acct;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1\n0\n70|2\n",
+      "explanation": "The first update matches version 1, withdraws 30 and bumps the version to 2. The second caller still expects version 1, so its WHERE clause matches no row and ROW_COUNT is 0: that stale write is detected instead of silently overwriting. The final row is balance 70, version 2.",
+      "materials": [
+        "pg-mvcc",
+        "pg-plpgsql-errors"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): an upsert whose DO UPDATE has a WHERE clause.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE best (player text PRIMARY KEY, score int);\nINSERT INTO best VALUES ('ann', 50);\nINSERT INTO best VALUES ('ann', 40), ('bob', 10)\nON CONFLICT (player) DO UPDATE SET score = EXCLUDED.score\nWHERE best.score < EXCLUDED.score;\nINSERT INTO best VALUES ('ann', 70)\nON CONFLICT (player) DO UPDATE SET score = EXCLUDED.score\nWHERE best.score < EXCLUDED.score;\nSELECT player, score FROM best ORDER BY player;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "ann|70\nbob|10\n",
+      "explanation": "bob does not conflict and is simply inserted. For ann, the WHERE on DO UPDATE decides whether the conflicting row is updated: 40 is not higher than 50, so the row is left untouched (no error), while 70 is higher and replaces it. This keeps a running maximum.",
+      "materials": [
+        "pg-insert"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one value per line): a single upsert statement that proposes the same key twice.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "CREATE TEMP TABLE kv (k text PRIMARY KEY, v int);\nCREATE FUNCTION pg_temp.try() RETURNS text LANGUAGE plpgsql AS $$\nBEGIN\n  INSERT INTO kv VALUES ('a', 1), ('a', 2)\n  ON CONFLICT (k) DO UPDATE SET v = EXCLUDED.v;\n  RETURN 'ok';\nEXCEPTION WHEN cardinality_violation THEN\n  RETURN 'cardinality_violation';\nEND $$;\nSELECT pg_temp.try();\nSELECT count(*) FROM kv;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "cardinality_violation\n0\n",
+      "explanation": "ON CONFLICT DO UPDATE refuses to change the same row twice in one command (\"command cannot affect row a second time\"), because the result would depend on processing order. The statement fails with SQLSTATE 21000 and inserts nothing; deduplicate the input first.",
+      "materials": [
+        "pg-insert"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): a BEFORE INSERT row trigger that changes NEW.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE usr (email text);\nCREATE FUNCTION pg_temp.norm() RETURNS trigger LANGUAGE plpgsql AS $$\nBEGIN\n  NEW.email := lower(trim(NEW.email));\n  RETURN NEW;\nEND $$;\nCREATE TRIGGER norm BEFORE INSERT ON usr FOR EACH ROW EXECUTE FUNCTION pg_temp.norm();\nINSERT INTO usr VALUES ('  Ann@Example.COM ');\nSELECT email, length(email) FROM usr;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "ann@example.com|15\n",
+      "explanation": "A BEFORE row trigger runs before the row is stored and may modify NEW; whatever row it returns is what gets inserted. Here the stored value is trimmed and lowercased.",
+      "materials": [
+        "pg-triggers"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a BEFORE INSERT row trigger that returns NULL for some rows.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "CREATE TEMP TABLE t (n int);\nCREATE FUNCTION pg_temp.skip_odd() RETURNS trigger LANGUAGE plpgsql AS $$\nBEGIN\n  IF NEW.n % 2 = 1 THEN RETURN NULL; END IF;\n  RETURN NEW;\nEND $$;\nCREATE TRIGGER skip BEFORE INSERT ON t FOR EACH ROW EXECUTE FUNCTION pg_temp.skip_odd();\nINSERT INTO t SELECT generate_series(1, 5);\nSELECT count(*), string_agg(n::text, ',' ORDER BY n) FROM t;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "2|2,4\n",
+      "explanation": "Returning NULL from a BEFORE row trigger silently skips the operation for that row; no error is raised. Only the even numbers 2 and 4 are stored.",
+      "materials": [
+        "pg-triggers"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: row-level and statement-level triggers on an UPDATE that matches no rows.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "CREATE TEMP TABLE t (n int);\nCREATE TEMP TABLE log (kind text);\nINSERT INTO t VALUES (1), (2);\nCREATE FUNCTION pg_temp.log_it() RETURNS trigger LANGUAGE plpgsql AS $$\nBEGIN\n  INSERT INTO log VALUES (TG_LEVEL);\n  RETURN NULL;\nEND $$;\nCREATE TRIGGER r AFTER UPDATE ON t FOR EACH ROW EXECUTE FUNCTION pg_temp.log_it();\nCREATE TRIGGER s AFTER UPDATE ON t FOR EACH STATEMENT EXECUTE FUNCTION pg_temp.log_it();\nUPDATE t SET n = n + 1;\nUPDATE t SET n = 0 WHERE n > 100;\nSELECT string_agg(kind || ':' || c, ',' ORDER BY kind)\nFROM (SELECT kind, count(*) c FROM log GROUP BY kind) x;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "ROW:2,STATEMENT:2\n",
+      "explanation": "A row-level trigger fires once per affected row: twice for the first UPDATE and never for the second, which matches nothing. A statement-level trigger fires once per statement even when zero rows are affected, so it fires twice.",
+      "materials": [
+        "pg-triggers"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): a plain view queried before and after its base table changes.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "CREATE TEMP TABLE orders (id int, paid boolean);\nCREATE TEMP VIEW unpaid AS SELECT id FROM orders WHERE NOT paid;\nINSERT INTO orders VALUES (1, false), (2, true);\nSELECT count(*) FROM unpaid;\nUPDATE orders SET paid = false WHERE id = 2;\nSELECT count(*) FROM unpaid;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1\n2\n",
+      "explanation": "A regular view stores only its query, not data. Every time it is read the query runs against the current base table, so the update is reflected immediately.",
+      "materials": [
+        "pg-createview"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): a materialized view queried before and after REFRESH.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "code": "CREATE TABLE orders (id int);\nINSERT INTO orders VALUES (1), (2);\nCREATE MATERIALIZED VIEW order_count AS SELECT count(*) AS n FROM orders;\nINSERT INTO orders VALUES (3);\nSELECT n FROM order_count;\nREFRESH MATERIALIZED VIEW order_count;\nSELECT n FROM order_count;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "2\n3\n",
+      "explanation": "A materialized view stores the result of its query at creation time. Later changes to the base table are not visible until REFRESH MATERIALIZED VIEW re-runs the query and replaces the stored rows.",
+      "materials": [
+        "pg-matviews"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a view defined with SELECT * after a column is added to the base table.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE person (id int, name text);\nCREATE TEMP VIEW v AS SELECT * FROM person;\nALTER TABLE person ADD COLUMN email text;\nINSERT INTO person VALUES (1, 'ann', 'ann@x.io');\nSELECT * FROM v;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1|ann\n",
+      "explanation": "The * in a view definition is expanded once, when the view is created, into the columns that existed then (id, name). Columns added to the table later do not appear in the view until it is recreated.",
+      "materials": [
+        "pg-createview"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one value per line): writing through a simple view, with and without WITH CHECK OPTION.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE task (id int, done boolean);\nCREATE TEMP VIEW open_a AS SELECT * FROM task WHERE NOT done;\nCREATE TEMP VIEW open_b AS SELECT * FROM task WHERE NOT done WITH CHECK OPTION;\nCREATE FUNCTION pg_temp.try(cmd text) RETURNS text LANGUAGE plpgsql AS $$\nBEGIN\n  EXECUTE cmd;\n  RETURN 'ok';\nEXCEPTION WHEN with_check_option_violation THEN\n  RETURN 'rejected';\nEND $$;\nSELECT pg_temp.try('INSERT INTO open_a VALUES (1, true)');\nSELECT pg_temp.try('INSERT INTO open_b VALUES (2, true)');\nSELECT (SELECT count(*) FROM task) || ' in table, ' || (SELECT count(*) FROM open_a) || ' visible';\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "ok\nrejected\n1 in table, 0 visible\n",
+      "explanation": "Simple single-table views are automatically updatable, so inserting through open_a works even though the new row does not match the view's WHERE and immediately disappears from it. WITH CHECK OPTION makes the view reject rows that it would not show.",
+      "materials": [
+        "pg-createview",
+        "pg-plpgsql-errors"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): rows routed into list partitions, then one row's partition key is updated.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE ev (id int, region text) PARTITION BY LIST (region);\nCREATE TEMP TABLE ev_eu PARTITION OF ev FOR VALUES IN ('eu');\nCREATE TEMP TABLE ev_us PARTITION OF ev FOR VALUES IN ('us');\nCREATE TEMP TABLE ev_other PARTITION OF ev DEFAULT;\nINSERT INTO ev VALUES (1, 'eu'), (2, 'us'), (3, 'apac');\nUPDATE ev SET region = 'us' WHERE id = 1;\nSELECT id, tableoid::regclass FROM ev ORDER BY id;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1|ev_us\n2|ev_us\n3|ev_other\n",
+      "explanation": "Inserts into the partitioned parent are routed by the partition key; 'apac' matches no list and goes to the DEFAULT partition. Updating the key of row 1 moves it to the partition that now matches (internally a delete plus insert). tableoid::regclass shows which partition physically holds each row.",
+      "materials": [
+        "pg-partitioning",
+        "pg-system-columns"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): adding 0.1 and 0.2 as double precision and as numeric.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "SELECT 0.1::float8 + 0.2::float8 = 0.3::float8, 0.1::numeric + 0.2::numeric = 0.3::numeric;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "f|t\n",
+      "explanation": "double precision is binary floating point; 0.1 and 0.2 have no exact binary representation, and their sum is not the same double as 0.3. numeric stores exact decimal digits, so the comparison holds. Use numeric for money.",
+      "materials": [
+        "pg-datatypes"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): integer range literals with different bound styles.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "SELECT '[1,4]'::int4range, '(0,4)'::int4range, '[1,4]'::int4range = '[1,5)'::int4range, upper('[1,4]'::int4range);\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "[1,5)|[1,4)|t|5\n",
+      "explanation": "Discrete range types like int4range are stored in canonical form with an inclusive lower and exclusive upper bound. [1,4] becomes [1,5) and (0,4) becomes [1,4). Because both spellings normalize to the same value they compare equal, and upper() returns the exclusive bound 5.",
+      "materials": [
+        "pg-datatypes"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one value per line): a too-long string cast to varchar(3) versus inserted into a varchar(3) column.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE t (code varchar(3));\nSELECT 'abcdef'::varchar(3);\nCREATE FUNCTION pg_temp.try() RETURNS text LANGUAGE plpgsql AS $$\nBEGIN\n  INSERT INTO t VALUES ('abcdef');\n  RETURN 'ok';\nEXCEPTION WHEN string_data_right_truncation THEN\n  RETURN 'too long';\nEND $$;\nSELECT pg_temp.try();\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "abc\ntoo long\n",
+      "explanation": "An explicit cast to varchar(n) silently truncates, as the SQL standard requires. Assigning a longer value to a varchar(n) column is an error instead (unless the extra characters are all spaces), so the insert fails.",
+      "materials": [
+        "pg-datatypes",
+        "pg-plpgsql-errors"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): a temporary table with the same name as a permanent table.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TABLE note (txt text);\nINSERT INTO note VALUES ('permanent');\nCREATE TEMP TABLE note (txt text);\nINSERT INTO note VALUES ('temp');\nSELECT txt FROM note;\nSELECT txt FROM public.note;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "temp\npermanent\n",
+      "explanation": "The session's temporary schema (pg_temp) is searched before the schemas in search_path, so an unqualified name resolves to the temporary table and hides the permanent one. Schema-qualifying the name (public.note) reaches the permanent table.",
+      "materials": [
+        "pg-createtable"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one value per line): taking the same session-level advisory lock twice and unlocking it.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "code": "SELECT pg_try_advisory_lock(42) AND pg_try_advisory_lock(42);\nSELECT pg_advisory_unlock(42);\nSELECT count(*) FROM pg_locks WHERE locktype = 'advisory' AND pid = pg_backend_pid();\nSELECT pg_advisory_unlock(42);\nSELECT count(*) FROM pg_locks WHERE locktype = 'advisory' AND pid = pg_backend_pid();\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "t\nt\n1\nt\n0\n",
+      "explanation": "Session-level advisory locks are re-entrant: the same session can acquire a lock it already holds, and each acquisition is counted. The lock is only really released after as many unlocks as locks, so after the first unlock it is still held, and after the second it is gone.",
+      "materials": [
+        "pg-locking"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one value per line): a temporary table created with ON COMMIT DELETE ROWS.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE scratch (id int) ON COMMIT DELETE ROWS;\nBEGIN;\nINSERT INTO scratch VALUES (1), (2);\nSELECT count(*) FROM scratch;\nCOMMIT;\nSELECT count(*) FROM scratch;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "2\n0\n",
+      "explanation": "ON COMMIT DELETE ROWS keeps the temporary table's definition for the whole session but empties it at the end of every transaction. Inside the transaction both rows are visible; after COMMIT the table is still there but empty.",
+      "materials": [
+        "pg-createtable"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a multi-row INSERT in which the last row violates the primary key.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "CREATE TEMP TABLE t (id int PRIMARY KEY);\nINSERT INTO t VALUES (1);\nCREATE FUNCTION pg_temp.try() RETURNS text LANGUAGE plpgsql AS $$\nBEGIN\n  INSERT INTO t VALUES (2), (3), (1);\n  RETURN 'ok';\nEXCEPTION WHEN unique_violation THEN\n  RETURN 'failed';\nEND $$;\nSELECT pg_temp.try() || ', rows: ' || (SELECT count(*) FROM t);\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "failed, rows: 1\n",
+      "explanation": "Every SQL statement is atomic: if any row fails, the whole statement's effects are undone. Rows 2 and 3 were already written when the duplicate 1 was hit, but they are rolled back together with it, leaving only the original row.",
+      "materials": [
+        "pg-constraints",
+        "pg-plpgsql-errors"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one value per line): setval with and without the is_called flag.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "CREATE TEMP SEQUENCE s;\nSELECT setval('s', 10);\nSELECT nextval('s');\nSELECT setval('s', 10, false);\nSELECT nextval('s');\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "10\n11\n10\n10\n",
+      "explanation": "setval returns the value it set. With the default is_called = true the sequence behaves as if 10 had already been handed out, so nextval returns 11. With is_called = false the next nextval returns exactly 10.",
+      "materials": [
+        "pg-sequences"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one row per line, columns separated by |): rows routed into range partitions at the boundary values.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "code": "CREATE TEMP TABLE m (id int, v int) PARTITION BY RANGE (v);\nCREATE TEMP TABLE m_low PARTITION OF m FOR VALUES FROM (0) TO (10);\nCREATE TEMP TABLE m_high PARTITION OF m FOR VALUES FROM (10) TO (20);\nINSERT INTO m VALUES (1, 0), (2, 9), (3, 10), (4, 19);\nSELECT id, tableoid::regclass FROM m ORDER BY id;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "1|m_low\n2|m_low\n3|m_high\n4|m_high\n",
+      "explanation": "A range partition's lower bound is inclusive and its upper bound exclusive, so FROM (0) TO (10) holds 0 through 9 and the value 10 belongs to the next partition. Adjacent partitions can share a bound without overlapping.",
+      "materials": [
+        "pg-partitioning",
+        "pg-system-columns"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one value per line): inserting a child row before its parent, with an immediate and with a deferred foreign key.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE parent (id int PRIMARY KEY);\nCREATE TEMP TABLE c_now (pid int REFERENCES parent);\nCREATE TEMP TABLE c_later (pid int REFERENCES parent DEFERRABLE INITIALLY DEFERRED);\nCREATE FUNCTION pg_temp.try(tbl text, k int) RETURNS text LANGUAGE plpgsql AS $$\nBEGIN\n  EXECUTE format('INSERT INTO %I VALUES (%s)', tbl, k);\n  INSERT INTO parent VALUES (k);\n  RETURN 'ok';\nEXCEPTION WHEN foreign_key_violation THEN\n  RETURN 'fk violation';\nEND $$;\nSELECT pg_temp.try('c_now', 1);\nSELECT pg_temp.try('c_later', 2);\nSELECT count(*) FROM parent;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "fk violation\nok\n1\n",
+      "explanation": "A normal foreign key is checked at the end of each statement, so the child insert fails because parent 1 does not exist yet (and the block's work is rolled back). An INITIALLY DEFERRED key is checked only at commit, by which time parent 2 has been inserted, so it succeeds and parent holds just row 2.",
+      "materials": [
+        "pg-constraints",
+        "pg-plpgsql-errors"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: two BEFORE INSERT triggers on the same table, both modifying the row.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "CREATE TEMP TABLE t (s text);\nCREATE FUNCTION pg_temp.add_x() RETURNS trigger LANGUAGE plpgsql AS $$\nBEGIN NEW.s := NEW.s || 'x'; RETURN NEW; END $$;\nCREATE FUNCTION pg_temp.add_y() RETURNS trigger LANGUAGE plpgsql AS $$\nBEGIN NEW.s := NEW.s || 'y'; RETURN NEW; END $$;\nCREATE TRIGGER zeta BEFORE INSERT ON t FOR EACH ROW EXECUTE FUNCTION pg_temp.add_x();\nCREATE TRIGGER alpha BEFORE INSERT ON t FOR EACH ROW EXECUTE FUNCTION pg_temp.add_y();\nINSERT INTO t VALUES ('-');\nSELECT s FROM t;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "-yx\n",
+      "explanation": "When several triggers of the same kind fire for the same event, PostgreSQL runs them in alphabetical order of trigger name, not creation order. alpha (adds y) runs before zeta (adds x), and each sees the NEW row returned by the previous one.",
+      "materials": [
+        "pg-triggers"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one value per line): REFRESH MATERIALIZED VIEW CONCURRENTLY with and without a unique index.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "code": "CREATE TABLE sales (region text, amount int);\nINSERT INTO sales VALUES ('eu', 10), ('us', 20);\nCREATE MATERIALIZED VIEW totals AS SELECT region, sum(amount) AS s FROM sales GROUP BY region;\nCREATE FUNCTION pg_temp.refresh() RETURNS text LANGUAGE plpgsql AS $$\nBEGIN\n  REFRESH MATERIALIZED VIEW CONCURRENTLY totals;\n  RETURN 'refreshed';\nEXCEPTION WHEN others THEN\n  RETURN 'error';\nEND $$;\nINSERT INTO sales VALUES ('eu', 5);\nSELECT pg_temp.refresh();\nSELECT s FROM totals WHERE region = 'eu';\nCREATE UNIQUE INDEX ON totals (region);\nSELECT pg_temp.refresh();\nSELECT s FROM totals WHERE region = 'eu';\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "error\n10\nrefreshed\n15\n",
+      "explanation": "CONCURRENTLY refreshes without blocking readers by computing the new result and diffing it against the old rows, which requires a unique index on the materialized view to match rows. Without one the refresh fails and the stale 10 remains; after creating the index the refresh succeeds and shows 15.",
+      "materials": [
+        "pg-matviews"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output (one value per line): a row's xmax before and after SELECT ... FOR UPDATE in the same transaction.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "CREATE TEMP TABLE t (id int);\nINSERT INTO t VALUES (1);\nBEGIN;\nSELECT xmax = '0'::xid FROM t;\nSELECT id FROM t FOR UPDATE;\nSELECT xmax::text = pg_current_xact_id()::text FROM t;\nCOMMIT;\n",
+      "codeLanguage": "sql",
+      "expectedOutput": "t\n1\nt\n",
+      "explanation": "xmax is 0 for a live, unlocked row. PostgreSQL records row locks in the tuple itself: SELECT ... FOR UPDATE writes the locking transaction's id into xmax (with a flag meaning locked, not deleted), which is also why taking the lock forces the transaction to get a real xid. The row stays visible.",
+      "materials": [
+        "pg-system-columns",
+        "pg-locking"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: replaying a write-ahead log after a crash, applying only committed transactions.",
+      "tags": [
+        "SQL & Databases",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "code": "const log = [\n  { tx: 1, op: \"set\", key: \"a\", val: 1 },\n  { tx: 2, op: \"set\", key: \"b\", val: 2 },\n  { tx: 1, op: \"commit\" },\n  { tx: 3, op: \"set\", key: \"a\", val: 3 },\n  { tx: 2, op: \"set\", key: \"a\", val: 4 },\n  { tx: 3, op: \"commit\" },\n  // crash: tx 2 never committed\n];\nconst committed = new Set(log.filter(e => e.op === \"commit\").map(e => e.tx));\nconst db = {};\nfor (const e of log) {\n  if (e.op === \"set\" && committed.has(e.tx)) db[e.key] = e.val;\n}\nconsole.log(JSON.stringify(db));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "{\"a\":3}\n",
+      "explanation": "Recovery first finds which transactions have a commit record (1 and 3), then redoes their writes in log order. Transaction 1 sets a=1, transaction 3 then sets a=3. Every write of the uncommitted transaction 2 (b=2 and a=4) is ignored, so b never appears.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a lock manager that grants shared (S) and exclusive (X) locks on one row.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\ntype lock struct {\n\ttx   int\n\tmode string\n}\n\nfunc main() {\n\theld := []lock{}\n\trequests := []lock{{1, \"S\"}, {2, \"S\"}, {3, \"X\"}, {1, \"X\"}}\n\tfor _, r := range requests {\n\t\tok := true\n\t\tfor _, h := range held {\n\t\t\tif h.tx != r.tx && (h.mode == \"X\" || r.mode == \"X\") {\n\t\t\t\tok = false\n\t\t\t}\n\t\t}\n\t\tif ok {\n\t\t\theld = append(held, r)\n\t\t\tfmt.Printf(\"T%d %s granted\\n\", r.tx, r.mode)\n\t\t} else {\n\t\t\tfmt.Printf(\"T%d %s waits\\n\", r.tx, r.mode)\n\t\t}\n\t}\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "T1 S granted\nT2 S granted\nT3 X waits\nT1 X waits\n",
+      "explanation": "Shared locks are compatible with each other, so T1 and T2 can both read. An exclusive lock conflicts with any lock held by another transaction: T3 must wait, and T1 cannot upgrade to X while T2 still holds S. This is why two readers that both try to upgrade can deadlock.",
+      "materials": [
+        "ddia",
+        "pg-locking"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: the height of a B-tree index versus a binary search tree holding one million keys.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "code": "function levels(fanout, keys) {\n  let height = 1, capacity = fanout;\n  while (capacity < keys) {\n    capacity *= fanout;\n    height++;\n  }\n  return height;\n}\nconsole.log(levels(500, 1_000_000), levels(100, 1_000_000), levels(2, 1_000_000));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "3 3 20\n",
+      "explanation": "Each level multiplies the number of reachable keys by the fan-out. With 500 or 100 children per page, three levels already cover a million keys (100^3 = 1,000,000), so a lookup reads about three pages. A binary tree needs 2^20 > 1,000,000, i.e. 20 levels and up to 20 random reads, which is why databases use wide B-trees.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: how many of 100 keys change shard when hash-mod-N sharding doubles from 4 to 8 shards, and where the moved keys go.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tmoved := 0\n\tdest := map[int]int{}\n\tfor key := 0; key < 100; key++ {\n\t\tif key%4 != key%8 {\n\t\t\tmoved++\n\t\t\tdest[key%8-key%4]++\n\t\t}\n\t}\n\tfmt.Println(\"moved:\", moved, \"stayed:\", 100-moved)\n\tfmt.Println(\"each moved key went to old shard + 4:\", dest[4] == moved)\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "moved: 48 stayed: 52\neach moved key went to old shard + 4: true\n",
+      "explanation": "A key moves when key mod 8 differs from key mod 4, which happens when key mod 8 is 4 to 7. Of 0..99, keys 0..95 split evenly (48 of 96 move), and 96..99 have key mod 8 of 0..3 so they stay: 48 move, 52 stay. Every moved key goes from shard s to shard s + 4, so each old shard splits in two. That is why doubling (and splitting partitions) is the cheap way to grow mod-N sharding; adding a single shard instead moves about (N-1)/N of all keys.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a CLOCK (second-chance) buffer replacement policy with three frames.",
+      "tags": [
+        "SQL & Databases",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "code": "const frames = [];   // { page, ref }\nlet hand = 0;\nconst evicted = [];\nfor (const page of [1, 2, 3, 1, 4, 5]) {\n  const hit = frames.find(f => f.page === page);\n  if (hit) { hit.ref = 1; continue; }\n  if (frames.length < 3) { frames.push({ page, ref: 1 }); continue; }\n  while (frames[hand].ref === 1) {   // give a second chance\n    frames[hand].ref = 0;\n    hand = (hand + 1) % 3;\n  }\n  evicted.push(frames[hand].page);\n  frames[hand] = { page, ref: 1 };\n  hand = (hand + 1) % 3;\n}\nconsole.log(\"evicted:\", evicted.join(\",\"));\nconsole.log(\"frames:\", frames.map(f => f.page).join(\",\"));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "evicted: 1,2\nframes: 4,5,3\n",
+      "explanation": "After 1,2,3 load (all ref=1), the hit on 1 only sets its bit again. For 4 the hand sweeps all three frames clearing bits, comes back to frame 0 and evicts 1, even though 1 was just used: CLOCK only approximates LRU. For 5 the hand is at frame 1, whose bit is now 0, so 2 is evicted immediately.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a two-phase commit coordinator collecting votes from three participants.",
+      "tags": [
+        "SQL & Databases",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "code": "function commit(votes) {\n  // phase 1: prepare\n  const allYes = Object.values(votes).every(v => v === \"yes\");\n  const decision = allYes ? \"COMMIT\" : \"ABORT\";\n  // phase 2: tell every participant the same decision\n  return decision + \" -> \" + Object.keys(votes).map(p => `${p}:${decision.toLowerCase()}`).join(\" \");\n}\nconsole.log(commit({ orders: \"yes\", stock: \"yes\", billing: \"yes\" }));\nconsole.log(commit({ orders: \"yes\", stock: \"no\", billing: \"yes\" }));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "COMMIT -> orders:commit stock:commit billing:commit\nABORT -> orders:abort stock:abort billing:abort\n",
+      "explanation": "In two-phase commit the coordinator may decide COMMIT only if every participant voted yes in the prepare phase. A single no vote forces ABORT, and the coordinator then sends that same decision to every participant, including the ones that voted yes, so all of them end in the same state.",
+      "materials": [
+        "ddia"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an MVCC visibility check of row versions against a snapshot.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "code": "package main\n\nimport \"fmt\"\n\ntype version struct {\n\tval        string\n\txmin, xmax int // xmax 0 = not deleted\n}\n\n// snapshot: xids < 100 are finished unless listed in active; xids >= 100 are in the future.\nvar active = map[int]bool{95: true}\n\nfunc committedForMe(x int) bool { return x < 100 && !active[x] }\n\nfunc main() {\n\trows := []version{{\"a\", 90, 0}, {\"b\", 95, 0}, {\"c\", 80, 92}, {\"d\", 85, 95}, {\"e\", 101, 0}}\n\tfor _, r := range rows {\n\t\tvisible := committedForMe(r.xmin) && (r.xmax == 0 || !committedForMe(r.xmax))\n\t\tfmt.Print(r.val, \"=\", visible, \" \")\n\t}\n\tfmt.Println()\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "a=true b=false c=false d=true e=false \n",
+      "explanation": "A version is visible if the transaction that created it had committed when the snapshot was taken, and the transaction that deleted it (if any) had not. b was created by 95, still running, so it is invisible. c was deleted by finished transaction 92. d's deleter 95 is still running, so d is still visible. e was created after the snapshot (xid 101). (This simplified model treats every finished xid as committed.)",
+      "materials": [
+        "pg-mvcc",
+        "ddia"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: deadlock detection by finding a cycle in a waits-for graph.",
+      "tags": [
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\t// waitsFor[t] = transaction that t is waiting on (0 = not waiting)\n\twaitsFor := map[int]int{1: 2, 2: 3, 3: 1, 4: 1, 5: 0}\n\tfor _, start := range []int{4, 5} {\n\t\tseen := map[int]bool{}\n\t\tt := start\n\t\tfor t != 0 && !seen[t] {\n\t\t\tseen[t] = true\n\t\t\tt = waitsFor[t]\n\t\t}\n\t\tif t == 0 {\n\t\t\tfmt.Printf(\"T%d: no deadlock\\n\", start)\n\t\t} else {\n\t\t\tfmt.Printf(\"T%d: reaches cycle at T%d\\n\", start, t)\n\t\t}\n\t}\n}\n",
+      "codeLanguage": "go",
+      "expectedOutput": "T4: reaches cycle at T1\nT5: no deadlock\n",
+      "explanation": "Following T4's wait edges gives 4 -> 1 -> 2 -> 3 -> 1; T1 is the first transaction seen twice, so the walk entered the cycle 1 -> 2 -> 3 -> 1 there. T4 is not part of the deadlock itself but is stuck behind it until the database aborts one cycle member. T5 waits on nothing (0), so the walk ends without a cycle.",
+      "materials": [
+        "ddia",
+        "pg-locking"
+      ]
+    }
+  ]
+}
