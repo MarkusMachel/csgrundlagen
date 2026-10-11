@@ -6,6 +6,7 @@ import { CodeBlock, InlineText, Spinner } from '@/shared/ui';
 import { formatRelative } from '@/shared/utils/relativeTime';
 import { parseRichText, type RichSegment } from '@/shared/utils/richText';
 import { randomSeed } from '@/shared/utils/shuffle';
+import { useAuthStore } from '@/stores/useAuthStore';
 
 import { canSubmit, correctAnswerOf } from '../grading';
 import { shuffledOptionOrder } from '../optionShuffle';
@@ -83,6 +84,7 @@ export function QuestionCard({
   // feed-mode local answer + submission result
   const [localAnswer, setLocalAnswer] = useState<AnswerValue | undefined>(undefined);
   const submitAnswer = useSubmitAnswer(question.id, question);
+  const isAdmin = useAuthStore((s) => s.user?.role === 'admin');
   const submitted = submitAnswer.isSuccess;
 
   // scissors strike-outs: session-only by design (§15)
@@ -131,8 +133,9 @@ export function QuestionCard({
   // design challenges are answered on their own board page
   const showSubmit = mode === 'feed' && question.type !== 'flashcard' && question.type !== 'design';
   // Practice keeps explanations reachable as the user goes (§15 open decision).
+  // Admins always see it, so they can check content without answering.
   const explanationRevealed =
-    mode === 'review' || submitted || (mode === 'test' && testMode === 'practice');
+    isAdmin || mode === 'review' || submitted || (mode === 'test' && testMode === 'practice');
   const hideRevealingTabs = isExam;
   const answersDisabled = mode === 'review' || (mode === 'feed' && submitted);
 
