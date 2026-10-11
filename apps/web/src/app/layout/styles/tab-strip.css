@@ -4,8 +4,14 @@
   display: flex;
   align-self: stretch;
   align-items: stretch;
+  /* still scrolls sideways when the tabs don't fit, but without a visible
+     scrollbar: the active tab's accent line is the only line here */
   overflow-x: auto;
-  scrollbar-width: thin;
+  scrollbar-width: none;
+}
+
+.tabstrip::-webkit-scrollbar {
+  display: none;
 }
 
 .file-tab {
