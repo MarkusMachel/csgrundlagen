@@ -1,0 +1,1123 @@
+{
+  "name": "System design: put in order",
+  "materials": [
+    {
+      "key": "primer",
+      "type": "article",
+      "title": "The System Design Primer",
+      "url": "https://github.com/donnemartin/system-design-primer",
+      "author": "Donne Martin",
+      "description": "Community guide covering DNS, CDNs, caching, availability math, latency numbers and back-of-the-envelope estimates."
+    },
+    {
+      "key": "rfc9293",
+      "type": "article",
+      "title": "RFC 9293: Transmission Control Protocol (TCP)",
+      "url": "https://www.rfc-editor.org/rfc/rfc9293",
+      "author": "IETF",
+      "description": "The current TCP specification, including the connection state machine, handshake and close."
+    },
+    {
+      "key": "rfc8446",
+      "type": "article",
+      "title": "RFC 8446: The Transport Layer Security (TLS) Protocol Version 1.3",
+      "url": "https://www.rfc-editor.org/rfc/rfc8446",
+      "author": "IETF",
+      "description": "The TLS 1.3 specification: handshake messages, key schedule and version history."
+    },
+    {
+      "key": "rfc6749",
+      "type": "article",
+      "title": "RFC 6749: The OAuth 2.0 Authorization Framework",
+      "url": "https://www.rfc-editor.org/rfc/rfc6749",
+      "author": "IETF",
+      "description": "Defines OAuth 2.0 roles, the authorization code grant and refresh tokens."
+    },
+    {
+      "key": "rfc7636",
+      "type": "article",
+      "title": "RFC 7636: Proof Key for Code Exchange (PKCE)",
+      "url": "https://www.rfc-editor.org/rfc/rfc7636",
+      "author": "IETF",
+      "description": "Extends the authorization code grant with a code verifier and code challenge."
+    },
+    {
+      "key": "kafka",
+      "type": "link",
+      "title": "Apache Kafka documentation",
+      "url": "https://kafka.apache.org/documentation/",
+      "author": "Apache Software Foundation",
+      "description": "Official Kafka docs: replication, producers, consumers, consumer groups and transactions."
+    },
+    {
+      "key": "fowler-cb",
+      "type": "article",
+      "title": "CircuitBreaker",
+      "url": "https://martinfowler.com/bliki/CircuitBreaker.html",
+      "author": "Martin Fowler",
+      "description": "Explains the closed, open and half-open states of a circuit breaker."
+    },
+    {
+      "key": "aws-backoff",
+      "type": "article",
+      "title": "Timeouts, retries, and backoff with jitter",
+      "url": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+      "author": "Marc Brooker (Amazon Builders' Library)",
+      "description": "How Amazon caps exponential backoff and adds jitter to retries."
+    },
+    {
+      "key": "sre-risk",
+      "type": "article",
+      "title": "Embracing Risk (Site Reliability Engineering, ch. 3)",
+      "url": "https://sre.google/sre-book/embracing-risk/",
+      "author": "Google SRE",
+      "description": "Availability targets, downtime budgets and error budgets."
+    },
+    {
+      "key": "mdn-http",
+      "type": "link",
+      "title": "HTTP | MDN",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP",
+      "author": "MDN Web Docs",
+      "description": "Reference for HTTP messages, caching, CORS, protocol upgrades and HTTP versions."
+    },
+    {
+      "key": "saga",
+      "type": "article",
+      "title": "Pattern: Saga",
+      "url": "https://microservices.io/patterns/data/saga.html",
+      "author": "Chris Richardson",
+      "description": "A sequence of local transactions undone by compensating transactions on failure."
+    },
+    {
+      "key": "bluegreen",
+      "type": "article",
+      "title": "BlueGreenDeployment",
+      "url": "https://martinfowler.com/bliki/BlueGreenDeployment.html",
+      "author": "Martin Fowler",
+      "description": "Two production environments and a router switch for releases and rollback."
+    },
+    {
+      "key": "raft",
+      "type": "link",
+      "title": "The Raft Consensus Algorithm",
+      "url": "https://raft.github.io/",
+      "author": "Diego Ongaro and John Ousterhout",
+      "description": "Raft paper, visualization and explanation of leader election and log replication."
+    },
+    {
+      "key": "2pc",
+      "type": "article",
+      "title": "Two-phase commit protocol",
+      "url": "https://en.wikipedia.org/wiki/Two-phase_commit_protocol",
+      "author": "Wikipedia",
+      "description": "The prepare (voting) and commit phases of atomic commit, and its blocking failure mode."
+    },
+    {
+      "key": "token-bucket",
+      "type": "article",
+      "title": "Token bucket",
+      "url": "https://en.wikipedia.org/wiki/Token_bucket",
+      "author": "Wikipedia",
+      "description": "Rate limiting where tokens refill at a fixed rate up to a bucket capacity."
+    }
+  ],
+  "questions": [
+    {
+      "type": "ordering",
+      "prompt": "A laptop looks up `www.example.com` and nothing is cached anywhere. Put the places the query goes in order, first to last.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The stub resolver in the laptop's OS",
+        "The recursive resolver (ISP or 8.8.8.8)",
+        "A root name server",
+        "The `.com` TLD name server",
+        "The authoritative server for `example.com`"
+      ],
+      "explanation": "The OS stub resolver hands the question to a recursive resolver, which does the legwork. With an empty cache it asks a root server, which refers it to the `.com` TLD servers, which refer it to the name servers for `example.com`. Only the authoritative server holds the actual record. Each step is a referral down the DNS delegation tree, so the order can't change.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the segments of a TCP connection setup in order, first to last.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Client sends `SYN`",
+        "Server replies `SYN-ACK`",
+        "Client sends `ACK`",
+        "Client sends its first data segment"
+      ],
+      "explanation": "The three-way handshake: the client's `SYN` carries its initial sequence number, the server's `SYN-ACK` acknowledges it and carries the server's own, and the client's `ACK` acknowledges that. Only after this (without TCP Fast Open) does application data flow, which is why a new connection costs one round trip before the request.",
+      "materials": [
+        "rfc9293"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Host A closes a TCP connection first, and host B acknowledges A's `FIN` before sending its own. Put the steps in order, first to last.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A sends `FIN`",
+        "B sends `ACK` for A's `FIN`",
+        "B sends its own `FIN`",
+        "A sends `ACK` for B's `FIN`",
+        "A waits in `TIME-WAIT` for 2×MSL"
+      ],
+      "explanation": "Each direction is closed separately. A's `FIN` closes A→B and B acknowledges it. B can keep sending until it is done, then sends its own `FIN`, which A acknowledges. The side that closed first (A) then sits in `TIME-WAIT` for twice the maximum segment lifetime so stray segments die out and a lost final `ACK` can be resent.",
+      "materials": [
+        "rfc9293"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A client opens a TCP connection, then closes it first; the server acknowledges the client's `FIN` before sending its own. Put the client's TCP states in order, first to last.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`SYN-SENT`",
+        "`ESTABLISHED`",
+        "`FIN-WAIT-1`",
+        "`FIN-WAIT-2`",
+        "`TIME-WAIT`"
+      ],
+      "explanation": "Sending `SYN` moves the client to `SYN-SENT`; receiving `SYN-ACK` and replying `ACK` makes it `ESTABLISHED`. Sending its `FIN` moves it to `FIN-WAIT-1`; the server's `ACK` moves it to `FIN-WAIT-2`; the server's `FIN` (which the client acknowledges) moves it to `TIME-WAIT`. (A simultaneous close would go through `CLOSING` instead, which the prompt rules out.)",
+      "materials": [
+        "rfc9293"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A server accepts a TCP connection, and the client is the one that closes it first. Put the server's TCP states in order, first to last.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`LISTEN`",
+        "`SYN-RECEIVED`",
+        "`ESTABLISHED`",
+        "`CLOSE-WAIT`",
+        "`LAST-ACK`"
+      ],
+      "explanation": "A passive open puts the server in `LISTEN`. Receiving `SYN` and sending `SYN-ACK` moves it to `SYN-RECEIVED`; the client's `ACK` makes it `ESTABLISHED`. When the client's `FIN` arrives the server acknowledges it and enters `CLOSE-WAIT` until the application closes; it then sends its own `FIN` and waits in `LAST-ACK` for the final `ACK`. Many sockets stuck in `CLOSE-WAIT` usually mean the app never closes them.",
+      "materials": [
+        "rfc9293"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these TLS 1.3 full-handshake messages in the order they are sent, first to last.",
+      "tags": [
+        "System Design",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`ClientHello`",
+        "`ServerHello`",
+        "Server `Certificate`",
+        "Server `CertificateVerify`",
+        "Server `Finished`"
+      ],
+      "explanation": "The client opens with `ClientHello` (including its key share). `ServerHello` completes the key exchange, and everything after it is encrypted. The server then sends `EncryptedExtensions` (not listed), its `Certificate`, a `CertificateVerify` signature over the transcript proving it holds the private key, and its `Finished` MAC. The client's own `Finished` comes after all of these.",
+      "materials": [
+        "rfc8446"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these TLS 1.3 key-schedule secrets in the order they are derived, first to last.",
+      "tags": [
+        "System Design",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Early Secret",
+        "Handshake Secret",
+        "Master Secret",
+        "`client_application_traffic_secret_0`",
+        "`client_application_traffic_secret_1` (after `KeyUpdate`)"
+      ],
+      "explanation": "The TLS 1.3 key schedule is a chain of HKDF-Extract steps. The Early Secret comes from the PSK (or zeros). Mixing in the (EC)DHE shared secret gives the Handshake Secret, and extracting again gives the Master Secret. The first application traffic secrets are derived from the Master Secret, and each `KeyUpdate` derives the next generation from the current one.",
+      "materials": [
+        "rfc8446"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these operations in order of latency, fastest to slowest.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "L1 cache reference",
+        "Main memory reference",
+        "SSD random read",
+        "Round trip within one data centre",
+        "Packet round trip California to Netherlands"
+      ],
+      "explanation": "Using the well-known latency table: L1 is about 0.5 ns, RAM about 100 ns, an SSD random read about 16-150 µs, a round trip inside a data centre about 500 µs, and a California-Netherlands round trip about 150 ms. Each step is roughly two or more orders of magnitude slower, which is why caching and avoiding cross-region calls matter so much.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Using the classic 'latency numbers every programmer should know' table, put these in order, fastest to slowest.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Branch mispredict",
+        "Mutex lock/unlock",
+        "Compress 1 KB with Zippy",
+        "Read 1 MB sequentially from memory",
+        "Hard-disk seek"
+      ],
+      "explanation": "In the table: branch mispredict about 5 ns, mutex lock/unlock about 25 ns, compressing 1 KB with Zippy (Snappy) a few microseconds, reading 1 MB sequentially from RAM about 250 µs, and a disk seek about 10 ms. The gaps are big enough that newer hardware hasn't changed the order.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these availability targets in order of allowed downtime, most to least.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "99.9% per year",
+        "99.99% per year",
+        "99.9% per 30-day month",
+        "99% per day",
+        "99.999% per year"
+      ],
+      "explanation": "Allowed downtime = (1 - availability) × window. 99.9% of a year: 0.001 × 8,760 h = 8.76 h. 99.99% of a year: 52.6 min. 99.9% of 30 days: 0.001 × 43,200 min = 43.2 min. 99% of a day: 0.01 × 1,440 min = 14.4 min. 99.999% of a year: 5.26 min. The window matters as much as the number of nines.",
+      "materials": [
+        "sre-risk",
+        "primer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Assuming independent failures, put these setups in order of availability, highest to lowest.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Two 99.9% replicas in parallel (either can serve)",
+        "One 99.99% service",
+        "A 99.99% service behind a 99.9% load balancer",
+        "Three 99.9% services called in series",
+        "One 99% service"
+      ],
+      "explanation": "Parallel: 1 - 0.001² = 99.9999%. Single: 99.99%. Series multiplies: 0.9999 × 0.999 ≈ 99.89%. Three in series: 0.999³ ≈ 99.70%. Last is 99%. Redundancy raises availability; each extra dependency in series lowers it.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these amounts of data in order, smallest to largest.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "1 million rows of 500 bytes",
+        "1 GiB",
+        "1 billion 32-bit integers",
+        "100 million 64-byte keys",
+        "One day of 100 writes/s at 1 KB each"
+      ],
+      "explanation": "1M × 500 B = 500 MB. 1 GiB = 2^30 B ≈ 1.07 GB. 1B × 4 B = 4 GB. 100M × 64 B = 6.4 GB. 100/s × 86,400 s × 1 KB ≈ 8.64 GB. Converting everything to bytes and powers of ten is the core move of back-of-the-envelope sizing.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "How long does it take to move 1 TB at each of these rates? Order them fastest to slowest.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "NVMe SSD at 3 GB/s",
+        "10 Gbit/s network link",
+        "Hard disk at 200 MB/s",
+        "1 Gbit/s network link",
+        "100 Mbit/s network link"
+      ],
+      "explanation": "1 TB = 10^12 bytes. At 3 GB/s: about 333 s. 10 Gbit/s is 1.25 GB/s: 800 s. 200 MB/s: 5,000 s. 1 Gbit/s is 125 MB/s: 8,000 s. 100 Mbit/s: 80,000 s (about 22 hours). The trap is bits vs bytes: divide a link's bit rate by 8.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these traffic levels in order of average requests per second, lowest to highest.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "1 million requests per day",
+        "50 requests per second",
+        "10,000 requests per minute",
+        "1 billion requests per 30-day month",
+        "100 million requests per day"
+      ],
+      "explanation": "A day has 86,400 s. 1M/day ≈ 11.6/s. 50/s is given. 10,000/min ≈ 167/s. 1B / 2,592,000 s ≈ 386/s. 100M/day ≈ 1,157/s. A handy rule: 1M per day is about 12 per second.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these numbers in order, smallest to largest.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Highest TCP port number",
+        "Seconds in a day",
+        "Seconds in a year",
+        "Largest signed 32-bit integer",
+        "Number of IPv4 addresses"
+      ],
+      "explanation": "65,535 ports; 86,400 seconds per day; about 31.5 million seconds per year; 2^31 - 1 ≈ 2.15 billion; 2^32 ≈ 4.29 billion IPv4 addresses. Knowing these magnitudes helps you spot overflow risks and do quick capacity estimates.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Estimate yearly storage for each workload and put them in order, smallest to largest.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "1 million 300-byte posts per day",
+        "100 million 100-byte events per day",
+        "10,000 photos of 2 MB per day",
+        "1,000 videos of 50 MB per day",
+        "1 billion 200-byte log lines per day"
+      ],
+      "explanation": "Per day: 300 MB, 10 GB, 20 GB, 50 GB and 200 GB. Times 365: about 110 GB, 3.65 TB, 7.3 TB, 18.25 TB and 73 TB. Multiply count × size per day first, then by 365, and the order is clear.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In the cache-aside pattern, put the steps of a read for a key that is not yet cached in order, first to last.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The app looks up the key in the cache",
+        "The cache reports a miss",
+        "The app reads the value from the database",
+        "The app stores the value in the cache",
+        "A later read of the key is served from the cache"
+      ],
+      "explanation": "With cache-aside the application owns the logic: try the cache, and on a miss load from the database and put the value in the cache (usually with a TTL). Only after that can a later read hit. The cache never talks to the database itself.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In a write-through cache where the cache layer writes to the database itself, put the steps of a write in order, first to last.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The app sends the write to the cache",
+        "The cache writes the value to the database",
+        "The database confirms the write",
+        "The cache reports success to the app"
+      ],
+      "explanation": "Write-through is synchronous: the write isn't acknowledged until the database has it. That keeps cache and database consistent and survives a cache crash, at the cost of slower writes.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In a write-back (write-behind) cache, put the steps of a single write in order, first to last.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The app writes the value to the cache",
+        "The cache acknowledges the write to the app",
+        "The cache asynchronously flushes the dirty entry to the database",
+        "The database confirms the flushed write",
+        "The cache marks the entry clean"
+      ],
+      "explanation": "Write-back acknowledges as soon as the cache has the value, so writes are fast. The database is updated later in the background, and the entry can only be marked clean once the database has confirmed it. Data written but not yet flushed is lost if the cache node dies.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A CDN uses an origin shield (a mid-tier cache). Neither the edge nor the shield has the requested file. Put the steps in order, first to last.",
+      "tags": [
+        "System Design",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The user's request reaches the nearest edge PoP",
+        "The edge misses and asks the shield",
+        "The shield misses and fetches from the origin",
+        "The shield caches the file and returns it to the edge",
+        "The edge caches the file and serves the user"
+      ],
+      "explanation": "Each tier checks its own cache and only goes one level up on a miss. The response flows back down, being cached at each tier, so the next user near that edge gets a hit and other edges can be filled from the shield without touching the origin.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these circuit-breaker events in order, first to last.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Closed: calls pass through and failures are counted",
+        "Failures reach the threshold and the breaker opens",
+        "Open: calls fail fast without reaching the service",
+        "The reset timeout expires and the breaker goes half-open",
+        "A trial call succeeds and the breaker closes"
+      ],
+      "explanation": "A breaker starts closed. Too many failures trip it open, and while open it fails fast to protect the struggling service. After the reset timeout it lets a trial call through (half-open); success closes it again, failure would reopen it.",
+      "materials": [
+        "fowler-cb"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A circuit breaker's first trial call after opening fails, but the next one succeeds. Put the transitions in order, first to last.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Closed to open after repeated failures",
+        "Open to half-open after the first reset timeout",
+        "Half-open to open when the trial call fails",
+        "Open to half-open after another reset timeout",
+        "Half-open to closed when the trial call succeeds"
+      ],
+      "explanation": "From half-open there are two exits: a failed trial sends the breaker straight back to open (restarting the timeout), and a successful one closes it. So the path is closed, open, half-open, open again, half-open again, and finally closed.",
+      "materials": [
+        "fowler-cb"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Each policy sleeps before each of the first four retries. Put them in order of total sleep across those four retries, shortest to longest.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Linear: 100, 200, 300, 400 ms",
+        "Exponential: base 100 ms, doubling",
+        "Exponential: base 200 ms, doubling, capped at 500 ms",
+        "Fixed 500 ms",
+        "Exponential: base 10 ms, ×10 each time"
+      ],
+      "explanation": "Linear: 100+200+300+400 = 1,000 ms. Base 100 doubling: 100+200+400+800 = 1,500 ms. Base 200 capped at 500: 200+400+500+500 = 1,600 ms. Fixed: 4 × 500 = 2,000 ms. Base 10 ×10: 10+100+1,000+10,000 = 11,110 ms. Large multipliers grow fast, which is why backoff needs a cap.",
+      "materials": [
+        "aws-backoff"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "With full jitter, retry n sleeps a random time up to `min(cap, base × 2^n)`, with n starting at 0. Put these upper bounds in order, smallest to largest.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "base 250 ms, n = 0, cap 10 s",
+        "base 50 ms, n = 3, cap 10 s",
+        "base 300 ms, n = 1, cap 10 s",
+        "base 50 ms, n = 5, cap 1 s",
+        "base 10 ms, n = 10, cap 5 s"
+      ],
+      "explanation": "250 × 1 = 250 ms. 50 × 8 = 400 ms. 300 × 2 = 600 ms. 50 × 32 = 1,600 ms, capped to 1,000 ms. 10 × 1,024 = 10,240 ms, capped to 5,000 ms. The cap is what keeps late retries from waiting absurdly long.",
+      "materials": [
+        "aws-backoff"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A token bucket holds at most 10 tokens, refills 1 token per second continuously, and is full at t = 0. A client sends 10 requests at t = 0 and 3 requests at t = 4 s, and nothing else. Order these moments by tokens in the bucket, fewest to most.",
+      "tags": [
+        "System Design",
+        "Resilience & Scalability"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Right after the t = 0 burst",
+        "Right after the t = 4 s requests",
+        "At t = 3 s",
+        "At t = 8 s",
+        "At t = 30 s"
+      ],
+      "explanation": "The burst empties the bucket (0). By t = 3 it has refilled to 3. At t = 4 it has 4, and 3 requests leave 1. By t = 8 that grows to 5. By t = 30 it would be 27, but the bucket is capped at 10. The capacity sets the maximum burst; the refill rate sets the long-run rate.",
+      "materials": [
+        "token-bucket"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A Kafka producer sends a record with `acks=all`. Put the steps in order, first to last.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The producer's partitioner picks a partition",
+        "The producer sends the batch to that partition's leader",
+        "The leader appends the batch to its local log",
+        "In-sync followers fetch and append the batch",
+        "The leader advances the high watermark and acks the producer"
+      ],
+      "explanation": "Records go to the partition leader only. With `acks=all` the leader waits until every in-sync replica has the batch; then the records are committed (the high watermark moves past them) and the producer gets its acknowledgement. Followers pull from the leader, they aren't pushed to by the producer.",
+      "materials": [
+        "kafka"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Under Kafka's classic (eager) consumer-group protocol, a new consumer joins a group. Put the rebalance steps in order, first to last.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The new consumer sends `JoinGroup` to the group coordinator",
+        "Existing members see the rebalance in a heartbeat and revoke their partitions",
+        "After all members rejoin, the coordinator sends the member list to the group leader",
+        "The leader computes an assignment and sends it in `SyncGroup`",
+        "Each member gets its partitions in the `SyncGroup` response"
+      ],
+      "explanation": "The join triggers the rebalance. Existing members learn about it from their heartbeat responses, give up their partitions (eager protocol) and rejoin. The coordinator makes one member the leader and gives it the membership; the leader runs the assignor and returns the plan via `SyncGroup`, and the coordinator hands each member its share. Consumers then resume from the committed offsets.",
+      "materials": [
+        "kafka"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A Kafka consumer wants at-least-once processing with manual offset commits. Put its loop steps in order, first to last.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Poll a batch of records",
+        "Process each record",
+        "Commit the offsets of the processed batch",
+        "Poll the next batch"
+      ],
+      "explanation": "Committing only after processing means a crash causes reprocessing rather than loss: at least once. Committing before processing would give at-most-once instead. That's why consumers in this mode must be idempotent.",
+      "materials": [
+        "kafka"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In one Kafka partition, a consumer group is behind, and followers have not yet replicated the newest records. Put these positions in order, lowest offset to highest.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Log start offset",
+        "The group's committed offset",
+        "High watermark",
+        "Log end offset"
+      ],
+      "explanation": "The log start offset is the oldest record still retained. Consumers can only read committed records, so a lagging group's committed offset sits below the high watermark. The high watermark is the last offset replicated to all in-sync replicas, and it trails the log end offset (the next offset the leader will write) while followers catch up.",
+      "materials": [
+        "kafka"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the calls of a Kafka transactional producer in order, first to last.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`initTransactions()`",
+        "`beginTransaction()`",
+        "`send()` the records",
+        "`commitTransaction()`",
+        "`read_committed` consumers can now see the records"
+      ],
+      "explanation": "`initTransactions()` runs once to register the transactional id and fence older producers. Each transaction is `beginTransaction()`, the sends, then `commitTransaction()`, which writes commit markers. Consumers with `isolation.level=read_committed` only see the records after those markers are written.",
+      "materials": [
+        "kafka"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "The broker leading a Kafka partition crashes. Put the recovery steps in order, first to last.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The leader broker stops responding",
+        "The controller detects the broker is gone",
+        "The controller picks a new leader from the ISR",
+        "Producers get a not-leader error and refresh metadata",
+        "Producers send to the new leader"
+      ],
+      "explanation": "The controller notices the lost broker (its session or heartbeats expire), then elects a new leader from the in-sync replicas so no committed data is lost. Clients still pointing at the old leader get errors, refresh their metadata, and retry against the new leader.",
+      "materials": [
+        "kafka"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the steps of a successful two-phase commit in order, first to last.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The coordinator sends `PREPARE` to all participants",
+        "Each participant makes its changes durable and votes yes",
+        "The coordinator writes the commit decision to its log",
+        "The coordinator sends `COMMIT` to all participants",
+        "Participants commit, release locks and acknowledge"
+      ],
+      "explanation": "Phase one collects votes: a participant may only vote yes once it can guarantee it will commit. With all yes votes, the coordinator durably logs the decision before telling anyone, so it can repeat it after a crash. Phase two delivers the decision, and participants then release their locks.",
+      "materials": [
+        "2pc"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In two-phase commit, the coordinator logs a commit decision and then crashes before sending it. Put what follows for one participant in order, first to last.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The participant has already voted yes",
+        "It waits in doubt, still holding its locks",
+        "The coordinator restarts and reads the decision from its log",
+        "The coordinator resends `COMMIT`",
+        "The participant commits and releases its locks"
+      ],
+      "explanation": "After voting yes the participant can neither commit nor abort on its own, so it blocks while holding locks. That blocking is 2PC's weak point. Recovery works because the decision was logged: the restarted coordinator reads it and resends it, and only then can the participant finish.",
+      "materials": [
+        "2pc"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A saga runs: create order, reserve stock, charge card, schedule shipping. The first two steps have succeeded. Put what happens next in order, first to last.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The card is charged",
+        "The shipping step fails",
+        "The card is refunded",
+        "The reserved stock is released",
+        "The order is cancelled"
+      ],
+      "explanation": "A saga has no rollback, so each completed local transaction is undone by its own compensating transaction. When a step fails, the compensations run in the reverse order of the steps they undo: refund the charge, then release the stock, then cancel the order.",
+      "materials": [
+        "saga"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In consistent hashing with virtual nodes, put the steps of routing a key in order, first to last.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Hash the key",
+        "Place the hash on the ring",
+        "Walk clockwise to the first virtual node",
+        "Map that virtual node to its physical server",
+        "Send the request to that server"
+      ],
+      "explanation": "Keys and virtual nodes share one hash space arranged as a ring. A key belongs to the first virtual node clockwise from its hash, and each virtual node belongs to a physical server. Because many virtual nodes per server spread load, adding or removing a server only moves the keys next to its points.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the steps of a Raft leader election in order, first to last.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A follower's election timeout passes with no heartbeat",
+        "It becomes a candidate and increments its term",
+        "It votes for itself and sends `RequestVote` RPCs",
+        "It receives votes from a majority",
+        "It becomes leader and sends `AppendEntries` heartbeats"
+      ],
+      "explanation": "A follower that hears nothing from a leader for its randomized timeout starts an election: it becomes a candidate, bumps the term, votes for itself and asks the others for votes. A majority makes it leader, and it sends heartbeats right away so the others don't start their own elections.",
+      "materials": [
+        "raft"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A Raft leader receives a client command. Put the steps in order, first to last.",
+      "tags": [
+        "System Design",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The leader appends the entry to its own log",
+        "The leader sends `AppendEntries` to the followers",
+        "A majority of servers have stored the entry",
+        "The leader commits the entry, applies it and replies to the client",
+        "Followers learn the new commit index and apply the entry"
+      ],
+      "explanation": "The leader logs the entry and replicates it. Once a majority have it, the entry is committed: the leader applies it to its state machine and answers the client. Followers find out about the new commit index in the next `AppendEntries` (or heartbeat) and only then apply it themselves.",
+      "materials": [
+        "raft"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the steps of a blue-green release in order, first to last. Blue is live.",
+      "tags": [
+        "System Design",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Deploy the new release to the idle green environment",
+        "Run final tests against green",
+        "Switch the router so live traffic goes to green",
+        "Keep blue running, ready for a fast rollback",
+        "Use blue as staging for the next release"
+      ],
+      "explanation": "Green is prepared and tested while blue still serves everyone. The router switch makes green live in one step, and blue stays untouched so switching back is instant if something goes wrong. Once green is stable, blue becomes the staging target for the next release.",
+      "materials": [
+        "bluegreen"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these OSI layers in order, from the bottom (layer 1) up.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Physical",
+        "Data link",
+        "Network",
+        "Transport",
+        "Application"
+      ],
+      "explanation": "Layer 1 physical (signals on a wire), layer 2 data link (Ethernet frames), layer 3 network (IP), layer 4 transport (TCP/UDP), and layer 7 application (HTTP, DNS). Session and presentation (5 and 6) sit between transport and application.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "An HTTPS request travels over Ethernet. Put the headers in order from outermost to innermost.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Ethernet header",
+        "IP header",
+        "TCP header",
+        "TLS record header",
+        "HTTP request line and headers"
+      ],
+      "explanation": "Each layer wraps the one above it. The Ethernet frame carries an IP packet, which carries a TCP segment, which carries TLS records, whose encrypted payload is the HTTP request. Routers look at the IP header, while the HTTP part is only readable after decryption.",
+      "materials": [
+        "primer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the parts of an HTTP/1.1 request message in order, first to last.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Request line (method, target, version)",
+        "Header fields",
+        "An empty line",
+        "Message body"
+      ],
+      "explanation": "An HTTP/1.1 message starts with the start line, here the request line, then one header per line. An empty line marks the end of the headers, and the optional body follows. Servers know where the body ends from `Content-Length` or chunked encoding.",
+      "materials": [
+        "mdn-http"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these HTTP versions in order of publication, oldest to newest.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "HTTP/0.9",
+        "HTTP/1.0",
+        "HTTP/1.1",
+        "HTTP/2",
+        "HTTP/3"
+      ],
+      "explanation": "HTTP/0.9 (1991) was a one-line GET. HTTP/1.0 (RFC 1945, 1996) added headers and status codes. HTTP/1.1 (1997) added persistent connections and `Host`. HTTP/2 (RFC 7540, 2015) added binary framing and multiplexing. HTTP/3 (RFC 9114, 2022) runs over QUIC.",
+      "materials": [
+        "mdn-http"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these protocol versions in order of publication, oldest to newest.",
+      "tags": [
+        "System Design",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "SSL 3.0",
+        "TLS 1.0",
+        "TLS 1.1",
+        "TLS 1.2",
+        "TLS 1.3"
+      ],
+      "explanation": "SSL 3.0 came out in 1996, TLS 1.0 in 1999 (RFC 2246), TLS 1.1 in 2006 (RFC 4346), TLS 1.2 in 2008 (RFC 5246), and TLS 1.3 in 2018 (RFC 8446). SSL 3.0, TLS 1.0 and TLS 1.1 are all deprecated now.",
+      "materials": [
+        "rfc8446"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "With the server's IP already known and no TCP Fast Open, put these setups in order of round trips before the client can send its HTTP request, fewest to most.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "HTTP/3 with QUIC 0-RTT resumption",
+        "HTTP/3 on a new QUIC connection",
+        "HTTP/2 over TCP with a full TLS 1.3 handshake",
+        "HTTP/2 over TCP with a full TLS 1.2 handshake"
+      ],
+      "explanation": "QUIC 0-RTT sends the request with the very first flight: 0 round trips. A new QUIC connection combines transport and TLS 1.3 setup into 1 round trip. Over TCP, the TCP handshake costs 1 round trip, plus 1 for TLS 1.3 (2 in total) or 2 for a full TLS 1.2 handshake (3 in total).",
+      "materials": [
+        "rfc8446",
+        "mdn-http"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A cached response has gone stale but has an `ETag`, and the resource hasn't changed. Put the steps in order, first to last.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The cached response's `max-age` runs out",
+        "The cache sends a GET with `If-None-Match` set to the ETag",
+        "The server finds the ETag still matches",
+        "The server replies `304 Not Modified` with no body",
+        "The cache refreshes the entry and serves the stored body"
+      ],
+      "explanation": "Once stale, a cache revalidates instead of downloading again. A conditional request with `If-None-Match` lets the server answer with a bodiless `304` when nothing changed. The cache then updates the stored response's freshness from the 304's headers and reuses the body it already has.",
+      "materials": [
+        "mdn-http"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A script on `app.example` calls `fetch` with `PUT` to `api.example` with a custom header. Put the steps in order, first to last.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The script calls `fetch`",
+        "The browser sends an `OPTIONS` preflight with `Access-Control-Request-Method`",
+        "The server replies with `Access-Control-Allow-*` headers",
+        "The browser sends the actual `PUT`",
+        "The browser lets the script read the response"
+      ],
+      "explanation": "A cross-origin `PUT` with a custom header isn't a simple request, so the browser first asks permission with a preflight `OPTIONS`. Only if the response allows the origin, method and header does it send the real request. The response is exposed to the script only if it also carries a matching `Access-Control-Allow-Origin`.",
+      "materials": [
+        "mdn-http"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the steps of opening and closing a WebSocket connection in order, first to last.",
+      "tags": [
+        "System Design",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The client sends a GET with `Upgrade: websocket` and `Sec-WebSocket-Key`",
+        "The server replies `101 Switching Protocols` with `Sec-WebSocket-Accept`",
+        "The client checks the `Sec-WebSocket-Accept` value",
+        "Both sides exchange WebSocket frames",
+        "Both sides exchange Close frames"
+      ],
+      "explanation": "WebSocket starts as an HTTP/1.1 upgrade request. The server proves it understood by returning `101` with an accept value derived from the client's key, and the client verifies it. After that the TCP connection carries WebSocket frames in both directions until a closing handshake of Close frames.",
+      "materials": [
+        "mdn-http"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the steps of the OAuth 2.0 authorization code flow in order, first to last.",
+      "tags": [
+        "System Design",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The client redirects the browser to the authorization endpoint",
+        "The user signs in and approves access",
+        "The authorization server redirects back with a code",
+        "The client exchanges the code at the token endpoint",
+        "The client calls the API with the access token"
+      ],
+      "explanation": "The user deals only with the authorization server, so the client never sees their password. The short-lived code comes back through the browser, and the client swaps it for tokens over a direct back-channel call to the token endpoint. Only then can it call the resource server.",
+      "materials": [
+        "rfc6749"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the PKCE steps of an authorization code flow in order, first to last.",
+      "tags": [
+        "System Design",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The client generates a random `code_verifier`",
+        "The client computes `code_challenge` = BASE64URL(SHA-256(verifier))",
+        "The client sends `code_challenge` in the authorization request",
+        "The client sends `code_verifier` in the token request",
+        "The server hashes the verifier and compares it to the challenge"
+      ],
+      "explanation": "The client keeps the verifier secret and sends only its hash with the authorization request, where the server stores it next to the code. When the code is redeemed the client must present the original verifier, and the server hashes it and checks it matches. A stolen code is useless without the verifier.",
+      "materials": [
+        "rfc7636"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the steps of an OAuth 2.0 refresh token flow in order, first to last.",
+      "tags": [
+        "System Design",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The client gets an access token and a refresh token",
+        "The client calls the API with the access token",
+        "The API rejects the expired access token",
+        "The client sends the refresh token to the token endpoint",
+        "The authorization server issues a new access token"
+      ],
+      "explanation": "This matches the refresh flow in RFC 6749: the access token works until it expires, the resource server then returns an invalid-token error, and the client uses the longer-lived refresh token at the token endpoint to get a new access token without involving the user.",
+      "materials": [
+        "rfc6749"
+      ]
+    }
+  ]
+}
