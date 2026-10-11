@@ -47,8 +47,11 @@ docker compose exec api adduser -email you@example.com -name "You" -role admin -
 docker compose exec api seed -file seeds/dotnet-interview.json   # optional question banks
 docker compose exec api seed -file seeds/system-design.json      # the system design challenges
 docker compose exec api seed -file seeds/javascript-big-o.json    # Big O of JavaScript snippets
-for t in dotnet go database sql javascript system-design design-patterns; do   # 7 × 50 true/false
-  docker compose exec api seed -file seeds/$t-true-false.json
+# 7 topics × 4 formats × 50 questions: true/false, pick all, put in order, predict the output
+for t in dotnet go database sql javascript system-design design-patterns; do
+  for k in true-false multi-select ordering output; do
+    docker compose exec api seed -file seeds/$t-$k.json
+  done
 done
 ```
 
