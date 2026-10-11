@@ -1,0 +1,1091 @@
+{
+  "name": "JavaScript: put in order",
+  "materials": [
+    {
+      "key": "microtask",
+      "type": "article",
+      "title": "Microtasks",
+      "url": "https://javascript.info/microtask-queue",
+      "author": "Ilya Kantor",
+      "description": "Explains the microtask queue, promise handlers and why they run before the next macrotask."
+    },
+    {
+      "key": "nodeloop",
+      "type": "article",
+      "title": "The Node.js Event Loop",
+      "url": "https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick",
+      "author": "Node.js",
+      "description": "Official guide to the event loop phases, setImmediate, setTimeout and process.nextTick."
+    },
+    {
+      "key": "nodeevents",
+      "type": "link",
+      "title": "Node.js Events API",
+      "url": "https://nodejs.org/api/events.html",
+      "author": "Node.js",
+      "description": "Reference for EventEmitter, EventTarget and how listeners are registered and invoked."
+    },
+    {
+      "key": "nodeprocess",
+      "type": "link",
+      "title": "Node.js Process API",
+      "url": "https://nodejs.org/api/process.html",
+      "author": "Node.js",
+      "description": "Reference for the process object, including the beforeExit and exit events and nextTick."
+    },
+    {
+      "key": "nodemodules",
+      "type": "link",
+      "title": "Node.js Modules: CommonJS modules",
+      "url": "https://nodejs.org/api/modules.html",
+      "author": "Node.js",
+      "description": "Reference for require(), module resolution, caching and the module wrapper."
+    },
+    {
+      "key": "mdnfields",
+      "type": "link",
+      "title": "Public class fields",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields",
+      "author": "MDN Web Docs",
+      "description": "How instance and static fields are initialized, including their timing relative to super()."
+    },
+    {
+      "key": "mdnproxy",
+      "type": "link",
+      "title": "Proxy",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+      "author": "MDN Web Docs",
+      "description": "Reference for Proxy objects and the handler traps that intercept object operations."
+    },
+    {
+      "key": "mdnmodules",
+      "type": "article",
+      "title": "JavaScript modules",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules",
+      "author": "MDN Web Docs",
+      "description": "Guide to ES modules: static imports, dynamic import() and top-level await."
+    },
+    {
+      "key": "mdnprecedence",
+      "type": "link",
+      "title": "Operator precedence",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_precedence",
+      "author": "MDN Web Docs",
+      "description": "Precedence table for JavaScript operators and the distinction from evaluation order."
+    },
+    {
+      "key": "arraymethods",
+      "type": "article",
+      "title": "Array methods",
+      "url": "https://javascript.info/array-methods",
+      "author": "Ilya Kantor",
+      "description": "Covers map, filter, sort and comparator functions, including default string-based sorting."
+    },
+    {
+      "key": "generators",
+      "type": "article",
+      "title": "Generators",
+      "url": "https://javascript.info/generators",
+      "author": "Ilya Kantor",
+      "description": "How generator functions pause at yield, receive values via next() and delegate with yield*."
+    },
+    {
+      "key": "browsers",
+      "type": "article",
+      "title": "How browsers work",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/Performance/How_browsers_work",
+      "author": "MDN Web Docs",
+      "description": "Walks through parsing, style, layout, paint and compositing in the browser rendering pipeline."
+    },
+    {
+      "key": "bubbling",
+      "type": "article",
+      "title": "Bubbling and capturing",
+      "url": "https://javascript.info/bubbling-and-capturing",
+      "author": "Ilya Kantor",
+      "description": "Explains the capturing, target and bubbling phases of DOM event propagation."
+    },
+    {
+      "key": "tc39",
+      "type": "link",
+      "title": "TC39 Finished Proposals",
+      "url": "https://github.com/tc39/proposals/blob/main/finished-proposals.md",
+      "author": "Ecma TC39",
+      "description": "List of finished proposals with the ECMAScript edition each one was published in."
+    },
+    {
+      "key": "forin",
+      "type": "link",
+      "title": "for...in",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in",
+      "author": "MDN Web Docs",
+      "description": "Reference for for...in, including property traversal order and inherited properties."
+    }
+  ],
+  "questions": [
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconsole.log('A');\nsetTimeout(() => console.log('B'), 0);\nPromise.resolve().then(() => console.log('C'));\nqueueMicrotask(() => console.log('E'));\nconsole.log('D');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A",
+        "D",
+        "C",
+        "E",
+        "B"
+      ],
+      "explanation": "Synchronous code runs to completion first, so A and D print. Then the microtask queue is drained in FIFO order: the promise reaction C, then the queueMicrotask callback E. Only after microtasks are empty does the event loop run the timer callback B, even with a 0 ms delay.",
+      "materials": [
+        "microtask"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconsole.log('start');\nconst p = new Promise((resolve) => {\n  console.log('executor');\n  resolve('value');\n  console.log('after resolve');\n});\np.then((v) => console.log(v));\nconsole.log('end');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "start",
+        "executor",
+        "after resolve",
+        "end",
+        "value"
+      ],
+      "explanation": "The Promise executor runs synchronously inside the constructor, so `executor` and `after resolve` print immediately (calling resolve does not stop the executor). `end` is still synchronous. The `.then` callback is a microtask, so `value` prints last.",
+      "materials": [
+        "microtask"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nfunction run() {\n  try {\n    console.log('try');\n    throw new Error('boom');\n  } catch (e) {\n    console.log('catch ' + e.message);\n  } finally {\n    console.log('finally');\n  }\n  console.log('after');\n}\nconsole.log('before');\nrun();\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "before",
+        "try",
+        "catch boom",
+        "finally",
+        "after"
+      ],
+      "explanation": "`before` prints, then `run()` enters the try block and prints `try`. The throw jumps to catch, printing `catch boom`. The finally block always runs after try/catch, printing `finally`, and then execution continues after the statement with `after`.",
+      "materials": [
+        "mdnprecedence"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does `Object.keys` return this object's keys, first to last?\n\n```js\nconst o = { name: 1, 10: 1, age: 1, 2: 1, id: 1 };\nObject.keys(o);\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "\"2\"",
+        "\"10\"",
+        "\"name\"",
+        "\"age\"",
+        "\"id\""
+      ],
+      "explanation": "Own string keys are ordered with integer-like keys first in ascending numeric order (2 before 10, not string order), followed by the remaining string keys in insertion order: name, age, id.",
+      "materials": [
+        "forin"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "What order do the elements end up in after this call, first to last?\n\n```js\n[10, 9, 1, 100, 25].sort();\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "1",
+        "10",
+        "100",
+        "25",
+        "9"
+      ],
+      "explanation": "Without a comparator, `sort` converts elements to strings and compares UTF-16 code units. As strings, \"1\" < \"10\" < \"100\" < \"25\" < \"9\", because comparison stops at the first differing character. Use `(a, b) => a - b` for numeric order.",
+      "materials": [
+        "arraymethods"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these phases of a single Node.js event loop iteration in order, first to last.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "timers",
+        "pending callbacks",
+        "poll",
+        "check",
+        "close callbacks"
+      ],
+      "explanation": "Each loop iteration starts with timers (expired setTimeout/setInterval callbacks), then pending callbacks (some deferred system I/O callbacks), then (after internal idle/prepare) poll, where new I/O events are retrieved and handled, then check, which runs setImmediate callbacks, and finally close callbacks such as `socket.on('close')`.",
+      "materials": [
+        "nodeloop"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these stages of the browser rendering pipeline in order, first to last, for a freshly loaded page.",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Parse HTML into the DOM",
+        "Compute styles for each element",
+        "Layout (geometry of each box)",
+        "Paint pixels into layers",
+        "Composite layers onto the screen"
+      ],
+      "explanation": "The browser parses HTML into the DOM (and CSS into the CSSOM), combines them to compute each element's styles, runs layout to work out sizes and positions, paints the boxes into layers, and finally composites those layers into the final image on screen.",
+      "materials": [
+        "browsers"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these JavaScript features in the order they were standardized, earliest to latest.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`let` and `const`",
+        "`async`/`await`",
+        "Optional chaining `?.`",
+        "Top-level `await` in modules",
+        "`Array.prototype.toSorted`"
+      ],
+      "explanation": "`let`/`const` arrived in ES2015, `async`/`await` in ES2017, optional chaining in ES2020, top-level await in ES2022, and the change-array-by-copy methods such as `toSorted` in ES2023.",
+      "materials": [
+        "tc39"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconst { EventEmitter } = require('node:events');\nconst e = new EventEmitter();\nlet n = 0;\ne.on('tick', () => console.log('on ' + n));\ne.once('tick', () => console.log('once ' + n));\ne.prependListener('tick', () => console.log('prepended ' + n));\nn = 1; e.emit('tick');\nn = 2; e.emit('tick');\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "prepended 1",
+        "on 1",
+        "once 1",
+        "prepended 2",
+        "on 2"
+      ],
+      "explanation": "An EventEmitter calls listeners synchronously in array order. `prependListener` puts its listener at the front, so on the first emit the order is prepended, on, once. The `once` listener is removed after it fires, so the second emit only calls prepended and on.",
+      "materials": [
+        "nodeevents"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nsetTimeout(() => console.log('10ms'), 10);\nsetTimeout(() => console.log('0ms a'), 0);\nsetTimeout(() => console.log('5ms'), 5);\nsetTimeout(() => console.log('0ms b'), 0);\nconsole.log('sync');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "sync",
+        "0ms a",
+        "0ms b",
+        "5ms",
+        "10ms"
+      ],
+      "explanation": "Synchronous code prints first. Timers fire in order of expiry time; the two 0 ms timers expire first and run in the order they were scheduled (a then b), then the 5 ms timer, then the 10 ms timer, regardless of the order the setTimeout calls appear in the source.",
+      "materials": [
+        "nodeloop"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconst { EventEmitter } = require('node:events');\nconst e = new EventEmitter();\ne.on('ping', () => console.log('listener 1'));\ne.on('ping', () => console.log('listener 2'));\nPromise.resolve().then(() => console.log('microtask'));\nconsole.log('before emit');\ne.emit('ping');\nconsole.log('after emit');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "before emit",
+        "listener 1",
+        "listener 2",
+        "after emit",
+        "microtask"
+      ],
+      "explanation": "`emit` is synchronous: it calls every listener, in registration order, before it returns. So listener 1 and listener 2 print between `before emit` and `after emit`. The promise callback is a microtask and only runs once the synchronous script finishes.",
+      "materials": [
+        "nodeevents"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Running `node main.mjs`, in what order are these lines printed, first to last?\n\n```js\n// main.mjs\nconsole.log('main: first line');\nimport { x } from './a.mjs';\nconsole.log('main: x is ' + x);\nimport './b.mjs';\n\n// a.mjs\nconsole.log('a evaluated');\nexport const x = 1;\n\n// b.mjs\nconsole.log('b evaluated');\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "a evaluated",
+        "b evaluated",
+        "main: first line",
+        "main: x is 1"
+      ],
+      "explanation": "Static `import` declarations are hoisted: all dependencies are loaded and evaluated, in the order they are imported, before any of main's body runs. So a and b evaluate first, even though `console.log('main: first line')` appears above the imports in the source.",
+      "materials": [
+        "mdnmodules"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "What order do the elements end up in after this call, first to last?\n\n```js\n['banana', 'Cherry', '_id', 'apple', 'Zebra'].sort();\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "\"Cherry\"",
+        "\"Zebra\"",
+        "\"_id\"",
+        "\"apple\"",
+        "\"banana\""
+      ],
+      "explanation": "Default sort compares UTF-16 code units. Uppercase letters (C=67, Z=90) come before underscore (95), which comes before lowercase letters (a=97, b=98), so capitalised words sort ahead of `_id` and all lowercase words. Use `localeCompare` for human-friendly ordering.",
+      "materials": [
+        "arraymethods"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconst ac = new AbortController();\nac.signal.addEventListener('abort', () => console.log('listener: ' + ac.signal.aborted));\nac.signal.onabort = () => console.log('onabort');\nPromise.resolve().then(() => console.log('microtask'));\nconsole.log('before abort');\nac.abort();\nconsole.log('after abort');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "before abort",
+        "listener: true",
+        "onabort",
+        "after abort",
+        "microtask"
+      ],
+      "explanation": "`abort()` sets `signal.aborted` to true and dispatches the abort event synchronously, so both handlers run before `abort()` returns. Listeners run in registration order: the addEventListener listener was added before `onabort` was assigned. The promise callback waits until the script finishes.",
+      "materials": [
+        "nodeevents"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconst o = {\n  get price() { console.log('get price'); return 2; },\n  get qty() { console.log('get qty'); return 3; },\n  set total(v) { console.log('set total ' + v); },\n};\no.total = o.price * o.qty;\nconsole.log('done');\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "get price",
+        "get qty",
+        "set total 6",
+        "done"
+      ],
+      "explanation": "In an assignment the right-hand side is evaluated first, left to right: the `price` getter, then the `qty` getter. Only then is the setter called with the product 6. `done` is the next statement.",
+      "materials": [
+        "mdnprecedence"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nclass Base {\n  baseField = console.log('Base field');\n  constructor() { console.log('Base constructor'); }\n}\nclass Derived extends Base {\n  derivedField = console.log('Derived field');\n  constructor() {\n    console.log('Derived before super');\n    super();\n    console.log('Derived after super');\n  }\n}\nnew Derived();\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Derived before super",
+        "Base field",
+        "Base constructor",
+        "Derived field",
+        "Derived after super"
+      ],
+      "explanation": "Code before `super()` runs first. `super()` builds the Base part: Base's field initializers run, then Base's constructor body. When `super()` returns, Derived's field initializers run, and only then does the rest of the Derived constructor body continue.",
+      "materials": [
+        "mdnfields"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nsetTimeout(() => console.log('timeout'), 0);\nPromise.resolve().then(() => console.log('promise'));\nprocess.nextTick(() => console.log('nextTick'));\nconsole.log('sync');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "sync",
+        "nextTick",
+        "promise",
+        "timeout"
+      ],
+      "explanation": "Synchronous code runs first. After the main script, Node drains the process.nextTick queue before the promise microtask queue, so `nextTick` precedes `promise` even though it was scheduled later. The timer runs in a later event loop phase.",
+      "materials": [
+        "nodeloop"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconst fs = require('node:fs');\nfs.readFile(__filename, () => {\n  setTimeout(() => console.log('timeout'), 0);\n  setImmediate(() => console.log('immediate'));\n  process.nextTick(() => console.log('nextTick'));\n  console.log('readFile callback');\n});\nconsole.log('main');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "main",
+        "readFile callback",
+        "nextTick",
+        "immediate",
+        "timeout"
+      ],
+      "explanation": "`main` prints synchronously. The readFile callback runs in the poll phase. After it returns, the nextTick queue drains. Inside an I/O callback the check phase comes next, so setImmediate always fires before a 0 ms setTimeout, which waits for the next iteration's timers phase.",
+      "materials": [
+        "nodeloop"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nasync function work() {\n  console.log('work start');\n  await null;\n  console.log('work resumed');\n}\nconsole.log('script start');\nwork();\nsetTimeout(() => console.log('timeout'), 0);\nconsole.log('script end');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "script start",
+        "work start",
+        "script end",
+        "work resumed",
+        "timeout"
+      ],
+      "explanation": "An async function runs synchronously until its first `await`, so `work start` prints before `work()` returns. The continuation after `await` is a microtask, so it runs after the rest of the script (`script end`) but before the timer callback.",
+      "materials": [
+        "microtask"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nPromise.resolve()\n  .then(() => console.log('a1'))\n  .then(() => console.log('a2'));\nPromise.resolve()\n  .then(() => console.log('b1'))\n  .then(() => console.log('b2'));\nconsole.log('sync');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "sync",
+        "a1",
+        "b1",
+        "a2",
+        "b2"
+      ],
+      "explanation": "Each `.then` callback is queued only when the previous step settles. After the sync log, the queue holds a1 and b1. Running a1 queues a2 behind b1; running b1 queues b2. So the two chains interleave: a1, b1, a2, b2.",
+      "materials": [
+        "microtask"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nsetTimeout(() => {\n  console.log('timeout 1');\n  queueMicrotask(() => console.log('microtask from timeout 1'));\n}, 0);\nsetTimeout(() => console.log('timeout 2'), 0);\nqueueMicrotask(() => console.log('microtask'));\nconsole.log('sync');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "sync",
+        "microtask",
+        "timeout 1",
+        "microtask from timeout 1",
+        "timeout 2"
+      ],
+      "explanation": "After the script, the microtask queue drains (`microtask`). Then the first timer runs. Since Node 11, the microtask queue is drained after each individual timer callback, so the microtask queued inside timeout 1 runs before timeout 2, matching browser behaviour.",
+      "materials": [
+        "microtask",
+        "nodeloop"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nfunction* gen() {\n  console.log('gen start');\n  yield 1;\n  console.log('gen after first yield');\n  yield 2;\n}\nconst it = gen();\nconsole.log('created');\nit.next();\nconsole.log('caller between');\nit.next();\nconsole.log('caller end');\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "created",
+        "gen start",
+        "caller between",
+        "gen after first yield",
+        "caller end"
+      ],
+      "explanation": "Calling a generator function only creates the iterator; no body code runs, so `created` prints first. The first `next()` runs the body up to the first `yield`. Control returns to the caller, then the second `next()` resumes right after that yield.",
+      "materials": [
+        "generators"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`Array.prototype.sort` is stable since ES2019. After this sort, what order are the names in, first to last?\n\n```js\nconst people = [\n  { name: 'Cy', age: 30 }, { name: 'Ann', age: 25 },\n  { name: 'Bo', age: 30 }, { name: 'Di', age: 25 },\n  { name: 'Ed', age: 20 },\n];\npeople.sort((a, b) => a.age - b.age);\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Ed",
+        "Ann",
+        "Di",
+        "Cy",
+        "Bo"
+      ],
+      "explanation": "The comparator sorts ascending by age: Ed (20), then the 25s, then the 30s. Because sort is stable, elements with equal age keep their original relative order: Ann before Di, and Cy before Bo.",
+      "materials": [
+        "arraymethods"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconst f = (name, v) => { console.log(name); return v; };\nconst r = f('a', 1) + f('b', 2) * f('c', 3);\nconsole.log('result ' + r);\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "a",
+        "b",
+        "c",
+        "result 7"
+      ],
+      "explanation": "Precedence decides how the expression is grouped (`a + (b * c)`), not when operands are evaluated. JavaScript always evaluates operands left to right, so a, b and c are called in source order, and only then is the multiplication and addition done, giving 1 + 2 * 3 = 7.",
+      "materials": [
+        "mdnprecedence"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A `<button>` sits inside a `<div>`. Listeners are added on `document` and `div` with `{ capture: true }`, and on `button`, `div` and `document` without it. When the button is clicked, in what order do the listeners run, first to last?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "document (capture)",
+        "div (capture)",
+        "button (target)",
+        "div (bubble)",
+        "document (bubble)"
+      ],
+      "explanation": "DOM events propagate in three phases: capturing goes down from the window through ancestors (document, then div), the target phase runs listeners on the button itself, and bubbling goes back up through the ancestors (div, then document).",
+      "materials": [
+        "bubbling"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these built-in APIs in the order they were added to the ECMAScript standard, earliest to latest.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Array.prototype.includes`",
+        "`Promise.prototype.finally`",
+        "`BigInt`",
+        "`String.prototype.replaceAll`",
+        "`Object.groupBy`"
+      ],
+      "explanation": "`includes` shipped in ES2016, `Promise.prototype.finally` in ES2018, `BigInt` in ES2020, `replaceAll` in ES2021, and `Object.groupBy` in ES2024.",
+      "materials": [
+        "tc39"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these JavaScript operators in order of precedence, highest (binds tightest) to lowest.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`**`",
+        "`+`",
+        "`<`",
+        "`&&`",
+        "`=`"
+      ],
+      "explanation": "Exponentiation `**` binds tighter than additive `+`, which binds tighter than relational `<`. Logical AND `&&` is lower still, and assignment `=` is among the lowest, so `x = a + b ** 2 < c && d` groups as `x = (((a + (b ** 2)) < c) && d)`.",
+      "materials": [
+        "mdnprecedence"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A page has `<script defer src=\"app.js\">` in its head and an inline `<script>` at the end of the body, with no images or other subresources. Put these events in order, first to last.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Inline script runs",
+        "Deferred `app.js` runs",
+        "`DOMContentLoaded` fires",
+        "`window` `load` fires"
+      ],
+      "explanation": "Classic inline scripts run as soon as the parser reaches them. Deferred scripts wait until parsing finishes and then run in document order, just before `DOMContentLoaded` is fired. The `load` event fires after that, once all subresources have finished loading.",
+      "materials": [
+        "browsers"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconst delay = (ms, v) => new Promise((resolve) =>\n  setTimeout(() => { console.log('settled ' + v); resolve(v); }, ms));\nPromise.all([delay(30, 'a'), delay(10, 'b'), delay(20, 'c')])\n  .then((vs) => console.log('all: ' + vs.join(',')));\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "settled b",
+        "settled c",
+        "settled a",
+        "all: a,b,c"
+      ],
+      "explanation": "Each promise settles when its timer fires: b at 10 ms, c at 20 ms, a at 30 ms. `Promise.all` waits for every input and then resolves with the values in input order, not completion order, so the final line is `a,b,c`.",
+      "materials": [
+        "microtask",
+        "nodeloop"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nfunction* inner() {\n  console.log('inner start');\n  yield 'i1';\n  console.log('inner end');\n  return 'r';\n}\nfunction* outer() {\n  console.log('outer start');\n  const r = yield* inner();\n  console.log('outer got ' + r);\n}\nfor (const v of outer()) console.log('value ' + v);\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "outer start",
+        "inner start",
+        "value i1",
+        "inner end",
+        "outer got r"
+      ],
+      "explanation": "The for...of loop starts the outer generator, which delegates with `yield*`, so inner starts and its yield goes straight to the loop (`value i1`). Resuming continues inner until it returns `r`. That return value becomes the result of the `yield*` expression in outer.",
+      "materials": [
+        "generators"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Running `node main.mjs`, in what order are these lines printed, first to last?\n\n```js\n// main.mjs\nconsole.log('before import()');\nimport('./lazy.mjs').then((m) => console.log('loaded: ' + m.value));\nconsole.log('after import()');\n\n// lazy.mjs\nconsole.log('lazy evaluated');\nexport const value = 42;\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "before import()",
+        "after import()",
+        "lazy evaluated",
+        "loaded: 42"
+      ],
+      "explanation": "Unlike static imports, `import()` is a function-like expression evaluated at runtime and returns a promise. The module is fetched and evaluated asynchronously, so the synchronous `after import()` line prints first, then the module body runs, then the `.then` callback receives the namespace.",
+      "materials": [
+        "mdnmodules"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nPromise.reject(new Error('x'))\n  .then(() => console.log('then 1'))\n  .catch((e) => console.log('catch ' + e.message))\n  .then(() => console.log('then after catch'))\n  .finally(() => console.log('finally'));\nconsole.log('sync');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "sync",
+        "catch x",
+        "then after catch",
+        "finally"
+      ],
+      "explanation": "The rejection skips the first `.then` (no rejection handler). `catch` handles it, and because catch returns normally, the chain is fulfilled again, so the next `.then` runs. `finally` runs last. All handlers are microtasks, so `sync` prints first.",
+      "materials": [
+        "microtask"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nasync function load() {\n  try {\n    console.log('try');\n    await Promise.reject(new Error('fail'));\n  } catch (e) {\n    console.log('catch ' + e.message);\n  } finally {\n    console.log('finally');\n  }\n}\nload().then(() => console.log('resolved'));\nconsole.log('after call');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "try",
+        "after call",
+        "catch fail",
+        "finally",
+        "resolved"
+      ],
+      "explanation": "`load()` runs synchronously until `await`, printing `try`. The caller continues with `after call`. When the awaited promise rejects, the function resumes by throwing into the catch block, then finally runs, and only when the function body completes is its returned promise fulfilled, triggering `resolved`.",
+      "materials": [
+        "microtask"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`main.mjs` imports `a.mjs` then `b.mjs`; `a.mjs` imports `c.mjs` then `d.mjs`; `b.mjs` imports `d.mjs`. Each module's body only logs its own name. In what order are the names printed, first to last?\n\n```js\n// main.mjs\nimport './a.mjs';\nimport './b.mjs';\nconsole.log('main');\n\n// a.mjs\nimport './c.mjs';\nimport './d.mjs';\nconsole.log('a');\n\n// b.mjs\nimport './d.mjs';\nconsole.log('b');\n\n// c.mjs\nconsole.log('c');\n\n// d.mjs\nconsole.log('d');\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "c",
+        "d",
+        "a",
+        "b",
+        "main"
+      ],
+      "explanation": "ES modules are evaluated depth-first, post-order: a module's dependencies are evaluated (in import order) before its own body. From main, go to a, which needs c then d, so c, d, then a. Next b, whose dependency d has already been evaluated and is not run again, so b. Finally main.",
+      "materials": [
+        "mdnmodules"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconst r = [1, 2]\n  .map((x) => { console.log('map ' + x); return x * 10; })\n  .filter((x) => { console.log('filter ' + x); return true; });\nconsole.log('done');\n```",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "map 1",
+        "map 2",
+        "filter 10",
+        "filter 20",
+        "done"
+      ],
+      "explanation": "Array methods are eager: `map` walks the whole array and builds a new array before `filter` is even called. So both map calls happen, then both filter calls on the mapped values 10 and 20.",
+      "materials": [
+        "arraymethods"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nprocess.on('exit', () => console.log('exit'));\nprocess.on('beforeExit', () => console.log('beforeExit'));\nsetTimeout(() => console.log('timeout'), 0);\nconsole.log('sync');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "sync",
+        "timeout",
+        "beforeExit",
+        "exit"
+      ],
+      "explanation": "The script body runs, then the event loop runs the pending timer. When the loop has no more work, Node emits `beforeExit` (which could schedule more work). Since the handler schedules nothing, the process then emits `exit` and terminates.",
+      "materials": [
+        "nodeprocess"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconst proto = { fromProto: 1 };\nconst o = Object.create(proto);\no.zed = 1;\no.amy = 1;\no.max = 1;\nfor (const k in o) console.log(k);\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "zed",
+        "amy",
+        "max",
+        "fromProto"
+      ],
+      "explanation": "`for...in` visits the object's own enumerable string keys first (non-integer keys in insertion order: zed, amy, max), then walks up the prototype chain and visits inherited enumerable keys such as `fromProto`.",
+      "materials": [
+        "forin"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nasync function returnsPromise() { return Promise.resolve('A'); }\nasync function returnsValue() { return 'B'; }\nreturnsPromise().then(console.log);\nreturnsValue().then(console.log);\nPromise.resolve()\n  .then(() => console.log('C'))\n  .then(() => console.log('D'))\n  .then(() => console.log('E'));\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "B",
+        "C",
+        "D",
+        "A",
+        "E"
+      ],
+      "explanation": "An async function that returns a promise resolves its own promise with that promise, which costs extra microtask ticks (a job to call `then` on it, then another to resolve). `returnsValue` resolves immediately, so B runs on the first tick alongside C. D runs on the next tick, A arrives after the two extra hops, and E follows.",
+      "materials": [
+        "microtask"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nPromise.resolve().then(() => {\n  console.log('promise 1');\n  process.nextTick(() => console.log('nextTick from promise'));\n});\nPromise.resolve().then(() => console.log('promise 2'));\nprocess.nextTick(() => console.log('nextTick'));\nconsole.log('sync');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "sync",
+        "nextTick",
+        "promise 1",
+        "promise 2",
+        "nextTick from promise"
+      ],
+      "explanation": "After the script, Node drains the nextTick queue, then the promise microtask queue. A nextTick scheduled from inside a promise callback does not interrupt the promise queue: Node finishes all queued promise callbacks (promise 1, promise 2) and only then returns to the nextTick queue.",
+      "materials": [
+        "nodeloop",
+        "nodeprocess"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconst log = (m) => console.log(m);\nclass A {\n  static s1 = log('static field s1');\n  static { log('static block'); }\n  inst = log('instance field');\n  static s2 = log('static field s2');\n  constructor() { log('constructor'); }\n}\nnew A();\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "static field s1",
+        "static block",
+        "static field s2",
+        "instance field",
+        "constructor"
+      ],
+      "explanation": "Static fields and static blocks are evaluated once, when the class definition is evaluated, interleaved in source order: s1, the static block, then s2. Instance fields are skipped at that point; they run on each `new`, before the constructor body (for a base class).",
+      "materials": [
+        "mdnfields"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does `Object.keys` return these keys, first to last?\n\n```js\nObject.keys({ b: 1, '10': 1, '-1': 1, '01': 1, '2': 1 });\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "\"2\"",
+        "\"10\"",
+        "\"b\"",
+        "\"-1\"",
+        "\"01\""
+      ],
+      "explanation": "Only canonical array-index keys (non-negative integers written without leading zeros) are sorted numerically first: \"2\", \"10\". \"-1\" is negative and \"01\" has a leading zero, so they are ordinary string keys and keep insertion order together with \"b\": b, -1, 01.",
+      "materials": [
+        "forin"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconst p = new Proxy({ count: 0 }, {\n  get(t, k, r) { console.log('get ' + String(k)); return Reflect.get(t, k, r); },\n  set(t, k, v, r) { console.log('set ' + k); return Reflect.set(t, k, v, r); },\n  getOwnPropertyDescriptor(t, k) { console.log('getOwnPropertyDescriptor ' + k); return Reflect.getOwnPropertyDescriptor(t, k); },\n  defineProperty(t, k, d) { console.log('defineProperty ' + k); return Reflect.defineProperty(t, k, d); },\n  has(t, k) { console.log('has ' + k); return Reflect.has(t, k); },\n});\np.count++;\n'count' in p;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "get count",
+        "set count",
+        "getOwnPropertyDescriptor count",
+        "defineProperty count",
+        "has count"
+      ],
+      "explanation": "`p.count++` first reads the value (get trap), then assigns (set trap). Forwarding with `Reflect.set(t, k, v, r)` where the receiver is the proxy makes the default [[Set]] look up the receiver's own property (getOwnPropertyDescriptor trap) and update it via [[DefineOwnProperty]] (defineProperty trap). The `in` operator then hits the has trap.",
+      "materials": [
+        "mdnproxy"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nJSON.parse('{\"a\":{\"b\":1,\"c\":2},\"d\":3}', function (k, v) {\n  console.log(k === '' ? '(root)' : k);\n  return v;\n});\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "b",
+        "c",
+        "a",
+        "d",
+        "(root)"
+      ],
+      "explanation": "A `JSON.parse` reviver is applied bottom-up (post-order): every nested value is revived before the object containing it. So the members of `a` (b, c) are visited before `a` itself, then `d`, and the root object is visited last with the key `\"\"`.",
+      "materials": [
+        "arraymethods"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`main.mjs` imports `a.mjs` then `b.mjs`; neither depends on the other. Running `node main.mjs`, in what order are these lines printed, first to last?\n\n```js\n// main.mjs\nimport './a.mjs';\nimport './b.mjs';\nconsole.log('main');\n\n// a.mjs\nconsole.log('a start');\nawait new Promise((r) => setTimeout(r, 10));\nconsole.log('a end');\n\n// b.mjs\nconsole.log('b');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "a start",
+        "b",
+        "a end",
+        "main"
+      ],
+      "explanation": "`a.mjs` uses top-level await, which makes it an async module. Its body starts and suspends at the await. Its sibling `b.mjs` does not depend on it, so b evaluates while a is waiting. `main` depends on both, so its body runs only after a finishes.",
+      "materials": [
+        "mdnmodules"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconst it = [1, 2].values()\n  .map((x) => { console.log('map ' + x); return x * 10; })\n  .filter((x) => { console.log('filter ' + x); return true; });\nconsole.log('helpers created');\nit.toArray();\n```",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "helpers created",
+        "map 1",
+        "filter 10",
+        "map 2",
+        "filter 20"
+      ],
+      "explanation": "Iterator helpers (ES2025) are lazy: creating the map/filter chain runs nothing. `toArray()` pulls values one at a time, so each element flows through map and then filter before the next element is requested.",
+      "materials": [
+        "generators"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nfunction* g() {\n  try {\n    const x = yield 'first';\n    console.log('got ' + x);\n    yield 'second';\n  } finally {\n    console.log('cleanup');\n  }\n}\nconst it = g();\nconsole.log(it.next('ignored').value);\nconsole.log(it.next('hello').value);\nconsole.log(it.return('bye').value);\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "first",
+        "got hello",
+        "second",
+        "cleanup",
+        "bye"
+      ],
+      "explanation": "The first `next()` runs to the first yield; its argument is ignored because no yield is waiting. The second `next('hello')` makes that yield evaluate to 'hello', prints `got hello`, and pauses at `yield 'second'`. `return('bye')` resumes as if a return happened at that yield, so the finally block runs before the result `{ value: 'bye' }` comes back.",
+      "materials": [
+        "generators"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nasync function* numbers() {\n  try {\n    yield 1;\n    yield 2;\n  } finally {\n    console.log('generator finally');\n  }\n}\n(async () => {\n  for await (const n of numbers()) {\n    console.log('got ' + n);\n    break;\n  }\n  console.log('after loop');\n})();\nconsole.log('sync');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "sync",
+        "got 1",
+        "generator finally",
+        "after loop"
+      ],
+      "explanation": "The async IIFE suspends at the first awaited `next()`, so `sync` prints first. The loop then gets 1. `break` makes `for await` call the generator's `return()`, which runs its finally block, and the loop awaits that before continuing to `after loop`.",
+      "materials": [
+        "generators"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "When `require('./util')` loads a file module for the first time, put these steps in order, first to last.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Resolve the specifier to an absolute filename",
+        "Look for that filename in `require.cache`",
+        "Create the Module and store it in the cache",
+        "Run the code inside the module wrapper function",
+        "Return `module.exports` to the caller"
+      ],
+      "explanation": "Node resolves the path first because the cache is keyed by resolved filename. On a cache miss it creates the Module object and caches it before running the code, which is what lets circular requires get a partially filled `exports`. The file is then compiled inside the `(exports, require, module, __filename, __dirname)` wrapper and executed, and finally `module.exports` is returned.",
+      "materials": [
+        "nodemodules"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconst p = new Proxy({ b: 1, a: 2 }, {\n  ownKeys(t) { console.log('ownKeys'); return Reflect.ownKeys(t); },\n  getOwnPropertyDescriptor(t, k) { console.log('getOwnPropertyDescriptor ' + k); return Reflect.getOwnPropertyDescriptor(t, k); },\n  get(t, k, r) { console.log('get ' + String(k)); return Reflect.get(t, k, r); },\n});\nconst copy = { ...p };\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "ownKeys",
+        "getOwnPropertyDescriptor b",
+        "get b",
+        "getOwnPropertyDescriptor a",
+        "get a"
+      ],
+      "explanation": "Object spread copies own enumerable properties. It first asks for the key list (ownKeys trap), then for each key in order checks enumerability via getOwnPropertyDescriptor and, if enumerable, reads the value with get, before moving to the next key.",
+      "materials": [
+        "mdnproxy"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconst src = {\n  get a() { console.log('get a'); return undefined; },\n  get b() { console.log('get b'); return undefined; },\n};\nconst def = (n) => { console.log('default ' + n); return 0; };\nconst { a = def('a'), b = def('b') } = src;\nconsole.log('done');\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "get a",
+        "default a",
+        "get b",
+        "default b",
+        "done"
+      ],
+      "explanation": "Object destructuring processes properties in pattern order. For each one it reads the property (calling the getter) and, only if the value is `undefined`, evaluates the default initializer, before moving on to the next property.",
+      "materials": [
+        "mdnprecedence"
+      ]
+    }
+  ]
+}
