@@ -1,0 +1,824 @@
+{
+  "name": "Go: true or false",
+  "materials": [
+    {
+      "key": "spec",
+      "type": "link",
+      "title": "The Go Programming Language Specification",
+      "url": "https://go.dev/ref/spec",
+      "author": "The Go Authors",
+      "description": "The authoritative definition of Go's syntax and semantics."
+    },
+    {
+      "key": "effective",
+      "type": "article",
+      "title": "Effective Go",
+      "url": "https://go.dev/doc/effective_go",
+      "author": "The Go Authors",
+      "description": "Official guide to writing clear, idiomatic Go code."
+    },
+    {
+      "key": "slices",
+      "type": "article",
+      "title": "Go Slices: usage and internals",
+      "url": "https://go.dev/blog/slices-intro",
+      "author": "The Go Authors",
+      "description": "Explains how slices relate to arrays, length, capacity and append."
+    },
+    {
+      "key": "errors-blog",
+      "type": "article",
+      "title": "Working with Errors in Go 1.13",
+      "url": "https://go.dev/blog/go1.13-errors",
+      "author": "The Go Authors",
+      "description": "Introduces error wrapping with %w, errors.Is and errors.As."
+    },
+    {
+      "key": "errors-pkg",
+      "type": "link",
+      "title": "Package errors",
+      "url": "https://pkg.go.dev/errors",
+      "author": "The Go Authors",
+      "description": "Reference documentation for the standard errors package."
+    },
+    {
+      "key": "defer",
+      "type": "article",
+      "title": "Defer, Panic, and Recover",
+      "url": "https://go.dev/blog/defer-panic-and-recover",
+      "author": "The Go Authors",
+      "description": "Describes how defer, panic and recover behave."
+    },
+    {
+      "key": "loopvar",
+      "type": "article",
+      "title": "Fixing For Loops in Go 1.22",
+      "url": "https://go.dev/blog/loopvar-preview",
+      "author": "The Go Authors",
+      "description": "Explains the per-iteration loop variable change in Go 1.22."
+    },
+    {
+      "key": "race",
+      "type": "article",
+      "title": "Data Race Detector",
+      "url": "https://go.dev/doc/articles/race_detector",
+      "author": "The Go Authors",
+      "description": "How to use the Go race detector and what it can find."
+    },
+    {
+      "key": "gc-guide",
+      "type": "article",
+      "title": "A Guide to the Go Garbage Collector",
+      "url": "https://go.dev/doc/gc-guide",
+      "author": "The Go Authors",
+      "description": "Explains how the Go GC works and how escape analysis affects allocation."
+    },
+    {
+      "key": "sync",
+      "type": "link",
+      "title": "Package sync",
+      "url": "https://pkg.go.dev/sync",
+      "author": "The Go Authors",
+      "description": "Reference documentation for Mutex, RWMutex, WaitGroup, Once and more."
+    },
+    {
+      "key": "context",
+      "type": "link",
+      "title": "Package context",
+      "url": "https://pkg.go.dev/context",
+      "author": "The Go Authors",
+      "description": "Reference documentation for cancellation, deadlines and request-scoped values."
+    },
+    {
+      "key": "http",
+      "type": "link",
+      "title": "Package net/http",
+      "url": "https://pkg.go.dev/net/http",
+      "author": "The Go Authors",
+      "description": "Reference documentation for Go's HTTP client and server."
+    },
+    {
+      "key": "json",
+      "type": "link",
+      "title": "Package encoding/json",
+      "url": "https://pkg.go.dev/encoding/json",
+      "author": "The Go Authors",
+      "description": "Reference documentation for JSON encoding and decoding."
+    },
+    {
+      "key": "testing",
+      "type": "link",
+      "title": "Package testing",
+      "url": "https://pkg.go.dev/testing",
+      "author": "The Go Authors",
+      "description": "Reference documentation for tests, benchmarks and subtests."
+    },
+    {
+      "key": "modref",
+      "type": "link",
+      "title": "Go Modules Reference",
+      "url": "https://go.dev/ref/mod",
+      "author": "The Go Authors",
+      "description": "Detailed reference for Go modules, versions and module paths."
+    }
+  ],
+  "questions": [
+    {
+      "type": "true-false",
+      "prompt": "The zero value of a slice type is `nil`, and calling `len` on a nil slice returns 0.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. A slice variable that is declared but not initialised is `nil`, and `len` and `cap` of a nil slice are both 0. You can range over it or append to it without any special handling.",
+      "materials": [
+        "spec",
+        "slices"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Calling `append` on a nil slice panics, so a slice must be created with `make` before you can append to it.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. `append` treats a nil slice like an empty one and allocates a new backing array as needed. Declaring `var s []int` and then calling `s = append(s, 1)` is idiomatic Go.",
+      "materials": [
+        "slices",
+        "effective"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Statement about this code: it prints `2`.\n\n```go\ns := make([]int, 3, 10)\nt := append(s, 1)\nu := append(s, 2)\n_ = u\nfmt.Println(t[3])\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. `s` has spare capacity, so neither `append` allocates: both `t` and `u` write index 3 of the same backing array. The second append overwrites the 1 with 2, so `t[3]` is 2.",
+      "materials": [
+        "slices",
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`json.Marshal` encodes a nil slice and an empty non-nil slice identically, both as `[]`.",
+      "tags": [
+        "Go",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. `encoding/json` encodes a nil slice as `null` and an empty non-nil slice such as `[]int{}` as `[]`. Initialise the slice if API clients expect an empty array.",
+      "materials": [
+        "json"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Ranging over a map visits its keys in the order they were inserted.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. The spec leaves map iteration order unspecified, and the runtime deliberately randomises it, so two loops over the same map can produce different orders. Sort the keys if you need a stable order.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Assigning to a key of a nil map, as in `var m map[string]int; m[\"a\"] = 1`, causes a run-time panic.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. A nil map behaves like an empty map for reads, but writing to it panics with \"assignment to entry in nil map\". Initialise it with `make` or a map literal first.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Unsynchronised concurrent writes to a built-in map from multiple goroutines can make the runtime abort the program with a fatal \"concurrent map writes\" error.",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Built-in maps are not safe for concurrent use when at least one goroutine writes. The runtime detects some of these cases and aborts with a fatal error that `recover` cannot catch, so protect the map with a mutex or use `sync.Map`.",
+      "materials": [
+        "race",
+        "sync"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`len(\"héllo\")` evaluates to 5.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. `len` of a string returns its length in bytes, not characters. Go source is UTF-8 and `é` takes 2 bytes, so the result is 6; use `utf8.RuneCountInString` to count runes.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In `for i, r := range s` over a string `s`, `r` is a decoded `rune` and `i` is the byte offset where that rune starts.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Ranging over a string decodes UTF-8 one code point at a time. The index is the byte position of each rune, so it can skip values when a rune is more than one byte long.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Go strings are mutable, so `s := \"hello\"; s[0] = 'H'` compiles and changes the first byte.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Strings are immutable and their bytes cannot be assigned to, so this is a compile error. Convert to a `[]byte` or `[]rune`, change that, and build a new string.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Statement about this code: `f() != nil` evaluates to `true`.\n\n```go\ntype MyErr struct{}\n\nfunc (*MyErr) Error() string { return \"boom\" }\n\nfunc f() error {\n\tvar p *MyErr = nil\n\treturn p\n}\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. An interface value is nil only when both its dynamic type and its value are nil. Here the returned `error` holds the type `*MyErr` with a nil pointer value, so it does not equal nil. Return a literal `nil` when there is no error.",
+      "materials": [
+        "effective",
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A Go type must declare which interfaces it satisfies, using a keyword such as `implements`.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Interface satisfaction in Go is implicit: a type implements an interface simply by having all its methods. Go has no `implements` keyword.",
+      "materials": [
+        "effective",
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "If `*T` has a method `M` with a pointer receiver, a plain value of type `T` can be assigned to an interface variable whose interface requires `M`.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. The method set of `T` contains only value-receiver methods, while `*T` also has the pointer-receiver ones. Assigning a `T` value fails to compile (\"method M has pointer receiver\"); you must assign `&t`.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "If `v` is an addressable variable of type `T` and `M` has a pointer receiver `*T`, the call `v.M()` is legal and Go passes `&v` automatically.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. The spec makes `v.M()` shorthand for `(&v).M()` when `v` is addressable and `&v`'s method set contains `M`. This shortcut does not apply to non-addressable values such as map elements or values stored in interfaces.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When struct type `S` embeds type `E`, the methods of `E` are promoted to `S`, so `S` can satisfy an interface using only `E`'s methods.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Embedding promotes the embedded type's fields and methods into the outer type's method set. An `S` can therefore be used wherever an interface requires methods that only `E` defines.",
+      "materials": [
+        "effective",
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When `Outer` embeds `Base` and defines its own `Name` method, a `Base` method that calls `b.Name()` invokes `Outer`'s `Name` when called through an `Outer` value.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. Embedding is composition, not inheritance, so there is no virtual dispatch. A promoted method's receiver is still the embedded `Base` value, so `b.Name()` calls `Base.Name`.",
+      "materials": [
+        "effective",
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`errors.Is(err, target)` finds `target` even when it was wrapped one or more times with `fmt.Errorf(\"...: %w\", ...)`.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. `%w` produces an error with an `Unwrap` method, and `errors.Is` walks the whole chain comparing each error to `target`. This is the idiomatic way to check for sentinel errors such as `io.EOF` or `sql.ErrNoRows`.",
+      "materials": [
+        "errors-blog",
+        "errors-pkg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Formatting an error with `fmt.Errorf(\"read failed: %v\", err)` wraps it, so `errors.Is` can still match the original `err`.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Only the `%w` verb records the original error for unwrapping. `%v` copies just the error's text, so `errors.Is` and `errors.As` can no longer find the original.",
+      "materials": [
+        "errors-blog",
+        "errors-pkg"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Deferred function calls in a function run in last-in, first-out order when the function returns.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Each `defer` pushes a call onto a stack, and the calls run in reverse order as the surrounding function returns or panics. This makes it natural to release resources in the reverse order you acquired them.",
+      "materials": [
+        "defer",
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Statement about this code: it prints `2`.\n\n```go\ni := 1\ndefer fmt.Println(i)\ni = 2\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. The arguments of a deferred call are evaluated when the `defer` statement runs, not when the call runs. The value 1 is captured, so it prints `1`; capture the variable in a closure to see later changes.",
+      "materials": [
+        "defer",
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Statement about this code: `f()` returns `2`.\n\n```go\nfunc f() (n int) {\n\tdefer func() { n++ }()\n\treturn 1\n}\n```",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. `return 1` first assigns 1 to the named result `n`, and deferred functions run after that and before the function actually returns. The closure increments `n`, so the caller receives 2.",
+      "materials": [
+        "defer",
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Calling `recover()` stops a panic no matter where it is called, including from ordinary non-deferred code that runs while the panic unwinds.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. `recover` only stops a panic when it is called directly by a deferred function. Called anywhere else, or when there is no panic, it returns nil and has no effect.",
+      "materials": [
+        "defer",
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A deferred `recover()` in `main` catches a panic raised in another goroutine that `main` started.",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. `recover` only works within the panicking goroutine. An unrecovered panic in any goroutine crashes the whole program, so each goroutine that may panic needs its own deferred `recover`.",
+      "materials": [
+        "defer",
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Each goroutine is backed by its own dedicated operating-system thread.",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Goroutines are lightweight and start with small stacks; the runtime scheduler multiplexes many goroutines onto a smaller number of OS threads. This is why a program can run hundreds of thousands of goroutines.",
+      "materials": [
+        "effective"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A send on an unbuffered channel blocks until another goroutine receives the value.",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. An unbuffered channel has no buffer, so sender and receiver must meet: the send completes only when a receiver takes the value. This makes unbuffered channels a synchronisation point as well as a way to pass data.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Receiving from a closed channel panics.",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Receiving from a closed channel returns any buffered values and then the zero value at once; `v, ok := <-ch` reports `ok == false` when it is closed and drained. It is sending on a closed channel, or closing it twice, that panics.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Inside a `select` statement, a case that sends to or receives from a nil channel is never chosen.",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. Communication on a nil channel blocks forever, so such a case can never proceed. Setting a channel variable to nil is a common way to disable a `select` case dynamically.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When several cases of a `select` are ready at the same time, Go always picks the first one listed in the source.",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. The spec says that if several cases can proceed, one is chosen by uniform pseudo-random selection. You cannot set priority by ordering the cases.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`sync.Mutex` is reentrant: a goroutine that already holds the lock can call `Lock` again without blocking.",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Go's mutex is not reentrant and is not tied to a goroutine. Calling `Lock` again while holding it blocks forever, which usually ends in a deadlock.",
+      "materials": [
+        "sync"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `sync.Mutex` must not be copied after first use, and `go vet`'s copylocks check reports code that copies one, for example through a value receiver.",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. The `sync` docs say a Mutex must not be copied after first use, because the copy has its own separate lock state. `go vet` flags copies of lock values, which is why structs that contain a mutex are usually passed by pointer.",
+      "materials": [
+        "sync"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Calling `wg.Add(1)` as the first statement inside a newly started goroutine is safe, because `wg.Wait()` always waits for that goroutine.",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. If `Wait` runs before the new goroutine has called `Add`, the counter may still be zero and `Wait` returns too early. Call `Add` before the `go` statement (or use `WaitGroup.Go` in Go 1.25+).",
+      "materials": [
+        "sync"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`once.Do(f)` on a `sync.Once` runs `f` only once, even when many goroutines call `Do` at the same time.",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. The first call runs `f`, and all other callers block until it has finished; later calls return without running `f`. This makes `sync.Once` a safe tool for lazy initialisation.",
+      "materials": [
+        "sync"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Cancelling a `context.Context` forcibly stops every goroutine that was given that context.",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Cancellation is cooperative: it closes the `ctx.Done()` channel and sets `ctx.Err()`. Goroutines stop only if their code checks those signals and returns.",
+      "materials": [
+        "context"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The race detector (`go test -race`) checks the source code statically and reports every possible data race, even in code paths that never run.",
+      "tags": [
+        "Go",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. The race detector instruments the program and only reports races that actually happen during that run. Races in code that is never executed go undetected, so good test coverage matters.",
+      "materials": [
+        "race"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Since Go 1.22, each iteration of a `for i := 0; i < n; i++` loop has its own `i`, so goroutines or closures created in the loop each see their own iteration's value.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. From Go 1.22 (for modules declaring `go 1.22` or later) loop variables are created anew on each iteration. The old `i := i` workaround is no longer needed.",
+      "materials": [
+        "loopvar",
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A generic function with a type parameter constrained by `any` can compare two values of that type with `==`.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. `any` permits types that do not support `==`, such as slices, maps and functions, so the compiler rejects the comparison. Use the `comparable` constraint instead.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Given `type MyInt int`, a type argument of `MyInt` satisfies the constraint `interface{ ~int }`.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. `~int` means any type whose underlying type is `int`, and `MyInt`'s underlying type is `int`. A plain `int` constraint, without the tilde, would accept only `int` itself.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A method can declare its own type parameters, for example `func (b Box) Map[U any](f func(int) U) U`.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. Methods cannot have type parameters; this is a syntax error (\"method must have no type parameters\"). A method can use only the type parameters of its generic receiver type; for anything else, write a top-level generic function.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "An identifier declared at package level is exported from the package if and only if its name starts with an upper-case letter.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Visibility in Go is decided by the first letter of the name: `Parse` is exported and `parse` is visible only inside its package. Go has no `public` or `private` keywords.",
+      "materials": [
+        "spec",
+        "effective"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The zero value of a variable of type `string` is `nil`.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. The zero value of `string` is the empty string `\"\"`; strings cannot be nil. Only pointers, slices, maps, channels, functions and interfaces have `nil` as their zero value.",
+      "materials": [
+        "spec"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A module at major version 2 or higher must include the major version suffix in its module path, such as `example.com/mod/v2`.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Go modules follow semantic import versioning: from v2 on, the module path must end in `/vN` so that different major versions can be imported side by side. Versions v0 and v1 need no suffix.",
+      "materials": [
+        "modref"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Returning a pointer to a local variable from a Go function is unsafe, because the variable is freed when the function returns.",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. This is perfectly safe in Go. Escape analysis notices that the variable outlives the function and allocates it on the heap, where the garbage collector manages it.",
+      "materials": [
+        "effective",
+        "gc-guide"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Building with `go build -gcflags=-m` makes the compiler print its escape analysis decisions, such as which variables escape to the heap.",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. The `-m` compiler flag reports optimisation decisions, including \"escapes to heap\" and \"moved to heap\" messages. It is the usual way to find out why a value is heap-allocated.",
+      "materials": [
+        "gc-guide"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The standard Go garbage collector is a generational, compacting collector that moves objects between memory regions.",
+      "tags": [
+        "Go",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. Go uses a concurrent, non-generational, non-moving tri-color mark-and-sweep collector. Objects are not moved or compacted, and GC frequency is tuned mainly with `GOGC` and `GOMEMLIMIT`.",
+      "materials": [
+        "gc-guide"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A test that calls `t.Parallel()` runs in parallel only with other tests that also call `t.Parallel()`.",
+      "tags": [
+        "Go",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. The `testing` package docs say `t.Parallel` marks a test to run in parallel with, and only with, other parallel tests. Sequential tests still run one at a time, and `-parallel` caps how many parallel tests run at once.",
+      "materials": [
+        "testing"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`http.Get` returns a non-nil error when the server responds with status 404 Not Found.",
+      "tags": [
+        "Go",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. A non-2xx status is not an error at the client level: you get a valid `*http.Response` and a nil error. Check `resp.StatusCode` yourself, and still close `resp.Body`.",
+      "materials": [
+        "http"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`http.DefaultClient` has a default request timeout of 30 seconds.",
+      "tags": [
+        "Go",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. `http.DefaultClient` has no timeout, so a request to a server that never answers can hang forever. Use a custom `http.Client` with `Timeout` set, or a request context with a deadline.",
+      "materials": [
+        "http"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When `json.Unmarshal` decodes a JSON number into an `interface{}` value, it stores it as a `float64`.",
+      "tags": [
+        "Go",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. Without a concrete target type, `encoding/json` maps JSON numbers to `float64`, objects to `map[string]interface{}` and arrays to `[]interface{}`. Use `Decoder.UseNumber` to keep large integers exact.",
+      "materials": [
+        "json"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Since Go 1.22, `http.ServeMux` accepts patterns like `\"GET /items/{id}\"`, and the handler can read the wildcard with `r.PathValue(\"id\")`.",
+      "tags": [
+        "Go",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Go 1.22 added HTTP method matching and path wildcards to the standard `ServeMux`. Matched wildcard values are available through `Request.PathValue`, so simple routing no longer needs a third-party router.",
+      "materials": [
+        "http"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Taking the address of a map element, as in `p := &m[\"key\"]`, is allowed.",
+      "tags": [
+        "Go"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Map elements are not addressable because the map may move entries when it grows, so `&m[k]` is a compile error. Store pointers in the map, or read the value, change it and write it back.",
+      "materials": [
+        "spec"
+      ]
+    }
+  ]
+}
