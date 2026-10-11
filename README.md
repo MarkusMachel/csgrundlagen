@@ -47,6 +47,7 @@ docker compose exec api adduser -email you@example.com -name "You" -role admin -
 docker compose exec api seed -file seeds/dotnet-interview.json   # optional question banks
 docker compose exec api seed -file seeds/system-design.json      # the system design challenges
 docker compose exec api seed -file seeds/javascript-big-o.json    # Big O of JavaScript snippets
+for f in seeds/*-true-false.json; do docker compose exec api seed -file "$f"; done   # 7 × 50 true/false
 ```
 
 nginx serves the production build and proxies `/api` to the api container, so the
