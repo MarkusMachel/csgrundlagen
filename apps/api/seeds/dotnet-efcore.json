@@ -1,0 +1,2108 @@
+{
+  "name": ".NET: EF Core and data access",
+  "materials": [
+    {
+      "key": "dbctx",
+      "type": "article",
+      "title": "DbContext lifetime, configuration, and initialization",
+      "url": "https://learn.microsoft.com/en-us/ef/core/dbcontext-configuration/",
+      "author": "Microsoft Learn",
+      "description": "How long a DbContext should live, how it is configured and why one instance must not be used by parallel operations."
+    },
+    {
+      "key": "advperf",
+      "type": "article",
+      "title": "Advanced performance topics",
+      "url": "https://learn.microsoft.com/en-us/ef/core/performance/advanced-performance-topics",
+      "author": "Microsoft Learn",
+      "description": "DbContext pooling, compiled queries and how constants versus parameters affect query caching."
+    },
+    {
+      "key": "explicit",
+      "type": "article",
+      "title": "Explicitly tracking entities",
+      "url": "https://learn.microsoft.com/en-us/ef/core/change-tracking/explicit-tracking",
+      "author": "Microsoft Learn",
+      "description": "How Add, Attach, Update and Remove set entity states, including for detached graphs."
+    },
+    {
+      "key": "detect",
+      "type": "article",
+      "title": "Change detection and notifications",
+      "url": "https://learn.microsoft.com/en-us/ef/core/change-tracking/change-detection",
+      "author": "Microsoft Learn",
+      "description": "Snapshot change tracking, when DetectChanges runs automatically and how to turn it off."
+    },
+    {
+      "key": "tracking",
+      "type": "article",
+      "title": "Tracking vs. no-tracking queries",
+      "url": "https://learn.microsoft.com/en-us/ef/core/querying/tracking",
+      "author": "Microsoft Learn",
+      "description": "Identity resolution, AsNoTracking, AsNoTrackingWithIdentityResolution and which projections are tracked."
+    },
+    {
+      "key": "tx",
+      "type": "article",
+      "title": "Using transactions",
+      "url": "https://learn.microsoft.com/en-us/ef/core/saving/transactions",
+      "author": "Microsoft Learn",
+      "description": "Default SaveChanges transactions, explicit transactions, savepoints and ambient System.Transactions."
+    },
+    {
+      "key": "conc",
+      "type": "article",
+      "title": "Handling concurrency conflicts",
+      "url": "https://learn.microsoft.com/en-us/ef/core/saving/concurrency",
+      "author": "Microsoft Learn",
+      "description": "Concurrency tokens, row versions, DbUpdateConcurrencyException and resolving conflicts."
+    },
+    {
+      "key": "bulk",
+      "type": "article",
+      "title": "ExecuteUpdate and ExecuteDelete",
+      "url": "https://learn.microsoft.com/en-us/ef/core/saving/execute-insert-update-delete",
+      "author": "Microsoft Learn",
+      "description": "Set-based updates and deletes that run immediately and bypass the change tracker."
+    },
+    {
+      "key": "cascade",
+      "type": "article",
+      "title": "Cascade delete",
+      "url": "https://learn.microsoft.com/en-us/ef/core/saving/cascade-delete",
+      "author": "Microsoft Learn",
+      "description": "Delete behaviors for required and optional relationships, orphan deletion and database-side cascades."
+    },
+    {
+      "key": "owned",
+      "type": "article",
+      "title": "Owned entity types",
+      "url": "https://learn.microsoft.com/en-us/ef/core/modeling/owned-entities",
+      "author": "Microsoft Learn",
+      "description": "OwnsOne and OwnsMany, table splitting, column naming and the limits of owned types."
+    },
+    {
+      "key": "conv",
+      "type": "article",
+      "title": "Value conversions",
+      "url": "https://learn.microsoft.com/en-us/ef/core/modeling/value-conversions",
+      "author": "Microsoft Learn",
+      "description": "Mapping a property to a different provider type, such as enums stored as strings."
+    },
+    {
+      "key": "shadow",
+      "type": "article",
+      "title": "Shadow and indexer properties",
+      "url": "https://learn.microsoft.com/en-us/ef/core/modeling/shadow-properties",
+      "author": "Microsoft Learn",
+      "description": "Properties that exist in the EF model but not on the CLR class, and how to read them."
+    },
+    {
+      "key": "inherit",
+      "type": "article",
+      "title": "Inheritance",
+      "url": "https://learn.microsoft.com/en-us/ef/core/modeling/inheritance",
+      "author": "Microsoft Learn",
+      "description": "TPH, TPT and TPC mapping strategies, discriminators and key generation for TPC."
+    },
+    {
+      "key": "ef8",
+      "type": "article",
+      "title": "What's new in EF Core 8",
+      "url": "https://learn.microsoft.com/en-us/ef/core/what-is-new/ef-core-8.0/whatsnew",
+      "author": "Microsoft Learn",
+      "description": "Complex types, raw SQL queries for unmapped types and other EF Core 8 features."
+    },
+    {
+      "key": "eager",
+      "type": "article",
+      "title": "Eager loading of related data",
+      "url": "https://learn.microsoft.com/en-us/ef/core/querying/related-data/eager",
+      "author": "Microsoft Learn",
+      "description": "Include, ThenInclude and filtered includes, including their interaction with tracking."
+    },
+    {
+      "key": "lazy",
+      "type": "article",
+      "title": "Lazy loading of related data",
+      "url": "https://learn.microsoft.com/en-us/ef/core/querying/related-data/lazy",
+      "author": "Microsoft Learn",
+      "description": "Lazy-loading proxies and ILazyLoader, and their requirements."
+    },
+    {
+      "key": "resil",
+      "type": "article",
+      "title": "Connection resiliency",
+      "url": "https://learn.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency",
+      "author": "Microsoft Learn",
+      "description": "Execution strategies that retry failed commands, and how they interact with user transactions."
+    },
+    {
+      "key": "clienteval",
+      "type": "article",
+      "title": "Client vs. server evaluation",
+      "url": "https://learn.microsoft.com/en-us/ef/core/querying/client-eval",
+      "author": "Microsoft Learn",
+      "description": "Which parts of a LINQ query EF Core may evaluate on the client and when it throws instead."
+    },
+    {
+      "key": "sql",
+      "type": "article",
+      "title": "SQL queries",
+      "url": "https://learn.microsoft.com/en-us/ef/core/querying/sql-queries",
+      "author": "Microsoft Learn",
+      "description": "FromSql, FromSqlRaw, SqlQuery, parameters, SQL injection and composing LINQ over raw SQL."
+    },
+    {
+      "key": "filters",
+      "type": "article",
+      "title": "Global query filters",
+      "url": "https://learn.microsoft.com/en-us/ef/core/querying/filters",
+      "author": "Microsoft Learn",
+      "description": "HasQueryFilter for soft delete and multi-tenancy, and IgnoreQueryFilters."
+    },
+    {
+      "key": "migapply",
+      "type": "article",
+      "title": "Applying migrations",
+      "url": "https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying",
+      "author": "Microsoft Learn",
+      "description": "SQL scripts, idempotent scripts, migration bundles, command-line tools and runtime Migrate()."
+    },
+    {
+      "key": "seeding",
+      "type": "article",
+      "title": "Data seeding",
+      "url": "https://learn.microsoft.com/en-us/ef/core/modeling/data-seeding",
+      "author": "Microsoft Learn",
+      "description": "UseSeeding, model-managed data with HasData, and custom migration operations."
+    },
+    {
+      "key": "intercept",
+      "type": "article",
+      "title": "Interceptors",
+      "url": "https://learn.microsoft.com/en-us/ef/core/logging-events-diagnostics/interceptors",
+      "author": "Microsoft Learn",
+      "description": "Command, connection, transaction and SaveChanges interceptors and how to register them."
+    },
+    {
+      "key": "logging",
+      "type": "article",
+      "title": "Simple logging",
+      "url": "https://learn.microsoft.com/en-us/ef/core/logging-events-diagnostics/simple-logging",
+      "author": "Microsoft Learn",
+      "description": "LogTo, sensitive data logging, detailed errors and filtering log messages."
+    },
+    {
+      "key": "effquery",
+      "type": "article",
+      "title": "Efficient querying",
+      "url": "https://learn.microsoft.com/en-us/ef/core/performance/efficient-querying",
+      "author": "Microsoft Learn",
+      "description": "Indexes, projections, limiting result sets, avoiding N+1 and lazy-loading pitfalls."
+    },
+    {
+      "key": "effupdate",
+      "type": "article",
+      "title": "Efficient updating",
+      "url": "https://learn.microsoft.com/en-us/ef/core/performance/efficient-updating",
+      "author": "Microsoft Learn",
+      "description": "Statement batching in SaveChanges and bulk updates."
+    },
+    {
+      "key": "datareader",
+      "type": "article",
+      "title": "Retrieve data using a DataReader",
+      "url": "https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/retrieving-data-using-a-datareader",
+      "author": "Microsoft Learn",
+      "description": "Reading rows with ExecuteReader, checking for nulls and moving through multiple result sets."
+    },
+    {
+      "key": "pooling",
+      "type": "article",
+      "title": "SQL Server connection pooling (ADO.NET)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/sql-server-connection-pooling",
+      "author": "Microsoft Learn",
+      "description": "How ADO.NET pools physical connections per connection string and returns them on Close or Dispose."
+    },
+    {
+      "key": "txscope",
+      "type": "article",
+      "title": "Implementing an implicit transaction using transaction scope",
+      "url": "https://learn.microsoft.com/en-us/dotnet/framework/data/transactions/implementing-an-implicit-transaction-using-transaction-scope",
+      "author": "Microsoft Learn",
+      "description": "TransactionScope, Complete, nesting and the Required, RequiresNew and Suppress options."
+    },
+    {
+      "key": "dapper",
+      "type": "link",
+      "title": "Dapper",
+      "url": "https://github.com/DapperLib/Dapper",
+      "author": "Dapper contributors",
+      "description": "The Dapper micro-ORM: extension methods on DbConnection that map query results to objects."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple-choice",
+      "prompt": "`services.AddDbContext<ShopContext>(...)` is called in an ASP.NET Core app with no lifetime argument. What lifetime does `ShopContext` get?",
+      "options": [
+        "Singleton, shared by the whole app",
+        "Transient, a new instance per resolution",
+        "Scoped, one instance per request",
+        "Pooled singleton, rented per request"
+      ],
+      "correct": 2,
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "explanation": "`AddDbContext` registers the context as scoped by default, so each HTTP request gets its own instance that is disposed at the end of the request. A singleton would be shared by parallel requests, which a DbContext does not support. Transient would hand different instances to services in the same request, and pooling only happens when you call `AddDbContextPool` instead.",
+      "materials": [
+        "dbctx"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `AddDbContextPool` are true?",
+      "options": [
+        "It makes a single context instance safe to share between threads",
+        "Entities left tracked by one request are still tracked in the next",
+        "The pool has a maximum size, 1024 by default since EF Core 6",
+        "Contexts are reset and reused instead of being created per request",
+        "It also works without DI, through `PooledDbContextFactory`"
+      ],
+      "correctIndices": [
+        2,
+        3,
+        4
+      ],
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "explanation": "Pooling resets and reuses context instances, the pool size defaults to 1024 (configurable), and `PooledDbContextFactory` gives the same benefit without dependency injection. The reset clears the change tracker before an instance goes back to the pool, so nothing tracked leaks into the next request. Pooling does nothing for thread safety: each rented instance is still for one operation at a time.",
+      "materials": [
+        "advperf"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With `AddDbContextPool`, the context's constructor runs again for every request that rents an instance from the pool.",
+      "correctAnswer": false,
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "explanation": "False. Pooling creates an instance once, then resets EF Core's own state and hands the same object to later requests, so the constructor runs only when the pool has to create a new instance. That is the source of the saving, and also why per-request state must not be set in the constructor.",
+      "materials": [
+        "advperf"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A team switches from `AddDbContext` to `AddDbContextPool` and sets a `TenantId` field from a constructor parameter that is read from the current request. What goes wrong?",
+      "options": [
+        "A reused instance keeps the tenant from the request that first created it",
+        "The pool rejects contexts whose constructor takes parameters",
+        "The context is created per request, so pooling brings no benefit",
+        "The field is reset to its default value before each request"
+      ],
+      "correct": 0,
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "explanation": "With pooling, a context instance is created once and then reset and reused across requests, so its constructor does not run again and constructor-set state belongs to whichever request created it. EF Core only resets its own state (change tracker, options it knows), not your custom fields, so the value is not cleared either. Pooled contexts may take a constructor, they just must not rely on per-request constructor state; the docs show setting such state after renting instead.",
+      "materials": [
+        "advperf"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Expression trees are what EF Core translates. The program inspects the right-hand side of two comparisons, one against a literal and one against a captured local. What does it print?",
+      "code": "using System.Linq.Expressions;\n\nvar minId = 2;\nExpression<Func<Blog, bool>> literal = b => b.Id > 2;\nExpression<Func<Blog, bool>> captured = b => b.Id > minId;\n\nConsole.WriteLine(((BinaryExpression)literal.Body).Right.NodeType);\nConsole.WriteLine(((BinaryExpression)captured.Body).Right.NodeType);\n\nrecord Blog(int Id, string Name);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "Constant\nMemberAccess",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "explanation": "A literal becomes a `ConstantExpression`, while a captured local becomes a `MemberAccess` on the compiler-generated closure object. EF Core uses this difference: constants are inlined into the SQL (a new value means a new cached query), while closure members are turned into SQL parameters, so the same query plan is reused for different values. This is why the docs advise using variables instead of building queries with changing constants.",
+      "materials": [
+        "advperf"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Two `ToListAsync()` calls on the same `DbContext` are started and then awaited together with `Task.WhenAll`. What does EF Core document about this?",
+      "options": [
+        "It is supported; each call opens its own connection from the pool",
+        "It is supported if MultipleActiveResultSets is enabled in the connection string",
+        "It is supported; the second query waits on an internal lock for the first one",
+        "It is unsupported; EF Core tries to detect it and throws InvalidOperationException"
+      ],
+      "correct": 3,
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "explanation": "A `DbContext` is not thread-safe and does not support parallel operations on one instance; await each operation before starting the next or use separate contexts. EF Core detects overlapping use on a best-effort basis and throws `InvalidOperationException` (\"A second operation was started on this context instance...\"). It does not open extra connections or queue the calls, and MARS does not make the context itself thread-safe.",
+      "materials": [
+        "dbctx"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these leave the entity tracked by the context?",
+      "options": [
+        "`context.Blogs.Find(5)` when the row exists",
+        "`context.Blogs.AsNoTracking().First()`",
+        "`context.Blogs.Add(blog)`",
+        "`context.Update(blog)`",
+        "`context.Attach(blog)`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "`Attach`, `Update`, `Add` and `Find` all leave the entity in the change tracker (`Find` checks the tracker first and tracks what it loads); they differ only in the state they assign. A no-tracking query returns detached instances that the context never sees, so changing them has no effect on `SaveChanges`.",
+      "materials": [
+        "explicit",
+        "tracking"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A web app uses `AddDbContextPool<ShopContext>()`. Put the life of one pooled context instance across two requests in order, first to last.",
+      "options": [
+        "Request 1 asks for the context and the pool creates a new instance",
+        "Request 1 queries and saves through the instance",
+        "Request 1's scope ends and EF Core resets the instance's state",
+        "The instance is returned to the pool",
+        "Request 2 is handed the same instance from the pool"
+      ],
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "explanation": "With an empty pool the first request causes the instance to be created. When its scope is disposed, the context is not destroyed: EF Core resets its state (change tracker and so on) and returns it to the pool, and the next request receives that same instance. That reuse is what saves the setup cost.",
+      "materials": [
+        "advperf"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`Blog.Id` is a store-generated `int` key. A detached `new Blog { Id = 5 }` and a detached `new Blog()` are each passed to `context.Attach`. Which states do they get?",
+      "options": [
+        "`Unchanged` for both",
+        "`Unchanged` and `Added`",
+        "`Modified` and `Added`",
+        "`Added` for both"
+      ],
+      "correct": 1,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`Attach` begins tracking in the `Unchanged` state, except that an entity whose generated key is not set (the CLR default, 0 here) is treated as new and marked `Added`. So the blog with `Id = 5` is assumed to exist and the one with no key is assumed to need an INSERT. `Modified` would come from `Update`, and attaching never marks an entity with a set key as `Added`.",
+      "materials": [
+        "explicit"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`ExecuteUpdate` and `ExecuteDelete` leave entities that are already tracked by the context unchanged, so the tracker can hold stale values afterwards.",
+      "correctAnswer": true,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "True. Both methods send SQL straight to the database and never consult or update the change tracker. Tracked instances keep their old values (and a deleted row's entity stays tracked), so reload them or use a fresh context when you need current data.",
+      "materials": [
+        "bulk"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "The query is built over an `IQueryable` before the captured variable changes. What does it print?",
+      "code": "var minId = 2;\nvar blogs = new List<Blog> { new(1, \"a\"), new(2, \"b\"), new(3, \"c\") };\n\nvar query = blogs.AsQueryable().Where(b => b.Id > minId);\nminId = 0;\n\nConsole.WriteLine(query.Count());\nblogs.Add(new(4, \"d\"));\nConsole.WriteLine(query.Count());\n\nrecord Blog(int Id, string Name);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "3\n4",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "The query stores an expression tree that refers to the variable `minId`, not its value at the time `Where` was called, and it runs only when `Count()` enumerates it. So the first count uses `minId = 0` and sees 3 blogs, and the second also sees the newly added one, printing 4. EF Core behaves the same way: a captured variable becomes a parameter whose value is read each time the query executes.",
+      "materials": [
+        "clienteval",
+        "advperf"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "With default settings (`AutoDetectChangesEnabled` true), which calls make EF Core run `DetectChanges` automatically?",
+      "options": [
+        "`context.ChangeTracker.Entries()`",
+        "`context.ChangeTracker.HasChanges()`",
+        "`context.SaveChanges()`",
+        "Assigning a new value to a tracked entity's property",
+        "Executing a LINQ query with `ToList()`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "explanation": "The docs list `SaveChanges`, `Entry`, `ChangeTracker.Entries`, `HasChanges`, `CascadeChanges` and `DbSet.Local` among the calls that detect changes first. A property setter on a plain POCO does not notify EF Core (that is the point of snapshot tracking), and running a query does not scan the tracker.",
+      "materials": [
+        "detect"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A detached `Blog` with a set key comes back from an API call and is saved with `context.Update(blog); context.SaveChanges();`. What does the UPDATE statement contain?",
+      "options": [
+        "Only the columns whose values differ from the database row",
+        "Every mapped non-key column of the blog, changed or not",
+        "Only the primary key, used to refresh the row's timestamp",
+        "No columns, because the entity is attached as Unchanged"
+      ],
+      "correct": 1,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`Update` marks the entity `Modified` and flags every property as modified, because EF Core has no original values to compare against for a detached object. The UPDATE therefore sets each mapped non-key column. Only a tracked entity loaded from the database gets the column-by-column diff, and `Unchanged` is what `Attach` (not `Update`) produces.",
+      "materials": [
+        "explicit"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A tracked blog named \"a\" is in memory. `context.Blogs.ExecuteUpdate(s => s.SetProperty(b => b.Name, \"bulk\"))` runs, then `context.Blogs.First()` is queried with tracking. What is the returned blog's `Name`?",
+      "options": [
+        "\"bulk\", because the tracking query refreshes the tracked instance",
+        "It throws, because the tracked entity is now out of date",
+        "\"bulk\", because ExecuteUpdate also updates tracked entities",
+        "\"a\", because the query returns the already-tracked instance as it is"
+      ],
+      "correct": 3,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "`ExecuteUpdate` runs SQL immediately and does not touch the change tracker. A later tracking query finds a row whose key is already tracked and returns that existing instance without overwriting its values, so you still see \"a\" (an `AsNoTracking` query would show \"bulk\"). EF Core does not raise an error for stale tracked data; you must reload or clear the tracker yourself.",
+      "materials": [
+        "bulk",
+        "tracking"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about owned entity types (`OwnsOne`/`OwnsMany`) are true?",
+      "options": [
+        "Owned types are loaded only when you `Include` them",
+        "`OwnsMany` stores the owned items in a separate table",
+        "`OwnsOne` maps the owned properties into the owner's table by default",
+        "The owned type gets a key in the model, often a shadow property",
+        "The same owned instance can be assigned to two different owners"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        3
+      ],
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`OwnsOne` uses table splitting into the owner's table, `OwnsMany` needs its own table, and owned types do have a key (for `OwnsOne` the owner's key as a shadow property). Because they have identity, one instance cannot belong to two owners (EF8 complex types allow that). Owned types are included automatically with the owner, no `Include` needed.",
+      "materials": [
+        "owned"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When a property has a value converter (for example an enum stored as a string), a LINQ comparison on that property is translated to SQL using the converted value.",
+      "correctAnswer": true,
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "explanation": "True. EF Core applies the converter to the constant or parameter, so `Where(b => b.Status != Status.Archived)` becomes `WHERE Status <> 'Archived'` (verified with SQLite). What does not translate well are operations that depend on the provider type's semantics, such as ordering converted strings as if they were numbers.",
+      "materials": [
+        "conv"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`var blog = new Blog(); context.Add(blog); context.Remove(blog);` What state is `blog` in afterwards?",
+      "options": [
+        "`Detached`, and SaveChanges sends nothing for it",
+        "`Added`, because Remove skips entities not yet in the database",
+        "`Deleted`, so SaveChanges sends a DELETE",
+        "`Modified`, because removing an added entity changes it"
+      ],
+      "correct": 0,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Removing an entity in the `Added` state simply stops tracking it, because there is no row to delete; it becomes `Detached` and `SaveChanges` issues no SQL for it. Marking it `Deleted` would produce a DELETE for a row that does not exist. Remove is not ignored and there is no `Modified` transition here.",
+      "materials": [
+        "explicit"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "The same filter is applied once to a variable typed `IEnumerable<Blog>` and once directly to the `IQueryable<Blog>`. What does it print?",
+      "code": "var blogs = new List<Blog> { new(1, \"a\"), new(2, \"b\"), new(3, \"c\") };\n\nIEnumerable<Blog> asEnumerable = blogs.AsQueryable().Where(b => b.Id > 1);\nvar fromEnumerable = asEnumerable.Where(b => b.Name != \"c\");\nvar fromQueryable = blogs.AsQueryable().Where(b => b.Id > 1).Where(b => b.Name != \"c\");\n\nConsole.WriteLine(fromEnumerable is IQueryable<Blog>);\nConsole.WriteLine(fromQueryable is IQueryable<Blog>);\nConsole.WriteLine(fromEnumerable.Count() + \" \" + fromQueryable.Count());\n\nrecord Blog(int Id, string Name);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "False\nTrue\n1 1",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "explanation": "Extension methods bind by the static type: on a variable declared as `IEnumerable<Blog>`, `Where` resolves to `Enumerable.Where`, which returns an in-memory iterator, so the result is not `IQueryable` (False). Chaining on the `IQueryable` keeps `Queryable.Where` and stays queryable (True). Both give the same 1 result here, but with EF Core the first form would run only the first filter in SQL and apply the second in memory after fetching the rows.",
+      "materials": [
+        "clienteval"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "With `context.ChangeTracker.AutoDetectChangesEnabled = false`, a tracked blog's `Name` is changed and then `context.Entry(blog).State` is read. What does it return?",
+      "options": [
+        "`Modified`, because Entry compares against the snapshot",
+        "`Modified`, because property setters notify the tracker",
+        "`Unchanged`, until DetectChanges runs",
+        "`Detached`, because automatic detection is off"
+      ],
+      "correct": 2,
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "explanation": "Plain POCO entities use snapshot change tracking: EF Core only notices a change when `DetectChanges` compares current values with the snapshot. Normally `Entry()` triggers that scan for the entity, but with automatic detection turned off nothing calls it, so the state stays `Unchanged` until you call `ChangeTracker.DetectChanges()`. Setters only notify EF Core if the entity implements notification interfaces, and turning detection off does not detach anything.",
+      "materials": [
+        "detect"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about EF Core inheritance mapping are true?",
+      "options": [
+        "TPH needs derived-only columns to be nullable in the shared table",
+        "TPC is the recommended default by the EF Core team for most hierarchies",
+        "TPC maps each concrete type to its own table, including inherited columns",
+        "TPH is the default strategy when you map derived types",
+        "TPT stores the hierarchy in one table with a discriminator"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "TPH is the default; since rows of other types leave the derived-only columns empty, those columns must be nullable. TPC repeats inherited columns in each concrete type's table. TPT is the table-per-type strategy, which needs joins rather than a discriminator in one table, and the docs recommend TPH as the usual default, with TPC for specific cases.",
+      "materials": [
+        "inherit"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "An entity has a `Version` concurrency token. Two users edit the same row. Put the events that end in a conflict for user B in order, first to last.",
+      "options": [
+        "Users A and B both read the row with Version = 1",
+        "User A saves; the UPDATE matches Version = 1 and sets Version = 2",
+        "User B calls SaveChanges with original Version = 1",
+        "User B's UPDATE ... WHERE Id = @id AND Version = 1 affects 0 rows",
+        "EF Core throws DbUpdateConcurrencyException for user B"
+      ],
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "Both users start from the same token value. A's save changes the token, so B's UPDATE, which includes B's original token in the WHERE clause, finds no matching row. EF Core sees 0 affected rows where it expected 1 and raises `DbUpdateConcurrencyException`.",
+      "materials": [
+        "conc"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Two posts belong to the same blog. Which query returns both posts with their `Blog` navigation pointing to the same `Blog` instance, without tracking anything?",
+      "options": [
+        "`context.Posts.AsNoTracking().Include(p => p.Blog).ToList()`",
+        "`context.Posts.Include(p => p.Blog).AsSplitQuery().ToList()`",
+        "`context.Posts.AsNoTrackingWithIdentityResolution().Include(p => p.Blog).ToList()`",
+        "`context.Posts.AsNoTracking().Include(p => p.Blog).AsSingleQuery().ToList()`"
+      ],
+      "correct": 2,
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "explanation": "`AsNoTrackingWithIdentityResolution` uses a temporary, query-scoped tracker so rows with the same key become one instance, and it tracks nothing afterwards. Plain `AsNoTracking` creates a new `Blog` object per row, so the two posts get different instances whether the query runs as a single or split query. The remaining option is a tracking query: it shares the instance but leaves the entities in the change tracker.",
+      "materials": [
+        "tracking"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "An owned entity type can be queried directly through its own `DbSet<T>` on the context.",
+      "correctAnswer": false,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "False. Owned types are part of their owner's aggregate and can only be reached through the owner's navigation; EF Core does not allow a `DbSet<T>` for them. Query the owner and project the owned value, or model the type as a regular entity if it needs to be queried on its own.",
+      "materials": [
+        "owned"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "The program looks at the expression tree a provider receives for a predicate. What does it print?",
+      "code": "using System.Linq.Expressions;\n\nExpression<Func<Blog, bool>> e = b => b.Name.StartsWith(\"a\") && b.Id > 1;\n\nvar body = (BinaryExpression)e.Body;\nvar left = (MethodCallExpression)body.Left;\nConsole.WriteLine(body.NodeType);\nConsole.WriteLine(left.Method.DeclaringType!.Name + \".\" + left.Method.Name);\nConsole.WriteLine(body.Right.NodeType);\n\nrecord Blog(int Id, string Name);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "AndAlso\nString.StartsWith\nGreaterThan",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`&&` becomes an `AndAlso` node whose left side is a method call to `String.StartsWith` and whose right side is a `GreaterThan` comparison. A LINQ provider walks this tree and maps known methods such as `string.StartsWith` to SQL (a LIKE or similar); it can only translate methods it recognizes, which is why calls to your own methods in a `Where` cannot be translated.",
+      "materials": [
+        "clienteval"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which LINQ operators can be used inside a filtered `Include`, as in `Include(b => b.Posts.<operator>(...))`?",
+      "options": [
+        "`Where`",
+        "`OrderByDescending`",
+        "`Take`",
+        "`Skip`",
+        "`Select`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Filtered include supports `Where`, `OrderBy`, `OrderByDescending`, `ThenBy`, `ThenByDescending`, `Skip` and `Take`. A projection with `Select` would change the element type of the navigation collection, so it is not allowed there; use a projection query instead.",
+      "materials": [
+        "eager"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Three new blogs are added with `Add` and `context.SaveChanges()` is called. What does `SaveChanges` return?",
+      "options": [
+        "The number of entities that were written, 3",
+        "The number of SQL commands sent to the database",
+        "The generated key of the last inserted blog",
+        "Nothing, since SaveChanges returns void"
+      ],
+      "correct": 0,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "`SaveChanges` returns an `int`: the number of state entries written to the database, here the three inserted blogs. It is not a count of commands (several entities can share a batch) and it does not return keys; generated keys are written back into the entity properties instead.",
+      "materials": [
+        "tx"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `context.SaveChanges(acceptAllChangesOnSuccess: false)` change compared with plain `SaveChanges()`?",
+      "options": [
+        "It skips the automatic transaction that normally wraps the commands",
+        "It writes the changes but rolls them back if the context is disposed",
+        "It validates the changes without sending any SQL to the database",
+        "Entities keep their pending states until AcceptAllChanges is called"
+      ],
+      "correct": 3,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "Normally a successful save moves entities to `Unchanged`. With `false`, the SQL is executed but the tracker keeps the pending states, so the same changes can be saved again, for example when an outer transaction or retry loop fails, and you call `ChangeTracker.AcceptAllChanges()` once everything succeeded. It still uses a transaction and still executes the commands, and disposing the context does not roll anything back.",
+      "materials": [
+        "tx",
+        "resil"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which are requirements for lazy loading with `Microsoft.EntityFrameworkCore.Proxies`?",
+      "options": [
+        "Registering the context with `AddDbContextPool`",
+        "Declaring the navigation properties as `virtual`",
+        "Marking each navigation with a `[LazyLoad]` attribute",
+        "Calling `UseLazyLoadingProxies()` when configuring the context",
+        "Entity classes that can be inherited (not sealed)"
+      ],
+      "correctIndices": [
+        1,
+        3,
+        4
+      ],
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "The proxies package creates subclasses at run time that override navigation getters, so you opt in with `UseLazyLoadingProxies()`, make navigations `virtual` and keep the classes inheritable. There is no `[LazyLoad]` attribute, and pooling has nothing to do with lazy loading.",
+      "materials": [
+        "lazy"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When a hierarchy is mapped with TPH, EF Core by default adds a shadow property named `Discriminator` that stores the CLR type name of each row.",
+      "correctAnswer": true,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "True. TPH is the default strategy: one table for the hierarchy plus a discriminator column (a shadow property named `Discriminator`) holding the type name, and queries for a derived type filter on it, for example `WHERE Discriminator = 'Cat'`. The name and values can be changed with `HasDiscriminator`.",
+      "materials": [
+        "inherit"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A context uses a retrying execution strategy (for example `EnableRetryOnFailure`). Code calls `context.Database.BeginTransaction()`, two `SaveChanges()` calls and `Commit()`. What happens?",
+      "options": [
+        "It works, and each SaveChanges is retried on its own",
+        "InvalidOperationException, unless the block runs inside strategy.Execute",
+        "It works, and the whole block is retried on a transient error",
+        "The transaction is silently replaced by one per SaveChanges call"
+      ],
+      "correct": 1,
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "explanation": "A retrying strategy cannot replay part of a user-initiated transaction, so EF Core throws `InvalidOperationException` (\"does not support user-initiated transactions\"). The fix is to wrap the whole unit, transaction included, in `context.Database.CreateExecutionStrategy().Execute(...)`, so the strategy retries the entire block. EF Core does not silently retry the individual saves or split the transaction.",
+      "materials": [
+        "resil"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "The program reads rows through `DbDataReader` (a `DataTableReader` here) and checks a NULL column. What does it print?",
+      "code": "using System.Data;\nusing System.Data.Common;\n\nvar table = new DataTable();\ntable.Columns.Add(\"Id\", typeof(int));\ntable.Columns.Add(\"Email\", typeof(string));\ntable.Rows.Add(1, \"a@x\");\ntable.Rows.Add(2, DBNull.Value);\n\nusing DbDataReader r = table.CreateDataReader();\nwhile (r.Read())\n{\n    var i = r.GetOrdinal(\"Email\");\n    Console.WriteLine($\"{r.GetInt32(0)} {r.IsDBNull(i)} {r.GetValue(i) is null} [{r[\"Email\"]}]\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "1 False False [a@x]\n2 True False []",
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "explanation": "ADO.NET represents a database NULL as `DBNull.Value`, not as `null`, so `IsDBNull` is True for the second row while `GetValue(i) is null` stays False in both rows. Interpolating `DBNull.Value` prints an empty string. Code reading nullable columns must check `IsDBNull` (or compare with `DBNull.Value`) before calling typed getters such as `GetString`, which would throw.",
+      "materials": [
+        "datareader"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`Blog` has an owned type configured with `modelBuilder.Entity<Blog>().OwnsOne(b => b.Home)`, where `Home` is an `Address` with `Street` and `City`. With default conventions, how are the columns named?",
+      "options": [
+        "`Street` and `City` in the Blogs table",
+        "`Home_Street` and `Home_City` in the Blogs table",
+        "`Street` and `City` in a separate Address table",
+        "`Address_Street` and `Address_City` in the Blogs table"
+      ],
+      "correct": 1,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Owned types are mapped into the owner's table by default (table splitting), and each column is named after the navigation plus the property: `Home_Street`, `Home_City`. The prefix comes from the navigation name, not the CLR type name `Address`. A separate table only happens with `ToTable` or with `OwnsMany`.",
+      "materials": [
+        "owned"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`name` comes from user input. Which calls are open to SQL injection?",
+      "options": [
+        "`context.Users.FromSql($\"SELECT * FROM Users WHERE Name = {name}\")`",
+        "`context.Database.ExecuteSqlRaw($\"DELETE FROM Users WHERE Name = '{name}'\")`",
+        "`context.Users.FromSqlRaw(\"SELECT * FROM Users WHERE Name = {0}\", name)`",
+        "`context.Users.FromSqlRaw($\"SELECT * FROM Users WHERE Name = '{name}'\")`",
+        "`context.Users.FromSqlRaw(\"SELECT * FROM Users WHERE Name = '\" + name + \"'\")`"
+      ],
+      "correctIndices": [
+        1,
+        3,
+        4
+      ],
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "explanation": "Concatenation, and string interpolation passed to a `...Raw` method, build the final SQL text before EF Core sees it, so the input becomes code. `FromSql` with interpolation receives a `FormattableString` and creates parameters, and `FromSqlRaw` with `{0}` placeholders plus arguments also parameterizes the values.",
+      "materials": [
+        "sql"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A developer adds a property to an entity and ships the schema change to production with a migration bundle. Put the steps in order, first to last.",
+      "options": [
+        "Add the property to the entity class",
+        "Run `dotnet ef migrations add AddRating`",
+        "Review the generated migration code",
+        "Build the bundle with `dotnet ef migrations bundle`",
+        "Run the bundle against the production database"
+      ],
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "Migrations are generated from model changes, so the model changes first, then `migrations add` creates the migration, which you review because EF Core cannot guess intent (for example data loss). The bundle is built from the reviewed migrations and then executed against the target database.",
+      "materials": [
+        "migapply"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which configuration stores the `Status` enum as its name (\"Active\") instead of its number?",
+      "options": [
+        "`.Property(o => o.Status).HasMaxLength(20)`",
+        "`.Property(o => o.Status).HasColumnType(\"varchar\")`",
+        "`.Property(o => o.Status).IsUnicode()`",
+        "`.Property(o => o.Status).HasConversion<string>()`"
+      ],
+      "correct": 3,
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "explanation": "Enums are stored as their underlying integer by default; `HasConversion<string>()` adds the built-in enum-to-string converter so the column holds the member name. Changing the column type, Unicode setting or max length only affects the database type, so EF Core would still try to write the integer value.",
+      "materials": [
+        "conv"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`HasData` can seed rows without specifying key values when the key is generated by the database.",
+      "correctAnswer": false,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "False. Model-managed seed data must specify key values explicitly, even for identity columns, because migrations compare seed rows by key to decide between InsertData, UpdateData and DeleteData. Without keys EF Core could not track which seed row is which across model changes.",
+      "materials": [
+        "seeding"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "An interpolated SQL string is passed as a `FormattableString`, the parameter type of EF Core's `FromSql`. What does it print?",
+      "code": "string name = \"x' OR 1=1 --\";\nFormattableString sql = $\"SELECT * FROM Users WHERE Name = {name}\";\n\nConsole.WriteLine(sql.Format);\nConsole.WriteLine(sql.ArgumentCount);\nConsole.WriteLine(sql.GetArgument(0));\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "SELECT * FROM Users WHERE Name = {0}\n1\nx' OR 1=1 --",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "explanation": "A `FormattableString` keeps the format text with numbered holes and the argument values separately, so the user input never becomes part of the SQL text. EF Core's `FromSql` and `ExecuteSql` use this to replace each hole with a `DbParameter`, so the malicious value is sent as a plain string parameter. Formatting it into a `string` first would produce injectable SQL.",
+      "materials": [
+        "sql"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `ExecuteUpdate`/`ExecuteDelete` are true?",
+      "options": [
+        "They return the number of affected rows",
+        "They do not invoke `SaveChanges` interceptors or events",
+        "They do not check concurrency tokens unless you add the condition to the query",
+        "They are queued and sent with the next `SaveChanges` transaction",
+        "They load the matching entities first to run cascade logic in memory"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "explanation": "These methods translate straight to an UPDATE/DELETE and run immediately, returning the affected-row count. Because they bypass the change tracker, `SaveChanges` interceptors and events do not fire and concurrency tokens are only checked if you put them in the `Where`. They are not batched into `SaveChanges`, and they load nothing, so only database-side cascades apply.",
+      "materials": [
+        "bulk"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`Blog` has a shadow property configured with `modelBuilder.Entity<Blog>().Property<DateTime>(\"LastUpdated\")`. How do you filter on it in a LINQ query?",
+      "options": [
+        "`b => EF.Property<DateTime>(b, \"LastUpdated\") > cutoff`",
+        "`b => b.LastUpdated > cutoff` after adding the property with a partial class",
+        "`b => context.Entry(b).Property(\"LastUpdated\").CurrentValue > cutoff`",
+        "`b => ((dynamic)b).LastUpdated > cutoff`"
+      ],
+      "correct": 0,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Shadow properties exist only in the EF model, so queries refer to them through `EF.Property<T>(entity, name)`, which EF Core translates to the column. `Entry(...).Property(...)` reads values of tracked entities in memory and cannot be translated inside a query, and `dynamic` access is not translatable either. Adding a CLR property would make it a normal property, no longer a shadow one.",
+      "materials": [
+        "shadow"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A hierarchy is mapped with TPC (`UseTpcMappingStrategy()`) on SQL Server. How does EF Core generate key values by default?",
+      "options": [
+        "With an IDENTITY column in each concrete table",
+        "With a GUID generated on the client for each row",
+        "With one database sequence shared by the concrete tables",
+        "With a computed column that combines table name and row number"
+      ],
+      "correct": 2,
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "explanation": "In TPC every concrete type has its own table, but keys must stay unique across the whole hierarchy because a query for the base type unions the tables. Separate IDENTITY columns would produce overlapping values, so EF Core uses a shared database sequence by default on SQL Server. Client-side GUIDs are possible if you choose them, but they are not the default for `int` keys.",
+      "materials": [
+        "inherit"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about global query filters in EF Core 8/9 are true?",
+      "options": [
+        "`IgnoreQueryFilters()` turns them off for a single query",
+        "Calling `HasQueryFilter` twice on one entity type combines both filters with AND",
+        "They apply to `ExecuteSqlRaw` statements that touch the table",
+        "They are defined with `HasQueryFilter` in `OnModelCreating`",
+        "They also apply to entities loaded through `Include`"
+      ],
+      "correctIndices": [
+        0,
+        3,
+        4
+      ],
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Filters are part of the model, are applied wherever the entity type is queried, including includes, and can be disabled per query. In EF Core 8/9 a second `HasQueryFilter` call replaces the first (verified), so combine conditions in one lambda. Raw SQL commands sent with `ExecuteSqlRaw` are not rewritten.",
+      "materials": [
+        "filters"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A script from `dotnet ef migrations script --idempotent` checks `__EFMigrationsHistory` before each migration, so it can run against a database at any migration level.",
+      "correctAnswer": true,
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "True. Each migration's statements are wrapped in a check for its row in the history table, so already-applied migrations are skipped. This makes the script safe when you do not know the target's current migration. Not every provider supports it; SQLite, for example, throws `NotSupportedException` for idempotent scripts.",
+      "materials": [
+        "migapply"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A query for the abstract base type `Animal` returns cats and dogs. Which mapping strategy makes this query join the base table with a table per derived type?",
+      "options": [
+        "TPH (table per hierarchy)",
+        "TPC (table per concrete type)",
+        "TPT (table per type)",
+        "Owned types with table splitting"
+      ],
+      "correct": 2,
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "explanation": "In TPT the base properties live in one table and each derived type adds its own table, so materializing mixed types needs joins across them, which is why the docs warn about TPT performance. TPH reads a single table and uses the discriminator. TPC unions the concrete tables instead of joining them, and owned types are not an inheritance strategy.",
+      "materials": [
+        "inherit"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "A class has two overloads, one taking `string` and one taking `FormattableString`, and is called with an interpolated string. What does it print?",
+      "code": "string name = \"x' OR 1=1 --\";\nDb.Run($\"SELECT * FROM Users WHERE Name = {name}\");\nDb.Run(\"SELECT 1\");\n\nstatic class Db\n{\n    public static void Run(string sql) => Console.WriteLine(\"string: \" + sql);\n    public static void Run(FormattableString sql) => Console.WriteLine(\"FormattableString: \" + sql.Format);\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "string: SELECT * FROM Users WHERE Name = x' OR 1=1 --\nstring: SELECT 1",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "explanation": "C# prefers the conversion of an interpolated string to `string`, so the `string` overload wins and the value is formatted straight into the SQL text, the injection risk in action. That is why EF Core gives the safe and unsafe APIs different names (`FromSql`/`ExecuteSql` take `FormattableString`, `FromSqlRaw`/`ExecuteSqlRaw` take `string`) instead of overloading one name.",
+      "materials": [
+        "sql"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`Note.BlogId` is a nullable FK with default configuration. A blog is deleted with `context.Remove(blog); context.SaveChanges();` without loading its notes, and the database has notes for that blog. What happens on a relational database?",
+      "options": [
+        "The DELETE fails with a foreign key violation",
+        "The notes' BlogId is set to NULL by an ON DELETE SET NULL constraint",
+        "EF Core loads the notes first and sets their BlogId to NULL",
+        "The notes are deleted by an ON DELETE CASCADE created by EF Core"
+      ],
+      "correct": 0,
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "explanation": "Optional relationships default to `ClientSetNull`: EF Core nulls the FK only on dependents it is tracking, and the database constraint gets no action. Since the notes were not loaded, the DELETE hits the FK constraint and fails (verified on SQLite). EF Core does not create a cascade or SET NULL constraint for this default and does not load dependents automatically; configure `OnDelete(DeleteBehavior.SetNull)` or load them.",
+      "materials": [
+        "cascade"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`SaveChanges` throws `DbUpdateConcurrencyException`. Which statements are true?",
+      "options": [
+        "Changes from the same `SaveChanges` call that succeeded stay committed",
+        "`ex.Entries` contains the entries whose updates failed the concurrency check",
+        "Copying database values into `entry.OriginalValues` and saving again overrides the other change",
+        "`entry.GetDatabaseValues()` returns `null` if the row has been deleted",
+        "A retrying execution strategy resolves the conflict by retrying automatically"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        3
+      ],
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "The exception exposes the failing entries; `GetDatabaseValues` tells you what is in the database now (or `null` for a deleted row), and refreshing `OriginalValues` makes the next save's WHERE clause match, so the client values win. `SaveChanges` runs in a transaction, so the other commands are rolled back. Execution strategies retry transient errors, not concurrency conflicts.",
+      "materials": [
+        "conc"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A context has a `SaveChangesInterceptor`, a connection interceptor and a transaction interceptor. `SaveChanges()` inserts two rows on a closed connection. Put these interceptor calls in the order they happen, first to last.",
+      "options": [
+        "`SavingChanges`",
+        "`ConnectionOpening`",
+        "`TransactionStarting`",
+        "`TransactionCommitted`",
+        "`SavedChanges`"
+      ],
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "`SavingChanges` fires before any database work. EF Core then opens the connection, starts the implicit transaction, executes the INSERT commands, commits, and finally reports `SavedChanges` (verified with SQLite and logging interceptors). Command interceptor calls would appear between starting and committing the transaction.",
+      "materials": [
+        "intercept"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`Post` has a non-nullable `int BlogId` FK to `Blog` and no `OnDelete` configuration. What delete behavior does the relationship get?",
+      "options": [
+        "`NoAction`",
+        "`ClientSetNull`",
+        "`Restrict`",
+        "`Cascade`"
+      ],
+      "correct": 3,
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "explanation": "A required relationship (non-nullable FK) defaults to `Cascade`, so deleting a blog deletes its posts, both for tracked posts and through the ON DELETE CASCADE that EF Core creates. `ClientSetNull` is the default for optional relationships, and `Restrict`/`NoAction` must be chosen explicitly.",
+      "materials": [
+        "cascade"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In EF Core 8 and 9, `IgnoreQueryFilters()` disables the filters on the root entity type but keeps the filters on entities brought in with `Include`.",
+      "correctAnswer": false,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "False. `IgnoreQueryFilters()` turns off every global query filter for the whole query, including the ones on included navigations (verified: soft-deleted posts reappeared in the include). EF Core 10 adds named filters that can be ignored selectively, but in 8 and 9 it is all or nothing.",
+      "materials": [
+        "filters"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Two `TransactionScope` blocks run, one with `Complete()` and one without. What does it print?",
+      "code": "using System.Transactions;\n\nusing (var scope = new TransactionScope())\n{\n    Transaction.Current!.TransactionCompleted += (_, e) =>\n        Console.WriteLine(\"first: \" + e.Transaction!.TransactionInformation.Status);\n}\n\nusing (var scope = new TransactionScope())\n{\n    Transaction.Current!.TransactionCompleted += (_, e) =>\n        Console.WriteLine(\"second: \" + e.Transaction!.TransactionInformation.Status);\n    scope.Complete();\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "first: Aborted\nsecond: Committed",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "A scope commits only if `Complete()` was called before it is disposed; otherwise disposing it rolls the transaction back. So the first scope ends `Aborted` and the second `Committed`. Connections that EF Core or ADO.NET open inside such a scope enlist in this ambient transaction, so forgetting `Complete()` silently discards their writes.",
+      "materials": [
+        "txscope",
+        "tx"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these apply EF Core migrations to a database?",
+      "options": [
+        "`context.Database.EnsureCreated()`",
+        "`context.Database.Migrate()`",
+        "`dotnet ef database update`",
+        "Running a script from `dotnet ef migrations script`",
+        "Running a migration bundle (`efbundle`)"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "The CLI command, the runtime `Migrate()` call, a bundle and a generated SQL script all apply migrations and record them in `__EFMigrationsHistory` (the script contains the INSERTs into the history table). `EnsureCreated` builds the schema straight from the model and bypasses migrations, leaving no history at all.",
+      "materials": [
+        "migapply"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "All posts are loaded into the context with `context.Posts.ToList()`. Then `context.Blogs.Include(b => b.Posts.Where(p => p.Title == \"p1\")).First()` runs with tracking. The blog has two posts, one titled \"p1\". How many posts are in `blog.Posts`?",
+      "options": [
+        "1, because the filtered include limits the collection",
+        "2, because navigation fixup adds the already-tracked post",
+        "0, because filtered includes are ignored for tracked blogs",
+        "It throws, because the posts are already tracked"
+      ],
+      "correct": 1,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "The filtered include only loads \"p1\", but in a tracking query EF Core fixes up navigations to every related entity already in the change tracker, so the earlier-loaded second post also appears (verified: 2). The docs warn about exactly this; use a fresh context or `AsNoTracking` to see only the filtered rows. The filter is not ignored and nothing throws.",
+      "materials": [
+        "eager",
+        "tracking"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "You need the number of posts of a tracked `blog` without loading the posts. Which call does that in one SQL query?",
+      "options": [
+        "`context.Entry(blog).Collection(b => b.Posts).Load(); blog.Posts.Count`",
+        "`context.Entry(blog).Collection(b => b.Posts).Query().Count()`",
+        "`blog.Posts.Count` with lazy loading turned off",
+        "`context.Entry(blog).Collection(b => b.Posts).CurrentValue.Count`"
+      ],
+      "correct": 1,
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "explanation": "`Collection(...).Query()` returns an `IQueryable` for the related rows, so you can compose `Count()`, `Where` and so on and EF Core runs it as SQL without materializing posts. `Load()` brings every post into memory first. Without lazy loading `blog.Posts` is just the empty in-memory collection, and `CurrentValue` reads that same in-memory collection.",
+      "materials": [
+        "eager",
+        "effquery"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about EF Core interceptors are true?",
+      "options": [
+        "An interceptor applies only to the async versions of the operations",
+        "EF Core finds `IInterceptor` services in the app's DI container automatically",
+        "They are registered with `AddInterceptors` when configuring the context",
+        "A stateless interceptor instance can be shared by every context",
+        "`SaveChangesInterceptor.SavingChanges` runs before EF Core generates the commands"
+      ],
+      "correctIndices": [
+        2,
+        3,
+        4
+      ],
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Interceptors are added per context through the options builder, are often singletons when stateless, and `SavingChanges` runs early enough to change entities. EF Core does not pick them up from the application's service provider on its own (you resolve them and pass them to `AddInterceptors`), and each interceptor interface has sync and async methods.",
+      "materials": [
+        "intercept"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Since EF Core 7, `FromSql` takes a `FormattableString`, so values interpolated into the SQL are sent as database parameters.",
+      "correctAnswer": true,
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "explanation": "True. `FromSql($\"... WHERE Id = {id}\")` turns each interpolation hole into a `DbParameter`, which prevents SQL injection. `FromSqlRaw` takes a plain string, so interpolating user input into it would build the SQL text before EF Core sees it.",
+      "materials": [
+        "sql"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`IsVip(Customer c)` is a plain C# method. Which EF Core 8 query throws `InvalidOperationException` because the call cannot be translated?",
+      "options": [
+        "`context.Customers.Select(c => new { c.Name, Vip = IsVip(c) }).ToList()`",
+        "`context.Customers.ToList().Where(c => IsVip(c)).ToList()`",
+        "`context.Customers.AsEnumerable().Where(c => IsVip(c)).ToList()`",
+        "`context.Customers.Where(c => IsVip(c)).ToList()`"
+      ],
+      "correct": 3,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "EF Core evaluates untranslatable code on the client only in the final top-level projection; a call inside `Where` would require fetching everything, so it throws. The projection version works because `IsVip` runs on each materialized row. The other two switch to LINQ to Objects explicitly (`ToList`, `AsEnumerable`) before the filter, so they run in memory without an error.",
+      "materials": [
+        "clienteval"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "An inner `TransactionScope` is disposed without `Complete()`, and the outer one calls `Complete()`. What does it print?",
+      "code": "using System.Transactions;\n\ntry\n{\n    using (var outer = new TransactionScope())\n    {\n        using (var inner = new TransactionScope())\n        {\n            // forgot inner.Complete()\n        }\n        outer.Complete();\n        Console.WriteLine(\"outer completed\");\n    }\n    Console.WriteLine(\"committed\");\n}\ncatch (Exception ex)\n{\n    Console.WriteLine(ex.GetType().Name);\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "outer completed\nTransactionAbortedException",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "With the default `Required` option the inner scope joins the outer transaction, and disposing it without `Complete()` dooms that shared transaction. `outer.Complete()` still runs, but when the outer scope is disposed it cannot commit and throws `TransactionAbortedException`, so \"committed\" is never printed. Every nested scope has to vote to complete.",
+      "materials": [
+        "txscope"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`context.Blogs.FromSql($\"SELECT * FROM Blogs\").Where(b => b.Rating > 3)` is executed. What SQL does EF Core send on a relational provider?",
+      "options": [
+        "The raw SQL wrapped as a subquery with the WHERE outside it",
+        "The raw SQL, with the filter applied in memory afterwards",
+        "Two statements: the raw SQL and then a filtered SELECT",
+        "The raw SQL with WHERE appended to the end of the text"
+      ],
+      "correct": 0,
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "explanation": "EF Core treats composable raw SQL as a subquery: `SELECT ... FROM (SELECT * FROM Blogs) AS b WHERE b.Rating > 3`. That is why the SQL must be composable; a stored procedure call or a trailing semicolon cannot be wrapped, and you then need `AsEnumerable()` before further operators. It does not filter on the client, split into two statements, or edit the text by appending a clause.",
+      "materials": [
+        "sql"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which options help you see or diagnose the SQL EF Core generates?",
+      "options": [
+        "`query.ToQueryString()`",
+        "`optionsBuilder.LogTo(Console.WriteLine)`",
+        "`EnableThreadSafetyChecks(false)`",
+        "`query.TagWith(\"Orders report\")`",
+        "`AsNoTracking()`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "`LogTo` logs each executed command, `ToQueryString()` returns the SQL of a query without running it, and `TagWith` adds a comment to the SQL so you can find it in logs and profilers. `AsNoTracking` changes tracking, not visibility, and disabling thread-safety checks only removes a safety net.",
+      "materials": [
+        "logging",
+        "effquery"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the steps of running a parameterized query with plain ADO.NET in order, first to last.",
+      "options": [
+        "Create the connection with a connection string",
+        "Open the connection",
+        "Create the command and add its parameters",
+        "Call ExecuteReader",
+        "Read rows with Read() until it returns false"
+      ],
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "explanation": "A connection is created and opened (taking one from the pool), then a command is built on it with its parameters. `ExecuteReader` sends it and returns a reader, and you advance with `Read()` until it returns false, then dispose the reader and connection to return the connection to the pool.",
+      "materials": [
+        "datareader"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "When is the DELETE statement of `context.Posts.Where(p => p.IsSpam).ExecuteDelete()` sent to the database?",
+      "options": [
+        "When the context is disposed at the end of the scope",
+        "At the next SaveChanges call on the same context",
+        "Immediately, when ExecuteDelete is called",
+        "When the returned query is enumerated"
+      ],
+      "correct": 2,
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "explanation": "`ExecuteDelete` and `ExecuteUpdate` execute right away and return the number of affected rows; they are not queued in the change tracker, so `SaveChanges` is not involved. Nothing is deferred to disposal, and the method returns an `int`, not a query to enumerate.",
+      "materials": [
+        "bulk"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A lazy-loading proxy can still load a navigation after the `DbContext` that loaded the entity has been disposed.",
+      "correctAnswer": false,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "False. Lazy loading needs the context to run the query; touching an unloaded navigation after disposal throws `InvalidOperationException` (the LazyLoadOnDisposedContextWarning is an error by default, verified). Load what you need with `Include` or projection before the context goes away.",
+      "materials": [
+        "lazy"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Inside an outer `TransactionScope`, inner scopes are created with `Suppress` and `RequiresNew`. What does it print?",
+      "code": "using System.Transactions;\n\nusing (var outer = new TransactionScope())\n{\n    var outerId = Transaction.Current!.TransactionInformation.LocalIdentifier;\n\n    using (new TransactionScope(TransactionScopeOption.Suppress))\n        Console.WriteLine(\"suppress: \" + (Transaction.Current is null));\n\n    using (new TransactionScope(TransactionScopeOption.RequiresNew))\n        Console.WriteLine(\"requiresNew same tx: \" + (Transaction.Current!.TransactionInformation.LocalIdentifier == outerId));\n\n    using (new TransactionScope(TransactionScopeOption.Required))\n        Console.WriteLine(\"required same tx: \" + (Transaction.Current!.TransactionInformation.LocalIdentifier == outerId));\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "suppress: True\nrequiresNew same tx: False\nrequired same tx: True",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`Suppress` runs the block with no ambient transaction (`Transaction.Current` is null), useful for writing an audit row that must survive a rollback. `RequiresNew` always starts a separate transaction, while `Required` joins the existing one, so only the last comparison is True.",
+      "materials": [
+        "txscope"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A page lists 50 blogs and the number of posts in each, and logs show 51 queries. Which changes remove the N+1 pattern?",
+      "options": [
+        "Add `AsNoTracking()` to the blog query",
+        "Eager-load the posts with `Include(b => b.Posts)`",
+        "Turn on lazy-loading proxies",
+        "Project in one query: `Select(b => new { b.Name, Posts = b.Posts.Count })`",
+        "Call `ToList()` on the blogs before reading `Posts`"
+      ],
+      "correctIndices": [
+        1,
+        3
+      ],
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "explanation": "A projection computes the counts in the same SQL, and `Include` loads the posts with the blogs, so both avoid one query per blog (the projection is cheaper because it does not load posts). `AsNoTracking` and `ToList` do not change how navigations are loaded, and lazy loading is a common cause of N+1 rather than a fix.",
+      "materials": [
+        "effquery"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A multi-tenant context defines `modelBuilder.Entity<Order>().HasQueryFilter(o => o.TenantId == _tenantId)`, where `_tenantId` is a field of the context. Why does this give each context instance its own tenant even though the model is built once and cached?",
+      "options": [
+        "EF Core rebuilds and caches a separate model for each context instance",
+        "The field's value is copied into the cached model as a constant",
+        "The context field becomes a parameter read from the running instance",
+        "Query filters are compiled per request by the ASP.NET Core pipeline"
+      ],
+      "correct": 2,
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "explanation": "EF Core recognizes references to members of the context in a query filter and turns them into parameters whose values are taken from the context instance running the query. The model is still built once and cached, so a captured local or static value would be fixed for every context. Nothing is rebuilt per instance, and ASP.NET Core plays no part in it.",
+      "materials": [
+        "filters"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`Version` is an `int` configured with `IsConcurrencyToken()` (not a `rowversion`). What must the application do for optimistic concurrency to keep working?",
+      "options": [
+        "Increment or replace the Version value whenever it saves a change",
+        "Call context.Entry(e).Reload() before each save to refresh the token",
+        "Nothing; the database increments the column on each update",
+        "Enable a retrying execution strategy so conflicts are retried"
+      ],
+      "correct": 0,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "An application-managed concurrency token is only compared, not generated: EF Core puts the original value in the UPDATE's WHERE clause, but you must set a new value on each change or later updates cannot detect conflicts. Only a database-generated `rowversion`/`[Timestamp]` is updated by the database itself. Reloading before saving would hide conflicts, and execution strategies retry transient failures, not concurrency conflicts.",
+      "materials": [
+        "conc"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about ADO.NET are true?",
+      "options": [
+        "`DbDataReader.Read` returns `null` when no rows are left",
+        "`ExecuteScalar` returns `null` when the first column of the first row is SQL NULL",
+        "`CommandBehavior.CloseConnection` closes the connection when the reader is closed",
+        "Closing a data reader also closes its connection by default",
+        "`ExecuteNonQuery` returns -1 for a SELECT statement"
+      ],
+      "correctIndices": [
+        2,
+        4
+      ],
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "explanation": "`ExecuteNonQuery` reports affected rows and returns -1 for SELECT, and `CloseConnection` ties the connection's lifetime to the reader; without that flag, closing the reader leaves the connection open. `ExecuteScalar` returns `DBNull.Value` for a SQL NULL (and `null` only if there are no rows), and `Read` returns `false`, not `null`, at the end.",
+      "materials": [
+        "datareader"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `DbCommandInterceptor` can change a command's `CommandText` before EF Core executes it, for example to append a query hint.",
+      "correctAnswer": true,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "True. The `...Executing` methods receive the `DbCommand` before it runs, so an interceptor can modify its text or parameters, or even suppress execution by returning a result. The docs show adding `OPTION (ROBUST PLAN)` this way, keyed off a tag set with `TagWith`.",
+      "materials": [
+        "intercept"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `dotnet ef migrations bundle` produce?",
+      "options": [
+        "A SQL script containing the migrations, for a DBA to run",
+        "A NuGet package the app restores and runs at startup",
+        "A zip of the Migrations folder for source control",
+        "A single executable that applies the migrations to a database"
+      ],
+      "correct": 3,
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "A migration bundle is a self-contained executable (efbundle by default) that applies pending migrations, taking the connection string as an argument. It needs neither the .NET SDK nor the source code on the deployment machine, which makes it a good fit for CI/CD. SQL scripts come from `dotnet ef migrations script`, and the bundle is neither a NuGet package nor an archive of source files.",
+      "materials": [
+        "migapply"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "A tiny Dapper-style mapper copies reader columns to properties by name, ignoring case. What does it print?",
+      "code": "using System.Data;\nusing System.Data.Common;\n\nvar table = new DataTable();\ntable.Columns.Add(\"ID\", typeof(int));\ntable.Columns.Add(\"display_name\", typeof(string));\ntable.Columns.Add(\"Email\", typeof(string));\ntable.Rows.Add(1, \"Ada\", \"ada@example.com\");\ntable.Rows.Add(2, \"Linus\", DBNull.Value);\n\nforeach (var u in Map<User>(table.CreateDataReader()))\n    Console.WriteLine($\"{u.Id}|{u.DisplayName ?? \"(null)\"}|{u.Email ?? \"(null)\"}\");\n\nstatic List<T> Map<T>(DbDataReader reader) where T : new()\n{\n    var props = typeof(T).GetProperties().ToDictionary(p => p.Name, StringComparer.OrdinalIgnoreCase);\n    var list = new List<T>();\n    while (reader.Read())\n    {\n        var item = new T();\n        for (int i = 0; i < reader.FieldCount; i++)\n            if (props.TryGetValue(reader.GetName(i), out var p))\n                p.SetValue(item, reader.IsDBNull(i) ? null : reader.GetValue(i));\n        list.Add(item);\n    }\n    return list;\n}\n\nclass User { public int Id { get; set; } public string? DisplayName { get; set; } public string? Email { get; set; } }\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "1|(null)|ada@example.com\n2|(null)|(null)",
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "explanation": "`ID` matches `Id` because the lookup ignores case, and the NULL email becomes `null` through the `IsDBNull` check. But `display_name` has no matching property, so the mapper silently skips it and `DisplayName` stays null in both rows. Dapper behaves the same by default: alias the column (`display_name AS DisplayName`) or set `DefaultTypeMap.MatchNamesWithUnderscores = true`.",
+      "materials": [
+        "dapper",
+        "datareader"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A team created its database with `context.Database.EnsureCreated()` and now adds migrations and calls `Migrate()`. What problem do they hit?",
+      "options": [
+        "Migrate() refuses to run until EnsureCreated is removed from the code",
+        "EnsureCreated left no migrations history, so Migrate tries to create existing tables",
+        "Migrate() drops the database first and recreates it from migrations",
+        "EnsureCreated stored a model snapshot that conflicts with the new migrations"
+      ],
+      "correct": 1,
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "`EnsureCreated` creates the schema straight from the model and skips migrations entirely, so `__EFMigrationsHistory` has no entries. `Migrate()` then sees every migration as pending and the initial one fails because the tables already exist. Neither method drops the database, and `EnsureCreated` writes no snapshot; the docs say to not mix the two.",
+      "materials": [
+        "migapply"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which describe a micro-ORM such as Dapper compared with EF Core?",
+      "options": [
+        "You write the SQL yourself",
+        "Results are mapped to objects by column name",
+        "Schema changes are managed through migrations",
+        "LINQ queries are translated to SQL",
+        "There is no change tracking or unit of work"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "explanation": "Dapper adds extension methods to `DbConnection` that run your SQL and map columns to properties by name, with no tracking, so you write UPDATEs yourself. LINQ translation and migrations are features of full ORMs like EF Core (or separate tools), not of Dapper.",
+      "materials": [
+        "dapper"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A `DbUpdateConcurrencyException` is handled with a \"client wins\" strategy. Put the steps in order, first to last.",
+      "options": [
+        "Catch DbUpdateConcurrencyException",
+        "Take the failing entry from ex.Entries",
+        "Call entry.GetDatabaseValues()",
+        "Copy those values into entry.OriginalValues",
+        "Call SaveChanges again"
+      ],
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Inside the catch you inspect each failing entry, read the current database values, and refresh the original values with them, so the next UPDATE's concurrency check matches the row as it is now. Saving again then writes the client's current values over the other user's change.",
+      "materials": [
+        "conc"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "EF Core 9 adds `UseSeeding` and `UseAsyncSeeding` on the options builder. When does EF Core call the seeding delegate?",
+      "options": [
+        "Whenever a new DbContext instance is created by DI",
+        "When EnsureCreated, Migrate or dotnet ef database update runs",
+        "When a migration containing HasData is added or removed",
+        "On the first SaveChanges call of each application run"
+      ],
+      "correct": 1,
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "`UseSeeding`/`UseAsyncSeeding` run as part of `EnsureCreated`, `Migrate` and `dotnet ef database update` (holding the migration lock), so seed logic runs when the schema is created or updated. Running it per context instance or on the first save would make every request pay for it. `HasData` is the separate, model-managed seeding mechanism that works through migrations.",
+      "materials": [
+        "seeding"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When pooling is enabled, calling `Dispose` on an ADO.NET connection closes the underlying network connection to the database server.",
+      "correctAnswer": false,
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "explanation": "False. `Close`/`Dispose` return the physical connection to the pool, where it stays open for the next `Open` with the same connection string. That is why opening and disposing connections per operation is cheap, and why forgetting to dispose them exhausts the pool.",
+      "materials": [
+        "pooling"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "A query is built with an optional filter, but the result of `Where` is not assigned. What does it print?",
+      "code": "var blogs = new List<Blog> { new(1, \"a\", true), new(2, \"b\", false), new(3, \"c\", true) };\nbool onlyActive = true;\n\nIQueryable<Blog> query = blogs.AsQueryable();\nif (onlyActive)\n    query.Where(b => b.Active);\nConsole.WriteLine(query.Count());\n\nif (onlyActive)\n    query = query.Where(b => b.Active);\nConsole.WriteLine(query.Count());\n\nrecord Blog(int Id, string Name, bool Active);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "3\n2",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "LINQ operators never modify the query they are called on; `Where` returns a new `IQueryable` with the extra filter. The first `Where` result is discarded, so the count is still 3; only after reassigning `query = query.Where(...)` does the filter apply and the count becomes 2. The same mistake with EF Core silently drops conditions from the generated SQL.",
+      "materials": [
+        "effquery"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A read-only API endpoint returns a page of order summaries. Which changes reduce the work EF Core and the database do?",
+      "options": [
+        "Projecting only the needed columns with `Select`",
+        "Paging with `Skip`/`Take` in the query",
+        "`AsNoTracking()` on the query",
+        "Using a compiled query for this hot endpoint",
+        "Calling `ToList()` before `Where` to simplify the SQL"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "explanation": "Skipping tracking avoids snapshot and identity work, projection reads fewer columns, and paging in SQL limits rows transferred, and a compiled query skips the per-call query-cache lookup. `ToList()` before filtering loads the whole table and filters in memory.",
+      "materials": [
+        "effquery",
+        "advperf"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "You want to set `CreatedAt` and `UpdatedAt` on entities automatically just before they are written. Which EF Core extension point fits best?",
+      "options": [
+        "A `DbCommandInterceptor` that rewrites the INSERT and UPDATE text",
+        "A global query filter on the audited entities",
+        "A `DbConnectionInterceptor` overriding `ConnectionOpening`",
+        "A `SaveChangesInterceptor` overriding `SavingChanges`"
+      ],
+      "correct": 3,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "`SavingChanges` runs before EF Core generates commands, so the interceptor can walk `ChangeTracker.Entries()` and set properties on `Added`/`Modified` entities. Rewriting SQL text is fragile and bypasses the model, a connection interceptor knows nothing about entities, and query filters only affect queries.",
+      "materials": [
+        "intercept"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`optionsBuilder.LogTo(Console.WriteLine)` shows commands as `@p0='?'`. What shows the actual parameter values?",
+      "options": [
+        "`EnableSensitiveDataLogging()`",
+        "`EnableDetailedErrors()`",
+        "`LogTo(Console.WriteLine, LogLevel.Trace)`",
+        "`UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll)`"
+      ],
+      "correct": 0,
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "explanation": "Parameter values can contain personal data, so EF Core hides them unless you opt in with `EnableSensitiveDataLogging()`, which belongs in development only. `EnableDetailedErrors` improves exception messages, a lower log level shows more events but still masks values, and tracking behavior is unrelated to logging.",
+      "materials": [
+        "logging"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these can a single EF Core value converter (`HasConversion`) do?",
+      "options": [
+        "Store a strongly-typed `OrderId` struct as an `int` column",
+        "Store an enum as its name in a string column",
+        "Store a `List<string>` as one delimited or JSON string column",
+        "Run the conversion as a SQL function inside the database",
+        "Split one property across two columns, such as amount and currency"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "explanation": "A value converter maps one property value to one provider value in .NET code on the way in and out, which covers enums as strings, strongly-typed IDs and primitive collections serialized into one column. The docs list mapping one property to several columns as a limitation (use an owned or complex type), and conversions run on the client, not as SQL functions.",
+      "materials": [
+        "conv"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Dapper opens a closed connection for the duration of a call such as `Query<T>` and closes it again afterwards.",
+      "correctAnswer": true,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "True. If the connection is closed, Dapper opens it, runs the command and closes it (verified: the state was `Closed` after `Query`). If you opened it yourself, Dapper leaves it open, which is what you want when running several commands in one transaction.",
+      "materials": [
+        "dapper"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`context.Blogs.Select(b => new { Blog = b, PostCount = b.Posts.Count }).ToList()` runs with default settings. What ends up in the change tracker?",
+      "options": [
+        "Nothing, because the result is an anonymous type",
+        "The blogs and also the posts that were counted in SQL",
+        "The blogs, since entities inside a projection are tracked",
+        "The anonymous objects, keyed by their position in the list"
+      ],
+      "correct": 2,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "EF Core tracks entity instances that appear anywhere in a projection's result, so each `Blog` inside the anonymous object is tracked (verified). Only projections made purely of scalar values are untracked. The posts are counted in SQL and never materialized, and anonymous types are never tracked themselves.",
+      "materials": [
+        "tracking"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "A reader returns two result sets, as a batch of two SELECTs (or Dapper's `QueryMultiple`) would. What does it print?",
+      "code": "using System.Data;\n\nvar ds = new DataSet();\nvar blogs = ds.Tables.Add(\"Blogs\");\nblogs.Columns.Add(\"Name\");\nblogs.Rows.Add(\"a\");\nblogs.Rows.Add(\"b\");\nvar posts = ds.Tables.Add(\"Posts\");\nposts.Columns.Add(\"Title\");\nposts.Rows.Add(\"p1\");\n\nusing var reader = ds.CreateDataReader();\nvar set = 0;\ndo\n{\n    set++;\n    while (reader.Read()) Console.WriteLine($\"{set}:{reader.GetString(0)}\");\n} while (reader.NextResult());\nConsole.WriteLine(\"sets: \" + set);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "1:a\n1:b\n2:p1\nsets: 2",
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "explanation": "`Read` moves through the rows of the current result set and returns false at its end; `NextResult` advances to the next result set and returns false when there are none left. So the loop prints both blogs from set 1, the post from set 2, and counts 2 sets. Fetching related data as multiple result sets in one round trip is a common way to avoid N+1 with plain ADO.NET or Dapper.",
+      "materials": [
+        "datareader"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "How does the SQL Server provider reduce round trips when `SaveChanges` inserts 100 new rows?",
+      "options": [
+        "It sends one statement per row, each on its own connection",
+        "It switches to SqlBulkCopy once there are more than 10 rows",
+        "It batches several statements per round trip, limited by MaxBatchSize",
+        "It runs the inserts in parallel tasks on pooled connections"
+      ],
+      "correct": 2,
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "explanation": "EF Core batches multiple INSERT/UPDATE/DELETE statements into one command; the SQL Server provider caps a batch at 42 statements by default, configurable with `MaxBatchSize`. It does not use `SqlBulkCopy` (that needs a third-party library) and it does not parallelize or open extra connections.",
+      "materials": [
+        "effupdate"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`dotnet ef database update` runs against a database with two pending migrations. Put these steps in order, first to last.",
+      "options": [
+        "Build the project",
+        "Create a DbContext instance at design time",
+        "Read __EFMigrationsHistory to find applied migrations",
+        "Run the first pending migration's Up operations",
+        "Insert that migration's row into __EFMigrationsHistory"
+      ],
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "The tools build the startup project, create the context (through `IDesignTimeDbContextFactory`, the host or a parameterless constructor), and query the history table to learn which migrations are missing. For each pending migration they run its operations and then record it, so a failure leaves the history accurate.",
+      "materials": [
+        "migapply"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In ADO.NET, which `DbCommand` method fits `SELECT COUNT(*) FROM Orders`?",
+      "options": [
+        "`ExecuteScalar()`",
+        "`ExecuteReader()` with `CommandBehavior.SequentialAccess`",
+        "`ExecuteNonQuery()`",
+        "`Prepare()`"
+      ],
+      "correct": 0,
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "explanation": "`ExecuteScalar` returns the first column of the first row, exactly what a single aggregate needs. `ExecuteNonQuery` returns an affected-row count for INSERT/UPDATE/DELETE (-1 for a SELECT), a reader works but is more ceremony for one value, and `Prepare` only prepares the statement without running it.",
+      "materials": [
+        "datareader"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`EF.CompileQuery` translates the LINQ query to SQL at build time, so no translation work happens when the application runs.",
+      "correctAnswer": false,
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "explanation": "False. A compiled query is still translated at run time, on its first execution; afterwards the delegate reuses the result and skips the cache lookup. Build-time precompilation of queries is a separate, newer feature (NativeAOT-oriented precompiled queries in EF Core 9), not what `EF.CompileQuery` does.",
+      "materials": [
+        "advperf"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "The program inspects a predicate that calls a user-defined method, as EF Core would see it in a `Where`. What does it print?",
+      "code": "using System.Linq.Expressions;\n\nExpression<Func<Customer, bool>> e = c => Rules.IsVip(c) && c.Orders > 3;\n\nvar call = (MethodCallExpression)((BinaryExpression)e.Body).Left;\nConsole.WriteLine(call.NodeType);\nConsole.WriteLine(call.Method.DeclaringType!.Name + \".\" + call.Method.Name);\nConsole.WriteLine(call.Arguments[0].NodeType);\n\nrecord Customer(string Name, int Orders, decimal Spent);\nstatic class Rules { public static bool IsVip(Customer c) => c.Spent > 1000m; }\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "Call\nRules.IsVip\nParameter",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "The expression tree only records a `Call` to `Rules.IsVip` with the lambda parameter as its argument; the method body is compiled IL and is not part of the tree. A provider like EF Core therefore has no way to turn it into SQL, which is why such a call inside `Where` throws instead of being translated. Inline the logic as an expression (`c.Spent > 1000m`) so it can be translated.",
+      "materials": [
+        "clienteval"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A service builds connection strings that differ only in `Application Name`, one per tenant. What does this do to ADO.NET connection pooling?",
+      "options": [
+        "Nothing; one pool is shared by the strings for the same server",
+        "Connections move between pools as the name changes",
+        "Pooling is turned off when Application Name is present",
+        "Each distinct connection string gets its own pool"
+      ],
+      "correct": 3,
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "explanation": "ADO.NET keys connection pools by the exact connection string (and identity), so every distinct string creates a separate pool with its own idle connections. Many tenants can therefore multiply open connections to the server. Pooling stays enabled, and connections never move between pools.",
+      "materials": [
+        "pooling"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What is the main point of `EF.CompileQuery`?",
+      "options": [
+        "It turns the LINQ query into a stored procedure in the database",
+        "It skips the per-execution query-cache lookup and expression processing",
+        "It caches the query's SQL text in the database plan cache",
+        "It lets the query use C# methods that are otherwise untranslatable"
+      ],
+      "correct": 1,
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "explanation": "A compiled query is a delegate that already holds the translated query, so each call skips computing the expression tree's cache key and looking it up, which matters on very hot paths. It creates nothing in the database and does not affect what can be translated. Database plan caching happens anyway for parameterized SQL.",
+      "materials": [
+        "advperf"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Removing a post from `blog.Posts` in a required relationship makes EF Core mark the post as `Deleted`, so `SaveChanges` deletes it.",
+      "correctAnswer": true,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "True. A dependent in a required relationship cannot exist without a principal, so severing the relationship makes it an orphan and EF Core deletes it by default (verified: the post's state became `Deleted` after change detection). In an optional relationship the FK would be set to null instead. The timing can be changed with `ChangeTracker.DeleteOrphansTiming`.",
+      "materials": [
+        "cascade"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`Address` is mapped as an EF Core 8 complex type with `ComplexProperty(s => s.Ad)`. Which statement is true, unlike for an owned type?",
+      "options": [
+        "It has its own hidden key property in the EF model",
+        "The same Address instance can be assigned to several entities",
+        "It can be queried through its own DbSet<Address> property",
+        "It is mapped to a separate table by default, like OwnsMany"
+      ],
+      "correct": 1,
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "Complex types have no key and no identity of their own: values are tracked as part of the owning entity, so one instance can be shared by several entities (verified; doing the same with an owned type fails on save). Owned types do have a hidden key, which is why one instance cannot belong to two owners. Neither kind gets a DbSet, and both map into the owner's table by default.",
+      "materials": [
+        "ef8",
+        "owned"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A report needs `SELECT Name, COUNT(*) AS Total FROM Orders GROUP BY Name` mapped to a `NameTotal` class that is not in the model. Which EF Core 8 API returns it?",
+      "options": [
+        "`context.Orders.FromSqlRaw(\"...\").Cast<NameTotal>()`",
+        "`context.Set<NameTotal>().FromSql($\"...\")`",
+        "`context.Database.ExecuteSql($\"...\")`",
+        "`context.Database.SqlQuery<NameTotal>($\"...\")`"
+      ],
+      "correct": 3,
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "explanation": "EF Core 8 lets `Database.SqlQuery<T>` return arbitrary unmapped types (EF Core 7 only allowed scalars), mapping columns to properties by name. `Set<NameTotal>()` needs `NameTotal` to be part of the model, `ExecuteSql` only returns the affected-row count, and casting `Order` entities to another class fails at run time.",
+      "materials": [
+        "ef8",
+        "sql"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Two DbContexts write inside one `TransactionScope`. Put the steps in order, first to last.",
+      "options": [
+        "Create the TransactionScope",
+        "SaveChanges on the first context",
+        "SaveChanges on the second context",
+        "Call scope.Complete()",
+        "Dispose the scope, which commits the transaction"
+      ],
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Connections opened inside the scope enlist in the ambient transaction, so both saves are part of it. `Complete()` only votes to commit; the commit happens when the scope is disposed. Disposing without `Complete()` rolls everything back.",
+      "materials": [
+        "tx",
+        "txscope"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "With Dapper, `conn.Query<Order>(\"SELECT * FROM Orders WHERE Id IN @ids\", new { ids = new[] { 1, 2, 3 } })` runs. What does Dapper send?",
+      "options": [
+        "`IN (@ids1, @ids2, @ids3)` with one parameter per element",
+        "One table-valued parameter named @ids holding the array",
+        "The literal text `IN (1,2,3)` inlined into the SQL",
+        "Three separate queries, one per id, merged on the client"
+      ],
+      "correct": 0,
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "hard",
+      "explanation": "Dapper recognizes an enumerable parameter used with `IN` and expands it into one parameter per element, so the values stay parameterized. It does not inline literals (that would invite injection), does not create a table-valued parameter by default, and runs a single query.",
+      "materials": [
+        "dapper"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A web request edits one product with EF Core in the usual unit-of-work style. Put the steps in order, first to last.",
+      "options": [
+        "DI creates a scoped DbContext for the request",
+        "A tracking query loads the product",
+        "Code changes the product's properties",
+        "SaveChanges detects the change and sends an UPDATE",
+        "The request ends and the DbContext is disposed"
+      ],
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "A context lives for one unit of work: it is created per request, loads entities with tracking, lets you change them, and `SaveChanges` uses the snapshot to write only the changes. Disposing it at the end releases the tracker and the connection.",
+      "materials": [
+        "dbctx",
+        "detect"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A new Author, a new Blog by that author, a new Post in the blog and a new Comment on the post are added in one `SaveChanges`. Put the INSERT statements in the order EF Core sends them, first to last.",
+      "options": [
+        "INSERT into Authors",
+        "INSERT into Blogs",
+        "INSERT into Posts",
+        "INSERT into Comments"
+      ],
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "explanation": "EF Core sorts commands by their foreign-key dependencies: a principal must exist (and its generated key be known) before a dependent that references it is inserted. So the chain Author, Blog, Post, Comment is inserted in that order (verified with SQLite logging). Deletes would be ordered the other way around.",
+      "materials": [
+        "effupdate"
+      ]
+    }
+  ]
+}
