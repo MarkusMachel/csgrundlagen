@@ -1,0 +1,1451 @@
+{
+  "name": "JavaScript: security and performance",
+  "materials": [
+    {
+      "key": "owasp-xss",
+      "type": "article",
+      "title": "Cross Site Scripting Prevention Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html",
+      "author": "OWASP Cheat Sheet Series",
+      "description": "Output encoding per context, safe sinks and the main XSS defenses."
+    },
+    {
+      "key": "mdn-csp",
+      "type": "article",
+      "title": "Content Security Policy (CSP)",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP",
+      "author": "MDN Web Docs",
+      "description": "How CSP directives, nonces and hashes restrict what a page may load and run."
+    },
+    {
+      "key": "webdev-strict-csp",
+      "type": "article",
+      "title": "Mitigate cross-site scripting (XSS) with a strict Content Security Policy",
+      "url": "https://web.dev/articles/strict-csp",
+      "author": "web.dev",
+      "description": "Nonce- and hash-based CSP with 'strict-dynamic' instead of host allowlists."
+    },
+    {
+      "key": "mdn-trusted-types",
+      "type": "article",
+      "title": "Trusted Types API",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API",
+      "author": "MDN Web Docs",
+      "description": "Locking DOM XSS sinks so they accept only typed values created by a policy."
+    },
+    {
+      "key": "owasp-csrf",
+      "type": "article",
+      "title": "Cross-Site Request Forgery Prevention Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html",
+      "author": "OWASP Cheat Sheet Series",
+      "description": "Tokens, SameSite cookies, custom headers and origin checks against CSRF."
+    },
+    {
+      "key": "mdn-set-cookie",
+      "type": "article",
+      "title": "Set-Cookie header",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie",
+      "author": "MDN Web Docs",
+      "description": "Reference for cookie attributes such as HttpOnly, Secure and SameSite."
+    },
+    {
+      "key": "webdev-samesite",
+      "type": "article",
+      "title": "SameSite cookies explained",
+      "url": "https://web.dev/articles/samesite-cookies-explained",
+      "author": "web.dev",
+      "description": "What Strict, Lax and None mean and how browsers default to Lax."
+    },
+    {
+      "key": "mdn-cors",
+      "type": "article",
+      "title": "Cross-Origin Resource Sharing (CORS)",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS",
+      "author": "MDN Web Docs",
+      "description": "How servers opt in to cross-origin reads, preflights and credentialed requests."
+    },
+    {
+      "key": "owasp-clickjacking",
+      "type": "article",
+      "title": "Clickjacking Defense Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Clickjacking_Defense_Cheat_Sheet.html",
+      "author": "OWASP Cheat Sheet Series",
+      "description": "frame-ancestors, X-Frame-Options and other framing defenses."
+    },
+    {
+      "key": "owasp-proto-pollution",
+      "type": "article",
+      "title": "Prototype Pollution Prevention Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Prototype_Pollution_Prevention_Cheat_Sheet.html",
+      "author": "OWASP Cheat Sheet Series",
+      "description": "How unsafe merges pollute Object.prototype and how to prevent it."
+    },
+    {
+      "key": "owasp-redos",
+      "type": "article",
+      "title": "Regular expression Denial of Service - ReDoS",
+      "url": "https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS",
+      "author": "OWASP",
+      "description": "Why nested quantifiers cause catastrophic backtracking and how attackers exploit it."
+    },
+    {
+      "key": "npm-scripts",
+      "type": "article",
+      "title": "npm scripts",
+      "url": "https://docs.npmjs.com/cli/v10/using-npm/scripts",
+      "author": "npm Docs",
+      "description": "Lifecycle scripts such as preinstall, install and postinstall, and when npm runs them."
+    },
+    {
+      "key": "npm-ci",
+      "type": "article",
+      "title": "npm ci",
+      "url": "https://docs.npmjs.com/cli/v10/commands/npm-ci",
+      "author": "npm Docs",
+      "description": "Clean, lockfile-exact installs for automated environments."
+    },
+    {
+      "key": "npm-provenance",
+      "type": "article",
+      "title": "Generating provenance statements",
+      "url": "https://docs.npmjs.com/generating-provenance-statements",
+      "author": "npm Docs",
+      "description": "Linking a published package to its source repository and build, and verifying it."
+    },
+    {
+      "key": "mdn-postmessage",
+      "type": "article",
+      "title": "Window: postMessage() method",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage",
+      "author": "MDN Web Docs",
+      "description": "Cross-origin messaging, targetOrigin and checking event.origin."
+    },
+    {
+      "key": "mdn-sri",
+      "type": "article",
+      "title": "Subresource Integrity",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity",
+      "author": "MDN Web Docs",
+      "description": "Verifying that fetched scripts and styles match an expected hash."
+    },
+    {
+      "key": "mdn-eval",
+      "type": "article",
+      "title": "eval()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval",
+      "author": "MDN Web Docs",
+      "description": "Direct and indirect eval, scope rules and why eval is dangerous."
+    },
+    {
+      "key": "owasp-html5",
+      "type": "article",
+      "title": "HTML5 Security Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html",
+      "author": "OWASP Cheat Sheet Series",
+      "description": "Web messaging, local storage and other HTML5 features from a security view."
+    },
+    {
+      "key": "mdn-memory",
+      "type": "article",
+      "title": "Memory management",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_management",
+      "author": "MDN Web Docs",
+      "description": "Reachability, mark-and-sweep and weak references in JavaScript."
+    },
+    {
+      "key": "v8-trash-talk",
+      "type": "article",
+      "title": "Trash talk: the Orinoco garbage collector",
+      "url": "https://v8.dev/blog/trash-talk",
+      "author": "V8 team",
+      "description": "V8's generational heap, scavenges and major mark-compact collections."
+    },
+    {
+      "key": "chrome-memory",
+      "type": "article",
+      "title": "Fix memory problems",
+      "url": "https://developer.chrome.com/docs/devtools/memory-problems",
+      "author": "Chrome DevTools",
+      "description": "Finding leaks and detached DOM nodes with heap snapshots."
+    },
+    {
+      "key": "webdev-lcp",
+      "type": "article",
+      "title": "Largest Contentful Paint (LCP)",
+      "url": "https://web.dev/articles/lcp",
+      "author": "web.dev",
+      "description": "What LCP measures, its thresholds and which elements count."
+    },
+    {
+      "key": "webdev-inp",
+      "type": "article",
+      "title": "Interaction to Next Paint (INP)",
+      "url": "https://web.dev/articles/inp",
+      "author": "web.dev",
+      "description": "How INP measures interaction latency and its three phases."
+    },
+    {
+      "key": "webdev-cls",
+      "type": "article",
+      "title": "Cumulative Layout Shift (CLS)",
+      "url": "https://web.dev/articles/cls",
+      "author": "web.dev",
+      "description": "How layout shifts are scored and which ones are excluded."
+    },
+    {
+      "key": "webdev-long-tasks",
+      "type": "article",
+      "title": "Optimize long tasks",
+      "url": "https://web.dev/articles/optimize-long-tasks",
+      "author": "web.dev",
+      "description": "Why tasks over 50 ms block the main thread and how to break them up."
+    },
+    {
+      "key": "webdev-layout-thrashing",
+      "type": "article",
+      "title": "Avoid large, complex layouts and layout thrashing",
+      "url": "https://web.dev/articles/avoid-large-complex-layouts-and-layout-thrashing",
+      "author": "web.dev",
+      "description": "Forced synchronous layouts and batching reads before writes."
+    },
+    {
+      "key": "mdn-http-caching",
+      "type": "article",
+      "title": "HTTP caching",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching",
+      "author": "MDN Web Docs",
+      "description": "Freshness, revalidation, no-cache versus no-store and caching hashed assets."
+    },
+    {
+      "key": "mdn-performance-now",
+      "type": "article",
+      "title": "Performance: now() method",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Performance/now",
+      "author": "MDN Web Docs",
+      "description": "High-resolution, monotonic timestamps relative to the time origin."
+    },
+    {
+      "key": "webdev-code-splitting",
+      "type": "article",
+      "title": "Reduce JavaScript payloads with code splitting",
+      "url": "https://web.dev/articles/reduce-javascript-payloads-with-code-splitting",
+      "author": "web.dev",
+      "description": "Splitting bundles with dynamic import() so pages load less JavaScript up front."
+    },
+    {
+      "key": "mdn-debounce",
+      "type": "article",
+      "title": "Debounce",
+      "url": "https://developer.mozilla.org/en-US/docs/Glossary/Debounce",
+      "author": "MDN Web Docs",
+      "description": "Glossary entry on debouncing and how it differs from throttling."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple-choice",
+      "prompt": "A page runs `document.querySelector('#greeting').innerHTML = decodeURIComponent(location.hash.slice(1));`. A victim opens a link ending in `#<img src=x onerror=alert(document.domain)>`. What happens in a current browser?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The markup is ignored, because browsers skip scripts and event handlers in HTML assigned through `innerHTML`.",
+        "The image fails to load, its `onerror` handler runs, and the attacker's code executes in the page's origin.",
+        "The browser displays the markup as literal text, because the URL fragment is still percent-encoded.",
+        "The handler runs, but in a sandboxed opaque origin without access to the page's DOM or cookies."
+      ],
+      "correct": 1,
+      "explanation": "This is DOM-based XSS: the payload never reaches the server, the page's own script moves it from `location.hash` into an HTML sink. Browsers do not execute `<script>` elements inserted via `innerHTML`, which is why people wrongly assume `innerHTML` is safe, but event-handler attributes such as `onerror` still fire. The handler runs with the full privileges of the page's origin. Use `textContent` or a sanitizer instead.",
+      "materials": [
+        "owasp-xss"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Assigning the string `'<script>alert(1)</script>'` to an element's `innerHTML` runs the script.",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. The HTML standard marks `<script>` elements created by `innerHTML` as already started, so they never execute (verified in Chromium). That does not make `innerHTML` safe: markup like `<img src=x onerror=...>` still runs attacker code through the event handler.",
+      "materials": [
+        "owasp-xss"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these can execute an attacker-controlled string `str` as JavaScript?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`eval(str)`",
+        "`el.textContent = str`",
+        "`setTimeout(str, 0)`",
+        "`new Function(str)`",
+        "`JSON.parse(str)`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "`eval`, `new Function` and the string form of `setTimeout`/`setInterval` all compile strings as code, which is why a CSP without `'unsafe-eval'` blocks them. `textContent` only creates a text node, and `JSON.parse` only accepts JSON data and never evaluates code, so neither is an injection sink by itself.",
+      "materials": [
+        "mdn-eval",
+        "owasp-xss"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these insert an untrusted string `input` into the DOM without it being parsed as HTML?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`el.textContent = input`",
+        "`el.insertAdjacentHTML('beforeend', input)`",
+        "`el.append(document.createTextNode(input))`",
+        "`el.outerHTML = input`",
+        "`el.setAttribute('title', input)`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "`textContent`, text nodes and setting a harmless attribute such as `title` treat the value as plain data. `insertAdjacentHTML` and `outerHTML` run the HTML parser, so they are XSS sinks just like `innerHTML`. Note that `setAttribute` is only safe for non-executable attributes; `href`, `src` and `on*` attributes need extra validation.",
+      "materials": [
+        "owasp-xss"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A search page's server reads the `q` query parameter and writes it unescaped into the HTML response as `You searched for: ...`. An attacker emails victims a crafted search link. Which kind of XSS is this?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Stored XSS",
+        "DOM-based XSS",
+        "Reflected XSS",
+        "Self-XSS"
+      ],
+      "correct": 2,
+      "explanation": "The payload travels in the request and the server reflects it straight back in the response, which is reflected XSS. Stored XSS would need the payload saved on the server and served to later visitors. DOM-based XSS happens entirely in client-side code without the server echoing the payload, and self-XSS relies on tricking users into pasting code themselves.",
+      "materials": [
+        "owasp-xss"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A template HTML-escapes `<`, `>`, `&`, `\"` and `'`, then renders a user-supplied profile link as `<a href=\"{{url}}\">`. Which input still runs script when a visitor clicks the link?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`\"><script>alert(1)</script>`",
+        "`' onmouseover='alert(1)`",
+        "`javascript:alert(document.cookie)`",
+        "`https://example.com/?q=<script>`"
+      ],
+      "correct": 2,
+      "explanation": "HTML-escaping stops the input from breaking out of the attribute, so the quote-based payloads are neutralised and the `https:` URL is harmless. A `javascript:` URL needs no special characters at all: it is valid attribute content and runs when the link is followed. URL attributes need a scheme allowlist (for example only `http:` and `https:`) in addition to encoding.",
+      "materials": [
+        "owasp-xss"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an HTML-escaping helper with its replacements in this order.",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "code": "function escapeHtml(s) {\n  return s\n    .replace(/</g, '&lt;')\n    .replace(/>/g, '&gt;')\n    .replace(/&/g, '&amp;')\n    .replace(/\"/g, '&quot;');\n}\nconsole.log(escapeHtml('<b>\"Tom & Jerry\"</b>'));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "&amp;lt;b&amp;gt;&quot;Tom &amp; Jerry&quot;&amp;lt;/b&amp;gt;",
+      "explanation": "The `&` replacement runs after `<` and `>` have already become `&lt;` and `&gt;`, so their ampersands are escaped a second time into `&amp;lt;` and `&amp;gt;`. The quotes are escaped last and stay correct. The fix is to replace `&` first; better still, use a vetted encoder or a safe sink like `textContent`.",
+      "materials": [
+        "owasp-xss"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: three ways to decide whether a link is safe to put in `href`.",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "code": "const naiveIsSafe = (href) => !href.startsWith('javascript:');\nconst urlIsSafe = (href) => ['http:', 'https:'].includes(new URL(href, 'https://site.example').protocol);\nfor (const href of ['/profile', 'JavaScript:alert(1)', '  javascript:alert(1)']) {\n  console.log(naiveIsSafe(href), urlIsSafe(href), new URL(href, 'https://site.example').protocol);\n}\n",
+      "codeLanguage": "js",
+      "expectedOutput": "true true https:\ntrue false javascript:\ntrue false javascript:",
+      "explanation": "URL schemes are case-insensitive and the URL parser strips leading spaces, so `JavaScript:` and `  javascript:` both slip past a naive `startsWith('javascript:')` test. Parsing with `new URL()` normalises the scheme to `javascript:`, so an allowlist of `http:` and `https:` rejects both. Relative paths resolve against the base URL and get `https:`.",
+      "materials": [
+        "owasp-xss"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the steps of a stored XSS attack in order, first to last.",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The attacker submits a comment containing `<img src=x onerror=...>`",
+        "The server saves the comment in its database unchanged",
+        "A victim opens the page that lists the comments",
+        "The server inserts the comment into the HTML response without encoding it",
+        "The victim's browser parses the markup and runs the handler in the site's origin"
+      ],
+      "explanation": "Stored XSS persists the payload on the server first, and only later serves it to other users. The missing step is output encoding at render time (or sanitising on input); because the response comes from the trusted site, the injected handler runs with that site's privileges.",
+      "materials": [
+        "owasp-xss"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A response carries `Content-Security-Policy: script-src 'self' 'unsafe-inline' 'nonce-r4nd'`. Which inline scripts in the page run in Chromium?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Both a `<script nonce=\"r4nd\">` block and a plain inline `<script>` block, since `'unsafe-inline'` allows the plain one.",
+        "Only the `<script nonce=\"r4nd\">` block, because a nonce in the policy makes the browser ignore `'unsafe-inline'`.",
+        "Neither inline block, because `'self'` limits execution to scripts loaded from same-origin URLs.",
+        "Both blocks and also inline `onclick` attributes, because `'unsafe-inline'` covers event handlers too."
+      ],
+      "correct": 1,
+      "explanation": "When a `script-src` contains a nonce or hash, CSP Level 2+ browsers ignore `'unsafe-inline'`, so only the nonced block runs; a test in Chromium blocked both the plain block and an `onclick` handler. Sites add `'unsafe-inline'` only as a fallback for very old browsers that do not understand nonces. `'self'` governs URLs, not inline code.",
+      "materials": [
+        "mdn-csp",
+        "webdev-strict-csp"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A page is served with `Content-Security-Policy: script-src 'nonce-r4nd' 'strict-dynamic' https://cdn.example`. Which script executes in Chromium?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A `<script src=\"https://cdn.example/lib.js\">` tag in the HTML without a nonce, because its host is in the policy",
+        "An inline `onclick=\"...\"` attribute on a button, because `'strict-dynamic'` trusts the page's own markup",
+        "A script element that the nonced inline script creates with `document.createElement('script')` and appends",
+        "A `<script>` block without a nonce, provided it was part of the original HTML response"
+      ],
+      "correct": 2,
+      "explanation": "`'strict-dynamic'` extends trust from a nonced (or hashed) script to scripts it adds dynamically, and at the same time makes the browser ignore host allowlists like `https://cdn.example` and `'self'`. So the parser-inserted CDN tag is blocked unless it carries the nonce, and inline handlers and nonce-less blocks stay blocked. This was verified in Chromium.",
+      "materials": [
+        "webdev-strict-csp",
+        "mdn-csp"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Under a CSP whose `script-src` does not contain `'unsafe-inline'`, which source expressions can allow one specific inline `<script>` block to run?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A `'nonce-...'` value that matches the block's `nonce` attribute",
+        "`'self'`",
+        "A `'sha256-...'` hash of the block's exact contents",
+        "`'unsafe-eval'`",
+        "`https:`"
+      ],
+      "correctIndices": [
+        0,
+        2
+      ],
+      "explanation": "Inline blocks are matched by nonce or by hash of their text. `'self'` and scheme sources such as `https:` only match script URLs, and `'unsafe-eval'` governs `eval`-like string compilation, not inline blocks. In a Chromium test, `script-src 'self'` blocked an inline block that a matching `sha256` hash allowed.",
+      "materials": [
+        "mdn-csp",
+        "webdev-strict-csp"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A server uses a nonce-based CSP. Put the steps for one page view in order, first to last.",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The server generates a fresh, unguessable random value for this response",
+        "The server sends `Content-Security-Policy: script-src 'nonce-<value>'` in the response headers",
+        "The server writes the same value into the `nonce` attribute of each of its `<script>` tags in the body",
+        "The browser parses a `<script>` tag and compares its `nonce` with the policy",
+        "The browser runs the script because the values match"
+      ],
+      "explanation": "The nonce must be new for every response, otherwise an attacker can learn and reuse it. Headers are sent before the body, and the browser enforces the policy as it parses each script tag. Injected markup lacks the right nonce and is blocked.",
+      "materials": [
+        "webdev-strict-csp",
+        "mdn-csp"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A page is served with `Content-Security-Policy: require-trusted-types-for 'script'` and creates no Trusted Types policy. What happens when it runs `el.innerHTML = '<b>hi</b>'` in Chromium?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The string is sanitised automatically: the `<b>` stays in place and any scripts or handlers are removed.",
+        "The assignment throws a `TypeError`, because the sink now requires a `TrustedHTML` object instead of a string.",
+        "The assignment succeeds and logs a console warning, because the directive runs in report mode by default.",
+        "The markup is inserted as plain text, exactly as if `textContent` had been used instead."
+      ],
+      "correct": 1,
+      "explanation": "With Trusted Types enforced, DOM XSS sinks such as `innerHTML` reject plain strings with a `TypeError` (Chromium: \"This document requires 'TrustedHTML' assignment\"). Values must come from a policy created with `trustedTypes.createPolicy`, which is where sanitising happens. Report-only behaviour needs the `Content-Security-Policy-Report-Only` header, and `textContent` keeps working because it is not a sink.",
+      "materials": [
+        "mdn-trusted-types"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Under a CSP of `script-src 'self'` (without `'unsafe-eval'`), calling `eval('1 + 1')` from a same-origin script throws an `EvalError`.",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Without `'unsafe-eval'`, the browser refuses to compile strings as code: `eval` and `new Function` throw `EvalError`, and the string form of `setTimeout` is silently not run (verified in Chromium). Loading the script from `'self'` does not grant permission to evaluate strings.",
+      "materials": [
+        "mdn-csp",
+        "mdn-eval"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: direct eval, indirect eval and `new Function` reading a variable.",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "code": "const x = 'module-local';\nglobalThis.x = 'global';\nfunction run() {\n  const x = 'function-local';\n  console.log(eval('x'));\n  console.log((0, eval)('x'));\n  console.log(new Function('return x')());\n}\nrun();\n",
+      "codeLanguage": "js",
+      "expectedOutput": "function-local\nglobal\nglobal",
+      "explanation": "Direct `eval` runs in the calling scope, so it sees the function's local `x`, which is why it can read and change anything around it. Indirect eval `(0, eval)(...)` and `new Function` run in global scope and see `globalThis.x`; they cannot see locals, but they still execute arbitrary code with full page privileges, so neither is a safe sandbox.",
+      "materials": [
+        "mdn-eval"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A cookie set with the `HttpOnly` attribute is hidden from `document.cookie` but is still sent with requests to its site.",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. `HttpOnly` only removes the cookie from script access; the browser keeps attaching it to matching requests (a Chromium test showed it missing from `document.cookie` but present in request headers). It limits token theft through XSS, but injected script can still send authenticated requests, so it is not an XSS fix.",
+      "materials": [
+        "mdn-set-cookie"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Chromium stores a cookie set with `SameSite=None` even when the `Secure` attribute is missing, and treats it as a cross-site cookie.",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Since Chrome 80, `SameSite=None` requires `Secure`; a cookie with `SameSite=None` but no `Secure` is rejected outright (in a test it was not stored at all). Cross-site cookies must be sent over HTTPS only.",
+      "materials": [
+        "webdev-samesite",
+        "mdn-set-cookie"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Right after login, `app.example` sets three cookies: `a=1; SameSite=Lax`, `b=1; SameSite=Strict` and `c=1` (no SameSite attribute). Ten seconds later a page on `evil.example` auto-submits a `<form method=\"POST\">` to `app.example`. Which cookies does Chromium attach?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`a` and `c`",
+        "`c` only",
+        "None of them",
+        "`a`, `b` and `c`"
+      ],
+      "correct": 1,
+      "explanation": "`Lax` and `Strict` cookies are not sent on cross-site POSTs. A cookie without SameSite defaults to Lax in Chromium, but with a temporary \"Lax-allowing-unsafe\" exception: for about two minutes after it is set, it is still sent on top-level cross-site POSTs, so only `c` goes along (verified in Chromium). After that window it would be withheld too, which is why you should set SameSite explicitly.",
+      "materials": [
+        "webdev-samesite",
+        "owasp-csrf"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these help protect a cookie-authenticated app against CSRF?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Using POST instead of GET for the state-changing endpoint",
+        "Setting the session cookie to `SameSite=Lax` or `SameSite=Strict`",
+        "Sending `Access-Control-Allow-Origin` only for your own front-end origin",
+        "Requiring a per-session CSRF token that the server checks on each state-changing request",
+        "Rejecting state-changing requests whose `Origin` header is not your own"
+      ],
+      "correctIndices": [
+        1,
+        3,
+        4
+      ],
+      "explanation": "SameSite cookies, synchronizer tokens and Origin checks all stop a foreign site's request from being treated as the user's. Switching to POST alone does not help, because a hidden form can POST. CORS controls who may read responses; a simple cross-site form POST is still sent with cookies regardless of `Access-Control-Allow-Origin`.",
+      "materials": [
+        "owasp-csrf"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Why does requiring a custom request header such as `X-CSRF-Token` (checked by the server) stop a cross-site page from forging a `fetch` that carries the victim's cookies?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Browsers strip non-standard headers from cross-site requests before sending them, so the server's check fails.",
+        "Custom headers are protected by TLS, while cookies travel unencrypted and are easy to replay.",
+        "A custom header tells the browser to drop cookies, so the forged request arrives unauthenticated.",
+        "A custom header makes the request non-simple, so the browser first sends a CORS preflight, which the server does not approve."
+      ],
+      "correct": 3,
+      "explanation": "Cross-site requests with custom headers are not \"simple\", so the browser sends an `OPTIONS` preflight first and only sends the real request if the server allows that origin and header. HTML forms cannot set custom headers at all. Browsers do not strip such headers, and TLS protects headers and cookies equally.",
+      "materials": [
+        "owasp-csrf",
+        "mdn-cors"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the steps of a classic CSRF attack in order, first to last.",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The victim logs in to `bank.example`, which sets a session cookie",
+        "The victim opens a page on `evil.example` in another tab",
+        "The evil page auto-submits a hidden form to `https://bank.example/transfer`",
+        "The browser attaches the bank's cookie to that request, as far as SameSite rules allow",
+        "The bank's server sees a valid session and performs the transfer"
+      ],
+      "explanation": "CSRF relies on the browser automatically sending cookies with requests to the target site, even when another site triggered them. The attacker never sees the cookie or the response; the damage is the side effect. SameSite cookies, tokens and Origin checks break the chain at the fourth or fifth step.",
+      "materials": [
+        "owasp-csrf"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A single-page app keeps its access token in `localStorage` and sends it in an `Authorization` header. Compared with an `HttpOnly; Secure; SameSite=Lax` session cookie, what is the main trade-off?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The header approach resists classic CSRF, but any XSS can read and exfiltrate the token; the cookie hides its value from scripts but needs CSRF defenses.",
+        "The header approach resists XSS, because `localStorage` is encrypted per origin, while any script on the page can read the `HttpOnly` cookie.",
+        "Both approaches behave the same for XSS and for CSRF; the real difference between them is the size limit on what they can store.",
+        "The cookie can be stolen through `document.cookie` during XSS, while the header approach needs a CSRF token on each request."
+      ],
+      "correct": 0,
+      "explanation": "Browsers never attach `localStorage` values automatically, so forged cross-site requests carry no token, but any injected script can read storage and send the token elsewhere. An `HttpOnly` cookie cannot be read by scripts, yet it is sent automatically and therefore needs SameSite/token defenses. Neither protects against XSS fully: injected code can still act as the user while it runs.",
+      "materials": [
+        "owasp-html5",
+        "mdn-set-cookie"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An API answers every request with `Access-Control-Allow-Origin: <the request's Origin header>` and `Access-Control-Allow-Credentials: true`. What is the risk?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Browsers reject reflected values, so legitimate cross-origin clients break, but no data leaks.",
+        "None while the session cookie is `HttpOnly`, because scripts on other origins are unable to read it.",
+        "Attackers can read the user's cookies from `document.cookie` on the API's origin.",
+        "Any site a logged-in user visits can call the API with the user's cookies and read the responses."
+      ],
+      "correct": 3,
+      "explanation": "Reflecting the Origin with credentials allowed is equivalent to trusting every origin with the user's session: the browser sends the cookies and then lets the attacker's page read the response. `HttpOnly` is irrelevant because the attacker reads API data, not the cookie. Browsers accept a reflected value because it is a specific origin; the server should compare against a fixed allowlist.",
+      "materials": [
+        "mdn-cors"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "If a server responds with `Access-Control-Allow-Origin: *` and `Access-Control-Allow-Credentials: true`, a cross-origin page can read the response to `fetch(url, { credentials: 'include' })`.",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. The wildcard is not allowed for credentialed requests; the browser blocks the response and `fetch` rejects with a `TypeError` (verified in Chromium, where the same request with `credentials: 'omit'` succeeded). Credentialed CORS needs an explicit origin in `Access-Control-Allow-Origin`.",
+      "materials": [
+        "mdn-cors"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An API's CORS configuration allowlists the origin `null` (with credentials) so that a local `file://` tool can call it. Why is this dangerous?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Browsers treat `null` like the `*` wildcard, so the credentials flag is ignored and cookies are sent to any server.",
+        "Browsers send `Origin: null` on same-origin requests, so allowing it disables the API's CSRF protection.",
+        "An attacker's page can run its code in a sandboxed iframe, whose requests carry `Origin: null`, and read credentialed responses.",
+        "It lets server-side clients like curl bypass CORS, which otherwise blocks them from reading responses."
+      ],
+      "correct": 2,
+      "explanation": "Several contexts produce an opaque origin serialised as `null`, including sandboxed iframes and some redirects, and any attacker can create one. Allowlisting `null` therefore trusts arbitrary pages. CORS is enforced only by browsers; curl was never subject to it.",
+      "materials": [
+        "mdn-cors"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "You want only `https://partner.example` to be able to embed your page in an iframe, in current Chrome, Firefox and Safari. Which response header does that?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`X-Frame-Options: ALLOW-FROM https://partner.example`",
+        "`Content-Security-Policy: frame-ancestors https://partner.example`",
+        "`Access-Control-Allow-Origin: https://partner.example`",
+        "`Cross-Origin-Opener-Policy: same-origin-allow-popups`"
+      ],
+      "correct": 1,
+      "explanation": "`frame-ancestors` lists which origins may frame the page and is supported by all current browsers. `ALLOW-FROM` was never widely supported and modern browsers ignore it, so `X-Frame-Options` only works with `DENY` or `SAMEORIGIN`. CORS headers govern reading responses, and COOP governs popup relationships, not framing.",
+      "materials": [
+        "owasp-clickjacking",
+        "mdn-csp"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `frame-ancestors` directive delivered in a `<meta http-equiv=\"Content-Security-Policy\">` tag stops other sites from framing the page.",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. `frame-ancestors` (like `report-uri` and `sandbox`) is ignored in a meta-delivered policy; Chromium logs a console message and lets the page be framed. It must be sent as an HTTP response header.",
+      "materials": [
+        "owasp-clickjacking",
+        "mdn-csp"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which response headers help defend a page against clickjacking?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`X-Content-Type-Options: nosniff`",
+        "`Content-Security-Policy: frame-ancestors 'self'`",
+        "`Access-Control-Allow-Origin: https://app.example`",
+        "`X-Frame-Options: DENY`",
+        "`Strict-Transport-Security: max-age=31536000`"
+      ],
+      "correctIndices": [
+        1,
+        3
+      ],
+      "explanation": "Clickjacking needs the victim page inside an attacker's frame, so the defenses forbid framing: `frame-ancestors` (preferred) and the older `X-Frame-Options`. `nosniff` stops MIME sniffing, CORS controls cross-origin reads and HSTS forces HTTPS; none of them prevents framing.",
+      "materials": [
+        "owasp-clickjacking"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A page includes `<script src=\"https://cdn.example/lib.js\" integrity=\"sha384-...\" crossorigin=\"anonymous\">`, but the CDN now serves a file whose hash doesn't match. What does the browser do?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It executes the script but logs a console warning, since integrity checks are advisory.",
+        "It refuses to execute the script and fires an `error` event on the `<script>` element.",
+        "It downloads the same path from the page's own origin as a fallback and runs that.",
+        "It executes the script in a sandbox without access to the page's DOM."
+      ],
+      "correct": 1,
+      "explanation": "Subresource Integrity is enforced: a mismatched resource is not executed and the element's `error` event fires, which you can use to load a fallback yourself (verified in Chromium). There is no automatic fallback or sandbox. This protects users if a CDN is compromised.",
+      "materials": [
+        "mdn-sri"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "For an SRI check on a cross-origin script to pass, the request must be CORS-enabled: the tag needs a `crossorigin` attribute and the server must allow the origin.",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Without CORS the browser cannot inspect the response bytes, so it blocks the script (Chromium: \"the resource requires the request to be CORS enabled to check the integrity\"). In a test, the same correct hash passed only with `crossorigin=\"anonymous\"` and an `Access-Control-Allow-Origin` header.",
+      "materials": [
+        "mdn-sri"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A login popup sends the user's access token with `window.opener.postMessage({ token }, '*')`. What is the risk?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The `'*'` target broadcasts the message to each open tab and window in the browser.",
+        "The token is appended to the opener's URL in plain text, where it ends up in server logs.",
+        "The `'*'` target turns off structured cloning, so extensions can read the message as text.",
+        "If the opener is an attacker's page (or has navigated to another origin), that page receives the token."
+      ],
+      "correct": 3,
+      "explanation": "`targetOrigin` is checked against the receiving window's current origin at delivery time; `'*'` skips the check, so whoever is in that window gets the data. Messages go only to the window you call `postMessage` on, not to other tabs, and the URL is not involved. Pass the exact expected origin when the message contains secrets.",
+      "materials": [
+        "mdn-postmessage"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A page listens for `message` events from an embedded widget at `https://widget.example`. Which checks make the handler safe?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Comparing `event.origin` exactly against `'https://widget.example'`",
+        "Validating the type and shape of `event.data` before using it",
+        "Accepting the message if `event.origin.includes('widget.example')`",
+        "Trusting an `origin` field the sender puts inside `event.data`",
+        "Checking that `event.source === iframe.contentWindow`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "`event.origin` is set by the browser and should be compared exactly; `includes` also accepts `https://widget.example.evil.net`. Data inside the message is attacker-controlled, so an origin field in it proves nothing, and the payload itself must be validated. Checking `event.source` additionally ties the message to the expected frame.",
+      "materials": [
+        "mdn-postmessage",
+        "owasp-html5"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: three ways to check a message's origin.",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "code": "const TRUSTED = 'https://app.example.com';\nconst looseCheck = (origin) => origin.startsWith(TRUSTED);\nconst regexCheck = (origin) => /https:\\/\\/app.example.com/.test(origin);\nconst strictCheck = (origin) => origin === TRUSTED;\nfor (const origin of ['https://app.example.com', 'https://app.example.com.evil.net', 'https://appxexample.com']) {\n  console.log(looseCheck(origin), regexCheck(origin), strictCheck(origin));\n}\n",
+      "codeLanguage": "js",
+      "expectedOutput": "true true true\ntrue true false\nfalse true false",
+      "explanation": "`startsWith` accepts any origin that merely begins with the trusted string, including `https://app.example.com.evil.net`. The regex is unanchored and its dots match any character, so it also accepts `https://appxexample.com`. Only the strict equality check rejects both look-alikes, which is why origins should be compared exactly against an allowlist.",
+      "materials": [
+        "mdn-postmessage"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a recursive merge that copies a parsed JSON body.",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "code": "function merge(target, source) {\n  for (const key in source) {\n    const value = source[key];\n    if (value && typeof value === 'object') {\n      if (!target[key]) target[key] = {};\n      merge(target[key], value);\n    } else {\n      target[key] = value;\n    }\n  }\n  return target;\n}\nconst settings = merge({}, JSON.parse('{\"__proto__\": {\"isAdmin\": true}}'));\nconst user = {};\nconsole.log(settings.isAdmin, user.isAdmin);\nconsole.log(Object.keys(settings).length, Object.hasOwn(user, 'isAdmin'));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "true true\n0 false",
+      "explanation": "`JSON.parse` creates an own property named `__proto__`, and `for...in` visits it. Then `target['__proto__']` reads `Object.prototype`, and the merge writes `isAdmin` there, so every plain object, including `user`, inherits it. `settings` has no own keys and `user` has no own `isAdmin`, which is what makes the bug hard to spot.",
+      "materials": [
+        "owasp-proto-pollution"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A naive recursive `merge(target, source)` copies every key of `JSON.parse(body)` into a plain object. Which payload does NOT add a property to `Object.prototype`?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`{\"__proto__\": {\"isAdmin\": true}}`",
+        "`{\"constructor\": {\"prototype\": {\"isAdmin\": true}}}`",
+        "`{\"prototype\": {\"isAdmin\": true}}`",
+        "`{\"a\": {\"__proto__\": {\"isAdmin\": true}}}`"
+      ],
+      "correct": 2,
+      "explanation": "Plain objects have no own or inherited `prototype` property, so that payload just creates a harmless nested object. `__proto__` reaches `Object.prototype` directly, at any depth, and `constructor.prototype` reaches it via `Object` (all verified in Node). Merge code must block `__proto__`, `constructor` and `prototype`.",
+      "materials": [
+        "owasp-proto-pollution"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: copying a parsed payload with `Object.assign` versus object spread.",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "code": "const payload = JSON.parse('{\"__proto__\": {\"polluted\": \"yes\"}}');\nconst viaAssign = Object.assign({}, payload);\nconst viaSpread = { ...payload };\nconsole.log(viaAssign.polluted, viaSpread.polluted);\nconsole.log(Object.keys(viaAssign), Object.keys(viaSpread));\nconsole.log(({}).polluted);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "yes undefined\n[] [ '__proto__' ]\nundefined",
+      "explanation": "`Object.assign` writes with ordinary assignment, so assigning the `__proto__` key calls the setter and changes the new object's prototype; `viaAssign` inherits `polluted` but has no own keys. Spread uses define semantics and creates an own data property literally named `__proto__`. Neither touches `Object.prototype`, so a fresh `{}` stays clean.",
+      "materials": [
+        "owasp-proto-pollution"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: counting words in a plain object versus a null-prototype object.",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "code": "function countWords(text) {\n  const counts = {};\n  for (const w of text.split(' ')) counts[w] = (counts[w] || 0) + 1;\n  return counts;\n}\nconst counts = countWords('constructor ok');\nconsole.log(counts.ok, typeof counts.constructor);\nconsole.log(counts.constructor);\nconst safe = Object.create(null);\nsafe.constructor = (safe.constructor || 0) + 1;\nconsole.log(safe.constructor, 'toString' in safe);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "1 string\nfunction Object() { [native code] }1\n1 false",
+      "explanation": "`counts.constructor` starts out as the inherited `Object` function, so `(counts[w] || 0) + 1` concatenates the function's source with `1` and produces a string. A dictionary made with `Object.create(null)` has no inherited keys, so `constructor` starts at `undefined` and counts correctly, and `'toString' in safe` is `false`. A `Map` solves the same problem.",
+      "materials": [
+        "owasp-proto-pollution"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these reduce the risk of prototype pollution when handling user-controlled keys?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Storing the data in objects created with `Object.create(null)`",
+        "Wrapping the merge function in `try...catch`",
+        "Using a `Map` instead of a plain object for the lookup table",
+        "Skipping the keys `__proto__`, `constructor` and `prototype` in merge or set-by-path helpers",
+        "Parsing the request body with `JSON.parse` instead of `eval`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Null-prototype objects and `Map`s have no path to `Object.prototype`, and filtering the dangerous keys closes the hole in merge helpers; freezing `Object.prototype` is another option. Pollution throws no error, so `try...catch` changes nothing. `JSON.parse` is the very thing that creates the own `__proto__` key in typical attacks.",
+      "materials": [
+        "owasp-proto-pollution"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which regex shows catastrophic backtracking in V8 (time roughly doubling with each extra character) on input like `'a'.repeat(28) + '!'`?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`/^a+$/`",
+        "`/^(a|b)+$/`",
+        "`/^[a-z]+\\d*$/`",
+        "`/^(a+)+$/`"
+      ],
+      "correct": 3,
+      "explanation": "`(a+)+` nests quantifiers, so the engine can split the run of `a`s between inner and outer repetitions in exponentially many ways and tries them all once the final `!` makes the match fail; in Node 22 it took several seconds for 27 characters. The other patterns have only one way to match each character, so they fail in linear time.",
+      "materials": [
+        "owasp-redos"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Why do attackers who publish a typosquatted package (for example `lodahs` instead of `lodash`) usually put their payload in a `postinstall` script?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "npm runs dependency lifecycle scripts during `npm install` by default, so the code runs on the developer's or CI machine before anything imports the package.",
+        "`postinstall` scripts are bundled into the front-end build, so they run in the browser of each user who loads the site afterwards.",
+        "`npm audit` skips packages that declare a `postinstall` script, so the malicious package is hidden from vulnerability reports.",
+        "Lifecycle scripts run with root privileges even when npm was started by a normal user, giving full control of the machine."
+      ],
+      "correct": 0,
+      "explanation": "`preinstall`, `install` and `postinstall` scripts of dependencies run automatically as part of installation with the current user's privileges, which gives an attacker code execution with access to tokens and SSH keys. They are not bundled into front-end code and `npm audit` does not skip them. `--ignore-scripts` (or an allowlist) reduces this risk.",
+      "materials": [
+        "npm-scripts"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which practices reduce supply-chain risk for a JavaScript project?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Changing exact versions like `\"4.17.21\"` to ranges like `\"^4.17.21\"`",
+        "Committing `package-lock.json` and installing with `npm ci` in CI",
+        "Installing with `--ignore-scripts` and allowing lifecycle scripts only for packages that need them",
+        "Running `npm audit`, which flags newly published malicious packages before any advisory exists",
+        "Preferring packages with npm provenance and verifying with `npm audit signatures`"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        4
+      ],
+      "explanation": "A lockfile with `npm ci` installs exactly the reviewed versions and fails on drift; blocking install scripts removes the most common payload path; provenance links a package to its source and build. Caret ranges widen what gets installed, so a malicious new minor release is picked up automatically. `npm audit` only knows published advisories, so a brand-new malicious package passes it.",
+      "materials": [
+        "npm-ci",
+        "npm-provenance"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A Vite app reads `import.meta.env.VITE_PAYMENT_SECRET` in a component. After `vite build`, where does the secret's value end up?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "In a server-side env file that the browser fetches with the user's session",
+        "Inlined as a plain string in the JavaScript files served to every visitor",
+        "Encrypted in the bundle and decrypted at runtime with a key from the build",
+        "Nowhere, because Vite strips variables whose names contain `SECRET`"
+      ],
+      "correct": 1,
+      "explanation": "Build tools replace `import.meta.env.VITE_*` references with their literal values at build time, so anything prefixed `VITE_` is public by design. Minification does not hide it, and there is no encryption or name-based stripping. Real secrets belong on a server that the front end calls.",
+      "materials": [
+        "owasp-html5"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which values are acceptable to ship in a front-end JavaScript bundle?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A public analytics measurement ID",
+        "A Stripe publishable key (`pk_live_...`)",
+        "The database password used by the API",
+        "A Stripe secret key (`sk_live_...`)",
+        "The client secret of a confidential OAuth client"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "Anything in a bundle can be read by every visitor, so only identifiers designed to be public belong there, such as analytics IDs and publishable keys. Database passwords, secret API keys and confidential client secrets must stay on the server; browser apps should use public OAuth clients with PKCE instead of a client secret.",
+      "materials": [
+        "owasp-html5"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In a single-page app, which of these commonly cause memory to grow each time a view is opened and closed?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A `resize` listener added to `window` when the view mounts and never removed",
+        "A large array created in a function that has returned and isn't referenced anywhere",
+        "A `setInterval` started by the view and never cleared",
+        "A module-level `Map` that caches API responses by URL with no eviction",
+        "Removed DOM nodes still referenced from a JavaScript array"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "explanation": "Listeners on long-lived objects, running intervals, unbounded caches and arrays holding removed (detached) nodes all keep data reachable, so the collector can't free it. A local array that nothing references after its function returns is unreachable and gets collected normally.",
+      "materials": [
+        "mdn-memory",
+        "chrome-memory"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A heap snapshot in Chrome DevTools shows a growing number of `Detached HTMLDivElement` entries each time a modal is closed. What is the most likely cause?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The browser keeps removed elements around for the back/forward cache and releases them at the next full navigation.",
+        "The modal's elements were removed from the document, but JavaScript still references them, for example from an array, a closure or a listener on `window`.",
+        "The modal was hidden with `display: none` instead of `visibility: hidden`, which detaches its nodes from the render tree.",
+        "The nodes were created with `innerHTML` instead of `createElement`, and V8 keeps parsed markup in a separate heap."
+      ],
+      "correct": 1,
+      "explanation": "\"Detached\" means the nodes are no longer in the document tree but are still reachable from JavaScript, so they and their subtrees stay in memory. The snapshot's retainers panel shows which reference holds them. Hiding with CSS does not detach nodes, and how a node was created has no effect on collection.",
+      "materials": [
+        "chrome-memory"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In V8, can the large array `big` be garbage-collected while `keep` is still alive?\n\n```js\nfunction setup() {\n  const big = new Array(1e6).fill('x');\n  const logSize = () => console.log(big.length);\n  logSize();\n  return () => 'small';\n}\nconst keep = setup();\n```",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Yes, because the returned function doesn't mention `big`, and V8 tracks captured variables separately for each closure.",
+        "No, because closures created in the same scope share one context object, and `logSize` put `big` into it.",
+        "No, because a function keeps its local variables alive for as long as its source code is loaded.",
+        "Yes, but it happens later, once `setup` runs a second time and V8 replaces the old context."
+      ],
+      "correct": 1,
+      "explanation": "V8 stores captured variables in a context object shared by all closures created in that scope. Because `logSize` references `big`, `big` lives in the shared context, and the returned closure keeps that context alive (a Node test with `FinalizationRegistry` and `--expose-gc` confirmed `big` was not collected, while a version without `logSize` was). Variables no closure captures are not kept.",
+      "materials": [
+        "mdn-memory",
+        "v8-trash-talk"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these events in the life of one long-lived object in V8 in order, first to last.",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The object is allocated in the young generation",
+        "It survives a minor GC (scavenge) because it is still reachable",
+        "After surviving another scavenge, it is promoted to the old generation",
+        "The program drops its last reference to the object",
+        "A major mark-compact GC of the old generation reclaims its memory"
+      ],
+      "explanation": "V8 allocates new objects in the small young generation, which is collected often by fast scavenges. Objects that survive two scavenges are promoted to the old generation, which is collected less often by the major mark-compact collector. An unreachable old object therefore waits for a major GC.",
+      "materials": [
+        "v8-trash-talk"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a size-bounded LRU cache built on `Map`.",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "code": "class LruCache {\n  constructor(limit) { this.limit = limit; this.map = new Map(); }\n  get(key) {\n    if (!this.map.has(key)) return undefined;\n    const value = this.map.get(key);\n    this.map.delete(key);\n    this.map.set(key, value);\n    return value;\n  }\n  set(key, value) {\n    this.map.delete(key);\n    this.map.set(key, value);\n    if (this.map.size > this.limit) this.map.delete(this.map.keys().next().value);\n  }\n}\nconst cache = new LruCache(2);\ncache.set('a', 1); cache.set('b', 2);\ncache.get('a');\ncache.set('c', 3);\nconsole.log([...cache.map.keys()], cache.get('b'));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "[ 'a', 'c' ] undefined",
+      "explanation": "A `Map` iterates in insertion order, so deleting and re-inserting a key on each access moves it to the end, and the first key is always the least recently used. Reading `a` makes `b` the oldest entry, so adding `c` evicts `b`. Bounding a cache like this stops it from growing into a memory leak.",
+      "materials": [
+        "mdn-memory"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a debounced search handler driven by a fake clock.",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "code": "// A tiny fake clock so the timing is deterministic\nlet now = 0;\nlet timers = [];\nconst fakeSetTimeout = (fn, ms) => { const t = { fn, at: now + ms }; timers.push(t); return t; };\nconst fakeClearTimeout = (t) => { timers = timers.filter((x) => x !== t); };\nconst advanceTo = (time) => {\n  timers.sort((a, b) => a.at - b.at);\n  while (timers.length && timers[0].at <= time) { const t = timers.shift(); now = t.at; t.fn(); }\n  now = time;\n};\n\nfunction debounce(fn, ms) {\n  let t;\n  return (arg) => { fakeClearTimeout(t); t = fakeSetTimeout(() => fn(arg), ms); };\n}\nconst search = debounce((q) => console.log(`search \"${q}\" at ${now}`), 100);\nsearch('j'); advanceTo(50);\nsearch('ja'); advanceTo(120);\nsearch('jav'); advanceTo(400);\nsearch('java'); advanceTo(1000);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "search \"jav\" at 220\nsearch \"java\" at 500",
+      "explanation": "Each call cancels the pending timer and starts a new 100 ms wait, so `j` (due at 100) and `ja` (due at 150) are cancelled by the next calls. `jav` is called at 120, nothing interrupts it, and it fires at 220. `java` is called at 400 and fires at 500.",
+      "materials": [
+        "mdn-debounce"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a leading-edge throttle with a 100 ms window.",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "code": "let now = 0;\nfunction throttle(fn, ms) {\n  let last = -Infinity;\n  return (arg) => {\n    if (now - last >= ms) { last = now; fn(arg); }\n  };\n}\nconst onScroll = throttle((y) => console.log(`handle y=${y} at ${now}`), 100);\nfor (const [t, y] of [[0, 0], [30, 40], [90, 120], [100, 150], [180, 260], [210, 300]]) {\n  now = t;\n  onScroll(y);\n}\n",
+      "codeLanguage": "js",
+      "expectedOutput": "handle y=0 at 0\nhandle y=150 at 100\nhandle y=300 at 210",
+      "explanation": "The throttle runs the handler when at least 100 ms have passed since the last run and drops calls in between. It runs at 0, drops 30 and 90, runs at 100 (exactly 100 ms later), drops 180, and runs at 210. Unlike debounce, it keeps producing updates while events continue.",
+      "materials": [
+        "mdn-debounce"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Why is this loop slow for 1,000 boxes, and what fixes it?\n\n```js\nfor (const box of boxes) {\n  box.style.width = box.parentElement.offsetWidth / 2 + 'px';\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`offsetWidth` makes the browser recompute styles for the entire document on every read; caching each value in `localStorage` avoids it.",
+        "Building strings with `+ 'px'` allocates many temporary strings; switching to template literals removes the slowdown.",
+        "Each style write triggers an immediate repaint; wrapping the loop body in `setTimeout(..., 0)` batches the paints together.",
+        "Each style write invalidates layout, so the next `offsetWidth` read forces a synchronous layout; read all widths first, then write all styles."
+      ],
+      "correct": 3,
+      "explanation": "Alternating writes and layout reads causes layout thrashing: each read must flush the pending style change with a full layout. Batching all reads before all writes lets the browser lay out once. Style writes do not repaint immediately, and string building is not the bottleneck.",
+      "materials": [
+        "webdev-layout-thrashing"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A click handler runs a 400 ms computation on the main thread, which makes the page feel frozen. Which changes let the browser handle input and paint while the work is done?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Marking the handler `async` without adding any `await` inside the loop",
+        "Splitting the work into chunks and yielding between them with `setTimeout` (or `scheduler.yield()` where supported)",
+        "Splitting the work into chunks scheduled with `queueMicrotask`",
+        "Moving the computation into a Web Worker and posting the result back",
+        "Running the whole computation inside one `requestAnimationFrame` callback"
+      ],
+      "correctIndices": [
+        1,
+        3
+      ],
+      "explanation": "A task longer than 50 ms blocks input and rendering until it ends. Yielding back to the event loop between chunks, or moving the work off the main thread into a worker, lets the browser respond in between. An `async` function without `await` runs synchronously, microtasks all run before the browser gets a chance to render or handle input, and a single `requestAnimationFrame` callback is still one long task.",
+      "materials": [
+        "webdev-long-tasks"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the phases of one interaction as measured by INP in order, first to last.",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The user taps a button",
+        "Input delay: the event waits for the main thread to finish its current task",
+        "Processing: the event handlers run",
+        "Presentation delay: the browser recalculates style, lays out and paints",
+        "The next frame appears on screen"
+      ],
+      "explanation": "INP measures from the input to the next frame painted, split into input delay, processing time and presentation delay. Long tasks inflate input delay, heavy handlers inflate processing, and large DOM updates inflate presentation delay.",
+      "materials": [
+        "webdev-inp"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "The LCP element on a landing page is a large hero image. Which changes are likely to improve LCP?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Adding `fetchpriority=\"high\"` to the hero `<img>` or preloading it",
+        "Adding `loading=\"lazy\"` to the hero image",
+        "Reducing server response time (TTFB) with caching or a CDN",
+        "Adding `width` and `height` attributes to the hero image",
+        "Serving the image in a smaller, compressed format such as AVIF or WebP"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "LCP improves when the image is discovered and requested earlier, the server answers sooner and fewer bytes are downloaded. Lazy-loading an above-the-fold image delays it until layout, which hurts LCP. Explicit dimensions prevent layout shifts, so they help CLS rather than LCP.",
+      "materials": [
+        "webdev-lcp"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these typically cause Cumulative Layout Shift (CLS)?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Animating an element with `transform: translateX(...)`",
+        "Images inserted without `width`/`height` or `aspect-ratio`",
+        "A 300 ms long task that delays a click handler",
+        "An ad slot injected above the content without reserved space",
+        "A web font swap that changes the size of text already on screen"
+      ],
+      "correctIndices": [
+        1,
+        3,
+        4
+      ],
+      "explanation": "CLS counts unexpected movement of visible content: images without reserved space, injected ads and banners, and font swaps that reflow text. `transform` animations do not move layout boxes, so they don't count as shifts. A long task blocking a handler hurts INP, not CLS.",
+      "materials": [
+        "webdev-cls"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Layout shifts that occur within 500 ms after a user's click, tap or key press are excluded from CLS.",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Shifts that follow discrete user input within 500 ms are flagged with `hadRecentInput` and not counted, because the user expects the page to change. Scrolling and hovering do not count as such input, and shifts from slow async work after 500 ms still count.",
+      "materials": [
+        "webdev-cls"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A route component is loaded with `const Settings = lazy(() => import('./Settings'))`. What is the main performance effect?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The bundler compiles `Settings` to WebAssembly, so it parses and executes faster than plain JavaScript.",
+        "The bundler emits `Settings` as a separate chunk that is downloaded when it is first rendered, shrinking the initial bundle.",
+        "The browser preloads `Settings` in parallel with the main bundle, so the first load fetches the same bytes faster.",
+        "The module runs in a Web Worker, which keeps its execution off the main thread."
+      ],
+      "correct": 1,
+      "explanation": "Dynamic `import()` is a split point: the bundler puts the module in its own chunk and fetches it on demand, which cuts the JavaScript that must be downloaded, parsed and executed on first load. The trade-off is a short delay when the route is first opened, often hidden with prefetching. It does not change the language or the thread the code runs on.",
+      "materials": [
+        "webdev-code-splitting"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An HTML document is served with `Cache-Control: no-cache` and an `ETag`. What does the browser do on the next visit?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It doesn't store the response, so the document is downloaded in full on each visit.",
+        "It reuses the stored copy without contacting the server until the ETag expires.",
+        "It stores the response but revalidates with `If-None-Match` before each reuse, and a `304` lets it reuse the stored copy.",
+        "It reuses the stored copy for the rest of the session and revalidates after the tab is closed."
+      ],
+      "correct": 2,
+      "explanation": "`no-cache` means \"store, but check with the server before using\"; with an ETag, revalidation is cheap because an unchanged resource returns `304` with no body. The no-storage behaviour is `no-store`. ETags have no expiry; freshness comes from `max-age`.",
+      "materials": [
+        "mdn-http-caching"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A script was cached with `Cache-Control: max-age=60` and `ETag: \"v1\"`. Five minutes later the page requests it again and the file is unchanged. Put the steps in order, first to last.",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The browser finds the stored response and sees it is older than 60 seconds, so it is stale",
+        "The browser sends the request with `If-None-Match: \"v1\"`",
+        "The server compares the ETag and finds the resource unchanged",
+        "The server replies `304 Not Modified` without a body",
+        "The browser uses the stored body and refreshes its freshness lifetime"
+      ],
+      "explanation": "A stale response is not thrown away; the browser revalidates it with a conditional request. A `304` saves the download, and the stored response is treated as fresh again for another `max-age`. For hashed asset filenames, a long `max-age` with `immutable` avoids even this round trip.",
+      "materials": [
+        "mdn-http-caching"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The value returned by `performance.now()` can jump backwards if the user changes the system clock.",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. `performance.now()` is monotonic and measured relative to the context's time origin, so wall-clock adjustments do not affect it; `Date.now()` follows the system clock and can jump. Browsers coarsen its resolution (for example to 100 µs, or 5 µs in cross-origin isolated pages) to limit timing attacks.",
+      "materials": [
+        "mdn-performance-now"
+      ]
+    }
+  ]
+}
