@@ -1,0 +1,1427 @@
+{
+  "name": "JavaScript: tooling and testing",
+  "materials": [
+    {
+      "key": "npm-semver",
+      "type": "article",
+      "title": "npm docs: semver",
+      "url": "https://docs.npmjs.com/cli/v10/using-npm/semver",
+      "author": "npm Docs",
+      "description": "How npm interprets caret, tilde, x-ranges and prerelease tags in version ranges."
+    },
+    {
+      "key": "semver-spec",
+      "type": "article",
+      "title": "Semantic Versioning 2.0.0",
+      "url": "https://semver.org/",
+      "author": "Tom Preston-Werner",
+      "description": "The specification for MAJOR.MINOR.PATCH versions and prerelease precedence."
+    },
+    {
+      "key": "npm-pkgjson",
+      "type": "article",
+      "title": "npm docs: package.json",
+      "url": "https://docs.npmjs.com/cli/v10/configuring-npm/package-json",
+      "author": "npm Docs",
+      "description": "Reference for dependencies, devDependencies, peerDependencies and other package.json fields."
+    },
+    {
+      "key": "npm-lock",
+      "type": "article",
+      "title": "npm docs: package-lock.json",
+      "url": "https://docs.npmjs.com/cli/v10/configuring-npm/package-lock-json",
+      "author": "npm Docs",
+      "description": "What the lockfile records and when npm reads or ignores it."
+    },
+    {
+      "key": "npm-ci",
+      "type": "article",
+      "title": "npm docs: npm ci",
+      "url": "https://docs.npmjs.com/cli/v10/commands/npm-ci",
+      "author": "npm Docs",
+      "description": "The clean, lockfile-exact install command intended for CI and deployments."
+    },
+    {
+      "key": "npm-install",
+      "type": "article",
+      "title": "npm docs: npm install",
+      "url": "https://docs.npmjs.com/cli/v10/commands/npm-install",
+      "author": "npm Docs",
+      "description": "How npm install resolves, saves and installs packages, including peer dependencies."
+    },
+    {
+      "key": "npm-scripts",
+      "type": "article",
+      "title": "npm docs: scripts",
+      "url": "https://docs.npmjs.com/cli/v10/using-npm/scripts",
+      "author": "npm Docs",
+      "description": "Lifecycle scripts, pre/post hooks and how npm run sets up PATH."
+    },
+    {
+      "key": "npx",
+      "type": "article",
+      "title": "npm docs: npx",
+      "url": "https://docs.npmjs.com/cli/v10/commands/npx",
+      "author": "npm Docs",
+      "description": "Running a package's binary from the local project or a temporary install."
+    },
+    {
+      "key": "npm-workspaces",
+      "type": "article",
+      "title": "npm docs: workspaces",
+      "url": "https://docs.npmjs.com/cli/v10/using-npm/workspaces",
+      "author": "npm Docs",
+      "description": "Managing several packages from one root package.json and lockfile."
+    },
+    {
+      "key": "pnpm",
+      "type": "article",
+      "title": "pnpm: Motivation",
+      "url": "https://pnpm.io/motivation",
+      "author": "pnpm",
+      "description": "Why pnpm uses a content-addressable store, hard links and a non-flat node_modules."
+    },
+    {
+      "key": "node-packages",
+      "type": "article",
+      "title": "Node.js docs: Modules: Packages",
+      "url": "https://nodejs.org/api/packages.html",
+      "author": "Node.js",
+      "description": "The exports field, conditional exports and the dual package hazard."
+    },
+    {
+      "key": "webpack-tree",
+      "type": "article",
+      "title": "webpack: Tree Shaking",
+      "url": "https://webpack.js.org/guides/tree-shaking/",
+      "author": "webpack",
+      "description": "How bundlers drop unused ES module exports and what the sideEffects flag does."
+    },
+    {
+      "key": "mdn-import",
+      "type": "article",
+      "title": "MDN: import()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import",
+      "author": "MDN Web Docs",
+      "description": "Dynamic import, which bundlers use as a code-splitting point."
+    },
+    {
+      "key": "mdn-sourcemap",
+      "type": "article",
+      "title": "MDN: Source map",
+      "url": "https://developer.mozilla.org/en-US/docs/Glossary/Source_map",
+      "author": "MDN Web Docs",
+      "description": "How a source map links generated code back to the original source."
+    },
+    {
+      "key": "vite-why",
+      "type": "article",
+      "title": "Vite: Why Vite",
+      "url": "https://vite.dev/guide/why.html",
+      "author": "Vite",
+      "description": "Native-ESM dev server, dependency pre-bundling and why production is still bundled."
+    },
+    {
+      "key": "vite-features",
+      "type": "article",
+      "title": "Vite: Features",
+      "url": "https://vite.dev/guide/features.html",
+      "author": "Vite",
+      "description": "Vite's TypeScript handling (transpile only, no type check) and other built-in features."
+    },
+    {
+      "key": "vite-env",
+      "type": "article",
+      "title": "Vite: Env Variables and Modes",
+      "url": "https://vite.dev/guide/env-and-mode.html",
+      "author": "Vite",
+      "description": "import.meta.env and the VITE_ prefix that controls what reaches client code."
+    },
+    {
+      "key": "esbuild-ts",
+      "type": "article",
+      "title": "esbuild: Content Types",
+      "url": "https://esbuild.github.io/content-types/",
+      "author": "esbuild",
+      "description": "esbuild strips TypeScript types without type checking, and its caveats."
+    },
+    {
+      "key": "babel-env",
+      "type": "article",
+      "title": "Babel: @babel/preset-env",
+      "url": "https://babeljs.io/docs/babel-preset-env",
+      "author": "Babel",
+      "description": "Syntax transforms by target, and how polyfills are a separate concern."
+    },
+    {
+      "key": "ts-noemit",
+      "type": "article",
+      "title": "TSConfig Reference: noEmitOnError",
+      "url": "https://www.typescriptlang.org/tsconfig/#noEmitOnError",
+      "author": "TypeScript",
+      "description": "tsc emits JavaScript despite type errors unless this option is set."
+    },
+    {
+      "key": "eslint-core",
+      "type": "article",
+      "title": "ESLint: Core Concepts",
+      "url": "https://eslint.org/docs/latest/use/core-concepts/",
+      "author": "ESLint",
+      "description": "Rules, configuration files, fixes and what ESLint is for."
+    },
+    {
+      "key": "prettier-cmp",
+      "type": "article",
+      "title": "Prettier vs. Linters",
+      "url": "https://prettier.io/docs/comparison",
+      "author": "Prettier",
+      "description": "Why formatting rules and code-quality rules belong to different tools."
+    },
+    {
+      "key": "vitest-expect",
+      "type": "article",
+      "title": "Vitest: expect",
+      "url": "https://vitest.dev/api/expect.html",
+      "author": "Vitest",
+      "description": "Matchers such as toBe, toEqual, toStrictEqual, toThrow, resolves and expect.assertions."
+    },
+    {
+      "key": "vitest-vi",
+      "type": "article",
+      "title": "Vitest: vi utility",
+      "url": "https://vitest.dev/api/vi.html",
+      "author": "Vitest",
+      "description": "vi.fn, vi.spyOn, vi.mock hoisting, vi.hoisted and fake timers."
+    },
+    {
+      "key": "vitest-snapshot",
+      "type": "article",
+      "title": "Vitest: Snapshot",
+      "url": "https://vitest.dev/guide/snapshot.html",
+      "author": "Vitest",
+      "description": "File and inline snapshots, updating them, and their behaviour in CI."
+    },
+    {
+      "key": "vitest-coverage",
+      "type": "article",
+      "title": "Vitest: Coverage",
+      "url": "https://vitest.dev/guide/coverage.html",
+      "author": "Vitest",
+      "description": "The v8 and istanbul coverage providers and the metrics they report."
+    },
+    {
+      "key": "pw-actionability",
+      "type": "article",
+      "title": "Playwright: Auto-waiting",
+      "url": "https://playwright.dev/docs/actionability",
+      "author": "Playwright",
+      "description": "The actionability checks Playwright performs before clicking or typing."
+    },
+    {
+      "key": "pw-locators",
+      "type": "article",
+      "title": "Playwright: Locators",
+      "url": "https://playwright.dev/docs/locators",
+      "author": "Playwright",
+      "description": "Lazy, strict locators and the recommended getByRole style."
+    },
+    {
+      "key": "pw-assertions",
+      "type": "article",
+      "title": "Playwright: Assertions",
+      "url": "https://playwright.dev/docs/test-assertions",
+      "author": "Playwright",
+      "description": "Auto-retrying web-first assertions versus one-shot generic assertions."
+    },
+    {
+      "key": "pw-contexts",
+      "type": "article",
+      "title": "Playwright: Isolation",
+      "url": "https://playwright.dev/docs/browser-contexts",
+      "author": "Playwright",
+      "description": "Each test runs in its own browser context with separate cookies and storage."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple-choice",
+      "prompt": "package.json declares `\"lodash\": \"^4.17.21\"`. Which of these versions may `npm install` pick for it?",
+      "options": [
+        "5.0.0-rc.1",
+        "4.17.20",
+        "4.18.0",
+        "5.0.0"
+      ],
+      "correct": 2,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "A caret range allows any later version with the same non-zero major, so `^4.17.21` means `>=4.17.21 <5.0.0` and 4.18.0 fits. 5.0.0 changes the major version, 4.17.20 is below the lower bound, and 5.0.0-rc.1 is both a new major and a prerelease, which caret ranges exclude unless the range itself names a prerelease of the same version.",
+      "materials": [
+        "npm-semver"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which range is `^0.3.1` equivalent to in npm?",
+      "options": [
+        ">=0.3.1 <1.0.0",
+        ">=0.3.1 <0.4.0",
+        ">=0.3.1 <0.3.2",
+        ">=0.3.0 <1.0.0"
+      ],
+      "correct": 1,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "explanation": "The caret allows changes that do not modify the left-most non-zero part. For `0.3.1` that part is the minor 3, so only 0.3.x patches at or above 0.3.1 match. Treating 0.x like 1.x (`<1.0.0`) is the common mistake; `<0.3.2` is what `^0.0.1`-style ranges do for the patch digit, and the lower bound stays 0.3.1, not 0.3.0.",
+      "materials": [
+        "npm-semver",
+        "semver-spec"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In CI, `npm ci` runs in a repository whose package.json asks for `ms@^1.0.0` while package-lock.json pins `ms@2.1.3`. What happens?",
+      "options": [
+        "It updates the lockfile to a 1.x version and installs that",
+        "It installs ms 2.1.3 from the lockfile and prints a warning",
+        "It installs a 1.x version and leaves the lockfile unchanged",
+        "It exits with an error and changes neither file"
+      ],
+      "correct": 3,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "`npm ci` requires package.json and the lockfile to be in sync; when they are not, it stops with an EUSAGE error telling you to run `npm install` first. It never rewrites package.json or the lockfile, which is exactly why CI uses it: a stale lockfile fails loudly instead of being silently repaired or ignored.",
+      "materials": [
+        "npm-ci"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "You publish a library to npm with its package-lock.json included. An application then installs your library. What decides which versions of your library's own dependencies the application gets?",
+      "options": [
+        "Your library's package-lock.json, because it ships in the tarball",
+        "The application's lockfile and your package.json ranges; your lockfile is ignored",
+        "The latest version of each dependency, ignoring the declared ranges",
+        "Your package-lock.json, unless the application passes --legacy-peer-deps"
+      ],
+      "correct": 1,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "npm reads package-lock.json only at the root of the project being installed; a lockfile inside a dependency is ignored. Your package.json ranges constrain the resolution and the application's own lockfile records the result. A library that really wants to pin its tree would need npm-shrinkwrap.json, which npm discourages for libraries; --legacy-peer-deps only changes peer dependency handling.",
+      "materials": [
+        "npm-lock"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Why does a React component library usually list `react` under `peerDependencies` instead of `dependencies`?",
+      "options": [
+        "So the application provides a single shared copy of React for itself and the library",
+        "So npm skips installing React when the library is used in production",
+        "So the library can bundle its own private copy of React at build time",
+        "So React is installed just for the library's own test runs in CI"
+      ],
+      "correct": 0,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "A peer dependency says \"I run inside a host that already has this package\". The application supplies React and the library uses that same instance; two copies of React in one app break hooks and context. Listing it under `dependencies` risks a second nested copy, and peer dependencies are not about production versus test installs (that is `devDependencies`). Since npm 7, missing peers are installed automatically and conflicting ones cause an ERESOLVE error.",
+      "materials": [
+        "npm-pkgjson",
+        "npm-install"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "ESLint is listed in the project's devDependencies and is not installed globally. What does `npx eslint .` do?",
+      "options": [
+        "Downloads the latest ESLint into a temporary cache and runs that copy",
+        "Runs the project's local `node_modules/.bin/eslint`",
+        "Fails because npx runs packages from the registry, not the project",
+        "Installs ESLint globally first, then runs the global copy"
+      ],
+      "correct": 1,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "npx first looks for the command in the local project's `node_modules/.bin`, so it runs the exact ESLint version the project pinned. It falls back to fetching a package into the npm cache when no local binary exists, and it does not install anything globally. npm scripts work the same way, because `npm run` puts `node_modules/.bin` on the PATH.",
+      "materials": [
+        "npx",
+        "npm-scripts"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "The latest `ms` release is 2.1.3. In a project without special npm config, what does `npm install ms@^2.0.0` write to package.json?",
+      "options": [
+        "`\"ms\": \"^2.0.0\"`",
+        "`\"ms\": \"2.1.3\"`",
+        "`\"ms\": \"^2.1.3\"`",
+        "`\"ms\": \"~2.1.3\"`"
+      ],
+      "correct": 2,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "npm resolves the range to the newest matching version (2.1.3) and saves that version with the default save-prefix `^`, giving `^2.1.3`. It does not copy the range you typed, and it saves an exact version only with `--save-exact` (or `save-exact=true` in .npmrc). A tilde is written only if you change the `save-prefix` config.",
+      "materials": [
+        "npm-install",
+        "npm-semver"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A build script uses `npm run build --ignore-scripts`, and package.json defines `prebuild`, `build` and `postbuild`. Which scripts run?",
+      "options": [
+        "None of them, since every script is skipped",
+        "`prebuild` and `build`, but not `postbuild`",
+        "All three, because the flag only affects installs",
+        "Only `build`; the pre and post hooks are skipped"
+      ],
+      "correct": 3,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "explanation": "With `ignore-scripts`, npm skips lifecycle scripts, but a command that explicitly names a script (`npm run build`, `npm test`, `npm start`) still runs that script. Its `pre` and `post` hooks are skipped, so only `build` runs. The flag is mostly used during installs to block dependency `install`/`postinstall` scripts.",
+      "materials": [
+        "npm-scripts"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Why does tree-shaking work well on ES modules but poorly on CommonJS code?",
+      "options": [
+        "`import`/`export` are static, so the bundler can see which bindings are used at build time",
+        "ES modules run in strict mode, which lets the minifier remove unused functions",
+        "CommonJS modules are loaded asynchronously, so the bundler skips waiting for them",
+        "ES modules are cached by URL, so duplicated code is detected and merged"
+      ],
+      "correct": 0,
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "explanation": "Tree-shaking relies on static structure: ES `import` and `export` declarations sit at the top level with literal names, so a bundler can prove which exports are never imported. CommonJS uses `require()` calls and assignments to `module.exports` that can be computed at runtime, so bundlers keep them. Strict mode and caching have nothing to do with dead-export removal, and `require` is synchronous, not asynchronous.",
+      "materials": [
+        "webpack-tree"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "```js\n// node_modules/lib/index.js\nexport { used } from './a.js';\nexport { unused } from './b.js';\n\n// node_modules/lib/b.js\nconsole.log('B loaded');\nexport const unused = () => 'UNUSED';\n```\nThe app does `import { used } from 'lib'` and bundles with esbuild. lib's package.json contains `\"sideEffects\": false`. What ends up in the bundle from b.js?",
+      "options": [
+        "Just `console.log('B loaded')`, because top-level statements are kept",
+        "The whole module, because `export ... from` re-exports are opaque to bundlers",
+        "Nothing; the bundler drops b.js entirely, including the log",
+        "Just `unused`, because re-exported bindings are retained"
+      ],
+      "correct": 2,
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "explanation": "`sideEffects: false` promises that importing a module without using its exports has no observable effect, so the bundler may skip b.js entirely and the `console.log` disappears. Without the flag, esbuild still removes the unused function but must keep the top-level `console.log` in case it matters. Re-exports are statically analysable, so they are not a reason to keep the module; this is also why a package with CSS imports or polyfills must list those files in `sideEffects`.",
+      "materials": [
+        "webpack-tree"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In an app bundled by Vite or webpack, a click handler runs `const { renderChart } = await import('./chart.js');`. What does the bundler typically do with chart.js?",
+      "options": [
+        "Inlines it into the main bundle, because import() is rewritten to a static import",
+        "Puts it in a separate chunk that is fetched the first time that line runs",
+        "Copies it unbundled to the output folder so the browser loads it from source",
+        "Downloads it with the main bundle and delays evaluating it until the click"
+      ],
+      "correct": 1,
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "explanation": "A dynamic `import()` is the standard code-splitting point: the bundler emits the module and its exclusive dependencies as a separate chunk and rewrites the call to load that chunk on demand. That keeps the initial bundle smaller. Bundlers do not inline it as a static import or ship it as raw source, and the chunk is not part of the initial download unless you add an explicit prefetch or preload.",
+      "materials": [
+        "mdn-import",
+        "vite-features"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A production bundle ends with `//# sourceMappingURL=app.3f9a.js.map`. What is that map file for?",
+      "options": [
+        "It lets the browser download just the modules that changed since the last deploy",
+        "It lists the npm packages and versions that were bundled, for license audits",
+        "It maps positions in the minified file back to the original sources for debugging",
+        "It tells the browser which chunks to fetch in parallel with the main bundle"
+      ],
+      "correct": 2,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "A source map records how each position in the generated file corresponds to a line and column in the original source files. DevTools use it to show original code and set breakpoints, and error-tracking tools use it to turn minified stack traces back into readable ones. It plays no part in caching, chunk loading or license reporting. If the map is public and includes `sourcesContent`, anyone can read your original source, which is why some teams upload maps only to their error tracker.",
+      "materials": [
+        "mdn-sourcemap"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "How does Vite's dev server serve your application's own source files?",
+      "options": [
+        "It bundles the whole app with Rollup on startup and rebuilds it on each change",
+        "It serves them as native ES modules, transforming each file when the browser requests it",
+        "It concatenates the files into one script and reloads the page on each change",
+        "It runs tsc in watch mode and serves the emitted JavaScript from a temp folder"
+      ],
+      "correct": 1,
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "explanation": "In development Vite relies on the browser's native ES module support: the browser requests modules over `import`, and Vite transforms each requested file on the fly (for example stripping TypeScript). Only dependencies are pre-bundled with esbuild, to cut down on many small requests and convert CommonJS. Production builds are still fully bundled and minified, because unbundled ESM over the network is slow at scale; Vite does not run tsc at all.",
+      "materials": [
+        "vite-why"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A Vite project's `.env` contains `VITE_API_URL=https://api.example` and `DB_PASSWORD=secret`. After `vite build`, what does `import.meta.env.DB_PASSWORD` evaluate to in client code?",
+      "options": [
+        "`undefined`, because Vite only exposes variables with the `VITE_` prefix",
+        "`\"secret\"`, because Vite inlines every variable from .env files",
+        "`\"secret\"` in development but `undefined` after a production build",
+        "It throws at build time, because the variable is not declared in vite.config"
+      ],
+      "correct": 0,
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "explanation": "Vite statically replaces `import.meta.env.*` at build time, but only for variables whose names start with `VITE_` (the default `envPrefix`), precisely so that secrets in .env files do not leak into the browser bundle. `DB_PASSWORD` therefore becomes `undefined` in both dev and build. Anything that is exposed is visible to every visitor, so a `VITE_` variable must never hold a secret.",
+      "materials": [
+        "vite-env"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`main.ts` contains `const n: number = \"oops\";`. You run `tsc main.ts` with no tsconfig. What happens?",
+      "options": [
+        "tsc reports TS2322 and writes no output file",
+        "tsc reports TS2322 as a warning and exits with code 0",
+        "tsc reports TS2322, still writes main.js, and exits with a non-zero code",
+        "tsc silently converts the string to a number in main.js"
+      ],
+      "correct": 2,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "By default tsc type-checks and emits independently: it prints `error TS2322: Type 'string' is not assignable to type 'number'`, still writes main.js and exits with a non-zero code (2 in TypeScript 5.6). Set `noEmitOnError` to suppress output when there are errors, or use `--noEmit` to type-check only. Type annotations are erased, never turned into runtime conversions.",
+      "materials": [
+        "ts-noemit"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Your Babel config uses `@babel/preset-env` targeting an old browser, with no polyfill options. The source uses `user?.name` and `items.at(-1)`. What happens on that old browser?",
+      "options": [
+        "Both work, because preset-env rewrites `?.` and adds an `.at()` helper",
+        "`?.` is rewritten and works, but `items.at` is undefined and throws a TypeError",
+        "Babel refuses to compile `.at()` because it is newer than the target browser",
+        "Both fail, because preset-env changes module syntax, not operators"
+      ],
+      "correct": 1,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "explanation": "Babel transforms syntax: optional chaining becomes plain conditional checks that old engines understand. `Array.prototype.at` is a runtime API, not syntax, so without a polyfill (for example core-js through preset-env's `useBuiltIns`) the call stays as is and fails with \"items.at is not a function\". Babel does not refuse to compile unknown methods, and preset-env does much more than module syntax.",
+      "materials": [
+        "babel-env"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Using Vitest, which of these assertions fails?",
+      "options": [
+        "`expect(NaN).toBe(NaN)`",
+        "`expect([, 1]).toEqual([undefined, 1])`",
+        "`expect(-0).toEqual(0)`",
+        "`expect({ a: 1, b: undefined }).toEqual({ a: 1 })`"
+      ],
+      "correct": 2,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "explanation": "`toEqual` compares primitives with `Object.is`, which distinguishes `-0` from `0`, so that assertion fails (Jest behaves the same). `toBe` also uses `Object.is`, under which `NaN` equals `NaN`. `toEqual` is the loose deep check: it treats sparse slots as `undefined` and ignores properties whose value is `undefined`; `toStrictEqual` would fail on those two.",
+      "materials": [
+        "vitest-expect"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "This Vitest test errors instead of passing. Why?\n```js\nexpect(JSON.parse('{')).toThrow(SyntaxError);\n```",
+      "options": [
+        "`toThrow` does not match built-in error classes such as `SyntaxError`",
+        "`JSON.parse` throws before `expect` is called; the code must be wrapped in a function",
+        "`toThrow` needs `await` because `JSON.parse` reports errors asynchronously",
+        "`toThrow` checks error messages, so a class argument is ignored"
+      ],
+      "correct": 1,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "Arguments are evaluated before the call, so `JSON.parse('{')` throws while building the argument and `expect` never runs; the test simply errors with the SyntaxError. Write `expect(() => JSON.parse('{')).toThrow(SyntaxError)` so the matcher can call the function and catch the error itself. `toThrow` accepts error classes, messages and regexes, and `JSON.parse` is synchronous.",
+      "materials": [
+        "vitest-expect"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "This Vitest file fails with `ReferenceError: Cannot access 'fake' before initialization`. Why?\n```js\nimport { vi, test } from 'vitest';\nconst fake = () => 1;\nvi.mock('./dep.js', () => ({ getPrice: fake }));\nimport { getPrice } from './dep.js';\n```",
+      "options": [
+        "`vi.mock` must be called inside a test, not at the top level of the file",
+        "Vitest hoists `vi.mock` above the imports, so its factory runs before `fake` is defined",
+        "The factory must return a Promise, so it should be an `async` function",
+        "`./dep.js` is imported after `vi.mock`, so the real module was cached first"
+      ],
+      "correct": 1,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "Vitest moves `vi.mock` calls to the top of the file, before all imports, so the mock is in place when `./dep.js` is loaded. The factory then runs while `const fake` is still in its temporal dead zone. Define such values inside the factory or with `vi.hoisted(() => ...)`, which is hoisted too. Top-level `vi.mock` is the intended usage, factories may be sync, and the import order in the source does not matter after hoisting.",
+      "materials": [
+        "vitest-vi"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`dep.js` exports `getPrice = () => 100` and `label = () => 'price:' + getPrice()`. A test mocks only `getPrice`:\n```js\nvi.mock('./dep.js', async (importOriginal) => ({\n  ...(await importOriginal()),\n  getPrice: () => 5,\n}));\n```\nWhat do `getPrice()` and `label()` return in the test?",
+      "options": [
+        "5 and `'price:5'`",
+        "100 and `'price:100'`",
+        "5 and `'price:100'`",
+        "100 and `'price:5'`"
+      ],
+      "correct": 2,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "explanation": "Module mocking replaces what other modules import, not the bindings inside dep.js. The test's `getPrice` is the mock (5), but the original `label` still calls dep.js's own local `getPrice`, so it returns `'price:100'`. To control that internal call, move `getPrice` into its own module or inject it as a parameter.",
+      "materials": [
+        "vitest-vi"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`g = vi.fn().mockReturnValue('b')` has been called three times. What does `g.mockClear()` do?",
+      "options": [
+        "Empties `g.mock.calls` and `g.mock.results` and keeps the `'b'` implementation",
+        "Empties the call history and makes `g` return `undefined` from now on",
+        "Restores the original function that `g` replaced on its object",
+        "Keeps the call history but removes the `'b'` implementation"
+      ],
+      "correct": 0,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "`mockClear` resets only the recorded history (calls, results, instances), so `g()` still returns `'b'`. `mockReset` also removes implementations set with methods such as `mockReturnValue`. `mockRestore` matters for `vi.spyOn`, where it puts the original method back on the object.",
+      "materials": [
+        "vitest-vi"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "```js\nexport function price(member, total) {\n  let discount = 0;\n  if (member && total > 100) discount = 10;\n  return total - discount;\n}\n```\nThe only test calls `price(true, 200)`. With Vitest's istanbul coverage provider, what does the report show for this file?",
+      "options": [
+        "100% lines and 100% branches",
+        "75% lines and 75% branches",
+        "100% lines and 75% branches",
+        "75% lines and 100% branches"
+      ],
+      "correct": 2,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "Every line executes, so line and statement coverage are 100%. Istanbul counts the `if` as two branches (taken and not taken) and the `&&` as two operands; the not-taken path is never exercised, giving 3 of 4 branches, or 75%. Line coverage hides untested decisions on a single line, which is why branch coverage is the more useful metric.",
+      "materials": [
+        "vitest-coverage"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A Playwright test checks `expect(await page.locator('#status').textContent()).toBe('Saved')` and fails now and then on CI. What is the usual fix?",
+      "options": [
+        "Add `await page.waitForTimeout(1000)` before reading the text",
+        "Use `await expect(page.locator('#status')).toHaveText('Saved')`",
+        "Increase the global test timeout so the assertion has more time",
+        "Run the test with `retries: 2` so a flaky failure is retried"
+      ],
+      "correct": 1,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "`textContent()` reads the element once and the generic `toBe` checks that one value, so if the UI updates a moment later the test fails. Web-first assertions like `toHaveText` retry until the condition holds or the expect timeout runs out. Fixed sleeps make tests slow and still flaky, a longer test timeout does not make a one-shot read retry, and retries hide the race instead of fixing it.",
+      "materials": [
+        "pw-assertions"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A page has two buttons labelled \"Save\". What happens when a Playwright test runs `await page.getByRole('button', { name: 'Save' }).click()`?",
+      "options": [
+        "It clicks the first matching button in DOM order",
+        "It clicks both buttons one after the other",
+        "It throws a strict mode violation because the locator matches 2 elements",
+        "It waits until a single button is visible and then clicks that one"
+      ],
+      "correct": 2,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "Locators are strict: an action that targets a single element throws `strict mode violation: ... resolved to 2 elements` when more than one element matches. You fix it by making the locator more specific (for example scoping it to a dialog) or, if you really mean it, using `.first()` or `.nth()`. Playwright never silently picks one or clicks all of them, and auto-waiting waits for actionability, not for the number of matches to drop.",
+      "materials": [
+        "pw-locators"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A new test calls `expect(result).toMatchSnapshot()` and no snapshot file exists yet. What does Vitest do when the run happens on CI, with the `CI` environment variable set?",
+      "options": [
+        "Writes the new snapshot file and marks the test as passed",
+        "Fails the test, because new snapshots are not written in CI",
+        "Skips the assertion and prints a warning to update snapshots",
+        "Writes the snapshot but marks the test as failed, to force a review"
+      ],
+      "correct": 1,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "explanation": "Locally Vitest writes missing snapshots and passes the test; on CI (detected via the `CI` variable) it does not write new snapshots, so the missing snapshot is a mismatch and the test fails. That stops an unreviewed snapshot from being generated on the build server and silently trusted. Jest has the same behaviour with `--ci`. To create the snapshot, run the tests locally and commit the file.",
+      "materials": [
+        "vitest-snapshot"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Package `dp` has `\"exports\": { \".\": { \"import\": \"./esm.mjs\", \"require\": \"./cjs.cjs\" } }`, and each file keeps its own module-level counter. An app imports `dp` with `import` in one file and `require` in another, then calls `inc()` twice through the ESM copy. What does the CommonJS copy's counter read?",
+      "options": [
+        "2, because Node loads one module per package name and shares its state",
+        "0, because the two conditions load two separate module instances",
+        "2, because `require` of a dual package returns the ESM module namespace",
+        "It throws, because a package may not be loaded by both import and require"
+      ],
+      "correct": 1,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "explanation": "Conditional exports make Node resolve `import` and `require` to different files, so the app ends up with two independent module instances with separate state. This is the \"dual package hazard\": singletons, caches and `instanceof` checks silently split in two. Packages avoid it by keeping state in one format (for example a CJS core wrapped by a thin ESM file) or shipping a single format.",
+      "materials": [
+        "node-packages"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The npm range `^1.2.3` accepts version 1.9.0.",
+      "correctAnswer": true,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "For a major version of 1 or higher, a caret range allows any minor and patch update within the same major, so `^1.2.3` means `>=1.2.3 <2.0.0` and 1.9.0 matches. What a caret excludes is 2.0.0 and anything above it, plus versions below 1.2.3.",
+      "materials": [
+        "npm-semver"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The npm range `^1.2.3` accepts the prerelease version 1.3.0-beta.1.",
+      "correctAnswer": false,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "Even though 1.3.0-beta.1 falls numerically inside `>=1.2.3 <2.0.0`, npm excludes prereleases from a range unless one of the range's comparators has a prerelease tag on the same `major.minor.patch`. This keeps users from getting a beta just because it is numerically in range. A range like `^1.3.0-beta.0` would accept it.",
+      "materials": [
+        "npm-semver"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With Vitest fake timers enabled, `vi.advanceTimersByTime(5000)` also moves `Date.now()` forward by 5000 ms.",
+      "correctAnswer": true,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "`vi.useFakeTimers()` fakes `Date` along with `setTimeout`, `setInterval` and similar APIs by default, and advancing the fake clock advances the time `Date.now()` and `new Date()` report. `vi.setSystemTime` sets the clock to a fixed date. By default the fake timers leave `process.nextTick` and `queueMicrotask` alone, so promise callbacks still run as usual.",
+      "materials": [
+        "vitest-vi"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "esbuild reports type errors when it compiles a `.ts` file, such as assigning a string to a variable typed `number`.",
+      "correctAnswer": false,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "esbuild (like Babel and SWC) only strips the type annotations; it does not type-check at all, so the file compiles with exit code 0. Tools built on it, such as Vite, therefore need a separate `tsc --noEmit` step (in CI or the editor) to catch type errors.",
+      "materials": [
+        "esbuild-ts",
+        "vite-features"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Since npm 7, `npm install` installs a package's missing `peerDependencies` automatically, and stops with an ERESOLVE error when a peer version conflicts with the tree.",
+      "correctAnswer": true,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "explanation": "npm 3 through 6 only printed a warning about missing peers and left installing them to you. npm 7 changed this: peers are now installed automatically, and an unsatisfiable peer range fails the install with ERESOLVE. `--legacy-peer-deps` restores the old behaviour of ignoring peers, which is a workaround rather than a fix.",
+      "materials": [
+        "npm-install",
+        "npm-pkgjson"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With pnpm's default node_modules layout, your code cannot import a package that is only a transitive dependency and is not listed in your package.json.",
+      "correctAnswer": true,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "pnpm puts only your direct dependencies at the top level of node_modules and links everything else from its content-addressable store into a `.pnpm` directory. npm's flat layout hoists transitive packages, so such \"phantom dependency\" imports happen to work there, until a dependency stops using that package. pnpm's strictness turns that hidden coupling into an immediate error.",
+      "materials": [
+        "pnpm"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "By default, Playwright Test gives each test a fresh browser context, so cookies and localStorage from one test are not visible in the next.",
+      "correctAnswer": true,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "Each test gets its own `BrowserContext`, which works like a new incognito profile, so tests are isolated and can run in parallel. To reuse a logged-in state, you save it explicitly with `storageState` and load it in the config; you don't rely on state left over from an earlier test.",
+      "materials": [
+        "pw-contexts"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In an npm workspaces monorepo, each workspace package gets its own package-lock.json next to its package.json.",
+      "correctAnswer": false,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "npm workspaces use a single package-lock.json at the repository root that covers all workspace packages. `npm install` at the root links each workspace into the root node_modules, and commands such as `npm test -w packages/api` target one workspace. A separate lockfile per package is what you get when each package is installed on its own, outside the workspace setup.",
+      "materials": [
+        "npm-workspaces"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When an application installs a package from the registry, npm also installs that package's `devDependencies`.",
+      "correctAnswer": false,
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "devDependencies are installed only for the root project you are working on, for building and testing it. Consumers of a published package get its `dependencies` (and, since npm 7, its peer dependencies), not its test runner or linter. Within your own project, `npm install --omit=dev` also skips them.",
+      "materials": [
+        "npm-pkgjson"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these versions satisfy the npm range `>=1.2.3`?",
+      "options": [
+        "1.2.3",
+        "3.0.0",
+        "2.0.0-rc.1",
+        "1.2.3-beta",
+        "1.10.0"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "`>=1.2.3` accepts every release version from 1.2.3 upwards, including 1.10.0 (versions compare numerically, not as text) and 3.0.0. 1.2.3-beta is lower than 1.2.3, because a prerelease ranks below its release. 2.0.0-rc.1 is excluded by npm's prerelease rule: a range accepts prereleases only on the same `major.minor.patch` as one of its comparators.",
+      "materials": [
+        "npm-semver",
+        "semver-spec"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "For a Node.js web API that is deployed with `npm ci --omit=dev`, which packages belong in devDependencies?",
+      "options": [
+        "vitest",
+        "express",
+        "eslint",
+        "pg (the PostgreSQL driver)",
+        "@types/node"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "devDependencies are tools needed to develop, test or build the project: the test runner, the linter and type definitions (which only matter at compile time). Packages the server imports at runtime, like the web framework and the database driver, must be in dependencies, or the production install with `--omit=dev` leaves them out and the app crashes on start.",
+      "materials": [
+        "npm-pkgjson",
+        "npm-install"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these stop a bundler from removing unused code from a library?",
+      "options": [
+        "The library is published only as CommonJS (`module.exports = {...}`)",
+        "The library uses named ES exports and the app imports `{ a } from 'lib'`",
+        "A module runs top-level code and the package has no `sideEffects` field",
+        "The app reads exports dynamically, as in `import * as u from 'lib'; u[name]()`",
+        "The library declares its functions with `export function`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "explanation": "Bundlers cannot statically prove which CommonJS exports are unused, so they keep them. A module with top-level statements has to be included when the package does not declare `sideEffects: false`, since those statements might matter. Computed access like `u[name]` could reach any export, so all are kept (`u.a` with a fixed name would still be shaken). Named imports and `export function` declarations are the case tree-shaking is designed for.",
+      "materials": [
+        "webpack-tree"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `npm ci` are true?",
+      "options": [
+        "It deletes an existing node_modules folder before installing",
+        "It installs exactly the versions recorded in package-lock.json",
+        "It does not write to package.json or package-lock.json",
+        "It can add one new package, as in `npm ci lodash`",
+        "Without a lockfile it falls back to the ranges in package.json"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "`npm ci` is a clean, reproducible install: it removes node_modules, installs the lockfile's exact versions and never modifies package.json or the lockfile. It installs the whole project, not individual packages, and it fails with an error if there is no package-lock.json or npm-shrinkwrap.json, instead of resolving ranges itself.",
+      "materials": [
+        "npm-ci"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Given `const users = [{ id: 1 }]`, which Vitest assertions pass?",
+      "options": [
+        "`expect(users).toContainEqual({ id: 1 })`",
+        "`expect(users).toContain({ id: 1 })`",
+        "`expect(users).toEqual([{ id: 1 }])`",
+        "`expect(users).toBe([{ id: 1 }])`",
+        "`expect(users).toHaveLength(1)`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "`toContain` checks items with `===`, so a new object literal never matches; `toContainEqual` uses deep equality and does. `toEqual` compares the arrays structurally, while `toBe` uses `Object.is` and fails for two different array objects. `toHaveLength` checks the `length` property.",
+      "materials": [
+        "vitest-expect"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "```js\nclass Point { constructor(x) { this.x = x; } }\nconst p = new Point(1);\n```\nWhich Vitest assertions pass?",
+      "options": [
+        "`expect(p).toEqual({ x: 1 })`",
+        "`expect(p).toStrictEqual({ x: 1 })`",
+        "`expect(p).toMatchObject({ x: 1 })`",
+        "`expect(p).toBeInstanceOf(Point)`",
+        "`expect(p).toBe(new Point(1))`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "`toEqual` recursively compares own enumerable properties and ignores the prototype, so a Point equals a plain `{ x: 1 }`. `toStrictEqual` also checks that the types match, so it fails here. `toMatchObject` checks a subset of properties and passes, `toBeInstanceOf` checks the prototype chain, and `toBe` fails because two separate instances are not the same object.",
+      "materials": [
+        "vitest-expect"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`fetchUser()` resolves to `{ id: 2 }` after 5 ms. Which of these Vitest tests correctly fail, because the test waits for the assertion?",
+      "options": [
+        "`test('a', () => { return fetchUser().then((u) => expect(u.id).toBe(1)); });`",
+        "`test('b', async () => { await expect(fetchUser()).resolves.toEqual({ id: 1 }); });`",
+        "`test('c', () => { fetchUser().then((u) => expect(u.id).toBe(1)); });`",
+        "`test('d', () => { setTimeout(() => expect(1).toBe(2), 0); });`",
+        "`test('e', async () => { const u = await fetchUser(); expect(u.id).toBe(1); });`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "explanation": "A test waits only for a Promise it returns or awaits: returning the `.then` chain, awaiting `.resolves`, or awaiting inside an `async` test all make the failure count. Test c drops the Promise, and test d schedules a timer, so both functions return immediately and the tests are reported as passed; the failing assertion runs later and at best shows up as a stray unhandled error.",
+      "materials": [
+        "vitest-expect"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are real drawbacks of snapshot tests?",
+      "options": [
+        "Large snapshot diffs tend to get accepted with `-u` without careful review",
+        "Values such as timestamps or random IDs make them fail on every run unless replaced",
+        "They record what the code currently produces, not what it should produce",
+        "They can only be used for rendered UI components, not plain data",
+        "They take more code to write than hand-written assertions for complex output"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "Snapshots are cheap to write for big outputs, which is their main advantage, but the first snapshot simply records whatever the code did, bugs included. Huge diffs invite rubber-stamping with `-u`, and nondeterministic fields need property matchers such as `expect.any(Date)` or to be removed. Snapshots work for any serialisable value, not just UI.",
+      "materials": [
+        "vitest-snapshot"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Before `locator.click()`, which checks does Playwright's auto-waiting perform on the target element?",
+      "options": [
+        "It is visible",
+        "It is stable, meaning not mid-animation",
+        "It is enabled",
+        "It receives pointer events and is not covered by another element",
+        "The page has had no network requests for 500 ms"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "For a click, Playwright waits until the element is visible, stable, enabled and actually receives events at the click point (not obscured by an overlay), and retries until the action timeout. It does not wait for network idle; that is a separate, discouraged load state you would request explicitly.",
+      "materials": [
+        "pw-actionability"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "After `vi.useFakeTimers()` with default options, which of these does Vitest control?",
+      "options": [
+        "When a `setTimeout` callback runs",
+        "What `new Date()` returns",
+        "When a `setInterval` callback runs",
+        "How long a real `fetch` request takes",
+        "When `.then` callbacks of an already-resolved Promise run"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "explanation": "The default fake timers replace timer functions and `Date`, so `vi.advanceTimersByTime` and `vi.setSystemTime` control them. They do not touch the network, and promise reactions are microtasks that run as normal (Vitest also leaves `nextTick` and `queueMicrotask` real by default). For code that mixes timers and promises, use the async variants such as `vi.advanceTimersByTimeAsync`.",
+      "materials": [
+        "vitest-vi"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are typically reported by ESLint rules rather than handled by a formatter such as Prettier?",
+      "options": [
+        "A variable that is declared but never used",
+        "Using `==` where the team requires `===`",
+        "A line longer than 80 characters",
+        "A missing trailing comma in a multi-line array",
+        "Code after a `return` statement that can never run"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "Linters look for likely bugs and risky patterns, such as `no-unused-vars`, `eqeqeq` and `no-unreachable`. Line length, trailing commas, quotes and indentation are layout, which Prettier rewrites automatically; that is why projects using both switch those stylistic rules off in ESLint (for example with eslint-config-prettier).",
+      "materials": [
+        "eslint-core",
+        "prettier-cmp"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does Vitest run these parts of a test file, first to last?\n```js\nlog('file top');\nbeforeAll(() => log('beforeAll'));\nbeforeEach(() => log('beforeEach'));\ndescribe('suite', () => {\n  log('describe body');\n  test('t', () => log('test body'));\n});\n```",
+      "options": [
+        "file top",
+        "describe body",
+        "beforeAll",
+        "beforeEach",
+        "test body"
+      ],
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "Vitest first executes the file, including every `describe` callback, to collect tests and register hooks; that is when `file top` and `describe body` run. Only after collection does it run the `beforeAll` hooks, then `beforeEach` before each test, then the test itself. Putting setup code directly in a `describe` body therefore runs it earlier than any hook.",
+      "materials": [
+        "vitest-vi"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In this Vitest file, in what order do the hook and test bodies run for test `t`, first to last?\n```js\nbeforeEach(() => log('outer beforeEach'));\nafterEach(() => log('outer afterEach'));\ndescribe('inner', () => {\n  beforeEach(() => log('inner beforeEach'));\n  afterEach(() => log('inner afterEach'));\n  test('t', () => log('test body'));\n});\n```",
+      "options": [
+        "outer beforeEach",
+        "inner beforeEach",
+        "test body",
+        "inner afterEach",
+        "outer afterEach"
+      ],
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "explanation": "`beforeEach` hooks run from the outermost scope inwards, so shared setup happens before the more specific setup. `afterEach` hooks run in the reverse order (Vitest's default `sequence.hooks: 'stack'`), so the inner teardown runs before the outer teardown it may depend on.",
+      "materials": [
+        "vitest-vi"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these versions in semver precedence order, lowest to highest.",
+      "options": [
+        "1.0.0-alpha",
+        "1.0.0-alpha.1",
+        "1.0.0-beta.2",
+        "1.0.0-beta.11",
+        "1.0.0"
+      ],
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "explanation": "A prerelease ranks below its release, so 1.0.0 is highest. Prerelease identifiers compare field by field: `alpha` < `alpha.1` because a longer list wins when the earlier fields are equal, `alpha` < `beta` alphabetically, and numeric fields compare as numbers, so `beta.2` < `beta.11`.",
+      "materials": [
+        "semver-spec",
+        "npm-semver"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "With Vitest fake timers on, what order does this push to `log`, first to last?\n```js\nsetTimeout(() => log.push('t1000'), 1000);\nsetTimeout(() => log.push('t50'), 50);\nvi.advanceTimersByTime(100);\nlog.push('after100');\nvi.runAllTimers();\nlog.push('afterAll');\n```",
+      "options": [
+        "t50",
+        "after100",
+        "t1000",
+        "afterAll"
+      ],
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "`advanceTimersByTime(100)` moves the fake clock 100 ms and synchronously runs only the timers due by then, so `t50` fires and `t1000` stays pending. `runAllTimers()` then runs every remaining timer, so `t1000` comes before the final push.",
+      "materials": [
+        "vitest-vi"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these npm ranges from the narrowest set of accepted release versions to the widest.",
+      "options": [
+        "1.2.3",
+        "~1.2.3",
+        "^1.2.3",
+        ">=1.2.3",
+        "*"
+      ],
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "An exact version accepts one release. `~1.2.3` adds patches (`<1.3.0`), `^1.2.3` adds minors (`<2.0.0`), `>=1.2.3` drops the upper bound, and `*` accepts any release, including versions below 1.2.3. Each range contains the previous one.",
+      "materials": [
+        "npm-semver"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these steps of a typical CI job for a JavaScript project in order, first to last.",
+      "options": [
+        "Check out the repository",
+        "Set up Node.js and restore the npm cache keyed on package-lock.json",
+        "Run `npm ci`",
+        "Run the test suite with coverage",
+        "Upload the coverage report as a build artifact"
+      ],
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "Each step needs the previous one: the code must be there before Node is set up, dependencies come from `npm ci` (fast thanks to the restored cache, and exact thanks to the lockfile), tests need the dependencies, and the coverage report exists only after the tests ran. Keying the cache on the lockfile's hash invalidates it whenever dependencies change.",
+      "materials": [
+        "npm-ci"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "This mini test runner awaits each test function, like Vitest does. Test A forgets to return its Promise. What does it print?",
+      "code": "const log = [];\nasync function test(name, fn) {\n  await fn();\n  log.push(`${name} done`);\n}\nconst later = (msg) => new Promise((resolve) => setTimeout(() => { log.push(msg); resolve(); }, 0));\nawait test('A', () => { later('A assert'); });\nawait test('B', () => later('B assert'));\nconsole.log(log.join('\\n'));",
+      "codeLanguage": "js",
+      "expectedOutput": "A done\nA assert\nB assert\nB done",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "explanation": "Test A's function returns `undefined`, so the runner marks A done immediately while its timer is still pending; the \"assertion\" then runs during test B. B returns the Promise, so the runner waits for it before logging `B done`. In a real runner this is how a forgotten `await`/`return` makes a failing test pass and an error appear under a different test.",
+      "materials": [
+        "vitest-expect"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "A release script sorts version tags with the default `sort`, then with a numeric comparator. What does it print?",
+      "code": "const tags = ['1.10.0', '1.2.0', '1.9.0'];\nconsole.log([...tags].sort().join(' '));\nconst cmp = (a, b) => {\n  const [x, y] = [a, b].map((v) => v.split('.').map(Number));\n  return x[0] - y[0] || x[1] - y[1] || x[2] - y[2];\n};\nconsole.log([...tags].sort(cmp).join(' '));",
+      "codeLanguage": "js",
+      "expectedOutput": "1.10.0 1.2.0 1.9.0\n1.2.0 1.9.0 1.10.0",
+      "tags": [
+        "JavaScript",
+        "Algorithms & Data Structures"
+      ],
+      "difficulty": "easy",
+      "explanation": "The default `sort` compares strings code unit by code unit, so `'1.10.0'` sorts before `'1.2.0'` because `'1'` < `'2'`. Semver compares each part as a number, which the comparator does: 2 < 9 < 10. Tools such as the `semver` package also handle prerelease tags, which this simple comparator does not.",
+      "materials": [
+        "semver-spec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "This simplified check implements npm's caret rule for versions without prerelease tags. What does it print?",
+      "code": "function caret(base, v) {\n  const [b, x] = [base, v].map((s) => s.split('.').map(Number));\n  const lead = b.findIndex((n) => n !== 0);\n  const i = lead === -1 ? 2 : lead;\n  const sameUpTo = b.slice(0, i + 1).every((n, k) => n === x[k]);\n  const notLower = x[0] - b[0] || x[1] - b[1] || x[2] - b[2];\n  return sameUpTo && notLower >= 0;\n}\nconsole.log(caret('1.2.3', '1.9.0'), caret('0.2.3', '0.3.0'), caret('0.0.3', '0.0.4'), caret('0.2.3', '0.2.9'));",
+      "codeLanguage": "js",
+      "expectedOutput": "true false false true",
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "The caret keeps the left-most non-zero part fixed: for 1.2.3 that is the major, so 1.9.0 is allowed. For 0.2.3 the minor is fixed, so 0.3.0 is rejected but 0.2.9 is accepted, and for 0.0.3 even the patch is fixed, so 0.0.4 is rejected. These results match the real `semver` package.",
+      "materials": [
+        "npm-semver"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "This hand-written `spyOn` replaces a method on an object, the way `vi.spyOn` does. What does it print?",
+      "code": "const api = { get: () => 'real' };\nconst { get } = api;\nfunction spyOn(obj, key) {\n  const spy = (...args) => { spy.calls.push(args); return 'fake'; };\n  spy.calls = [];\n  obj[key] = spy;\n  return spy;\n}\nconst spy = spyOn(api, 'get');\nconsole.log(get(), api.get(1), spy.calls.length);",
+      "codeLanguage": "js",
+      "expectedOutput": "real fake 1",
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "explanation": "A spy works by replacing the property on the object. Code that copied the function reference before the spy was installed (here the destructured `get`) still calls the original and is not recorded. Only `api.get(1)` goes through the spy, so it returns `'fake'` and records one call. The same thing happens when a module grabs a reference at import time, which is why module mocking exists.",
+      "materials": [
+        "vitest-vi"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Two tests share a module-level array and run in the order written. What does it print?",
+      "code": "const cart = [];\nconst tests = {\n  'adds an item': () => { cart.push('apple'); return cart.length === 1; },\n  'starts empty': () => cart.length === 0,\n};\nfor (const [name, fn] of Object.entries(tests)) {\n  console.log(`${fn() ? 'pass' : 'FAIL'} ${name}`);\n}",
+      "codeLanguage": "js",
+      "expectedOutput": "pass adds an item\nFAIL starts empty",
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "The first test leaves `'apple'` in the shared array, so the second test sees a length of 1 and fails, although it would pass if run alone or first. Shared mutable state makes test results depend on order; recreate the state in `beforeEach` (or inside each test) so every test starts from a known state.",
+      "materials": [
+        "vitest-vi"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "This tiny mock imitates `mockReturnValue` and `mockReturnValueOnce`. What does it print?",
+      "code": "function mockFn() {\n  const once = [];\n  let fallback;\n  const f = () => (once.length ? once.shift() : fallback);\n  f.returns = (v) => { fallback = v; return f; };\n  f.returnsOnce = (v) => { once.push(v); return f; };\n  return f;\n}\nconst g = mockFn().returns('b').returnsOnce('a1').returnsOnce('a2');\nconsole.log(g(), g(), g(), g());",
+      "codeLanguage": "js",
+      "expectedOutput": "a1 a2 b b",
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "explanation": "One-time values are kept in a queue and used first, in the order they were added, no matter when the fallback was set. When the queue is empty, every call returns the fallback. Vitest's `vi.fn().mockReturnValue('b').mockReturnValueOnce('a1').mockReturnValueOnce('a2')` behaves the same way.",
+      "materials": [
+        "vitest-vi"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Test runners enforce timeouts roughly like this `withTimeout` helper. What does it print?",
+      "code": "const withTimeout = (p, ms) => Promise.race([\n  p,\n  new Promise((_, reject) => setTimeout(() => reject(new Error(`timed out after ${ms}ms`)), ms)),\n]);\nconst slow = new Promise((resolve) => setTimeout(() => resolve('ok'), 50));\nslow.then((v) => console.log('slow finished anyway:', v));\ntry { console.log(await withTimeout(slow, 10)); } catch (e) { console.log(e.message); }\nconsole.log(await withTimeout(Promise.resolve('fast'), 10));",
+      "codeLanguage": "js",
+      "expectedOutput": "timed out after 10ms\nfast\nslow finished anyway: ok",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "explanation": "`Promise.race` settles with whichever Promise settles first, so the 10 ms rejection wins over the 50 ms work and the message is logged. The fast case resolves immediately. The slow work is not cancelled: it still finishes and logs afterwards, which is why a timed-out test can leak work into later tests unless it is given an AbortSignal or cleaned up.",
+      "materials": [
+        "vitest-expect"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "This test checks an error inside `catch`, and an `assert` helper counts how many assertions ran. What does it print?",
+      "code": "let count = 0;\nconst assert = (cond) => { count++; if (!cond) throw new Error('assertion failed'); };\nasync function testBody(load) {\n  try { await load(); } catch (e) { assert(e.message === 'boom'); }\n}\nawait testBody(() => Promise.reject(new Error('boom')));\nconsole.log('when load rejects:', count);\ncount = 0;\nawait testBody(() => Promise.resolve('data'));\nconsole.log('when load resolves:', count);",
+      "codeLanguage": "js",
+      "expectedOutput": "when load rejects: 1\nwhen load resolves: 0",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "explanation": "If `load` resolves, the `catch` block never runs, so no assertion executes and the test would pass without checking anything. That is the bug `expect.assertions(1)` or `expect.hasAssertions()` catches in Vitest and Jest: the test fails when the expected number of assertions did not run. `await expect(load()).rejects.toThrow('boom')` avoids the problem altogether.",
+      "materials": [
+        "vitest-expect"
+      ]
+    }
+  ]
+}
