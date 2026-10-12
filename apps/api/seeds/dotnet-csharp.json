@@ -1,0 +1,2747 @@
+{
+  "name": ".NET: the C# language",
+  "materials": [
+    {
+      "key": "struct",
+      "type": "article",
+      "title": "Structure types (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct",
+      "author": "Microsoft Learn",
+      "description": "Covers struct declarations, readonly structs, constructors and default values."
+    },
+    {
+      "key": "record",
+      "type": "article",
+      "title": "Records (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record",
+      "author": "Microsoft Learn",
+      "description": "Explains record classes and record structs, value equality, with expressions, ToString and inheritance."
+    },
+    {
+      "key": "enum",
+      "type": "article",
+      "title": "Enumeration types (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum",
+      "author": "Microsoft Learn",
+      "description": "Describes enum underlying types, conversions and flags enums."
+    },
+    {
+      "key": "tuples",
+      "type": "article",
+      "title": "Tuple types (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-tuples",
+      "author": "Microsoft Learn",
+      "description": "Covers ValueTuple syntax, element names, equality and deconstruction."
+    },
+    {
+      "key": "nullable-vt",
+      "type": "article",
+      "title": "Nullable value types (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types",
+      "author": "Microsoft Learn",
+      "description": "Explains Nullable<T>, HasValue, Value, GetValueOrDefault and lifted operators."
+    },
+    {
+      "key": "nrt",
+      "type": "article",
+      "title": "Nullable reference types",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references",
+      "author": "Microsoft Learn",
+      "description": "Explains null-state analysis, annotations, attributes on API signatures and generics with nullable reference types."
+    },
+    {
+      "key": "interface",
+      "type": "article",
+      "title": "interface keyword (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface",
+      "author": "Microsoft Learn",
+      "description": "Covers interface members, default implementations and static abstract members."
+    },
+    {
+      "key": "constraints",
+      "type": "article",
+      "title": "Constraints on type parameters",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters",
+      "author": "Microsoft Learn",
+      "description": "Lists every generic constraint, their order, and the allows ref struct anti-constraint."
+    },
+    {
+      "key": "generic-math",
+      "type": "article",
+      "title": "Generic math",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/generics/math",
+      "author": "Microsoft Learn",
+      "description": "Explains INumber<T> and related interfaces, static abstract members and the CreateChecked/Saturating/Truncating conversions."
+    },
+    {
+      "key": "type-testing",
+      "type": "article",
+      "title": "Type-testing operators and cast expressions",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast",
+      "author": "Microsoft Learn",
+      "description": "Covers the is, as, typeof and cast operators and which conversions each one considers."
+    },
+    {
+      "key": "patterns",
+      "type": "article",
+      "title": "Patterns (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/patterns",
+      "author": "Microsoft Learn",
+      "description": "Reference for type, relational, logical, property, positional, var and list patterns."
+    },
+    {
+      "key": "operators",
+      "type": "article",
+      "title": "Operator overloading (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading",
+      "author": "Microsoft Learn",
+      "description": "Lists overloadable operators and the operators that must be overloaded in pairs."
+    },
+    {
+      "key": "conversions",
+      "type": "article",
+      "title": "User-defined explicit and implicit conversion operators",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/user-defined-conversion-operators",
+      "author": "Microsoft Learn",
+      "description": "Explains how to declare implicit and explicit conversion operators."
+    },
+    {
+      "key": "numeric-conv",
+      "type": "article",
+      "title": "Built-in numeric conversions (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/numeric-conversions",
+      "author": "Microsoft Learn",
+      "description": "Tables of implicit and explicit numeric conversions, including precision loss."
+    },
+    {
+      "key": "interpolated",
+      "type": "article",
+      "title": "String interpolation using $ (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated",
+      "author": "Microsoft Learn",
+      "description": "Covers interpolation holes, alignment, format strings, constant interpolated strings and handlers."
+    },
+    {
+      "key": "member-access",
+      "type": "article",
+      "title": "Member access operators and expressions",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/member-access-operators",
+      "author": "Microsoft Learn",
+      "description": "Covers ., [], the null-conditional ?. and ?[] operators, the ^ index-from-end operator and the .. range operator."
+    },
+    {
+      "key": "linq-ops",
+      "type": "article",
+      "title": "Standard query operators overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/linq/standard-query-operators/",
+      "author": "Microsoft Learn",
+      "description": "Overview of LINQ operators, their execution modes (immediate, deferred streaming, deferred non-streaming) and set operations."
+    },
+    {
+      "key": "linq-query",
+      "type": "article",
+      "title": "Query expression basics",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/linq/get-started/query-expression-basics",
+      "author": "Microsoft Learn",
+      "description": "Explains query syntax clauses such as from, where, let, join, group and select, and how they map to method calls."
+    },
+    {
+      "key": "lambda",
+      "type": "article",
+      "title": "Lambda expressions and anonymous functions",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions",
+      "author": "Microsoft Learn",
+      "description": "Covers lambda syntax, natural types, static lambdas, default parameter values and expression trees."
+    },
+    {
+      "key": "events",
+      "type": "article",
+      "title": "Events (C# programming guide)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/",
+      "author": "Microsoft Learn",
+      "description": "Explains how events wrap delegates and what code outside the declaring class may do with them."
+    },
+    {
+      "key": "local-fn",
+      "type": "article",
+      "title": "Local functions",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/local-functions",
+      "author": "Microsoft Learn",
+      "description": "Explains local functions and compares them with lambda expressions."
+    },
+    {
+      "key": "extension",
+      "type": "article",
+      "title": "Extension methods",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods",
+      "author": "Microsoft Learn",
+      "description": "Explains how extension methods are declared, bound and called."
+    },
+    {
+      "key": "yield",
+      "type": "article",
+      "title": "yield statement (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/yield",
+      "author": "Microsoft Learn",
+      "description": "Describes iterators, yield return, yield break and how iterator execution works."
+    },
+    {
+      "key": "exceptions",
+      "type": "article",
+      "title": "Exception-handling statements",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements",
+      "author": "Microsoft Learn",
+      "description": "Reference for throw, try-catch, try-finally, exception filters and throw expressions."
+    },
+    {
+      "key": "method-params",
+      "type": "article",
+      "title": "Method parameters and modifiers",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/method-parameters",
+      "author": "Microsoft Learn",
+      "description": "Covers ref, out, in, ref readonly, scoped and params parameters, including params collections."
+    },
+    {
+      "key": "attributes-general",
+      "type": "article",
+      "title": "Miscellaneous attributes interpreted by the C# compiler",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/general",
+      "author": "Microsoft Learn",
+      "description": "Explains Conditional, Obsolete, AttributeUsage, SetsRequiredMembers and other compiler-interpreted attributes."
+    },
+    {
+      "key": "properties",
+      "type": "article",
+      "title": "Properties (C# programming guide)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties",
+      "author": "Microsoft Learn",
+      "description": "Covers auto-properties, init accessors, required properties and expression-bodied properties."
+    },
+    {
+      "key": "cs11",
+      "type": "article",
+      "title": "What's new in C# 11",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11",
+      "author": "Microsoft Learn",
+      "description": "Summarizes C# 11: raw string literals, UTF-8 literals, list patterns, required members, file-local types, generic attributes and more."
+    },
+    {
+      "key": "cs12",
+      "type": "article",
+      "title": "What's new in C# 12",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-12",
+      "author": "Microsoft Learn",
+      "description": "Summarizes C# 12: primary constructors, collection expressions, ref readonly parameters, default lambda parameters and alias any type."
+    },
+    {
+      "key": "history",
+      "type": "article",
+      "title": "The history of C#",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history",
+      "author": "Microsoft Learn",
+      "description": "Lists the features added in each C# version."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple-choice",
+      "prompt": "With `int? n = null;`, which expression evaluates to 0 instead of throwing?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "`GetValueOrDefault()` returns the underlying value, or `default(int)` (0) when there is none. `n.Value` and the explicit cast `(int)n` both throw `InvalidOperationException` for a null nullable. `n.ToString()` returns an empty string for a null `int?`, so `int.Parse` throws `FormatException`.",
+      "materials": [
+        "nullable-vt"
+      ],
+      "options": [
+        "`n.Value`",
+        "`(int)n`",
+        "`n.GetValueOrDefault()`",
+        "`int.Parse(n.ToString())`"
+      ],
+      "correct": 2
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Given `[Flags] enum Perm { None = 0, Read = 1, Write = 2 }`, what does `Perm.Read.HasFlag(Perm.None)` return?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`HasFlag(f)` is `(value & f) == f`. With `f` = 0 the left side is 0 for any value, so the result is `true`. It does not throw for a zero argument and compiles fine; it throws only when the argument is a different enum type. That is why a zero-valued member should be checked with `== Perm.None`, not `HasFlag`.",
+      "materials": [
+        "enum"
+      ],
+      "options": [
+        "`false`, because `Read` does not contain `None`",
+        "`true`, because every value contains the zero flag",
+        "It throws `ArgumentException`, since `None` is zero",
+        "It does not compile, since `None` is not a flag"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does this print?\n\n```csharp\n(int a, int b) t1 = (1, 2);\nvar t2 = (x: 1, y: 2);\nConsole.WriteLine(t1 == t2);\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Tuple equality (C# 7.3) compares elements pairwise by position; element names are only compile-time metadata, so `(a: 1, b: 2) == (x: 1, y: 2)` is `True`. The names don't create distinct types, so there is no compile error. No boxing is involved: the compiler expands `==` into `t1.Item1 == t2.Item1 && t1.Item2 == t2.Item2`.",
+      "materials": [
+        "tuples"
+      ],
+      "options": [
+        "`False`, because the element names differ",
+        "A compile error, because the tuple types have different names",
+        "`True`, because tuple `==` compares elements in order and ignores names",
+        "`True`, because both tuples are boxed and compared with `Equals`"
+      ],
+      "correct": 2
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What must a class `Point` provide so that `var (x, y) = point;` compiles?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "Deconstruction of a non-tuple type is pattern-based: the compiler looks for an accessible `Deconstruct` method (instance or extension) with matching `out` parameters. `ITuple` is used by positional patterns on `object`, not by deconstruction declarations. `Item1`/`Item2` properties are not looked up, and a user-defined conversion to a tuple is not considered for `var (x, y)`.",
+      "materials": [
+        "tuples"
+      ],
+      "options": [
+        "An instance or extension method `void Deconstruct(out int x, out int y)`",
+        "An implementation of the `System.Runtime.CompilerServices.ITuple` interface",
+        "Public properties named `Item1` and `Item2` for the two values",
+        "An implicit conversion operator from `Point` to `(int, int)`"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Given `struct P { public int X; }` and two variables `a` and `b` of type `P`, what happens with `a == b`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "A user-defined struct gets no `==` operator, so `a == b` is error CS0019. `ValueType.Equals` does exist and compares fields, but you must call `a.Equals(b)` explicitly; the compiler never maps `==` to it. Value types are not compared by address. A `record struct` would generate `==` for you.",
+      "materials": [
+        "struct"
+      ],
+      "options": [
+        "It compares the `X` fields of both values",
+        "It compares the two values with `ValueType.Equals`",
+        "It compares the two stack addresses and is `false`",
+        "It does not compile: `==` isn't defined for `P`"
+      ],
+      "correct": 3
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A method `bool TryGet(string key, out string? value)` sets `value` to non-null whenever it returns `true`. Which attribute on the `out` parameter lets the compiler know, so callers get no warning when they use `value` inside `if (TryGet(k, out var v))`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`[NotNullWhen(true)]` says the argument is non-null when the method returns `true`, which is the TryGet pattern. `[NotNull]` would claim it is non-null on every return, which is wrong for the `false` case. `[MaybeNullWhen(true)]` says the opposite, and `[DisallowNull]` is about inputs: it forbids passing null into a parameter or property.",
+      "materials": [
+        "nrt"
+      ],
+      "options": [
+        "`[NotNull]`",
+        "`[NotNullWhen(true)]`",
+        "`[MaybeNullWhen(true)]`",
+        "`[DisallowNull]`"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`class User { public string Name { get; set; } }` produces warning CS8618 (non-nullable property not initialized). Which change removes the warning AND makes the compiler reject `new User()` without `Name` in the object initializer?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`required` (C# 11) means every object creation must set the member, which also satisfies nullable analysis, so CS8618 goes away. `init` still warns because nothing forces a value. `= null!` silences the warning but lets callers skip `Name` and leaves it null. `[DisallowNull]` only stops callers from assigning null; CS8618 remains.",
+      "materials": [
+        "properties",
+        "cs11"
+      ],
+      "options": [
+        "Change the accessor from `set` to `init`",
+        "Add the `required` modifier to the property",
+        "Add the initializer `= null!;` to the property",
+        "Add `[DisallowNull]` to the property"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`interface I { void M() => Console.WriteLine(\"default\"); }` and `class C : I { }`. Which call compiles?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "A default interface member is not inherited into the class's own members, so `new C().M()` is error CS1061; you have to call it through an `I`-typed reference, for example with a cast. `C.M()` would need a static method, and `.I.M()` is not valid member-access syntax. If `C` declared its own public `M`, that method would implement `I.M` and be callable both ways.",
+      "materials": [
+        "interface"
+      ],
+      "options": [
+        "`new C().M();`",
+        "`C.M();`",
+        "`((I)new C()).M();`",
+        "`new C().I.M();`"
+      ],
+      "correct": 2
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`interface IParse<T> where T : IParse<T> { static abstract T Parse(string s); }`. Given `class Foo : IParse<Foo>`, which line fails to compile?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "An interface with a static abstract member that has no implementation cannot be a type argument (CS8920), because generic code could call `T.Parse` and there would be nothing to run; so `List<IParse<Foo>>` fails. Calling `T.Parse(s)` on a constrained type parameter is exactly what the feature is for, and `Make<Foo>` works because `Foo` supplies `Parse`. Declaring a variable of the interface type is allowed.",
+      "materials": [
+        "interface",
+        "generic-math"
+      ],
+      "options": [
+        "`static T Make<T>(string s) where T : IParse<T> => T.Parse(s);`",
+        "`IParse<Foo>? x = null;`",
+        "`Foo f = Make<Foo>(\"a\");`",
+        "`var list = new List<IParse<Foo>>();`"
+      ],
+      "correct": 3
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A class implements `void IDisposable.Dispose() { ... }` explicitly. Given `var r = new Resource();`, how can the method be called?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "An explicit interface implementation is not a public member of the class, so `r.Dispose()` is a compile error; it is reachable only through the interface type (a cast, an `IDisposable` variable, or a `using` statement). It is not a virtual base-class member you can reach with `base`, and the GC never calls `Dispose`; it calls finalizers.",
+      "materials": [
+        "interface"
+      ],
+      "options": [
+        "Directly as `r.Dispose()`, like a public method",
+        "Through a cast: `((IDisposable)r).Dispose()`",
+        "Through `base.Dispose()` from a derived class",
+        "By the GC, automatically, when `r` is collected"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`class Point { public void Deconstruct(out int x, out int y) { ... } }`. Which pattern uses that `Deconstruct` method?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "A positional pattern `(…)` on a non-tuple type calls `Deconstruct` and matches each output against a subpattern, so `(0, var y)` checks that x is 0 and captures y. A property pattern reads properties, not `Deconstruct`. A list pattern needs `Length`/`Count` and an indexer. `Point { 0, var y }` is a syntax error, because a property pattern needs `Name: pattern` entries.",
+      "materials": [
+        "patterns"
+      ],
+      "options": [
+        "`p is { X: 0 }`",
+        "`p is (0, var y)`",
+        "`p is [0, var y]`",
+        "`p is Point { 0, var y }`"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Given `static T Parse<T>(string s)`, what happens with `int x = Parse(\"1\");`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Generic type inference uses only the arguments, never the target of the assignment, and `T` does not appear in any parameter, so the compiler reports CS0411 and you must write `Parse<int>(\"1\")`. It does not fall back to `object` or pick the argument type `string`, because `T` is unrelated to `s`.",
+      "materials": [
+        "constraints"
+      ],
+      "options": [
+        "`T` is inferred as `int` from the variable being assigned",
+        "`T` is inferred as `object` and the result is unboxed",
+        "It compiles, and `T` is inferred as `string`",
+        "Compile error CS0411: `T` can't be inferred"
+      ],
+      "correct": 3
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does the C# 13 anti-constraint `where T : allows ref struct` permit?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "Normally a `ref struct` like `Span<T>` can't be a type argument. `allows ref struct` lifts that, and in exchange the generic code must obey ref-struct rules for `T` (no boxing, no storing it in a heap field). It is not about pass-by-reference, it does not let ordinary classes hold span fields, and it has nothing to do with `scoped` ref returns.",
+      "materials": [
+        "constraints",
+        "history"
+      ],
+      "options": [
+        "Passing any struct by reference to methods of the generic type",
+        "Using `ref struct` types such as `Span<int>` as type arguments",
+        "Storing `Span<T>` fields inside ordinary generic classes",
+        "Using `T` as a `ref` return type without a `scoped` modifier"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Inside `static T Sum<T>(T[] xs) where T : INumber<T>`, how do you write the starting value 0 of type `T`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`INumberBase<T>` declares the static abstract property `Zero`, and a type parameter constrained to `INumber<T>` can call it as `T.Zero`. `(T)0` is a compile error because there's no conversion from `int` to an arbitrary `T` (you'd use `T.CreateChecked(0)`). `new T()` needs a `new()` constraint, and `MinValue` belongs to `IMinMaxValue<T>` and isn't zero anyway.",
+      "materials": [
+        "generic-math"
+      ],
+      "options": [
+        "`(T)0`",
+        "`new T()`",
+        "`T.MinValue`",
+        "`T.Zero`"
+      ],
+      "correct": 3
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "For `char c = 'b';`, what does `c is not 'a' or 'b'` evaluate to, and why?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "In patterns `not` binds tighter than `and`, which binds tighter than `or`, so the pattern is `(not 'a') or 'b'`, which matches every char except 'a'; for 'b' it is `true`. To exclude both you write `c is not ('a' or 'b')`. The compiler accepts the form without parentheses (and warns that the `'b'` part is redundant), which is why this bug is easy to write.",
+      "materials": [
+        "patterns"
+      ],
+      "options": [
+        "`false`, because it means `not ('a' or 'b')`",
+        "`true`, because it means `(not 'a') or 'b'`",
+        "`false`, because `or` is evaluated before `not`",
+        "It doesn't compile, since `not` needs parentheses"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `if (obj is { })` test?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "An empty property pattern `{ }` matches any non-null value, so `is { }` is a non-null check (equivalent to `is not null`). It doesn't inspect properties, collection contents or default values; only a null input fails to match.",
+      "materials": [
+        "patterns"
+      ],
+      "options": [
+        "That `obj` is not null",
+        "That `obj` has no properties",
+        "That `obj` is an empty collection",
+        "That `obj` holds its type's default value"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`Animal a = new Dog();` where `Dog : Animal`. What are `a.GetType() == typeof(Animal)` and `a is Animal`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "`GetType()` returns the exact run-time type, `Dog`, so comparing it with `typeof(Animal)` is `False`. The `is` operator checks compatibility, and a `Dog` is an `Animal`, so `a is Animal` is `True`. The static type of the variable (`Animal`) affects neither result.",
+      "materials": [
+        "type-testing"
+      ],
+      "options": [
+        "`True` and `True`",
+        "`False` and `True`",
+        "`True` and `False`",
+        "`False` and `False`"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "With `string? s`, what is the type of `var len = s?.Length;`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "The null-conditional operator yields null when the receiver is null, so a value-type member like `int Length` is lifted to `int?`. It doesn't substitute 0 (you'd add `?? 0` for that), it never throws for a null receiver, and nothing is boxed.",
+      "materials": [
+        "member-access"
+      ],
+      "options": [
+        "`int`, with 0 when `s` is null",
+        "`int?`, null when `s` is null",
+        "`int`, but it throws when `s` is null",
+        "`object`, holding a boxed int or null"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`object o = 5;`. Which line compiles?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`as` produces null on failure, so its target type must be a reference type or a nullable value type; `o as int?` compiles and gives 5 here. `o as int` is error CS0077 whatever the left side is, and `as (int)o` is not valid syntax. For a non-nullable result you'd write `o is int n` or a cast.",
+      "materials": [
+        "type-testing"
+      ],
+      "options": [
+        "`int n = o as int;`",
+        "`var n = o as int;`",
+        "`int? n = o as int?;`",
+        "`int n = o as (int)o;`"
+      ],
+      "correct": 2
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`byte b = 10;`. Which statement fails to compile?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`b + 5` is computed as `int` and there's no implicit `int`-to-`byte` conversion, so assigning it back is error CS0266. A compound assignment like `b += 5` includes an implicit cast back to `byte`, and `++` likewise works on `byte`. `b = 15` compiles because a constant that fits in a byte converts implicitly.",
+      "materials": [
+        "numeric-conv"
+      ],
+      "options": [
+        "`b += 5;`",
+        "`b = b + 5;`",
+        "`b++;`",
+        "`b = 15;`"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "You want `a && b` to work for a custom type `Tri`, with short-circuiting. What must `Tri` declare?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "`&&` and `||` can't be overloaded directly. The compiler evaluates `a && b` as `Tri.false(a) ? a : Tri.&(a, b)`, so the type needs `&` (returning `Tri`) and `true`/`false` operators. An implicit conversion to `bool` lets `&&` compile but converts both sides to `bool` and returns `bool`, not `Tri`. `&` alone is not enough, because the short-circuit test needs `operator false`.",
+      "materials": [
+        "operators"
+      ],
+      "options": [
+        "`operator &&` and `operator ||` directly",
+        "`operator &` plus `operator true` and `operator false`",
+        "An implicit conversion from `Tri` to `bool` and nothing else",
+        "`operator &` alone; the compiler derives `&&` from it"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`struct Celsius` declares `public static implicit operator Celsius(double d) => new(d);`. Which line uses this conversion?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "The operator converts from `double` to `Celsius`, implicitly, so `Celsius c = 21.5;` calls it. Converting the other way (`Celsius` to `double`) would need a second operator. No `Parse` method is generated, and there is no conversion from `string`, so the cast from a string literal is a compile error.",
+      "materials": [
+        "conversions"
+      ],
+      "options": [
+        "`Celsius c = 21.5;`",
+        "`double d = new Celsius(21.5);`",
+        "`Celsius c = Celsius.Parse(\"21.5\");`",
+        "`var c = (Celsius)\"21.5\";`"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A raw string literal's content contains `\"\"\"` (three double quotes in a row). How must the literal be delimited?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "A raw string literal starts and ends with the same number of quotes, at least three, and that number must exceed the longest run of quotes in the content; so content with `\"\"\"` needs four or more. Raw strings don't process escape sequences, so `\\\"` would be two literal characters. `@` belongs to verbatim strings, not raw strings.",
+      "materials": [
+        "cs11"
+      ],
+      "options": [
+        "With `@\"\"\"` and `\"\"\"`",
+        "With three quotes and `\\\"` escapes inside",
+        "With at least four double quotes on each side",
+        "It isn't possible; use a regular string"
+      ],
+      "correct": 2
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In .NET 8, what does the compiler typically generate for `string s = $\"{count} items\";` where `count` is an `int`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "Since C# 10 / .NET 6, interpolated strings converted to `string` are lowered to `DefaultInterpolatedStringHandler`, whose generic `AppendFormatted<T>` avoids boxing value types and rents its buffer from a pool. `string.Format` with boxing was the older lowering. No `StringBuilder` is created. `string.Concat` is used only when every hole is already a `string`.",
+      "materials": [
+        "interpolated"
+      ],
+      "options": [
+        "A `string.Format` call that boxes `count`",
+        "A `DefaultInterpolatedStringHandler` that appends `count` without boxing",
+        "A `StringBuilder` created and discarded per call",
+        "A `string.Concat` of `count.ToString()` and a literal"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which comparison is right for checking whether a file extension equals \".JPG\" regardless of case?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "Identifiers like file extensions, keys and protocol names should be compared ordinally; `OrdinalIgnoreCase` ignores case without culture rules. `ToLower()` allocates and uses the current culture, which breaks in cultures such as Turkish (dotted/dotless i). The culture-aware comparisons are meant for text shown to users, and `InvariantCulture` is not case-insensitive.",
+      "materials": [
+        "interpolated"
+      ],
+      "options": [
+        "`ext.ToLower() == \".jpg\"`",
+        "`string.Equals(ext, \".jpg\", StringComparison.CurrentCultureIgnoreCase)`",
+        "`string.Equals(ext, \".jpg\", StringComparison.OrdinalIgnoreCase)`",
+        "`ext.Equals(\".jpg\", StringComparison.InvariantCulture)`"
+      ],
+      "correct": 2
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What text does the verbatim literal `@\"say \"\"hi\"\"\"` contain?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "In a verbatim string, a doubled quote `\"\"` stands for one quote character and backslashes are literal, so the value is `say \"hi\"`. The doubled quotes are not kept as-is, no backslash escapes appear, and the quotes are not dropped.",
+      "materials": [
+        "interpolated"
+      ],
+      "options": [
+        "`say \"\"hi\"\"`",
+        "`say \\\"hi\\\"`",
+        "`say \"hi\"`",
+        "`say hi`"
+      ],
+      "correct": 2
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which parameter declaration is new in C# 13?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "C# 13 (\"params collections\") lets `params` be used with spans and other collection types such as `ReadOnlySpan<T>`, `List<T>` and `IEnumerable<T>`, so calls can avoid allocating an array. `params T[]` has existed since C# 1. A method still can have just one `params` parameter, as the last one, and `params` can't be combined with `ref`.",
+      "materials": [
+        "method-params",
+        "history"
+      ],
+      "options": [
+        "`params int[] values`",
+        "`params ReadOnlySpan<int> values`",
+        "`params int[] a, params int[] b`",
+        "`params ref int[] values`"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `new[] { 1, 2, 3 }.Zip(new[] { \"a\", \"b\" }).Count()` return?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "`Zip` pairs elements until either sequence runs out, so the result has as many elements as the shorter input: two pairs. It doesn't pad to the longer length (which would give 3), and different lengths are not an error.",
+      "materials": [
+        "linq-ops"
+      ],
+      "options": [
+        "2",
+        "3",
+        "It throws `InvalidOperationException`",
+        "It throws `ArgumentException`"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does the `let` clause do in a LINQ query expression?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "`let name = expr` computes a value per element and makes it available to the following clauses, for example `let lower = w.ToLower() where lower.StartsWith(\"a\")`. It doesn't filter, the variable is scoped to the query, and it doesn't change deferred execution (the compiler turns it into a `Select` that projects an anonymous type).",
+      "materials": [
+        "linq-query"
+      ],
+      "options": [
+        "It filters the source like an extra `where` clause",
+        "It stores a computed value in a new range variable for later clauses",
+        "It declares a variable that's visible after the query ends",
+        "It forces the query to execute at that point"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which method calls does the compiler produce for `from n in nums where n > 1 select n`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "When the final `select` returns the range variable unchanged after another clause, it is a \"degenerate\" select and the compiler drops it, so the query is just `nums.Where(n => n > 1)`. An identity `Select` is emitted only for a query that consists of nothing but `from ... select x`, so that the result isn't the source itself. The clauses are never reordered, and `SelectMany` comes from a second `from`.",
+      "materials": [
+        "linq-query"
+      ],
+      "options": [
+        "`nums.Where(n => n > 1).Select(n => n)`",
+        "`nums.Select(n => n).Where(n => n > 1)`",
+        "`nums.Where(n => n > 1)`",
+        "`nums.SelectMany(n => nums.Where(m => m > 1))`"
+      ],
+      "correct": 2
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A query has two `from` clauses: `from c in customers from o in c.Orders select o.Total`. Which operator does the second `from` become?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "A second `from` flattens a nested sequence per element, which is `SelectMany`. `join ... on ... equals` produces `Join`, and `join ... into` produces `GroupJoin`. `Zip` pairs two sequences by position and has no query-syntax form.",
+      "materials": [
+        "linq-query"
+      ],
+      "options": [
+        "`Join`",
+        "`GroupJoin`",
+        "`SelectMany`",
+        "`Zip`"
+      ],
+      "correct": 2
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`object[] items = { 1, \"two\", 3 };`. What happens with `items.Cast<int>().ToList()` versus `items.OfType<int>().ToList()`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`Cast<T>` casts every element and throws `InvalidCastException` when it reaches the string; `OfType<T>` keeps only elements that are `T`, so it returns 1 and 3. `Cast` never substitutes a default value. Both are deferred, so the exception happens during `ToList`, not when `Cast` is called.",
+      "materials": [
+        "linq-ops"
+      ],
+      "options": [
+        "Both return `[1, 3]`",
+        "`Cast` throws `InvalidCastException`; `OfType` returns `[1, 3]`",
+        "`Cast` returns `[1, 0, 3]`; `OfType` returns `[1, 3]`",
+        "Both throw `InvalidCastException` at `\"two\"`"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "How do you check that two `int[]` arrays contain the same elements in the same order?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "`SequenceEqual` compares the elements pairwise. Arrays are reference types without value equality, so `==` and `Equals` compare references and are false for two separate arrays. Hash codes are reference-based too, and equal hash codes would not prove equality anyway.",
+      "materials": [
+        "linq-ops"
+      ],
+      "options": [
+        "`a == b`",
+        "`a.Equals(b)`",
+        "`a.SequenceEqual(b)`",
+        "`a.GetHashCode() == b.GetHashCode()`"
+      ],
+      "correct": 2
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`new[] { \"a\", \"b\", \"a\" }.ToDictionary(s => s)` is executed. What happens?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`ToDictionary` calls `Add` for each element, and adding an existing key throws `ArgumentException`. It never silently keeps the first or last value; for that you'd use `GroupBy`, `DistinctBy`, or a loop with the indexer. A multi-value result is what `ToLookup` returns.",
+      "materials": [
+        "linq-ops"
+      ],
+      "options": [
+        "It returns a dictionary with two entries; the later \"a\" wins",
+        "It returns a dictionary with two entries; the first \"a\" wins",
+        "It throws `ArgumentException` because of the duplicate key",
+        "It returns a lookup with two values under \"a\""
+      ],
+      "correct": 2
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does this print?\n\n```csharp\nFunc<int> f = () => 1;\nf += () => 2;\nConsole.WriteLine(f());\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Invoking a multicast delegate runs every target in order and returns the result of the last one, so it prints 2; the first result is discarded. Results are never summed. Multicast delegates with a return type are legal; if you need every result, iterate `GetInvocationList()`.",
+      "materials": [
+        "events",
+        "lambda"
+      ],
+      "options": [
+        "1",
+        "2",
+        "3",
+        "It throws, because multicast delegates may not return values"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A class declares `public event EventHandler? Changed { add { ... } remove { ... } }` with custom accessors. How does the class raise the event?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "With custom `add`/`remove` the compiler generates no backing field, so `Changed` can only appear on the left of `+=`/`-=` even inside the class (CS0079); you store handlers in your own delegate field (or an `EventHandlerList`) and invoke that. Only field-like events can be invoked by name. There is no `Raise` method, and no `OnChanged` is generated.",
+      "materials": [
+        "events"
+      ],
+      "options": [
+        "`Changed?.Invoke(this, EventArgs.Empty)`, as with a field-like event",
+        "By invoking its own backing delegate field, since the event name can't be invoked",
+        "By calling `Changed.Raise(this, EventArgs.Empty)`",
+        "By calling `base.OnChanged()`, which the compiler generates"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which lambda cannot be converted to `Expression<Func<int, int>>`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "Expression trees can be built only from expression-bodied lambdas; a statement body is error CS0834. The other three are single expressions, including the method call to `Math.Abs`, so the compiler can turn each into an `Expression` tree. All four could be converted to a plain `Func<int, int>` delegate.",
+      "materials": [
+        "lambda"
+      ],
+      "options": [
+        "`x => x + 1`",
+        "`x => x * x - 2`",
+        "`x => { return x + 1; }`",
+        "`x => Math.Abs(x)`"
+      ],
+      "correct": 2
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`static class Ext { public static void Inc(this ref int x) => x++; }`. What does `int n = 5; n.Inc(); Console.WriteLine(n);` print?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "Since C# 7.2 the receiver of an extension method on a struct type can be `ref` (or `in`), so `n.Inc()` passes `n` by reference and it prints 6. A plain `this int x` extension would get a copy and print 5. `5.Inc()` would fail, because a `ref` receiver must be a variable. Extension methods on value types have always been allowed.",
+      "materials": [
+        "extension",
+        "method-params"
+      ],
+      "options": [
+        "5, because the extension receives a copy",
+        "6, because `this ref` passes the variable by reference",
+        "It doesn't compile: extension receivers may not be `ref`",
+        "It doesn't compile: extensions on value types aren't allowed"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "You catch an exception on one thread and need to rethrow it later from another place while keeping its original stack trace. What do you use?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "`ExceptionDispatchInfo.Capture` records the exception and its stack trace, and `Throw()` rethrows it with the original trace preserved and the new frames appended; `await` uses the same mechanism. `throw ex;` resets the trace to the rethrow point. Wrapping in a new exception loses the type and trace unless you pass `ex` as the inner exception. `throw;` is only allowed inside a `catch` block.",
+      "materials": [
+        "exceptions"
+      ],
+      "options": [
+        "`throw ex;` at the new location",
+        "`throw new Exception(ex.Message);`",
+        "`ExceptionDispatchInfo.Capture(ex).Throw();`",
+        "`throw;` outside the catch block"
+      ],
+      "correct": 2
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which class should a custom application exception derive from, according to .NET guidelines?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "Custom exceptions should derive from `Exception` (or a more specific existing exception that fits). `ApplicationException` was meant for this originally but adds nothing, and the guidelines now say not to use it. `SystemException` is the base for exceptions thrown by the runtime, and `ExternalException` is for interop errors.",
+      "materials": [
+        "exceptions"
+      ],
+      "options": [
+        "`System.ApplicationException`",
+        "`System.SystemException`",
+        "`System.Exception`",
+        "`System.Runtime.InteropServices.ExternalException`"
+      ],
+      "correct": 2
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Why does this fail to compile?\n\n```csharp\nobject o = 5;\nvar s = o switch { int => \"int\", 5 => \"five\", _ => \"other\" };\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Arms are tested top to bottom, and the type pattern `int` matches every boxed int, so the constant `5` arm is unreachable: error CS8510. Swapping the two arms fixes it. A `null` arm is optional (the discard covers null), constant patterns work on `object`, and `_` must be last, not first.",
+      "materials": [
+        "patterns"
+      ],
+      "options": [
+        "The arm `5` can never match, because the `int` arm before it already handles it",
+        "A switch expression on `object` needs a `null` arm",
+        "Constant patterns aren't allowed on an `object` input",
+        "The discard arm `_` has to come first"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`var list = new List<int> { 1, 2, 3 };`. Which expression returns 3?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "`^1` means one from the end. `List<T>` has `Count` and an `int` indexer, so the compiler supports `^` for it automatically and turns `list[^1]` into `list[list.Count - 1]`. C# has no negative indexing, so `list[-1]` throws `ArgumentOutOfRangeException`, and so do `list[list.Count]` and `list[^0]`, which both point one past the last element.",
+      "materials": [
+        "member-access"
+      ],
+      "options": [
+        "`list[-1]`",
+        "`list[^1]`",
+        "`list[list.Count]`",
+        "`list[^0]`"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`record P(string Name) { public string Name { get; init; } = Name.ToUpper(); }`. What does `new P(\"ann\").Name` return?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "If a record declares a member with the same name as a positional parameter, the compiler doesn't generate that property; the explicit one is used, and its initializer can read the primary constructor parameter. So `Name` holds \"ANN\". There is no duplicate-member error, and the parameter is used by the initializer, so it isn't left null.",
+      "materials": [
+        "record"
+      ],
+      "options": [
+        "`\"ann\"`, because the positional property wins",
+        "`\"ANN\"`, because the explicit property replaces the generated one",
+        "It doesn't compile: `Name` is declared twice",
+        "`null`, because the parameter isn't assigned to it"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`int a = 1, b = 2;` then `(a, b) = (b, a);`. What are `a` and `b` afterwards?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "Tuple deconstruction assignment evaluates the whole right side (the values 2 and 1) before assigning, so the variables are swapped without a temporary. It is not done one assignment at a time, which would give both the same value. Assigning into existing variables needs no `var`.",
+      "materials": [
+        "tuples"
+      ],
+      "options": [
+        "`a` = 2, `b` = 2",
+        "`a` = 1, `b` = 1",
+        "`a` = 2, `b` = 1",
+        "It doesn't compile without `var`"
+      ],
+      "correct": 2
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A method `Log(int value)` has `[Conditional(\"DEBUG\")]`. In a Release build (DEBUG not defined), what happens to `Log(Next());` where `Next()` increments a counter?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "The compiler removes the whole call expression, argument evaluation included, so `Next()` never runs and the counter doesn't change; side effects in arguments therefore differ between Debug and Release. The method itself still exists in the assembly and could be called through reflection or a delegate. No compile error occurs.",
+      "materials": [
+        "attributes-general"
+      ],
+      "options": [
+        "`Log` runs but its body is empty, and `Next()` runs",
+        "The call is removed and `Next()` isn't evaluated",
+        "`Next()` runs and its result is discarded",
+        "It fails to compile in Release"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Method `Old` is marked `[Obsolete(\"Use New\", true)]`. What happens when code calls `Old()`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "The second argument `true` turns the obsolete warning into an error, so the call fails with CS0619 and the message \"Use New\". Without it (or with `false`) you'd get warning CS0618. `Obsolete` is purely a compile-time check and doesn't change run-time behaviour.",
+      "materials": [
+        "attributes-general"
+      ],
+      "options": [
+        "Warning CS0618 at compile time",
+        "Error CS0619 at compile time",
+        "`NotSupportedException` when the call runs",
+        "Nothing, unless warnings are treated as errors"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What is true of a type declared as `file class Helper { }` (C# 11)?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "The `file` modifier limits a top-level type's scope to its own source file, so another file in the same project can declare its own `Helper` without a clash; source generators use this a lot. Project-wide visibility is `internal`, and C# has no namespace-level accessibility. Nothing is generated per file.",
+      "materials": [
+        "cs11"
+      ],
+      "options": [
+        "It can be used only inside the source file that declares it",
+        "It can be used only inside the project that declares it",
+        "It can be used only by classes in the same namespace",
+        "It is generated by a source generator for each file"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What is the main difference between an `in int x` parameter and a `ref readonly int x` parameter (C# 12)?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "Both pass a read-only reference. For `ref readonly`, the compiler warns when the argument is an rvalue such as `5` (CS9193) or when a variable is passed without `ref`/`in` (CS9192), because the API wants a real storage location. `in` accepts temporaries silently by creating a hidden copy. Neither lets the method assign through the reference, and neither copies a variable argument.",
+      "materials": [
+        "method-params",
+        "cs12"
+      ],
+      "options": [
+        "`in` lets the method assign `x`; `ref readonly` doesn't",
+        "`ref readonly` warns when given a literal; `in` accepts one silently",
+        "`ref readonly` copies the argument; `in` passes a reference",
+        "Callers can pass literals to `ref readonly`, but `in` gives an error"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does the `scoped` modifier mean in `static void Fill(scoped Span<int> buffer)`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "`scoped` limits the lifetime of the reference to the method, so the compiler rejects returning `buffer` or storing it somewhere that outlives the call (CS8352). In return, callers can pass spans over stack memory more freely. It has nothing to do with disposal, it doesn't change how the span itself is passed, and callers can pass any span.",
+      "materials": [
+        "method-params"
+      ],
+      "options": [
+        "`buffer` is disposed when `Fill` returns",
+        "`buffer` can't escape `Fill`, for example by being returned or stored",
+        "`buffer` is passed by reference instead of by value",
+        "`buffer` must be allocated with `stackalloc` by the caller"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A method declares `void Parse(string s, out int value)` but has a code path that returns without assigning `value`. What happens?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "An `out` parameter must be definitely assigned before every normal return, so the method fails with error CS0177. The compiler doesn't zero it for you, and it isn't a warning. The caller's previous value can't be relied on, because the caller may pass an unassigned variable to an `out` parameter.",
+      "materials": [
+        "method-params"
+      ],
+      "options": [
+        "`value` is left as 0 on that path",
+        "Compile error CS0177",
+        "`value` keeps whatever the caller had in it",
+        "A warning that `value` may be unassigned"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does this print?\n\n```csharp\nvar s = new[] { 1, 2, 3 }.Aggregate(\"0\", (acc, x) => $\"({acc}+{x})\");\nConsole.WriteLine(s);\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`Aggregate` with a seed starts from the seed and folds left: `acc` is \"0\", then \"(0+1)\", then \"((0+1)+2)\", then \"(((0+1)+2)+3)\". It never folds from the right, and the seed isn't skipped or placed last. Without a seed, the first element would be the starting value.",
+      "materials": [
+        "linq-ops"
+      ],
+      "options": [
+        "`(((0+1)+2)+3)`",
+        "`(0+(1+(2+3)))`",
+        "`(1+(2+(3+0)))`",
+        "`((1+2)+3)`"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `Enumerable.Range(1, 7).Chunk(3)` produce?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "`Chunk(size)` (.NET 6) splits a sequence into arrays of that size, and the last array holds whatever is left, here just 7. The leftover isn't dropped or padded with defaults, and the elements stay in their original consecutive order instead of being dealt round-robin.",
+      "materials": [
+        "linq-ops"
+      ],
+      "options": [
+        "`[1,2,3]`, `[4,5,6]`",
+        "`[1,2,3]`, `[4,5,6]`, `[7]`",
+        "`[1,2,3]`, `[4,5,6]`, `[7,0,0]`",
+        "`[1,4,7]`, `[2,5]`, `[3,6]`"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `new[] { (\"a\", 3), (\"b\", 5), (\"c\", 5) }.MaxBy(p => p.Item2)` return?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`MaxBy` (.NET 6) returns the element with the largest key, and on a tie it keeps the first one it found, so `(\"b\", 5)`. It returns the element, not the key (that would be `Max(p => p.Item2)`), and ties aren't an error.",
+      "materials": [
+        "linq-ops"
+      ],
+      "options": [
+        "`(\"c\", 5)`, the last of the tied maximums",
+        "`(\"b\", 5)`, the first of the tied maximums",
+        "`5`, the maximum key itself",
+        "It throws, because the maximum isn't unique"
+      ],
+      "correct": 1
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`class C { public List<int> A => new(); public List<int> B { get; } = new(); }`. For one instance `c`, what are `ReferenceEquals(c.A, c.A)` and `ReferenceEquals(c.B, c.B)`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "`=>` declares an expression-bodied getter that runs on every access, so `A` returns a new list each time. `{ get; } = new()` is an auto-property whose initializer runs once when the object is constructed, so `B` returns the same list every time. Mixing the two up is a common source of lost updates.",
+      "materials": [
+        "properties"
+      ],
+      "options": [
+        "`False` and `True`",
+        "`True` and `True`",
+        "`True` and `False`",
+        "`False` and `False`"
+      ],
+      "correct": 0
+    },
+    {
+      "type": "true-false",
+      "prompt": "If an enum declaration doesn't name an underlying type, its underlying type is `int`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "Without `: byte`, `: long` or another integral type, an enum is backed by `int`, and its members get 0, 1, 2, ... unless you assign values. You can pick any integral numeric type except `char`. The underlying type decides the storage size and the range of valid values.",
+      "materials": [
+        "enum"
+      ],
+      "correctAnswer": true
+    },
+    {
+      "type": "true-false",
+      "prompt": "A record can declare `public sealed override string ToString()` so that records derived from it can't replace its `ToString`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "Since C# 10 a record may seal its `ToString` override. The compiler then stops generating `ToString` in derived records, and a derived record that tries to override it gets CS0239. Without `sealed`, every derived record gets its own synthesized `ToString` that prints its own members.",
+      "materials": [
+        "record"
+      ],
+      "correctAnswer": true
+    },
+    {
+      "type": "true-false",
+      "prompt": "With nullable reference types enabled, `T?` on an unconstrained type parameter means `Nullable<T>` when `T` is a value type, so `static T? Get<T>() => default;` returns null for `Get<int>()`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "For an unconstrained `T`, `T?` (C# 9) is only an annotation meaning \"may be default\"; when `T` is `int` it stays `int`, so `Get<int>()` returns 0. `T?` becomes `Nullable<T>` only when `T` is constrained to `struct`. That's why generic code that needs a real \"no value\" for value types adds the `struct` constraint or uses a separate flag.",
+      "materials": [
+        "nrt"
+      ],
+      "correctAnswer": false
+    },
+    {
+      "type": "true-false",
+      "prompt": "The pattern `obj is var x` evaluates to `false` when `obj` is null.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "A `var` pattern always matches, null included, and simply binds `x` to the value. That makes it handy for naming an intermediate result in a `when` clause, but useless as a null check. Use `is { } x` or `is not null` to test for non-null.",
+      "materials": [
+        "patterns"
+      ],
+      "correctAnswer": false
+    },
+    {
+      "type": "true-false",
+      "prompt": "In a `switch` statement, a case section that contains statements may fall through into the next case label if it has no `break`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "C# forbids implicit fall-through: a non-empty section must end with `break`, `return`, `throw`, `goto case` or another jump, otherwise you get error CS0163. Stacking several labels on one empty section is allowed. To continue into another case deliberately you write `goto case`.",
+      "materials": [
+        "patterns"
+      ],
+      "correctAnswer": false
+    },
+    {
+      "type": "true-false",
+      "prompt": "If `a` is null, `a?.B.C()` evaluates to null without evaluating `.B` or calling `C()`, so it doesn't throw even though `.B` uses a plain dot.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "The null-conditional operator short-circuits the rest of the member-access chain: when `a` is null, the whole chain is skipped and the result is null. You only need `?.` again where an intermediate member (like `B`) could itself be null. Without short-circuiting you'd have to write `a?.B?.C()` just to avoid evaluating `.B` on null.",
+      "materials": [
+        "member-access"
+      ],
+      "correctAnswer": true
+    },
+    {
+      "type": "true-false",
+      "prompt": "The `as` operator applies user-defined conversion operators, so `obj as Celsius` succeeds when `Celsius` defines an implicit conversion from `obj`'s run-time type.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`as` considers only reference, boxing, unboxing and nullable conversions. User-defined conversions are applied only by casts and implicit conversions at compile time; when the compiler knows the types, `c as string` is even error CS0039. At run time `as` simply returns null for an object that isn't of the target type.",
+      "materials": [
+        "type-testing",
+        "conversions"
+      ],
+      "correctAnswer": false
+    },
+    {
+      "type": "true-false",
+      "prompt": "In a multi-line raw string literal, the whitespace in front of the closing `\"\"\"` is removed from the start of every content line.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "The column of the closing delimiter defines the indentation to strip, so you can indent a raw string to match the surrounding code. Every content line must start with that same whitespace, otherwise it is a compile error. The newlines right after the opening and right before the closing delimiter aren't part of the value.",
+      "materials": [
+        "cs11"
+      ],
+      "correctAnswer": true
+    },
+    {
+      "type": "true-false",
+      "prompt": "`const string Greeting = $\"Hello {Name}\";` compiles when `Name` is itself a `const string`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Since C# 10, an interpolated string whose holes are all constant strings is itself a constant, so it can initialize a `const` or be used in an attribute argument. It doesn't work if a hole is a number or uses a format specifier, because formatting depends on culture at run time.",
+      "materials": [
+        "interpolated"
+      ],
+      "correctAnswer": true
+    },
+    {
+      "type": "true-false",
+      "prompt": "When one handler of a multicast delegate throws, the handlers after it in the invocation list don't run.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "A multicast delegate calls its targets one after another on the same call stack, so an exception from one propagates to the caller right away and the rest are skipped. To isolate handlers you iterate `GetInvocationList()` and wrap each call in try/catch.",
+      "materials": [
+        "events"
+      ],
+      "correctAnswer": true
+    },
+    {
+      "type": "true-false",
+      "prompt": "A lambda marked `static`, such as `static x => x * factor`, cannot capture local variables or `this` from the enclosing method.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "The `static` modifier (C# 9) makes capturing an outer local, parameter or `this` a compile error (CS8820), which guarantees the lambda allocates no closure. Constants and static members can still be used. It's a way to make sure a hot-path lambda doesn't capture by accident.",
+      "materials": [
+        "lambda"
+      ],
+      "correctAnswer": true
+    },
+    {
+      "type": "true-false",
+      "prompt": "Calling `Reset()` on the enumerator returned by a C# iterator method (`yield return`) throws `NotSupportedException`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "Compiler-generated iterator enumerators don't support `Reset`; it throws `NotSupportedException`. To enumerate again you call `GetEnumerator()` again (which `foreach` does), and that runs the iterator body again from the start.",
+      "materials": [
+        "yield"
+      ],
+      "correctAnswer": true
+    },
+    {
+      "type": "true-false",
+      "prompt": "A get-only auto-property such as `public int X { get; }` can be assigned only in its initializer, not in a constructor.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "A get-only auto-property is backed by a readonly field, and it can be assigned in its initializer or in any constructor of the type. After construction it can't be changed. An `init` accessor additionally allows object initializers and `with` expressions to set it.",
+      "materials": [
+        "properties"
+      ],
+      "correctAnswer": false
+    },
+    {
+      "type": "true-false",
+      "prompt": "Like a `ref` argument, an `out` argument must be definitely assigned before the call.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "A `ref` argument must be assigned first, because the method may read it. An `out` argument doesn't need to be, because the method must assign it before returning, and you can even declare it in place with `out var x` or discard it with `out _`.",
+      "materials": [
+        "method-params"
+      ],
+      "correctAnswer": false
+    },
+    {
+      "type": "true-false",
+      "prompt": "Default parameter values are copied into the calling code at compile time, so changing a default in a library doesn't affect already-compiled callers until they are recompiled.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "When a call leaves out an optional argument, the compiler inserts the default value as a constant at the call site. If a library changes `int retries = 3` to `5`, callers compiled against the old version keep passing 3. That's why changing a public default is effectively a breaking change; an overload avoids the issue.",
+      "materials": [
+        "method-params"
+      ],
+      "correctAnswer": true
+    },
+    {
+      "type": "true-false",
+      "prompt": "Attributes can't be generic in C#, so a validator type has to be passed as an argument, as in `[Validator(typeof(EmailValidator))]`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "C# 11 added generic attributes: you can declare `class ValidatorAttribute<T> : Attribute` and write `[Validator<EmailValidator>]`. The type argument must be fully known (no open type parameters or `dynamic`). The `typeof` style still works, but the generic form can use constraints that the compiler checks.",
+      "materials": [
+        "cs11"
+      ],
+      "correctAnswer": false
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `using` alias can name a closed generic type like `List<int>`, but not a tuple type such as `(int X, int Y)`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Since C# 12, a `using` alias can name any type, including tuples, arrays and pointers, for example `using Point = (int X, int Y);`. Before C# 12 aliases were limited to named types (generic ones included). The alias is still just another name for the same type, not a new type.",
+      "materials": [
+        "cs12"
+      ],
+      "correctAnswer": false
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `switch` expression arm can run several statements if you wrap them in braces, as in `1 => { Log(); \"one\" }`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "Each arm of a switch expression is a single expression, so braces with statements are a syntax error. If an arm needs several steps, call a method or use a `switch` statement. `throw` expressions are allowed in arms, which covers the common error case.",
+      "materials": [
+        "patterns"
+      ],
+      "correctAnswer": false
+    },
+    {
+      "type": "true-false",
+      "prompt": "`obj is int` evaluates to `false`, without throwing, when `obj` is null.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "A type check with `is` never throws: a null reference isn't an instance of any type, so the result is `false`. The same holds for declaration patterns like `obj is int n`. A cast such as `(int)obj` on null would throw `NullReferenceException`.",
+      "materials": [
+        "type-testing"
+      ],
+      "correctAnswer": true
+    },
+    {
+      "type": "true-false",
+      "prompt": "A tuple's element names, such as `Name` in `(string Name, int Age) t`, can be read at run time from the tuple value itself, for example through reflection on `t.GetType()`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "Element names exist only at compile time; at run time `t` is a plain `ValueTuple<string, int>` with fields `Item1` and `Item2`. When names appear in member signatures, the compiler records them in a `TupleElementNames` attribute on that member, not on the value, which is why serializers see `Item1` and `Item2`.",
+      "materials": [
+        "tuples"
+      ],
+      "correctAnswer": false
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Given `var t = (Name: \"Ann\", Age: 3);`, which statements are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Named elements are aliases for `Item1`, `Item2`, ..., so `t.Item1` works, and the type is the struct `ValueTuple<string, int>`. Tuples deconstruct directly. Unlike anonymous types they are value types, not heap objects, and their fields are mutable, so `t.Name = \"Bo\"` compiles.",
+      "materials": [
+        "tuples"
+      ],
+      "options": [
+        "`t.Item1` still compiles and returns \"Ann\"",
+        "`t` is a `ValueTuple<string, int>`, a value type",
+        "`t` is allocated on the heap like an anonymous type",
+        "`var (n, a) = t;` deconstructs it into two variables",
+        "Assigning `t.Name = \"Bo\"` is a compile error, since tuples are immutable"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "With nullable reference types enabled and `string? Get()`, which lines compile without a nullable warning?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`null!` suppresses the warning on purpose. After `s is not null`, flow analysis knows `s` isn't null, and `string.IsNullOrEmpty` is annotated with `[NotNullWhen(false)]`, so `s` is non-null inside that `if` too. Assigning a plain `null` to `string` warns (CS8600), and dereferencing a `string?` without a check warns (CS8602).",
+      "materials": [
+        "nrt"
+      ],
+      "options": [
+        "`string s = null!;`",
+        "`string s = null;`",
+        "`string? s = Get(); int n = s.Length;`",
+        "`string? s = Get(); if (s is not null) Console.WriteLine(s.Length);`",
+        "`string? s = Get(); if (!string.IsNullOrEmpty(s)) Console.WriteLine(s.Length);`"
+      ],
+      "correctIndices": [
+        0,
+        3,
+        4
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which members can an interface declare in C# 12?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Since C# 8 interfaces can contain static fields, private methods with bodies (helpers for default implementations), and since C# 11 static abstract members. They still can't hold instance state, so an instance field is error CS0525, and they can't declare instance constructors (CS0526).",
+      "materials": [
+        "interface"
+      ],
+      "options": [
+        "An instance field such as `int count;`",
+        "A static field such as `static int count;`",
+        "A private method with a body",
+        "An instance constructor",
+        "A `static abstract` method"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        4
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these record and record struct declarations compile?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "A record class can inherit only from `object` or another record class, and it can implement any interfaces. Inheriting a record from an ordinary class is CS8864, and a class can't inherit from a record (CS8865). Record structs, like all structs, can't inherit from anything; `A` would be treated as an interface and fail.",
+      "materials": [
+        "record"
+      ],
+      "options": [
+        "`record Student : Person;` where `Person` is a record class",
+        "`record Student : Person;` where `Person` is an ordinary class",
+        "`class Student : Person { }` where `Person` is a record class",
+        "`record Student : IComparable<Student> { ... }` implementing the interface",
+        "`record struct B : A;` where `A` is another record struct"
+      ],
+      "correctIndices": [
+        0,
+        3
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these values can be matched with a list pattern such as `[1, ..]` or `['a', ..]`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "List patterns need a countable type (`Length` or `Count`) with an `int` (or `Index`) indexer; arrays, `List<T>`, spans and `string` qualify. `IEnumerable<T>` has neither, so the pattern is error CS8985. `HashSet<T>` has `Count` but no indexer, so it fails too.",
+      "materials": [
+        "patterns",
+        "cs11"
+      ],
+      "options": [
+        "An `int[]`",
+        "A `List<int>`",
+        "An `IEnumerable<int>`",
+        "A `string`",
+        "A `HashSet<int>`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which operators must be overloaded together with their partner, or the compiler reports CS0216?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "C# requires the comparison operators in pairs (`==`/`!=`, `<`/`>`, `<=`/`>=`) and `operator true` together with `operator false`. Arithmetic operators are independent: you can overload `+` without `-`.",
+      "materials": [
+        "operators"
+      ],
+      "options": [
+        "`==` and `!=`",
+        "`<` and `>`",
+        "`<=` and `>=`",
+        "`+` and `-`",
+        "`true` and `false`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`Naturals()` is an iterator that yields 1, 2, 3, ... forever. Which calls finish?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`First`, `Take` and `Any` are streaming: they pull only as many elements as they need and then stop. `OrderBy` and `Reverse` must read the entire source before yielding their first element, so on an infinite sequence they never return (and keep allocating until memory runs out).",
+      "materials": [
+        "linq-ops"
+      ],
+      "options": [
+        "`Naturals().First(n => n > 5)`",
+        "`Naturals().Take(3).ToList()`",
+        "`Naturals().OrderBy(n => n).First()`",
+        "`Naturals().Any()`",
+        "`Naturals().Reverse().First()`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Class `Pub` declares `public event EventHandler? Changed;`. Which lines compile in code outside `Pub`, given `var o = new Pub();` and a matching method `H`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Outside the declaring type an event exposes only `add` and `remove`, so `+=` and `-=` are the only allowed uses. Assigning it or invoking it from outside is error CS0070, which stops other code from wiping out subscribers or raising the event. Inside `Pub`, a field-like event can be assigned and invoked like a delegate field.",
+      "materials": [
+        "events"
+      ],
+      "options": [
+        "`o.Changed += H;`",
+        "`o.Changed -= H;`",
+        "`o.Changed = null;`",
+        "`o.Changed?.Invoke(o, EventArgs.Empty);`"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which delegate types can hold the method `static bool IsEven(int n)`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "A method group converts to any delegate type whose parameters and return type match, so `Func<int, bool>`, `Predicate<int>` and `Converter<int, bool>` all work even though they're different types. `Action<int>` returns `void`, so the return type is wrong (CS0407), and `Func<bool, int>` has parameter and return types reversed.",
+      "materials": [
+        "lambda"
+      ],
+      "options": [
+        "`Func<int, bool>`",
+        "`Predicate<int>`",
+        "`Action<int>`",
+        "`Converter<int, bool>`",
+        "`Func<bool, int>`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In C# 12, which of these can a local function do that a lambda expression cannot?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "Local functions can be generic and can be iterators; lambdas can do neither. Both can capture enclosing locals, both can be `static`, and since C# 12 lambdas also accept default parameter values such as `(int x, int by = 1) => x + by`.",
+      "materials": [
+        "local-fn",
+        "lambda"
+      ],
+      "options": [
+        "Declare its own generic type parameters",
+        "Use `yield return` to be an iterator",
+        "Capture local variables of the enclosing method",
+        "Declare default parameter values",
+        "Be marked `static` to forbid captures"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these situations skip a C# `finally` block?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`Environment.FailFast` terminates the process immediately, and a stack overflow kills the process in .NET, so neither runs pending `finally` blocks. Leaving the `try` by `return`, `break`, `continue`, `goto` or an exception that is caught higher up all run the `finally` first.",
+      "materials": [
+        "exceptions"
+      ],
+      "options": [
+        "The process is ended with `Environment.FailFast`",
+        "The `try` block causes a `StackOverflowException`",
+        "The `try` block executes `return`",
+        "An exception from the `try` is caught by a caller further up the stack",
+        "The `try` block contains `break` inside a loop"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`class C { public int X { get; init; } }`. Where can `X` be assigned?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "An `init` accessor can be called during object initialization: in constructors, in object initializers, and in `with` expressions on records. After that the property is read-only, so assigning it in a regular method or from outside is error CS8852.",
+      "materials": [
+        "properties"
+      ],
+      "options": [
+        "In an object initializer: `new C { X = 1 }`",
+        "In a constructor of `C`",
+        "In a `with` expression, if `C` were a record",
+        "In an ordinary instance method of `C`",
+        "After construction: `c.X = 1;`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Given `void M(in int x)` and `int n = 1;`, which calls compile?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "For an `in` parameter the `in` keyword at the call site is optional, and you may pass a constant or other rvalue; the compiler then passes a reference to a hidden temporary. Passing with `out` is error CS1615, since `out` would mean the method assigns the variable.",
+      "materials": [
+        "method-params"
+      ],
+      "options": [
+        "`M(5);`",
+        "`M(n);`",
+        "`M(in n);`",
+        "`M(out n);`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are valid attribute arguments (assuming a matching attribute constructor)?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "Attribute arguments must be compile-time constants of primitive types or `string`, `typeof` expressions, enum values, or one-dimensional arrays of those. `DateTime.Now` is evaluated at run time (CS0182), and `decimal` isn't a valid attribute parameter type, even though `1.5m` is a constant.",
+      "materials": [
+        "attributes-general"
+      ],
+      "options": [
+        "A constant string such as `\"name\"`",
+        "`typeof(int)`",
+        "The array `new[] { 1, 2 }`",
+        "`DateTime.Now`",
+        "The decimal literal `1.5m`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Given `const string A = \"x\";`, which of these `const` declarations compile?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "Constant interpolated strings work when every hole is a constant string, `Math.PI` is itself a `const`, and `decimal` constants are allowed. `DateTime` can't be declared `const` (CS0283); use `static readonly`. Arrays aren't constants either, because they're created at run time.",
+      "materials": [
+        "interpolated",
+        "struct"
+      ],
+      "options": [
+        "`const string B = $\"{A}!\";`",
+        "`const double D = Math.PI;`",
+        "`const decimal M = 1.5m;`",
+        "`const DateTime T = default;`",
+        "`const int[] Arr = { 1, 2 };`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which enum declarations compile?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "The underlying type of an enum must be one of the integral types `byte`, `sbyte`, `short`, `ushort`, `int`, `uint`, `long` or `ulong`. `char` isn't allowed even though it's a 16-bit integer under the hood, and `string` isn't numeric, so both give CS1008.",
+      "materials": [
+        "enum"
+      ],
+      "options": [
+        "`enum E : byte { A }`",
+        "`enum E : long { A }`",
+        "`enum E : char { A }`",
+        "`enum E : string { A }`",
+        "`enum E : uint { A }`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are allowed for a C# struct?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "Structs can implement interfaces, can declare a parameterless constructor since C# 10, and can be `readonly`, which requires every instance field to be readonly. They can't inherit from another struct or class (they implicitly derive from `ValueType`), and a non-nullable value type variable can't be null (CS0037).",
+      "materials": [
+        "struct"
+      ],
+      "options": [
+        "Implementing interfaces",
+        "Declaring an explicit parameterless constructor",
+        "Being declared `readonly`, which makes all its instance fields readonly",
+        "Inheriting from another struct",
+        "Assigning `null` to a variable of the struct type without `?`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`struct Meters` declares `implicit operator double(Meters m)` and `explicit operator Meters(double d)`. With `var m = new Meters();`, which lines compile and run without throwing?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "`Meters` to `double` is implicit, so the first line works. `double` to `Meters` is explicit, so it needs a cast (CS0266 without one); `(Meters)5` works because a standard implicit conversion (`int` to `double`) may run before the user-defined one. Casting the boxed `object` to `double` is an unboxing, which ignores user-defined conversions and throws `InvalidCastException`.",
+      "materials": [
+        "conversions"
+      ],
+      "options": [
+        "`double d = m;`",
+        "`Meters m2 = 5.0;`",
+        "`Meters m3 = (Meters)5;`",
+        "`double d2 = (double)(object)m;`"
+      ],
+      "correctIndices": [
+        0,
+        2
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which LINQ calls execute the query immediately rather than deferring it?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Operators that return a single value or a materialized collection (`ToList`, `ToArray`, `ToDictionary`, `ToLookup`, `Count`, `First`, ...) run the query when called. `Select` and `GroupBy` return lazy sequences; `GroupBy` reads the whole source only when you start enumerating, whereas `ToLookup` builds the same grouping right away.",
+      "materials": [
+        "linq-ops"
+      ],
+      "options": [
+        "`ToList()`",
+        "`Count()`",
+        "`ToLookup(x => x.Key)`",
+        "`Select(x => x.Name)`",
+        "`GroupBy(x => x.Key)`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which `var` declarations compile in C# 12?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Since C# 10 lambdas have a natural type when the parameter types are known, so `f` is a `Func<int>`, `h` a `Func<int, int>` and `k` a `Func<int, int, int>`. `x => x` has no parameter type to infer from, and `Console.WriteLine` is a method group with many overloads, so both are CS8917.",
+      "materials": [
+        "lambda"
+      ],
+      "options": [
+        "`var f = () => 42;`",
+        "`var g = x => x;`",
+        "`var h = (int x) => x * 2;`",
+        "`var w = Console.WriteLine;`",
+        "`var k = static (int a, int b) => a + b;`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Where is a `throw` expression (as opposed to a `throw` statement) allowed?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Since C# 7, `throw` can be used as an expression in the conditional operator, after `??`, and as the body of an expression-bodied member or lambda. Elsewhere, such as an initializer for `var` (which has no type to infer) or a method argument, it is error CS8115.",
+      "materials": [
+        "exceptions"
+      ],
+      "options": [
+        "As the right operand of `??`, as in `name ?? throw new ArgumentNullException(nameof(name))`",
+        "As a branch of the conditional operator, as in `ok ? value : throw new InvalidOperationException()`",
+        "As an expression body: `void Fail() => throw new NotImplementedException();`",
+        "As an initializer: `var x = throw new Exception();`",
+        "As a method argument: `M(throw new Exception())`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `required` members (C# 11) are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Missing required members give error CS9035, and `required` works on fields and on properties with `set` or `init`. A constructor that sets them can be marked `[SetsRequiredMembers]` so callers using it aren't forced to repeat them. A required member can't be less visible than its containing type (CS9032), so a public class can't have a private required property.",
+      "materials": [
+        "properties",
+        "attributes-general"
+      ],
+      "options": [
+        "Object creation that doesn't set them in an object initializer is a compile error",
+        "They can be applied to fields as well as properties",
+        "A `public` class can have a `private required` property",
+        "A constructor marked `[SetsRequiredMembers]` lets callers skip the initializer",
+        "They can be combined with `init` accessors"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3,
+        4
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which types implement `INumber<T>` (for themselves) in .NET 8?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "The built-in numeric types, including `int`, `decimal`, `double` and `Half`, implement `INumber<TSelf>`, so generic math works on them. `bool` and `Guid` support equality but aren't numbers, so they don't implement it.",
+      "materials": [
+        "generic-math"
+      ],
+      "options": [
+        "`int`",
+        "`decimal`",
+        "`Half`",
+        "`bool`",
+        "`Guid`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about file-local types (`file class Helper`) are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "A file-local type is scoped to its source file, so names don't collide across files, which is why source generators like them. Because other files can't see it, it can't be used in the signature of a member of a non-file-local type (CS9051). `file` is allowed only on top-level types (CS9054), and namespaces don't widen its visibility.",
+      "materials": [
+        "cs11"
+      ],
+      "options": [
+        "Two files in the same project can each declare their own `file class Helper`",
+        "A file-local type can't appear in the signature of a public member of a non-file-local type",
+        "The `file` modifier can be applied to a nested class",
+        "A file-local type is visible to every file in the same namespace"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Given `var a = new { X = 1 }; var b = new { X = 1 };` in the same assembly, which statements are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Anonymous types with the same property names, types and order share one generated class, which overrides `Equals`, `GetHashCode` and `ToString` with value semantics. They don't overload `==`, so `a == b` compares references and is `False`. Their properties are read-only, so assigning `a.X` is a compile error.",
+      "materials": [
+        "record",
+        "type-testing"
+      ],
+      "options": [
+        "`a.Equals(b)` is `True`",
+        "`a == b` is `True`",
+        "`a` and `b` have the same compiler-generated type",
+        "`a.X = 2;` compiles",
+        "`a.ToString()` returns `\"{ X = 1 }\"`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Given `int[] a = { 1, 2, 3, 4, 5 };`, which statements are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`^1` is the last element, a range `start..end` excludes `end`, so `1..3` is indices 1 and 2, and `..^2` drops the last two elements. `^0` means the position after the last element, so reading it throws `IndexOutOfRangeException`. A range whose start is after its end throws `ArgumentOutOfRangeException` rather than returning an empty array.",
+      "materials": [
+        "member-access"
+      ],
+      "options": [
+        "`a[^1]` is 5",
+        "`a[1..3]` contains 2 and 3",
+        "`a[..^2]` has length 3",
+        "`a[^0]` returns 1",
+        "`a[3..1]` returns an empty array"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the UTF-8 literal `\"héllo\"u8` are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "A `u8` literal (C# 11) is a `ReadOnlySpan<byte>` holding the UTF-8 bytes, so `é` takes two bytes and the length is 6. The bytes are baked into the assembly, so no string exists and nothing is converted at run time. It can't be interpolated, and `ReadOnlySpan<byte>` can't be `const` (CS0283).",
+      "materials": [
+        "cs11"
+      ],
+      "options": [
+        "Its type is `ReadOnlySpan<byte>`",
+        "Its `Length` is 6",
+        "It can be combined with interpolation, as in `$\"h{x}\"u8`",
+        "It can initialize a `const` field",
+        "It is a `string` that is converted to UTF-8 when used"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: enum values without a name, a [Flags] combination and Enum.IsDefined.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Casting an out-of-range number to an enum is legal and produces a value whose `ToString` is just the number, and `Enum.IsDefined` reports that no member has it. With `[Flags]`, `ToString` lists the set flags, so `Read | Write` prints \"Read, Write\"; a value with a bit that no member covers (8) prints as a number. `Color` has no `[Flags]`, so `Green | Blue` (1 | 2 = 3) has no name and prints 3.",
+      "materials": [
+        "enum"
+      ],
+      "code": "Color c = (Color)7;\nConsole.WriteLine(c);\nConsole.WriteLine(Enum.IsDefined(c));\nConsole.WriteLine(Perm.Read | Perm.Write);\nConsole.WriteLine((Perm)8);\nConsole.WriteLine(Color.Green | Color.Blue);\n\nenum Color { Red, Green, Blue }\n[Flags] enum Perm { Read = 1, Write = 2, Exec = 4 }\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "7\nFalse\nRead, Write\n8\n3"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a struct with an explicit parameterless constructor, created three ways.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "Since C# 10 a struct can declare a parameterless constructor, and `new S()` calls it, so `a.X` is 42. `default` and array creation don't call any constructor; they just zero the memory, so both print 0. Code that relies on the constructor for invariants has to account for default instances.",
+      "materials": [
+        "struct"
+      ],
+      "code": "var a = new S();\nS b = default;\nvar arr = new S[1];\nConsole.WriteLine(a.X);\nConsole.WriteLine(b.X);\nConsole.WriteLine(arr[0].X);\n\nstruct S\n{\n    public int X;\n    public S() { X = 42; }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "42\n0\n0"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: equality between a base record and a derived record with the same values.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "Record equality also compares the run-time type through the generated `EqualityContract` property, so a `Person` never equals a `Student`, even when the compared `Name` values match. Two students with equal values are equal even through `Person` variables, because `Equals` is virtual. `ToString` is virtual too, so `s` prints with the derived type's name and all its members.",
+      "materials": [
+        "record"
+      ],
+      "code": "Person p = new Person(\"Ann\");\nPerson s = new Student(\"Ann\", 2);\nPerson s2 = new Student(\"Ann\", 2);\nConsole.WriteLine(p == s);\nConsole.WriteLine(s == s2);\nConsole.WriteLine(s);\n\nrecord Person(string Name);\nrecord Student(string Name, int Year) : Person(Name);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "False\nTrue\nStudent { Name = Ann, Year = 2 }"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: generic math conversions with CreateSaturating, CreateTruncating and CreateChecked.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "`CreateSaturating` clamps to the target range, so 300 becomes 255 and 1e20 becomes `int.MaxValue`. `CreateTruncating` keeps the low bits for integers (300 & 0xFF = 44) and drops the fraction for floating point (3.99 becomes 3). `CreateChecked` throws `OverflowException` when the value doesn't fit.",
+      "materials": [
+        "generic-math"
+      ],
+      "code": "Console.WriteLine(byte.CreateSaturating(300));\nConsole.WriteLine(byte.CreateTruncating(300));\nConsole.WriteLine(int.CreateTruncating(3.99));\nConsole.WriteLine(int.CreateSaturating(1e20));\ntry { byte.CreateChecked(300); }\ncatch (Exception ex) { Console.WriteLine(ex.GetType().Name); }\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "255\n44\n3\n2147483647\nOverflowException"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: overload resolution with numeric, object and string overloads.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "`int` converts implicitly to `long`, `double` and `object`; `long` wins because `long` converts to the other two. `float` can't go to `long`, so `double` is best. `char` converts implicitly to `long` (as the code 120), which beats `double` and `object`. `null` fits `string` and `object`, and the more specific `string` wins. `decimal` has no implicit conversion to `long` or `double`, so only `object` applies.",
+      "materials": [
+        "numeric-conv"
+      ],
+      "code": "P.Print(5);\nP.Print(5f);\nP.Print('x');\nP.Print(null);\nP.Print(5m);\n\nstatic class P\n{\n    public static void Print(long x) => Console.WriteLine($\"long {x}\");\n    public static void Print(double x) => Console.WriteLine($\"double {x}\");\n    public static void Print(object x) => Console.WriteLine($\"object {x}\");\n    public static void Print(string? x) => Console.WriteLine($\"string {x ?? \"null\"}\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "long 5\ndouble 5\nlong 120\nstring null\nobject 5"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: writing through an object[] variable that refers to a string[].",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Arrays of reference types are covariant, so a `string[]` can be used as `object[]`, and both variables refer to the same array; writing \"c\" changes `names[0]`. Because the array really is a `string[]`, the runtime checks every store, and storing a boxed int throws `ArrayTypeMismatchException`, leaving `names[1]` unchanged.",
+      "materials": [
+        "type-testing"
+      ],
+      "code": "string[] names = { \"a\", \"b\" };\nobject[] items = names;\nitems[0] = \"c\";\nConsole.WriteLine(names[0]);\ntry\n{\n    items[1] = 42;\n}\ncatch (Exception ex)\n{\n    Console.WriteLine(ex.GetType().Name);\n}\nConsole.WriteLine(names[1]);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "c\nArrayTypeMismatchException\nb"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: shift operators, unsigned right shift and the ^ operator.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "For an `int`, the shift count is masked to its low 5 bits, so `1 << 33` is `1 << 1` = 2. `>>` on a signed int is arithmetic and keeps the sign, giving -4. `>>>` (C# 11) shifts in zeros, so the top four bits of -8 (0xFFFFFFF8) end up as 15. `^` is bitwise XOR, not exponentiation: 2 XOR 3 is 1.",
+      "materials": [
+        "cs11",
+        "operators"
+      ],
+      "code": "Console.WriteLine(1 << 33);\nConsole.WriteLine(-8 >> 1);\nConsole.WriteLine(-8 >>> 28);\nConsole.WriteLine(2 ^ 3);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "2\n-4\n15\n1"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: mixing char, int and string with the + operator.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`+` is evaluated left to right. Once the left operand is a string, each next operand is concatenated as text: \"a1\" and \"123\". Before a string is involved, `char` and `int` are added numerically: `'a' + 1` is 97 + 1 = 98, and `1 + 2` is 3, which is then concatenated with \"3\" to give \"33\".",
+      "materials": [
+        "numeric-conv"
+      ],
+      "code": "Console.WriteLine(\"\" + 'a' + 1);\nConsole.WriteLine('a' + 1 + \"\");\nConsole.WriteLine(1 + 2 + \"3\");\nConsole.WriteLine(\"1\" + 2 + 3);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "a1\n98\n33\n123"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an interpolated raw string literal with $$ and literal braces.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "With `$$`, an interpolation hole needs two braces, so single `{` and `}` are literal text, which is ideal for JSON. The indentation in front of the closing `\"\"\"` is removed from every line, so the output starts at column 0 with the inner lines keeping their two extra spaces. The newlines after the opening and before the closing delimiter aren't part of the value.",
+      "materials": [
+        "cs11"
+      ],
+      "code": "var name = \"Ann\";\nvar age = 30;\nvar json = $$\"\"\"\n    {\n      \"name\": \"{{name}}\",\n      \"age\": {{age}}\n    }\n    \"\"\";\nConsole.WriteLine(json);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "{\n  \"name\": \"Ann\",\n  \"age\": 30\n}"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: alignment and format specifiers in interpolation holes.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "In `{value,alignment:format}`, a positive alignment pads on the left (right-aligns) to that width, and a negative one pads on the right. `X4` formats as hexadecimal with at least four digits (00FF), and `D3` pads an integer with zeros to three digits (007). Alignment works the same way for strings.",
+      "materials": [
+        "interpolated"
+      ],
+      "code": "Console.WriteLine($\"[{42,5}]\");\nConsole.WriteLine($\"[{42,-5}]\");\nConsole.WriteLine($\"[{255:X4}]\");\nConsole.WriteLine($\"[{7:D3}]\");\nConsole.WriteLine($\"[{\"ab\",4}|{\"cd\",-4}]\");\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "[   42]\n[42   ]\n[00FF]\n[007]\n[  ab|cd  ]"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: nameof with members, generic types and locals.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "`nameof` is evaluated at compile time and returns only the final identifier: \"City\", not the whole path or the value \"Oslo\". For a generic type it returns the name without type arguments, \"List\". It works for locals and for members accessed through the type name.",
+      "materials": [
+        "member-access"
+      ],
+      "code": "var order = new Order();\nint count = 3;\nConsole.WriteLine(nameof(order.Customer.City));\nConsole.WriteLine(nameof(List<int>));\nConsole.WriteLine(nameof(count));\nConsole.WriteLine(nameof(Order.Customer));\n\nclass Order { public Customer Customer { get; } = new(); }\nclass Customer { public string City { get; } = \"Oslo\"; }\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "City\nList\ncount\nCustomer"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an index initializer versus a collection initializer with a duplicate key.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "An index initializer `[\"x\"] = 1` calls the indexer setter, which overwrites, so the dictionary ends up with one entry holding 2. A collection initializer `{ \"x\", 1 }` calls `Add`, and adding the same key twice throws `ArgumentException`.",
+      "materials": [
+        "member-access"
+      ],
+      "code": "var a = new Dictionary<string, int> { [\"x\"] = 1, [\"x\"] = 2 };\nConsole.WriteLine($\"{a.Count} {a[\"x\"]}\");\ntry\n{\n    var b = new Dictionary<string, int> { { \"x\", 1 }, { \"x\", 2 } };\n    Console.WriteLine(b.Count);\n}\ncatch (Exception ex)\n{\n    Console.WriteLine(ex.GetType().Name);\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "1 2\nArgumentException"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: passing null, nothing and several nulls to a params array.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "With no arguments the compiler passes an empty array. A single `null` converts directly to the array type, so the normal form applies and `items` itself is null. Two nulls only fit the expanded form, so the method gets a new array of two null elements. One string goes into a one-element array.",
+      "materials": [
+        "method-params"
+      ],
+      "code": "Show();\nShow(null);\nShow(null, null);\nShow(\"a\");\n\nstatic void Show(params string?[]? items) =>\n    Console.WriteLine(items is null ? \"array is null\" : $\"length {items.Length}\");\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "length 0\narray is null\nlength 2\nlength 1"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a left outer join in query syntax with join ... into and DefaultIfEmpty.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`join ... into` is a group join that gives each person the (possibly empty) group of matching pets. The second `from` over `owned.DefaultIfEmpty()` flattens the groups and supplies one default element for an empty group, which turns it into a left outer join: Bo stays, with a default tuple whose `Pet` is null. People keep their order, and pets keep theirs within each person.",
+      "materials": [
+        "linq-query"
+      ],
+      "code": "var people = new[] { (Id: 1, Name: \"Ann\"), (Id: 2, Name: \"Bo\"), (Id: 3, Name: \"Cy\") };\nvar pets = new[] { (Owner: 1, Pet: \"Rex\"), (Owner: 1, Pet: \"Tom\"), (Owner: 3, Pet: \"Kit\") };\n\nvar q = from p in people\n        join pet in pets on p.Id equals pet.Owner into owned\n        from o in owned.DefaultIfEmpty()\n        select $\"{p.Name}: {o.Pet ?? \"-\"}\";\n\nforeach (var line in q) Console.WriteLine(line);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "Ann: Rex\nAnn: Tom\nBo: -\nCy: Kit"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: Concat, Union, Intersect and Except on sequences with duplicates.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`Concat` simply appends and keeps duplicates. `Union`, `Intersect` and `Except` are set operations, so their results contain each value once: `Except` returns 1 only once even though `a` has two 1s. They keep the order in which elements first appear.",
+      "materials": [
+        "linq-ops"
+      ],
+      "code": "int[] a = { 1, 1, 2, 3 };\nint[] b = { 3, 4, 4 };\nConsole.WriteLine(string.Join(\",\", a.Concat(b)));\nConsole.WriteLine(string.Join(\",\", a.Union(b)));\nConsole.WriteLine(string.Join(\",\", a.Intersect(b)));\nConsole.WriteLine(string.Join(\",\", a.Except(b)));\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "1,1,2,3,3,4,4\n1,2,3,4\n3\n1,2"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: LINQ Sum on ints that overflow.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "Plain C# arithmetic is unchecked by default, so the loop silently wraps to `int.MinValue`. `Enumerable.Sum` for `int` uses checked arithmetic and throws `OverflowException` instead of returning a wrong total. Summing as `long` has room for the result.",
+      "materials": [
+        "linq-ops"
+      ],
+      "code": "int[] values = { int.MaxValue, 1 };\nint manual = 0;\nforeach (var v in values) manual += v;\nConsole.WriteLine(manual);\ntry { Console.WriteLine(values.Sum()); }\ncatch (Exception ex) { Console.WriteLine(ex.GetType().Name); }\nConsole.WriteLine(values.Sum(v => (long)v));\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "-2147483648\nOverflowException\n2147483648"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a primary constructor parameter used both to initialize a property and in a method.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "The property initializer copies the parameter's value once, when the object is created, so `Start` stays 5. Because `Increment` and `Current` also use `start`, the compiler captures the parameter in a hidden mutable field, which `Increment` changes to 7. Storing the value in two places like this gets warning CS9124.",
+      "materials": [
+        "cs12"
+      ],
+      "code": "var c = new Counter(5);\nc.Increment();\nc.Increment();\nConsole.WriteLine(c.Start);\nConsole.WriteLine(c.Current);\n\nclass Counter(int start)\n{\n    public int Start { get; } = start;\n    public void Increment() => start++;\n    public int Current => start;\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "5\n7"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an overridden method with different default parameter values.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "Which method runs is decided at run time (virtual dispatch), so both calls run `Derived.Greet`. The default argument, however, is inserted at compile time from the method declaration of the variable's static type: through `Base` it's \"base default\", through `Derived` it's \"derived default\". That mismatch is why overrides should keep the same defaults.",
+      "materials": [
+        "method-params"
+      ],
+      "code": "Base b = new Derived();\nDerived d = new Derived();\nb.Greet();\nd.Greet();\n\nclass Base\n{\n    public virtual void Greet(string who = \"base default\") => Console.WriteLine($\"Base {who}\");\n}\nclass Derived : Base\n{\n    public override void Greet(string who = \"derived default\") => Console.WriteLine($\"Derived {who}\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "Derived base default\nDerived derived default"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: one generic Sum method used with int, double and decimal.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`INumber<T>` gives access to the static abstract `T.Zero` and `operator +`, so one method works for every numeric type. Each call uses that type's own arithmetic: decimals keep their scale (3.30), and an empty array returns `T.Zero`.",
+      "materials": [
+        "generic-math"
+      ],
+      "code": "using System.Numerics;\n\nConsole.WriteLine(Sum(new[] { 1, 2, 3 }));\nConsole.WriteLine(Sum(new[] { 0.5, 0.25 }));\nConsole.WriteLine(Sum(new[] { 1.10m, 2.20m }));\nConsole.WriteLine(Sum(Array.Empty<int>()));\n\nstatic T Sum<T>(T[] values) where T : INumber<T>\n{\n    T total = T.Zero;\n    foreach (var v in values) total += v;\n    return total;\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "6\n0.75\n3.30\n0"
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: ArgumentNullException.ThrowIfNull and CallerMemberName.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`ThrowIfNull` has a parameter marked `[CallerArgumentExpression]`, so the compiler passes the text of the argument, \"userName\", which becomes `ParamName`. `[CallerMemberName]` fills the optional parameter with the name of the calling method, `Save`. Both are filled in at compile time.",
+      "materials": [
+        "attributes-general",
+        "exceptions"
+      ],
+      "code": "using System.Runtime.CompilerServices;\n\nstring? userName = null;\ntry\n{\n    ArgumentNullException.ThrowIfNull(userName);\n}\ncatch (ArgumentNullException ex)\n{\n    Console.WriteLine(ex.ParamName);\n}\nRepo.Save();\n\nstatic class Repo\n{\n    public static void Save() => Log(\"saving\");\n    static void Log(string message, [CallerMemberName] string caller = \"\") =>\n        Console.WriteLine($\"{caller}: {message}\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "userName\nSave: saving"
+    },
+    {
+      "type": "ordering",
+      "prompt": "Sort these language additions from the oldest C# release to the newest.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "String interpolation arrived in C# 6, records in C# 9, raw string literals in C# 11, primary constructors for all classes and structs in C# 12, and params collections in C# 13. Records had positional primary constructors from the start, but ordinary classes got them only in C# 12.",
+      "materials": [
+        "history"
+      ],
+      "options": [
+        "String interpolation with `$\"...\"`",
+        "Records",
+        "Raw string literals",
+        "Primary constructors on classes and structs",
+        "`params` collections such as `params ReadOnlySpan<T>`"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these pattern-matching features by the C# version that introduced them, earliest first.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "C# 7.0 added `is` with type patterns, C# 8 switch expressions (with property and positional patterns), C# 9 relational and `and`/`or`/`not` patterns, C# 10 extended property patterns, and C# 11 list patterns.",
+      "materials": [
+        "history",
+        "patterns"
+      ],
+      "options": [
+        "Type patterns with a declaration: `if (o is int n)`",
+        "Switch expressions",
+        "Relational and logical patterns: `is > 0 and < 10`",
+        "Extended property patterns: `{ Address.City: \"Oslo\" }`",
+        "List patterns: `is [1, .., 9]`"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nvar q = new[] { 3, 1, 2 }\n    .Select(n => { Console.WriteLine($\"select {n}\"); return n; })\n    .OrderBy(n => n);\nConsole.WriteLine(\"query built\");\nConsole.WriteLine($\"first {q.First()}\");\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Nothing runs while the query is built. When `First()` asks `OrderBy` for its first element, `OrderBy` must see every element before it knows the smallest, so it pulls all three through `Select` first. Only then can it return 1, even though just one element was requested.",
+      "materials": [
+        "linq-ops"
+      ],
+      "options": [
+        "query built",
+        "select 3",
+        "select 1",
+        "select 2",
+        "first 1"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Overload resolution is tried for `M(5)`, removing the chosen overload each time. In what order are the overloads chosen, first to last?\n\n```csharp\nnew A1().M(5);\nnew A2().M(5);\nnew A3().M(5);\nnew A4().M(5);\n\nclass A1 { public void M(int x) => Console.WriteLine(\"M(int)\"); public void M(long x) => Console.WriteLine(\"M(long)\"); public void M(double x) => Console.WriteLine(\"M(double)\"); public void M(object x) => Console.WriteLine(\"M(object)\"); }\nclass A2 { public void M(long x) => Console.WriteLine(\"M(long)\"); public void M(double x) => Console.WriteLine(\"M(double)\"); public void M(object x) => Console.WriteLine(\"M(object)\"); }\nclass A3 { public void M(double x) => Console.WriteLine(\"M(double)\"); public void M(object x) => Console.WriteLine(\"M(object)\"); }\nclass A4 { public void M(object x) => Console.WriteLine(\"M(object)\"); }\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "An identity conversion beats every other, so `M(int)` wins first. Among the rest, the better target is the one that converts implicitly to the others: `long` converts to `double` and `object`, and `double` converts to `object` (by boxing). So the order is int, long, double, object.",
+      "materials": [
+        "numeric-conv"
+      ],
+      "options": [
+        "M(int)",
+        "M(long)",
+        "M(double)",
+        "M(object)"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nint r = A() + B() * C();\nConsole.WriteLine($\"result {r}\");\n\nstatic int A() { Console.WriteLine(\"A\"); return 1; }\nstatic int B() { Console.WriteLine(\"B\"); return 2; }\nstatic int C() { Console.WriteLine(\"C\"); return 3; }\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Precedence decides how operands are grouped (`A() + (B() * C())`), not when they're evaluated. C# evaluates operands strictly left to right, so A, B and C run in that order and only then is the multiplication done, giving 1 + 6 = 7.",
+      "materials": [
+        "numeric-conv"
+      ],
+      "options": [
+        "A",
+        "B",
+        "C",
+        "result 7"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these numeric types so that each one converts implicitly to every type after it, first to last.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "Implicit numeric conversions go from narrower to wider types: `byte` to `short`, `short` to `int`, `int` to `long`, and `long` to `float`. `long` to `float` is implicit even though it can lose precision, because `float` has a far larger range. None of the reverse conversions is implicit.",
+      "materials": [
+        "numeric-conv"
+      ],
+      "options": [
+        "`byte`",
+        "`short`",
+        "`int`",
+        "`long`",
+        "`float`"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these clauses so they form a valid query expression, first to last.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "A query expression must start with `from` and end with `select` or `group`. `group ... into g` ends the first part and continues the query with the new range variable `g`, so the `where` that uses `g` must come after it, and `select g.Key` ends the query.",
+      "materials": [
+        "linq-query"
+      ],
+      "options": [
+        "`from n in nums`",
+        "`group n by n % 3 into g`",
+        "`where g.Count() > 1`",
+        "`select g.Key`"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nConsole.WriteLine(\"start\");\nstring? s = Get(\"A\", null) ?? Get(\"B\", \"b\") ?? Get(\"C\", \"c\");\nConsole.WriteLine($\"result {s}\");\n\nstatic string? Get(string name, string? value)\n{\n    Console.WriteLine($\"call {name}\");\n    return value;\n}\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "explanation": "`??` is right-associative and short-circuits: it evaluates its left operand and evaluates the right side only when the left is null. `A` returns null, so `B` is called; `B` returns \"b\", so `C` is never called.",
+      "materials": [
+        "nullable-vt"
+      ],
+      "options": [
+        "start",
+        "call A",
+        "call B",
+        "result b"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A record has a user-defined copy constructor and logging `init` accessors. In what order are these lines printed, first to last?\n\n```csharp\nvar a = new Rec(1, 2);\nvar b = a with { Y = Log(20), X = Log(10) };\n\nstatic int Log(int v) { Console.WriteLine($\"eval {v}\"); return v; }\n\nrecord Rec\n{\n    int x, y;\n    public Rec(int x, int y) { this.x = x; this.y = y; }\n    protected Rec(Rec other) { Console.WriteLine(\"copy constructor\"); x = other.x; y = other.y; }\n    public int X { get => x; init { Console.WriteLine($\"set X {value}\"); x = value; } }\n    public int Y { get => y; init { Console.WriteLine($\"set Y {value}\"); y = value; } }\n}\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "A `with` expression first clones the record by calling its copy constructor (through the generated `<Clone>$` method), then runs the initializer assignments on the copy in the order they're written: each value is evaluated and then the `init` accessor is called. The written order (Y before X) is kept, not the declaration order.",
+      "materials": [
+        "record"
+      ],
+      "options": [
+        "copy constructor",
+        "eval 20",
+        "set Y 20",
+        "eval 10",
+        "set X 10"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nvar p = new Pt();\n(Get(\"left\", p).X, p.Y) = (Val(\"right 1\", 1), Val(\"right 2\", 2));\n\nstatic Pt Get(string m, Pt p) { Console.WriteLine(m); return p; }\nstatic int Val(string m, int v) { Console.WriteLine(m); return v; }\n\nclass Pt\n{\n    public int X { set => Console.WriteLine(\"set X\"); }\n    public int Y { set => Console.WriteLine(\"set Y\"); }\n}\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "For a deconstruction assignment, C# first evaluates the receivers on the left side (here `Get(\"left\", p)`), then evaluates the whole right side left to right, and only then performs the assignments left to right. So both values exist before any setter runs.",
+      "materials": [
+        "tuples"
+      ],
+      "options": [
+        "left",
+        "right 1",
+        "right 2",
+        "set X",
+        "set Y"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these numeric literals from smallest value to largest.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "`1e1` is the double 10. C# has no octal literals, so `012` is just decimal 12. `0xE` is 14, `0b1111` is 15 and `0x10` is 16.",
+      "materials": [
+        "numeric-conv"
+      ],
+      "options": [
+        "`1e1`",
+        "`012`",
+        "`0xE`",
+        "`0b1111`",
+        "`0x10`"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these generic math interfaces from the most general to the most specific, so that each one inherits from the one before it.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "`INumberBase<T>` is the base for all number types (including complex numbers). `INumber<T>` adds comparison and ordering, `IBinaryNumber<T>` adds binary-specific operations such as bitwise operators and `IsPow2`, and `IBinaryInteger<T>` adds integer operations such as shifts and `DivRem`.",
+      "materials": [
+        "generic-math"
+      ],
+      "options": [
+        "`INumberBase<T>`",
+        "`INumber<T>`",
+        "`IBinaryNumber<T>`",
+        "`IBinaryInteger<T>`"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A handler removes itself from the event while the event is being raised. In what order are these lines printed, first to last?\n\n```csharp\nvar pub = new Pub();\nAction? h1 = null;\nh1 = () => { Console.WriteLine(\"H1\"); pub.E -= h1; };\npub.E += h1;\nint n = 0;\npub.E += () => Console.WriteLine($\"H2 call {++n}\");\npub.Raise();\nConsole.WriteLine(\"raised again\");\npub.Raise();\n\nclass Pub\n{\n    public event Action? E;\n    public void Raise() => E?.Invoke();\n}\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "explanation": "Delegates are immutable: `-=` creates a new delegate and stores it in the field, while the invocation already in progress keeps using the old invocation list. So H2 still runs during the first raise. The second raise uses the new list, which contains only H2.",
+      "materials": [
+        "events"
+      ],
+      "options": [
+        "H1",
+        "H2 call 1",
+        "raised again",
+        "H2 call 2"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\ntry\n{\n    using var r = new Res();\n    Console.WriteLine(\"throwing\");\n    throw new Exception(\"x\");\n}\ncatch\n{\n    Console.WriteLine(\"catch\");\n}\nfinally\n{\n    Console.WriteLine(\"finally\");\n}\n\nclass Res : IDisposable\n{\n    public void Dispose() => Console.WriteLine(\"dispose\");\n}\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "explanation": "A `using` declaration is lowered to its own inner `try/finally` that ends where the enclosing block ends, so the resource is disposed while the exception leaves the `try` block, before the outer `catch` runs. The outer `finally` runs last.",
+      "materials": [
+        "exceptions"
+      ],
+      "options": [
+        "throwing",
+        "dispose",
+        "catch",
+        "finally"
+      ]
+    }
+  ]
+}
