@@ -53,6 +53,10 @@ for t in dotnet go database sql javascript system-design design-patterns; do
     docker compose exec api seed -file seeds/$t-$k.json
   done
 done
+# .NET by area (C#, runtime, async, ASP.NET Core, EF Core, testing, architecture)
+for a in csharp runtime async aspnetcore efcore testing architecture; do
+  docker compose exec api seed -file seeds/dotnet-$a.json
+done
 ```
 
 nginx serves the production build and proxies `/api` to the api container, so the
