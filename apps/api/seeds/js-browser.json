@@ -1,0 +1,2216 @@
+{
+  "name": "JavaScript: browser, DOM and Web APIs",
+  "materials": [
+    {
+      "key": "dom-props",
+      "type": "article",
+      "title": "Node properties: type, tag and contents",
+      "url": "https://javascript.info/basic-dom-node-properties",
+      "author": "Ilya Kantor",
+      "description": "Covers node types, nodeType, innerHTML, outerHTML, textContent and the hidden property."
+    },
+    {
+      "key": "qsa",
+      "type": "article",
+      "title": "Document: querySelectorAll() method",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll",
+      "author": "MDN Web Docs",
+      "description": "Reference for querySelectorAll and the static NodeList it returns."
+    },
+    {
+      "key": "slots",
+      "type": "article",
+      "title": "Using templates and slots",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots",
+      "author": "MDN Web Docs",
+      "description": "How template elements and named and default slots compose content into a shadow tree."
+    },
+    {
+      "key": "attrs-props",
+      "type": "article",
+      "title": "Attributes and properties",
+      "url": "https://javascript.info/dom-attributes-and-properties",
+      "author": "Ilya Kantor",
+      "description": "Explains how HTML attributes map to DOM properties, property-attribute synchronization and data-* attributes."
+    },
+    {
+      "key": "classlist",
+      "type": "article",
+      "title": "Element: classList property",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Element/classList",
+      "author": "MDN Web Docs",
+      "description": "Reference for the live DOMTokenList used to add, remove, toggle and replace classes."
+    },
+    {
+      "key": "add-listener",
+      "type": "article",
+      "title": "EventTarget: addEventListener() method",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener",
+      "author": "MDN Web Docs",
+      "description": "Reference for addEventListener including the capture, once, passive and signal options."
+    },
+    {
+      "key": "bubbling",
+      "type": "article",
+      "title": "Bubbling and capturing",
+      "url": "https://javascript.info/bubbling-and-capturing",
+      "author": "Ilya Kantor",
+      "description": "Explains event phases, event.target versus event.currentTarget and stopping propagation."
+    },
+    {
+      "key": "dispatch",
+      "type": "article",
+      "title": "Dispatching custom events",
+      "url": "https://javascript.info/dispatch-events",
+      "author": "Ilya Kantor",
+      "description": "How to create and dispatch Event and CustomEvent objects, bubbles, cancelable and detail."
+    },
+    {
+      "key": "browsers",
+      "type": "article",
+      "title": "How browsers work",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/Performance/How_browsers_work",
+      "author": "MDN Web Docs",
+      "description": "Walks through parsing, style, layout, paint and compositing in the browser."
+    },
+    {
+      "key": "raf",
+      "type": "article",
+      "title": "Window: requestAnimationFrame() method",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame",
+      "author": "MDN Web Docs",
+      "description": "Reference for scheduling a callback before the next repaint."
+    },
+    {
+      "key": "thrashing",
+      "type": "article",
+      "title": "Avoid large, complex layouts and layout thrashing",
+      "url": "https://web.dev/articles/avoid-large-complex-layouts-and-layout-thrashing",
+      "author": "web.dev",
+      "description": "Explains forced synchronous layouts and how batching reads and writes avoids them."
+    },
+    {
+      "key": "async-defer",
+      "type": "article",
+      "title": "Scripts: async, defer",
+      "url": "https://javascript.info/script-async-defer",
+      "author": "Ilya Kantor",
+      "description": "Compares regular, async, defer and dynamically inserted scripts and their relation to DOMContentLoaded."
+    },
+    {
+      "key": "fetch",
+      "type": "article",
+      "title": "Using the Fetch API",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch",
+      "author": "MDN Web Docs",
+      "description": "Guide to making requests with fetch, checking status and reading response bodies."
+    },
+    {
+      "key": "response",
+      "type": "article",
+      "title": "Response",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Response",
+      "author": "MDN Web Docs",
+      "description": "Reference for the Response interface: ok, status, type, body, bodyUsed and clone()."
+    },
+    {
+      "key": "cors",
+      "type": "article",
+      "title": "Cross-Origin Resource Sharing (CORS)",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS",
+      "author": "MDN Web Docs",
+      "description": "Explains simple and preflighted requests, credentialed requests and the CORS response headers."
+    },
+    {
+      "key": "webstorage",
+      "type": "article",
+      "title": "Web Storage API",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API",
+      "author": "MDN Web Docs",
+      "description": "Overview of localStorage, sessionStorage and the storage event."
+    },
+    {
+      "key": "indexeddb",
+      "type": "article",
+      "title": "IndexedDB API",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API",
+      "author": "MDN Web Docs",
+      "description": "Overview of IndexedDB databases, versions, object stores and transactions."
+    },
+    {
+      "key": "cookie",
+      "type": "article",
+      "title": "Document: cookie property",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie",
+      "author": "MDN Web Docs",
+      "description": "How to read, write and delete cookies from JavaScript with document.cookie."
+    },
+    {
+      "key": "urlsp",
+      "type": "article",
+      "title": "URLSearchParams",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams",
+      "author": "MDN Web Docs",
+      "description": "Reference for parsing, reading and serializing URL query strings."
+    },
+    {
+      "key": "history",
+      "type": "article",
+      "title": "History API",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/History_API",
+      "author": "MDN Web Docs",
+      "description": "Explains pushState, replaceState, history state and the popstate event used by SPA routers."
+    },
+    {
+      "key": "intersection",
+      "type": "article",
+      "title": "Intersection Observer API",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API",
+      "author": "MDN Web Docs",
+      "description": "How IntersectionObserver reports visibility changes asynchronously, with root, rootMargin and thresholds."
+    },
+    {
+      "key": "mutation",
+      "type": "article",
+      "title": "MutationObserver",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver",
+      "author": "MDN Web Docs",
+      "description": "Reference for observing DOM changes, mutation records and takeRecords()."
+    },
+    {
+      "key": "resize",
+      "type": "article",
+      "title": "ResizeObserver",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver",
+      "author": "MDN Web Docs",
+      "description": "Reference for observing element size changes and the entries it delivers."
+    },
+    {
+      "key": "workers",
+      "type": "article",
+      "title": "Using Web Workers",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers",
+      "author": "MDN Web Docs",
+      "description": "Guide to dedicated workers, postMessage, structured cloning and transferable objects."
+    },
+    {
+      "key": "sw",
+      "type": "article",
+      "title": "The service worker lifecycle",
+      "url": "https://web.dev/articles/service-worker-lifecycle",
+      "author": "web.dev",
+      "description": "Explains install, waiting, activate, skipWaiting and clients.claim for service workers."
+    },
+    {
+      "key": "custom-elements",
+      "type": "article",
+      "title": "Using custom elements",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements",
+      "author": "MDN Web Docs",
+      "description": "How to define custom elements and use their lifecycle callbacks and observedAttributes."
+    },
+    {
+      "key": "shadow",
+      "type": "article",
+      "title": "Using shadow DOM",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM",
+      "author": "MDN Web Docs",
+      "description": "How to attach shadow roots, what open and closed mode mean and how encapsulation works."
+    },
+    {
+      "key": "aria",
+      "type": "article",
+      "title": "ARIA",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA",
+      "author": "MDN Web Docs",
+      "description": "Introduction to ARIA roles, states and properties and when to prefer native HTML elements."
+    },
+    {
+      "key": "canvas",
+      "type": "article",
+      "title": "Canvas tutorial",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial",
+      "author": "MDN Web Docs",
+      "description": "Tutorial on the 2D canvas context: sizing, paths, styles, state and pixel manipulation."
+    },
+    {
+      "key": "input-events",
+      "type": "article",
+      "title": "Events: change, input, cut, copy, paste",
+      "url": "https://javascript.info/events-change-input",
+      "author": "Ilya Kantor",
+      "description": "Explains when input and change fire and how clipboard events and the Clipboard API work."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple-choice",
+      "prompt": "A `<ul>` holds two `<li class=\"i\">` elements. You run the code below. What do the two `console.log` calls print?\n\n```js\nconst live = document.getElementsByClassName('i');\nconst snap = document.querySelectorAll('.i');\nconst li = document.createElement('li');\nli.className = 'i';\ndocument.querySelector('ul').append(li);\nconsole.log(live.length, snap.length);\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`3 3`, because both collections re-query the document when read",
+        "`2 2`, because both collections are snapshots taken when created",
+        "`2 3`, because querySelectorAll tracks later changes and the other does not",
+        "`3 2`, because the HTMLCollection is live and the NodeList is static"
+      ],
+      "correct": 3,
+      "explanation": "`getElementsByClassName` returns a live HTMLCollection that reflects later DOM changes, so it sees the appended `<li>`. `querySelectorAll` returns a static NodeList captured at call time, so it still has 2 entries. Not every NodeList is static (`childNodes` is live), but the one from `querySelectorAll` is.",
+      "materials": [
+        "qsa",
+        "dom-props"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Given this markup, what are `ul.childNodes.length` and `ul.children.length`?\n\n```html\n<ul>\n  <li>a</li>\n  <li>b</li>\n</ul>\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`5` and `2`",
+        "`2` and `2`",
+        "`3` and `2`",
+        "`2` and `5`"
+      ],
+      "correct": 0,
+      "explanation": "`childNodes` includes every child node, so the whitespace between tags counts as text nodes: text, li, text, li, text gives 5. `children` contains element children only, so it is 2. Forgetting the whitespace text nodes is a common source of off-by-one bugs when walking `firstChild`/`nextSibling`.",
+      "materials": [
+        "dom-props"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `document.querySelectorAll('.missing')` return when no element matches?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`null`",
+        "`undefined`",
+        "An empty NodeList with `length` 0",
+        "It throws a `SyntaxError`"
+      ],
+      "correct": 2,
+      "explanation": "`querySelectorAll` returns a NodeList even when nothing matches, so you can call `.forEach` on it safely. `querySelector` and `getElementById` are the ones that return `null` for no match. A `SyntaxError` is thrown only for an invalid selector string, not for a valid one that matches nothing.",
+      "materials": [
+        "qsa"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "For `<div id=\"d\">A<span style=\"display:none\">B</span><script>var q=1</script>  C</div>`, how do `d.textContent` and `d.innerText` differ?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Both are `\"A C\"`, because both skip hidden and script content",
+        "`textContent` is `\"ABvar q=1  C\"`; `innerText` is `\"A C\"`",
+        "`textContent` is `\"A C\"`; `innerText` is `\"ABvar q=1  C\"`",
+        "Both are `\"ABvar q=1  C\"`, because both read raw text nodes"
+      ],
+      "correct": 1,
+      "explanation": "`textContent` concatenates every descendant text node, including hidden elements and the contents of `<script>`, with whitespace untouched. `innerText` is layout-aware: it returns the text as rendered, so `display:none` content is dropped and whitespace is collapsed. Because it depends on CSS, reading `innerText` can also force a layout, which `textContent` does not.",
+      "materials": [
+        "dom-props"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "After `el.textContent = '<b>Hi</b>'`, what does the element contain?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A `<b>` element with the text Hi",
+        "A `<b>` element that is created once the next frame is painted",
+        "The text `Hi`, because the tags are stripped before insertion",
+        "A text node that displays the literal characters `<b>Hi</b>`"
+      ],
+      "correct": 3,
+      "explanation": "Setting `textContent` replaces the children with a single text node and does no HTML parsing, so the angle brackets show up literally (and `innerHTML` would read back `&lt;b&gt;Hi&lt;/b&gt;`). That is why it is the safe choice for inserting untrusted text. `innerHTML` is the property that parses markup; nothing is stripped or deferred.",
+      "materials": [
+        "dom-props"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A button inside `#c` has a click listener added with `addEventListener`. Then this runs: `c.innerHTML += '<i>new</i>'`. What happens when the user clicks the button afterwards?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Nothing runs, because the original button was replaced by a new parsed copy without the listener",
+        "The listener runs twice, because the button is parsed a second time",
+        "The listener runs, because `+=` just appends new markup after the button",
+        "The click throws, because the old listener points at a detached node"
+      ],
+      "correct": 0,
+      "explanation": "`innerHTML += x` reads the current markup as a string, appends to it and re-parses the whole thing, replacing every child with new nodes. Listeners added with `addEventListener` are not part of the markup, so the new button has none (and any references to the old one now point at a detached element). Use `insertAdjacentHTML('beforeend', ...)` or `append` to add content without rebuilding existing nodes.",
+      "materials": [
+        "dom-props",
+        "add-listener"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`<input id=\"i\" value=\"start\">` is on the page. The user types so the box shows `typed`. What do `i.value` and `i.getAttribute('value')` return?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`\"typed\"` and `\"typed\"`",
+        "`\"start\"` and `\"typed\"`",
+        "`\"typed\"` and `\"start\"`",
+        "`\"start\"` and `\"start\"`"
+      ],
+      "correct": 2,
+      "explanation": "For inputs, the `value` attribute is only the initial (default) value, mirrored by the `defaultValue` property. The `value` property holds the current value and changes as the user types; it does not write back to the attribute. So the property says `typed` while the attribute still says `start`.",
+      "materials": [
+        "attrs-props"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "The user has already edited an `<input value=\"start\">`. Your code then calls `input.setAttribute('value', 'reset')`. What does the box show?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`reset`, because setting the attribute updates the current value",
+        "The user's edited text, because the input's value is now dirty and ignores the default",
+        "`start`, because the attribute change reverts the user's edit",
+        "An empty box, because conflicting values cancel each other"
+      ],
+      "correct": 1,
+      "explanation": "Changing the `value` attribute changes the input's default value. While the value is still clean, the current value follows the default, so on a fresh input `setAttribute` appears to work. Once the user (or a script setting `.value`) has changed it, the dirty flag is set and the current value no longer tracks the attribute. To change what the user sees, set the `value` property.",
+      "materials": [
+        "attrs-props"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An element has `data-user-id=\"42\"`. Which expression reads that value?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`el.dataset['user-id']`, which returns the string `\"42\"`",
+        "`el.data.userId`, which returns the string `\"42\"`",
+        "`el.dataset.userId`, which returns the number `42`",
+        "`el.dataset.userId`, which returns the string `\"42\"`"
+      ],
+      "correct": 3,
+      "explanation": "`dataset` maps each `data-*` attribute to a camelCased property, so `data-user-id` becomes `dataset.userId`. Values are strings, because they come from attributes; there is no type conversion. Writing `el.dataset.fooBar = 7` creates `data-foo-bar=\"7\"` in the reverse direction.",
+      "materials": [
+        "attrs-props"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In a delegated click listener on a `<ul>`, the user clicks a `<span>` inside an `<li>`. What are `event.target` and `event.currentTarget`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`target` is the `<span>`; `currentTarget` is the `<ul>`",
+        "Both are the `<li>`, the nearest list item to the click",
+        "`target` is the `<li>`; `currentTarget` is the `<span>`",
+        "`target` is the `<ul>`; `currentTarget` is the `<span>`"
+      ],
+      "correct": 0,
+      "explanation": "`event.target` is the deepest element where the event started, here the `<span>`. `event.currentTarget` is the element whose listener is running now, the `<ul>`. Delegation usually uses `event.target.closest('li')` to find the item, because the target can be any descendant of it.",
+      "materials": [
+        "bubbling"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "This code runs. How many times does `f` run when the click is dispatched?\n\n```js\nel.addEventListener('click', f, { capture: true });\nel.removeEventListener('click', f);\nel.click();\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "0, because the listener was removed",
+        "2, because the capture and bubble registrations both fire",
+        "1, because the removal did not match the capture flag",
+        "0, because `click()` does not trigger capture listeners"
+      ],
+      "correct": 2,
+      "explanation": "A listener is identified by its type, callback and capture flag. `removeEventListener('click', f)` defaults to `capture: false`, so it looks for a different registration and removes nothing. You must pass `{ capture: true }` (or `true`) to remove it. Other options such as `once` or `passive` do not take part in this match.",
+      "materials": [
+        "add-listener"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A `wheel` listener is added with `{ passive: true }` and calls `event.preventDefault()`. What happens?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Scrolling is cancelled, because `preventDefault` overrides the option",
+        "The call is ignored, `defaultPrevented` stays `false` and scrolling continues",
+        "A `TypeError` is thrown when `preventDefault` is called",
+        "The listener is skipped, because passive listeners are called for touch events alone"
+      ],
+      "correct": 1,
+      "explanation": "`passive: true` promises the browser the listener will not cancel the event, so it can start scrolling without waiting for JavaScript. Calling `preventDefault()` inside is ignored (Chrome logs a console warning) and nothing throws. Chrome and Firefox make `wheel`, `touchstart` and `touchmove` listeners on window, document and body passive by default, so pass `passive: false` when you really need to cancel.",
+      "materials": [
+        "add-listener"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A child element runs `child.dispatchEvent(new CustomEvent('saved', { detail: 1 }))`. Its parent has a `saved` listener. Does the parent's listener run?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Yes, because custom events bubble by default",
+        "No, because custom events are delivered to `window` instead",
+        "Yes, because a `detail` payload makes the event bubble",
+        "No, because `bubbles` defaults to `false` for constructed events"
+      ],
+      "correct": 3,
+      "explanation": "Synthetic events created with `new Event` or `new CustomEvent` have `bubbles: false` unless you set it, so a bubbling-phase listener on the parent is not called. Capture still happens, so a capturing listener on an ancestor does run. Pass `{ bubbles: true }` when you want listeners higher up to see it; `detail` has no effect on propagation.",
+      "materials": [
+        "dispatch"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does this log?\n\n```js\nconst log = [];\nel.addEventListener('ping', () => log.push('handler'));\nlog.push('before');\nel.dispatchEvent(new Event('ping'));\nlog.push('after');\nconsole.log(log.join(' '));\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`before handler after`",
+        "`before after handler`",
+        "`handler before after`",
+        "`before after`, because the handler runs on a later task"
+      ],
+      "correct": 0,
+      "explanation": "`dispatchEvent` is synchronous: it calls every matching listener before it returns. That differs from events the browser fires itself, which are queued as tasks. So `handler` lands between `before` and `after`.",
+      "materials": [
+        "dispatch"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "You want one listener on a `<form>` to react whenever any of its inputs gains focus. Which event should you listen for?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`focus`, because it bubbles from the input to the form",
+        "`change`, because it fires when an input becomes active",
+        "`focusin`, because it bubbles while `focus` does not",
+        "`select`, because it fires when an input is chosen"
+      ],
+      "correct": 2,
+      "explanation": "`focus` and `blur` do not bubble, so a bubbling listener on the form never sees them. `focusin` and `focusout` are the bubbling versions designed for delegation; `addEventListener('focus', fn, true)` on the form would also work through capture. `change` fires when a value is committed, and `select` is about selecting text.",
+      "materials": [
+        "bubbling",
+        "input-events"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Code runs `input.value = 'x'` on a text input that has `input` and `change` listeners. Which listeners run?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Both, because the value changed",
+        "Neither; script assignments fire no event",
+        "The `change` listener but not `input`",
+        "The `input` listener but not `change`"
+      ],
+      "correct": 1,
+      "explanation": "`input` and `change` are fired for user edits, not for programmatic assignments. Frameworks that need to notice script changes either call the update logic themselves or dispatch `new Event('input', { bubbles: true })` by hand. That is also why test libraries simulate typing rather than just setting `value`.",
+      "materials": [
+        "input-events"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A form has a `submit` listener that validates and calls `preventDefault()`, and a `required` field that is empty. What does calling `form.submit()` from script do?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Runs the listener and constraint validation, then stops on the empty field",
+        "Runs constraint validation but skips the `submit` listener",
+        "Throws an `InvalidStateError` because the form is invalid",
+        "Submits immediately, with no `submit` event and no constraint validation"
+      ],
+      "correct": 3,
+      "explanation": "`form.submit()` skips both the `submit` event and constraint validation and just submits. `form.requestSubmit()` behaves like a user clicking a submit button: it validates (firing `invalid` events and stopping if a field fails) and dispatches a cancelable `submit` event. Use `requestSubmit()` when your listener's logic should run.",
+      "materials": [
+        "input-events"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "For a text `<input>`, when do `input` and `change` fire as the user types `abc` and then tabs away?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`input` fires after each keystroke; `change` fires once when the field loses focus",
+        "Both fire after each keystroke",
+        "`change` fires after each keystroke; `input` fires once on blur",
+        "Both fire once, when the field loses focus"
+      ],
+      "correct": 0,
+      "explanation": "`input` fires every time the value changes, so it is the event for live validation or search-as-you-type. For text fields, `change` fires when the edited value is committed, usually on blur or Enter. Checkboxes, radios and selects fire `change` right away because the change is committed with the click.",
+      "materials": [
+        "input-events"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `requestAnimationFrame(cb)` do?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Runs `cb` on a separate rendering thread so it does not block the page",
+        "Runs `cb` repeatedly at about 60 frames per second until cancelled",
+        "Runs `cb` once, just before the browser's next repaint, passing a timestamp",
+        "Runs `cb` after the next paint has finished, passing the frame duration"
+      ],
+      "correct": 2,
+      "explanation": "rAF schedules a single callback for the next rendering opportunity, before style, layout and paint, and passes a high-resolution timestamp. To animate continuously you call it again from inside the callback. It runs on the main thread like any other script, and browsers pause it in background tabs.",
+      "materials": [
+        "raf"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A page loads a third-party analytics script that does not depend on the DOM or on other scripts, and order does not matter. Which `<script>` tag fits best?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`<script src=\"analytics.js\">` at the top of `<head>`",
+        "`<script async src=\"analytics.js\">`",
+        "`<script defer src=\"analytics.js\">` placed before the main app bundle",
+        "`<script type=\"module\" src=\"analytics.js\">` with `nomodule` fallback"
+      ],
+      "correct": 1,
+      "explanation": "`async` downloads in parallel and runs as soon as the file arrives, in whatever order, without waiting for parsing to finish; that suits independent scripts. `defer` keeps document order and waits for parsing, which matters for scripts that depend on each other or the full DOM. A plain script in `<head>` blocks parsing while it downloads and runs.",
+      "materials": [
+        "async-defer"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A script element is created and inserted from JavaScript: `const s = document.createElement('script'); s.src = 'a.js'; document.head.append(s);`. How does it run?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It blocks the parser like a classic script until it executes",
+        "It behaves like `defer` and waits for `DOMContentLoaded`",
+        "It does not run until `s.execute()` is called",
+        "It behaves like `async` by default, running as soon as it loads"
+      ],
+      "correct": 3,
+      "explanation": "Dynamically inserted scripts are async by default (`s.async` is `true`), so they run when loaded and do not keep insertion order. Set `s.async = false` before inserting to make a group of them execute in order. There is no parser to block at that point, and no `execute()` method exists.",
+      "materials": [
+        "async-defer"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A cross-origin `fetch` fails CORS checks. What does the promise do, and what can your code learn about the failure?",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It rejects with a generic `TypeError` that gives no reason",
+        "It resolves with `ok: false` and a `type` of `\"cors-error\"`",
+        "It rejects with a `DOMException` named `CorsError` that holds the missing header",
+        "It resolves with `status` 403 and the server's error body"
+      ],
+      "correct": 0,
+      "explanation": "A CORS failure is reported to script as a network error: `fetch` rejects with a `TypeError` (\"Failed to fetch\" in Chrome) that does not say why. The specific reason appears only in the developer console, so that a page cannot use the errors to probe other origins. There is no `CorsError` type and no readable status or body.",
+      "materials": [
+        "cors",
+        "fetch"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A cross-origin API responds with `X-Request-Id: 9`, and its CORS headers allow your origin. What does `res.headers.get('X-Request-Id')` return in your page?",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`\"9\"`, because the response passed the CORS check",
+        "`\"9\"`, provided the request used `credentials: 'include'`",
+        "`null`, unless the server lists it in `Access-Control-Expose-Headers`",
+        "`null`, because cross-origin responses expose `Content-Type` and nothing else"
+      ],
+      "correct": 2,
+      "explanation": "For CORS responses, script can read only the CORS-safelisted response headers (such as `Content-Type`, `Cache-Control`, `Content-Language`, `Expires`, `Last-Modified`, `Pragma` and `Content-Length`) unless the server lists more in `Access-Control-Expose-Headers`. Passing the CORS check makes the body readable but does not expose custom headers. Credentials do not change which headers are exposed.",
+      "materials": [
+        "cors"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What do you get from `fetch(url, { mode: 'no-cors' })` to another origin that sends no CORS headers?",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A rejected promise, because the server did not allow the origin",
+        "An opaque response with `status` 0, `ok: false` and an unreadable body",
+        "A normal response whose body is readable but whose headers are hidden",
+        "A response whose body is readable as long as the request was a simple GET"
+      ],
+      "correct": 1,
+      "explanation": "`no-cors` lets the request go out and resolves with an opaque response (`type: 'opaque'`) that script cannot inspect: status 0, no headers, empty body. It is useful mainly for caching or fire-and-forget requests in a service worker. It does not bypass CORS for reading, and it allows only simple methods and headers.",
+      "materials": [
+        "cors",
+        "response"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Each `PUT` your SPA sends to `api.example` is preceded by an `OPTIONS` round trip. Which response header lets the browser reuse a successful preflight for later requests?",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Cache-Control: max-age=600` on the actual `PUT` response",
+        "`Vary: Origin` on the actual `PUT` response",
+        "`Keep-Alive: timeout=600` on the preflight response",
+        "`Access-Control-Max-Age: 600` on the preflight response"
+      ],
+      "correct": 3,
+      "explanation": "The browser keeps a preflight cache keyed by origin, URL and the allowed methods and headers, and `Access-Control-Max-Age` on the `OPTIONS` response says how many seconds an entry may be reused (browsers cap it; Chromium at two hours). Without it, Chromium caches preflights for only 5 seconds. `Cache-Control` affects the HTTP cache, not the preflight cache, and `Vary: Origin` is about caching responses per origin.",
+      "materials": [
+        "cors"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `localStorage.getItem('n')` return after `localStorage.setItem('n', 1)`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The string `\"1\"`",
+        "The number `1`",
+        "`true`, because `1` is truthy",
+        "`undefined`, because numbers are not storable"
+      ],
+      "correct": 0,
+      "explanation": "Web Storage keys and values are strings, and non-string values are converted with `String()`. A number becomes `\"1\"`, and an object becomes `\"[object Object]\"`, which is why structured data is stored with `JSON.stringify` and read back with `JSON.parse`. `getItem` returns `null` for a missing key.",
+      "materials": [
+        "webstorage"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A user opens your site in tab A, stores something in `sessionStorage`, then opens the same URL in a fresh tab B by typing it in. What does tab B see?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The same `sessionStorage` data, because it is shared per origin",
+        "The data, but locked for writing while tab A is open",
+        "An empty `sessionStorage`, because each top-level tab has its own session",
+        "The data, because `sessionStorage` lasts until the browser restarts"
+      ],
+      "correct": 2,
+      "explanation": "`sessionStorage` is scoped to the origin and the tab (the top-level browsing context), so a newly opened tab starts empty. It survives reloads in the same tab, and duplicating a tab copies its current contents. `localStorage` is the one shared across all tabs of an origin.",
+      "materials": [
+        "webstorage"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Your code calls `db.createObjectStore('notes')` inside the `success` handler of `indexedDB.open('app', 1)`. What happens?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The store is created, and the database version stays at 1",
+        "It throws an `InvalidStateError` outside a version change",
+        "The call is queued and runs on the next `upgradeneeded` event",
+        "The store is created in memory and is lost on the next reload"
+      ],
+      "correct": 1,
+      "explanation": "Object stores and indexes may be created or deleted only inside a `versionchange` transaction, which you get in the `upgradeneeded` handler when opening with a higher version. Elsewhere `createObjectStore` throws `InvalidStateError`. Schema changes therefore go with a version bump.",
+      "materials": [
+        "indexeddb"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Inside an IndexedDB `readwrite` transaction, the code does `store.put(a)`, then `await new Promise(r => setTimeout(r, 50))`, then `store.put(b)`. What happens on the second `put`?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It succeeds, because the transaction stays open until you call `commit()`",
+        "It succeeds, but `b` is written in a new implicit transaction",
+        "It is queued and runs when the transaction reopens",
+        "It throws `TransactionInactiveError`, because the transaction auto-committed while no requests were pending"
+      ],
+      "correct": 3,
+      "explanation": "IndexedDB transactions commit automatically once control returns to the event loop with no pending requests. Waiting on a timer (or a `fetch`) lets that happen, so later calls on the store throw `TransactionInactiveError`. Awaiting a microtask such as a resolved promise is fine in current browsers, but unrelated async work should happen before or after the transaction.",
+      "materials": [
+        "indexeddb"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Your SPA uses `history.pushState` for routes like `/settings/profile`. Navigating inside the app works, but reloading that URL returns a 404. What is the usual fix?",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Configure the server to answer unknown paths with the app's `index.html`",
+        "Switch the routes to `location.assign` so the server sees each change",
+        "Call `history.replaceState` on load so the browser forgets the path",
+        "Store the route in `sessionStorage` and restore it before the request"
+      ],
+      "correct": 0,
+      "explanation": "`pushState` changes the URL without contacting the server, but a reload or deep link makes a real request for `/settings/profile`. The server must fall back to the SPA shell for app routes (while still returning real 404s for missing assets and API paths). Client-side tricks cannot help, because the failing request happens before any script runs.",
+      "materials": [
+        "history"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "You call `observer.observe(el)` on a new `IntersectionObserver`, where `el` is far below the fold. When is the callback first called?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Not until `el` scrolls into view",
+        "Immediately and synchronously inside `observe()`",
+        "Soon after, asynchronously, with an entry where `isIntersecting` is `false`",
+        "On the next scroll event, with the scroll position"
+      ],
+      "correct": 2,
+      "explanation": "IntersectionObserver delivers an initial entry for each newly observed target at the next update, even if it is not intersecting, so the callback sees its starting state. Callbacks are asynchronous and never run inside `observe()`. Code that assumes the first call means \"visible\" should check `entry.isIntersecting`.",
+      "materials": [
+        "intersection"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A `ResizeObserver` watches `<div style=\"width:100px; padding:10px; border:2px solid\">` with the default box option. What is `entry.contentRect.width`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`120`, the padding box width",
+        "`100`, the content box width",
+        "`124`, the border box width",
+        "`0`, because the size is not known until scroll"
+      ],
+      "correct": 1,
+      "explanation": "`contentRect` describes the content box, so with `box-sizing: content-box` it is the 100px set in CSS. The entry also has `borderBoxSize` (124 here, including padding and border) and `contentBoxSize`. Pass `{ box: 'border-box' }` to `observe()` to be notified when the border box changes instead.",
+      "materials": [
+        "resize"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "You deploy a new service worker. Users who have the site open in a tab reload, but the old worker keeps handling requests. Why?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Service workers are cached for 24 hours by HTTP caching rules",
+        "Reloading bypasses service workers, so the old one is still active",
+        "The new worker failed to install, because two versions may not coexist",
+        "The new worker installed but waits until no tabs use the old one, unless it calls `skipWaiting()`"
+      ],
+      "correct": 3,
+      "explanation": "A new version installs in the background and then enters the waiting state while any client is still controlled by the old version. A reload of a single tab does not release the old worker, because the old page stays alive until the new one is ready. Calling `self.skipWaiting()` (often after asking the user) lets it activate right away.",
+      "materials": [
+        "sw"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A service worker is registered for the first time on page load. Its `fetch` handler does not see the page's later requests until the user reloads. What makes it take over the open page right away?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Calling `clients.claim()` in the `activate` event",
+        "Calling `self.skipWaiting()` in the `fetch` event",
+        "Registering with `{ scope: '/' }` instead of the default scope",
+        "Calling `caches.open()` during `install`"
+      ],
+      "correct": 0,
+      "explanation": "By default a page is controlled by the service worker it loaded with, so the page that first registers a worker stays uncontrolled until navigation. `clients.claim()` in `activate` makes the active worker control existing in-scope clients immediately. `skipWaiting` deals with a waiting worker, not uncontrolled pages, and scope only limits which URLs it can control.",
+      "materials": [
+        "sw"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which describes the stale-while-revalidate caching strategy in a service worker?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Try the network first, and fall back to the cache when the network fails",
+        "Serve from the cache and skip the network until the service worker is updated",
+        "Respond from the cache if present, and fetch from the network in the background to update the cache",
+        "Fetch from network and cache together, and use whichever answers first"
+      ],
+      "correct": 2,
+      "explanation": "Stale-while-revalidate returns the cached copy straight away for speed, then fetches a fresh copy to update the cache for next time. Network-first suits content that must be fresh; cache-only suits precached, versioned assets; racing cache and network is a different strategy again. The trade-off is that users may see one-version-old content.",
+      "materials": [
+        "sw"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Why does `customElements.define('userbadge', class extends HTMLElement {})` throw?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Custom element classes must define a `render()` method",
+        "Custom element names must contain a hyphen, such as `user-badge`",
+        "The class must extend `HTMLUnknownElement`",
+        "Names must start with `x-` to avoid future clashes"
+      ],
+      "correct": 1,
+      "explanation": "Valid custom element names must start with a lowercase letter and contain a hyphen, which keeps them from clashing with current or future built-in elements. Without one, `define` throws a `SyntaxError`. There is no required `render()` method or `x-` prefix; autonomous custom elements extend `HTMLElement`.",
+      "materials": [
+        "custom-elements"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A custom element has an `attributeChangedCallback`, but it never runs when you call `el.setAttribute('size', '2')`. What is missing?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A `MutationObserver` created in `connectedCallback`",
+        "A call to `this.attachShadow()` in the constructor",
+        "Registering the element with `{ observe: true }`",
+        "A `static observedAttributes` array that includes `'size'`"
+      ],
+      "correct": 3,
+      "explanation": "The browser calls `attributeChangedCallback` only for attributes listed in the class's static `observedAttributes`, which saves work for the rest. Attributes present in the markup when the element is upgraded also trigger it, before `connectedCallback`. A shadow root or a MutationObserver is not needed.",
+      "materials": [
+        "custom-elements"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`<user-card></user-card>` is in the HTML, and its class is defined later with `customElements.define`. What is true before the definition runs?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The element is a plain `HTMLElement` that matches `:not(:defined)`, and it is upgraded when defined",
+        "The element is an `HTMLUnknownElement` and stays one after the definition",
+        "The parser waits for the definition before building the rest of the page",
+        "The element is removed from the DOM until the definition arrives"
+      ],
+      "correct": 0,
+      "explanation": "Names that are valid custom element names become plain `HTMLElement` instances until defined, and they match `:not(:defined)`, which you can use to hide unstyled content. When `define` runs, existing instances are upgraded: their prototype changes and the lifecycle callbacks fire. Names without a hyphen, like `<foo>`, become `HTMLUnknownElement` instead.",
+      "materials": [
+        "custom-elements"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A component calls `this.attachShadow({ mode: 'closed' })`. What does `el.shadowRoot` return from outside?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The shadow root, but with frozen children",
+        "A copy of the shadow root without styles",
+        "`null`",
+        "It throws a `SecurityError`"
+      ],
+      "correct": 2,
+      "explanation": "With `mode: 'closed'`, the `shadowRoot` property returns `null`, so outside code cannot reach the tree through it; the component keeps the reference returned by `attachShadow`. It is an encapsulation hint, not a security boundary, since script in the page can still patch `attachShadow`. With `mode: 'open'`, `shadowRoot` returns the root.",
+      "materials": [
+        "shadow"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A component's shadow root has `<slot>`, and the page has `.label { color: red }`. The component's shadow CSS has `::slotted(span) { color: blue }`. A light DOM `<span class=\"label\">` is slotted in. What color is it?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Blue, because shadow styles beat page styles",
+        "Red, because the slotted span stays in the light DOM and page styles win over `::slotted`",
+        "The inherited color from the host, because both rules are ignored for slotted nodes",
+        "Blue, because `::slotted` has higher specificity than a class"
+      ],
+      "correct": 1,
+      "explanation": "Slotted nodes are rendered in the slot but still live in the light DOM, so page styles apply to them. When a page rule and a `::slotted` rule conflict, the outer (document) style wins in the cascade regardless of specificity, so `::slotted` works best as a default. To force it, the component's rule would need `!important`.",
+      "materials": [
+        "slots",
+        "shadow"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A shadow root contains `<slot>` and `::slotted(span) { color: blue }`. The host's light DOM is `<div><span>n</span></div>`. Is the span blue?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Yes, because `::slotted` matches every slotted descendant",
+        "Yes, but only when the div is a named slot",
+        "No, because spans cannot be slotted",
+        "No, because `::slotted` matches only nodes slotted directly, which is the div"
+      ],
+      "correct": 3,
+      "explanation": "`::slotted()` takes a compound selector and matches only the top-level nodes assigned to the slot, here the `<div>`. Descendants of slotted nodes are not matched, so the inner span is styled only by page CSS and inheritance. Style deeper content from the page, or slot the span directly.",
+      "materials": [
+        "slots"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A modal dialog built from `<div>`s closes when the user presses Escape. Where should keyboard focus go?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Return it to the element that opened the dialog",
+        "Move it to `document.body` so the user starts at the top",
+        "Leave it where it was inside the removed dialog",
+        "Move it to the first link on the page"
+      ],
+      "correct": 0,
+      "explanation": "When a dialog closes, focus should return to the control that opened it so keyboard and screen reader users keep their place. Leaving focus on a removed node drops it to `<body>`, which restarts navigation. The native `<dialog>` element with `showModal()` restores focus this way for you in current browsers.",
+      "materials": [
+        "aria"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A canvas has `width=\"300\" height=\"150\"` and CSS `width: 600px; height: 300px`, on a screen with `devicePixelRatio` 2. Why does the drawing look blurry?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The 2D context renders at half resolution unless `imageSmoothingEnabled` is set to `false`",
+        "Canvas drawing is vector-based, and the CSS size forces it to rasterize",
+        "The bitmap is 300×150 pixels stretched to 1200×600 device pixels; size the bitmap to CSS size times `devicePixelRatio`",
+        "CSS sizes on a canvas are ignored, so the browser falls back to a low-resolution default"
+      ],
+      "correct": 2,
+      "explanation": "The `width`/`height` attributes set the drawing buffer size; CSS only sets the displayed size, so a small buffer gets stretched. For sharp output, set `canvas.width = cssWidth * devicePixelRatio` (likewise the height) and `ctx.scale(dpr, dpr)`. `imageSmoothingEnabled` affects scaled images drawn into the canvas, not the canvas's own scaling.",
+      "materials": [
+        "canvas"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Code draws an image loaded from another origin, without CORS, onto a canvas and then calls `ctx.getImageData(0, 0, 1, 1)`. What happens?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It returns transparent black pixels for the cross-origin area",
+        "It throws a `SecurityError`, because the canvas is tainted",
+        "It returns the real pixels, because the image was already visible",
+        "It returns `null` until the image's server sends a cookie"
+      ],
+      "correct": 1,
+      "explanation": "Drawing a cross-origin image that was not loaded with CORS approval taints the canvas. After that, reading pixels with `getImageData`, `toDataURL` or `toBlob` throws a `SecurityError`, so pages cannot read images they are not allowed to see. Set `img.crossOrigin = 'anonymous'` and have the server send CORS headers to keep the canvas clean.",
+      "materials": [
+        "canvas",
+        "cors"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "On a page served over plain `http://` from a non-localhost host, `navigator.clipboard.writeText('x')` throws `TypeError: Cannot read properties of undefined`. Why?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The clipboard can only be written from inside a `copy` event",
+        "The page lacks the `clipboard-write` permission prompt result",
+        "`writeText` must be called with `await`, or the property is removed",
+        "`navigator.clipboard` is exposed only in secure contexts, so it is `undefined` here"
+      ],
+      "correct": 3,
+      "explanation": "The async Clipboard API is limited to secure contexts (HTTPS, or `http://localhost`), so on plain HTTP the `navigator.clipboard` property does not exist. In secure contexts, writing generally also needs a recent user gesture, and reading needs permission. The same secure-context rule hides `navigator.serviceWorker`.",
+      "materials": [
+        "input-events"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which call is the fastest way to add 1,000 list items while touching the live DOM once?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Append the items to a `DocumentFragment`, then append the fragment to the list",
+        "Call `ul.appendChild(li)` inside the loop for each item",
+        "Build each item with `ul.innerHTML += '<li>...</li>'` in the loop",
+        "Append each item, then read `ul.offsetHeight` after each append"
+      ],
+      "correct": 0,
+      "explanation": "A `DocumentFragment` collects nodes off-document; appending it moves all its children into the list in one operation and leaves the fragment empty. `ul.append(...items)` is equally good. `innerHTML +=` in a loop re-parses the growing list every time, and reading `offsetHeight` after each append forces a layout per item.",
+      "materials": [
+        "dom-props",
+        "thrashing"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `storage` event fires in the same tab that called `localStorage.setItem`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "The `storage` event is delivered to other documents of the same origin (other tabs and windows), not to the one that made the change. It is the built-in way to sync state across tabs. The writing tab already knows about its change, so it must update itself directly.",
+      "materials": [
+        "webstorage"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When a simple cross-origin `GET` is blocked by CORS, the request has still reached the server.",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "For simple requests the browser sends the request and applies CORS only to the response, refusing to expose it to script. The server therefore still runs the handler, which is why CORS is not a defense against state-changing requests (that is what CSRF protections are for). Only preflighted requests can be stopped before the real request is sent.",
+      "materials": [
+        "cors"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Calling `history.pushState()` fires a `popstate` event.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "`pushState` and `replaceState` change the URL and history entry silently, with no event; the router must render the new view itself. `popstate` fires when the active entry changes through navigation such as the back and forward buttons or `history.back()`. That is why routers handle both their own link clicks and `popstate`.",
+      "materials": [
+        "history"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Adding `aria-hidden=\"true\"` to a `<button>` removes it from the keyboard tab order.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "`aria-hidden` hides an element from the accessibility tree only; the button can still be focused and activated by keyboard. That creates focusable elements a screen reader cannot announce. To make content non-interactive as well, use the `inert` attribute, `disabled`, or remove it.",
+      "materials": [
+        "aria"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "For a name with no definition, `document.createElement('foo')` returns an `HTMLUnknownElement`, while `document.createElement('x-foo')` returns a plain `HTMLElement`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "A name that is a valid custom element name (it contains a hyphen) produces an `HTMLElement` that waits to be upgraded if `customElements.define('x-foo', ...)` runs later. A name without a hyphen that HTML does not know can never become a custom element, so it is an `HTMLUnknownElement`. The upgrade path is why undefined custom elements match `:not(:defined)`.",
+      "materials": [
+        "custom-elements"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Scripts with `type=\"module\"` are deferred by default, both external and inline.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "Module scripts do not block the parser: they wait until parsing finishes and run in document order, like `defer`. Adding `async` makes a module run as soon as it and its imports are ready. Unlike classic scripts, `async` works on inline modules too.",
+      "materials": [
+        "async-defer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`DOMContentLoaded` waits until all `async` scripts have run.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "`DOMContentLoaded` waits for the parser to finish and for `defer` and module scripts to run, but not for `async` scripts, images or iframes. An async script can run before or after it, depending on when its download finishes. The `load` event on `window` is the one that waits for subresources.",
+      "materials": [
+        "async-defer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "On a page served over plain `http://` from a host other than `localhost`, `navigator.serviceWorker` is `undefined`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "Service workers can intercept every request in their scope, so browsers expose them only in secure contexts: HTTPS, or `localhost` and `127.0.0.1` for development. On plain HTTP the property is missing altogether. You can check `window.isSecureContext` to detect this.",
+      "materials": [
+        "sw"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A custom element's `connectedCallback` can run more than once for the same element.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "`connectedCallback` runs every time the element is inserted into a document, so moving it (remove then append) calls `disconnectedCallback` and then `connectedCallback` again. Setup work there must be idempotent, and anything started in it should be torn down in `disconnectedCallback`. One-time setup belongs in the constructor or behind a guard flag.",
+      "materials": [
+        "custom-elements"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `MutationObserver` callback runs synchronously inside each DOM call that causes a mutation.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "Mutation records are queued, and the callback runs later as a microtask, receiving all records gathered since the last delivery in one array. So two `append` calls in a row produce one callback with two records. `observer.takeRecords()` lets you pull pending records synchronously.",
+      "materials": [
+        "mutation"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Calling `canvas.getContext('2d')` twice on the same canvas returns the same context object.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "A canvas has a single rendering context: the first call creates it, and later calls with the same type return the same object. Asking for a different type after that, such as `'webgl'`, returns `null`. That is why canvas state lives on the context and carries across calls.",
+      "materials": [
+        "canvas"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Setting `location.hash = '#x'` fires `hashchange`, but `history.pushState(null, '', '#y')` does not.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "Navigating to a fragment through `location.hash` or a link fires both `popstate` and `hashchange`. `pushState` updates the URL without firing either, even when only the hash changes. Hash-based routers that switch to `pushState` must render the view themselves.",
+      "materials": [
+        "history"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A dedicated Web Worker can read and write `localStorage`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "`localStorage` and `sessionStorage` are synchronous and exist only on `window`, so they are not available in workers. Workers can use IndexedDB, the Cache API and `fetch`, or send data to the page with `postMessage`. Workers also have no access to the DOM.",
+      "materials": [
+        "workers",
+        "webstorage"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A page stylesheet rule like `p { color: red }` applies to `<p>` elements inside an open shadow root.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "Shadow DOM encapsulates styles: selectors in the page do not match elements inside a shadow tree, whether the root is open or closed. Inherited properties like `color` still flow in from the host, and CSS custom properties pass through, which is how components offer theming. `::part()` is the other way to style internals from outside.",
+      "materials": [
+        "shadow"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`new Response(null, { status: 204 }).ok` is `true`.",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "`ok` is `true` for any status from 200 to 299, and 204 No Content is in that range. A response with status 300 or higher has `ok: false`, even though `fetch` still resolves for it. Checking `ok` rather than `status === 200` avoids treating 201 or 204 as failures.",
+      "materials": [
+        "response"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Reading `document.cookie` returns each cookie's attributes, such as `Path` and `Expires`, along with its value.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "The getter returns only `name=value` pairs separated by `; `. Attributes are write-only from this API, and `HttpOnly` cookies are left out entirely. `cookieStore.get()` in Chromium-based browsers returns more detail, but not every browser supports it.",
+      "materials": [
+        "cookie"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "An element with `tabindex=\"-1\"` can receive focus through `element.focus()`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "`tabindex=\"-1\"` makes an element focusable from script and by click but leaves it out of the Tab order. It is useful for headings or containers you move focus to after a route change or in a widget with arrow-key navigation. A plain `<div>` without `tabindex` ignores `focus()`.",
+      "materials": [
+        "aria"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these return a live collection that updates when the DOM changes?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`document.getElementsByClassName('item')`",
+        "`document.querySelectorAll('.item')`",
+        "`parent.children`",
+        "`parent.childNodes`",
+        "`[...parent.children]`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "`getElementsBy*` return live HTMLCollections, `children` is a live HTMLCollection and `childNodes` is a live NodeList. `querySelectorAll` returns a static NodeList, and spreading into an array copies the elements at that moment. Live collections can surprise you when you remove items while looping over them.",
+      "materials": [
+        "qsa",
+        "dom-props"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these can you call `.forEach` on directly, without converting to an array first?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The result of `document.querySelectorAll('li')`",
+        "The result of `document.getElementsByTagName('li')`",
+        "`parent.children`",
+        "`parent.childNodes`",
+        "`el.classList`"
+      ],
+      "correctIndices": [
+        0,
+        3,
+        4
+      ],
+      "explanation": "NodeList (from `querySelectorAll` or `childNodes`) and DOMTokenList (`classList`) have `forEach`. HTMLCollection (`getElementsByTagName`, `children`) does not, so use `Array.from` or `for...of`, which works on all of them. None of these has `map` or `filter`.",
+      "materials": [
+        "qsa",
+        "classlist"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "For this form, which entries appear in `[...new FormData(form)]`?\n\n```html\n<form>\n  <input name=\"a\" value=\"1\">\n  <input name=\"b\" value=\"2\" disabled>\n  <input type=\"checkbox\" name=\"c\">\n  <input type=\"checkbox\" name=\"d\" checked>\n  <input value=\"no-name\">\n</form>\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`['a', '1']`",
+        "`['b', '2']`",
+        "`['c', '']`",
+        "`['d', 'on']`",
+        "`['', 'no-name']`"
+      ],
+      "correctIndices": [
+        0,
+        3
+      ],
+      "explanation": "FormData follows the form submission rules: disabled controls, unchecked checkboxes and controls without a `name` are skipped. A checked checkbox without a `value` attribute submits `on`. Use `readonly` instead of `disabled` when a field should be shown, locked and still submitted.",
+      "materials": [
+        "input-events"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Animating which of these CSS properties usually lets the browser skip both layout and paint, updating only the compositor?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`transform`",
+        "`opacity`",
+        "`width`",
+        "`top`",
+        "`font-size`"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "When an element is on its own compositor layer, changes to `transform` and `opacity` can be applied by the compositor without re-running layout or paint. Geometry properties like `width`, `top` and `font-size` change layout, which then requires paint as well. That is why smooth animations move things with `transform: translate()` instead of `left`/`top`.",
+      "materials": [
+        "browsers",
+        "thrashing"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the History API are true?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`history.pushState(state, '', '/a')` changes the URL without loading a page",
+        "`history.replaceState` changes the current entry without increasing `history.length`",
+        "`pushState` with a URL on another origin throws a `SecurityError`",
+        "Right after `pushState({ page: 2 }, '', '/b')`, `history.state` is still `null`",
+        "`pushState` sends a request for the new URL in the background"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`pushState` adds a history entry and `replaceState` overwrites the current one; neither contacts the server or reloads, which is what makes client-side routing possible. The state object is structured-cloned and available right away as `history.state`. URLs must stay on the same origin, or the call throws a `SecurityError`.",
+      "materials": [
+        "history"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A page on `https://app.example` calls these `fetch` requests to `https://api.example`. Which trigger a CORS preflight?",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`POST` with header `Content-Type: application/json`",
+        "`POST` with a plain string body (sent as `text/plain`)",
+        "`PUT` with no body",
+        "`DELETE` with no body",
+        "`HEAD` with no extra headers"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Requests without preflight must use `GET`, `HEAD` or `POST`, only safelisted headers, and for `POST` a content type of `text/plain`, `application/x-www-form-urlencoded` or `multipart/form-data`. JSON, `PUT` and `DELETE` fall outside that, so the browser first sends an `OPTIONS` preflight. A browser may skip a repeat preflight while an earlier one is still cached (`Access-Control-Max-Age`).",
+      "materials": [
+        "cors"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which request headers can a page set on a cross-origin `fetch` without causing a preflight?",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`Accept`",
+        "`Accept-Language`",
+        "`Authorization`",
+        "`X-Requested-With`",
+        "`Content-Language`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "`Accept`, `Accept-Language`, `Content-Language` and (with restricted values) `Content-Type` are CORS-safelisted request headers. `Authorization` and custom headers such as `X-Requested-With` make the request non-simple, so it is preflighted and the server must list them in `Access-Control-Allow-Headers`. Safelisted headers also have length and character limits.",
+      "materials": [
+        "cors"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are available inside a dedicated Web Worker?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`fetch`",
+        "`indexedDB`",
+        "`document`",
+        "`localStorage`",
+        "`importScripts` (in a classic worker)"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "Workers have networking (`fetch`, `XMLHttpRequest`), IndexedDB, timers and `postMessage`, and classic workers can load code with `importScripts`. They have no `document` or `window`, and synchronous Web Storage is not exposed. DOM work has to happen on the main thread, so workers send results back as messages.",
+      "materials": [
+        "workers"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `localStorage` are true?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It stores values as strings",
+        "Its API is synchronous and runs on the main thread",
+        "It is shared by all same-origin tabs",
+        "Its contents are sent to the server with each request",
+        "It can be used from service workers"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`localStorage` is a synchronous, string-only key/value store per origin, shared across tabs and persisted across restarts. Unlike cookies, nothing is sent to the server automatically. Because it is synchronous, it is not exposed to workers or service workers; use IndexedDB there.",
+      "materials": [
+        "webstorage"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about working with cookies through `document.cookie` are true?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A cookie set without `expires` or `max-age` is a session cookie",
+        "Each assignment sets or updates one cookie and leaves others alone",
+        "Deleting a cookie needs `max-age=0` (or a past `expires`) with the same path and domain it was set with",
+        "Assigning `document.cookie = ''` deletes every cookie for the site"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The setter handles one cookie per assignment, so it merges rather than replaces. To delete a cookie, write it again with `max-age=0` or a past date and matching `path`/`domain`, or the browser treats it as a different cookie. Without `expires` or `max-age` a cookie lasts for the browser session, and assigning an empty string does not clear anything.",
+      "materials": [
+        "cookie"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these events do not bubble?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`focus`",
+        "`mouseenter`",
+        "`click`",
+        "`input`",
+        "`blur`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "`focus`, `blur`, `mouseenter` and `mouseleave` do not bubble; their bubbling counterparts are `focusin`, `focusout`, `mouseover` and `mouseout`. `click` and `input` bubble, so they work well with delegation. Even non-bubbling events go through the capture phase, so a capturing listener on an ancestor still sees them.",
+      "materials": [
+        "bubbling"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about service workers are true?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "They are available only in secure contexts",
+        "They can read and change the DOM of the pages they control",
+        "They can intercept `fetch` requests from pages in their scope",
+        "The browser may stop them when idle, so global variables are not reliable state",
+        "An updated worker takes control of open tabs as soon as it installs"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Service workers run in their own global scope with no DOM access, start on events such as `fetch`, `push` and `message`, and can be terminated between events, so persistent state belongs in IndexedDB or the Cache API. They require HTTPS (or localhost). A new version waits until old clients are gone unless it calls `skipWaiting()`.",
+      "materials": [
+        "sw"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are lifecycle callbacks the browser calls on a custom element class?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`connectedCallback`",
+        "`mountedCallback`",
+        "`adoptedCallback`",
+        "`attributeChangedCallback`",
+        "`updatedCallback`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "The custom elements spec defines `connectedCallback`, `disconnectedCallback`, `adoptedCallback` (moved to a new document) and `attributeChangedCallback` (for `observedAttributes`); Chrome 133+ also added `connectedMoveCallback` for `moveBefore()`. `mounted` and `updated` are names from frameworks like Vue and Lit, not the platform.",
+      "materials": [
+        "custom-elements"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A host element has a shadow root. Which of these from the outer page affect elements inside the shadow tree?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "An inherited property set on the host, such as `color`",
+        "A CSS custom property such as `--accent` set on the host",
+        "A page rule targeting a class used inside the shadow tree",
+        "`document.querySelector('#inner')` returning an element inside it"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "Inheritance crosses the shadow boundary, so properties like `color` and `font` and all custom properties flow from the host into the tree. Page selectors do not match shadow content, and `document.querySelector` does not search inside shadow roots. Components expose styling hooks through custom properties and `::part()`.",
+      "materials": [
+        "shadow"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "On which of these elements does `attachShadow({ mode: 'open' })` succeed?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`<div>`",
+        "`<span>`",
+        "An autonomous custom element such as `<my-card>`",
+        "`<input>`",
+        "`<img>`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Only certain elements can host a shadow root: autonomous custom elements and a fixed list of built-ins including `div`, `span`, `section`, `article`, `p` and the headings. Elements like `<input>`, `<img>` and `<button>` already have their own internal rendering, so `attachShadow` throws a `NotSupportedError` there.",
+      "materials": [
+        "shadow"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A `<button id=\"in\">` lives inside an open shadow root attached to `<div id=\"host\">`. Which statements are true?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A `click` listener on `document` sees `event.target` as the host div",
+        "In that listener, `event.composedPath()[0]` is the inner button",
+        "`new CustomEvent('ping', { bubbles: true })` dispatched on the button reaches a listener on `document`",
+        "If the shadow root were closed, `composedPath()` called from the document listener would not include the inner button"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Events that cross a shadow boundary are retargeted, so outside listeners see the host as the target. `composedPath()` exposes the inner nodes for open roots but hides them from outside listeners when the root is closed. Built-in UI events like `click` are composed; a custom event needs `composed: true` as well as `bubbles: true` to leave the shadow root.",
+      "materials": [
+        "shadow"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A team replaces a `<button>` with `<div role=\"button\">`. What must they add to match the native button for keyboard users?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`tabindex=\"0\"` so the div can be focused with Tab",
+        "Key handlers so Enter and Space activate it",
+        "Nothing; `role=\"button\"` makes Enter fire `click`",
+        "Nothing; `role=\"button\"` puts the div into the tab order"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "ARIA roles change what assistive technology announces but add no behavior. A native button is focusable, activates on Enter and Space, and supports `disabled`; a div gets none of that. That is why the first rule of ARIA is to use the native element when one exists.",
+      "materials": [
+        "aria"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A 2D canvas context has `fillStyle = 'red'` and `lineWidth = 5`, and a rectangle is drawn. Then the code sets `canvas.width = 300`. Which statements are true afterwards?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The canvas is cleared",
+        "`fillStyle` is back to `#000000`",
+        "`lineWidth` is still `5`",
+        "The red rectangle is still visible",
+        "The same context object is still returned by `getContext('2d')`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "Setting `width` or `height`, even to the current value, resets the bitmap and all context state (styles, transforms, clipping), so the drawing is gone and `fillStyle`/`lineWidth` return to their defaults. The context object itself stays the same. Use `clearRect` when you only want to clear and keep the state.",
+      "materials": [
+        "canvas"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `IntersectionObserver` are true?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Its callback runs asynchronously, not inside the scroll event",
+        "It requires a `scroll` listener to be registered on the root",
+        "`rootMargin` grows or shrinks the root's box, which can trigger loading before an element is visible",
+        "Its callback is called synchronously each time layout changes"
+      ],
+      "correctIndices": [
+        0,
+        2
+      ],
+      "explanation": "IntersectionObserver computes intersections as part of the rendering steps and queues callbacks, so you need no scroll listener or `getBoundingClientRect` polling. A positive `rootMargin` such as `'200px'` reports targets before they enter the viewport, which suits lazy loading. Callbacks are not synchronous with layout.",
+      "materials": [
+        "intersection"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "For `const sp = new URL('https://x.test/?a=1&a=2&q=red+shoes').searchParams`, which statements are true?",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`sp.get('a')` returns `'1'`",
+        "`sp.get('q')` returns `'red shoes'`",
+        "`sp.set('a', '3')` leaves one `a` entry with the value `'3'`",
+        "`sp.toString()` encodes a space as `%20`",
+        "`sp.get('missing')` returns an empty string"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`get` returns the first value for a key and `null` when it is missing, `getAll` returns all of them, and `set` replaces every entry for the key with one. Query parsing follows `application/x-www-form-urlencoded`, so `+` decodes to a space, and serialization writes spaces as `+`, not `%20` (unlike `encodeURIComponent`).",
+      "materials": [
+        "urlsp"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about reading a `Response` body are true?",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "After `await res.json()`, `res.bodyUsed` is `true`",
+        "Calling `res.text()` after `res.json()` rejects with a `TypeError`",
+        "`res.clone()` must be called before the body is read",
+        "`res.json()` on a non-JSON body resolves to `null`",
+        "Calling `res.text()` twice returns the cached string the second time"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "A body is a stream that can be consumed once; reading it sets `bodyUsed`, and any later read (or a `clone()`) fails with a `TypeError`. Clone first if two consumers need it, for example a service worker that caches and returns a response. Invalid JSON rejects with a `SyntaxError`, not `null`.",
+      "materials": [
+        "response",
+        "fetch"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about browser storage APIs are true?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "IndexedDB can store values like `Map`, `Date` and `Blob` directly",
+        "IndexedDB's API is synchronous, like `localStorage`",
+        "`navigator.storage.estimate()` reports usage and quota for the origin",
+        "`localStorage` is unlimited as long as the user stays on the site",
+        "IndexedDB is available inside Web Workers"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "IndexedDB stores structured-clone values asynchronously and works in workers, which makes it the place for large or offline data. The Storage API's `estimate()` returns `{ usage, quota }`, and `navigator.storage.persist()` can ask the browser not to evict the data. `localStorage` is capped at about 5 MiB per origin and throws `QuotaExceededError` beyond it.",
+      "materials": [
+        "indexeddb",
+        "webstorage"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "The page is still parsing when your script registers listeners. Put these milestones of a normal page load in order, first to last.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`document.readyState` becomes `\"interactive\"`",
+        "`DOMContentLoaded` fires on `document`",
+        "`document.readyState` becomes `\"complete\"`",
+        "`load` fires on `window`"
+      ],
+      "explanation": "When the parser finishes, `readyState` changes to `interactive`; deferred and module scripts then run, and `DOMContentLoaded` fires. Once images, stylesheets and other subresources have loaded, `readyState` becomes `complete` and right after that `load` fires on `window`.",
+      "materials": [
+        "async-defer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A page contains, in this order, `<script defer src=\"slow.js\">` (takes 200 ms to download), `<script defer src=\"fast.js\">` (cached), `<script type=\"module\">log('module')</script>`, and an inline classic `<script>log('inline')</script>`. Put these in the order they happen, first to last.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Inline classic script runs",
+        "`slow.js` runs",
+        "`fast.js` runs",
+        "Inline module script runs",
+        "`DOMContentLoaded` fires"
+      ],
+      "explanation": "Classic inline scripts run as soon as the parser reaches them. Deferred scripts and modules, inline or not, wait until parsing ends and then run in document order, so `fast.js` waits for `slow.js` even though it was ready first. `DOMContentLoaded` fires after all of them have run.",
+      "materials": [
+        "async-defer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A new service worker version is registered on a site where no older version is running. Put these steps in order, first to last.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`navigator.serviceWorker.register()` is called",
+        "The `install` event fires and precaching runs",
+        "The `activate` event fires and old caches are cleaned up",
+        "The worker handles `fetch` events for pages it controls"
+      ],
+      "explanation": "Registration downloads and evaluates the script, then `install` fires, which is where the worker precaches assets with `event.waitUntil`. Without an older active worker it moves straight to activation, and `activate` is the place to delete outdated caches. Only after activation does it handle `fetch` events, and only for clients it controls.",
+      "materials": [
+        "sw"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`x-a` is defined with `static observedAttributes = ['size']` and all four lifecycle callbacks that log. Then `document.body.innerHTML = '<x-a size=\"1\" color=\"red\"></x-a>'` runs, followed by `el.setAttribute('size', '2')` and `el.remove()`. Put the callbacks in the order they run, first to last.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`constructor`",
+        "`attributeChangedCallback('size', null, '1')`",
+        "`connectedCallback`",
+        "`attributeChangedCallback('size', '1', '2')`",
+        "`disconnectedCallback`"
+      ],
+      "explanation": "The element is created and upgraded, so the constructor runs first, then `attributeChangedCallback` for each observed attribute already in the markup (`color` is not observed), then `connectedCallback` because it is in the document. Later changes to `size` call `attributeChangedCallback` again, and removal calls `disconnectedCallback`.",
+      "materials": [
+        "custom-elements"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Starting from `<div id=\"t\">m</div>`, this code runs. Put the resulting nodes in document order, first to last.\n\n```js\nt.insertAdjacentHTML('beforebegin', '<i>1</i>');\nt.insertAdjacentHTML('afterbegin', '<i>2</i>');\nt.insertAdjacentHTML('beforeend', '<i>3</i>');\nt.insertAdjacentHTML('afterend', '<i>4</i>');\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`<i>1</i>`",
+        "The opening of `<div id=\"t\">`",
+        "`<i>2</i>`",
+        "The text `m`",
+        "`<i>3</i>`"
+      ],
+      "explanation": "`beforebegin` inserts before the element itself and `afterbegin` inserts as its first child. `beforeend` adds a last child after the existing text, and `afterend` (the `<i>4</i>`, not listed) goes after the closing tag. The result is `<i>1</i><div id=\"t\"><i>2</i>m<i>3</i></div><i>4</i>`.",
+      "materials": [
+        "dom-props"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines logged, first to last?\n\n```js\nconst m = document.getElementById('m');\nnew MutationObserver(() => console.log('observer')).observe(m, { attributes: true });\nsetTimeout(() => console.log('timeout'));\nPromise.resolve().then(() => console.log('promise'));\nm.setAttribute('a', '1');\nconsole.log('sync');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`sync`",
+        "`promise`",
+        "`observer`",
+        "`timeout`"
+      ],
+      "explanation": "The synchronous code runs first. MutationObserver callbacks are delivered as microtasks; the promise callback was queued before the attribute changed, so it runs first, then the observer. The timer callback is a task and runs after the microtask queue is empty.",
+      "materials": [
+        "mutation"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A page contains, in DOM order: `<button>A</button>`, `<button tabindex=\"2\">B</button>`, `<input placeholder=\"C\">`, `<button tabindex=\"1\">D</button>` and `<a href=\"/e\">E</a>`. Focus starts on `<body>`. Put the elements in the order the Tab key visits them, first to last.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "D (`tabindex=\"1\"`)",
+        "B (`tabindex=\"2\"`)",
+        "A (button)",
+        "C (input)",
+        "E (link)"
+      ],
+      "explanation": "Elements with a positive `tabindex` come first, in increasing value order, so D (1) is visited before B (2). After them come elements with `tabindex=\"0\"` and natively focusable elements (buttons, inputs, links with `href`) in DOM order: A, C, E. This jump is why positive values are discouraged: the order no longer follows the layout.",
+      "materials": [
+        "aria"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A page sends `fetch(url, { method: 'PUT' })` to another origin that supports CORS. Put the steps in order, first to last.",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The browser sends an `OPTIONS` request with `Access-Control-Request-Method: PUT`",
+        "The server answers with `Access-Control-Allow-Methods` including `PUT`",
+        "The browser sends the actual `PUT` request",
+        "The server responds with `Access-Control-Allow-Origin` matching the page's origin",
+        "The browser exposes the response to the page's script"
+      ],
+      "explanation": "Non-simple requests start with a preflight `OPTIONS` that names the method and any non-safelisted headers. If the preflight response allows them, the browser sends the real request. The actual response must also pass the origin check before `fetch` resolves with a readable response.",
+      "materials": [
+        "cors"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A page opens an IndexedDB database with a higher version than before, adds a store and writes a record. Put the steps in order, first to last.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`indexedDB.open('app', 2)` is called",
+        "`upgradeneeded` fires and `createObjectStore` runs",
+        "`success` fires on the open request",
+        "`db.transaction('notes', 'readwrite')` is created and `put` is called",
+        "The transaction's `complete` event fires"
+      ],
+      "explanation": "Opening with a higher version starts a `versionchange` transaction and fires `upgradeneeded`, the only place schema changes are allowed. When that finishes, the open request's `success` gives you the database. Normal reads and writes then happen in their own transactions, which fire `complete` once committed.",
+      "materials": [
+        "indexeddb"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "The user clicks a focusable `<button>` with the mouse. Put these events, dispatched on the button, in order, first to last.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`pointerdown`",
+        "`mousedown`",
+        "`focus`",
+        "`pointerup`",
+        "`mouseup`"
+      ],
+      "explanation": "Pointer events come first, each followed by its compatibility mouse event. Focus moves as the default action of `mousedown`, so `focus` fires before the button is released, which is why calling `preventDefault()` on `mousedown` stops focus. After `pointerup` and `mouseup`, `click` fires last.",
+      "materials": [
+        "bubbling"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A user types the letter `a` into a focused text input. Put these events in order, first to last.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`keydown`",
+        "`beforeinput`",
+        "`input`",
+        "`keyup`"
+      ],
+      "explanation": "`keydown` fires first and can cancel the edit. `beforeinput` fires just before the value changes and is also cancelable, then the value updates and `input` fires. `keyup` comes when the key is released; `change` only fires later, when the field loses focus.",
+      "materials": [
+        "input-events"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these parts of `https://user@shop.example:8080/cart/items?sort=asc#top` in the order they appear in `url.href`, left to right.",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`url.protocol`",
+        "`url.username`",
+        "`url.hostname`",
+        "`url.port`",
+        "`url.pathname`"
+      ],
+      "explanation": "A URL serializes as protocol, then `//`, optional credentials before `@`, hostname, `:port`, path, `?search` and `#hash`. Here that gives `https:`, `user`, `shop.example`, `8080` and `/cart/items`, with `?sort=asc` and `#top` after them. `url.host` would combine hostname and port.",
+      "materials": [
+        "urlsp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: reading repeated, encoded and empty query parameters through a URL's searchParams.",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "code": "const url = new URL('https://shop.example/search?tag=a&tag=b&q=red+shoes&empty=');\nconst sp = url.searchParams;\nconsole.log(sp.get('tag'));\nconsole.log(sp.getAll('tag'));\nconsole.log(sp.get('q'));\nconsole.log(JSON.stringify(sp.get('empty')), sp.get('missing'));\nconsole.log(sp.has('empty'));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "a\n[ 'a', 'b' ]\nred shoes\n\"\" null\ntrue",
+      "explanation": "`get` returns the first value for a repeated key and `getAll` returns them all. `+` decodes to a space in query strings. A key with no value gives an empty string and counts for `has`, while a missing key gives `null`.",
+      "materials": [
+        "urlsp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: resolving relative URLs against a base URL.",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "code": "const base = 'https://example.com/docs/guide/intro.html?v=1';\nconsole.log(new URL('setup.html', base).href);\nconsole.log(new URL('../api/', base).href);\nconsole.log(new URL('/home', base).href);\nconsole.log(new URL('?v=2', base).href);\nconsole.log(new URL('//cdn.example.net/app.js', base).href);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "https://example.com/docs/guide/setup.html\nhttps://example.com/docs/api/\nhttps://example.com/home\nhttps://example.com/docs/guide/intro.html?v=2\nhttps://cdn.example.net/app.js",
+      "explanation": "A bare path replaces the last segment of the base path, and `../` goes up one directory from there. A leading `/` resolves from the origin, a lone `?query` keeps the base path and swaps only the query, and `//host` keeps only the base's scheme. The browser uses the same rules for links and `fetch` URLs.",
+      "materials": [
+        "urlsp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: changing a URL through its searchParams and hash.",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "code": "const url = new URL('https://example.com/list?page=1');\nurl.searchParams.set('page', 2);\nurl.searchParams.append('q', 'a&b c');\nurl.hash = 'top';\nconsole.log(url.search);\nconsole.log(url.href);\nurl.search = '';\nconsole.log(url.href);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "?page=2&q=a%26b+c\nhttps://example.com/list?page=2&q=a%26b+c#top\nhttps://example.com/list#top",
+      "explanation": "`url.searchParams` is linked to the URL, so changes to it update `search` and `href` at once. Values are form-encoded: `&` becomes `%26` and a space becomes `+`, and the number 2 is converted to a string. Setting `search` to an empty string removes the `?` but keeps the hash.",
+      "materials": [
+        "urlsp"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an EventTarget with a duplicate listener, a once listener and stopImmediatePropagation.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "code": "const target = new EventTarget();\nconst log = (e) => console.log('log', e.type);\ntarget.addEventListener('ping', log);\ntarget.addEventListener('ping', log);\ntarget.addEventListener('ping', () => console.log('once'), { once: true });\ntarget.addEventListener('ping', (e) => { console.log('third'); e.stopImmediatePropagation(); });\ntarget.addEventListener('ping', () => console.log('fourth'));\ntarget.dispatchEvent(new Event('ping'));\ntarget.dispatchEvent(new Event('ping'));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "log ping\nonce\nthird\nlog ping\nthird",
+      "explanation": "Adding the same function with the same capture flag twice registers it once. The `once` listener is removed after its first call, so the second dispatch skips it. `stopImmediatePropagation` stops the remaining listeners on the same target, so `fourth` never runs. `EventTarget` works the same in browsers, workers and Node.",
+      "materials": [
+        "add-listener",
+        "bubbling"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: calling preventDefault on cancelable and non-cancelable events.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "const target = new EventTarget();\ntarget.addEventListener('save', (e) => e.preventDefault());\nconst plain = new Event('save');\nconst cancelable = new Event('save', { cancelable: true });\nconsole.log(target.dispatchEvent(plain), plain.defaultPrevented);\nconsole.log(target.dispatchEvent(cancelable), cancelable.defaultPrevented);\nconsole.log(plain.bubbles, cancelable.target === target);\nconsole.log(cancelable.currentTarget);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "true false\nfalse true\nfalse true\nnull",
+      "explanation": "`preventDefault` has no effect on an event created without `cancelable: true`, so `dispatchEvent` returns `true`. For the cancelable one it returns `false`, which lets the dispatching code skip its default action. Synthetic events do not bubble by default, and `currentTarget` is reset to `null` once dispatch ends.",
+      "materials": [
+        "dispatch"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: encoding text to UTF-8 bytes and decoding a multi-byte character that arrives split across two chunks, as when reading a fetch body stream.",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "code": "const enc = new TextEncoder();\nconsole.log(enc.encode('a').length, enc.encode('é').length, enc.encode('€').length);\nconst bytes = enc.encode('€');\nconst dec = new TextDecoder();\nconsole.log(JSON.stringify(dec.decode(bytes.slice(0, 2), { stream: true })));\nconsole.log(dec.decode(bytes.slice(2)));\nconsole.log(new TextDecoder().decode(bytes.slice(0, 2)) === '\\uFFFD');\n",
+      "codeLanguage": "js",
+      "expectedOutput": "1 2 3\n\"\"\n€\ntrue",
+      "explanation": "UTF-8 uses 1 byte for ASCII, 2 for `é` and 3 for `€`. With `{ stream: true }` the decoder holds back an incomplete sequence and returns an empty string, then completes the character with the next chunk; that is how `res.body` chunks (Uint8Arrays) should be decoded. Decoding the partial bytes without streaming yields the replacement character U+FFFD.",
+      "materials": [
+        "response"
+      ]
+    }
+  ]
+}
