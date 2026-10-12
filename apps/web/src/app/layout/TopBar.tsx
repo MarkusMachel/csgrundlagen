@@ -24,6 +24,7 @@ import { useDueCount } from '@/features/review';
 import { GlobalSearch } from '@/features/search';
 import { SUPPORTED_LOCALES } from '@/i18n/config';
 import { useClickOutside } from '@/shared/hooks/useClickOutside';
+import { useDragScroll } from '@/shared/hooks/useDragScroll';
 import { requestSignIn } from '@/stores/useAuthPrompt';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useUIStore } from '@/stores/useUIStore';
@@ -74,12 +75,19 @@ export function TopBar() {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const localeMenuRef = useRef<HTMLDivElement>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
+  const tabstripRef = useRef<HTMLElement>(null);
+  useDragScroll(tabstripRef);
   useClickOutside(localeMenuRef, () => setLocaleMenuOpen(false), localeMenuOpen);
   useClickOutside(userMenuRef, () => setUserMenuOpen(false), userMenuOpen);
 
   return (
     <header className="titlebar" style={{ paddingRight: 8 }}>
-      <nav className="tabstrip" aria-label={t('common.appName')} style={{ flex: 1, minWidth: 0 }}>
+      <nav
+        ref={tabstripRef}
+        className="tabstrip"
+        aria-label={t('common.appName')}
+        style={{ flex: 1, minWidth: 0 }}
+      >
         {visibleTabs.map(({ to, file, icon: Icon, key, end, badge }) => (
           <NavLink
             key={to}

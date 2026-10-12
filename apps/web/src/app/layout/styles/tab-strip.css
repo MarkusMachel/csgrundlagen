@@ -14,6 +14,16 @@
   display: none;
 }
 
+/* while the mouse drags the strip sideways (useDragScroll) */
+.tabstrip.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.tabstrip.is-dragging .file-tab {
+  pointer-events: none; /* no hover flicker while dragging */
+}
+
 .file-tab {
   display: inline-flex;
   align-items: center;
