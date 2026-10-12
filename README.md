@@ -54,7 +54,7 @@ for t in dotnet go database sql javascript system-design design-patterns; do
   done
 done
 # .NET by area (C#, runtime, async, ASP.NET Core, EF Core, testing, architecture)
-for a in csharp runtime async aspnetcore efcore testing architecture; do
+for a in csharp runtime async aspnetcore efcore testing architecture web-hosting realtime-rpc; do
   docker compose exec api seed -file seeds/dotnet-$a.json
 done
 ```
