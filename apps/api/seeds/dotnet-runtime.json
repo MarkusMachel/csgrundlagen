@@ -1,0 +1,1748 @@
+{
+  "name": ".NET: runtime, memory and performance",
+  "materials": [
+    {
+      "key": "gc-fundamentals",
+      "type": "article",
+      "title": "Fundamentals of garbage collection",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/fundamentals",
+      "author": "Microsoft Learn",
+      "description": "How the .NET GC allocates, marks, compacts and promotes objects through generations."
+    },
+    {
+      "key": "gc-loh",
+      "type": "article",
+      "title": "The large object heap on Windows systems",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/large-object-heap",
+      "author": "Microsoft Learn",
+      "description": "When objects go to the LOH, how it is collected and how to compact it on demand."
+    },
+    {
+      "key": "gc-background",
+      "type": "article",
+      "title": "Background garbage collection",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/background-gc",
+      "author": "Microsoft Learn",
+      "description": "How background GC collects generation 2 while ephemeral collections continue."
+    },
+    {
+      "key": "gc-latency",
+      "type": "article",
+      "title": "Garbage collection latency modes",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/latency",
+      "author": "Microsoft Learn",
+      "description": "GCLatencyMode values, no-GC regions and when to use them."
+    },
+    {
+      "key": "gc-config",
+      "type": "article",
+      "title": "Runtime configuration options for garbage collection",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/runtime-config/garbage-collector",
+      "author": "Microsoft Learn",
+      "description": "MSBuild properties, runtimeconfig.json knobs and environment variables that configure the GC."
+    },
+    {
+      "key": "weak-refs",
+      "type": "article",
+      "title": "Weak references",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/weak-references",
+      "author": "Microsoft Learn",
+      "description": "How weak references let the GC collect an object while code can still reach it."
+    },
+    {
+      "key": "cwt",
+      "type": "article",
+      "title": "ConditionalWeakTable<TKey,TValue> class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.conditionalweaktable-2",
+      "author": "Microsoft Learn",
+      "description": "A table that attaches values to objects without keeping the keys alive."
+    },
+    {
+      "key": "dispose",
+      "type": "article",
+      "title": "Implement a Dispose method",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose",
+      "author": "Microsoft Learn",
+      "description": "The dispose pattern, finalizers, GC.SuppressFinalize and safe handles."
+    },
+    {
+      "key": "safehandle",
+      "type": "article",
+      "title": "SafeHandle class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle",
+      "author": "Microsoft Learn",
+      "description": "The base class for wrappers around operating-system handles."
+    },
+    {
+      "key": "gc-api",
+      "type": "article",
+      "title": "GC class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.gc",
+      "author": "Microsoft Learn",
+      "description": "Collect, KeepAlive, AddMemoryPressure, AllocateArray and the other GC APIs."
+    },
+    {
+      "key": "memory-guidelines",
+      "type": "article",
+      "title": "Memory<T> and Span<T> usage guidelines",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/memory-and-spans/memory-t-usage-guidelines",
+      "author": "Microsoft Learn",
+      "description": "Ownership and lifetime rules for Span<T>, Memory<T> and pooled buffers."
+    },
+    {
+      "key": "stackalloc",
+      "type": "article",
+      "title": "stackalloc expression",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/stackalloc",
+      "author": "Microsoft Learn",
+      "description": "Allocating a block of memory on the stack and the risks of large or looped allocations."
+    },
+    {
+      "key": "arraypool",
+      "type": "article",
+      "title": "ArrayPool<T> class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.buffers.arraypool-1",
+      "author": "Microsoft Learn",
+      "description": "A shared, thread-safe pool of reusable arrays."
+    },
+    {
+      "key": "unsafe-code",
+      "type": "article",
+      "title": "Unsafe code, pointer types and function pointers",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/unsafe-code",
+      "author": "Microsoft Learn",
+      "description": "Pointers, the fixed statement and pinning in C#."
+    },
+    {
+      "key": "compilation-config",
+      "type": "article",
+      "title": "Runtime configuration options for compilation",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/runtime-config/compilation",
+      "author": "Microsoft Learn",
+      "description": "Tiered compilation, quick JIT for loops, ReadyToRun and profile-guided optimization settings."
+    },
+    {
+      "key": "ready-to-run",
+      "type": "article",
+      "title": "ReadyToRun compilation",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/deploying/ready-to-run",
+      "author": "Microsoft Learn",
+      "description": "Precompiling assemblies to native code to improve startup, and its trade-offs."
+    },
+    {
+      "key": "native-aot",
+      "type": "article",
+      "title": "Native AOT deployment",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/",
+      "author": "Microsoft Learn",
+      "description": "Publishing an app ahead of time to a self-contained native executable, with its limitations."
+    },
+    {
+      "key": "trimming",
+      "type": "article",
+      "title": "Introduction to trim warnings",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/deploying/trimming/fixing-warnings",
+      "author": "Microsoft Learn",
+      "description": "Why the trimmer warns about reflection and how the trimming attributes fix it."
+    },
+    {
+      "key": "alc",
+      "type": "article",
+      "title": "About System.Runtime.Loader.AssemblyLoadContext",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/dependency-loading/understanding-assemblyloadcontext",
+      "author": "Microsoft Learn",
+      "description": "How load contexts isolate assemblies and how type identity depends on them."
+    },
+    {
+      "key": "unloadability",
+      "type": "article",
+      "title": "How to use and debug assembly unloadability in .NET",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/assembly/unloadability",
+      "author": "Microsoft Learn",
+      "description": "Loading plugins into a collectible AssemblyLoadContext and unloading them."
+    },
+    {
+      "key": "sync-primitives",
+      "type": "article",
+      "title": "Overview of synchronization primitives",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/threading/overview-of-synchronization-primitives",
+      "author": "Microsoft Learn",
+      "description": "Monitor, Mutex, Semaphore, SemaphoreSlim, ReaderWriterLockSlim and other primitives."
+    },
+    {
+      "key": "lock-statement",
+      "type": "article",
+      "title": "The lock statement",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/lock",
+      "author": "Microsoft Learn",
+      "description": "How lock works with Monitor and System.Threading.Lock, and guidelines for choosing a lock object."
+    },
+    {
+      "key": "memory-model",
+      "type": "article",
+      "title": ".NET memory model",
+      "url": "https://github.com/dotnet/runtime/blob/main/docs/design/specs/Memory-model.md",
+      "author": "dotnet/runtime",
+      "description": "The ordering, atomicity and volatile guarantees the .NET runtime gives."
+    },
+    {
+      "key": "interlocked",
+      "type": "article",
+      "title": "Interlocked class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.threading.interlocked",
+      "author": "Microsoft Learn",
+      "description": "Atomic operations on variables shared by multiple threads."
+    },
+    {
+      "key": "unsafe-accessor",
+      "type": "article",
+      "title": "UnsafeAccessorAttribute class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.unsafeaccessorattribute",
+      "author": "Microsoft Learn",
+      "description": "Accessing inaccessible members without reflection, compatible with Native AOT."
+    },
+    {
+      "key": "regex-sourcegen",
+      "type": "article",
+      "title": ".NET regular expression source generators",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-source-generators",
+      "author": "Microsoft Learn",
+      "description": "How [GeneratedRegex] emits matching code at compile time."
+    },
+    {
+      "key": "string-intern",
+      "type": "article",
+      "title": "String.Intern method",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.string.intern",
+      "author": "Microsoft Learn",
+      "description": "How the intern pool works and its memory implications."
+    },
+    {
+      "key": "static-ctors",
+      "type": "article",
+      "title": "Static constructors",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-constructors",
+      "author": "Microsoft Learn",
+      "description": "When static constructors run, beforefieldinit and failures during type initialization."
+    },
+    {
+      "key": "exceptions",
+      "type": "article",
+      "title": "Exception-handling statements",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements",
+      "author": "Microsoft Learn",
+      "description": "try, catch, finally, exception filters and how a handler is found."
+    },
+    {
+      "key": "bdn-diagnosers",
+      "type": "article",
+      "title": "BenchmarkDotNet diagnosers",
+      "url": "https://benchmarkdotnet.org/articles/configs/diagnosers.html",
+      "author": "BenchmarkDotNet",
+      "description": "What the MemoryDiagnoser columns such as Gen0 and Allocated report."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple-choice",
+      "prompt": "In .NET 8, dynamic PGO (profile-guided optimization) is on by default. What does it do?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It reads a profile recorded during an earlier run and precompiles the hottest methods to native code at startup",
+        "It records which assemblies load during startup so the host can load them in parallel on the next launch",
+        "It gathers profile data from instrumented code while the app runs and uses it when re-compiling hot methods at tier 1",
+        "It samples CPU usage and moves busy threads onto dedicated cores to reduce thread-pool contention"
+      ],
+      "correct": 2,
+      "explanation": "Dynamic PGO adds instrumentation to code that tiered compilation will later re-JIT, collects data such as hot branches and the actual types behind virtual or interface calls, and feeds it into the optimized tier-1 code (for example guarded devirtualization). It is on by default from .NET 8 (`TieredPGO`). It does not use a profile from a previous run (that describes static PGO with ReadyToRun), and it has nothing to do with assembly loading or thread placement.",
+      "materials": [
+        "compilation-config"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A method containing a long-running loop is called once at startup. With default .NET 8 settings, how does that loop end up running optimized code?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It starts in tier-0 code, and on-stack replacement switches the running frame to optimized code partway through the loop",
+        "It stays in tier-0 code for good, because a method needs 30 calls before tiered compilation recompiles it",
+        "Methods that contain loops skip tier 0 and are compiled with full optimization the first time they are called",
+        "The JIT unrolls the loop while producing tier-0 code, which makes it as fast as tier-1 code without recompiling"
+      ],
+      "correct": 0,
+      "explanation": "Since .NET 7, quick JIT for loops is on by default together with on-stack replacement (OSR): a method with loops starts unoptimized, and when a loop iterates enough, the runtime compiles an optimized version and transfers the live frame into it mid-execution. The 30-call threshold applies to call counting, but OSR handles a method that is called once and loops for a long time. Skipping tier 0 for methods with loops was the older behaviour when `QuickJitForLoops` was off, and tier-0 code is deliberately not optimized (no loop unrolling).",
+      "materials": [
+        "compilation-config"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A library method is marked `[RequiresUnreferencedCode]`. What happens when your app calls it and is published with `<PublishTrimmed>true</PublishTrimmed>`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The trimmer then leaves the whole app untrimmed, so the reflection inside that method keeps working",
+        "The trim analysis reports warning IL2026 at your call site, saying the call may not work after trimming",
+        "The publish fails with an error until the call is removed or wrapped in a try/catch block",
+        "The method body is replaced with a stub that throws PlatformNotSupportedException when it runs"
+      ],
+      "correct": 1,
+      "explanation": "`[RequiresUnreferencedCode]` marks code whose behaviour the trimmer cannot verify, typically because it uses reflection; every caller then gets warning IL2026 so the problem surfaces where you can do something about it. The trimmer does not switch to keeping everything, it does not fail the build (it is a warning unless you treat warnings as errors), and it does not rewrite the method into a throwing stub.",
+      "materials": [
+        "trimming"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]` on a `Type` parameter tell the trimmer?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "To restrict callers to types that declare a public property, which the compiler checks at each call",
+        "To skip trim analysis inside the method, because its author vouches that it reads public members safely",
+        "To generate property accessors at compile time, so the method no longer needs reflection at run time",
+        "To keep the public properties of any type passed to that parameter, so reflecting over them still works"
+      ],
+      "correct": 3,
+      "explanation": "The attribute is a data-flow annotation: wherever a `Type` flows into that parameter (for example `typeof(Order)`), the trimmer preserves the listed member kinds on that type, so `GetProperties()` inside the method still finds them. It is not a compile-time constraint on which types may be passed, it does not suppress analysis (that is `UnconditionalSuppressMessage`), and it generates no code.",
+      "materials": [
+        "trimming"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An app published with `<PublishTrimmed>true</PublishTrimmed>` throws `MissingMethodException` from code that looks up a method by name with reflection. What is the most likely cause?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The trimmer removed code it saw no static reference to, including members reached only through reflection",
+        "Trimming strips the metadata that reflection needs, so reflection APIs throw in any trimmed app",
+        "The trimmer renames private members to shorter names, so lookups by the original name fail",
+        "Trimmed apps load assemblies lazily, so the type had not been loaded yet when reflection ran"
+      ],
+      "correct": 0,
+      "explanation": "Trimming analyses the app statically and removes types and members that nothing references; a member looked up only by a string at run time looks unused and can be removed, which shows up as `MissingMethodException` or a null `MethodInfo`. Reflection itself still works on whatever was kept, the trimmer does not obfuscate names, and assembly loading timing is unrelated.",
+      "materials": [
+        "trimming"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A plugin was loaded into a collectible `AssemblyLoadContext`. After `Unload()` and several `GC.Collect()` calls, a `WeakReference` to the context is still alive. What is the most likely cause?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Unloading takes effect after a process restart, since JIT-compiled code stays mapped until then",
+        "The plugin was loaded from a file path, and unloading works for assemblies loaded from a stream",
+        "Collectible contexts need GC.Collect with GCCollectionMode.Aggressive before they unload",
+        "Something outside the plugin still references a plugin type or object, such as a cached delegate or a static field"
+      ],
+      "correct": 3,
+      "explanation": "Unloading is cooperative: `Unload()` just starts the process, and the context is freed by the GC once nothing outside it references its assemblies, types, objects or delegates. A lingering reference such as an event handler, a static cache or a type stored in a dictionary keeps the whole context alive. Unloading works without a restart and regardless of whether the assembly came from a path or a stream, and no special collection mode is required.",
+      "materials": [
+        "unloadability"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "The same `Contracts.dll` is loaded into two different `AssemblyLoadContext`s, A and B. An object implementing `IPlugin` as loaded in A is cast to `IPlugin` as loaded in B. What happens?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The cast succeeds, because both types have the same full name and the same assembly identity",
+        "The cast succeeds, but calls through the interface are marshalled between the two contexts",
+        "The cast throws InvalidCastException, because types loaded in different contexts are distinct types",
+        "The runtime notices the duplicate and loads the assembly once, so both contexts share one type"
+      ],
+      "correct": 2,
+      "explanation": "A type's identity includes the load context its assembly was loaded into, so two loads of the same assembly produce two unrelated `IPlugin` types and the cast fails with `InvalidCastException`. This is why plugin hosts load shared contract assemblies only once, usually in the default context, and let plugin contexts resolve to it. Matching names do not make the types equal, there is no cross-context marshalling like the old AppDomain remoting, and the runtime does not de-duplicate loads on its own.",
+      "materials": [
+        "alc"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A method takes a raw handle from an object that has a finalizer, passes the handle to a native call, and never uses the object again. Why can `GC.KeepAlive(obj)` placed after the native call matter?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Without it, compaction can move obj during the call, which leaves the raw handle pointing at the wrong memory",
+        "In optimized code the JIT can treat obj as dead after its last use, so it could be finalized during the native call",
+        "It pins obj until the method returns, so the GC skips compacting the generation that holds it",
+        "It suppresses obj's finalizer until the method returns, after which the finalizer is registered again"
+      ],
+      "correct": 1,
+      "explanation": "The GC tracks liveness precisely: once a local is no longer used, the object can be collected even though the variable is still in scope, so its finalizer may close the handle while native code is using it. `GC.KeepAlive` is an empty method the JIT cannot see through, which extends the object's lifetime to that point. It does not pin anything (a handle value is not a pointer into the object, so moving it is not the issue) and it does not touch finalizer registration.",
+      "materials": [
+        "gc-api"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A small managed wrapper class allocates 50 MB of native memory per instance. What does calling `GC.AddMemoryPressure(50_000_000)` in its constructor achieve?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It reserves 50 MB of managed heap up front, so the later native allocation is guaranteed to succeed",
+        "It makes the GC free the native memory itself once the wrapper object becomes unreachable",
+        "It tells the GC the object costs more than its managed size suggests, so collections are scheduled sooner",
+        "It places the wrapper directly in generation 2, because large owners are expensive to promote"
+      ],
+      "correct": 2,
+      "explanation": "The GC decides when to collect based on managed allocations, so thousands of tiny wrappers holding huge native buffers would barely trigger collections. `AddMemoryPressure` (paired with `RemoveMemoryPressure` when the memory is freed) feeds that hidden cost into the GC's scheduling. It reserves nothing, it does not free native memory (your finalizer or `Dispose` still must), and it does not change which generation the wrapper lives in.",
+      "materials": [
+        "gc-api"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does DATAS (dynamic adaptation to application sizes), which is on by default with Server GC in .NET 9, change?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The runtime picks workstation GC for apps using under 1 GB of memory and Server GC for apps above that",
+        "Server GC compacts the large object heap on each gen 2 collection once memory use passes a threshold",
+        "The GC commits memory in proportion to the container limit at startup to avoid page faults later on",
+        "Server GC starts with fewer heaps and grows or shrinks the heap count and budgets to match the app's actual load"
+      ],
+      "correct": 3,
+      "explanation": "Classic Server GC creates one heap per available core up front, which can waste memory for small or bursty workloads. DATAS lets Server GC start small and adjust the number of heaps and allocation budgets as the live data and throughput needs change; it became the default for Server GC in .NET 9 (in .NET 8 it was opt-in, and on by default only for Native AOT web apps). It does not switch GC flavours, does not force LOH compaction and does not pre-commit memory.",
+      "materials": [
+        "gc-config"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A .NET 8 app using Server GC runs in a container limited to 2 CPUs on a 64-core host. How many GC heaps does it create by default?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "2, because the runtime respects the container's CPU limit when it counts the available processors",
+        "64, one per core of the host, because the GC reads the host machine's processor count",
+        "1, because Server GC uses a single shared heap whenever it detects that it runs in a container",
+        "4, two heaps per available CPU so that background collections have a heap of their own"
+      ],
+      "correct": 0,
+      "explanation": "Server GC creates a heap (and a GC thread) per processor it may use, and modern .NET reads cgroup CPU limits, so a 2-CPU container gets 2 heaps. Older runtimes that ignored container limits could create far too many heaps, which is the misconception in the 64 option. There is no special single-heap container mode for 2 CPUs and no two-heaps-per-CPU rule; the heap count can also be set explicitly with `GCHeapCount`.",
+      "materials": [
+        "gc-config"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `GC.TryStartNoGCRegion(100_000_000)` do when it returns `true`?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It blocks other threads from allocating, so the calling thread allocates alone until EndNoGCRegion",
+        "It ensures 100 MB can be allocated without a collection, and no GC runs until that budget is used or EndNoGCRegion is called",
+        "It switches the process to workstation GC for the region and back to server GC when the region ends",
+        "It pins each object allocated inside the region, so those objects can be handed to native code safely"
+      ],
+      "correct": 1,
+      "explanation": "A no-GC region is for short latency-critical work: the runtime makes sure the requested amount is available (collecting first if it must) and then performs no collections while the code allocates within that budget. Exceeding the budget ends the region, and `EndNoGCRegion` ends it explicitly. Other threads are not blocked, the GC flavour does not change, and nothing is pinned.",
+      "materials": [
+        "gc-latency"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "You want to attach extra data to objects you don't own without extending their lifetime. Why use `ConditionalWeakTable<TKey,TValue>` instead of a `Dictionary<object,TValue>`?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It compares keys with Equals and GetHashCode, so equal objects share one entry like a cache",
+        "Its entries don't keep keys alive, and a value is released once its key has been collected",
+        "It stores the value inside the key object's header, so a lookup skips hashing entirely",
+        "It is a struct, so keeping it in a static field adds no extra allocation on the heap"
+      ],
+      "correct": 1,
+      "explanation": "A dictionary holds strong references to its keys, so every object you attach data to stays alive for as long as the dictionary does, which is a classic leak. `ConditionalWeakTable` uses dependent handles: the key is held weakly, and the value lives only as long as the key does. It uses reference equality rather than `Equals`, it does not modify the object header, and it is a class.",
+      "materials": [
+        "cwt"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What is the risk of `Span<byte> buf = stackalloc byte[length];` when `length` comes from user input?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A large length can overflow the stack, which ends the process instead of throwing a catchable exception",
+        "A large length makes the runtime move the buffer to the heap, which quietly adds a GC allocation",
+        "The buffer is not zeroed, so reading it returns leftover data from earlier stack frames by design",
+        "The span stays valid after the method returns, so callers can read memory that later calls reuse"
+      ],
+      "correct": 0,
+      "explanation": "Stack space is small (often 1 MB per thread), and a stack overflow cannot be caught in .NET, so an unbounded `stackalloc` lets input crash the process. The usual pattern is `length <= 256 ? stackalloc byte[length] : new byte[length]` or renting from `ArrayPool`. The runtime never silently moves a stackalloc to the heap, C# zero-initializes it unless `[SkipLocalsInit]` is applied, and the compiler stops the span from escaping the method.",
+      "materials": [
+        "stackalloc"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`Span<int> s = CollectionsMarshal.AsSpan(list);` gives a span over a `List<int>` that is full to capacity. What happens if you then call `list.Add(5)` and write `s[0] = 99`?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Add throws InvalidOperationException, because a span over the list's storage is still in use",
+        "The span follows the list to its new backing array, because it holds a reference to the list",
+        "Add grew the list into a new array, so s still points at the old one and list[0] keeps its value",
+        "The write goes to the old array and is copied into the list on the next call to TrimExcess"
+      ],
+      "correct": 2,
+      "explanation": "`CollectionsMarshal.AsSpan` returns a span over the list's current backing array; when `Add` exceeds the capacity, the list allocates a bigger array and copies the items, and the span keeps pointing at the old array. Writes through it are then lost, which is why the API is in `CollectionsMarshal` and the list must not change size while the span is used. Lists do not track spans, so nothing throws, and nothing copies the old array back later.",
+      "materials": [
+        "memory-guidelines"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A synchronous method `void Process(Memory<byte> data)` saves `data` in a field to use later. Why do the `Memory<T>` usage guidelines call this a bug?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Memory<T> is a ref struct, so assigning it to a field of a class is rejected by the compiler",
+        "Assigning Memory<T> to a field boxes it, which defeats the purpose of avoiding allocations",
+        "The GC does not track Memory<T> stored in fields, so the buffer can be collected while still referenced",
+        "The caller may return the buffer to a pool once Process returns, so later reads can see reused memory"
+      ],
+      "correct": 3,
+      "explanation": "The guidelines treat a `Memory<T>` parameter on a void-returning method as a lease that ends when the method returns: the caller may return the underlying array to a pool or reuse it, so holding on to it causes use-after-free style bugs. Unlike `Span<T>`, `Memory<T>` is a normal struct and can be stored in fields, storing it does not box, and the GC tracks the array it wraps like any other reference.",
+      "materials": [
+        "memory-guidelines"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`class Particle { public Vector2 Position; }`, where `Vector2` is a struct. Where is the `Position` data stored for an object created with `new Particle()`?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "On the stack of the thread that created the Particle",
+        "In a separate boxed object that the Particle points to",
+        "In a per-type static area shared by Particle instances",
+        "Inline inside the Particle object on the managed heap"
+      ],
+      "correct": 3,
+      "explanation": "A struct field is laid out inline in whatever contains it, so for a class instance its bytes sit inside that object on the heap. \"Value types live on the stack\" is only true for locals and parameters that are not captured; a struct field is not boxed separately, and instance fields are per object, not shared in a static area.",
+      "materials": [
+        "gc-fundamentals"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`interface IShape { double Area(); }` is implemented by `struct Square`. Which method computes the area of a `Square` passed to it without boxing the struct?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`static double M(IShape s) => s.Area();`",
+        "`static double M<T>(T s) where T : IShape => s.Area();`",
+        "`static double M(object s) => ((IShape)s).Area();`",
+        "`static double M(ValueType s) => ((IShape)s).Area();`"
+      ],
+      "correct": 1,
+      "explanation": "With a generic parameter constrained to the interface, the JIT compiles a specialized version for `Square` and calls `Area` directly through a constrained call, so no box is created. Passing a struct as `IShape`, `object` or `ValueType` converts it to a reference type, which allocates a box on the heap for every call.",
+      "materials": [
+        "gc-fundamentals"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "How does the JIT compile the generic method `M<T>` when it is used with `int`, `double`, `string` and `List<int>`?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Separate native code for int and for double, and one shared copy for string and List<int>",
+        "One shared copy for the four of them, with T erased to object and value types boxed",
+        "Separate native code for each of the four, because each instantiation is a distinct type",
+        "One shared copy for int and double, and separate native code for each reference type"
+      ],
+      "correct": 0,
+      "explanation": "Generics are reified in .NET: each value-type instantiation gets its own specialized native code (so no boxing), while all reference-type instantiations share one copy, because references all have the same size and the exact type is looked up at run time when needed. There is no erasure as in Java, and specializing every reference type would just bloat code without a speed benefit.",
+      "materials": [
+        "gc-fundamentals"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does the `fixed` statement do in `fixed (byte* p = buffer) { ... }`?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It copies buffer to the stack so the pointer stays valid after the block",
+        "It makes buffer read-only, so code in the block may only read through p",
+        "It pins buffer so the GC cannot move it while p is used inside the block",
+        "It frees buffer at the end of the block, like using for unmanaged memory"
+      ],
+      "correct": 2,
+      "explanation": "A compacting GC may move managed objects, which would invalidate a raw pointer, so `fixed` pins the array for the duration of the block and unpins it afterwards. It makes no copy, does not make the data read-only (you can write through `p`), and does not free anything; the array is still collected normally once unreachable.",
+      "materials": [
+        "unsafe-code"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A service calls `string.Intern` on every unique customer name it parses. What is the main drawback?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Interned strings are stored on the thread's stack, so a long list of names can overflow it",
+        "Interned strings are held by the runtime's intern pool and are typically not freed before the process ends",
+        "Interning makes the strings mutable, so changing one name changes it for other references too",
+        "Interning moves each string to the large object heap, which is not compacted by default"
+      ],
+      "correct": 1,
+      "explanation": "The intern pool keeps a reference to every string added to it, so interning an unbounded set of runtime values makes memory grow for the life of the process; the docs note that interned strings are unlikely to be released until the runtime terminates. Interning only helps when the same few values repeat a lot. Strings are never stack-allocated by interning, stay immutable, and do not move to the LOH because of it.",
+      "materials": [
+        "string-intern"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A worker thread runs `while (!s_stop) { count++; }` and another thread sets the `static bool s_stop` to `true`. In a Release build the loop can spin forever. What is the minimal fix?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Read the flag with Volatile.Read or declare s_stop volatile, so the JIT must re-read it on each iteration",
+        "Call GC.Collect inside the loop, so the worker reaches a safe point and picks up the new value",
+        "Make s_stop an instance field, because the JIT re-reads instance fields from memory each time",
+        "Wrap the assignment in try/finally, because leaving a finally block flushes the write to memory"
+      ],
+      "correct": 0,
+      "explanation": "Without volatile semantics the JIT may hoist the read of `s_stop` out of the loop and keep it in a register, so the worker never sees the change. A volatile read forces a fresh load on every iteration (and gives acquire ordering). Forcing GCs is not a memory-visibility mechanism, instance fields can be hoisted just like static ones, and finally blocks carry no special flushing semantics.",
+      "materials": [
+        "memory-model"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which code correctly sets a shared `int _max` to `value` when `value` is larger, without taking a lock?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`int cur = Volatile.Read(ref _max); if (value > cur) Interlocked.Exchange(ref _max, value);`",
+        "`if (value > Volatile.Read(ref _max)) { Thread.MemoryBarrier(); Volatile.Write(ref _max, value); }`",
+        "`int cur = _max; if (value > cur) Interlocked.CompareExchange(ref _max, value, value);`",
+        "`int cur; do { cur = _max; if (value <= cur) return; } while (Interlocked.CompareExchange(ref _max, value, cur) != cur);`"
+      ],
+      "correct": 3,
+      "explanation": "The compare-and-swap loop only writes if `_max` still holds the value it compared against, and retries otherwise, so a concurrent larger write can never be overwritten by a smaller one. The Exchange and Volatile.Write versions check and write in separate steps: another thread can raise `_max` in between, and the later write then lowers it again, because atomic or volatile single operations do not make a check-then-act sequence atomic. The last option passes `value` as the comparand, so it only swaps when `_max` already equals `value` and never raises it.",
+      "materials": [
+        "interlocked"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In .NET 9 with C# 13, what changes when the target of a `lock` statement is a `System.Threading.Lock` instead of an `object`?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The lock becomes async-aware, so the body of the lock statement may now contain await expressions",
+        "The lock is released automatically after a timeout, which prevents deadlocks between waiting threads",
+        "The compiler calls Lock.EnterScope() and disposes the scope, instead of calling Monitor.Enter and Monitor.Exit",
+        "The lock can be shared across processes, because Lock wraps a named operating-system mutex"
+      ],
+      "correct": 2,
+      "explanation": "C# 13 recognizes the dedicated `Lock` type and lowers `lock (l)` to `using (l.EnterScope())`, which is cheaper and clearer than `Monitor` on an arbitrary object. It is still a thread-affine, in-process lock: `await` inside `lock` is still a compile error, there is no automatic timeout, and cross-process locking still needs a named `Mutex`.",
+      "materials": [
+        "lock-statement"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "When would you need `Semaphore` rather than `SemaphoreSlim`?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "When the count must be shared between processes, which Semaphore supports through named OS semaphores on Windows",
+        "When the count must be larger than one, because SemaphoreSlim allows a single holder at a time",
+        "When callers need to wait asynchronously, because Semaphore has WaitAsync and SemaphoreSlim does not",
+        "When the protected section is very short, because Semaphore spins in user mode before it blocks"
+      ],
+      "correct": 0,
+      "explanation": "`Semaphore` wraps a kernel semaphore, which is heavier but can be named and shared across processes (named system semaphores are a Windows feature). `SemaphoreSlim` is the lightweight in-process choice: it supports any initial and maximum count, it is the one with `WaitAsync`, and it is the one that spins briefly before blocking.",
+      "materials": [
+        "sync-primitives"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Inside `lock (gate) { ... }`, a thread calls `Monitor.Wait(gate)`. What happens?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It blocks while still holding the lock, so other threads stay out until the waiting thread has been pulsed",
+        "It throws SynchronizationLockException, because Wait may not be called while the calling thread holds the lock",
+        "It releases the lock on gate and blocks until another thread calls Monitor.Pulse or PulseAll, then reacquires the lock",
+        "It gives up the rest of its time slice and then continues inside the lock without waiting for any signal"
+      ],
+      "correct": 2,
+      "explanation": "`Monitor.Wait` is the condition-variable half of `Monitor`: it atomically releases the lock, waits in the object's waiting queue until pulsed, and re-acquires the lock before returning. Waiting while holding the lock would make a pulse impossible, since the pulsing thread must hold the lock too. The exception is thrown in the opposite case, when the caller does not own the lock, and yielding a time slice is what `Thread.Yield` does.",
+      "materials": [
+        "sync-primitives"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `ThreadPool.SetMinThreads(200, 200)` change?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The pool starts 200 threads immediately at startup and keeps them alive even while they are idle",
+        "The pool caps concurrency at 200 threads and queues further work items until a thread frees up",
+        "The pool reserves 200 threads for I/O completions and runs CPU-bound work on the other threads",
+        "The pool creates threads on demand up to 200 without its usual injection delay, before throttling begins"
+      ],
+      "correct": 3,
+      "explanation": "Below the minimum, the thread pool adds a new thread as soon as work is waiting; above it, the hill-climbing logic injects threads slowly, which is what makes blocking code cause starvation. Raising the minimum lets the pool burst faster, but threads are still created on demand, not up front. The maximum is set with `SetMaxThreads`, and the second argument is the minimum number of I/O completion threads, not a reservation taken from the worker count.",
+      "materials": [
+        "sync-primitives"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `[UnsafeAccessor]` (introduced in .NET 8) let you do?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Mark a method so that the JIT skips bounds checks and null checks inside it, the way an unsafe block does",
+        "Declare an extern method that the runtime binds to a private member, giving direct access without reflection that works with Native AOT",
+        "Expose a private member to reflection in trimmed apps, so that GetField can still find it after trimming",
+        "Call native code without P/Invoke marshalling by treating an unmanaged function pointer as a delegate"
+      ],
+      "correct": 1,
+      "explanation": "You declare `static extern` methods marked with `[UnsafeAccessor(UnsafeAccessorKind.Field, Name = \"_x\")]` and similar, and the runtime generates direct accessors for the named field, method or constructor, at the cost of a normal call. Because nothing is looked up by string at run time, it is fast and trimming/AOT-friendly. It does not remove bounds checks, it does not feed reflection, and it is not an interop mechanism.",
+      "materials": [
+        "unsafe-accessor"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What do you gain from `[GeneratedRegex(@\"\\d+\")] private static partial Regex Digits();` compared with `new Regex(@\"\\d+\", RegexOptions.Compiled)`?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The pattern runs on the regex interpreter, which uses less memory than compiled code but matches more slowly",
+        "The matching code is generated at compile time, so there is no startup cost to build it and it works under Native AOT",
+        "The regex gets one instance per thread, so it is safe to share between threads, unlike a normal Regex",
+        "The pattern is compiled with Reflection.Emit on first use and the result is cached on disk for later runs"
+      ],
+      "correct": 1,
+      "explanation": "The regex source generator emits C# for the matcher during the build, so the app pays neither for parsing the pattern nor for `RegexOptions.Compiled`'s Reflection.Emit at run time, and the result works with trimming and Native AOT, where Emit is not available. The generated code is as fast as compiled regexes, not interpreted. `Regex` instances are already thread-safe, and nothing is cached on disk.",
+      "materials": [
+        "regex-sourcegen"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A BenchmarkDotNet run with `[MemoryDiagnoser]` shows `Gen0 = 1.2207` and `Allocated = 5.13 KB` for one benchmark. What do these numbers mean?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "1.22 ms spent in gen 0 collections per operation, and 5.13 KB allocated over the whole benchmark run",
+        "1.22 % of allocated objects survived into gen 1, and 5.13 KB was still in use when the run finished",
+        "About 1.22 gen 0 collections per 1,000 operations, and 5.13 KB allocated on the managed heap per operation",
+        "1.22 gen 0 collections per operation, and 5.13 KB of native plus managed memory used per operation"
+      ],
+      "correct": 2,
+      "explanation": "MemoryDiagnoser reports GC counts per 1,000 operations (so small numbers stay readable) and the managed allocations of a single operation. Neither column measures time, survival rates or retained memory, and Allocated covers only managed heap allocations, not native memory.",
+      "materials": [
+        "bdn-diagnosers"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A class has `static readonly Config Instance = Load();` but no explicit static constructor. When does `Load()` run?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Some time before the first access to a static field, possibly earlier, because the type is marked beforefieldinit",
+        "Right when the first instance of the class is created, regardless of any access to static members",
+        "When the assembly containing the class is loaded, together with the other static initializers in it",
+        "On each access to Instance, because a static initializer without a static constructor is not cached"
+      ],
+      "correct": 0,
+      "explanation": "Without an explicit static constructor, the C# compiler marks the type `beforefieldinit`, which lets the runtime run the static field initializers at any time before the first static field access, for example when a method using the type is JIT-compiled. Adding an explicit static constructor removes that flag and makes initialization happen exactly at first use. Initializers run once per type, not per access, and they are not tied to instance creation or assembly load.",
+      "materials": [
+        "static-ctors"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Reads and writes of a `long` field are guaranteed to be atomic on every platform .NET runs on.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "The runtime guarantees atomic reads and writes only for properly aligned values up to the native pointer size (and for references); a 64-bit `long` or `double` can tear on a 32-bit platform. Use `Interlocked.Read`, `Interlocked.Exchange` or a lock when a 64-bit value is shared between threads.",
+      "materials": [
+        "memory-model"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A thread that already holds a `lock` on an object can enter `lock` on the same object again without deadlocking.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "`Monitor`, and therefore the `lock` statement, is re-entrant: the owning thread can acquire the same lock again, and the lock is released when the matching number of exits has happened. This differs from `SemaphoreSlim(1, 1)`, which has no owner and would block the same thread on a second `Wait`.",
+      "materials": [
+        "sync-primitives",
+        "lock-statement"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Because a Native AOT app has no JIT compilation to do at startup, it typically starts faster than the same app run on the JIT.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "Native AOT compiles the whole app to machine code at publish time, so startup skips loading the JIT and compiling methods, which gives faster startup and a smaller memory footprint. The trade-offs are the restrictions on dynamic code and that steady-state throughput can be somewhat lower than JIT code that benefits from tiering and dynamic PGO.",
+      "materials": [
+        "native-aot"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A short weak reference keeps its target alive until the next generation 2 collection.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "A weak reference never keeps its target alive: once no strong references remain, the object can be reclaimed by whichever collection processes its generation, including a gen 0 collection, and the weak reference then reports no target. Weak references suit caches of objects that are cheap to recreate, not data you need to keep.",
+      "materials": [
+        "weak-refs"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Calling `GC.SuppressFinalize(this)` releases the object's unmanaged resources, so `Dispose` needs no other cleanup code.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "`GC.SuppressFinalize` only tells the GC that the finalizer no longer needs to run, which saves the cost of finalization. The actual release of handles or native memory must still happen in `Dispose(bool)` (or in a `SafeHandle`), and `SuppressFinalize` is called after that cleanup.",
+      "materials": [
+        "dispose"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "If many threads increment the same `int` field with `Interlocked.Increment`, no increment is lost.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "`Interlocked.Increment` performs the read, add and write as one atomic operation, so concurrent calls never overwrite each other's updates. A plain `_count++` is three separate steps, which is why it loses updates under contention.",
+      "materials": [
+        "interlocked"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Memory allocated with `stackalloc` inside a loop body is released at the end of each iteration.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "Stack memory from `stackalloc` is released only when the method returns, so allocating inside a loop keeps growing the stack frame and can overflow it (analyzer rule CA2014 warns about this). Allocate the buffer once before the loop and reuse it.",
+      "materials": [
+        "stackalloc"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "After `GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce`, the next blocking full GC compacts the large object heap and the setting then goes back to `Default`.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "The LOH is not compacted by default because copying large objects is expensive. Setting `CompactOnce` requests one compaction during the next blocking generation 2 collection, after which the property resets to `Default`, so you set it again whenever you want another compaction.",
+      "materials": [
+        "gc-loh"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Declaring a field `volatile` makes `_count++` on that field an atomic operation.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "`volatile` only changes how individual reads and writes are ordered and prevents them from being cached or reordered across each other. `_count++` is still a separate read, add and write, so two threads can read the same value and one increment is lost; use `Interlocked.Increment` or a lock.",
+      "materials": [
+        "memory-model"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "ReadyToRun images still contain IL, so tiered compilation can later re-JIT their hot methods into optimized tier-1 code.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "ReadyToRun adds precompiled native code next to the IL. That code is treated like tier 0: it gives fast startup, and methods that turn out to be hot are re-compiled by the JIT at tier 1, where it can inline across assemblies and use dynamic PGO. The IL also lets the runtime fall back to the JIT if the precompiled code cannot be used.",
+      "materials": [
+        "ready-to-run"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`GC.Collect()` runs all pending finalizers before it returns.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "`GC.Collect()` performs the collection, but finalizers run later on the finalizer thread. Code that needs them to have run must call `GC.WaitForPendingFinalizers()` afterwards, and often a second `GC.Collect()` to reclaim the objects that were just finalized.",
+      "materials": [
+        "gc-api"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Projects that use the `Microsoft.NET.Sdk.Web` SDK, such as ASP.NET Core apps, use Server GC by default.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "The Web SDK sets `ServerGarbageCollection` to true unless the project overrides it, while console apps on `Microsoft.NET.Sdk` default to workstation GC. You can switch either way with the `<ServerGarbageCollection>` property or `System.GC.Server` in runtimeconfig.json.",
+      "materials": [
+        "gc-config"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these approaches work in a Native AOT app without producing trim or AOT warnings?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Regular expressions declared with `[GeneratedRegex]`",
+        "Building a method at run time with `System.Reflection.Emit.DynamicMethod`",
+        "System.Text.Json serialization through a source-generated `JsonSerializerContext`",
+        "`Activator.CreateInstance(Type.GetType(typeNameFromConfig)!)`",
+        "Logging methods generated with `[LoggerMessage]`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "Source generators do their work at compile time, so JSON contexts, generated regexes and `[LoggerMessage]` methods need no run-time reflection or code generation. Reflection.Emit is not supported because there is no JIT to compile emitted IL. Loading a type by a name read from configuration cannot be analysed statically, so the trimmer warns that the type may have been removed.",
+      "materials": [
+        "native-aot",
+        "regex-sourcegen"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the large object heap (LOH) in .NET 8 are true?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Allocating on it is cheaper than allocating in gen 0, because its memory is not cleared",
+        "A `byte[]` with 100,000 elements is allocated on it",
+        "New large objects start in generation 0 and move to the LOH once they survive a collection",
+        "The size threshold for LOH objects can be raised with the `GCLOHThreshold` setting",
+        "It is collected as part of generation 2 collections"
+      ],
+      "correctIndices": [
+        1,
+        3,
+        4
+      ],
+      "explanation": "Objects of 85,000 bytes or more go straight to the LOH, which is logically part of generation 2 and is collected with it; a 100,000-byte array is over the threshold. The threshold is configurable through `GCLOHThreshold`. Large objects do not start in gen 0, and LOH allocation is more expensive, not cheaper, because the memory must be cleared and large allocations can trigger gen 2 collections.",
+      "materials": [
+        "gc-loh",
+        "gc-config"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the pinned object heap (POH) are true?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It was introduced in .NET 5",
+        "Objects on it are collected by every generation 0 collection",
+        "The `fixed` statement moves its target onto the POH for the duration of the block",
+        "`GC.AllocateArray<T>(length, pinned: true)` allocates an array on it",
+        "Objects on it are not moved by compacting collections"
+      ],
+      "correctIndices": [
+        0,
+        3,
+        4
+      ],
+      "explanation": "The POH, added in .NET 5, holds objects that are pinned for their whole life, typically I/O buffers, so they do not fragment the ephemeral generations; you allocate there with `GC.AllocateArray` or `GC.AllocateUninitializedArray` and `pinned: true`. Its objects are never compacted. `fixed` pins an object where it already is rather than moving it, and the POH is collected together with generation 2, like the LOH.",
+      "materials": [
+        "gc-api",
+        "gc-fundamentals"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about background garbage collection are true?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It never suspends managed threads at any point of the collection",
+        "Generation 0 and 1 collections can happen while a background collection is in progress",
+        "It is enabled by default for both workstation and server GC",
+        "It applies to generation 2 collections",
+        "Setting `<ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>` turns it off"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "Background GC performs most of a gen 2 collection concurrently with the app and allows foreground ephemeral (gen 0/1) collections in the meantime; it is on by default for both GC flavours. It still suspends threads briefly at the start and end of its phases. `ConcurrentGarbageCollection` set to false disables it; true is the default.",
+      "materials": [
+        "gc-background",
+        "gc-config"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are real .NET garbage collector configuration settings?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The runtimeconfig.json setting `System.GC.HeapHardLimit`",
+        "The MSBuild property `<GarbageCollectorGenerations>4</GarbageCollectorGenerations>`",
+        "The runtimeconfig.json setting `System.GC.MaxGenerationSize`",
+        "The MSBuild property `<ServerGarbageCollection>true</ServerGarbageCollection>`",
+        "The runtimeconfig.json setting `System.GC.ReferenceCountingMode`"
+      ],
+      "correctIndices": [
+        0,
+        3
+      ],
+      "explanation": "`ServerGarbageCollection` selects server GC and `System.GC.HeapHardLimit` caps the GC heap size, which is useful in containers. The other three are invented: the .NET GC is a tracing collector with no reference-counting mode, the number of generations is fixed (0, 1 and 2, plus the LOH and POH), and there is no per-generation maximum-size knob of that name.",
+      "materials": [
+        "gc-config"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `SafeHandle` are true?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "P/Invoke declarations can take and return `SafeHandle` subclasses instead of `IntPtr`",
+        "Disposing a `SafeHandle` makes the GC reclaim the `SafeHandle` object's memory immediately",
+        "A class that holds a `SafeHandle` field also needs its own finalizer to release the handle",
+        "A derived class overrides `ReleaseHandle` to free the native resource",
+        "Passing a `SafeHandle` to `GC.KeepAlive` closes the handle it wraps"
+      ],
+      "correctIndices": [
+        0,
+        3
+      ],
+      "explanation": "`SafeHandle` wraps an OS handle, frees it in `ReleaseHandle` (called from `Dispose` or its own critical finalizer), and is understood by the P/Invoke marshaller, which also reference-counts it during calls so it cannot be released mid-call. Because the safe handle has its own finalizer, the owning class only needs `Dispose`, not a finalizer. Disposing frees the native resource, not the managed object's memory, and `GC.KeepAlive` just extends lifetime.",
+      "materials": [
+        "safehandle",
+        "dispose"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A `Span<T>` or `ReadOnlySpan<T>` can refer to which of these?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Part of a managed array",
+        "Native memory, given a pointer and a length",
+        "A block of memory allocated with `stackalloc`",
+        "The backing array of a `List<T>`, through `CollectionsMarshal.AsSpan`",
+        "The characters of a string, as a writable `Span<char>`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "Spans are views over contiguous memory of any kind: arrays, stack memory, unmanaged memory (`new Span<byte>(ptr, length)`) and, through `CollectionsMarshal.AsSpan`, a list's internal array. Strings are immutable, so `AsSpan()` on a string gives a `ReadOnlySpan<char>`; there is no safe way to get a writable span over a string's characters.",
+      "materials": [
+        "memory-guidelines"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `ArrayPool<T>.Shared` are true?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`Rent` can return an array longer than the length you asked for",
+        "`Rent` returns a zero-filled array, just like `new T[n]`",
+        "A rented array can still contain data written by a previous renter",
+        "It is safe to call `Rent` and `Return` from several threads at the same time",
+        "After `Return`, the caller may keep reading the array until someone calls `Rent` again"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "The shared pool hands out arrays from size buckets, so you get at least the requested length and must track how much you use; arrays are not cleared unless you pass `clearArray: true` to `Return`, so stale data is possible. The shared instance is thread-safe. Once returned, the array may be handed to another renter at any moment, so any further use is a bug.",
+      "materials": [
+        "arraypool"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these methods exist on `System.Threading.Interlocked` in .NET 8?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`Interlocked.And`",
+        "`Interlocked.Add`",
+        "`Interlocked.Or`",
+        "`Interlocked.Multiply`",
+        "`Interlocked.CompareExchange`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "`Add`, `CompareExchange`, and the bitwise `And` and `Or` (added in .NET 5) are all atomic operations supported directly by the hardware. There is no `Multiply`; for other operations such as multiply or max you write a `CompareExchange` retry loop.",
+      "materials": [
+        "interlocked"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are poor choices for the object passed to `lock`?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A boxed value, as in `lock ((object)_count)`",
+        "`typeof(MyService)`",
+        "`this`, in a public class whose instances callers can also lock",
+        "A `private readonly object` field created only for locking",
+        "A string literal such as `\"sync\"`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "Literal strings are interned and `Type` objects are shared, so unrelated code anywhere in the process could lock the same object and cause contention or deadlocks; `this` has the same problem when callers can see the instance. Boxing creates a new object on every evaluation, so each `lock` locks something different and nothing is excluded. A private object (or, in .NET 9, a private `Lock`) that no one else can reach is the recommended choice.",
+      "materials": [
+        "lock-statement",
+        "string-intern"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `ReaderWriterLockSlim` are true?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It is safe to hold one of its locks across an `await`",
+        "Several threads can hold the read lock at the same time",
+        "Only one thread at a time can be in upgradeable read mode",
+        "A thread holding the read lock can call `EnterWriteLock` to upgrade directly",
+        "It allows the same thread to acquire a lock recursively by default"
+      ],
+      "correctIndices": [
+        1,
+        2
+      ],
+      "explanation": "Readers share the lock, a writer gets it exclusively, and upgradeable read mode is limited to one thread so two would-be upgraders cannot deadlock each other. The default policy is `LockRecursionPolicy.NoRecursion`, and calling `EnterWriteLock` while holding a plain read lock throws `LockRecursionException`; you must use upgradeable mode. The lock is thread-affine, so releasing it after an `await` on another thread fails.",
+      "materials": [
+        "sync-primitives"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `[ThreadStatic]` fields and `ThreadLocal<T>` are true?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`ThreadLocal<T>` implements `IDisposable`",
+        "An initializer on a `[ThreadStatic]` field runs only on the thread that triggers the static constructor",
+        "A `[ThreadStatic]` value follows an `await` continuation onto whichever thread resumes it",
+        "`[ThreadStatic]` also gives each thread its own copy of an instance field",
+        "The value factory of a `ThreadLocal<T>` runs once on each thread that reads `Value`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "A field initializer such as `[ThreadStatic] static int x = 42;` runs inside the static constructor, so only one thread sees 42 and the others see 0; `ThreadLocal<T>` solves this with a factory that runs lazily per thread, and it is disposable because it holds per-thread storage. `[ThreadStatic]` is ignored on instance fields. Thread-static data stays with the thread, so after an `await` resumes elsewhere you see that thread's value (flowing state across awaits is what `AsyncLocal<T>` is for).",
+      "materials": [
+        "sync-primitives",
+        "static-ctors"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In a .NET 8 release build, which of these allocate on the managed heap?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Calling `static int Count(params int[] values)` as `Count(1, 2, 3)`",
+        "`foreach (var x in list)` where `list` is a variable of type `List<int>`",
+        "`string.Concat(a, b)` where `a` and `b` are non-empty strings",
+        "`Span<int> buf = stackalloc int[4];`",
+        "`foreach (var x in items)` where `items` is the same list typed as `IEnumerable<int>`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "`List<T>.GetEnumerator()` returns a struct, so `foreach` over a `List<T>` variable allocates nothing, but through `IEnumerable<int>` the struct enumerator is boxed. A `params int[]` call allocates the array for its arguments, and concatenating two non-empty strings creates a new string. `stackalloc` into a `Span<T>` uses stack memory.",
+      "materials": [
+        "gc-fundamentals",
+        "stackalloc"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`class C` declares an explicit static constructor. Which of these cause it to run, if it has not run yet?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Calling `RuntimeHelpers.RunClassConstructor(typeof(C).TypeHandle)`",
+        "Calling a static method of a class derived from `C` that touches no static member of `C`",
+        "Declaring a local variable `C? c = null;`",
+        "Evaluating `typeof(C)`",
+        "Creating the first instance with `new C()`"
+      ],
+      "correctIndices": [
+        0,
+        4
+      ],
+      "explanation": "With an explicit static constructor, the runtime runs it right before the first instance is created or the first static member of `C` is accessed, and `RunClassConstructor` forces it explicitly. Declaring a variable or getting the `Type` object does not initialize the type. A derived class has its own type initializer; calling one of its static methods does not run the base class's static constructor unless something of the base is touched.",
+      "materials": [
+        "static-ctors"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the .NET memory model are true?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "On Arm64, another thread may observe two ordinary writes in a different order than they were made",
+        "Reading a reference-type field can return a torn, half-written reference",
+        "`Volatile.Write` stops earlier memory operations from being moved after it",
+        "`Interlocked` operations act as full memory barriers",
+        "Acquiring and releasing a `lock` gives mutual exclusion but no memory-ordering guarantees"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Weakly ordered CPUs such as Arm64 can make ordinary writes visible out of order, which is why publication needs release semantics: `Volatile.Write` keeps earlier accesses before it, and `Interlocked` operations are full fences. References are always read and written atomically, so they cannot tear. Entering and leaving a lock also have acquire and release semantics, which is why data protected by a lock needs no extra `volatile`.",
+      "materials": [
+        "memory-model"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A class owns a managed `IDisposable` field and an unmanaged handle and follows the standard dispose pattern. Put the steps of a first call to `Dispose()` in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Dispose(true)` checks the `_disposed` flag",
+        "The managed `IDisposable` field is disposed",
+        "The unmanaged handle is released",
+        "`_disposed` is set to `true`",
+        "`Dispose()` calls `GC.SuppressFinalize(this)`"
+      ],
+      "explanation": "In the documented pattern, `Dispose()` calls `Dispose(disposing: true)` and then `GC.SuppressFinalize(this)`. Inside `Dispose(bool)`, the flag check comes first so repeated calls do nothing, managed objects are disposed only when `disposing` is true, unmanaged resources are freed in both the `Dispose` and finalizer paths, and the flag is set at the end. Suppressing finalization last means the finalizer still runs if cleanup threw.",
+      "materials": [
+        "dispose"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\ntry\n{\n    Inner();\n}\ncatch (Exception) when (Log(\"outer filter\"))\n{\n    Console.WriteLine(\"outer catch\");\n}\n\nstatic void Inner()\n{\n    try\n    {\n        Console.WriteLine(\"throw\");\n        throw new InvalidOperationException();\n    }\n    finally\n    {\n        Console.WriteLine(\"inner finally\");\n    }\n}\n\nstatic bool Log(string s) { Console.WriteLine(s); return true; }\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "throw",
+        "outer filter",
+        "inner finally",
+        "outer catch"
+      ],
+      "explanation": "The runtime handles exceptions in two passes. The first pass walks up the stack looking for a handler and runs exception filters as it goes, before anything is unwound, so the outer `when` clause runs while `Inner`'s frame is still alive. The second pass unwinds to the chosen handler, running `finally` blocks on the way, and only then does the catch body run. This is why filters are useful for logging: they see the stack before it unwinds.",
+      "materials": [
+        "exceptions"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A host loads a plugin so that it can unload it later. Put the steps of the documented unloading recipe in order, first to last.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Create an `AssemblyLoadContext` with `isCollectible: true`",
+        "Load the plugin assembly into that context",
+        "Run the plugin and then drop every reference to its types and objects",
+        "Call `Unload()` on the context",
+        "Call `GC.Collect()` and `GC.WaitForPendingFinalizers()` until a `WeakReference` to the context is no longer alive"
+      ],
+      "explanation": "Only a context created as collectible can be unloaded, and assemblies must be loaded into it rather than into the default context. Unloading is cooperative: `Unload()` starts it, but the context is only freed once nothing references it, which is why the host drops all references first (often by doing the work in a separate non-inlined method) and then runs the GC in a loop, checking a weak reference to confirm the unload finished.",
+      "materials": [
+        "unloadability"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`dotnet publish -r linux-x64 -p:PublishAot=true` builds a Native AOT app. Put these stages in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The ILCompiler package is restored for the target runtime",
+        "Roslyn compiles the C# source to IL assemblies",
+        "ILCompiler analyses the whole app, trims it, and compiles the IL to a native object file",
+        "The platform linker links that object file with the runtime into an executable"
+      ],
+      "explanation": "Publishing with `PublishAot` restores the ILCompiler package, then the normal build produces IL. The AOT compiler takes the IL of the app and all its dependencies, does whole-program analysis (which is why trim and AOT warnings matter) and emits native object code. Finally the platform's native toolchain (clang or the MSVC linker) links it into a single executable, which is why Native AOT needs those tools installed.",
+      "materials": [
+        "native-aot"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these ways of incrementing a shared counter from typically cheapest to most expensive, assuming no contention.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A plain `_count++` with no synchronization",
+        "`Interlocked.Increment(ref _count)`",
+        "`lock (_gate) { _count++; }`",
+        "`_mutex.WaitOne(); _count++; _mutex.ReleaseMutex();` with a `Mutex`"
+      ],
+      "explanation": "A plain increment is a few instructions but is not thread-safe. `Interlocked.Increment` is a single atomic CPU instruction. An uncontended `lock` needs atomic operations on both enter and exit plus bookkeeping, so it costs more than one interlocked operation. `Mutex` is a kernel object, so each wait and release is a system call, by far the most expensive.",
+      "materials": [
+        "sync-primitives",
+        "interlocked"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the steps of thread-safe double-checked lazy initialization of a `static Service? s_instance` in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Read `s_instance` and return it if it is not null",
+        "Enter the lock",
+        "Read `s_instance` again inside the lock",
+        "Create the service and publish it to `s_instance` with a volatile write",
+        "Exit the lock and return the instance"
+      ],
+      "explanation": "The first unlocked check keeps the common path cheap; the second check inside the lock prevents two threads that both saw null from creating two instances. Publishing with release semantics (a volatile write) ensures other threads that read the field without the lock see a fully constructed object. In practice `Lazy<T>` or `LazyInitializer` implements this pattern for you.",
+      "materials": [
+        "memory-model",
+        "lock-statement"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these runtime features by the .NET version that introduced them, earliest first.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`Span<T>` (.NET Core 2.1)",
+        "The pinned object heap (.NET 5)",
+        "Native AOT for console apps (.NET 7)",
+        "Dynamic PGO enabled by default (.NET 8)",
+        "The `System.Threading.Lock` type (.NET 9)"
+      ],
+      "explanation": "`Span<T>` arrived with .NET Core 2.1 in 2018, the POH with .NET 5, officially supported Native AOT for console apps with .NET 7, dynamic PGO became the default in .NET 8, and the dedicated `Lock` type, with C# 13 support in the `lock` statement, came in .NET 9.",
+      "materials": [
+        "native-aot",
+        "compilation-config",
+        "lock-statement"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these GC latency settings from the one that allows the most intrusive (blocking full) collections to the one that allows the least.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`GCLatencyMode.Batch`",
+        "`GCLatencyMode.Interactive`",
+        "`GCLatencyMode.SustainedLowLatency`",
+        "`GCLatencyMode.LowLatency`",
+        "A no-GC region started with `GC.TryStartNoGCRegion`"
+      ],
+      "explanation": "`Batch` disables background GC, so gen 2 collections are blocking. `Interactive` (the default with concurrent GC) does gen 2 work in the background. `SustainedLowLatency` avoids blocking gen 2 collections unless memory is low. `LowLatency` (workstation GC only, for short periods) avoids gen 2 collections altogether, and a no-GC region tries to prevent any collection until its budget is used.",
+      "materials": [
+        "gc-latency"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: one object is disposed and one is left for the finalizer, then a full GC runs.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "code": "using System.Runtime.CompilerServices;\n\nCreate(\"A\", suppress: false);\nCreate(\"B\", suppress: true);\nGC.Collect();\nGC.WaitForPendingFinalizers();\nConsole.WriteLine(\"done\");\n\n[MethodImpl(MethodImplOptions.NoInlining)]\nstatic void Create(string name, bool suppress)\n{\n    var r = new Res(name);\n    if (suppress) r.Dispose();\n}\n\nclass Res(string name) : IDisposable\n{\n    public void Dispose()\n    {\n        Console.WriteLine($\"dispose {name}\");\n        GC.SuppressFinalize(this);\n    }\n\n    ~Res() => Console.WriteLine($\"finalize {name}\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "dispose B\nfinalize A\ndone\n",
+      "explanation": "B is disposed, which prints and calls `GC.SuppressFinalize`, so its finalizer never runs. A is never disposed; once it is unreachable, `GC.Collect` puts it on the finalization queue and `WaitForPendingFinalizers` waits for the finalizer thread to print. The objects are created in a non-inlined method so no local keeps them alive in a Debug build.",
+      "materials": [
+        "dispose",
+        "gc-api"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: Interlocked operations at the edges of the int range, inside a checked block.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "code": "int a = int.MaxValue;\nlong b = 10;\n\nchecked\n{\n    Console.WriteLine(Interlocked.Increment(ref a));\n    Console.WriteLine(Interlocked.Add(ref b, -15));\n    Console.WriteLine(Interlocked.Exchange(ref b, 100));\n    Console.WriteLine(b);\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "-2147483648\n-5\n-5\n100\n",
+      "explanation": "`Interlocked.Increment` wraps on overflow without throwing, and a `checked` block does not change that because the addition happens inside the method, not in your C# expression. `Interlocked.Add` returns the new value (10 - 15 = -5), while `Exchange` returns the old value (-5) and stores 100.",
+      "materials": [
+        "interlocked"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: GC.GetGeneration for a small object across collections, and for a large array.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "code": "var small = new object();\nvar large = new byte[100_000];\n\nConsole.WriteLine(GC.MaxGeneration);\nConsole.WriteLine(GC.GetGeneration(small));\nGC.Collect();\nConsole.WriteLine(GC.GetGeneration(small));\nGC.Collect();\nConsole.WriteLine(GC.GetGeneration(small));\nGC.Collect();\nConsole.WriteLine(GC.GetGeneration(small));\nConsole.WriteLine(GC.GetGeneration(large));\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "2\n0\n1\n2\n2\n2\n",
+      "explanation": "The .NET GC has generations 0 to 2, so `MaxGeneration` is 2. A new small object starts in gen 0 and is promoted by one generation each time it survives a collection, stopping at gen 2. The 100,000-byte array is above the 85,000-byte threshold and lives on the large object heap, which `GetGeneration` reports as generation 2.",
+      "materials": [
+        "gc-fundamentals",
+        "gc-loh"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: two weak references, one to an object that is still referenced strongly.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "code": "using System.Runtime.CompilerServices;\n\nvar strong = new object();\nWeakReference<object> kept = new(strong);\nWeakReference<object> lost = MakeWeak();\n\nGC.Collect();\nGC.WaitForPendingFinalizers();\n\nConsole.WriteLine(kept.TryGetTarget(out var k1));\nConsole.WriteLine(lost.TryGetTarget(out var k2));\nConsole.WriteLine(k2 is null);\nGC.KeepAlive(strong);\n\n[MethodImpl(MethodImplOptions.NoInlining)]\nstatic WeakReference<object> MakeWeak() => new(new object());\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "True\nFalse\nTrue\n",
+      "explanation": "A weak reference does not keep its target alive. `kept` points to an object that the local `strong` still references (kept alive to the end by `GC.KeepAlive`), so `TryGetTarget` succeeds. The object behind `lost` was created in a separate method and nothing else references it, so the collection reclaims it and `TryGetTarget` returns false with a null target.",
+      "materials": [
+        "weak-refs"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: ConditionalWeakTable with record keys that are equal but distinct.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "code": "using System.Runtime.CompilerServices;\n\nvar table = new ConditionalWeakTable<Key, string>();\nvar k1 = new Key(1);\nvar k2 = new Key(1);\n\ntable.Add(k1, \"first\");\nConsole.WriteLine(k1 == k2);\nConsole.WriteLine(table.TryGetValue(k2, out var v) ? v : \"missing\");\ntable.AddOrUpdate(k1, \"second\");\nConsole.WriteLine(table.TryGetValue(k1, out v) ? v : \"missing\");\ntry { table.Add(k1, \"third\"); }\ncatch (ArgumentException) { Console.WriteLine(\"duplicate\"); }\n\nrecord Key(int Id);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "True\nmissing\nsecond\nduplicate\n",
+      "explanation": "Records compare by value, so `k1 == k2` is True, but `ConditionalWeakTable` matches keys by reference, so looking up `k2` finds nothing. `AddOrUpdate` replaces the value for `k1`, while `Add` throws `ArgumentException` when the key is already present.",
+      "materials": [
+        "cwt"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: the lengths of arrays rented from ArrayPool<byte>.Shared.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "code": "using System.Buffers;\n\nvar pool = ArrayPool<byte>.Shared;\nbyte[] a = pool.Rent(100);\nbyte[] b = pool.Rent(1);\nbyte[] c = pool.Rent(1025);\nbyte[] d = pool.Rent(0);\n\nConsole.WriteLine(a.Length);\nConsole.WriteLine(b.Length);\nConsole.WriteLine(c.Length);\nConsole.WriteLine(d.Length);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "128\n16\n2048\n0\n",
+      "explanation": "The shared pool keeps arrays in power-of-two size buckets starting at 16, so a rent is rounded up to the next bucket: 100 becomes 128, 1 becomes 16 and 1025 becomes 2048. Renting length 0 returns the cached empty array. This is why code must use the length it asked for, not `array.Length`.",
+      "materials": [
+        "arraypool"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: string literals, compile-time and run-time concatenation, and string.Intern.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "code": "string a = \"hello\";\nstring b = \"hel\" + \"lo\";\nstring part = \"hel\";\nstring c = part + \"lo\";\nstring d = string.Intern(c);\n\nConsole.WriteLine(ReferenceEquals(a, b));\nConsole.WriteLine(ReferenceEquals(a, c));\nConsole.WriteLine(a == c);\nConsole.WriteLine(ReferenceEquals(a, d));\nConsole.WriteLine(string.IsInterned(new string('x', 3) + \"yz-unique\") is null);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "True\nFalse\nTrue\nTrue\nTrue\n",
+      "explanation": "Literals are interned, and `\"hel\" + \"lo\"` is folded by the compiler into the literal \"hello\", so `a` and `b` are the same object. Concatenation with a variable runs at run time and creates a new string: equal by `==`, but a different reference. `string.Intern` returns the pooled instance, which is `a`, and a string built at run time that was never interned is not in the pool, so `IsInterned` returns null.",
+      "materials": [
+        "string-intern"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a static constructor that throws, with the type used twice.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "code": "for (int i = 0; i < 2; i++)\n{\n    try\n    {\n        Console.WriteLine(Settings.Port);\n    }\n    catch (TypeInitializationException ex)\n    {\n        Console.WriteLine($\"{i}: {ex.InnerException?.GetType().Name}\");\n    }\n}\n\nstatic class Settings\n{\n    public static readonly int Port;\n\n    static Settings()\n    {\n        Console.WriteLine(\"cctor\");\n        Port = int.Parse(\"not a number\");\n    }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "cctor\n0: FormatException\n1: FormatException\n",
+      "explanation": "The first access runs the static constructor, which prints \"cctor\" and throws; the runtime wraps the error in `TypeInitializationException`. The runtime does not try the static constructor again: the second access throws the same kind of exception without printing \"cctor\", and the type stays unusable for the life of the process.",
+      "materials": [
+        "static-ctors"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: Monitor.Enter and Monitor.Exit with a boxed object and with an int variable.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "code": "int count = 0;\nobject gate = count;\n\nMonitor.Enter(gate);\nConsole.WriteLine(Monitor.IsEntered(gate));\nMonitor.Exit(gate);\n\nMonitor.Enter(count);\ntry\n{\n    Monitor.Exit(count);\n    Console.WriteLine(\"exited\");\n}\ncatch (SynchronizationLockException)\n{\n    Console.WriteLine(\"SynchronizationLockException\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "True\nSynchronizationLockException\n",
+      "explanation": "Locking through the `object gate` works because `Enter` and `Exit` get the same reference. Passing `count` directly boxes it separately for each call, so `Exit` receives a box the thread never locked and throws `SynchronizationLockException`. This is why the C# compiler rejects `lock` on a value type.",
+      "materials": [
+        "sync-primitives",
+        "lock-statement"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: Interlocked.CompareExchange on an int and on a string reference.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "code": "int value = 5;\n\nint seen1 = Interlocked.CompareExchange(ref value, 10, 5);\nConsole.WriteLine($\"{seen1} {value}\");\n\nint seen2 = Interlocked.CompareExchange(ref value, 20, 5);\nConsole.WriteLine($\"{seen2} {value}\");\n\nstring? s = null;\nConsole.WriteLine(Interlocked.CompareExchange(ref s, \"a\", null) ?? \"null\");\nConsole.WriteLine(Interlocked.CompareExchange(ref s, \"b\", null));\nConsole.WriteLine(s);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "5 10\n10 10\nnull\na\na\n",
+      "explanation": "`CompareExchange(ref location, value, comparand)` stores `value` only if the location equals `comparand`, and always returns the original value. The first call sees 5 and stores 10; the second compares against 5, finds 10, and changes nothing. For the string, the first call replaces null with \"a\" and returns null; the second fails because the field is no longer null and returns \"a\".",
+      "materials": [
+        "interlocked"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a mutable struct incremented directly and through an interface reference.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "code": "var c = new Counter();\nICounter boxed = c;\nboxed.Increment();\nboxed.Increment();\nc.Increment();\n\nConsole.WriteLine(c.Value);\nConsole.WriteLine(boxed.Value);\n\nICounter again = c;\nConsole.WriteLine(ReferenceEquals(boxed, again));\n\ninterface ICounter\n{\n    int Value { get; }\n    void Increment();\n}\n\nstruct Counter : ICounter\n{\n    public int Value { get; private set; }\n    public void Increment() => Value++;\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "1\n2\nFalse\n",
+      "explanation": "Assigning the struct to `ICounter` boxes a copy, so the two calls through `boxed` change the box (2) while `c.Increment()` changes the local (1). Converting `c` to the interface again creates a new box, so the references differ. Boxing copies the value, which is why mutable structs behind interfaces are surprising.",
+      "materials": [
+        "gc-fundamentals"
+      ]
+    }
+  ]
+}
