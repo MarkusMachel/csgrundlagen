@@ -1,0 +1,1928 @@
+{
+  "name": "JavaScript: Node.js",
+  "materials": [
+    {
+      "key": "el",
+      "type": "article",
+      "title": "The Node.js Event Loop",
+      "url": "https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick",
+      "author": "Node.js Docs",
+      "description": "Explains the event loop phases, setImmediate, setTimeout and process.nextTick."
+    },
+    {
+      "key": "dontblock",
+      "type": "article",
+      "title": "Don't Block the Event Loop (or the Worker Pool)",
+      "url": "https://nodejs.org/en/learn/asynchronous-work/dont-block-the-event-loop",
+      "author": "Node.js Docs",
+      "description": "Covers the libuv worker pool, which APIs use it and how blocking hurts throughput."
+    },
+    {
+      "key": "timers",
+      "type": "article",
+      "title": "Timers",
+      "url": "https://nodejs.org/api/timers.html",
+      "author": "Node.js Docs",
+      "description": "Reference for setTimeout, setImmediate, Timeout objects and ref/unref."
+    },
+    {
+      "key": "process",
+      "type": "article",
+      "title": "Process",
+      "url": "https://nodejs.org/api/process.html",
+      "author": "Node.js Docs",
+      "description": "Reference for process events, exit codes, signals, argv and nextTick."
+    },
+    {
+      "key": "cli",
+      "type": "article",
+      "title": "Command-line API",
+      "url": "https://nodejs.org/api/cli.html",
+      "author": "Node.js Docs",
+      "description": "Reference for Node.js CLI flags and environment variables such as UV_THREADPOOL_SIZE and --watch."
+    },
+    {
+      "key": "modules",
+      "type": "article",
+      "title": "Modules: CommonJS modules",
+      "url": "https://nodejs.org/api/modules.html",
+      "author": "Node.js Docs",
+      "description": "Reference for require, module.exports, the require cache and node_modules resolution."
+    },
+    {
+      "key": "esm",
+      "type": "article",
+      "title": "Modules: ECMAScript modules",
+      "url": "https://nodejs.org/api/esm.html",
+      "author": "Node.js Docs",
+      "description": "Reference for ES modules in Node: specifiers, import.meta, JSON modules and CommonJS interop."
+    },
+    {
+      "key": "packages",
+      "type": "article",
+      "title": "Modules: Packages",
+      "url": "https://nodejs.org/api/packages.html",
+      "author": "Node.js Docs",
+      "description": "Reference for the type, main, exports and imports fields and module format detection."
+    },
+    {
+      "key": "npmpkg",
+      "type": "article",
+      "title": "package.json",
+      "url": "https://docs.npmjs.com/cli/v10/configuring-npm/package-json",
+      "author": "npm Docs",
+      "description": "npm's reference for package.json fields such as engines, scripts and bin."
+    },
+    {
+      "key": "npmscripts",
+      "type": "article",
+      "title": "scripts",
+      "url": "https://docs.npmjs.com/cli/v10/using-npm/scripts",
+      "author": "npm Docs",
+      "description": "npm's reference for lifecycle scripts, pre/post hooks and the PATH used by npm run."
+    },
+    {
+      "key": "fs",
+      "type": "article",
+      "title": "File system",
+      "url": "https://nodejs.org/api/fs.html",
+      "author": "Node.js Docs",
+      "description": "Reference for the synchronous, callback and promise-based fs APIs."
+    },
+    {
+      "key": "stream",
+      "type": "article",
+      "title": "Stream",
+      "url": "https://nodejs.org/api/stream.html",
+      "author": "Node.js Docs",
+      "description": "Reference for readable, writable and transform streams, pipeline and highWaterMark."
+    },
+    {
+      "key": "backpressure",
+      "type": "article",
+      "title": "Backpressuring in Streams",
+      "url": "https://nodejs.org/en/learn/modules/backpressuring-in-streams",
+      "author": "Node.js Docs",
+      "description": "Guide to backpressure, write() return values and the drain event."
+    },
+    {
+      "key": "buffer",
+      "type": "article",
+      "title": "Buffer",
+      "url": "https://nodejs.org/api/buffer.html",
+      "author": "Node.js Docs",
+      "description": "Reference for Buffer allocation, encodings and memory sharing."
+    },
+    {
+      "key": "strdec",
+      "type": "article",
+      "title": "String decoder",
+      "url": "https://nodejs.org/api/string_decoder.html",
+      "author": "Node.js Docs",
+      "description": "Reference for decoding byte chunks without breaking multi-byte characters."
+    },
+    {
+      "key": "events",
+      "type": "article",
+      "title": "Events",
+      "url": "https://nodejs.org/api/events.html",
+      "author": "Node.js Docs",
+      "description": "Reference for EventEmitter, the error event, once and max listeners."
+    },
+    {
+      "key": "http",
+      "type": "article",
+      "title": "HTTP",
+      "url": "https://nodejs.org/api/http.html",
+      "author": "Node.js Docs",
+      "description": "Reference for Node's HTTP server, client and Agent."
+    },
+    {
+      "key": "globals",
+      "type": "article",
+      "title": "Global objects",
+      "url": "https://nodejs.org/api/globals.html",
+      "author": "Node.js Docs",
+      "description": "Lists Node's globals, including fetch, WebSocket and TextEncoder."
+    },
+    {
+      "key": "cp",
+      "type": "article",
+      "title": "Child process",
+      "url": "https://nodejs.org/api/child_process.html",
+      "author": "Node.js Docs",
+      "description": "Reference for spawn, exec, execFile and fork."
+    },
+    {
+      "key": "workers",
+      "type": "article",
+      "title": "Worker threads",
+      "url": "https://nodejs.org/api/worker_threads.html",
+      "author": "Node.js Docs",
+      "description": "Reference for Worker, workerData, postMessage and transferable objects."
+    },
+    {
+      "key": "cluster",
+      "type": "article",
+      "title": "Cluster",
+      "url": "https://nodejs.org/api/cluster.html",
+      "author": "Node.js Docs",
+      "description": "Reference for forking worker processes that share a server port."
+    },
+    {
+      "key": "errors",
+      "type": "article",
+      "title": "Errors",
+      "url": "https://nodejs.org/api/errors.html",
+      "author": "Node.js Docs",
+      "description": "Reference for error-first callbacks, error codes and system errors."
+    },
+    {
+      "key": "als",
+      "type": "article",
+      "title": "Asynchronous context tracking",
+      "url": "https://nodejs.org/api/async_context.html",
+      "author": "Node.js Docs",
+      "description": "Reference for AsyncLocalStorage."
+    },
+    {
+      "key": "test",
+      "type": "article",
+      "title": "Test runner",
+      "url": "https://nodejs.org/api/test.html",
+      "author": "Node.js Docs",
+      "description": "Reference for node:test, test file discovery and mocking."
+    },
+    {
+      "key": "perm",
+      "type": "article",
+      "title": "Permissions",
+      "url": "https://nodejs.org/api/permissions.html",
+      "author": "Node.js Docs",
+      "description": "Reference for the Node.js permission model and its --allow-* flags."
+    },
+    {
+      "key": "releases",
+      "type": "article",
+      "title": "Node.js Releases",
+      "url": "https://nodejs.org/en/about/previous-releases",
+      "author": "Node.js Docs",
+      "description": "Explains the Current, Active LTS and Maintenance LTS phases of release lines."
+    },
+    {
+      "key": "util",
+      "type": "article",
+      "title": "Util",
+      "url": "https://nodejs.org/api/util.html",
+      "author": "Node.js Docs",
+      "description": "Reference for util.promisify and other utilities."
+    },
+    {
+      "key": "dns",
+      "type": "article",
+      "title": "DNS",
+      "url": "https://nodejs.org/api/dns.html",
+      "author": "Node.js Docs",
+      "description": "Explains dns.lookup versus dns.resolve and their threading behaviour."
+    },
+    {
+      "key": "textenc",
+      "type": "article",
+      "title": "TextEncoder",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder",
+      "author": "MDN Web Docs",
+      "description": "Encodes strings into UTF-8 bytes; available in Node and browsers."
+    },
+    {
+      "key": "textdec",
+      "type": "article",
+      "title": "TextDecoder",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/TextDecoder",
+      "author": "MDN Web Docs",
+      "description": "Decodes bytes into strings, including streaming decoding."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple-choice",
+      "prompt": "How many threads does the libuv thread pool use by default in Node.js 22?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "4",
+        "One per CPU core",
+        "16",
+        "1"
+      ],
+      "correct": 0,
+      "explanation": "The libuv pool starts with 4 threads unless `UV_THREADPOOL_SIZE` says otherwise. It does not scale with the number of CPU cores, which is why a machine with many cores can still queue file system or crypto work behind 4 busy threads. A single thread would serialize all pooled work, and 16 is not a default anywhere in Node.",
+      "materials": [
+        "dontblock",
+        "cli"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "On a 4-core machine with the default thread pool, a script starts 8 `crypto.pbkdf2` calls at once, and each takes about 150 ms of CPU. Roughly when does the last callback fire?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "After about 150 ms, because each call gets its own thread",
+        "After about 1200 ms, because the calls run one at a time on the main thread",
+        "After about 300 ms, because they run in two waves of four",
+        "After about 600 ms, because each core handles two calls one after another"
+      ],
+      "correct": 2,
+      "explanation": "Async `pbkdf2` runs on the libuv pool, which has 4 threads by default, so the first four finish together and the next four start afterwards: about 2 x 150 ms. Running this with Node 22 on 4 cores shows callbacks at ~150 ms and ~300 ms. The main thread is not used for the hashing, and Node does not create one thread per call.",
+      "materials": [
+        "dontblock",
+        "cli"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "You want 16 libuv pool threads for a file-heavy service. Which approach reliably works?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Set `\"threadpool\": 16` in package.json",
+        "Call `process.setThreadPoolSize(16)` before the first `fs` call",
+        "Pass `--max-old-space-size=16` on the command line",
+        "Start Node with `UV_THREADPOOL_SIZE=16` in the environment"
+      ],
+      "correct": 3,
+      "explanation": "`UV_THREADPOOL_SIZE` is an environment variable that libuv reads when it first creates the pool, so set it before the process starts (or at the very top of the entry file before anything uses the pool). There is no package.json field or `process.setThreadPoolSize` API for it. `--max-old-space-size` sets the V8 heap limit in megabytes, not a thread count.",
+      "materials": [
+        "cli",
+        "dontblock"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A callback passed to `process.nextTick` schedules itself again with `process.nextTick`, forever. What happens to pending I/O callbacks?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "They run normally, because each nextTick callback is deferred to the next loop iteration",
+        "They never run, because the nextTick queue is drained completely before the event loop continues",
+        "Node throws a `RangeError` for exceeding the maximum call stack size",
+        "Node switches the recursive callbacks to `setImmediate` after 1000 iterations"
+      ],
+      "correct": 1,
+      "explanation": "Node drains the whole nextTick queue (and microtasks) before moving on, and a callback added during draining is processed in the same drain, so the loop never reaches the poll phase. There is no stack overflow because each callback returns before the next is called from the queue. Node has no automatic fallback to `setImmediate`, which is the right tool when you want to yield to I/O.",
+      "materials": [
+        "el",
+        "process"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "This file is run as `node main.mjs`. What does it print?\n\n```js\nPromise.resolve().then(() => console.log('promise'));\nprocess.nextTick(() => console.log('tick'));\nconsole.log('sync');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`sync`, `tick`, `promise`",
+        "`tick`, `sync`, `promise`",
+        "`sync`, `promise`, `tick`",
+        "`promise`, `tick`, `sync`"
+      ],
+      "correct": 2,
+      "explanation": "An ES module's top-level code is itself evaluated inside a promise job, so after `sync` the microtask queue keeps draining and `promise` runs before Node gets a chance to process the nextTick queue. The same code saved as a `.cjs` file prints `sync`, `tick`, `promise`, because there the nextTick queue is drained before promise microtasks. Neither callback can run before the synchronous `console.log`.",
+      "materials": [
+        "el",
+        "process"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In the main module (not inside an I/O callback), a script calls `setTimeout(a, 0)` and then `setImmediate(b)`. Which runs first?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It is not guaranteed; it depends on how quickly the loop starts",
+        "`a`, because timers are the first phase of the loop",
+        "`b`, because the check phase runs before timers",
+        "Both run in the same callback batch, in an unspecified order"
+      ],
+      "correct": 0,
+      "explanation": "The 0 ms timer is really 1 ms, and whether it has expired when the loop first enters the timers phase depends on process performance, so the order varies between runs. Inside an I/O callback the order is fixed (`setImmediate` first) because the check phase comes right after poll. Timers and immediates are in different phases, so they are never part of one batch.",
+      "materials": [
+        "el",
+        "timers"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A CommonJS file contains `exports = { greet() {} };` and nothing else. What does `require()` of that file return?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`{ greet: [Function: greet] }`",
+        "`undefined`",
+        "It throws a `TypeError` when the module loads",
+        "An empty object `{}`"
+      ],
+      "correct": 3,
+      "explanation": "`exports` is just a local variable that starts as a reference to `module.exports`; reassigning it points the variable elsewhere and leaves `module.exports` as the original empty object. `require` always returns `module.exports`. Use `module.exports = { ... }` or add properties with `exports.greet = ...`.",
+      "materials": [
+        "modules"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Two files both call `require('./config')`, and `config.js` logs a line at the top. How many times is the line logged, and why?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Twice, because each `require` call evaluates the file again",
+        "Once, because the module is cached by its resolved filename",
+        "Once, because Node caches modules by the string passed to `require`",
+        "Twice, unless the file ends with `module.exports = Object.freeze(...)`"
+      ],
+      "correct": 1,
+      "explanation": "After the first load, `require.cache` holds the module under its resolved absolute filename, so later calls return the same `module.exports` without re-running the code. The key is the resolved path, not the specifier, which is why `./config` and `../lib/config` pointing at the same file share one instance. Freezing the export has nothing to do with caching.",
+      "materials": [
+        "modules"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In Node.js 22.12 or later, a CommonJS file calls `require('./esm.mjs')`, where `esm.mjs` contains `export const x = 1; export default 'd';` and no top-level `await`. What does `require` return?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The module namespace object, with `x` and the default value under `default`",
+        "`'d'`, the default export value by itself",
+        "A Promise that resolves to the module namespace object",
+        "It throws an error with code `ERR_REQUIRE_ESM`"
+      ],
+      "correct": 0,
+      "explanation": "Since Node 22.12, `require()` can load an ES module synchronously as long as its graph has no top-level `await`, and it returns the module namespace object, so the default export is at `.default`. Earlier versions threw `ERR_REQUIRE_ESM`. `require` never returns a Promise; dynamic `import()` is the call that does.",
+      "materials": [
+        "modules",
+        "esm"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In Node 22, a CommonJS file calls `require('./setup.mjs')`, and `setup.mjs` uses top-level `await`. What happens?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`require` blocks until the awaited promise settles",
+        "`require` returns a namespace whose values are filled in later",
+        "It throws an error with code `ERR_REQUIRE_ASYNC_MODULE`",
+        "The `await` is ignored and the module runs synchronously"
+      ],
+      "correct": 2,
+      "explanation": "`require()` is synchronous, so it can only load ES modules whose evaluation finishes synchronously; a graph with top-level `await` makes it throw `ERR_REQUIRE_ASYNC_MODULE`. Use `await import('./setup.mjs')` instead. Node does not block the thread on a promise, and it does not silently skip the `await`.",
+      "materials": [
+        "modules",
+        "esm"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`legacy.cjs` builds an object with `const o = {}; o.dyn = 1;` and ends with `module.exports = o;`. What does `import { dyn } from './legacy.cjs'` do in an ES module?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Imports `1`, because named imports read properties of `module.exports`",
+        "Imports `undefined`, because the property is added after export",
+        "Imports a live binding that becomes `1` once `legacy.cjs` runs",
+        "Fails with a `SyntaxError` saying the named export `dyn` was not found"
+      ],
+      "correct": 3,
+      "explanation": "Node detects CommonJS named exports by statically scanning the source (cjs-module-lexer) for patterns such as `exports.x =` or `module.exports = { x }`; it cannot see a property added to a local object. The link step then fails with `SyntaxError: Named export 'dyn' not found`. The default import (`import legacy from './legacy.cjs'`) always works and gives `module.exports`.",
+      "materials": [
+        "esm"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In a Node 22 ES module, which expression gives the directory of the current file?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`process.cwd()`",
+        "`import.meta.dirname`",
+        "`module.path`",
+        "`require.main.path`"
+      ],
+      "correct": 1,
+      "explanation": "`import.meta.dirname` (and `import.meta.filename`) were added in Node 20.11 as ESM replacements for `__dirname` and `__filename`. `process.cwd()` is the directory Node was started from, which is often different. `module` and `require` are not defined in ES modules.",
+      "materials": [
+        "esm"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A package.json in `/app` contains `\"type\": \"module\"`. Which file is loaded as CommonJS?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`/app/src/index.js`",
+        "`/app/src/server.mjs`",
+        "`/app/src/legacy.cjs`",
+        "`/app/lib/util.js`"
+      ],
+      "correct": 2,
+      "explanation": "The `type` field of the nearest package.json applies to `.js` files beneath it, so both `.js` files are ES modules here. The `.cjs` extension always means CommonJS and `.mjs` always means ESM, whatever `type` says. That lets one package mix formats file by file.",
+      "materials": [
+        "packages"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An ES module contains `import { helper } from './utils';` and the file on disk is `utils.js`. What happens in Node 22?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The import fails with `ERR_MODULE_NOT_FOUND`",
+        "Node tries `.js`, `.mjs` and `.cjs` and loads `utils.js`",
+        "Node loads `utils.js` but prints a deprecation warning",
+        "Node loads `utils/index.js` if it exists, otherwise `utils.js`"
+      ],
+      "correct": 0,
+      "explanation": "The ESM resolver does not add extensions or look for `index.js`; relative specifiers must name the exact file, such as `'./utils.js'`. Extension guessing is a CommonJS `require` feature (and something bundlers emulate). Directory imports fail too, with `ERR_UNSUPPORTED_DIR_IMPORT`.",
+      "materials": [
+        "esm"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "How do you import `data.json` into an ES module in Node 22?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`import data from './data.json';`",
+        "`import data from 'json:./data.json';`",
+        "`const data = await import.meta.json('./data.json');`",
+        "`import data from './data.json' with { type: 'json' };`"
+      ],
+      "correct": 3,
+      "explanation": "JSON modules need the import attribute `with { type: 'json' }`; without it Node throws `ERR_IMPORT_ATTRIBUTE_MISSING`. The attribute exists so a server cannot switch a file's type and get it executed as code. There is no `json:` scheme or `import.meta.json` helper.",
+      "materials": [
+        "esm"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A package's package.json has `\"exports\": { \".\": \"./index.js\", \"./feature\": \"./lib/feature.js\" }`. What does `require('pkg/lib/internal.js')` do?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Loads the file, because `exports` applies to `import` but not `require`",
+        "Throws an error with code `ERR_PACKAGE_PATH_NOT_EXPORTED`",
+        "Loads `./index.js`, the closest matching export",
+        "Loads the file but prints an `ExperimentalWarning`"
+      ],
+      "correct": 1,
+      "explanation": "Once a package defines `exports`, only the listed subpaths can be loaded from outside, by both `require` and `import`; anything else fails with `ERR_PACKAGE_PATH_NOT_EXPORTED`. That makes `exports` a way to hide internal files. Node does not fall back to the main entry or warn and continue.",
+      "materials": [
+        "packages"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A package declares `\"exports\": { \".\": { \"default\": \"./a.js\", \"import\": \"./b.mjs\" } }`. Which file does `import p from 'pkg'` load?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`./a.js`, because conditions are checked in object order and `default` matches first",
+        "`./b.mjs`, because `import` is more specific than `default`",
+        "Neither; Node throws because `default` must be listed last",
+        "`./b.mjs`, because ESM resolution prefers `.mjs` files"
+      ],
+      "correct": 0,
+      "explanation": "Node walks the condition keys in the order they appear and uses the first one that matches; `default` matches everything, so `./a.js` wins and the `import` entry is dead. That is why the docs say `default` should come last. Node does not reorder the keys by specificity and does not reject the map.",
+      "materials": [
+        "packages"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A package.json has `\"engines\": { \"node\": \">=22\" }`. A user runs `npm install` on Node 18 with default npm settings. What happens?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "npm refuses to install and exits with an error",
+        "npm downloads Node 22 automatically before installing",
+        "npm installs it and prints an `EBADENGINE` warning",
+        "Node refuses to start the package at runtime"
+      ],
+      "correct": 2,
+      "explanation": "With default settings, `engines` is advisory: npm warns with `EBADENGINE` and installs anyway. It becomes a hard error only when `engine-strict` is enabled. Neither npm nor Node downloads a runtime or checks `engines` when the code runs.",
+      "materials": [
+        "npmpkg"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Why can an npm script such as `\"build\": \"tsc -p .\"` run `tsc` when TypeScript is only a local dev dependency?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "npm installs dev dependencies globally as well",
+        "Node resolves shell commands through `require`",
+        "npm rewrites the script to `npx tsc -p .` before running it",
+        "`npm run` adds `node_modules/.bin` to `PATH` for the script"
+      ],
+      "correct": 3,
+      "explanation": "When npm runs a script, it prepends the package's `node_modules/.bin` (where dependencies' `bin` entries are linked) to `PATH`, so local CLIs work by name. Nothing is installed globally. The script runs through a shell as written, not rewritten to `npx`.",
+      "materials": [
+        "npmscripts"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An HTTP handler calls `fs.readFileSync` on a 200 MB file for each request. What is the main problem?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Each read starts a new libuv thread, which exhausts memory",
+        "The read blocks the event loop, so every other request waits until it finishes",
+        "The file is read twice, once by `fs` and once by the HTTP module",
+        "Synchronous `fs` functions are not allowed in HTTP handlers"
+      ],
+      "correct": 1,
+      "explanation": "Sync `fs` calls run on the main thread and block JavaScript until the read completes, so no other callbacks, including other requests, run meanwhile. Sync calls do not use the thread pool at all. They are allowed and fine at startup, but in handlers use `fs.promises` or a stream.",
+      "materials": [
+        "fs",
+        "dontblock"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does this print?\n\n```js\ntry {\n  fs.readFile('config.json', (err, data) => {\n    throw new Error('bad config');\n  });\n} catch (e) {\n  console.log('caught');\n}\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`caught`, after the file is read",
+        "`caught`, immediately",
+        "Nothing from this code; the error is uncaught and crashes the process",
+        "Nothing; errors thrown in `fs` callbacks are silently ignored"
+      ],
+      "correct": 2,
+      "explanation": "The `try` block finishes as soon as `readFile` is scheduled; the callback runs later from the event loop, outside that `try`, so the throw becomes an uncaught exception and the process exits. Node does not swallow callback errors. Handle the `err` argument inside the callback, or use `await fs.promises.readFile` inside the `try`.",
+      "materials": [
+        "errors",
+        "fs"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What is the default `highWaterMark` of a byte-mode (non-object-mode) stream created with `new Readable()` in Node 22?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "64 KiB",
+        "16 KiB",
+        "1 MiB",
+        "4 KiB"
+      ],
+      "correct": 0,
+      "explanation": "Node 22 raised the default from 16 KiB to 64 KiB (65536 bytes) for byte streams; `new Writable().writableHighWaterMark` prints 65536. Object-mode streams count objects instead and default to 16. The value is a buffering threshold for backpressure, not a hard size limit.",
+      "materials": [
+        "stream"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Why is `stream.pipeline(src, gzip, dest, cb)` preferred over `src.pipe(gzip).pipe(dest)`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`pipe` reads the whole source into memory first",
+        "`pipeline` runs each stream in a separate worker thread",
+        "`pipe` ignores backpressure",
+        "`pipe` does not forward errors or destroy the other streams when one fails"
+      ],
+      "correct": 3,
+      "explanation": "With `.pipe()`, an error in one stream is not propagated, and the other streams stay open, which leaks file descriptors; you need error handlers on each. `pipeline` destroys all streams on failure and reports one error via its callback or promise. Both stream in chunks and both respect backpressure.",
+      "materials": [
+        "stream"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What is the difference between `Buffer.alloc(1024)` and `Buffer.allocUnsafe(1024)`?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`alloc` is on the V8 heap; `allocUnsafe` is on disk",
+        "`alloc` is zero-filled; `allocUnsafe` may contain old memory contents",
+        "`allocUnsafe` must be filled before it is writable",
+        "`alloc` is limited to 1024 bytes; `allocUnsafe` has no limit"
+      ],
+      "correct": 1,
+      "explanation": "`allocUnsafe` skips zero-filling, which is faster but can expose data previously stored in that memory (it may come from a shared pool), so you must overwrite it fully before reading or sending it. `alloc` returns zeroed memory. Both can be written to and both accept sizes far above 1024.",
+      "materials": [
+        "buffer"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does this print?\n\n```js\nconst b = Buffer.from('abc');\nconst part = b.slice(0, 1);\npart[0] = 0x7a; // 'z'\nconsole.log(b.toString());\n```",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`zbc`, because `Buffer#slice` returns a view on the same memory",
+        "`abc`, because `slice` copies the bytes",
+        "`z`, because `b` now refers to the slice",
+        "It throws, because Buffer slices are immutable views"
+      ],
+      "correct": 0,
+      "explanation": "`Buffer#slice` behaves like `subarray`: it returns a view over the same bytes, so writing through it changes the original. That differs from `Uint8Array#slice`, which copies, and is why Node docs deprecate `buf.slice` in favour of the explicit `subarray`. Use `Buffer.from(part)` to get an independent copy.",
+      "materials": [
+        "buffer"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A handler collects a UTF-8 response with `body += chunk` for each `data` event and sometimes shows `\\uFFFD` characters in non-English text. What is the fix?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Raise the `highWaterMark` so that chunks are larger and splits rarer",
+        "Decode each chunk with `chunk.toString('latin1')` instead of UTF-8",
+        "Call `stream.setEncoding('utf8')` (or use a `StringDecoder`) before reading",
+        "Switch the stream to object mode so whole strings are emitted"
+      ],
+      "correct": 2,
+      "explanation": "`body += chunk` converts each Buffer separately, and a multi-byte character split across two chunks becomes two replacement characters. `setEncoding('utf8')` uses a StringDecoder that holds incomplete bytes until the next chunk. A bigger `highWaterMark` only makes the split rarer, latin1 decodes UTF-8 wrongly, and object mode does not decode bytes.",
+      "materials": [
+        "strdec",
+        "stream"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What happens when an `EventEmitter` emits `'error'` and has no `'error'` listener?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The event is ignored, like any event without listeners, and `emit` returns `false`",
+        "Node prints an unhandled-error warning to stderr and continues running",
+        "The error is queued and delivered once an `error` listener is added",
+        "The error is thrown from `emit`, which crashes the process if nothing catches it"
+      ],
+      "correct": 3,
+      "explanation": "`'error'` is special: with no listener, `emit('error', err)` throws `err` (or an `ERR_UNHANDLED_ERROR` wrapper for non-Error values). Other events with no listener just make `emit` return `false`. Always attach an `'error'` listener to streams, sockets and other emitters.",
+      "materials": [
+        "events"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What happens when you add an 11th `'data'` listener to one EventEmitter with default settings?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`on` throws a `RangeError` for exceeding the listener limit",
+        "Node prints a `MaxListenersExceededWarning`, and the listener is still added",
+        "The oldest `data` listener is removed to make room for the new one",
+        "The new listener is not registered, and no warning is printed"
+      ],
+      "correct": 1,
+      "explanation": "The default limit of 10 per event is only a leak detector: exceeding it prints `MaxListenersExceededWarning` once, and all listeners stay registered and are called. Raise it with `emitter.setMaxListeners(n)` when many listeners are intended. Node does not throw, evict or drop listeners.",
+      "materials": [
+        "events"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `await events.once(server, 'listening')` do if the server emits `'error'` before `'listening'`?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It keeps waiting for `'listening'`",
+        "It resolves with `undefined`",
+        "The promise rejects with that error",
+        "It resolves with the error as its value"
+      ],
+      "correct": 2,
+      "explanation": "`events.once` returns a promise that resolves with the event's arguments, and it also listens for `'error'` and rejects if that comes first, so a failure like `EADDRINUSE` surfaces as an exception you can catch. It does not resolve on errors or keep waiting forever.",
+      "materials": [
+        "events"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`child_process.exec('cat big.log', cb)` runs on a 2 MB file with default options. What happens?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`cb` gets an error with code `ERR_CHILD_PROCESS_STDIO_MAXBUFFER`, and the child is killed",
+        "`cb` receives the full 2 MB of output as the `stdout` string",
+        "`exec` switches to streaming mode and calls `cb` once per chunk",
+        "`stdout` is truncated to the first 64 KiB, and no error is reported"
+      ],
+      "correct": 0,
+      "explanation": "`exec` buffers all output in memory and enforces `maxBuffer`, 1 MiB by default; going over it kills the child and passes an error with code `ERR_CHILD_PROCESS_STDIO_MAXBUFFER`. Use `spawn` and read `stdout` as a stream for large or unbounded output. There is no silent truncation or automatic switch.",
+      "materials": [
+        "cp"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What happens with `spawn('ls -la')` on Linux, with no `shell` option?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It lists the directory, because `spawn` splits the string on spaces",
+        "It runs `ls` and ignores `-la`",
+        "It throws a `SyntaxError` synchronously",
+        "It emits an `'error'` event with code `ENOENT`"
+      ],
+      "correct": 3,
+      "explanation": "Without `shell: true`, `spawn` treats the first argument as the executable name, so it looks for a program literally called `ls -la` and fails with `ENOENT`. Pass arguments separately, as in `spawn('ls', ['-la'])`. Not splitting the string is deliberate: it avoids shell parsing and injection.",
+      "materials": [
+        "cp"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "How do `cluster` workers differ from `worker_threads` workers?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Cluster workers share one V8 heap; worker threads each get a separate process",
+        "Cluster workers are processes sharing a server port; worker threads share one process",
+        "Cluster is meant for CPU work; worker threads are meant for HTTP servers",
+        "The APIs differ, but both create threads inside the same process"
+      ],
+      "correct": 1,
+      "explanation": "`cluster` forks full Node processes (with separate memory) and lets them accept connections on one port, which scales a server across cores. Worker threads live in one process, each with its own V8 isolate and event loop, and can share memory through `SharedArrayBuffer`. Worker threads are the usual choice for CPU-heavy work inside a single service.",
+      "materials": [
+        "cluster",
+        "workers"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A CLI prints a large report with `console.log` and then calls `process.exit(0)`. When stdout is piped to a file, the output is sometimes cut off. What is the usual fix?",
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Set `process.exitCode = 0` and let the process end on its own",
+        "Call `process.exit(0)` twice",
+        "Use `process.kill(process.pid)` instead",
+        "Wrap the `console.log` calls in `try/finally`"
+      ],
+      "correct": 0,
+      "explanation": "`process.exit()` ends the process right away, even if writes to stdout are still pending (writes to pipes are asynchronous on POSIX). Setting `process.exitCode` lets Node exit naturally after pending work, including output, has finished. Killing the process or calling exit again loses output the same way.",
+      "materials": [
+        "process"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A Node 22 server with no signal handlers receives `SIGTERM`. What exit status does a POSIX shell report?",
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "0",
+        "1",
+        "143",
+        "15"
+      ],
+      "correct": 2,
+      "explanation": "By default Node does not handle `SIGTERM`, so the OS terminates the process by that signal, and shells report 128 + signal number, which is 128 + 15 = 143. Exit code 1 is what Node uses for an uncaught exception. To shut down gracefully and choose your own code, add `process.on('SIGTERM', ...)`.",
+      "materials": [
+        "process"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A script adds `process.on('SIGINT', () => console.log('cleaning up'))` and nothing else. What happens when the user presses Ctrl+C?",
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It logs `cleaning up`, then exits",
+        "It exits without logging, because SIGINT is not catchable",
+        "It logs `cleaning up` once the event loop has emptied",
+        "It logs `cleaning up` and keeps running"
+      ],
+      "correct": 3,
+      "explanation": "Adding a listener for `SIGINT` replaces Node's default behaviour of exiting, so the process keeps running unless the handler calls `process.exit()` or lets the loop drain. `SIGINT` can be caught; `SIGKILL` and `SIGSTOP` cannot. The handler runs promptly as an event loop callback.",
+      "materials": [
+        "process"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does this log?\n\n```js\nconst { AsyncLocalStorage } = require('node:async_hooks');\nconst als = new AsyncLocalStorage();\nals.run({ id: 1 }, async () => {\n  await null;\n  console.log('inside', als.getStore());\n});\nconsole.log('outside', als.getStore());\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`outside { id: 1 }`, then `inside { id: 1 }`",
+        "`outside undefined`, then `inside { id: 1 }`",
+        "`outside undefined`, then `inside undefined`",
+        "`inside { id: 1 }`, then `outside undefined`"
+      ],
+      "correct": 1,
+      "explanation": "`run` makes the store visible to the callback and to every async continuation it creates, including code after `await`, but not to code outside the callback. The callback runs synchronously until the `await`, so `outside undefined` prints first, then the continuation logs `inside { id: 1 }`.",
+      "materials": [
+        "als"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `node --watch server.js` do in Node 22?",
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Reloads changed modules in place without restarting",
+        "Watches `package.json` and reinstalls dependencies on change",
+        "Restarts the process when `server.js` or a module it loads changes",
+        "Opens the inspector and pauses on file changes"
+      ],
+      "correct": 2,
+      "explanation": "Watch mode (stable since Node 22.0 and 20.13) restarts the process when the entry file or any imported or required file changes; `--watch-path` adds other paths. It does not hot-swap modules inside the running process or touch dependencies.",
+      "materials": [
+        "cli"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A script runs with `node --permission app.js` and no `--allow-*` flags, then calls `fs.readFileSync('/etc/hosts')`. What happens?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It throws an error with code `ERR_ACCESS_DENIED`",
+        "The read succeeds, because the permission model restricts writes but not reads",
+        "Node prompts the user to grant access",
+        "It returns an empty Buffer"
+      ],
+      "correct": 0,
+      "explanation": "With `--permission`, file system reads and writes, child processes and worker threads are denied unless allowed with flags such as `--allow-fs-read=/etc/hosts`; denied calls throw `ERR_ACCESS_DENIED`. Node never prompts interactively. Code can check access with `process.permission.has('fs.read', path)`.",
+      "materials": [
+        "perm"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A script's only pending work is `const t = setInterval(poll, 60_000); t.unref();`. What happens when the main code finishes?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The process stays alive and calls `poll` once a minute",
+        "The process exits right after `poll` runs for the first time",
+        "Node throws, because `unref` is not supported on intervals",
+        "The process exits, because an unref'd timer does not keep the loop alive"
+      ],
+      "correct": 3,
+      "explanation": "`unref()` tells the event loop not to count that timer when deciding whether to stay alive, so with nothing else pending the process exits. The timer still fires normally while other work keeps the process running. `ref()` reverses this.",
+      "materials": [
+        "timers"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Node.js 22 provides `fetch` as a global function without importing a package or passing a flag.",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "Built-in `fetch` (based on undici) was enabled by default in Node 18 and marked stable in Node 21, so Node 22 has it globally. Node 22 also exposes `WebSocket` as a global client. Older versions needed `node-fetch` or a similar package.",
+      "materials": [
+        "globals"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Attaching a `'data'` listener to a paused Readable stream switches it into flowing mode.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "Readable streams start paused, and adding a `'data'` listener (or calling `resume()` or `pipe()`) switches them to flowing mode, so data is pushed as fast as it arrives. If nothing consumes the data, it is lost. Use `pause()`, async iteration or `pipeline` when you need control.",
+      "materials": [
+        "stream"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "An object-mode stream's default `highWaterMark` is 16, counted in objects rather than bytes.",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "In object mode each chunk counts as one unit, and the default threshold is 16 objects. Byte streams count bytes instead and default to 64 KiB in Node 22. `Readable.from(iterable)` creates an object-mode stream by default.",
+      "materials": [
+        "stream"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In Node.js 22, `http.globalAgent` keeps connections alive and reuses them by default.",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "Since Node 19, the global HTTP agent has `keepAlive: true`, so `http.request` reuses sockets instead of opening a new TCP connection per request. Before that you had to create `new http.Agent({ keepAlive: true })`. The built-in `fetch` uses its own undici pool, which also reuses connections.",
+      "materials": [
+        "http"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `setTimeout` callback scheduled inside a `process.on('exit')` listener runs before the process terminates.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "When `'exit'` fires, the event loop has stopped, so only synchronous code in the listener runs; timers or I/O scheduled there are abandoned. Use `'beforeExit'` (which fires when the loop empties, not on explicit `process.exit()`) for async cleanup, or do cleanup before calling exit.",
+      "materials": [
+        "process"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Registering a `process.on('uncaughtException')` listener stops Node from exiting when an exception goes uncaught.",
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "With a listener present, Node calls it instead of printing the stack and exiting with code 1, so the process keeps running. That is risky, because the exception may have left state half-updated. The listener should log and exit; `'uncaughtExceptionMonitor'` observes without changing the default.",
+      "materials": [
+        "process"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Keys in a package.json `\"imports\"` field can be any bare name, such as `\"db\"`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "Entries in `imports` must start with `#`, as in `\"#db\": \"./src/db.js\"`, so they cannot clash with package names from `node_modules`. They are private to the package and work with both `require` and `import`. A bare key like `\"db\"` is rejected.",
+      "materials": [
+        "packages"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When a package.json has both `\"main\"` and `\"exports\"`, Node.js uses `\"exports\"` to resolve the package.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "In every Node version that supports `exports`, it takes precedence over `main`; `main` remains only as a fallback for very old tools and runtimes. That is why adding `exports` to an existing package can break deep imports. Keep both pointing at the same entry during migration.",
+      "materials": [
+        "packages"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In Node.js 22, running a `.js` file that uses `import` syntax with no `\"type\"` field anywhere fails with a `SyntaxError`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "Since Node 22.7, module syntax detection is on by default: if a typeless `.js` file fails to parse as CommonJS because of ESM syntax, Node reparses it as an ES module. When a package.json without `type` exists, it also prints a `MODULE_TYPELESS_PACKAGE_JSON` warning about the extra parse. Setting `\"type\": \"module\"` avoids the reparse.",
+      "materials": [
+        "packages",
+        "esm"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The built-in test runner can be loaded with `require('test')`, like other built-in modules.",
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "`node:test` is one of the built-ins that is only available with the `node:` prefix; `require('test')` throws `MODULE_NOT_FOUND` (or loads an npm package named `test`). Use `require('node:test')` or `import test from 'node:test'`.",
+      "materials": [
+        "test"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Calling `process.exit()` inside a `worker_threads` worker terminates the whole Node.js process.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "In a worker, `process.exit()` stops only that thread; the main thread receives the worker's `'exit'` event with the exit code and keeps running. This is part of why workers suit isolated jobs. The main thread's `process.exit()` does end everything.",
+      "materials": [
+        "workers"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Workers created with the `cluster` module are threads that share a single V8 heap.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "`cluster.fork()` starts separate Node processes, each with its own memory and event loop, connected to the primary over IPC. Shared in-memory state such as a cache or a session map is therefore not shared between them. Threads with optional shared memory come from `worker_threads`.",
+      "materials": [
+        "cluster"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Node.js treats `setTimeout(fn, 0)` as a 1 ms delay.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "Node's timers set any delay below 1 (or above 2147483647, or NaN) to 1 ms. That is why a zero-delay timer may or may not be ready on the loop's first timers phase. It is never synchronous.",
+      "materials": [
+        "timers"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The libuv thread pool handles socket reads and writes for Node's `http` server.",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "Network sockets use the OS's non-blocking I/O notification (epoll, kqueue, IOCP) on the event loop thread, not the pool. The pool is used for work the OS can't do asynchronously in that way: most `fs` calls, `dns.lookup`, async `crypto` and `zlib`. That is why a server can hold thousands of connections with 4 pool threads.",
+      "materials": [
+        "dontblock"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Odd-numbered Node.js major releases such as 21 and 23 did not become LTS release lines.",
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "Node 21 and 23 were Current-only lines supported for about six months, while even-numbered lines such as 20, 22 and 24 were promoted to LTS. Production deployments therefore target the even LTS lines. Check the releases page for the current schedule.",
+      "materials": [
+        "releases"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these async operations run on the libuv thread pool?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`fs.readFile`",
+        "`crypto.scrypt`",
+        "`dns.lookup`",
+        "`dns.resolve4`",
+        "Reading a request body on an `http` server"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "File system calls, async crypto such as `scrypt`, and `dns.lookup` (which calls the blocking `getaddrinfo`) all use the pool. `dns.resolve4` queries DNS servers over the network with c-ares, and socket I/O is handled by the OS's non-blocking APIs on the event loop thread. So a slow `dns.lookup` can starve `fs` calls, but `dns.resolve4` cannot.",
+      "materials": [
+        "dontblock",
+        "dns"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Code schedules several callbacks synchronously, then calls `setImmediate(x)`. Which of these callbacks are guaranteed to run before `x`?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A `process.nextTick` callback",
+        "A `Promise.resolve().then` callback",
+        "A `queueMicrotask` callback",
+        "A `setTimeout(..., 0)` callback",
+        "An `fs.readFile` callback"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "nextTick callbacks and microtasks are drained before the event loop moves to any phase, so they run before `x`. A zero-delay timer may run before or after the first check phase depending on timing, and a file read usually finishes later than one loop iteration.",
+      "materials": [
+        "el",
+        "process"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In Node.js 22, which of these are loaded as ES modules?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`app.mjs`",
+        "`app.js` when the nearest package.json has `\"type\": \"module\"`",
+        "Code passed with `node --input-type=module -e \"...\"`",
+        "`app.cjs` when the nearest package.json has `\"type\": \"module\"`",
+        "A `.js` file that starts with a `\"use module\"` directive"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`.mjs` is always ESM, `.js` follows the nearest `type`, and `--input-type=module` covers `-e` and stdin. `.cjs` is always CommonJS regardless of `type`. There is no `\"use module\"` directive in JavaScript.",
+      "materials": [
+        "packages",
+        "esm"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these can you use inside a Node 22 ES module without extra setup?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`import.meta.url`",
+        "`import.meta.filename`",
+        "`require` as a global",
+        "`__filename`",
+        "`createRequire` from `node:module`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "`import.meta.url`, `import.meta.filename` and `import.meta.dirname` are available in ESM. `require`, `module`, `__filename` and `__dirname` are not defined there. When you need CommonJS loading, `createRequire(import.meta.url)` gives you a `require` function.",
+      "materials": [
+        "esm"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In a CommonJS file `m.js`, which of these make `require('./m').a === 1` true?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`exports.a = 1;`",
+        "`module.exports.a = 1;`",
+        "`module.exports = { a: 1 };`",
+        "`exports = { a: 1 };`",
+        "`this = { a: 1 };`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`require` returns `module.exports`, and `exports` starts as an alias for it, so adding properties to either works and replacing `module.exports` works. Reassigning `exports` only changes the local variable. Assigning to `this` is a syntax error, even though top-level `this` in CommonJS is `module.exports`.",
+      "materials": [
+        "modules"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In Node 22, `node --test` is run with no file arguments. Which of these files does it run?",
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`src/math.test.mjs`",
+        "`test/setup.js`",
+        "`src/math.spec.js`",
+        "`src/math_test.js`",
+        "`src/math.js`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Default discovery matches names like `*.test.*`, `*-test.*`, `*_test.*`, `test-*.*`, `test.*` and every `.js`, `.cjs` or `.mjs` file inside a `test` directory. `*.spec.js` is a Jest/Mocha convention that `node --test` does not match by default, and ordinary source files are skipped. Pass globs explicitly to change this.",
+      "materials": [
+        "test"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`writable.write(chunk)` returns `false`. Which statements are true?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The chunk was still accepted and buffered",
+        "The producer should stop writing until `'drain'` fires",
+        "The chunk was discarded and must be written again",
+        "Writing more anyway keeps growing the in-memory buffer",
+        "The stream has been ended and further writes throw"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "`false` means the buffer has reached `highWaterMark`; the chunk is kept, but you should pause until `'drain'`. Ignoring the signal does not lose data, it just grows memory without bound, which is the backpressure bug. Writing after `end()` is a different error.",
+      "materials": [
+        "backpressure",
+        "stream"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `EventEmitter` are true?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`emit` returns `true` if the event had listeners and `false` otherwise",
+        "Emitting `'error'` with no `'error'` listener throws",
+        "`emit` calls listeners on the next tick, after the current code finishes",
+        "Adding an 11th listener for one event throws a `RangeError`",
+        "`removeAllListeners('x')` removes only the listeners for `'x'`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "`emit` calls listeners synchronously and returns whether there were any. `'error'` throws without a listener. Passing an event name to `removeAllListeners` limits it to that event. The 10-listener limit only prints a warning.",
+      "materials": [
+        "events"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are valid encodings for `buf.toString(encoding)`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`'hex'`",
+        "`'base64url'`",
+        "`'latin1'`",
+        "`'utf32'`",
+        "`'gzip'`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Buffer supports `utf8`, `utf16le`, `latin1` (alias `binary`), `base64`, `base64url`, `hex` and `ascii`. UTF-32 is not a Buffer encoding, and gzip is compression, done with `zlib`, not a character encoding.",
+      "materials": [
+        "buffer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `child_process` functions are true?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`spawn` exposes the child's output as streams while it runs",
+        "`exec` runs the command through a shell and buffers the output",
+        "`execFile` does not use a shell by default",
+        "`fork` runs a shell command inside a new thread",
+        "`spawn` waits for the child to exit and returns its output as a string"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`spawn` streams stdio, `exec` uses `/bin/sh` (or `cmd.exe`) and buffers up to `maxBuffer`, and `execFile` runs the file directly, which also avoids shell injection. `fork` starts a new Node process with an IPC channel. The synchronous variant that returns output is `spawnSync`/`execSync`.",
+      "materials": [
+        "cp"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these keep a Node.js process running after the main script finishes?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "An active `setInterval` that has not been unref'd",
+        "An `http` server that is listening",
+        "A `setTimeout` on which `.unref()` was called",
+        "A Promise that never settles, with nothing else pending",
+        "An `fs.readFile` call that has not completed yet"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "The process lives while the loop has referenced handles or pending requests: active timers, listening servers and in-flight I/O. An unref'd timer is ignored for this purpose. A pending Promise is not a handle, so `new Promise(() => {})` alone lets the process exit immediately.",
+      "materials": [
+        "el",
+        "timers"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `AsyncLocalStorage` are true?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A store set with `run` is visible after an `await` inside the callback",
+        "A `setTimeout` callback scheduled inside `run` sees the same store",
+        "`getStore()` called outside any `run` returns `undefined`",
+        "Two concurrent `run` calls see whichever store was set last",
+        "`run` deep-copies the store, so mutations inside are invisible outside"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The store follows the async context: promise continuations, timers and other callbacks created inside `run` see it, and code outside sees `undefined`. Each concurrent `run` has its own context, which is what makes it useful for per-request IDs. The store object is passed by reference, so mutating it is visible to whoever holds it.",
+      "materials": [
+        "als"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "When an `uncaughtException` or a process signal is not handled, which statements about exit behaviour in Node 22 are true?",
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "An uncaught exception exits with code 1",
+        "An unhandled promise rejection exits with code 1",
+        "Setting `process.exitCode = 3` and letting the loop drain exits with code 3",
+        "`process.exit()` with no argument and no `exitCode` set exits with code 1",
+        "A process killed with `SIGKILL` runs its `'exit'` listeners first"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Uncaught exceptions and unhandled rejections both end with code 1 by default, and `exitCode` sets the code for a natural exit. `process.exit()` defaults to `process.exitCode` or 0. `SIGKILL` cannot be caught, so no JavaScript runs at all.",
+      "materials": [
+        "process"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which package.json fields does Node.js itself read when loading modules (as opposed to only npm)?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`type`",
+        "`exports`",
+        "`engines`",
+        "`main`",
+        "`scripts`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Node's resolver reads `type`, `main`, `exports` and `imports` (and `name` for self-referencing). `engines` is checked by npm during install and `scripts` is run by npm; Node ignores both at runtime.",
+      "materials": [
+        "packages",
+        "npmpkg"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the built-in `fetch` in Node.js 22 are true?",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It is available globally without an import",
+        "It is implemented on top of undici",
+        "It needs the `--experimental-fetch` flag",
+        "`response.body` is a web `ReadableStream`",
+        "The response object is an `http.IncomingMessage`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Node's `fetch` is the WHATWG API built on undici, exposed as a global, and its body is a web `ReadableStream` (convert with `Readable.fromWeb` if needed). The flag was only needed before Node 18. `http.IncomingMessage` belongs to the older `http` client.",
+      "materials": [
+        "globals"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A script runs with `node --permission app.js` in Node 22 and no `--allow-*` flags. Which of these throw `ERR_ACCESS_DENIED`?",
+      "tags": [
+        "JavaScript",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`fs.readFileSync('/etc/hosts')`",
+        "`child_process.execSync('true')`",
+        "`new Worker(file)`",
+        "`fetch('https://example.com')`",
+        "`JSON.parse('{}')`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "In Node 22 the permission model restricts file system access, child processes and worker threads (plus native addons and WASI), each re-enabled by an `--allow-*` flag. Network access is not restricted in Node 22, and pure JavaScript is never affected. The docs also note it is a safeguard for trusted code, not a sandbox for malicious code.",
+      "materials": [
+        "perm"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these objects are `Transform` streams?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`zlib.createGzip()`",
+        "`crypto.createCipheriv(...)`",
+        "`fs.createReadStream(path)`",
+        "A `net.Socket`",
+        "`process.stdout`"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "Gzip and cipher streams take input and emit transformed output, so they are `Transform` streams (`instanceof Transform` is `true` in Node 22). A file read stream is a `Readable`, `process.stdout` is a `Writable`, and a `net.Socket` is a `Duplex` whose two sides are independent rather than transformed.",
+      "materials": [
+        "stream"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these expressions return a Promise?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`fs.promises.readFile(path)`",
+        "`require('node:fs/promises').stat(path)`",
+        "`util.promisify(fs.readFile)(path)`",
+        "`fs.readFile(path)` with no callback",
+        "`fs.readFileSync(path)`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`fs.promises` and `node:fs/promises` are the same promise API, and `promisify` wraps the callback API. Calling callback-style `fs.readFile` without a callback throws `ERR_INVALID_ARG_TYPE` rather than returning a Promise. `readFileSync` returns the data directly.",
+      "materials": [
+        "fs",
+        "util"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`/app/src/lib/x.js` calls `require('lodash')`, and `NODE_PATH` is not set. Put the directories Node searches in order, first to last.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`/app/src/lib/node_modules`",
+        "`/app/src/node_modules`",
+        "`/app/node_modules`",
+        "`/node_modules`",
+        "`$HOME/.node_modules`"
+      ],
+      "explanation": "For a bare specifier, Node checks `node_modules` in the requiring file's directory and then in each parent up to the root. Only after that does it try the global folders such as `$HOME/.node_modules`. That walk is why a dependency installed higher in a monorepo can be found from nested packages.",
+      "materials": [
+        "modules"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A CommonJS file calls `require('./util')`. Put the paths Node tries in order, first to last (it stops at the first that exists).",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`./util` (exact filename)",
+        "`./util.js`",
+        "`./util.json`",
+        "`./util.node`",
+        "`./util/index.js`"
+      ],
+      "explanation": "Node first tries the exact filename, then appends `.js`, `.json` and `.node`, and only then treats it as a directory (`package.json` `main`, then `index.js`). ES module `import` does none of this guessing and needs the exact file.",
+      "materials": [
+        "modules"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nsetImmediate(() => {\n  console.log('immediate 1');\n  process.nextTick(() => console.log('tick inside immediate 1'));\n  Promise.resolve().then(() => console.log('promise inside immediate 1'));\n});\nsetImmediate(() => console.log('immediate 2'));\nconsole.log('sync');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "sync",
+        "immediate 1",
+        "tick inside immediate 1",
+        "promise inside immediate 1",
+        "immediate 2"
+      ],
+      "explanation": "Since Node 11, the nextTick queue and microtasks are drained after each individual `setImmediate` callback, not only after the whole check phase, matching browser behaviour. So the tick and promise from the first immediate run before `immediate 2`. Inside that drain, nextTick comes before the promise.",
+      "materials": [
+        "el"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nsetTimeout(() => {\n  console.log('timeout');\n  setTimeout(() => console.log('timeout in timeout'), 0);\n  setImmediate(() => console.log('immediate in timeout'));\n  process.nextTick(() => console.log('tick in timeout'));\n}, 0);\nconsole.log('sync');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "sync",
+        "timeout",
+        "tick in timeout",
+        "immediate in timeout",
+        "timeout in timeout"
+      ],
+      "explanation": "The outer callback runs in the timers phase; its nextTick runs as soon as it returns. The loop then moves through poll to the check phase, running the immediate, before it can return to the timers phase for the new timer. This order is deterministic, unlike `setTimeout` versus `setImmediate` from the main module.",
+      "materials": [
+        "el",
+        "timers"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`main.js` runs `require('./a')`. In what order are these lines printed, first to last?\n\n```js\n// a.js\nconsole.log('a start');\nexports.done = false;\nconst b = require('./b');\nconsole.log('a: b.done = ' + b.done);\nexports.done = true;\n\n// b.js\nconsole.log('b start');\nconst a = require('./a');\nconsole.log('b: a.done = ' + a.done);\nexports.done = true;\nconsole.log('b end');\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "a start",
+        "b start",
+        "b: a.done = false",
+        "b end",
+        "a: b.done = true"
+      ],
+      "explanation": "When `b.js` requires `a.js` during the cycle, Node returns `a`'s unfinished `exports` from the cache instead of running it again, so `b` sees `done = false`. `b` then finishes, and `a` continues with `b`'s complete exports. Cycles therefore expose partially initialised modules.",
+      "materials": [
+        "modules"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconst { Readable, Writable, pipeline } = require('node:stream');\nconst r = Readable.from(['x']);\nconst w = new Writable({ write(c, e, cb) { console.log('write'); cb(); } });\nr.on('end', () => console.log('readable end'));\nw.on('finish', () => console.log('writable finish'));\npipeline(r, w, () => console.log('pipeline callback'));\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "write",
+        "readable end",
+        "writable finish",
+        "pipeline callback"
+      ],
+      "explanation": "The single chunk is written first. The readable then signals `'end'`, which makes `pipeline` call `w.end()`, and the writable emits `'finish'` once everything is flushed. The pipeline callback runs only after all streams are done, which is why it is the right place to report completion or errors.",
+      "materials": [
+        "stream"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the phases of a Node.js release line in order, from first release to end of support.",
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Current",
+        "Active LTS",
+        "Maintenance LTS",
+        "End-of-life"
+      ],
+      "explanation": "A new even-numbered line starts as Current, is promoted to Active LTS about six months later, then moves to Maintenance LTS (critical and security fixes only) until end-of-life. Upgrade before end-of-life, since no more security fixes ship after it.",
+      "materials": [
+        "releases"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "The main thread runs `const w = new Worker(file)` and attaches listeners; the worker posts one message and finishes. Put these events in order, first to last.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`new Worker(file)` returns to the main thread",
+        "`w` emits `'online'`",
+        "`w` emits `'message'`",
+        "`w` emits `'exit'` with code 0"
+      ],
+      "explanation": "The constructor returns immediately while the thread starts in the background, so listeners attached right after it are not too late. `'online'` fires when the worker starts executing JavaScript, its messages arrive as `'message'` events, and `'exit'` comes last with the exit code. Running this in Node 22 prints exactly this sequence.",
+      "materials": [
+        "workers"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A producer writes to a slow writable stream. Put the backpressure steps in order, first to last.",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`write()` returns `false` because the buffer reached `highWaterMark`",
+        "The producer stops writing",
+        "The writable flushes its buffered data to the destination",
+        "The writable emits `'drain'`",
+        "The producer resumes writing"
+      ],
+      "explanation": "`false` from `write()` is the signal to pause, and `'drain'` fires when the buffer has emptied enough to accept more. `pipe` and `pipeline` implement this loop for you; hand-written producers must do it themselves or memory grows without bound.",
+      "materials": [
+        "backpressure"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A server handles `SIGTERM` for a graceful shutdown. Put the steps in order, first to last.",
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The `SIGTERM` handler runs",
+        "`server.close()` stops accepting new connections",
+        "In-flight requests finish and the `close` callback fires",
+        "The database pool is closed",
+        "The process exits once nothing is pending"
+      ],
+      "explanation": "Stop taking new work first, let current requests finish, and close shared resources such as the DB pool only after nothing uses them. Closing the pool earlier would make in-flight requests fail. Exiting naturally (or with `process.exitCode`) avoids cutting off pending writes.",
+      "materials": [
+        "process",
+        "http"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: string length versus UTF-8 byte length (as Buffer.byteLength would report).",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "const enc = new TextEncoder();\nconst s = 'naïve';\nconsole.log(s.length, enc.encode(s).length);\nconsole.log('😀'.length, enc.encode('😀').length);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "5 6\n2 4",
+      "explanation": "`length` counts UTF-16 code units, while UTF-8 uses 2 bytes for `ï` and 4 for the emoji. Node's `Buffer.byteLength(s)` gives the same byte counts. Use the byte length, not `s.length`, for headers like `Content-Length`.",
+      "materials": [
+        "textenc",
+        "buffer"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: decoding a multi-byte character that is split across two chunks.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "code": "const bytes = new TextEncoder().encode('€');\nconst a = bytes.subarray(0, 2), b = bytes.subarray(2);\nconst plain = new TextDecoder();\nconst r1 = plain.decode(a) + plain.decode(b);\nconsole.log(r1.length, r1 === '€');\nconst streaming = new TextDecoder();\nconst r2 = streaming.decode(a, { stream: true }) + streaming.decode(b);\nconsole.log(r2.length, r2 === '€');\n",
+      "codeLanguage": "js",
+      "expectedOutput": "2 false\n1 true",
+      "explanation": "`€` is 3 bytes in UTF-8. Decoding each chunk on its own turns the incomplete prefix and the lone last byte into one replacement character each, so the result has 2 wrong characters. With `{ stream: true }` the decoder keeps the incomplete bytes for the next call, which is what Node's `StringDecoder` and `setEncoding` do for stream chunks.",
+      "materials": [
+        "textdec",
+        "strdec"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: subarray versus slice on a Uint8Array (the type Buffer extends).",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "code": "const bytes = new Uint8Array([1, 2, 3, 4]);\nconst view = bytes.subarray(1, 3);\nconst copy = bytes.slice(1, 3);\nview[0] = 20;\ncopy[1] = 30;\nconsole.log(bytes.join(','), view.join(','), copy.join(','));\nconsole.log(view.byteOffset, view.buffer === bytes.buffer);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "1,20,3,4 20,3 2,30\n1 true",
+      "explanation": "`subarray` creates a view on the same `ArrayBuffer`, so writing through it changes `bytes`; `slice` copies, so the write to `copy` is not seen. Buffer inherits this, except that `Buffer#slice` also returns a view, which is why Node prefers the explicit `subarray`. `byteOffset` 1 shows where the view starts.",
+      "materials": [
+        "buffer"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: base64 with btoa and atob.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "console.log(btoa('hi'));\nconsole.log(atob('aGk='));\nconst bytes = new TextEncoder().encode('é');\nconsole.log(btoa(String.fromCharCode(...bytes)));\ntry { btoa('é😀'); } catch (e) { console.log(e.name); }\n",
+      "codeLanguage": "js",
+      "expectedOutput": "aGk=\nhi\nw6k=\nInvalidCharacterError",
+      "explanation": "`btoa` encodes a string of characters 0-255 as base64 and `atob` decodes it. To base64 UTF-8 text you must convert to bytes first, which gives `w6k=` for `é`, the same as Node's `Buffer.from('é').toString('base64')`. A character above 255, like the emoji, makes `btoa` throw an `InvalidCharacterError`.",
+      "materials": [
+        "buffer",
+        "textenc"
+      ]
+    }
+  ]
+}
