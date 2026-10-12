@@ -27,6 +27,7 @@ function fmt(v, depth) {
   if (typeof v === 'bigint') return v + 'n';
   if (typeof v === 'symbol') return v.toString();
   if (typeof v === 'function') return '[' + (/^class\b/.test(Function.prototype.toString.call(v)) ? 'class' : 'Function') + ': ' + (v.name || '(anonymous)') + ']';
+  if (Object.is(v, -0)) return '-0';
   if (v === null || typeof v !== 'object') return String(v);
   if (depth > 2) return Array.isArray(v) ? '[Array]' : '[Object]';
   if (v instanceof Error) return v.stack && !nested ? v.name + ': ' + v.message : '[' + v.name + ': ' + v.message + ']';
