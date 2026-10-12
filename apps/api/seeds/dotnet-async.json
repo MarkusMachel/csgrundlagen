@@ -1,0 +1,1513 @@
+{
+  "name": ".NET: async and concurrency",
+  "materials": [
+    {
+      "key": "async-scenarios",
+      "type": "article",
+      "title": "Asynchronous programming scenarios",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/async-scenarios",
+      "author": "Microsoft Learn",
+      "description": "When to use async/await for I/O-bound and CPU-bound work, and the common pitfalls such as async void and blocking."
+    },
+    {
+      "key": "await-op",
+      "type": "article",
+      "title": "await operator (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/await",
+      "author": "Microsoft Learn",
+      "description": "How await suspends an async method, the awaitable pattern, and where await may appear."
+    },
+    {
+      "key": "async-kw",
+      "type": "article",
+      "title": "async (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/async",
+      "author": "Microsoft Learn",
+      "description": "What the async modifier does, valid return types, and why async void is meant for event handlers."
+    },
+    {
+      "key": "tap",
+      "type": "article",
+      "title": "Task-based asynchronous pattern (TAP)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap",
+      "author": "Microsoft Learn",
+      "description": "How TAP methods start, report exceptions through the returned task, and support cancellation."
+    },
+    {
+      "key": "consuming-tap",
+      "type": "article",
+      "title": "Consuming the Task-based Asynchronous Pattern",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/consuming-the-task-based-asynchronous-pattern",
+      "author": "Microsoft Learn",
+      "description": "Await mechanics, WhenAll and WhenAny combinators, ConfigureAwait, and Task.Run versus StartNew."
+    },
+    {
+      "key": "cancellation",
+      "type": "article",
+      "title": "Cancellation in managed threads",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads",
+      "author": "Microsoft Learn",
+      "description": "The cooperative cancellation model: CancellationTokenSource, tokens, callbacks and linked sources."
+    },
+    {
+      "key": "task-cancel",
+      "type": "article",
+      "title": "Task cancellation",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/task-cancellation",
+      "author": "Microsoft Learn",
+      "description": "How a token passed to a task affects whether it runs and how it ends in the Canceled state."
+    },
+    {
+      "key": "tpl-exceptions",
+      "type": "article",
+      "title": "Exception handling (Task Parallel Library)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/exception-handling-task-parallel-library",
+      "author": "Microsoft Learn",
+      "description": "How tasks store exceptions in AggregateException and how waiting and awaiting surface them."
+    },
+    {
+      "key": "channels",
+      "type": "article",
+      "title": "System.Threading.Channels library",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/channels",
+      "author": "Microsoft Learn",
+      "description": "Bounded and unbounded channels, full modes, and producer/consumer patterns with ChannelReader and ChannelWriter."
+    },
+    {
+      "key": "hosted-services",
+      "type": "article",
+      "title": "Background tasks with hosted services in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services",
+      "author": "Microsoft Learn",
+      "description": "IHostedService and BackgroundService: ExecuteAsync, the stopping token, scoped services and queued work."
+    },
+    {
+      "key": "workers",
+      "type": "article",
+      "title": "Worker services in .NET",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/workers",
+      "author": "Microsoft Learn",
+      "description": "How BackgroundService-based workers start, run and stop inside the generic host."
+    },
+    {
+      "key": "scoped-service",
+      "type": "article",
+      "title": "Use scoped services within a BackgroundService",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/scoped-service",
+      "author": "Microsoft Learn",
+      "description": "Creating a DI scope inside a singleton hosted service to consume scoped dependencies."
+    },
+    {
+      "key": "plinq-intro",
+      "type": "article",
+      "title": "Introduction to PLINQ",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/introduction-to-plinq",
+      "author": "Microsoft Learn",
+      "description": "How AsParallel works, degree of parallelism, ForAll and how PLINQ decides to run sequentially."
+    },
+    {
+      "key": "plinq-order",
+      "type": "article",
+      "title": "Order preservation in PLINQ",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/order-preservation-in-plinq",
+      "author": "Microsoft Learn",
+      "description": "Why PLINQ results are unordered by default and how AsOrdered changes that."
+    },
+    {
+      "key": "plinq-pitfalls",
+      "type": "article",
+      "title": "Potential pitfalls with PLINQ",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/potential-pitfalls-with-plinq",
+      "author": "Microsoft Learn",
+      "description": "Common PLINQ mistakes, including shared state and preferring ForAll to foreach."
+    },
+    {
+      "key": "parallel-local",
+      "type": "article",
+      "title": "How to write a Parallel.For loop with thread-local variables",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/parallel-programming/how-to-write-a-parallel-for-loop-with-thread-local-variables",
+      "author": "Microsoft Learn",
+      "description": "Using localInit and localFinally to accumulate per-task subtotals without contention."
+    },
+    {
+      "key": "foreachasync",
+      "type": "article",
+      "title": "Parallel.ForEachAsync method",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.parallel.foreachasync",
+      "author": "Microsoft Learn",
+      "description": "API reference for running async loop bodies with a bounded degree of parallelism."
+    },
+    {
+      "key": "async-streams",
+      "type": "article",
+      "title": "Generate and consume async streams",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/generate-consume-asynchronous-stream",
+      "author": "Microsoft Learn",
+      "description": "Writing async iterators with IAsyncEnumerable<T>, await foreach and cancellation."
+    },
+    {
+      "key": "disposeasync",
+      "type": "article",
+      "title": "Implement a DisposeAsync method",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-disposeasync",
+      "author": "Microsoft Learn",
+      "description": "IAsyncDisposable, await using, ConfigureAwait on disposal, and combining it with IDisposable."
+    },
+    {
+      "key": "tcs",
+      "type": "article",
+      "title": "TaskCompletionSource<TResult> class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.taskcompletionsource-1",
+      "author": "Microsoft Learn",
+      "description": "API reference for creating a task whose completion you control with SetResult, TrySetResult and related methods."
+    },
+    {
+      "key": "task-creation-options",
+      "type": "article",
+      "title": "TaskCreationOptions enum",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.taskcreationoptions",
+      "author": "Microsoft Learn",
+      "description": "Options such as LongRunning and RunContinuationsAsynchronously that change how tasks are scheduled."
+    },
+    {
+      "key": "semaphoreslim",
+      "type": "article",
+      "title": "SemaphoreSlim class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.threading.semaphoreslim",
+      "author": "Microsoft Learn",
+      "description": "API reference for the lightweight semaphore with WaitAsync for async mutual exclusion and throttling."
+    },
+    {
+      "key": "periodictimer",
+      "type": "article",
+      "title": "PeriodicTimer class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.threading.periodictimer",
+      "author": "Microsoft Learn",
+      "description": "API reference for the async-friendly timer awaited with WaitForNextTickAsync."
+    },
+    {
+      "key": "timers",
+      "type": "article",
+      "title": "Timers in .NET",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/threading/timers",
+      "author": "Microsoft Learn",
+      "description": "Overview of System.Threading.Timer and the other timer types and how their callbacks run."
+    },
+    {
+      "key": "starvation",
+      "type": "article",
+      "title": "Debug thread pool starvation",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/diagnostics/debug-threadpool-starvation",
+      "author": "Microsoft Learn",
+      "description": "How blocking calls starve the thread pool, what the symptoms look like, and how to fix the cause."
+    },
+    {
+      "key": "waitasync",
+      "type": "article",
+      "title": "Task.WaitAsync method",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task.waitasync",
+      "author": "Microsoft Learn",
+      "description": "API reference for waiting on a task with a timeout or cancellation token without affecting the task."
+    },
+    {
+      "key": "configureawait-options",
+      "type": "article",
+      "title": "ConfigureAwaitOptions enum",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.configureawaitoptions",
+      "author": "Microsoft Learn",
+      "description": "The .NET 8 options for ConfigureAwait, including SuppressThrowing and ForceYielding."
+    },
+    {
+      "key": "asynclocal",
+      "type": "article",
+      "title": "AsyncLocal<T> class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.threading.asynclocal-1",
+      "author": "Microsoft Learn",
+      "description": "API reference for ambient data that flows with the ExecutionContext across awaits."
+    },
+    {
+      "key": "configureawait-faq",
+      "type": "article",
+      "title": "ConfigureAwait FAQ",
+      "url": "https://devblogs.microsoft.com/dotnet/configureawait-faq/",
+      "author": "Stephen Toub (.NET Blog)",
+      "description": "What ConfigureAwait(false) does and does not do, and when library code should use it."
+    },
+    {
+      "key": "lazy-init",
+      "type": "article",
+      "title": "Lazy initialization",
+      "url": "https://learn.microsoft.com/en-us/dotnet/framework/performance/lazy-initialization",
+      "author": "Microsoft Learn",
+      "description": "Lazy<T> and its thread-safety modes for creating a value once on first use."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple-choice",
+      "prompt": "`await Task.WhenAll(a, b)` throws, and both `a` and `b` faulted. How do you get every exception, not just the one that `await` rethrew?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Keep the `Task` returned by `WhenAll` in a variable and read its `Exception.InnerExceptions`",
+        "Catch `AggregateException` around the `await`, because `await` wraps several failures in one",
+        "Read `InnerException` on the caught exception, which chains the second failure onto the first",
+        "Read the caught exception's `Data` dictionary, where `await` stores the other tasks' exceptions"
+      ],
+      "correct": 0,
+      "explanation": "The task returned by WhenAll holds an AggregateException with one inner exception per failed task, but `await` rethrows just the first of them. Keeping the WhenAll task and reading `task.Exception.InnerExceptions` gives you all of them. `await` never throws an AggregateException for a faulted task, InnerException on the rethrown exception is whatever that exception itself wrapped, and the Data dictionary is not used for this.",
+      "materials": [
+        "tpl-exceptions",
+        "consuming-tap"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`var first = await Task.WhenAny(callA, callB);` returns when `callA` completes. What happens to `callB`?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It is canceled automatically, because WhenAny signals the losing tasks' cancellation tokens",
+        "It is aborted at its next await point, and its Task ends in the Canceled state",
+        "It keeps running; WhenAny just observes tasks, so you cancel `callB` yourself through a token",
+        "It is moved off the thread pool and finishes synchronously on the caller's thread later"
+      ],
+      "correct": 2,
+      "explanation": "Task.WhenAny returns a task that completes when any input completes; it has no way to stop the other tasks, because tasks know nothing about each other and cancellation in .NET is cooperative. To stop the loser, give both operations a token from a shared CancellationTokenSource and cancel it once you have a winner. Nothing aborts tasks at await points, and WhenAny does not move work between threads.",
+      "materials": [
+        "consuming-tap",
+        "cancellation"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`await LoadAsync().WaitAsync(TimeSpan.FromSeconds(2))` takes longer than two seconds. What happens?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The await throws a `TaskCanceledException`, and `LoadAsync` is stopped at its next await",
+        "The await returns `default` for the result, while the operation keeps going in the background",
+        "The await throws a `TimeoutException`, and the runtime cancels the token passed into `LoadAsync`",
+        "The await throws a `TimeoutException`, and `LoadAsync` keeps running because just the wait gave up"
+      ],
+      "correct": 3,
+      "explanation": "Task.WaitAsync (added in .NET 6) returns a task that completes when the original task does or faults with TimeoutException when the timeout elapses first. It does not touch the original operation, which keeps running; to stop it you must pass a CancellationToken into LoadAsync. The TaskCanceledException case applies to WaitAsync(CancellationToken) when the token is canceled, and WaitAsync never invents a default result.",
+      "materials": [
+        "waitasync"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A method awaits `Task.Delay(5000, token)` and also calls `token.ThrowIfCancellationRequested()`. Which `catch` clause handles cancellation from both?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`catch (TaskCanceledException)`, the type that `ThrowIfCancellationRequested` throws",
+        "`catch (OperationCanceledException)`, the base type that `TaskCanceledException` derives from",
+        "`catch (AggregateException)`, since cancellation of an awaited task is wrapped in one",
+        "`catch (ObjectDisposedException)`, since a canceled token disposes its source"
+      ],
+      "correct": 1,
+      "explanation": "Task.Delay throws TaskCanceledException, while ThrowIfCancellationRequested throws a plain OperationCanceledException. TaskCanceledException derives from OperationCanceledException, so catching the base type covers both. Catching TaskCanceledException would miss the plain one, `await` does not wrap cancellation in an AggregateException, and canceling a token does not dispose anything.",
+      "materials": [
+        "cancellation",
+        "task-cancel"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A long-lived service calls `CancellationTokenSource.CreateLinkedTokenSource(appStopping, requestToken)` for every request. Why must each linked source be disposed?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Disposing cancels the linked token, which is how the request signals that it finished cleanly",
+        "Disposing also disposes the parent sources, so the app can shut down without leaking them",
+        "Undisposed linked sources stop the parent token from being canceled once too many of them exist",
+        "Disposing removes its registration on the parent tokens; otherwise each request leaves one behind on `appStopping`"
+      ],
+      "correct": 3,
+      "explanation": "A linked source registers a callback on each parent token so it can cancel itself when a parent is canceled. Those registrations live as long as the parent unless the linked source is disposed, so a long-lived parent such as an application-stopping token accumulates one registration per request: a memory leak. Disposing does not cancel the token, does not touch the parents, and extra registrations do not prevent cancellation.",
+      "materials": [
+        "cancellation"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Where is an `async void` method an acceptable choice?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "For event handlers, whose delegate signature requires a `void` return",
+        "For fire-and-forget calls in a library, so callers don't have to await the work",
+        "For `Main`, because the entry point is not allowed to return a `Task`",
+        "For hot paths, because returning `void` avoids allocating a `Task`"
+      ],
+      "correct": 0,
+      "explanation": "async void exists so that event handlers, whose delegate types return void, can use await. Callers cannot await an async void method or catch its exceptions, which instead go to the synchronization context and usually crash the process, so library fire-and-forget code should return a Task. `static async Task Main` has been allowed since C# 7.1, and the allocation argument is what ValueTask addresses, not async void.",
+      "materials": [
+        "async-kw",
+        "async-scenarios"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What is wrong with this method, which returns the task directly instead of awaiting it?\n\n```csharp\nstatic Task<string> ReadAsync()\n{\n    using var reader = new StreamReader(\"data.txt\");\n    return reader.ReadToEndAsync();\n}\n```",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Nothing; returning the task directly is the same as awaiting it, just without a state machine",
+        "It returns before the read finishes, so `reader` is disposed while the read may still be running",
+        "It deadlocks, because `ReadToEndAsync` waits for the `using` scope to end before it can finish",
+        "It fails to compile, because a `using` declaration is not allowed in a method returning a Task"
+      ],
+      "correct": 1,
+      "explanation": "Without `async`/`await`, the method returns as soon as ReadToEndAsync hands back its task, and the using declaration disposes the reader at that moment, while the read is still in progress; the task can then fail with ObjectDisposedException. With `return await`, disposal waits until the read completes. Eliding await is only equivalent when nothing (using, try/finally, catch) must run after the operation, there is no deadlock involved, and the code compiles fine.",
+      "materials": [
+        "async-scenarios",
+        "await-op"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Why is `new TaskCompletionSource<T>(TaskCreationOptions.RunContinuationsAsynchronously)` commonly recommended?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Otherwise `SetResult` throws when it is called from a thread other than the one that created the source",
+        "Otherwise the returned task supports just one awaiting consumer at a time",
+        "Otherwise awaiting code may run inline inside `SetResult`, on the completing thread and under any lock it holds",
+        "Otherwise the source starts a dedicated thread per waiter, which this option replaces with the pool"
+      ],
+      "correct": 2,
+      "explanation": "By default, completing a TaskCompletionSource can run awaiting continuations synchronously inside the SetResult call, so the producer suddenly executes consumer code, possibly while holding a lock, which can cause reentrancy bugs or deadlocks. RunContinuationsAsynchronously forces those continuations to be queued instead. SetResult works from any thread, many consumers can await the same task, and a TaskCompletionSource never starts threads.",
+      "materials": [
+        "task-creation-options",
+        "tcs"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A loop runs `while (await timer.WaitForNextTickAsync(ct)) { await WorkAsync(); }` with a 1-second `PeriodicTimer`, and one `WorkAsync` call takes 3.5 seconds. What happens next?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The next wait completes at once, standing in for the missed ticks, and then the loop is back on the 1-second cadence",
+        "The three missed ticks are queued, so the loop runs `WorkAsync` three times back to back to catch up",
+        "The timer throws `InvalidOperationException`, because a tick fired while no wait was pending",
+        "A second `WorkAsync` starts in parallel at each missed tick, overlapping with the slow call"
+      ],
+      "correct": 0,
+      "explanation": "A PeriodicTimer remembers at most one tick that fired while nobody was waiting, so after slow work the next WaitForNextTickAsync completes immediately and later ticks follow the original schedule; missed ticks are not queued up. It also never invokes a callback, so work cannot overlap: the loop body runs only when you await the next tick. Ticks that fire with no pending wait are normal, not an error.",
+      "materials": [
+        "periodictimer"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A worker runs a loop that calls a blocking, synchronous SDK for the whole life of the process. Which way of starting it avoids tying up a thread-pool thread indefinitely?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Task.Run(Loop)`, because Task.Run detects long blocking work and moves it to its own thread",
+        "`Task.Factory.StartNew(Loop, TaskCreationOptions.LongRunning)`, which hints the scheduler to use a dedicated thread",
+        "`Parallel.Invoke(Loop)`, because the Parallel methods run their delegates outside the pool",
+        "`await Task.Yield()` before calling `Loop`, so the blocking work moves off the pool afterwards"
+      ],
+      "correct": 1,
+      "explanation": "TaskCreationOptions.LongRunning tells the default scheduler that the work is long and coarse-grained, and it creates a dedicated thread for it instead of using a pool thread. Task.Run always queues to the thread pool and does not detect blocking, Parallel.Invoke runs its delegates on pool threads and the calling thread, and Task.Yield merely resumes the method on the pool, where the blocking loop would still hold a pool thread.",
+      "materials": [
+        "task-creation-options",
+        "starvation"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In .NET 8, a `BackgroundService.ExecuteAsync` starts with ten seconds of synchronous work before its first `await`. What is the effect?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "None; the host calls `ExecuteAsync` on a thread-pool thread, so the synchronous part runs in the background",
+        "The host detects the blocking call and fails startup with an `InvalidOperationException`",
+        "The stopping token is canceled after a 5-second startup timeout and the service is skipped",
+        "Host startup waits for that synchronous part, so other hosted services start and `StartAsync` returns 10 s later"
+      ],
+      "correct": 3,
+      "explanation": "In .NET 8 and 9, BackgroundService.StartAsync calls ExecuteAsync directly on the starting thread and stores the returned task, so everything before the first real await runs during host startup and delays the next hosted service and the app as a whole (.NET 10 changed this to run the whole method as a background task). The usual fix is to start with `await Task.Yield()` or move the work into an awaited call. The host does not detect blocking, and there is no 5-second startup timeout that skips services.",
+      "materials": [
+        "hosted-services",
+        "workers"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A `BackgroundService` needs a scoped `IOrderRepository` on each loop iteration. What is the correct way to get it?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Inject `IOrderRepository` into the constructor; the host opens a new scope for each loop iteration",
+        "Register the hosted service itself as scoped with `AddScoped<IHostedService, Worker>()`",
+        "Inject `IServiceScopeFactory`, create a scope for each iteration, and resolve the repository from that scope",
+        "Resolve `IOrderRepository` from the root `IServiceProvider` at the start of each iteration"
+      ],
+      "correct": 2,
+      "explanation": "Hosted services are singletons, so a scoped dependency injected into the constructor would be captured for the app's lifetime (and scope validation rejects it in Development). The documented pattern is to inject IServiceScopeFactory and create a scope, ideally with CreateAsyncScope, around each unit of work, disposing it afterwards. The host never creates scopes per iteration, a scoped hosted service is still resolved once at startup, and resolving scoped services from the root provider either throws under scope validation or effectively turns them into singletons.",
+      "materials": [
+        "scoped-service",
+        "hosted-services"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A library method contains three awaits. Why does guidance say to apply `ConfigureAwait(false)` to each of them, not just the first?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "If the first awaited task is already complete, the method stays on the original context, and a later plain await would capture it",
+        "The effect of `ConfigureAwait(false)` expires at the end of the statement, and the runtime then switches back to the captured context",
+        "The compiler reports a warning for any await after the first one in a method that lacks it",
+        "Leaving it off later awaits makes the first one throw `InvalidOperationException` at run time"
+      ],
+      "correct": 0,
+      "explanation": "ConfigureAwait(false) only matters when the await actually suspends. If the first awaited task has already completed, execution continues synchronously on the caller's context, so a later await without ConfigureAwait(false) would capture that context and resume on it. When an await does suspend with ConfigureAwait(false), the method does not switch back later on its own; there is no compiler warning for this, and mixing styles does not throw.",
+      "materials": [
+        "configureawait-faq"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A consumer runs `await foreach (var item in channel.Reader.ReadAllAsync())`. When does the loop end?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "As soon as the channel is momentarily empty, so the consumer has to restart the loop later",
+        "When the writer calls `Complete()`, which discards any items that had not been read yet",
+        "When the reader's internal timeout of 100 seconds expires without a new item arriving",
+        "When the writer has called `Complete()` and the consumer has read the items still in the channel"
+      ],
+      "correct": 3,
+      "explanation": "ReadAllAsync waits asynchronously while the channel is empty and ends only when the channel is completed and drained. Complete() marks that no more items will be written, but items already buffered are still delivered to readers. An empty channel just makes the reader wait, and there is no built-in read timeout; you would pass a CancellationToken for that.",
+      "materials": [
+        "channels"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "This loop sometimes produces the wrong total. Which fix keeps it parallel and avoids contention on every iteration?\n\n```csharp\nlong total = 0;\nParallel.For(0, 1_000_000, i => { total += i; });\n```",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Declare `total` as `volatile` so each thread reads the latest value before it adds to it",
+        "Use the overload with `localInit`/`localFinally`: sum into a per-task local and add each subtotal once at the end",
+        "Wrap the body in `lock (gate) { total += i; }`, which is the cheapest way to make the add atomic",
+        "Switch to `Parallel.ForEachAsync`, which runs the iterations one at a time on a single thread"
+      ],
+      "correct": 1,
+      "explanation": "`total += i` is a read-modify-write, so two threads can read the same value and lose an update. The thread-local overload of Parallel.For gives each task its own running subtotal and combines them once in localFinally (with Interlocked.Add or a lock), so synchronization happens a handful of times instead of a million. volatile does not make += atomic, a lock per iteration is correct but serializes the loop, and Parallel.ForEachAsync is also concurrent.",
+      "materials": [
+        "parallel-local"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "With PLINQ, why can `query.ForAll(item => Process(item))` be faster than `foreach (var item in query) Process(item);`?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`ForAll` preserves the source order, while `foreach` has to sort the results after merging them",
+        "`foreach` over a parallel query runs the whole query sequentially on the calling thread",
+        "`ForAll` runs `Process` on the worker threads directly, skipping the merge of results back to one consuming thread",
+        "`ForAll` caches the query's results, so repeated calls skip the parallel work entirely"
+      ],
+      "correct": 2,
+      "explanation": "With foreach, the parallel results are merged back and Process runs serially on the enumerating thread, so only the query part is parallel and the merge adds overhead. ForAll invokes the action on each partition's worker thread with no merge, so Process itself runs in parallel (and must therefore be thread-safe). ForAll does not preserve order, foreach does still run the query in parallel, and PLINQ does not cache results.",
+      "materials": [
+        "plinq-pitfalls",
+        "plinq-intro"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`class Conn : IAsyncDisposable { ... }` does not implement `IDisposable`. What does `using (var c = new Conn()) { }` do?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It fails to compile (CS8418), and the compiler suggests `await using` instead",
+        "It compiles and calls `DisposeAsync()` synchronously, blocking until it completes",
+        "It compiles, but `DisposeAsync()` is skipped because a plain `using` looks for `Dispose()`",
+        "It compiles and calls `DisposeAsync()` without awaiting it, so disposal runs in the background"
+      ],
+      "correct": 0,
+      "explanation": "A plain using statement needs a type convertible to IDisposable (or a pattern Dispose for ref structs), so the compiler reports CS8418: \"type used in a using statement must be implicitly convertible to 'System.IDisposable'. Did you mean 'await using' rather than 'using'?\". The compiler never quietly blocks on, skips or fires off DisposeAsync; you choose async disposal explicitly with `await using`.",
+      "materials": [
+        "disposeasync"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A caller writes `await foreach (var x in ReadAsync().WithCancellation(token))`, where `ReadAsync` is `async IAsyncEnumerable<int> ReadAsync(CancellationToken ct = default)`. What makes `token` reach `ct`?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Marking the `ct` parameter with `[EnumeratorCancellation]`, so the compiler passes the WithCancellation token into it",
+        "Nothing extra; the compiler passes the WithCancellation token to any CancellationToken parameter of an iterator",
+        "Returning `IAsyncEnumerator<int>` instead, because enumerators accept tokens and enumerables do not",
+        "Calling `ConfigureAwait(false)` after `WithCancellation`, which forwards the token to the iterator method"
+      ],
+      "correct": 0,
+      "explanation": "WithCancellation passes the token to GetAsyncEnumerator; the compiler-generated enumerable forwards it into the iterator body only through a parameter marked [EnumeratorCancellation]. Without the attribute, `ct` stays default, the token is ignored, and the compiler emits warning CS8425. Returning an enumerator does not help callers using await foreach, and ConfigureAwait only controls context capture.",
+      "materials": [
+        "async-streams"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`Task t = Task.Factory.StartNew(async () => { await Task.Delay(1000); Save(); });` is followed by `await t;`. When does `await t` complete?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "After `Save()` has run, just as with `Task.Run`, because StartNew unwraps async lambdas",
+        "It does not compile, because StartNew has no overload that accepts an async lambda",
+        "After `Save()` has run, but on a dedicated thread instead of the thread pool",
+        "Almost at once: `t` is really a `Task<Task>` that completes when the lambda reaches its first await"
+      ],
+      "correct": 3,
+      "explanation": "StartNew treats the async lambda as a Func<Task>, so it returns Task<Task>: the outer task completes as soon as the lambda returns its inner task at the first await, and assigning it to Task hides the problem. Task.Run has overloads that unwrap async delegates, which is why it waits for Save(); with StartNew you need `.Unwrap()` or `await await`. The code compiles, and nothing here asks for a dedicated thread.",
+      "materials": [
+        "consuming-tap"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Inside an `async` method, what is the problem with `Thread.Sleep(1000)` compared with `await Task.Delay(1000)`?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`Thread.Sleep` throws inside async methods, because an async method has no thread of its own to suspend",
+        "`Thread.Sleep` also pauses the other pending async methods in the process until it returns",
+        "`Thread.Sleep` blocks the current thread for the whole second; `Task.Delay` frees it until a timer completes the task",
+        "Nothing; in async methods the compiler rewrites `Thread.Sleep` into an awaited `Task.Delay`"
+      ],
+      "correct": 2,
+      "explanation": "Thread.Sleep blocks whichever thread is running the method, wasting a pool thread (or freezing the UI thread) for the whole interval. Task.Delay returns a task completed by a timer, so `await` releases the thread meanwhile. Thread.Sleep works fine inside async methods, it only blocks its own thread rather than the whole process, and the compiler does not rewrite it.",
+      "materials": [
+        "async-scenarios"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A task you are blocking on faults with `InvalidOperationException`. How do `task.Result` and `task.GetAwaiter().GetResult()` differ?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`.Result` throws an `AggregateException` wrapping it; `GetAwaiter().GetResult()` throws the `InvalidOperationException` itself",
+        "`GetAwaiter().GetResult()` waits without blocking the thread, so it avoids sync-over-async deadlocks",
+        "`.Result` returns `default` for a faulted task, while `GetAwaiter().GetResult()` throws",
+        "Both throw `AggregateException`; `GetResult` additionally marks the exception as observed"
+      ],
+      "correct": 0,
+      "explanation": "Both block the calling thread until the task completes. `.Result` and `.Wait()` wrap the failure in an AggregateException, while `GetAwaiter().GetResult()` is what `await` uses and rethrows the original exception with its stack trace preserved. Because it still blocks, it deadlocks in exactly the same situations as `.Result`, and neither returns default for a faulted task.",
+      "materials": [
+        "tpl-exceptions",
+        "consuming-tap"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "At startup, 50 requests call `GetConfigAsync` concurrently. What happens, and what is a good fix?\n\n```csharp\nprivate Config? _config;\npublic async Task<Config> GetConfigAsync()\n{\n    if (_config is null)\n        _config = await LoadConfigAsync(); // slow HTTP call\n    return _config;\n}\n```",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It deadlocks, because the second caller waits on the first caller's continuation; add `ConfigureAwait(false)`",
+        "`LoadConfigAsync` can run up to 50 times; cache the task, e.g. in a `Lazy<Task<Config>>`, so every caller awaits one load",
+        "It loads once, because `await` lets one caller at a time through the method; no change is needed",
+        "It loads once but may return null to some callers; marking `_config` as `volatile` fixes it"
+      ],
+      "correct": 1,
+      "explanation": "Every caller that checks `_config` before the first load finishes sees null and starts its own LoadConfigAsync, because the check and the assignment are separated by an await. Caching the task instead of the result (a Lazy<Task<Config>> with the default thread-safe mode, or a task stored once) makes all callers await the same in-flight load. Nothing here blocks, so there is no deadlock; await does not serialize callers; and volatile does not make check-then-act atomic.",
+      "materials": [
+        "lazy-init",
+        "async-scenarios"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In an `async Task SendAsync(string to)` method, `ArgumentNullException.ThrowIfNull(to)` before the first await puts the exception into the returned task instead of throwing at the call. Which change makes the check throw synchronously at the call site?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Make `SendAsync` non-async: validate, then return the task of a private async local function that does the awaiting",
+        "Move the check after the first `await`, so it runs once the method is executing asynchronously",
+        "Add `ConfigureAwait(false)` to the await, which makes the code before it throw directly to the caller",
+        "Mark the method `async void`, which rethrows argument exceptions on the caller's stack"
+      ],
+      "correct": 0,
+      "explanation": "In an async method every exception, even one thrown before the first await, is captured into the returned task, so it surfaces only when the task is awaited. Splitting the method into a non-async wrapper that validates and an async local function that awaits makes usage errors throw immediately, as TAP guidance suggests. Moving the check later delays it further, ConfigureAwait has no effect on exception capture, and async void sends exceptions to the synchronization context where the caller cannot catch them.",
+      "materials": [
+        "tap"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In a Release build, when is the compiler-generated state machine of an `async Task` method copied to the heap?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "On each call, because the compiler generates the state machine as a class in Release builds",
+        "At no point; it stays on the stack, and the continuation later resumes from the original stack frame",
+        "When the method returns a value, because `Task<T>` stores the whole state machine as its result",
+        "When the method first awaits something that has not completed yet, so its state must outlive the call"
+      ],
+      "correct": 3,
+      "explanation": "In Release builds the state machine is a struct that starts on the caller's stack, and if every await completes synchronously it never leaves it. The first await that must suspend boxes the state machine onto the heap so its fields (the hoisted locals) survive after the method returns, and the continuation resumes from there. Debug builds use a class, the original stack frame is gone after returning, and Task<T> stores only the result.",
+      "materials": [
+        "await-op",
+        "async-scenarios"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Why are `System.Threading.Channels` usually preferred over `BlockingCollection<T>` for a producer/consumer queue in async code?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`BlockingCollection<T>` loses items when two consumers call `Take()` at the same moment",
+        "`BlockingCollection<T>` has no bounded mode, so it gives the producer no backpressure",
+        "`BlockingCollection.Take()` blocks a thread while waiting; `ChannelReader.ReadAsync` releases it until an item arrives",
+        "Channels persist their items to disk, so the queue survives a process restart"
+      ],
+      "correct": 2,
+      "explanation": "BlockingCollection is thread-safe and supports a bounded capacity, but its Take and Add block threads while waiting, which wastes pool threads in async code. Channels offer the same producer/consumer model with ReadAsync and WriteAsync that wait without holding a thread. BlockingCollection does not lose items under concurrent consumers, and channels are in-memory only.",
+      "materials": [
+        "channels"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Calling `token.Register(callback)` on a token that is already canceled runs the callback immediately, on the calling thread, before `Register` returns.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "If cancellation has already been requested, Register invokes the callback synchronously right away instead of storing it. This means code that registers late is still notified, but it also means the callback runs on the registering thread, so it must not assume it runs during Cancel().",
+      "materials": [
+        "cancellation"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`CancellationToken.None` and `default(CancellationToken)` both report `CanBeCanceled` as `false`.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "Both are the same empty token with no CancellationTokenSource behind it, so nothing can ever cancel them and CanBeCanceled is false. APIs can use this to skip registering callbacks, which is why passing CancellationToken.None is cheap.",
+      "materials": [
+        "cancellation"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Calling `Dispose()` on a `CancellationTokenSource` cancels its token.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "Dispose only releases the source's resources (such as its timer and wait handle); a token from a disposed source simply never becomes canceled. To signal cancellation you must call Cancel() or CancelAfter(), and dispose the source afterwards.",
+      "materials": [
+        "cancellation"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`Task.WhenAll` called with an empty collection returns a task that has already completed successfully.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "With no tasks to wait for, WhenAll returns a task in the RanToCompletion state (for WhenAll<T>, its result is an empty array). It does not throw or wait, so code that awaits WhenAll over a possibly empty list works without a special case.",
+      "materials": [
+        "consuming-tap"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `System.Threading.Timer` callback can start again on another thread while the previous call is still running, if the callback takes longer than the period.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "System.Threading.Timer queues each callback to the thread pool when it is due, regardless of whether the previous one finished, so slow callbacks overlap and must be thread-safe. PeriodicTimer avoids this by having you await ticks in a loop, so the next iteration starts only after the previous work completes.",
+      "materials": [
+        "timers",
+        "periodictimer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Two loops can safely await the same `PeriodicTimer`'s `WaitForNextTickAsync` at the same time, each receiving every tick.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "PeriodicTimer supports a single consumer: only one WaitForNextTickAsync call may be outstanding at a time, and starting a second while the first is pending throws InvalidOperationException. To fan ticks out to several workers, have one loop await the timer and signal the others, for example through a channel.",
+      "materials": [
+        "periodictimer"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`await using` on an object that implements both `IAsyncDisposable` and `IDisposable` calls `DisposeAsync()` and then `Dispose()`.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "`await using` calls only DisposeAsync(). A type that implements both interfaces is expected to release everything from either method, with the usual pattern sharing a DisposeAsyncCore/Dispose(bool) implementation, so callers pick exactly one of them.",
+      "materials": [
+        "disposeasync"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`Parallel.ForEachAsync` without `ParallelOptions` limits the number of concurrently running iterations to `Environment.ProcessorCount`.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "When no MaxDegreeOfParallelism is given, Parallel.ForEachAsync uses Environment.ProcessorCount as its limit (unlike Parallel.ForEach, whose default is unbounded). For I/O-bound bodies such as HTTP calls you usually set MaxDegreeOfParallelism explicitly to match what the downstream service tolerates.",
+      "materials": [
+        "foreachasync"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In a `BackgroundService`, the `stoppingToken` passed to `ExecuteAsync` is canceled when the host begins a graceful shutdown.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "When the host stops, it calls StopAsync on each hosted service, and BackgroundService.StopAsync cancels the token it passed to ExecuteAsync and then waits for the ExecuteAsync task to finish or for the shutdown timeout. ExecuteAsync should pass the token to its awaits so it can exit promptly.",
+      "materials": [
+        "hosted-services",
+        "workers"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Without `AsOrdered()`, `list.AsParallel().Where(x => x > 0).ToList()` is guaranteed to keep the elements in source order.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "PLINQ treats queries as unordered by default so partitions can produce results as they go; the result may happen to come out in order for small inputs, but nothing guarantees it. Add AsOrdered() when order matters, accepting some extra cost.",
+      "materials": [
+        "plinq-order"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In which of these calls does the `async` lambda become an `async void` method, so the caller cannot await it or catch its exceptions?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`list.ForEach(async x => await SaveAsync(x))`",
+        "`Task.Run(async () => await SaveAsync(item))`",
+        "`Parallel.ForEach(items, async x => await SaveAsync(x))`",
+        "`Parallel.ForEachAsync(items, async (x, ct) => await SaveAsync(x))`",
+        "`button.Click += async (s, e) => await SaveAsync(item)`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "An async lambda becomes async void whenever the target delegate returns void: List<T>.ForEach and Parallel.ForEach take an Action<T>, and event handlers return void. The first two then return before the saves finish, and exceptions escape to the thread pool. Task.Run has Func<Task> overloads and Parallel.ForEachAsync takes a Func<T, CancellationToken, ValueTask>, so both await the lambda's work.",
+      "materials": [
+        "async-scenarios",
+        "async-kw"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about thread-pool starvation are true?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Once its minimum is reached, the pool adds threads gradually rather than all at once, so a burst of blocked threads causes queuing",
+        "Requests can be slow while CPU usage stays low",
+        "Wrapping the blocking `.Result` calls in more `Task.Run` calls fixes it",
+        "Many requests blocking on `.Result` or `.Wait()` of async calls is a common cause",
+        "It happens only when every CPU core is at 100%"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Starvation means work items are queued but no pool thread is free to run them, typically because threads are blocked in sync-over-async calls; the pool's thread injection is deliberately slow beyond the minimum, so latency grows while CPU stays low. More Task.Run calls just add more work items that then block, and the problem is about blocked threads, not saturated cores. The real fix is to make the call chain asynchronous.",
+      "materials": [
+        "starvation"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `System.Threading.Channels` are true?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`writer.Complete()` discards the items that have not been read yet",
+        "On a full bounded channel with `FullMode = Wait`, `WriteAsync` waits until there is space",
+        "An unbounded channel makes the writer wait once it holds 1,000 items",
+        "On a full bounded channel with `FullMode = Wait`, `TryWrite` returns `false`",
+        "`ReadAsync` on a completed, empty channel throws `ChannelClosedException`"
+      ],
+      "correctIndices": [
+        1,
+        3,
+        4
+      ],
+      "explanation": "A bounded channel in Wait mode applies backpressure: WriteAsync waits for space while the synchronous TryWrite returns false. Complete() only stops further writes; buffered items are still read, and once the channel is completed and drained, ReadAsync throws ChannelClosedException (ReadAllAsync and WaitToReadAsync end quietly instead). Unbounded channels have no capacity limit at all, which is why they can grow without bound.",
+      "materials": [
+        "channels"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `TaskCompletionSource<T>` are true?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Calling `SetResult` a second time throws `InvalidOperationException`",
+        "Creating one starts a thread that waits for the result to be set",
+        "Many callers can await the same `tcs.Task`",
+        "`TrySetCanceled()` moves the task to the `Canceled` state",
+        "`tcs.Task` completes by itself after a default timeout of 100 seconds"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "TaskCompletionSource creates a task with no code behind it: it completes exactly once, when you call SetResult, SetException or SetCanceled (the Set methods throw if it is already completed, the TrySet versions return false). No thread is involved and there is no built-in timeout. Like any Task, its Task can be awaited by any number of callers.",
+      "materials": [
+        "tcs"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`DownloadAsync(CancellationToken ct)` honours its token. Which of these give a 5-second timeout that actually stops the download, not just the waiting for it?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));` and pass `cts.Token`",
+        "Create a source, call `cts.CancelAfter(TimeSpan.FromSeconds(5))`, and pass `cts.Token`",
+        "`await DownloadAsync(CancellationToken.None).WaitAsync(TimeSpan.FromSeconds(5))`",
+        "`await Task.WhenAny(DownloadAsync(CancellationToken.None), Task.Delay(5000))`",
+        "Link the caller's token with `CreateLinkedTokenSource`, call `CancelAfter` with 5 seconds on it, and pass its token"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "Only cancelling the token the operation observes stops the operation; the timeout constructor, CancelAfter and a linked source with CancelAfter all do that (the linked version also honours the caller's own cancellation). WaitAsync with a timeout and WhenAny with Task.Delay merely stop waiting: the download keeps running and using resources in the background.",
+      "materials": [
+        "cancellation",
+        "waitasync"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `ConfigureAwait(false)` are true?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "In a console app with no `SynchronizationContext` and the default scheduler, it does not change where the continuation runs",
+        "In a WPF event handler, code after `await x.ConfigureAwait(false)` may run off the UI thread, so it must not touch controls",
+        "It skips building the async state machine, which is why it is faster",
+        "It stops `AsyncLocal<T>` values from flowing to the continuation"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "ConfigureAwait(false) only means \"do not resume on the captured SynchronizationContext or TaskScheduler\"; where there is none, as in a console app, continuations run on the pool either way. In a UI app the continuation may then run on a pool thread, so touching controls afterwards fails. The state machine is still generated, and the ExecutionContext (and so AsyncLocal values) still flows, because that is a separate mechanism.",
+      "materials": [
+        "configureawait-faq"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A method returns `ValueTask<int>`. Which ways of consuming it are safe?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Await it once directly",
+        "Call `.AsTask()` once and then await the resulting `Task` as often as needed",
+        "Read `.Result` after checking that `IsCompletedSuccessfully` is `true`",
+        "Store it in a field and await it from two different methods",
+        "Pass it straight to `Task.WhenAll`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "A ValueTask may be backed by a pooled IValueTaskSource that is reused after the first await, so it must be consumed exactly once: await it, read Result when it has already completed successfully, or convert it with AsTask() once and use the Task freely. Awaiting it twice can read another operation's result, and Task.WhenAll accepts only Task, so passing a ValueTask does not compile.",
+      "materials": [
+        "tap",
+        "consuming-tap"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `IAsyncDisposable` and `await using` are true?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`DisposeAsync()` returns a `ValueTask`",
+        "`await using` can be used inside a non-async method that returns `void`",
+        "`await using (resource.ConfigureAwait(false))` is valid syntax",
+        "`await using var x = ...;` disposes `x` when the enclosing scope ends",
+        "Implementing `IAsyncDisposable` makes the garbage collector call `DisposeAsync()` when the object is collected"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "IAsyncDisposable.DisposeAsync returns ValueTask, and `await using` declarations dispose at the end of the scope just like using declarations. Because it awaits, `await using` is only allowed in async methods. ConfigureAwait(false) can be applied to the disposal via ConfiguredAsyncDisposable. The GC knows nothing about DisposeAsync; only a finalizer runs on collection.",
+      "materials": [
+        "disposeasync"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these contain a race condition when they run concurrently?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`foreach (var id in ids) total += await GetAsync(id);` where `total` is a local variable",
+        "Many `Task.Run(() => counter++)` calls on a shared `int` field",
+        "`if (!dict.ContainsKey(k)) dict[k] = await LoadAsync(k);` on a shared `Dictionary` from several requests",
+        "`await gate.WaitAsync(); try { counter++; } finally { gate.Release(); }` with `gate = new SemaphoreSlim(1, 1)`",
+        "`Parallel.ForEach(items, x => results.Add(x))` where `results` is a `List<T>`"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        4
+      ],
+      "explanation": "`counter++` is a non-atomic read-modify-write, the ContainsKey/assign pair is a check-then-act split by an await (and Dictionary is not thread-safe), and List<T>.Add is not safe from multiple threads. The sequential foreach awaits one call at a time, so only one continuation touches `total` at once, and the SemaphoreSlim(1, 1) serializes the increments.",
+      "materials": [
+        "semaphoreslim",
+        "async-scenarios"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `BackgroundService` in the generic host are true?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`AddHostedService<T>()` registers the service as a singleton",
+        "When `ExecuteAsync` returns normally, the host shuts down",
+        "`BackgroundService.StopAsync` cancels the stopping token and waits for `ExecuteAsync` to finish, bounded by the shutdown timeout",
+        "The host calls `ExecuteAsync` again if it completes before shutdown",
+        "Since .NET 6 the default host shutdown timeout is 30 seconds"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "Hosted services are singletons, and BackgroundService.StopAsync signals the stopping token and waits for the ExecuteAsync task or until the host's shutdown token fires; HostOptions.ShutdownTimeout defaults to 30 seconds since .NET 6 (it was 5 seconds before). If ExecuteAsync simply returns, that service is finished but the host keeps running, and nothing restarts it: a loop belongs inside ExecuteAsync.",
+      "materials": [
+        "hosted-services",
+        "workers"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about PLINQ are true?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "PLINQ is a good fit for issuing many concurrent HTTP calls",
+        "`AsOrdered()` makes the results come back in source order",
+        "PLINQ may run a query sequentially if it judges that parallelism would not pay off",
+        "An exception thrown by a delegate in a PLINQ query reaches the caller wrapped in an `AggregateException`",
+        "PLINQ runs a query on one dedicated background thread by default"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "AsOrdered restores source order, PLINQ analyses query shape and may fall back to sequential execution (unless you force parallel mode), and delegate exceptions are collected and rethrown as an AggregateException. PLINQ partitions work across several pool threads, and it targets CPU-bound work: it blocks threads while waiting, so I/O such as HTTP calls is better served by async with Task.WhenAll or Parallel.ForEachAsync.",
+      "materials": [
+        "plinq-intro",
+        "plinq-order"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about how the C# compiler builds `async` methods are true?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Local variables that are used across an `await` become fields of the state machine",
+        "An `async` method with no `await` runs synchronously to the end and returns a completed task (with warning CS1998)",
+        "Each `await` allocates a new `Task`, even when the awaited task has already completed",
+        "`await` may be used inside `catch` and `finally` blocks"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "The compiler rewrites an async method into a state machine whose fields hold the locals that must survive suspension. Without any await, the body runs synchronously and the method returns a completed task, which CS1998 warns about. Awaiting an already completed task takes a fast path with no suspension and no extra allocation, and await in catch and finally has been allowed since C# 6.",
+      "materials": [
+        "await-op",
+        "async-kw"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about cancellation are true?",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Passing a token to `Task.Run` does not stop a delegate that is already running; the delegate must check the token itself",
+        "`TryReset()` (.NET 6+) lets you reuse a source whose token has not been canceled",
+        "Canceling a linked token source also cancels the sources it was linked from",
+        "`token.ThrowIfCancellationRequested()` throws a `TaskCanceledException`"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "A token given to Task.Run only prevents the delegate from starting if it is already canceled; once running, cancellation is cooperative. TryReset returns true and resets a source that has not been canceled (useful for pooling) and returns false once it has. Linking is one-way, from parents to the linked source, and ThrowIfCancellationRequested throws a plain OperationCanceledException.",
+      "materials": [
+        "cancellation",
+        "task-cancel"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nvar tcs = new TaskCompletionSource();\nTask waiter = WaitAsync(tcs.Task);\nConsole.WriteLine(\"before SetResult\");\ntcs.SetResult();\nConsole.WriteLine(\"after SetResult\");\nawait waiter;\nConsole.WriteLine(\"done\");\n\nstatic async Task WaitAsync(Task t)\n{\n    Console.WriteLine(\"waiting\");\n    await t;\n    Console.WriteLine(\"continuation\");\n}\n```",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "waiting",
+        "before SetResult",
+        "continuation",
+        "after SetResult",
+        "done"
+      ],
+      "explanation": "WaitAsync runs synchronously until it awaits the incomplete tcs.Task, printing \"waiting\" first. The TaskCompletionSource was created without RunContinuationsAsynchronously and a console app has no SynchronizationContext, so SetResult runs the awaiting continuation inline: \"continuation\" is printed before SetResult returns and \"after SetResult\" runs. Then `await waiter` finds a completed task and \"done\" follows.",
+      "materials": [
+        "tcs",
+        "task-creation-options"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nawait using (var a = new Res(\"A\"))\nawait using (var b = new Res(\"B\"))\n{\n    Console.WriteLine(\"body\");\n}\n\nclass Res : IAsyncDisposable\n{\n    private readonly string _name;\n    public Res(string name) { _name = name; Console.WriteLine($\"open {name}\"); }\n    public async ValueTask DisposeAsync()\n    {\n        await Task.Delay(1);\n        Console.WriteLine($\"dispose {_name}\");\n    }\n}\n```",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "open A",
+        "open B",
+        "body",
+        "dispose B",
+        "dispose A"
+      ],
+      "explanation": "The resources are created in declaration order, then the body runs. `await using` disposes in reverse order, and each DisposeAsync is awaited to completion before the next one starts, so B's disposal finishes before A's begins even though both contain an await.",
+      "materials": [
+        "disposeasync"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A producer writes items to a channel and a consumer reads them with `await foreach (var x in reader.ReadAllAsync())`. Put the steps of a clean shutdown in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The producer writes its last item",
+        "The producer calls `writer.Complete()`",
+        "The consumer reads the items still buffered in the channel",
+        "The consumer's `await foreach` loop exits",
+        "Awaiting the consumer's task completes"
+      ],
+      "explanation": "Complete() is called after the last write to say that no more items will come. Items already in the channel are still delivered, so the consumer drains them first; only when the channel is both completed and empty does ReadAllAsync end, which exits the loop and lets the consumer's task complete.",
+      "materials": [
+        "channels"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "For `var x = await expr;` where `expr` has not completed yet, put the steps of the awaiter pattern in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Call `GetAwaiter()` on `expr`",
+        "Check the awaiter's `IsCompleted` property",
+        "Save the state and register the continuation with `OnCompleted`/`UnsafeOnCompleted`, then return",
+        "The continuation calls the state machine's `MoveNext` to resume",
+        "Call the awaiter's `GetResult()` to get the value or rethrow the exception"
+      ],
+      "explanation": "The compiler first obtains an awaiter and checks IsCompleted; since it is false, the state machine records where to resume, hands its MoveNext to the awaiter as a continuation, and returns to its caller. When the operation completes, the continuation runs MoveNext, which jumps back to the await and calls GetResult, producing the value or rethrowing the stored exception. If IsCompleted had been true, GetResult would be called right away without suspending.",
+      "materials": [
+        "await-op"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A generic host with one `BackgroundService` (that does not override its stop logic) is asked to stop gracefully. Put these events in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`IHostApplicationLifetime.ApplicationStopping` is triggered",
+        "The host calls the service's `StopAsync`",
+        "The `stoppingToken` passed to `ExecuteAsync` is canceled",
+        "`ExecuteAsync` finishes and its task completes",
+        "`IHostApplicationLifetime.ApplicationStopped` is triggered"
+      ],
+      "explanation": "On StopAsync the host first fires ApplicationStopping, then stops hosted services (in reverse registration order). BackgroundService.StopAsync cancels the stopping token and waits for the ExecuteAsync task (or the shutdown timeout), so ExecuteAsync must finish before StopAsync returns. ApplicationStopped fires after every hosted service has stopped.",
+      "materials": [
+        "hosted-services",
+        "workers"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```csharp\nusing var parent = new CancellationTokenSource();\nusing var linked = CancellationTokenSource.CreateLinkedTokenSource(parent.Token);\nlinked.Token.Register(() => Console.WriteLine(\"linked callback\"));\nparent.Token.Register(() => Console.WriteLine(\"parent callback\"));\nConsole.WriteLine(\"cancel parent\");\nparent.Cancel();\nConsole.WriteLine($\"linked canceled: {linked.IsCancellationRequested}\");\n```",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "cancel parent",
+        "parent callback",
+        "linked callback",
+        "linked canceled: True"
+      ],
+      "explanation": "Creating the linked source registers an internal callback on parent.Token before \"parent callback\" is registered. Cancel() runs a token's callbacks synchronously in reverse registration order, so \"parent callback\" runs first and then the internal callback cancels the linked source, which runs \"linked callback\". All of this happens inside Cancel(), so the final line sees the linked token canceled.",
+      "materials": [
+        "cancellation"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: awaiting a faulted task with ConfigureAwaitOptions.SuppressThrowing (.NET 8).",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "code": "Task t = FailAsync();\nawait t.ConfigureAwait(ConfigureAwaitOptions.SuppressThrowing);\nConsole.WriteLine($\"after await: {t.Status}\");\nConsole.WriteLine(t.Exception!.InnerException!.Message);\n\nstatic async Task FailAsync()\n{\n    await Task.Delay(10);\n    throw new InvalidOperationException(\"boom\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "after await: Faulted\nboom\n",
+      "explanation": "ConfigureAwaitOptions.SuppressThrowing (new in .NET 8) makes the await wait for completion without rethrowing a fault or cancellation, so execution continues normally. The task itself is still Faulted, and its Exception property holds an AggregateException whose inner exception is the InvalidOperationException. Reading t.Exception also marks the exception as observed.",
+      "materials": [
+        "configureawait-options"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: tasks created by a lazy LINQ query and enumerated twice.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "code": "int calls = 0;\nvar tasks = new[] { 1, 2, 3 }.Select(n => GetAsync(n));\nawait Task.WhenAll(tasks);\nvar results = tasks.Select(t => t.Result).ToArray();\nConsole.WriteLine(string.Join(\",\", results));\nConsole.WriteLine($\"calls: {calls}\");\n\nasync Task<int> GetAsync(int n)\n{\n    calls++;\n    await Task.Delay(10);\n    return n * 10;\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "10,20,30\ncalls: 6\n",
+      "explanation": "`tasks` is a deferred query, not a list of tasks. Task.WhenAll enumerates it once and starts three calls; the second Select enumerates it again, which calls GetAsync three more times and blocks on these new tasks. The results look right, but the work ran twice; materialize with `.ToList()` or `.ToArray()` before awaiting, or use the array returned by `await Task.WhenAll`.",
+      "materials": [
+        "consuming-tap"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an async method that observes a canceled token.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "code": "var cts = new CancellationTokenSource();\ncts.Cancel();\nTask t = WorkAsync(cts.Token);\ntry\n{\n    await t;\n}\ncatch (OperationCanceledException e)\n{\n    Console.WriteLine(e.GetType().Name);\n}\nConsole.WriteLine(t.Status);\nConsole.WriteLine($\"IsFaulted: {t.IsFaulted}\");\n\nstatic async Task WorkAsync(CancellationToken ct)\n{\n    await Task.Yield();\n    ct.ThrowIfCancellationRequested();\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "OperationCanceledException\nCanceled\nIsFaulted: False\n",
+      "explanation": "When an OperationCanceledException escapes an async method, the returned task ends in the Canceled state rather than Faulted, so IsFaulted is False. Awaiting it rethrows the original exception, which is a plain OperationCanceledException because that is what ThrowIfCancellationRequested throws.",
+      "materials": [
+        "task-cancel",
+        "tap"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: Task.Run given a token that is already canceled.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "code": "using var cts = new CancellationTokenSource();\ncts.Cancel();\nbool ran = false;\nTask t = Task.Run(() => { ran = true; }, cts.Token);\ntry\n{\n    await t;\n}\ncatch (TaskCanceledException)\n{\n    Console.WriteLine(\"canceled\");\n}\nConsole.WriteLine($\"ran: {ran}\");\nConsole.WriteLine(t.Status);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "canceled\nran: False\nCanceled\n",
+      "explanation": "Task.Run checks the token before the delegate starts; because cancellation was already requested, the task moves straight to Canceled and the delegate never runs. Awaiting a task that was canceled this way throws TaskCanceledException. Once a delegate is running, the token no longer stops it unless the delegate checks it.",
+      "materials": [
+        "task-cancel"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: Task.WhenAll over a canceled task combined with a faulted one, then with a successful one.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "code": "var cts = new CancellationTokenSource();\ncts.Cancel();\nTask canceled = Task.Delay(1000, cts.Token);\nTask faulted = FailAsync();\n\nTask all = Task.WhenAll(canceled, faulted);\ntry { await all; } catch (Exception e) { Console.WriteLine($\"caught {e.GetType().Name}\"); }\nConsole.WriteLine($\"{all.Status}, inner: {all.Exception!.InnerExceptions.Count}\");\n\nTask onlyCanceled = Task.WhenAll(canceled, Task.CompletedTask);\ntry { await onlyCanceled; } catch (Exception e) { Console.WriteLine($\"caught {e.GetType().Name}\"); }\nConsole.WriteLine(onlyCanceled.Status);\n\nstatic async Task FailAsync()\n{\n    await Task.Delay(10);\n    throw new InvalidOperationException(\"bad\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "caught InvalidOperationException\nFaulted, inner: 1\ncaught TaskCanceledException\nCanceled\n",
+      "explanation": "If any input task faults, the WhenAll task ends Faulted and its AggregateException holds only the faults; canceled inputs add no exception, so the count is 1 and await rethrows the InvalidOperationException. If no input faulted but at least one was canceled, the WhenAll task ends Canceled, and awaiting it throws TaskCanceledException.",
+      "materials": [
+        "consuming-tap",
+        "tpl-exceptions"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an AsyncLocal<T> value changed inside an awaited async method.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "code": "var local = new AsyncLocal<string>();\nlocal.Value = \"outer\";\nawait ChangeAsync();\nConsole.WriteLine($\"after call: {local.Value}\");\nawait Task.Run(() => Console.WriteLine($\"in Task.Run: {local.Value}\"));\n\nasync Task ChangeAsync()\n{\n    Console.WriteLine($\"callee sees: {local.Value}\");\n    local.Value = \"inner\";\n    await Task.Delay(10);\n    Console.WriteLine($\"callee after await: {local.Value}\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "callee sees: outer\ncallee after await: inner\nafter call: outer\nin Task.Run: outer\n",
+      "explanation": "AsyncLocal values travel with the ExecutionContext, which flows into called async methods, across their awaits and into Task.Run. An async method works on its own copy of the context, so the change to \"inner\" is visible inside ChangeAsync, even after its await, but is discarded when the method returns: the caller still sees \"outer\".",
+      "materials": [
+        "asynclocal"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: completing a TaskCompletionSource more than once with the TrySet methods.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "code": "var tcs = new TaskCompletionSource<string>();\nConsole.WriteLine(tcs.TrySetResult(\"first\"));\nConsole.WriteLine(tcs.TrySetResult(\"second\"));\nConsole.WriteLine(tcs.TrySetException(new Exception(\"x\")));\nConsole.WriteLine(await tcs.Task);\nConsole.WriteLine(tcs.Task.Status);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "True\nFalse\nFalse\nfirst\nRanToCompletion\n",
+      "explanation": "A TaskCompletionSource's task can complete only once. The first TrySetResult succeeds and returns True; later TrySet calls return False and change nothing, so the task keeps the result \"first\" and stays RanToCompletion. The Set versions would throw InvalidOperationException instead of returning False.",
+      "materials": [
+        "tcs"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: leaving an await foreach loop early over an async iterator with a finally block.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "code": "await foreach (var n in NumbersAsync())\n{\n    Console.WriteLine($\"got {n}\");\n    if (n == 2) break;\n}\nConsole.WriteLine(\"after loop\");\n\nstatic async IAsyncEnumerable<int> NumbersAsync()\n{\n    try\n    {\n        for (int i = 1; i <= 5; i++)\n        {\n            await Task.Delay(1);\n            Console.WriteLine($\"yield {i}\");\n            yield return i;\n        }\n    }\n    finally\n    {\n        Console.WriteLine(\"cleanup\");\n    }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "yield 1\ngot 1\nyield 2\ngot 2\ncleanup\nafter loop\n",
+      "explanation": "The iterator produces items lazily, one per MoveNextAsync, so \"yield\" and \"got\" lines alternate and items 3 to 5 are never produced. Breaking out of await foreach disposes the enumerator with DisposeAsync, which runs the iterator's finally block before the code after the loop.",
+      "materials": [
+        "async-streams"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: Task.WhenAny when the first task to finish has faulted.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "code": "Task fast = FailAsync(10);\nTask slow = Task.Delay(500);\nTask winner = await Task.WhenAny(fast, slow);\nConsole.WriteLine($\"winner is fast: {winner == fast}\");\nConsole.WriteLine($\"winner faulted: {winner.IsFaulted}\");\nConsole.WriteLine($\"slow done yet: {slow.IsCompleted}\");\ntry\n{\n    await winner;\n}\ncatch (Exception e)\n{\n    Console.WriteLine($\"caught {e.Message}\");\n}\n\nstatic async Task FailAsync(int ms)\n{\n    await Task.Delay(ms);\n    throw new InvalidOperationException(\"fast failed\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "winner is fast: True\nwinner faulted: True\nslow done yet: False\ncaught fast failed\n",
+      "explanation": "Task.WhenAny returns the first task to complete, and completing includes faulting; awaiting WhenAny itself never throws. You only see the failure when you await (or inspect) the returned task. The slower task is not affected and is still running.",
+      "materials": [
+        "consuming-tap"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: writing to a full bounded channel that uses BoundedChannelFullMode.DropOldest.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "code": "using System.Threading.Channels;\n\nvar ch = Channel.CreateBounded<int>(new BoundedChannelOptions(2)\n{\n    FullMode = BoundedChannelFullMode.DropOldest\n});\nfor (int i = 1; i <= 4; i++)\n    Console.WriteLine($\"write {i}: {ch.Writer.TryWrite(i)}\");\nch.Writer.Complete();\nvar items = new List<int>();\nawait foreach (var x in ch.Reader.ReadAllAsync()) items.Add(x);\nConsole.WriteLine(string.Join(\",\", items));\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "write 1: True\nwrite 2: True\nwrite 3: True\nwrite 4: True\n3,4\n",
+      "explanation": "With DropOldest, a write to a full bounded channel succeeds by removing the oldest buffered item, so TryWrite returns True every time. Writing 3 drops 1 and writing 4 drops 2, leaving 3 and 4 for the reader. With the default Wait mode, the third and fourth TryWrite calls would have returned False instead.",
+      "materials": [
+        "channels"
+      ]
+    }
+  ]
+}
