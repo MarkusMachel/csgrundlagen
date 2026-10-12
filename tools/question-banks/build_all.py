@@ -30,6 +30,7 @@ BANKS = {
     "sql_100": "sql-100.json",
     "system_design_products": "system-design-products.json",
     "camera_image_quality": "camera-image-quality.json",
+    "camera_iq_quiz": "camera-iq-quiz.json",
 }
 
 

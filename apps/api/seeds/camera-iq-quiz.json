@@ -1,0 +1,533 @@
+{
+  "name": "Image quality fundamentals quiz",
+  "materials": [
+    {
+      "key": "iqa",
+      "type": "article",
+      "title": "Image quality assessment",
+      "url": "https://en.wikipedia.org/wiki/Image_quality_assessment",
+      "author": "Wikipedia",
+      "description": "Objective and subjective quality methods. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "subjective-vq",
+      "type": "article",
+      "title": "Subjective video quality",
+      "url": "https://en.wikipedia.org/wiki/Subjective_video_quality",
+      "author": "Wikipedia",
+      "description": "Observer-based quality tests. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "jpeg",
+      "type": "article",
+      "title": "JPEG",
+      "url": "https://en.wikipedia.org/wiki/JPEG",
+      "author": "Wikipedia",
+      "description": "DCT, quantization and entropy coding."
+    },
+    {
+      "key": "artifacts",
+      "type": "article",
+      "title": "Compression artifact",
+      "url": "https://en.wikipedia.org/wiki/Compression_artifact",
+      "author": "Wikipedia",
+      "description": "Blocking, ringing, mosquito noise and banding."
+    },
+    {
+      "key": "webvision",
+      "type": "book",
+      "title": "Webvision: The Organization of the Retina and Visual System",
+      "url": "https://webvision.med.utah.edu/",
+      "author": "University of Utah",
+      "description": "Free textbook on photoreceptors, color vision and adaptation."
+    },
+    {
+      "key": "trichromacy",
+      "type": "article",
+      "title": "Trichromacy",
+      "url": "https://en.wikipedia.org/wiki/Trichromacy",
+      "author": "Wikipedia",
+      "description": "Three cone types and three-channel color."
+    },
+    {
+      "key": "checker",
+      "type": "article",
+      "title": "Checker shadow illusion",
+      "url": "https://en.wikipedia.org/wiki/Checker_shadow_illusion",
+      "author": "Wikipedia",
+      "description": "Adelson's identical squares that look different."
+    },
+    {
+      "key": "chromatic-adapt",
+      "type": "article",
+      "title": "Chromatic adaptation",
+      "url": "https://en.wikipedia.org/wiki/Chromatic_adaptation",
+      "author": "Wikipedia",
+      "description": "How the eye and cameras discount the illuminant. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "gestalt",
+      "type": "article",
+      "title": "Gestalt psychology",
+      "url": "https://en.wikipedia.org/wiki/Gestalt_psychology",
+      "author": "Wikipedia",
+      "description": "Perceiving the whole before the parts."
+    },
+    {
+      "key": "aliasing",
+      "type": "article",
+      "title": "Aliasing",
+      "url": "https://en.wikipedia.org/wiki/Aliasing",
+      "author": "Wikipedia",
+      "description": "Undersampled detail folding into false patterns. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "noise-red",
+      "type": "article",
+      "title": "Noise reduction",
+      "url": "https://en.wikipedia.org/wiki/Noise_reduction",
+      "author": "Wikipedia",
+      "description": "Spatial and temporal denoising. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "depth-perception",
+      "type": "article",
+      "title": "Depth perception",
+      "url": "https://en.wikipedia.org/wiki/Depth_perception",
+      "author": "Wikipedia",
+      "description": "Monocular and binocular depth cues. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "dof",
+      "type": "article",
+      "title": "Depth of field",
+      "url": "https://en.wikipedia.org/wiki/Depth_of_field",
+      "author": "Wikipedia",
+      "description": "What controls the range of acceptable sharpness."
+    },
+    {
+      "key": "dynamic-range",
+      "type": "article",
+      "title": "Dynamic range",
+      "url": "https://en.wikipedia.org/wiki/Dynamic_range",
+      "author": "Wikipedia",
+      "description": "Ratio of largest to smallest usable signal. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "ev",
+      "type": "article",
+      "title": "Exposure value",
+      "url": "https://en.wikipedia.org/wiki/Exposure_value",
+      "author": "Wikipedia",
+      "description": "EV, stops and equivalent exposures."
+    },
+    {
+      "key": "tone-mapping",
+      "type": "article",
+      "title": "Tone mapping",
+      "url": "https://en.wikipedia.org/wiki/Tone_mapping",
+      "author": "Wikipedia",
+      "description": "Compressing HDR scenes for a display. Added as a standard reference; not from your notes."
+    },
+    {
+      "key": "hdr",
+      "type": "article",
+      "title": "High-dynamic-range imaging",
+      "url": "https://en.wikipedia.org/wiki/High-dynamic-range_imaging",
+      "author": "Wikipedia",
+      "description": "Bracketing, merging and rendering HDR. Added as a standard reference; not from your notes."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple-choice",
+      "prompt": "Which option best describes what image quality measures?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The level of compression applied to a file, measured as the ratio between the original and the compressed size.",
+        "The degree of degradation an observer can perceive, such as the noise caused by a low radiation dose in CT scans.",
+        "The ability of an algorithm to predict, automatically and quickly, the overall impression of quality without any human assessment.",
+        "The amount of spatial information captured by the sensor, related to faithfully reproducing the shapes in the scene."
+      ],
+      "correct": 1,
+      "explanation": "Image quality is about perceptible degradation: how much worse the image looks to an observer, for example the noise from a low radiation dose in a CT scan. A compression ratio is a file property, automatic prediction is what objective metrics try to do (not what quality is), and spatial information is only one attribute (resolution and shape).",
+      "materials": [
+        "iqa"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Why is compressing an image to formats such as PNG or JPEG relevant to image quality assessment?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Because compression degrades the image data, and quality assessment is used to measure that kind of degradation.",
+        "Because compression improves the image's perceived sharpness, bringing its quality closer to the original before conversion.",
+        "Because compression is mainly about adjusting the image's dynamic range of colors, much like tone mapping.",
+        "Because compression increases the image's spatial resolution, so more detail is stored in the final file."
+      ],
+      "correct": 0,
+      "explanation": "Lossy compression (JPEG) throws data away and introduces artifacts such as blocking and ringing, so measuring that degradation is a classic use of quality assessment. Compression never adds sharpness or resolution, and it isn't tone mapping.",
+      "materials": [
+        "jpeg",
+        "artifacts",
+        "iqa"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about subjective and objective image quality assessment are true? Pick all that apply.",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Subjective assessment is done by people, or by perceptual models that consider higher-level aspects in the context of the region being viewed.",
+        "Objective assessment compares values with each other without taking the perception of the image as a whole into account.",
+        "The goal of image quality assessment is to provide metrics that predict perceived quality manually, with the help of many human raters.",
+        "Subjective and objective assessment share the goal of measuring the degree of image degradation, just by different routes."
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Subjective assessment uses people (or perceptual models that imitate them, looking at context); objective assessment compares values, such as pixels or measurements, without judging the image as a whole. Both aim to measure degradation. The false statement is the 'manually' one: the point of quality metrics is to predict perceived quality automatically, so you don't need a panel of raters every time.",
+      "materials": [
+        "iqa",
+        "subjective-vq"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the definitions of image quality proposed by different authors are true? Pick all that apply.",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "One definition says image quality depends only on the resolution of the capture sensor, regardless of the viewing conditions.",
+        "One definition describes image quality as an integrated set of perceptions of the overall degree of excellence of the image, not just an isolated comparison of pixels.",
+        "Another defines image quality as the impression of its merit or excellence as perceived by an observer not involved in taking the photo or with its subject.",
+        "The definitions agree that image quality involves human perception, not only isolated technical measurements."
+      ],
+      "correctIndices": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "The definitions describe quality as an integrated perception of overall excellence, and (Keelan) as the impression of merit perceived by an observer neither involved in taking the picture nor with its subject. All of them put human perception at the center. None says quality depends only on sensor resolution; viewing conditions matter.",
+      "materials": [
+        "iqa"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "From the point of view of visual perception, what is color?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "What the visual system perceives from the physical properties of an object when it is struck by light, lit or emits light, as with the Sun and, by reflection, the Moon.",
+        "A visual effect that tends to appear similarly across species, since most visual systems capture similar ranges of light wavelengths.",
+        "A measure of the amount of light reflected by an object's surface, computed independently of the visual system that observes it.",
+        "A property of the object that depends mainly on its chemical composition and surface texture, and is little influenced by the light falling on it."
+      ],
+      "correct": 0,
+      "explanation": "Color is a perception: what the visual system makes of light emitted by a source (the Sun) or reflected by an object (the Moon). It differs between species, which see different wavelength ranges, and it depends strongly on the illuminating light, so it isn't a fixed property of the object or a reflectance number independent of the observer.",
+      "materials": [
+        "webvision",
+        "trichromacy"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the light spectrum perceived by the human visual system (HVS) and by other animals are true? Pick all that apply.",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The human visual system perceives electromagnetic waves roughly between 380 and 720 nanometers.",
+        "The light spectrum visible to humans is most of the total electromagnetic spectrum, including X-rays and gamma rays.",
+        "Snakes can sense infrared radiation and bees can see ultraviolet, ranges the human eye can't perceive.",
+        "Just past violet, toward shorter wavelengths, comes ultraviolet, followed by X-rays and gamma rays."
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Human vision covers about 380 to 720 nm, a tiny slice of the electromagnetic spectrum. Beyond violet (shorter wavelengths) come ultraviolet, X-rays and gamma rays; beyond red, infrared. Some animals see outside our range: pit vipers sense infrared and bees see ultraviolet. The false statement claims the visible band is most of the spectrum.",
+      "materials": [
+        "webvision",
+        "trichromacy"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which option correctly describes the simultaneous contrast effect in color perception?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Color perception depends mainly on the physical properties of the pigment used, and has little to do with the surrounding visual context.",
+        "The same color can be perceived differently depending on its surround or the colors around it, even when the color values are identical.",
+        "The brain tends to adjust the perceived color of an object to reduce the difference caused by the surround.",
+        "Two physically different colors tend to look alike when applied to similar geometric shapes."
+      ],
+      "correct": 1,
+      "explanation": "Simultaneous contrast: identical color values look different on different surrounds (a gray patch looks lighter on a dark background). The surround pushes the color away from itself, not toward it, and shape has nothing to do with it. Adelson's checker shadow illusion is a famous example.",
+      "materials": [
+        "checker",
+        "webvision"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "When a color filter is applied to only part of an image rather than the whole image, what usually happens to the viewer's chromatic adaptation?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It depends mainly on the amount of ambient light in the photographed scene, with little influence from the other colors in the image.",
+        "It tends to keep colors distinguishable even when the filter covers only a small region of the image.",
+        "It can be impaired when the filter covers only one region, making it harder to tell colors apart in that area.",
+        "It is mainly related to the amount of texture detail in the region where the filter is applied."
+      ],
+      "correct": 2,
+      "explanation": "Chromatic adaptation works on the whole visual field: with a filter over the entire image the eye adapts and the colors look normal again after a moment. With the filter on only one region, the rest of the image anchors the adaptation, so the filtered area keeps its cast and colors there are harder to tell apart.",
+      "materials": [
+        "chromatic-adapt",
+        "webvision"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What is the main difference between Biederman's and the Gestalt approaches to visual recognition?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Both say the whole and the parts are recognized at the same time, with no order of precedence.",
+        "Biederman says the whole is perceived before the parts, while Gestalt says the parts are perceived before the whole.",
+        "Biederman says the parts are perceived before the whole, while Gestalt argues for holistic perception of the whole before the parts are analyzed.",
+        "Both say recognition happens only by analyzing the parts in isolation, without any perception of the whole."
+      ],
+      "correct": 2,
+      "explanation": "Biederman's recognition-by-components is bottom-up: objects are assembled from simple parts (geons). Gestalt psychology is holistic: the whole is perceived first and is more than the sum of its parts. Real vision mixes both.",
+      "materials": [
+        "gestalt"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "How does a camera's resolution relate to how well it reproduces an object's shape?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Shape reproduction is determined mainly by the distance between object and camera, with little relation to the sensor's resolution.",
+        "Low-resolution cameras tend to reproduce shape more faithfully, because each capture covers a larger area of the scene.",
+        "Resolution has little influence on shape reproduction, which depends mainly on the texture of the object's surface.",
+        "A low-resolution camera can confuse where object geometries intersect, while a higher-resolution camera reproduces the space more faithfully."
+      ],
+      "correct": 3,
+      "explanation": "Shape is carried by edges and boundaries. With too few pixels, edges where objects meet blur together or alias, so the geometry becomes ambiguous; more resolution samples those boundaries finely enough to reproduce the scene faithfully.",
+      "materials": [
+        "aliasing"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about texture and its importance in image quality assessment are true? Pick all that apply.",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Texture can be defined as a variation inherent to a physical object, natural or synthetic, that the human visual system can distinguish.",
+        "Perceptible differences in texture and gloss can help tell natural objects from synthetic (artificial) ones.",
+        "Texture lets you interpret an object's properties by sight alone, helping recognize the object as a whole.",
+        "Texture can only be perceived on surfaces with obvious relief; flatter areas show no perceptible variation."
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Texture is the fine, characteristic variation of a surface, natural or synthetic, that we can distinguish. Texture and gloss help tell natural from artificial materials and let us infer properties (rough, soft, wet) just by looking. Flat surfaces have texture too, in color and reflectance variation, which is why denoising that removes it makes skin or fabric look waxy.",
+      "materials": [
+        "noise-red",
+        "iqa"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What usually happens when a texture-smoothing filter is applied to a photo in post-processing, even when the original image has no noise?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Texture filtering in these cases usually aims to bring out fine detail in skin and hair, making it sharper and more realistic.",
+        "The waxy look in these cases comes mainly from the low bit depth used at capture, not from texture processing.",
+        "Texture filtering can lower image quality, producing blur and a 'waxy' look on skin, hair and clothing.",
+        "Texture filtering tends to improve perceived quality, making the image look sharper after processing."
+      ],
+      "correct": 2,
+      "explanation": "Smoothing filters can't tell fine texture from noise, so they erase it even when there is no noise to remove. The result is blur and a waxy, plastic look on skin, hair and fabric, which lowers perceived quality.",
+      "materials": [
+        "noise-red"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the need for objective metrics when handling large volumes of images are true? Pick all that apply.",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Comparing a top-quality camera with mobile devices shows that objective metrics are unnecessary when the cameras' quality differs a lot.",
+        "Automating quality assessment is essential when handling large volumes of images, such as 100,000 or 200,000.",
+        "Purely subjective assessment becomes unfeasible with large volumes of images.",
+        "The importance of objective metrics here is related to the need to compare the quality of images from different sensors."
+      ],
+      "correctIndices": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "People can't rate hundreds of thousands of images, so large volumes need automated, objective metrics; they also make images from different sensors comparable on the same scale. An obvious quality gap between a top camera and a phone doesn't make metrics unnecessary: you still need numbers to compare and track devices.",
+      "materials": [
+        "iqa",
+        "subjective-vq"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the visual cues that let you infer depth in an image are true? Pick all that apply.",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Interposition, one of the depth cues, happens when one object is in front of another and hides part of it.",
+        "Shading is a depth cue closely tied to lighting, which lets you infer that objects are at different positions.",
+        "Retinal size and familiarity explain why a nearby ant can look bigger than a truck in the background, even though we know the truck is physically bigger.",
+        "Linear perspective refers to the variation in color seen between objects at different distances from the viewer."
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Interposition (occlusion), shading and retinal size combined with familiar size are all monocular depth cues: a close ant can fill more of the retina than a distant truck, and knowing their real sizes tells us which is farther. Linear perspective is about parallel lines converging with distance; the color and contrast change with distance is aerial (atmospheric) perspective.",
+      "materials": [
+        "depth-perception"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which option best defines the parallax effect?",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The difference in apparent motion of objects at different distances when the viewer changes viewpoint, which contributes to the impression of depth.",
+        "One object overlapping another, which lets the viewer infer which of the two is closer to the camera.",
+        "The change in the intensity of light reflected by an object's surface as the viewing angle relative to the light source changes.",
+        "The loss of sharpness in distant objects caused by atmospheric scattering, making colors and outlines less defined with distance."
+      ],
+      "correct": 0,
+      "explanation": "Motion parallax: when the viewpoint moves, near objects shift more than far ones, and that difference signals depth. The other options describe other cues: interposition (overlap), shading or specular reflection, and aerial perspective.",
+      "materials": [
+        "depth-perception"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about depth as an aspect of image quality are true? Pick all that apply.",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Depth is considered crucial to how an observer relates to objects in the three-dimensional world.",
+        "Being able to tell that one object doesn't belong to another, or that one part of an object is farther away than another, depends on understanding depth.",
+        "Depth can only be perceived in three-dimensional (stereoscopic) images; it can't be conveyed in an ordinary two-dimensional photo.",
+        "Depth can be inferred in an image from cues such as focus, blur and capture distortions."
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Depth is how we relate to a 3D world and separate objects and their parts. A flat photo still conveys depth through monocular cues (occlusion, shading, perspective, focus and blur, distortion), so stereoscopy isn't required.",
+      "materials": [
+        "depth-perception",
+        "dof"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about absolute luminance and luminance range are true? Pick all that apply.",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Absolute luminance is the total amount of light captured by the observer, human or camera.",
+        "Luminance range describes the span of different luminances that can be captured, not the total amount of light.",
+        "Overexposure causes low absolute luminance, making details hard to see for lack of light.",
+        "Insufficient lighting can make the scene's content impossible to determine, because too little light is captured to reveal what the objects emit or reflect."
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Absolute luminance is how much light is captured; luminance (dynamic) range is the span between the darkest and brightest levels that can be captured. Too little light leaves content undeterminable. Overexposure is the opposite of the false statement: too much light, which clips highlights and loses detail there.",
+      "materials": [
+        "dynamic-range",
+        "ev"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about tone mapping are true? Pick all that apply.",
+      "tags": [
+        "Camera & Image Quality"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Tone mapping adjusts an image's tones and contrast to make it better suited to display on devices with a reduced dynamic range.",
+        "Tone mapping is related to the behavior of the capture device, since a low-cost camera doesn't offer such a wide dynamic range of luminance.",
+        "In practice, tone mapping is done from a single image captured with automatic exposure, without combining different exposures.",
+        "Tone mapping is related to HDR (High Dynamic Range), although not directly: the methods depend on each other conceptually."
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Tone mapping compresses a wide luminance range into what a display (or a limited camera pipeline) can show, while keeping contrast and detail. It's tied to HDR: typically several exposures are merged into an HDR image and then tone mapped, so it isn't limited to a single auto-exposed shot.",
+      "materials": [
+        "tone-mapping",
+        "hdr"
+      ]
+    }
+  ]
+}
