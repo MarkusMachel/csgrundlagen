@@ -1,0 +1,1409 @@
+{
+  "name": ".NET: architecture",
+  "materials": [
+    {
+      "key": "arch",
+      "type": "article",
+      "title": "Common web application architectures",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures",
+      "author": "Microsoft Learn",
+      "description": "Monoliths, Clean Architecture (onion/hexagonal) and how the projects of a .NET solution reference each other."
+    },
+    {
+      "key": "ddd-ms",
+      "type": "article",
+      "title": "Design a DDD-oriented microservice",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/ddd-oriented-microservice",
+      "author": "Microsoft Learn",
+      "description": "Domain, application and infrastructure layers of a .NET service and which depends on which."
+    },
+    {
+      "key": "domain-model",
+      "type": "article",
+      "title": "Implement a microservice domain model with .NET",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/net-core-microservice-domain-model",
+      "author": "Microsoft Learn",
+      "description": "Entities, aggregates and encapsulated child collections in C#."
+    },
+    {
+      "key": "value-obj",
+      "type": "article",
+      "title": "Implement value objects",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/implement-value-objects",
+      "author": "Microsoft Learn",
+      "description": "Value objects without identity, compared by their values, and how to persist them with EF Core."
+    },
+    {
+      "key": "records",
+      "type": "article",
+      "title": "Records (C# reference)",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record",
+      "author": "Microsoft Learn",
+      "description": "Value equality, positional syntax and nondestructive mutation with `with` for record types."
+    },
+    {
+      "key": "domain-events",
+      "type": "article",
+      "title": "Domain events: design and implementation",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/domain-events-design-implementation",
+      "author": "Microsoft Learn",
+      "description": "Raising domain events in aggregates and dispatching them from the DbContext before or after commit."
+    },
+    {
+      "key": "persistence",
+      "type": "article",
+      "title": "Design the infrastructure persistence layer",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design",
+      "author": "Microsoft Learn",
+      "description": "Repositories per aggregate, the unit of work, and how DbContext already plays both roles."
+    },
+    {
+      "key": "simplified-cqrs",
+      "type": "article",
+      "title": "Apply simplified CQRS and DDD patterns in a microservice",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/apply-simplified-microservice-cqrs-ddd-patterns",
+      "author": "Microsoft Learn",
+      "description": "A single database with a DDD write model and a separate, simple query side."
+    },
+    {
+      "key": "cqrs-reads",
+      "type": "article",
+      "title": "Implement reads/queries in a CQRS microservice",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/cqrs-microservice-reads",
+      "author": "Microsoft Learn",
+      "description": "Query side with Dapper returning ViewModels/DTOs, independent of the aggregates."
+    },
+    {
+      "key": "app-layer",
+      "type": "article",
+      "title": "Implement the microservice application layer using the Web API",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/microservice-application-layer-implementation-web-api",
+      "author": "Microsoft Learn",
+      "description": "Commands, command handlers, the mediator pattern with MediatR and pipeline behaviors for cross-cutting concerns."
+    },
+    {
+      "key": "integration-events",
+      "type": "article",
+      "title": "Implementing event-based communication between microservices",
+      "url": "https://learn.microsoft.com/en-us/dotnet/architecture/microservices/multi-container-microservice-net-applications/integration-event-based-microservice-communications",
+      "author": "Microsoft Learn",
+      "description": "Integration events published through an event bus, and the outbox-style integration event log."
+    },
+    {
+      "key": "outbox",
+      "type": "article",
+      "title": "Transactional Outbox pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/databases/guide/transactional-outbox-cosmos",
+      "author": "Microsoft Learn",
+      "description": "Saving a state change and its outgoing message in one transaction and relaying the message later."
+    },
+    {
+      "key": "saga",
+      "type": "article",
+      "title": "Saga distributed transactions pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/reference-architectures/saga/saga",
+      "author": "Microsoft Learn",
+      "description": "Sequences of local transactions with compensating actions, choreographed or orchestrated."
+    },
+    {
+      "key": "hosted",
+      "type": "article",
+      "title": "Background tasks with hosted services in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services",
+      "author": "Microsoft Learn",
+      "description": "IHostedService, BackgroundService and consuming scoped services from a background task."
+    },
+    {
+      "key": "hangfire",
+      "type": "article",
+      "title": "Hangfire documentation",
+      "url": "https://docs.hangfire.io/en/latest/",
+      "author": "Hangfire",
+      "description": "Persistent fire-and-forget, delayed and recurring background jobs with automatic retries."
+    },
+    {
+      "key": "http-resilience",
+      "type": "article",
+      "title": "Build resilient HTTP apps: key development patterns",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/resilience/http-resilience",
+      "author": "Microsoft Learn",
+      "description": "Microsoft.Extensions.Http.Resilience, the standard resilience handler and its strategies and defaults."
+    },
+    {
+      "key": "circuit-breaker",
+      "type": "article",
+      "title": "Circuit Breaker pattern",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker",
+      "author": "Microsoft Learn",
+      "description": "Closed, open and half-open states and why an open breaker fails fast."
+    },
+    {
+      "key": "service-discovery",
+      "type": "article",
+      "title": "Service discovery in .NET",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/service-discovery",
+      "author": "Microsoft Learn",
+      "description": "Microsoft.Extensions.ServiceDiscovery, logical service names and the https+http scheme."
+    },
+    {
+      "key": "aspire-overview",
+      "type": "article",
+      "title": ".NET Aspire overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/aspire/get-started/aspire-overview",
+      "author": "Microsoft Learn",
+      "description": "The AppHost orchestration project, resources, integrations and the dashboard."
+    },
+    {
+      "key": "aspire-defaults",
+      "type": "article",
+      "title": ".NET Aspire service defaults",
+      "url": "https://learn.microsoft.com/en-us/dotnet/aspire/fundamentals/service-defaults",
+      "author": "Microsoft Learn",
+      "description": "What AddServiceDefaults configures: OpenTelemetry, health checks, service discovery and HTTP resilience."
+    },
+    {
+      "key": "feature-mgmt",
+      "type": "article",
+      "title": ".NET feature management",
+      "url": "https://learn.microsoft.com/en-us/azure/azure-app-configuration/feature-management-dotnet-reference",
+      "author": "Microsoft Learn",
+      "description": "Microsoft.FeatureManagement: feature flags, built-in filters, FeatureGate and IFeatureManagerSnapshot."
+    },
+    {
+      "key": "environments",
+      "type": "article",
+      "title": "Use multiple environments in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/environments",
+      "author": "Microsoft Learn",
+      "description": "How the environment name is chosen and how appsettings.{Environment}.json is layered."
+    },
+    {
+      "key": "api-versioning",
+      "type": "article",
+      "title": "ASP.NET API Versioning wiki",
+      "url": "https://github.com/dotnet/aspnet-api-versioning/wiki",
+      "author": "dotnet/aspnet-api-versioning",
+      "description": "Asp.Versioning options: version readers, reporting API versions and deprecation."
+    },
+    {
+      "key": "sb-settlement",
+      "type": "article",
+      "title": "Message transfers, locks, and settlement",
+      "url": "https://learn.microsoft.com/en-us/azure/service-bus-messaging/message-transfers-locks-settlement",
+      "author": "Microsoft Learn",
+      "description": "Peek-lock receive mode and settling messages with complete, abandon, dead-letter and defer."
+    },
+    {
+      "key": "sb-dlq",
+      "type": "article",
+      "title": "Service Bus dead-letter queues",
+      "url": "https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-dead-letter-queues",
+      "author": "Microsoft Learn",
+      "description": "When messages are moved to the dead-letter subqueue, including exceeding MaxDeliveryCount."
+    },
+    {
+      "key": "sb-dup",
+      "type": "article",
+      "title": "Duplicate detection in Azure Service Bus",
+      "url": "https://learn.microsoft.com/en-us/azure/service-bus-messaging/duplicate-detection",
+      "author": "Microsoft Learn",
+      "description": "Dropping messages resent with the same MessageId within the duplicate detection window."
+    },
+    {
+      "key": "sb-sessions",
+      "type": "article",
+      "title": "Message sessions in Azure Service Bus",
+      "url": "https://learn.microsoft.com/en-us/azure/service-bus-messaging/message-sessions",
+      "author": "Microsoft Learn",
+      "description": "FIFO handling of related messages grouped by SessionId."
+    },
+    {
+      "key": "masstransit",
+      "type": "article",
+      "title": "MassTransit: exceptions, retry and redelivery",
+      "url": "https://masstransit.io/documentation/concepts/exceptions",
+      "author": "MassTransit",
+      "description": "What happens when a consumer throws: retry filters, the _error queue and Fault<T> events."
+    },
+    {
+      "key": "exceptions",
+      "type": "article",
+      "title": "Best practices for exceptions",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions",
+      "author": "Microsoft Learn",
+      "description": "When to throw and when to return a result for common, expected conditions."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple-choice",
+      "prompt": "A use case in the Application project must send an email, and the real implementation uses SMTP. In a Clean Architecture solution, where do the `IEmailSender` interface and `SmtpEmailSender` class belong?",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The interface and the class both go in Infrastructure, and Application references Infrastructure to use them.",
+        "The interface goes in Application, and `SmtpEmailSender` goes in Infrastructure, which references Application.",
+        "The interface goes in the Api project, and `SmtpEmailSender` goes in Domain next to the entities.",
+        "The interface and the class both go in Domain, so that entities can send their own emails."
+      ],
+      "correct": 1,
+      "explanation": "The layer that needs the abstraction owns it: Application declares `IEmailSender` and Infrastructure implements it, so source dependencies point inward (dependency inversion). Putting both in Infrastructure forces Application to reference Infrastructure, which reverses the dependency rule. Domain should stay free of I/O concerns like SMTP, and the Api project is the outermost ring, so inner layers cannot see interfaces declared there.",
+      "materials": [
+        "arch",
+        "ddd-ms"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In a typical Clean Architecture template, the Api project references Infrastructure even though its endpoints talk only to Application interfaces. Why is that reference there?",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Endpoints need the concrete `DbContext` type to open transactions around each request.",
+        "Without that reference, Infrastructure would not be able to see the interfaces declared in Application.",
+        "`Program.cs` is the composition root and calls something like `AddInfrastructure()` to register the implementations in DI.",
+        "MSBuild needs the startup project to reference Infrastructure so its test assemblies can be discovered."
+      ],
+      "correct": 2,
+      "explanation": "The startup project is the composition root: it wires concrete Infrastructure implementations to Application interfaces in the DI container, which needs a reference to Infrastructure. Infrastructure sees Application through its own reference to Application, not through the Api project. Endpoints should depend on use cases, not on `DbContext`, and test discovery has nothing to do with the startup project's references.",
+      "materials": [
+        "arch"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In a hexagonal (ports and adapters) .NET service, the core declares `IOrderRepository` and an EF Core class in another project implements it. What is that EF Core class?",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A driven (secondary) adapter",
+        "A driving (primary) adapter",
+        "A port",
+        "An application service"
+      ],
+      "correct": 0,
+      "explanation": "Ports are the interfaces the core declares; the EF Core implementation plugs into a port the core calls out through, which makes it a driven (secondary) adapter. A driving (primary) adapter is something that calls into the core, such as an ASP.NET Core endpoint or a message consumer. The application service is the use case inside the core that uses the port.",
+      "materials": [
+        "arch"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An `OrderPlaced` event must trigger two independent reactions in the same process: sending an email and updating sales statistics. Which MediatR-style construct fits?",
+      "tags": [
+        "C# & .NET",
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "An `IRequest` sent with `Send`, handled by two `IRequestHandler` classes",
+        "An `INotification` sent with `Publish`, handled by two `INotificationHandler` classes",
+        "Two `IPipelineBehavior` classes that run around the request handler",
+        "An `IStreamRequest` whose handler yields one item per reaction"
+      ],
+      "correct": 1,
+      "explanation": "Notifications are the one-to-many construct: `Publish` delivers an `INotification` to zero or more handlers. A request sent with `Send` is meant for exactly one handler, so registering two handlers for it is a configuration mistake, not a fan-out. Pipeline behaviors wrap request handling for cross-cutting concerns rather than modelling reactions to an event, and stream requests return a sequence to a single caller.",
+      "materials": [
+        "app-layer"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In the eShop-style CQRS approach, what should a query handler that uses Dapper return?",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Aggregates loaded through their repositories, then mapped to the response",
+        "Tracked EF Core entities, so the caller can edit and save them later",
+        "DTOs or view models shaped for the caller, read straight from the database",
+        "Domain events describing how the requested data reached its current state"
+      ],
+      "correct": 2,
+      "explanation": "The query side is deliberately simple: it runs SQL (often with Dapper) and maps the rows into DTOs or view models built for the screen or API response. Aggregates and repositories exist to protect invariants on writes, so loading them for reads adds cost and coupling. Returning tracked entities mixes the read and write paths, and replaying domain events is event sourcing, which CQRS does not require.",
+      "materials": [
+        "cqrs-reads",
+        "simplified-cqrs"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A service uses EF Core for commands and Dapper for queries, and both run against the same SQL database. Which statement about consistency is accurate?",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Queries see a command's changes as soon as its transaction commits; eventual consistency appears once reads come from a separate store updated asynchronously.",
+        "Queries lag behind commands by the EF Core change tracker's flush interval, so reads are eventually consistent even with one database.",
+        "Dapper reads from the database's snapshot of the previous day, so read models are refreshed nightly unless configured otherwise.",
+        "Commands and queries must share one `DbContext` instance, otherwise Dapper sees uncommitted rows from EF Core."
+      ],
+      "correct": 0,
+      "explanation": "With one database, both sides read and write the same tables, so a committed change is visible to the next query; this is the simplified CQRS that the .NET microservices guide recommends. Eventual consistency only enters when a separate read model is updated from events. EF Core has no background flush interval (changes are written on `SaveChanges`), Dapper has no snapshot cache, and the default isolation level does not expose uncommitted rows to another connection.",
+      "materials": [
+        "simplified-cqrs",
+        "cqrs-reads"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which declaration best models a `Money` value object in modern C#?",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`public record Money { public decimal Amount { get; set; } public string Currency { get; set; } = \"\"; }`",
+        "`public class Money { public Guid Id { get; set; } public decimal Amount { get; set; } public string Currency { get; set; } = \"\"; }`",
+        "`public struct Money { public decimal Amount; public string Currency; }`",
+        "`public sealed record Money(decimal Amount, string Currency);`"
+      ],
+      "correct": 3,
+      "explanation": "A value object has no identity, is compared by its values and should be immutable; a positional record gives value equality and init-only properties out of the box. The record with `set` accessors has value equality but can be mutated after it is put in a dictionary or shared, and the class with an `Id` is an entity with reference equality. The mutable struct with public fields can be changed through any copy and offers no place for validation.",
+      "materials": [
+        "value-obj",
+        "records"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An `Order` aggregate must enforce \"at most 10 lines per order\". How should it expose its lines?",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`public List<OrderLine> Lines { get; set; } = new();` so EF Core can populate it",
+        "A private `List<OrderLine>` field, exposed as `IReadOnlyCollection<OrderLine>`, plus an `AddLine` method that checks the rule",
+        "`public List<OrderLine> Lines { get; } = new();` because a property without a setter stops callers changing the list",
+        "A separate `OrderLineRepository` that callers use to insert lines for an order directly"
+      ],
+      "correct": 1,
+      "explanation": "Encapsulating the collection behind a read-only view forces every change through the aggregate root, where the invariant is checked; EF Core can map the private backing field. A `List<T>` property without a setter still lets callers call `Add` and `Clear`, so it does not protect anything. A repository for child entities bypasses the root, which is exactly what aggregates are meant to prevent.",
+      "materials": [
+        "domain-model"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An `Order` aggregate needs to know which customer placed it, and `Customer` is a separate aggregate. What does DDD guidance for .NET recommend?",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Give `Order` a `Customer` navigation property and load the customer whenever the order is loaded.",
+        "Copy the customer's fields into `Order`, so the two aggregates do not need to be read together.",
+        "Store the customer's identity (for example a `CustomerId`) in `Order`, not a reference to the `Customer` object.",
+        "Merge `Customer` into the `Order` aggregate, so one transaction can update both consistently."
+      ],
+      "correct": 2,
+      "explanation": "Aggregates reference each other by identity, which keeps each aggregate a small consistency boundary that can be loaded and saved on its own. A navigation property to another aggregate root invites loading and changing both in one transaction and blurs the boundary. Copying all fields duplicates data that then goes stale, and merging aggregates to get one transaction makes them large and contended.",
+      "materials": [
+        "domain-model",
+        "ddd-ms"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`SaveChangesAsync` on a `DbContext` is overridden to collect domain events from tracked aggregates and dispatch them in-process before it calls `base.SaveChangesAsync`. What does dispatching before the base call give you?",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Changes that handlers make through the same `DbContext` are saved in the same transaction as the aggregate.",
+        "Each event is guaranteed to reach subscribers in other microservices, even if the process crashes.",
+        "Handlers run after the commit, so a failing handler does not roll back the aggregate's change.",
+        "EF Core stores the events in an outbox table automatically before they are dispatched."
+      ],
+      "correct": 0,
+      "explanation": "Dispatching before the commit lets side effects in the same bounded context (changing another aggregate through the same context) be committed or rolled back together with the original change, which is the approach used in the eShop reference app. In-process dispatch says nothing about other services; that needs integration events and an outbox. Handlers that run after the commit is the other option, and EF Core has no built-in outbox.",
+      "materials": [
+        "domain-events"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "When an order is placed, the separate Shipping microservice must be told. What is the recommended way to do that from the Ordering service?",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The `Order` entity publishes a message to Azure Service Bus inside its `Place` method.",
+        "Shipping registers an `INotificationHandler` for Ordering's in-process domain event.",
+        "Shipping polls Ordering's database tables for new orders through a shared connection string.",
+        "A domain event handler writes an integration event in the same transaction, and it is published to the broker afterwards."
+      ],
+      "correct": 3,
+      "explanation": "Domain events stay inside one service; crossing a service boundary is the job of integration events, which should be saved atomically with the change (an outbox or integration event log) and published afterwards. Publishing from inside the entity couples the domain to the broker and can send a message for a transaction that later rolls back. In-process notifications cannot reach another process, and sharing a database breaks service autonomy.",
+      "materials": [
+        "integration-events",
+        "domain-events"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which situation is a better fit for returning a `Result<T>` than for throwing an exception?",
+      "tags": [
+        "C# & .NET",
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The connection string is missing from configuration when the app starts.",
+        "A user asks to transfer more money than their account balance allows.",
+        "A caller passes `null` for a parameter because of a programming bug.",
+        "The process runs out of memory while it builds a large report."
+      ],
+      "correct": 1,
+      "explanation": "An insufficient balance is an expected business outcome that the caller has to handle, so it belongs in the return type where the compiler makes it visible. A missing configuration value at startup, a null argument from a bug and running out of memory are unexpected faults; failing fast with an exception is the right response, and wrapping them in a result only hides them. The .NET guidance is to avoid exceptions for common, expected conditions.",
+      "materials": [
+        "exceptions"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A command handler uses an `OrderRepository` and a `StockRepository`, both built on EF Core. What makes their changes commit atomically?",
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Each repository calls `SaveChangesAsync` at the end of its own methods.",
+        "The `DbContext` is registered as transient, so each repository gets a fresh, isolated context.",
+        "Both repositories use the same scoped `DbContext` and the handler calls `SaveChangesAsync` once.",
+        "Each repository opens its own `TransactionScope` around the changes it makes."
+      ],
+      "correct": 2,
+      "explanation": "`DbContext` is itself the unit of work: changes tracked by one instance are written in a single transaction by one `SaveChangesAsync` call. Sharing the scoped context and saving once at the end of the use case is what makes the two changes atomic. Saving inside each repository, or giving each one its own context or its own transaction scope, produces two separate commits, so one can succeed while the other fails.",
+      "materials": [
+        "persistence"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A job must run next Monday at 09:00, survive application restarts and redeploys before then, and be retried automatically if it fails. Which approach fits best?",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A `BackgroundService` that computes the delay and calls `Task.Delay` until Monday",
+        "A fire-and-forget `Task.Run` started from the controller that accepted the request",
+        "A `System.Threading.Timer` held by a singleton service and set to fire on Monday",
+        "A job scheduler with persistent storage, such as Hangfire or Quartz.NET with a database store"
+      ],
+      "correct": 3,
+      "explanation": "Schedulers like Hangfire and Quartz.NET keep jobs in durable storage, so a scheduled job still exists after a restart, and they support retries and recurring schedules. `Task.Delay`, a timer and `Task.Run` all live in process memory: a restart or redeploy before Monday silently loses the job, and nothing retries it.",
+      "materials": [
+        "hangfire",
+        "hosted"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In a modular monolith, the Billing module needs an order's total, which the Orders module owns. Which approach keeps the module boundaries intact?",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Billing calls a public contract that Orders exposes, or keeps its own copy updated from Orders' events.",
+        "Billing maps the Orders tables into its own `DbContext` and joins them in its queries.",
+        "Billing references the `Orders.Infrastructure` project and uses its repository classes.",
+        "Both modules share one `DbContext` containing both modules' entities, so cross-module joins are easy."
+      ],
+      "correct": 0,
+      "explanation": "Modules own their data and talk through public contracts (an interface or query in a contracts project) or through events, so each can change its internals or be extracted later. Mapping another module's tables or referencing its infrastructure creates hidden coupling to its schema and implementation. A single shared `DbContext` for every module removes the data ownership that makes it a modular monolith in the first place.",
+      "materials": [
+        "arch",
+        "ddd-ms"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A modular monolith keeps each module in its own set of projects. Which technique stops other modules from using a module's implementation classes at compile time?",
+      "tags": [
+        "C# & .NET",
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Putting each module's classes in a separate namespace, such as `Shop.Orders.Internal`",
+        "Grouping each module's projects in its own solution folder in the `.sln` file",
+        "Marking implementation types `internal` and exposing only a small public contracts project",
+        "Prefixing implementation class names with an underscore to signal they are private"
+      ],
+      "correct": 2,
+      "explanation": "C# access modifiers are enforced by the compiler: `internal` types are invisible outside their assembly, so only the public contracts can be used by other modules (architecture tests can check the rest). Namespaces and solution folders are organisational only, and naming conventions are not enforced at all, so any module can still reference the classes.",
+      "materials": [
+        "arch"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `builder.Services.AddHttpClient<CatalogClient>().AddStandardResilienceHandler();` add to that client's pipeline?",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A retry strategy with three immediate retries and nothing else",
+        "Rate limiting, a total request timeout, retries, a circuit breaker and a per-attempt timeout",
+        "A response cache that serves recent responses when the catalog is down",
+        "Client-side load balancing across the catalog's instances, with health probes"
+      ],
+      "correct": 1,
+      "explanation": "The standard resilience handler from `Microsoft.Extensions.Http.Resilience` chains five strategies: a rate limiter, a total request timeout, retry (with exponential backoff and jitter), a circuit breaker and an attempt timeout. Its retries are not immediate and they are only one part of it. It does not cache responses, and endpoint resolution and load balancing come from service discovery, not from this handler.",
+      "materials": [
+        "http-resilience"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "With `Microsoft.Extensions.ServiceDiscovery` configured, an `HttpClient` has the base address `https+http://catalog`. What does that address mean?",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Send each request over both HTTPS and HTTP at the same time and use the faster response.",
+        "Look up the host `catalog` in DNS over HTTP first and then upgrade the connection to HTTPS.",
+        "It is an invalid URI, so `HttpClient` throws as soon as the first request is sent.",
+        "Resolve the logical name `catalog` through service discovery, preferring HTTPS endpoints and falling back to HTTP."
+      ],
+      "correct": 3,
+      "explanation": "Service discovery resolves the logical service name to concrete endpoints from configuration or another provider, and the `https+http` scheme lists the acceptable schemes in order of preference. Nothing is sent over two protocols at once, and the name is not a DNS host lookup. The URI is valid once the discovery handler is added to the client, for example with `AddServiceDiscovery()`.",
+      "materials": [
+        "service-discovery"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In a .NET Aspire solution, what is the role of the AppHost project?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It describes the app model in code (projects, containers, databases) and wires their references for local orchestration.",
+        "It is the shared library whose `AddServiceDefaults()` adds telemetry, health checks and resilience to each service.",
+        "It is a production reverse proxy that routes external traffic to the services in the cluster.",
+        "It replaces Kubernetes in production by scheduling the service containers on each server."
+      ],
+      "correct": 0,
+      "explanation": "The AppHost is the orchestrator: `DistributedApplication.CreateBuilder` declares resources, and `WithReference` passes connection strings and service endpoints between them while the app runs locally. The shared library with `AddServiceDefaults()` is the separate ServiceDefaults project. Aspire is not a runtime gateway or a production scheduler; for deployment its model is handed to tools that target a hosting platform.",
+      "materials": [
+        "aspire-overview"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which attribute makes an MVC controller action unavailable while the `Beta` feature flag from `Microsoft.FeatureManagement` is off?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`[FeatureFlag(\"Beta\")]`",
+        "`[RequiresFeature(\"Beta\")]`",
+        "`[FeatureGate(\"Beta\")]`",
+        "`[EnableFeature(\"Beta\")]`"
+      ],
+      "correct": 2,
+      "explanation": "`[FeatureGate]` from `Microsoft.FeatureManagement.AspNetCore` gates a controller or action on one or more feature flags; when the flag is off, the disabled-feature handler runs, which returns 404 by default. The other attribute names do not exist in the library. In code you can also call `IFeatureManager.IsEnabledAsync(\"Beta\")`.",
+      "materials": [
+        "feature-mgmt"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An API uses `Asp.Versioning` with `options.ReportApiVersions = true`. What does that setting add?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A `/versions` endpoint that lists the versions the API supports, with release dates",
+        "The `api-supported-versions` and `api-deprecated-versions` response headers",
+        "A redirect from deprecated versions to the newest version of the same endpoint",
+        "An `api-version` field added to the JSON body of each response"
+      ],
+      "correct": 1,
+      "explanation": "With `ReportApiVersions` on, responses carry `api-supported-versions` and `api-deprecated-versions` headers so clients can discover what is available and what is going away. The library does not add an endpoint, rewrite response bodies or redirect requests; deprecated versions keep working until you remove them.",
+      "materials": [
+        "api-versioning"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An API uses `Asp.Versioning` with `DefaultApiVersion = new ApiVersion(1, 0)`, `AssumeDefaultVersionWhenUnspecified = true` and the default version selector. A client sends a request without any API version. What happens?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The request is routed to the newest version the API implements.",
+        "The request is rejected with 400 Bad Request because no version was given.",
+        "The request is routed to the oldest version that is not deprecated.",
+        "The request is handled as if the client had asked for version 1.0."
+      ],
+      "correct": 3,
+      "explanation": "With `AssumeDefaultVersionWhenUnspecified` on, the default selector picks `DefaultApiVersion`, so existing clients that never sent a version keep working against 1.0. Without the option, an unversioned request gets a 400 response. Picking the newest implemented version requires a different selector, such as `CurrentImplementationApiVersionSelector`.",
+      "materials": [
+        "api-versioning"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A MassTransit consumer throws an exception, and no retry policy is configured for its endpoint. What happens to the message by default?",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It is moved to the endpoint's error queue (named with an `_error` suffix) and a `Fault<T>` event is published.",
+        "It is redelivered to the same consumer immediately, again and again, until it is consumed successfully.",
+        "It is discarded silently, and the exception is written to the application log.",
+        "It is returned to the producer, whose `Publish` call then throws the consumer's exception."
+      ],
+      "correct": 0,
+      "explanation": "MassTransit's documented default is to move a faulted message to the `<queue>_error` queue and publish a `Fault<T>` message, so nothing is lost and the failure is visible; retries and redelivery are added with `UseMessageRetry` and delayed redelivery. It does not loop forever or drop the message, and publishing is decoupled from consumption, so the producer never sees the consumer's exception.",
+      "materials": [
+        "masstransit"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`Money` is a `readonly record struct` whose constructor rejects a negative amount and a null or empty currency. Which code still produces a `Money` that breaks those rules?",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`new Money(-1m, \"EUR\")`",
+        "`Money m = default;`",
+        "`new Money(5m, \"\")`",
+        "`new Money(5m, null!)`"
+      ],
+      "correct": 1,
+      "explanation": "A struct always has a zero-initialised default value that skips every constructor, so `default` (and every element of a new `Money[]`) has `Amount = 0` and `Currency = null`. The other three calls go through the validating constructor and throw. This is one reason many teams model value objects that have invariants as `sealed record` classes rather than structs.",
+      "materials": [
+        "value-obj",
+        "records"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With duplicate detection enabled on an Azure Service Bus queue, a message sent again with the same `MessageId` inside the detection window is accepted by the send operation and then dropped.",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "Duplicate detection tracks `MessageId` values for the configured window; a resend with a known id succeeds from the sender's point of view, but the broker ignores the copy. That lets a sender safely retry after an uncertain send. It does not make consumers idempotent, because redelivery after a failed or expired lock is a different thing.",
+      "materials": [
+        "sb-dup"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When neither `DOTNET_ENVIRONMENT` nor `ASPNETCORE_ENVIRONMENT` is set, the host runs in the Development environment and loads `appsettings.Development.json`.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "The default environment is Production, so a server where nobody set the variable gets Production settings, which is the safe choice. `appsettings.{Environment}.json` is layered over `appsettings.json` for whatever environment is active, and environment-specific values such as connection strings belong there or in environment variables and secret stores rather than in `#if DEBUG` code.",
+      "materials": [
+        "environments"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Services added with `AddHostedService<T>()` are registered with a singleton lifetime, so a hosted service that needs a scoped `DbContext` should create a scope with `IServiceScopeFactory`.",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "Hosted services are singletons that live as long as the host. Injecting a scoped `DbContext` directly would either fail scope validation or keep one context alive forever, so the docs show creating a scope per unit of work and resolving scoped services from it.",
+      "materials": [
+        "hosted"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Keeping EF Core mapping in `IEntityTypeConfiguration<T>` classes in the Infrastructure project lets the domain entities stay free of EF Core attributes and package references.",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "The fluent API in configuration classes describes keys, owned types and backing fields from the outside, so the Domain project does not need to reference EF Core. That is how persistence ignorance is usually achieved in a Clean Architecture solution. Data annotations, by contrast, put persistence details on the entities themselves.",
+      "materials": [
+        "persistence",
+        "ddd-ms"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Reading flags through `IFeatureManagerSnapshot` gives the same value for a feature flag throughout one request, even if the flag's configuration changes during that request.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "`IFeatureManagerSnapshot` caches each flag's evaluation for the lifetime of its scope, which in ASP.NET Core is the request. That keeps a request internally consistent, for example when a percentage filter could otherwise give different answers. `IFeatureManager` evaluates the flag every time it is asked.",
+      "materials": [
+        "feature-mgmt"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Marking an API version as deprecated in `Asp.Versioning` stops the API from routing requests to that version.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "Deprecation is advisory: a deprecated version is still served and is reported in the `api-deprecated-versions` header so clients know to move. A version stops working only when you remove it from the code. This lets you announce a sunset date while partners migrate.",
+      "materials": [
+        "api-versioning"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A circuit breaker in the open state forwards a reduced share of calls to the failing dependency so it can tell when the dependency has recovered.",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "While open, the breaker fails calls immediately without touching the dependency. After the break duration it moves to half-open, where a trial call is allowed through: success closes the breaker and failure opens it again. Sending a share of the traffic is not what the open state does.",
+      "materials": [
+        "circuit-breaker",
+        "http-resilience"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In an Azure Service Bus queue with sessions enabled, messages that share a `SessionId` are received in order by one receiver at a time, which holds a lock on that session.",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "Sessions give FIFO handling of related messages: a receiver accepts a session and gets an exclusive lock on it, so no other receiver processes that session's messages at the same time. Different sessions can still be processed in parallel by different receivers, which is how ordered processing per order or per customer scales out.",
+      "materials": [
+        "sb-sessions"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In the standard resilience handler's default options, the per-attempt timeout is longer than the total request timeout, so one slow attempt can use up the whole time budget.",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "The defaults are a 10-second attempt timeout inside a 30-second total request timeout, so several attempts (with retry delays) fit inside the overall budget. The attempt timeout is the innermost strategy and the total timeout wraps the retries. If the attempt timeout were longer than the total, retries would never get a chance to run.",
+      "materials": [
+        "http-resilience"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these belong in the Domain project of a Clean Architecture solution?",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "An `AppDbContext : DbContext` with the entity mappings",
+        "An `Order` entity that enforces its own business rules",
+        "A `Money` value object",
+        "An `SmtpEmailSender` class that uses `SmtpClient`",
+        "An `OrderPlaced` domain event record"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        4
+      ],
+      "explanation": "Entities, value objects and domain events are the core model and depend on nothing else. The `DbContext` and the SMTP sender are infrastructure: they depend on EF Core and network I/O and implement abstractions declared further in. Putting them in Domain would make the center of the solution depend on frameworks.",
+      "materials": [
+        "arch",
+        "ddd-ms"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which concerns are a good fit for MediatR-style `IPipelineBehavior<TRequest, TResponse>` implementations?",
+      "tags": [
+        "C# & .NET",
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Validating the request before the handler runs",
+        "Mapping HTTP routes to endpoints",
+        "Wrapping command handlers in a database transaction",
+        "Logging and timing every request",
+        "Caching the responses of selected queries"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "explanation": "Pipeline behaviors wrap the handler, so anything that should run before and after every (or every matching) request fits: validation, transactions, logging and timing, and caching. Routing happens earlier, in ASP.NET Core, before any request object reaches the mediator.",
+      "materials": [
+        "app-layer"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which traits describe a value object that is modelled well in C#?",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It has no identity property, such as an `Id`",
+        "It has public setters so EF Core can materialise it",
+        "Its properties are positional or `init`-only, so it cannot change after creation",
+        "Its key is generated by the database when it is first saved",
+        "It rejects invalid values in its constructor or factory method"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "A value object is defined by its values, is immutable and is always valid, so it has no identity, no setters and validates on creation. EF Core can map value objects as owned types or complex types without public setters. A database-generated key would make it an entity.",
+      "materials": [
+        "value-obj",
+        "records"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A message is received from an Azure Service Bus queue in peek-lock mode. Which of these are real ways to settle it?",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Complete it, which removes it from the queue",
+        "Abandon it, which releases the lock so it can be delivered again",
+        "Dead-letter it, which moves it to the dead-letter subqueue",
+        "Defer it, which keeps it in the queue to be received later by sequence number",
+        "Requeue it at the front of the queue with a higher priority"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "Peek-lock supports four settlement operations: complete, abandon, dead-letter and defer. Service Bus queues have no message priority, so there is no requeue-with-priority operation; ordering is handled with sessions instead.",
+      "materials": [
+        "sb-settlement",
+        "sb-dlq"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about sagas implemented as state machines (for example a MassTransit saga state machine) are true?",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The saga's state is persisted between messages, so a long process survives restarts",
+        "Messages are routed to the right saga instance by a correlation id",
+        "One database transaction is kept open across all steps until the saga completes",
+        "Undoing earlier steps after a failure is done with explicit compensating actions",
+        "The participating services join a distributed two-phase commit"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "A saga is a sequence of local transactions: its state is stored in a saga repository between messages, each message is matched to an instance by correlation id, and failures are handled with compensating actions. Holding a transaction open for the whole process or using two-phase commit is what sagas are designed to avoid.",
+      "materials": [
+        "saga",
+        "masstransit"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these strategies are part of the pipeline added by `AddStandardResilienceHandler()`?",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Hedging that sends parallel requests to other endpoints",
+        "Retry with exponential backoff",
+        "Circuit breaker",
+        "Response caching",
+        "Per-attempt timeout"
+      ],
+      "correctIndices": [
+        1,
+        2,
+        4
+      ],
+      "explanation": "The standard handler chains a rate limiter, a total timeout, retry, a circuit breaker and an attempt timeout. Hedging is a separate pipeline added with `AddStandardHedgingHandler()`, and none of the resilience handlers cache responses.",
+      "materials": [
+        "http-resilience"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are built-in feature filters in `Microsoft.FeatureManagement`?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`Microsoft.Percentage`",
+        "`Microsoft.Region`",
+        "`Microsoft.TimeWindow`",
+        "`Microsoft.Targeting`",
+        "`Microsoft.Browser`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "The library ships the percentage filter (gradual rollout), the time window filter (on between two dates) and the targeting filter (specific users and groups, with percentages). Region and browser filters are not built in; you write a custom `IFeatureFilter` for rules like those.",
+      "materials": [
+        "feature-mgmt"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In the .NET Aspire project templates, what does `builder.AddServiceDefaults()` from the ServiceDefaults project configure?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "OpenTelemetry logging, metrics and tracing",
+        "Default health checks, exposed by `MapDefaultEndpoints()`",
+        "Service discovery for `HttpClient`s",
+        "The standard resilience handler for `HttpClient`s",
+        "Applying pending EF Core migrations at startup"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "The template's extension method sets up OpenTelemetry, adds default health checks, and configures every `HttpClient` with service discovery and the standard resilience handler. Database migrations are not part of service defaults; you add them yourself, for example in a worker or a startup step.",
+      "materials": [
+        "aspire-defaults"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In a modular monolith with Orders and Billing modules, which ways for Billing to use Orders keep the boundary intact?",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Calling an interface that Orders exposes in its public contracts project",
+        "Handling an in-process integration event that Orders publishes",
+        "Querying the Orders tables with raw SQL from Billing's code",
+        "Reusing the Orders module's entity classes in Billing's `DbContext`",
+        "Referencing the Orders implementation project to call its internal services"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "Modules interact through their public contracts or through events, so each module keeps ownership of its data and its internals. Reading another module's tables, reusing its entities or calling its implementation all couple Billing to details Orders should be free to change.",
+      "materials": [
+        "arch"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the query side of CQRS with Dapper are true?",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Queries return DTOs shaped for the caller",
+        "A query may join tables that belong to different aggregates",
+        "Queries should load aggregates through repositories so invariants are checked",
+        "Query handlers should call `SaveChanges` to keep audit columns up to date"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "Reads do not change state, so they do not need aggregates or their invariants; they can join whatever tables the screen needs and map straight to DTOs. Loading aggregates for a read adds cost for no benefit, and a query that writes is no longer a query.",
+      "materials": [
+        "cqrs-reads"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which are good reasons to choose Hangfire or Quartz.NET over a plain `BackgroundService`?",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Cron-style recurring schedules",
+        "Jobs kept in persistent storage that survive restarts",
+        "Running code on a background thread at all",
+        "Coordinating a cluster so a scheduled job runs on one node",
+        "Making `ExecuteAsync` start before the web server accepts requests"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Schedulers add durable job storage, cron schedules, retries and clustered coordination on top of plain background execution. A `BackgroundService` already runs code in the background, and when it starts relative to the server is a hosting detail, not a reason to add a scheduler.",
+      "materials": [
+        "hangfire",
+        "hosted"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about using `Result<T>` types instead of exceptions in a .NET application layer are true?",
+      "tags": [
+        "C# & .NET",
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The possible failure is visible in the method signature, so callers have to handle it",
+        "Exceptions are still the right tool for unexpected faults such as a lost database connection",
+        "ASP.NET Core converts a returned `Result<T>` into a `ProblemDetails` response automatically",
+        "Adopting result types means `try`/`catch` is no longer needed anywhere in the app"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "Result types make expected failures (validation, business rules) explicit, while exceptions remain the mechanism for unexpected faults. `Result<T>` is not a framework type, so mapping it to HTTP responses or `ProblemDetails` is code you write. Infrastructure and framework code still throw, so exception handling stays.",
+      "materials": [
+        "exceptions"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A Clean Architecture solution has these four projects. Order them from the project that references none of the others to the project that references all of the others.",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Domain",
+        "Application (references Domain)",
+        "Infrastructure (implements Application's interfaces)",
+        "Api (the composition root)"
+      ],
+      "explanation": "Domain is the center and references nothing. Application references Domain and declares interfaces. Infrastructure references Application (and through it Domain) to implement those interfaces. The Api project is the composition root, so it references Application for the use cases and Infrastructure to register the implementations.",
+      "materials": [
+        "arch"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`AddStandardResilienceHandler()` chains five strategies. Order them from the outermost (runs first) to the innermost (closest to the HTTP call).",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Rate limiter",
+        "Total request timeout",
+        "Retry",
+        "Circuit breaker",
+        "Attempt timeout"
+      ],
+      "explanation": "The rate limiter caps concurrency before anything else, then the total timeout bounds the whole operation including all retries. Retry wraps the circuit breaker so each attempt is counted by the breaker, and the attempt timeout is innermost so it limits each individual try.",
+      "materials": [
+        "http-resilience"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Pipeline behaviors are registered in the order Logging, Validation, Transaction, and a valid command is sent. Order what happens, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Logging behavior records that the command started",
+        "Validation behavior checks the command",
+        "Transaction behavior begins a transaction",
+        "The command handler runs",
+        "Transaction behavior commits"
+      ],
+      "explanation": "Behaviors run in registration order, each wrapping the next, so the first registered is the outermost and the handler sits in the middle. Putting validation outside the transaction means invalid commands never open one. The commit happens as the transaction behavior unwinds, before control returns to the outer behaviors.",
+      "materials": [
+        "app-layer"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the steps of the transactional outbox pattern for one state change, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Save the business change and an outbox row in one database transaction",
+        "Commit the transaction",
+        "A background relay reads unpublished outbox rows",
+        "The relay publishes each message to the broker",
+        "The relay marks the rows as published"
+      ],
+      "explanation": "Writing the change and the message together is what removes the dual-write problem. Publishing happens only after the commit, by a separate relay. Marking rows last means a crash between publishing and marking causes a duplicate, not a loss, which is why consumers still need to be idempotent.",
+      "materials": [
+        "outbox"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A message in an Azure Service Bus queue keeps failing in its handler. Order what happens, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The receiver gets the message in peek-lock mode and holds a lock on it",
+        "The handler throws and the message is abandoned",
+        "The message becomes available again with its delivery count increased",
+        "Its delivery count goes past the queue's MaxDeliveryCount",
+        "Service Bus moves it to the dead-letter subqueue"
+      ],
+      "explanation": "Peek-lock keeps the message in the queue while it is processed. Abandoning (or letting the lock expire) releases it, and every delivery increments the delivery count. When the count exceeds `MaxDeliveryCount` (10 by default) the broker dead-letters the message so it stops blocking the queue and can be inspected.",
+      "materials": [
+        "sb-dlq",
+        "sb-settlement"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In the eShop-style approach, where domain events are dispatched from the DbContext before committing, order the steps of a command, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "An aggregate method changes state and adds a domain event to its list",
+        "The command handler calls the unit of work's save method",
+        "The DbContext collects the events from tracked aggregates and dispatches them",
+        "Domain event handlers change other aggregates through the same DbContext",
+        "`base.SaveChangesAsync` commits all the changes in one transaction"
+      ],
+      "explanation": "Aggregates only record events; nothing is dispatched while the domain method runs. On save, the context gathers events from tracked entities and dispatches them through the mediator, so handlers' changes join the same context. The final base save commits everything atomically.",
+      "materials": [
+        "domain-events"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a hand-written request pipeline with logging, validation and transaction behaviors, sent an invalid command.",
+      "tags": [
+        "C# & .NET",
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "var log = new List<string>();\nFunc<CreateUser, Result> handler = cmd => { log.Add(\"handler\"); return Result.Ok(); };\n\nvar behaviors = new List<Func<CreateUser, Func<Result>, Result>>\n{\n    (cmd, next) => { log.Add(\"logging in\"); var r = next(); log.Add($\"logging out ok={r.IsSuccess}\"); return r; },\n    (cmd, next) => string.IsNullOrWhiteSpace(cmd.Email)\n        ? Result.Fail(\"email required\")\n        : next(),\n    (cmd, next) => { log.Add(\"begin tx\"); var r = next(); log.Add(\"commit\"); return r; },\n};\n\nResult Send(CreateUser cmd)\n{\n    Func<Result> pipeline = () => handler(cmd);\n    for (int i = behaviors.Count - 1; i >= 0; i--)\n    {\n        var behavior = behaviors[i];\n        var next = pipeline;\n        pipeline = () => behavior(cmd, next);\n    }\n    return pipeline();\n}\n\nvar result = Send(new CreateUser(\"\"));\nlog.ForEach(Console.WriteLine);\nConsole.WriteLine(result.Error);\n\nrecord CreateUser(string Email);\nrecord Result(bool IsSuccess, string? Error)\n{\n    public static Result Ok() => new(true, null);\n    public static Result Fail(string e) => new(false, e);\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "logging in\nlogging out ok=False\nemail required\n",
+      "explanation": "The behaviors are wrapped so the first in the list is outermost: logging runs, then validation sees an empty email and returns a failure without calling `next`. The transaction behavior and the handler never run, so no \"begin tx\" or \"handler\" line appears. Logging then sees the failed result on the way out, and the error is printed last.",
+      "materials": [
+        "app-layer"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a record value object whose constructor validates the amount, copied with a `with` expression.",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "hard",
+      "code": "var price = new Money(10m, \"EUR\");\nConsole.WriteLine(price);\n\nvar discounted = price with { Amount = -5m };\nConsole.WriteLine(discounted);\n\ntry\n{\n    var bad = new Money(-5m, \"EUR\");\n}\ncatch (ArgumentOutOfRangeException)\n{\n    Console.WriteLine(\"constructor rejected -5\");\n}\n\npublic sealed record Money\n{\n    public Money(decimal amount, string currency)\n    {\n        ArgumentOutOfRangeException.ThrowIfNegative(amount);\n        Amount = amount;\n        Currency = currency;\n    }\n\n    public decimal Amount { get; init; }\n    public string Currency { get; init; }\n\n    public override string ToString() => $\"{Amount} {Currency}\";\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "10 EUR\n-5 EUR\nconstructor rejected -5\n",
+      "explanation": "A `with` expression clones the record and then runs the `init` accessors for the listed properties; it does not call your constructor. So `price with { Amount = -5m }` creates an invalid `Money` without any exception, while calling the constructor directly throws. Put the validation in the `init` accessors, or avoid `init` setters, if invariants must hold for copies too.",
+      "materials": [
+        "records",
+        "value-obj"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: value equality for a record value object and identity equality for an entity.",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "easy",
+      "code": "var a = new Money(10m, \"EUR\");\nvar b = new Money(10m, \"EUR\");\nConsole.WriteLine(a == b);\nConsole.WriteLine(new HashSet<Money> { a, b }.Count);\n\nvar c1 = new Customer(42) { Name = \"Ada\" };\nvar c2 = new Customer(42) { Name = \"Ada Lovelace\" };\nvar c3 = new Customer(7) { Name = \"Ada\" };\nConsole.WriteLine(c1.Equals(c2));\nConsole.WriteLine(c1.Equals(c3));\nConsole.WriteLine(new HashSet<Customer> { c1, c2, c3 }.Count);\n\nrecord Money(decimal Amount, string Currency);\n\nabstract class Entity\n{\n    protected Entity(int id) => Id = id;\n    public int Id { get; }\n    public override bool Equals(object? obj) =>\n        obj is Entity other && other.GetType() == GetType() && other.Id == Id;\n    public override int GetHashCode() => HashCode.Combine(GetType(), Id);\n}\n\nclass Customer(int id) : Entity(id)\n{\n    public string Name { get; set; } = \"\";\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "True\n1\nTrue\nFalse\n2\n",
+      "explanation": "Records compare by value, so two `Money(10, EUR)` instances are equal and a set keeps one. The entity base class compares by type and `Id`, so `c1` and `c2` are the same customer despite different names, while `c3` is a different customer. The set of customers therefore holds two items.",
+      "materials": [
+        "value-obj",
+        "domain-model"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an aggregate that records domain events, and a context that dispatches and clears them on save.",
+      "tags": [
+        "C# & .NET",
+        "Architecture & DDD"
+      ],
+      "difficulty": "medium",
+      "code": "var order = new Order();\norder.Place();\norder.Place();\n\nvar context = new FakeContext();\ncontext.Track(order);\ncontext.SaveChanges();\ncontext.SaveChanges();\n\ninterface IDomainEvent;\nrecord OrderPlaced(int Attempt) : IDomainEvent;\n\nabstract class AggregateRoot\n{\n    private readonly List<IDomainEvent> _events = new();\n    public IReadOnlyCollection<IDomainEvent> DomainEvents => _events;\n    protected void Raise(IDomainEvent e) => _events.Add(e);\n    public void ClearDomainEvents() => _events.Clear();\n}\n\nclass Order : AggregateRoot\n{\n    private int _attempts;\n    public bool IsPlaced { get; private set; }\n    public void Place()\n    {\n        _attempts++;\n        if (IsPlaced) return;\n        IsPlaced = true;\n        Raise(new OrderPlaced(_attempts));\n    }\n}\n\nclass FakeContext\n{\n    private readonly List<AggregateRoot> _tracked = new();\n    private int _saves;\n    public void Track(AggregateRoot a) => _tracked.Add(a);\n    public void SaveChanges()\n    {\n        _saves++;\n        var events = _tracked.SelectMany(a => a.DomainEvents).ToList();\n        _tracked.ForEach(a => a.ClearDomainEvents());\n        foreach (var e in events) Console.WriteLine($\"save {_saves}: dispatch {e}\");\n        Console.WriteLine($\"save {_saves}: {events.Count} event(s)\");\n    }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "save 1: dispatch OrderPlaced { Attempt = 1 }\nsave 1: 1 event(s)\nsave 2: 0 event(s)\n",
+      "explanation": "The second `Place()` call returns early because the order is already placed, so only one event is raised (with attempt 1). The first save dispatches it and clears the list, so the second save finds nothing. Clearing the events after collecting them is what stops them being dispatched again on a later save.",
+      "materials": [
+        "domain-events"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: chaining validations with a Result type's `Bind` and `Map`.",
+      "tags": [
+        "C# & .NET",
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "medium",
+      "code": "Console.WriteLine(Register(\"ada@example.com\", 30));\nConsole.WriteLine(Register(\"not-an-email\", 30));\nConsole.WriteLine(Register(\"not-an-email\", 12));\nConsole.WriteLine(Register(\"bob@example.com\", 12));\n\nstatic string Register(string email, int age) =>\n    ValidateEmail(email)\n        .Bind(e => ValidateAge(age).Map(a => $\"{e} ({a})\"))\n        .Match(ok => $\"created {ok}\", err => $\"rejected: {err}\");\n\nstatic Result<string> ValidateEmail(string email) =>\n    email.Contains('@') ? Result<string>.Ok(email) : Result<string>.Fail(\"bad email\");\n\nstatic Result<int> ValidateAge(int age) =>\n    age >= 18 ? Result<int>.Ok(age) : Result<int>.Fail(\"too young\");\n\nreadonly record struct Result<T>(bool IsSuccess, T? Value, string? Error)\n{\n    public static Result<T> Ok(T value) => new(true, value, null);\n    public static Result<T> Fail(string error) => new(false, default, error);\n\n    public Result<TOut> Bind<TOut>(Func<T, Result<TOut>> next) =>\n        IsSuccess ? next(Value!) : Result<TOut>.Fail(Error!);\n\n    public Result<TOut> Map<TOut>(Func<T, TOut> map) =>\n        IsSuccess ? Result<TOut>.Ok(map(Value!)) : Result<TOut>.Fail(Error!);\n\n    public TOut Match<TOut>(Func<T, TOut> ok, Func<string, TOut> fail) =>\n        IsSuccess ? ok(Value!) : fail(Error!);\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "created ada@example.com (30)\nrejected: bad email\nrejected: bad email\nrejected: too young\n",
+      "explanation": "`Bind` only calls the next step when the current result is a success, so the first failure is carried through unchanged. With a bad email the age check is never reached, which is why the third call reports \"bad email\" rather than \"too young\". Only the fourth call gets past the email check and fails on age.",
+      "materials": [
+        "exceptions"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a simple circuit breaker with a failure threshold of 2 and a 5-second break.",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "code": "var breaker = new CircuitBreaker(failureThreshold: 2, breakSeconds: 5);\nvar dependencyUp = false;\n\nforeach (var second in new[] { 0, 1, 3, 6, 9, 12 })\n{\n    if (second == 12) dependencyUp = true;\n    var outcome = breaker.Execute(second, () => dependencyUp);\n    Console.WriteLine($\"t={second} {outcome} -> {breaker.State}\");\n}\n\nclass CircuitBreaker(int failureThreshold, int breakSeconds)\n{\n    private int _failures;\n    private int _openedAt;\n    public string State { get; private set; } = \"Closed\";\n\n    public string Execute(int now, Func<bool> call)\n    {\n        if (State == \"Open\")\n        {\n            if (now - _openedAt < breakSeconds) return \"rejected\";\n            State = \"HalfOpen\";\n        }\n\n        if (call())\n        {\n            _failures = 0;\n            State = \"Closed\";\n            return \"ok\";\n        }\n\n        _failures++;\n        if (State == \"HalfOpen\" || _failures >= failureThreshold)\n        {\n            State = \"Open\";\n            _openedAt = now;\n        }\n        return \"failed\";\n    }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "t=0 failed -> Closed\nt=1 failed -> Open\nt=3 rejected -> Open\nt=6 failed -> Open\nt=9 rejected -> Open\nt=12 ok -> Closed\n",
+      "explanation": "Two failures in a row open the breaker at t=1, so the call at t=3 is rejected without running. At t=6 the break has lasted 5 seconds, so the breaker goes half-open and lets a trial call through; it fails and the breaker opens again from t=6, so t=9 is rejected. At t=12 the trial succeeds and the breaker closes.",
+      "materials": [
+        "circuit-breaker"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a message consumer that uses an inbox of processed message ids.",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "code": "var consumer = new DepositConsumer();\nvar deliveries = new[]\n{\n    new Deposit(\"m1\", 100),\n    new Deposit(\"m2\", 50),\n    new Deposit(\"m1\", 100),\n    new Deposit(\"m3\", 25),\n    new Deposit(\"m2\", 50),\n};\n\nforeach (var d in deliveries) consumer.Consume(d);\nConsole.WriteLine($\"balance {consumer.Balance}, handled {consumer.Handled}, skipped {consumer.Skipped}\");\n\nrecord Deposit(string MessageId, decimal Amount);\n\nclass DepositConsumer\n{\n    private readonly HashSet<string> _inbox = new();\n    public decimal Balance { get; private set; }\n    public int Handled { get; private set; }\n    public int Skipped { get; private set; }\n\n    public void Consume(Deposit message)\n    {\n        if (!_inbox.Add(message.MessageId))\n        {\n            Skipped++;\n            return;\n        }\n        Balance += message.Amount;\n        Handled++;\n    }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "balance 175, handled 3, skipped 2\n",
+      "explanation": "The inbox records each `MessageId` the first time it is handled; `HashSet.Add` returns false for an id it already holds, so the redelivered `m1` and `m2` are skipped. Only the three distinct deposits change the balance: 100 + 50 + 25 = 175. In a real system the inbox row is saved in the same transaction as the side effect.",
+      "materials": [
+        "integration-events"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a saga state machine that receives an out-of-order message and a payment failure.",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "code": "var saga = new OrderSaga();\nsaga.Handle(\"PaymentCaptured\");\nsaga.Handle(\"OrderSubmitted\");\nsaga.Handle(\"StockReserved\");\nsaga.Handle(\"PaymentFailed\");\nsaga.Handle(\"PaymentCaptured\");\n\nclass OrderSaga\n{\n    public string State { get; private set; } = \"Initial\";\n\n    public void Handle(string message)\n    {\n        var (next, action) = (State, message) switch\n        {\n            (\"Initial\", \"OrderSubmitted\") => (\"AwaitingStock\", \"reserve stock\"),\n            (\"AwaitingStock\", \"StockReserved\") => (\"AwaitingPayment\", \"capture payment\"),\n            (\"AwaitingPayment\", \"PaymentCaptured\") => (\"Completed\", \"ship order\"),\n            (\"AwaitingPayment\", \"PaymentFailed\") => (\"Cancelled\", \"release stock\"),\n            _ => (State, \"ignored\"),\n        };\n        Console.WriteLine($\"{message}: {State} -> {next} ({action})\");\n        State = next;\n    }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "PaymentCaptured: Initial -> Initial (ignored)\nOrderSubmitted: Initial -> AwaitingStock (reserve stock)\nStockReserved: AwaitingStock -> AwaitingPayment (capture payment)\nPaymentFailed: AwaitingPayment -> Cancelled (release stock)\nPaymentCaptured: Cancelled -> Cancelled (ignored)\n",
+      "explanation": "Each state accepts only certain messages, so the early `PaymentCaptured` in the initial state is ignored. The order then moves through stock reservation to awaiting payment, where `PaymentFailed` cancels it and triggers the compensating \"release stock\". A late `PaymentCaptured` in the final `Cancelled` state is ignored too.",
+      "materials": [
+        "saga"
+      ]
+    }
+  ]
+}

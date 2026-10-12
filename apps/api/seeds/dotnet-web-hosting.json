@@ -1,0 +1,897 @@
+{
+  "name": ".NET: static files, JWT and Kestrel",
+  "materials": [
+    {
+      "key": "static",
+      "type": "article",
+      "title": "Static files in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/static-files",
+      "author": "Microsoft Learn",
+      "description": "Serving wwwroot and other folders, default documents, directory browsing, content types, caching headers and authorization of static files."
+    },
+    {
+      "key": "aspnet9",
+      "type": "article",
+      "title": "What's new in ASP.NET Core 9.0",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/release-notes/aspnetcore-9.0",
+      "author": "Microsoft Learn",
+      "description": "Release notes for ASP.NET Core 9, including MapStaticAssets with build-time compression and fingerprinting."
+    },
+    {
+      "key": "fileproviders",
+      "type": "article",
+      "title": "File Providers in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/file-providers",
+      "author": "Microsoft Learn",
+      "description": "IFileProvider, PhysicalFileProvider and how ASP.NET Core abstracts file system access."
+    },
+    {
+      "key": "mw",
+      "type": "article",
+      "title": "ASP.NET Core Middleware",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/",
+      "author": "Microsoft Learn",
+      "description": "How the request pipeline is built and why middleware order matters, including static files and authorization."
+    },
+    {
+      "key": "authzpol",
+      "type": "article",
+      "title": "Policy-based authorization in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/security/authorization/policies",
+      "author": "Microsoft Learn",
+      "description": "Authorization policies, requirements, the default policy and the fallback policy."
+    },
+    {
+      "key": "jwtconf",
+      "type": "article",
+      "title": "Configure JWT bearer authentication in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/security/authentication/configure-jwt-bearer-authentication",
+      "author": "Microsoft Learn",
+      "description": "AddJwtBearer options, token validation parameters, Authority and metadata discovery, and signing keys."
+    },
+    {
+      "key": "userjwts",
+      "type": "article",
+      "title": "Manage JSON Web Tokens in development with dotnet user-jwts",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/security/authentication/jwt-authn",
+      "author": "Microsoft Learn",
+      "description": "Creating development JWTs with the dotnet user-jwts tool and how it configures the app."
+    },
+    {
+      "key": "policyscheme",
+      "type": "article",
+      "title": "Policy schemes in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/security/authentication/policyschemes",
+      "author": "Microsoft Learn",
+      "description": "Policy schemes that forward authentication actions to another scheme, chosen per request."
+    },
+    {
+      "key": "signalrauth",
+      "type": "article",
+      "title": "Authentication and authorization in ASP.NET Core SignalR",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/signalr/authn-and-authz",
+      "author": "Microsoft Learn",
+      "description": "Sending bearer tokens to SignalR hubs, including the access_token query string and OnMessageReceived."
+    },
+    {
+      "key": "clockskew",
+      "type": "article",
+      "title": "TokenValidationParameters.ClockSkew Property",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/microsoft.identitymodel.tokens.tokenvalidationparameters.clockskew",
+      "author": "Microsoft Learn",
+      "description": "API reference for the clock skew applied when validating token lifetimes; the default is 300 seconds."
+    },
+    {
+      "key": "mapinbound",
+      "type": "article",
+      "title": "JwtBearerOptions.MapInboundClaims Property",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.authentication.jwtbearer.jwtbeareroptions.mapinboundclaims",
+      "author": "Microsoft Learn",
+      "description": "API reference for the switch that maps short JWT claim names such as sub to long ClaimTypes URIs."
+    },
+    {
+      "key": "rfc7519",
+      "type": "article",
+      "title": "RFC 7519: JSON Web Token (JWT)",
+      "url": "https://datatracker.ietf.org/doc/html/rfc7519",
+      "author": "IETF",
+      "description": "The JWT specification: compact serialization, registered claims such as exp, nbf and sub, and NumericDate."
+    },
+    {
+      "key": "rfc6750",
+      "type": "article",
+      "title": "RFC 6750: OAuth 2.0 Bearer Token Usage",
+      "url": "https://datatracker.ietf.org/doc/html/rfc6750",
+      "author": "IETF",
+      "description": "How bearer tokens are sent and the WWW-Authenticate error codes invalid_request, invalid_token and insufficient_scope."
+    },
+    {
+      "key": "rfc4648",
+      "type": "article",
+      "title": "RFC 4648: The Base16, Base32, and Base64 Data Encodings",
+      "url": "https://datatracker.ietf.org/doc/html/rfc4648",
+      "author": "IETF",
+      "description": "Defines base64 and the URL- and filename-safe base64url alphabet used by JWTs."
+    },
+    {
+      "key": "owaspjwt",
+      "type": "article",
+      "title": "JSON Web Token Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html",
+      "author": "OWASP",
+      "description": "Common JWT pitfalls, including token revocation with a deny list and token storage on the client."
+    },
+    {
+      "key": "hmac",
+      "type": "article",
+      "title": "HMACSHA256 Class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.hmacsha256",
+      "author": "Microsoft Learn",
+      "description": "API reference for HMAC with SHA-256, including the static HashData method."
+    },
+    {
+      "key": "frombase64",
+      "type": "article",
+      "title": "Convert.FromBase64String Method",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.convert.frombase64string",
+      "author": "Microsoft Learn",
+      "description": "API reference for decoding base64 strings and the FormatException thrown for invalid input."
+    },
+    {
+      "key": "unixtime",
+      "type": "article",
+      "title": "DateTimeOffset.FromUnixTimeSeconds Method",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.datetimeoffset.fromunixtimeseconds",
+      "author": "Microsoft Learn",
+      "description": "API reference for converting Unix time in seconds to a DateTimeOffset."
+    },
+    {
+      "key": "kestrel",
+      "type": "article",
+      "title": "Kestrel web server in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel",
+      "author": "Microsoft Learn",
+      "description": "Overview of Kestrel, when to use a reverse proxy, and host filtering."
+    },
+    {
+      "key": "kestrelopts",
+      "type": "article",
+      "title": "Configure options for the ASP.NET Core Kestrel web server",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel/options",
+      "author": "Microsoft Learn",
+      "description": "Kestrel limits: body size, connections, keep-alive, header timeouts and minimum data rates."
+    },
+    {
+      "key": "http2",
+      "type": "article",
+      "title": "Use HTTP/2 with the ASP.NET Core Kestrel web server",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel/http2",
+      "author": "Microsoft Learn",
+      "description": "HTTP/2 requirements in Kestrel, TLS and ALPN, and cleartext HTTP/2."
+    },
+    {
+      "key": "http3",
+      "type": "article",
+      "title": "Use HTTP/3 with the ASP.NET Core Kestrel web server",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel/http3",
+      "author": "Microsoft Learn",
+      "description": "Enabling HTTP/3 over QUIC in Kestrel and how clients discover it through alt-svc."
+    },
+    {
+      "key": "proxy",
+      "type": "article",
+      "title": "Configure ASP.NET Core to work with proxy servers and load balancers",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/proxy-load-balancer",
+      "author": "Microsoft Learn",
+      "description": "Forwarded Headers Middleware, X-Forwarded-For and X-Forwarded-Proto, KnownProxies and KnownNetworks."
+    },
+    {
+      "key": "servers",
+      "type": "article",
+      "title": "Web server implementations in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/",
+      "author": "Microsoft Learn",
+      "description": "Kestrel, IIS HTTP Server and HTTP.sys, and how they relate to hosting models."
+    },
+    {
+      "key": "iisinproc",
+      "type": "article",
+      "title": "In-process hosting with IIS and ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/in-process-hosting",
+      "author": "Microsoft Learn",
+      "description": "How the ASP.NET Core Module hosts the app inside the IIS worker process with IIS HTTP Server."
+    },
+    {
+      "key": "generichost",
+      "type": "article",
+      "title": ".NET Generic Host in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host",
+      "author": "Microsoft Learn",
+      "description": "Host lifetime, graceful shutdown and the ShutdownTimeout setting."
+    },
+    {
+      "key": "uploads",
+      "type": "article",
+      "title": "Upload files in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads",
+      "author": "Microsoft Learn",
+      "description": "Large uploads, the Kestrel maximum request body size, RequestSizeLimit and DisableRequestSizeLimit."
+    },
+    {
+      "key": "ipnetwork",
+      "type": "article",
+      "title": "IPNetwork Struct",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.net.ipnetwork",
+      "author": "Microsoft Learn",
+      "description": "API reference for the .NET 8 IP network type with Parse and Contains."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple-choice",
+      "prompt": "An app sets an authorization `FallbackPolicy` that requires an authenticated user and builds its pipeline like this. What does an anonymous `GET /site.css` return when `wwwroot/site.css` exists?\n\n```csharp\napp.UseStaticFiles();\napp.UseAuthentication();\napp.UseAuthorization();\napp.MapControllers();\n```",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "401, because the fallback policy applies to requests that match no endpoint",
+        "200 with the file, because the static file middleware answers before authorization runs",
+        "302 to the login path, because static files inherit the default cookie challenge",
+        "404, because files in `wwwroot` must be mapped as endpoints to be served"
+      ],
+      "correct": 1,
+      "explanation": "Static File Middleware short-circuits the pipeline when it finds a matching file, so with `UseStaticFiles` ahead of `UseAuthorization` the fallback policy never sees the request and the file is public (verified: 200). The fallback policy would apply only if the request reached the authorization middleware without an endpoint. There is no cookie scheme here to redirect, and `UseStaticFiles` serves `wwwroot` without any endpoint mapping.",
+      "materials": [
+        "static",
+        "authzpol"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With a `FallbackPolicy` that requires an authenticated user, moving `app.UseStaticFiles()` to after `app.UseAuthorization()` makes an anonymous request for an existing `wwwroot` file get a 401.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "A request for a file matches no endpoint, and the authorization middleware applies the fallback policy to such requests, so it challenges before Static File Middleware runs (verified: 401 after the move, 200 before it). This is the documented way to protect static files: place `UseStaticFiles` after `UseAuthorization` and rely on the fallback policy, or serve protected files from an action that returns `File(...)`.",
+      "materials": [
+        "static",
+        "authzpol"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`wwwroot/data.blob` exists, `.blob` is not in the default content type mappings, and the app calls `app.UseStaticFiles()` with no options. What does `GET /data.blob` return?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "200 with `Content-Type: application/octet-stream`",
+        "200 with no `Content-Type` header",
+        "404 Not Found",
+        "415 Unsupported Media Type"
+      ],
+      "correct": 2,
+      "explanation": "Static File Middleware serves only files whose extension the `FileExtensionContentTypeProvider` knows; an unknown extension is treated as not found, so the request falls through and ends in 404 (verified). Setting `ServeUnknownFileTypes = true` serves it (with `DefaultContentType` if you set one), and adding the extension to the provider's `Mappings` is the safer fix. 415 is about request bodies, not file downloads.",
+      "materials": [
+        "static"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`wwwroot/index.html` exists. The pipeline is below. What does `GET /` return?\n\n```csharp\napp.UseStaticFiles();\napp.UseDefaultFiles();\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "200 with `index.html`, because the two middlewares can run in either order",
+        "301 redirect to `/index.html`",
+        "200 with a directory listing of `wwwroot`",
+        "404, because `UseDefaultFiles` only rewrites the path and nothing after it serves the file"
+      ],
+      "correct": 3,
+      "explanation": "`UseDefaultFiles` is a URL rewriter: it changes `/` to `/index.html` but does not send the file. It must run before `UseStaticFiles`; in the order shown, the static file middleware has already passed on `/`, so the request ends in 404 (verified). It does not redirect to `/index.html`, and directory listings need `UseDirectoryBrowser`.",
+      "materials": [
+        "static",
+        "mw"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about serving files with ASP.NET Core's static file middleware are true?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`app.UseFileServer()` combines static files and default documents, but leaves directory browsing off",
+        "With `UseDefaultFiles`, a request for `/docs` (no trailing slash) to a folder with `index.html` is redirected to `/docs/`",
+        "`UseStaticFiles(new StaticFileOptions { FileProvider = new PhysicalFileProvider(dir), RequestPath = \"/files\" })` serves `dir/a.txt` at `/files/a.txt`",
+        "`app.UseStaticFiles()` serves files from the content root when `wwwroot` does not contain them",
+        "Directory browsing is on by default in Development"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`UseFileServer()` is `UseDefaultFiles` plus `UseStaticFiles`; directory browsing needs `enableDirectoryBrowsing: true` (verified: 404 without it, a listing with it). Default documents for a folder requested without the trailing slash produce a 301 to the slashed URL (verified). A `PhysicalFileProvider` with a `RequestPath` maps another folder under a URL prefix. Plain `UseStaticFiles()` uses only the web root, and directory browsing is off in every environment because it can expose files.",
+      "materials": [
+        "static",
+        "fileproviders"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A browser fetches `/app.js` twice from an app using `app.UseStaticFiles()`, and the file does not change in between. Put these steps in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The middleware returns 200 with the file plus `ETag` and `Last-Modified` headers",
+        "The browser stores the response along with its validators",
+        "The browser sends the second request with `If-None-Match` set to the stored ETag",
+        "The middleware compares that value with the current file's ETag",
+        "The middleware returns 304 Not Modified without a body"
+      ],
+      "explanation": "Static File Middleware adds `ETag` and `Last-Modified` to every file response. A later conditional request carries `If-None-Match` (or `If-Modified-Since`); when the validator still matches, the middleware answers 304 with no body (verified with curl), and the browser reuses its copy. The 304 cannot come before the browser has a validator to send.",
+      "materials": [
+        "static"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A .NET 9 app replaces `app.UseStaticFiles()` with `app.MapStaticAssets()`. A background job later writes a new file `wwwroot/reports/today.pdf` while the app runs. What happens to requests for it?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`MapStaticAssets` serves it, compressed on the fly with Brotli",
+        "It is not served by `MapStaticAssets`, which serves assets from a manifest built at build or publish time",
+        "It is served, but without an `ETag`, because strong ETags come from the build manifest",
+        "The app restarts to rebuild the asset manifest, then serves the file"
+      ],
+      "correct": 1,
+      "explanation": "`MapStaticAssets` (new in .NET 9) uses a manifest produced at build/publish time to serve known assets with precompressed gzip/Brotli variants, content-based ETags and fingerprinted URLs. Files that appear at runtime are not in that manifest, so they need `UseStaticFiles` or another endpoint. It does not compress unknown files on the fly or restart the app.",
+      "materials": [
+        "aspnet9",
+        "static"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "An app calls `app.UseStaticFiles()` with default options. Which statements about its responses are true?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Responses include an `ETag` header",
+        "Responses include a `Last-Modified` header",
+        "Responses include `Cache-Control: max-age=604800` unless you change it",
+        "`OnPrepareResponse` can add a `Cache-Control` header to each file response",
+        "The file is served compressed when the client sends `Accept-Encoding: br`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "The middleware sets `ETag` and `Last-Modified` (so conditional requests can get 304) but no `Cache-Control` at all by default (verified). To add caching headers you set them in `StaticFileOptions.OnPrepareResponse`. `UseStaticFiles` does not compress; precompressed assets come from `MapStaticAssets` in .NET 9, or you add response compression yourself.",
+      "materials": [
+        "static"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With `app.MapFallbackToFile(\"index.html\")` in a single-page app, a `GET /assets/missing.js` for a file that does not exist returns `index.html` with status 200.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "`MapFallbackToFile` uses the route pattern `{*path:nonfile}`, and the `nonfile` constraint excludes paths that look like file names (with an extension). A missing `.js` therefore gets 404 (verified), which avoids sending HTML to a script tag, while client-side routes such as `/orders/42` get `index.html` with 200.",
+      "materials": [
+        "static"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: building an HS256 JWT by hand and checking the signature after changing the payload.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "code": "using System.Security.Cryptography;\nusing System.Text;\n\nvar key = Encoding.UTF8.GetBytes(\"demo-secret-key-of-at-least-32-bytes\");\n\nstring header = B64Url(Encoding.UTF8.GetBytes(\"\"\"{\"alg\":\"HS256\",\"typ\":\"JWT\"}\"\"\"));\nstring payload = B64Url(Encoding.UTF8.GetBytes(\"\"\"{\"sub\":\"42\",\"role\":\"user\"}\"\"\"));\nstring token = $\"{header}.{payload}.{Sign(header, payload)}\";\n\nvar parts = token.Split('.');\nConsole.WriteLine(parts.Length);\nConsole.WriteLine(parts[0]);\nConsole.WriteLine(Encoding.UTF8.GetString(FromB64Url(parts[1])));\n\nstring forged = B64Url(Encoding.UTF8.GetBytes(\"\"\"{\"sub\":\"42\",\"role\":\"admin\"}\"\"\"));\nConsole.WriteLine(Sign(parts[0], forged) == parts[2]);\nConsole.WriteLine(Sign(parts[0], parts[1]) == parts[2]);\n\nstring Sign(string h, string p) =>\n    B64Url(HMACSHA256.HashData(key, Encoding.UTF8.GetBytes(h + \".\" + p)));\n\nstatic string B64Url(byte[] b) =>\n    Convert.ToBase64String(b).TrimEnd('=').Replace('+', '-').Replace('/', '_');\n\nstatic byte[] FromB64Url(string s)\n{\n    s = s.Replace('-', '+').Replace('_', '/');\n    return Convert.FromBase64String(s + new string('=', (4 - s.Length % 4) % 4));\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "3\neyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\n{\"sub\":\"42\",\"role\":\"user\"}\nFalse\nTrue",
+      "explanation": "A JWT is three base64url segments joined by dots; the header `{\"alg\":\"HS256\",\"typ\":\"JWT\"}` always encodes to `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`. The payload is only encoded, so anyone can decode it and read the claims. The signature is an HMAC over `header.payload`, so swapping in a payload with `role: admin` gives a different HMAC and the check prints `False`, while the original segments still verify.",
+      "materials": [
+        "rfc7519",
+        "hmac"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: base64 versus base64url for the same bytes, and decoding the base64url form with `Convert.FromBase64String`.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "code": "byte[] data = { 0xFB, 0xFF, 0xBF, 0x41 };\n\nstring b64 = Convert.ToBase64String(data);\nstring url = b64.TrimEnd('=').Replace('+', '-').Replace('/', '_');\nConsole.WriteLine(b64);\nConsole.WriteLine(url);\n\ntry\n{\n    Convert.FromBase64String(url);\n    Console.WriteLine(\"decoded as-is\");\n}\ncatch (FormatException)\n{\n    Console.WriteLine(\"FormatException\");\n}\n\nstring restored = url.Replace('-', '+').Replace('_', '/');\nrestored += new string('=', (4 - restored.Length % 4) % 4);\nConsole.WriteLine(Convert.FromBase64String(restored).Length);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "+/+/QQ==\n-_-_QQ\nFormatException\n4",
+      "explanation": "Base64url (RFC 4648) replaces `+` with `-` and `/` with `_`, and JWTs also drop the `=` padding. `Convert.FromBase64String` accepts only standard base64, so the URL-safe string throws `FormatException`. After switching the characters back and padding the length to a multiple of four, it decodes to the original 4 bytes.",
+      "materials": [
+        "rfc4648",
+        "frombase64"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: reading `exp` from a JWT payload and applying a 5-minute clock skew.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "code": "using System.Text.Json;\n\nusing var doc = JsonDocument.Parse(\"\"\"{\"sub\":\"42\",\"exp\":1760000000}\"\"\");\nlong expValue = doc.RootElement.GetProperty(\"exp\").GetInt64();\n\nvar exp = DateTimeOffset.FromUnixTimeSeconds(expValue);\nConsole.WriteLine(exp.ToString(\"u\"));\nConsole.WriteLine(DateTimeOffset.FromUnixTimeMilliseconds(expValue).ToString(\"u\"));\n\nvar skew = TimeSpan.FromMinutes(5);\nforeach (int secondsAfterExp in new[] { 120, 300, 301 })\n{\n    var now = exp.AddSeconds(secondsAfterExp);\n    Console.WriteLine($\"{secondsAfterExp}: {(now <= exp + skew ? \"accepted\" : \"expired\")}\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "2025-10-09 08:53:20Z\n1970-01-21 08:53:20Z\n120: accepted\n300: accepted\n301: expired",
+      "explanation": "`exp` is a NumericDate: seconds since the Unix epoch, so `FromUnixTimeSeconds` gives 2025-10-09, while reading it as milliseconds lands in January 1970. With a 5-minute skew a token is still accepted until `exp + 300s`: 120 and 300 seconds late pass, 301 seconds late is rejected. This mirrors the JWT handler, whose `ClockSkew` defaults to 5 minutes.",
+      "materials": [
+        "rfc7519",
+        "unixtime"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An API uses `AddJwtBearer` and does not set `ClockSkew`. A client sends a correctly signed token whose `exp` was 3 minutes ago. What does an `[Authorize]` endpoint return?",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "200, because the default clock skew of 5 minutes still accepts the token",
+        "401, because lifetime validation compares `exp` with the current time exactly",
+        "200, because `ValidateLifetime` is off unless you turn it on",
+        "401 for the first request, then 200 after the handler refreshes the token"
+      ],
+      "correct": 0,
+      "explanation": "`TokenValidationParameters.ClockSkew` defaults to 300 seconds, so a token expired less than 5 minutes ago still validates (verified: 200 at 3 minutes, 401 at 6 minutes). Set `ClockSkew = TimeSpan.Zero` when short-lived tokens must expire on time. `ValidateLifetime` is on by default, and the bearer handler never refreshes tokens; that is the client's job.",
+      "materials": [
+        "clockskew",
+        "jwtconf"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A client calls a JWT-protected endpoint with a correctly signed token that expired an hour ago. Which header does the 401 response carry in .NET 8?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`WWW-Authenticate: Bearer`",
+        "`WWW-Authenticate: Bearer error=\"invalid_token\", error_description=\"The token expired at '...'\"`",
+        "`WWW-Authenticate: Bearer error=\"expired_token\"`",
+        "`WWW-Authenticate: Bearer error=\"insufficient_scope\", error_description=\"Token lifetime exceeded\"`"
+      ],
+      "correct": 1,
+      "explanation": "When a token was sent but failed validation, the bearer handler adds the RFC 6750 `invalid_token` error and, by default (`IncludeErrorDetails = true`), a description; for an expired token it is \"The token expired at '<time>'\" (verified). A plain `Bearer` with no error is what a request without any token gets. `expired_token` is not an RFC 6750 code, and `insufficient_scope` is for a valid token that lacks rights.",
+      "materials": [
+        "rfc6750",
+        "jwtconf"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When a valid JWT reaches an endpoint whose role policy the user fails, the JWT bearer handler answers 403 with a `WWW-Authenticate: Bearer error=\"insufficient_scope\"` header.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "The handler's forbid action just sets 403; it adds no `WWW-Authenticate` header (verified with curl). `WWW-Authenticate` comes from the challenge, which produces a 401 for missing or invalid tokens. RFC 6750 defines `insufficient_scope`, but ASP.NET Core does not emit it unless you write that yourself in `OnForbidden`.",
+      "materials": [
+        "rfc6750",
+        "jwtconf"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A token contains `\"sub\": \"u1\"`, `\"role\": \"admin\"` and `\"name\": \"ann\"`. The API uses `AddJwtBearer` with default claim mapping. What do `User.FindFirstValue(ClaimTypes.NameIdentifier)`, `User.IsInRole(\"admin\")` and `User.Identity.Name` return?",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`\"u1\"`, `true`, `\"ann\"`",
+        "`null`, `true`, `\"ann\"`",
+        "`\"u1\"`, `true`, `null`",
+        "`null`, `false`, `null`"
+      ],
+      "correct": 2,
+      "explanation": "With `MapInboundClaims` on (the default), `sub` becomes `ClaimTypes.NameIdentifier` and `role` becomes `ClaimTypes.Role`, so the first two calls give `\"u1\"` and `true`. The `name` claim is not mapped (the legacy mapping turns `unique_name` into `ClaimTypes.Name`), so `Identity.Name`, which reads `ClaimTypes.Name`, is `null` (verified). Set `TokenValidationParameters.NameClaimType = \"name\"` to fix it.",
+      "materials": [
+        "mapinbound",
+        "jwtconf"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "An API sets `options.MapInboundClaims = false` in `AddJwtBearer` and changes nothing else. A token has `sub`, `role` and `name` claims. Which statements are true?",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The claim types on `User` are the short names `sub`, `role` and `name`",
+        "`User.FindFirstValue(ClaimTypes.NameIdentifier)` returns `null`",
+        "`User.IsInRole(\"admin\")` returns `false` until `RoleClaimType` is set to `\"role\"`",
+        "`User.Identity.Name` returns the `name` claim, because the name claim type switches to `name` automatically",
+        "Tokens are rejected, because `sub` no longer matches the expected claim type"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Turning mapping off keeps the JWT's own claim names (verified: `sub=u1;role=admin;name=ann`), so lookups by the long `ClaimTypes` URIs find nothing. `IsInRole` and `Identity.Name` use `RoleClaimType` and `NameClaimType`, which still default to the long URIs, so you set them to `\"role\"` and `\"name\"` yourself. Validation itself does not depend on claim names, so tokens are still accepted.",
+      "materials": [
+        "mapinbound",
+        "jwtconf"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Browsers can't set an `Authorization` header on WebSocket connections, so a SignalR client sends its JWT as `?access_token=...`. How does the server accept it?",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Set `options.SaveToken = true`, which also reads the token from the query string",
+        "Add `[FromQuery] string access_token` to the hub's `OnConnectedAsync` and validate it there",
+        "In `JwtBearerEvents.OnMessageReceived`, copy the query value into `context.Token` for hub paths",
+        "Set `TokenValidationParameters.TokenReader` to a delegate that returns the query value"
+      ],
+      "correct": 2,
+      "explanation": "The bearer handler reads only the `Authorization` header by default; `OnMessageReceived` runs first and can set `context.Token`, and the docs restrict this to the hub path so tokens in URLs aren't accepted everywhere (verified: the hub path returned 200, another path 401). `SaveToken` only stores the validated token in the authentication properties. Validating inside the hub is too late for `[Authorize]`, and `TokenReader` parses a token string, it does not locate it.",
+      "materials": [
+        "signalrauth",
+        "jwtconf"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about JWT signing keys and `AddJwtBearer` are true?",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "With `Authority` set, the handler downloads the OpenID Connect metadata and the signing keys from its `jwks_uri`",
+        "With HS256, every API that validates tokens needs the same secret the issuer signs with",
+        "With RS256, an API needs just the issuer's public key to validate tokens",
+        "RS256 encrypts the payload, so clients can't read the claims",
+        "Publishing an HS256 key in a JWKS document is safe, because the document is read-only"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Setting `Authority` makes the handler fetch `/.well-known/openid-configuration` and the keys listed at `jwks_uri`, refreshing them for key rotation. HS256 is symmetric, so anyone who can validate can also mint tokens; RS256 signs with a private key and validates with the public key. Signing doesn't hide the payload (that needs JWE), and publishing a symmetric key lets anyone forge tokens.",
+      "materials": [
+        "jwtconf",
+        "rfc7519"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "An API that validates self-contained JWTs can invalidate one specific token before its `exp` without keeping any server-side state, such as a deny list or a token version per user.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "A self-contained JWT is accepted by signature and claims alone, so the server has nothing to change for a single token. Revocation needs state the API checks, such as a deny list of `jti` values, a per-user token version or security stamp, or very short access tokens combined with revocable refresh tokens. Rotating the signing key invalidates every token, not one.",
+      "materials": [
+        "owaspjwt",
+        "rfc7519"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does running `dotnet user-jwts create` in an ASP.NET Core project with JWT bearer authentication do?",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It creates a development token, stores the signing key in user secrets and adds issuer and audience settings to `appsettings.Development.json`",
+        "It registers the app with Microsoft Entra ID and downloads a token signed by Entra for local testing",
+        "It generates an RSA key pair, writes the private key into `appsettings.json` and prints a token signed with it",
+        "It starts a local token server on port 5001 that issues tokens to the app until the tool stops"
+      ],
+      "correct": 0,
+      "explanation": "`dotnet user-jwts` is a development tool that mints a token locally, keeps the signing key in the project's user secrets and writes `Authentication:Schemes:Bearer` settings (valid audiences and issuer) into `appsettings.Development.json`, so `AddJwtBearer` accepts the token without an identity provider. It does not talk to Entra ID, run a server or put keys in `appsettings.json`.",
+      "materials": [
+        "userjwts"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A SPA's 10-minute access token has expired, and it holds a refresh token. Put these steps in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The SPA calls the API with the expired access token",
+        "The API answers 401 with `error=\"invalid_token\"`",
+        "The SPA sends the refresh token to the token endpoint",
+        "The token server checks the refresh token, rotates it and issues a new access token",
+        "The SPA retries the original API call with the new access token"
+      ],
+      "explanation": "The API validates only the access token, so the expired token earns a 401 with `invalid_token`. The client then uses its refresh token at the token endpoint (never at the API); the server checks it against its store, and with rotation replaces it with a new one. Only then can the client retry the failed call with the fresh access token.",
+      "materials": [
+        "owaspjwt",
+        "rfc6750"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An app has a `Cookies` scheme for its pages and a `Bearer` scheme for API clients. It registers `AddPolicyScheme(\"Smart\", ...)` with a `ForwardDefaultSelector` that returns `\"Bearer\"` when the `Authorization` header starts with `Bearer `, otherwise `\"Cookies\"`, and makes `Smart` the default. What does the policy scheme do?",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It runs both handlers on each request and merges their claims into one identity",
+        "It chooses one of the two schemes per request and forwards authenticate, challenge and forbid to it",
+        "It tries `Bearer` first and falls back to `Cookies` when token validation fails",
+        "It converts a valid cookie into a bearer token so the API endpoints see one scheme"
+      ],
+      "correct": 1,
+      "explanation": "A policy scheme has no handler logic of its own: `ForwardDefaultSelector` picks a target scheme for each request, and authenticate, challenge, forbid, sign-in and sign-out are forwarded there. So a browser gets cookie behaviour (redirects) and an API client gets bearer behaviour (401). It doesn't merge identities or retry another scheme after a failure, and nothing turns cookies into tokens.",
+      "materials": [
+        "policyscheme"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A Minimal API endpoint copies `HttpRequest.Body` into a stream. With default Kestrel settings and no size attributes, a client POSTs a 31 MB body. What does the client get?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "200, because Kestrel imposes no body size limit by default",
+        "400 Bad Request, because the body is larger than the 28 MB `MaxRequestLineSize`",
+        "413 Payload Too Large, because the default `MaxRequestBodySize` is 30,000,000 bytes",
+        "431 Request Header Fields Too Large, because the `Content-Length` value is over the limit"
+      ],
+      "correct": 2,
+      "explanation": "Kestrel's `MaxRequestBodySize` defaults to 30,000,000 bytes (about 28.6 MB); reading past it throws `BadHttpRequestException` and the response is 413 (verified with a real 31 MB upload; exactly 30,000,000 bytes succeeded). `MaxRequestLineSize` limits the request line, not the body, and 431 is about header size.",
+      "materials": [
+        "kestrelopts",
+        "uploads"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Kestrel's `MaxRequestBodySize` is set to 1,000 bytes. Which statements are true for Minimal API endpoints that read the body?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "An endpoint with `[RequestSizeLimit(2000)]` accepts a 1,500-byte body",
+        "An endpoint with `[DisableRequestSizeLimit]` accepts a 6,000-byte body",
+        "A chunked request with no `Content-Length` is not counted against the limit",
+        "Code can raise the limit through `IHttpMaxRequestBodySizeFeature` after it has started reading the body",
+        "A 3,000-byte body to an endpoint with no attribute gets 413"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "Per-endpoint metadata overrides the server-wide value in both directions (verified: 1,500 bytes accepted with `[RequestSizeLimit(2000)]`, 6,000 with `[DisableRequestSizeLimit]`, 413 without either). The limit also counts bytes as they arrive, so a chunked upload gets 413 too. `IHttpMaxRequestBodySizeFeature.IsReadOnly` becomes true once the body is being read, so the limit must be changed before that.",
+      "materials": [
+        "kestrelopts",
+        "uploads"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A Kestrel endpoint `http://localhost:5000` uses the default protocols (`Http1AndHttp2`). A gRPC client connects with HTTP/2 \"prior knowledge\" (h2c, no TLS). What happens?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Kestrel switches to HTTP/2 after reading the connection preface",
+        "The connection fails, because without TLS the endpoint runs HTTP/1.1, so h2c needs `Protocols = Http2`",
+        "Kestrel upgrades the connection with an `Upgrade: h2c` response header",
+        "Kestrel redirects the client to an HTTPS endpoint with a 307"
+      ],
+      "correct": 1,
+      "explanation": "Kestrel picks HTTP/2 on an `Http1AndHttp2` endpoint through TLS ALPN; without TLS there's no negotiation, so it speaks HTTP/1.1 and the h2c preface fails (verified: the curl prior-knowledge request failed, and succeeded once `Protocols` was `Http2`). Kestrel does not support the `Upgrade: h2c` mechanism, and it never redirects by itself.",
+      "materials": [
+        "http2"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A .NET 8 app enables `HttpProtocols.Http1AndHttp2AndHttp3` on an HTTPS endpoint. Why does the browser's first request still use HTTP/2?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "HTTP/3 is reserved for requests after the TLS session is resumed",
+        "Kestrel serves HTTP/3 to gRPC clients and HTTP/2 to browsers",
+        "HTTP/3 must be confirmed by a DNS SVCB record before Kestrel will accept it",
+        "The browser learns about HTTP/3 from the `alt-svc` response header and switches on later requests"
+      ],
+      "correct": 3,
+      "explanation": "HTTP/3 runs over QUIC on UDP, so a browser first connects over TCP (HTTP/1.1 or HTTP/2); Kestrel adds an `alt-svc: h3=\":port\"` header, and the browser uses HTTP/3 for later requests. Kestrel does not pick the protocol by client type, and it doesn't require DNS records (browsers may use them, but `alt-svc` is what Kestrel provides). Kestrel also needs the QUIC library (msquic) on the host.",
+      "materials": [
+        "http3"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "An app runs behind Nginx, which terminates TLS and sets `X-Forwarded-For` and `X-Forwarded-Proto`. Which statements about Forwarded Headers Middleware are true?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`new ForwardedHeadersOptions()` has `ForwardedHeaders = None`, so you must choose which headers to process",
+        "By default, forwarded headers are accepted from loopback proxies alone (`127.0.0.0/8` and `::1`)",
+        "Without the middleware, `UseHttpsRedirection` sees `http` and can redirect every request in a loop",
+        "Register `UseForwardedHeaders` after `UseAuthentication` so authentication sees the proxy's address",
+        "The middleware is enabled automatically in Production builds"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The options default to `ForwardedHeaders.None`, `ForwardLimit = 1`, `KnownNetworks` 127.0.0.0/8 and `KnownProxies` ::1 (verified by printing them), so a proxy on another address must be added. Without the middleware, `Request.Scheme` stays `http`, and HTTPS redirection keeps redirecting a client that already used HTTPS. The middleware should run before other middleware, and it is added automatically only when `ASPNETCORE_FORWARDEDHEADERS_ENABLED=true`.",
+      "materials": [
+        "proxy"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A client calls `https://shop.example.com` through a TLS-terminating proxy at `10.0.0.5`, which is in `KnownProxies`. The app calls `UseForwardedHeaders` then `UseHttpsRedirection`. Put these steps in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The proxy decrypts the HTTPS request",
+        "The proxy forwards it over HTTP with `X-Forwarded-For` and `X-Forwarded-Proto: https`",
+        "Kestrel accepts the connection from `10.0.0.5` with scheme `http`",
+        "Forwarded Headers Middleware sets `Request.Scheme` to `https` and `RemoteIpAddress` to the client's address",
+        "`UseHttpsRedirection` sees `https` and passes the request on"
+      ],
+      "explanation": "The proxy terminates TLS and must add the forwarded headers before Kestrel ever sees the request. Kestrel only knows the proxy's connection, so the scheme is `http` and the remote address is `10.0.0.5`. Because the proxy is trusted, the middleware rewrites the scheme and client IP, and only then does HTTPS redirection run and see a secure request instead of redirecting.",
+      "materials": [
+        "proxy"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: checking an IPv4-mapped IPv6 remote address against an IPv4 network.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "code": "using System.Net;\n\nvar proxies = IPNetwork.Parse(\"10.0.0.0/16\");\nvar remote = IPAddress.Parse(\"::ffff:10.0.5.20\");\n\nConsole.WriteLine(remote.AddressFamily);\nConsole.WriteLine(remote.IsIPv4MappedToIPv6);\nConsole.WriteLine(proxies.Contains(remote));\nConsole.WriteLine(proxies.Contains(remote.MapToIPv4()));\nConsole.WriteLine(remote.MapToIPv4());\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "InterNetworkV6\nTrue\nFalse\nTrue\n10.0.5.20",
+      "explanation": "On a dual-mode socket the remote address can arrive as `::ffff:10.0.5.20`, which is an IPv6 address (`InterNetworkV6`) even though it wraps an IPv4 one. `IPNetwork.Contains` returns false when the families differ, so the check against `10.0.0.0/16` fails until the address is converted with `MapToIPv4()`. This is why the proxy docs tell you to account for mapped addresses when filling `KnownProxies`/`KnownNetworks`.",
+      "materials": [
+        "ipnetwork",
+        "proxy"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A .NET 8 app receives SIGTERM while 20 requests are in flight and does not change any host options. What do Kestrel and the host do?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Kestrel stops accepting new connections and waits for in-flight requests until `ShutdownTimeout`, 30 seconds by default",
+        "Kestrel aborts the in-flight requests at once and the process exits with code 143",
+        "Kestrel keeps accepting connections until in-flight requests reach zero, then stops",
+        "The host waits 5 seconds by default, then aborts the remaining requests"
+      ],
+      "correct": 0,
+      "explanation": "On a stop signal the host stops the server: Kestrel closes its listeners and lets in-flight requests finish, bounded by `HostOptions.ShutdownTimeout`, whose default is 30 seconds since .NET 6 (verified by printing the option). Before .NET 6 the default was 5 seconds. Requests still running when the timeout elapses are aborted; new connections are refused as soon as shutdown starts.",
+      "materials": [
+        "generichost",
+        "kestrel"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An ASP.NET Core app runs on IIS with the ASP.NET Core Module set to the in-process hosting model. Which server handles the HTTP requests?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Kestrel, inside the app's own `dotnet.exe` process behind IIS",
+        "IIS HTTP Server (`IISHttpServer`), inside the IIS worker process `w3wp.exe`",
+        "HTTP.sys, which IIS hands requests to after authentication",
+        "Kestrel, inside `w3wp.exe`, listening on a loopback port"
+      ],
+      "correct": 1,
+      "explanation": "In-process hosting loads the app into the IIS worker process and uses IIS HTTP Server instead of Kestrel, which avoids the loopback hop. The out-of-process model is the one where IIS acts as a reverse proxy to Kestrel running in a separate process. HTTP.sys is a separate Windows-only server you choose with `UseHttpSys`, not part of IIS hosting.",
+      "materials": [
+        "iisinproc",
+        "servers"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "By default, Kestrel enforces a minimum request body data rate of 240 bytes per second with a 5-second grace period, and drops slower uploads.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "`KestrelServerLimits.MinRequestBodyDataRate` defaults to 240 bytes/second with a 5-second grace period (verified by printing the limits), which defends against slow-upload attacks. A request that falls below it times out. You can relax it per request through `IHttpMinRequestBodyDataRateFeature`, for example for slow clients on long uploads.",
+      "materials": [
+        "kestrelopts"
+      ]
+    }
+  ]
+}

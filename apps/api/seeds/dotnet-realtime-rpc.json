@@ -1,0 +1,875 @@
+{
+  "name": ".NET: SignalR and gRPC",
+  "materials": [
+    {
+      "key": "sr-hubs",
+      "type": "article",
+      "title": "Use hubs in ASP.NET Core SignalR",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/signalr/hubs",
+      "author": "Microsoft Learn",
+      "description": "Hub methods, the Clients object, strongly typed hubs, lifetime events and error handling."
+    },
+    {
+      "key": "sr-groups",
+      "type": "article",
+      "title": "Manage users and groups in SignalR",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/signalr/groups",
+      "author": "Microsoft Learn",
+      "description": "User identifiers, IUserIdProvider and connection-scoped group membership."
+    },
+    {
+      "key": "sr-hubcontext",
+      "type": "article",
+      "title": "Send messages from outside a hub",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/signalr/hubcontext",
+      "author": "Microsoft Learn",
+      "description": "Using IHubContext<THub> from controllers, middleware and background services."
+    },
+    {
+      "key": "sr-config",
+      "type": "article",
+      "title": "ASP.NET Core SignalR configuration",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/signalr/configuration",
+      "author": "Microsoft Learn",
+      "description": "Server and client options such as message size limits, timeouts and transports."
+    },
+    {
+      "key": "sr-intro",
+      "type": "article",
+      "title": "Overview of ASP.NET Core SignalR",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/signalr/introduction",
+      "author": "Microsoft Learn",
+      "description": "What SignalR does, its transports and the fallback between them."
+    },
+    {
+      "key": "sr-client",
+      "type": "article",
+      "title": "ASP.NET Core SignalR .NET Client",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/signalr/dotnet-client",
+      "author": "Microsoft Learn",
+      "description": "Connecting, automatic reconnect and handling lost connections from .NET."
+    },
+    {
+      "key": "sr-streaming",
+      "type": "article",
+      "title": "Use streaming in ASP.NET Core SignalR",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/signalr/streaming",
+      "author": "Microsoft Learn",
+      "description": "Server-to-client and client-to-server streaming with IAsyncEnumerable and ChannelReader."
+    },
+    {
+      "key": "sr-scale",
+      "type": "article",
+      "title": "ASP.NET Core SignalR hosting and scaling",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/signalr/scale",
+      "author": "Microsoft Learn",
+      "description": "Sticky sessions, backplanes and Azure SignalR Service for multiple servers."
+    },
+    {
+      "key": "sr-redis",
+      "type": "article",
+      "title": "Set up a Redis backplane for SignalR scale-out",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/signalr/redis-backplane",
+      "author": "Microsoft Learn",
+      "description": "Configuring the Redis backplane and what happens when Redis is unavailable."
+    },
+    {
+      "key": "sr-auth",
+      "type": "article",
+      "title": "Authentication and authorization in SignalR",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/signalr/authn-and-authz",
+      "author": "Microsoft Learn",
+      "description": "Cookie and bearer token authentication, including tokens in the query string."
+    },
+    {
+      "key": "sr-filters",
+      "type": "article",
+      "title": "Use hub filters in ASP.NET Core SignalR",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/signalr/hub-filters",
+      "author": "Microsoft Learn",
+      "description": "Global and per-hub filters that run around hub method invocations."
+    },
+    {
+      "key": "sr-msgpack",
+      "type": "article",
+      "title": "Use MessagePack Hub Protocol in SignalR",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/signalr/messagepackhubprotocol",
+      "author": "Microsoft Learn",
+      "description": "Enabling the binary MessagePack protocol and its serialization differences."
+    },
+    {
+      "key": "sr-protocol",
+      "type": "article",
+      "title": "SignalR Hub Protocol specification",
+      "url": "https://github.com/dotnet/aspnetcore/blob/main/src/SignalR/docs/specs/HubProtocol.md",
+      "author": "ASP.NET Core team",
+      "description": "Message types, handshake and record-separator framing of the hub protocol."
+    },
+    {
+      "key": "grpc-basics",
+      "type": "article",
+      "title": "gRPC services with C#",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/grpc/basics",
+      "author": "Microsoft Learn",
+      "description": "Proto files, Grpc.Tools code generation and the GrpcServices setting."
+    },
+    {
+      "key": "grpc-aspnetcore",
+      "type": "article",
+      "title": "gRPC services with ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/grpc/aspnetcore",
+      "author": "Microsoft Learn",
+      "description": "Hosting gRPC in ASP.NET Core and configuring Kestrel endpoints for HTTP/2."
+    },
+    {
+      "key": "grpc-errors",
+      "type": "article",
+      "title": "Error handling with gRPC",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/grpc/error-handling",
+      "author": "Microsoft Learn",
+      "description": "Status codes, RpcException and how unhandled server exceptions reach the client."
+    },
+    {
+      "key": "grpc-deadlines",
+      "type": "article",
+      "title": "Reliable gRPC services with deadlines and cancellation",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/grpc/deadlines-cancellation",
+      "author": "Microsoft Learn",
+      "description": "Setting deadlines, server-side cancellation and propagating them to child calls."
+    },
+    {
+      "key": "grpc-clientfactory",
+      "type": "article",
+      "title": "gRPC client factory integration in .NET",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/grpc/clientfactory",
+      "author": "Microsoft Learn",
+      "description": "AddGrpcClient, client lifetimes and call context propagation."
+    },
+    {
+      "key": "grpc-client",
+      "type": "article",
+      "title": "Call gRPC services with the .NET client",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/grpc/client",
+      "author": "Microsoft Learn",
+      "description": "Creating channels and clients, call types, headers and trailers."
+    },
+    {
+      "key": "grpc-perf",
+      "type": "article",
+      "title": "Performance best practices with gRPC",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/grpc/performance",
+      "author": "Microsoft Learn",
+      "description": "Reusing channels, connection concurrency and load balancing long-lived connections."
+    },
+    {
+      "key": "grpc-lb",
+      "type": "article",
+      "title": "gRPC client-side load balancing",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/grpc/loadbalancing",
+      "author": "Microsoft Learn",
+      "description": "Resolvers and load balancers in Grpc.Net.Client."
+    },
+    {
+      "key": "grpc-web",
+      "type": "article",
+      "title": "gRPC-Web in ASP.NET Core gRPC apps",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/grpc/grpcweb",
+      "author": "Microsoft Learn",
+      "description": "Calling gRPC from browsers with gRPC-Web and its limitations."
+    },
+    {
+      "key": "grpc-transcoding",
+      "type": "article",
+      "title": "gRPC JSON transcoding in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/grpc/json-transcoding",
+      "author": "Microsoft Learn",
+      "description": "Exposing gRPC methods as RESTful JSON APIs with HTTP annotations."
+    },
+    {
+      "key": "grpc-config",
+      "type": "article",
+      "title": "gRPC for .NET configuration",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/grpc/configuration",
+      "author": "Microsoft Learn",
+      "description": "Server and client options such as maximum message sizes."
+    },
+    {
+      "key": "grpc-protobuf",
+      "type": "article",
+      "title": "Create Protobuf messages for .NET apps",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/grpc/protobuf",
+      "author": "Microsoft Learn",
+      "description": "Scalar types, well-known types, nullable wrappers and dates in Protobuf for .NET."
+    },
+    {
+      "key": "proto3",
+      "type": "article",
+      "title": "Language Guide (proto3)",
+      "url": "https://protobuf.dev/programming-guides/proto3/",
+      "author": "Protocol Buffers",
+      "description": "Field numbers, default values, field presence, reserved fields and updating messages."
+    },
+    {
+      "key": "pb-encoding",
+      "type": "article",
+      "title": "Protocol Buffers Encoding",
+      "url": "https://protobuf.dev/programming-guides/encoding/",
+      "author": "Protocol Buffers",
+      "description": "How varints, tags and wire types are laid out on the wire."
+    },
+    {
+      "key": "grpc-http2",
+      "type": "article",
+      "title": "gRPC over HTTP2 protocol",
+      "url": "https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md",
+      "author": "gRPC Authors",
+      "description": "Request and response frames, length-prefixed messages and status trailers."
+    },
+    {
+      "key": "grpc-status",
+      "type": "article",
+      "title": "gRPC status codes",
+      "url": "https://grpc.io/docs/guides/status-codes/",
+      "author": "gRPC Authors",
+      "description": "The list of gRPC status codes and when each is used."
+    },
+    {
+      "key": "grpc-metadata",
+      "type": "article",
+      "title": "gRPC Metadata",
+      "url": "https://grpc.io/docs/guides/metadata/",
+      "author": "gRPC Authors",
+      "description": "Headers, trailers and binary metadata keys in gRPC."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple-choice",
+      "prompt": "Inside a SignalR hub method, which `Clients` member sends a message to every connection of the hub except the one that invoked the method?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`Clients.Caller`",
+        "`Clients.Others`",
+        "`Clients.OthersInGroup(\"lobby\")`",
+        "`Clients.Group(Context.ConnectionId)`"
+      ],
+      "correct": 1,
+      "explanation": "`Clients.Others` targets every connection except the caller (verified: the second client got the message, the invoking client did not). `Clients.Caller` is the opposite, only the invoking connection, and `Clients.OthersInGroup(\"lobby\")` skips the caller but also everyone outside that group. A connection ID is not a group name, so `Clients.Group(Context.ConnectionId)` reaches nobody unless a group with that name was created.",
+      "materials": [
+        "sr-hubs"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A `BackgroundService` injects `IHubContext<ChatHub>` and sends notifications. Which of these can it use on `hubContext.Clients`? Select all that apply.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Clients.All`",
+        "`Clients.Group(\"admins\")`",
+        "`Clients.User(userId)`",
+        "`Clients.Caller`",
+        "`Clients.Others`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`IHubContext<THub>.Clients` is an `IHubClients`, which offers `All`, `AllExcept`, `Client`, `Clients`, `Group`, `Groups`, `GroupExcept`, `User` and `Users`. `Caller` and `Others` live on `IHubCallerClients`, which only exists inside a hub invocation, because they are defined relative to the connection that made the call; a background service has no current connection.",
+      "materials": [
+        "sr-hubcontext"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When a SignalR client reconnects through `WithAutomaticReconnect()` (without stateful reconnect), the server restores the group memberships it had before the connection dropped.",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Groups are tracked per connection ID and are not persisted; an automatic reconnect creates a new connection with a new ID (verified: the ID changed after the server closed the connection), so the old memberships are gone. Re-add the connection in `OnConnectedAsync` or in the client's `Reconnected` handler, typically from data you store yourself. Only the .NET 8 stateful reconnect feature keeps the same connection across a short network break.",
+      "materials": [
+        "sr-groups",
+        "sr-client"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A .NET client calls `StartAsync()` on a hub connection and then `InvokeAsync(\"Ping\")`. Put these steps in the order they happen, first to last.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The client sends `POST /chat/negotiate` to get a connection token and the available transports",
+        "The client opens the transport connection (for example a WebSocket request to `/chat?id=...`)",
+        "Client and server exchange the handshake that selects the hub protocol (for example JSON, version 1)",
+        "The server runs the hub's `OnConnectedAsync`",
+        "A new hub instance runs the `Ping` hub method"
+      ],
+      "explanation": "Negotiation comes first; it returns the connection token and transports, and the client then opens the transport with that token as the `id` query value (verified with request logging). Over the open transport the client sends the handshake request and only after a successful handshake does the server call `OnConnectedAsync`, after which `StartAsync` completes and invocations can be dispatched. Each invocation gets its own transient hub instance.",
+      "materials": [
+        "sr-intro",
+        "sr-protocol"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A hub has a global filter `G` added with `AddSignalR(o => o.AddFilter<G>())` and a per-hub filter `H` added with `AddHubOptions<ChatHub>(o => o.AddFilter<H>())`. Each filter logs before and after calling `next`. Order the log lines for one hub method call, first to last.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "G before `next`",
+        "H before `next`",
+        "Hub method body runs",
+        "H after `next`",
+        "G after `next`"
+      ],
+      "explanation": "Global filters run first (several global filters run in the order they were added), then hub-specific filters, and finally the hub method; on the way back the code after `next` runs in reverse order (verified: global before, hub filter before, method, hub filter after, global after). The filters form a nested pipeline like middleware, so the last filter to start is the first to finish. Registration through `AddHubOptions` does not move a filter in front of the global ones.",
+      "materials": [
+        "sr-filters"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A SignalR JavaScript client uses the default transport settings, and WebSockets are blocked by a proxy. Which transport does it try next?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Long Polling",
+        "HTTP/2 streaming of the hub protocol",
+        "WebTransport over HTTP/3",
+        "Server-Sent Events"
+      ],
+      "correct": 3,
+      "explanation": "SignalR tries WebSockets first, then Server-Sent Events, then Long Polling, picking the first transport both client and server support. Long Polling is the last resort, not the next one. SignalR has no HTTP/2 streaming or WebTransport transport; those are not part of the negotiated transport list.",
+      "materials": [
+        "sr-intro",
+        "sr-config"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "With default server options, a client calls `InvokeAsync(\"Echo\", text)` where `text` is a 40,000 character string. What happens?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The server truncates the argument to 32 KB and runs `Echo` with the shorter string",
+        "This invocation fails with an error while the connection stays open for later calls",
+        "The server rejects the message as larger than the 32 KB `MaximumReceiveMessageSize` and closes the connection",
+        "The call succeeds, because the default receive limit is 1 MB per message"
+      ],
+      "correct": 2,
+      "explanation": "`HubOptions.MaximumReceiveMessageSize` defaults to 32 KB (32,768 bytes). Exceeding it is a protocol error: the server closes the connection (`OnDisconnectedAsync` received an `InvalidDataException` saying the maximum message size of 32768B was exceeded) and the pending invocation fails. Nothing is truncated, and the error is not scoped to the single invocation; raise the limit in `AddHubOptions` or split large payloads.",
+      "materials": [
+        "sr-config"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A browser app uses the SignalR JavaScript client with JWT bearer authentication over WebSockets. Where does the token travel, and what must the server do?",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "In the `access_token` query string parameter, which the server must read in `JwtBearerEvents.OnMessageReceived`",
+        "In the `Authorization` header of the WebSocket upgrade request, which the JWT handler reads as usual",
+        "Inside the SignalR handshake message, which the hub reads in `OnConnectedAsync`",
+        "In a cookie that the client creates from the token, which the JWT handler reads like any cookie"
+      ],
+      "correct": 0,
+      "explanation": "The browser WebSocket and EventSource APIs cannot set custom headers, so the SignalR client puts the token in the `access_token` query string for those transports. The JWT bearer handler only reads the `Authorization` header by default, so you set `context.Token` from the query string in `OnMessageReceived` for requests to the hub path. The handshake carries only protocol information, and the JWT handler does not read cookies.",
+      "materials": [
+        "sr-auth"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A SignalR app runs on three servers behind a load balancer and uses the Redis backplane. Which statements are true? Select all that apply.",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Sticky sessions are still needed when clients negotiate and may fall back to transports other than WebSockets",
+        "`Clients.All` on one server reaches connections held by the other servers, because the backplane forwards the message",
+        "The Redis backplane removes the need for sticky sessions, because connection state is stored in Redis",
+        "With Azure SignalR Service, clients hold their connections to the service, so the app servers do not need sticky sessions",
+        "Messages sent while Redis is unreachable are buffered and delivered once Redis comes back"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "The backplane only fans messages out between servers; connection state stays in the server's memory, so negotiate and the follow-up requests (especially for Long Polling and SSE) must land on the same server, unless every client uses WebSockets with `SkipNegotiation`. Azure SignalR Service terminates the client connections itself, which is why app servers need no affinity. SignalR does not buffer messages while Redis is down; they are lost.",
+      "materials": [
+        "sr-scale",
+        "sr-redis"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which hub method signatures does SignalR treat as streaming methods? Select all that apply.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`public async IAsyncEnumerable<int> Counter(int count)`",
+        "`public ChannelReader<int> Counter(int count)`",
+        "`public async Task<int> Sum(ChannelReader<int> numbers)`",
+        "`public IEnumerable<int> Counter(int count)` with `yield return`",
+        "`public async Task<List<int>> Counter(int count)`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Returning `IAsyncEnumerable<T>` or `ChannelReader<T>` makes a server-to-client stream, and a `ChannelReader<T>` (or `IAsyncEnumerable<T>`) parameter makes a client-to-server stream (verified: a client wrote 1..4 into a channel and the hub returned 10). An `IEnumerable<T>` return is a normal result serialized as one array: `StreamAsync` on it failed with 'non-streaming method with a streaming invocation', while `InvokeAsync<int[]>` returned `1,2`. `Task<List<T>>` is likewise a single completion.",
+      "materials": [
+        "sr-streaming"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With default hub options, if one client calls `InvokeAsync(\"Slow\")` twice without awaiting in between, and `Slow` takes 500 ms, the server runs the second call only after the first finishes.",
+      "tags": [
+        "C# & .NET",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. `HubOptions.MaximumParallelInvocationsPerClient` defaults to 1, so invocations from one connection are processed one at a time (verified: the two calls took about 1000 ms in total). Different connections still run in parallel. Raise the option if a client really needs concurrent invocations, keeping in mind that client results (`InvokeAsync` to a client from the hub) can deadlock with a limit of 1.",
+      "materials": [
+        "sr-config"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "```csharp\npublic interface IChatClient { void Notify(string text); }\npublic class ChatHub : Hub<IChatClient>\n{\n    public Task Send(string text) { Clients.All.Notify(text); return Task.CompletedTask; }\n}\n```\nWhat happens when a client invokes `Send`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It works as fire-and-forget, because `void` client methods are sent without waiting",
+        "It does not compile, because `Hub<T>` constrains `T` to interfaces whose methods return `Task`",
+        "It works, but the server waits for each client to acknowledge `Notify` before `Send` returns",
+        "The invocation fails at runtime, because the generated client proxy requires every method to return `Task` or `Task<T>`"
+      ],
+      "correct": 3,
+      "explanation": "There is no generic constraint on the method signatures, so it compiles, but when SignalR builds the proxy for `IChatClient` it throws `InvalidOperationException: Cannot generate proxy implementation for 'IChatClient.Notify'. All client proxy methods must return 'Task' or 'Task<T>'`, and the client sees a failed invocation (verified). The fix is `Task Notify(string text)`. Sending to clients never waits for acknowledgement; `Task<T>` client methods are only for client results on a single client.",
+      "materials": [
+        "sr-hubs"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A hub method throws `new InvalidOperationException(\"db timeout on server-7\")`, and `EnableDetailedErrors` is off. What does the calling client observe?",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The connection closes, and `Closed` is raised with the exception message",
+        "A `HubException` with a generic message that the invocation of the method failed, without the exception text",
+        "A `HubException` that contains the original message and the server stack trace",
+        "Nothing, because the invocation completes normally and the error goes to the server log"
+      ],
+      "correct": 1,
+      "explanation": "Unhandled exceptions in a hub method fail only that invocation; the client gets `An unexpected error occurred invoking 'Boom' on the server.` and the connection stays up (verified). Details are hidden to avoid leaking server information unless `EnableDetailedErrors` is set. To send a message on purpose, throw `HubException`, whose message is passed to the client; stack traces are not sent.",
+      "materials": [
+        "sr-hubs"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With the MessagePack hub protocol, a `DateTime` argument created with `DateTimeKind.Local` arrives in the hub method with its `Kind` still set to `Local`.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. The MessagePack protocol does not preserve `DateTime.Kind`; values are serialized as UTC, and the hub received `Kind = Utc` (verified, while the same call over the JSON protocol arrived as `Local`). Convert to UTC before sending, or use `DateTimeOffset`/explicit offsets when the local time matters. The client and server must both enable MessagePack (`AddMessagePackProtocol`) for the binary protocol to be used.",
+      "materials": [
+        "sr-msgpack"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "This console app mimics a SignalR client using the default `WithAutomaticReconnect()` retry policy while the server is down until t = 20 s. What does it print?",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "easy",
+      "code": "// Mimics the default WithAutomaticReconnect() policy: wait 0, 2, 10 and 30 seconds\n// before the 1st..4th retry, then stop retrying. The server is down until t = 20 s,\n// and each connection attempt is assumed to finish instantly.\nTimeSpan?[] delays = { TimeSpan.Zero, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(30), null };\ndouble clock = 0;\nfor (int attempt = 0; ; attempt++)\n{\n    TimeSpan? next = delays[attempt];\n    if (next is null) { Console.WriteLine($\"t={clock}s: Closed\"); break; }\n    clock += next.Value.TotalSeconds;\n    bool serverUp = clock >= 20;\n    Console.WriteLine($\"t={clock}s: retry {attempt + 1} {(serverUp ? \"Reconnected\" : \"failed\")}\");\n    if (serverUp) break;\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "t=0s: retry 1 failed\nt=2s: retry 2 failed\nt=12s: retry 3 failed\nt=42s: retry 4 Reconnected",
+      "explanation": "The default policy waits 0, 2, 10 and 30 seconds before the first four retries and then stops. The delays are waited one after another, so the retries happen at t = 0, 2, 12 and 42 s; the first one after the server comes back at t = 20 is the retry at 42 s, which succeeds. If that had also failed, the next delay would be `null` and the connection would move to `Closed`.",
+      "materials": [
+        "sr-client"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "A client has received these bytes over a SignalR connection that uses the JSON hub protocol. The app splits them into messages the way the protocol frames them. What does it print?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "code": "using System.Text.Json;\n\n// Bytes received so far on a SignalR connection that uses the JSON hub protocol.\nconst char RS = '\\u001e';\nstring received = \"{}\" + RS\n    + \"{\\\"type\\\":6}\" + RS\n    + \"{\\\"type\\\":1,\\\"target\\\":\\\"msg\\\",\\\"arguments\\\":[\\\"hi\\\",2]}\" + RS\n    + \"{\\\"type\\\":1,\\\"target\\\":\\\"msg\\\",\\\"argu\";\n\nstring[] parts = received.Split(RS);\nfor (int i = 0; i < parts.Length - 1; i++)\n{\n    using var doc = JsonDocument.Parse(parts[i]);\n    var root = doc.RootElement;\n    if (!root.TryGetProperty(\"type\", out var type)) { Console.WriteLine(\"handshake response\"); continue; }\n    string text = type.GetInt32() switch\n    {\n        1 => $\"Invocation {root.GetProperty(\"target\").GetString()} ({root.GetProperty(\"arguments\").GetArrayLength()} args)\",\n        6 => \"Ping\",\n        7 => \"Close\",\n        _ => \"Other\"\n    };\n    Console.WriteLine(text);\n}\nConsole.WriteLine($\"buffered: {parts[^1].Length} chars\");\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "handshake response\nPing\nInvocation msg (2 args)\nbuffered: 30 chars",
+      "explanation": "The JSON hub protocol ends every message with the ASCII record separator `0x1E`, so text after the last separator is an incomplete message that must stay buffered (30 chars here). The first message is the handshake response, an empty JSON object when the handshake succeeds; after that, `type` 6 is a Ping (keep-alive) and `type` 1 is an Invocation with a `target` and `arguments`. Treating the trailing fragment as a message would fail to parse.",
+      "materials": [
+        "sr-protocol"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In a `.proto` file, `rpc Upload (stream Chunk) returns (UploadResult);` declares which kind of gRPC method?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Unary",
+        "Server streaming",
+        "Client streaming",
+        "Bidirectional streaming"
+      ],
+      "correct": 2,
+      "explanation": "`stream` on the request type only means the client sends a sequence of `Chunk` messages and the server answers once, which is client streaming; in C# the client gets an `AsyncClientStreamingCall` with `RequestStream`. Server streaming would put `stream` on the response, bidirectional on both, and unary on neither.",
+      "materials": [
+        "grpc-basics"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A gRPC service listens on `http://localhost:5000` with Kestrel's default endpoint protocols (`Http1AndHttp2`) and no TLS. A `GrpcChannel.ForAddress(\"http://localhost:5000\")` client fails with HTTP/2 error `HTTP_1_1_REQUIRED`. What fixes it?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Configure the Kestrel endpoint with `Protocols = HttpProtocols.Http2` so it accepts HTTP/2 without TLS",
+        "Call `AppContext.SetSwitch(\"System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport\", true)` on the client",
+        "Set `HttpVersion = HttpVersion.Version20` on the `GrpcChannelOptions`",
+        "Add `app.UseHttpsRedirection()` so the request is upgraded to HTTP/2"
+      ],
+      "correct": 0,
+      "explanation": "Without TLS there is no ALPN, so a `Http1AndHttp2` endpoint can only speak HTTP/1.1 and rejects the client's HTTP/2 prior-knowledge request (verified: `HTTP_1_1_REQUIRED` on both `Http1AndHttp2` and `Http1` endpoints, success on an `Http2`-only endpoint). The `Http2UnencryptedSupport` switch was only needed by .NET Core 3.x clients, and the channel already uses HTTP/2. HTTPS redirection would send the client to a different endpoint rather than fixing this one.",
+      "materials": [
+        "grpc-aspnetcore"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A team removes `string email = 3;` from a proto3 message that is already used by deployed clients. What should they do to keep the contract safe?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Add `reserved 3; reserved \"email\";` so the number and name cannot be reused later",
+        "Renumber the following fields down by one so the field numbers stay contiguous",
+        "Reuse number 3 for the next new field, since old clients ignore fields they do not know",
+        "Keep number 3 but change its type to `bytes`, which accepts any old payload"
+      ],
+      "correct": 0,
+      "explanation": "Field numbers identify fields on the wire, so a removed number must never be reused with a different meaning; `reserved` makes the compiler reject such reuse (the name is reserved for JSON and text formats). Renumbering existing fields breaks every deployed client. Old clients do skip unknown numbers, but if 3 is reused, old clients that still send `email` would have their data parsed as the new field; changing the type of a number is also a breaking change.",
+      "materials": [
+        "proto3"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Inside a gRPC service method, the code calls another gRPC service through a client registered with `AddGrpcClient<Inventory.InventoryClient>()`. Which addition makes the outgoing call inherit the incoming call's deadline and cancellation token automatically?",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Setting `GrpcChannelOptions.MaxRetryAttempts` so the child call times out with the parent",
+        "Setting `HttpClient.Timeout` to the incoming `ServerCallContext.Deadline` in `ConfigureHttpClient`",
+        "Adding the incoming `grpc-timeout` header to `ServerCallContext.ResponseTrailers`",
+        "Chaining `.EnableCallContextPropagation()` onto the `AddGrpcClient` registration"
+      ],
+      "correct": 3,
+      "explanation": "`EnableCallContextPropagation()` (from Grpc.AspNetCore.Server.ClientFactory) copies the current `ServerCallContext` deadline and cancellation token onto calls made by that client, so the child call fails with `DeadlineExceeded`/`Cancelled` along with its parent. Retries have nothing to do with deadlines, `HttpClient.Timeout` is a fixed value set once per client and not per call, and response trailers go back to the original caller rather than to the downstream service.",
+      "materials": [
+        "grpc-clientfactory",
+        "grpc-deadlines"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A message has `google.protobuf.Timestamp created_at = 1;`. What happens with `CreatedAt = Timestamp.FromDateTime(DateTime.Now)`?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It stores the local wall-clock time and drops the offset",
+        "It converts the local time to UTC automatically before storing it",
+        "It throws `ArgumentException`, because the `DateTime` must have `DateTimeKind.Utc`",
+        "It stores the value together with the machine's time zone offset"
+      ],
+      "correct": 2,
+      "explanation": "`Timestamp.FromDateTime` requires `Kind == Utc` and throws `ArgumentException: Conversion from DateTime to Timestamp requires the DateTime kind to be Utc` for `Local` and `Unspecified` values (verified). Use `DateTime.UtcNow`, `ToUniversalTime()`, or `Timestamp.FromDateTimeOffset`. A `Timestamp` is an instant (seconds and nanos since the Unix epoch) and never stores an offset; `ToDateTime()` returns a UTC value.",
+      "materials": [
+        "grpc-protobuf"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Three pods run a gRPC service behind a Kubernetes `ClusterIP` service (an L4, connection-level load balancer). A single client pod sends thousands of calls, and one server pod gets nearly all of them. Why?",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "gRPC sends each call on a new TCP connection, and the balancer picks the same pod by source IP",
+        "The client reuses one long-lived HTTP/2 connection and multiplexes calls on it, while the balancer only balances connections",
+        "Kubernetes services balance only HTTP/1.1 traffic and send HTTP/2 traffic to the first ready pod",
+        "Protobuf messages carry no `Host` header, so the balancer cannot route them to other pods"
+      ],
+      "correct": 1,
+      "explanation": "HTTP/2 multiplexes many calls over one TCP connection, and an L4 balancer decides once per connection, so all calls from that channel stick to one pod. Fixes are client-side load balancing in Grpc.Net.Client (for example a DNS resolver against a headless service with `round_robin`) or an L7 proxy/service mesh that balances per request. gRPC does not open a connection per call, and the routing problem is not caused by missing headers.",
+      "materials": [
+        "grpc-perf",
+        "grpc-lb"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which change lets `GET /v1/products/42` be served by the existing gRPC method `rpc GetProduct (GetProductRequest) returns (Product)` in ASP.NET Core, alongside normal gRPC calls?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Add an `[HttpGet(\"/v1/products/{id}\")]` attribute to the `GetProduct` override in the service class",
+        "Enable gRPC-Web with `app.UseGrpcWeb()` and call `EnableGrpcWeb()` on the mapped service",
+        "Map the service a second time with `app.MapGrpcService<ProductService>(\"/v1/products/{id}\")`",
+        "Annotate the method with `option (google.api.http) = { get: \"/v1/products/{id}\" };` and call `AddJsonTranscoding()`"
+      ],
+      "correct": 3,
+      "explanation": "gRPC JSON transcoding (package Microsoft.AspNetCore.Grpc.JsonTranscoding) reads `google.api.http` annotations from the proto and maps RESTful routes and JSON bodies to the gRPC method, with `{id}` bound to the request field. MVC routing attributes have no effect on gRPC service methods, and `MapGrpcService` takes no route template. gRPC-Web still uses gRPC message framing over HTTP, so it does not produce a plain JSON REST endpoint.",
+      "materials": [
+        "grpc-transcoding"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A gRPC call on which the server throws `RpcException(new Status(StatusCode.NotFound, \"no item 7\"))` comes back as an HTTP response with status code 404.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. gRPC reports its own status in the `grpc-status` and `grpc-message` trailers, while the HTTP status stays 200 (verified with curl: `HTTP/2 200` with `grpc-status: 5` and `grpc-message: no item 7`). The .NET client turns that into an `RpcException` with `StatusCode.NotFound`. An unknown method likewise returned HTTP 200 with `grpc-status: 12` (Unimplemented); a non-200 HTTP status only appears for failures outside gRPC, such as a proxy error.",
+      "materials": [
+        "grpc-errors",
+        "grpc-http2"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Creating a new gRPC client from an existing `GrpcChannel` for each call is cheap, whereas creating a new `GrpcChannel` for each call is costly and should be avoided.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. The channel owns the HTTP/2 connection (and the TCP and TLS setup behind it), so creating one per call throws away the connection and its multiplexing. Clients are lightweight wrappers around a channel; they need no disposing and can be created per call or injected as transient through the client factory. Create channels once and share them, or let `AddGrpcClient` manage them.",
+      "materials": [
+        "grpc-perf",
+        "grpc-client"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about gRPC metadata with the .NET client are true? Select all that apply.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A metadata entry with a `byte[]` value needs a key ending in `-bin`, otherwise `Metadata.Add` throws",
+        "Calling `GetTrailers()` on an `AsyncUnaryCall` before the call has completed throws `InvalidOperationException`",
+        "A service adds trailers by writing to `ServerCallContext.ResponseTrailers` before the method returns",
+        "Response headers are only exposed through `GetTrailers()`, after the response message has arrived",
+        "Request metadata is sent in the protobuf message as an extra field that the server unpacks"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Binary values must use a `-bin` key (verified: `ArgumentException ... needs to have '-bin' suffix`), and trailers are only available once the call finishes (verified: `Can't get the call trailers because the call has not completed successfully`). Servers set trailers through `ResponseTrailers` and can send headers early with `WriteResponseHeadersAsync`; clients read those with `ResponseHeadersAsync`, separately from trailers. Metadata travels as HTTP/2 headers and trailers, never inside the protobuf message.",
+      "materials": [
+        "grpc-metadata",
+        "grpc-client"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A proto3 message has `int32 discount = 1;`. The server sets `Discount = 0`, and the client cannot tell this apart from 'not set'. Which changes let the receiver distinguish the two cases in C#? Select all that apply.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Change the field to `google.protobuf.Int32Value discount = 1;`, which generates an `int?` property",
+        "Declare the field as `optional int32 discount = 1;`, which generates `HasDiscount` and `ClearDiscount()`",
+        "Keep `int32` and assign `Discount = 0` explicitly, which forces the value onto the wire",
+        "Keep `int32` and declare `int32 discount = 1 [default = -1];` so unset reads as -1"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "Plain proto3 scalars have no presence: a default value is not written at all (verified: a message with only zero/empty fields serialized to 0 bytes), so assigning 0 explicitly changes nothing. The `Int32Value` wrapper maps to `int?` in C# (verified: the property type is `Nullable<int>`, `null` by default, and 0 is sent as an empty wrapper), and proto3 `optional` restores explicit presence with `Has`/`Clear` members. Custom `[default = ...]` values exist only in proto2 and are rejected in proto3.",
+      "materials": [
+        "proto3",
+        "grpc-protobuf"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about gRPC-Web in ASP.NET Core are true? Select all that apply.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Browser apps can make unary calls through gRPC-Web",
+        "Browser apps can receive server streaming calls through gRPC-Web",
+        "Client streaming calls are supported through gRPC-Web",
+        "Bidirectional streaming calls are supported through gRPC-Web",
+        "The server needs `app.UseGrpcWeb()` and services enabled for gRPC-Web, for example with `EnableGrpcWeb()`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "gRPC-Web is a protocol variant that works with browser HTTP APIs (and HTTP/1.1), but those APIs cannot stream a request body, so it supports unary and server streaming calls and not client streaming or bidirectional streaming. On the server, the `UseGrpcWeb` middleware plus `EnableGrpcWeb()` (or `DefaultEnabled = true`) translate gRPC-Web requests. Use SignalR or WebSockets when a browser must stream to the server.",
+      "materials": [
+        "grpc-web"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put the HTTP/2 frames of a successful unary gRPC call in the order they are sent, first to last.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Request HEADERS: `:method POST`, `:path /pkg.Service/Method`, `content-type: application/grpc`",
+        "Request DATA: the length-prefixed protobuf request message",
+        "Response HEADERS: `:status 200` and `content-type: application/grpc`",
+        "Response DATA: the length-prefixed protobuf response message",
+        "Trailing HEADERS: `grpc-status: 0` and optional custom trailers"
+      ],
+      "explanation": "A gRPC call is one HTTP/2 stream: the client sends request headers (the method is the `:path`) and then the message in DATA frames, each message prefixed with a compressed flag and a 4-byte length. The server replies with response headers, the response message in DATA frames, and finally a trailing HEADERS frame carrying `grpc-status`, which is why the status is only known at the end. A call that fails before sending any message can send a single trailers-only HEADERS frame instead.",
+      "materials": [
+        "grpc-http2"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "This console app encodes single protobuf fields by hand, the way Google.Protobuf writes `int32` fields (wire type 0). What does it print?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "code": "// Hand-written protobuf encoding of a single varint (wire type 0) field.\nstatic byte[] Varint(ulong v)\n{\n    var bytes = new List<byte>();\n    do\n    {\n        byte b = (byte)(v & 0x7F);\n        v >>= 7;\n        if (v != 0) b |= 0x80;\n        bytes.Add(b);\n    } while (v != 0);\n    return bytes.ToArray();\n}\n\nstatic string Field(int number, ulong value) =>\n    Convert.ToHexString(Varint((ulong)((number << 3) | 0)).Concat(Varint(value)).ToArray());\n\nConsole.WriteLine(Field(1, 150));\nConsole.WriteLine(Field(15, 1));\nConsole.WriteLine(Field(16, 1));\nConsole.WriteLine(Field(2, 300));\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "089601\n7801\n800101\n10AC02",
+      "explanation": "A tag is the varint of `(fieldNumber << 3) | wireType`: field 1 gives 0x08 and field 15 gives 0x78, but field 16 gives 128, which needs two varint bytes (80 01); that is why the most frequent fields should get numbers 1 to 15. Values are varints with 7 bits per byte and the high bit as continuation flag: 150 is 96 01 and 300 is AC 02. The results match what Google.Protobuf produced for real messages (`08 96 01` and `80 01 01`).",
+      "materials": [
+        "pb-encoding",
+        "proto3"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "This console app builds gRPC length-prefixed messages by hand and checks a received header against the default gRPC receive limit. What does it print?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "code": "using System.Buffers.Binary;\n\n// gRPC length-prefixed message: 1 byte compressed flag + 4 byte big-endian length + payload.\nstatic byte[] Frame(byte[] message)\n{\n    var frame = new byte[5 + message.Length];\n    frame[0] = 0; // not compressed\n    BinaryPrimitives.WriteUInt32BigEndian(frame.AsSpan(1, 4), (uint)message.Length);\n    message.CopyTo(frame, 5);\n    return frame;\n}\n\nConsole.WriteLine(Convert.ToHexString(Frame(new byte[] { 0x08, 0x96, 0x01 })));\nConsole.WriteLine(Convert.ToHexString(Frame(Array.Empty<byte>())));\n\nconst int MaxReceive = 4 * 1024 * 1024; // the default receive limit\nbyte[] header = Frame(new byte[5_000_000])[..5];\nuint length = BinaryPrimitives.ReadUInt32BigEndian(header.AsSpan(1));\nConsole.WriteLine($\"{length} bytes -> {(length > MaxReceive ? \"ResourceExhausted\" : \"OK\")}\");\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "0000000003089601\n0000000000\n5000000 bytes -> ResourceExhausted",
+      "explanation": "Each message on a gRPC stream is prefixed by a 1-byte compressed flag and a 4-byte big-endian length, so the 3-byte message becomes `00 00000003 089601`, and an empty message (all fields at defaults) is still a 5-byte frame. The receiver can check the length before reading the body; the default receive limit in gRPC for .NET is 4 MB (4,194,304 bytes), so a 5,000,000-byte message fails with `ResourceExhausted` (verified with a real call in each direction; send size is unlimited by default).",
+      "materials": [
+        "grpc-http2",
+        "grpc-config"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "A gRPC call reaches service B with a 1000 ms deadline, and B propagates the deadline to service C. This console app simulates the time each step takes. What does it print?",
+      "tags": [
+        "C# & .NET",
+        "Distributed Systems & Messaging"
+      ],
+      "difficulty": "medium",
+      "code": "// Service B receives a call with a 1000 ms deadline and forwards it to service C\n// with deadline propagation, so C works against the same absolute deadline.\nvar t0 = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc);\nDateTime deadline = t0.AddMilliseconds(1000);\nDateTime now = t0;\n\n(string Step, int Ms)[] steps =\n{\n    (\"B parses request\", 150),\n    (\"B checks cache\", 300),\n    (\"C loads data\", 400),\n    (\"C builds reply\", 200),\n};\n\nforeach (var (step, ms) in steps)\n{\n    TimeSpan remaining = deadline - now;\n    if (ms > remaining.TotalMilliseconds)\n    {\n        Console.WriteLine($\"{step}: cancelled after {remaining.TotalMilliseconds} ms -> DeadlineExceeded\");\n        break;\n    }\n    now = now.AddMilliseconds(ms);\n    Console.WriteLine($\"{step}: done, {(deadline - now).TotalMilliseconds} ms left\");\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "B parses request: done, 850 ms left\nB checks cache: done, 550 ms left\nC loads data: done, 150 ms left\nC builds reply: cancelled after 150 ms -> DeadlineExceeded",
+      "explanation": "Deadlines are absolute points in time, so propagation passes the same deadline to C instead of a fresh timeout: after 150, 300 and 400 ms of work only 150 ms remain. The last 200 ms step does not fit, so it is cancelled when the deadline passes and the call ends with `DeadlineExceeded`. In a real server, `ServerCallContext.CancellationToken` fires at that moment (verified: a 2 s delay on that token was cancelled at the 300 ms deadline and the client got `DeadlineExceeded`).",
+      "materials": [
+        "grpc-deadlines",
+        "grpc-status"
+      ]
+    }
+  ]
+}

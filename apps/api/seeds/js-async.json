@@ -1,0 +1,949 @@
+{
+  "name": "JavaScript: async and the event loop",
+  "materials": [
+    {
+      "key": "mdn-execution-model",
+      "type": "article",
+      "title": "JavaScript execution model",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model",
+      "author": "MDN Web Docs",
+      "description": "How agents, the job queue and the event loop run JavaScript code."
+    },
+    {
+      "key": "mdn-microtask-guide",
+      "type": "article",
+      "title": "Using microtasks in JavaScript with queueMicrotask()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide",
+      "author": "MDN Web Docs",
+      "description": "How tasks and microtasks are queued and when each queue is processed."
+    },
+    {
+      "key": "mdn-promise",
+      "type": "article",
+      "title": "Promise",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+      "author": "MDN Web Docs",
+      "description": "Promise states, thenables, chaining and the static combinator methods."
+    },
+    {
+      "key": "mdn-promise-resolve",
+      "type": "article",
+      "title": "Promise.resolve()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve",
+      "author": "MDN Web Docs",
+      "description": "How Promise.resolve returns, wraps or adopts the value it is given."
+    },
+    {
+      "key": "mdn-promise-try",
+      "type": "article",
+      "title": "Promise.try()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/try",
+      "author": "MDN Web Docs",
+      "description": "Calls a callback synchronously and wraps its result or exception in a promise."
+    },
+    {
+      "key": "mdn-promise-withresolvers",
+      "type": "article",
+      "title": "Promise.withResolvers()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/withResolvers",
+      "author": "MDN Web Docs",
+      "description": "Creates a promise together with its resolve and reject functions."
+    },
+    {
+      "key": "mdn-promise-race",
+      "type": "article",
+      "title": "Promise.race()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/race",
+      "author": "MDN Web Docs",
+      "description": "Settles with the first input promise to settle, and what happens with an empty iterable."
+    },
+    {
+      "key": "mdn-using-promises",
+      "type": "article",
+      "title": "Using promises",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises",
+      "author": "MDN Web Docs",
+      "description": "Guide to chaining, error handling, composition and timing of promises."
+    },
+    {
+      "key": "mdn-async-function",
+      "type": "article",
+      "title": "async function",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function",
+      "author": "MDN Web Docs",
+      "description": "How async functions run, suspend at await and settle their returned promise."
+    },
+    {
+      "key": "mdn-await",
+      "type": "article",
+      "title": "await",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await",
+      "author": "MDN Web Docs",
+      "description": "How await unwraps promises and thenables and resumes in a microtask."
+    },
+    {
+      "key": "mdn-for-await",
+      "type": "article",
+      "title": "for await...of",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of",
+      "author": "MDN Web Docs",
+      "description": "Looping over async iterables and sync iterables of promises."
+    },
+    {
+      "key": "mdn-async-generator",
+      "type": "article",
+      "title": "AsyncGenerator",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator",
+      "author": "MDN Web Docs",
+      "description": "The object returned by async generator functions and its next, return and throw methods."
+    },
+    {
+      "key": "mdn-iteration-protocols",
+      "type": "article",
+      "title": "Iteration protocols",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols",
+      "author": "MDN Web Docs",
+      "description": "The iterable, iterator, async iterable and async iterator protocols."
+    },
+    {
+      "key": "mdn-abortcontroller",
+      "type": "article",
+      "title": "AbortController",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/AbortController",
+      "author": "MDN Web Docs",
+      "description": "Creating a controller whose signal cancels async operations."
+    },
+    {
+      "key": "mdn-abortsignal",
+      "type": "article",
+      "title": "AbortSignal",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal",
+      "author": "MDN Web Docs",
+      "description": "Abort signals, reasons, AbortSignal.timeout and AbortSignal.any."
+    },
+    {
+      "key": "mdn-settimeout",
+      "type": "article",
+      "title": "Window: setTimeout() method",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout",
+      "author": "MDN Web Docs",
+      "description": "Scheduling timers, minimum delays, clamping and the maximum delay value."
+    },
+    {
+      "key": "mdn-setinterval",
+      "type": "article",
+      "title": "Window: setInterval() method",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval",
+      "author": "MDN Web Docs",
+      "description": "Repeating timers and why recursive setTimeout guarantees a gap between runs."
+    },
+    {
+      "key": "mdn-queuemicrotask",
+      "type": "article",
+      "title": "Window: queueMicrotask() method",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/queueMicrotask",
+      "author": "MDN Web Docs",
+      "description": "Queues a callback on the microtask queue."
+    },
+    {
+      "key": "mdn-structuredclone",
+      "type": "article",
+      "title": "Window: structuredClone() method",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/structuredClone",
+      "author": "MDN Web Docs",
+      "description": "Deep-copies a value with the structured clone algorithm, optionally transferring buffers."
+    },
+    {
+      "key": "mdn-structured-clone-algorithm",
+      "type": "article",
+      "title": "The structured clone algorithm",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm",
+      "author": "MDN Web Docs",
+      "description": "Which types can be cloned for postMessage and structuredClone, and what is lost."
+    },
+    {
+      "key": "mdn-transferable",
+      "type": "article",
+      "title": "Transferable objects",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Transferable_objects",
+      "author": "MDN Web Docs",
+      "description": "Moving ownership of buffers between contexts instead of copying them."
+    },
+    {
+      "key": "mdn-web-workers",
+      "type": "article",
+      "title": "Using Web Workers",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers",
+      "author": "MDN Web Docs",
+      "description": "Running scripts on background threads that communicate by messages."
+    },
+    {
+      "key": "mdn-sharedarraybuffer",
+      "type": "article",
+      "title": "SharedArrayBuffer",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer",
+      "author": "MDN Web Docs",
+      "description": "Memory shared between agents, and the cross-origin isolation it requires."
+    },
+    {
+      "key": "mdn-atomics",
+      "type": "article",
+      "title": "Atomics",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Atomics",
+      "author": "MDN Web Docs",
+      "description": "Atomic operations and waiting on shared memory."
+    },
+    {
+      "key": "mdn-atomics-wait",
+      "type": "article",
+      "title": "Atomics.wait()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Atomics/wait",
+      "author": "MDN Web Docs",
+      "description": "Blocking a thread on a shared memory location, and where that is not allowed."
+    },
+    {
+      "key": "mdn-unhandledrejection",
+      "type": "article",
+      "title": "Window: unhandledrejection event",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/unhandledrejection_event",
+      "author": "MDN Web Docs",
+      "description": "The event fired when a rejected promise has no handler."
+    },
+    {
+      "key": "mdn-error-cause",
+      "type": "article",
+      "title": "Error: cause",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause",
+      "author": "MDN Web Docs",
+      "description": "Attaching the original error when rethrowing a wrapped one."
+    },
+    {
+      "key": "v8-fast-async",
+      "type": "article",
+      "title": "Faster async functions and promises",
+      "url": "https://v8.dev/blog/fast-async",
+      "author": "V8 team",
+      "description": "How V8 implements await and zero-cost async stack traces."
+    },
+    {
+      "key": "node-timers",
+      "type": "article",
+      "title": "Timers",
+      "url": "https://nodejs.org/docs/latest-v22.x/api/timers.html",
+      "author": "Node.js",
+      "description": "Node.js timer functions and how out-of-range delays are handled."
+    },
+    {
+      "key": "aws-backoff-jitter",
+      "type": "article",
+      "title": "Exponential Backoff And Jitter",
+      "url": "https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/",
+      "author": "AWS Architecture Blog",
+      "description": "Why adding jitter to retry backoff avoids synchronized retry storms."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple-choice",
+      "prompt": "`outer` is created with `new Promise((resolve) => resolve(inner))`, where `inner` is still pending. What is the state of `outer` right after `resolve(inner)` returns?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It is fulfilled, and its value is the `inner` promise object itself.",
+        "It is still pending, but locked in: it will settle the same way `inner` does.",
+        "It is rejected with a `TypeError`, because promises may not resolve to promises.",
+        "It is pending, and a later `resolve(42)` call would still fulfill it with `42`."
+      ],
+      "correct": 1,
+      "explanation": "Resolving with a thenable makes the promise follow it: `outer` is now resolved (its fate is fixed) but still pending until `inner` settles. A promise is never fulfilled with another promise as its value, and later `resolve` calls are ignored because the resolving functions were already used. The `TypeError` case applies only when a promise is resolved with itself.",
+      "materials": [
+        "mdn-promise",
+        "mdn-promise-resolve"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `Promise.try(fn)` (ES2025; Chrome 128+, Node 23+) do differently from `Promise.resolve().then(fn)`?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It calls `fn` synchronously and turns a synchronous throw into a rejected promise.",
+        "It calls `fn` in a microtask and retries it once if the returned promise rejects.",
+        "It calls `fn` synchronously and lets a synchronous throw escape to the caller.",
+        "It calls `fn` in a new task, so it runs after any timers that are already due."
+      ],
+      "correct": 0,
+      "explanation": "`Promise.try` runs the callback right away, like `new Promise((r) => r(fn()))`, and wraps both its return value and any synchronous exception in a promise. `Promise.resolve().then(fn)` also catches throws, but it defers `fn` to a microtask. It never retries, does not let the exception escape, and does not wait for a task.",
+      "materials": [
+        "mdn-promise-try"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In a browser, a promise rejects with no handler. One second later, code attaches `.catch()` to it. Which events does `window` receive?",
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`error`, because a rejection without a handler is reported as an uncaught exception",
+        "No events, because the rejection gets a handler before the page unloads",
+        "`unhandledrejection` once, and attaching the late handler fires nothing further",
+        "`unhandledrejection`, then `rejectionhandled` when the late handler is attached"
+      ],
+      "correct": 3,
+      "explanation": "The browser fires `unhandledrejection` when a rejected promise still has no handler after the current microtasks are processed. If a handler is attached later, it fires `rejectionhandled` on the same promise, so error trackers can retract the report. Rejections are not reported through the `error` event, and waiting until unload is not how the check works.",
+      "materials": [
+        "mdn-unhandledrejection"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What happens with `setTimeout(fn, 3_000_000_000)` (about 35 days) in Node 22 or an evergreen browser?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`fn` runs after about 35 days, exactly as requested.",
+        "It throws a `RangeError` because the delay is too large for a timer.",
+        "The delay overflows the 32-bit signed limit, so `fn` runs almost at once.",
+        "The delay is capped at about 24.8 days, so `fn` runs after that time."
+      ],
+      "correct": 2,
+      "explanation": "Timer delays are stored as 32-bit signed integers, so anything above 2,147,483,647 ms overflows. Browsers then run the timer immediately, and Node 22 prints a `TimeoutOverflowWarning` and sets the delay to 1 ms. Nothing throws and nothing is capped at the maximum; split long waits into shorter timers.",
+      "materials": [
+        "mdn-settimeout",
+        "node-timers"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A job's run time varies from 50 ms to several seconds. It must have at least 1 s of idle time between the end of one run and the start of the next. Which scheduling gives that?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`setInterval(job, 1000)`",
+        "`setInterval(job, 2000)`",
+        "Calling `setTimeout(run, 1000)` again at the end of each run",
+        "Calling `queueMicrotask(run)` again at the end of each run"
+      ],
+      "correct": 2,
+      "explanation": "A recursive `setTimeout` starts the 1 s wait only after the previous run finishes, so the gap is guaranteed whatever the run time. `setInterval` counts from the start of each run, so a run longer than the interval leaves no gap at all, and a larger interval only moves the threshold. Re-queuing a microtask has no delay and starves the event loop.",
+      "materials": [
+        "mdn-setinterval"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In Node 22 (an ES module), `a()` fulfills after 100 ms and `b()` rejects after 10 ms. What happens?\n\n```js\nconst pa = a();\nconst pb = b();\ntry {\n  await pa;\n  await pb;\n} catch (e) {\n  console.log('caught', e.message);\n}\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It logs `caught` with b's message after about 100 ms.",
+        "It logs `caught` with b's message after about 10 ms.",
+        "The process exits after about 10 ms with an unhandled rejection.",
+        "Nothing is logged, because the late `await pb` silences the rejection."
+      ],
+      "correct": 2,
+      "explanation": "`pb` rejects at 10 ms while the function is still waiting on `pa`, so no handler is attached to `pb` yet. Node reports an unhandled rejection and, by default, exits with code 1 before `await pb` ever runs. `await Promise.all([pa, pb])` avoids this because it subscribes to both promises immediately.",
+      "materials": [
+        "mdn-await",
+        "mdn-using-promises"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which of these makes an object usable with `for await (const x of obj)`?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A `then()` method that resolves with an array of the values to loop over",
+        "An async `next()` method on the object itself, with no iterator method",
+        "A `[Symbol.asyncIterator]()` method returning an object whose `next()` returns a promise",
+        "A `Symbol.asyncIterator` property whose value is an array of promises"
+      ],
+      "correct": 2,
+      "explanation": "`for await` calls `obj[Symbol.asyncIterator]()` (or falls back to `Symbol.iterator`) and then awaits each `next()` result. A thenable is not iterable, a bare `next()` without the iterator method is not found, and the property must be a function, not an array; each of these throws `TypeError: obj is not async iterable`.",
+      "materials": [
+        "mdn-iteration-protocols",
+        "mdn-for-await"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Two worker threads each run `view[0]++` one million times on the same `Int32Array` backed by a `SharedArrayBuffer`. The result is often below 2,000,000. Why, and what fixes it?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`++` is a separate read, add and write, so concurrent updates get lost; use `Atomics.add(view, 0, 1)`.",
+        "Each worker writes to its own copy of the buffer; transfer the buffer instead of sharing it.",
+        "Each thread caches typed array writes; call `Atomics.notify` after each increment to flush them.",
+        "The increments are queued as microtasks and some are dropped; `await` each increment instead."
+      ],
+      "correct": 0,
+      "explanation": "The memory really is shared, but `view[0]++` is not atomic: both threads can read the same value and both write back value + 1, losing an update. `Atomics.add` performs the read-modify-write as one indivisible operation. `Atomics.notify` wakes threads blocked in `Atomics.wait` and does not make other writes atomic, and plain increments have nothing to do with microtasks.",
+      "materials": [
+        "mdn-atomics",
+        "mdn-sharedarraybuffer"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Why do retry policies add random jitter to exponential backoff delays?",
+      "tags": [
+        "JavaScript",
+        "Design Principles & Patterns"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "So that clients that failed at the same moment don't retry in synchronized waves",
+        "So that each retry starts sooner than the last one and recovery is noticed faster",
+        "So that a retry does not start while the previous request is still in flight",
+        "So that one large request can be split into several smaller retried requests"
+      ],
+      "correct": 0,
+      "explanation": "Without jitter, clients that failed together compute the same delays and hit the recovering service in bursts at the same instants. Randomizing each delay (for example a random value between 0 and the capped backoff) spreads them out. Jitter does not shorten delays, does not coordinate with in-flight requests and does not split payloads.",
+      "materials": [
+        "aws-backoff-jitter"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`fetch` normally answers in 200 ms. What is wrong with this timeout helper?\n\n```js\nconst withTimeout = (p, ms) =>\n  Promise.race([p, new Promise((_, rej) =>\n    setTimeout(() => rej(new Error('timeout')), ms))]);\nawait withTimeout(fetch(url), 5000);\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The race rejects with `timeout` even when the fetch wins, as the timer still fires later.",
+        "The timer stays active for 5 s after the fetch wins, and a timeout does not cancel the fetch.",
+        "`Promise.race` waits for both promises to settle, so each call takes the full 5 s.",
+        "The timer's later rejection becomes an unhandled rejection once the fetch has won."
+      ],
+      "correct": 1,
+      "explanation": "The race settles with the first input, so a fast fetch wins and the later timer rejection is ignored (the race has a handler on it, so it is not unhandled). But nothing clears the timer, and on a timeout the request keeps running because racing does not cancel anything. `fetch(url, { signal: AbortSignal.timeout(5000) })` fixes both.",
+      "materials": [
+        "mdn-promise-race",
+        "mdn-abortsignal"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which of these promises never settles?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`Array.fromAsync([])`",
+        "`Promise.any([])`",
+        "`Promise.allSettled([])`",
+        "`Promise.race([])`"
+      ],
+      "correct": 3,
+      "explanation": "With an empty iterable, `Promise.race` has nothing to wait for and stays pending forever. `Promise.allSettled([])` and `Array.fromAsync([])` (ES2024) fulfill with an empty array straight away, as does `Promise.all([])`, and `Promise.any([])` rejects with an `AggregateError` whose `errors` array is empty.",
+      "materials": [
+        "mdn-promise-race",
+        "mdn-promise"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A `fetch` is called with `signal: AbortSignal.timeout(5000)` and the server never answers. What does the awaited `fetch` reject with after 5 s?",
+      "tags": [
+        "JavaScript",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A `DOMException` named `AbortError`",
+        "A `DOMException` named `TimeoutError`",
+        "A `TypeError` with the message `Failed to fetch`",
+        "A `RangeError` that reports the elapsed time"
+      ],
+      "correct": 1,
+      "explanation": "`AbortSignal.timeout` aborts its signal with a `TimeoutError` DOMException as the reason, and `fetch` rejects with that reason. A manual `controller.abort()` without an argument gives an `AbortError` instead, so code can tell a timeout from a user cancel by `err.name`. `TypeError` is what fetch uses for network failures.",
+      "materials": [
+        "mdn-abortsignal"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Each call takes the time in its comment. About how long does this code take?\n\n```js\nconst user = await getUser();      // 50 ms\nconst [orders, prefs] = await Promise.all([\n  getOrders(user.id),              // 100 ms\n  getPrefs(user.id),               // 80 ms\n]);\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "100 ms",
+        "150 ms",
+        "180 ms",
+        "230 ms"
+      ],
+      "correct": 1,
+      "explanation": "`getUser` must finish first because both later calls need `user.id`, which takes 50 ms. The two dependent calls then run at the same time, so that step takes as long as the slower one, 100 ms. 230 ms would be fully sequential, and 100 ms would ignore the real dependency on `user`.",
+      "materials": [
+        "mdn-using-promises",
+        "mdn-async-function"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`Promise.withResolvers()` (ES2024) returns an object with `promise`, `resolve` and `reject`, so a promise can be settled from code outside an executor function.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. It is equivalent to creating a promise and copying its resolving functions out of the executor, which is handy when the code that settles the promise lives in an event handler or another callback. It is available in Node 22 and all evergreen browsers.",
+      "materials": [
+        "mdn-promise-withresolvers"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When `Promise.all` rejects, the operations behind its other input promises are stopped.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. A promise is just a placeholder for a result; `Promise.all` stops waiting, but timers, requests and other work keep running and their results are ignored. To actually stop them, pass an `AbortSignal` to each operation and abort it when one fails.",
+      "materials": [
+        "mdn-promise",
+        "mdn-abortcontroller"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `SharedArrayBuffer` sent to a worker with `postMessage` is copied, so the worker's writes are not visible to the sender.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "False. Posting a `SharedArrayBuffer` shares the same memory block; both sides see each other's writes, which is why `Atomics` is needed for safe updates. An ordinary `ArrayBuffer` is copied by default or moved when listed as transferable.",
+      "materials": [
+        "mdn-sharedarraybuffer",
+        "mdn-web-workers"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When a `setInterval` callback takes longer than its interval, the missed ticks are not queued up; the next call simply runs soon after the slow one finishes.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. The repeating timer is rescheduled only after each callback returns, so a 10 ms interval with a 50 ms callback runs about every 50 ms instead of firing a burst of catch-up calls. The flip side is drift: the calls do not stay on a fixed 10 ms grid, so time-sensitive code should measure elapsed time rather than count ticks.",
+      "materials": [
+        "mdn-setinterval",
+        "node-timers"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "An exception thrown inside a `queueMicrotask` callback is reported as an uncaught exception, not as a promise rejection.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. `queueMicrotask` runs a plain callback, so an exception from it goes to the global error path (`error` event in browsers, `uncaughtException` in Node). Only exceptions inside promise reactions such as `.then` callbacks turn into rejections.",
+      "materials": [
+        "mdn-queuemicrotask",
+        "mdn-microtask-guide"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In a browser, `Atomics.wait` can block the main window thread until a worker calls `Atomics.notify`.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. Browsers forbid blocking the main thread, so `Atomics.wait` throws a `TypeError` there; it can be used in workers. The main thread can use the non-blocking `Atomics.waitAsync`, which returns a promise instead.",
+      "materials": [
+        "mdn-atomics-wait"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`await v` and `Promise.resolve(v)` adopt the state of `v` by calling its `then` method when `v` is a thenable. Which values of `v` are treated as thenables?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`{ then(resolve) { resolve(1); } }`",
+        "`{ then: 42 }`",
+        "A function object that has a callable `then` property",
+        "An instance of a `Promise` subclass",
+        "The string `'then'`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "A thenable is any object or function whose `then` property is callable, which includes promises from subclasses or other libraries. `{ then: 42 }` has a non-callable `then`, so the promise simply fulfills with that object. Primitives such as strings are never thenables.",
+      "materials": [
+        "mdn-promise",
+        "mdn-await"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which values come out of `structuredClone` (and so `postMessage`) with their type intact?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A `Map` whose values are plain objects",
+        "A `Date`",
+        "An object literal that has a method",
+        "A class instance, keeping its prototype and methods",
+        "An `ArrayBuffer`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "`Map`, `Date` and `ArrayBuffer` are supported types and come back as the same types with deep-copied contents. An object with a method throws `DataCloneError`, because functions cannot be cloned. A class instance clones as a plain object: its own data properties survive, but the prototype and its methods do not.",
+      "materials": [
+        "mdn-structured-clone-algorithm",
+        "mdn-structuredclone"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `AbortController` and `AbortSignal` are true?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`AbortSignal.any([a, b])` aborts as soon as either `a` or `b` aborts",
+        "An aborted signal returns to the non-aborted state once all its listeners have run",
+        "A listener added after the signal has already aborted is called right away",
+        "Aborting a signal rejects every pending promise in the function that created it",
+        "`controller.abort()` with no argument sets `signal.reason` to a `DOMException` named `AbortError`"
+      ],
+      "correctIndices": [
+        0,
+        4
+      ],
+      "explanation": "`AbortSignal.any` follows several signals and takes the reason of the first to abort, and the default reason is an `AbortError` DOMException. Aborting is permanent, and the `abort` event fires once, so a listener added later is never called; check `signal.aborted` first. Aborting only affects code that listens to the signal, not arbitrary promises.",
+      "materials": [
+        "mdn-abortsignal",
+        "mdn-abortcontroller"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these keep at most 3 `upload(file)` calls in flight at a time for a list of 100 files?",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Three async loops that each `await upload(...)` on files taken from a shared queue",
+        "`await Promise.all(files.map(upload))`",
+        "Processing `files` in slices of 3 and awaiting `Promise.all` for each slice",
+        "`for await (const r of files.map(upload)) {}`",
+        "A semaphore with 3 permits that each call acquires before it starts and releases in `finally`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "A pool of three loops and a 3-permit semaphore each start a new upload only when one finishes; slicing also stays at 3 but idles while the slowest of each slice finishes. `files.map(upload)` calls `upload` for all 100 files right away, so both `Promise.all` and `for await` over that array have 100 uploads in flight.",
+      "materials": [
+        "mdn-promise",
+        "mdn-for-await"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A search box calls `fetch` on every keystroke and renders whichever response arrives. A slow response for `ab` can overwrite the results for `abc`. Which changes prevent stale results from being rendered?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Abort the previous request with its `AbortController` before starting the next one",
+        "Tag each request with an increasing id and render a response only if its id is still the latest",
+        "Wrap `await fetch(...)` in `try...finally`",
+        "Debounce the input by 300 ms and change nothing else",
+        "Use `.then` instead of `await` for the request"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "The bug is a race: responses can arrive out of order. Aborting the old request or ignoring responses that are no longer the latest both fix it. Debouncing sends fewer requests but two of them can still finish out of order, and `try...finally` or `.then` versus `await` do not change the order of arrival.",
+      "materials": [
+        "mdn-abortcontroller"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In Node 22, which statements about `error.stack` for errors thrown in async code are true?",
+      "tags": [
+        "JavaScript",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Awaiting callers appear as `at async name` frames in the stack",
+        "`return await inner()` keeps the current function in the async stack, while `return inner()` drops it",
+        "An error thrown inside a `setTimeout` callback lists the function that scheduled the timer",
+        "Rethrowing with `new Error('msg', { cause: err })` keeps the original error and its stack reachable",
+        "Async frames appear in `error.stack` just when Node is started with `--inspect`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "V8's zero-cost async stack traces walk the chain of awaiting async functions and add `at async` frames, with no flag needed. A function that returns a promise without awaiting it has already finished, so it (and its callers) is missing from the trace. Timer callbacks start from a fresh stack, so `error.stack` does not show who scheduled them, and `cause` is the standard way to keep the original error.",
+      "materials": [
+        "v8-fast-async",
+        "mdn-error-cause"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about Web Workers and Node `worker_threads` are true?",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Each worker has its own event loop and global scope",
+        "A worker can read the main thread's top-level variables directly",
+        "Transferring an `ArrayBuffer` with `postMessage` leaves the sender's buffer detached, with `byteLength` 0",
+        "A browser worker can create and modify DOM elements in the page",
+        "A long busy loop in a worker does not block the main thread's event loop"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "Workers are separate threads with their own globals and event loop, so their CPU work does not block the main thread. They share nothing by default and communicate with `postMessage`; a transferred buffer moves to the receiver and is detached in the sender. Browser workers have no access to the DOM.",
+      "materials": [
+        "mdn-web-workers",
+        "mdn-transferable"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Put these steps of one browser event-loop iteration in order, first to last, for an iteration where a new frame is due.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Run the oldest task from a task queue, such as a timer callback",
+        "Drain the microtask queue",
+        "Run `requestAnimationFrame` callbacks",
+        "Recalculate style and layout",
+        "Paint the updated frame"
+      ],
+      "explanation": "The loop runs one task, then drains every microtask it queued. When the browser decides to render, it runs animation frame callbacks first so they can change the DOM, then recalculates style and layout, then paints. This is why `requestAnimationFrame` is the place for visual updates: they land in the same frame.",
+      "materials": [
+        "mdn-execution-model",
+        "mdn-microtask-guide"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nsetTimeout(() => console.log('timer'), 0);\nqueueMicrotask(() => {\n  console.log('m1');\n  queueMicrotask(() => console.log('m3'));\n});\nqueueMicrotask(() => console.log('m2'));\nconsole.log('sync');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "sync",
+        "m1",
+        "m2",
+        "m3",
+        "timer"
+      ],
+      "explanation": "The script runs to the end first. Then the microtask queue is drained in FIFO order: m1 runs and adds m3 to the back of the queue, behind m2. The queue is drained completely, including microtasks added while draining, before the timer task gets a turn.",
+      "materials": [
+        "mdn-queuemicrotask",
+        "mdn-microtask-guide"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nasync function* gen() {\n  console.log('gen start');\n  yield 'a';\n}\nconst it = gen();\nconsole.log('created');\nconst p = it.next();\nconsole.log('next called');\np.then((r) => console.log('got ' + r.value));\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "created",
+        "gen start",
+        "next called",
+        "got a"
+      ],
+      "explanation": "Calling an async generator function only creates the generator; the body does not run yet. The first `next()` starts the body synchronously up to the `yield`, so `gen start` prints before `next()` returns. `next()` still returns a promise, and its `.then` callback runs as a microtask after the script.",
+      "materials": [
+        "mdn-async-generator"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\n(async () => {\n  await { then(r) { r(); } };\n  console.log('thenable');\n})();\n(async () => {\n  await null;\n  console.log('null');\n})();\nPromise.resolve()\n  .then(() => console.log('t1'))\n  .then(() => console.log('t2'));\nconsole.log('sync');\n```",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "sync",
+        "null",
+        "t1",
+        "thenable",
+        "t2"
+      ],
+      "explanation": "Awaiting a non-thenable takes one microtask, so `null` and `t1` run on the first round. Awaiting a thenable first queues a job that calls its `then` method; only when `r()` runs inside that job is the continuation queued, one round later. That puts `thenable` in the second round, just ahead of `t2`, which was queued when `t1` ran.",
+      "materials": [
+        "mdn-await",
+        "mdn-promise-resolve"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an async generator that yields a promise and is then closed with return().",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "hard",
+      "code": "async function* gen() {\n  yield 1;\n  yield Promise.resolve(2);\n  return 3;\n}\nconst values = [];\nfor await (const v of gen()) values.push(v);\nconsole.log(values);\nconst it = gen();\nconsole.log(await it.next(), await it.return(9), await it.next());\n",
+      "codeLanguage": "js",
+      "expectedOutput": "[ 1, 2 ]\n{ value: 1, done: false } { value: 9, done: true } { value: undefined, done: true }\n",
+      "explanation": "In an async generator, `yield` awaits a promise operand, so the loop sees `2`, not a promise. `for await` ignores the `return` value `3` because that result has `done: true`. Calling `return(9)` finishes the generator early with `{ value: 9, done: true }`, and later `next()` calls report `done` with `undefined`.",
+      "materials": [
+        "mdn-async-generator",
+        "mdn-for-await"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an AbortController that is aborted twice, then checked with throwIfAborted().",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "code": "const ac = new AbortController();\nconst { signal } = ac;\nsignal.addEventListener(\"abort\", () => console.log(\"aborted:\", signal.reason.message));\nconsole.log(signal.aborted);\nac.abort(new Error(\"user cancelled\"));\nac.abort(new Error(\"again\"));\nconsole.log(signal.aborted, signal.reason.message);\ntry { signal.throwIfAborted(); } catch (e) { console.log(\"thrown:\", e.message); }\n",
+      "codeLanguage": "js",
+      "expectedOutput": "false\naborted: user cancelled\ntrue user cancelled\nthrown: user cancelled\n",
+      "explanation": "`abort()` sets the reason and dispatches the `abort` event synchronously, so the listener logs before the next line. A signal aborts only once: the second `abort()` call is ignored and the first reason stays. `throwIfAborted()` throws that stored reason, which lets long-running code check for cancellation between steps.",
+      "materials": [
+        "mdn-abortsignal",
+        "mdn-abortcontroller"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a pool of two async workers pulling jobs from a shared queue.",
+      "tags": [
+        "JavaScript",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "code": "const sleep = (ms) => new Promise((r) => setTimeout(r, ms));\nconst jobs = [[\"A\", 80], [\"B\", 15], [\"C\", 15], [\"D\", 15]];\nasync function worker(name) {\n  for (let job; (job = jobs.shift()); ) { await sleep(job[1]); console.log(name, job[0]); }\n}\nawait Promise.all([worker(\"w1\"), worker(\"w2\")]);\nconsole.log(\"done\");\n",
+      "codeLanguage": "js",
+      "expectedOutput": "w2 B\nw2 C\nw2 D\nw1 A\ndone\n",
+      "explanation": "Both workers start at once: w1 takes A (80 ms) and w2 takes B. Because w2 picks the next job as soon as it finishes one, it handles B, C and D at about 15, 30 and 45 ms while w1 is still busy, and A finishes at 80 ms. At most two jobs run at a time, and `done` waits for both loops.",
+      "materials": [
+        "mdn-promise",
+        "mdn-using-promises"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: two concurrent withdrawals that read a shared balance before an await.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "code": "let balance = 100;\nasync function withdraw(amount) {\n  const current = balance;\n  await null;\n  balance = current - amount;\n}\nawait Promise.all([withdraw(30), withdraw(50)]);\nconsole.log(balance);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "50\n",
+      "explanation": "Both calls read `balance` (100) synchronously before either resumes, so the first continuation writes 70 and the second overwrites it with 50. JavaScript is single-threaded, but any `await` between a read and a write lets other code interleave. Reading the value after the await, or serializing the updates, avoids the lost update.",
+      "materials": [
+        "mdn-async-function",
+        "mdn-await"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: comparing promises returned by Promise.resolve, new Promise and an async function.",
+      "tags": [
+        "JavaScript",
+        "Async & Concurrency"
+      ],
+      "difficulty": "medium",
+      "code": "const p = Promise.resolve(1);\nconsole.log(Promise.resolve(p) === p);\nconsole.log(new Promise((r) => r(p)) === p);\nasync function f() { return p; }\nconsole.log(f() === p);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "true\nfalse\nfalse\n",
+      "explanation": "`Promise.resolve` returns its argument unchanged when it is already a native promise with the same constructor. The constructor always creates a new promise that follows `p`, and an async function always returns its own new promise, even when it returns a promise.",
+      "materials": [
+        "mdn-promise-resolve",
+        "mdn-async-function"
+      ]
+    }
+  ]
+}

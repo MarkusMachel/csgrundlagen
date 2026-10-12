@@ -1,0 +1,2861 @@
+{
+  "name": ".NET: ASP.NET Core",
+  "materials": [
+    {
+      "key": "mw",
+      "type": "article",
+      "title": "ASP.NET Core Middleware",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/",
+      "author": "Microsoft Learn",
+      "description": "How the request pipeline is built, ordered, branched and short-circuited."
+    },
+    {
+      "key": "routing",
+      "type": "article",
+      "title": "Routing in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing",
+      "author": "Microsoft Learn",
+      "description": "Endpoint routing, route templates, constraints, precedence and link generation."
+    },
+    {
+      "key": "minimal",
+      "type": "article",
+      "title": "Minimal APIs quick reference",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis",
+      "author": "Microsoft Learn",
+      "description": "WebApplication, route handlers, groups, filters, authorization and responses in Minimal APIs."
+    },
+    {
+      "key": "min-binding",
+      "type": "article",
+      "title": "Parameter binding in Minimal API apps",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/parameter-binding",
+      "author": "Microsoft Learn",
+      "description": "Binding sources, inference rules, special types, AsParameters, TryParse/BindAsync and forms."
+    },
+    {
+      "key": "min-responses",
+      "type": "article",
+      "title": "Create responses in Minimal API applications",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/responses",
+      "author": "Microsoft Learn",
+      "description": "Return values, IResult, Results versus TypedResults and the Results<T1,T2> union types."
+    },
+    {
+      "key": "openapi",
+      "type": "article",
+      "title": "Overview of OpenAPI support in ASP.NET Core API apps",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/openapi/overview",
+      "author": "Microsoft Learn",
+      "description": "Generating OpenAPI documents with Microsoft.AspNetCore.OpenApi in .NET 9 and later."
+    },
+    {
+      "key": "webapi",
+      "type": "article",
+      "title": "Create web APIs with ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/web-api/",
+      "author": "Microsoft Learn",
+      "description": "ControllerBase and the behaviours enabled by the [ApiController] attribute."
+    },
+    {
+      "key": "return-types",
+      "type": "article",
+      "title": "Controller action return types in ASP.NET Core web API",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/web-api/action-return-types",
+      "author": "Microsoft Learn",
+      "description": "Specific types, IActionResult, ActionResult<T> and its implicit conversions."
+    },
+    {
+      "key": "model-binding",
+      "type": "article",
+      "title": "Model Binding in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding",
+      "author": "Microsoft Learn",
+      "description": "Binding sources, their order, [BindRequired] and binding attributes for controllers."
+    },
+    {
+      "key": "validation",
+      "type": "article",
+      "title": "Model validation in ASP.NET Core MVC",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation",
+      "author": "Microsoft Learn",
+      "description": "Validation attributes, ModelState, non-nullable reference types and [Required] versus [BindRequired]."
+    },
+    {
+      "key": "filters",
+      "type": "article",
+      "title": "Filters in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/filters",
+      "author": "Microsoft Learn",
+      "description": "Filter types, scopes, ordering, short-circuiting, ServiceFilter and TypeFilter."
+    },
+    {
+      "key": "formatting",
+      "type": "article",
+      "title": "Format response data in ASP.NET Core Web API",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/web-api/advanced/formatting",
+      "author": "Microsoft Learn",
+      "description": "Content negotiation, output formatters, Accept headers and 406 responses."
+    },
+    {
+      "key": "errors",
+      "type": "article",
+      "title": "Handle errors in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling",
+      "author": "Microsoft Learn",
+      "description": "Developer exception page, UseExceptionHandler, IExceptionHandler, status code pages and ProblemDetails."
+    },
+    {
+      "key": "di",
+      "type": "article",
+      "title": "Dependency injection in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection",
+      "author": "Microsoft Learn",
+      "description": "Service lifetimes, registration methods, scope validation and DI in middleware."
+    },
+    {
+      "key": "di-net",
+      "type": "article",
+      "title": ".NET dependency injection",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection",
+      "author": "Microsoft Learn",
+      "description": "The Microsoft.Extensions.DependencyInjection container: multiple registrations, constructor selection, keyed services, disposal."
+    },
+    {
+      "key": "options",
+      "type": "article",
+      "title": "Options pattern in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options",
+      "author": "Microsoft Learn",
+      "description": "IOptions, IOptionsSnapshot, IOptionsMonitor, named options and options validation."
+    },
+    {
+      "key": "config",
+      "type": "article",
+      "title": "Configuration in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/",
+      "author": "Microsoft Learn",
+      "description": "Default configuration sources, precedence, hierarchical keys, binding and GetValue."
+    },
+    {
+      "key": "logging",
+      "type": "article",
+      "title": "Logging in .NET Core and ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/",
+      "author": "Microsoft Learn",
+      "description": "ILogger, categories, log levels, filter rules, providers, scopes and message templates."
+    },
+    {
+      "key": "envs",
+      "type": "article",
+      "title": "Use multiple environments in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/environments",
+      "author": "Microsoft Learn",
+      "description": "How the environment is chosen and how it changes configuration and behaviour."
+    },
+    {
+      "key": "kestrel",
+      "type": "article",
+      "title": "Configure endpoints for the ASP.NET Core Kestrel web server",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel/endpoints",
+      "author": "Microsoft Learn",
+      "description": "Default addresses, ASPNETCORE_URLS, ASPNETCORE_HTTP_PORTS and Kestrel endpoint configuration."
+    },
+    {
+      "key": "authz",
+      "type": "article",
+      "title": "Policy-based authorization in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/security/authorization/policies",
+      "author": "Microsoft Learn",
+      "description": "Policies, requirements, handlers, Succeed/Fail semantics and default and fallback policies."
+    },
+    {
+      "key": "authn",
+      "type": "article",
+      "title": "Overview of ASP.NET Core authentication",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/security/authentication/",
+      "author": "Microsoft Learn",
+      "description": "Authentication schemes, handlers, default schemes, challenge and forbid."
+    },
+    {
+      "key": "cors",
+      "type": "article",
+      "title": "Enable Cross-Origin Requests (CORS) in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/security/cors",
+      "author": "Microsoft Learn",
+      "description": "CORS policies, origins, credentials, preflight requests and middleware placement."
+    },
+    {
+      "key": "ratelimit",
+      "type": "article",
+      "title": "Rate limiting middleware in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/performance/rate-limit",
+      "author": "Microsoft Learn",
+      "description": "Fixed window, sliding window, token bucket and concurrency limiters and their options."
+    },
+    {
+      "key": "outputcache",
+      "type": "article",
+      "title": "Output caching middleware in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/performance/caching/output",
+      "author": "Microsoft Learn",
+      "description": "Default output caching rules, cache keys, expiration, tags and eviction."
+    },
+    {
+      "key": "health",
+      "type": "article",
+      "title": "Health checks in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks",
+      "author": "Microsoft Learn",
+      "description": "Health check registration, status codes, tags and filtering with predicates."
+    },
+    {
+      "key": "httpfactory",
+      "type": "article",
+      "title": "Make HTTP requests using IHttpClientFactory in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/http-requests",
+      "author": "Microsoft Learn",
+      "description": "Named and typed clients, handler lifetime and pooling, and outgoing request middleware."
+    },
+    {
+      "key": "stj",
+      "type": "article",
+      "title": "How to instantiate JsonSerializerOptions instances with System.Text.Json",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/configure-options",
+      "author": "Microsoft Learn",
+      "description": "JsonSerializerDefaults.Web and the options ASP.NET Core uses by default."
+    },
+    {
+      "key": "claims",
+      "type": "article",
+      "title": "ClaimsIdentity Class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.security.claims.claimsidentity",
+      "author": "Microsoft Learn",
+      "description": "API reference for ClaimsIdentity: IsAuthenticated, NameClaimType, RoleClaimType and claim lookup."
+    },
+    {
+      "key": "httpclient",
+      "type": "article",
+      "title": "HttpClient Class",
+      "url": "https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpclient",
+      "author": "Microsoft Learn",
+      "description": "API reference for HttpClient: BaseAddress, Timeout, headers and request methods."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple-choice",
+      "prompt": "Both endpoints below are registered, the parameter route first. Which handler answers `GET /products/new`?\n\n```csharp\napp.MapGet(\"/products/{id}\", (string id) => $\"param {id}\");\napp.MapGet(\"/products/new\", () => \"literal new\");\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The parameter route, because it was added to the endpoint list earlier and wins ties",
+        "Neither: the request fails with an ambiguous match error",
+        "The literal route, because a literal segment has higher precedence",
+        "The parameter route, because it was registered first"
+      ],
+      "correct": 2,
+      "explanation": "Endpoint routing ranks candidates by route precedence, not by registration order, and a literal segment such as `new` is more specific than a parameter segment, so the response is `literal new`. Registration order does not decide the winner, and there is no ambiguity because the two templates have different precedence; an ambiguous match only happens when the candidates are equally specific.",
+      "materials": [
+        "routing"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What happens when this app receives `GET /x/1`?\n\n```csharp\napp.MapGet(\"/x/{a}\", (string a) => \"xa\");\napp.MapGet(\"/x/{b}\", (string b) => \"xb\");\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The request fails with a 500 caused by an `AmbiguousMatchException`",
+        "The first registered endpoint runs and returns `xa`",
+        "The last registered endpoint runs and returns `xb`",
+        "`builder.Build()` throws because the two templates overlap"
+      ],
+      "correct": 0,
+      "explanation": "Both templates have identical precedence, so the matcher finds two equally good candidates at request time and throws `AmbiguousMatchException` (\"The request matched multiple endpoints\"), which surfaces as a 500. Routing does not validate overlaps at startup, and it never breaks a tie by registration order in either direction.",
+      "materials": [
+        "routing"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An app maps only `app.MapGet(\"/hello\", () => \"hello\")`. What status code does `POST /hello` get?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "400 Bad Request",
+        "404 Not Found",
+        "405 Method Not Allowed",
+        "200 OK, because the path matches"
+      ],
+      "correct": 2,
+      "explanation": "The path matches an endpoint but its HTTP method metadata only allows GET, so endpoint routing selects its built-in 405 Method Not Allowed endpoint. A 404 is for paths that match nothing, 400 is for binding failures, and the GET handler never runs for a POST.",
+      "materials": [
+        "routing"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In this app, what does the first middleware print for a request to `/late`?\n\n```csharp\nvar app = builder.Build();\napp.Use(async (ctx, next) =>\n{\n    Console.WriteLine(ctx.GetEndpoint()?.DisplayName ?? \"null\");\n    await next(ctx);\n});\napp.UseRouting();\napp.MapGet(\"/late\", () => \"body\");\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It throws, because `GetEndpoint` may be called inside endpoints but not in middleware",
+        "`null`, because the endpoint is selected by `UseRouting`, which runs after this middleware",
+        "`404`, because no endpoint has been chosen yet and the default is the not-found endpoint",
+        "`HTTP: GET /late`, because WebApplication matches endpoints before any middleware runs"
+      ],
+      "correct": 1,
+      "explanation": "The endpoint is attached to `HttpContext` by the routing middleware, and because `UseRouting()` is called explicitly after this middleware, the endpoint is still unset when it runs, so it prints `null`. WebApplication only adds routing at the very start of the pipeline when you do not call `UseRouting()` yourself. `GetEndpoint()` is legal in any middleware, and there is no placeholder not-found endpoint before routing.",
+      "materials": [
+        "routing",
+        "mw"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A middleware wants to add a response header after the endpoint has run:\n\n```csharp\napp.Use(async (ctx, next) =>\n{\n    await next(ctx);\n    ctx.Response.Headers[\"X-Elapsed\"] = \"12\"; // throws for /late\n});\n```\n\nThe endpoint has already written its body, so this throws \"Headers are read-only, response has already started\". Which change adds the header reliably?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Call `await ctx.Response.Body.FlushAsync()` before setting the header",
+        "Call `ctx.Response.Headers.Append` instead of using the indexer",
+        "Set the header after `await next(ctx)` but wrap it in `try`/`catch`",
+        "Register a callback with `ctx.Response.OnStarting(...)` before calling `next`"
+      ],
+      "correct": 3,
+      "explanation": "`Response.OnStarting` runs its callback just before the headers are sent, so a header set there is included even though the endpoint writes the body later. `Append` writes to the same read-only header collection and fails the same way, a `try`/`catch` only hides the failure, and flushing sends the headers immediately, which makes the problem worse.",
+      "materials": [
+        "mw"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A client posts the body `hi` to this endpoint. What does it return?\n\n```csharp\napp.MapPost(\"/twice\", async (HttpRequest r) =>\n{\n    var a = await new StreamReader(r.Body).ReadToEndAsync();\n    var b = await new StreamReader(r.Body).ReadToEndAsync();\n    return $\"[{a}][{b}]\";\n});\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It throws `NotSupportedException` on the second read",
+        "`[hi][]`",
+        "`[][hi]`",
+        "`[hi][hi]`"
+      ],
+      "correct": 1,
+      "explanation": "The request body is a forward-only stream, so the first reader consumes it and the second `ReadToEndAsync` finds nothing and returns an empty string, giving `[hi][]`. To read it twice you call `r.EnableBuffering()` and reset `r.Body.Position = 0` between reads. The second read does not throw and does not see the data again.",
+      "materials": [
+        "mw",
+        "min-binding"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A .NET 8 app maps this endpoint, where `Todo` is a record. What happens at run time?\n\n```csharp\napp.MapGet(\"/g\", (Todo t) => t);\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Requests fail with an `InvalidOperationException`: a body was inferred for a GET endpoint",
+        "`t` is read from the JSON request body, as it would be for a POST",
+        "`t` is bound from query string values that match the record's properties",
+        "`/g` returns 400 while the rest of the app keeps working"
+      ],
+      "correct": 0,
+      "explanation": "Minimal APIs infer a complex type as a body parameter, but body inference is not allowed for GET, so building the endpoint throws \"Body was inferred but the method does not allow inferred body parameters\". Endpoints are built on first use, so in practice requests start failing with 500s, not just `/g`. Complex types are not bound from the query string unless you use `[AsParameters]` or a `TryParse`/`BindAsync` method.",
+      "materials": [
+        "min-binding"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What is the main advantage of returning `TypedResults.Ok(todo)` instead of `Results.Ok(todo)` from a Minimal API handler?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It sets the status code to 201 when the value is new",
+        "Its concrete return type lets OpenAPI infer the response and makes the handler easy to unit test",
+        "It serializes the body faster because it skips content negotiation",
+        "It is required for a Minimal API to return JSON"
+      ],
+      "correct": 1,
+      "explanation": "`Results.Ok` returns `IResult`, which hides the response type, whereas `TypedResults.Ok` returns `Ok<Todo>`, so OpenAPI metadata can be inferred and a unit test can assert on the typed result directly. Both write the same JSON with the same serializer, neither changes the status code to 201, and returning the object itself also produces JSON.",
+      "materials": [
+        "min-responses"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A Minimal API lambda returns `TypedResults.Ok(todo)` on one branch and `TypedResults.NotFound()` on another. Which declared return type compiles and still lets OpenAPI describe both responses?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`ActionResult<Todo>`",
+        "`object`",
+        "`IResult`",
+        "`Results<Ok<Todo>, NotFound>`"
+      ],
+      "correct": 3,
+      "explanation": "`Results<Ok<Todo>, NotFound>` is a union type with implicit conversions from each listed result, so both branches compile, and its type arguments tell OpenAPI about the 200 and 404 responses. `IResult` compiles but hides which results are possible, `ActionResult<Todo>` is an MVC type that Minimal APIs do not execute as a result, and `object` loses all metadata.",
+      "materials": [
+        "min-responses"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An app calls `builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))`, yet a Minimal API endpoint still returns enums as numbers. Why?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Minimal APIs use `Microsoft.AspNetCore.Http.Json.JsonOptions`, configured with `ConfigureHttpJsonOptions`",
+        "Minimal APIs serialize with Newtonsoft.Json, which ignores System.Text.Json converters",
+        "`JsonStringEnumConverter` must be added before `AddControllers` to take effect",
+        "Enums are written as numbers by the endpoint's content negotiation step"
+      ],
+      "correct": 0,
+      "explanation": "MVC and Minimal APIs have separate JSON settings: controllers read `Microsoft.AspNetCore.Mvc.JsonOptions`, while Minimal APIs read `Microsoft.AspNetCore.Http.Json.JsonOptions`, which you set with `builder.Services.ConfigureHttpJsonOptions(...)`. Registration order with `AddControllers` is not the problem, Minimal APIs use System.Text.Json, not Newtonsoft, and they do no content negotiation at all.",
+      "materials": [
+        "min-responses",
+        "stj"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In .NET 8, a client posts `{\"name\":\"toolong\"}` to this endpoint. What is the response?\n\n```csharp\napp.MapPost(\"/v\", (Item i) => $\"ok {i.Name}\");\nrecord Item([Required, StringLength(3)] string Name);\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "500, because validation attributes on record parameters are not supported",
+        "400 with a validation problem saying Name is too long",
+        "200 with `ok toolong`, because Minimal APIs in .NET 8 do not run data annotation validation",
+        "422 Unprocessable Entity"
+      ],
+      "correct": 2,
+      "explanation": "Minimal APIs in .NET 8 bind the body but do not validate data annotations, so the handler runs and returns `ok toolong`; you validate yourself, for example in an endpoint filter (built-in `AddValidation` support arrived in .NET 10). The automatic 400 is an MVC `[ApiController]` behaviour, ASP.NET Core does not use 422 for validation by default, and the attributes cause no error.",
+      "materials": [
+        "min-binding"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A .NET 8 app maps `app.MapPost(\"/upload\", (IFormFile file) => file.Length);` without registering antiforgery. A script posts a multipart file and gets a 500 saying the endpoint \"contains anti-forgery metadata, but a middleware was not found\". Which change lets the upload succeed for this non-browser client?",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Call `.DisableAntiforgery()` on the endpoint",
+        "Add `[FromForm]` to the `file` parameter",
+        "Change the parameter type to `IFormFileCollection`",
+        "Add `.Accepts<IFormFile>(\"multipart/form-data\")` to the endpoint"
+      ],
+      "correct": 0,
+      "explanation": "In .NET 8, Minimal API endpoints that bind form data (`IFormFile`, `[FromForm]`) carry antiforgery metadata, and without antiforgery middleware they fail; `.DisableAntiforgery()` removes that requirement for an API called by scripts. `[FromForm]` and `IFormFileCollection` also bind from the form and keep the same metadata, and `.Accepts` only adds OpenAPI metadata.",
+      "materials": [
+        "min-binding"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `GET /s?term=x&size=5` return?\n\n```csharp\napp.MapGet(\"/s\", ([AsParameters] Search s) => $\"{s.Term} {s.Page} {s.Size}\");\nrecord struct Search(string Term, int Page = 1, int Size = 20);\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`x 1 20`",
+        "`x 1 5`",
+        "400, because `page` is missing",
+        "`x 0 5`"
+      ],
+      "correct": 1,
+      "explanation": "`[AsParameters]` binds each constructor parameter as if it were a separate handler parameter, so `term` and `size` come from the query string and `Page` keeps its default of 1, giving `x 1 5`. Defaults are honoured, so `Page` is not 0, `size=5` overrides 20, and an optional parameter with a default does not cause a 400.",
+      "materials": [
+        "min-binding"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`app.MapGet(\"/pt\", (Point p) => ...)` should accept `GET /pt?p=3,4`. What makes the custom `Point` type bindable from the query string in a Minimal API?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A public parameterless constructor and settable `X` and `Y` properties",
+        "Implementing `IConvertible` on `Point`",
+        "A public static `bool TryParse(string value, out Point result)` method on `Point`",
+        "A `[TypeConverter]` attribute on `Point`"
+      ],
+      "correct": 2,
+      "explanation": "Minimal APIs bind route, query and header values to any type that exposes a static `TryParse` method (or implements `IParsable<T>`), and a type with `BindAsync` can bind from the whole request. They do not use `TypeConverter` (that is MVC model binding), a parameterless constructor makes a complex type that would be inferred from the body, and `IConvertible` is not consulted.",
+      "materials": [
+        "min-binding"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which URL reaches this endpoint?\n\n```csharp\nvar api = app.MapGroup(\"/api\");\nvar v1 = api.MapGroup(\"/v1\");\nv1.MapGet(\"/items/{id}\", (int id) => id);\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`/api/v1/items/5`",
+        "`/api/items/5`",
+        "`/v1/items/5`",
+        "`/items/5`"
+      ],
+      "correct": 0,
+      "explanation": "Route group prefixes are concatenated from the outermost group inward, so the endpoint lives at `/api/v1/items/{id}`. Each nested group adds its prefix rather than replacing the parent's, and the bare `/items/5` or partial prefixes match nothing.",
+      "materials": [
+        "minimal"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does a POST to `/api/v1/items` return?\n\n```csharp\nv1.MapGet(\"/items/{id:int}\", (int id) => $\"item {id}\").WithName(\"GetItem\");\nv1.MapPost(\"/items\", () => Results.CreatedAtRoute(\"GetItem\", new { id = 9 }, new { id = 9 }));\n```\n\n(`v1` is the group `/api/v1`.)",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "200 with a `Location` header for `/api/v1/items/9`",
+        "201 with no `Location` header, because route names are an MVC feature",
+        "302 redirecting the client to `/api/v1/items/9`",
+        "201 with a `Location` header for `/api/v1/items/9`"
+      ],
+      "correct": 3,
+      "explanation": "`WithName` gives the endpoint a route name, and `CreatedAtRoute` uses the link generator to build its URL with the supplied values, so the response is 201 Created with `Location: .../api/v1/items/9` and the JSON body. Route names work for Minimal API endpoints too, the status is 201 rather than 200, and nothing redirects.",
+      "materials": [
+        "minimal",
+        "routing"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In a project created from the .NET 9 `webapi` template, which code produces the OpenAPI document, and where is it served by default?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`AddSwaggerGen()` and `UseSwagger()`, at `/swagger/v1/swagger.json`",
+        "`AddControllers().AddOpenApi()`, at `/openapi.json`",
+        "`AddOpenApi()` and `MapOpenApi()`, at `/openapi/v1.json`",
+        "`AddEndpointsApiExplorer()` by itself, at `/api-docs`"
+      ],
+      "correct": 2,
+      "explanation": "Starting with .NET 9 the templates use Microsoft.AspNetCore.OpenApi: `builder.Services.AddOpenApi()` registers document generation and `app.MapOpenApi()` serves it at `/openapi/v1.json`. Swashbuckle's `AddSwaggerGen`/`UseSwagger` was what the .NET 8 template used, `AddEndpointsApiExplorer` only exposes endpoint metadata, and there is no `AddControllers().AddOpenApi()` method.",
+      "materials": [
+        "openapi"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In an `[ApiController]`, `CreatedAtAction` fails with \"No route matches the supplied values\":\n\n```csharp\n[HttpGet(\"{id}\")]\npublic ActionResult<Todo> GetAsync(int id) => ...;\n\n[HttpPost]\npublic IActionResult Create(Dto d) => CreatedAtAction(nameof(GetAsync), new { id = 1 }, d);\n```\n\nWhy?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`CreatedAtAction` can point at a POST action but not at a GET action",
+        "`CreatedAtAction` needs the controller name in the route values whenever it is called",
+        "MVC trims the `Async` suffix from action names by default, so the action is named `Get`",
+        "`nameof` returns the fully qualified method name, which doesn't match"
+      ],
+      "correct": 2,
+      "explanation": "`MvcOptions.SuppressAsyncSuffixInActionNames` is true by default, so the action's name is `Get`, and looking up `\"GetAsync\"` finds no route; use `nameof(Get)`-style names, pass `\"Get\"`, or turn the option off. The controller defaults to the current one, `nameof` returns just the simple name, and `CreatedAtAction` commonly targets a GET action.",
+      "materials": [
+        "return-types",
+        "routing"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Why does this action fail to compile with CS0029?\n\n```csharp\npublic ActionResult<IEnumerable<Todo>> Get() => _repo.GetAll(); // returns IEnumerable<Todo>\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Controllers must return `IActionResult` when the result is a collection",
+        "C# does not allow implicit user-defined conversions from an interface type, so `IEnumerable<Todo>` cannot convert",
+        "`ActionResult<T>` requires `T` to be a class with a parameterless constructor",
+        "`ActionResult<T>` only converts from `T` inside `async` methods"
+      ],
+      "correct": 1,
+      "explanation": "`ActionResult<T>` relies on an implicit operator from `T`, and C# forbids user-defined implicit conversions when the source expression's type is an interface, so an `IEnumerable<Todo>` expression does not convert. Returning a concrete type such as `_repo.GetAll().ToList()` or wrapping it in `Ok(...)` compiles. There is no constructor constraint on `T`, collections can be returned through `ActionResult<T>`, and `async` makes no difference.",
+      "materials": [
+        "return-types"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "This controller has no `[ApiController]` attribute. A client posts `{\"name\":\"a\",\"age\":3}` with `Content-Type: application/json`. What comes back?\n\n```csharp\n[Route(\"plain\")]\npublic class PlainController : ControllerBase\n{\n    [HttpPost] public IActionResult P(Dto d) => Ok(d);\n}\npublic class Dto { public string? Name { get; set; } public int Age { get; set; } }\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`{\"name\":null,\"age\":0}`, bound from form, route and query",
+        "`{\"name\":\"a\",\"age\":3}`, read from the JSON body",
+        "415 Unsupported Media Type for the JSON body",
+        "400, because the JSON body could not be bound"
+      ],
+      "correct": 0,
+      "explanation": "Inferring `[FromBody]` for complex types is an `[ApiController]` behaviour; without it, MVC binds `Dto` from form fields, route values and the query string, finds nothing and returns an empty model with default values. Adding `[FromBody]` or `[ApiController]` makes the JSON body bind. No 415 or 400 occurs because the body is simply not read.",
+      "materials": [
+        "model-binding",
+        "webapi"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In a controller without `[ApiController]`, the action `[HttpPost(\"{id}\")] public string Prec(string id) => id;` receives `POST /plain/route?id=query` with the form field `id=form`. What does it return?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`route`",
+        "400, because `id` has several values",
+        "`query`",
+        "`form`"
+      ],
+      "correct": 3,
+      "explanation": "For a simple type without a binding attribute, MVC looks through its value providers in order: form fields first, then route values, then the query string, so the form value `form` wins. Without the form field the route value `route` would be used, and the query value only applies when neither exists; multiple sources do not cause a 400.",
+      "materials": [
+        "model-binding"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An `[ApiController]` action takes `[FromQuery] Q q`, and `GET /api/q` is sent with no query string. What does the response report?\n\n```csharp\npublic class Q\n{\n    [Required] public int A { get; set; }\n    [BindRequired] public int B { get; set; }\n}\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A validation error for `A` alone",
+        "Validation errors for both `A` and `B`",
+        "A validation error for `B` alone",
+        "200 with `{\"a\":0,\"b\":0}`"
+      ],
+      "correct": 2,
+      "explanation": "`[BindRequired]` adds a model-state error when no value was supplied, so `B` is reported. `[Required]` on a non-nullable `int` never fails, because the property always holds a value (0) after binding; use `int?` with `[Required]` or `[BindRequired]` instead. With the `B` error present, `[ApiController]` returns a 400, so the request does not succeed.",
+      "materials": [
+        "validation",
+        "model-binding"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An action is decorated with `[ServiceFilter(typeof(MyFilter))]`. What must be true for requests to it to succeed?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`MyFilter` must be registered in the DI container",
+        "`MyFilter` must derive from `ActionFilterAttribute`",
+        "`MyFilter` must have a parameterless constructor",
+        "`MyFilter` must also be added to `MvcOptions.Filters`"
+      ],
+      "correct": 0,
+      "explanation": "`ServiceFilter` resolves the filter instance from DI, so without a registration every request fails with \"No service for type 'MyFilter' has been registered\". `TypeFilter` is the variant that creates the filter with `ActivatorUtilities` without a registration. The filter only has to implement a filter interface, its constructor can take services, and adding it globally would run it on every action.",
+      "materials": [
+        "filters"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An action filter sets `context.Result = new BadRequestObjectResult(\"no\");` in `OnActionExecuting`. What happens next?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The action runs first, then the filter's `OnActionExecuted` decides",
+        "The action does not run, and the 400 result is executed",
+        "The action runs, and its result is replaced by the 400",
+        "An exception is thrown because results are set in result filters"
+      ],
+      "correct": 1,
+      "explanation": "Setting `Result` in `OnActionExecuting` short-circuits: the action method and the remaining action filters are skipped, and the result you assigned is executed as the response. The action does not run at all, setting a result there is the documented way to short-circuit, and `OnActionExecuted` of the same filter is not called.",
+      "materials": [
+        "filters"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An `[ApiController]` action returns `NotFound()`. What does the client receive by default?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A 200 with the JSON body `{\"status\":404}`",
+        "A 404 with an empty body and no content type",
+        "A 404 with the plain text body `Not Found`",
+        "A 404 with an `application/problem+json` body"
+      ],
+      "correct": 3,
+      "explanation": "With `[ApiController]`, client error results of 400 and above are turned into `ProblemDetails`, so `NotFound()` produces a 404 `application/problem+json` body with an RFC 9110 `type`, the title `Not Found`, the status and a `traceId`. Without `[ApiController]` the body would be empty, and the status code stays 404.",
+      "materials": [
+        "webapi",
+        "errors"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which setting turns off the automatic 400 response that `[ApiController]` sends when model state is invalid, so the action can inspect `ModelState` itself?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`builder.Services.Configure<ApiBehaviorOptions>(o => o.SuppressModelStateInvalidFilter = true)`",
+        "`builder.Services.AddControllers(o => o.ModelValidatorProviders.Clear())`",
+        "`builder.Services.Configure<ApiBehaviorOptions>(o => o.SuppressInferBindingSourcesForParameters = true)`",
+        "`builder.Services.Configure<MvcOptions>(o => o.SuppressAsyncSuffixInActionNames = true)`"
+      ],
+      "correct": 0,
+      "explanation": "`SuppressModelStateInvalidFilter = true` (also reachable via `ConfigureApiBehaviorOptions`) removes the filter that returns the automatic 400, while validation still populates `ModelState`. Clearing validator providers disables validation itself, `SuppressInferBindingSourcesForParameters` stops `[FromBody]`-style inference, and the async-suffix option affects action names.",
+      "materials": [
+        "webapi"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`GetRequiredService<IGreeter>()` is called after these registrations. Which implementation is returned?\n\n```csharp\nservices.AddSingleton<IGreeter, En>();\nservices.AddSingleton<IGreeter, De>();\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`En`, because the first registration wins",
+        "It throws because two implementations are registered",
+        "`De`, because the last registration wins",
+        "A composite that calls both"
+      ],
+      "correct": 2,
+      "explanation": "When a service type has several registrations, resolving a single instance returns the last one registered, `De`; resolving `IEnumerable<IGreeter>` returns all of them in registration order. The container does not throw for duplicates and does not build composites.",
+      "materials": [
+        "di-net"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which implementations does `GetServices<IGreeter>()` return after these registrations?\n\n```csharp\nservices.AddSingleton<IGreeter, En>();\nservices.AddSingleton<IGreeter, De>();\nservices.TryAddSingleton<IGreeter, Fr>();\nservices.TryAddEnumerable(ServiceDescriptor.Singleton<IGreeter, En>());\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`En, De, Fr`",
+        "`En, De, Fr, En`",
+        "`En, De, En`",
+        "`En, De`"
+      ],
+      "correct": 3,
+      "explanation": "`TryAddSingleton` does nothing when any registration for the service type exists, so `Fr` is skipped, and `TryAddEnumerable` skips a descriptor whose implementation type is already registered for that service, so the second `En` is skipped too. The result is `En, De`.",
+      "materials": [
+        "di-net"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A class has three public constructors: `()`, `(Dep1 d)` and `(Dep1 d, Dep2 e)`. Only `Dep1` is registered. Which constructor does the default container use?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`(Dep1 d)`, the longest one whose parameters can all be resolved",
+        "None: it throws because the constructor choice is ambiguous",
+        "`(Dep1 d, Dep2 e)`, passing `null` for `Dep2`",
+        "`()`, because it can always be satisfied"
+      ],
+      "correct": 0,
+      "explanation": "The container picks the constructor with the most parameters that it can fully satisfy from registered services, which here is `(Dep1 d)`. It does not fall back to the shortest constructor, it never passes `null` for an unregistered service, and it only throws for ambiguity when two equally long constructors are both satisfiable with no superset.",
+      "materials": [
+        "di-net"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In this endpoint filter, what does `context.GetArgument<int>(1)` return for `GET /orders/7?page=3`?\n\n```csharp\napp.MapGet(\"/orders/{id}\", (ILogger<Program> log, int id, int page) => id + page)\n   .AddEndpointFilter(async (context, next) =>\n   {\n       Console.WriteLine(context.GetArgument<int>(1));\n       return await next(context);\n   });\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`1`, the index itself",
+        "`3`, the second value taken from the request",
+        "It throws, because a filter runs before parameters are bound",
+        "`7`, the handler's second parameter `id`"
+      ],
+      "correct": 3,
+      "explanation": "`EndpointFilterInvocationContext.Arguments` holds the handler's arguments in parameter order after binding, so index 1 is the second parameter, `id`, which is 7; index 0 is the logger. Indexes follow the handler signature, not the order of values in the request, and filters run after binding, which is why they can inspect and validate arguments.",
+      "materials": [
+        "minimal"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A transient service that implements `IDisposable` is resolved directly from `app.Services` (the root provider). When is it disposed?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "When the root provider is disposed, at app shutdown",
+        "As soon as the calling method returns",
+        "At the next garbage collection",
+        "It is not disposed, because transients are not tracked"
+      ],
+      "correct": 0,
+      "explanation": "The container tracks disposable transients it creates and disposes them with the scope that resolved them; for the root provider that is app shutdown, so resolving many from the root leaks memory until then. The container does not dispose at method exit or on GC, and it does track disposable transients, which is why resolving them from a scope is preferred.",
+      "materials": [
+        "di-net"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An app runs with `ASPNETCORE_ENVIRONMENT=QA`. Which statement is correct?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The app fails to start because QA is not a known environment name",
+        "`app.Environment.IsDevelopment()` returns true for any non-production name",
+        "The app falls back to Production and loads `appsettings.Production.json`",
+        "`appsettings.QA.json` is loaded after `appsettings.json` if it exists"
+      ],
+      "correct": 3,
+      "explanation": "The environment name is free-form: `WebApplication.CreateBuilder` loads `appsettings.{EnvironmentName}.json`, so `appsettings.QA.json` overrides `appsettings.json`, and `app.Environment.IsEnvironment(\"QA\")` returns true. Custom names are allowed, nothing falls back to Production, and `IsDevelopment()` is only true for `Development`.",
+      "materials": [
+        "envs"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In .NET 8, a container started from the official ASP.NET Core image listens on port 8080 rather than 80. Why?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Port 8080 is hard-coded in Kestrel for container environments",
+        "`launchSettings.json` is copied into the image and sets 8080",
+        "The image sets `ASPNETCORE_HTTP_PORTS=8080` so the app can run as a non-root user",
+        "Kestrel refuses ports below 1024 when running on Linux"
+      ],
+      "correct": 2,
+      "explanation": "Starting with .NET 8 the images set `ASPNETCORE_HTTP_PORTS=8080` instead of `ASPNETCORE_URLS=http://+:80`, so apps can run as a non-root user, which cannot bind ports below 1024. Kestrel itself does not reject low ports, `launchSettings.json` is only used by tooling, and the port comes from the environment variable rather than code.",
+      "materials": [
+        "kestrel"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An app runs with `ASPNETCORE_URLS=http://localhost:5098` and also has `Kestrel__Endpoints__Http__Url=http://localhost:5097`. Where does it listen?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Both 5097 and 5098",
+        "Neither: startup fails because the settings conflict",
+        "5097, and Kestrel logs that it is overriding the address from `ASPNETCORE_URLS`",
+        "5098, because `ASPNETCORE_URLS` has the highest priority"
+      ],
+      "correct": 2,
+      "explanation": "Endpoints configured in the `Kestrel` configuration section (or in `UseKestrel`/`ConfigureKestrel` code) override `UseUrls`, `--urls` and `ASPNETCORE_URLS`, and Kestrel logs \"Overriding address(es) 'http://localhost:5098'\". The addresses are not merged and the conflict does not stop startup.",
+      "materials": [
+        "kestrel"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`custom.json` contains `{\"Key\":\"fromCustom\"}`. The app runs with the environment variable `Key=fromEnv` and the argument `--Key=fromCmd`. What is `app.Configuration[\"Key\"]`?\n\n```csharp\nvar builder = WebApplication.CreateBuilder(args);\nbuilder.Configuration.AddJsonFile(\"custom.json\");\nvar app = builder.Build();\n```",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`fromEnv`, because environment variables override JSON files",
+        "`null`, because the same key in several sources is a conflict",
+        "`fromCmd`, because command-line arguments have the highest priority",
+        "`fromCustom`, because the provider added last wins"
+      ],
+      "correct": 3,
+      "explanation": "Configuration providers are consulted in reverse order of addition, and `CreateBuilder` adds command-line arguments last among its defaults; a JSON file added afterwards therefore overrides even them. The usual \"command line beats everything\" rule only holds for the default sources, environment variables rank below the command line, and duplicate keys are resolved by order, not reported as conflicts.",
+      "materials": [
+        "config"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Where does an app created with `WebApplication.CreateBuilder(args)` listen when nothing configures its URLs (no `launchSettings.json`, environment variables, arguments or Kestrel settings)?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`https://localhost:5001` and `http://localhost:5000`",
+        "`http://0.0.0.0:80`",
+        "`http://localhost:5000`",
+        "`http://localhost:8080`"
+      ],
+      "correct": 2,
+      "explanation": "With no URL configuration at all, Kestrel binds to `http://localhost:5000`. Port 8080 comes from the `ASPNETCORE_HTTP_PORTS` variable set in container images, HTTPS on 5001 needs a configured endpoint or certificate, and port 80 on all interfaces was the pre-.NET 8 container default set through `ASPNETCORE_URLS`.",
+      "materials": [
+        "kestrel"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What is the log category of `ILogger<Shop.Orders.OrderService>`?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`OrderService`",
+        "The name of the assembly that contains the type",
+        "`ILogger<OrderService>`",
+        "`Shop.Orders.OrderService`"
+      ],
+      "correct": 3,
+      "explanation": "`ILogger<T>` uses the full name of `T` as its category, here `Shop.Orders.OrderService`, which is why filter rules for the prefix `Shop` or `Shop.Orders` apply to it. The short class name, the generic interface name and the assembly name are not used.",
+      "materials": [
+        "logging"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does the `[LoggerMessage]` source generator give you over calling `logger.LogInformation(\"Order {Id} shipped\", id)`?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Strongly typed logging methods that avoid parsing the template and boxing arguments on every call",
+        "It turns message templates into string interpolation at compile time",
+        "It sends logs to every registered provider, including the ones filtered out",
+        "Logs are written synchronously, so they cannot be lost"
+      ],
+      "correct": 0,
+      "explanation": "A `[LoggerMessage]` partial method is generated at compile time with the template already parsed, typed parameters (no `object[]` or boxing) and a level check, which makes hot-path logging cheaper. It does not change how providers write or bypass filtering, and it keeps the structured template with named properties rather than flattening it into an interpolated string.",
+      "materials": [
+        "logging"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In the `appsettings.json` created by the `dotnet new web` template, what minimum level is set for the `Microsoft.AspNetCore` category?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Information",
+        "Debug",
+        "Error",
+        "Warning"
+      ],
+      "correct": 3,
+      "explanation": "The template sets `\"Default\": \"Information\"` and `\"Microsoft.AspNetCore\": \"Warning\"`, so framework categories only log warnings and above, while your own categories log Information. That is why per-request framework messages such as routing and endpoint execution logs do not appear by default.",
+      "materials": [
+        "logging"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which call logs an exception so that providers receive the exception object (including its stack trace) and the order ID as a structured property?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`logger.LogError($\"Failed {orderId}: {ex}\");`",
+        "`logger.LogError(ex, \"Failed to ship {OrderId}\", orderId);`",
+        "`logger.LogError(ex.ToString(), orderId);`",
+        "`logger.LogError(\"Failed to ship {OrderId} {Exception}\", orderId, ex);`"
+      ],
+      "correct": 1,
+      "explanation": "The overloads that take an `Exception` as the first argument pass it to providers separately, so they can record the type and stack trace, while `{OrderId}` stays a structured property. Interpolation flattens everything into one string, putting the exception in the template only stores its `ToString()` as a property, and using `ex.ToString()` as the template makes every message unique.",
+      "materials": [
+        "logging"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A user has only the role claim `A`. What does a request to this endpoint return?\n\n```csharp\napp.MapGet(\"/both\", [Authorize(Roles = \"A\")] [Authorize(Roles = \"B\")] () => \"both\");\n```",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "200, because the user has one of the listed roles",
+        "500, because `[Authorize]` may appear once per endpoint",
+        "401, because the user is not authenticated for role B",
+        "403, because each `[Authorize]` attribute must be satisfied"
+      ],
+      "correct": 3,
+      "explanation": "Separate `[Authorize]` attributes are combined, and each one must succeed, so a user needs both role A and role B; with only A the request gets 403 Forbidden. Listing roles in one attribute (`Roles = \"A,B\"`) would mean either role. The user is authenticated, so it is not 401, and the attribute allows multiple uses.",
+      "materials": [
+        "authz"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A user may edit a document only if they are its author, and the check needs the loaded document. What is the standard ASP.NET Core way to do this?",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Add a role claim per document when the user signs in",
+        "Call `IAuthorizationService.AuthorizeAsync(User, document, \"EditPolicy\")` after loading the document",
+        "Use a `FallbackPolicy` that loads the document from the route values",
+        "Put `[Authorize(Policy = \"Author\")]` on the action and read the document inside the policy's requirement"
+      ],
+      "correct": 1,
+      "explanation": "Resource-based authorization calls `IAuthorizationService.AuthorizeAsync(user, resource, policy)` imperatively once the resource is loaded, and a handler such as `AuthorizationHandler<TRequirement, Document>` receives the document. Attribute-based policies run before the action and don't have the resource, a role per document doesn't scale, and the fallback policy only applies to endpoints without authorization metadata.",
+      "materials": [
+        "authz"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An endpoint has `[Authorize]` with no policy name and no roles. Which policy is evaluated?",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "No policy: `[Authorize]` alone just checks the scheme",
+        "The `DefaultPolicy`, which by default requires an authenticated user",
+        "The most recently added named policy",
+        "The `FallbackPolicy`"
+      ],
+      "correct": 1,
+      "explanation": "`[Authorize]` without arguments uses `AuthorizationOptions.DefaultPolicy`, which out of the box just requires an authenticated user. The `FallbackPolicy` is for endpoints with no authorization metadata at all, `[Authorize]` always evaluates a policy, and named policies are only used when referenced.",
+      "materials": [
+        "authz"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An API should allow 100 requests per minute for each signed-in user, with each user counted separately. Which rate limiting setup does this?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Setting `RejectionStatusCode = 100` in the limiter options",
+        "A partitioned fixed-window limiter keyed by the user name",
+        "`AddConcurrencyLimiter` with `PermitLimit = 100`",
+        "A single named fixed-window limiter with `PermitLimit = 100`"
+      ],
+      "correct": 1,
+      "explanation": "A partitioned limiter creates a separate limiter per key, so partitioning by `httpContext.User.Identity?.Name` (or by IP for anonymous users) gives each user their own 100-per-minute window. A plain named fixed-window limiter shares one counter across all callers, a concurrency limiter caps simultaneous requests rather than requests per minute, and `RejectionStatusCode` only sets the rejection status.",
+      "materials": [
+        "ratelimit"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "With `builder.Services.AddOutputCache()` and `.CacheOutput()` on an endpoint, how long is a cached response kept by default?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "10 seconds",
+        "60 seconds",
+        "Until the app restarts",
+        "5 minutes"
+      ],
+      "correct": 1,
+      "explanation": "The default output caching policy expires entries after one minute; you can change it per policy with `Expire(...)` or globally with `OutputCacheOptions.DefaultExpirationTimeSpan`. Entries are not kept until restart, and 10 seconds and 5 minutes are not the defaults.",
+      "materials": [
+        "outputcache"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Product endpoints use `.CacheOutput(p => p.Tag(\"products\"))`. After a product changes, how do you remove those cached responses?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Call `IOutputCacheStore.EvictByTagAsync(\"products\", ct)`",
+        "Call `HttpContext.Response.Headers.Remove(\"products\")`",
+        "Return `Cache-Control: no-cache` from the update endpoint",
+        "Restart the app so the in-memory cache is cleared"
+      ],
+      "correct": 0,
+      "explanation": "Output caching supports tags: entries created by a policy with `Tag(\"products\")` can be removed together with `IOutputCacheStore.EvictByTagAsync`. Restarting is not a cache-management strategy, a response header on another endpoint does not touch the server-side store, and response headers have nothing to do with cache tags.",
+      "materials": [
+        "outputcache"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "By default, how long does `IHttpClientFactory` reuse a pooled `HttpMessageHandler` before creating a new one for a named or typed client?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "30 seconds",
+        "1 hour",
+        "2 minutes",
+        "For the lifetime of the app"
+      ],
+      "correct": 2,
+      "explanation": "The default `HandlerLifetime` is two minutes; after that, new `HttpClient` instances get a fresh handler so DNS changes are picked up, while the old handler is disposed once no clients use it. It can be changed with `SetHandlerLifetime`. Keeping one handler forever is what causes stale DNS.",
+      "materials": [
+        "httpfactory"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A typed client `GitHubClient` (registered with `AddHttpClient<GitHubClient>()`) is injected into a singleton service that keeps it in a field. What problem does this cause?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It throws at startup because typed clients may not be used by singletons",
+        "The singleton keeps one `HttpClient` and handler forever, so handler rotation and DNS updates are lost",
+        "Each request creates a new socket, exhausting ports",
+        "Requests are serialized because `HttpClient` is not thread-safe"
+      ],
+      "correct": 1,
+      "explanation": "Typed clients are registered as transient so each one gets a handler from the factory's rotating pool; capturing one in a singleton freezes a single handler for the app's lifetime and defeats the rotation that picks up DNS changes. It does not create a socket per request, scope validation does not flag it, and `HttpClient` supports concurrent requests.",
+      "materials": [
+        "httpfactory"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What must be true for `services.AddHttpClient(\"api\").AddHttpMessageHandler<AuthHeaderHandler>()` to work?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It must derive from `HttpClientHandler` instead",
+        "It must be registered in DI as a singleton",
+        "It must have a public parameterless constructor",
+        "It must be a `DelegatingHandler` registered in DI as transient"
+      ],
+      "correct": 3,
+      "explanation": "`AddHttpMessageHandler<T>` resolves the handler from DI each time a handler pipeline is built, so `T` must be a `DelegatingHandler` registered in the container, typically with `AddTransient`. Deriving from `HttpClientHandler` makes it a primary handler, not a delegating one, the factory needs a new instance per pipeline so a singleton is wrong, and constructor dependencies are fine.",
+      "materials": [
+        "httpfactory"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`app.UseExceptionHandler(\"/error\")` is configured and the error endpoint is mapped with `app.MapGet(\"/error\", ...)`. A POST request throws. What goes wrong?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Nothing, since the re-executed request is switched to GET",
+        "The middleware returns 405 before catching the exception",
+        "The exception is logged twice and the client gets a 200",
+        "The re-executed POST doesn't match the GET-only `/error` endpoint"
+      ],
+      "correct": 3,
+      "explanation": "The exception handler middleware re-executes the pipeline with the path changed to `/error` but keeps the original HTTP method, so a POST does not match a GET-only endpoint and the handler fails. The docs therefore advise not restricting the error endpoint to one HTTP method. The method is not rewritten to GET, the client does not get 200, and 405 is not returned before the catch.",
+      "materials": [
+        "errors"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Inside the endpoint mapped for `app.UseExceptionHandler(\"/error\")`, how do you get the exception that was thrown?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Read `HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error`",
+        "Catch it with a `try`/`catch` around `app.Run()`",
+        "Read it from `HttpContext.Items[\"Exception\"]`",
+        "Inject `Exception` as a handler parameter"
+      ],
+      "correct": 0,
+      "explanation": "The exception handler middleware stores the original exception (and, with `IExceptionHandlerPathFeature`, the original path) in a feature on the `HttpContext`, which the error endpoint reads. `app.Run()` does not see request exceptions, `Exception` is not a bindable parameter type, and the middleware does not put it in `Items`.",
+      "materials": [
+        "errors"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which registration adds a custom route constraint usable as `{code:slug}` in templates?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`builder.Services.AddRouting(o => o.ConstraintMap.Add(\"slug\", typeof(SlugConstraint)))`",
+        "`builder.Services.AddSingleton<IRouteConstraint, SlugConstraint>()`",
+        "`builder.Services.Configure<JsonOptions>(o => o.Constraints.Add(\"slug\"))`",
+        "`app.MapGet(\"/{code}\", ...).WithMetadata(new SlugConstraint())`"
+      ],
+      "correct": 0,
+      "explanation": "Inline constraint names are looked up in `RouteOptions.ConstraintMap`, so a class implementing `IRouteConstraint` must be added there under its name, here via `AddRouting(o => o.ConstraintMap.Add(...))`. Endpoint metadata doesn't change template parsing, registering an `IRouteConstraint` service doesn't give it a name, and JSON options are unrelated.",
+      "materials": [
+        "routing"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which caching middleware keeps serving a stored response even when the client sends `Cache-Control: no-cache`?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Neither of them, because `no-cache` disables server caches",
+        "Output caching (`UseOutputCache`), because the server configuration decides what is cached",
+        "Response caching (`UseResponseCaching`), because it ignores request headers",
+        "Both of them, because `no-cache` is meant for browsers"
+      ],
+      "correct": 1,
+      "explanation": "Output caching is controlled by server-side policies and ignores the client's `Cache-Control` request directives, so a request with `no-cache` still gets the cached copy. Response caching follows HTTP caching semantics and honours client directives, which is why it is less useful for protecting the server. So the two middlewares behave differently here.",
+      "materials": [
+        "outputcache"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `GET /files/a/b/c.txt` return?\n\n```csharp\napp.MapGet(\"/files/{**path}\", (string path) => $\"path {path}\");\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`path a/b/c.txt`",
+        "`path a%2Fb%2Fc.txt`",
+        "`path a`",
+        "404, because a route parameter stops at `/`"
+      ],
+      "correct": 0,
+      "explanation": "A catch-all parameter (`*` or `**`) matches the rest of the path, slashes included, so `path` is `a/b/c.txt`. A normal parameter matches one segment, so without the catch-all the request would 404. When reading a value, both forms give the decoded text; they only differ in how `/` is encoded when generating links.",
+      "materials": [
+        "routing"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In ASP.NET Core 8, route matching ignores case, so a request for `/HELLO` matches an endpoint mapped as `/hello`.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "Route templates are matched case-insensitively, so `/HELLO` and `/Hello` both reach the `/hello` endpoint (a trailing slash is also accepted). Route values keep the casing the client sent, which matters if your handler compares them.",
+      "materials": [
+        "routing"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With nullable reference types enabled, a .NET 8 Minimal API endpoint that binds `record Todo(int Id, string Title)` from the body answers 400 when the JSON has no `title` property.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "Minimal APIs in .NET 8 do no validation, and System.Text.Json does not enforce nullable annotations, so the handler runs with `Title` set to `null` and returns 200. To require the property you can use `required` members (which the serializer enforces) or validate in an endpoint filter. The automatic 400 for non-nullable properties is an MVC `[ApiController]` behaviour.",
+      "materials": [
+        "min-binding"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In an `[ApiController]` with nullable reference types enabled, a non-nullable `string Name` property on the body model is validated as required, so a body without `name` gets a 400.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "MVC treats non-nullable reference-type properties as if they had `[Required]` when the nullable context is enabled, so the response is a 400 problem details body with \"The Name field is required.\" This is controlled by `MvcOptions.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes`, which is false by default.",
+      "materials": [
+        "validation"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In ASP.NET Core 8, an endpoint mapped with `app.MapGet` also answers `HEAD` requests for the same path.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "`MapGet` adds HTTP method metadata for GET only, so a HEAD request to the path gets 405 Method Not Allowed. To serve HEAD as well, use `MapMethods(path, new[] { \"GET\", \"HEAD\" }, handler)`. MVC's `[HttpGet]` likewise matches only GET.",
+      "materials": [
+        "routing"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A Minimal API endpoint filter can return a result such as `Results.BadRequest()` without calling `next`, and then the route handler does not run.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "Endpoint filters wrap the handler like middleware: returning a value without invoking `next(context)` short-circuits, so the handler and any inner filters are skipped and the returned value is written as the response. This is a common way to validate arguments read with `context.GetArgument<T>(index)`.",
+      "materials": [
+        "minimal"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "An MVC controller action declared to return `Todo?` that returns `null` sends 200 OK with the body `null`.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "MVC's `HttpNoContentOutputFormatter` turns a `null` object result into 204 No Content with no body. A Minimal API handler is different: returning `null` for an object type writes the JSON literal `null` with 200.",
+      "materials": [
+        "formatting"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In the Production environment with default settings, a singleton whose constructor takes `IOptionsSnapshot<T>` is resolved without any error, even though `IOptionsSnapshot<T>` is scoped.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "Scope validation (`ValidateScopes` and `ValidateOnBuild`) is only switched on by default in Development, so in Production the singleton silently captures one snapshot instance resolved from the root provider and never sees configuration changes. In Development the same registration makes `builder.Build()` throw \"Cannot consume scoped service\".",
+      "materials": [
+        "options",
+        "di"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`services.TryAddSingleton<IGreeter, Fr>()` replaces an earlier `services.AddSingleton<IGreeter, De>()` registration.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "`TryAdd*` registers only if no descriptor exists yet for that service type, so it is a no-op here and `De` is still resolved. To replace a registration you use `services.Replace(...)` or remove the descriptor first. Library code uses `TryAdd*` so that the app's own registrations win.",
+      "materials": [
+        "di-net"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When a singleton is registered with a factory, such as `services.AddSingleton(sp => new Foo())`, and `Foo` implements `IDisposable`, the container disposes it when the app shuts down.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "The container owns instances it creates, including ones created by your factory delegate, and disposes them when the root provider is disposed at shutdown. It only skips disposal for instances you construct yourself and pass in, as in `AddSingleton(new Foo())`.",
+      "materials": [
+        "di-net"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The default ASP.NET Core container can inject `Func<IGreeter>` into a constructor automatically when `IGreeter` is registered.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "Microsoft.Extensions.DependencyInjection has no automatic `Func<T>` or `Lazy<T>` factories, so resolving the class fails with \"Unable to resolve service for type 'System.Func`1[IGreeter]'\" (and `Build()` fails in Development). You register such a factory yourself or inject `IServiceProvider`, or use a third-party container that supports it.",
+      "materials": [
+        "di-net"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In the Development environment, `builder.Build()` throws if a registered singleton's constructor needs a service that is not registered at all.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "In Development the host enables `ValidateOnBuild`, which builds the call site for every registration at `Build()` time and throws an `AggregateException` listing services that cannot be constructed. In Production that check is off and the error only appears when the service is first resolved.",
+      "materials": [
+        "di"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Options validation registered with `.ValidateOnStart()` runs inside `builder.Build()`, so an invalid value makes `Build()` throw.",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "`ValidateOnStart` validates when the host starts, so the `OptionsValidationException` is thrown from `app.Run()` (or `StartAsync`), after `Build()` has returned. Without `ValidateOnStart`, validation runs lazily on the first read of `.Value`.",
+      "materials": [
+        "options"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Message template placeholders are matched to arguments by position, so `logger.LogInformation(\"Order {B} {A}\", 1, 2)` logs `Order 1 2`.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "The placeholder names become structured property names, but values are assigned in argument order, so `B` gets 1 and `A` gets 2 and the rendered text is `Order 1 2`. Naming placeholders consistently matters for querying, but it does not reorder arguments.",
+      "materials": [
+        "logging"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A logging filter rule for the category `Shop` applies to the category named exactly `Shop`, but not to `Shop.Billing`.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "Filter rules match category prefixes, and the most specific matching rule wins, so a `Shop` rule also applies to `Shop.Billing` unless a longer prefix such as `Shop.Billing` has its own rule. That is how `Microsoft.AspNetCore: Warning` covers every framework category below it.",
+      "materials": [
+        "logging"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In a .NET 8 app built with `WebApplication`, registering authentication and authorization services is enough for `[Authorize]` endpoints to work, even if `app.UseAuthentication()` and `app.UseAuthorization()` are never called.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "Since .NET 7, `WebApplication` adds the authentication and authorization middleware automatically when their services are registered and you have not added them yourself. You still call them explicitly when they must sit at a specific place in the pipeline, for example after `UseCors`.",
+      "materials": [
+        "authn",
+        "minimal"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In a policy built with `RequireClaim(\"dept\", \"IT\", \"HR\")`, claim values are compared case-insensitively, so a user with `dept=hr` passes.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "`RequireClaim` with allowed values passes if the user has a `dept` claim whose value equals one of them, and that comparison is case-sensitive, so `hr` does not match `HR` and the user gets 403. The claim type is matched case-insensitively.",
+      "materials": [
+        "authz"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When a CORS preflight request comes from an origin that the policy does not allow, the CORS middleware still answers 204, but without any `Access-Control-Allow-Origin` header.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "The middleware handles the preflight either way and simply omits the CORS response headers when the origin isn't allowed; it is the browser that sees their absence and blocks the real request. So a 204 on a preflight does not by itself mean the origin was accepted.",
+      "materials": [
+        "cors"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "By default, the output caching middleware serves a cached response to a request that carries an `Authorization` header.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "The default output caching policy does not cache or serve cached responses for authenticated requests, which includes requests with an `Authorization` header, because the response may be user-specific. You need a custom policy to cache such responses deliberately.",
+      "materials": [
+        "outputcache"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "By default, `MapHealthChecks` answers 200 OK when the overall health status is `Degraded`.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "The default mapping sends 200 for both `Healthy` and `Degraded`, and 503 Service Unavailable only for `Unhealthy`; the body is the status name as plain text. You can change this with `HealthCheckOptions.ResultStatusCodes`.",
+      "materials": [
+        "health"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When the ASP.NET Core rate limiting middleware rejects a request, it answers 429 Too Many Requests by default.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "The default `RejectionStatusCode` is 503 Service Unavailable; most apps set `options.RejectionStatusCode = StatusCodes.Status429TooManyRequests` (and often an `OnRejected` callback that adds `Retry-After`).",
+      "materials": [
+        "ratelimit"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "How do these two routes respond to valid and invalid ids? Pick every true statement.\n\n```csharp\napp.MapGet(\"/a/{id}\", (int id) => $\"a {id}\");\napp.MapGet(\"/b/{id:int}\", (int id) => $\"b {id}\");\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`GET /a/abc` returns 400 Bad Request",
+        "`GET /b/abc` returns 404 Not Found",
+        "`GET /a/5` returns `a 5`",
+        "`GET /b/abc` runs the handler with `id = 0`",
+        "Route constraints are the recommended way to validate input"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Without a constraint, `/a/abc` matches the route and then fails to bind `abc` to `int`, which gives 400; with `{id:int}`, the template doesn't match at all, so the result is 404 and the handler never runs. The routing docs warn against using constraints for input validation, because invalid input then looks like a missing resource; they exist to choose between routes.",
+      "materials": [
+        "routing",
+        "min-binding"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Optional segments, route defaults and optional query values: which statements are true?\n\n```csharp\napp.MapGet(\"/opt/{id?}\", (int? id) => $\"opt {id?.ToString() ?? \"none\"}\");\napp.MapGet(\"/def/{page=3}\", (int page) => $\"def {page}\");\napp.MapGet(\"/q\", (int? page, int size = 10) => $\"q {page?.ToString() ?? \"null\"} {size}\");\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`GET /opt` returns `opt none`",
+        "`GET /def` returns `def 3`",
+        "`GET /q` returns `q null 10`",
+        "`GET /opt` returns 404 because the segment is missing",
+        "`GET /q` returns 400 because `page` is missing"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`{id?}` makes the segment optional and `int?` receives null, a `{page=3}` default supplies 3 when the segment is absent, and a nullable or defaulted query parameter is optional, giving `q null 10`. Only a non-nullable parameter without a default, such as `int page`, makes a missing value a 400; an optional segment does not cause a 404.",
+      "materials": [
+        "routing",
+        "min-binding"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which Minimal API handler parameter types are filled from the current request or `HttpContext` rather than resolved from DI, without any attribute?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`ClaimsPrincipal`",
+        "`HttpRequest`",
+        "`Stream` (the request body)",
+        "`ILogger<Program>`",
+        "`IOptions<MyOptions>`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`ClaimsPrincipal` is bound to `HttpContext.User`, `HttpRequest` to `HttpContext.Request`, and `Stream` or `PipeReader` to the raw request body. `ILogger<T>` and `IOptions<T>` are registered services, so they come from DI.",
+      "materials": [
+        "min-binding"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Each line names a `Results` helper and a claimed response. Which claims are correct?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`Results.Created(\"/items/5\", item)` sends 201 with `Location: /items/5`",
+        "`Results.Problem(\"bad\", statusCode: 409)` sends `application/problem+json`",
+        "`Results.ValidationProblem(errors)` sends 400 with an `errors` dictionary",
+        "`Results.NotFound(\"gone\")` is rewritten into a problem details body",
+        "`Results.Created(...)` sends 200 because the body is present"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`Created` sets 201 and the `Location` header, `Problem` writes a `ProblemDetails` object as `application/problem+json`, and `ValidationProblem` writes an `HttpValidationProblemDetails` with status 400 and an `errors` map. `NotFound(\"gone\")` writes the value you passed as JSON (`\"gone\"`), and a body does not change Created's 201.",
+      "materials": [
+        "min-responses"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which behaviours does the `[ApiController]` attribute enable on a controller?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "An automatic 400 response when model state is invalid",
+        "A requirement that actions use attribute routing",
+        "Inferring `[FromBody]` for complex-type parameters",
+        "Returning 422 Unprocessable Entity for invalid models",
+        "Producing XML when the client sends `Accept: application/xml`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`[ApiController]` adds the automatic 400 (as problem details), makes attribute routing mandatory (conventional routes fail at startup), and infers binding sources such as `[FromBody]` for complex types. The automatic response is 400, not 422, and XML output depends on registering XML formatters, not on this attribute.",
+      "materials": [
+        "webapi"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "An `[ApiController]` action takes a `Dto` from the body. Which statements about bad requests are true?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A body sent as `text/plain` gets 415 Unsupported Media Type",
+        "A truncated JSON body gets 400 with an error keyed by a JSON path such as `$.name`",
+        "The 415 response body is `application/problem+json`",
+        "A truncated JSON body causes a 500",
+        "A body sent as `text/plain` gets 400"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "No input formatter accepts `text/plain` for a complex type, so MVC returns 415, which `[ApiController]` turns into problem details. Malformed JSON adds a model-state error keyed by the JSON path, which produces the usual 400 validation problem. The JSON exception is caught by the formatter, so it doesn't become a 500.",
+      "materials": [
+        "webapi",
+        "model-binding"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "An MVC exception filter is registered globally. Exceptions thrown in which places are handled by it?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The action method",
+        "Model binding",
+        "An action filter",
+        "Middleware that runs before `UseRouting`",
+        "Executing the action's result (for example, while serializing the response)"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Exception filters handle unhandled exceptions from controller creation, model binding, action filters and the action method. They don't see exceptions from middleware outside MVC, and they don't catch exceptions from resource filters, result filters or result execution; use `UseExceptionHandler` or `IExceptionHandler` for app-wide handling.",
+      "materials": [
+        "filters"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A class is registered with `services.AddKeyedSingleton<IGreeter, Keyed>(KeyedService.AnyKey)` and has the constructor `Keyed([ServiceKey] string key)`. Which statements are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`GetRequiredKeyedService<IGreeter>(\"xyz\")` returns an instance whose `key` is `\"xyz\"`",
+        "`GetServices<IGreeter>()` does not include this keyed registration",
+        "The `[ServiceKey]` parameter type must match the type of the key used for the lookup",
+        "`GetServices<IGreeter>()` returns it along with the unkeyed registrations",
+        "`AnyKey` registrations can be resolved only with the key `\"*\"`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`KeyedService.AnyKey` makes the registration answer for any key, and `[ServiceKey]` injects the key that was actually used, so the instance gets `\"xyz\"`. Keyed registrations are not part of the unkeyed `IEnumerable<IGreeter>`. If the lookup key's type doesn't match the `[ServiceKey]` parameter's type, resolution throws. There is no special `\"*\"` key.",
+      "materials": [
+        "di-net"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "An app calls `services.Configure<Feat>(\"a\", o => o.Name = \"A\")` and `services.Configure<Feat>(\"b\", o => o.Name = \"B\")` and nothing else for `Feat`. Which statements are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`IOptionsMonitor<Feat>.Get(\"a\").Name` is `\"A\"`",
+        "`IOptionsSnapshot<Feat>.Get(\"b\").Name` is `\"B\"`",
+        "`IOptions<Feat>.Value.Name` is `\"B\"`, the last configured name",
+        "`IOptionsMonitor<Feat>.CurrentValue.Name` is `\"A\"`, the first configured name"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "Named options are read with `Get(name)` on `IOptionsMonitor<T>` or `IOptionsSnapshot<T>`. `IOptions<T>.Value` and `CurrentValue` return the default-named instance (`Options.DefaultName`, an empty string), which nothing configured here, so `Name` is `null` for both.",
+      "materials": [
+        "options"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "An app runs with the environment variables `Hosts__0=h0`, `Hosts__1=h1` and `Bad__Port=abc`. Which statements are true?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`config.GetSection(\"Hosts\").Get<string[]>()` returns `[\"h0\", \"h1\"]`",
+        "Binding the `Bad` section to a class with `int Port` throws `InvalidOperationException`",
+        "`config.GetSection(\"Nope\")` returns `null` for a missing section",
+        "`config.GetValue<int>(\"NoInt\")` throws `KeyNotFoundException` for a missing key",
+        "`[ConfigurationKeyName(\"host_name\")]` on a property makes it bind from the key `host_name`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "Numeric key segments bind to array or list elements, a value that can't be converted makes the binder throw \"Failed to convert configuration value at 'Bad:Port'\", and `[ConfigurationKeyName]` maps a property to a differently named key. `GetSection` never returns null; for missing keys it returns an empty section whose `Exists()` is false, and `GetValue<int>` returns `default` (0) unless you pass a default value.",
+      "materials": [
+        "config"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "The app below uses the console logger. Which messages are written?\n\n```csharp\nbuilder.Logging.AddFilter(\"Shop\", LogLevel.Warning);\nbuilder.Logging.AddFilter(\"Shop.Orders\", LogLevel.Debug);\n// later:\nordersLogger.LogInformation(\"order placed\");   // category Shop.Orders.OrderService\nordersLogger.LogDebug(\"order details\");\nbillingLogger.LogInformation(\"invoice sent\");  // category Shop.Billing\nbillingLogger.LogWarning(\"invoice late\");\nmiscLogger.LogDebug(\"misc details\");           // category Misc, default minimum Information\n```",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`order placed`",
+        "`order details`",
+        "`invoice sent`",
+        "`invoice late`",
+        "`misc details`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "The most specific matching prefix wins: `Shop.Orders.OrderService` matches `Shop.Orders` (Debug), so both its messages are written, and `Shop.Billing` only matches `Shop` (Warning), so only `invoice late` appears. `Misc` falls under the default Information level, so its Debug message is filtered out.",
+      "materials": [
+        "logging"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which logging providers does `WebApplication.CreateBuilder` add by default?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Console",
+        "Debug",
+        "EventSource",
+        "A rolling file provider",
+        "Application Insights"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The default host adds the Console, Debug and EventSource providers, plus EventLog on Windows. There is no built-in file provider, so logging to files needs a third-party provider such as Serilog or NLog, and Application Insights is a separate package you add explicitly.",
+      "materials": [
+        "logging"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A policy has one requirement, and two authorization handlers are registered for it. Which statements are true?",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "If one handler calls `Succeed` and the other does nothing, authorization succeeds",
+        "If one handler calls `Succeed` and the other calls `Fail`, the user gets 403",
+        "If neither handler calls `Succeed`, the user gets 403",
+        "A `Fail` from one handler is cancelled by a `Succeed` from the other",
+        "Both handlers must call `Succeed` for the requirement to be met"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Several handlers for one requirement act as OR: one `Succeed` is enough, provided no handler calls `Fail`. `Fail` is a veto that makes authorization fail whatever other handlers did, and a requirement no handler succeeds stays unmet. Requiring every handler to succeed would be AND, which is how multiple requirements combine, not multiple handlers.",
+      "materials": [
+        "authz"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In a .NET 8 app, the default scheme is a custom header scheme, and a cookie scheme named `Cookies` is also registered. Which statements are true?",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`AddAuthentication(\"Hdr\")` makes `Hdr` the default scheme",
+        "An endpoint with `AuthenticationSchemes = \"Cookies\"` ignores a user authenticated only by `Hdr`",
+        "An anonymous request to an endpoint protected by the cookie scheme gets a 302 redirect to `/Account/Login`",
+        "The cookie scheme answers 401 for API endpoints in .NET 8",
+        "Challenge and forbid are the same action and both return 401"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The string passed to `AddAuthentication` becomes the default scheme. Naming schemes on an endpoint authenticates with those schemes only, so a header-authenticated user still looks anonymous there. In .NET 8 the cookie handler challenges by redirecting to its login path even for API calls (.NET 10 changed this to 401/403 for known API endpoints). Challenge (401 or redirect) and forbid (403 or access-denied redirect) are different actions.",
+      "materials": [
+        "authn"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about ASP.NET Core CORS are true?",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A policy with both `AllowAnyOrigin()` and `AllowCredentials()` throws when it is built",
+        "A request without an `Origin` header passes through without CORS response headers",
+        "A named policy can be applied to an endpoint with `.RequireCors(\"web\")`",
+        "CORS stops the server from running the handler for a disallowed origin",
+        "`WithOrigins(\"https://app.example.com/\")` with a trailing slash matches that origin"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The CORS protocol forbids a wildcard origin together with credentials, so the builder throws `InvalidOperationException`. Same-origin and non-browser requests without `Origin` are not CORS requests, and `RequireCors` attaches a named policy to an endpoint. CORS doesn't block the server: a simple GET still runs and only lacks the headers the browser needs. Origins are compared exactly, so a trailing slash never matches.",
+      "materials": [
+        "cors"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "An endpoint uses `.CacheOutput()` with the default policy. Which responses are served from the cache on a repeat request?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A second `GET /oc` that returned 200 the first time",
+        "A second `GET /oc?x=1`, cached separately from `GET /oc`",
+        "A second `POST /oc`",
+        "A second `GET` to an endpoint whose response sets a cookie",
+        "A second `GET /oc` that sends `Authorization: Bearer ...`"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "The default policy caches 200 responses to GET and HEAD, and the cache key includes the query string, so `?x=1` gets its own entry. POST responses, responses that set cookies and authenticated requests are not cached by default.",
+      "materials": [
+        "outputcache"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which rate limiting algorithms ship with ASP.NET Core's rate limiting middleware (`Microsoft.AspNetCore.RateLimiting`)?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Fixed window",
+        "Sliding window",
+        "Token bucket",
+        "Leaky bucket",
+        "Exponential backoff"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The built-in limiters are fixed window, sliding window, token bucket and concurrency (`AddFixedWindowLimiter`, `AddSlidingWindowLimiter`, `AddTokenBucketLimiter`, `AddConcurrencyLimiter`). Leaky bucket isn't one of them, and exponential backoff is a client retry strategy, not a server-side limiter.",
+      "materials": [
+        "ratelimit"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the rate limiting middleware are true?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`.RequireRateLimiting(\"two\")` applies the named policy to an endpoint",
+        "`[DisableRateLimiting]` exempts an endpoint or controller",
+        "With `QueueLimit` above zero, excess requests can wait for a permit instead of being rejected",
+        "Limiter state is automatically shared across all instances of a scaled-out app",
+        "A `GlobalLimiter` applies only to endpoints that call `RequireRateLimiting`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Named policies are attached with `RequireRateLimiting` or `[EnableRateLimiting]`, and `[DisableRateLimiting]` opts out. A queue holds requests until permits free up. Limiters are in-memory per process, so each instance counts separately, and the `GlobalLimiter` runs for every request regardless of endpoint policies.",
+      "materials": [
+        "ratelimit"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "An app calls `app.MapHealthChecks(\"/healthz\")`. Which statements are true?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "If a check reports `Unhealthy`, the endpoint answers 503",
+        "The response body is the overall status as plain text, such as `Unhealthy`",
+        "`HealthCheckOptions.Predicate` can restrict an endpoint to checks with a given tag",
+        "Health check responses are cached for one minute by default",
+        "A controller is required to expose health checks"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Unhealthy maps to 503, the default writer outputs the status name as `text/plain`, and a predicate such as `r => r.Tags.Contains(\"ready\")` gives separate liveness and readiness endpoints. The middleware sets `Cache-Control: no-store, no-cache`, so responses are not cached, and `MapHealthChecks` is an endpoint mapping that needs no controller.",
+      "materials": [
+        "health"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `HttpClient` lifetime problems and `IHttpClientFactory` are true?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Creating and disposing a new `HttpClient` per request can exhaust sockets under load",
+        "One static `HttpClient` with the default handler can keep using stale DNS results",
+        "The factory pools handlers and rotates them to address both problems",
+        "Typed clients are registered as singletons by default",
+        "A client returned by `CreateClient` must never be disposed"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Each disposed client closes its connections, leaving sockets in TIME_WAIT, while a long-lived handler never re-resolves DNS; the factory reuses pooled handlers and replaces them after their lifetime. Typed clients are registered as transient, and disposing a factory-created `HttpClient` is safe because the pooled handler is not disposed with it.",
+      "materials": [
+        "httpfactory"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "An app calls `AddProblemDetails()`, `UseExceptionHandler()` and `UseStatusCodePages()`, and registers two `IExceptionHandler`s. Which statements are true?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "An unhandled exception that no handler handles produces a 500 `application/problem+json` response",
+        "`Results.NotFound()` with no body becomes a problem details response",
+        "If the first `IExceptionHandler` returns true, the second one is not called",
+        "`Results.NotFound(\"gone\")` has its body replaced by problem details",
+        "The developer exception page is shown in Production"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "With problem details registered, the exception handler middleware writes a 500 `application/problem+json` body when no `IExceptionHandler` handles the exception, and status code pages fill in a body for empty error responses. Handlers run in registration order until one returns true. Responses that already have a body are left alone, and the developer exception page is used only in Development.",
+      "materials": [
+        "errors"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which methods add OpenAPI-relevant metadata to a Minimal API endpoint?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`.WithName(\"GetTodo\")`",
+        "`.WithTags(\"Todos\")`",
+        "`.Produces<Todo>(StatusCodes.Status201Created)`",
+        "`.WithResponseType<Todo>(201)`",
+        "`.ProducesBody<Todo>()`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`WithName` sets the endpoint name (used as the operation ID), `WithTags` groups operations, and `Produces<T>(status)` describes a response type; `ProducesProblem` and `Accepts` are related helpers. `WithResponseType` and `ProducesBody` don't exist in ASP.NET Core.",
+      "materials": [
+        "minimal",
+        "openapi"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about content negotiation in ASP.NET Core MVC are true?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "With `ReturnHttpNotAcceptable = true`, an unsupported `Accept` type gets 406",
+        "By default, `Accept: application/xml` with only the JSON formatter returns JSON",
+        "XML output needs a formatter such as `AddXmlSerializerFormatters()`",
+        "An unsupported `Accept` type gets 415 by default",
+        "Browsers' `Accept` headers are honoured by default"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "When no formatter matches `Accept`, MVC falls back to the first formatter that can write the type (JSON) unless `ReturnHttpNotAcceptable` is set, in which case it answers 406. XML needs an XML formatter. 415 is about request bodies, not `Accept`, and `RespectBrowserAcceptHeader` is false by default, so browser `Accept` headers are ignored.",
+      "materials": [
+        "formatting"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A .NET 8 app uses `WebApplication.CreateBuilder(args)`. Which statements are true?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "If you don't call `UseRouting()`, routing is added at the start of the pipeline, so earlier `app.Use` middleware can see the endpoint",
+        "In Development, unhandled exceptions show the developer exception page without calling `UseDeveloperExceptionPage()`",
+        "With no environment variable set, the environment is Production",
+        "Services can still be added to `builder.Services` after `builder.Build()`",
+        "`UseHttpsRedirection()` is added automatically"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`WebApplication` adds `UseRouting` first (when you don't call it) and `UseEndpoints` last, enables the developer exception page in Development, and defaults to Production. After `Build()`, the service collection is read-only and adding to it throws. HTTPS redirection is added by the templates in `Program.cs`, not by the framework.",
+      "materials": [
+        "minimal",
+        "envs"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "A `Map` and a `MapWhen` branch and a `UseWhen` are added to the pipeline. Which statements are true?",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Inside `app.Map(\"/api\", ...)`, a request to `/api/users` sees `Path = /users` and `PathBase = /api`",
+        "A `MapWhen` branch doesn't rejoin the main pipeline afterwards",
+        "A `UseWhen` branch rejoins the main pipeline if it doesn't short-circuit",
+        "`app.Map(\"/api\", ...)` also matches a request for `/apiv2`",
+        "A `UseWhen` branch must end with terminal middleware"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`Map` moves the matched prefix from `Path` to `PathBase`, and both `Map` and `MapWhen` create separate branches that never return to the main pipeline. `UseWhen` runs its branch and continues with the main pipeline. `Map` matches whole path segments, so `/apiv2` doesn't match `/api`, and `UseWhen` needs no terminal middleware because it rejoins.",
+      "materials": [
+        "mw"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which registrations make `IA` and `IB` resolve to the same singleton instance of `Both`, which implements both interfaces?",
+      "tags": [
+        "C# & .NET"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`AddSingleton<Both>(); AddSingleton<IA>(sp => sp.GetRequiredService<Both>()); AddSingleton<IB>(sp => sp.GetRequiredService<Both>());`",
+        "`AddSingleton<IA, Both>(); AddSingleton<IB, Both>();`",
+        "`var b = new Both(); AddSingleton<IA>(b); AddSingleton<IB>(b);`",
+        "`AddScoped<IA, Both>(); AddScoped<IB, Both>();`",
+        "`AddSingleton<Both>(); AddSingleton<IA, Both>(); AddSingleton<IB, Both>();`"
+      ],
+      "correctIndices": [
+        0,
+        2
+      ],
+      "explanation": "Each implementation-type registration gets its own instance, so `AddSingleton<IA, Both>()` and `AddSingleton<IB, Both>()` create two `Both` objects, even when `Both` is registered too. Forwarding through factories to one `Both` registration, or registering one existing instance for both interfaces, shares a single object. Scoped registrations create separate instances per registration within a scope.",
+      "materials": [
+        "di-net"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about these route templates are true?\n\n```csharp\napp.MapGet(\"/items/{id:int:min(1)}\", (int id) => id);\napp.MapGet(\"/slug/{slug:regex(^[a-z]+$)}\", (string slug) => slug);\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`GET /items/0` returns 404",
+        "`GET /slug/abc` returns `abc`",
+        "`GET /slug/ABC1` returns 404",
+        "`GET /slug/ABC1` returns 400",
+        "Combining constraints such as `int:min(1)` works in controllers but not in Minimal APIs"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Constraints can be chained with `:`, and a value that fails any of them means the route doesn't match, so `/items/0` and `/slug/ABC1` get 404 rather than 400. `abc` satisfies the regex. Constraints are a routing feature, so they work the same for Minimal APIs and controllers.",
+      "materials": [
+        "routing"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "One request reaches `/f`. In what order are these lines printed, first to last?\n\n```csharp\napp.MapGet(\"/f\", () => { Console.WriteLine(\"handler\"); return \"f\"; })\n   .AddEndpointFilter(async (c, n) => { Console.WriteLine(\"F1 before\"); var r = await n(c); Console.WriteLine(\"F1 after\"); return r; })\n   .AddEndpointFilter(async (c, n) => { Console.WriteLine(\"F2 before\"); var r = await n(c); Console.WriteLine(\"F2 after\"); return r; });\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "F1 before",
+        "F2 before",
+        "handler",
+        "F2 after",
+        "F1 after"
+      ],
+      "explanation": "Endpoint filters run in the order they are added, each wrapping the ones added after it, so the first filter is the outermost: its before-code runs first and its after-code runs last. The handler sits in the middle, and the after-code unwinds in reverse order like middleware.",
+      "materials": [
+        "minimal"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "One request reaches `/g/x`. In what order are these lines printed, first to last?\n\n```csharp\napp.Use(async (ctx, next) => { Console.WriteLine(\"middleware\"); await next(ctx); Console.WriteLine(\"middleware done\"); });\nvar g = app.MapGroup(\"/g\").AddEndpointFilter(async (c, n) => { Console.WriteLine(\"group filter\"); return await n(c); });\ng.MapGet(\"/x\", () => { Console.WriteLine(\"handler\"); return \"gx\"; })\n .AddEndpointFilter(async (c, n) => { Console.WriteLine(\"endpoint filter\"); return await n(c); });\n```",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "middleware",
+        "group filter",
+        "endpoint filter",
+        "handler",
+        "middleware done"
+      ],
+      "explanation": "Middleware runs before the endpoint is executed and finishes after it. Filters added to a route group are outer filters for every endpoint in the group, so they run before filters added to the individual endpoint, and the handler runs last inside them.",
+      "materials": [
+        "minimal",
+        "mw"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A global action filter, a controller-level `[Log]` filter and an action-level `[Log]` filter are all action filters with the default order. Put these calls in the order they run for one successful request, first to last.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "global `OnActionExecuting`",
+        "controller `OnActionExecuting`",
+        "action `OnActionExecuting`",
+        "controller `OnActionExecuted`",
+        "global `OnActionExecuted`"
+      ],
+      "explanation": "Filters of the same type nest by scope: global wraps controller, which wraps action. So the executing methods run global, controller, action, and the executed methods unwind in reverse: action, controller, global. Setting `Order` on a filter can override this default.",
+      "materials": [
+        "filters"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these `LogLevel` values from least severe to most severe.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`Trace`",
+        "`Debug`",
+        "`Information`",
+        "`Error`",
+        "`Critical`"
+      ],
+      "explanation": "The levels are Trace (0), Debug (1), Information (2), Warning (3), Error (4) and Critical (5), with None (6) used to turn logging off. A minimum level lets that level and everything more severe through.",
+      "materials": [
+        "logging"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A page on `https://app.example.com` sends a cross-origin `PUT` to an API whose CORS policy allows that origin and method. Put these steps in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The browser sends an `OPTIONS` preflight with `Origin` and `Access-Control-Request-Method: PUT`",
+        "The CORS middleware checks the request against the policy",
+        "The API answers 204 with `Access-Control-Allow-Origin` and `Access-Control-Allow-Methods`",
+        "The browser sends the actual `PUT` request",
+        "The API's response includes `Access-Control-Allow-Origin`, so the page can read it"
+      ],
+      "explanation": "A PUT is not a simple request, so the browser first sends a preflight, which the CORS middleware answers with the allow headers if the policy matches. Only then does the browser send the real PUT, whose response also needs `Access-Control-Allow-Origin` for the script to read it.",
+      "materials": [
+        "cors"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "An app calls `AddProblemDetails()` and `UseExceptionHandler()`, and registers `IExceptionHandler`s `First` then `Second`; both return false. An endpoint throws. Put these steps in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The endpoint throws the exception",
+        "The exception handler middleware catches it",
+        "`First.TryHandleAsync` runs and returns false",
+        "`Second.TryHandleAsync` runs and returns false",
+        "A 500 `application/problem+json` response is written"
+      ],
+      "explanation": "The middleware catches the exception and calls each registered `IExceptionHandler` in registration order until one returns true. When none handles it, the middleware falls back to `IProblemDetailsService`, which writes a 500 problem details response.",
+      "materials": [
+        "errors"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A named client is configured with `services.AddHttpClient(\"api\").AddHttpMessageHandler<AuthHandler>().AddHttpMessageHandler<LoggingHandler>();`. Order the components an outgoing request passes through, first to last.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`AuthHandler`",
+        "`LoggingHandler`",
+        "The primary handler (`SocketsHttpHandler`)",
+        "The remote server"
+      ],
+      "explanation": "Handlers added with `AddHttpMessageHandler` form a chain in registration order, the first one being the outermost, so the request goes through `AuthHandler`, then `LoggingHandler`, then the primary handler that does the network I/O. Responses travel back in reverse order.",
+      "materials": [
+        "httpfactory"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A request reaches a Minimal API endpoint that has one endpoint filter. Put these steps in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Routing matches the request to the endpoint",
+        "Handler parameters are bound from the request and DI",
+        "The endpoint filter runs",
+        "The route handler runs",
+        "The returned value or `IResult` is written to the response"
+      ],
+      "explanation": "The routing middleware selects the endpoint, then the endpoint's request delegate binds the parameters. Filters run after binding, which is why they can read arguments with `GetArgument`. The handler runs inside the filter, and finally its return value is written (as JSON, text or by `IResult.ExecuteAsync`).",
+      "materials": [
+        "minimal",
+        "min-binding"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A POST reaches an `[ApiController]` action whose body is invalid. Put these steps in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Resource filters' `OnResourceExecuting` runs",
+        "Model binding reads the body",
+        "Model validation records errors in `ModelState`",
+        "The `[ApiController]` model-state filter returns a 400 problem details result",
+        "The action method would run here, but it is skipped"
+      ],
+      "explanation": "Model binding happens after authorization and resource filters, and validation follows binding. The automatic 400 comes from an action filter that `[ApiController]` adds, so it runs before the action and short-circuits it.",
+      "materials": [
+        "filters",
+        "webapi"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "All four endpoints are mapped. Order the templates from highest routing precedence (wins first) to lowest for a request they all match.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`/p/new`",
+        "`/p/{id:int}`",
+        "`/p/{id}`",
+        "`/p/{**rest}`"
+      ],
+      "explanation": "Routing prefers literal segments over parameters, a parameter with a constraint over one without, and a catch-all parameter last. That is why `/p/new` goes to the literal, `/p/5` to the int-constrained route, `/p/abc` to `{id}`, and `/p/a/b` to the catch-all.",
+      "materials": [
+        "routing"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A .NET 8 app has one hosted service added with `AddHostedService` and calls `app.Run()`. Put these events in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`builder.Build()` returns",
+        "The hosted service's `StartAsync` runs",
+        "Kestrel starts listening for requests",
+        "`ApplicationStarted` callbacks run"
+      ],
+      "explanation": "Hosted services registered by the app start before the web server, so the port isn't open yet during `StartAsync`. After the server is listening, the host signals `ApplicationStarted`. All of this happens in `Run()`, after `Build()` has returned.",
+      "materials": [
+        "minimal"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "An endpoint uses `.CacheOutput()` and two identical GET requests arrive one after the other. Put these steps in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The output cache middleware finds no entry for the first request",
+        "The endpoint runs and produces a 200 response",
+        "The response is stored under its cache key",
+        "The second request is answered from the cache without running the endpoint"
+      ],
+      "explanation": "On a miss the middleware lets the request through, captures the 200 response and stores it under a key built from the request. The identical second request finds the entry, so the endpoint doesn't run again.",
+      "materials": [
+        "outputcache"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "An authenticated request reaches an endpoint protected by a policy, and the app registers an `IClaimsTransformation`. Put these steps in order, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The authentication middleware authenticates the default scheme",
+        "`IClaimsTransformation.TransformAsync` adds claims to the principal",
+        "The authorization middleware gets the endpoint's policy",
+        "Authorization handlers evaluate the policy's requirements",
+        "The endpoint runs"
+      ],
+      "explanation": "Claims transformation runs as part of authentication, right after the handler builds the principal, so the added claims are already there when the authorization middleware evaluates the endpoint's policy with its handlers. The endpoint only runs if authorization succeeds.",
+      "materials": [
+        "authn",
+        "authz"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: serializing an object with the serializer's plain defaults and with the web defaults ASP.NET Core uses.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "code": "using System.Text.Json;\n\nvar todo = new TodoItem { Id = 7, DisplayName = \"Write tests\", IsDone = false };\nConsole.WriteLine(JsonSerializer.Serialize(todo));\nConsole.WriteLine(JsonSerializer.Serialize(todo, new JsonSerializerOptions(JsonSerializerDefaults.Web)));\n\nclass TodoItem\n{\n    public int Id { get; set; }\n    public string DisplayName { get; set; } = \"\";\n    public bool IsDone { get; set; }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "{\"Id\":7,\"DisplayName\":\"Write tests\",\"IsDone\":false}\n{\"id\":7,\"displayName\":\"Write tests\",\"isDone\":false}",
+      "explanation": "Plain `JsonSerializer` defaults keep property names as declared (PascalCase). `JsonSerializerDefaults.Web`, which ASP.NET Core uses for Minimal APIs and controllers, applies the camelCase naming policy, so the second line has `id`, `displayName` and `isDone`.",
+      "materials": [
+        "stj"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: deserializing JSON whose property names don't match the C# casing, with plain and web defaults.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "code": "using System.Text.Json;\n\nvar json = \"\"\"{\"ID\": 3, \"displayname\": \"Ship it\"}\"\"\";\n\nvar strict = JsonSerializer.Deserialize<TodoItem>(json)!;\nConsole.WriteLine($\"default: {strict.Id} '{strict.DisplayName}'\");\n\nvar web = JsonSerializer.Deserialize<TodoItem>(json, new JsonSerializerOptions(JsonSerializerDefaults.Web))!;\nConsole.WriteLine($\"web: {web.Id} '{web.DisplayName}'\");\n\nclass TodoItem\n{\n    public int Id { get; set; }\n    public string DisplayName { get; set; } = \"\";\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "default: 0 ''\nweb: 3 'Ship it'",
+      "explanation": "The plain defaults match property names case-sensitively, so `ID` and `displayname` match nothing and the properties keep their defaults (0 and an empty string). The web defaults turn on case-insensitive matching, so both properties are filled. Unknown or unmatched properties are ignored rather than causing an error.",
+      "materials": [
+        "stj"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a number sent as a JSON string, read with plain and web defaults.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "code": "using System.Text.Json;\n\nvar json = \"\"\"{\"Quantity\": \"42\"}\"\"\";\n\ntry\n{\n    var a = JsonSerializer.Deserialize<Order>(json)!;\n    Console.WriteLine($\"default: {a.Quantity}\");\n}\ncatch (JsonException)\n{\n    Console.WriteLine(\"default: JsonException\");\n}\n\nvar b = JsonSerializer.Deserialize<Order>(json, new JsonSerializerOptions(JsonSerializerDefaults.Web))!;\nConsole.WriteLine($\"web: {b.Quantity}\");\nConsole.WriteLine(JsonSerializer.Serialize(b, new JsonSerializerOptions(JsonSerializerDefaults.Web)));\n\nclass Order\n{\n    public int Quantity { get; set; }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "default: JsonException\nweb: 42\n{\"quantity\":42}",
+      "explanation": "With plain defaults, a JSON string can't be read into an `int`, so a `JsonException` is thrown. The web defaults include `JsonNumberHandling.AllowReadingFromString`, so `\"42\"` is accepted; when writing, numbers are still written as numbers, so the last line has `42` without quotes.",
+      "materials": [
+        "stj"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an enum property serialized with the web defaults, with and without `JsonStringEnumConverter`.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "code": "using System.Text.Json;\nusing System.Text.Json.Serialization;\n\nvar web = new JsonSerializerOptions(JsonSerializerDefaults.Web);\nvar order = new Order(1, Status.Shipped);\nConsole.WriteLine(JsonSerializer.Serialize(order, web));\n\nvar withConverter = new JsonSerializerOptions(JsonSerializerDefaults.Web);\nwithConverter.Converters.Add(new JsonStringEnumConverter());\nConsole.WriteLine(JsonSerializer.Serialize(order, withConverter));\n\nvar back = JsonSerializer.Deserialize<Order>(\"\"\"{\"id\":2,\"status\":\"Delivered\"}\"\"\", withConverter)!;\nConsole.WriteLine(back.Status);\n\nenum Status { Pending, Shipped, Delivered }\nrecord Order(int Id, Status Status);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "{\"id\":1,\"status\":1}\n{\"id\":1,\"status\":\"Shipped\"}\nDelivered",
+      "explanation": "System.Text.Json writes enums as their numeric value by default, even with the web defaults, so `Shipped` becomes `1`. Adding `JsonStringEnumConverter` writes the name instead, and the same converter also reads names such as `\"Delivered\"` back.",
+      "materials": [
+        "stj"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: dictionary keys and property names serialized with the web defaults.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "code": "using System.Text.Json;\n\nvar web = new JsonSerializerOptions(JsonSerializerDefaults.Web);\nvar report = new Report\n{\n    TotalCount = 2,\n    CountsByRegion = new() { [\"NorthEast\"] = 1, [\"WestCoast\"] = 1 }\n};\nConsole.WriteLine(JsonSerializer.Serialize(report, web));\n\nclass Report\n{\n    public int TotalCount { get; set; }\n    public Dictionary<string, int> CountsByRegion { get; set; } = new();\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "{\"totalCount\":2,\"countsByRegion\":{\"NorthEast\":1,\"WestCoast\":1}}",
+      "explanation": "The web defaults set `PropertyNamingPolicy` to camelCase but leave `DictionaryKeyPolicy` unset, so property names become `totalCount` and `countsByRegion` while the dictionary keys keep their original casing. Set `DictionaryKeyPolicy` too if clients expect camelCase keys.",
+      "materials": [
+        "stj"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a missing property on a non-nullable string versus a missing `required` property.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "code": "using System.Text.Json;\n\nvar web = new JsonSerializerOptions(JsonSerializerDefaults.Web);\n\nvar ok = JsonSerializer.Deserialize<CreateUser>(\"\"\"{\"email\":\"a@b.c\"}\"\"\", web)!;\nConsole.WriteLine($\"name null: {ok.Name is null}\");\n\ntry\n{\n    JsonSerializer.Deserialize<SignUp>(\"\"\"{\"name\":\"Ann\"}\"\"\", web);\n    Console.WriteLine(\"signup ok\");\n}\ncatch (JsonException)\n{\n    Console.WriteLine(\"signup: JsonException\");\n}\n\nclass CreateUser\n{\n    public string Name { get; set; } = null!;\n    public string Email { get; set; } = \"\";\n}\n\nclass SignUp\n{\n    public required string Name { get; set; }\n    public required string Email { get; set; }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "name null: True\nsignup: JsonException",
+      "explanation": "Nullable annotations aren't enforced by the serializer, so a missing `name` simply leaves the `null!` default in place. Properties marked with the C# `required` keyword are enforced by System.Text.Json (since .NET 7), so the missing `email` makes deserialization throw `JsonException`. This is why Minimal APIs don't reject missing non-nullable properties unless you validate.",
+      "materials": [
+        "stj"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an extra JSON property (an over-posting attempt) with default handling and with `UnmappedMemberHandling.Disallow`.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "code": "using System.Text.Json;\nusing System.Text.Json.Serialization;\n\nvar json = \"\"\"{\"name\":\"Ann\",\"isAdmin\":true}\"\"\";\nvar web = new JsonSerializerOptions(JsonSerializerDefaults.Web);\n\nvar a = JsonSerializer.Deserialize<UpdateProfile>(json, web)!;\nConsole.WriteLine($\"default: {a.Name}\");\n\nweb = new JsonSerializerOptions(JsonSerializerDefaults.Web)\n{\n    UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow\n};\ntry\n{\n    JsonSerializer.Deserialize<UpdateProfile>(json, web);\n    Console.WriteLine(\"disallow: ok\");\n}\ncatch (JsonException)\n{\n    Console.WriteLine(\"disallow: JsonException\");\n}\n\nclass UpdateProfile\n{\n    public string Name { get; set; } = \"\";\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "default: Ann\ndisallow: JsonException",
+      "explanation": "By default, JSON properties that don't map to a member are skipped, so `isAdmin` is silently ignored and `Name` is read. Setting `UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow` (.NET 8) makes unknown properties throw `JsonException` instead.",
+      "materials": [
+        "stj"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: serializing an object graph with a back-reference, with and without `ReferenceHandler.IgnoreCycles`.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "code": "using System.Text.Json;\nusing System.Text.Json.Serialization;\n\nvar blog = new Blog { Name = \"dev\" };\nblog.Posts.Add(new Post { Title = \"hi\", Blog = blog });\n\ntry\n{\n    JsonSerializer.Serialize(blog, new JsonSerializerOptions(JsonSerializerDefaults.Web));\n    Console.WriteLine(\"serialized\");\n}\ncatch (JsonException)\n{\n    Console.WriteLine(\"JsonException\");\n}\n\nvar options = new JsonSerializerOptions(JsonSerializerDefaults.Web)\n{\n    ReferenceHandler = ReferenceHandler.IgnoreCycles\n};\nConsole.WriteLine(JsonSerializer.Serialize(blog, options));\n\nclass Blog\n{\n    public string Name { get; set; } = \"\";\n    public List<Post> Posts { get; } = new();\n}\n\nclass Post\n{\n    public string Title { get; set; } = \"\";\n    public Blog? Blog { get; set; }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "JsonException\n{\"name\":\"dev\",\"posts\":[{\"title\":\"hi\",\"blog\":null}]}",
+      "explanation": "The `Blog` refers to a `Post` whose `Blog` points back, so the default serializer runs into the cycle and throws `JsonException` once the maximum depth is exceeded. `ReferenceHandler.IgnoreCycles` writes `null` where a cycle would start, giving `\"blog\":null` inside the post. Returning entity graphs from APIs is a common way to hit this.",
+      "materials": [
+        "stj"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: null properties with the default ignore condition, with `WhenWritingNull`, and with a per-property override.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "code": "using System.Text.Json;\nusing System.Text.Json.Serialization;\n\nvar web = new JsonSerializerOptions(JsonSerializerDefaults.Web);\nConsole.WriteLine(JsonSerializer.Serialize(new Customer(\"Ann\", null, null), web));\n\nweb = new JsonSerializerOptions(JsonSerializerDefaults.Web)\n{\n    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull\n};\nConsole.WriteLine(JsonSerializer.Serialize(new Customer(\"Ann\", null, null), web));\n\nrecord Customer(\n    string Name,\n    string? Phone,\n    [property: JsonIgnore(Condition = JsonIgnoreCondition.Never)] string? Email);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "{\"name\":\"Ann\",\"phone\":null,\"email\":null}\n{\"name\":\"Ann\",\"email\":null}",
+      "explanation": "By default null properties are written, so the first line includes `phone` and `email` as `null`. `DefaultIgnoreCondition = WhenWritingNull` drops null properties, except where a property's own `[JsonIgnore(Condition = Never)]` overrides it, so `email` stays and `phone` disappears.",
+      "materials": [
+        "stj"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: `IsAuthenticated` for identities created with and without an authentication type.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "medium",
+      "code": "using System.Security.Claims;\n\nvar claims = new[] { new Claim(ClaimTypes.Name, \"ann\") };\n\nvar noType = new ClaimsPrincipal(new ClaimsIdentity(claims));\nvar withType = new ClaimsPrincipal(new ClaimsIdentity(claims, \"Bearer\"));\n\nConsole.WriteLine($\"{noType.Identity!.Name} {noType.Identity.IsAuthenticated}\");\nConsole.WriteLine($\"{withType.Identity!.Name} {withType.Identity.IsAuthenticated}\");\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "ann False\nann True",
+      "explanation": "`ClaimsIdentity.IsAuthenticated` is true only when `AuthenticationType` is non-empty, regardless of the claims, so an identity built without one is anonymous even though `Name` is `ann`. Custom authentication handlers must pass a scheme or type name when creating the identity, or `[Authorize]` treats the user as anonymous.",
+      "materials": [
+        "claims"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: `Name` and `IsInRole` with the standard claim types and with custom name and role claim types.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "code": "using System.Security.Claims;\n\nvar claims = new[]\n{\n    new Claim(\"name\", \"ann\"),\n    new Claim(\"role\", \"admin\"),\n    new Claim(ClaimTypes.Role, \"editor\"),\n};\n\nvar standard = new ClaimsPrincipal(new ClaimsIdentity(claims, \"Bearer\"));\nvar mapped = new ClaimsPrincipal(new ClaimsIdentity(claims, \"Bearer\", \"name\", \"role\"));\n\nConsole.WriteLine($\"{standard.Identity!.Name ?? \"null\"} {standard.IsInRole(\"admin\")} {standard.IsInRole(\"editor\")}\");\nConsole.WriteLine($\"{mapped.Identity!.Name ?? \"null\"} {mapped.IsInRole(\"admin\")} {mapped.IsInRole(\"editor\")}\");\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "null False True\nann True False",
+      "explanation": "By default `ClaimsIdentity` reads `Name` from `ClaimTypes.Name` and roles from `ClaimTypes.Role` (long URIs), so the short `name` and `role` claims are ignored: `Name` is null and only `editor` counts as a role. Passing `\"name\"` and `\"role\"` as `nameType` and `roleType` reverses this. This is why JWT apps set `NameClaimType` and `RoleClaimType` when tokens use short claim names.",
+      "materials": [
+        "claims"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a `ClaimsPrincipal` with two identities.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "code": "using System.Security.Claims;\n\nvar cookie = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, \"ann\") }, \"Cookies\");\nvar extra = new ClaimsIdentity(new[]\n{\n    new Claim(ClaimTypes.Name, \"service\"),\n    new Claim(ClaimTypes.Role, \"admin\"),\n}, \"Partner\");\n\nvar user = new ClaimsPrincipal(new[] { cookie, extra });\n\nConsole.WriteLine(user.Identity!.Name);\nConsole.WriteLine(user.IsInRole(\"admin\"));\nConsole.WriteLine(user.FindFirst(ClaimTypes.Name)!.Value);\nConsole.WriteLine(user.FindAll(ClaimTypes.Name).Count());\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "ann\nTrue\nann\n2",
+      "explanation": "`ClaimsPrincipal.Identity` returns the primary (by default the first) identity, so `Name` is `ann`. `IsInRole`, `FindFirst` and `FindAll` look across every identity: the `admin` role from the second identity counts, `FindFirst` returns the first match (`ann`), and `FindAll` finds both name claims.",
+      "materials": [
+        "claims"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: combining an `HttpClient.BaseAddress` with relative request URIs.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "code": "var cases = new (string Base, string Path)[]\n{\n    (\"https://api.example.com/v1/\", \"users\"),\n    (\"https://api.example.com/v1\", \"users\"),\n    (\"https://api.example.com/v1/\", \"/users\"),\n};\n\nforeach (var (b, p) in cases)\n{\n    var client = new HttpClient(new EchoHandler()) { BaseAddress = new Uri(b) };\n    Console.WriteLine(await client.GetStringAsync(p));\n}\n\nclass EchoHandler : HttpMessageHandler\n{\n    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct) =>\n        Task.FromResult(new HttpResponseMessage { Content = new StringContent(request.RequestUri!.ToString()) });\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "https://api.example.com/v1/users\nhttps://api.example.com/users\nhttps://api.example.com/users",
+      "explanation": "Relative URIs are resolved with standard URI rules. With a trailing slash, `users` is appended to `/v1/`. Without the trailing slash, the last segment `v1` is treated like a file name and replaced, and a leading `/` makes the path root-relative, so both drop `v1`. Typed clients should use a base address ending in `/` and relative paths without a leading `/`.",
+      "materials": [
+        "httpclient",
+        "httpfactory"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a 429 response with `IsSuccessStatusCode`, `EnsureSuccessStatusCode` and `GetStringAsync`.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "easy",
+      "code": "using System.Net;\n\nvar client = new HttpClient(new StatusHandler()) { BaseAddress = new Uri(\"https://api.example.com/\") };\n\nvar response = await client.GetAsync(\"orders/1\");\nConsole.WriteLine($\"{(int)response.StatusCode} {response.IsSuccessStatusCode}\");\n\ntry\n{\n    response.EnsureSuccessStatusCode();\n}\ncatch (HttpRequestException ex)\n{\n    Console.WriteLine($\"caught {ex.StatusCode}\");\n}\n\ntry\n{\n    await client.GetStringAsync(\"orders/1\");\n}\ncatch (HttpRequestException ex)\n{\n    Console.WriteLine($\"GetStringAsync: {(int?)ex.StatusCode}\");\n}\n\nclass StatusHandler : HttpMessageHandler\n{\n    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct) =>\n        Task.FromResult(new HttpResponseMessage(HttpStatusCode.TooManyRequests));\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "429 False\ncaught TooManyRequests\nGetStringAsync: 429",
+      "explanation": "`GetAsync` does not throw for error status codes; it returns the response, and `IsSuccessStatusCode` is false for 429. `EnsureSuccessStatusCode` throws an `HttpRequestException` whose `StatusCode` is `TooManyRequests`, and helpers such as `GetStringAsync` call it for you, so they throw with status 429.",
+      "materials": [
+        "httpclient"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an `HttpClient.Timeout` that expires during a request.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "hard",
+      "code": "var client = new HttpClient(new SlowHandler()) { Timeout = TimeSpan.FromMilliseconds(200) };\n\ntry\n{\n    await client.GetAsync(\"https://api.example.com/slow\");\n    Console.WriteLine(\"completed\");\n}\ncatch (TaskCanceledException ex)\n{\n    Console.WriteLine(ex.GetType().Name);\n    Console.WriteLine(ex.InnerException?.GetType().Name ?? \"no inner\");\n}\n\nclass SlowHandler : HttpMessageHandler\n{\n    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct)\n    {\n        await Task.Delay(TimeSpan.FromSeconds(10), ct);\n        return new HttpResponseMessage();\n    }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "TaskCanceledException\nTimeoutException",
+      "explanation": "When `HttpClient.Timeout` expires, the request is canceled and a `TaskCanceledException` is thrown. Since .NET 5 its `InnerException` is a `TimeoutException`, which lets you tell a timeout apart from cancellation by your own token.",
+      "materials": [
+        "httpclient"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: adding a custom header and a `Content-Type` header to an `HttpRequestMessage`.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "code": "var request = new HttpRequestMessage(HttpMethod.Post, \"https://api.example.com/orders\");\n\nrequest.Headers.Add(\"X-Correlation-Id\", \"abc\");\nConsole.WriteLine(\"custom header added\");\n\ntry\n{\n    request.Headers.Add(\"Content-Type\", \"application/json\");\n    Console.WriteLine(\"content-type added\");\n}\ncatch (InvalidOperationException)\n{\n    Console.WriteLine(\"InvalidOperationException\");\n}\n\nrequest.Content = new StringContent(\"{}\", System.Text.Encoding.UTF8, \"application/json\");\nConsole.WriteLine(request.Content.Headers.ContentType);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "custom header added\nInvalidOperationException\napplication/json; charset=utf-8",
+      "explanation": "Custom headers can be added to `request.Headers`, but `Content-Type` describes the body, so adding it to the request headers throws `InvalidOperationException` (a misused header name). It belongs on `request.Content.Headers`, which `StringContent` fills with `application/json; charset=utf-8`.",
+      "materials": [
+        "httpclient"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: `GetFromJsonAsync` for a camelCase JSON response and for a 404.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "code": "using System.Net;\nusing System.Net.Http.Json;\n\nvar client = new HttpClient(new FakeApi()) { BaseAddress = new Uri(\"https://api.example.com/\") };\n\nvar p = await client.GetFromJsonAsync<Product>(\"products/1\");\nConsole.WriteLine($\"{p!.Id} {p.Name}\");\n\ntry\n{\n    await client.GetFromJsonAsync<Product>(\"products/2\");\n}\ncatch (HttpRequestException ex)\n{\n    Console.WriteLine($\"HttpRequestException {(int?)ex.StatusCode}\");\n}\n\nrecord Product(int Id, string Name);\n\nclass FakeApi : HttpMessageHandler\n{\n    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct) =>\n        Task.FromResult(request.RequestUri!.AbsolutePath == \"/products/1\"\n            ? new HttpResponseMessage { Content = new StringContent(\"\"\"{\"id\":1,\"name\":\"Lamp\"}\"\"\") }\n            : new HttpResponseMessage(HttpStatusCode.NotFound));\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "1 Lamp\nHttpRequestException 404",
+      "explanation": "`System.Net.Http.Json` uses the web defaults, so the camelCase `id` and `name` bind to the record's `Id` and `Name`. For a non-success status it calls `EnsureSuccessStatusCode`, so the 404 surfaces as an `HttpRequestException` with `StatusCode` 404, not as a null result.",
+      "materials": [
+        "httpclient",
+        "stj"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: ranking the media types in an `Accept` header by quality value.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "code": "using System.Net.Http.Headers;\n\nvar accept = \"text/html;q=0.8, application/json, application/xml;q=0.9, */*;q=0.1\";\n\nvar ranked = accept.Split(',')\n    .Select(MediaTypeWithQualityHeaderValue.Parse)\n    .OrderByDescending(m => m.Quality ?? 1.0);\n\nforeach (var m in ranked)\n    Console.WriteLine($\"{m.MediaType} {m.Quality?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? \"none\"}\");\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "application/json none\napplication/xml 0.9\ntext/html 0.8\n*/* 0.1",
+      "explanation": "Each media range can carry a `q` weight from 0 to 1, and a range without `q` counts as 1, so `application/json` ranks first even though it is listed second. `MediaTypeWithQualityHeaderValue.Quality` is null when no `q` was given. Content negotiation in MVC uses the same weights when picking a formatter.",
+      "materials": [
+        "formatting"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: `HasClaim` with different casing of the claim type and value.",
+      "tags": [
+        "C# & .NET",
+        "Security"
+      ],
+      "difficulty": "hard",
+      "code": "using System.Security.Claims;\n\nvar user = new ClaimsPrincipal(new ClaimsIdentity(new[]\n{\n    new Claim(\"scope\", \"orders.read\"),\n    new Claim(\"scope\", \"orders.write\"),\n}, \"Bearer\"));\n\nConsole.WriteLine(user.HasClaim(\"scope\", \"orders.write\"));\nConsole.WriteLine(user.HasClaim(\"SCOPE\", \"orders.write\"));\nConsole.WriteLine(user.HasClaim(\"scope\", \"Orders.Write\"));\nConsole.WriteLine(user.FindFirst(\"scope\")!.Value);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "True\nTrue\nFalse\norders.read",
+      "explanation": "`HasClaim(type, value)` compares the claim type case-insensitively and the value case-sensitively (ordinal), so `SCOPE` matches but `Orders.Write` does not. `FindFirst` returns the first claim of that type in the order it was added, `orders.read`.",
+      "materials": [
+        "claims"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: `[JsonPropertyName]` combined with the web defaults.",
+      "tags": [
+        "C# & .NET",
+        "APIs & HTTP"
+      ],
+      "difficulty": "medium",
+      "code": "using System.Text.Json;\nusing System.Text.Json.Serialization;\n\nvar web = new JsonSerializerOptions(JsonSerializerDefaults.Web);\nvar dto = new ErrorDto { ErrorCode = \"E1\", TraceId = \"t-1\" };\nConsole.WriteLine(JsonSerializer.Serialize(dto, web));\n\nvar back = JsonSerializer.Deserialize<ErrorDto>(\"\"\"{\"code\":\"E2\",\"traceId\":\"t-2\",\"ErrorCode\":\"X\"}\"\"\", web)!;\nConsole.WriteLine($\"{back.ErrorCode} {back.TraceId}\");\n\nclass ErrorDto\n{\n    [JsonPropertyName(\"code\")]\n    public string ErrorCode { get; set; } = \"\";\n    public string TraceId { get; set; } = \"\";\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "{\"code\":\"E1\",\"traceId\":\"t-1\"}\nE2 t-2",
+      "explanation": "`[JsonPropertyName(\"code\")]` overrides the naming policy, so `ErrorCode` is written as `code` while `TraceId` gets camelCase. When reading, the property is matched only by its new name `code`, so the `ErrorCode` key in the JSON is ignored and the value is `E2`.",
+      "materials": [
+        "stj"
+      ]
+    }
+  ]
+}

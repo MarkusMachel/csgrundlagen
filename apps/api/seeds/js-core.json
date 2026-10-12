@@ -1,0 +1,936 @@
+{
+  "name": "JavaScript: the language",
+  "materials": [
+    {
+      "key": "error",
+      "type": "article",
+      "title": "Error",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+      "author": "MDN Web Docs",
+      "description": "The Error constructor, its options bag with cause, and custom error subclasses."
+    },
+    {
+      "key": "define-property",
+      "type": "article",
+      "title": "Object.defineProperty()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty",
+      "author": "MDN Web Docs",
+      "description": "Property descriptors, their default attributes and how writable affects assignment."
+    },
+    {
+      "key": "seal",
+      "type": "article",
+      "title": "Object.seal()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal",
+      "author": "MDN Web Docs",
+      "description": "How sealing compares with Object.preventExtensions and Object.freeze."
+    },
+    {
+      "key": "group-by",
+      "type": "article",
+      "title": "Object.groupBy()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/groupBy",
+      "author": "MDN Web Docs",
+      "description": "Grouping iterable elements into a null-prototype object by a callback's key."
+    },
+    {
+      "key": "exponent",
+      "type": "article",
+      "title": "Exponentiation (**)",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Exponentiation",
+      "author": "MDN Web Docs",
+      "description": "The exponentiation operator, its right associativity and the unary-operand restriction."
+    },
+    {
+      "key": "nullish",
+      "type": "article",
+      "title": "Nullish coalescing operator (??)",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing",
+      "author": "MDN Web Docs",
+      "description": "How ?? works and why it cannot be mixed with || or && without parentheses."
+    },
+    {
+      "key": "fn-length",
+      "type": "article",
+      "title": "Function: length",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/length",
+      "author": "MDN Web Docs",
+      "description": "How a function's length counts parameters before the first default or rest parameter."
+    },
+    {
+      "key": "bind",
+      "type": "article",
+      "title": "Function.prototype.bind()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind",
+      "author": "MDN Web Docs",
+      "description": "Bound functions, partial application and how they behave with new."
+    },
+    {
+      "key": "structured-clone",
+      "type": "article",
+      "title": "The structured clone algorithm",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/../API/Web_Workers_API/Structured_clone_algorithm",
+      "author": "MDN Web Docs",
+      "description": "Which types structuredClone can copy and what it drops, such as prototypes and symbol keys."
+    },
+    {
+      "key": "symbol",
+      "type": "article",
+      "title": "Symbol",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+      "author": "MDN Web Docs",
+      "description": "Symbols, the global registry and the well-known symbols such as toPrimitive, toStringTag and species."
+    },
+    {
+      "key": "private",
+      "type": "article",
+      "title": "Private properties",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_properties",
+      "author": "MDN Web Docs",
+      "description": "Private fields and methods, brand checks and the TypeError on foreign objects."
+    },
+    {
+      "key": "export",
+      "type": "article",
+      "title": "export",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export",
+      "author": "MDN Web Docs",
+      "description": "Named and default exports, and how export default of an expression differs from a live binding."
+    },
+    {
+      "key": "import-with",
+      "type": "article",
+      "title": "Import attributes",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/with",
+      "author": "MDN Web Docs",
+      "description": "The with { type: 'json' } syntax for passing attributes to module imports."
+    },
+    {
+      "key": "proxy",
+      "type": "article",
+      "title": "Proxy",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+      "author": "MDN Web Docs",
+      "description": "Proxy handler traps, which operations trigger them, and the invariants they must respect."
+    },
+    {
+      "key": "regexp-guide",
+      "type": "article",
+      "title": "Regular expressions",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions",
+      "author": "MDN Web Docs",
+      "description": "Regex syntax and flags, including sticky, unicodeSets (v) and lookbehind assertions."
+    },
+    {
+      "key": "has-own",
+      "type": "article",
+      "title": "Object.hasOwn()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwn",
+      "author": "MDN Web Docs",
+      "description": "Checking own properties safely, including on objects without a prototype."
+    },
+    {
+      "key": "normalize",
+      "type": "article",
+      "title": "String.prototype.normalize()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize",
+      "author": "MDN Web Docs",
+      "description": "Unicode normalization forms and why visually identical strings can differ."
+    },
+    {
+      "key": "array",
+      "type": "article",
+      "title": "Array",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+      "author": "MDN Web Docs",
+      "description": "Array methods, including at, findLast and the copying versus mutating methods."
+    },
+    {
+      "key": "set",
+      "type": "article",
+      "title": "Set",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+      "author": "MDN Web Docs",
+      "description": "Set objects and the set-composition methods union, intersection, difference and isSubsetOf."
+    },
+    {
+      "key": "default-params",
+      "type": "article",
+      "title": "Default parameters",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters",
+      "author": "MDN Web Docs",
+      "description": "When default parameter values are evaluated and which earlier parameters they can see."
+    },
+    {
+      "key": "iteration",
+      "type": "article",
+      "title": "Iteration protocols",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols",
+      "author": "MDN Web Docs",
+      "description": "The iterable and iterator protocols, including next() and the optional return() method."
+    },
+    {
+      "key": "template",
+      "type": "article",
+      "title": "Template literals",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals",
+      "author": "MDN Web Docs",
+      "description": "Template literals, tagged templates and String.raw."
+    },
+    {
+      "key": "json-stringify",
+      "type": "article",
+      "title": "JSON.stringify()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify",
+      "author": "MDN Web Docs",
+      "description": "Serialization with toJSON, replacer functions and arrays, and the space argument."
+    },
+    {
+      "key": "reflect-ownkeys",
+      "type": "article",
+      "title": "Reflect.ownKeys()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/ownKeys",
+      "author": "MDN Web Docs",
+      "description": "Listing every own key, string and symbol, in property order."
+    },
+    {
+      "key": "label",
+      "type": "article",
+      "title": "Labeled statement",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label",
+      "author": "MDN Web Docs",
+      "description": "Labels and which statements break and continue can target."
+    },
+    {
+      "key": "finalization",
+      "type": "article",
+      "title": "FinalizationRegistry",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/FinalizationRegistry",
+      "author": "MDN Web Docs",
+      "description": "Cleanup callbacks after garbage collection and why they are not guaranteed to run."
+    },
+    {
+      "key": "weakmap",
+      "type": "article",
+      "title": "WeakMap",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+      "author": "MDN Web Docs",
+      "description": "Weakly held keys, including which symbols may be used as keys."
+    },
+    {
+      "key": "to-fixed",
+      "type": "article",
+      "title": "Number.prototype.toFixed()",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed",
+      "author": "MDN Web Docs",
+      "description": "Formatting numbers with a fixed number of decimals and the binary-rounding surprises."
+    },
+    {
+      "key": "strict",
+      "type": "article",
+      "title": "Strict mode",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode",
+      "author": "MDN Web Docs",
+      "description": "What strict mode changes, including the arguments object and silent failures that become errors."
+    },
+    {
+      "key": "classes",
+      "type": "article",
+      "title": "Classes",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes",
+      "author": "MDN Web Docs",
+      "description": "Class syntax: methods, accessors, fields, static members and how they are defined."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple-choice",
+      "prompt": "After `const err = new Error('save failed', { cause: dbError });`, where does `dbError` end up?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "In a non-enumerable own property `err.cause`",
+        "Appended to the end of `err.message`",
+        "In the `err.stack` string, but not on any property",
+        "In an `err.errors` array, as with `AggregateError`"
+      ],
+      "correct": 0,
+      "explanation": "Since ES2022 the Error constructor reads the `cause` option and installs it as an own, non-enumerable `cause` property, so the original error survives wrapping. The message and stack are not changed by it. The `errors` array belongs to `AggregateError`, which is a different constructor for many failures at once.",
+      "materials": [
+        "error"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In an ES module, what happens here?\n\n```js\nconst o = {};\nObject.defineProperty(o, 'x', { value: 1 });\no.x = 2;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`o.x` becomes `2`, because a new property is writable by default",
+        "The assignment throws a `TypeError`, because `x` is non-writable",
+        "The assignment is silently ignored and `o.x` stays `1`",
+        "`defineProperty` throws, because the descriptor has no `writable` key"
+      ],
+      "correct": 1,
+      "explanation": "Attributes missing from a `defineProperty` descriptor default to `false`, so `x` is non-writable, non-enumerable and non-configurable. Modules are strict, and in strict mode assigning to a non-writable property throws a `TypeError`; the silent no-op only happens in sloppy scripts. Properties created by plain assignment or literals are the ones that default to writable.",
+      "materials": [
+        "define-property",
+        "strict"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which call lets you delete an object's existing properties afterwards, but stops new properties from being added?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Object.freeze(obj)`",
+        "`Object.seal(obj)`",
+        "`Object.preventExtensions(obj)`",
+        "`Object.defineProperties(obj, {})`"
+      ],
+      "correct": 2,
+      "explanation": "`Object.preventExtensions` only blocks adding properties; existing ones can still be changed and deleted. `Object.seal` additionally makes every property non-configurable, so deleting fails, and `Object.freeze` also makes them non-writable. `defineProperties` with an empty object changes nothing at all.",
+      "materials": [
+        "seal"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What is true about the object returned by `Object.groupBy([1, 2, 3], (n) => (n % 2 ? 'odd' : 'even'))`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It is a `Map` whose keys are `'odd'` and `'even'`",
+        "It is an array of `[key, items]` pairs in insertion order",
+        "It is a plain object, so `result.hasOwnProperty('odd')` returns `true`",
+        "It has a `null` prototype, so `result.hasOwnProperty` is `undefined`"
+      ],
+      "correct": 3,
+      "explanation": "`Object.groupBy` (ES2024) returns an object created with a null prototype, so it inherits nothing from `Object.prototype` and method calls like `hasOwnProperty` fail; use `Object.hasOwn` or `in` instead. The null prototype prevents keys such as `'constructor'` from colliding with inherited members. A `Map` result comes from the separate `Map.groupBy`.",
+      "materials": [
+        "group-by",
+        "has-own"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `(function (a, b = 2, ...rest) {}).length` evaluate to?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`1`",
+        "`2`",
+        "`3`",
+        "`0`"
+      ],
+      "correct": 0,
+      "explanation": "A function's `length` counts the parameters before the first one with a default value, and a rest parameter is never counted. Here only `a` comes before `b = 2`, so the result is `1`. Counting `a` and `b` (2) or all three (3) is the common mistake.",
+      "materials": [
+        "fn-length",
+        "default-params"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `inst.v` hold after this code runs?\n\n```js\nfunction P() { this.v = this.tag; }\nconst Bound = P.bind({ tag: 'bound' });\nconst inst = new Bound();\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`'bound'`, because `bind` fixes `this` permanently",
+        "`undefined`, because `new` ignores the bound `this` value",
+        "Nothing; calling `new` on a bound function throws a `TypeError`",
+        "`'bound'`, but `inst instanceof P` is `false`"
+      ],
+      "correct": 1,
+      "explanation": "When a bound function is called with `new`, the bound `this` is ignored and a fresh object inheriting from `P.prototype` is used, so `this.tag` is `undefined`; bound arguments are still prepended. `new` on bound functions is allowed (only arrow functions and methods are not constructors), and `inst instanceof P` is `true` because `instanceof` on a bound function checks the target's prototype.",
+      "materials": [
+        "bind"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`class Point { constructor() { this.x = 1; } }`. What does `structuredClone(new Point())` return?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A `Point` instance with `x: 1`, since the clone keeps the prototype",
+        "Nothing; it throws a `DataCloneError` because class instances are not cloneable",
+        "A plain object `{ x: 1 }` whose prototype is `Object.prototype`",
+        "The same object, since class instances are passed by reference"
+      ],
+      "correct": 2,
+      "explanation": "The structured clone algorithm copies own enumerable data properties of ordinary objects but does not preserve the prototype chain, so the result is a plain object and `instanceof Point` is `false`. It throws only for things it cannot serialize at all, such as functions or DOM nodes, and it never returns the original object.",
+      "materials": [
+        "structured-clone"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which well-known symbol do you implement so that `Object.prototype.toString.call(obj)` returns `\"[object Zed]\"`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`Symbol.toPrimitive`",
+        "`Symbol.species`",
+        "`Symbol.hasInstance`",
+        "`Symbol.toStringTag`"
+      ],
+      "correct": 3,
+      "explanation": "`Object.prototype.toString` reads the object's `Symbol.toStringTag` property and uses it in the `[object …]` result; built-ins like `Map` use it to report `[object Map]`. `Symbol.toPrimitive` controls conversion to primitives, `Symbol.species` picks the constructor for derived objects, and `Symbol.hasInstance` customizes `instanceof`.",
+      "materials": [
+        "symbol"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What happens when this runs?\n\n```js\nclass A {\n  #x = 1;\n  read() { return this.#x; }\n}\nA.prototype.read.call({ x: 1 });\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It returns `undefined`, because the plain object has no `#x`",
+        "It throws a `TypeError`, because the object does not have the private field",
+        "It returns `1`, because `#x` is looked up on the prototype chain",
+        "It throws a `SyntaxError` when the method is called through `call`"
+      ],
+      "correct": 1,
+      "explanation": "Private names are not properties and are not looked up on the prototype chain; reading `this.#x` performs a brand check and throws a `TypeError` when the object was not constructed by the class. Returning `undefined` is how a missing public property behaves, not a private one. A `SyntaxError` would occur only if `#x` were referenced outside the class body, which is a parse-time error.",
+      "materials": [
+        "private"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Module `a.mjs` contains:\n\n```js\nlet x = 1;\nexport default x;\nexport { x };\nx = 2;\n```\n\nWhat does `import d, { x } from './a.mjs'; console.log(d, x);` log?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`2 2`",
+        "`1 1`",
+        "`1 2`",
+        "`2 1`"
+      ],
+      "correct": 2,
+      "explanation": "`export { x }` exports a live binding, so importers see the reassignment and `x` is `2`. `export default x` evaluates the expression `x` once and exports that value under the name `default`, so `d` stays `1`. Only `export default function`/`class` declarations or `export { x as default }` create a live default binding.",
+      "materials": [
+        "export"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which line imports a JSON file as an ES module using the standard import attributes syntax?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`import data from './data.json' with { type: 'json' };`",
+        "`import data from './data.json' as json;`",
+        "`import json data from './data.json';`",
+        "`import data from './data.json?type=json';`"
+      ],
+      "correct": 0,
+      "explanation": "Import attributes use the `with { type: 'json' }` clause, which reached stage 4 and shipped in Node.js 22 and evergreen browsers. It replaced the earlier `assert { type: 'json' }` form, which was removed from the proposal. The other spellings are not valid JavaScript or are just URL tricks that hosts do not treat as a JSON module type.",
+      "materials": [
+        "import-with"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What happens when `p.x` is read here?\n\n```js\nconst p = new Proxy(Object.freeze({ x: 1 }), {\n  get() { return 2; },\n});\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "It returns `2`, since the trap's return value is used",
+        "It returns `1`, since frozen targets bypass the trap",
+        "It throws a `TypeError` for violating a proxy invariant",
+        "It returns `undefined`, because a frozen target hides `x` from the trap"
+      ],
+      "correct": 2,
+      "explanation": "A `get` trap must report the real value for a target property that is non-writable and non-configurable, and freezing makes `x` exactly that, so the engine throws a `TypeError`. The trap still runs, so the target is not bypassed. Frozen objects can be wrapped by a proxy; the invariants simply constrain what traps may report about them.",
+      "materials": [
+        "proxy"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A labeled `continue` statement can jump to the end of a labeled block statement that is not a loop, such as `block: { … continue block; … }`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "`continue` must target a label on an iteration statement; using it with a label on a plain block is a `SyntaxError`. Inside a labeled block you can use `break block;` to leave it early, which is the statement people usually mean.",
+      "materials": [
+        "label"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "When a `FinalizationRegistry` is used, the language guarantees that its cleanup callback runs for every registered object before the program exits.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "Cleanup callbacks may run late or never: an object might not be collected before exit, and engines are allowed to skip callbacks entirely. MDN advises against relying on them for essential program logic, such as releasing a resource that must be released.",
+      "materials": [
+        "finalization"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Since ES2023, a `WeakMap` accepts a symbol created with `Symbol('id')` as a key, while a symbol from `Symbol.for('id')` is rejected with a `TypeError`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "The symbols-as-WeakMap-keys change (ES2023) allows non-registered symbols as weak keys because they are unique and can be garbage-collected. Registered symbols from `Symbol.for` live forever in the global registry, so using one would never let the entry go away, and the engine throws a `TypeError`.",
+      "materials": [
+        "weakmap",
+        "symbol"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In strict mode, if an object's prototype has a non-writable data property `x`, assigning `obj.x = 1` throws a `TypeError` instead of creating an own property `x` on `obj`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "Assignment checks the property found on the prototype chain: an inherited non-writable data property blocks creating an own property of that name, and strict code turns the failure into a `TypeError`. This differs from an inherited writable property, which is simply shadowed by the new own property. `Object.defineProperty` can still create the own property, because it does not go through assignment.",
+      "materials": [
+        "define-property",
+        "strict"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "If `class List extends Array {}`, then `new List(1, 2, 3).map((x) => x)` returns an instance of `List`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "Array methods that create new arrays, like `map`, `filter` and `slice`, use the receiver's constructor via `Symbol.species`, which defaults to the subclass. The change-by-copy methods `toSorted`, `toReversed` and `with` are different: they deliberately return plain `Array` instances.",
+      "materials": [
+        "symbol",
+        "array"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Inside a function in strict mode, assigning `arguments[0] = 9` also changes the value of the first named parameter.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "Strict mode removes the aliasing between `arguments` and the named parameters, so the parameter keeps its value. Aliasing still exists in sloppy functions that have only simple parameters. Modules and class bodies are always strict, so they get the non-aliased behaviour.",
+      "materials": [
+        "strict"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these are early `SyntaxError`s (the code does not even parse)?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`-2 ** 2`",
+        "`a || b ?? c`",
+        "`(-2) ** 2`",
+        "`a ?? (b || c)`",
+        "`obj?.prop = 1`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "A unary operator directly before `**` is ambiguous, so `-2 ** 2` is rejected; you must write `(-2) ** 2` or `-(2 ** 2)`. Mixing `??` with `||` or `&&` needs parentheses, so `a ?? (b || c)` is fine but `a || b ?? c` is not. An optional chain is never a valid assignment target, so `obj?.prop = 1` fails to parse.",
+      "materials": [
+        "exponent",
+        "nullish"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about regular-expression features are true for current JavaScript?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "With the `y` (sticky) flag, a match is attempted only at `lastIndex`",
+        "With the `v` flag, `[\\p{L}--[a-z]]` matches letters except ASCII `a` to `z`",
+        "`(?<=\\$)\\d+` matches the digits in `'$12'` without including the `$`",
+        "`'aa'.matchAll(/a/)` returns an iterator over both matches",
+        "The `d` flag makes `test()` ignore and reset `lastIndex`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Sticky regexes anchor at `lastIndex` instead of scanning forward, the `v` flag (ES2024) adds set operations such as `--` subtraction in classes, and lookbehind assertions match context without consuming it. `matchAll` throws a `TypeError` when given a regex without the `g` flag. The `d` flag adds `indices` with start and end offsets to match results; it does not change how `lastIndex` works.",
+      "materials": [
+        "regexp-guide"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`const o = { a: 1, [Symbol('s')]: 2 };`. Which of these produce a copy that still has the symbol-keyed property?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Object.assign({}, o)`",
+        "`{ ...o }`",
+        "`structuredClone(o)`",
+        "`Object.fromEntries(Object.entries(o))`",
+        "`JSON.parse(JSON.stringify(o))`"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "`Object.assign` and object spread copy all own enumerable properties, string- and symbol-keyed alike. `structuredClone` serializes only string keys and silently drops symbol keys. `Object.entries` lists only string keys, and `JSON.stringify` skips symbol keys, so both of those copies lose it.",
+      "materials": [
+        "symbol",
+        "structured-clone"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`const n = Object.create(null); n.a = 1;`. Which of these run without throwing?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`Object.hasOwn(n, 'a')`",
+        "`n.hasOwnProperty('a')`",
+        "`'a' in n`",
+        "`Object.prototype.hasOwnProperty.call(n, 'a')`",
+        "`String(n)`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "An object with a null prototype inherits no methods, so `n.hasOwnProperty` is `undefined` and calling it throws a `TypeError`. `String(n)` also throws, because there is no `toString` or `valueOf` to convert with. `Object.hasOwn` (ES2022), the `in` operator and borrowing the method from `Object.prototype` all work, which is why `Object.hasOwn` is the recommended check.",
+      "materials": [
+        "has-own"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these throw an error?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`[1, 2].with(5, 0)`",
+        "`[1, 2].at(5)`",
+        "`[1, 2].toSpliced(5, 1)`",
+        "`Object.freeze([1]).push(2)`",
+        "`new Array(-1)`"
+      ],
+      "correctIndices": [
+        0,
+        3,
+        4
+      ],
+      "explanation": "`with` validates its index and throws a `RangeError` when it is out of bounds, unlike bracket assignment. `at(5)` just returns `undefined`, and `toSpliced` clamps the start index like `splice`, returning a copy. Pushing onto a frozen array throws a `TypeError` because it cannot add an element or change `length`, and `new Array(-1)` throws a `RangeError` for an invalid length.",
+      "materials": [
+        "array"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "`const p = new Proxy({ x: 1 }, { has(t, k) { console.log('has', k); return k in t; } });`. Which of these make the `has` trap log?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`'x' in p`",
+        "`Reflect.has(p, 'x')`",
+        "`Object.hasOwn(p, 'x')`",
+        "`p.x`",
+        "`'y' in Object.create(p)`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "The `has` trap intercepts the `[[HasProperty]]` operation, used by `in` and `Reflect.has`. `in` on an object whose prototype is the proxy walks up the chain and calls the proxy's `has` too. `Object.hasOwn` asks for an own property descriptor (the `getOwnPropertyDescriptor` trap) and `p.x` uses the `get` trap, so neither logs.",
+      "materials": [
+        "proxy"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "With `const arr = [1, 2, 3];`, which of these evaluate to `3`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`arr.at(-1)`",
+        "`arr[-1]`",
+        "`arr.findLast(() => true)`",
+        "`arr.slice(-1)`",
+        "`arr.lastIndexOf(3)`"
+      ],
+      "correctIndices": [
+        0,
+        2
+      ],
+      "explanation": "`at` accepts negative indexes counted from the end, and `findLast` (ES2023) searches from the end, so the first element it tests is `3`. `arr[-1]` looks up a property named `\"-1\"`, which does not exist, so it gives `undefined`. `slice(-1)` returns the array `[3]`, not the element, and `lastIndexOf(3)` returns the index `2`.",
+      "materials": [
+        "array"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order does `Reflect.ownKeys` return these keys, first to last?\n\n```js\nconst s = Symbol('s');\nReflect.ownKeys({ b: 1, [s]: 1, 2: 1, a: 1, 1: 1 });\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`'1'`",
+        "`'2'`",
+        "`'b'`",
+        "`'a'`",
+        "`Symbol(s)`"
+      ],
+      "explanation": "Own keys are listed with integer-like keys first in ascending numeric order, then the other string keys in insertion order, then symbol keys in insertion order. So `'1'` and `'2'` come first even though they were added later, `'b'` precedes `'a'` by insertion, and the symbol comes last although it was defined second.",
+      "materials": [
+        "reflect-ownkeys"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconst log = (m) => console.log(m);\nconst iterable = {\n  [Symbol.iterator]() {\n    let i = 0;\n    return {\n      next() { i++; log('next ' + i); return { value: i, done: false }; },\n      return() { log('return'); return { done: true }; },\n    };\n  },\n};\nfor (const v of iterable) {\n  log('body ' + v);\n  if (v === 2) break;\n}\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "next 1",
+        "body 1",
+        "next 2",
+        "body 2",
+        "return"
+      ],
+      "explanation": "`for...of` calls `next()` before each iteration, so each `next` line precedes the body that uses its value. When the loop exits early with `break`, it calls the iterator's optional `return()` method to let it clean up, and it does not call `next()` again. The same `return()` call happens on `throw` or `return` out of the loop.",
+      "materials": [
+        "iteration"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconst t = (n) => { console.log(n); return n; };\nfunction getTag() {\n  console.log('getTag');\n  return () => console.log('tag called');\n}\ngetTag()`${t('a')} and ${t('b')}`;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "getTag",
+        "a",
+        "b",
+        "tag called"
+      ],
+      "explanation": "A tagged template first evaluates the tag expression, here the call `getTag()`, then evaluates the substitutions left to right, and only then calls the tag function with the strings array and the values. The tag function therefore cannot affect whether the substitutions run.",
+      "materials": [
+        "template"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "In what order are these lines printed, first to last?\n\n```js\nconst value = {\n  a: { toJSON() { console.log('toJSON'); return { x: 1 }; } },\n};\nJSON.stringify(value, function (key, v) {\n  console.log('replacer ' + (key || '(root)'));\n  return v;\n});\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "replacer (root)",
+        "toJSON",
+        "replacer a",
+        "replacer x"
+      ],
+      "explanation": "`JSON.stringify` first calls the replacer with the empty key for the root value. For each property it calls `toJSON` (if present) before the replacer, so the replacer for `a` sees the object `toJSON` returned. Serialization then descends into that returned object, calling the replacer for `x`.",
+      "materials": [
+        "json-stringify"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: calling `test()` twice on a regex with the `g` flag.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "const re = /a/g;\nconsole.log(re.test('a'), re.lastIndex);\nconsole.log(re.test('a'), re.lastIndex);\nconsole.log(re.test('a'));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "true 1\nfalse 0\ntrue\n",
+      "explanation": "A global or sticky regex remembers where the last match ended in `lastIndex`, and `test` starts searching from there. The second call starts at index 1, finds nothing, returns `false` and resets `lastIndex` to 0, so the third call matches again. Reusing one `/g` regex for many `test` calls is a classic source of alternating results.",
+      "materials": [
+        "regexp-guide"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: default parameters that use an earlier parameter and a mutable default.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "function add(item, list = [], label = `n=${list.length}`) {\n  list.push(item);\n  return label + ' ' + list.length;\n}\nconsole.log(add('a'));\nconsole.log(add('b'));\nconsole.log(add('c', ['x', 'y']));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "n=0 1\nn=0 1\nn=2 3\n",
+      "explanation": "Default values are evaluated at call time, every time the argument is missing, so each call without `list` gets a fresh empty array (unlike Python's shared defaults). A later default can read earlier parameters, so `label` is computed from `list` before the `push`. With an explicit two-element array, the label is `n=2` and the length afterwards is 3.",
+      "materials": [
+        "default-params"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: rounding with Math.round and toFixed.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "code": "console.log(Math.round(2.5), Math.round(-2.5));\nconsole.log((1.005).toFixed(2), (1.25).toFixed(1));\nconsole.log(Math.round(-3.5), Math.trunc(-3.5), Math.floor(-3.5));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "3 -2\n1.00 1.3\n-3 -3 -4\n",
+      "explanation": "`Math.round` rounds halves toward positive infinity, so `-2.5` becomes `-2` and `-3.5` becomes `-3`, the same as `Math.trunc` here, while `Math.floor` goes down to `-4`. `1.005` is stored as slightly less than 1.005 in binary, so `toFixed(2)` gives `\"1.00\"`; `1.25` is exact in binary and is rounded up to `\"1.3\"`.",
+      "materials": [
+        "to-fixed"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: the ES2025 set-composition methods.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "const a = new Set([1, 2, 3]);\nconst b = new Set([3, 4]);\nconsole.log([...a.union(b)]);\nconsole.log([...a.intersection(b)], [...a.difference(b)]);\nconsole.log([...a.symmetricDifference(b)]);\nconsole.log(new Set([3]).isSubsetOf(a), a.size);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "[ 1, 2, 3, 4 ]\n[ 3 ] [ 1, 2 ]\n[ 1, 2, 4 ]\ntrue 3\n",
+      "explanation": "The set methods (ES2025, available in Node.js 22 and evergreen browsers) return new `Set` objects and leave the receiver unchanged, which is why `a.size` is still 3. `union` keeps the receiver's order and appends new elements, `difference` keeps elements of `a` not in `b`, and `symmetricDifference` keeps elements in exactly one of the two.",
+      "materials": [
+        "set"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a custom Error subclass with a cause.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "class DbError extends Error {}\nconst e = new DbError('write failed', { cause: new Error('disk full') });\nconsole.log(e.name, e instanceof DbError, e instanceof Error);\nconsole.log(String(e));\nconsole.log(e.cause.message, Object.keys(e).length);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "Error true true\nError: write failed\ndisk full 0\n",
+      "explanation": "A subclass inherits `name` from `Error.prototype`, so it is still `\"Error\"` unless you set `this.name` yourself; `String(e)` uses that name. `instanceof` works for both classes because `extends` wires up the prototype chain. The `cause` option is passed through `super` and stored as a non-enumerable own property, so `Object.keys(e)` is empty.",
+      "materials": [
+        "error"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: Symbol.toPrimitive and the hint each operation passes.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "code": "const money = {\n  [Symbol.toPrimitive](hint) {\n    return hint === 'number' ? 42 : hint === 'string' ? '$42' : 'default';\n  },\n};\nconsole.log(+money, `${money}`, money + '');\nconsole.log(money * 2, money == 'default');\n",
+      "codeLanguage": "js",
+      "expectedOutput": "42 $42 default\n84 true\n",
+      "explanation": "Unary `+` and `*` request the `\"number\"` hint, and template literals request `\"string\"`. Binary `+` and loose `==` pass `\"default\"`, because they can work with either strings or numbers, so `money + ''` is `\"default\"` and the comparison is `true`. When `Symbol.toPrimitive` exists it replaces the usual `valueOf`/`toString` lookup entirely.",
+      "materials": [
+        "symbol"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: Unicode case mapping and normalization.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "console.log('ß'.toUpperCase(), 'ß'.toUpperCase().length);\nconst composed = '\\u00e9';\nconst decomposed = 'e\\u0301';\nconsole.log(composed === decomposed, decomposed.length);\nconsole.log(composed === decomposed.normalize('NFC'));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "SS 2\nfalse 2\ntrue\n",
+      "explanation": "Upper-casing can change a string's length: the German sharp s maps to the two letters `SS`. The precomposed `é` (U+00E9) and `e` plus a combining acute accent look identical but are different code-unit sequences, so `===` is `false` and the decomposed form has length 2. `normalize('NFC')` composes it into U+00E9, after which the strings are equal.",
+      "materials": [
+        "normalize"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: named capture groups in replace and capturing groups in split.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "const date = '2024-03-09';\nconst re = /(?<y>\\d{4})-(?<m>\\d{2})-(?<d>\\d{2})/;\nconsole.log(date.replace(re, '$<d>.$<m>.$<y>'));\nconsole.log(date.match(re).groups.m);\nconsole.log('a1b2c'.split(/(\\d)/));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "09.03.2024\n03\n[ 'a', '1', 'b', '2', 'c' ]\n",
+      "explanation": "Named groups can be referenced in a replacement string as `$<name>` and read from `match.groups`. When the separator regex passed to `split` contains a capturing group, the captured text is spliced into the result array between the pieces, so the digits appear as their own elements. Without the parentheses the result would be `['a', 'b', 'c']`.",
+      "materials": [
+        "regexp-guide"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: which class members show up in Object.keys and JSON.stringify.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "class User {\n  role = 'admin';\n  constructor(name) { this.name = name; }\n  get label() { return this.name.toUpperCase(); }\n  greet() { return 'hi'; }\n}\nconst u = new User('ada');\nconsole.log(Object.keys(u), JSON.stringify(u));\nconsole.log(u.label, Object.keys(User.prototype).length);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "[ 'role', 'name' ] {\"role\":\"admin\",\"name\":\"ada\"}\nADA 0\n",
+      "explanation": "Class fields and properties assigned in the constructor become own enumerable properties, with fields initialized before the constructor body runs, so `role` comes before `name`. Methods and accessors live on `User.prototype` and are non-enumerable, so they appear neither in `Object.keys` nor in JSON, even though `u.label` works.",
+      "materials": [
+        "classes"
+      ]
+    }
+  ]
+}

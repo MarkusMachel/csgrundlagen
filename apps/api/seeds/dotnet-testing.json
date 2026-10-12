@@ -1,0 +1,1617 @@
+{
+  "name": ".NET: testing, tooling and diagnostics",
+  "materials": [
+    {
+      "key": "xunit-shared",
+      "type": "article",
+      "title": "Shared context between tests (xUnit.net)",
+      "url": "https://xunit.net/docs/shared-context",
+      "author": "xUnit.net",
+      "description": "Constructor and Dispose per test, class fixtures and collection fixtures in xUnit."
+    },
+    {
+      "key": "nunit-lifecycle",
+      "type": "article",
+      "title": "FixtureLifeCycle attribute (NUnit)",
+      "url": "https://docs.nunit.org/articles/nunit/writing-tests/attributes/fixturelifecycle.html",
+      "author": "NUnit",
+      "description": "How NUnit reuses one fixture instance by default and how to opt into an instance per test case."
+    },
+    {
+      "key": "mstest-attrs",
+      "type": "article",
+      "title": "MSTest attributes",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-mstest-writing-tests-attributes",
+      "author": "Microsoft Learn",
+      "description": "MSTest test, initialization and cleanup attributes such as ClassInitialize and TestInitialize."
+    },
+    {
+      "key": "best-practices",
+      "type": "article",
+      "title": "Unit testing best practices for .NET",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices",
+      "author": "Microsoft Learn",
+      "description": "Naming, arranging tests and the difference between fakes, stubs and mocks."
+    },
+    {
+      "key": "moq",
+      "type": "article",
+      "title": "Moq on GitHub",
+      "url": "https://github.com/devlooped/moq",
+      "author": "devlooped",
+      "description": "The Moq mocking library: setups, verification, mock behaviours and its proxy-based limits."
+    },
+    {
+      "key": "nsubstitute-auto",
+      "type": "article",
+      "title": "Auto and recursive mocks (NSubstitute)",
+      "url": "https://nsubstitute.github.io/help/auto-and-recursive-mocks/",
+      "author": "NSubstitute",
+      "description": "Which values an NSubstitute substitute returns for calls that were not configured."
+    },
+    {
+      "key": "integration-tests",
+      "type": "article",
+      "title": "Integration tests in ASP.NET Core",
+      "url": "https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests",
+      "author": "Microsoft Learn",
+      "description": "WebApplicationFactory, TestServer, ConfigureTestServices and exposing Program to the test project."
+    },
+    {
+      "key": "ef-testing-strategy",
+      "type": "article",
+      "title": "Choosing a testing strategy (EF Core)",
+      "url": "https://learn.microsoft.com/en-us/ef/core/testing/choosing-a-testing-strategy",
+      "author": "Microsoft Learn",
+      "description": "Trade-offs between a real database, SQLite in-memory, the InMemory provider and test doubles."
+    },
+    {
+      "key": "testcontainers",
+      "type": "article",
+      "title": "Testcontainers for .NET",
+      "url": "https://dotnet.testcontainers.org/",
+      "author": "Testcontainers",
+      "description": "Library that starts throwaway Docker containers, such as real databases, from test code."
+    },
+    {
+      "key": "timeprovider",
+      "type": "article",
+      "title": "What is TimeProvider?",
+      "url": "https://learn.microsoft.com/en-us/dotnet/standard/datetime/timeprovider-overview",
+      "author": "Microsoft Learn",
+      "description": "The TimeProvider abstraction in .NET 8 and FakeTimeProvider for deterministic tests."
+    },
+    {
+      "key": "coverage",
+      "type": "article",
+      "title": "Use code coverage for unit testing",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-code-coverage",
+      "author": "Microsoft Learn",
+      "description": "Collecting coverage with coverlet and the XPlat Code Coverage collector, and generating reports."
+    },
+    {
+      "key": "dotnet-test",
+      "type": "article",
+      "title": "dotnet test command",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-test",
+      "author": "Microsoft Learn",
+      "description": "Options of dotnet test, including --filter, --no-build, --collect and loggers."
+    },
+    {
+      "key": "publish",
+      "type": "article",
+      "title": "dotnet publish command",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-publish",
+      "author": "Microsoft Learn",
+      "description": "Configurations, runtime identifiers and self-contained options of dotnet publish."
+    },
+    {
+      "key": "deploying",
+      "type": "article",
+      "title": ".NET application publishing overview",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/deploying/",
+      "author": "Microsoft Learn",
+      "description": "Framework-dependent versus self-contained deployments and single-file publishing."
+    },
+    {
+      "key": "global-tools",
+      "type": "article",
+      "title": ".NET tools",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/tools/global-tools",
+      "author": "Microsoft Learn",
+      "description": "Global and local .NET tools, tool manifests and dotnet tool restore."
+    },
+    {
+      "key": "msbuild-dir",
+      "type": "article",
+      "title": "Customize your build by folder",
+      "url": "https://learn.microsoft.com/en-us/visualstudio/msbuild/customize-by-directory",
+      "author": "Microsoft Learn",
+      "description": "How MSBuild finds and imports Directory.Build.props and Directory.Build.targets."
+    },
+    {
+      "key": "cpm",
+      "type": "article",
+      "title": "Central Package Management (NuGet)",
+      "url": "https://learn.microsoft.com/en-us/nuget/consume-packages/central-package-management",
+      "author": "Microsoft Learn",
+      "description": "Directory.Packages.props, ManagePackageVersionsCentrally and PackageVersion items."
+    },
+    {
+      "key": "nuget-versioning",
+      "type": "article",
+      "title": "Package versioning (NuGet)",
+      "url": "https://learn.microsoft.com/en-us/nuget/concepts/package-versioning",
+      "author": "Microsoft Learn",
+      "description": "Version ranges, pre-release ordering and how NuGet picks a version."
+    },
+    {
+      "key": "code-analysis",
+      "type": "article",
+      "title": "Overview of .NET source code analysis",
+      "url": "https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/overview",
+      "author": "Microsoft Learn",
+      "description": "Code quality (CA) and code style (IDE) analyzers, severities and EnforceCodeStyleInBuild."
+    },
+    {
+      "key": "errors-warnings",
+      "type": "article",
+      "title": "C# compiler options for errors and warnings",
+      "url": "https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/errors-warnings",
+      "author": "Microsoft Learn",
+      "description": "TreatWarningsAsErrors, WarningsAsErrors, NoWarn and related MSBuild properties."
+    },
+    {
+      "key": "dotnet-counters",
+      "type": "article",
+      "title": "dotnet-counters",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-counters",
+      "author": "Microsoft Learn",
+      "description": "Monitoring and collecting live performance counters of a running .NET process."
+    },
+    {
+      "key": "dotnet-trace",
+      "type": "article",
+      "title": "dotnet-trace",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-trace",
+      "author": "Microsoft Learn",
+      "description": "Collecting EventPipe traces (.nettrace) of a running process without a native profiler."
+    },
+    {
+      "key": "dotnet-dump",
+      "type": "article",
+      "title": "dotnet-dump",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-dump",
+      "author": "Microsoft Learn",
+      "description": "Collecting process dumps and analyzing them with SOS commands."
+    },
+    {
+      "key": "dotnet-gcdump",
+      "type": "article",
+      "title": "dotnet-gcdump",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/diagnostics/dotnet-gcdump",
+      "author": "Microsoft Learn",
+      "description": "Capturing a GC heap snapshot through EventPipe, and what it costs the target process."
+    },
+    {
+      "key": "bdn-overview",
+      "type": "article",
+      "title": "BenchmarkDotNet overview",
+      "url": "https://benchmarkdotnet.org/articles/overview.html",
+      "author": "BenchmarkDotNet",
+      "description": "Writing and running benchmarks, parameters, baselines and diagnosers."
+    },
+    {
+      "key": "bdn-practices",
+      "type": "article",
+      "title": "BenchmarkDotNet good practices",
+      "url": "https://benchmarkdotnet.org/articles/guides/good-practices.html",
+      "author": "BenchmarkDotNet",
+      "description": "Release builds, avoiding dead code elimination and other benchmarking pitfalls."
+    },
+    {
+      "key": "bdn-setup",
+      "type": "article",
+      "title": "Setup and cleanup (BenchmarkDotNet)",
+      "url": "https://benchmarkdotnet.org/articles/features/setup-and-cleanup.html",
+      "author": "BenchmarkDotNet",
+      "description": "GlobalSetup, IterationSetup and when each runs."
+    },
+    {
+      "key": "otel-tracing",
+      "type": "article",
+      "title": "Add distributed tracing instrumentation",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing-instrumentation-walkthroughs",
+      "author": "Microsoft Learn",
+      "description": "ActivitySource, Activity, listeners and registering sources with OpenTelemetry."
+    },
+    {
+      "key": "otel-metrics",
+      "type": "article",
+      "title": "Creating metrics",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/diagnostics/metrics-instrumentation",
+      "author": "Microsoft Learn",
+      "description": "Meter, Counter, UpDownCounter, Histogram and observable instruments in System.Diagnostics.Metrics."
+    },
+    {
+      "key": "logging-gen",
+      "type": "article",
+      "title": "Compile-time logging source generation",
+      "url": "https://learn.microsoft.com/en-us/dotnet/core/extensions/logger-message-generator",
+      "author": "Microsoft Learn",
+      "description": "The [LoggerMessage] source generator and why it beats extension-method logging on hot paths."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple-choice",
+      "prompt": "In xUnit, where should cleanup code go that must run after every test in a test class?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "In a method marked `[TearDown]`",
+        "In a method marked `[TestCleanup]`",
+        "In `Dispose`, by implementing `IDisposable` on the test class",
+        "In a finalizer (`~MyTests()`) on the test class"
+      ],
+      "correct": 2,
+      "explanation": "xUnit creates a new test class instance per test and calls `Dispose` on it afterwards when the class implements `IDisposable` (or `DisposeAsync` with `IAsyncLifetime`). `[TearDown]` is NUnit and `[TestCleanup]` is MSTest; xUnit ignores both. A finalizer runs at an unpredictable time on the finalizer thread, so it is no place for test cleanup.",
+      "materials": [
+        "xunit-shared"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An xUnit `[Theory]` uses `[MemberData(nameof(Cases))]`. What must `Cases` be?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A public instance property that the test class constructor fills in",
+        "A public static property, field or method returning rows of arguments, such as `IEnumerable<object[]>` or `TheoryData<...>`",
+        "A `const` array declared in the test class",
+        "An instance method on a class fixture that the theory receives through `IClassFixture<T>`"
+      ],
+      "correct": 1,
+      "explanation": "Theory data is read during test discovery, before any test class instance exists, so `MemberData` must point at a static member that yields one argument array per row (`TheoryData<T1,...>` gives type safety). An instance property filled by the constructor is not available at discovery, `const` cannot hold an array, and fixtures are created per test run, not for discovery.",
+      "materials": [
+        "xunit-shared"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In NUnit (3 and 4) with default settings, how does the framework create instances of a test fixture class?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A new instance for each test method, so the constructor acts as per-test setup",
+        "A new instance for each test case, including each row of a `[TestCase]`",
+        "One instance shared by all tests in the fixture, unless `[FixtureLifeCycle]` changes it",
+        "One instance per assembly, shared by the fixture classes of one test run"
+      ],
+      "correct": 2,
+      "explanation": "NUnit reuses a single fixture instance for all its tests by default, which is why per-test state belongs in `[SetUp]` and why a field incremented in one test is still incremented in the next. `[FixtureLifeCycle(LifeCycle.InstancePerTestCase)]` opts into xUnit-like behaviour. The per-test-instance options describe xUnit and MSTest, and there is no per-assembly sharing of fixture instances.",
+      "materials": [
+        "nunit-lifecycle"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In the terms used by the .NET unit testing guidance, what distinguishes a stub from a mock?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A stub is generated by a library like Moq, while a mock is a hand-written class",
+        "A stub replaces a dependency in production code, while a mock exists only in tests",
+        "A stub records every call for later inspection, while a mock returns hard-coded values",
+        "A stub only feeds canned data to the code, while a mock is what the test asserts against"
+      ],
+      "correct": 3,
+      "explanation": "A stub supplies inputs (for example a fixed exchange rate) so the code can run, and the test never asserts on it. A mock is what the test checks: it verifies that the expected call happened. Whether a double is hand-written or generated by Moq does not decide the term, recording calls is the job of a spy or mock, and neither belongs in production code.",
+      "materials": [
+        "best-practices"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Code calls a method on `new Mock<IRepo>(MockBehavior.Strict).Object` that has no matching `Setup`. What happens?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Moq throws a `MockException`",
+        "The call returns the default value of the return type",
+        "The call returns a nested mock so chained calls keep working",
+        "The call is recorded and returns default, and `Verify` reports it later"
+      ],
+      "correct": 0,
+      "explanation": "With `MockBehavior.Strict`, every invocation needs a matching setup, otherwise Moq throws `MockException` at the call. Returning default values is the behaviour of the default `MockBehavior.Loose`. Nested mocks are returned only with `DefaultValue.Mock`, and recording without failing is just loose behaviour plus later verification.",
+      "materials": [
+        "moq"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`IRepo` has a method `string Name()`. Neither a Moq mock (default settings) nor an NSubstitute substitute of `IRepo` configures it. What does each return?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Moq returns `\"\"` and NSubstitute returns `null`",
+        "Both return `null`",
+        "Moq returns `null` and NSubstitute returns `\"\"`",
+        "Both return `\"\"`"
+      ],
+      "correct": 2,
+      "explanation": "Moq's default `DefaultValue.Empty` gives `null` for reference types such as `string` (empty arrays and enumerables are the exception). NSubstitute returns auto-values: an empty string for `string`, and a recursive substitute for interface return types. The difference matters when moving tests between the two libraries, because null checks start or stop firing.",
+      "materials": [
+        "moq",
+        "nsubstitute-auto"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which Moq call fails the test unless `Send` was called exactly once, with any string?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`mock.Verify(x => x.Send(It.IsAny<string>()));`",
+        "`mock.Setup(x => x.Send(It.IsAny<string>())).Verifiable();`",
+        "`mock.Verify(x => x.Send(It.IsAny<string>()), Times.Once());`",
+        "`mock.VerifyNoOtherCalls();`"
+      ],
+      "correct": 2,
+      "explanation": "`Verify` with `Times.Once()` asserts an exact count of one. `Verify` without a `Times` argument means at least once, so it also passes after two calls. `Verifiable()` only marks a setup for a later `Verify()` and asserts nothing by itself, and `VerifyNoOtherCalls` checks that no unverified calls happened rather than counting `Send`.",
+      "materials": [
+        "moq"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A test does `new Mock<Svc>().Setup(x => x.Total()).Returns(5)`, where `Svc` is a public class and `Total` is a public non-virtual method. What happens?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The setup works, because Moq rewrites the method's IL at run time",
+        "`Setup` throws a `NotSupportedException`, because a proxy cannot override a non-virtual member",
+        "The setup is accepted but ignored, so the real `Total` runs",
+        "The test project fails to compile with an error about the method being non-virtual"
+      ],
+      "correct": 1,
+      "explanation": "Moq (like NSubstitute) builds a runtime subclass with Castle DynamicProxy, which can only intercept interface, abstract and virtual members. Moq detects the non-overridable member and throws `NotSupportedException` (\"Unsupported expression\") at `Setup`. It does not rewrite IL, the setup is not silently ignored, and the compiler sees a valid lambda, so there is no compile error.",
+      "materials": [
+        "moq"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A .NET 8 web app uses top-level statements in `Program.cs`. The test project's `new WebApplicationFactory<Program>()` fails with CS0122 \"'Program' is inaccessible due to its protection level\". What is the usual fix?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Add `public partial class Program { }` to the web project",
+        "Change the test project's output type to `Exe`",
+        "Use `WebApplicationFactory<Startup>` instead",
+        "Set `<IsTestProject>true</IsTestProject>` in the web project"
+      ],
+      "correct": 0,
+      "explanation": "The compiler-generated `Program` class for top-level statements is internal, so another assembly cannot name it. Declaring `public partial class Program { }` makes it public (an `InternalsVisibleTo` for the test assembly also works). The test project's output type and `IsTestProject` do not change accessibility, and minimal-hosting apps have no `Startup` class to use as the entry point.",
+      "materials": [
+        "integration-tests"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Without any environment configuration in the test, which environment does an app hosted by `WebApplicationFactory<Program>` run in?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Production",
+        "Testing",
+        "Development",
+        "Staging"
+      ],
+      "correct": 2,
+      "explanation": "`WebApplicationFactory` sets the host environment to Development unless the test changes it, for example with `builder.UseEnvironment(\"Testing\")` in `WithWebHostBuilder`. So `appsettings.Development.json` and development-only code paths are active in integration tests by default. Production is the default only for a normally started app with no ASPNETCORE_ENVIRONMENT, and Testing or Staging must be set explicitly.",
+      "materials": [
+        "integration-tests"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Code under test awaits `Task.Delay(TimeSpan.FromMinutes(5), timeProvider)`, and the test passes in a `FakeTimeProvider`. What makes that delay complete?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Waiting five real minutes, because `Task.Delay` uses the system timer regardless of the provider",
+        "Nothing extra, because `FakeTimeProvider` completes timers as soon as they are created",
+        "Calling `Thread.Sleep(TimeSpan.FromMinutes(5))` in the test",
+        "Calling `fakeTime.Advance(TimeSpan.FromMinutes(5))` in the test"
+      ],
+      "correct": 3,
+      "explanation": "Since .NET 8, `Task.Delay` has an overload that takes a `TimeProvider`, and `FakeTimeProvider` (package Microsoft.Extensions.TimeProvider.Testing) only moves time when the test calls `Advance` or `SetUtcNow`; timers that are due then fire. Real waiting or `Thread.Sleep` does not move fake time, and the fake does not complete timers early on its own.",
+      "materials": [
+        "timeprovider"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does the Testcontainers library give an integration test suite?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "An in-process fake of SQL Server that needs no Docker",
+        "Code that starts throwaway Docker containers, such as a real PostgreSQL, for tests",
+        "A mocking library that records database calls and replays them",
+        "A hosted cloud database that the test runs connect to over the internet"
+      ],
+      "correct": 1,
+      "explanation": "Testcontainers starts real services in Docker from test code (for example in a fixture's `InitializeAsync`), exposes their connection strings and cleans them up afterwards, so tests run against the same engine as production. It needs a Docker-compatible runtime; it is not an in-process fake, a record-and-replay mock or a shared hosted database.",
+      "materials": [
+        "testcontainers"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does a self-contained .NET deployment include that a framework-dependent one does not?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "The .NET runtime and base libraries, so the app runs on a machine without .NET installed",
+        "The app's NuGet dependencies, which a framework-dependent deployment downloads at startup",
+        "Debug symbols, which a framework-dependent deployment strips",
+        "An installer that adds .NET to the target machine"
+      ],
+      "correct": 0,
+      "explanation": "A self-contained publish copies the runtime and framework libraries for one runtime identifier next to the app, so the target needs no shared .NET install, at the cost of a larger output. A framework-dependent publish also includes the app's NuGet dependencies; it relies on an installed shared runtime instead. Neither mode is defined by symbols or ships an installer.",
+      "materials": [
+        "deploying"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A repository has `.config/dotnet-tools.json` listing `dotnet-ef`. After cloning it, which command makes that tool version available in the repo?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`dotnet restore`",
+        "`dotnet tool install -g dotnet-ef`",
+        "`dotnet tool restore`",
+        "`dotnet build`"
+      ],
+      "correct": 2,
+      "explanation": "`.config/dotnet-tools.json` is a local tool manifest; `dotnet tool restore` installs exactly the versions it lists, after which `dotnet ef` or `dotnet tool run dotnet-ef` works inside the repo. `dotnet restore` and `dotnet build` restore project packages, not manifest tools. A global install ignores the manifest and may pick a different version.",
+      "materials": [
+        "global-tools"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A project has `<PackageReference Include=\"Serilog\" Version=\"3.1.0\" />`. What does NuGet treat this version as?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Exactly 3.1.0, and restore fails if another package needs a higher one",
+        "A floating version: restore picks the newest 3.x release available",
+        "A minimum: 3.1.0 or higher, resolved to the lowest version that fits",
+        "A range from 3.1.0 up to 4.0.0, resolved to the newest version in it"
+      ],
+      "correct": 2,
+      "explanation": "A bare version in NuGet means `>= 3.1.0`, and the resolver uses the lowest applicable version, so it gets 3.1.0 unless another package requires something higher. Exact versions need bracket syntax `[3.1.0]`, and caret-style \"up to next major\" ranges are an npm habit; NuGet would need `[3.1.0,4.0.0)`. Floating to the newest version needs a floating version such as `3.*`.",
+      "materials": [
+        "nuget-versioning"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which `.editorconfig` entry makes analyzer rule CA1822 fail `dotnet build`?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`CA1822 = error`",
+        "`dotnet_diagnostic.CA1822.severity = error`",
+        "`dotnet_analyzer_diagnostic.CA1822 = error`",
+        "`csharp_rule.CA1822.level = error`"
+      ],
+      "correct": 1,
+      "explanation": "The per-rule key is `dotnet_diagnostic.<rule id>.severity` with a value such as `error`, `warning`, `suggestion` or `none`; with `error`, the build reports error CA1822. `dotnet_analyzer_diagnostic` keys set the severity of a whole category or of all analyzers (`dotnet_analyzer_diagnostic.category-Performance.severity`), not of one rule, and the other two forms are not recognized keys.",
+      "materials": [
+        "code-analysis"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`.editorconfig` sets `dotnet_diagnostic.IDE0059.severity = error`. The IDE shows the error, but `dotnet build` in CI succeeds. What is missing?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>` in the project",
+        "`<TreatWarningsAsErrors>true</TreatWarningsAsErrors>` in the project",
+        "A NuGet reference to Microsoft.CodeAnalysis.NetAnalyzers",
+        "Running `dotnet build -c Release`, since IDE rules are skipped in Debug builds"
+      ],
+      "correct": 0,
+      "explanation": "Code style rules (IDExxxx) run in the IDE by default and only run during the build when `EnforceCodeStyleInBuild` is true. `TreatWarningsAsErrors` cannot help because the rule does not run at all in the build, the NetAnalyzers package adds CA rules (which already ship with the SDK), and the build configuration has no effect on which analyzers run.",
+      "materials": [
+        "code-analysis"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which tool shows live values such as CPU usage, GC heap size and exception count of a running .NET process, without restarting it?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`dotnet-dump collect`",
+        "`dotnet-gcdump collect`",
+        "`dotnet-counters monitor`",
+        "`dotnet watch run`"
+      ],
+      "correct": 2,
+      "explanation": "`dotnet-counters monitor -p <pid>` attaches over the diagnostic port and refreshes counters such as those of `System.Runtime` (`collect` writes them to CSV or JSON instead). `dotnet-dump` and `dotnet-gcdump` take one-off snapshots, and `dotnet watch` rebuilds and restarts an app during development.",
+      "materials": [
+        "dotnet-counters"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A Linux service shows high CPU. You want sampled call stacks over 30 seconds from the running process to find the hot methods. Which tool fits?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`dotnet-gcdump collect`",
+        "`dotnet-trace collect`",
+        "`dotnet-counters collect`",
+        "`dotnet-dump collect`"
+      ],
+      "correct": 1,
+      "explanation": "`dotnet-trace collect -p <pid>` records an EventPipe trace (a `.nettrace` file) that includes CPU sampling by default, which you open in PerfView, Visual Studio or speedscope to see hot paths. `dotnet-gcdump` captures the heap object graph, `dotnet-counters` records aggregate numbers without stacks, and `dotnet-dump` captures stacks at one instant only.",
+      "materials": [
+        "dotnet-trace"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A process hangs. You want to inspect every managed thread's stack and see which thread owns which lock, later and on another machine. Which approach fits?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`dotnet-gcdump collect`, then open the `.gcdump` file in Visual Studio's heap view",
+        "`dotnet-trace collect` with the GC and contention providers enabled for a minute",
+        "`dotnet-counters monitor` and watch the monitor lock contention counter",
+        "`dotnet-dump collect`, then `clrstack -all` and `syncblk` in `dotnet-dump analyze`"
+      ],
+      "correct": 3,
+      "explanation": "A full process dump from `dotnet-dump` contains thread stacks and lock state, and `dotnet-dump analyze` runs SOS commands on it anywhere. A `.gcdump` holds only the GC object graph (types, counts, references), not threads. GC trace events and the contention counter show that something waits, but not which thread holds which lock.",
+      "materials": [
+        "dotnet-dump",
+        "dotnet-gcdump"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does adding `[MemoryDiagnoser]` to a BenchmarkDotNet class add to the results?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "A memory-leak report for each benchmark",
+        "The process's peak working set",
+        "Allocated bytes per operation and GC collection counts",
+        "A heap snapshot of the benchmark process"
+      ],
+      "correct": 2,
+      "explanation": "`[MemoryDiagnoser]` adds an `Allocated` column (managed bytes allocated per operation) and Gen0/Gen1/Gen2 collection counts per 1,000 operations. It does not hunt leaks, report working set or take heap snapshots; tools such as `dotnet-gcdump` do those jobs.",
+      "materials": [
+        "bdn-overview"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A BenchmarkDotNet method is `[Benchmark] public void Parse() { int.Parse(\"12345\"); }`. Why can its result be misleading, and what is the fix?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The JIT can remove work whose result is unused; return the value from the method",
+        "Methods returning `void` are measured a single time; add `[IterationCount(100)]`",
+        "String literals are interned, so parsing is cached; build the string with `new string(...)`",
+        "Benchmarks have to be `static`; mark the method `static`"
+      ],
+      "correct": 0,
+      "explanation": "When a benchmark discards its result, the JIT may treat the computation as dead code and the benchmark measures less than intended; returning the value (BenchmarkDotNet consumes it) prevents that. BenchmarkDotNet runs `void` benchmarks many times like any other, interning does not cache `int.Parse` results, and benchmark methods are instance methods.",
+      "materials": [
+        "bdn-practices"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A BenchmarkDotNet class has two `[Benchmark]` methods, `[Params(10, 100)]` and a `[GlobalSetup]` method. With the default configuration, how often does `GlobalSetup` run?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Once, before the first benchmark starts",
+        "Twice, once for each `Params` value",
+        "Four times, once per benchmark and parameter combination",
+        "Before each iteration of each benchmark"
+      ],
+      "correct": 2,
+      "explanation": "BenchmarkDotNet runs each benchmark case (method x parameter values) in a separate process by default, and `[GlobalSetup]` runs once in each, before the jitting, pilot, warmup and measured iterations. With two methods and two values that makes four runs. Running before every iteration is what `[IterationSetup]` does.",
+      "materials": [
+        "bdn-setup",
+        "bdn-overview"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "An app creates spans with `new ActivitySource(\"Shop.Orders\")` and configures OpenTelemetry tracing with an OTLP exporter, but none of these spans are exported. What is the most likely missing piece?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Setting `Activity.DefaultIdFormat = ActivityIdFormat.W3C`",
+        "Calling `.AddSource(\"Shop.Orders\")` on the tracer provider builder",
+        "Calling `Activity.Start()` on each activity returned by `StartActivity`",
+        "Registering the `ActivitySource` as a singleton in DI"
+      ],
+      "correct": 1,
+      "explanation": "The OpenTelemetry tracer provider only listens to sources whose names were added with `AddSource` (wildcards allowed); for other sources `StartActivity` returns `null` and nothing is exported. W3C is already the default ID format, `StartActivity` returns an already started activity, and DI registration has no effect on whether a listener subscribes.",
+      "materials": [
+        "otel-tracing"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "`repo/Directory.Build.props` sets `LangVersion` and `repo/src/Directory.Build.props` sets `Nullable`. A project lives in `repo/src/App/`. Which settings does it get by default?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Both, because MSBuild imports every `Directory.Build.props` up the tree",
+        "Only `LangVersion`, because the file closest to the repository root wins",
+        "Both, but only when the solution file sits in `repo/`",
+        "Only `Nullable`, because MSBuild imports just the nearest file unless that file imports the parent one"
+      ],
+      "correct": 3,
+      "explanation": "MSBuild walks up from the project directory and imports the first `Directory.Build.props` it finds, then stops. To layer files, the inner one must import the outer one explicitly, for example with `$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))`. The location of the solution file plays no part in this lookup.",
+      "materials": [
+        "msbuild-dir"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A library's project file contains `<TargetFrameworks>net8.0;netstandard2.0</TargetFrameworks>`. What does `dotnet build` do?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Builds the project once for each listed framework, into separate output folders",
+        "Builds for `net8.0` and falls back to `netstandard2.0` if that build fails",
+        "Picks the newest installed framework from the list and builds once",
+        "Fails, because the property is named `TargetFramework`"
+      ],
+      "correct": 0,
+      "explanation": "The plural `TargetFrameworks` turns on multi-targeting: the project is compiled once per framework, into `bin/Debug/net8.0/` and `bin/Debug/netstandard2.0/`, and a package built with `dotnet pack` contains both. There is no fallback logic. The singular `TargetFramework` is for a single target, and both names are valid properties.",
+      "materials": [
+        "publish"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A test filters users with `Where(u => u.Email == \"bob@example.com\")`. The stored value is `Bob@example.com`. The query finds the user on SQL Server with its default collation, but not with the EF Core InMemory provider. Why?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The InMemory provider lowercases stored strings, but not the values used in queries",
+        "InMemory compares strings in .NET, case-sensitively; SQL Server's default collation ignores case",
+        "EF Core caches compiled queries per provider, and the InMemory cache entry is stale",
+        "The InMemory provider needs `StringComparison.OrdinalIgnoreCase` configured on the model"
+      ],
+      "correct": 1,
+      "explanation": "The InMemory provider is not a relational database: it runs LINQ with .NET semantics, so `==` on strings is an ordinal, case-sensitive comparison, while the same query on SQL Server uses the column's (typically case-insensitive) collation. This is one reason the EF Core docs discourage the InMemory provider for testing. It does not alter stored strings, query caching does not change results, and there is no such model-wide setting.",
+      "materials": [
+        "ef-testing-strategy"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which project-file setting turns nullable warnings into build errors while leaving other warnings as warnings?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`<TreatWarningsAsErrors>true</TreatWarningsAsErrors>`",
+        "`<Nullable>error</Nullable>`",
+        "`<NoWarn>nullable</NoWarn>`",
+        "`<WarningsAsErrors>nullable</WarningsAsErrors>`"
+      ],
+      "correct": 3,
+      "explanation": "`WarningsAsErrors` takes a list of warning IDs, and `nullable` is a shorthand for all nullable warnings (CS8600, CS8602 and so on), so a `string s = null;` then fails the build with error CS8600. `TreatWarningsAsErrors` promotes every warning, `Nullable` accepts only `enable`, `disable`, `warnings` and `annotations`, and `NoWarn` hides the warnings instead.",
+      "materials": [
+        "errors-warnings"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With the .NET 8 SDK, `dotnet publish` on a project targeting `net8.0` uses the Release configuration when no `-c` option is given.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "True. Starting with the .NET 8 SDK, `PublishRelease` defaults to true for projects targeting .NET 8 or later, so the output lands in `bin/Release/net8.0/publish/`. `dotnet build` and `dotnet run` still default to Debug.",
+      "materials": [
+        "publish"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With the .NET 8 SDK, `dotnet publish -r linux-x64` produces a self-contained app unless you also pass `--self-contained false`.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. Since the .NET 8 SDK, specifying a runtime identifier no longer implies self-contained; the output is framework-dependent with a native `apphost` executable for that RID. Pass `--self-contained` (or set `SelfContained`) to bundle the runtime.",
+      "materials": [
+        "publish",
+        "deploying"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The EF Core InMemory provider rejects `SaveChanges` when a new `Post` has a `BlogId` that matches no existing `Blog`, just as a relational database does.",
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. The InMemory provider does not enforce foreign-key constraints, so the orphaned `Post` is saved. The same code fails with `DbUpdateException` on SQLite or SQL Server, which is why the EF Core docs recommend testing against a real or SQLite database instead.",
+      "materials": [
+        "ef-testing-strategy"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A SQLite database opened with `DataSource=:memory:` keeps its tables and data after its connection is closed, as long as the process is still running.",
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. An in-memory SQLite database lives only as long as its connection; closing it destroys the database. EF Core tests therefore open one `SqliteConnection` themselves, pass it to `UseSqlite(connection)` and keep it open for the whole test; with only a connection string, each context gets a fresh, empty database.",
+      "materials": [
+        "ef-testing-strategy"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "The `HttpClient` returned by `WebApplicationFactory<Program>.CreateClient()` sends requests to an in-memory `TestServer` without the app listening on a network port.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. `WebApplicationFactory` replaces Kestrel with `TestServer`, and the client's handler passes requests straight into the app's pipeline in memory. That makes tests fast and avoids port conflicts; the client's base address is `http://localhost/`.",
+      "materials": [
+        "integration-tests"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `.gcdump` file from `dotnet-gcdump` contains the process's full memory, including native allocations and thread stacks, like a full dump from `dotnet-dump`.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. `dotnet-gcdump` builds a report of the managed GC heap only (object types, counts, sizes and references) from EventPipe events, which is why the file is small. To produce it, the tool triggers a full (generation 2) collection in the target. Thread stacks and native memory need a full dump from `dotnet-dump`.",
+      "materials": [
+        "dotnet-gcdump"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With central package management turned on, a `PackageReference` that also specifies a `Version` attribute makes restore fail with error NU1008.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "True. When `ManagePackageVersionsCentrally` is true, versions belong on `PackageVersion` items in `Directory.Packages.props`, and a `Version` on `PackageReference` triggers NU1008. Overriding on purpose uses `VersionOverride` instead. A `PackageReference` with no matching `PackageVersion` fails with NU1010.",
+      "materials": [
+        "cpm"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "BenchmarkDotNet recommends `[IterationSetup]` for resetting state in microbenchmarks that take only a few nanoseconds per call.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": false,
+      "explanation": "False. `[IterationSetup]` runs before each iteration, adding work around very short measurements, and the BenchmarkDotNet docs advise against it for microbenchmarks because it can spoil the results. Prefer `[GlobalSetup]`, or make each invocation independent of earlier ones.",
+      "materials": [
+        "bdn-setup"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In xUnit, `Assert.Throws<ArgumentException>(...)` passes when the code throws an `ArgumentNullException`.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "False. `Assert.Throws<T>` requires the exact exception type, so a derived `ArgumentNullException` fails with \"Expected: typeof(System.ArgumentException)\". Use `Assert.ThrowsAny<ArgumentException>` to accept derived types, and `Assert.ThrowsAsync` for async code.",
+      "materials": [
+        "xunit-shared"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A Moq mock created with `new Mock<IRepo>()` returns default values such as `0` or `null` for methods that have no setup, instead of throwing.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. The default is `MockBehavior.Loose`: unconfigured members return defaults, and a `Task<int>` method returns a completed task with `0`. Only `MockBehavior.Strict` throws `MockException` for calls without a setup.",
+      "materials": [
+        "moq"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`dotnet test` builds the test project before running the tests, unless you pass `--no-build`.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "True. Like `dotnet run`, `dotnet test` restores and builds first (in the Debug configuration by default), then discovers and runs the tests. `--no-build` skips the build, which is useful in CI when an earlier step already built the solution.",
+      "materials": [
+        "dotnet-test"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which attributes supply argument rows to an xUnit `[Theory]`?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`[InlineData]`",
+        "`[MemberData]`",
+        "`[ClassData]`",
+        "`[TestCaseSource]`",
+        "`[DataRow]`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "xUnit theories get data from `[InlineData]` (constants), `[MemberData]` (a static member) and `[ClassData]` (a class that enumerates rows). `[TestCaseSource]` is NUnit's equivalent of `MemberData`, and `[DataRow]` is MSTest's equivalent of `InlineData`.",
+      "materials": [
+        "xunit-shared"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about the EF Core InMemory provider are true?",
+      "tags": [
+        "C# & .NET",
+        "SQL & Databases"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It saves two rows with the same value in a column configured with a unique index",
+        "`Database.BeginTransaction()` throws by default, because of the `TransactionIgnoredWarning`",
+        "Queries built with `FromSqlRaw` fail, because there is no SQL to run",
+        "It translates LINQ to SQL internally, so translation errors show up in tests",
+        "A second `DbContext` that uses a different database name sees the first context's data"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The InMemory provider is not relational: it does not enforce unique indexes, raises the `TransactionIgnoredWarning` as an exception by default when you start a transaction, and cannot run raw SQL. It never translates to SQL, so translation problems stay hidden until production. Data is shared between contexts only when they use the same database name.",
+      "materials": [
+        "ef-testing-strategy"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about publishing a .NET 8 console app are true?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`dotnet publish -r linux-x64 --self-contained` copies the .NET runtime into the publish folder",
+        "A framework-dependent publish for a runtime identifier still produces a native executable launcher (apphost)",
+        "`PublishSingleFile` can be combined with a framework-dependent publish",
+        "A framework-dependent publish runs on machines that have no .NET runtime installed",
+        "A framework-dependent publish folder contains a copy of the base class library"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Self-contained output bundles the runtime (around 190 files for a console app on linux-x64). Framework-dependent output with a RID still gets an apphost executable, and single-file publishing works in both modes; framework-dependent single-file just needs a shared runtime on the target. A framework-dependent app needs an installed runtime and ships only the app and its NuGet dependencies, not the base class library.",
+      "materials": [
+        "publish",
+        "deploying"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which members can Moq or NSubstitute intercept on the object they generate?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Methods of an interface",
+        "Virtual methods of a non-sealed class",
+        "Abstract members of an abstract class",
+        "Static methods",
+        "Non-virtual instance methods of a class"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Both libraries generate a subclass or interface implementation at run time with Castle DynamicProxy, so they can only override interface, abstract and virtual members. Static and non-virtual methods cannot be overridden by a subclass, so the real code runs; Moq rejects such setups with `NotSupportedException`. Wrap such code behind an interface instead.",
+      "materials": [
+        "moq",
+        "best-practices"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `WebApplicationFactory<Program>` in ASP.NET Core 8 integration tests are true?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Services registered in `ConfigureTestServices` are added after the app's own registrations, so they can replace them",
+        "The client from `CreateClient()` has `http://localhost/` as its base address",
+        "The app's `Program.cs` code runs when the factory first builds the server, for example on the first `CreateClient()`",
+        "The app has to listen on a free TCP port that the test client connects to",
+        "Using it through `IClassFixture<WebApplicationFactory<Program>>` starts a new app for every test method"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`ConfigureTestServices` runs after the app's registrations, so a later registration wins when the app resolves a single service. The factory builds the host lazily by running the entry point, and its client targets `http://localhost/` over `TestServer` with no real port. A class fixture is created once per test class, so all tests in the class share one app.",
+      "materials": [
+        "integration-tests"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which `System.Diagnostics.Metrics` instruments report their values through a callback that runs when metrics are collected?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`ObservableGauge<T>`",
+        "`ObservableCounter<T>`",
+        "`Counter<T>`",
+        "`Histogram<T>`",
+        "`ObservableUpDownCounter<T>`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        4
+      ],
+      "explanation": "Observable (asynchronous) instruments take a callback that a listener or exporter invokes on each collection, which suits values you can read on demand, like queue length. `Counter<T>` and `Histogram<T>` are synchronous: the code calls `Add` or `Record` at the moment something happens.",
+      "materials": [
+        "otel-metrics"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `dotnet-dump` are true?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`dotnet-dump collect -p <pid>` writes a dump of the whole process, including managed heap and thread stacks",
+        "`dotnet-dump analyze` runs SOS commands such as `dumpheap -stat` and `clrstack` on a dump file",
+        "A dump can contain sensitive data from process memory, such as tokens and connection strings",
+        "The target process stays paused for as long as you analyze its dump",
+        "It works only on Windows, because it relies on the Windows debugger engine"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`dotnet-dump` captures a full dump and analyzes it offline with SOS commands, on Linux, macOS and Windows, without native debuggers. The process is suspended only while the dump is written, not during analysis. Because the dump holds raw memory, treat it like secret data.",
+      "materials": [
+        "dotnet-dump"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these files do the .NET SDK and MSBuild pick up automatically, based only on their name and location?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Directory.Build.props`",
+        "`Directory.Build.targets`",
+        "`global.json`",
+        "`project.json`",
+        "`Directory.Build.csproj`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "MSBuild imports the nearest `Directory.Build.props` early and the nearest `Directory.Build.targets` late, and the `dotnet` host reads `global.json` to choose an SDK version. `project.json` was the pre-MSBuild project format of early .NET Core previews and is ignored today, and `Directory.Build.csproj` is not a recognized name.",
+      "materials": [
+        "msbuild-dir"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these make BenchmarkDotNet results unreliable or impossible to get?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Running the benchmarks from a Debug build",
+        "Discarding the computed result inside the benchmark method",
+        "Using `const` inputs, so the JIT can fold the computation into a constant",
+        "Adding `[MemoryDiagnoser]` to the class",
+        "Using `[Params]` with several values"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "BenchmarkDotNet refuses a non-optimized (Debug) assembly, and unused results or constant inputs let the JIT remove or precompute the work being measured. `[MemoryDiagnoser]` has negligible overhead on timings, and `[Params]` just multiplies the benchmark cases, each measured independently.",
+      "materials": [
+        "bdn-practices"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about code coverage in .NET test projects are true?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "100% line coverage does not guarantee that every branch of a condition was exercised",
+        "`dotnet test --collect:\"XPlat Code Coverage\"` with the coverlet.collector package writes a Cobertura XML report",
+        "`[ExcludeFromCodeCoverage]` leaves the marked type or member out of the coverage report",
+        "High coverage shows that the tests assert the correct results",
+        "`dotnet test` collects coverage on every run unless coverage is turned off"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Line coverage counts executed lines, so a line like `if (a && b)` can be covered without testing every branch. The coverlet collector writes `coverage.cobertura.xml` under `TestResults/<guid>/` when asked with `--collect`, and `[ExcludeFromCodeCoverage]` removes code from the report. Coverage says nothing about assertions, and it is off unless requested.",
+      "materials": [
+        "coverage"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `TimeProvider` in .NET 8 are true?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It is an abstract class in the `System` namespace",
+        "`TimeProvider.System` returns an instance backed by the system clock",
+        "`FakeTimeProvider` ships in the Microsoft.Extensions.TimeProvider.Testing package",
+        "It is an interface named `ITimeProvider` that classes implement",
+        "Once a `FakeTimeProvider` exists, `DateTime.UtcNow` returns its time"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`TimeProvider` is an abstract class (it can gain members without breaking implementers) with `TimeProvider.System` as the real implementation, and `FakeTimeProvider` in Microsoft.Extensions.TimeProvider.Testing lets tests set and advance time. Only code that asks the provider for time sees fake time; `DateTime.UtcNow` keeps reading the system clock.",
+      "materials": [
+        "timeprovider"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about .NET code analyzers in an SDK-style project targeting .NET 8 are true?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The code quality analyzers (CA rules) ship with the .NET SDK, so no package is needed",
+        "`AnalysisLevel` or `AnalysisMode` in the project file changes which CA rules are enabled and at what severity",
+        "Analyzers referenced as NuGet packages run as part of `dotnet build`",
+        "CA1822 (\"mark members as static\") reports a build warning by default",
+        "Analyzers run inside Visual Studio and are skipped by the command-line build"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The .NET analyzers come with the SDK and run during the compiler pass on the command line too; `AnalysisLevel` and `AnalysisMode` widen or narrow the default rule set. Many rules, CA1822 included, are only suggestions by default, so the build stays silent until you raise their severity, for example in `.editorconfig`.",
+      "materials": [
+        "code-analysis"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about logging performance with `Microsoft.Extensions.Logging` are true?",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`logger.LogDebug($\"Order {id}\")` builds the string even when Debug logging is disabled",
+        "The `[LoggerMessage]` source generator emits code that checks `IsEnabled` and avoids boxing value-type arguments",
+        "`[LoggerMessage]` methods have to be declared `partial`",
+        "`logger.LogDebug(\"Order {Id}\", Compute())` skips calling `Compute()` when Debug logging is disabled",
+        "With `[LoggerMessage]`, the message template is parsed again on every call"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "An interpolated string is built at the call site before the logger can check the level, and arguments like `Compute()` are always evaluated, so expensive values need an `IsEnabled` guard. The source generator fills in a `partial` method with strongly typed parameters, an `IsEnabled` check and a template parsed once at compile time.",
+      "materials": [
+        "logging-gen"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about running xUnit tests are true?",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`[Fact(Skip = \"reason\")]` reports the test as skipped instead of running it",
+        "Tests marked `[Trait(\"Category\", \"Slow\")]` can be selected with `dotnet test --filter \"Category=Slow\"`",
+        "`[Ignore]` is the xUnit attribute for skipping a test",
+        "`[Fact(Repeat = 3)]` runs a test three times"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "`Skip` on `[Fact]` or `[Theory]` marks the test skipped with a reason, and xUnit traits are exposed as filter properties, so `Category=Slow` selects them. `[Ignore]` belongs to NUnit and MSTest, and `[Fact]` has no `Repeat` property.",
+      "materials": [
+        "dotnet-test",
+        "xunit-shared"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "An xUnit v2 test class implements `IClassFixture<DbFixture>`, `IAsyncLifetime` and nothing else, and has a single test. Order these calls, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`DbFixture` constructor",
+        "Test class constructor",
+        "`InitializeAsync` on the test class",
+        "`DisposeAsync` on the test class",
+        "`Dispose` on `DbFixture`"
+      ],
+      "explanation": "xUnit creates the class fixture before the first test of the class, then constructs the test class (receiving the fixture), awaits `InitializeAsync`, runs the test, and awaits `DisposeAsync`. The fixture is disposed only after all tests in the class have finished.",
+      "materials": [
+        "xunit-shared"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "An MSTest class has two test methods. For the first test that runs, order these calls, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`[ClassInitialize]` method",
+        "Test class constructor",
+        "`[TestInitialize]` method",
+        "The `[TestMethod]`",
+        "`[TestCleanup]` method"
+      ],
+      "explanation": "`[ClassInitialize]` is static and runs once before any test in the class. Then, for each test, MSTest constructs a new instance, runs `[TestInitialize]`, the test and `[TestCleanup]`. `[ClassCleanup]` comes after the last test.",
+      "materials": [
+        "mstest-attrs"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these NuGet package versions from lowest to highest precedence.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "1.0.0-alpha",
+        "1.0.0-alpha.1",
+        "1.0.0-beta",
+        "1.0.0-rc.1",
+        "1.0.0"
+      ],
+      "explanation": "NuGet follows SemVer 2.0 ordering: any pre-release of a version is lower than the release itself, and pre-release labels are compared part by part. `alpha` is lower than `alpha.1` because it has fewer parts, `alpha` sorts before `beta` and `rc` alphabetically, and plain `1.0.0` comes last.",
+      "materials": [
+        "nuget-versioning"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A project in an SDK-style build has `Directory.Build.props`, `Directory.Packages.props` and `Directory.Build.targets` above it. Order these as MSBuild evaluates them, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`Directory.Build.props`",
+        "`Directory.Packages.props`",
+        "The `PropertyGroup` in the `.csproj`",
+        "`Directory.Build.targets`"
+      ],
+      "explanation": "`Directory.Build.props` is imported by Microsoft.Common.props near the very start, `Directory.Packages.props` follows during the props phase, then the project file's own content is evaluated. `Directory.Build.targets` is imported by Microsoft.Common.targets after the project body, so it can read properties that the `.csproj` set.",
+      "materials": [
+        "msbuild-dir",
+        "cpm"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "BenchmarkDotNet measures one benchmark case with the default job. Order these stages, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`[GlobalSetup]` method runs",
+        "Pilot stage picks how many invocations go into one iteration",
+        "Warmup iterations run",
+        "Measured (actual) workload iterations run",
+        "`[GlobalCleanup]` method runs"
+      ],
+      "explanation": "In the benchmark's own process, BenchmarkDotNet first calls `[GlobalSetup]`, jits the method, uses a pilot stage to choose an invocation count that makes iterations long enough to time, warms up, then runs the measured iterations (overhead is also measured and subtracted). `[GlobalCleanup]` runs last.",
+      "materials": [
+        "bdn-setup",
+        "bdn-overview"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "A test uses `new WebApplicationFactory<Program>().WithWebHostBuilder(b => { b.ConfigureServices(...); b.ConfigureTestServices(...); })` against a .NET 8 minimal-hosting app, then calls `CreateClient()`. Order these events, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`WebApplication.CreateBuilder(args)` returns in `Program.cs`",
+        "`Program.cs` registers its own services on `builder.Services`",
+        "The factory's `ConfigureServices` callback runs",
+        "The factory's `ConfigureTestServices` callback runs",
+        "`builder.Build()` returns in `Program.cs`"
+      ],
+      "explanation": "With minimal hosting, the factory runs the real entry point and applies its callbacks when the app calls `Build()`: after `Program.cs` has made its registrations, `ConfigureServices` runs, then `ConfigureTestServices`, and only then does `Build()` return. This is why test registrations override the app's.",
+      "materials": [
+        "integration-tests"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "An `ActivityListener` that samples everything is registered, then `new ActivitySource(\"S\")` is created and `using (var a = source.StartActivity(\"op\")) { ... }` runs. Order these, first to last.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`ShouldListenTo` is called for source \"S\"",
+        "`Sample` is called for \"op\"",
+        "`ActivityStarted` is called",
+        "The code inside the `using` block runs",
+        "`ActivityStopped` is called"
+      ],
+      "explanation": "Creating the source asks every registered listener's `ShouldListenTo` whether it wants that source. `StartActivity` then asks `Sample` whether to create the activity, starts it and raises `ActivityStarted`. Disposing the activity at the end of the `using` block stops it and raises `ActivityStopped`.",
+      "materials": [
+        "otel-tracing"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: `StartActivity` before and after an `ActivityListener` is registered.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "code": "using System.Diagnostics;\n\nvar source = new ActivitySource(\"Shop.Orders\");\n\nusing (var a = source.StartActivity(\"before-listener\"))\n    Console.WriteLine(a is null ? \"null\" : a.OperationName);\n\nusing var listener = new ActivityListener\n{\n    ShouldListenTo = s => s.Name == \"Shop.Orders\",\n    Sample = (ref ActivityCreationOptions<ActivityContext> _) => ActivitySamplingResult.AllDataAndRecorded\n};\nActivitySource.AddActivityListener(listener);\n\nusing (var b = source.StartActivity(\"after-listener\"))\n    Console.WriteLine(b is null ? \"null\" : b.OperationName);\n\nvar other = new ActivitySource(\"Shop.Payments\");\nusing (var c = other.StartActivity(\"other-source\"))\n    Console.WriteLine(c is null ? \"null\" : c.OperationName);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "null\nafter-listener\nnull\n",
+      "explanation": "Without a listener interested in a source, `StartActivity` returns `null`, which is why instrumentation uses `?.` on activities. After the listener subscribes to \"Shop.Orders\" and samples everything, a real activity is created. \"Shop.Payments\" is not matched by `ShouldListenTo`, so it still returns `null`, which is what happens in OpenTelemetry when a source is not added with `AddSource`.",
+      "materials": [
+        "otel-tracing"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a child activity started while a parent is current.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "code": "using System.Diagnostics;\n\nvar source = new ActivitySource(\"Demo\");\nActivitySource.AddActivityListener(new ActivityListener\n{\n    ShouldListenTo = _ => true,\n    Sample = (ref ActivityCreationOptions<ActivityContext> _) => ActivitySamplingResult.AllDataAndRecorded\n});\n\nusing var parent = source.StartActivity(\"parent\")!;\nusing (var child = source.StartActivity(\"child\")!)\n{\n    Console.WriteLine(Activity.Current?.OperationName);\n    Console.WriteLine(child.TraceId == parent.TraceId);\n    Console.WriteLine(child.SpanId == parent.SpanId);\n    Console.WriteLine(child.ParentSpanId == parent.SpanId);\n}\nConsole.WriteLine(Activity.Current?.OperationName);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "child\nTrue\nFalse\nTrue\nparent\n",
+      "explanation": "`StartActivity` uses `Activity.Current` as the parent, so the child shares the parent's `TraceId`, gets its own `SpanId` and records the parent's span ID as `ParentSpanId`. Disposing the child restores the parent as `Activity.Current`. This is how one trace ID ties together spans within and across services.",
+      "materials": [
+        "otel-tracing"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a `MeterListener` that starts after the first measurement.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "code": "using System.Diagnostics.Metrics;\n\nusing var meter = new Meter(\"Shop\");\nvar orders = meter.CreateCounter<int>(\"orders\");\n\nlong total = 0, eu = 0;\nusing var listener = new MeterListener();\nlistener.InstrumentPublished = (inst, l) => { if (inst.Meter.Name == \"Shop\") l.EnableMeasurementEvents(inst); };\nlistener.SetMeasurementEventCallback<int>((inst, value, tags, state) =>\n{\n    total += value;\n    foreach (var t in tags)\n        if (t.Key == \"region\" && (string?)t.Value == \"eu\") eu += value;\n});\n\norders.Add(2, new KeyValuePair<string, object?>(\"region\", \"eu\"));\nlistener.Start();\norders.Add(3, new KeyValuePair<string, object?>(\"region\", \"eu\"));\norders.Add(5, new KeyValuePair<string, object?>(\"region\", \"us\"));\n\nConsole.WriteLine(total);\nConsole.WriteLine(eu);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "8\n3\n",
+      "explanation": "Measurements are delivered only while a listener is started and has enabled the instrument; the first `Add(2)` happens before `Start()` and is lost, not buffered. The listener then sees 3 (eu) and 5 (us), so the total is 8 and the eu sum is 3. Tags arrive with each measurement as key/value pairs.",
+      "materials": [
+        "otel-metrics"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: an observable gauge and `RecordObservableInstruments`.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "code": "using System.Diagnostics.Metrics;\n\nint calls = 0;\nusing var meter = new Meter(\"Queue\");\nmeter.CreateObservableGauge(\"queue.length\", () => { calls++; return 42; });\n\nint last = 0;\nusing var listener = new MeterListener();\nlistener.InstrumentPublished = (inst, l) => l.EnableMeasurementEvents(inst);\nlistener.SetMeasurementEventCallback<int>((inst, value, tags, state) => last = value);\nlistener.Start();\n\nConsole.WriteLine($\"{calls} {last}\");\nlistener.RecordObservableInstruments();\nlistener.RecordObservableInstruments();\nConsole.WriteLine($\"{calls} {last}\");\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "0 0\n2 42\n",
+      "explanation": "An observable instrument's callback runs only when a listener asks for values. Starting the listener does not call it, so the first line is `0 0`. Each `RecordObservableInstruments()` call invokes the callback once and delivers 42, which gives `2 42`. Exporters such as OpenTelemetry trigger this collection on their export interval.",
+      "materials": [
+        "otel-metrics"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a listener that enables only histogram instruments.",
+      "tags": [
+        "C# & .NET",
+        "Performance & Memory"
+      ],
+      "difficulty": "hard",
+      "code": "using System.Diagnostics.Metrics;\n\nusing var meter = new Meter(\"Api\");\nvar latency = meter.CreateHistogram<double>(\"request.duration\", unit: \"ms\");\nvar inFlight = meter.CreateUpDownCounter<int>(\"requests.active\");\n\nvar seen = new List<string>();\nusing var listener = new MeterListener();\nlistener.InstrumentPublished = (inst, l) => { if (inst is Histogram<double>) l.EnableMeasurementEvents(inst); };\nlistener.SetMeasurementEventCallback<double>((inst, v, tags, s) => seen.Add($\"{inst.Name}={v}\"));\nlistener.SetMeasurementEventCallback<int>((inst, v, tags, s) => seen.Add($\"{inst.Name}={v}\"));\nlistener.Start();\n\ninFlight.Add(1);\nlatency.Record(12);\nlatency.Record(7);\ninFlight.Add(-1);\n\nConsole.WriteLine(seen.Count);\nConsole.WriteLine(string.Join(\", \", seen));\nConsole.WriteLine(latency.Unit);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "2\nrequest.duration=12, request.duration=7\nms\n",
+      "explanation": "`InstrumentPublished` enables measurement events only for the `Histogram<double>`, so the `UpDownCounter<int>` calls are ignored even though an `int` callback is set. The two `Record` calls arrive with their values, and `Unit` returns the unit given when the instrument was created.",
+      "materials": [
+        "otel-metrics"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: testing expiry with a hand-written `TimeProvider`.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "code": "var clock = new ManualClock(new DateTimeOffset(2024, 1, 1, 12, 0, 0, TimeSpan.Zero));\nvar token = new Token(clock.GetUtcNow().AddMinutes(30), clock);\n\nConsole.WriteLine(token.IsExpired);\nclock.Now = clock.Now.AddMinutes(30);\nConsole.WriteLine(token.IsExpired);\nclock.Now = clock.Now.AddTicks(1);\nConsole.WriteLine(token.IsExpired);\n\nsealed class ManualClock(DateTimeOffset start) : TimeProvider\n{\n    public DateTimeOffset Now { get; set; } = start;\n    public override DateTimeOffset GetUtcNow() => Now;\n}\n\nsealed class Token(DateTimeOffset expiresAt, TimeProvider time)\n{\n    public bool IsExpired => time.GetUtcNow() > expiresAt;\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "False\nFalse\nTrue\n",
+      "explanation": "Because `Token` reads time through the injected `TimeProvider`, the test controls the clock. At exactly 30 minutes `GetUtcNow() > expiresAt` is still false, and one tick later it is true. This boundary check would be flaky with `DateTimeOffset.UtcNow`; `FakeTimeProvider` gives the same control without a hand-written class.",
+      "materials": [
+        "timeprovider"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a stub and a spy passed to the code under test.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "easy",
+      "code": "var stub = new StubRates(2m);\nvar spy = new SpyAudit();\nvar service = new Converter(stub, spy);\n\nConsole.WriteLine(service.ToEur(100m));\nConsole.WriteLine(service.ToEur(0m));\nConsole.WriteLine(spy.Calls.Count);\nConsole.WriteLine(string.Join(\"|\", spy.Calls));\n\ninterface IRates { decimal UsdToEur(); }\ninterface IAudit { void Record(string message); }\n\nclass StubRates(decimal rate) : IRates { public decimal UsdToEur() => rate; }\nclass SpyAudit : IAudit\n{\n    public List<string> Calls { get; } = new();\n    public void Record(string message) => Calls.Add(message);\n}\n\nclass Converter(IRates rates, IAudit audit)\n{\n    public decimal ToEur(decimal usd)\n    {\n        if (usd == 0) return 0;\n        var eur = usd * rates.UsdToEur();\n        audit.Record($\"{usd}->{eur}\");\n        return eur;\n    }\n}\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "200\n0\n1\n100->200\n",
+      "explanation": "`StubRates` only supplies a canned rate of 2, so 100 converts to 200. `SpyAudit` records calls so the test can check the interaction afterwards. The early return for 0 skips the audit, so exactly one call, `100->200`, was recorded.",
+      "materials": [
+        "best-practices"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: a sampler that returns `PropagationData` for one operation.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "code": "using System.Diagnostics;\n\nvar source = new ActivitySource(\"Sampled\");\nActivitySource.AddActivityListener(new ActivityListener\n{\n    ShouldListenTo = _ => true,\n    Sample = (ref ActivityCreationOptions<ActivityContext> o) =>\n        o.Name == \"health\" ? ActivitySamplingResult.PropagationData : ActivitySamplingResult.AllDataAndRecorded\n});\n\nusing (var a = source.StartActivity(\"health\"))\n    Console.WriteLine($\"{a is null} {a?.IsAllDataRequested} {a?.Recorded}\");\n\nusing (var b = source.StartActivity(\"checkout\"))\n    Console.WriteLine($\"{b is null} {b?.IsAllDataRequested} {b?.Recorded}\");\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "False False False\nFalse True True\n",
+      "explanation": "`PropagationData` still creates an activity, so context can flow to downstream calls, but `IsAllDataRequested` and `Recorded` are false, so instrumentation should skip expensive tags and exporters drop it. `AllDataAndRecorded` gives a fully recorded activity. Only `ActivitySamplingResult.None` makes `StartActivity` return `null`.",
+      "materials": [
+        "otel-tracing"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: the parts of a W3C activity ID.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "medium",
+      "code": "using System.Diagnostics;\n\nActivity.DefaultIdFormat = ActivityIdFormat.W3C;\nActivity.ForceDefaultIdFormat = true;\n\nvar activity = new Activity(\"incoming\").Start();\nvar parts = activity.Id!.Split('-');\n\nConsole.WriteLine(parts.Length);\nConsole.WriteLine(parts[0]);\nConsole.WriteLine($\"{parts[1].Length} {parts[2].Length}\");\nConsole.WriteLine(parts[1] == activity.TraceId.ToHexString());\nConsole.WriteLine(parts[2] == activity.SpanId.ToHexString());\nConsole.WriteLine(parts[3]);\nactivity.Stop();\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "4\n00\n32 16\nTrue\nTrue\n00\n",
+      "explanation": "A W3C ID is `version-traceid-spanid-flags`: version `00`, a 32-hex-digit trace ID, a 16-hex-digit span ID and two hex digits of flags. It matches the `traceparent` header sent to other services. The flags are `00` here because an activity started directly, without a sampling listener, is not marked as recorded.",
+      "materials": [
+        "otel-tracing"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "Predict the output: tags versus baggage on a parent activity.",
+      "tags": [
+        "C# & .NET",
+        "Testing & Operations"
+      ],
+      "difficulty": "hard",
+      "code": "using System.Diagnostics;\n\nvar parent = new Activity(\"parent\");\nparent.SetTag(\"tenant\", \"acme\");\nparent.SetBaggage(\"user\", \"42\");\nparent.Start();\n\nvar child = new Activity(\"child\").Start();\nConsole.WriteLine(child.GetTagItem(\"tenant\") ?? \"(none)\");\nConsole.WriteLine(child.GetBaggageItem(\"user\") ?? \"(none)\");\nConsole.WriteLine(child.Parent?.OperationName);\nchild.Stop();\nparent.Stop();\nConsole.WriteLine(Activity.Current is null);\n",
+      "codeLanguage": "csharp",
+      "expectedOutput": "(none)\n42\nparent\nTrue\n",
+      "explanation": "Tags belong to one activity only, so the child sees no `tenant` tag. Baggage is inherited by child activities (and propagated across process boundaries), so the child reads `user` = 42. The child's `Parent` is the activity that was current when it started, and once both stop `Activity.Current` is null again.",
+      "materials": [
+        "otel-tracing"
+      ]
+    }
+  ]
+}
