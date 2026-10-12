@@ -1,0 +1,1953 @@
+{
+  "name": "JavaScript: TypeScript",
+  "materials": [
+    {
+      "key": "everyday",
+      "type": "article",
+      "title": "Everyday Types",
+      "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html",
+      "author": "TypeScript Handbook",
+      "description": "Primitives, any, unions, type aliases, interfaces, literal types and non-null assertions."
+    },
+    {
+      "key": "narrowing",
+      "type": "article",
+      "title": "Narrowing",
+      "url": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html",
+      "author": "TypeScript Handbook",
+      "description": "typeof, truthiness, in, instanceof, type predicates, discriminated unions and never."
+    },
+    {
+      "key": "functions",
+      "type": "article",
+      "title": "More on Functions",
+      "url": "https://www.typescriptlang.org/docs/handbook/2/functions.html",
+      "author": "TypeScript Handbook",
+      "description": "Function types, generics in functions, overloads, unknown, never and void."
+    },
+    {
+      "key": "objects",
+      "type": "article",
+      "title": "Object Types",
+      "url": "https://www.typescriptlang.org/docs/handbook/2/objects.html",
+      "author": "TypeScript Handbook",
+      "description": "Optional and readonly properties, excess property checks, extending and intersecting, tuples."
+    },
+    {
+      "key": "generics",
+      "type": "article",
+      "title": "Generics",
+      "url": "https://www.typescriptlang.org/docs/handbook/2/generics.html",
+      "author": "TypeScript Handbook",
+      "description": "Generic functions, constraints, defaults and using type parameters in constraints."
+    },
+    {
+      "key": "keyof",
+      "type": "article",
+      "title": "Keyof Type Operator",
+      "url": "https://www.typescriptlang.org/docs/handbook/2/keyof-types.html",
+      "author": "TypeScript Handbook",
+      "description": "How keyof produces a union of an object type's keys."
+    },
+    {
+      "key": "typeof",
+      "type": "article",
+      "title": "Typeof Type Operator",
+      "url": "https://www.typescriptlang.org/docs/handbook/2/typeof-types.html",
+      "author": "TypeScript Handbook",
+      "description": "Using typeof in a type position to refer to the type of a value."
+    },
+    {
+      "key": "indexed",
+      "type": "article",
+      "title": "Indexed Access Types",
+      "url": "https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html",
+      "author": "TypeScript Handbook",
+      "description": "Looking up property types with T[K], including T[number] for arrays."
+    },
+    {
+      "key": "conditional",
+      "type": "article",
+      "title": "Conditional Types",
+      "url": "https://www.typescriptlang.org/docs/handbook/2/conditional-types.html",
+      "author": "TypeScript Handbook",
+      "description": "Conditional types, infer, and distribution over unions."
+    },
+    {
+      "key": "mapped",
+      "type": "article",
+      "title": "Mapped Types",
+      "url": "https://www.typescriptlang.org/docs/handbook/2/mapped-types.html",
+      "author": "TypeScript Handbook",
+      "description": "Mapped types, readonly and optional modifiers, and key remapping with as."
+    },
+    {
+      "key": "template",
+      "type": "article",
+      "title": "Template Literal Types",
+      "url": "https://www.typescriptlang.org/docs/handbook/2/template-literal-types.html",
+      "author": "TypeScript Handbook",
+      "description": "Template literal types, union cross products and intrinsic string types."
+    },
+    {
+      "key": "classes",
+      "type": "article",
+      "title": "Classes",
+      "url": "https://www.typescriptlang.org/docs/handbook/2/classes.html",
+      "author": "TypeScript Handbook",
+      "description": "Fields, access modifiers, parameter properties, abstract classes and #private."
+    },
+    {
+      "key": "modules",
+      "type": "article",
+      "title": "Modules",
+      "url": "https://www.typescriptlang.org/docs/handbook/2/modules.html",
+      "author": "TypeScript Handbook",
+      "description": "ES module syntax in TypeScript, including import type."
+    },
+    {
+      "key": "utility",
+      "type": "article",
+      "title": "Utility Types",
+      "url": "https://www.typescriptlang.org/docs/handbook/utility-types.html",
+      "author": "TypeScript Handbook",
+      "description": "Reference for Partial, Required, Pick, Omit, Record, ReturnType, Awaited, NonNullable and more."
+    },
+    {
+      "key": "enums",
+      "type": "article",
+      "title": "Enums",
+      "url": "https://www.typescriptlang.org/docs/handbook/enums.html",
+      "author": "TypeScript Handbook",
+      "description": "Numeric and string enums, reverse mappings and const enums."
+    },
+    {
+      "key": "compat",
+      "type": "article",
+      "title": "Type Compatibility",
+      "url": "https://www.typescriptlang.org/docs/handbook/type-compatibility.html",
+      "author": "TypeScript Handbook",
+      "description": "Structural typing, assignability, and parameter bivariance."
+    },
+    {
+      "key": "inference",
+      "type": "article",
+      "title": "Type Inference",
+      "url": "https://www.typescriptlang.org/docs/handbook/type-inference.html",
+      "author": "TypeScript Handbook",
+      "description": "Best common type and contextual typing."
+    },
+    {
+      "key": "merging",
+      "type": "article",
+      "title": "Declaration Merging",
+      "url": "https://www.typescriptlang.org/docs/handbook/declaration-merging.html",
+      "author": "TypeScript Handbook",
+      "description": "How interfaces, namespaces and other declarations merge."
+    },
+    {
+      "key": "dts",
+      "type": "article",
+      "title": "Declaration Files: Introduction",
+      "url": "https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html",
+      "author": "TypeScript Handbook",
+      "description": "What .d.ts files are and how to write them."
+    },
+    {
+      "key": "consumption",
+      "type": "article",
+      "title": "Consuming Declaration Files",
+      "url": "https://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html",
+      "author": "TypeScript Handbook",
+      "description": "Getting types for libraries from npm @types packages."
+    },
+    {
+      "key": "tsconfig",
+      "type": "article",
+      "title": "TSConfig Reference",
+      "url": "https://www.typescriptlang.org/tsconfig/",
+      "author": "TypeScript",
+      "description": "Every compiler option, including strict, target, module, lib and moduleResolution."
+    },
+    {
+      "key": "modtheory",
+      "type": "article",
+      "title": "Modules - Theory",
+      "url": "https://www.typescriptlang.org/docs/handbook/modules/theory.html",
+      "author": "TypeScript Handbook",
+      "description": "How TypeScript models module systems, output format and module resolution."
+    },
+    {
+      "key": "ts37",
+      "type": "article",
+      "title": "TypeScript 3.7 Release Notes",
+      "url": "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html",
+      "author": "TypeScript",
+      "description": "Introduces assertion functions, optional chaining and nullish coalescing."
+    },
+    {
+      "key": "ts41",
+      "type": "article",
+      "title": "TypeScript 4.1 Release Notes",
+      "url": "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-1.html",
+      "author": "TypeScript",
+      "description": "Introduces template literal types and key remapping in mapped types."
+    },
+    {
+      "key": "ts49",
+      "type": "article",
+      "title": "TypeScript 4.9 Release Notes",
+      "url": "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-9.html",
+      "author": "TypeScript",
+      "description": "Introduces the satisfies operator and unlisted property narrowing with in."
+    },
+    {
+      "key": "ts50",
+      "type": "article",
+      "title": "TypeScript 5.0 Release Notes",
+      "url": "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html",
+      "author": "TypeScript",
+      "description": "Introduces const type parameters, verbatimModuleSyntax and standard decorators."
+    },
+    {
+      "key": "ts55",
+      "type": "article",
+      "title": "TypeScript 5.5 Release Notes",
+      "url": "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-5.html",
+      "author": "TypeScript",
+      "description": "Introduces inferred type predicates and control-flow narrowing for constant indexed accesses."
+    },
+    {
+      "key": "dt",
+      "type": "article",
+      "title": "DefinitelyTyped",
+      "url": "https://github.com/DefinitelyTyped/DefinitelyTyped",
+      "author": "DefinitelyTyped",
+      "description": "The repository of community-maintained @types declaration packages."
+    },
+    {
+      "key": "mdnprivate",
+      "type": "article",
+      "title": "Private properties",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_properties",
+      "author": "MDN Web Docs",
+      "description": "JavaScript #private class members and how they are enforced at run time."
+    },
+    {
+      "key": "typesfromtypes",
+      "type": "article",
+      "title": "Creating Types from Types",
+      "url": "https://www.typescriptlang.org/docs/handbook/2/types-from-types.html",
+      "author": "TypeScript Handbook",
+      "description": "Overview of generics, keyof, typeof, indexed access, conditional, mapped and template literal types."
+    }
+  ],
+  "questions": [
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `tsc --strict` report for this code?\n\n```ts\ninterface Point { x: number; y: number }\nclass Vec {\n  constructor(public x: number, public y: number) {}\n}\nconst p: Point = new Vec(1, 2);\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "TS2741, because `Vec` is missing the `Point` brand",
+        "No error, because `Vec` has every member that `Point` requires",
+        "TS2322, because `Vec` does not declare `implements Point`",
+        "TS2352, because a class instance needs a cast to an interface"
+      ],
+      "correct": 1,
+      "explanation": "TypeScript is structurally typed: a value is assignable to `Point` if it has compatible `x` and `y` members, whatever class created it. `implements` is an optional check on the class declaration, not a requirement for assignability. There is no nominal brand on interfaces, so no cast is needed.",
+      "materials": [
+        "compat"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What types does TypeScript infer for `a` and `b`?\n\n```ts\nlet a = \"hi\";\nconst b = \"hi\";\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`a: string` and `b: string`",
+        "`a: \"hi\"` and `b: \"hi\"`",
+        "`a: string` and `b: \"hi\"`",
+        "`a: \"hi\"` and `b: string`"
+      ],
+      "correct": 2,
+      "explanation": "A `const` binding can never be reassigned, so TypeScript keeps the literal type `\"hi\"`. A `let` binding may later hold another string, so its type is widened to `string`. Widening happens on the mutable declaration, not the constant one.",
+      "materials": [
+        "inference",
+        "everyday"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "This fails with TS2345 (`Type 'string' is not assignable to type '\"circle\"'`). Which single change makes it compile?\n\n```ts\nfunction draw(s: { kind: \"circle\" }) {}\nconst shape = { kind: \"circle\" };\ndraw(shape);\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`const shape = { kind: \"circle\" } as const;`",
+        "`let shape = { kind: \"circle\" };`",
+        "`const shape = Object.assign({}, { kind: \"circle\" });`",
+        "`const shape = { kind: String(\"circle\") };`"
+      ],
+      "correct": 0,
+      "explanation": "Properties of an object literal are mutable, so `kind` is widened to `string` even though `shape` is `const`. `as const` keeps the literal type `\"circle\"` (and makes the property `readonly`). Switching to `let` changes nothing about the property, `Object.assign` still infers `string`, and `String(...)` returns `string`.",
+      "materials": [
+        "everyday",
+        "inference"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What type does TypeScript infer for `x`?\n\n```ts\nfunction first<T>(arr: T[]): T | undefined {\n  return arr[0];\n}\nconst x = first([1, \"a\"]);\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`number | undefined`",
+        "`unknown`",
+        "`[number, string] | undefined`",
+        "`string | number | undefined`"
+      ],
+      "correct": 3,
+      "explanation": "The array literal `[1, \"a\"]` is inferred as `(string | number)[]`, so `T` becomes `string | number` and the return type is `string | number | undefined`. TypeScript does not pick only the first element's type, and an array literal passed to `T[]` is not inferred as a tuple. `unknown` would only appear if there were no inference candidates.",
+      "materials": [
+        "generics",
+        "inference"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `tsc --strict` report for this function?\n\n```ts\nfunction format(x: unknown) {\n  return x.toFixed(2);\n}\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "No error; `unknown` behaves like `any` for member access",
+        "TS18046: `'x' is of type 'unknown'`",
+        "TS7006: `Parameter 'x' implicitly has an 'any' type`",
+        "TS2339: `Property 'toFixed' does not exist on type 'object'`"
+      ],
+      "correct": 1,
+      "explanation": "`unknown` is the type-safe top type: anything can be assigned to it, but you cannot use it until you narrow it, so TS18046 is reported on `x.toFixed`. `any` would allow the call silently. TS7006 is about missing annotations, and `x` is explicitly annotated here.",
+      "materials": [
+        "functions",
+        "narrowing"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "A new member `\"triangle\"` is added to `Shape`, but `area` is not updated. What happens?\n\n```ts\ntype Shape = \"circle\" | \"square\" | \"triangle\";\nfunction area(s: Shape): number {\n  switch (s) {\n    case \"circle\": return 3.14;\n    case \"square\": return 1;\n    default:\n      const unreachable: never = s;\n      return unreachable;\n  }\n}\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It compiles, and `area(\"triangle\")` returns `undefined` at run time",
+        "TS2322: `Type 'string' is not assignable to type 'never'`",
+        "TS2322: `Type '\"triangle\"' is not assignable to type 'never'`",
+        "TS2366: `Function lacks ending return statement`"
+      ],
+      "correct": 2,
+      "explanation": "After the two `case` branches, `s` is narrowed to the remaining member `\"triangle\"`, which cannot be assigned to `never`, so tsc reports TS2322 naming that literal. This is the exhaustiveness-check pattern. The error mentions the leftover literal, not `string`, and the `default` branch returns, so there is no missing-return error.",
+      "materials": [
+        "narrowing"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What is the type of `pet` on the line marked `// here`?\n\n```ts\ninterface Fish { swim(): void }\ninterface Bird { fly(): void }\nfunction isFish(pet: Fish | Bird): pet is Fish {\n  return \"swim\" in pet;\n}\nfunction move(pet: Fish | Bird) {\n  if (isFish(pet)) pet.swim();\n  else pet; // here\n}\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Fish | Bird`",
+        "`Fish & Bird`",
+        "`Bird`",
+        "`Fish`"
+      ],
+      "correct": 2,
+      "explanation": "A user-defined type guard with return type `pet is Fish` narrows the argument to `Fish` when it returns true and removes `Fish` from the union when it returns false. So the `else` branch sees `Bird`. A plain `boolean` return type would leave `Fish | Bird` in both branches.",
+      "materials": [
+        "narrowing"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "How does `assertIsString` differ from a type guard `(v: unknown): v is string`?\n\n```ts\nfunction assertIsString(v: unknown): asserts v is string {\n  if (typeof v !== \"string\") throw new TypeError(\"not a string\");\n}\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "It narrows `v` for the rest of the scope after the call, and must throw to signal failure",
+        "It narrows `v` just within an `if` that tests its boolean return value",
+        "It makes tsc insert a run-time `typeof` check at each call site",
+        "It makes tsc verify that the body throws for each non-string value"
+      ],
+      "correct": 0,
+      "explanation": "An assertion function (TypeScript 3.7+) returns `void`; if it returns normally, the asserted type holds for the code that follows the call, so failure must be signalled by throwing. A type guard returns a boolean and narrows only in the branch that tests it. tsc never inserts run-time checks, and it does not verify that the body actually throws for non-strings; an assertion function that fails to check simply lies to the type checker.",
+      "materials": [
+        "ts37",
+        "narrowing"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `tsc --strict` report here?\n\n```ts\nfunction len(x: string[] | null) {\n  if (typeof x === \"object\") {\n    return x.length;\n  }\n  return 0;\n}\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "No error; `typeof x === \"object\"` narrows `x` to `string[]`",
+        "TS2339: `Property 'length' does not exist on type 'object'`",
+        "TS2367: this comparison appears to be unintentional",
+        "TS18047: `'x' is possibly 'null'`"
+      ],
+      "correct": 3,
+      "explanation": "In JavaScript `typeof null` is `\"object\"`, and TypeScript models that: the check keeps both `string[]` and `null`, so `x.length` reports TS18047. Arrays also report `\"object\"`, so the comparison is valid. Use `x !== null` or a truthiness check to remove `null`.",
+      "materials": [
+        "narrowing"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `tsc --strict` report for this file?\n\n```ts\ninterface User { name: string }\ninterface User { age: number }\n\ntype Account = { id: string };\ntype Account = { owner: string };\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "TS2300 on both pairs: duplicate identifiers `User` and `Account`",
+        "No errors; both pairs merge into one type each",
+        "TS2300 on `Account` only; the two `User` interfaces merge into one",
+        "TS2300 on `User` only; the two `Account` aliases intersect"
+      ],
+      "correct": 2,
+      "explanation": "Interfaces support declaration merging: the two `User` declarations combine into `{ name: string; age: number }`. A type alias is a single named type and cannot be reopened, so the second `Account` triggers TS2300 `Duplicate identifier 'Account'`. Aliases never merge or intersect implicitly.",
+      "materials": [
+        "merging",
+        "everyday"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Why does `tsc --strict` reject this?\n\n```ts\nfunction shout(x: string | number) {\n  return x.toUpperCase();\n}\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "TS2339: `toUpperCase` is not a member of every type in `string | number`",
+        "TS2345: a union cannot be passed where `string` methods are called",
+        "TS7006: the parameter needs an explicit `string` annotation",
+        "TS18048: `x` may be `undefined` inside the function"
+      ],
+      "correct": 0,
+      "explanation": "On a union you can only access members that exist on every constituent. `number` has no `toUpperCase`, so tsc reports TS2339 on `string | number`. Narrow first, e.g. `typeof x === \"string\"`. The parameter is annotated and cannot be `undefined`, so the other errors do not apply.",
+      "materials": [
+        "everyday",
+        "narrowing"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What is the type of `Both[\"id\"]`?\n\n```ts\ntype Both = { id: string } & { id: number };\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`string | number`",
+        "`never`",
+        "`string`",
+        "`number`"
+      ],
+      "correct": 1,
+      "explanation": "An intersection requires a value to satisfy both object types, so `id` must be `string & number`, which has no values and reduces to `never`. A union would give `string | number`. Intersections do not let one side win; you only get a usable type when the property types overlap.",
+      "materials": [
+        "objects",
+        "everyday"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which statement about these two declarations is correct?\n\n```ts\ntype Colors = Record<\"red\" | \"green\", string | [number, number, number]>;\nconst a = { red: \"#f00\", green: [0, 255, 0] } satisfies Colors;\nconst b: Colors = { red: \"#f00\", green: [0, 255, 0] };\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Both reject `.red.toUpperCase()`, since both have the declared type `Colors`",
+        "`b.red.toUpperCase()` compiles, but `a.red.toUpperCase()` is TS2339",
+        "Both compile `.red.toUpperCase()`, because `satisfies` is a type assertion",
+        "`a.red.toUpperCase()` compiles, but `b.red.toUpperCase()` is TS2339"
+      ],
+      "correct": 3,
+      "explanation": "`satisfies` (TypeScript 4.9) checks the expression against `Colors` but keeps the expression's own inferred type, so `a.red` stays `string`. The annotation on `b` replaces the inferred type with `Colors`, so `b.red` is `string | [number, number, number]` and `toUpperCase` is TS2339. `satisfies` is a check, not an assertion like `as`.",
+      "materials": [
+        "ts49"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "This fails with TS2339 (`Property 'length' does not exist on type 'T'`). Which signature fixes it while still accepting both strings and arrays?\n\n```ts\nfunction len<T>(x: T) {\n  return x.length;\n}\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`function len<T = { length: number }>(x: T)`",
+        "`function len<T extends { length: number }>(x: T)`",
+        "`function len<T>(x: T & object)`",
+        "`function len<T extends object>(x: T)`"
+      ],
+      "correct": 1,
+      "explanation": "A constraint (`extends`) tells the checker what every `T` is guaranteed to have, so `x.length` becomes valid and both `\"abc\"` and `[1, 2]` satisfy it. A default (`= ...`) is only used when nothing is inferred and gives no guarantee. `object` has no `length`, and it also rules out strings.",
+      "materials": [
+        "generics"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which call is a compile error?\n\n```ts\nfunction getProp<T, K extends keyof T>(obj: T, key: K): T[K] {\n  return obj[key];\n}\nconst user = { name: \"Ada\", age: 36 };\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`getProp(user, \"name\")`",
+        "`getProp(user, \"age\")`",
+        "`getProp(user, \"email\")`",
+        "`getProp({ email: \"a@b\" }, \"email\")`"
+      ],
+      "correct": 2,
+      "explanation": "`K extends keyof T` limits `key` to `\"name\" | \"age\"` for `user`, so `\"email\"` is TS2345. The last call passes a different object whose keys include `email`, so it is valid. The return type `T[K]` also gives `string` for `name` and `number` for `age`.",
+      "materials": [
+        "generics",
+        "keyof"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What type does TypeScript 5.x infer for `t`?\n\n```ts\nfunction tuple<const T>(x: T) {\n  return x;\n}\nconst t = tuple([\"a\", \"b\"]);\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`string[]`",
+        "`(\"a\" | \"b\")[]`",
+        "`[string, string]`",
+        "`readonly [\"a\", \"b\"]`"
+      ],
+      "correct": 3,
+      "explanation": "A `const` type parameter (TypeScript 5.0) makes inference behave as if the argument were written with `as const`, so the array literal becomes the readonly tuple `readonly [\"a\", \"b\"]`. Without `const`, `T` would be `string[]`. Neither `(\"a\" | \"b\")[]` nor a mutable `[string, string]` is what `as const` produces.",
+      "materials": [
+        "ts50",
+        "generics"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `tsc --strict` (TypeScript 5.4+) report for the call?\n\n```ts\nfunction pick<T extends string>(values: T[], fallback: NoInfer<T>) {}\npick([\"a\", \"b\"], \"c\");\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "No error; `T` is inferred as `\"a\" | \"b\" | \"c\"`",
+        "TS2345: `Argument of type '\"c\"' is not assignable to parameter of type '\"a\" | \"b\"'`",
+        "No error; `NoInfer<T>` widens `fallback` to `string`",
+        "TS2344: `NoInfer` requires a concrete type, not a type parameter"
+      ],
+      "correct": 1,
+      "explanation": "`NoInfer<T>` (TypeScript 5.4) blocks `fallback` from contributing an inference candidate, so `T` is inferred from `values` alone as `\"a\" | \"b\"`, and `\"c\"` is then rejected with TS2345. Without `NoInfer`, `\"c\"` would be added to `T` and the call would compile. It does not widen anything and works on type parameters.",
+      "materials": [
+        "utility",
+        "generics"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What do `A` and `B` resolve to?\n\n```ts\ntype ToArray<T> = T extends unknown ? T[] : never;\ntype ToArrayND<T> = [T] extends [unknown] ? T[] : never;\ntype A = ToArray<string | number>;\ntype B = ToArrayND<string | number>;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`A` is `(string | number)[]`; `B` is `string[] | number[]`",
+        "Both are `(string | number)[]`",
+        "Both are `string[] | number[]`",
+        "`A` is `string[] | number[]`; `B` is `(string | number)[]`"
+      ],
+      "correct": 3,
+      "explanation": "A conditional type whose checked type is a naked type parameter distributes over unions, so `ToArray` is applied to `string` and `number` separately. Wrapping both sides in a one-element tuple turns distribution off, so `ToArrayND` sees the whole union at once. Distribution only depends on whether the checked type is a bare type parameter.",
+      "materials": [
+        "conditional"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What do `A` and `B` resolve to?\n\n```ts\ntype ElementOf<T> = T extends (infer U)[] ? U : never;\ntype A = ElementOf<boolean[]>;\ntype B = ElementOf<number>;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`A` is `boolean`; `B` is `never`",
+        "`A` is `boolean[]`; `B` is `number`",
+        "`A` is `boolean`; `B` is `unknown`",
+        "`A` is `true | false`; `B` is a compile error"
+      ],
+      "correct": 0,
+      "explanation": "`infer U` declares a type variable that is filled in when the match succeeds, so for `boolean[]` it captures `boolean`. `number` is not an array, so the false branch `never` is used. A failed match is not an error, and `infer` without a constraint does not fall back to `unknown` when the branch is not taken.",
+      "materials": [
+        "conditional"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `R` resolve to?\n\n```ts\nasync function loadUser() {\n  return { id: 1, name: \"Ada\" };\n}\ntype R = Awaited<ReturnType<typeof loadUser>>;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`Promise<{ id: number; name: string }>`",
+        "`{ id: number; name: string }`",
+        "`{ id: 1; name: \"Ada\" }`",
+        "`unknown`, because `ReturnType` does not see through `async`"
+      ],
+      "correct": 1,
+      "explanation": "`ReturnType<typeof loadUser>` is `Promise<{ id: number; name: string }>` because an `async` function returns a promise. `Awaited` unwraps promises recursively, giving the object type. Object literal properties are widened, so the literal types `1` and `\"Ada\"` are not kept.",
+      "materials": [
+        "utility",
+        "typeof"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `tsc` report for the alias `R`?\n\n```ts\nfunction fetchUser() {\n  return { id: 1 };\n}\ntype R = ReturnType<fetchUser>;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "No error; `R` is `() => { id: number }`",
+        "TS2344: `fetchUser` does not satisfy the constraint of `ReturnType`",
+        "TS2749: `'fetchUser' refers to a value, but is being used as a type here`",
+        "No error; `R` is `{ id: number }`"
+      ],
+      "correct": 2,
+      "explanation": "A function declaration creates a value, not a type, so naming it in a type position is TS2749 (tsc even suggests `typeof fetchUser`). The fix is `ReturnType<typeof fetchUser>`. The name does exist, so it is not TS2304, and the constraint check never runs because there is no type to check.",
+      "materials": [
+        "typeof",
+        "utility"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `G` resolve to?\n\n```ts\ntype Getters<T> = {\n  [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K];\n};\ntype G = Getters<{ name: string; age: number }>;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`{ getName: () => string; getAge: () => number }`",
+        "`{ name: () => string; age: () => number }`",
+        "`{ get: { name: () => string; age: () => number } }`",
+        "`{ [x: `get${string}`]: () => string | number }`"
+      ],
+      "correct": 0,
+      "explanation": "The `as` clause (TypeScript 4.1) remaps each key: `Capitalize<\"name\">` is `\"Name\"`, so the new key is `getName`, and the value type still uses the original key `K`. Without `as` the keys would stay `name` and `age`. `Capitalize` changes the first letter, and remapping over a finite key set does not produce an index signature.",
+      "materials": [
+        "mapped",
+        "ts41"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "How many members does the union `T` have?\n\n```ts\ntype T = `${\"top\" | \"bottom\"}-${\"left\" | \"center\" | \"right\"}`;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "2",
+        "3",
+        "5",
+        "6"
+      ],
+      "correct": 3,
+      "explanation": "When a template literal type interpolates unions, TypeScript produces the cross product of all combinations: 2 x 3 = 6 strings, such as `\"top-left\"` and `\"bottom-right\"`. It does not pair members positionally (which would give 2 or 3) and does not add them (5).",
+      "materials": [
+        "template",
+        "typesfromtypes"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `Role` resolve to?\n\n```ts\nconst roles = [\"admin\", \"editor\", \"viewer\"] as const;\ntype Role = (typeof roles)[number];\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`string`",
+        "`number`",
+        "`readonly [\"admin\", \"editor\", \"viewer\"]`",
+        "`\"admin\" | \"editor\" | \"viewer\"`"
+      ],
+      "correct": 3,
+      "explanation": "`as const` makes `roles` a readonly tuple of literal types, `typeof roles` lifts that into a type, and indexing with `number` gives the union of all element types. Without `as const` the array would be `string[]` and `Role` would be `string`. Indexing by `number` gives element types, not the index type.",
+      "materials": [
+        "indexed",
+        "typeof"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `K` resolve to?\n\n```ts\nconst config = { host: \"localhost\", port: 5432 };\ntype K = keyof typeof config;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`\"host\" | \"port\"`",
+        "`string`",
+        "`string | number`",
+        "`{ host: string; port: number }`"
+      ],
+      "correct": 0,
+      "explanation": "`typeof config` gives the object type `{ host: string; port: number }`, and `keyof` turns it into the union of its property names. `string | number` would be the value types (`(typeof config)[keyof typeof config]`). `keyof` only returns `string` for a type with a string index signature.",
+      "materials": [
+        "keyof",
+        "typeof"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "How does a numeric `enum` differ from a string `enum` in the emitted JavaScript?\n\n```ts\nenum Dir { Up, Down }\nenum Color { Red = \"RED\" }\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Neither emits code; both are replaced by their values at each use",
+        "`Dir` gets a reverse mapping (`Dir[0] === \"Up\"`), while `Color` maps names to values one way",
+        "`Color` gets a reverse mapping (`Color.RED === \"Red\"`), while `Dir` maps names to values one way",
+        "Both get reverse mappings, so `Dir[0]` and `Color[\"RED\"]` return the member names"
+      ],
+      "correct": 1,
+      "explanation": "Regular enums are real run-time objects. For numeric members tsc emits `Dir[Dir[\"Up\"] = 0] = \"Up\"`, so the object maps both ways; string members are emitted as plain `Color[\"Red\"] = \"RED\"` with no reverse entry. Inlining with no emitted object is what `const enum` does, not a regular enum.",
+      "materials": [
+        "enums"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does tsc emit for the `console.log` line (with default options, no `isolatedModules`)?\n\n```ts\nconst enum Level { Low = 1, High = 2 }\nconsole.log(Level.High);\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`console.log(Level.High);` plus an emitted `Level` object",
+        "`console.log(Level[\"High\"]);` with a frozen `Level` object",
+        "`console.log(2 /* Level.High */);` and no `Level` object",
+        "A TS2475 error, because a `const enum` is not allowed in an expression"
+      ],
+      "correct": 2,
+      "explanation": "A `const enum` exists only at compile time: tsc replaces each member access with its literal value (adding a comment) and emits no enum object, unless `preserveConstEnums` is set. TS2475 is reported only when the enum object itself is used, e.g. `Object.keys(Level)`; a member access is allowed. Because inlining needs the declaration's values, tools that compile one file at a time (`isolatedModules`) restrict ambient const enums.",
+      "materials": [
+        "enums"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which statement about `private` versus `#secret` is correct?\n\n```ts\nclass A { private secret = 1 }\nclass B { #secret = 1 }\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Both are enforced by the JavaScript engine once compiled",
+        "`private` is enforced at run time; `#secret` is checked only by tsc",
+        "Both are erased by tsc, so neither is enforced at run time",
+        "`private` is checked only by tsc; `#secret` is enforced by the engine at run time"
+      ],
+      "correct": 3,
+      "explanation": "TypeScript's `private` is a compile-time check that is erased, so `(a as any).secret` or `a[\"secret\"]` reads the field at run time. `#secret` is a JavaScript private field (ES2022): the engine hides it, it does not appear in `Object.keys` or JSON, and outside access is a syntax error. tsc keeps `#` fields in its output (or downlevels them with WeakMaps for old targets).",
+      "materials": [
+        "classes",
+        "mdnprivate"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does this constructor do?\n\n```ts\nclass User {\n  constructor(private readonly name: string, public age: number) {}\n}\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "It declares the fields `name` and `age` and assigns the arguments to them",
+        "It declares the parameters, and fields must be declared separately",
+        "It declares `age` as a field, but `name` stays a local parameter",
+        "It is a TS1187 error; modifiers belong on fields, not parameters"
+      ],
+      "correct": 0,
+      "explanation": "These are parameter properties: an access modifier or `readonly` on a constructor parameter both declares a class property and emits `this.name = name` in the constructor. Every modified parameter becomes a field, including `private readonly name`. Parameter properties are a TypeScript-only feature (not erasable syntax), which is why they appear in the emitted JavaScript as assignments.",
+      "materials": [
+        "classes"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `tsc --strict` report for this code?\n\n```ts\nabstract class Shape {\n  abstract area(): number;\n  describe() { return `area ${this.area()}`; }\n}\nconst s = new Shape();\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "No error; `describe` makes the class concrete",
+        "TS2515: `Shape` does not implement the abstract member `area`",
+        "TS2511: `Cannot create an instance of an abstract class`",
+        "TS2564: the abstract property `area` has no initializer"
+      ],
+      "correct": 2,
+      "explanation": "An `abstract` class cannot be instantiated directly (TS2511), even if it has some implemented methods. TS2515 is reported on a non-abstract subclass that fails to implement an abstract member, not on the abstract class itself. `area` is a method, so property-initialization errors do not apply.",
+      "materials": [
+        "classes"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does `tsc --strict` report for the last line?\n\n```ts\nfunction parse(x: string): string;\nfunction parse(x: number): number;\nfunction parse(x: string | number) { return x; }\n\ndeclare const input: string | number;\nparse(input);\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "No error; the implementation signature accepts `string | number`",
+        "TS2769: `No overload matches this call`",
+        "No error; tsc picks the first overload and returns `string`",
+        "TS2394: the overloads are incompatible with the implementation"
+      ],
+      "correct": 1,
+      "explanation": "Callers only see the overload signatures; the implementation signature is hidden. Neither overload accepts `string | number` on its own, so tsc reports TS2769. The overloads are compatible with the implementation, so TS2394 does not apply. The fix is to add a third overload `(x: string | number): string | number`.",
+      "materials": [
+        "functions"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Which line does `tsc --strict` reject?\n\n```ts\ninterface Point { x: number; y: number }\nconst tmp = { x: 1, y: 2, z: 3 };\nconst a: Point = tmp;                     // line A\nconst b: Point = { x: 1, y: 2, z: 3 };    // line B\nconst c: Point = { x: 1, y: 2, z: 3 } as Point; // line C\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Line A only",
+        "Lines A and B",
+        "Lines B and C",
+        "Line B only"
+      ],
+      "correct": 3,
+      "explanation": "Excess property checking applies only to fresh object literals assigned directly to a typed target, so line B gets TS2353 (`'z' does not exist in type 'Point'`). Line A assigns a variable, which is ordinary structural assignability, and extra properties are fine. Line C uses a type assertion, which skips the excess property check.",
+      "materials": [
+        "objects"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "With `strict` and `noUncheckedIndexedAccess` enabled, what is the type of `first`?\n\n```ts\nconst names: string[] = [\"Ada\"];\nconst first = names[0];\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`string`",
+        "`string | undefined`",
+        "`\"Ada\"`",
+        "`string | null`"
+      ],
+      "correct": 1,
+      "explanation": "`noUncheckedIndexedAccess` adds `undefined` to every read through an index signature or array index, because the checker cannot prove the element exists. It is not part of `strict`, so without the flag `first` is just `string`. The annotation `string[]` drops the literal, and out-of-range reads give `undefined`, not `null`.",
+      "materials": [
+        "tsconfig"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "With `strict` and `exactOptionalPropertyTypes` enabled, which assignment is an error?\n\n```ts\ninterface Prefs { theme?: string }\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`const p: Prefs = {};`",
+        "`const p: Prefs = { theme: \"dark\" };`",
+        "`const p: Prefs = { theme: undefined };`",
+        "`const p: Partial<Prefs> = {};`"
+      ],
+      "correct": 2,
+      "explanation": "`exactOptionalPropertyTypes` makes `theme?: string` mean \"may be missing\" but not \"may be present with the value `undefined`\", so `{ theme: undefined }` is TS2375. Omitting the property is still fine. To allow an explicit `undefined`, write `theme?: string | undefined`. The flag is not included in `strict`.",
+      "materials": [
+        "tsconfig",
+        "objects"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "In a `catch` clause under `strict` (TypeScript 4.4+), what is the type of `err`?\n\n```ts\ntry { JSON.parse(\"{\"); }\ncatch (err) { console.log(err.message); }\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`any`, so `err.message` compiles",
+        "`Error`, so `err.message` compiles",
+        "`SyntaxError`, inferred from `JSON.parse`",
+        "`unknown`, so `err.message` is TS18046"
+      ],
+      "correct": 3,
+      "explanation": "`useUnknownInCatchVariables` is part of `strict` since TypeScript 4.4, so catch variables are `unknown` and must be narrowed (for example with `err instanceof Error`). Without that flag they are `any`. TypeScript has no checked exceptions, so it cannot infer `Error` or `SyntaxError` from the `try` body.",
+      "materials": [
+        "tsconfig",
+        "narrowing"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "What does tsc report for the last line?\n\n```ts\n// user.ts\nexport class User { constructor(public name: string) {} }\n\n// main.ts\nimport type { User } from \"./user\";\nconst u = new User(\"Ada\");\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "No error; `import type` only affects the emitted JavaScript",
+        "TS2307: `Cannot find module './user'`",
+        "TS1361: `'User' cannot be used as a value because it was imported using 'import type'`",
+        "TS2693: `'User' only refers to a type, but is being used as a value here`"
+      ],
+      "correct": 2,
+      "explanation": "`import type` imports only the type side of a binding and is always erased, so using `User` as a constructor is TS1361. You can still write `let u: User`. TS2693 is the error for names that are only types to begin with, like an interface, whereas `User` is a class that was imported type-only.",
+      "materials": [
+        "modules"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "With `verbatimModuleSyntax` enabled (TypeScript 5.0+), what happens to this import in the emitted JavaScript if `Config` is an interface?\n\n```ts\nimport { Config } from \"./config\";\nlet c: Config;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "tsc removes the import because `Config` is used just as a type",
+        "tsc keeps it as `import { Config } from \"./config\"`",
+        "tsc reports TS1484: a type must be imported with `import type`",
+        "tsc rewrites it to `import \"./config\"` to keep side effects"
+      ],
+      "correct": 2,
+      "explanation": "Under `verbatimModuleSyntax`, imports without a `type` modifier are emitted exactly as written, so importing a type-only name that way would leave a broken import at run time. tsc therefore reports TS1484 (`'Config' is a type and must be imported using a type-only import`). Removing type-only imports silently is what happened before this flag; it is not what happens with it.",
+      "materials": [
+        "ts50",
+        "modules"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Under `strict`, `import fmt from \"tiny-fmt\"` fails with TS7016 (`Could not find a declaration file for module 'tiny-fmt'`). Which fix gives the import real, non-`any` types?\n\n```ts\nimport fmt from \"tiny-fmt\";\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Add the shorthand `declare module \"tiny-fmt\";` to a `.d.ts` file",
+        "Set `skipLibCheck: true` in the project's `tsconfig.json`",
+        "Put a `// @ts-ignore` comment directly above the import",
+        "Add `declare module \"tiny-fmt\" { ... }` declaring its exports"
+      ],
+      "correct": 3,
+      "explanation": "A module declaration with a body describes the module's exports, so `fmt` gets the declared signature (installing a matching `@types/tiny-fmt` package from DefinitelyTyped would do the same). The shorthand `declare module \"tiny-fmt\";` silences the error but types every import as `any`, as does `@ts-ignore`. `skipLibCheck` only skips checking existing `.d.ts` files.",
+      "materials": [
+        "dts",
+        "consumption"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "With `module` and `moduleResolution` set to `nodenext`, in a package with `\"type\": \"module\"`, what does tsc report for this import in `main.ts`?\n\n```ts\nimport { add } from \"./math\";\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "No error; tsc resolves `./math.ts` automatically",
+        "TS2835: relative imports need explicit file extensions; it suggests `./math.js`",
+        "TS2307: `./math` is not found, and it suggests `./math.ts`",
+        "TS2691: an import path may not end with a `.ts` extension"
+      ],
+      "correct": 1,
+      "explanation": "Node's ESM loader does not guess extensions, and `nodenext` models that, so an extensionless relative import is TS2835. You write the extension of the emitted file, `./math.js`, and tsc maps it back to `math.ts`. `moduleResolution: \"bundler\"` would accept the extensionless path, because bundlers do add extensions.",
+      "materials": [
+        "modtheory",
+        "tsconfig"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "With `\"target\": \"ES2017\"` and no explicit `lib`, what does tsc report for this line?\n\n```ts\nconst last = [1, 2, 3].at(-1);\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "No error; tsc adds a polyfill for `Array.prototype.at`",
+        "No error; `target` affects syntax alone, so the newest built-in types are available",
+        "TS2550: `Property 'at' does not exist`, with a hint to change `lib` to es2022 or later",
+        "TS1005: `at` is reserved syntax that the ES2017 parser rejects"
+      ],
+      "correct": 2,
+      "explanation": "When `lib` is not set, its default follows `target`, so only ES2017 built-in declarations are loaded and `at` (ES2022) is TS2550. tsc never polyfills APIs; `target` controls which syntax gets downleveled and `lib` controls which built-in types exist. Setting `lib` to include `es2022` makes it type-check, but the runtime must still provide `at`.",
+      "materials": [
+        "tsconfig"
+      ]
+    },
+    {
+      "type": "multiple-choice",
+      "prompt": "Given `interface Dog extends Animal { bark(): void }`, which assignment does `strictFunctionTypes` reject?\n\n```ts\ndeclare let onAnimal: (a: Animal) => void;\ndeclare let onDog: (d: Dog) => void;\ndeclare let makeDog: () => Dog;\ndeclare let makeAnimal: () => Animal;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`onDog = onAnimal;`",
+        "`makeAnimal = makeDog;`",
+        "`onAnimal = onDog;`",
+        "`const dogs: Animal[] = [] as Dog[];`"
+      ],
+      "correct": 2,
+      "explanation": "Function parameters are checked contravariantly under `strictFunctionTypes`: a handler that needs a `Dog` cannot stand in for one that may receive any `Animal`, so `onAnimal = onDog` is TS2322. The reverse is safe, return types are covariant, and arrays are (unsoundly) covariant, so the other three compile.",
+      "materials": [
+        "compat"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "With `\"strict\": true` and default options, tsc refuses to emit JavaScript for a file that has type errors.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "Type checking and emit are independent: by default tsc reports the errors and still writes the JavaScript. Only `noEmitOnError: true` suppresses output when there are errors. `strict` changes which errors are reported, not whether output is produced.",
+      "materials": [
+        "tsconfig"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "An `interface` declaration produces no JavaScript at all in tsc's output.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": true,
+      "explanation": "Interfaces, type aliases and other type-only constructs are erased completely, which is why you cannot test `x instanceof SomeInterface` at run time. By contrast, `class` and regular `enum` declarations do produce JavaScript because they are values.",
+      "materials": [
+        "everyday",
+        "modules"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Under `strictFunctionTypes`, parameters of members declared with method syntax (`m(x: Dog): void`) are still compared bivariantly.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "`strictFunctionTypes` applies only to function-type syntax such as `m: (x: Dog) => void`; method and constructor declarations are deliberately exempt so that types like `Array<T>` stay covariant. So assigning `{ m(x: Dog): void }` to `{ m(x: Animal): void }` compiles, while the same with property syntax is TS2322.",
+      "materials": [
+        "compat",
+        "tsconfig"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Assigning a `Dog[]` to a variable of type `Animal[]` compiles under `strict`, even though pushing a `Cat` through that variable then breaks the original array's type.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "Mutable arrays are treated covariantly for convenience, which is a known unsoundness: tsc accepts `const animals: Animal[] = dogs; animals.push(cat);`. Typing the target as `readonly Animal[]` removes the risk because it has no `push`.",
+      "materials": [
+        "compat"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Setting `\"strict\": true` also enables `noUncheckedIndexedAccess`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "`strict` enables `noImplicitAny`, `strictNullChecks`, `strictFunctionTypes`, `strictBindCallApply`, `strictPropertyInitialization`, `noImplicitThis`, `useUnknownInCatchVariables` and `alwaysStrict`. `noUncheckedIndexedAccess` (and `exactOptionalPropertyTypes`) must be turned on separately, so `arr[0]` on a `string[]` is plain `string` under `strict` alone.",
+      "materials": [
+        "tsconfig"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A `type` alias can be declared a second time with the same name to add more properties, just like an interface.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "Only interfaces (and namespaces, enums and some others) take part in declaration merging. A second `type` with the same name is TS2300 `Duplicate identifier`. To extend an alias, create a new one with an intersection such as `type B = A & { extra: string }`.",
+      "materials": [
+        "merging"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A value of type `unknown` can be assigned to a variable of type `string` without narrowing or a cast.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "`unknown` accepts every value, but it is assignable only to `unknown` and `any`. Assigning it to `string` is TS2322 until you narrow it (for example with `typeof v === \"string\"`) or assert. That restriction is what makes `unknown` safer than `any`.",
+      "materials": [
+        "functions"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A value of type `never` can be assigned to a variable of any other type.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "`never` is the bottom type: it has no values, so it is a subtype of every type and assignable to all of them. That is why a function that always throws can be used where any return type is expected. The reverse is not true: nothing except `never` (and `any` is not an exception here) is assignable to `never`.",
+      "materials": [
+        "functions"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "In TypeScript 5.5 and later, `[1, undefined, 2].filter(x => x !== undefined)` is inferred as `number[]` without writing an explicit type predicate.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "correctAnswer": true,
+      "explanation": "TypeScript 5.5 added inferred type predicates: an arrow function like `x => x !== undefined` is inferred as `(x) => x is number`, and `filter` uses that overload. Before 5.5 the result stayed `(number | undefined)[]` unless you wrote `(x): x is number => ...` yourself.",
+      "materials": [
+        "ts55"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "By default, tsc replaces each `const enum` member access with its literal value and emits no enum object.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "That inlining is the purpose of `const enum`: `Level.High` becomes `2 /* Level.High */`. The `preserveConstEnums` option keeps the object in the output as well, and `isolatedModules` restricts using ambient const enums because a single-file transpiler cannot see their values.",
+      "materials": [
+        "enums"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Excess property checking also applies when you assign an existing variable (not a fresh object literal) to a narrower object type.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "Only fresh object literals are checked for unknown properties, because extra keys there are almost always typos. A variable holding `{ x: 1, y: 2, z: 3 }` is assignable to `{ x: number; y: number }` by normal structural rules, so the extra `z` passes silently.",
+      "materials": [
+        "objects"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "`expr satisfies T` changes the inferred type of `expr` to `T`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "`satisfies` (TypeScript 4.9) only checks that the expression is assignable to `T` and leaves the inferred type unchanged, keeping specific literal and property types. A type annotation or `as T` is what replaces the type with `T`.",
+      "materials": [
+        "ts49"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "A function declared with return type `never` may simply reach the end of its body, implicitly returning `undefined`.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": false,
+      "explanation": "A `never` return type means the function never completes normally: it must throw or loop forever. If the end of the body is reachable, tsc reports TS2534 `A function returning 'never' cannot have a reachable end point`. A function that returns nothing useful should be typed `void` instead.",
+      "materials": [
+        "functions"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "Without `noUncheckedIndexedAccess`, reading `scores.anyKey` on a `Record<string, number>` is typed as plain `number`, even if the key is missing at run time.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "correctAnswer": true,
+      "explanation": "A string index signature promises a value for every key, so reads are typed `number` and a missing key silently yields `undefined` at run time. `noUncheckedIndexedAccess` changes such reads to `number | undefined`, forcing a check.",
+      "materials": [
+        "tsconfig",
+        "indexed"
+      ]
+    },
+    {
+      "type": "true-false",
+      "prompt": "TypeScript's `private` modifier stops other code from reading the property at run time.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "correctAnswer": false,
+      "explanation": "`private` is checked by tsc and then erased; the emitted JavaScript has an ordinary property that anything can read, and even TypeScript allows `obj[\"secret\"]` bracket access. Use a JavaScript `#private` field when you need run-time privacy.",
+      "materials": [
+        "classes",
+        "mdnprivate"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which checks narrow `x` from `string[] | null` to `string[]` inside the `if` block?\n\n```ts\ndeclare const x: string[] | null;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`if (x)`",
+        "`if (x !== null)`",
+        "`if (typeof x === \"object\")`",
+        "`if (Array.isArray(x))`",
+        "`if (typeof x !== \"undefined\")`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Truthiness removes `null`, `x !== null` removes it directly, and `Array.isArray` is declared as a type guard (`arg is any[]`), so all three leave `string[]`. `typeof null` is `\"object\"`, so that check keeps `null`. The `undefined` check removes nothing because `undefined` was never in the union.",
+      "materials": [
+        "narrowing"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these produce no JavaScript output at all when compiled by tsc?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`interface User { name: string }`",
+        "`type Id = string | number;`",
+        "`enum Role { Admin, User }`",
+        "`import type { Config } from \"./config\";`",
+        "`class Point { constructor(public x: number) {} }`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Interfaces, type aliases and `import type` exist only for the type checker and are erased. A regular `enum` compiles to an object, and a class with a parameter property compiles to a class whose constructor assigns `this.x = x`. These two are TypeScript-specific syntax that generates code, which is why Node's type stripping rejects them.",
+      "materials": [
+        "modules",
+        "enums"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these flags does `\"strict\": true` turn on in TypeScript 5.6?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`noImplicitAny`",
+        "`strictNullChecks`",
+        "`useUnknownInCatchVariables`",
+        "`noUncheckedIndexedAccess`",
+        "`exactOptionalPropertyTypes`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "The `strict` family is `noImplicitAny`, `strictNullChecks`, `strictFunctionTypes`, `strictBindCallApply`, `strictPropertyInitialization`, `noImplicitThis`, `useUnknownInCatchVariables` (since 4.4) and `alwaysStrict`. `noUncheckedIndexedAccess` and `exactOptionalPropertyTypes` are stricter still and must be enabled explicitly, because they would break a lot of existing code.",
+      "materials": [
+        "tsconfig"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "In TypeScript 5.x's `lib.es5.d.ts`, which utility types are defined as conditional types?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`Exclude<T, U>`",
+        "`ReturnType<T>`",
+        "`Parameters<T>`",
+        "`Partial<T>`",
+        "`NonNullable<T>`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`Exclude` is `T extends U ? never : T`, and `ReturnType` and `Parameters` use `infer` inside a conditional type. `Partial` is a mapped type. `NonNullable` used to be a conditional type but has been `T & {}` since TypeScript 4.8, which lets the intersection simplify better.",
+      "materials": [
+        "utility",
+        "conditional"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about interfaces and type aliases are correct in TypeScript 5.x?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Interfaces support declaration merging; type aliases do not",
+        "A type alias can name a union such as `string | number`",
+        "A class can `implements` an object-shaped type alias",
+        "An interface cannot `extends` a type alias",
+        "A type alias cannot take type parameters"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Repeated interface declarations merge, while a repeated alias is TS2300. Aliases can name any type, including unions, primitives and tuples, which interfaces cannot. A class may implement, and an interface may extend, any object-shaped alias, and aliases can be generic (`type Box<T> = { value: T }`).",
+      "materials": [
+        "everyday",
+        "merging"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which assignments compile under `--strict`?\n\n```ts\ndeclare const u: unknown;\ndeclare const a: any;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`const x1: unknown = 5;`",
+        "`const x2: string = u;`",
+        "`const x3: number = a;`",
+        "`const x4: never = 5;`",
+        "`const x5: {} = 0;`"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        4
+      ],
+      "explanation": "Anything is assignable to `unknown`, and `any` is assignable to everything (that is what makes it unsafe). `{}` means \"any non-nullish value\", so a primitive like `0` fits. `unknown` cannot be assigned to `string` without narrowing (TS2322), and nothing is assignable to `never`.",
+      "materials": [
+        "everyday",
+        "functions"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `as const` are correct?\n\n```ts\nconst settings = { mode: \"dark\", sizes: [12, 14] } as const;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`settings.mode` has the literal type `\"dark\"`",
+        "`settings.sizes` has the type `readonly [12, 14]`",
+        "Assigning `settings.mode = \"light\"` is a compile error",
+        "At run time the object is frozen, so assignments throw",
+        "Nested values stay mutable; only top-level properties become readonly"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`as const` applies recursively to the literal: strings and numbers keep their literal types, arrays become readonly tuples and every property becomes `readonly`, so the assignment is TS2540. It is purely a compile-time assertion and is erased, so nothing is frozen at run time; use `Object.freeze` for that.",
+      "materials": [
+        "everyday"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which types resolve to exactly `string`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`Extract<string | number, string>`",
+        "`NonNullable<string | null | undefined>`",
+        "`Exclude<string | number, number>`",
+        "`keyof string`",
+        "`ReturnType<() => string | void>`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`Extract` keeps the union members assignable to `string`, `Exclude` removes `number`, and `NonNullable` (`T & {}`) strips `null` and `undefined`, so all three give `string`. `keyof string` is the union of `number` and the names of `String.prototype` members. The return type keeps `void`, so it is `string | void`.",
+      "materials": [
+        "utility"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these does TypeScript use to narrow a union type?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`typeof x === \"string\"`",
+        "`x instanceof Date`",
+        "`\"id\" in x`",
+        "`Object.keys(x).length > 0`",
+        "`x.kind === \"circle\"` on a discriminated union"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "explanation": "`typeof`, `instanceof`, `in` and equality checks on a discriminant property are all recognised by control-flow analysis. `Object.keys(x).length` is an ordinary expression with a `number` result; tsc does not derive any type information from it, so `x` keeps its declared type.",
+      "materials": [
+        "narrowing"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these strings are assignable to the type `Id`?\n\n```ts\ntype Id = `user-${number}`;\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`\"user-42\"`",
+        "`\"user-3.5\"`",
+        "`\"user-\"`",
+        "`\"user-abc\"`",
+        "`\"User-7\"`"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "A `${number}` placeholder accepts any string that parses as a number, including decimals, so `\"user-42\"` and `\"user-3.5\"` fit. An empty or non-numeric suffix is TS2322, and the literal prefix is case-sensitive, so `\"User-7\"` fails too.",
+      "materials": [
+        "template"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which of these compiler options change the JavaScript that tsc emits (not just which errors it reports)?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`target`",
+        "`module`",
+        "`lib`",
+        "`strictNullChecks`",
+        "`noUncheckedIndexedAccess`"
+      ],
+      "correctIndices": [
+        0,
+        1
+      ],
+      "explanation": "`target` decides which syntax is downleveled (for example `class` fields or `?.`), and `module` decides the module format (ESM `import` or CommonJS `require`). `lib` only selects built-in type declarations, and the two checking flags only add or remove errors; none of them alter the output. Note that `strict` itself does affect emit, because it includes `alwaysStrict`.",
+      "materials": [
+        "tsconfig",
+        "modtheory"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about abstract classes in TypeScript are correct?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "They can contain fully implemented methods",
+        "`new` on an abstract class is a compile error",
+        "A non-abstract subclass must implement every abstract member",
+        "They are erased like interfaces and emit no JavaScript",
+        "They cannot declare a constructor"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Abstract classes can mix implemented and `abstract` members and can have constructors that subclasses call with `super()`. Instantiating one is TS2511, and a concrete subclass that skips an abstract member gets TS2515. Unlike interfaces they are real classes in the output; only the `abstract` keyword and abstract members are erased.",
+      "materials": [
+        "classes"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about function overloads in TypeScript are correct?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "Callers cannot call the implementation signature directly",
+        "Each overload must be compatible with the implementation signature",
+        "The emitted JavaScript contains one function body",
+        "tsc tries the overloads in declaration order and picks the first match",
+        "At run time the engine dispatches to the overload matching the argument types"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "explanation": "Overload signatures are type-only: the output has a single function, and JavaScript has no type-based dispatch, so the implementation must inspect its arguments itself. tsc resolves a call against the overloads top to bottom, which is why more specific overloads go first. An overload the implementation cannot satisfy is TS2394, and the implementation signature is invisible to callers.",
+      "materials": [
+        "functions"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Given `type T = { readonly a?: number; b?: string }`, which of these produce exactly `{ a: number; b: string }` (no `readonly`, no optional)?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`{ -readonly [K in keyof T]-?: T[K] }`",
+        "`Required<T>`",
+        "`{ -readonly [K in keyof T]: T[K] }`",
+        "`Required<{ -readonly [K in keyof T]: T[K] }>`",
+        "`Partial<Readonly<T>>`"
+      ],
+      "correctIndices": [
+        0,
+        3
+      ],
+      "explanation": "`-readonly` and `-?` remove the two modifiers, so applying both (in one mapped type or in two steps) gives the plain type. `Required<T>` removes `?` but keeps `readonly a`. Removing only `readonly` leaves the properties optional, and `Partial<Readonly<T>>` adds modifiers rather than removing them.",
+      "materials": [
+        "mapped",
+        "utility"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Given `interface Dog extends Animal { bark(): void }`, which assignments compile under `--strict`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "A `(a: Animal) => void` to a `(d: Dog) => void` variable",
+        "A `(d: Dog) => void` to a `(a: Animal) => void` variable",
+        "A `() => Dog` to a `() => Animal` variable",
+        "A `Dog[]` to an `Animal[]` variable",
+        "A `readonly Animal[]` to a `Dog[]` variable"
+      ],
+      "correctIndices": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Parameters are contravariant under `strictFunctionTypes`, so a function that accepts any `Animal` can be used where a `Dog` handler is expected, but not the reverse (TS2322). Return types are covariant. Arrays are treated covariantly, which allows `Dog[]` to `Animal[]`. A readonly array cannot become a mutable one, and `Animal` is not a `Dog` either.",
+      "materials": [
+        "compat"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about `any` are correct under `--strict`?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "A property read on an `any` value is also `any`",
+        "An `any` value can be assigned to a `number` variable without a cast",
+        "`strict` reports an error whenever you write `any` explicitly",
+        "Calling an `any` value as a function compiles",
+        "`any` and `unknown` allow the same operations without narrowing"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "`any` switches off checking: member access, calls and assignment to other types all compile, and the `any`-ness spreads through property reads. `noImplicitAny` only flags implicit `any`; an explicit annotation is allowed (linters can ban it). `unknown` is the opposite: it allows almost nothing until narrowed.",
+      "materials": [
+        "everyday"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Your app imports the untyped npm package `left-pad-x`. Which of these are legitimate ways to get type declarations for it?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "Install `@types/left-pad-x` from DefinitelyTyped if it exists",
+        "Use the package's own bundled `.d.ts`, found via `types` or `exports` in its `package.json`",
+        "Write a local `.d.ts` file with `declare module \"left-pad-x\" { ... }`",
+        "Enable `allowJs`, which makes tsc read the package's JavaScript inside `node_modules`",
+        "Set `skipLibCheck: false` so tsc generates the missing types"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Types come either from the package itself (`types` or `exports` conditions in `package.json`), from a DefinitelyTyped `@types/*` package, or from your own ambient module declaration. `allowJs` does not reach into `node_modules` by default (`maxNodeModuleJsDepth` is 0), and `skipLibCheck` only controls whether existing declaration files are checked.",
+      "materials": [
+        "consumption",
+        "dt"
+      ]
+    },
+    {
+      "type": "multi-select",
+      "prompt": "Which statements about type-only imports and erasure are correct?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`import type { A } from \"./a\"` is removed from the emitted JavaScript",
+        "`import { type A, b } from \"./a\"` keeps the import but drops `A` from it",
+        "A type imported with `import type` can still be used in annotations",
+        "`import type` makes tsc check the imported value at run time",
+        "Interfaces can be checked at run time with `instanceof`"
+      ],
+      "correctIndices": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "`import type` is erased entirely, and an inline `type` modifier drops just that specifier while keeping the import for the remaining values. Either way the name is still usable in type positions. Types have no run-time representation, so tsc never emits checks for them, and `instanceof` with an interface is TS2693 because only values can appear on its right side.",
+      "materials": [
+        "modules"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these types from narrowest (fewest possible values) to widest.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`never`",
+        "`\"a\"`",
+        "`\"a\" | \"b\"`",
+        "`string`",
+        "`unknown`"
+      ],
+      "explanation": "`never` has no values and `unknown` contains every value, so they are the bottom and top of the type lattice. In between, each type is assignable to the next: the literal `\"a\"` fits in `\"a\" | \"b\"`, which fits in `string`. None of the reverse assignments compile.",
+      "materials": [
+        "everyday",
+        "functions"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order the phases of the TypeScript compiler (tsc) from first to last.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "Scanner turns source text into tokens",
+        "Parser builds the abstract syntax tree",
+        "Binder creates symbols and connects declarations",
+        "Checker computes and verifies types",
+        "Emitter writes JavaScript and declaration files"
+      ],
+      "explanation": "tsc scans characters into tokens, parses them into an AST, binds names to symbols, type-checks using those symbols, and finally emits output. Emit runs after checking but does not depend on it succeeding, which is why errors and output can coexist unless `noEmitOnError` is set.",
+      "materials": [
+        "modtheory"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Each type below is assignable to the next. Order them from most specific to least specific.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "`{ a: 1; b: \"x\" }`",
+        "`{ a: number; b: string }`",
+        "`{ a: number }`",
+        "`{}`",
+        "`unknown`"
+      ],
+      "explanation": "Structural subtyping: narrowing a property to a literal gives a subtype, and removing properties gives a supertype (more objects match). `{}` accepts any non-nullish value, and `unknown` also includes `null` and `undefined`. No step can be reversed without a TS2322 error.",
+      "materials": [
+        "compat"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "`x` starts as `string | number | boolean | null`. Order its narrowed types as the function executes, from the parameter declaration to the final `return`.\n\n```ts\nfunction f(x: string | number | boolean | null) {\n  if (x === null) return \"none\";\n  if (typeof x === \"boolean\") return \"bool\";\n  if (typeof x === \"number\") return \"num\";\n  return x;\n}\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`string | number | boolean | null`",
+        "`string | number | boolean`",
+        "`string | number`",
+        "`string`"
+      ],
+      "explanation": "Control-flow analysis removes each case that has already returned: after the `null` check `null` is gone, after the boolean check `boolean` is gone, and after the number check only `string` remains at the final `return`.",
+      "materials": [
+        "narrowing"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "With `moduleResolution: \"node10\"`, tsc resolves `import _ from \"lodash\"` from `/app/src/main.ts`. Order the locations it tries, from first to last (stopping at the first hit).",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The `types` field in `/app/src/node_modules/lodash/package.json`",
+        "`/app/src/node_modules/lodash/index.d.ts`",
+        "`/app/src/node_modules/@types/lodash`",
+        "`/app/node_modules/lodash` (same checks one directory up)",
+        "`/app/node_modules/@types/lodash`"
+      ],
+      "explanation": "Like Node's CommonJS algorithm, tsc looks in the nearest `node_modules` first, and in each one it tries the package itself (its `package.json` `types`, then `index.d.ts`) before the matching `@types` package. Only then does it walk up to the parent directory's `node_modules` and repeat. `--traceResolution` prints this sequence.",
+      "materials": [
+        "modtheory",
+        "consumption"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Compiled with `target: \"ES2017\"` (so `useDefineForClassFields` is off), in what order do these steps run when `new Child(\"x\")` is called?\n\n```ts\nclass Base { constructor() { console.log(\"base\"); } }\nclass Child extends Base {\n  tag = \"child\";\n  constructor(public name: string) {\n    super();\n    console.log(\"body\");\n  }\n}\n```",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "The `Base` constructor body runs",
+        "`this.name = name` (parameter property)",
+        "`this.tag = \"child\"` (field initializer)",
+        "`console.log(\"body\")` runs"
+      ],
+      "explanation": "In a derived class, `this` is only available after `super()`. tsc emits the parameter-property assignments first, then the field initializers, and then the remaining constructor statements, all right after the `super()` call.",
+      "materials": [
+        "classes"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Given `type T = { a: 1; b: 2; c: 3; d: 4 }`, order these types from fewest to most properties.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "options": [
+        "`Pick<T, \"a\">`",
+        "`Omit<T, \"a\" | \"b\">`",
+        "`Omit<T, \"a\">`",
+        "`Partial<T>`",
+        "`T & { e: 5 }`"
+      ],
+      "explanation": "`Pick` keeps one key, `Omit` of two keys leaves two, `Omit` of one key leaves three, `Partial` keeps all four (only making them optional), and the intersection adds a fifth property `e`.",
+      "materials": [
+        "utility"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Each type is assignable to the next one but not the other way round. Order them from most specific to least specific.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "hard",
+      "options": [
+        "`[\"a\", \"b\"]`",
+        "`string[]`",
+        "`readonly string[]`",
+        "`Iterable<string>`",
+        "`unknown`"
+      ],
+      "explanation": "A mutable tuple of literals is a `string[]`; any mutable array is assignable to its readonly form; a readonly array is iterable; and everything fits in `unknown`. The reverse directions fail: a readonly array has no `push`, an `Iterable` has no indexes or `length`, and `string[]` does not have a fixed length.",
+      "materials": [
+        "objects",
+        "compat"
+      ]
+    },
+    {
+      "type": "ordering",
+      "prompt": "Order these TypeScript features by the release that introduced them, from oldest to newest.",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "options": [
+        "The `unknown` type",
+        "Assertion functions (`asserts x is T`)",
+        "Template literal types",
+        "The `satisfies` operator",
+        "`const` type parameters"
+      ],
+      "explanation": "`unknown` arrived in TypeScript 3.0, assertion functions in 3.7, template literal types in 4.1, `satisfies` in 4.9 and `const` type parameters in 5.0.",
+      "materials": [
+        "ts37",
+        "ts41",
+        "ts49",
+        "ts50"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "The TypeScript `const input = JSON.parse(raw) as number; console.log(input + 1);` compiles cleanly. tsc erases the assertion and emits the JavaScript below. What does it log?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "const raw = '\"1\"';\nconst input = JSON.parse(raw); // was: JSON.parse(raw) as number\nconsole.log(input + 1);\nconsole.log(typeof input);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "11\nstring",
+      "explanation": "A type assertion is erased and does no conversion or check, so `input` is still the string `\"1\"` at run time. `\"1\" + 1` concatenates to `\"11\"`. Validate parsed data at run time (for example with a schema) instead of asserting its type.",
+      "materials": [
+        "everyday"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "tsc compiles `enum Dir { Up, Down }` to the JavaScript below. What does it log?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "var Dir;\n(function (Dir) {\n  Dir[Dir[\"Up\"] = 0] = \"Up\";\n  Dir[Dir[\"Down\"] = 1] = \"Down\";\n})(Dir || (Dir = {}));\nconsole.log(Dir.Up, Dir[1]);\nconsole.log(Object.keys(Dir));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "0 Down\n[ '0', '1', 'Up', 'Down' ]",
+      "explanation": "The inner assignment `Dir[\"Up\"] = 0` evaluates to `0`, which is then used as a key mapping back to `\"Up\"`. So the object holds both name-to-number and number-to-name entries, and `Object.keys` lists the integer keys first. This is why iterating a numeric enum's keys yields twice as many entries as members.",
+      "materials": [
+        "enums"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "tsc compiles `enum Color { Red = \"RED\" }` to the JavaScript below. What does it log?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "var Color;\n(function (Color) {\n  Color[\"Red\"] = \"RED\";\n})(Color || (Color = {}));\nconsole.log(Color.Red, Color[\"RED\"]);\nconsole.log(Object.keys(Color));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "RED undefined\n[ 'Red' ]",
+      "explanation": "String enum members get no reverse mapping, so the object only maps `Red` to `\"RED\"` and looking up `\"RED\"` gives `undefined`. Only numeric members are emitted with the `E[E[\"k\"] = v] = \"k\"` pattern.",
+      "materials": [
+        "enums"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "In TypeScript, `Account` declared `private secret: string` and `Vault` uses a JavaScript `#secret` field. Below is the emitted JavaScript (target ES2022). What does it log?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "class Account {\n  constructor(secret) { this.secret = secret; } // was: private secret\n}\nclass Vault {\n  #secret;\n  constructor(secret) { this.#secret = secret; }\n}\nconst a = new Account(\"pw\");\nconst v = new Vault(\"pw\");\nconsole.log(a.secret, v.secret);\nconsole.log(JSON.stringify(a), JSON.stringify(v));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "pw undefined\n{\"secret\":\"pw\"} {}",
+      "explanation": "`private` is erased, leaving an ordinary public property that can be read and is serialized by `JSON.stringify`. A `#secret` field is a separate private slot: `v.secret` is a different, nonexistent property (`undefined`), and private fields are not own enumerable properties, so the JSON is `{}`.",
+      "materials": [
+        "classes",
+        "mdnprivate"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "In TypeScript, `user` was typed with `as { age: number }`, so `user.age + 1` compiled. Below is the emitted JavaScript. What does it log?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "easy",
+      "code": "const user = JSON.parse('{\"age\":\"42\"}'); // was: as { age: number }\nconsole.log(user.age + 1);\nconsole.log(typeof user.age);\n",
+      "codeLanguage": "js",
+      "expectedOutput": "421\nstring",
+      "explanation": "The type annotation disappears at compile time, so nothing checks that `age` is really a number. The JSON contains the string `\"42\"`, so `+ 1` concatenates to `\"421\"`. Types describe what you expect, not what arrives over the wire.",
+      "materials": [
+        "everyday"
+      ]
+    },
+    {
+      "type": "output",
+      "prompt": "tsc reports TS2540 (`Cannot assign to 'x' because it is a read-only property`) for the TypeScript version of this code, which used `as const`. Because `noEmitOnError` is off by default, it still emits the JavaScript below. What does it log?",
+      "tags": [
+        "JavaScript"
+      ],
+      "difficulty": "medium",
+      "code": "const point = { x: 1, y: 2 }; // was: { x: 1, y: 2 } as const\npoint.x = 10;\nconsole.log(point.x, Object.isFrozen(point));\n",
+      "codeLanguage": "js",
+      "expectedOutput": "10 false",
+      "explanation": "`as const` is a compile-time assertion; it is erased and does not call `Object.freeze`, so the assignment succeeds at run time and the object is not frozen. tsc reports the error but writes output anyway unless `noEmitOnError` is enabled.",
+      "materials": [
+        "everyday",
+        "tsconfig"
+      ]
+    }
+  ]
+}
