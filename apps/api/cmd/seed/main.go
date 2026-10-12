@@ -14,6 +14,7 @@ import (
 	"fmt"
 	"log/slog"
 	"os"
+	"slices"
 	"sort"
 
 	"github.com/markusmachel/csgrundlagen/apps/api/internal/config"
@@ -65,14 +66,16 @@ type bank struct {
 
 func main() {
 	file := flag.String("file", "seeds/dotnet-interview.json", "question bank JSON")
+	update := flag.Bool("update", false,
+		"also bring questions that already exist (same prompt) in line with the file, recorded as an edit")
 	flag.Parse()
-	if err := run(*file); err != nil {
+	if err := run(*file, *update); err != nil {
 		fmt.Fprintln(os.Stderr, "seed:", err)
 		os.Exit(1)
 	}
 }
 
-func run(file string) error {
+func run(file string, update bool) error {
 	raw, err := os.ReadFile(file)
 	if err != nil {
 		return err
@@ -107,7 +110,7 @@ func run(file string) error {
 	}
 
 	materialID := map[string]string{}
-	var newMaterials, newQuestions, skipped int
+	var newMaterials, newQuestions, updated, skipped int
 	for _, m := range b.Materials {
 		id, err := st.FindMaterialIDByURL(ctx, m.URL)
 		switch {
@@ -135,11 +138,14 @@ func run(file string) error {
 
 	letters := []string{"A", "B", "C", "D", "E"}
 	for i, q := range b.Questions {
-		if _, err := st.FindQuestionIDByPrompt(ctx, q.Prompt); err == nil {
+		existingID, err := st.FindQuestionIDByPrompt(ctx, q.Prompt)
+		exists := err == nil
+		if err != nil && !errors.Is(err, store.ErrNotFound) {
+			return err
+		}
+		if exists && !update {
 			skipped++
 			continue
-		} else if !errors.Is(err, store.ErrNotFound) {
-			return err
 		}
 		typ := q.Type
 		if typ == "" {
@@ -197,13 +203,47 @@ func run(file string) error {
 			}
 			nq.Design = &spec
 		}
+		if exists {
+			current, err := st.QuestionInput(ctx, existingID)
+			if err != nil {
+				return fmt.Errorf("question %d: %w", i+1, err)
+			}
+			if sameContent(current, nq) {
+				skipped++
+				continue
+			}
+			if _, err := st.UpdateQuestion(ctx, "", existingID, nq); err != nil {
+				return fmt.Errorf("question %d: %w", i+1, err)
+			}
+			updated++
+			continue
+		}
 		if _, err := st.CreateQuestion(ctx, "", nq); err != nil {
 			return fmt.Errorf("question %d: %w", i+1, err)
 		}
 		newQuestions++
 	}
 
-	fmt.Printf("%s: added %d questions (%d already present), %d new materials (%d total in bank)\n",
-		b.Name, newQuestions, skipped, newMaterials, len(b.Materials))
+	fmt.Printf("%s: added %d questions, updated %d (%d already present and unchanged), "+
+		"%d new materials (%d total in bank)\n",
+		b.Name, newQuestions, updated, skipped, newMaterials, len(b.Materials))
 	return nil
+}
+
+// sameContent reports whether a question already has the content n would
+// give it, ignoring the order of tags and materials.
+func sameContent(current, n store.NewQuestion) bool {
+	norm := func(q store.NewQuestion) string {
+		q.Tags = slices.Sorted(slices.Values(q.Tags))
+		q.RelatedMaterialIDs = slices.Sorted(slices.Values(q.RelatedMaterialIDs))
+		if len(q.CorrectOptionIDs) == 0 {
+			q.CorrectOptionIDs = nil
+		}
+		if len(q.Options) == 0 {
+			q.Options = nil
+		}
+		raw, _ := json.Marshal(q)
+		return string(raw)
+	}
+	return norm(current) == norm(n)
 }
