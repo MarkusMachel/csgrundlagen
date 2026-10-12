@@ -435,13 +435,13 @@
       ],
       "difficulty": "easy",
       "options": [
-        "Return 200 for everything so clients don't need to check status.",
+        "Register one wildcard route and branch on req.method, since Express keeps one handler per path; return 200 with the body for each verb.",
         "One handler per method and path, express.json() for bodies, and the right status: 201 with Location, 200/204, 204, or 404.",
-        "Use app.get with a ?method= query parameter for writes.",
-        "Handle every verb in app.all() and branch on req.method, since Express can only register one handler per path, so no extra setup is needed for it to work."
+        "Route writes through app.get with a method query parameter, since fetch in browsers sends just GET and POST requests.",
+        "One handler per method and path, and Express parses JSON bodies by default; return 200 for each write so clients stay simple."
       ],
       "correct": 1,
-      "explanation": "Register a handler per method and path, parse the body with `express.json()`, and return the right status: `201` (plus `Location`) for create, `200` or `204` for update, `204` for delete, `404` if missing.\n\n```js\nimport express from \"express\";\nconst app = express();\napp.use(express.json());\n\napp.post(\"/items\", (req, res) => {\n  const item = items.create(req.body);\n  res.status(201).location(`/items/${item.id}`).json(item);\n});\napp.put(\"/items/:id\", (req, res) => res.json(items.replace(req.params.id, req.body)));\napp.delete(\"/items/:id\", (req, res) => { items.remove(req.params.id); res.sendStatus(204); });\n```",
+      "explanation": "Register a handler per method and path, parse the body with `express.json()`, and return the right status: `201` (plus `Location`) for create, `200` or `204` for update, `204` for delete, `404` if missing.\n\nWhy the others are wrong: Express does not parse bodies until you add `express.json()`, and returning 200 for everything hides created/empty/missing outcomes; `fetch` can send `PUT`, `DELETE` and `PATCH`, and writes over GET break caching and safety guarantees; and Express happily registers many handlers per path, one per method (`app.post`, `app.put`...).\n\n```js\nimport express from \"express\";\nconst app = express();\napp.use(express.json());\n\napp.post(\"/items\", (req, res) => {\n  const item = items.create(req.body);\n  res.status(201).location(`/items/${item.id}`).json(item);\n});\napp.put(\"/items/:id\", (req, res) => res.json(items.replace(req.params.id, req.body)));\napp.delete(\"/items/:id\", (req, res) => { items.remove(req.params.id); res.sendStatus(204); });\n```",
       "materials": [
         "ex-routing"
       ]
@@ -454,13 +454,13 @@
       ],
       "difficulty": "easy",
       "options": [
-        "Use window.onerror on the server.",
+        "A four-argument (err, req, res, next) middleware registered first; Express 5 still needs async handlers wrapped in try/catch.",
         "A four-argument (err, req, res, next) middleware registered last; Express 5 sends rejected async handlers there automatically.",
-        "Wrap app.listen in try/catch; Express 5 removed error middleware in favour of process-level handlers, which is what the Express docs recommend for production apps.",
-        "Register the error middleware first so it can catch everything after it."
+        "A three-argument (req, res, next) middleware registered last that checks res.error; Express 5 added a built-in app.onError hook.",
+        "Wrap app.listen in try/catch to catch route errors; Express 5 removed error middleware in favour of process-level handlers."
       ],
       "correct": 1,
-      "explanation": "Register an error-handling middleware last; it has four parameters `(err, req, res, next)`. In Express 5 a rejected promise or thrown error in any handler reaches it. In Express 4 you must wrap async handlers and call `next(err)`.\n\n```js\napp.use((err, req, res, next) => {\n  req.log?.error(err);\n  res.status(err.status ?? 500).json({ error: { message: err.expose ? err.message : \"Internal error\" } });\n});\n```",
+      "explanation": "Register an error-handling middleware last; it has four parameters `(err, req, res, next)`. In Express 5 a rejected promise or thrown error in any handler reaches it. In Express 4 you must wrap async handlers and call `next(err)`.\n\nWhy the others are wrong: Express recognises error middleware by its four parameters, there is no `res.error` or `app.onError`; `app.listen` returns immediately, so its try/catch never sees request errors, and Express 5 kept error middleware; and error middleware must come after the routes, while Express 5 is exactly the version that forwards rejected promises without wrappers.\n\n```js\napp.use((err, req, res, next) => {\n  req.log?.error(err);\n  res.status(err.status ?? 500).json({ error: { message: err.expose ? err.message : \"Internal error\" } });\n});\n```",
       "materials": [
         "ex-errors",
         "ex-5"
@@ -475,13 +475,13 @@
       ],
       "difficulty": "easy",
       "options": [
-        "Use TypeScript types, which validate request bodies at runtime.",
-        "Check for the presence of fields with if (req.body) only.",
-        "Trust req.body when the client is your own front end, since it already validated the form before sending it, which is what the Express docs recommend for production apps.",
+        "Check each field with if statements inside the handler and coerce wrong types silently so requests don't fail.",
+        "Skip server checks when the client is your own front end, since its form validation already ran, and rely on the database constraints.",
+        "Declare the body with TypeScript interfaces, which the compiler turns into runtime checks that reject bad input with 400.",
         "Validate req.body against a schema (Zod, Joi, Ajv) at the edge, return 400/422 with field errors, pass only parsed data on."
       ],
       "correct": 3,
-      "explanation": "Never trust `req.body`. Validate against a schema (Zod, Joi, Ajv) at the edge, return `400` or `422` with field errors, and pass only validated data inward.\n\n```js\nimport { z } from \"zod\";\nconst CreateItem = z.object({ name: z.string().min(1), price: z.number().positive() });\nconst parsed = CreateItem.safeParse(req.body);\nif (!parsed.success) return res.status(422).json({ errors: parsed.error.flatten().fieldErrors });\n```",
+      "explanation": "Never trust `req.body`. Validate against a schema (Zod, Joi, Ajv) at the edge, return `400` or `422` with field errors, and pass only validated data inward.\n\nWhy the others are wrong: TypeScript types are erased at compile time and check nothing at runtime; ad hoc checks scattered through handlers miss cases, and silent coercion hides client bugs instead of returning a 400/422; and anyone can call the API directly, bypassing the front end, while database errors give poor messages and catch only some rules.\n\n```js\nimport { z } from \"zod\";\nconst CreateItem = z.object({ name: z.string().min(1), price: z.number().positive() });\nconst parsed = CreateItem.safeParse(req.body);\nif (!parsed.success) return res.status(422).json({ errors: parsed.error.flatten().fieldErrors });\n```",
       "materials": [
         "zod"
       ]
@@ -495,12 +495,12 @@
       "difficulty": "easy",
       "options": [
         "Parse with a schema, return a stable error shape (code, message, details) with 422, and never leak stack traces.",
-        "Throw a string so Express formats the error.",
-        "Return 500 for any invalid input.",
-        "Send err.stack back to the client so front-end developers can debug faster, with status 200 to keep caches happy."
+        "Validate with a schema and return 500 with a message string, since invalid input means the request failed on the server.",
+        "Parse with a schema and send err.stack with status 400, so front-end developers can see where validation failed.",
+        "Parse with a schema and throw the Zod error as is, so Express serializes its full issue list and stack with status 500."
       ],
       "correct": 0,
-      "explanation": "A strong answer also says: a stable error shape (code, message, details), no stack traces to clients.\n\n```js\napp.post(\"/items\", (req, res) => {\n  const r = CreateItem.safeParse(req.body);\n  if (!r.success) {\n    return res.status(422).json({\n      error: { code: \"VALIDATION_FAILED\", message: \"Invalid item\", details: r.error.flatten().fieldErrors },\n    });\n  }\n  res.status(201).json(items.create(r.data));\n});\n```",
+      "explanation": "Parse the body with a schema; on failure return `422` (or `400`) with a stable error shape (`code`, `message`, field `details`, ideally RFC 9457 problem details) that clients can rely on, and never send stack traces to clients. On success pass only the parsed data on and return `201` for a create.\n\nWhy the others are wrong: an unhandled Zod error becomes a 500 with internals instead of a client error with a stable shape; invalid input is a client error (400/422), 500 means the server failed; and stack traces leak implementation details to attackers and are useless to clients compared to field-level details.\n\n```js\napp.post(\"/items\", (req, res) => {\n  const r = CreateItem.safeParse(req.body);\n  if (!r.success) {\n    return res.status(422).json({\n      error: { code: \"VALIDATION_FAILED\", message: \"Invalid item\", details: r.error.flatten().fieldErrors },\n    });\n  }\n  res.status(201).json(items.create(r.data));\n});\n```",
       "materials": [
         "zod",
         "rfc9457"
@@ -514,13 +514,13 @@
       ],
       "difficulty": "easy",
       "options": [
-        "Express picks the status from the body type: objects give 200, strings give 201 and empty bodies give 404, so no extra setup is needed for it to work.",
-        "Set res.code = 404 before res.send().",
-        "Status codes can only be set in error middleware.",
+        "Express infers it from the body: objects send 200, strings send 201 and an empty body sends 204, with no extra call needed.",
+        "Assign res.code = 404 before res.send(); Express reads that property when it writes the response headers.",
+        "Call res.send(body, code) with the status as the second argument, which is the form Express 5 recommends.",
         "res.status(code).json(body): 200, 201, 204, 400/422, 401, 403, 404, 409, 429 and 500 for their specific meanings."
       ],
       "correct": 3,
-      "explanation": "`res.status(code).json(body)`. Common set: `200` OK, `201` created, `204` no content, `400/422` bad input, `401` unauthenticated, `403` forbidden, `404` not found, `409` conflict, `429` too many requests, `500` server fault.",
+      "explanation": "`res.status(code).json(body)`. Common set: `200` OK, `201` created, `204` no content, `400/422` bad input, `401` unauthenticated, `403` forbidden, `404` not found, `409` conflict, `429` too many requests, `500` server fault.\n\nWhy the others are wrong: Express defaults to 200 whatever the body type; `res.code` is not read by anything (the real Node property is `res.statusCode`, and `res.status()` is the idiomatic setter); and the old two-argument `res.send` forms were deprecated in Express 4 and removed in Express 5.",
       "materials": [
         "mdn-status"
       ]
@@ -534,12 +534,12 @@
       "difficulty": "easy",
       "options": [
         "app is the whole application; a Router is a mountable mini-app with its own routes and middleware, one per feature.",
-        "app handles GET requests and Router handles POST requests.",
-        "Routers run in a separate process for isolation.",
-        "Router is the older API replaced by app in Express 5, so new code should register every route on app directly, which is what the Express docs recommend for production apps."
+        "A Router runs its routes in a separate worker, so slow features don't block app; use one per CPU-heavy feature.",
+        "Router is the older API replaced in Express 5, so new code registers each route on app directly and avoids mounting.",
+        "app handles requests and settings, and a Router is a lighter app for read routes (GET) that skips the middleware stack."
       ],
       "correct": 0,
-      "explanation": "`app` is the whole application (settings, listen). A `Router` is a mountable mini-application with its own routes and middleware. Use one router per feature and mount it: `app.use(\"/items\", itemsRouter)`. (In NestJS the closer idea is plain controllers versus controllers with extra framework base classes; NestJS keeps controllers as decorated classes.)",
+      "explanation": "`app` is the whole application (settings, listen). A `Router` is a mountable mini-application with its own routes and middleware. Use one router per feature and mount it: `app.use(\"/items\", itemsRouter)`. (In NestJS the closest equivalent is a feature module with its own controllers.)\n\nWhy the others are wrong: a Router supports every HTTP method and has its own middleware stack; it runs in the same process and thread as the app; and `express.Router()` is fully supported in Express 5 and is the recommended way to split routes by feature.",
       "materials": [
         "ex-routing"
       ]
@@ -552,13 +552,13 @@
       ],
       "difficulty": "easy",
       "options": [
-        "Return null from services and check it in each route.",
-        "Handle errors in every route with res.status(...).json(...), so each handler controls its own error format, which is what the Express docs recommend for production apps.",
+        "Log errors in the service where they occur and swallow them, returning a default value so routes can skip error handling entirely.",
+        "Return null from services on failure and let each route turn the null into a 404 or 500 response as it sees fit.",
         "Throw an AppError carrying status and code anywhere, and map it in the single error middleware; business code never touches res.",
-        "Log errors to console and let Express crash."
+        "Handle errors in each route with res.status(...).json(...), so each handler controls its own error format."
       ],
       "correct": 2,
-      "explanation": "Define an `AppError` class carrying `status` and `code`, throw it anywhere, and map it in the one error middleware. Business code never touches `res`.\n\n```js\nclass AppError extends Error {\n  constructor(status, code, message) { super(message); this.status = status; this.code = code; this.expose = true; }\n}\nthrow new AppError(404, \"ITEM_NOT_FOUND\", \"Item not found\");\n```",
+      "explanation": "Define an `AppError` class carrying `status` and `code`, throw it anywhere, and map it in the one error middleware. Business code never touches `res`.\n\nWhy the others are wrong: a `null` carries no reason, so routes guess the status and the shape drifts; per-route handling duplicates code and produces inconsistent error formats; and swallowing errors hides failures and returns wrong data as if it were correct.\n\n```js\nclass AppError extends Error {\n  constructor(status, code, message) { super(message); this.status = status; this.code = code; this.expose = true; }\n}\nthrow new AppError(404, \"ITEM_NOT_FOUND\", \"Item not found\");\n```",
       "materials": [
         "ex-errors"
       ]
@@ -571,13 +571,13 @@
       ],
       "difficulty": "easy",
       "options": [
-        "Logging only errors, never info or debug.",
+        "Formatted console.log lines with a fixed column order, which are faster than JSON and easier for log tools to search and index.",
         "JSON log objects with fields (level, msg, requestId, userId) that machines can filter, aggregate and trace across services.",
-        "Writing logs into the database inside each transaction.",
-        "Logging with console.log in a fixed order, which is faster than JSON and easier to search across services, and it behaves the same in Express, Fastify and NestJS."
+        "Writing log lines into a database table inside each transaction, so logs and data stay consistent and queryable.",
+        "Logging to separate files per level (error.log, info.log) so each file has a predictable structure for grep."
       ],
       "correct": 1,
-      "explanation": "Logs as JSON objects with fields (`level`, `time`, `msg`, `requestId`, `userId`, `durationMs`) instead of free text. Machines can filter, aggregate and alert on them; one request can be traced across lines and services.\n\n```js\nimport pino from \"pino\";\nconst logger = pino();\nlogger.info({ requestId, orderId }, \"order created\");\n```",
+      "explanation": "Logs as JSON objects with fields (`level`, `time`, `msg`, `requestId`, `userId`, `durationMs`) instead of free text. Machines can filter, aggregate and alert on them; one request can be traced across lines and services.\n\nWhy the others are wrong: splitting by level is about routing, the lines are still free text; logging inside transactions loses the log when the transaction rolls back and adds load to the database; and free-text lines need fragile parsing, while JSON loggers like Pino are among the fastest options.\n\n```js\nimport pino from \"pino\";\nconst logger = pino();\nlogger.info({ requestId, orderId }, \"order created\");\n```",
       "materials": [
         "pino"
       ]
@@ -591,12 +591,12 @@
       "difficulty": "easy",
       "options": [
         "A Pino destination or Winston file transport with rotation; in containers, write JSON to stdout and let the platform collect it.",
-        "Node writes logs to /var/log automatically.",
-        "Use console.error, which writes to a file by default.",
-        "Use fs.writeFileSync on every log call, which is the standard approach and keeps logs in order under load, and that has been the default behaviour since Node 20."
+        "console.error writes to a log file by default; in containers, write logs to /var/log so the platform rotates them.",
+        "fs.writeFileSync on each log call so lines stay ordered; in containers, write to a file inside the image.",
+        "Set NODE_LOG_FILE so Node redirects console output to that file; in containers, mount a volume and log to it."
       ],
       "correct": 0,
-      "explanation": "Pino: `pino(pino.destination(\"app.log\"))` or a transport. Winston: `new winston.transports.File({ filename })`. In containers the better practice is to write JSON to stdout and let the platform collect and rotate it; files need rotation (`logrotate`, `pino-roll`).",
+      "explanation": "Pino: `pino(pino.destination(\"app.log\"))` or a transport. Winston: `new winston.transports.File({ filename })`. In containers the better practice is to write JSON to stdout and let the platform collect and rotate it; files need rotation (`logrotate`, `pino-roll`).\n\nWhy the others are wrong: Node has no `NODE_LOG_FILE` setting, and in containers stdout is the collected stream; `console.error` writes to stderr, not a file, and nothing rotates `/var/log` inside a container; and synchronous writes block the event loop on every log call, while files inside the container vanish with it.",
       "materials": [
         "pino"
       ]
@@ -609,13 +609,13 @@
       ],
       "difficulty": "easy",
       "options": [
-        "It calls next(false), which tells Express to skip the remaining middleware and close the socket.",
+        "It calls next(false), which tells Express to skip the remaining middleware and close the connection.",
         "It sends a response without calling next(), or calls next(err) to jump to the error handler.",
-        "It returns false from the middleware function.",
-        "It calls res.end() and then next() so logging still runs."
+        "It returns false from the middleware function, and Express then ends the request with a 403.",
+        "It calls res.end() and then next(), so later middleware still runs but leaves the response alone."
       ],
       "correct": 1,
-      "explanation": "Do not call `next()`; send a response, or call `next(err)` to jump to the error handler.\n\n```js\nconst requireAuth = (req, res, next) => {\n  if (!req.headers.authorization) return res.status(401).json({ error: \"unauthenticated\" });\n  next();\n};\n```",
+      "explanation": "Do not call `next()`; send a response, or call `next(err)` to jump to the error handler.\n\nWhy the others are wrong: Express has no `next(false)` (it has `next('route')` and `next('router')`, which skip to other routes); Express ignores a middleware's return value; and calling `next()` after responding lets later handlers try to respond again, which fails with \"headers already sent\".\n\n```js\nconst requireAuth = (req, res, next) => {\n  if (!req.headers.authorization) return res.status(401).json({ error: \"unauthenticated\" });\n  next();\n};\n```",
       "materials": [
         "ex-writing-mw"
       ]
@@ -628,13 +628,13 @@
       ],
       "difficulty": "easy",
       "options": [
-        "process.env, which is request-scoped.",
-        "Global variables, because Node handles one request at a time on its single thread.",
-        "Cookies set on the response and read back by later middleware.",
+        "Cookies set on the response and read by later middleware in the same request; globalThis for deeper code.",
+        "process.env entries set per request, since each request gets its own copy of the environment in Node.",
+        "Module-level variables, since Node handles one request at a time on its single thread until that response is fully sent.",
         "res.locals or a typed req property between middleware; AsyncLocalStorage for request context deep in the call stack."
       ],
       "correct": 3,
-      "explanation": "Use `res.locals` (request-scoped) or attach a typed property such as `req.user`. For deep call stacks without passing parameters, use `AsyncLocalStorage` (request id, tenant id).\n\n```js\nimport { AsyncLocalStorage } from \"node:async_hooks\";\nexport const ctx = new AsyncLocalStorage();\napp.use((req, res, next) => ctx.run({ requestId: crypto.randomUUID() }, next));\n```",
+      "explanation": "Use `res.locals` (request-scoped) or attach a typed property such as `req.user`. For deep call stacks without passing parameters, use `AsyncLocalStorage` (request id, tenant id).\n\nWhy the others are wrong: `process.env` is one shared object for the whole process; Node interleaves many requests on one thread, so module-level state leaks between concurrent requests; and a response cookie is not visible on the current request, while `globalThis` is shared by every request.\n\n```js\nimport { AsyncLocalStorage } from \"node:async_hooks\";\nexport const ctx = new AsyncLocalStorage();\napp.use((req, res, next) => ctx.run({ requestId: crypto.randomUUID() }, next));\n```",
       "materials": [
         "als",
         "ex-middleware"
@@ -647,13 +647,13 @@
       ],
       "difficulty": "easy",
       "options": [
-        "Store configuration in localStorage.",
+        "Hard-code defaults in the code and use a git branch per environment, merging config changes between them.",
         "Read process.env once at startup in one config module, validate it (e.g. Zod), freeze it, and import that object.",
-        "Read process.env.X directly in each handler, so changes to the environment apply without restarts, and that has been the default behaviour since Node 20.",
-        "Hard-code values and use git branches per environment."
+        "Keep the values, connection string included, in a config.json committed to the repo and read it with require where needed.",
+        "Read process.env.X directly in each handler, so changes to the environment apply without a restart."
       ],
       "correct": 1,
-      "explanation": "Read `process.env` once at startup in a single config module, validate it, freeze it, and import the config object everywhere. Do not scatter `process.env.X` through handlers.\n\n```js\nconst Env = z.object({ DATABASE_URL: z.string().url(), PORT: z.coerce.number().default(3000) });\nexport const config = Object.freeze(Env.parse(process.env));\n```",
+      "explanation": "Read `process.env` once at startup in a single config module, validate it, freeze it, and import the config object everywhere. Do not scatter `process.env.X` through handlers.\n\nWhy the others are wrong: committing connection strings leaks secrets and ties config to builds; a running process's environment doesn't change from outside, and scattered reads skip validation and fail late; and per-environment branches drift apart and make every deploy a merge.\n\n```js\nconst Env = z.object({ DATABASE_URL: z.string().url(), PORT: z.coerce.number().default(3000) });\nexport const config = Object.freeze(Env.parse(process.env));\n```",
       "materials": [
         "zod",
         "node-env"
@@ -667,13 +667,13 @@
       ],
       "difficulty": "easy",
       "options": [
-        "process.env returns typed values such as numbers and booleans, so no conversion is needed.",
+        "process.env.NAME, which returns numbers and booleans already parsed; --env-file loads production secrets from the repo.",
         "process.env.NAME (always strings, so convert and validate); --env-file or dotenv in development, secrets from the platform.",
-        "Use require('env') to load them.",
-        "Node reads .env automatically in every environment."
+        "process.env.NAME; Node 22 loads a .env file from the working directory automatically, so dotenv is no longer needed.",
+        "require('env').NAME, the built-in env module; dotenv is needed in production because Node doesn't read the OS environment itself."
       ],
       "correct": 1,
-      "explanation": "`process.env.NAME` (always strings, so convert and validate). Load a `.env` file in development with `node --env-file=.env app.js` (Node 20.6+) or `dotenv`. Production values come from the platform or a secret store; never commit secrets.",
+      "explanation": "`process.env.NAME` (always strings, so convert and validate). Load a `.env` file in development with `node --env-file=.env app.js` (Node 20.6+) or `dotenv`. Production values come from the platform or a secret store; never commit secrets.\n\nWhy the others are wrong: every `process.env` value is a string (or `undefined`), and production secrets shouldn't live in repo files; there is no built-in `env` module, and `process.env` already exposes the OS environment; and Node loads a `.env` file only when asked (`--env-file` or `process.loadEnvFile()`).",
       "materials": [
         "node-env",
         "node-learn"
@@ -685,15 +685,15 @@
         "JavaScript",
         "Testing & Operations"
       ],
-      "difficulty": "easy",
+      "difficulty": "medium",
       "options": [
-        "Node reloads configuration automatically on SIGTERM.",
+        "Clear require.cache and re-import the config module; that also refreshes process.env from the shell.",
         "Env vars need a restart; for file or remote config, watch it or handle SIGHUP, validate, then swap the reference atomically.",
-        "Re-read process.env in a setInterval, since the operating system updates a running process's environment, which is what the Express docs recommend for production apps.",
-        "Call require.cache.clear() and re-import everything."
+        "Send SIGTERM; Node rereads process.env and its config files on that signal and continues without restarting.",
+        "Re-read process.env on a timer, since the OS updates a running process's environment when the variable changes in the shell or the service config."
       ],
       "correct": 1,
-      "explanation": "Environment variables need a restart. For file or remote config: watch the file (`fs.watch`) or listen for `SIGHUP`, validate the new config, then atomically swap the reference. Feature flags and a config service avoid restarts altogether.\n\n```js\nlet config = load();\nprocess.on(\"SIGHUP\", () => { try { config = load(); } catch (e) { logger.error(e); } });\n```",
+      "explanation": "Environment variables need a restart. For file or remote config: watch the file (`fs.watch`) or listen for `SIGHUP`, validate the new config, then atomically swap the reference. Feature flags and a config service avoid restarts altogether.\n\nWhy the others are wrong: `SIGTERM` asks the process to shut down, and Node reloads nothing by itself; a process's environment is copied at start and outside changes don't reach it; and clearing the module cache re-runs the module but `process.env` stays the same (and ESM has no `require.cache`).\n\n```js\nlet config = load();\nprocess.on(\"SIGHUP\", () => { try { config = load(); } catch (e) { logger.error(e); } });\n```",
       "materials": [
         "node-signals"
       ]
@@ -703,15 +703,15 @@
       "tags": [
         "JavaScript"
       ],
-      "difficulty": "easy",
+      "difficulty": "medium",
       "options": [
-        "Through require, import or fetch.",
-        "From JSON, YAML or TOML only.",
-        "Synchronously, asynchronously, or via callbacks, which is how Node reads every configuration source, and it behaves the same in Express, Fastify and NestJS.",
+        "Synchronously, with callbacks or with promises; the choice decides whether in-flight requests see changes.",
+        "From JSON, YAML or TOML files, one per environment, which Node merges in a fixed order at startup.",
+        "Through Node's require, dynamic import() or fetch, which map to IOptions, IOptionsSnapshot and IOptionsMonitor in that order.",
         "Once at startup (frozen constant), per request (a getter that rereads), or a live watcher that swaps a shared reference."
       ],
       "correct": 3,
-      "explanation": "Three read strategies: a value read once at startup (frozen constant, like `IOptions`), a value read per request (a getter that rereads, like `IOptionsSnapshot`), and a live watcher that updates a shared reference and notifies subscribers (like `IOptionsMonitor`). Choose by how often it changes and whether in-flight requests may see a change mid-way.",
+      "explanation": "Three read strategies: a value read once at startup (frozen constant, like `IOptions`), a value read per request (a getter that rereads, like `IOptionsSnapshot`), and a live watcher that updates a shared reference and notifies subscribers (like `IOptionsMonitor`). Choose by how often it changes and whether in-flight requests may see a change mid-way.\n\nWhy the others are wrong: the loading mechanism says nothing about when values refresh; Node has no built-in config merging, and file format is unrelated to lifetime; and sync versus async reading is an API style, not a refresh strategy.",
       "materials": [
         "node-bp"
       ]
@@ -724,13 +724,13 @@
       ],
       "difficulty": "easy",
       "options": [
-        "Code First generates SQL from TypeScript types at runtime; Database First means writing raw SQL without an ORM, which is why most Node teams standardize on it.",
+        "Code First: Prisma generates SQL from TypeScript types at runtime. Database First: raw SQL with no ORM involved.",
         "Code First: schema.prisma plus prisma migrate create the database. Database First: prisma db pull generates the schema.",
-        "They're Prisma's two pricing tiers.",
-        "Database First is only available for MongoDB."
+        "Code First: prisma db pull writes models into code. Database First: prisma migrate creates tables from them.",
+        "Code First: Prisma Client creates missing tables on its first query. Database First: prisma generate creates the database tables."
       ],
       "correct": 1,
-      "explanation": "Code First: you define models in code, and migrations create or update the database (Prisma `schema.prisma` and `prisma migrate dev`). Database First: the database is the source of truth and you generate models from it (`prisma db pull`, `sequelize-auto`). Code First suits new services; Database First suits legacy or DBA-owned schemas.",
+      "explanation": "Code First: you define models in code, and migrations create or update the database (Prisma `schema.prisma` and `prisma migrate dev`). Database First: the database is the source of truth and you generate models from it (`prisma db pull`, `sequelize-auto`). Code First suits new services; Database First suits legacy or DBA-owned schemas.\n\nWhy the others are wrong: Prisma works from `schema.prisma`, not TypeScript types, and Database First still uses the ORM; the commands are swapped; and the client never creates tables, while `prisma generate` only generates the typed client.",
       "materials": [
         "prisma-migrate",
         "prisma-introspect"
@@ -744,13 +744,13 @@
       ],
       "difficulty": "easy",
       "options": [
-        "Give both models a list field and Prisma creates a join table, the same way it models many-to-many, which is why most Node teams standardize on it.",
-        "Store the child ids as a JSON array on the parent.",
+        "Give both models a list field and Prisma creates an implicit join table, which is how it models one-to-many.",
+        "Store the child ids as a scalar list (Int[]) on the parent; Prisma resolves them into a proper relation automatically.",
         "The many side holds the foreign key field plus @relation; the one side has a list field. Index the foreign key.",
-        "Use a @oneToMany attribute on the parent model."
+        "The one side holds the foreign key plus @relation; the many side has a single field pointing back. Index it."
       ],
       "correct": 2,
-      "explanation": "The \"many\" side holds the foreign key. Index the foreign key.\n\n```prisma\nmodel Author { id Int @id @default(autoincrement())\n               name String\n               posts Post[] }\nmodel Post   { id Int @id @default(autoincrement())\n               title String\n               authorId Int\n               author Author @relation(fields: [authorId], references: [id]) }\n```",
+      "explanation": "The \"many\" side holds the foreign key. Index the foreign key.\n\nWhy the others are wrong: list fields on both sides define an implicit many-to-many; a scalar list is plain data with no foreign key or relation behind it; and the foreign key belongs on the many side, since one parent row can't hold a column per child.\n\n```prisma\nmodel Author { id Int @id @default(autoincrement())\n               name String\n               posts Post[] }\nmodel Post   { id Int @id @default(autoincrement())\n               title String\n               authorId Int\n               author Author @relation(fields: [authorId], references: [id]) }\n```",
       "materials": [
         "prisma-relations",
         "prisma"
@@ -764,13 +764,13 @@
       ],
       "difficulty": "medium",
       "options": [
-        "Method injection means monkey-patching module exports at runtime, which is the idiomatic way to inject in Node, and it behaves the same in Express, Fastify and NestJS.",
-        "Constructor injection only works with TypeScript decorators.",
+        "Method injection means monkey-patching module exports at runtime; factories do the same through require.cache.",
+        "Factories receive dependencies per call; method injection sets them once on the prototype, fitting long-lived app-wide services.",
         "Factories receive dependencies once; method injection passes them per call, fitting per-call things like a transaction.",
-        "Node has no dependency injection, so modules must import their dependencies directly."
+        "Factories need TypeScript decorators and a container; method injection is the plain-JS form that passes them once."
       ],
       "correct": 2,
-      "explanation": "Constructor injection passes dependencies once when the object or factory is created; method injection passes them per call. JS usually uses factory functions or class constructors; method injection fits things that vary per call (a transaction, a request context).\n\n```js\nconst createOrderService = ({ repo, mailer }) => ({\n  async place(order, tx) { await repo.save(order, tx); await mailer.send(order); },\n});\n```",
+      "explanation": "Constructor injection passes dependencies once when the object or factory is created; method injection passes them per call. JS usually uses factory functions or class constructors; method injection fits things that vary per call (a transaction, a request context).\n\nWhy the others are wrong: monkey-patching is a testing hack, not injection; a factory is a plain function taking its dependencies, no decorators or container needed, and method injection passes per call, not once; and the definitions are swapped.\n\n```js\nconst createOrderService = ({ repo, mailer }) => ({\n  async place(order, tx) { await repo.save(order, tx); await mailer.send(order); },\n});\n```",
       "materials": [
         "node-bp"
       ]
@@ -783,13 +783,13 @@
       ],
       "difficulty": "medium",
       "options": [
-        "Each request gets a new Node process.",
-        "Express runs all route handlers in parallel and sends whichever response finishes first.",
-        "Error middleware runs before route handlers to catch errors early.",
+        "Middleware runs in registration order, but error middleware runs before route handlers to catch errors early.",
+        "Each request gets its own worker, which runs middleware in registration order before the matching route responds.",
+        "Route handlers run first, then middleware in registration order adds headers; errors go to the error middleware.",
         "Middleware runs in registration order, the matching route handler responds; errors skip to error middleware; finish fires after."
       ],
       "correct": 3,
-      "explanation": "Server receives the request, it passes through middleware in registration order, a matching route handler runs, the response is sent. A thrown error or `next(err)` skips to error middleware. After sending, the `finish` and `close` events fire (useful for logging duration). In NestJS the order is middleware, guards, interceptors, pipes, handler, interceptors, exception filters.",
+      "explanation": "Server receives the request, it passes through middleware in registration order, a matching route handler runs, the response is sent. A thrown error or `next(err)` skips to error middleware. After sending, the `finish` and `close` events fire (useful for logging duration). In NestJS the order is middleware, guards, interceptors, pipes, handler, interceptors, exception filters.\n\nWhy the others are wrong: Express handles every request on the one event-loop thread; middleware and routes share one ordered stack, so middleware registered before a route runs before it; and error middleware is skipped until an error is passed, so it belongs after the routes.",
       "materials": [
         "ex-middleware",
         "nest-lifecycle"
@@ -803,13 +803,13 @@
       ],
       "difficulty": "medium",
       "options": [
-        "Array.prototype.filter applied to the response body.",
-        "Express has no equivalent, so cross-cutting logic must be copied into every route handler, and that has been the default behaviour since Node 20.",
-        "process.on('request') listeners.",
+        "process.on('request') listeners for Express, and Fastify's onRequest event emitted on the process object.",
+        "Express's app.filter() hook, Fastify's filters array, and NestJS @Filter() decorators on each handler.",
+        "There are none in Express; cross-cutting logic is copied into each handler, and NestJS limits it to exception filters.",
         "Route-level middleware (auth, validation), Fastify lifecycle hooks, or NestJS guards, pipes and interceptors."
       ],
       "correct": 3,
-      "explanation": "Route-level middleware: `router.post(\"/items\", requireAuth, validate(CreateItem), handler)`. Fastify has lifecycle hooks (`preHandler`, `onSend`); NestJS has guards, pipes and interceptors. Use them for cross-cutting concerns: auth, validation, timing, caching.",
+      "explanation": "Route-level middleware: `router.post(\"/items\", requireAuth, validate(CreateItem), handler)`. Fastify has lifecycle hooks (`preHandler`, `onSend`); NestJS has guards, pipes and interceptors. Use them for cross-cutting concerns: auth, validation, timing, caching.\n\nWhy the others are wrong: those APIs don't exist (NestJS has exception filters via `@UseFilters`, which only handle errors); route-level middleware is Express's equivalent, and NestJS also offers guards, pipes and interceptors; and requests are not events on `process` (Fastify's `onRequest` is a hook on the Fastify instance).",
       "materials": [
         "ex-middleware",
         "nest-lifecycle"
@@ -824,13 +824,13 @@
       ],
       "difficulty": "medium",
       "options": [
-        "Write a middleware that stores every request in Redis forever.",
-        "Log req and res objects in full with console.log, including bodies and headers, for complete audit trails, which is why most Node teams standardize on it.",
-        "Log only the URL so logs stay small.",
+        "pino-http or morgan logging just the URL, so logs stay small; status and duration belong in metrics instead.",
+        "A middleware that stores each request and response in Redis indefinitely, so you can replay any of them later.",
+        "console.log of the full req and res objects, including headers and bodies, for a complete audit trail.",
         "pino-http or morgan: method, path, status, duration, request id; redact secrets and skip bodies by default."
       ],
       "correct": 3,
-      "explanation": "Use `pino-http` or `morgan`. Log method, path, status, duration, request id, and user id. Redact secrets (`authorization`, passwords, tokens) and avoid logging bodies by default (privacy and volume); sample or log bodies only for failures.\n\n```js\nimport pinoHttp from \"pino-http\";\napp.use(pinoHttp({ redact: [\"req.headers.authorization\"] }));\n```",
+      "explanation": "Use `pino-http` or `morgan`. Log method, path, status, duration, request id, and user id. Redact secrets (`authorization`, passwords, tokens) and avoid logging bodies by default (privacy and volume); sample or log bodies only for failures.\n\nWhy the others are wrong: keeping everything forever is a privacy and cost problem and not a logging pipeline; full objects leak tokens, passwords and personal data and are unstructured; and status, duration and request id are what make request logs useful for debugging.\n\n```js\nimport pinoHttp from \"pino-http\";\napp.use(pinoHttp({ redact: [\"req.headers.authorization\"] }));\n```",
       "materials": [
         "pino-http"
       ]
@@ -841,15 +841,15 @@
         "JavaScript",
         "APIs & HTTP"
       ],
-      "difficulty": "medium",
+      "difficulty": "easy",
       "options": [
         "Path segments, query string, parsed payload (express.json / urlencoded), and multer for file uploads; all untrusted.",
-        "They're the same object exposed under four names for backward compatibility.",
-        "req.params holds headers and req.query holds cookies.",
-        "req.body is parsed automatically without any middleware."
+        "Path segments, query string and raw payload; Express parses JSON and multipart form data into req.body by default.",
+        "req.params holds request headers, req.query the parsed cookies, and req.body the JSON payload once express.json() has run.",
+        "Path segments, query string and payload, which Express validates and converts to numbers and booleans for you."
       ],
       "correct": 0,
-      "explanation": "`params` come from the path (`/items/:id`), `query` from the query string, `body` from the payload (`express.json()` for JSON, `express.urlencoded()` for HTML forms, `multer` for file uploads). All are untrusted strings or objects: validate and convert each.",
+      "explanation": "`params` come from the path (`/items/:id`), `query` from the query string, `body` from the payload (`express.json()` for JSON, `express.urlencoded()` for HTML forms, `multer` for file uploads). All are untrusted strings or objects: validate and convert each.\n\nWhy the others are wrong: `req.body` is `undefined` until a parser runs, and multipart needs `multer` or similar; headers live in `req.headers` and cookies need `cookie-parser`; and Express validates nothing, params and query values arrive as strings.",
       "materials": [
         "ex-routing",
         "multer"
@@ -864,12 +864,12 @@
       "difficulty": "medium",
       "options": [
         "It runs in registration order: helmet and CORS, request id and logging, parsers, auth, rate limit, routes, 404, error handler.",
-        "Error handlers must be registered first.",
-        "Body parsers must run after the routes.",
-        "Express sorts middleware by priority internally, so registration order only matters for performance, and it behaves the same in Express, Fastify and NestJS."
+        "It runs in registration order: routes first so they match quickly, then body parsers, auth, logging and errors.",
+        "Express sorts middleware by type internally, so registration order affects just performance, not behaviour.",
+        "It runs in registration order: error handler first so it wraps everything after it, then parsers, auth, routes and the 404 handler."
       ],
       "correct": 0,
-      "explanation": "Middleware runs in registration order. Typical order: security headers (`helmet`) and CORS, request id and logging, body parsers, auth, rate limit, routes, 404 handler, error handler. Wrong order gives bugs such as reading `req.body` before the parser, or auth running after a route.",
+      "explanation": "Middleware runs in registration order. Typical order: security headers (`helmet`) and CORS, request id and logging, body parsers, auth, rate limit, routes, 404 handler, error handler. Wrong order gives bugs such as reading `req.body` before the parser, or auth running after a route.\n\nWhy the others are wrong: error middleware only receives errors from middleware registered before it, so it goes last; routes before parsers see no `req.body`, and auth after routes protects nothing; and Express does no sorting, order is behaviour.",
       "materials": [
         "ex-middleware",
         "helmet"
@@ -883,13 +883,13 @@
       ],
       "difficulty": "medium",
       "options": [
-        "App-level middleware only runs once at startup, router-level runs per request, and error middleware runs on 404s, which avoids the overhead of the alternatives entirely.",
-        "They're interchangeable; the names describe file locations.",
-        "Error middleware runs on every request after the response.",
+        "App-level middleware runs once at startup, router-level runs per request, and error middleware handles 404s.",
+        "They're interchangeable at runtime; the names just describe the files where the middleware is defined.",
+        "app.use applies to everything, router middleware to one router, and error middleware runs after each response has been sent.",
         "app.use applies to everything, router middleware to one router, and error middleware (4 params) only runs on errors."
       ],
       "correct": 3,
-      "explanation": "App-level (`app.use`) applies to everything; router-level applies to one router; error middleware has four parameters and runs only when an error is passed. Scope middleware as narrowly as correctness allows.",
+      "explanation": "App-level (`app.use`) applies to everything; router-level applies to one router; error middleware has four parameters and runs only when an error is passed. Scope middleware as narrowly as correctness allows.\n\nWhy the others are wrong: `app.use` middleware runs on every matching request, and a 404 is handled by a normal catch-all middleware, not error middleware; the scope differs (app-wide versus mounted router); and error middleware runs only when an error is passed via `next(err)` or thrown.",
       "materials": [
         "ex-middleware"
       ]
@@ -902,13 +902,13 @@
       ],
       "difficulty": "medium",
       "options": [
-        "Ignore them; Node retries the failed code automatically.",
-        "Convert them into 500 responses for the current request.",
+        "Exit with code 0 straight away so the orchestrator treats it as a clean stop; SIGTERM needs no handling.",
+        "Log the error and keep serving, because exiting would drop in-flight requests; restart once a day to clear leaks.",
         "Log, flush and exit non-zero so a supervisor restarts a clean process; also handle SIGTERM for graceful shutdown.",
-        "Log the error and keep serving requests, because exiting the process would drop every in-flight request, which avoids the overhead of the alternatives entirely."
+        "Register handlers that log and continue; Node rolls back the failed operation, so the process state stays consistent."
       ],
       "correct": 2,
-      "explanation": "Log, flush and exit with a non-zero code; let the supervisor (Kubernetes, systemd, PM2) restart a clean process. Continuing after an uncaught exception risks corrupt state. Also handle `SIGTERM` for graceful shutdown (stop accepting, finish in-flight requests, close DB).",
+      "explanation": "Log, flush and exit with a non-zero code; let the supervisor (Kubernetes, systemd, PM2) restart a clean process. Continuing after an uncaught exception risks corrupt state. Also handle `SIGTERM` for graceful shutdown (stop accepting, finish in-flight requests, close DB).\n\nWhy the others are wrong: Node rolls nothing back, so state may be half-updated; exit code 0 hides the crash from supervisors and alerts, and without a `SIGTERM` handler deploys cut requests off; and continuing after an uncaught exception risks corrupt state, a clean restart is safer.",
       "materials": [
         "node-uncaught",
         "node-signals"
@@ -922,13 +922,13 @@
       ],
       "difficulty": "medium",
       "options": [
-        "Attach dependencies to globalThis at startup, which every middleware can read without imports, so no extra setup is needed for it to work.",
-        "Express injects services by parameter name automatically.",
+        "Attach dependencies to globalThis at startup, so each middleware can read them directly without imports or parameters.",
+        "Name the middleware's extra parameters after the services, and Express resolves them by name per request.",
         "Write a factory that takes the dependencies and returns the middleware, so it stays testable and global-free.",
-        "Import the dependency inside the middleware on every request."
+        "Import the dependency inside the middleware with a dynamic import() on each request, so it's freshly built."
       ],
       "correct": 2,
-      "explanation": "Write a factory that takes dependencies and returns the middleware. This keeps it testable and avoids globals.\n\n```js\nconst rateLimit = ({ store, limit }) => async (req, res, next) => {\n  if (await store.hit(req.ip) > limit) return res.sendStatus(429);\n  next();\n};\napp.use(rateLimit({ store: redisStore, limit: 100 }));\n```",
+      "explanation": "Write a factory that takes dependencies and returns the middleware. This keeps it testable and avoids globals.\n\nWhy the others are wrong: globals hide dependencies and make tests interfere with each other; Express passes `(req, res, next)` and has no dependency container; and modules are cached, so a per-request `import()` returns the same instance while adding overhead, and it still can't be swapped in tests.\n\n```js\nconst rateLimit = ({ store, limit }) => async (req, res, next) => {\n  if (await store.hit(req.ip) > limit) return res.sendStatus(429);\n  next();\n};\napp.use(rateLimit({ store: redisStore, limit: 100 }));\n```",
       "materials": [
         "ex-writing-mw"
       ]
@@ -940,13 +940,13 @@
       ],
       "difficulty": "medium",
       "options": [
-        "204 when the resource doesn't exist and 404 when a list is empty, since both mean 'nothing found', which avoids the overhead of the alternatives entirely.",
-        "Always 200, with an error field when needed.",
-        "404 for every DELETE so clients refresh.",
+        "204 when the resource doesn't exist and 404 when a list is empty, since both just mean that nothing was found for the request.",
+        "200 in both cases with an error field in the body, so clients parse one shape and don't branch on status.",
+        "404 for a successful DELETE so clients know it's gone, and 204 when a GET by id finds nothing.",
         "404 when the addressed resource doesn't exist; 204 for success with no body; an empty collection is 200 with []."
       ],
       "correct": 3,
-      "explanation": "`404`: the resource does not exist (GET, PUT or DELETE by id of something unknown). `204`: the request succeeded and there is intentionally no body (successful DELETE or PUT). An empty collection is `200` with `[]`, not 404.",
+      "explanation": "`404`: the resource does not exist (GET, PUT or DELETE by id of something unknown). `204`: the request succeeded and there is intentionally no body (successful DELETE or PUT). An empty collection is `200` with `[]`, not 404.\n\nWhy the others are wrong: 204 means success, and an empty list is a valid result (200 with `[]`); hiding errors in a 200 breaks caches, retries and monitoring that rely on status codes; and a successful DELETE is 204 (or 200), while a missing resource is 404.",
       "materials": [
         "rfc9110"
       ]
@@ -959,12 +959,12 @@
       "difficulty": "medium",
       "options": [
         "Avoid it with additive changes; if unavoidable, ship a new version, keep the old one, announce dates, watch usage, use contract tests.",
-        "Ship it in a patch release and bump the npm package version, which notifies every API consumer automatically, and that has been the default behaviour since Node 20.",
-        "Breaking changes are fine if the response stays JSON.",
-        "Change the old endpoint in place and document it in the README."
+        "Ship it in a patch release and bump the npm package version; semantic versioning informs API consumers of the break.",
+        "Change the existing endpoint in place, document it in the changelog, and send a Warning header for a week after.",
+        "Change the response freely as long as it stays valid JSON, since clients parse whatever fields they happen to receive."
       ],
       "correct": 0,
-      "explanation": "Avoid it. Prefer additive, backward compatible changes (new optional fields, new endpoints). If a break is unavoidable: ship a new version, keep the old one running, announce deprecation with dates (`Deprecation` and `Sunset` headers), watch usage, and use contract tests with consumers.",
+      "explanation": "Avoid it. Prefer additive, backward compatible changes (new optional fields, new endpoints). If a break is unavoidable: ship a new version, keep the old one running, announce deprecation with dates (`Deprecation` and `Sunset` headers), watch usage, and use contract tests with consumers.\n\nWhy the others are wrong: an HTTP API's consumers don't install your npm package, and a break would need a major version anyway; clients depend on specific fields and types, so removing or renaming breaks them; and changing in place breaks clients immediately, before anyone reads the changelog.",
       "materials": [
         "sunset",
         "versioning"
@@ -977,13 +977,13 @@
       ],
       "difficulty": "medium",
       "options": [
-        "In the request body, because GET requests in Express can't carry version information any other way, which avoids the overhead of the alternatives entirely.",
-        "With a cookie named api-version.",
+        "In the JSON request body as an apiVersion field, which works for each HTTP method and keeps the URLs stable over time.",
+        "Through the version field in package.json, which Express exposes as a header on each response.",
         "In the URL path (/v1/items): visible, cacheable, simple to route; headers or a query parameter are the alternatives.",
-        "In the package.json version field."
+        "In a cookie named api-version, so browsers send it automatically and clients don't need to change URLs."
       ],
       "correct": 2,
-      "explanation": "URL path (`/v1/items`), because it is visible, cacheable and simple to route. Alternatives: a header (`Accept: application/vnd.api.v2+json`) or a query parameter. Pick one and be consistent.",
+      "explanation": "URL path (`/v1/items`), because it is visible, cacheable and simple to route. Alternatives: a header (`Accept: application/vnd.api.v2+json`) or a query parameter. Pick one and be consistent.\n\nWhy the others are wrong: GET requests have no meaningful body and routing on body content is awkward; cookies are browser state that server clients lack and caches ignore; and `package.json` versions the code, Express exposes nothing from it.",
       "materials": [
         "versioning"
       ]
@@ -996,13 +996,13 @@
       ],
       "difficulty": "medium",
       "options": [
-        "Spreading the database row into the response is safer, since it keeps every field the client might need, which is why most Node teams standardize on it.",
-        "Manual mapping is required because JSON.stringify can't serialize classes.",
+        "Spreading the database row into the response is the safer default, as it keeps each field the client might need later on.",
+        "JSON.stringify throws on class instances, so each layer must convert objects to plain literals by hand.",
         "Explicit conversion functions are type-safe and debuggable, and stop internal fields like password hashes from leaking.",
-        "It improves V8's garbage collection."
+        "Hand mapping lets V8 keep objects in one hidden class, which is the main reason; field safety is a side effect."
       ],
       "correct": 2,
-      "explanation": "Writing explicit functions that convert between layers (request DTO to domain model to DB row to response DTO). It is verbose but type-safe, easy to debug, and stops internal fields (password hash, internal ids) from leaking. Avoid magic auto-mappers unless the shapes are truly identical.\n\n```js\nconst toItemDto = (row) => ({ id: row.id, name: row.name, price: row.price_cents / 100 });\n```",
+      "explanation": "Writing explicit functions that convert between layers (request DTO to domain model to DB row to response DTO). It is verbose but type-safe, easy to debug, and stops internal fields (password hash, internal ids) from leaking. Avoid magic auto-mappers unless the shapes are truly identical.\n\nWhy the others are wrong: spreading rows leaks internal columns such as password hashes; `JSON.stringify` serializes class instances' own enumerable properties without complaint; and hidden-class effects are a micro-optimisation, the real reason is explicit, safe contracts between layers.\n\n```js\nconst toItemDto = (row) => ({ id: row.id, name: row.name, price: row.price_cents / 100 });\n```",
       "materials": [
         "node-bp"
       ]
@@ -1015,12 +1015,12 @@
       "difficulty": "medium",
       "options": [
         "Level 2: resources with proper HTTP verbs and status codes; level 3 adds hypermedia links (HATEOAS).",
-        "Level 0, since JSON APIs can't be RESTful.",
-        "Level 1, because Express doesn't support DELETE.",
-        "Level 3, because Express adds hypermedia links to JSON responses automatically when routers are used."
+        "Level 1: resources with their own URLs and proper verbs; level 2 adds hypermedia links (HATEOAS).",
+        "Level 3: resources with proper HTTP verbs and status codes; level 4 adds hypermedia links (HATEOAS).",
+        "Level 0: JSON over HTTP counts as RPC, and resources with proper HTTP verbs and status codes are already level 3."
       ],
       "correct": 0,
-      "explanation": "Four levels of REST adoption: 0 one endpoint, one verb (RPC over HTTP); 1 resources with their own URLs; 2 correct HTTP verbs and status codes; 3 hypermedia (HATEOAS: responses carry links to next actions). Most production APIs sit at level 2.",
+      "explanation": "Four levels of REST adoption: 0 one endpoint, one verb (RPC over HTTP); 1 resources with their own URLs; 2 correct HTTP verbs and status codes; 3 hypermedia (HATEOAS: responses carry links to next actions). Most production APIs sit at level 2.\n\nWhy the others are wrong: the payload format doesn't decide the level, and verbs plus status codes are level 2; level 1 has resources but not proper verbs, and hypermedia is level 3; and the model stops at level 3, which is hypermedia.",
       "materials": [
         "richardson"
       ]
@@ -1033,13 +1033,13 @@
       ],
       "difficulty": "medium",
       "options": [
-        "A modular monolith uses npm workspaces, while microservices use separate git repositories but share one database.",
-        "Microservices are monoliths running in cluster mode.",
-        "Modular monolith: one deployable with strict module boundaries and no cross-module DB access; microservices deploy and own data separately.",
-        "They only differ in the number of Express routers."
+        "Modular monolith: modules in npm workspaces sharing tables freely; microservices: separate repos sharing one database.",
+        "Modular monolith: one codebase run in cluster mode per module; microservices: monoliths split by Express router.",
+        "Modular monolith: one deployable, strict module boundaries, no cross-module DB access; microservices deploy and own data separately.",
+        "Modular monolith: separately deployed services that share one database; microservices: one deployable per team."
       ],
       "correct": 2,
-      "explanation": "Monolith: one deployable, usually tangled. Modular monolith: one deployable with strict module boundaries and no cross-module database access; cheap to run and a good default. Microservices: independently deployable services with their own data, giving team and scaling independence at the price of network failures, distributed data and operational cost. Split only when a boundary and a reason are clear.",
+      "explanation": "Monolith: one deployable, usually tangled. Modular monolith: one deployable with strict module boundaries and no cross-module database access; cheap to run and a good default. Microservices: independently deployable services with their own data, giving team and scaling independence at the price of network failures, distributed data and operational cost. Split only when a boundary and a reason are clear.\n\nWhy the others are wrong: shared tables break module boundaries and a shared database couples microservices; cluster mode and routers are runtime and code details, not architecture boundaries; and separately deployed services sharing a database is a distributed monolith, while microservices are split by capability, not one per team.",
       "materials": [
         "monolith-first"
       ]
@@ -1053,12 +1053,12 @@
       "difficulty": "medium",
       "options": [
         "Routes and handles auth, rate limits, TLS, aggregation, caching; risks are a single point of failure and creeping business logic.",
-        "It compiles TypeScript for the services at request time.",
-        "It's only needed for WebSocket traffic.",
-        "It replaces each service's database with a shared cache and runs the business rules centrally for consistency, so no extra setup is needed for it to work."
+        "Proxies WebSocket traffic, which Node services don't accept directly; the risk is dropped connections on deploys.",
+        "Replaces each service's database with a shared cache and runs business rules centrally; the risk is cache size.",
+        "Routes requests and compiles TypeScript per request; the risk is slower cold starts for each service behind it."
       ],
       "correct": 0,
-      "explanation": "A single entry point in front of services: routing, authentication, rate limiting, TLS, request aggregation, caching and observability. It spares clients from knowing the internal topology. Risks: a single point of failure and a place where business logic wrongly accumulates.",
+      "explanation": "A single entry point in front of services: routing, authentication, rate limiting, TLS, request aggregation, caching and observability. It spares clients from knowing the internal topology. Risks: a single point of failure and a place where business logic wrongly accumulates.\n\nWhy the others are wrong: gateways don't compile service code; Node services serve WebSockets directly and gateways handle all kinds of traffic; and data and business rules stay in the services, a gateway full of business logic is the anti-pattern.",
       "materials": [
         "gateway"
       ]
@@ -1070,13 +1070,13 @@
       ],
       "difficulty": "medium",
       "options": [
-        "It's lowercasing all string columns.",
+        "Convert rows to JSON documents to avoid joins; denormalize back into tables when you need foreign keys.",
         "Store each fact once to avoid update anomalies; denormalize deliberately for read-heavy paths and keep copies in sync.",
-        "Normalization means converting rows to JSON documents; denormalize when you need foreign keys, which is why most Node teams standardize on it.",
-        "Normalization is done automatically by Prisma migrations."
+        "Lowercase and trim the string columns so values compare equally; denormalize again when case-sensitive search is needed.",
+        "Store each fact once; Prisma migrations denormalize read-heavy tables automatically, so copies stay in sync."
       ],
       "correct": 1,
-      "explanation": "Normalization removes duplicated data into separate tables to avoid update anomalies. Denormalize deliberately for read performance (reporting, search, read models, hot lists) and keep copies in sync through events or triggers; measure first.",
+      "explanation": "Normalization removes duplicated data into separate tables to avoid update anomalies. Denormalize deliberately for read performance (reporting, search, read models, hot lists) and keep copies in sync through events or triggers; measure first.\n\nWhy the others are wrong: that is data cleaning, unrelated to database normalization; embedding data in documents is denormalization, not normalization; and Prisma never denormalizes for you, keeping copies in sync is your job (events, triggers, jobs).",
       "materials": [
         "normalization"
       ]
@@ -1088,13 +1088,13 @@
       ],
       "difficulty": "medium",
       "options": [
-        "Indexes only help Prisma, not raw SQL.",
-        "Indexes store query results in memory, so they cost nothing and should be added to every column, so no extra setup is needed for it to work.",
-        "Indexes speed up writes and slow down reads.",
+        "A B-tree sorts the table itself on each insert; extra indexes speed up writes because rows are pre-sorted.",
+        "Indexes cache recent query results in memory; extra indexes use RAM but have no effect on write speed.",
+        "Indexes speed up writes by batching them; each extra index slows reads because the planner checks each one.",
         "A B-tree lets the database find rows without a scan; each extra index slows writes, uses storage and burdens the planner."
       ],
       "correct": 3,
-      "explanation": "An index (usually a B-tree) lets the database find rows without scanning the table. Costs: slower writes (every index updates), more storage, and more work for the query planner. Index columns used in filters, joins and sort; check plans with `EXPLAIN ANALYZE`; drop unused indexes.",
+      "explanation": "An index (usually a B-tree) lets the database find rows without scanning the table. Costs: slower writes (every index updates), more storage, and more work for the query planner. Index columns used in filters, joins and sort; check plans with `EXPLAIN ANALYZE`; drop unused indexes.\n\nWhy the others are wrong: an index is a sorted structure of column values pointing to rows, not a result cache, and every insert or update must maintain it; a secondary index is a separate structure and each one adds write cost; and indexes help reads and cost writes, not the other way round.",
       "materials": [
         "explain",
         "use-the-index"
@@ -1108,12 +1108,12 @@
       "difficulty": "hard",
       "options": [
         "During a network partition, consistency or availability; partitions happen, so it's CP or AP, often per operation.",
-        "Between SQL and NoSQL.",
-        "Two of consistency, availability and performance at design time; partitions only matter for multi-region setups, and it behaves the same in Express, Fastify and NestJS.",
-        "Between caching and persistence."
+        "Between consistency and latency during normal operation; partitions are rare enough to leave out of the system design.",
+        "Between SQL and NoSQL: relational stores give consistency, document stores give availability and partitioning.",
+        "Two of consistency, availability and performance, chosen once at design time regardless of network failures."
       ],
       "correct": 0,
-      "explanation": "In a network Partition a distributed store must choose between Consistency (every read sees the latest write) and Availability (every request gets a non-error response). Partitions happen, so the real choice is CP or AP during a partition. Many systems tune this per operation.",
+      "explanation": "In a network Partition a distributed store must choose between Consistency (every read sees the latest write) and Availability (every request gets a non-error response). Partitions happen, so the real choice is CP or AP during a partition. Many systems tune this per operation.\n\nWhy the others are wrong: CAP is about behaviour under partition, and SQL and NoSQL systems exist on both sides; the P is partition tolerance, not performance, and the choice only bites when the network fails; and consistency versus latency in normal operation is the PACELC extension, while partitions are a reality to design for.",
       "materials": [
         "cap",
         "ddia"
@@ -1127,12 +1127,12 @@
       "difficulty": "hard",
       "options": [
         "Strong: readers see every completed write. Eventual: replicas converge later, so design for staleness and idempotency.",
-        "Eventual consistency means data is eventually deleted.",
-        "Strong consistency is a JavaScript strict-mode setting; eventual consistency is the default in sloppy mode, which is what the Express docs recommend for production apps.",
-        "There's no difference once you use await."
+        "Strong: data is validated before saving. Eventual: data is validated after saving, so add rollback endpoints.",
+        "Strong: writes are retried until they succeed. Eventual: writes may be dropped, so add a nightly reconciliation job to repair them.",
+        "Strong: replicas confirm writes asynchronously. Eventual: readers see the latest write once you await the call."
       ],
       "correct": 0,
-      "explanation": "Strong: after a write completes, all readers see it (higher latency, lower availability). Eventual: replicas converge over time, so readers may see stale data briefly (higher availability and speed). Design UX and APIs for staleness (read-your-writes where needed, idempotent updates, conflict resolution).",
+      "explanation": "Strong: after a write completes, all readers see it (higher latency, lower availability). Eventual: replicas converge over time, so readers may see stale data briefly (higher availability and speed). Design UX and APIs for staleness (read-your-writes where needed, idempotent updates, conflict resolution).\n\nWhy the others are wrong: eventual consistency doesn't lose writes, replicas converge; consistency models are about what readers see, not validation; and asynchronous replica confirmation is what leads to eventual consistency, while awaiting a write doesn't make other replicas current.",
       "materials": [
         "eventual"
       ]
@@ -1145,13 +1145,13 @@
       ],
       "difficulty": "hard",
       "options": [
-        "Horizontal scaling requires rewriting the app in worker threads.",
+        "The event loop spreads JS across cores, so vertical scaling covers most loads; sessions can stay in process memory.",
         "One process runs JS on one core, so scale out with several processes (cluster, containers) and keep sessions out of memory.",
-        "Node can't run behind a load balancer.",
-        "Node uses all cores automatically through the event loop, so vertical scaling is all you ever need, and it behaves the same in Express, Fastify and NestJS."
+        "Scale out with several processes, keeping sessions in each process's memory since the load balancer routes evenly.",
+        "One process runs JS on one core, so scale vertically with more cores; worker threads then spread incoming requests automatically."
       ],
       "correct": 1,
-      "explanation": "Vertical: bigger machine (simple, capped, single point of failure). Horizontal: more instances (needs stateless services, shared or sharded data, load balancing). Node specifics: one process uses one core for JS, so run several processes (cluster, containers) and keep sessions out of memory.",
+      "explanation": "Vertical: bigger machine (simple, capped, single point of failure). Horizontal: more instances (needs stateless services, shared or sharded data, load balancing). Node specifics: one process uses one core for JS, so run several processes (cluster, containers) and keep sessions out of memory.\n\nWhy the others are wrong: extra cores sit idle unless you run more processes, and worker threads don't take HTTP requests automatically; the event loop runs your JS on one thread; and in-memory sessions break when the next request hits a different process, so use a shared store or tokens.",
       "materials": [
         "node-cluster"
       ]
@@ -1164,13 +1164,13 @@
       ],
       "difficulty": "hard",
       "options": [
-        "Only for read-only data.",
+        "By default, because JavaScript objects map to documents and relational drivers block the event loop.",
         "By access pattern: massive key lookups, flexible documents, graphs, time series; relational for transactions, joins and constraints.",
-        "When the team prefers JSON over SQL syntax.",
-        "Always, because JavaScript objects map directly to documents and relational drivers block the event loop."
+        "When the team prefers JSON to SQL syntax; Postgres needs an ORM in Node, while document stores don't.",
+        "For read-heavy data, since NoSQL stores don't support transactions and relational ones don't scale reads."
       ],
       "correct": 1,
-      "explanation": "Choose by access pattern and consistency needs, not fashion: massive scale and simple key access (key-value, wide column), flexible or hierarchical documents, graph traversals, time series. Stay relational for transactions, joins, constraints and ad hoc queries. PostgreSQL with `jsonb` covers many \"flexible\" cases.",
+      "explanation": "Choose by access pattern and consistency needs, not fashion: massive scale and simple key access (key-value, wide column), flexible or hierarchical documents, graph traversals, time series. Stay relational for transactions, joins, constraints and ad hoc queries. PostgreSQL with `jsonb` covers many \"flexible\" cases.\n\nWhy the others are wrong: many NoSQL stores support transactions and relational databases scale reads with replicas; syntax preference is a poor reason, and `pg` works fine without an ORM; and Node's database drivers are asynchronous, they don't block the event loop.",
       "materials": [
         "ddia"
       ]
@@ -1182,13 +1182,13 @@
       ],
       "difficulty": "hard",
       "options": [
-        "A file lock, which is always safe on NFS.",
-        "A mutex from the async-mutex package, which is safe across servers because it uses the event loop.",
+        "A row lock in a Postgres transaction held across HTTP calls; the main risk is a slightly slower commit.",
+        "A file lock on shared storage such as NFS; locks there are atomic, so no expiry or fencing is needed.",
         "A lock across processes (Redis NX PX, advisory locks); expiry mid-work, clocks and split brain mean you need fencing tokens.",
-        "A Postgres transaction; the only risk is a slow commit."
+        "A mutex from async-mutex, which coordinates across servers through the event loop; the risk is extra latency."
       ],
       "correct": 2,
-      "explanation": "A lock shared across processes (Redis `SET key val NX PX`, Redlock, Postgres advisory locks, ZooKeeper). Risks: expiry while the holder is still working (GC pauses, slow calls), clock assumptions, split brain, and deadlocks. Use TTLs, renew while working, and fencing tokens so the resource rejects stale holders; prefer idempotent operations or queue partitioning over locks.",
+      "explanation": "A lock shared across processes (Redis `SET key val NX PX`, Redlock, Postgres advisory locks, ZooKeeper). Risks: expiry while the holder is still working (GC pauses, slow calls), clock assumptions, split brain, and deadlocks. Use TTLs, renew while working, and fencing tokens so the resource rejects stale holders; prefer idempotent operations or queue partitioning over locks.\n\nWhy the others are wrong: NFS locking is notoriously unreliable, and a crashed holder needs expiry anyway; `async-mutex` works inside one process, it knows nothing about other servers; and holding a transaction open across HTTP calls blocks other writers and connections far worse than a slow commit.",
       "materials": [
         "dist-lock",
         "pg-locking"
@@ -1201,13 +1201,13 @@
       ],
       "difficulty": "hard",
       "options": [
-        "Prisma does both automatically on every update.",
-        "Optimistic: wrap the update in a JavaScript lock; pessimistic: retry until the database stops throwing.",
-        "Both need Redis; Postgres can't lock rows.",
+        "Pessimistic: a version column in the WHERE clause. Optimistic: SELECT ... FOR UPDATE, retried on deadlock.",
+        "Prisma applies optimistic locking to each update automatically; pessimistic locking is a Prisma schema flag.",
+        "Optimistic: an in-process mutex around the update. Pessimistic: retry the update until the database stops erroring.",
         "Pessimistic: SELECT ... FOR UPDATE inside a transaction. Optimistic: a version column in the WHERE; 0 rows updated means conflict."
       ],
       "correct": 3,
-      "explanation": "Pessimistic: lock the row up front (`SELECT ... FOR UPDATE`); safe under high contention, blocks others. Optimistic: no lock; a version column makes the update conditional and a conflict is retried or reported; best for low contention.\n\n```sql\nUPDATE items SET qty = $1, version = version + 1 WHERE id = $2 AND version = $3; -- 0 rows = conflict\n```",
+      "explanation": "Pessimistic: lock the row up front (`SELECT ... FOR UPDATE`); safe under high contention, blocks others. Optimistic: no lock; a version column makes the update conditional and a conflict is retried or reported; best for low contention.\n\nWhy the others are wrong: Prisma does neither automatically (you add a version field, and use raw SQL for `FOR UPDATE`); an in-process mutex doesn't protect against other instances, and blind retry is not locking; and the two approaches are swapped.\n\n```sql\nUPDATE items SET qty = $1, version = version + 1 WHERE id = $2 AND version = $3; -- 0 rows = conflict\n```",
       "materials": [
         "pg-locking"
       ]
@@ -1220,13 +1220,13 @@
       ],
       "difficulty": "hard",
       "options": [
-        "Separate tables named after each tenant in one schema.",
-        "One Prisma client per tenant pointing at the same tables, which isolates tenants without any tenant column, which is why most Node teams standardize on it.",
+        "One Prisma client per tenant pointed at the same tables, which isolates tenants without a tenant column.",
+        "Separate tables named after each tenant in one schema, created at signup, which gives full isolation cheaply.",
         "Shared tables with tenant_id (plus RLS), schema per tenant, or database per tenant; choose by isolation, compliance and scale.",
-        "Store tenant data in browser storage."
+        "Shared tables with tenant_id filtered in the front end, since the API returns rows for the logged-in user."
       ],
       "correct": 2,
-      "explanation": "Three models: shared tables with a `tenant_id` (cheapest; enforce with Postgres row-level security and a mandatory tenant filter), schema per tenant (moderate isolation), database per tenant (strongest isolation, highest cost). Decide by isolation, compliance, noisy neighbours and tenant count. Always index `tenant_id` and test for cross-tenant leaks.",
+      "explanation": "Three models: shared tables with a `tenant_id` (cheapest; enforce with Postgres row-level security and a mandatory tenant filter), schema per tenant (moderate isolation), database per tenant (strongest isolation, highest cost). Decide by isolation, compliance, noisy neighbours and tenant count. Always index `tenant_id` and test for cross-tenant leaks.\n\nWhy the others are wrong: per-tenant tables explode the schema and make migrations painful, without real isolation; several clients on the same tables see the same rows, isolation needs a tenant key or separate schemas/databases; and filtering in the front end means the API sends other tenants' data.",
       "materials": [
         "tenancy-models",
         "pg-rls"
@@ -1240,12 +1240,12 @@
       "difficulty": "hard",
       "options": [
         "Cache-aside fills on miss and invalidates on write; write-through writes both; write-back flushes later and risks loss.",
-        "They're Redis eviction policies.",
-        "They differ only in TTL length.",
-        "Cache-aside writes only to the cache; write-through writes only to the database; write-back reads from both, and that has been the default behaviour since Node 20."
+        "Cache-aside writes to the cache alone; write-through writes to the database alone; write-back reads from both and merges them.",
+        "They differ in TTL: cache-aside short, write-through long, write-back none, with the same data flow otherwise.",
+        "They're Redis eviction policies: cache-aside evicts LRU, write-through evicts by TTL, write-back by size."
       ],
       "correct": 0,
-      "explanation": "Cache-aside: the app reads the cache, on miss reads the DB and fills the cache (most common; invalidate on write). Write-through: writes go to cache and DB together (consistent, slower writes). Write-back: write to cache, flush to DB later (fast, risk of data loss). Always set TTLs and plan stampede protection.",
+      "explanation": "Cache-aside: the app reads the cache, on miss reads the DB and fills the cache (most common; invalidate on write). Write-through: writes go to cache and DB together (consistent, slower writes). Write-back: write to cache, flush to DB later (fast, risk of data loss). Always set TTLs and plan stampede protection.\n\nWhy the others are wrong: they're read/write patterns, Redis eviction policies are things like `allkeys-lru`; cache-aside writes to the database and invalidates the cache, and write-through writes to both; and TTLs are orthogonal, the patterns differ in data flow.",
       "materials": [
         "cache-aside"
       ]
@@ -1257,13 +1257,13 @@
       ],
       "difficulty": "hard",
       "options": [
-        "REST only; Node can't run gRPC servers.",
-        "Always GraphQL, since it replaces both.",
+        "gRPC for browsers since it uses JSON, REST inside because it's binary, and GraphQL for streaming.",
+        "GraphQL everywhere, since it replaces REST and gRPC and keeps HTTP caching just as simple as REST.",
         "REST outside (public, cacheable), gRPC inside (contracts, streaming, low latency), GraphQL for clients shaping their own data.",
-        "gRPC for browsers since it's JSON, REST for internal calls because it's binary, GraphQL only for files, so no extra setup is needed for it to work."
+        "REST for public and internal APIs, because Node lacks a maintained gRPC server; GraphQL for file uploads."
       ],
       "correct": 2,
-      "explanation": "REST: public, cacheable, simple resource APIs. gRPC: internal service-to-service calls, strong contracts (protobuf), streaming, low latency. GraphQL: many different clients that need to shape their own data, at the cost of caching and query-cost control. Often: REST outside, gRPC inside.",
+      "explanation": "REST: public, cacheable, simple resource APIs. gRPC: internal service-to-service calls, strong contracts (protobuf), streaming, low latency. GraphQL: many different clients that need to shape their own data, at the cost of caching and query-cost control. Often: REST outside, gRPC inside.\n\nWhy the others are wrong: `@grpc/grpc-js` is the maintained Node gRPC implementation, and GraphQL isn't a file-upload protocol; GraphQL usually POSTs to one endpoint, which makes HTTP caching harder; and gRPC uses binary protobuf (browsers need gRPC-Web) while REST is typically JSON.",
       "materials": [
         "grpc-node",
         "graphql"
@@ -1276,13 +1276,13 @@
       ],
       "difficulty": "hard",
       "options": [
-        "Whenever latency matters, because queues deliver faster than HTTP between services.",
-        "Only for logging and metrics.",
-        "When the answer isn't needed now: smoothing spikes, decoupled availability, retries, fan-out, long jobs; at the cost of eventual consistency.",
-        "Never; queues block the event loop."
+        "Whenever latency matters, because a broker delivers faster than an HTTP call between services and adds no ops cost.",
+        "When the caller needs an immediate answer, since a queue guarantees ordered, exactly-once replies to each request.",
+        "When no answer is needed now: smoothing spikes, decoupling availability, retries, fan-out, long jobs; costs eventual consistency.",
+        "When services share a database, since a queue lets them lock rows across services without distributed transactions."
       ],
       "correct": 2,
-      "explanation": "When the caller does not need the answer now: smoothing spikes, decoupling availability, retries, fan-out to multiple consumers, long jobs. Use direct calls when you need an immediate result. Costs: eventual consistency, ordering, duplicates, observability.",
+      "explanation": "When the caller does not need the answer now: smoothing spikes, decoupling availability, retries, fan-out to multiple consumers, long jobs. Use direct calls when you need an immediate result. Costs: eventual consistency, ordering, duplicates, observability.\n\nWhy the others are wrong: a broker adds a hop and operational cost, it's not faster; queues fit when the caller doesn't wait, and they typically give at-least-once delivery, not exactly-once replies; and queues don't lock rows, services sharing a database is a separate coupling problem.",
       "materials": [
         "load-leveling"
       ]
@@ -1294,13 +1294,13 @@
       ],
       "difficulty": "hard",
       "options": [
-        "They describe how many consumers share a queue.",
-        "Exactly-once is achieved with setTimeout retries.",
+        "At-most-once may duplicate, at-least-once may lose; exactly-once comes from retrying with setTimeout until acked.",
+        "At-least-once may lose messages; exactly-once is what kafkajs and amqplib guarantee by default for consumers.",
         "At-most-once may lose, at-least-once may duplicate; exactly-once in practice is at-least-once delivery plus idempotent processing.",
-        "At-least-once may lose messages; exactly-once is what kafkajs and amqplib guarantee by default."
+        "They describe how many consumers share a queue: one, several, or exactly one per partition in a group."
       ],
       "correct": 2,
-      "explanation": "At-most-once: may lose messages, never duplicates. At-least-once: never loses, may duplicate (the usual default). Exactly-once in practice is at-least-once delivery plus idempotent processing (dedupe by message id); true end-to-end exactly-once is only possible within a closed system such as Kafka transactions.",
+      "explanation": "At-most-once: may lose messages, never duplicates. At-least-once: never loses, may duplicate (the usual default). Exactly-once in practice is at-least-once delivery plus idempotent processing (dedupe by message id); true end-to-end exactly-once is only possible within a closed system such as Kafka transactions.\n\nWhy the others are wrong: delivery guarantees are about how often a message is processed, not consumer counts; the guarantees are swapped, and retrying until acked is at-least-once (duplicates possible); and at-least-once never loses messages but may duplicate, and neither library gives exactly-once processing by default.",
       "materials": [
         "delivery"
       ]
@@ -1313,13 +1313,13 @@
       ],
       "difficulty": "hard",
       "options": [
-        "Use setInterval polling of an HTTP endpoint instead of a broker.",
+        "kafkajs, amqplib, BullMQ; keep processed ids in an in-memory Set and retry failures forever at a fixed interval.",
         "kafkajs/confluent, amqplib, BullMQ, NATS; record processed ids with the effect (inbox), backoff with jitter, retry cap, DLQ.",
-        "Idempotency isn't needed if handlers are async.",
-        "Any library; retry failed messages immediately in a loop and rely on the broker to drop duplicates, which is why most Node teams standardize on it."
+        "Any library; retry failures immediately in a tight loop and rely on the broker to drop duplicate deliveries.",
+        "kafkajs, amqplib, BullMQ; idempotency comes from making handlers async, and failed messages retry immediately in a tight loop."
       ],
       "correct": 1,
-      "explanation": "Libraries: `kafkajs`/`@confluentinc/kafka-javascript`, `amqplib` (RabbitMQ), BullMQ (Redis jobs), NATS, cloud SDKs. Idempotency: carry a unique message id and record processed ids in a table inside the same transaction as the effect (inbox pattern), or use idempotency keys on HTTP writes. Retries: exponential backoff with jitter, a retry limit, and a dead-letter queue; only retry safe or idempotent work.",
+      "explanation": "Libraries: `kafkajs`/`@confluentinc/kafka-javascript`, `amqplib` (RabbitMQ), BullMQ (Redis jobs), NATS, cloud SDKs. Idempotency: carry a unique message id and record processed ids in a table inside the same transaction as the effect (inbox pattern), or use idempotency keys on HTTP writes. Retries: exponential backoff with jitter, a retry limit, and a dead-letter queue; only retry safe or idempotent work.\n\nWhy the others are wrong: `async` has nothing to do with idempotency, and immediate retries hammer a failing dependency; an in-memory Set is lost on restart and not shared between instances, and endless fixed retries need a cap and a DLQ; and brokers deliver at least once, so deduplication is the consumer's job.",
       "materials": [
         "bullmq",
         "idempotent-consumer"
@@ -1333,12 +1333,12 @@
       "difficulty": "hard",
       "options": [
         "The domain imports nothing from Express or Prisma; it declares ports that adapters implement, wired in one composition root.",
-        "The domain extends Prisma models so entities can save themselves.",
-        "Every module imports the Express app so it can register its own routes and database access directly, which avoids the overhead of the alternatives entirely.",
-        "It means one folder per npm dependency."
+        "Each module imports the Express app to register its own routes and database access, keeping each feature fully self-contained.",
+        "Domain entities extend Prisma models so they can save themselves, and Express routes call them directly.",
+        "Dependencies point outward: the domain imports adapters for Express and Prisma, and the HTTP layer stays thin."
       ],
       "correct": 0,
-      "explanation": "Concentric layers: entities and use cases at the center, adapters (HTTP, DB, queues) outside. Dependencies point inward only: the domain imports nothing from Express or Prisma; it declares interfaces (ports) that outer code implements, wired in one composition root. Benefit: testable core and replaceable infrastructure. Do not apply it ceremonially to a tiny CRUD service.",
+      "explanation": "Concentric layers: entities and use cases at the center, adapters (HTTP, DB, queues) outside. Dependencies point inward only: the domain imports nothing from Express or Prisma; it declares interfaces (ports) that outer code implements, wired in one composition root. Benefit: testable core and replaceable infrastructure. Do not apply it ceremonially to a tiny CRUD service.\n\nWhy the others are wrong: extending Prisma models makes the domain depend on the ORM, the opposite of the rule; modules importing the app and database couple everything to infrastructure; and dependencies must point inward, the domain never imports adapters.",
       "materials": [
         "clean"
       ]
@@ -1352,12 +1352,12 @@
       "difficulty": "hard",
       "options": [
         "Usually not: Prisma already offers repository-like APIs and $transaction; wrap only to shield the domain or ease testing.",
-        "Repositories are required for Prisma migrations.",
-        "Never use Prisma directly from any code.",
-        "Yes, always, because Prisma can't run transactions without a Unit of Work class around it."
+        "No: wrapping Prisma breaks its type generation, so use the client directly from controllers instead.",
+        "Yes: Prisma can't run multi-statement transactions without a Unit of Work class coordinating them.",
+        "Yes: Prisma migrations need repository classes to discover models, so each model needs its own repository."
       ],
       "correct": 0,
-      "explanation": "Prisma, TypeORM and Sequelize already implement unit of work and repository-like APIs (`prisma.$transaction`). Wrapping them adds a layer that is worth it only to protect domain code from the ORM or to ease testing; otherwise it is boilerplate. If you do, keep repositories small and aggregate-oriented, and let the use case own the transaction.",
+      "explanation": "Prisma, TypeORM and Sequelize already implement unit of work and repository-like APIs (`prisma.$transaction`). Wrapping them adds a layer that is worth it only to protect domain code from the ORM or to ease testing; otherwise it is boilerplate. If you do, keep repositories small and aggregate-oriented, and let the use case own the transaction.\n\nWhy the others are wrong: migrations read `schema.prisma`, not repository classes; `prisma.$transaction` already runs multi-statement transactions; and wrapping doesn't affect the generated types, it's just usually unnecessary.",
       "materials": [
         "prisma-tx"
       ]
@@ -1369,13 +1369,13 @@
       ],
       "difficulty": "hard",
       "options": [
-        "Giving each developer a vertical layer of the stack.",
+        "Each feature runs in its own worker thread, so a bug in one slice doesn't crash the others at runtime.",
         "Each feature keeps route, validation, handler, data access and tests together, so a change stays in one folder.",
-        "Splitting the code into controllers/, services/ and models/ folders shared by all features, which avoids the overhead of the alternatives entirely.",
-        "Running each feature in its own Node worker thread."
+        "Each developer owns one layer across features (routes, services, data), so changes rarely collide in review.",
+        "Code is split into controllers/, services/ and models/ folders shared by features, so each layer is reusable across features."
       ],
       "correct": 1,
-      "explanation": "Organise code by feature (a slice contains its route, validation, handler, data access and tests) instead of by technical layer. Changing a feature touches one folder; slices share little, so coupling between features is low and each slice can choose its own approach.",
+      "explanation": "Organise code by feature (a slice contains its route, validation, handler, data access and tests) instead of by technical layer. Changing a feature touches one folder; slices share little, so coupling between features is low and each slice can choose its own approach.\n\nWhy the others are wrong: ownership by layer is the opposite of slicing by feature; folders per technical layer are the layered structure vertical slices replace, since a feature change touches every folder; and slices are a code organisation, not a runtime isolation mechanism.",
       "materials": [
         "bogard"
       ]
@@ -1388,13 +1388,13 @@
       ],
       "difficulty": "hard",
       "options": [
-        "src/controllers, src/services and src/repositories, with one file per feature in each folder.",
-        "Everything in index.js so imports stay short.",
-        "One npm package per HTTP route.",
+        "src/controllers, src/services and src/repositories, with one file per feature in each of the three folders.",
+        "src/features/<entity>/ with routes for each use case, plus a large shared/ folder holding the DTOs and queries.",
+        "One package per HTTP route in a monorepo, each with its own database client and its own copy of shared code.",
         "src/features/<use-case>/ with route, schema, handler and tests; a small stable shared/ folder; app.ts mounts the feature routers."
       ],
       "correct": 3,
-      "explanation": "A slice per use case, a small shared kernel, and one composition root that mounts each feature's router.\n\n```text\nsrc/\n  features/\n    create-order/  route.ts  schema.ts  handler.ts  handler.test.ts\n    get-order/     route.ts  query.ts   handler.ts\n  shared/          logger.ts  db.ts  errors.ts   (small, stable)\n  app.ts           (composition root, mounts feature routers)\n```",
+      "explanation": "A slice per use case, a small shared kernel, and one composition root that mounts each feature's router.\n\nWhy the others are wrong: per-layer folders scatter one feature across the tree; a package per route adds heavy tooling overhead and duplicated infrastructure; and grouping by entity with a big shared folder recreates coupling, slices are per use case with a small shared kernel.\n\n```text\nsrc/\n  features/\n    create-order/  route.ts  schema.ts  handler.ts  handler.test.ts\n    get-order/     route.ts  query.ts   handler.ts\n  shared/          logger.ts  db.ts  errors.ts   (small, stable)\n  app.ts           (composition root, mounts feature routers)\n```",
       "materials": [
         "bogard"
       ]
@@ -1408,12 +1408,12 @@
       "difficulty": "hard",
       "options": [
         "Some: extract on the third repetition and share only stable things (errors, logging, auth, a small domain kernel).",
-        "Duplication is fine only in tests.",
-        "None: extract a shared helper the moment two slices contain similar lines, including their DTOs and queries, and that has been the default behaviour since Node 20.",
-        "All of it; slices should never share any code, not even logging."
+        "Any amount: slices shouldn't share code at all, not even logging or error types, to stay independent of each other.",
+        "Some, in tests; production code should extract a helper as soon as two slices share similar lines.",
+        "None: extract a shared helper when two slices have similar lines, including their DTOs and queries."
       ],
       "correct": 0,
-      "explanation": "Accept some duplication: it is cheaper than the wrong abstraction. Apply the rule of three (extract on the third repetition), and share only genuinely stable things (error types, logging, auth, a small domain kernel). Do not share DTOs or query code between slices just to save lines.",
+      "explanation": "Accept some duplication: it is cheaper than the wrong abstraction. Apply the rule of three (extract on the third repetition), and share only genuinely stable things (error types, logging, auth, a small domain kernel). Do not share DTOs or query code between slices just to save lines.\n\nWhy the others are wrong: extracting at the second repetition often creates the wrong abstraction, in production code as much as in tests; sharing DTOs and queries couples slices that should evolve separately; and cross-cutting concerns like logging and error types are stable and worth sharing.",
       "materials": [
         "rule-of-three",
         "bogard"
@@ -1427,13 +1427,13 @@
       ],
       "difficulty": "hard",
       "options": [
-        "CQRS in Node requires event sourcing and two databases from day one, otherwise queries can't scale, and it behaves the same in Express, Fastify and NestJS.",
+        "Start with event sourcing and two databases from day one, since queries can't scale without a separate read store.",
         "Separate command and query handlers on one database first; add an event-fed read model only when reads need it.",
-        "Use a message bus for every query.",
-        "Split each route into a GET router and a POST router only."
+        "Split each route into a GET router and a POST router; that separation is what CQRS refers to.",
+        "Route each query through a message bus and each command through HTTP, so reads and writes are decoupled."
       ],
       "correct": 1,
-      "explanation": "Separate commands (change state, return little) from queries (read only, return DTOs). Minimal version: two handlers per feature and the same database. Fuller version: a separate read model fed by events, which scales reads independently but adds eventual consistency. Start minimal.\n\n```js\nconst placeOrder = async (cmd) => { /* validate, write, publish OrderPlaced */ };\nconst getOrderSummary = async (id) => db.orderSummaries.findUnique({ where: { id } }); // read model\n```",
+      "explanation": "Separate commands (change state, return little) from queries (read only, return DTOs). Minimal version: two handlers per feature and the same database. Fuller version: a separate read model fed by events, which scales reads independently but adds eventual consistency. Start minimal.\n\nWhy the others are wrong: CQRS doesn't require event sourcing or a second database, and starting there adds eventual consistency for no reason; transport choice isn't the point, the separation is between handler models; and splitting routers by HTTP verb is routing, not separate command and query models.\n\n```js\nconst placeOrder = async (cmd) => { /* validate, write, publish OrderPlaced */ };\nconst getOrderSummary = async (id) => db.orderSummaries.findUnique({ where: { id } }); // read model\n```",
       "materials": [
         "cqrs",
         "msio"

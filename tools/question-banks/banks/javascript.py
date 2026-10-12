@@ -78,7 +78,7 @@ M = {
  "jsi-microtask": jsi("microtask-queue", "Microtasks", "Why promise handlers run before timers."),
  "jsi-callbacks": jsi("callbacks", "Introduction: callbacks", "Callbacks and the pyramid of doom."),
  "node-promisify": ("article", "util.promisify(original)", "https://nodejs.org/api/util.html#utilpromisifyoriginal", NODE, "Turning error-first callbacks into promises.", False),
- "callbackhell": ("link", "Callback Hell", "http://callbackhell.com/", "Max Ogden", "A guide to writing asynchronous JavaScript programs.", True),
+ "callbackhell": ("link", "Callback Hell", "https://callbackhell.com/", "Max Ogden", "A guide to writing asynchronous JavaScript programs.", True),
  "mdn-using-promises": mdn("Web/JavaScript/Guide/Using_promises", "Using promises", "Chaining, error handling and composition."),
  "jsi-promise-basics": jsi("promise-basics", "Promise", "States, resolve and reject."),
  "jsi-promise-chaining": jsi("promise-chaining", "Promises chaining", "How then returns a new promise."),
@@ -172,10 +172,10 @@ Q = [
  # ---------------- A. core and types ----------------
  ("What are JavaScript's data types, and what are the two classic quirks of `typeof`?", [A], "easy",
   "Seven primitives plus objects; `typeof null` is `\"object\"` (an old bug) and functions report `\"function\"`.",
-  ["Five primitives plus arrays; `typeof []` is `\"array\"` and `typeof null` is `\"null\"`.",
-   "Everything is an object, so `typeof` returns `\"object\"` for every value except `undefined`.",
-   "Seven primitives plus objects; `typeof NaN` is `\"undefined\"` and `typeof function(){}` is `\"object\"`."],
-  ex("Seven primitives: `string`, `number`, `bigint`, `boolean`, `undefined`, `symbol`, `null`. Everything else is an object (arrays, functions, dates, maps). `typeof` returns the type name as a string, with two quirks: `typeof null` is `\"object\"` (a historical bug) and `typeof function(){}` is `\"function\"`. Use `Array.isArray` for arrays.", r'''
+  ["Seven primitives plus objects; `typeof NaN` is `\"NaN\"` and arrays report `\"array\"` instead of `\"object\"`.",
+   "Six primitives plus objects; `typeof null` is `\"null\"` and `typeof undefined` is `\"object\"` (an old bug).",
+   "Seven primitives plus objects; functions report `\"object\"` and BigInts report `\"number\"` like other numbers."],
+  ex("Seven primitives: `string`, `number`, `bigint`, `boolean`, `undefined`, `symbol`, `null`. Everything else is an object (arrays, functions, dates, maps). `typeof` returns the type name as a string, with two quirks: `typeof null` is `\"object\"` (a historical bug) and `typeof function(){}` is `\"function\"`. Use `Array.isArray` for arrays.\n\nWhy the others are wrong: `typeof NaN` is `\"number\"` (NaN is a number value) and `typeof []` is `\"object\"`; there are seven primitives, `typeof null` is `\"object\"` and `typeof undefined` is `\"undefined\"`; functions report `\"function\"` and BigInts report `\"bigint\"`.", r'''
 typeof 42;          // "number"
 typeof null;        // "object"  (bug that stayed)
 typeof [];          // "object"
@@ -183,10 +183,10 @@ Array.isArray([]);  // true
 '''), ["mdn-types", "jsi-types", "ydkjs"]),
  ("What is the difference between `==` and `===`, and when is `==` acceptable?", [A], "easy",
   "`===` compares without type conversion; `==` coerces first. The one common accepted use is `x == null`.",
-  ["`===` compares by reference while `==` compares by value, so use `==` for primitives and `===` for objects.",
-   "They are identical in strict mode, so the choice only matters in old sloppy-mode scripts.",
-   "`==` is faster because it skips the type check, so it's preferred in hot loops and comparisons of numbers."],
-  ex("`===` compares without conversion (type and value). `==` applies the coercion rules first, which gives surprising results (`0 == \"\"`, `null == undefined`). Default to `===`. The one common accepted use of `==` is `x == null` to check for both `null` and `undefined` at once.", r'''
+  ["`==` skips the type check, so it is faster and preferred for numbers; `===` is mainly useful for comparing strings.",
+   "`===` compares by reference and `==` by value, so `==` is the right choice for comparing two arrays' contents.",
+   "They differ just for `null` versus `undefined`; for other values both give the same result, so `==` is fine in general."],
+  ex("`===` compares without conversion (type and value). `==` applies the coercion rules first, which gives surprising results (`0 == \"\"`, `null == undefined`). Default to `===`. The one common accepted use of `==` is `x == null` to check for both `null` and `undefined` at once.\n\nWhy the others are wrong: there is no meaningful speed advantage for `==`, and the coercion makes it riskier, not preferred; both operators compare objects (arrays included) by identity, so `[1] == [1]` is `false`; and they differ for many values, e.g. `0 == \"\"` is `true` but `0 === \"\"` is `false`.", r'''
 0 == "";            // true
 null == undefined;  // true
 null === undefined; // false
@@ -194,10 +194,10 @@ NaN === NaN;        // false
 '''), ["mdn-equality", "jsi-comparison", "fm-deep-js"]),
  ("How do `var`, `let` and `const` differ?", [A], "easy",
   "`var` is function-scoped and hoisted as `undefined`; `let`/`const` are block-scoped with a TDZ, and `const` only forbids reassignment.",
-  ["`var` and `let` behave the same; only `const` is block-scoped, and it makes the object it points to immutable.",
-   "All three are block-scoped; `var` just allows redeclaration, and `const` deep-freezes the value it is assigned.",
-   "`let` and `const` are hoisted as `undefined` like `var`, so reading them before the declaration returns `undefined`."],
-  ex("`var` is function-scoped, hoisted and initialised to `undefined`, and can be redeclared. `let` and `const` are block-scoped and live in the temporal dead zone (TDZ) until their declaration runs; touching them earlier throws a `ReferenceError`. `const` forbids reassigning the binding, not mutating the object it points to.", r'''
+  ["`var` is function-scoped; `let`/`const` are block-scoped but hoisted as `undefined`, and `const` also deep-freezes the object it is assigned.",
+   "`var` and `let` are both block-scoped and differ in redeclaration; `const` is block-scoped and makes its object read-only.",
+   "`var` is global-scoped, `let` is function-scoped and `const` is block-scoped; reading a `let` early returns `undefined`."],
+  ex("`var` is function-scoped, hoisted and initialised to `undefined`, and can be redeclared. `let` and `const` are block-scoped and live in the temporal dead zone (TDZ) until their declaration runs; touching them earlier throws a `ReferenceError`. `const` forbids reassigning the binding, not mutating the object it points to.\n\nWhy the others are wrong: `let`/`const` are hoisted but not initialised, so early access throws instead of giving `undefined`, and `const` does not freeze the object; `var` is function-scoped, not block-scoped; `var` inside a function is not global and `let` is block-scoped, not function-scoped.", r'''
 console.log(a); // undefined
 var a = 1;
 // console.log(b); // ReferenceError (TDZ)
@@ -208,10 +208,10 @@ o.n = 2;        // fine
 '''), ["mdn-let", "mdn-const", "jsi-variables"]),
  ("What is hoisting, and why can you call a function declaration before it appears but not a `var` function expression?", [A], "medium",
   "Declarations are registered before code runs: function declarations with their body, `var` only as `undefined`.",
-  ["The engine physically moves every line of code to the top of its file before running it.",
-   "Function expressions are hoisted with their body too; calling one early fails only in strict mode.",
-   "Hoisting only applies to `let` and `const`, which is why they can be read before their declaration."],
-  ex("Declarations are registered when the scope is created, before code runs. Function declarations are hoisted with their body, so you can call them early. `var` is hoisted as `undefined`, so calling a `var` function expression early is calling `undefined`. `let`, `const` and `class` are hoisted but not initialised (TDZ).", r'''
+  ["Function declarations are hoisted with their body; `var` isn't hoisted, so calling the expression early throws a `ReferenceError`.",
+   "Function declarations are moved to the top at parse time, while `var` expressions stay in a TDZ until they are assigned.",
+   "Both are hoisted with their bodies, but function expressions are compiled later, so an early call returns `undefined`."],
+  ex("Declarations are registered when the scope is created, before code runs. Function declarations are hoisted with their body, so you can call them early. `var` is hoisted as `undefined`, so calling a `var` function expression early is calling `undefined`. `let`, `const` and `class` are hoisted but not initialised (TDZ).\n\nWhy the others are wrong: `var` is hoisted (as `undefined`), so the early call throws a `TypeError` (`bye is not a function`), not a `ReferenceError`; the TDZ applies to `let`, `const` and `class`, not `var`; and a `var` function expression is not hoisted with its body, the call fails rather than returning `undefined`.", r'''
 hello();                 // works
 function hello() { console.log("hi"); }
 
@@ -220,10 +220,10 @@ var bye = function () {};
 '''), ["mdn-hoisting", "jsi-closure"]),
  ("Which values are falsy, and why does `count || 10` go wrong when `count` is `0`?", [A], "easy",
   "`false`, `0`, `-0`, `0n`, `\"\"`, `null`, `undefined`, `NaN`; `||` treats `0` as missing, so use `??`.",
-  ["`false`, `null` and `undefined` only; `0 || 10` returns `0`, so `||` is safe for counts.",
-   "Every empty value, including `[]` and `{}`; `||` checks for emptiness, so `0` and `[]` both fall through.",
-   "`false`, `0` and `\"false\"`; the string `\"0\"` is falsy too, which is why `||` misbehaves with form input."],
-  ex("Falsy values are `false`, `0`, `-0`, `0n`, `\"\"`, `null`, `undefined` and `NaN`. Everything else is truthy, including `\"0\"`, `\"false\"`, `[]` and `{}`. This matters in conditions and with `||`, which treats `0` and `\"\"` as missing; prefer `??` when those are valid values.", r'''
+  ["`false`, `0`, `\"\"`, `null`, `undefined` and `[]`; `||` treats `0` as missing, so compare against `null` explicitly.",
+   "`false`, `null`, `undefined` and `NaN`; `0` is truthy, but `||` converts it to a string first, which fails the check.",
+   "`false`, `0`, `\"\"`, `\"0\"`, `null` and `undefined`; `||` treats `0` as missing, so wrap the value in `Number()`."],
+  ex("Falsy values are `false`, `0`, `-0`, `0n`, `\"\"`, `null`, `undefined` and `NaN`. Everything else is truthy, including `\"0\"`, `\"false\"`, `[]` and `{}`. This matters in conditions and with `||`, which treats `0` and `\"\"` as missing; prefer `??` when those are valid values.\n\nWhy the others are wrong: `[]` is truthy (every object is) and the list misses `NaN`, `-0` and `0n`; `0` is falsy and `||` does not stringify anything; `\"0\"` is a non-empty string and therefore truthy, and `Number(0)` is still `0`, so `||` would still fall through.", r'''
 const count = 0;
 count || 10;   // 10  (surprise)
 count ?? 10;   // 0
@@ -231,20 +231,20 @@ Boolean([]);   // true
 '''), ["mdn-truthy", "mdn-falsy", "jsi-logical"]),
  ("What is the difference between `null` and `undefined`?", [A], "easy",
   "`undefined` means nothing was assigned; `null` is an intentional empty value. `JSON.stringify` drops `undefined` properties.",
-  ["They are the same value with two names, so `null === undefined` is `true`.",
-   "`null` means a variable was never declared, while `undefined` means it was declared but deleted.",
-   "`undefined` is an intentional empty value set by developers, and engines use `null` for missing properties."],
-  ex("`undefined` means \"no value assigned\": an uninitialised variable, a missing property or argument, a function with no `return`. `null` is an intentional \"no value\" set by the programmer. They are loosely equal (`==`) but not strictly equal, and `typeof` differs. APIs and JSON usually use `null` for empty; `JSON.stringify` drops properties whose value is `undefined`.", r'''
+  ["`null` means a variable was not declared yet and `undefined` means it was declared; `JSON.stringify` drops `null` properties.",
+   "`null` is what the engine uses for missing properties; `undefined` is set by developers. `JSON.stringify` writes both as `null`.",
+   "`undefined` means nothing was assigned and `null` is intentional; they are strictly equal, so `null === undefined` is `true`."],
+  ex("`undefined` means \"no value assigned\": an uninitialised variable, a missing property or argument, a function with no `return`. `null` is an intentional \"no value\" set by the programmer. They are loosely equal (`==`) but not strictly equal, and `typeof` differs. APIs and JSON usually use `null` for empty; `JSON.stringify` drops properties whose value is `undefined`.\n\nWhy the others are wrong: an undeclared variable throws a `ReferenceError`, it is neither value, and `JSON.stringify` keeps `null` properties; the engine uses `undefined` (not `null`) for missing properties and arguments, and drops `undefined` properties (it writes `null` only for `undefined` array items); `null == undefined` is `true` but `null === undefined` is `false`.", r'''
 let a;               // undefined
 const b = null;      // explicit empty
 JSON.stringify({ a: undefined, b: null }); // '{"b":null}'
 '''), ["mdn-null", "mdn-undefined", "jsi-nullish"]),
  ("How are primitives and objects copied and compared?", [A], "easy",
   "Primitives are copied and compared by value; objects by reference, so `===` checks identity, not content.",
-  ["Both are copied by value; objects are cloned on assignment, so changing a copy never affects the original.",
-   "Objects are compared by content with `===`, so two object literals with the same keys are equal.",
-   "Primitives are passed by reference to functions, so a function can change a caller's number variable."],
-  ex("Primitives are immutable and copied by value; comparing compares values. Objects (arrays and functions included) are copied by reference: the variable holds a pointer, so two variables can share and mutate the same object, and `===` compares identity, not content.", r'''
+  ["Primitives are copied by value but compared by reference, so two equal strings built separately aren't `===`.",
+   "Both are copied by value; assigning an object makes a shallow clone, so `===` compares the top-level properties.",
+   "Objects are copied by reference but compared by content, so two literals with the same keys are `===`."],
+  ex("Primitives are immutable and copied by value; comparing compares values. Objects (arrays and functions included) are copied by reference: the variable holds a pointer, so two variables can share and mutate the same object, and `===` compares identity, not content.\n\nWhy the others are wrong: strings are compared by value, so `\"ab\" === \"a\" + \"b\"` is `true`; assigning an object copies the reference, not a clone, so both variables see mutations; and `===` on objects checks identity, so `({ x: 1 }) === ({ x: 1 })` is `false`.", r'''
 const a = { x: 1 };
 const b = a;
 b.x = 2;
@@ -253,10 +253,10 @@ a.x;                       // 2
 '''), ["jsi-object-copy", "mdn-primitive", "eloquent"]),
  ("How do you deep-copy an object, and what is wrong with `JSON.parse(JSON.stringify(x))`?", [A], "medium",
   "Use `structuredClone`; the JSON round-trip drops `undefined`, turns dates into strings, loses `Map`/`Set` and throws on cycles.",
-  ["Use the spread operator, which copies nested objects too; the JSON round-trip is fine apart from being slow.",
-   "Use `Object.assign({}, x)`, which deep-copies; the JSON round-trip only fails for numbers above 2^53.",
-   "Use `structuredClone`, which also copies functions and class prototypes; the JSON round-trip handles everything else."],
-  ex("Spread (`{...o}`) and `Object.assign` copy one level; nested objects are still shared. For a deep copy use `structuredClone`: built in, and it handles dates, maps, sets and cycles (but not functions or class prototypes). `JSON.parse(JSON.stringify(x))` loses `undefined`, turns dates into strings, drops `Map` and `Set`, and throws on cycles.", r'''
+  ["Use `structuredClone`, which also copies functions and class methods; the JSON round-trip's one problem is losing `Date` objects.",
+   "Use `Object.assign({}, x)`, which copies nested objects; the JSON round-trip loses precision for numbers above 2^53.",
+   "Use the spread operator `{ ...x }`, which recurses into nested objects; the JSON round-trip is correct but slow."],
+  ex("Spread (`{...o}`) and `Object.assign` copy one level; nested objects are still shared. For a deep copy use `structuredClone`: built in, and it handles dates, maps, sets and cycles (but not functions or class prototypes). `JSON.parse(JSON.stringify(x))` loses `undefined`, turns dates into strings, drops `Map` and `Set`, and throws on cycles.\n\nWhy the others are wrong: `structuredClone` throws a `DataCloneError` on functions and returns plain objects for class instances (methods are lost); `Object.assign` and spread copy one level only; a JSON round-trip of a JS number is exact (the number is already a double), and the round-trip has real correctness problems, not just speed.", r'''
 const o = { a: 1, inner: { b: 2 }, when: new Date() };
 const shallow = { ...o };
 const deep = structuredClone(o);
@@ -265,20 +265,20 @@ deep.inner === o.inner;    // false
 '''), ["mdn-structuredclone", "jsi-object-copy", "webdev-structured-clone"]),
  ("Why is `0.1 + 0.2 !== 0.3`, and when do you need `BigInt`?", [A], "medium",
   "Numbers are IEEE 754 doubles that can't store some decimals exactly; `BigInt` is for integers beyond 2^53 - 1.",
-  ["It's a known engine bug fixed in ES2015; `BigInt` is the fix and should be used for all decimal math.",
-   "Addition rounds to 16 significant digits; `BigInt` is for decimals that need more precision, like currency.",
-   "JavaScript stores numbers as 32-bit floats; `BigInt` doubles that to 64 bits so decimals become exact."],
-  ex("Numbers are IEEE 754 64-bit floats, and some decimals can't be represented exactly in binary. Compare with a tolerance (`Math.abs(a - b) < Number.EPSILON`) or work in integers (cents) for money. Integers are exact only up to `Number.MAX_SAFE_INTEGER` (2^53 - 1); beyond that use `BigInt` (suffix `n`), which can't be mixed with `Number` without converting.", r'''
+  ["Addition rounds results to 15 significant digits; `BigInt` is for decimals that need more precision, like money.",
+   "Numbers are 32-bit floats by default; `BigInt` switches to 64-bit doubles, which store decimals like 0.1 exactly.",
+   "The `+` operator accumulates rounding error that `Math.round` fixes; `BigInt` handles exact fractions like `0.1n`."],
+  ex("Numbers are IEEE 754 64-bit floats, and some decimals can't be represented exactly in binary. Compare with a tolerance (`Math.abs(a - b) < Number.EPSILON`) or work in integers (cents) for money. Integers are exact only up to `Number.MAX_SAFE_INTEGER` (2^53 - 1); beyond that use `BigInt` (suffix `n`), which can't be mixed with `Number` without converting.\n\nWhy the others are wrong: the error comes from binary representation of 0.1 and 0.2, not from rounding to a digit count, and `BigInt` holds integers only; numbers are already 64-bit doubles, and no binary float stores 0.1 exactly; `0.1n` is a `SyntaxError` because BigInts can't have fractions.", r'''
 0.1 + 0.2;                                   // 0.30000000000000004
 Math.abs(0.1 + 0.2 - 0.3) < Number.EPSILON;  // true
 9007199254740993n + 1n;                      // 9007199254740994n
 '''), ["mdn-number", "mdn-bigint", "point-three", "jsi-number"]),
  ("What do `\"5\" + 1` and `\"5\" - 1` evaluate to, and why?", [A], "easy",
   "`\"51\"` and `4`: `+` concatenates when either side is a string, while `-` always converts to numbers.",
-  ["`6` and `4`: both operators convert numeric strings to numbers before doing arithmetic.",
-   "`\"51\"` and `\"5-1\"`: once a string is involved, every operator works on strings.",
-   "`6` and `\"4\"`: arithmetic happens first and the result takes the type of the left operand."],
-  ex("Operators convert their operands: `+` concatenates if either side is a string, the other arithmetic operators convert to numbers, conditions convert to booleans, and `==` uses the abstract equality algorithm. Be explicit instead: `Number(x)`, `String(x)`, `Boolean(x)`. `parseInt` parses a prefix and needs a radix.", r'''
+  ["`6` and `4`: both operators convert numeric strings to numbers first, since `\"5\"` looks like a number.",
+   "`\"51\"` and `NaN`: `+` concatenates, and `-` can't subtract from a string, so it produces `NaN`.",
+   "`6` and `\"4\"`: arithmetic happens first, and the result keeps the type of the left-hand operand."],
+  ex("Operators convert their operands: `+` concatenates if either side is a string, the other arithmetic operators convert to numbers, conditions convert to booleans, and `==` uses the abstract equality algorithm. Be explicit instead: `Number(x)`, `String(x)`, `Boolean(x)`. `parseInt` parses a prefix and needs a radix.\n\nWhy the others are wrong: `+` concatenates as soon as either operand is a string, numeric-looking or not; `-` converts `\"5\"` to `5`, so the result is `4`, not `NaN` (`NaN` appears only for non-numeric strings like `\"a\" - 1`); results don't take the left operand's type.", r'''
 "5" + 1;              // "51"
 "5" - 1;              // 4
 [] + {};              // "[object Object]"
@@ -289,10 +289,10 @@ parseInt("08px", 10); // 8
  # ---------------- B. functions, scope, this, prototypes ----------------
  ("What is a closure, what is it good for, and what does it cost?", [B], "easy",
   "A function that keeps access to its creating scope's variables; good for private state and factories, but captured values stay in memory.",
-  ["A function that copies the outer variables' values when it's created; it saves memory because nothing outer is kept alive.",
-   "A function stored inside an object; it's mainly a way to group methods and has no effect on memory.",
-   "A function that runs immediately and closes over nothing; it isolates code from the global scope."],
-  ex("A closure is a function that keeps access to the variables of the scope where it was created, even after that scope has returned. Uses: private state, factories, callbacks that remember context, memoisation, partial application. The cost: captured variables aren't garbage-collected while the closure lives.", r'''
+  ["A function that copies outer variables' values when it's created; good for snapshots, and it lets the outer scope be freed right afterwards.",
+   "A function invoked immediately to wrap code; good for avoiding globals, and it costs one extra stack frame per call.",
+   "An inner function that reads outer variables while the outer call is still on the stack; cheap, as nothing is retained."],
+  ex("A closure is a function that keeps access to the variables of the scope where it was created, even after that scope has returned. Uses: private state, factories, callbacks that remember context, memoisation, partial application. The cost: captured variables aren't garbage-collected while the closure lives.\n\nWhy the others are wrong: a closure keeps live access to the variables (later changes are visible), not a copy, and it keeps them alive; an IIFE is one use of a function, not the definition of a closure; and closures work after the outer function has returned, which is exactly why the captured scope is retained.", r'''
 function counter() {
   let n = 0;
   return () => ++n;
@@ -302,19 +302,19 @@ next(); next(); // 1, 2
 '''), ["mdn-closures", "jsi-closure", "ydkjs"]),
  ("What does this print, and how do you fix it?\n\n```js\nfor (var i = 0; i < 3; i++) setTimeout(() => console.log(i), 0);\n```", [B], "medium",
   "`3 3 3`, because every callback shares one function-scoped `i`; use `let` to get a new binding per iteration.",
-  ["`0 1 2`, because each callback captures the value of `i` when `setTimeout` is called.",
-   "`undefined` three times, because `i` no longer exists once the loop has finished running.",
-   "`2 2 2`, because the last loop iteration sets `i` to 2 before any timer fires."],
-  ex("`var` is function-scoped, so all callbacks share one `i`, which is `3` by the time the timers run. Fix it with `let` (a new binding per iteration) or an IIFE.", r'''
+  ["`2 2 2`, because the last iteration leaves `i` at 2; use `let` so each callback gets its own copy of `i`.",
+   "`0 1 2`, because each arrow captures `i`'s value when `setTimeout` is called, so no fix is needed here.",
+   "`3 3 3`, because the timers run after the loop; fix it with `setTimeout(..., 1)` so each fires inside its iteration."],
+  ex("`var` is function-scoped, so all callbacks share one `i`, which is `3` by the time the timers run. Fix it with `let` (a new binding per iteration) or an IIFE.\n\nWhy the others are wrong: the loop increments `i` once more before the condition fails, so it ends at `3`, not `2`; arrows capture the variable, not its value; and changing the delay doesn't help because the loop finishes synchronously before any timer can run.", r'''
 for (var i = 0; i < 3; i++) setTimeout(() => console.log(i), 0); // 3 3 3
 for (let j = 0; j < 3; j++) setTimeout(() => console.log(j), 0); // 0 1 2
 '''), ["mdn-closures-loops", "jsi-closure", "namaste-js"]),
- ("How is the value of `this` determined?", [B], "medium",
+ ("How is the value of `this` determined?", [B], "hard",
   "By how the function is called: `new`, then `call`/`apply`/`bind`, then `obj.fn()`, then a plain call; arrows use the outer `this`.",
-  ["By where the function is defined: it always refers to the object literal or class the code appears in.",
-   "It always refers to the global object unless the function is declared with the `method` keyword.",
-   "By the last object the function was assigned to, so storing a method in a variable keeps its `this`."],
-  ex("By how the function is called, not where it is defined (except arrows). Precedence: `new` (the new object), explicit `call`/`apply`/`bind`, a method call (`obj.fn()` gives `obj`), a plain call (`undefined` in strict mode, the global object otherwise). Arrow functions take `this` from the enclosing scope. Extracting a method loses its `this`.", r'''
+  ["By where the function is defined: methods get their object, plain functions get the module, and arrows get the caller.",
+   "By the object the function was last assigned to, so a method stored in a variable keeps its original `this`.",
+   "By how it's called: `obj.fn()` beats `bind`, which beats `new`; arrows take `this` from whoever calls them."],
+  ex("By how the function is called, not where it is defined (except arrows). Precedence: `new` (the new object), explicit `call`/`apply`/`bind`, a method call (`obj.fn()` gives `obj`), a plain call (`undefined` in strict mode, the global object otherwise). Arrow functions take `this` from the enclosing scope. Extracting a method loses its `this`.\n\nWhy the others are wrong: only arrows are lexical, and they take `this` from the enclosing scope, not the caller; extracting a method (`const f = obj.fn`) loses `this`; and the precedence is reversed: `new` beats `bind`, and `bind` beats a method call.", r'''
 const user = { name: "Ana", hi() { return this?.name; } };
 user.hi();          // "Ana"
 const f = user.hi;
@@ -322,10 +322,10 @@ f();                // undefined (this lost)
 '''), ["mdn-this", "jsi-object-methods", "ydkjs"]),
  ("What do `call`, `apply` and `bind` do?", [B], "easy",
   "All set `this`: `call` invokes now with listed arguments, `apply` with an array, `bind` returns a new bound function.",
-  ["`call` and `apply` create copies of a function, and `bind` attaches a function to an object permanently.",
-   "`bind` invokes immediately with an array of arguments, and `call`/`apply` return new functions.",
-   "They only work on arrow functions, and they set the function's `arguments` object, not `this`."],
-  ex("All three set `this` explicitly. `call(thisArg, a, b)` invokes now with listed arguments; `apply(thisArg, [a, b])` invokes now with an array; `bind(thisArg, ...preset)` returns a new function with `this` (and optionally leading arguments) fixed.", r'''
+  ["All set `this`: `apply` invokes now with listed arguments, `call` with an array, and `bind` invokes it on the next tick.",
+   "All set `this`: `call` and `apply` return bound copies to invoke later, while `bind` invokes now and returns the result.",
+   "All set `this`: `call` invokes now, `apply` with an array, and `bind` permanently changes the original function's `this`."],
+  ex("All three set `this` explicitly. `call(thisArg, a, b)` invokes now with listed arguments; `apply(thisArg, [a, b])` invokes now with an array; `bind(thisArg, ...preset)` returns a new function with `this` (and optionally leading arguments) fixed.\n\nWhy the others are wrong: `call` takes listed arguments and `apply` an array (not the other way round), and `bind` never schedules anything; `call` and `apply` invoke immediately while `bind` returns a function; and `bind` leaves the original function untouched, returning a new bound one.", r'''
 function greet(g, p) { return `${g}, ${this.name}${p}`; }
 const u = { name: "Ana" };
 greet.call(u, "Hi", "!");
@@ -335,10 +335,10 @@ hi("?");
 '''), ["mdn-bind", "jsi-bind"]),
  ("How do arrow functions differ from regular functions?", [B], "easy",
   "No own `this`, `arguments` or `prototype`, and no `new`: good for callbacks, wrong for methods and constructors.",
-  ["They are just shorter syntax with identical behaviour, so they can replace every regular function.",
-   "They always bind `this` to the object they are stored on, which makes them ideal for object methods.",
-   "They are hoisted with their body like function declarations, so they can be called before they appear."],
-  ex("Arrows have no own `this`, `arguments`, `super` or `new.target`; they can't be used with `new` and have no `prototype`. Great for callbacks that need the outer `this`; wrong for object methods that rely on their own `this`, and for constructors.", r'''
+  ["Hoisted with their body like declarations, and they bind `this` to the object they're stored on: ideal for methods.",
+   "They have their own `this` but no `arguments`; they work with `new`, which makes them a good fit for constructors.",
+   "Same semantics with shorter syntax; the one real difference is the implicit `return` for single-expression bodies."],
+  ex("Arrows have no own `this`, `arguments`, `super` or `new.target`; they can't be used with `new` and have no `prototype`. Great for callbacks that need the outer `this`; wrong for object methods that rely on their own `this`, and for constructors.\n\nWhy the others are wrong: arrows are expressions assigned to variables, so they follow `const`/`let` rules, and they don't get `this` from the object; they have no own `this`, and `new` on an arrow throws a `TypeError`; and the missing `this`, `arguments` and `prototype` are real semantic differences beyond syntax.", r'''
 const o = {
   n: 1,
   later() { setTimeout(() => console.log(this.n), 0); }, // 1
@@ -347,10 +347,10 @@ const o = {
 '''), ["mdn-arrow", "jsi-arrow"]),
  ("How does the prototype chain work?", [B], "medium",
   "Each object links to a prototype; reads walk the chain until found or `null`, while writes set the property on the object itself.",
-  ["Each object copies all of its prototype's properties when created, so later changes to the prototype aren't seen.",
-   "Property reads and writes both go to the prototype, so writing a property changes it for every instance.",
-   "Only classes have prototypes; objects created with literals or `Object.create` have no prototype link."],
-  ex("Every object has an internal `[[Prototype]]` link. Property lookup walks the chain until it finds the property or reaches `null`. Writing sets the property on the object itself (shadowing). `Object.getPrototypeOf(x)` reads the link; `Object.create(p)` makes an object with prototype `p`. Methods shared via the prototype are stored once, not per instance.", r'''
+  ["Each object copies its prototype's properties when created, so later changes to the prototype don't reach objects that already exist.",
+   "Each object links to a prototype; reads walk the chain, and writes update the prototype where the property was found.",
+   "Each object links to a prototype; reads check the prototype first and fall back to own properties if it's missing there."],
+  ex("Every object has an internal `[[Prototype]]` link. Property lookup walks the chain until it finds the property or reaches `null`. Writing sets the property on the object itself (shadowing). `Object.getPrototypeOf(x)` reads the link; `Object.create(p)` makes an object with prototype `p`. Methods shared via the prototype are stored once, not per instance.\n\nWhy the others are wrong: the prototype is a live link, so adding a method to it later is visible on existing objects; a plain assignment creates an own property that shadows the inherited one; and lookup starts with own properties, then walks up the chain.", r'''
 const animal = { eats: true };
 const dog = Object.create(animal);
 dog.barks = true;
@@ -359,10 +359,10 @@ Object.getPrototypeOf(dog) === animal; // true
 '''), ["mdn-proto-chain", "jsi-proto", "ydkjs"]),
  ("Are ES6 classes real classes, or something else underneath?", [B], "medium",
   "Syntax over prototypes: methods live on `Class.prototype`, but classes are always strict, need `new` and support `#private`.",
-  ["Real classes like in Java: instances get their own copy of every method and there is no prototype involved.",
-   "Exactly the same as constructor functions, with no behavioural differences besides the keyword.",
-   "A compile-time feature only: they're removed during parsing, so `typeof SomeClass` is `\"undefined\"`."],
-  ex("They are syntax over prototypes. A class body defines the constructor function; methods go on `Class.prototype`; `extends` links prototypes and `super` calls the parent. Differences from old constructor functions: a TDZ before the declaration, always strict, must be called with `new`, and support for `#private` fields and `static` members.", r'''
+  ["Real classes as in Java: each instance gets its own copy of every method, and the prototype is no longer used.",
+   "Syntax over prototypes with identical behaviour to constructor functions, so a class can also be called as a plain function without `new`.",
+   "A separate object model: methods live on each instance, and `typeof SomeClass` returns `\"class\"`."],
+  ex("They are syntax over prototypes. A class body defines the constructor function; methods go on `Class.prototype`; `extends` links prototypes and `super` calls the parent. Differences from old constructor functions: a TDZ before the declaration, always strict, must be called with `new`, and support for `#private` fields and `static` members.\n\nWhy the others are wrong: methods are stored once on `Class.prototype` and shared through the chain; calling a class without `new` throws a `TypeError`, one of several differences from constructor functions; and `typeof SomeClass` is `\"function\"`.", r'''
 class Animal {
   #sound;
   constructor(s) { this.#sound = s; }
@@ -374,20 +374,20 @@ typeof Animal;     // "function"
 '''), ["mdn-classes", "jsi-class"]),
  ("What does the `new` keyword do?", [B], "medium",
   "Creates an object linked to `Constructor.prototype`, runs the constructor with `this` set to it, and returns it.",
-  ["Allocates a copy of the constructor function itself and returns that copy as the new instance.",
-   "Calls the constructor normally; `new` is only a naming convention that signals intent to readers.",
-   "Creates an object with no prototype, then copies every property of the constructor onto it."],
-  ex("It creates an empty object linked to `Constructor.prototype`, calls the constructor with `this` set to that object, and returns the object (unless the constructor returns another object). Forgetting `new` on a plain function sets properties on the global object (sloppy mode) or throws (strict mode, classes).", r'''
+  ["Copies the constructor's prototype into a new object, runs the constructor, and returns whatever the constructor returns.",
+   "Creates an object with no prototype, copies the constructor's methods onto it, and returns it with `this` bound.",
+   "Runs the constructor with `this` set to the global object, then returns that object's newly added properties."],
+  ex("It creates an empty object linked to `Constructor.prototype`, calls the constructor with `this` set to that object, and returns the object (unless the constructor returns another object). Forgetting `new` on a plain function sets properties on the global object (sloppy mode) or throws (strict mode, classes).\n\nWhy the others are wrong: the new object is linked to `Constructor.prototype`, not given a copy, and a returned primitive is ignored (only a returned object replaces the instance); the object does have a prototype and methods are inherited, not copied; and `this` is the new object, not the global object.", r'''
 function Person(name) { this.name = name; }
 const p = new Person("Ana");
 p instanceof Person;   // true
 '''), ["mdn-new", "jsi-constructor-new"]),
  ("What is a higher-order function, and what is currying?", [B], "medium",
   "A function that takes or returns functions; currying turns `f(a, b, c)` into `f(a)(b)(c)` for partial application.",
-  ["A function that runs at a higher priority in the event loop; currying is chaining several of them together.",
-   "A function defined inside a class; currying is binding it to the class with `bind`.",
-   "A function with more than three parameters; currying merges its parameters into a single options object."],
-  ex("A higher-order function takes or returns functions (`map`, `filter`, `setTimeout`, decorators). Currying turns `f(a, b, c)` into `f(a)(b)(c)`, enabling partial application and reuse.", r'''
+  ["A function that calls itself; currying caches its results by argument so that repeated calls return faster.",
+   "A function that takes or returns functions; currying chains `f(g(h(x)))` so each output feeds straight into the next function.",
+   "A function defined on a class's prototype; currying binds it to an instance with `bind` so its `this` is fixed."],
+  ex("A higher-order function takes or returns functions (`map`, `filter`, `setTimeout`, decorators). Currying turns `f(a, b, c)` into `f(a)(b)(c)`, enabling partial application and reuse.\n\nWhy the others are wrong: a function that calls itself is recursive, and caching results is memoisation; chaining outputs into inputs is function composition, not currying; and binding `this` is `bind`, unrelated to higher-order functions.", r'''
 const curry = (fn) =>
   function curried(...args) {
     return args.length >= fn.length
@@ -400,10 +400,10 @@ add(1, 2)(3); // 6
 '''), ["jsi-currying", "mdn-first-class", "eloquent"]),
  ("What is memoisation, and what are its limits?", [B], "medium",
   "Caching a pure function's results by its arguments; it needs a stable key and an upper bound on the cache.",
-  ["Storing a function's source code so it doesn't have to be parsed again on every call.",
-   "Caching any function's results, including impure ones like API calls, so they never need to run twice.",
-   "A garbage-collector optimisation that the engine applies automatically to recursive functions."],
-  ex("Memoisation caches a pure function's results by its arguments, trading memory for speed. It needs a stable cache key (serialise the arguments) and only suits pure functions. Watch for unbounded cache growth; consider an LRU, or a `WeakMap` for object keys.", r'''
+  ["An engine optimisation that caches recursive calls automatically; it needs no code but suits pure functions.",
+   "Caching a function's compiled code so it isn't parsed again; it needs a stable key and grows with function count.",
+   "Caching any function's results by its arguments, including API calls; it needs a stable key but no cache bound."],
+  ex("Memoisation caches a pure function's results by its arguments, trading memory for speed. It needs a stable cache key (serialise the arguments) and only suits pure functions. Watch for unbounded cache growth; consider an LRU, or a `WeakMap` for object keys.\n\nWhy the others are wrong: engines don't memoise your functions for you; caching compiled code is what the JIT does, not memoisation; and impure functions (API calls, time, randomness) give stale results when cached, while an unbounded cache is a memory leak.", r'''
 const memo = (fn) => {
   const cache = new Map();
   return (...args) => {
@@ -419,22 +419,22 @@ fib(50); // 12586269025
  # ---------------- C. async and the event loop ----------------
  ("In what order does this log, and why?\n\n```js\nconsole.log(\"A\");\nsetTimeout(() => console.log(\"timeout\"), 0);\nPromise.resolve().then(() => console.log(\"promise\"));\nconsole.log(\"B\");\n```", [C], "medium",
   "A, B, promise, timeout: synchronous code first, then all microtasks, then the next task (the timer).",
-  ["A, timeout, promise, B: callbacks run as soon as they are scheduled, in order of registration.",
-   "A, B, timeout, promise: a zero-delay timer is due immediately, so it beats the promise.",
-   "A, promise, B, timeout: resolved promises run synchronously inside the current statement."],
-  ex("JavaScript runs on one thread with one call stack. Async work (timers, I/O, network) is handled by the host (browser or Node), which queues callbacks. When the stack is empty the loop takes the next task. After each task it drains the whole microtask queue (promise reactions, `queueMicrotask`) before the next task or render. A long synchronous task blocks everything, including rendering.", r'''
+  ["A, promise, B, timeout: an already-resolved promise runs its `.then` callback synchronously.",
+   "A, B, timeout, promise: a zero-delay timer is due at once, so it runs before the promise callback.",
+   "A, timeout, promise, B: callbacks run as soon as they're registered, in the order they were scheduled."],
+  ex("JavaScript runs on one thread with one call stack. Async work (timers, I/O, network) is handled by the host (browser or Node), which queues callbacks. When the stack is empty the loop takes the next task. After each task it drains the whole microtask queue (promise reactions, `queueMicrotask`) before the next task or render. A long synchronous task blocks everything, including rendering.\n\nWhy the others are wrong: `.then` callbacks are queued as microtasks even for a resolved promise, so they never run in the middle of synchronous code; the microtask queue is drained before the next task, so the promise beats the timer; and no callback runs until the current synchronous code has finished.", r'''
 console.log("A");
 setTimeout(() => console.log("timeout"), 0);
 Promise.resolve().then(() => console.log("promise"));
 console.log("B");
 // A, B, promise, timeout
 '''), ["roberts-event-loop", "archibald-in-the-loop", "hallie-event-loop", "mdn-event-loop"]),
- ("What is the difference between microtasks and macrotasks (tasks)?", [C], "medium",
+ ("What is the difference between microtasks and macrotasks (tasks)?", [C], "hard",
   "Promise reactions and `queueMicrotask` are microtasks, drained fully after each task; timers, I/O and UI events are tasks.",
-  ["Microtasks are small timers under 4 ms; macrotasks are timers above that and are throttled by the browser.",
-   "Microtasks run on a separate worker thread, so they can't block rendering the way tasks do.",
-   "Tasks always run before microtasks, which is why a `setTimeout(fn, 0)` beats a resolved promise."],
-  ex("Macrotasks (tasks): `setTimeout`, `setInterval`, I/O, UI events, `MessageChannel`. Microtasks: promise `.then/.catch/.finally`, `await` continuations, `queueMicrotask`, `MutationObserver`. The microtask queue is fully drained after the current task, so a promise chain always runs before the next timer, and an endless microtask loop starves rendering.", r'''
+  ["Timers and I/O are microtasks, drained after each task; promise reactions and UI events are tasks queued by the browser itself.",
+   "Promise reactions are microtasks, but just one runs after each task; timers, I/O and UI events are tasks.",
+   "Promise reactions are microtasks run on a separate thread, so they don't block rendering; timers are tasks."],
+  ex("Macrotasks (tasks): `setTimeout`, `setInterval`, I/O, UI events, `MessageChannel`. Microtasks: promise `.then/.catch/.finally`, `await` continuations, `queueMicrotask`, `MutationObserver`. The microtask queue is fully drained after the current task, so a promise chain always runs before the next timer, and an endless microtask loop starves rendering.\n\nWhy the others are wrong: the roles are swapped, timers and I/O are tasks and promise reactions are microtasks; the whole microtask queue is drained (including microtasks queued meanwhile), not one per task; and microtasks run on the same main thread, so an endless microtask loop starves rendering.", r'''
 setTimeout(() => console.log("macro"), 0);
 queueMicrotask(() => console.log("micro 1"));
 Promise.resolve().then(() => console.log("micro 2"));
@@ -442,19 +442,19 @@ Promise.resolve().then(() => console.log("micro 2"));
 '''), ["archibald-tasks", "mdn-microtask", "jsi-microtask"]),
  ("What is callback hell, and how do you avoid it?", [C], "easy",
   "Deeply nested callbacks that are hard to read and handle errors in; flatten with promises and `async/await`.",
-  ["An infinite loop of callbacks that crashes the engine; avoid it by limiting callbacks to three per file.",
-   "Calling a callback more than once; avoid it by wrapping every callback in `setTimeout`.",
-   "Using callbacks in the browser instead of Node; avoid it by moving async code to the server."],
-  ex("Deeply nested callbacks that are hard to read, handle errors in, and compose. Avoid them with promises (flat chains and a central `.catch`), `async/await`, named functions and small composable helpers. Node's `util.promisify` converts error-first callbacks into promise-returning functions.", r'''
+  ["A callback invoked twice by mistake; avoid it with a flag that ignores any repeat calls.",
+   "Synchronous callbacks blocking the event loop; avoid it by moving the work into `setImmediate`.",
+   "Callbacks that leak memory through closures; avoid it by using named functions instead of arrows."],
+  ex("Deeply nested callbacks that are hard to read, handle errors in, and compose. Avoid them with promises (flat chains and a central `.catch`), `async/await`, named functions and small composable helpers. Node's `util.promisify` converts error-first callbacks into promise-returning functions.\n\nWhy the others are wrong: a double-invoked callback is a real bug but not what \"callback hell\" means; blocking work is a performance issue, and deferring it with `setImmediate` still blocks the loop when it runs; and naming functions helps readability but has nothing to do with leaks.", r'''
 import { readFile } from "node:fs/promises";
 const data = await readFile("a.json", "utf8"); // instead of nested callbacks
 '''), ["jsi-callbacks", "node-promisify", "callbackhell"]),
  ("What are a promise's states, and how does chaining with `.then` work?", [C], "medium",
-  "Pending, then fulfilled or rejected; each `.then` returns a new promise resolved with the callback's return value, and throws become rejections.",
-  ["Pending, running and done; `.then` mutates the original promise, so every handler sees the first value.",
-   "Fulfilled or rejected only; `.then` callbacks run synchronously, and a thrown error stops the program.",
-   "Pending and settled, which can switch back to pending if the promise is resolved again."],
-  ex("`pending`, then `fulfilled` or `rejected` (settled, final). `.then(onOk, onErr)` returns a new promise; its value is the callback's return value (or the unwrapped promise it returns); a thrown error becomes a rejection. `.catch` handles rejections anywhere above it in the chain; `.finally` runs either way and doesn't change the value.", r'''
+  "Pending, then fulfilled or rejected; each `.then` returns a new promise with the callback's result, and throws become rejections.",
+  ["Pending, then fulfilled or rejected; `.then` returns the same promise, so each handler in the chain sees the very first resolved value.",
+   "Pending, then fulfilled or rejected; `.then` callbacks run synchronously, and a throw inside one crashes the program.",
+   "Pending and settled; a settled promise can go back to pending if resolved again, and `.then` reruns its callbacks."],
+  ex("`pending`, then `fulfilled` or `rejected` (settled, final). `.then(onOk, onErr)` returns a new promise; its value is the callback's return value (or the unwrapped promise it returns); a thrown error becomes a rejection. `.catch` handles rejections anywhere above it in the chain; `.finally` runs either way and doesn't change the value.\n\nWhy the others are wrong: `.then` returns a new promise, so each step sees the previous callback's return value; callbacks run asynchronously as microtasks, and a throw becomes a rejection handled by a later `.catch`; and settling is final, further `resolve`/`reject` calls are ignored.", r'''
 Promise.resolve(1)
   .then((x) => x + 1)
   .then((x) => { throw new Error("boom " + x); })
@@ -463,10 +463,10 @@ Promise.resolve(1)
 '''), ["mdn-using-promises", "jsi-promise-basics", "jsi-promise-chaining", "hallie-promises"]),
  ("When do you use `Promise.all`, `allSettled`, `race` and `any`?", [C], "medium",
   "`all` fails fast, `allSettled` reports every outcome, `race` takes the first settled (timeouts), `any` the first success.",
-  ["`all` runs promises sequentially, `allSettled` in parallel, `race` retries failures, and `any` picks one at random.",
-   "`all` ignores rejections, `allSettled` fails fast, `race` waits for all, and `any` returns the slowest result.",
-   "They're aliases kept for compatibility; all four wait for every promise and differ only in the return shape."],
-  ex("`all`: waits for all, rejects on the first rejection (fail fast). `allSettled`: waits for all and reports each outcome; never rejects. `race`: settles with the first settled promise (good for timeouts). `any`: resolves with the first fulfilled one; rejects with an `AggregateError` only if all fail (good for redundant sources).", r'''
+  ["`all` ignores rejections, `allSettled` fails fast, `race` takes the first success, `any` the first settled.",
+   "`all` fails fast, `allSettled` reports outcomes, `race` takes the first success, `any` rejects if one fails.",
+   "`all` runs the promises in sequence, `allSettled` runs them in parallel, `race` takes the fastest success, `any` the first settled."],
+  ex("`all`: waits for all, rejects on the first rejection (fail fast). `allSettled`: waits for all and reports each outcome; never rejects. `race`: settles with the first settled promise (good for timeouts). `any`: resolves with the first fulfilled one; rejects with an `AggregateError` only if all fail (good for redundant sources).\n\nWhy the others are wrong: `all` rejects on the first rejection and `allSettled` never rejects; `race` settles with the first settled promise, rejection included, while `any` waits for the first fulfilment and rejects only if all reject; and none of them run anything: the promises are already running when passed in.", r'''
 const results = await Promise.allSettled([a(), b(), c()]);
 const ok = results.filter((r) => r.status === "fulfilled").map((r) => r.value);
 
@@ -475,10 +475,10 @@ const withTimeout = (p, ms) =>
 '''), ["mdn-promise-concurrency", "jsi-promise-api"]),
  ("How do you handle errors with `async/await`, and what does `fetch` not reject on?", [C], "medium",
   "`try/catch` around awaits where you can act, rethrowing with a `cause`; `fetch` doesn't reject on HTTP errors, so check `res.ok`.",
-  ["Wrap the whole program in one `try/catch`; `fetch` rejects on any non-200 status, so no extra check is needed.",
-   "`async` functions can't throw, so check the return value for `null`; `fetch` rejects only on 500 errors.",
-   "Attach `.catch` to every awaited line; `fetch` rejects on 404s but not on network failures."],
-  ex("Use `try/catch` around awaited calls; an `async` function always returns a promise, and a thrown error rejects it. Catch where you can act (retry, fallback, translate) and let the rest bubble; don't swallow errors. `fetch` only rejects on network failure, not on a 404 or 500, so check `res.ok`. A rejected promise that is never awaited or caught becomes an unhandled rejection.", r'''
+  ["One top-level `try/catch` around the whole app; `fetch` rejects on any non-2xx status, so no extra check is needed.",
+   "Attach `.catch` to the returned promise instead of `try/catch`; `fetch` rejects on 4xx/5xx, so read `err.status`.",
+   "`try/catch` around awaits; `fetch` rejects on 404s and 500s but resolves with `res.ok === false` on network failure."],
+  ex("Use `try/catch` around awaited calls; an `async` function always returns a promise, and a thrown error rejects it. Catch where you can act (retry, fallback, translate) and let the rest bubble; don't swallow errors. `fetch` only rejects on network failure, not on a 404 or 500, so check `res.ok`. A rejected promise that is never awaited or caught becomes an unhandled rejection.\n\nWhy the others are wrong: a single top-level catch can't retry or add context, and `fetch` resolves normally for 4xx/5xx responses; `.catch` works but `fetch` still doesn't reject on HTTP status, so there is no `err.status`; and it's the reverse: network failures reject, HTTP error statuses resolve with `res.ok === false`.", r'''
 async function load(id) {
   try {
     const res = await fetch(`/api/items/${id}`);
@@ -491,10 +491,10 @@ async function load(id) {
 '''), ["mdn-async-function", "jsi-async-await", "mdn-error-cause"]),
  ("What is the performance trap with sequential `await`, and why is `forEach` with an async callback wrong?", [C], "medium",
   "Independent awaits run one after another; start them together with `Promise.all`. `forEach` doesn't wait for async callbacks at all.",
-  ["`await` blocks the whole thread, so use callbacks instead; `forEach` awaits each callback but is slower than `for`.",
-   "Sequential awaits run in parallel automatically, so there's no trap; `forEach` is fine because it returns a promise.",
-   "Awaiting more than ten promises overflows the microtask queue; `forEach` is wrong only in older browsers."],
-  ex("Awaiting in sequence makes independent calls run one after another. Start them together and await them together. In loops, `await` inside `for...of` is sequential on purpose, while `forEach` with an async callback doesn't wait at all. Bound concurrency for big lists (batches or a pool) to avoid overloading a server.", r'''
+  ["`await` blocks the whole thread, so other requests wait; `forEach` awaits each callback in turn but is slower than `for`.",
+   "Sequential awaits are parallelised by the engine, so there's no trap; `forEach` returns a promise you can await.",
+   "Independent awaits run one after another; fix it with `Promise.all`. `forEach` awaits each callback but silently swallows their errors."],
+  ex("Awaiting in sequence makes independent calls run one after another. Start them together and await them together. In loops, `await` inside `for...of` is sequential on purpose, while `forEach` with an async callback doesn't wait at all. Bound concurrency for big lists (batches or a pool) to avoid overloading a server.\n\nWhy the others are wrong: `await` suspends only the current async function, not the thread, and `forEach` does not await its callbacks; the engine never parallelises awaits for you, and `forEach` returns `undefined`; and `forEach` doesn't await at all, so it can't even observe the errors (they become unhandled rejections).", r'''
 // slow: total = a + b
 const x = await getA();
 const y = await getB();
@@ -507,12 +507,12 @@ items.forEach(async (i) => { await save(i); });
 // right
 await Promise.all(items.map(save));
 '''), ["jsi-async-await", "webdev-async-iterators", "mdn-for-await"]),
- ("What is an unhandled promise rejection, and what does modern Node do with one?", [C], "medium",
+ ("What is an unhandled promise rejection, and what does modern Node do with one?", [C], "hard",
   "A rejection with no handler once microtasks drain; since Node 15 it terminates the process by default.",
-  ["A promise that never settles; Node keeps it in memory forever but otherwise ignores it.",
-   "A rejection inside `try/catch`; Node logs a warning and continues as if the promise had resolved.",
-   "Any promise created without `new`; Node rejects it at parse time and refuses to start the script."],
-  ex("A rejection with no handler attached by the time the microtask queue drains. Browsers emit `unhandledrejection`; modern Node terminates the process by default (since v15). Always return, await or catch promises; add a global handler only to log and shut down cleanly, not to carry on as if nothing happened.", r'''
+  ["A rejection with no handler once microtasks drain; Node prints a warning and keeps the process running.",
+   "A promise that stays pending forever; Node keeps it in memory and prints a warning after about 30 seconds.",
+   "A rejection inside an `async` function without its own `try/catch`, even when the caller awaits and catches it."],
+  ex("A rejection with no handler attached by the time the microtask queue drains. Browsers emit `unhandledrejection`; modern Node terminates the process by default (since v15). Always return, await or catch promises; add a global handler only to log and shut down cleanly, not to carry on as if nothing happened.\n\nWhy the others are wrong: warning and continuing was the behaviour before Node 15, now the default mode is `throw`; a never-settling promise is not a rejection and Node doesn't time it out; and a rejection is handled as soon as any caller awaits or catches it, it needn't be caught where it was thrown.", r'''
 process.on("unhandledRejection", (reason) => {
   console.error("unhandled", reason);
   process.exit(1);
@@ -520,20 +520,20 @@ process.on("unhandledRejection", (reason) => {
 '''), ["node-unhandled", "mdn-unhandledrejection", "jsi-promise-error"]),
  ("Does `setTimeout(fn, 0)` run immediately?", [C], "easy",
   "No: it queues a task after at least the delay, and it runs only once the stack is empty and microtasks are drained.",
-  ["Yes: a zero delay calls the function synchronously before the next statement runs.",
-   "Yes, unless a promise is pending, in which case it waits for that specific promise.",
-   "No: it always waits exactly 4 ms, which is the fixed minimum resolution of every JavaScript timer."],
-  ex("No. It schedules a task after at least the delay (browsers clamp nested timers to about 4 ms and throttle background tabs). It runs only when the stack is empty and microtasks are drained, so a busy main thread delays it arbitrarily. Use `requestAnimationFrame` for visual updates and `queueMicrotask` for \"right after this\".", r'''
+  ["Yes: a zero delay runs the function synchronously, right after the current statement finishes.",
+   "No: it runs after exactly 4 ms, the fixed minimum for timers in browsers and Node.",
+   "No: it runs as a microtask right after the current function returns, before pending promise callbacks."],
+  ex("No. It schedules a task after at least the delay (browsers clamp nested timers to about 4 ms and throttle background tabs). It runs only when the stack is empty and microtasks are drained, so a busy main thread delays it arbitrarily. Use `requestAnimationFrame` for visual updates and `queueMicrotask` for \"right after this\".\n\nWhy the others are wrong: timers never run synchronously; the 4 ms clamp applies to nested browser timers (Node uses 1 ms) and the real delay depends on how busy the thread is; and `setTimeout` queues a task, which runs after the microtask queue (promise callbacks) is drained.", r'''
 const t = Date.now();
 setTimeout(() => console.log("fired after", Date.now() - t, "ms"), 0);
 while (Date.now() - t < 100) {} // blocks: timer fires after about 100 ms
 '''), ["mdn-settimeout", "jsi-settimeout", "roberts-event-loop"]),
  ("How do you cancel an async operation like a `fetch`?", [C], "medium",
   "Pass an `AbortController`'s `signal` and call `abort()`; `AbortSignal.timeout(ms)` gives a timeout.",
-  ["Call `promise.cancel()`, which every native promise supports since ES2017.",
-   "Set the promise variable to `null`, which stops the request and frees its memory.",
-   "Throw inside a `.then` handler, which reaches back and cancels the network request."],
-  ex("Promises can't be cancelled themselves; use `AbortController`. Pass its `signal` to `fetch` (and many Node APIs), call `abort()` to cancel, and handle the `AbortError`. Also use it for timeouts (`AbortSignal.timeout(ms)`) and to ignore stale responses in UI code.", r'''
+  ["Call `promise.cancel()` on the promise `fetch` returns; `Promise.race` with a timer then gives a timeout.",
+   "Set the promise variable to `null` so it's garbage-collected, which aborts the request in flight.",
+   "Throw inside a `.then` handler; the rejection propagates back up and cancels the network request."],
+  ex("Promises can't be cancelled themselves; use `AbortController`. Pass its `signal` to `fetch` (and many Node APIs), call `abort()` to cancel, and handle the `AbortError`. Also use it for timeouts (`AbortSignal.timeout(ms)`) and to ignore stale responses in UI code.\n\nWhy the others are wrong: native promises have no `cancel()`, and `Promise.race` only stops waiting, the request keeps running; dropping the reference doesn't abort anything (the pending request keeps it alive); and a throw in `.then` rejects the derived promise, it doesn't travel back to the request.", r'''
 const ctrl = new AbortController();
 const p = fetch("/api/slow", { signal: ctrl.signal });
 setTimeout(() => ctrl.abort(), 500);
@@ -545,21 +545,21 @@ await fetch("/api/x", { signal: AbortSignal.timeout(3000) });
  # ---------------- D. modern JavaScript ----------------
  ("What are destructuring, spread and rest, and what are their traps?", [Dm], "easy",
   "Unpacking, expanding and collecting values; spread copies are shallow, and defaults apply only to `undefined`, not `null`.",
-  ["Ways to deep-clone objects; the trap is that they're slow, so avoid them in loops.",
-   "Ways to declare typed variables; the trap is that defaults also replace `0` and `\"\"`.",
-   "Syntax for importing modules; the trap is that they only work with default exports."],
-  ex("Destructuring unpacks arrays and objects into variables, with defaults and renaming. Spread (`...x`) expands an iterable or object in place; rest (`...x`) collects the remaining items. Traps: spread copies are shallow, and defaults apply only for `undefined`, not `null`.", r'''
+  ["Unpacking, expanding and collecting values; spread copies are deep, and defaults apply to any falsy value.",
+   "Unpacking, expanding and collecting values; spread copies are shallow, and defaults also apply to `null`.",
+   "Unpacking, expanding and collecting values; rest must come first in a destructuring pattern, and spread skips `undefined` values."],
+  ex("Destructuring unpacks arrays and objects into variables, with defaults and renaming. Spread (`...x`) expands an iterable or object in place; rest (`...x`) collects the remaining items. Traps: spread copies are shallow, and defaults apply only for `undefined`, not `null`.\n\nWhy the others are wrong: spread copies one level (nested objects are shared), and defaults kick in for `undefined`, not for `0` or `\"\"`; `const { d = 5 } = { d: null }` gives `d === null`; and a rest element must be last, while spread copies `undefined` values like any other.", r'''
 const { id, name: title = "n/a", ...others } = { id: 1, extra: true };
 const [first, , third = 0, ...tail] = [1, 2, undefined, 4, 5];
 const merged = { ...{ a: 1 }, ...{ a: 2, b: 3 } }; // { a: 2, b: 3 }
 const sum = (...nums) => nums.reduce((a, b) => a + b, 0);
 '''), ["mdn-destructuring", "jsi-destructuring", "jsi-rest-spread", "exploring-js"]),
- ("How do ES modules differ from CommonJS?", [Dm], "medium",
-  "ESM is static and async, always strict, with live bindings, tree shaking and top-level `await`; CommonJS `require` is synchronous and dynamic.",
-  ["They're identical; `import` is just a newer spelling of `require` that bundlers translate one-to-one.",
-   "CommonJS supports tree shaking and top-level `await`, while ESM loads synchronously like `require`.",
-   "ESM only works in browsers and CommonJS only in Node, so a package can never use both."],
-  ex("CommonJS (`require`, `module.exports`) is synchronous, dynamic and Node's legacy format. ES modules (`import`/`export`) are static (enabling tree shaking), asynchronous, always strict, export live bindings and support top-level `await`. In Node, enable ESM with `.mjs` or `\"type\": \"module\"`. Use dynamic `import()` for lazy loading and to import ESM from CommonJS.", r'''
+ ("How do ES modules differ from CommonJS?", [Dm], "hard",
+  "ESM is static, async and strict, with live bindings and top-level `await`; CommonJS `require` is synchronous and dynamic.",
+  ["ESM is static and async with live bindings; CommonJS supports top-level `await` and is strict by default too.",
+   "ESM is loaded synchronously like `require` and exports value copies; CommonJS exports live bindings and is therefore tree-shakable.",
+   "ESM is static but evaluated lazily on first use of an export; CommonJS `require` is asynchronous and cached."],
+  ex("CommonJS (`require`, `module.exports`) is synchronous, dynamic and Node's legacy format. ES modules (`import`/`export`) are static (enabling tree shaking), asynchronous, always strict, export live bindings and support top-level `await`. In Node, enable ESM with `.mjs` or `\"type\": \"module\"`. Use dynamic `import()` for lazy loading and to import ESM from CommonJS.\n\nWhy the others are wrong: top-level `await` is ESM-only and CommonJS is sloppy unless you add `\"use strict\"`; the bindings are reversed, ESM exports live bindings while `require` returns a snapshot object, and static imports are what makes tree shaking possible; and ESM modules are evaluated eagerly in dependency order, while `require` is synchronous.", r'''
 // math.mjs
 export const add = (a, b) => a + b;
 export default function mul(a, b) { return a * b; }
@@ -569,21 +569,21 @@ const lazy = await import("./big.mjs");
 '''), ["mdn-modules", "node-esm", "jsi-modules"]),
  ("When do you use `Map`, `Set`, `WeakMap` and `WeakSet` instead of objects and arrays?", [Dm], "medium",
   "`Map` for any-type keys and frequent changes, `Set` for unique values, and the weak versions for per-object data that mustn't leak.",
-  ["`Map` and `Set` are slower aliases of objects and arrays, kept only for older code; weak versions are deprecated.",
-   "`WeakMap` is a `Map` limited to string keys, used when the number of keys is small and fixed.",
-   "`Set` keeps duplicates in insertion order, and `WeakSet` is a `Set` that can be iterated faster."],
-  ex("`Map` allows any key type, keeps insertion order, has `size`, and beats an object for frequent adds and removals. `Set` stores unique values (fast `has`, easy dedupe). `WeakMap`/`WeakSet` hold keys weakly (objects only, not iterable), so entries disappear when the key is collected: ideal for caches or metadata per object without leaks.", r'''
+  ["`Map` for string keys in insertion order, `Set` for sorted unique values, and the weak versions for primitive keys that expire over time.",
+   "`Map` for any-type keys, `Set` for unique values, and the weak versions when you need to iterate entries without copying.",
+   "`Map` and `Set` for data you'll serialise to JSON, and the weak versions for caches keyed by strings to save memory."],
+  ex("`Map` allows any key type, keeps insertion order, has `size`, and beats an object for frequent adds and removals. `Set` stores unique values (fast `has`, easy dedupe). `WeakMap`/`WeakSet` hold keys weakly (objects only, not iterable), so entries disappear when the key is collected: ideal for caches or metadata per object without leaks.\n\nWhy the others are wrong: `Map` accepts any key type and `Set` keeps insertion order, not sorted order, while weak collections reject primitive keys; `WeakMap` and `WeakSet` are not iterable; and `JSON.stringify(new Map(...))` gives `\"{}\"`, while `new WeakMap().set(\"s\", 1)` throws a `TypeError`.", r'''
 const unique = [...new Set([1, 1, 2])];   // [1, 2]
 const m = new Map([[{ id: 1 }, "x"]]);
 const meta = new WeakMap();
 meta.set(domNode, { clicks: 0 });         // freed with domNode
 '''), ["mdn-keyed", "jsi-map-set", "jsi-weakmap"]),
  ("What are iterators and generators?", [Dm], "medium",
-  "An iterable has `[Symbol.iterator]()` yielding `{ value, done }`; a generator (`function*`) is a pausable function that `yield`s values lazily.",
-  ["Iterators are arrays with an index property; generators are functions that create new arrays on every call.",
-   "Generators run eagerly and return all values at once, while iterators are only for asynchronous code.",
-   "Both are Node-only APIs for reading files line by line, unavailable in the browser."],
-  ex("An iterable has `[Symbol.iterator]()` returning an iterator whose `next()` yields `{ value, done }`; `for...of`, spread and destructuring use it. A generator (`function*`) is a pausable function that `yield`s values lazily, handy for infinite sequences, custom iteration and cooperative flows. Async generators with `for await` stream async data.", r'''
+  "An iterable's `[Symbol.iterator]()` returns an object whose `next()` gives `{ value, done }`; a generator (`function*`) pauses at each `yield`.",
+  ["An iterable has a `length` and numeric indexes that `for...of` reads; a generator (`function*`) computes its values up front.",
+   "An iterable's `[Symbol.iterator]()` returns an array copy that `for...of` walks; a generator runs on a worker thread.",
+   "An iterable's `next()` returns the next value or `undefined` at the end; a generator (`function*`) returns a promise per value."],
+  ex("An iterable has `[Symbol.iterator]()` returning an iterator whose `next()` yields `{ value, done }`; `for...of`, spread and destructuring use it. A generator (`function*`) is a pausable function that `yield`s values lazily, handy for infinite sequences, custom iteration and cooperative flows. Async generators with `for await` stream async data.\n\nWhy the others are wrong: `for...of` uses `[Symbol.iterator]`, not `length` (array-likes without it throw), and generators are lazy; the iterator protocol returns an iterator object, not an array, and generators run on the calling thread; and `next()` returns `{ value, done }` objects, while promise-per-value is what async generators (`async function*`) do.", r'''
 function* ids() { let i = 1; while (true) yield i++; }
 const it = ids();
 it.next().value; // 1
@@ -593,11 +593,11 @@ async function* pages() { for (let p = 1; p <= 3; p++) yield await fetchPage(p);
 for await (const page of pages()) { /* ... */ }
 '''), ["mdn-iterators", "jsi-generators", "jsi-async-iter"]),
  ("What do optional chaining (`?.`) and nullish coalescing (`??`) do, and how is `??` different from `||`?", [Dm], "easy",
-  "`?.` returns `undefined` instead of throwing on `null`/`undefined`; `??` falls back only for those two, while `||` falls back for any falsy value.",
-  ["`?.` converts `null` to an empty object; `??` and `||` are identical except for operator precedence.",
-   "`?.` catches any exception thrown by a getter; `??` falls back for every falsy value, like `||`.",
-   "`?.` makes a property optional in the type system; `??` throws if the left side is `null`."],
-  ex("`a?.b` returns `undefined` instead of throwing when `a` is `null` or `undefined` (also `a?.[k]` and `a?.()`). `a ?? b` falls back only for `null`/`undefined`, unlike `||`, which falls back for any falsy value. Combine them for safe reads with correct defaults.", r'''
+  "`?.` gives `undefined` instead of throwing on `null`/`undefined`; `??` falls back just for those two, `||` for any falsy value.",
+  ["`?.` catches errors thrown anywhere in the chain; `??` falls back for any falsy value, like `||` with lower precedence.",
+   "`?.` returns `null` when the left side is missing; `??` and `||` differ in precedence but fall back for the same values.",
+   "`?.` returns `undefined` on `null`/`undefined`; `??` falls back for those two and for `NaN`, while `||` also covers `0` and `\"\"`."],
+  ex("`a?.b` returns `undefined` instead of throwing when `a` is `null` or `undefined` (also `a?.[k]` and `a?.()`). `a ?? b` falls back only for `null`/`undefined`, unlike `||`, which falls back for any falsy value. Combine them for safe reads with correct defaults.\n\nWhy the others are wrong: `?.` doesn't catch exceptions (a throwing getter still throws) and `??` treats `0` and `\"\"` as real values; `?.` short-circuits to `undefined`, not `null`; and `NaN ?? 5` is `NaN`, since `??` ignores every value except `null` and `undefined`.", r'''
 const port = config?.server?.port ?? 3000;
 user.onLogin?.();
 0 ?? 5;   // 0
@@ -605,20 +605,20 @@ user.onLogin?.();
 '''), ["mdn-optional-chaining", "mdn-nullish", "jsi-optional-chaining"]),
  ("What are template literals and tagged templates?", [Dm], "easy",
   "Backtick strings with `${}` interpolation and multiple lines; a tag function receives the string parts and values separately.",
-  ["Strings that are compiled once and cached; a tag marks which ones should be translated.",
-   "HTML snippets the browser parses automatically; tags choose which HTML element to render.",
-   "A JSON shorthand; tagged templates are validated against a schema at parse time."],
-  ex("Backtick strings with `${expression}` interpolation and multiline support. A tag function receives the string parts and the values separately, enabling safe SQL/HTML building, i18n or styling (the idea behind styled-components and `sql` helper libraries).", r'''
+  ["Backtick strings with `${}` interpolation; a tag function receives the final concatenated string and can rewrite it before it's returned.",
+   "Backtick strings that escape HTML in `${}` values automatically; a tag function picks which escaping rules apply.",
+   "Single- or double-quoted strings with `${}` placeholders; a tag function formats the values before interpolation."],
+  ex("Backtick strings with `${expression}` interpolation and multiline support. A tag function receives the string parts and the values separately, enabling safe SQL/HTML building, i18n or styling (the idea behind styled-components and `sql` helper libraries).\n\nWhy the others are wrong: the tag gets the raw pieces (a strings array plus the values) before any joining, which is what makes safe escaping possible; template literals escape nothing by themselves; and `${}` only interpolates inside backticks, in quotes it is literal text.", r'''
 const tag = (strings, ...vals) =>
   strings.reduce((out, s, i) => out + s + (vals[i] !== undefined ? `[${vals[i]}]` : ""), "");
 tag`id=${7} name=${"ana"}`; // "id=[7] name=[ana]"
 '''), ["mdn-template", "jsi-string"]),
  ("When shouldn't you use `forEach` or `reduce`?", [Dm], "medium",
   "`forEach` can't be awaited or stopped early, so use `for...of`; `reduce` that builds complex objects reads better as `Object.groupBy`.",
-  ["Never: `forEach` and `reduce` are always the fastest and clearest way to loop over arrays.",
-   "Use `forEach` for async work since it awaits each callback; avoid `reduce` because it mutates the array.",
-   "Avoid both on arrays over 100 items, since they copy the array on every iteration."],
-  ex("`map` transforms each item into a new array, `filter` keeps matching items, `reduce` folds to a single value. `forEach` returns nothing and can't be awaited or broken out of; prefer `for...of` for side effects, early exit and `await`. `reduce` becomes unreadable when it builds complex objects; `Object.groupBy` or `Object.fromEntries` often say it better.", r'''
+  ["Use `forEach` for async work, since it awaits each callback; avoid `reduce`, as it mutates the array as it folds.",
+   "`forEach` is slower than `map`, so use `map` for side effects; `reduce` fails on empty arrays even with an initial value.",
+   "Avoid both on arrays over 100 items, since they copy the array on each iteration; a `for` loop avoids the copies."],
+  ex("`map` transforms each item into a new array, `filter` keeps matching items, `reduce` folds to a single value. `forEach` returns nothing and can't be awaited or broken out of; prefer `for...of` for side effects, early exit and `await`. `reduce` becomes unreadable when it builds complex objects; `Object.groupBy` or `Object.fromEntries` often say it better.\n\nWhy the others are wrong: `forEach` ignores the promises its callback returns, and `reduce` doesn't mutate the array; `map` for side effects builds a throwaway array, and `[].reduce(fn, 0)` returns `0` (it throws only without an initial value); and neither method copies the array.", r'''
 const orders = [{ t: "a", n: 2 }, { t: "b", n: 3 }, { t: "a", n: 1 }];
 const total = orders.reduce((s, o) => s + o.n, 0);           // 6
 const byType = Object.groupBy(orders, (o) => o.t);            // { a: [...], b: [...] }
@@ -626,10 +626,10 @@ const names = orders.filter((o) => o.n > 1).map((o) => o.t);  // ["a", "b"]
 '''), ["mdn-array", "jsi-array-methods", "eloquent"]),
  ("What are `Proxy` and `Reflect` used for?", [Dm], "hard",
   "A `Proxy` intercepts operations through traps (validation, reactivity); `Reflect` provides each default behaviour so traps can delegate.",
-  ["`Proxy` forwards network requests through a server; `Reflect` logs the responses for debugging.",
-   "`Proxy` makes a deep copy of an object; `Reflect` compares two proxies for structural equality.",
-   "`Proxy` is a faster replacement for plain objects; `Reflect` converts a proxy back to an object."],
-  ex("A `Proxy` wraps an object and intercepts operations (get, set, has, deleteProperty, apply) through handler traps. `Reflect` offers the default behaviour for each operation, so traps can delegate. Uses: validation, observable state (Vue 3 reactivity), logging, default values. Costs: slower than plain access, and subtle invariants.", r'''
+  ["A `Proxy` deep-copies an object and tracks changes to the copy; `Reflect` compares two proxies for structural equality.",
+   "A `Proxy` is a faster replacement for plain objects in hot paths; `Reflect` converts a proxy back into its target object.",
+   "A `Proxy` intercepts property reads but not writes or calls; `Reflect` exposes metadata such as an object's class name."],
+  ex("A `Proxy` wraps an object and intercepts operations (get, set, has, deleteProperty, apply) through handler traps. `Reflect` offers the default behaviour for each operation, so traps can delegate. Uses: validation, observable state (Vue 3 reactivity), logging, default values. Costs: slower than plain access, and subtle invariants.\n\nWhy the others are wrong: a proxy wraps the original target without copying it, and `Reflect` has no equality check; proxies are slower than plain objects and there is no API to unwrap one; and handlers can trap `set`, `apply`, `construct`, `deleteProperty` and more, while `Reflect` mirrors those operations rather than reporting metadata.", r'''
 const guarded = new Proxy({}, {
   set(target, key, value, receiver) {
     if (key === "age" && !Number.isInteger(value)) throw new TypeError("age must be int");
@@ -640,10 +640,10 @@ guarded.age = 30;
 '''), ["mdn-proxy", "jsi-proxy"]),
  ("How do you make an object immutable, and how is `Object.freeze` different from `const`?", [Dm], "medium",
   "`const` protects only the binding; `Object.freeze` makes own properties read-only, but only one level deep.",
-  ["`const` makes the object deeply immutable, so `Object.freeze` is only needed for arrays.",
-   "`Object.freeze` deep-freezes every nested object, while `const` freezes only the top level.",
-   "Both are identical; `Object.freeze` is the older spelling of `const` for objects."],
-  ex("`const` protects the binding only. `Object.freeze` makes own properties read-only (shallow; it fails silently in sloppy mode and throws a `TypeError` in strict mode). Nested objects need recursive freezing or immutable update patterns (spread, `structuredClone`, Immer). `Object.defineProperty` gives per-property control (`writable`, `enumerable`, `configurable`).", r'''
+  ["Both do the same thing for objects; `Object.freeze` is the older spelling of `const` from before ES2015.",
+   "`Object.freeze` freezes nested objects recursively, while `const` makes the top-level properties read-only.",
+   "`const` makes the object read-only one level deep, so `Object.freeze` is needed for arrays and nested objects."],
+  ex("`const` protects the binding only. `Object.freeze` makes own properties read-only (shallow; it fails silently in sloppy mode and throws a `TypeError` in strict mode). Nested objects need recursive freezing or immutable update patterns (spread, `structuredClone`, Immer). `Object.defineProperty` gives per-property control (`writable`, `enumerable`, `configurable`).\n\nWhy the others are wrong: `const` affects the variable and `Object.freeze` affects the object, they're unrelated features; `Object.freeze` is shallow (nested objects stay mutable) and `const` doesn't touch properties at all; and a `const` object's properties can still be changed.", r'''
 "use strict";
 const cfg = Object.freeze({ a: 1, nested: { b: 2 } });
 // cfg.a = 2;        // TypeError
@@ -651,22 +651,22 @@ cfg.nested.b = 3;    // allowed (shallow freeze)
 '''), ["mdn-freeze", "jsi-descriptors"]),
  ("What is the difference between `for...in` and `for...of`?", [Dm], "easy",
   "`for...in` loops over enumerable string keys, inherited ones included; `for...of` loops over the values of any iterable.",
-  ["`for...in` loops over array values and `for...of` over object keys, so they're interchangeable on arrays.",
-   "`for...of` only works on arrays, while `for...in` also works on strings, Maps and Sets.",
-   "Both iterate values; `for...in` is just the older, slower syntax for the same loop."],
-  ex("`for...in` iterates enumerable string keys, including inherited ones (avoid it on arrays). `for...of` iterates the values of any iterable (arrays, strings, Maps, Sets, generators). For an object's own properties use `Object.keys`/`values`/`entries`, often with `for...of` and destructuring.", r'''
+  ["`for...in` loops over own keys, skipping inherited ones; `for...of` loops over a plain object's values in order.",
+   "`for...in` loops over array indexes as numbers; `for...of` loops over values but skips holes and `undefined`.",
+   "`for...in` loops over the values of any iterable, including Maps; `for...of` loops over a plain object's enumerable keys."],
+  ex("`for...in` iterates enumerable string keys, including inherited ones (avoid it on arrays). `for...of` iterates the values of any iterable (arrays, strings, Maps, Sets, generators). For an object's own properties use `Object.keys`/`values`/`entries`, often with `for...of` and destructuring.\n\nWhy the others are wrong: `for...in` includes inherited enumerable keys, and `for...of` on a plain object throws a `TypeError` (it isn't iterable); `for...in` yields keys as strings, and `for...of` visits holes as `undefined`; and the roles are swapped.", r'''
 for (const [k, v] of Object.entries({ a: 1, b: 2 })) console.log(k, v);
 for (const ch of "hi") console.log(ch);
 for (const i in ["x", "y"]) console.log(typeof i); // "string"
 '''), ["mdn-for-in", "mdn-for-of", "jsi-keys"]),
 
  # ---------------- E. runtime, browser, security ----------------
- ("How does Node.js handle concurrency if JavaScript is single-threaded?", [E], "medium",
+ ("How does Node.js handle concurrency if JavaScript is single-threaded?", [E], "hard",
   "JS runs on one thread, but I/O goes to the OS and libuv's thread pool and returns as callbacks; CPU-bound work needs worker threads.",
-  ["Node runs each request's JavaScript on its own OS thread, so CPU-heavy code never blocks other requests.",
-   "Node isn't concurrent: it handles one request at a time, which is why it uses many processes by default.",
-   "JavaScript in Node is multi-threaded by default; only browsers restrict it to a single thread."],
-  ex("The JS code runs on one thread, but I/O is delegated to the OS (epoll/kqueue/IOCP) and to a libuv thread pool (file system, DNS, crypto, zlib), and results come back as callbacks into the event loop. CPU-bound work blocks the loop, so offload it to `worker_threads`, child processes or a separate service; scale across cores with the `cluster` module or multiple processes.", r'''
+  ["JS runs on libuv's thread pool, one thread per pending callback, so CPU-heavy handlers run in parallel by default.",
+   "Each incoming request's JavaScript runs on its own OS thread, so CPU-heavy code in one handler doesn't block others.",
+   "JS runs on one thread, and `async` functions move CPU-bound work to the thread pool, so `await` keeps the loop free."],
+  ex("The JS code runs on one thread, but I/O is delegated to the OS (epoll/kqueue/IOCP) and to a libuv thread pool (file system, DNS, crypto, zlib), and results come back as callbacks into the event loop. CPU-bound work blocks the loop, so offload it to `worker_threads`, child processes or a separate service; scale across cores with the `cluster` module or multiple processes.\n\nWhy the others are wrong: the thread pool runs native work (file system, DNS lookup, crypto, zlib), never your JS callbacks; Node doesn't use a thread per request, so a CPU-heavy handler stalls every request; and marking a function `async` doesn't move it anywhere, its synchronous parts still block the event loop.", r'''
 import { Worker, isMainThread, parentPort, workerData } from "node:worker_threads";
 if (isMainThread) {
   new Worker(new URL(import.meta.url), { workerData: 40 })
@@ -676,22 +676,22 @@ if (isMainThread) {
   parentPort.postMessage(fib(workerData));
 }
 '''), ["node-event-loop", "node-workers", "belder-event-loop"]),
- ("What typically causes memory leaks in JavaScript, and how do you find them?", [E], "medium",
+ ("What typically causes memory leaks in JavaScript, and how do you find them?", [E], "hard",
   "Forgotten references: listeners, timers, closures, unbounded caches, detached DOM nodes. Compare heap snapshots before and after an action.",
-  ["Leaks are impossible because of garbage collection; slow pages come from CPU usage, which the Performance tab shows.",
-   "Only `var` variables leak; switching everything to `let` and `const` removes every leak.",
-   "Large arrays leak automatically after 100 MB; you find them by counting `new` calls in the source."],
-  ex("The GC frees what is unreachable, so leaks are references you forgot: accidental globals, listeners never removed, timers never cleared, closures holding big objects, unbounded caches and Maps, detached DOM nodes. Find them with heap snapshots and allocation timelines (Chrome DevTools Memory tab, `node --inspect`), comparing snapshots before and after an action. Fix by removing listeners, using `WeakMap`/`WeakRef`, bounding caches and clearing timers.", r'''
+  ["Circular references between objects, which the GC doesn't collect; find them by searching for objects that point back.",
+   "Large allocations the GC hasn't reached yet; find them in the CPU profile and call `global.gc()` more often.",
+   "Objects created with `new` that weren't `delete`d afterwards; find them by counting allocations in a CPU profile."],
+  ex("The GC frees what is unreachable, so leaks are references you forgot: accidental globals, listeners never removed, timers never cleared, closures holding big objects, unbounded caches and Maps, detached DOM nodes. Find them with heap snapshots and allocation timelines (Chrome DevTools Memory tab, `node --inspect`), comparing snapshots before and after an action. Fix by removing listeners, using `WeakMap`/`WeakRef`, bounding caches and clearing timers.\n\nWhy the others are wrong: the mark-and-sweep GC collects unreachable cycles fine; garbage that hasn't been collected yet isn't a leak, and a CPU profile shows time, not retained memory; and `delete` removes properties, it doesn't free objects (unreachable ones are collected automatically).", r'''
 const cache = new Map();              // leak: grows forever
 function get(k) { if (!cache.has(k)) cache.set(k, big(k)); return cache.get(k); }
 // fix: LRU / size limit, or WeakMap when keys are objects
 '''), ["mdn-memory", "chrome-memory", "node-memory"]),
  ("What is the difference between debounce and throttle in JavaScript, and when do you use each?", [E], "medium",
   "Debounce runs once after calls stop for `ms` (search-as-you-type); throttle runs at most once per `ms` while calls continue (scroll).",
-  ["Debounce runs at most once per interval while events continue; throttle waits for silence, then runs once.",
-   "Both delay a function by a fixed time; debounce uses `setTimeout` and throttle uses `setInterval`.",
-   "Debounce cancels the function entirely after the first call; throttle makes it run twice as often."],
-  ex("Debounce waits until calls stop for `ms`, then runs once (search-as-you-type, end of resize). Throttle runs at most once per `ms` while calls continue (scroll, mouse move). Both use closures and timers.", r'''
+  ["Both delay a function by a fixed time; debounce uses `setTimeout` and throttle uses `setInterval`, otherwise they match.",
+   "Debounce runs on the first call and ignores the rest for good; throttle queues each call and replays them `ms` apart.",
+   "Debounce runs at most once per `ms` while calls keep coming (scroll); throttle runs a single time after the calls stop (search-as-you-type)."],
+  ex("Debounce waits until calls stop for `ms`, then runs once (search-as-you-type, end of resize). Throttle runs at most once per `ms` while calls continue (scroll, mouse move). Both use closures and timers.\n\nWhy the others are wrong: they behave differently (debounce resets on every call, throttle rate-limits), regardless of which timer API implements them; debounce runs after a quiet period, not on the first call only, and throttle drops extra calls rather than queueing them; and the definitions are swapped.", r'''
 const debounce = (fn, ms) => {
   let t;
   return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
@@ -706,21 +706,21 @@ const throttle = (fn, ms) => {
 '''), ["jsi-decorators", "css-tricks-debounce"]),
  ("What are event bubbling, capturing and delegation?", [E], "medium",
   "Events travel down (capture), hit the target, then bubble up; delegation uses one parent listener and `event.target` for many children.",
-  ["Bubbling sends an event to every element on the page at once; delegation copies a listener onto each child.",
-   "Capturing stores events for later replay; delegation hands the event to a Web Worker for processing.",
-   "Events fire only on the target; bubbling is an opt-in flag, and delegation means using `stopPropagation`."],
-  ex("An event travels down from the root to the target (capture), fires on the target, then bubbles back up. Handlers run on bubble by default. Delegation attaches one listener on a parent and uses `event.target` (or `closest`) to handle many children, including ones added later. `stopPropagation` halts the travel; `preventDefault` cancels the browser default; they're different things.", r'''
+  ["Events bubble down from the root to the target, then capture back up; delegation means calling `stopPropagation` early.",
+   "Events fire on the target, then bubble up; capturing is a separate opt-in event type, and delegation copies the listener onto each child element.",
+   "Events travel down (capture), then bubble up; handlers run in the capture phase by default, and delegation needs `once: true`."],
+  ex("An event travels down from the root to the target (capture), fires on the target, then bubbles back up. Handlers run on bubble by default. Delegation attaches one listener on a parent and uses `event.target` (or `closest`) to handle many children, including ones added later. `stopPropagation` halts the travel; `preventDefault` cancels the browser default; they're different things.\n\nWhy the others are wrong: capture goes down and bubbling goes up, and `stopPropagation` stops the travel rather than delegating; capturing is a phase of the same event (opt in with `{ capture: true }`), and delegation uses one listener on the parent; and listeners run in the bubble phase by default, while `once` only removes a listener after one call.", r'''
 list.addEventListener("click", (e) => {
   const li = e.target.closest("li");
   if (li && list.contains(li)) console.log("clicked", li.dataset.id);
 });
 '''), ["jsi-bubbling", "jsi-delegation", "mdn-bubbling"]),
- ("What is CORS, and when does the browser send a preflight request?", [E], "medium",
+ ("What is CORS, and when does the browser send a preflight request?", [E], "hard",
   "Server headers that opt in to cross-origin reads; non-simple requests (custom headers, JSON, `PUT`/`DELETE`) get an `OPTIONS` preflight.",
-  ["A server-side firewall that blocks requests from other origins; every request gets a preflight.",
-   "An authentication scheme: the preflight sends the user's credentials so the server can log them in.",
-   "A browser cache policy; the preflight checks whether a cached response is still fresh."],
-  ex("The same-origin policy blocks a page from reading responses from another origin. CORS lets the server opt in with headers (`Access-Control-Allow-Origin`, `-Methods`, `-Headers`, `-Credentials`). \"Non-simple\" requests (custom headers, a JSON content type, `PUT`/`DELETE`) trigger a preflight `OPTIONS` request first. CORS is enforced by the browser only, protects users, and isn't an authentication mechanism. Never reflect `*` together with credentials.", r'''
+  ["A server-side firewall that blocks cross-origin requests; the browser sends a preflight before each cross-origin request.",
+   "Server headers that allow cross-origin reads; the browser preflights GET and POST requests but skips `PUT` and `DELETE`.",
+   "An authentication scheme between origins; the preflight sends the user's credentials so the server can verify them first."],
+  ex("The same-origin policy blocks a page from reading responses from another origin. CORS lets the server opt in with headers (`Access-Control-Allow-Origin`, `-Methods`, `-Headers`, `-Credentials`). \"Non-simple\" requests (custom headers, a JSON content type, `PUT`/`DELETE`) trigger a preflight `OPTIONS` request first. CORS is enforced by the browser only, protects users, and isn't an authentication mechanism. A wildcard `*` origin is rejected by browsers for credentialed requests, and reflecting any request's `Origin` back with `Allow-Credentials: true` is just as unsafe.\n\nWhy the others are wrong: CORS is enforced by the browser, not a server firewall, and simple requests (plain GET, form-style POST) have no preflight; it's the reverse, `PUT` and `DELETE` are non-simple and preflighted; and the preflight never carries cookies or credentials, CORS is not authentication.", r'''
 // Express-style
 app.use((req, res, next) => {
   res.set("Access-Control-Allow-Origin", "https://app.example.com");
@@ -731,29 +731,29 @@ app.use((req, res, next) => {
 '''), ["mdn-cors", "jsi-fetch-cors"]),
  ("What are XSS and CSRF, and how do you defend a JavaScript app against each?", [E], "hard",
   "XSS runs attacker script in your page (escape output, avoid `innerHTML`, CSP); CSRF abuses cookies (SameSite, tokens, origin checks).",
-  ["XSS is stealing cookies over HTTP (fix with HTTPS); CSRF is SQL injection from forms (fix with prepared statements).",
-   "Both are prevented by CORS, so a strict `Access-Control-Allow-Origin` header is enough for either.",
-   "XSS abuses cookies (fix with `SameSite`); CSRF injects scripts into the page (fix with `textContent`)."],
-  ex("XSS: attacker script runs in your page. Defend by escaping output, avoiding `innerHTML` with untrusted data (use `textContent`), sanitising HTML (DOMPurify) and a strict Content-Security-Policy. CSRF: a malicious site makes the browser send an authenticated request using cookies. Defend with `SameSite` cookies, CSRF tokens and checking `Origin`. Store session cookies as `HttpOnly; Secure`.", r'''
+  ["Both are cross-origin attacks, so a strict `Access-Control-Allow-Origin` header plus HTTPS defends against each of them.",
+   "XSS abuses ambient cookies (fix with `SameSite`); CSRF injects script into your page (escape output, use a CSP).",
+   "XSS steals cookies over plain HTTP (fix with HTTPS); CSRF is SQL injection through forms (fix with prepared statements)."],
+  ex("XSS: attacker script runs in your page. Defend by escaping output, avoiding `innerHTML` with untrusted data (use `textContent`), sanitising HTML (DOMPurify) and a strict Content-Security-Policy. CSRF: a malicious site makes the browser send an authenticated request using cookies. Defend with `SameSite` cookies, CSRF tokens and checking `Origin`. Store session cookies as `HttpOnly; Secure`.\n\nWhy the others are wrong: CORS controls reading responses, it doesn't stop injected script or a forged cookie-carrying request from being sent; the definitions are swapped; and XSS is script injection (HTTPS doesn't prevent it) while CSRF forges authenticated requests, SQL injection is a different attack.", r'''
 el.textContent = userInput;         // safe
 // el.innerHTML = userInput;        // XSS risk
 // Set-Cookie: sid=...; HttpOnly; Secure; SameSite=Lax
 '''), ["owasp-xss", "owasp-csrf", "mdn-csp"]),
  ("When do you use `localStorage`, `sessionStorage`, cookies and IndexedDB?", [E], "medium",
   "Web Storage for small strings (per origin or per tab), `HttpOnly` cookies for session ids, IndexedDB for large or offline data.",
-  ["`localStorage` for auth tokens since scripts can't read it, cookies for large files, IndexedDB for UI preferences.",
-   "They're interchangeable: all four are synchronous, unlimited in size and sent to the server automatically.",
-   "Cookies for offline apps, `sessionStorage` for data shared across tabs, and IndexedDB only inside workers."],
-  ex("`localStorage`: synchronous string key/values, persistent, per origin, about 5 MB, readable by any script (don't keep tokens there if XSS is a concern). `sessionStorage`: the same, but per tab session. Cookies: sent with every request, size-limited, can be `HttpOnly` (invisible to JS), so best for session ids. IndexedDB: asynchronous, structured, for large data and offline apps.", r'''
+  ["`localStorage` for session tokens since page scripts don't see it, cookies for UI preferences, IndexedDB for caching small images.",
+   "`sessionStorage` for data shared across tabs, cookies for offline data, and IndexedDB for small synchronous lookups.",
+   "`localStorage` for data the server should receive, since it's sent with requests; cookies and IndexedDB for large blobs."],
+  ex("`localStorage`: synchronous string key/values, persistent, per origin, about 5 MB, readable by any script (don't keep tokens there if XSS is a concern). `sessionStorage`: the same, but per tab session. Cookies: sent with every request, size-limited, can be `HttpOnly` (invisible to JS), so best for session ids. IndexedDB: asynchronous, structured, for large data and offline apps.\n\nWhy the others are wrong: any script on the origin (including injected XSS) can read `localStorage`, while `HttpOnly` cookies are hidden from JS; `sessionStorage` is per tab, cookies are tiny and sent with every request, and IndexedDB is asynchronous; and Web Storage is never sent to the server, cookies are limited to about 4 KB.", r'''
 localStorage.setItem("theme", "dark");
 JSON.parse(localStorage.getItem("prefs") ?? "{}");
 '''), ["mdn-webstorage", "mdn-indexeddb", "jsi-localstorage", "jsi-cookie"]),
  ("How do you keep the browser UI responsive during heavy work?", [E], "hard",
   "Move computation to Web Workers, split long tasks, animate in `requestAnimationFrame`, and batch DOM reads before writes.",
-  ["Wrap heavy loops in `async` functions, which run them on a background thread automatically.",
-   "Use `setInterval` with a 0 ms delay, which gives the loop its own thread separate from rendering.",
-   "Call `document.write` instead of DOM APIs, which skips layout and paint entirely."],
-  ex("The main thread runs JS, style, layout and paint, so long tasks (over 50 ms) cause jank. Move heavy computation to Web Workers, split work into chunks (`requestIdleCallback`, `scheduler.yield`), do visual updates in `requestAnimationFrame`, batch DOM reads before writes to avoid layout thrashing, and prefer CSS transforms for animation.", r'''
+  ["Run the heavy loop with `setInterval(fn, 0)`, which schedules it on a separate thread from rendering.",
+   "Wrap the heavy loops in `async` functions, which the engine runs on a background thread away from rendering.",
+   "Interleave DOM reads and writes so layout work is spread out over time, and animate with `setTimeout` at fixed 16 ms intervals."],
+  ex("The main thread runs JS, style, layout and paint, so long tasks (over 50 ms) cause jank. Move heavy computation to Web Workers, split work into chunks (`requestIdleCallback`, `scheduler.yield`), do visual updates in `requestAnimationFrame`, batch DOM reads before writes to avoid layout thrashing, and prefer CSS transforms for animation.\n\nWhy the others are wrong: timers run their callbacks on the main thread, so the loop still blocks rendering; `async` doesn't move code off the main thread; and interleaving reads and writes forces repeated synchronous layout (layout thrashing), while `setTimeout` isn't synced to the display like `requestAnimationFrame`.", r'''
 const w = new Worker("worker.js");
 w.postMessage(bigArray);
 w.onmessage = (e) => render(e.data);
@@ -763,19 +763,19 @@ requestAnimationFrame(tick);
 '''), ["mdn-workers", "webdev-long-tasks", "webdev-layout-thrashing"]),
  ("What does `\"use strict\"` change, and what does TypeScript add on top?", [E], "medium",
   "Strict mode turns silent errors into exceptions and makes plain-call `this` `undefined`; TypeScript adds build-time types but erases to JS.",
-  ["Strict mode enables static types at runtime; TypeScript then removes them again for faster execution.",
-   "Strict mode makes all objects immutable; TypeScript validates API responses at runtime automatically.",
-   "Strict mode is required for `async` code; TypeScript replaces the JS engine with a typed one."],
-  ex("Strict mode turns silent errors into exceptions (undeclared variables, duplicate parameters, assignments to read-only properties), sets `this` to `undefined` in plain calls, and is automatic in modules and classes. TypeScript adds static types, catching shape and null errors at build time and improving refactoring and editor support; it erases to plain JavaScript, so runtime rules still apply and external data still needs validation (for example with Zod).", r'''
+  ["Strict mode enables runtime type checks on function arguments; TypeScript adds compile-time types and keeps them at runtime.",
+   "Strict mode makes objects immutable by default; TypeScript validates API responses against its types at runtime.",
+   "Strict mode turns silent errors into exceptions; TypeScript's compiled output keeps checks that throw on bad input."],
+  ex("Strict mode turns silent errors into exceptions (undeclared variables, duplicate parameters, assignments to read-only properties), sets `this` to `undefined` in plain calls, and is automatic in modules and classes. TypeScript adds static types, catching shape and null errors at build time and improving refactoring and editor support; it erases to plain JavaScript, so runtime rules still apply and external data still needs validation (for example with Zod).\n\nWhy the others are wrong: strict mode has no type checks and TypeScript types are erased at build time; strict mode doesn't freeze objects, and TypeScript can't check data at runtime (use a validator such as Zod); and the compiled JavaScript contains no type checks at all.", r'''
 "use strict";
 // undeclaredVar = 1;   // ReferenceError
 '''), ["mdn-strict", "ts-handbook", "effective-ts"]),
  ("Implementing `Promise.all` by hand is a common exercise. What must a correct version handle?", [E], "hard",
   "Results in input order, non-promise values, empty input resolving to `[]`, rejecting on the first failure, and counting completions.",
-  ["Results in completion order, ignoring rejections, and resolving only when the array length stops changing.",
-   "Awaiting each promise in a `for` loop, which keeps order and is just as fast as running them together.",
-   "Only arrays of promises; non-promise values and empty input should throw a `TypeError`."],
-  ex("It tests promises, ordering and edge cases: preserve input order (not completion order), accept non-promise values (wrap them with `Promise.resolve`), resolve `[]` for empty input, reject on the first rejection, and count completions rather than relying on array length.", r'''
+  ["Results in input order and rejecting on the first failure; non-promise values and empty input should throw a `TypeError`.",
+   "Results in completion order, waiting for each promise even after a rejection, and resolving with `[]` for empty input.",
+   "Awaiting each promise in a `for` loop, which keeps input order and rejects as soon as any input rejects."],
+  ex("It tests promises, ordering and edge cases: preserve input order (not completion order), accept non-promise values (wrap them with `Promise.resolve`), resolve `[]` for empty input, reject on the first rejection, and count completions rather than relying on array length.\n\nWhy the others are wrong: `Promise.all` accepts plain values (wrapping them with `Promise.resolve`) and resolves `[]` for empty input; results follow input order and the first rejection settles it, the behaviour described is closer to `allSettled`; and a sequential `await` loop only notices a rejection when it reaches that item, so a fast failure behind a slow promise is reported late (and briefly unhandled).", r'''
 function promiseAll(items) {
   return new Promise((resolve, reject) => {
     const list = [...items];
@@ -796,49 +796,4 @@ await promiseAll([1, Promise.resolve(2), new Promise((r) => setTimeout(() => r(3
 
 assert len(Q) == 50, len(Q)
 
-# Longer distractors (still wrong) so the correct answer isn't simply the longest
-# option. Keyed by 1-based question number -> (distractor index, new text).
-LONGER = {
- 3: (0, "`var` and `let` behave the same way in every scope; only `const` is block-scoped, and it also makes the object it points to fully immutable."),
- 6: (2, "`undefined` is the intentional empty value developers set, while the engine itself uses `null` for missing properties and arguments, so `JSON.stringify` keeps both."),
- 11: (0, "A function that copies the outer variables' values at the moment it's created; it saves memory, because nothing from the outer scope is kept alive afterwards."),
- 12: (0, "`0 1 2`, because each arrow callback captures the current value of `i` at the moment `setTimeout` is called, not the variable."),
- 13: (0, "By where the function is defined: `this` always refers to the object literal or class body the code appears in, no matter how it is called later."),
- 14: (0, "`call` and `apply` create copies of a function with a new scope, and `bind` attaches a function to an object permanently by adding it as a method."),
- 16: (0, "Each object copies all of its prototype's properties when it's created, so later changes to the prototype are never seen by existing objects."),
- 17: (0, "Real classes like in Java or C#: every instance gets its own copy of each method, and there is no prototype involved anywhere in the lookup."),
- 18: (2, "Creates an object with no prototype at all, then copies every property and method of the constructor function onto it."),
- 22: (2, "Tasks always run before microtasks, which is why a `setTimeout(fn, 0)` callback beats the `.then` of an already-resolved promise every time."),
- 24: (0, "Pending, running and done; `.then` mutates the original promise in place, so every handler in the chain sees the very first resolved value, unchanged."),
- 26: (0, "Wrap the whole program in one top-level `try/catch`; `fetch` already rejects on any non-200 status, so no extra check of the response is needed."),
- 27: (0, "`await` blocks the whole thread, so use callbacks instead; `forEach` does await each async callback in turn but is slower than a plain `for` loop."),
- 29: (2, "No: it always waits exactly 4 ms, which is the fixed minimum resolution of every JavaScript timer in browsers and Node."),
- 30: (2, "Throw inside a `.then` handler, which propagates back up the chain and cancels the underlying network request."),
- 31: (0, "Ways to deep-clone objects and arrays safely; the main trap is that they're slow, so you should avoid them inside loops."),
- 32: (1, "CommonJS supports tree shaking and top-level `await`, while ES modules are loaded synchronously like `require`, which is why bundlers prefer CommonJS."),
- 33: (0, "`Map` and `Set` are slower aliases of objects and arrays kept only for older code, and the weak versions are deprecated in favour of `WeakRef`."),
- 34: (0, "Iterators are arrays with an internal index property, and generators are functions that build and return a brand-new array of all values on every call."),
- 35: (1, "`?.` catches any exception thrown by a getter along the chain, and `??` falls back for every falsy value exactly like `||` does, just with lower precedence."),
- 36: (0, "Strings that are compiled once and cached by the engine for speed; a tag function marks which of those cached strings should be translated."),
- 37: (1, "Use `forEach` for async work, since it awaits each callback before moving on; avoid `reduce`, because it mutates the original array as it folds."),
- 38: (0, "`Proxy` forwards network requests through an intermediate server, and `Reflect` records the responses that come back so you can debug them later."),
- 39: (1, "`Object.freeze` deep-freezes every nested object recursively, while `const` only freezes the top-level properties."),
- 40: (0, "`for...in` loops over array values and `for...of` over object keys, so on arrays the two loops are fully interchangeable in practice."),
- 41: (0, "Node runs each incoming request's JavaScript on its own OS thread, so CPU-heavy code in one handler never blocks the other requests being served."),
- 42: (0, "Leaks are impossible thanks to garbage collection; a slow or bloated page comes from CPU usage, which the Performance tab shows you directly instead."),
- 43: (0, "Debounce runs at most once per interval while events keep coming, and throttle waits for a quiet period with no calls, then runs exactly once."),
- 44: (0, "Bubbling delivers an event to every element on the page at the same time, and delegation copies a single listener onto each child element."),
- 45: (0, "A server-side firewall that blocks requests coming from other origins, which is why every single cross-origin request gets a preflight first."),
- 46: (0, "XSS is stealing cookies over plain HTTP (fix it with HTTPS), and CSRF is SQL injection through forms (fix it with prepared statements)."),
- 47: (0, "`localStorage` for auth tokens, since page scripts can't read it; cookies for large files; and IndexedDB for small UI preferences."),
- 48: (0, "Wrap the heavy loops in `async` functions, which the engine then runs on a background thread automatically, away from rendering."),
- 49: (0, "Strict mode enables static type checks at runtime, and TypeScript then strips them out again in the build so the code executes noticeably faster."),
- 50: (0, "Results in completion order, ignoring any rejections, and resolving only once the input array's length stops changing between checks."),
-}
-for n, (wi, text) in LONGER.items():
-    q = list(Q[n - 1])
-    wrong = list(q[4])
-    wrong[wi] = text
-    q[4] = wrong
-    Q[n - 1] = tuple(q)
 build("JavaScript interview questions", M, Q, sys.argv[1], strip_backticks=False)
