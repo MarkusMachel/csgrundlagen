@@ -57,6 +57,10 @@ done
 for a in csharp runtime async aspnetcore efcore testing architecture web-hosting realtime-rpc; do
   docker compose exec api seed -file seeds/dotnet-$a.json
 done
+# JavaScript by area (language, async, browser, Node.js, TypeScript, tooling, security & performance)
+for a in core async browser node typescript tooling security-perf; do
+  docker compose exec api seed -file seeds/js-$a.json
+done
 ```
 
 nginx serves the production build and proxies `/api` to the api container, so the
